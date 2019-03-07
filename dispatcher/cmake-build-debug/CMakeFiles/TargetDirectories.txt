@@ -1,0 +1,2 @@
+/home/FyS/Project/FyS/dispatcher/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/FyS/Project/FyS/dispatcher/cmake-build-debug/CMakeFiles/edit_cache.dir

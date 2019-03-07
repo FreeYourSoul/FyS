@@ -1,0 +1,8 @@
+cmake_minimum_required( VERSION 3.6 )
+
+add_subdirectory(inventoryexch_dispatcher)
+add_subdirectory(inventoryusage_dispatcher)
+add_subdirectory(inventorygrab_dispatcher)
+add_subdirectory(quest_dispatcher)
+add_subdirectory(chat_dispatcher)
+add_subdirectory(worldserver_dispatcher)

@@ -50,6 +50,7 @@ namespace fys {
             bool _verbose = false;
             bool _isClusterAware = false;
             std::vector<std::string> _subTopics;
+            std::string _version;
 
     };
 

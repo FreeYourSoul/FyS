@@ -1,11 +1,13 @@
 #include <iostream>
 #include <tclap/ValueArg.h>
 #include <tclap/CmdLine.h>
+#include <boost/property_tree/ini_parser.hpp>
 #include <StartupDispatcherCtx.hh>
+#include <Versioner.hh>
 
 fys::StartupDispatcherCtx::StartupDispatcherCtx(const int ac, const char *const *av) try {
     TCLAP::CmdLine cli("FyS::Dispatcher", ' ', VERSION_DISPATCHER);
-    TCLAP::ValueArg<std::string> configPath("c", "config", "Path of config file", false, "NONE", "string");
+TCLAP::ValueArg<std::string> configPath("c", "config", "Path of config file", false, "NONE", "string");
     TCLAP::ValueArg<std::string> name("n", "name", "Name of the Dispatcher (used as key for the cluster)", false, "WS", "string");
     TCLAP::ValueArg<ushort> changePort("p", "port", "Listening Port", false, 0, "integer");
     TCLAP::ValueArg<bool> aware("a", "aware", "Is aware of the other cluster member", false, true, "boolean");
@@ -21,19 +23,20 @@ fys::StartupDispatcherCtx::StartupDispatcherCtx(const int ac, const char *const 
         this->initializeFromIni(configPath.getValue());
     if (_bindingPort > 0)
         _bindingPort = changePort.getValue();
-    if (_name.empty)
+    if (_name.empty())
         _name = name.getValue();
     _isClusterAware = !aware.getValue() ? false : _isClusterAware;
     _verbose = verbose.getValue();
+    _version = std::to_string(VERSION_MAJOR) + "." + std::to_string(VERSION_MINOR);
 }
 catch (std::exception &e) {
     std::cerr << "Context of the Dispatcher not initialized caused by :" << e.what() << "\n";
 }
 
 
-fys::StartupDispatcherCtx::initializeFromIni(const std::string &configFilePath) {
+void fys::StartupDispatcherCtx::initializeFromIni(const std::string &configFilePath) {
     boost::property_tree::ptree pt;
-    boost::property_tree::read_ini(iniPath, pt);
+    boost::property_tree::read_ini(configFilePath, pt);
 
     _bindingPort = pt.get<ushort>(fys::INIT_BINDINGPORT);
     _isClusterAware = pt.get<bool>(fys::INIT_ISCLUSTERAWARE);

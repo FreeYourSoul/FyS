@@ -1,0 +1,18 @@
+/home/FyS/Documents/CLion/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher
+-- Boost version: 1.66.0
+-- SetWarningsflag:
+-- Configuring done
+CMake Error at CMakeLists.txt:15 (add_executable):
+  Cannot find source file:
+
+    /home/FyS/Project/FyS/dispatcher/common/include/core/Dispatcher.hpp
+
+  Tried extensions .c .C .c++ .cc .cpp .cxx .cu .m .M .mm .h .hh .h++ .hm
+  .hpp .hxx .in .txx
+
+
+CMake Error at CMakeLists.txt:15 (add_executable):
+  No SOURCES given to target: worldserver_dispatcher
+
+
+-- Build files have been written to: /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug
