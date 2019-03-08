@@ -16,19 +16,16 @@ void fys::network::DispatcherConnectionManager::setupConnectionManager(const fys
         const std::string proxyBeConnectionString;
         _clusterConnection.pubSocket.connect(proxyFeConnectionString);
         _clusterConnection.subSocket.connect(proxyBeConnectionString);
-        subscribeToTopics(ctx.getBroadcastTopic(), ctx.getSubscriptionTopics());
+        subscribeToTopics(ctx.getSubscriptionTopics());
     }
     else {
         _clusterConnection.pubSocket.close();
         _clusterConnection.subSocket.close();
     }
-    _listener.bind("ftp://*:" + std::to_string(ctx.getBindingPort()));
+    _listener.bind("tcp://*:" + std::to_string(ctx.getBindingPort()));
 }
 
-void fys::network::DispatcherConnectionManager::subscribeToTopics(const std::string &broadcastTopic, const std::vector<std::string> &topics) {
-    if (!broadcastTopic.empty()) {
-        _clusterConnection.subSocket.setsockopt(ZMQ_SUBSCRIBE, broadcastTopic.c_str(), broadcastTopic.size());
-    }
+void fys::network::DispatcherConnectionManager::subscribeToTopics(const std::vector<std::string> &topics) {
     for (const auto &topic : topics) {
         _clusterConnection.subSocket.setsockopt(ZMQ_SUBSCRIBE, topic.c_str(), topic.size());
     }

@@ -27,7 +27,7 @@ fys::StartupDispatcherCtx::StartupDispatcherCtx(int ac, const char *const *av) t
         _bindingPort = changePort.getValue();
     if (_name.empty())
         _name = name.getValue();
-    setIsClusterAware(!aware.getValue() ? false : _isClusterAware);
+    _isClusterAware = !aware.getValue() ? false : _isClusterAware;
     _isLoadBalancing = loadBalance.getValue();
     _verbose = verbose.getValue();
 }
@@ -45,4 +45,17 @@ void fys::StartupDispatcherCtx::initializeFromIni(const std::string &configFileP
     _isLoadBalancing = pt.get<bool>(fys::INIT_ISLOADBALANCING);
     _name = pt.get<std::string>(fys::INIT_NAME);
     _subTopics = asVector<std::string>(pt, fys::INIT_TOPICS);
+}
+
+std::string fys::StartupDispatcherCtx::toString() const {
+    std::string str;
+    str = "\n*************************\n";
+    str+= "Dispatcher " + _name + " context VERSION : " + _version + "\n\n";
+    str+= std::string("Listener bindingPort ") + std::to_string(_bindingPort) + "\n";
+    str+= std::string("isClusterAware : ") + (_isClusterAware ? "true" : "false") + "\n";
+    for (const auto &topic : _subTopics) {
+        str+= std::string("Cluster: Subscribing topic :") + topic + "\n";
+    }
+    str+= "\n*************************\n";
+    return str;
 }

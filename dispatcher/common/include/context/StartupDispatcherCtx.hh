@@ -21,17 +21,11 @@ namespace fys {
         public:
             StartupDispatcherCtx(int ac, const char *const *av);
 
-            void setIsClusterAware(bool isClusterAware) {
-                if (!_isClusterAware)
-                    _broadcastTopic = "";
-                _isClusterAware = isClusterAware;
-            }
-
             bool isClusterAware() const { return _isClusterAware; }
             ushort getBindingPort() const { return _bindingPort; }
             const std::string &getName() const { return _name; }
-            const std::string &getBroadcastTopic() const { return _broadcastTopic; }
             const std::vector<std::string> getSubscriptionTopics() const { return _subTopics; }
+            std::string toString() const;
 
         private:
             void initializeFromIni(const std::string &configFilePath);
@@ -48,7 +42,6 @@ namespace fys {
         private:
             std::string _version;
             std::string _name;
-            std::string _broadcastTopic;
 
             ushort _bindingPort = 0;
             bool _verbose = false;

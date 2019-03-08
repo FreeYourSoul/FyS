@@ -6,10 +6,8 @@
 int main(int ac, char **av) {
     try {
         auto console = spdlog::stdout_color_mt("c");
-
-        spdlog::get("c")->info("loggers can be retrieved from a global registry using the spdlog::get(logger_name)");
-
         fys::StartupDispatcherCtx ctx(ac, av);
+        spdlog::get("c")->info(ctx.toString());
         fys::Dispatcher dispatcher(std::move(ctx));
 
         dispatcher.runDispatching();

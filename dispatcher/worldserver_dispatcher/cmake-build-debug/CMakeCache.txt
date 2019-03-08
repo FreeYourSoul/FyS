@@ -21,6 +21,9 @@ Boost_DIR:PATH=Boost_DIR-NOTFOUND
 Boost_INCLUDE_DIR:PATH=/usr/include
 
 //Path to a program.
+CCACHE_FOUND:FILEPATH=/usr/bin/ccache
+
+//Path to a program.
 CMAKE_AR:FILEPATH=/usr/bin/ar
 
 //Choose the type of build, options are: None Debug Release RelWithDebInfo

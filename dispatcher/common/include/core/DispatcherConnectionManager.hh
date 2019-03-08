@@ -30,10 +30,9 @@ namespace fys::network {
         private:
             /**
              * The dispatcher connect to the proxy and subscribe to specifics channels given as parameter
-             * plus the Broadcast topic used in order to broadcast a message to all server
              * @param topics additional topics to subscribe to (customizable through the config file)
              */
-            void subscribeToTopics(const std::string &broadcastTopic, const std::vector<std::string> &topics);
+            void subscribeToTopics(const std::vector<std::string> &topics);
             
         private:
             zmq::context_t _zmqContext;

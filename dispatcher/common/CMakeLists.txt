@@ -28,3 +28,9 @@ set(COMMON_SRC
         ${COMMON_DIR}/src/context/StartupDispatcherCtx.cpp
         ${COMMON_DIR}/src/core/Dispatcher.cpp
         ${COMMON_DIR}/src/core/DispatcherConnectionManager.cpp)
+
+find_program(CCACHE_FOUND ccache)
+if(CCACHE_FOUND)
+    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
+    set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
+endif(CCACHE_FOUND)

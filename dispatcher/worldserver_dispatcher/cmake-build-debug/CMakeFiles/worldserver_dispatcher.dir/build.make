@@ -60,7 +60,7 @@ include CMakeFiles/worldserver_dispatcher.dir/flags.make
 CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/main.cpp.o: CMakeFiles/worldserver_dispatcher.dir/flags.make
 CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/main.cpp.o: /home/FyS/Project/FyS/dispatcher/common/src/main.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/main.cpp.o"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/main.cpp.o -c /home/FyS/Project/FyS/dispatcher/common/src/main.cpp
+	ccache /usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/main.cpp.o -c /home/FyS/Project/FyS/dispatcher/common/src/main.cpp
 
 CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/main.cpp.i"
@@ -73,7 +73,7 @@ CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src
 CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp.o: CMakeFiles/worldserver_dispatcher.dir/flags.make
 CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp.o: /home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp.o"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp.o -c /home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp
+	ccache /usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp.o -c /home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp
 
 CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp.i"
@@ -86,7 +86,7 @@ CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src
 CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.cpp.o: CMakeFiles/worldserver_dispatcher.dir/flags.make
 CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.cpp.o: /home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.cpp.o"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.cpp.o -c /home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.cpp
+	ccache /usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.cpp.o -c /home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.cpp
 
 CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.cpp.i"
@@ -99,7 +99,7 @@ CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src
 CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp.o: CMakeFiles/worldserver_dispatcher.dir/flags.make
 CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp.o: /home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp.o"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp.o -c /home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp
+	ccache /usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp.o -c /home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp
 
 CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp.i"
