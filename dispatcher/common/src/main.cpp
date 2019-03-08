@@ -8,7 +8,7 @@ int main(int ac, char **av) {
         auto console = spdlog::stdout_color_mt("c");
         fys::StartupDispatcherCtx ctx(ac, av);
         spdlog::get("c")->info(ctx.toString());
-        fys::Dispatcher dispatcher(std::move(ctx));
+        fys::Dispatcher<> dispatcher(std::move(ctx));
 
         dispatcher.runDispatching();
     }

@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/worldserver_dispatcher.dir/main.cpp.o"
+  "CMakeFiles/worldserver_dispatcher.dir/src/main.cpp.o"
+  "CMakeFiles/worldserver_dispatcher.dir/src/WorldServerDispatcherHandler.cpp.o"
   "worldserver_dispatcher.pdb"
   "worldserver_dispatcher"
 )

@@ -4,7 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/main.cpp" "/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/worldserver_dispatcher.dir/main.cpp.o"
+  "/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/src/WorldServerDispatcherHandler.cpp" "/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/worldserver_dispatcher.dir/src/WorldServerDispatcherHandler.cpp.o"
+  "/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/src/main.cpp" "/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/worldserver_dispatcher.dir/src/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

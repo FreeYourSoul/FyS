@@ -217,32 +217,59 @@ home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp.
 	$(MAKE) -f CMakeFiles/common_dispatcher.dir/build.make CMakeFiles/common_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp.s
 .PHONY : home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp.s
 
-main.o: main.cpp.o
+src/WorldServerDispatcherHandler.o: src/WorldServerDispatcherHandler.cpp.o
 
-.PHONY : main.o
+.PHONY : src/WorldServerDispatcherHandler.o
 
 # target to build an object file
-main.cpp.o:
-	$(MAKE) -f CMakeFiles/worldserver_dispatcher.dir/build.make CMakeFiles/worldserver_dispatcher.dir/main.cpp.o
-.PHONY : main.cpp.o
+src/WorldServerDispatcherHandler.cpp.o:
+	$(MAKE) -f CMakeFiles/worldserver_dispatcher.dir/build.make CMakeFiles/worldserver_dispatcher.dir/src/WorldServerDispatcherHandler.cpp.o
+.PHONY : src/WorldServerDispatcherHandler.cpp.o
 
-main.i: main.cpp.i
+src/WorldServerDispatcherHandler.i: src/WorldServerDispatcherHandler.cpp.i
 
-.PHONY : main.i
+.PHONY : src/WorldServerDispatcherHandler.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles/worldserver_dispatcher.dir/build.make CMakeFiles/worldserver_dispatcher.dir/main.cpp.i
-.PHONY : main.cpp.i
+src/WorldServerDispatcherHandler.cpp.i:
+	$(MAKE) -f CMakeFiles/worldserver_dispatcher.dir/build.make CMakeFiles/worldserver_dispatcher.dir/src/WorldServerDispatcherHandler.cpp.i
+.PHONY : src/WorldServerDispatcherHandler.cpp.i
 
-main.s: main.cpp.s
+src/WorldServerDispatcherHandler.s: src/WorldServerDispatcherHandler.cpp.s
 
-.PHONY : main.s
+.PHONY : src/WorldServerDispatcherHandler.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles/worldserver_dispatcher.dir/build.make CMakeFiles/worldserver_dispatcher.dir/main.cpp.s
-.PHONY : main.cpp.s
+src/WorldServerDispatcherHandler.cpp.s:
+	$(MAKE) -f CMakeFiles/worldserver_dispatcher.dir/build.make CMakeFiles/worldserver_dispatcher.dir/src/WorldServerDispatcherHandler.cpp.s
+.PHONY : src/WorldServerDispatcherHandler.cpp.s
+
+src/main.o: src/main.cpp.o
+
+.PHONY : src/main.o
+
+# target to build an object file
+src/main.cpp.o:
+	$(MAKE) -f CMakeFiles/worldserver_dispatcher.dir/build.make CMakeFiles/worldserver_dispatcher.dir/src/main.cpp.o
+.PHONY : src/main.cpp.o
+
+src/main.i: src/main.cpp.i
+
+.PHONY : src/main.i
+
+# target to preprocess a source file
+src/main.cpp.i:
+	$(MAKE) -f CMakeFiles/worldserver_dispatcher.dir/build.make CMakeFiles/worldserver_dispatcher.dir/src/main.cpp.i
+.PHONY : src/main.cpp.i
+
+src/main.s: src/main.cpp.s
+
+.PHONY : src/main.s
+
+# target to generate assembly for a file
+src/main.cpp.s:
+	$(MAKE) -f CMakeFiles/worldserver_dispatcher.dir/build.make CMakeFiles/worldserver_dispatcher.dir/src/main.cpp.s
+.PHONY : src/main.cpp.s
 
 # Help Target
 help:
@@ -263,9 +290,12 @@ help:
 	@echo "... home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.o"
 	@echo "... home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.i"
 	@echo "... home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.s"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... src/WorldServerDispatcherHandler.o"
+	@echo "... src/WorldServerDispatcherHandler.i"
+	@echo "... src/WorldServerDispatcherHandler.s"
+	@echo "... src/main.o"
+	@echo "... src/main.i"
+	@echo "... src/main.s"
 .PHONY : help
 
 

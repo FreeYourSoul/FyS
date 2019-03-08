@@ -12,7 +12,10 @@ find_package(cppzmq REQUIRED)
 include(${CMAKE_SOURCE_DIR}/../common/CMakeLists.txt)
 
 #Build executable
-add_executable(worldserver_dispatcher ${CMAKE_SOURCE_DIR}/main.cpp)
+add_executable(worldserver_dispatcher
+        ${CMAKE_SOURCE_DIR}/src/main.cpp
+        ${CMAKE_SOURCE_DIR}/src/WorldServerDispatcherHandler.cpp
+        ${CMAKE_SOURCE_DIR}/src/WorldServerDispatcherHandler.hh)
 
 target_include_directories(worldserver_dispatcher
         PRIVATE /usr/include/tclap

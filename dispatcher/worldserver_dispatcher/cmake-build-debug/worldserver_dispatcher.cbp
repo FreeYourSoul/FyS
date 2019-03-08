@@ -152,7 +152,13 @@
 		<Unit filename="/home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp">
 			<Option target="common_dispatcher"/>
 		</Unit>
-		<Unit filename="/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/main.cpp">
+		<Unit filename="/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/src/WorldServerDispatcherHandler.cpp">
+			<Option target="worldserver_dispatcher"/>
+		</Unit>
+		<Unit filename="/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/src/WorldServerDispatcherHandler.hh">
+			<Option target="worldserver_dispatcher"/>
+		</Unit>
+		<Unit filename="/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/src/main.cpp">
 			<Option target="worldserver_dispatcher"/>
 		</Unit>
 		<Unit filename="/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/CMakeLists.txt">

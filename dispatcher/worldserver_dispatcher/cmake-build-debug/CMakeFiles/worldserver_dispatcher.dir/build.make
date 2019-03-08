@@ -57,32 +57,47 @@ include CMakeFiles/worldserver_dispatcher.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/worldserver_dispatcher.dir/flags.make
 
-CMakeFiles/worldserver_dispatcher.dir/main.cpp.o: CMakeFiles/worldserver_dispatcher.dir/flags.make
-CMakeFiles/worldserver_dispatcher.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/worldserver_dispatcher.dir/main.cpp.o"
-	ccache /usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/worldserver_dispatcher.dir/main.cpp.o -c /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/main.cpp
+CMakeFiles/worldserver_dispatcher.dir/src/main.cpp.o: CMakeFiles/worldserver_dispatcher.dir/flags.make
+CMakeFiles/worldserver_dispatcher.dir/src/main.cpp.o: ../src/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/worldserver_dispatcher.dir/src/main.cpp.o"
+	ccache /usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/worldserver_dispatcher.dir/src/main.cpp.o -c /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/src/main.cpp
 
-CMakeFiles/worldserver_dispatcher.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/worldserver_dispatcher.dir/main.cpp.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/main.cpp > CMakeFiles/worldserver_dispatcher.dir/main.cpp.i
+CMakeFiles/worldserver_dispatcher.dir/src/main.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/worldserver_dispatcher.dir/src/main.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/src/main.cpp > CMakeFiles/worldserver_dispatcher.dir/src/main.cpp.i
 
-CMakeFiles/worldserver_dispatcher.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/worldserver_dispatcher.dir/main.cpp.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/main.cpp -o CMakeFiles/worldserver_dispatcher.dir/main.cpp.s
+CMakeFiles/worldserver_dispatcher.dir/src/main.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/worldserver_dispatcher.dir/src/main.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/src/main.cpp -o CMakeFiles/worldserver_dispatcher.dir/src/main.cpp.s
+
+CMakeFiles/worldserver_dispatcher.dir/src/WorldServerDispatcherHandler.cpp.o: CMakeFiles/worldserver_dispatcher.dir/flags.make
+CMakeFiles/worldserver_dispatcher.dir/src/WorldServerDispatcherHandler.cpp.o: ../src/WorldServerDispatcherHandler.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/worldserver_dispatcher.dir/src/WorldServerDispatcherHandler.cpp.o"
+	ccache /usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/worldserver_dispatcher.dir/src/WorldServerDispatcherHandler.cpp.o -c /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/src/WorldServerDispatcherHandler.cpp
+
+CMakeFiles/worldserver_dispatcher.dir/src/WorldServerDispatcherHandler.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/worldserver_dispatcher.dir/src/WorldServerDispatcherHandler.cpp.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/src/WorldServerDispatcherHandler.cpp > CMakeFiles/worldserver_dispatcher.dir/src/WorldServerDispatcherHandler.cpp.i
+
+CMakeFiles/worldserver_dispatcher.dir/src/WorldServerDispatcherHandler.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/worldserver_dispatcher.dir/src/WorldServerDispatcherHandler.cpp.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/src/WorldServerDispatcherHandler.cpp -o CMakeFiles/worldserver_dispatcher.dir/src/WorldServerDispatcherHandler.cpp.s
 
 # Object files for target worldserver_dispatcher
 worldserver_dispatcher_OBJECTS = \
-"CMakeFiles/worldserver_dispatcher.dir/main.cpp.o"
+"CMakeFiles/worldserver_dispatcher.dir/src/main.cpp.o" \
+"CMakeFiles/worldserver_dispatcher.dir/src/WorldServerDispatcherHandler.cpp.o"
 
 # External object files for target worldserver_dispatcher
 worldserver_dispatcher_EXTERNAL_OBJECTS =
 
-worldserver_dispatcher: CMakeFiles/worldserver_dispatcher.dir/main.cpp.o
+worldserver_dispatcher: CMakeFiles/worldserver_dispatcher.dir/src/main.cpp.o
+worldserver_dispatcher: CMakeFiles/worldserver_dispatcher.dir/src/WorldServerDispatcherHandler.cpp.o
 worldserver_dispatcher: CMakeFiles/worldserver_dispatcher.dir/build.make
 worldserver_dispatcher: libcommon_dispatcher.a
 worldserver_dispatcher: /usr/local/lib64/libzmq.so.5.2.2
 worldserver_dispatcher: CMakeFiles/worldserver_dispatcher.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable worldserver_dispatcher"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable worldserver_dispatcher"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/worldserver_dispatcher.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
