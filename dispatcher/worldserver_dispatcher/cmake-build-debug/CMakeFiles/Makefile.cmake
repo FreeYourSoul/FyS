@@ -54,5 +54,6 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
+  "CMakeFiles/common_dispatcher.dir/DependInfo.cmake"
   "CMakeFiles/worldserver_dispatcher.dir/DependInfo.cmake"
   )

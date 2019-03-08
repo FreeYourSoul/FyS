@@ -110,6 +110,100 @@ depend:
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
+#=============================================================================
+# Target rules for targets named common_dispatcher
+
+# Build rule for target.
+common_dispatcher: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 common_dispatcher
+.PHONY : common_dispatcher
+
+# fast build rule for target.
+common_dispatcher/fast:
+	$(MAKE) -f CMakeFiles/common_dispatcher.dir/build.make CMakeFiles/common_dispatcher.dir/build
+.PHONY : common_dispatcher/fast
+
+src/context/StartupDispatcherCtx.o: src/context/StartupDispatcherCtx.cpp.o
+
+.PHONY : src/context/StartupDispatcherCtx.o
+
+# target to build an object file
+src/context/StartupDispatcherCtx.cpp.o:
+	$(MAKE) -f CMakeFiles/common_dispatcher.dir/build.make CMakeFiles/common_dispatcher.dir/src/context/StartupDispatcherCtx.cpp.o
+.PHONY : src/context/StartupDispatcherCtx.cpp.o
+
+src/context/StartupDispatcherCtx.i: src/context/StartupDispatcherCtx.cpp.i
+
+.PHONY : src/context/StartupDispatcherCtx.i
+
+# target to preprocess a source file
+src/context/StartupDispatcherCtx.cpp.i:
+	$(MAKE) -f CMakeFiles/common_dispatcher.dir/build.make CMakeFiles/common_dispatcher.dir/src/context/StartupDispatcherCtx.cpp.i
+.PHONY : src/context/StartupDispatcherCtx.cpp.i
+
+src/context/StartupDispatcherCtx.s: src/context/StartupDispatcherCtx.cpp.s
+
+.PHONY : src/context/StartupDispatcherCtx.s
+
+# target to generate assembly for a file
+src/context/StartupDispatcherCtx.cpp.s:
+	$(MAKE) -f CMakeFiles/common_dispatcher.dir/build.make CMakeFiles/common_dispatcher.dir/src/context/StartupDispatcherCtx.cpp.s
+.PHONY : src/context/StartupDispatcherCtx.cpp.s
+
+src/core/Dispatcher.o: src/core/Dispatcher.cpp.o
+
+.PHONY : src/core/Dispatcher.o
+
+# target to build an object file
+src/core/Dispatcher.cpp.o:
+	$(MAKE) -f CMakeFiles/common_dispatcher.dir/build.make CMakeFiles/common_dispatcher.dir/src/core/Dispatcher.cpp.o
+.PHONY : src/core/Dispatcher.cpp.o
+
+src/core/Dispatcher.i: src/core/Dispatcher.cpp.i
+
+.PHONY : src/core/Dispatcher.i
+
+# target to preprocess a source file
+src/core/Dispatcher.cpp.i:
+	$(MAKE) -f CMakeFiles/common_dispatcher.dir/build.make CMakeFiles/common_dispatcher.dir/src/core/Dispatcher.cpp.i
+.PHONY : src/core/Dispatcher.cpp.i
+
+src/core/Dispatcher.s: src/core/Dispatcher.cpp.s
+
+.PHONY : src/core/Dispatcher.s
+
+# target to generate assembly for a file
+src/core/Dispatcher.cpp.s:
+	$(MAKE) -f CMakeFiles/common_dispatcher.dir/build.make CMakeFiles/common_dispatcher.dir/src/core/Dispatcher.cpp.s
+.PHONY : src/core/Dispatcher.cpp.s
+
+src/core/DispatcherConnectionManager.o: src/core/DispatcherConnectionManager.cpp.o
+
+.PHONY : src/core/DispatcherConnectionManager.o
+
+# target to build an object file
+src/core/DispatcherConnectionManager.cpp.o:
+	$(MAKE) -f CMakeFiles/common_dispatcher.dir/build.make CMakeFiles/common_dispatcher.dir/src/core/DispatcherConnectionManager.cpp.o
+.PHONY : src/core/DispatcherConnectionManager.cpp.o
+
+src/core/DispatcherConnectionManager.i: src/core/DispatcherConnectionManager.cpp.i
+
+.PHONY : src/core/DispatcherConnectionManager.i
+
+# target to preprocess a source file
+src/core/DispatcherConnectionManager.cpp.i:
+	$(MAKE) -f CMakeFiles/common_dispatcher.dir/build.make CMakeFiles/common_dispatcher.dir/src/core/DispatcherConnectionManager.cpp.i
+.PHONY : src/core/DispatcherConnectionManager.cpp.i
+
+src/core/DispatcherConnectionManager.s: src/core/DispatcherConnectionManager.cpp.s
+
+.PHONY : src/core/DispatcherConnectionManager.s
+
+# target to generate assembly for a file
+src/core/DispatcherConnectionManager.cpp.s:
+	$(MAKE) -f CMakeFiles/common_dispatcher.dir/build.make CMakeFiles/common_dispatcher.dir/src/core/DispatcherConnectionManager.cpp.s
+.PHONY : src/core/DispatcherConnectionManager.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -117,7 +211,17 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
+	@echo "... common_dispatcher"
 	@echo "... edit_cache"
+	@echo "... src/context/StartupDispatcherCtx.o"
+	@echo "... src/context/StartupDispatcherCtx.i"
+	@echo "... src/context/StartupDispatcherCtx.s"
+	@echo "... src/core/Dispatcher.o"
+	@echo "... src/core/Dispatcher.i"
+	@echo "... src/core/Dispatcher.s"
+	@echo "... src/core/DispatcherConnectionManager.o"
+	@echo "... src/core/DispatcherConnectionManager.i"
+	@echo "... src/core/DispatcherConnectionManager.s"
 .PHONY : help
 
 

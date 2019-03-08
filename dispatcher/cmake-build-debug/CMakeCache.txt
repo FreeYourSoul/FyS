@@ -14,6 +14,12 @@
 # EXTERNAL cache entries
 ########################
 
+//The directory containing a CMake configuration file for Boost.
+Boost_DIR:PATH=Boost_DIR-NOTFOUND
+
+//Path to a file.
+Boost_INCLUDE_DIR:PATH=/usr/include
+
 //Path to a program.
 CMAKE_AR:FILEPATH=/usr/bin/ar
 
@@ -223,6 +229,12 @@ Project_BINARY_DIR:STATIC=/home/FyS/Project/FyS/dispatcher/cmake-build-debug
 //Value Computed by CMake
 Project_SOURCE_DIR:STATIC=/home/FyS/Project/FyS/dispatcher
 
+//The directory containing a CMake configuration file for ZeroMQ.
+ZeroMQ_DIR:PATH=/usr/local/share/cmake/ZeroMQ
+
+//The directory containing a CMake configuration file for cppzmq.
+cppzmq_DIR:PATH=/usr/local/share/cmake/cppzmq
+
 //Value Computed by CMake
 worldserver_dispatcher_BINARY_DIR:STATIC=/home/FyS/Project/FyS/dispatcher/cmake-build-debug/worldserver_dispatcher
 
@@ -234,6 +246,10 @@ worldserver_dispatcher_SOURCE_DIR:STATIC=/home/FyS/Project/FyS/dispatcher/worlds
 # INTERNAL cache entries
 ########################
 
+//ADVANCED property for variable: Boost_DIR
+Boost_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: Boost_INCLUDE_DIR
+Boost_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_AR
 CMAKE_AR-ADVANCED:INTERNAL=1
 //This is the directory where this CMakeCache.txt was created
@@ -383,4 +399,12 @@ CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 ProcessorCount_cmd_getconf-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: ProcessorCount_cmd_sysctl
 ProcessorCount_cmd_sysctl-ADVANCED:INTERNAL=1
+//Components requested for this build tree.
+_Boost_COMPONENTS_SEARCHED:INTERNAL=
+//Last used Boost_INCLUDE_DIR value.
+_Boost_INCLUDE_DIR_LAST:INTERNAL=/usr/include
+//Last used Boost_NAMESPACE value.
+_Boost_NAMESPACE_LAST:INTERNAL=boost
+//Last used Boost_USE_MULTITHREADED value.
+_Boost_USE_MULTITHREADED_LAST:INTERNAL=TRUE
 

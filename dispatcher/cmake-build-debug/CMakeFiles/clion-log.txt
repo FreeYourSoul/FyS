@@ -1,11 +1,12 @@
 /home/FyS/Documents/CLion/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/FyS/Project/FyS/dispatcher
-CMake Error at CMakeLists.txt:7 (add_subdirectory):
-  The source directory
+-- Boost version: 1.66.0
+CMake Error: File /home/FyS/Project/FyS/common/include/context/Versioner.hh.in does not exist.
+CMake Error at common/CMakeLists.txt:14 (configure_file):
+  configure_file Problem configuring file
+Call Stack (most recent call first):
+  worldserver_dispatcher/CMakeLists.txt:12 (include)
 
-    /home/FyS/Project/FyS/dispatcher/chat_dispatcher
 
-  does not contain a CMakeLists.txt file.
-
-
+-- SetWarningsflag:
 -- Configuring incomplete, errors occurred!
 See also "/home/FyS/Project/FyS/dispatcher/cmake-build-debug/CMakeFiles/CMakeOutput.log".

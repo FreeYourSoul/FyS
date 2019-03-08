@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named common_dispatcher
+
+# Build rule for target.
+common_dispatcher: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 common_dispatcher
+.PHONY : common_dispatcher
+
+# fast build rule for target.
+common_dispatcher/fast:
+	$(MAKE) -f CMakeFiles/common_dispatcher.dir/build.make CMakeFiles/common_dispatcher.dir/build
+.PHONY : common_dispatcher/fast
+
+#=============================================================================
 # Target rules for targets named worldserver_dispatcher
 
 # Build rule for target.
@@ -129,7 +142,7 @@ home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.o: home/
 
 # target to build an object file
 home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp.o:
-	$(MAKE) -f CMakeFiles/worldserver_dispatcher.dir/build.make CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp.o
+	$(MAKE) -f CMakeFiles/common_dispatcher.dir/build.make CMakeFiles/common_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp.o
 .PHONY : home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp.o
 
 home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.i: home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp.i
@@ -138,7 +151,7 @@ home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.i: home/
 
 # target to preprocess a source file
 home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp.i:
-	$(MAKE) -f CMakeFiles/worldserver_dispatcher.dir/build.make CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp.i
+	$(MAKE) -f CMakeFiles/common_dispatcher.dir/build.make CMakeFiles/common_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp.i
 .PHONY : home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp.i
 
 home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.s: home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp.s
@@ -147,7 +160,7 @@ home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.s: home/
 
 # target to generate assembly for a file
 home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp.s:
-	$(MAKE) -f CMakeFiles/worldserver_dispatcher.dir/build.make CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp.s
+	$(MAKE) -f CMakeFiles/common_dispatcher.dir/build.make CMakeFiles/common_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp.s
 .PHONY : home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp.s
 
 home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.o: home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.cpp.o
@@ -156,7 +169,7 @@ home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.o: home/FyS/Project/F
 
 # target to build an object file
 home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.cpp.o:
-	$(MAKE) -f CMakeFiles/worldserver_dispatcher.dir/build.make CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.cpp.o
+	$(MAKE) -f CMakeFiles/common_dispatcher.dir/build.make CMakeFiles/common_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.cpp.o
 .PHONY : home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.cpp.o
 
 home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.i: home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.cpp.i
@@ -165,7 +178,7 @@ home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.i: home/FyS/Project/F
 
 # target to preprocess a source file
 home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.cpp.i:
-	$(MAKE) -f CMakeFiles/worldserver_dispatcher.dir/build.make CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.cpp.i
+	$(MAKE) -f CMakeFiles/common_dispatcher.dir/build.make CMakeFiles/common_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.cpp.i
 .PHONY : home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.cpp.i
 
 home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.s: home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.cpp.s
@@ -174,7 +187,7 @@ home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.s: home/FyS/Project/F
 
 # target to generate assembly for a file
 home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.cpp.s:
-	$(MAKE) -f CMakeFiles/worldserver_dispatcher.dir/build.make CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.cpp.s
+	$(MAKE) -f CMakeFiles/common_dispatcher.dir/build.make CMakeFiles/common_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.cpp.s
 .PHONY : home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.cpp.s
 
 home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.o: home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp.o
@@ -183,7 +196,7 @@ home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.o: h
 
 # target to build an object file
 home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp.o:
-	$(MAKE) -f CMakeFiles/worldserver_dispatcher.dir/build.make CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp.o
+	$(MAKE) -f CMakeFiles/common_dispatcher.dir/build.make CMakeFiles/common_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp.o
 .PHONY : home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp.o
 
 home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.i: home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp.i
@@ -192,7 +205,7 @@ home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.i: h
 
 # target to preprocess a source file
 home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp.i:
-	$(MAKE) -f CMakeFiles/worldserver_dispatcher.dir/build.make CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp.i
+	$(MAKE) -f CMakeFiles/common_dispatcher.dir/build.make CMakeFiles/common_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp.i
 .PHONY : home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp.i
 
 home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.s: home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp.s
@@ -201,35 +214,35 @@ home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.s: h
 
 # target to generate assembly for a file
 home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp.s:
-	$(MAKE) -f CMakeFiles/worldserver_dispatcher.dir/build.make CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp.s
+	$(MAKE) -f CMakeFiles/common_dispatcher.dir/build.make CMakeFiles/common_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp.s
 .PHONY : home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp.s
 
-home/FyS/Project/FyS/dispatcher/common/src/main.o: home/FyS/Project/FyS/dispatcher/common/src/main.cpp.o
+main.o: main.cpp.o
 
-.PHONY : home/FyS/Project/FyS/dispatcher/common/src/main.o
+.PHONY : main.o
 
 # target to build an object file
-home/FyS/Project/FyS/dispatcher/common/src/main.cpp.o:
-	$(MAKE) -f CMakeFiles/worldserver_dispatcher.dir/build.make CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/main.cpp.o
-.PHONY : home/FyS/Project/FyS/dispatcher/common/src/main.cpp.o
+main.cpp.o:
+	$(MAKE) -f CMakeFiles/worldserver_dispatcher.dir/build.make CMakeFiles/worldserver_dispatcher.dir/main.cpp.o
+.PHONY : main.cpp.o
 
-home/FyS/Project/FyS/dispatcher/common/src/main.i: home/FyS/Project/FyS/dispatcher/common/src/main.cpp.i
+main.i: main.cpp.i
 
-.PHONY : home/FyS/Project/FyS/dispatcher/common/src/main.i
+.PHONY : main.i
 
 # target to preprocess a source file
-home/FyS/Project/FyS/dispatcher/common/src/main.cpp.i:
-	$(MAKE) -f CMakeFiles/worldserver_dispatcher.dir/build.make CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/main.cpp.i
-.PHONY : home/FyS/Project/FyS/dispatcher/common/src/main.cpp.i
+main.cpp.i:
+	$(MAKE) -f CMakeFiles/worldserver_dispatcher.dir/build.make CMakeFiles/worldserver_dispatcher.dir/main.cpp.i
+.PHONY : main.cpp.i
 
-home/FyS/Project/FyS/dispatcher/common/src/main.s: home/FyS/Project/FyS/dispatcher/common/src/main.cpp.s
+main.s: main.cpp.s
 
-.PHONY : home/FyS/Project/FyS/dispatcher/common/src/main.s
+.PHONY : main.s
 
 # target to generate assembly for a file
-home/FyS/Project/FyS/dispatcher/common/src/main.cpp.s:
-	$(MAKE) -f CMakeFiles/worldserver_dispatcher.dir/build.make CMakeFiles/worldserver_dispatcher.dir/home/FyS/Project/FyS/dispatcher/common/src/main.cpp.s
-.PHONY : home/FyS/Project/FyS/dispatcher/common/src/main.cpp.s
+main.cpp.s:
+	$(MAKE) -f CMakeFiles/worldserver_dispatcher.dir/build.make CMakeFiles/worldserver_dispatcher.dir/main.cpp.s
+.PHONY : main.cpp.s
 
 # Help Target
 help:
@@ -238,8 +251,9 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... worldserver_dispatcher"
 	@echo "... edit_cache"
+	@echo "... common_dispatcher"
+	@echo "... worldserver_dispatcher"
 	@echo "... home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.o"
 	@echo "... home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.i"
 	@echo "... home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.s"
@@ -249,9 +263,9 @@ help:
 	@echo "... home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.o"
 	@echo "... home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.i"
 	@echo "... home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.s"
-	@echo "... home/FyS/Project/FyS/dispatcher/common/src/main.o"
-	@echo "... home/FyS/Project/FyS/dispatcher/common/src/main.i"
-	@echo "... home/FyS/Project/FyS/dispatcher/common/src/main.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 .PHONY : help
 
 

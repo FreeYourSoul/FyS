@@ -1,11 +1,10 @@
+#include <chrono>
 #include <Dispatcher.hh>
 
+void fys::DispatcherHandlerBase::processInputMessage() {
 
-fys::Dispatcher::Dispatcher(fys::StartupDispatcherCtx &&ctx) :
- _connectionManager(1) {
-    _connectionManager.setupConnectionManager(ctx);
 }
 
-void fys::Dispatcher::runDispatching() {
+void fys::DispatcherHandlerBase::processClusterMessage() {
 
 }

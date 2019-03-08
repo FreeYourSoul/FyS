@@ -6,27 +6,3 @@
 
 #IncludeRegexTransform: 
 
-../../common/include/context/StartupDispatcherCtx.hh
-boost/property_tree/ptree.hpp
--
-boost/property_tree/json_parser.hpp
--
-string
--
-
-../../common/include/context/Versioner.hh
-
-/home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp
-spdlog/spdlog.h
--
-tclap/ValueArg.h
--
-tclap/CmdLine.h
--
-boost/property_tree/ini_parser.hpp
--
-StartupDispatcherCtx.hh
--
-Versioner.hh
--
-

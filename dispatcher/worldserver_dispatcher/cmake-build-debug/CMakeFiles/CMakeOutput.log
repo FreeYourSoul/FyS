@@ -1,4 +1,4 @@
-The system is: Linux - 4.19.15-300.fc29.x86_64 - x86_64
+The system is: Linux - 4.20.13-200.fc29.x86_64 - x86_64
 Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
 Compiler: /usr/lib64/ccache/c++ 
 Build flags: 
@@ -15,28 +15,56 @@ The CXX compiler identification is GNU, found in "/home/FyS/Project/FyS/dispatch
 Determining if the CXX compiler works passed with the following output:
 Change Dir: /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/gmake" "cmTC_ac61c/fast"
-/usr/bin/gmake -f CMakeFiles/cmTC_ac61c.dir/build.make CMakeFiles/cmTC_ac61c.dir/build
+Run Build Command:"/usr/bin/gmake" "cmTC_6e87e/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_6e87e.dir/build.make CMakeFiles/cmTC_6e87e.dir/build
 gmake[1]: Entering directory '/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_ac61c.dir/testCXXCompiler.cxx.o
-/usr/lib64/ccache/c++     -o CMakeFiles/cmTC_ac61c.dir/testCXXCompiler.cxx.o -c /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
-Linking CXX executable cmTC_ac61c
-/home/FyS/Documents/CLion/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ac61c.dir/link.txt --verbose=1
-/usr/lib64/ccache/c++       CMakeFiles/cmTC_ac61c.dir/testCXXCompiler.cxx.o  -o cmTC_ac61c 
+Building CXX object CMakeFiles/cmTC_6e87e.dir/testCXXCompiler.cxx.o
+/usr/lib64/ccache/c++     -o CMakeFiles/cmTC_6e87e.dir/testCXXCompiler.cxx.o -c /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTC_6e87e
+/home/FyS/Documents/CLion/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6e87e.dir/link.txt --verbose=1
+/usr/lib64/ccache/c++       CMakeFiles/cmTC_6e87e.dir/testCXXCompiler.cxx.o  -o cmTC_6e87e 
+gmake[1]: Leaving directory '/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/CMakeTmp'
+
+
+The system is: Linux - 4.20.13-200.fc29.x86_64 - x86_64
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /usr/lib64/ccache/c++ 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+
+The CXX compiler identification is GNU, found in "/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/3.13.2/CompilerIdCXX/a.out"
+
+Determining if the CXX compiler works passed with the following output:
+Change Dir: /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_2ff3e/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_2ff3e.dir/build.make CMakeFiles/cmTC_2ff3e.dir/build
+gmake[1]: Entering directory '/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_2ff3e.dir/testCXXCompiler.cxx.o
+/usr/lib64/ccache/c++     -o CMakeFiles/cmTC_2ff3e.dir/testCXXCompiler.cxx.o -c /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTC_2ff3e
+/home/FyS/Documents/CLion/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2ff3e.dir/link.txt --verbose=1
+/usr/lib64/ccache/c++       CMakeFiles/cmTC_2ff3e.dir/testCXXCompiler.cxx.o  -o cmTC_2ff3e 
 gmake[1]: Leaving directory '/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/CMakeTmp'
 
 
 Detecting CXX compiler ABI info compiled with the following output:
 Change Dir: /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/gmake" "cmTC_959df/fast"
-/usr/bin/gmake -f CMakeFiles/cmTC_959df.dir/build.make CMakeFiles/cmTC_959df.dir/build
+Run Build Command:"/usr/bin/gmake" "cmTC_7dc7c/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_7dc7c.dir/build.make CMakeFiles/cmTC_7dc7c.dir/build
 gmake[1]: Entering directory '/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_959df.dir/CMakeCXXCompilerABI.cpp.o
-/usr/lib64/ccache/c++     -o CMakeFiles/cmTC_959df.dir/CMakeCXXCompilerABI.cpp.o -c /home/FyS/Documents/CLion/bin/cmake/linux/share/cmake-3.13/Modules/CMakeCXXCompilerABI.cpp
-Linking CXX executable cmTC_959df
-/home/FyS/Documents/CLion/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_959df.dir/link.txt --verbose=1
-/usr/lib64/ccache/c++      -v CMakeFiles/cmTC_959df.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_959df 
+Building CXX object CMakeFiles/cmTC_7dc7c.dir/CMakeCXXCompilerABI.cpp.o
+/usr/lib64/ccache/c++     -o CMakeFiles/cmTC_7dc7c.dir/CMakeCXXCompilerABI.cpp.o -c /home/FyS/Documents/CLion/bin/cmake/linux/share/cmake-3.13/Modules/CMakeCXXCompilerABI.cpp
+Linking CXX executable cmTC_7dc7c
+/home/FyS/Documents/CLion/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7dc7c.dir/link.txt --verbose=1
+/usr/lib64/ccache/c++      -v CMakeFiles/cmTC_7dc7c.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_7dc7c 
 Using built-in specs.
 COLLECT_GCC=/usr/bin/c++
 COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-redhat-linux/8/lto-wrapper
@@ -48,9 +76,9 @@ Thread model: posix
 gcc version 8.3.1 20190223 (Red Hat 8.3.1-2) (GCC) 
 COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/8/:/usr/libexec/gcc/x86_64-redhat-linux/8/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/8/:/usr/lib/gcc/x86_64-redhat-linux/
 LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/8/:/usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-redhat-linux/8/../../../:/lib/:/usr/lib/
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_959df' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
- /usr/libexec/gcc/x86_64-redhat-linux/8/collect2 -plugin /usr/libexec/gcc/x86_64-redhat-linux/8/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/8/lto-wrapper -plugin-opt=-fresolution=/tmp/ccdprbvQ.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_959df /usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/8/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/8 -L/usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/8/../../.. CMakeFiles/cmTC_959df.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-redhat-linux/8/crtend.o /usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64/crtn.o
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_959df' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_7dc7c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /usr/libexec/gcc/x86_64-redhat-linux/8/collect2 -plugin /usr/libexec/gcc/x86_64-redhat-linux/8/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/8/lto-wrapper -plugin-opt=-fresolution=/tmp/cccc3K3R.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_7dc7c /usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/8/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/8 -L/usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/8/../../.. CMakeFiles/cmTC_7dc7c.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-redhat-linux/8/crtend.o /usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_7dc7c' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
 gmake[1]: Leaving directory '/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/CMakeTmp'
 
 
@@ -58,14 +86,14 @@ Parsed CXX implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
   ignore line: [Change Dir: /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/CMakeTmp]
   ignore line: []
-  ignore line: [Run Build Command:"/usr/bin/gmake" "cmTC_959df/fast"]
-  ignore line: [/usr/bin/gmake -f CMakeFiles/cmTC_959df.dir/build.make CMakeFiles/cmTC_959df.dir/build]
+  ignore line: [Run Build Command:"/usr/bin/gmake" "cmTC_7dc7c/fast"]
+  ignore line: [/usr/bin/gmake -f CMakeFiles/cmTC_7dc7c.dir/build.make CMakeFiles/cmTC_7dc7c.dir/build]
   ignore line: [gmake[1]: Entering directory '/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/CMakeTmp']
-  ignore line: [Building CXX object CMakeFiles/cmTC_959df.dir/CMakeCXXCompilerABI.cpp.o]
-  ignore line: [/usr/lib64/ccache/c++     -o CMakeFiles/cmTC_959df.dir/CMakeCXXCompilerABI.cpp.o -c /home/FyS/Documents/CLion/bin/cmake/linux/share/cmake-3.13/Modules/CMakeCXXCompilerABI.cpp]
-  ignore line: [Linking CXX executable cmTC_959df]
-  ignore line: [/home/FyS/Documents/CLion/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_959df.dir/link.txt --verbose=1]
-  ignore line: [/usr/lib64/ccache/c++      -v CMakeFiles/cmTC_959df.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_959df ]
+  ignore line: [Building CXX object CMakeFiles/cmTC_7dc7c.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/usr/lib64/ccache/c++     -o CMakeFiles/cmTC_7dc7c.dir/CMakeCXXCompilerABI.cpp.o -c /home/FyS/Documents/CLion/bin/cmake/linux/share/cmake-3.13/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Linking CXX executable cmTC_7dc7c]
+  ignore line: [/home/FyS/Documents/CLion/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7dc7c.dir/link.txt --verbose=1]
+  ignore line: [/usr/lib64/ccache/c++      -v CMakeFiles/cmTC_7dc7c.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_7dc7c ]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=/usr/bin/c++]
   ignore line: [COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-redhat-linux/8/lto-wrapper]
@@ -77,13 +105,13 @@ Parsed CXX implicit link information from above output:
   ignore line: [gcc version 8.3.1 20190223 (Red Hat 8.3.1-2) (GCC) ]
   ignore line: [COMPILER_PATH=/usr/libexec/gcc/x86_64-redhat-linux/8/:/usr/libexec/gcc/x86_64-redhat-linux/8/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/8/:/usr/lib/gcc/x86_64-redhat-linux/]
   ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/8/:/usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib/gcc/x86_64-redhat-linux/8/../../../:/lib/:/usr/lib/]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_959df' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
-  link line: [ /usr/libexec/gcc/x86_64-redhat-linux/8/collect2 -plugin /usr/libexec/gcc/x86_64-redhat-linux/8/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/8/lto-wrapper -plugin-opt=-fresolution=/tmp/ccdprbvQ.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_959df /usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/8/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/8 -L/usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/8/../../.. CMakeFiles/cmTC_959df.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-redhat-linux/8/crtend.o /usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64/crtn.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_7dc7c' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  link line: [ /usr/libexec/gcc/x86_64-redhat-linux/8/collect2 -plugin /usr/libexec/gcc/x86_64-redhat-linux/8/liblto_plugin.so -plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/8/lto-wrapper -plugin-opt=-fresolution=/tmp/cccc3K3R.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_7dc7c /usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/8/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/8 -L/usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib/gcc/x86_64-redhat-linux/8/../../.. CMakeFiles/cmTC_7dc7c.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib/gcc/x86_64-redhat-linux/8/crtend.o /usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64/crtn.o]
     arg [/usr/libexec/gcc/x86_64-redhat-linux/8/collect2] ==> ignore
     arg [-plugin] ==> ignore
     arg [/usr/libexec/gcc/x86_64-redhat-linux/8/liblto_plugin.so] ==> ignore
     arg [-plugin-opt=/usr/libexec/gcc/x86_64-redhat-linux/8/lto-wrapper] ==> ignore
-    arg [-plugin-opt=-fresolution=/tmp/ccdprbvQ.res] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/cccc3K3R.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lc] ==> ignore
@@ -98,7 +126,7 @@ Parsed CXX implicit link information from above output:
     arg [-dynamic-linker] ==> ignore
     arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_959df] ==> ignore
+    arg [cmTC_7dc7c] ==> ignore
     arg [/usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64/crt1.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-redhat-linux/8/../../../../lib64/crti.o] ==> ignore
     arg [/usr/lib/gcc/x86_64-redhat-linux/8/crtbegin.o] ==> ignore
@@ -107,7 +135,7 @@ Parsed CXX implicit link information from above output:
     arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
     arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
     arg [-L/usr/lib/gcc/x86_64-redhat-linux/8/../../..] ==> dir [/usr/lib/gcc/x86_64-redhat-linux/8/../../..]
-    arg [CMakeFiles/cmTC_959df.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [CMakeFiles/cmTC_7dc7c.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
     arg [-lstdc++] ==> lib [stdc++]
     arg [-lm] ==> lib [m]
     arg [-lgcc_s] ==> lib [gcc_s]
@@ -132,14 +160,14 @@ Parsed CXX implicit link information from above output:
 Detecting CXX [-std=c++2a] compiler features compiled with the following output:
 Change Dir: /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/gmake" "cmTC_03229/fast"
-/usr/bin/gmake -f CMakeFiles/cmTC_03229.dir/build.make CMakeFiles/cmTC_03229.dir/build
+Run Build Command:"/usr/bin/gmake" "cmTC_e930d/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_e930d.dir/build.make CMakeFiles/cmTC_e930d.dir/build
 gmake[1]: Entering directory '/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_03229.dir/feature_tests.cxx.o
-/usr/lib64/ccache/c++    -std=c++2a -o CMakeFiles/cmTC_03229.dir/feature_tests.cxx.o -c /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_03229
-/home/FyS/Documents/CLion/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_03229.dir/link.txt --verbose=1
-/usr/lib64/ccache/c++       CMakeFiles/cmTC_03229.dir/feature_tests.cxx.o  -o cmTC_03229 
+Building CXX object CMakeFiles/cmTC_e930d.dir/feature_tests.cxx.o
+/usr/lib64/ccache/c++    -std=c++2a -o CMakeFiles/cmTC_e930d.dir/feature_tests.cxx.o -c /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_e930d
+/home/FyS/Documents/CLion/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e930d.dir/link.txt --verbose=1
+/usr/lib64/ccache/c++       CMakeFiles/cmTC_e930d.dir/feature_tests.cxx.o  -o cmTC_e930d 
 gmake[1]: Leaving directory '/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/CMakeTmp'
 
 
@@ -205,14 +233,14 @@ gmake[1]: Leaving directory '/home/FyS/Project/FyS/dispatcher/worldserver_dispat
 Detecting CXX [-std=c++17] compiler features compiled with the following output:
 Change Dir: /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/gmake" "cmTC_9951b/fast"
-/usr/bin/gmake -f CMakeFiles/cmTC_9951b.dir/build.make CMakeFiles/cmTC_9951b.dir/build
+Run Build Command:"/usr/bin/gmake" "cmTC_b90c5/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_b90c5.dir/build.make CMakeFiles/cmTC_b90c5.dir/build
 gmake[1]: Entering directory '/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_9951b.dir/feature_tests.cxx.o
-/usr/lib64/ccache/c++    -std=c++17 -o CMakeFiles/cmTC_9951b.dir/feature_tests.cxx.o -c /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_9951b
-/home/FyS/Documents/CLion/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9951b.dir/link.txt --verbose=1
-/usr/lib64/ccache/c++       CMakeFiles/cmTC_9951b.dir/feature_tests.cxx.o  -o cmTC_9951b 
+Building CXX object CMakeFiles/cmTC_b90c5.dir/feature_tests.cxx.o
+/usr/lib64/ccache/c++    -std=c++17 -o CMakeFiles/cmTC_b90c5.dir/feature_tests.cxx.o -c /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_b90c5
+/home/FyS/Documents/CLion/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b90c5.dir/link.txt --verbose=1
+/usr/lib64/ccache/c++       CMakeFiles/cmTC_b90c5.dir/feature_tests.cxx.o  -o cmTC_b90c5 
 gmake[1]: Leaving directory '/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/CMakeTmp'
 
 
@@ -278,14 +306,14 @@ gmake[1]: Leaving directory '/home/FyS/Project/FyS/dispatcher/worldserver_dispat
 Detecting CXX [-std=c++14] compiler features compiled with the following output:
 Change Dir: /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/gmake" "cmTC_77aa6/fast"
-/usr/bin/gmake -f CMakeFiles/cmTC_77aa6.dir/build.make CMakeFiles/cmTC_77aa6.dir/build
+Run Build Command:"/usr/bin/gmake" "cmTC_3c0cb/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_3c0cb.dir/build.make CMakeFiles/cmTC_3c0cb.dir/build
 gmake[1]: Entering directory '/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_77aa6.dir/feature_tests.cxx.o
-/usr/lib64/ccache/c++    -std=c++14 -o CMakeFiles/cmTC_77aa6.dir/feature_tests.cxx.o -c /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_77aa6
-/home/FyS/Documents/CLion/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_77aa6.dir/link.txt --verbose=1
-/usr/lib64/ccache/c++       CMakeFiles/cmTC_77aa6.dir/feature_tests.cxx.o  -o cmTC_77aa6 
+Building CXX object CMakeFiles/cmTC_3c0cb.dir/feature_tests.cxx.o
+/usr/lib64/ccache/c++    -std=c++14 -o CMakeFiles/cmTC_3c0cb.dir/feature_tests.cxx.o -c /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_3c0cb
+/home/FyS/Documents/CLion/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3c0cb.dir/link.txt --verbose=1
+/usr/lib64/ccache/c++       CMakeFiles/cmTC_3c0cb.dir/feature_tests.cxx.o  -o cmTC_3c0cb 
 gmake[1]: Leaving directory '/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/CMakeTmp'
 
 
@@ -351,14 +379,14 @@ gmake[1]: Leaving directory '/home/FyS/Project/FyS/dispatcher/worldserver_dispat
 Detecting CXX [-std=c++11] compiler features compiled with the following output:
 Change Dir: /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/gmake" "cmTC_5c1d3/fast"
-/usr/bin/gmake -f CMakeFiles/cmTC_5c1d3.dir/build.make CMakeFiles/cmTC_5c1d3.dir/build
+Run Build Command:"/usr/bin/gmake" "cmTC_c57c7/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_c57c7.dir/build.make CMakeFiles/cmTC_c57c7.dir/build
 gmake[1]: Entering directory '/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_5c1d3.dir/feature_tests.cxx.o
-/usr/lib64/ccache/c++    -std=c++11 -o CMakeFiles/cmTC_5c1d3.dir/feature_tests.cxx.o -c /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_5c1d3
-/home/FyS/Documents/CLion/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5c1d3.dir/link.txt --verbose=1
-/usr/lib64/ccache/c++       CMakeFiles/cmTC_5c1d3.dir/feature_tests.cxx.o  -o cmTC_5c1d3 
+Building CXX object CMakeFiles/cmTC_c57c7.dir/feature_tests.cxx.o
+/usr/lib64/ccache/c++    -std=c++11 -o CMakeFiles/cmTC_c57c7.dir/feature_tests.cxx.o -c /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_c57c7
+/home/FyS/Documents/CLion/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c57c7.dir/link.txt --verbose=1
+/usr/lib64/ccache/c++       CMakeFiles/cmTC_c57c7.dir/feature_tests.cxx.o  -o cmTC_c57c7 
 gmake[1]: Leaving directory '/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/CMakeTmp'
 
 
@@ -424,14 +452,14 @@ gmake[1]: Leaving directory '/home/FyS/Project/FyS/dispatcher/worldserver_dispat
 Detecting CXX [-std=c++98] compiler features compiled with the following output:
 Change Dir: /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/CMakeTmp
 
-Run Build Command:"/usr/bin/gmake" "cmTC_d35e7/fast"
-/usr/bin/gmake -f CMakeFiles/cmTC_d35e7.dir/build.make CMakeFiles/cmTC_d35e7.dir/build
+Run Build Command:"/usr/bin/gmake" "cmTC_fd5e7/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_fd5e7.dir/build.make CMakeFiles/cmTC_fd5e7.dir/build
 gmake[1]: Entering directory '/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/CMakeTmp'
-Building CXX object CMakeFiles/cmTC_d35e7.dir/feature_tests.cxx.o
-/usr/lib64/ccache/c++    -std=c++98 -o CMakeFiles/cmTC_d35e7.dir/feature_tests.cxx.o -c /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/feature_tests.cxx
-Linking CXX executable cmTC_d35e7
-/home/FyS/Documents/CLion/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d35e7.dir/link.txt --verbose=1
-/usr/lib64/ccache/c++       CMakeFiles/cmTC_d35e7.dir/feature_tests.cxx.o  -o cmTC_d35e7 
+Building CXX object CMakeFiles/cmTC_fd5e7.dir/feature_tests.cxx.o
+/usr/lib64/ccache/c++    -std=c++98 -o CMakeFiles/cmTC_fd5e7.dir/feature_tests.cxx.o -c /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_fd5e7
+/home/FyS/Documents/CLion/bin/cmake/linux/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fd5e7.dir/link.txt --verbose=1
+/usr/lib64/ccache/c++       CMakeFiles/cmTC_fd5e7.dir/feature_tests.cxx.o  -o cmTC_fd5e7 
 gmake[1]: Leaving directory '/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug/CMakeFiles/CMakeTmp'
 
 
