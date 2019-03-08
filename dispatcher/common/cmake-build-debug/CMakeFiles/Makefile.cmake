@@ -42,7 +42,7 @@ set(CMAKE_MAKEFILE_OUTPUTS
 
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
-  "../common/include/context/Versioner.hh"
+  "../include/context/Versioner.hh"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 

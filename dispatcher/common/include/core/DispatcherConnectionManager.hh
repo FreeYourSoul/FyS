@@ -16,18 +16,31 @@ namespace fys::network {
 
     class DispatcherConnectionManager {
         public:
-            DispatcherConnectionManager(int threadNumber, const std::string &proxyFeConnectionString, const std::string &proxyBeConnectionString);
+            /**
+             * @param threadNumber
+             *          number of thread used by the zmq::context in order to manage messages
+             * @param isLoadBalancing
+             *          if true, a Dealer socket is instantiated in order to dispatch messages
+             *          if false, a Publisher socket is instantiated to do so
+             */
+            explicit DispatcherConnectionManager(int threadNumber = 1,  bool isLoadBalancing = true);
 
             void setupConnectionManager(const fys::StartupDispatcherCtx &ctx);
 
         private:
-            void subscribeToTopics(const std::vector<std::string> &topics);
+            /**
+             * The dispatcher connect to the proxy and subscribe to specifics channels given as parameter
+             * plus the Broadcast topic used in order to broadcast a message to all server
+             * @param topics additional topics to subscribe to (customizable through the config file)
+             */
+            void subscribeToTopics(const std::string &broadcastTopic, const std::vector<std::string> &topics);
             
         private:
             zmq::context_t _zmqContext;
+            zmq::socket_t _listener;
+            zmq::socket_t _dipatcher;
             ClusterConnection _clusterConnection;
-            zmq::pollitem_t _items[1];
-            
+
     };
     
 }

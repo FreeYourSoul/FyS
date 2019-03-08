@@ -28,8 +28,8 @@ int main (int argc, char *argv[])
     } (argc, argv);
 
     zmq::context_t context(args.threadNumbers);
-    zmq::socket_t frontend (context, ZMQ_XSUB);
-    zmq::socket_t backend (context, ZMQ_XPUB);
+    zmq::socket_t frontend (context, zmq::socket_type::xsub);
+    zmq::socket_t backend (context, zmq::socket_type::xpub);
 
     frontend.bind(args.protocol + "*:" + std::to_string(args.bindingPort_fe));
     backend.bind(args.protocol + "*:" + std::to_string(args.bindingPort_be));

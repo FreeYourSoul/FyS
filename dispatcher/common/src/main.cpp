@@ -1,15 +1,21 @@
-#include <iostream>
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/stdout_color_sinks.h>
 #include <StartupDispatcherCtx.hh>
 #include <Dispatcher.hh>
 
 int main(int ac, char **av) {
     try {
-        fys::StartupDispatcherCtx ctx(ac, av);
-        fys::Dispatcher dispatch();
+        auto console = spdlog::stdout_color_mt("c");
 
+        spdlog::get("c")->info("loggers can be retrieved from a global registry using the spdlog::get(logger_name)");
+
+        fys::StartupDispatcherCtx ctx(ac, av);
+        fys::Dispatcher dispatcher(std::move(ctx));
+
+        dispatcher.runDispatching();
     }
     catch (const std::exception &e) {
-        std::cerr << "Main caught an exception: " << e.what() << "\n";
+        spdlog::get("c")->error("Main caught an exception: {}", e.what());
     }
     return 0;
 }

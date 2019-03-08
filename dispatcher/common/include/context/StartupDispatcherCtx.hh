@@ -15,21 +15,22 @@ namespace fys {
     constexpr auto INIT_TOPICS          = "topics";
     constexpr auto INIT_ISCLUSTERAWARE  = "isClusterAware";
     constexpr auto INIT_BINDINGPORT     = "bindingPort";
+    constexpr auto INIT_ISLOADBALANCING = "isLoadBalancing";
 
     class StartupDispatcherCtx {
         public:
-            StartupDispatcherCtx(const int ac, const char *const *av);
+            StartupDispatcherCtx(int ac, const char *const *av);
 
-            template <typename T>
-            void setName(T && name) {
-                _name = std::forward(name);
+            void setIsClusterAware(bool isClusterAware) {
+                if (!_isClusterAware)
+                    _broadcastTopic = "";
+                _isClusterAware = isClusterAware;
             }
-            void setIsClusterAware(bool isClusterAware) { _isClusterAware = isClusterAware; }
 
             bool isClusterAware() const { return _isClusterAware; }
-            bool isVerbose() const { return _verbose; }
             ushort getBindingPort() const { return _bindingPort; }
             const std::string &getName() const { return _name; }
+            const std::string &getBroadcastTopic() const { return _broadcastTopic; }
             const std::vector<std::string> getSubscriptionTopics() const { return _subTopics; }
 
         private:
@@ -45,12 +46,16 @@ namespace fys {
             }
 
         private:
+            std::string _version;
             std::string _name;
+            std::string _broadcastTopic;
+
             ushort _bindingPort = 0;
             bool _verbose = false;
-            bool _isClusterAware = false;
             std::vector<std::string> _subTopics;
-            std::string _version;
+
+            bool _isClusterAware = false;
+            bool _isLoadBalancing = true;
 
     };
 

@@ -1,5 +1,7 @@
 cmake_minimum_required( VERSION 3.6 )
 
+set_property(TARGET PROPERTY CXX_STANDARD 17)
+
 add_subdirectory(inventoryexch_dispatcher)
 add_subdirectory(inventoryusage_dispatcher)
 add_subdirectory(inventorygrab_dispatcher)

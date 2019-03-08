@@ -2,10 +2,11 @@
 #define FYS_DISPATCHER_HH_
 
 #include <DispatcherConnectionManager.hh>
-#include <StartupDispatcherCtx.hh>
 
 namespace fys
 {
+    class StartupDispatcherCtx;
+
     class Dispatcher {
         public:
             Dispatcher(fys::StartupDispatcherCtx &&ctx);

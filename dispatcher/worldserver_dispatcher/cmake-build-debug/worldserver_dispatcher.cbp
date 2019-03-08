@@ -34,9 +34,10 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/usr/include/tclap"/>
 					<Add directory="/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/../common/include/context"/>
 					<Add directory="/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/../common/include/core"/>
+					<Add directory="/usr/include/tclap"/>
+					<Add directory="/usr/include/spdlog"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8"/>
 					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux"/>
@@ -58,9 +59,10 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/usr/include/tclap"/>
 					<Add directory="/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/../common/include/context"/>
 					<Add directory="/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/../common/include/core"/>
+					<Add directory="/usr/include/tclap"/>
+					<Add directory="/usr/include/spdlog"/>
 					<Add directory="/usr/local/include"/>
 					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8"/>
 					<Add directory="/usr/lib/gcc/x86_64-redhat-linux/8/../../../../include/c++/8/x86_64-redhat-linux"/>
