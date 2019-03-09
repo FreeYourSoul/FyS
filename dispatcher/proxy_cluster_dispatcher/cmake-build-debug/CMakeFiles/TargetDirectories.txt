@@ -1,3 +1,0 @@
-/home/FyS/Project/FyS/dispatcher/proxy_cluster_dispatcher/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/FyS/Project/FyS/dispatcher/proxy_cluster_dispatcher/cmake-build-debug/CMakeFiles/proxy_cluster_dispatcher.dir
-/home/FyS/Project/FyS/dispatcher/proxy_cluster_dispatcher/cmake-build-debug/CMakeFiles/edit_cache.dir

@@ -2,8 +2,10 @@ cmake_minimum_required( VERSION 3.6 )
 
 set_property(TARGET PROPERTY CXX_STANDARD 17)
 
-set(RELATIVE_TO_COMMON /common/)
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}${RELATIVE_TO_COMMON}cmake)
+if (NOT RELATIVE_TO_COMMON)
+    set(RELATIVE_TO_COMMON /common/)
+    list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}${RELATIVE_TO_COMMON}cmake)
+endif ()
 
 add_subdirectory(inventoryexch_dispatcher)
 add_subdirectory(inventoryusage_dispatcher)
