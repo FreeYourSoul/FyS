@@ -1,5 +1,6 @@
 .idea
 **/.idea
+dispatcher/worldserver_dispatcher/cmake-build-debug/
 **/cmake_build_debug
 **/CMakeFiles
 

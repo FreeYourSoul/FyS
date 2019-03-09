@@ -1,6 +1,0 @@
-/home/FyS/Documents/CLion/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher
--- Boost version: 1.66.0
--- SetWarningsflag:
--- Configuring done
--- Generating done
--- Build files have been written to: /home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/cmake-build-debug

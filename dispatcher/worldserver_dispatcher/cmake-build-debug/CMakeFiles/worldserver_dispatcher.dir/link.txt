@@ -1,1 +1,0 @@
-ccache /usr/bin/g++  -g   CMakeFiles/worldserver_dispatcher.dir/src/main.cpp.o CMakeFiles/worldserver_dispatcher.dir/src/WorldServerDispatcherHandler.cpp.o  -o worldserver_dispatcher -Wl,-rpath,/usr/local/lib64 libcommon_dispatcher.a /usr/local/lib64/libzmq.so.5.2.2 -lpthread -lrt 
