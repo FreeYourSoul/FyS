@@ -1,7 +1,9 @@
 .idea
 **/.idea
-dispatcher/worldserver_dispatcher/cmake-build-debug/
-**/cmake_build_debug
+**/cmake-build-debug
+**/cmake-build-release
+*/cmake-build-debug
+*/cmake-build-release
 **/CMakeFiles
 
 # Prerequisites

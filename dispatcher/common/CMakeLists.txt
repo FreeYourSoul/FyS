@@ -6,8 +6,10 @@ set(CMAKE_CXX_COMPILER /usr/bin/g++)
 set (VERSION_MAJOR 1)
 set (VERSION_MINOR 0)
 
-set(COMMON_DIR ${CMAKE_SOURCE_DIR}/../common/)
+set(COMMON_DIR ${CMAKE_SOURCE_DIR}${RELATIVE_TO_COMMON})
 
+#find boost
+find_package(TCLAP REQUIRED)
 
 # configure a header file to pass some of the CMake settings
 # to the source code
@@ -21,17 +23,23 @@ include_directories(
         ${COMMON_DIR}/include/core
 )
 
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+
 find_program(CCACHE_FOUND ccache)
 if(CCACHE_FOUND)
     set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
     set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
 endif(CCACHE_FOUND)
 
-add_library(common_dispatcher
-        ${COMMON_DIR}/include/core/Dispatcher.hh
-        ${COMMON_DIR}/include/core/DispatcherConnectionManager.hh
-        ${COMMON_DIR}/include/context/StartupDispatcherCtx.hh
-        #        ${COMMON_DIR}/src/main.cpp
-        ${COMMON_DIR}/src/context/StartupDispatcherCtx.cpp
-        ${COMMON_DIR}/src/core/Dispatcher.cpp
-        ${COMMON_DIR}/src/core/DispatcherConnectionManager.cpp)
+if (NOT TARGET common_dispatcher)
+    add_library(common_dispatcher
+            ${COMMON_DIR}/include/core/Dispatcher.hh
+            ${COMMON_DIR}/include/core/DispatcherConnectionManager.hh
+            ${COMMON_DIR}/include/context/StartupDispatcherCtx.hh
+            #        ${COMMON_DIR}/src/main.cpp
+            ${COMMON_DIR}/src/context/StartupDispatcherCtx.cpp
+            ${COMMON_DIR}/src/core/Dispatcher.cpp
+            ${COMMON_DIR}/src/core/DispatcherConnectionManager.cpp)
+    target_link_libraries(common_dispatcher
+            PUBLIC ${CONAN_LIBS_ZMQ})
+endif ()
