@@ -1,4 +1,3 @@
-#include <zmq.h>
 #include <DispatcherConnectionManager.hh>
 #include <StartupDispatcherCtx.hh>
 

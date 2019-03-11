@@ -1,7 +1,8 @@
 #ifndef FYS_CONNECTIONMANAGER_HH_
 #define FYS_CONNECTIONMANAGER_HH_
 
-#include <zmq.hpp>
+#include <spdlog/spdlog.h>
+#include <zmq_addon.hpp>
 
 namespace fys {
     class StartupDispatcherCtx;
@@ -28,7 +29,48 @@ namespace fys::network {
 
         void setupConnectionManager(const fys::StartupDispatcherCtx &ctx);
 
+        /**
+         * @brief Poll the reader socket (the listener one and the subscriber one if the dispatcher is cluster
+         * aware
+         *
+         * @return a pair of bool with
+         *         first  : is there anything on the listener socket to read
+         *         second : is there anything on the subscriber socket to read
+         */
         std::pair<bool, bool> poll();
+
+
+        /**
+         * @brief Read the Listener socket and call a given handler with this message as parameter
+         *
+         * @tparam Handler function to call after reading message from socket (multipart_t object sent as parameter)
+         * @param handler function instance to call which take zmq::multipart object as parameter
+         */
+        template <typename Handler>
+        void dispatchMessageOnListenerSocket(Handler &&handler) {
+            zmq::multipart_t msg;
+            if (!msg.recv(_listener))
+                spdlog::get("c")->error("Error while reading on the listener socket");
+            else
+                handler(std::move(msg));
+        }
+
+        /**
+         * @brief Read the Cluster subscriber socket and call a given handler with this message as parameter
+         *
+         * @tparam Handler function to call after reading message from socket (multipart_t object sent as parameter)
+         * @param handler function instance to call which take zmq::multipart object as parameter
+         */
+        template <typename Handler>
+        void dispatchMessageOnSubscriberSocket(Handler &&handler) {
+            if (!_clusterConnection.closed) {
+                zmq::multipart_t msg;
+                if (!msg.recv(_clusterConnection.subSocket))
+                    spdlog::get("c")->error("Error while reading on the cluster subscriber socket");
+                else
+                    handler(std::move(msg));
+            }
+        }
 
     private:
         /**
