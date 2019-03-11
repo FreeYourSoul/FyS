@@ -43,3 +43,12 @@ std::pair<bool, bool> fys::network::DispatcherConnectionManager::poll() {
     bool subSocketPolling = static_cast<bool>(_clusterConnection.closed ? false : (items[1].revents & ZMQ_POLLIN));
     return {listenerPolling, subSocketPolling};
 }
+
+bool fys::network::DispatcherConnectionManager::sendMessageToDispatcherSocket(zmq::multipart_t &&msg) {
+    return msg.send(_dipatcher);
+}
+
+bool fys::network::DispatcherConnectionManager::sendMessageToClusterPubSocket(zmq::multipart_t &&msg) {
+    return msg.send(_clusterConnection.pubSocket);
+}
+

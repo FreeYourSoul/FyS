@@ -72,6 +72,9 @@ namespace fys::network {
             }
         }
 
+        bool sendMessageToDispatcherSocket(zmq::multipart_t &&msg);
+        bool sendMessageToClusterPubSocket(zmq::multipart_t &&msg);
+
     private:
         /**
          * The dispatcher connect to the proxy and subscribe to specifics channels given as parameter
