@@ -52,7 +52,7 @@ namespace fys::network {
             if (!msg.recv(_listener))
                 spdlog::get("c")->error("Error while reading on the listener socket");
             else
-                handler(std::move(msg));
+                handler(std::move(msg), *this);
         }
 
         /**
@@ -68,7 +68,7 @@ namespace fys::network {
                 if (!msg.recv(_clusterConnection.subSocket))
                     spdlog::get("c")->error("Error while reading on the cluster subscriber socket");
                 else
-                    handler(std::move(msg));
+                    handler(std::move(msg), *this);
             }
         }
 

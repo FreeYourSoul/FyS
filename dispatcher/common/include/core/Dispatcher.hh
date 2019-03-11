@@ -23,13 +23,13 @@ namespace fys
          * @brief This method is processing the inputMessage and dispatch it appropriately among the peers connected to
          * the dispatcher socket
          */
-        static void processInputMessage(zmq::multipart_t &&msg);
+        static void processInputMessage(zmq::multipart_t &&msg, network::DispatcherConnectionManager &manager);
 
         /**
          * @brief This method is dispatching the cluster message and forward it appropriately among the peers connected to
          * the dispatcher socket
          */
-        static void processClusterMessage(zmq::multipart_t &&msg);
+        static void processClusterMessage(zmq::multipart_t &&msg, network::DispatcherConnectionManager &manager);
     };
 
     /**
@@ -50,15 +50,15 @@ namespace fys
 
         void runDispatching() {
             while (true) {
-                auto [listenerPolling, subPolling] = _connectionManager.poll();
-                if (listenerPolling) {
-                    _connectionManager.dispatchMessageOnListenerSocket([](zmq::multipart_t && msg){
-                        DispatcherHandler::processInputMessage(std::move(msg));
+                auto [listenerSocketHasSomethingToPoll, subscriberSocketHasSomethingToPoll] = _connectionManager.poll();
+                if (listenerSocketHasSomethingToPoll) {
+                    _connectionManager.dispatchMessageOnListenerSocket([](zmq::multipart_t && msg, network::DispatcherConnectionManager &manager){
+                        DispatcherHandler::processInputMessage(std::move(msg), manager);
                     });
                 }
-                else if (subPolling) {
-                    _connectionManager.dispatchMessageOnSubscriberSocket([](zmq::multipart_t && msg){
-                        DispatcherHandler::processClusterMessage(std::move(msg));
+                else if (subscriberSocketHasSomethingToPoll) {
+                    _connectionManager.dispatchMessageOnSubscriberSocket([](zmq::multipart_t && msg, network::DispatcherConnectionManager &manager){
+                        DispatcherHandler::processClusterMessage(std::move(msg), manager);
                     });
                 }
             }

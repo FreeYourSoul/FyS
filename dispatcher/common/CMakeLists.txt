@@ -36,7 +36,6 @@ if (NOT TARGET common_dispatcher)
             ${COMMON_DIR}/include/core/Dispatcher.hh
             ${COMMON_DIR}/include/core/DispatcherConnectionManager.hh
             ${COMMON_DIR}/include/context/StartupDispatcherCtx.hh
-            #        ${COMMON_DIR}/src/main.cpp
             ${COMMON_DIR}/src/context/StartupDispatcherCtx.cpp
             ${COMMON_DIR}/src/core/Dispatcher.cpp
             ${COMMON_DIR}/src/core/DispatcherConnectionManager.cpp)
