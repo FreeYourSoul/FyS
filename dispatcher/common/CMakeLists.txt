@@ -2,13 +2,14 @@ cmake_minimum_required( VERSION 3.6 )
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_COMPILER /usr/bin/g++)
 
+set(CMAKE_VERBOSE_MAKEFILE ON)
+
 # The version number.
 set (VERSION_MAJOR 1)
 set (VERSION_MINOR 0)
 
 set(COMMON_DIR ${CMAKE_SOURCE_DIR}${RELATIVE_TO_COMMON})
 
-#find boost
 find_package(TCLAP REQUIRED)
 
 # configure a header file to pass some of the CMake settings
