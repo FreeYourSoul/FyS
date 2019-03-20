@@ -11,16 +11,17 @@
 
 namespace fys {
 
-    constexpr auto INIT_NAME            = "dispatcher.name";
-    constexpr auto INIT_TOPICS          = "dispatcher.topics";
-    constexpr auto INIT_ISCLUSTERAWARE  = "dispatcher.isClusterAware";
-    constexpr auto INIT_BINDINGPORT     = "dispatcher.bindingPort";
-    constexpr auto INIT_ISLOADBALANCING = "dispatcher.isLoadBalancing";
-    constexpr auto INIT_FRONTEND_PORT   = "proxy.frontend.port";
-    constexpr auto INIT_FRONTEND_ADDR   = "proxy.frontend.address";
-    constexpr auto INIT_BACKEND_PORT    = "proxy.backend.port";
-    constexpr auto INIT_BACKEND_ADDR    = "proxy.backend.address";
-
+    namespace init_beacon {
+        constexpr auto NAME            = "dispatcher.name";
+        constexpr auto TOPICS          = "dispatcher.topics";
+        constexpr auto ISCLUSTERAWARE  = "dispatcher.isClusterAware";
+        constexpr auto BINDINGPORT     = "dispatcher.bindingPort";
+        constexpr auto ISLOADBALANCING = "dispatcher.isLoadBalancing";
+        constexpr auto FRONTEND_PORT   = "proxy_frontend.port";
+        constexpr auto FRONTEND_ADDR   = "proxy_frontend.address";
+        constexpr auto BACKEND_PORT    = "proxy_backend.port";
+        constexpr auto BACKEND_ADDR    = "proxy_backend.address";
+    }
 
     class StartupDispatcherCtx {
         struct ClusterProxy {

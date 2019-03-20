@@ -40,25 +40,29 @@ void fys::StartupDispatcherCtx::initializeFromIni(const std::string &configFileP
     boost::property_tree::ptree pt;
     boost::property_tree::read_ini(configFilePath, pt);
 
-    _bindingPort = pt.get<ushort>(fys::INIT_BINDINGPORT);
-    _isClusterAware = pt.get<bool>(fys::INIT_ISCLUSTERAWARE);
-    _isLoadBalancing = pt.get<bool>(fys::INIT_ISLOADBALANCING);
-    _name = pt.get<std::string>(fys::INIT_NAME);
-    _subTopics = asVector<std::string>(pt, fys::INIT_TOPICS);
+    _clusterProxy.backendAddress = pt.get<std::string>(fys::init_beacon::BACKEND_ADDR);
+    _clusterProxy.backendPort= pt.get<ushort>(fys::init_beacon::BACKEND_PORT);
+    _clusterProxy.frontendAddress = pt.get<std::string>(fys::init_beacon::FRONTEND_ADDR);
+    _clusterProxy.frontendPort = pt.get<ushort>(fys::init_beacon::FRONTEND_PORT);
+    _bindingPort = pt.get<ushort>(fys::init_beacon::BINDINGPORT);
+    _isClusterAware = pt.get<bool>(fys::init_beacon::ISCLUSTERAWARE);
+    _isLoadBalancing = pt.get<bool>(fys::init_beacon::ISLOADBALANCING);
+    _name = pt.get<std::string>(fys::init_beacon::NAME);
+    _subTopics = asVector<std::string>(pt, fys::init_beacon::TOPICS);
 }
 
 std::string fys::StartupDispatcherCtx::toString() const {
     std::string str;
     str = "\n*************************\n";
-    str+= "Dispatcher " + _name + " context VERSION : " + _version + "\n\n";
-    str+= "Listener bindingPort " + std::to_string(_bindingPort) + "\n";
-    str+= "isClusterAware : " + std::string(_isClusterAware ? "true" : "false") + "\n";
-    str+= "isLoadBalancing : " + std::string(_isLoadBalancing ? "true" : "false") + "\n";
+    str+= "[INFO] Dispatcher " + _name + " context VERSION : " + _version + "\n\n";
+    str+= "[INFO] Listener bindingPort " + std::to_string(_bindingPort) + "\n";
+    str+= "[INFO] isClusterAware : " + std::string(_isClusterAware ? "true" : "false") + "\n";
+    str+= "[INFO] isLoadBalancing : " + std::string(_isLoadBalancing ? "true" : "false") + "\n";
     for (const auto &topic : _subTopics) {
-        str+= "Cluster: Subscribing topic :" + topic + "\n";
+        str+= "[INFO] Cluster: Subscribing topic :" + topic + "\n";
     }
-    str+= "Frontend connection string : " + getFrontendClusterProxyConnectionString() + "\n";
-    str+= "Backend connection string : " + getBackendClusterProxyConnectionString() + "\n";
+    str+= "[INFO] Frontend connection string : " + getFrontendClusterProxyConnectionString() + "\n";
+    str+= "[INFO] Backend connection string : " + getBackendClusterProxyConnectionString() + "\n";
     str+= "\n*************************\n";
     return str;
 }
