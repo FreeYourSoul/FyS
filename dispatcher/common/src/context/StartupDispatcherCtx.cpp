@@ -48,7 +48,7 @@ void fys::StartupDispatcherCtx::initializeFromIni(const std::string &configFileP
     _isClusterAware = pt.get<bool>(fys::init_beacon::ISCLUSTERAWARE);
     _isLoadBalancing = pt.get<bool>(fys::init_beacon::ISLOADBALANCING);
     _name = pt.get<std::string>(fys::init_beacon::NAME);
-    _subTopics = asVector<std::string>(pt, fys::init_beacon::TOPICS);
+    _subTopics = parseToArray<std::string>(pt.get<std::string>(fys::init_beacon::TOPICS));
 }
 
 std::string fys::StartupDispatcherCtx::toString() const {

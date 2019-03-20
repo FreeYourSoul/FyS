@@ -3,6 +3,7 @@
 
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
+#include <boost/lexical_cast.hpp>
 #include <string>
 
 #ifndef VERSION_DISPATCHER
@@ -50,13 +51,15 @@ namespace fys {
         private:
             void initializeFromIni(const std::string &configFilePath);
 
-            template <typename T>
-            std::vector<T> asVector(boost::property_tree::ptree const& pt, boost::property_tree::ptree::key_type const& key)
+            template<typename T>
+            std::vector<T> parseToArray(const std::string &s)
             {
-                std::vector<T> r;
-                for (auto& item : pt.get_child(key))
-                    r.push_back(item.second.get_value<T>());
-                return r;
+                std::vector<T> result;
+                std::stringstream ss(s);
+                std::string item;
+                while(std::getline(ss, item, ','))
+                    result.push_back(boost::lexical_cast<T>(item));
+                return result;
             }
 
         private:
