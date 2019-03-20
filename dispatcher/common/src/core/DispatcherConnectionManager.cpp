@@ -12,10 +12,8 @@ fys::network::DispatcherConnectionManager::DispatcherConnectionManager(int threa
 
 void fys::network::DispatcherConnectionManager::setupConnectionManager(const fys::StartupDispatcherCtx &ctx) {
     if (ctx.isClusterAware()) {
-        const std::string proxyFeConnectionString;
-        const std::string proxyBeConnectionString;
-        _clusterConnection.pubSocket.connect(proxyFeConnectionString);
-        _clusterConnection.subSocket.connect(proxyBeConnectionString);
+        _clusterConnection.pubSocket.connect(ctx.getFrontendClusterProxyConnectionString());
+        _clusterConnection.subSocket.connect(ctx.getBackendClusterProxyConnectionString());
         subscribeToTopics(ctx.getSubscriptionTopics());
     }
     else {

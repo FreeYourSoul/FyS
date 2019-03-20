@@ -51,11 +51,22 @@ std::string fys::StartupDispatcherCtx::toString() const {
     std::string str;
     str = "\n*************************\n";
     str+= "Dispatcher " + _name + " context VERSION : " + _version + "\n\n";
-    str+= std::string("Listener bindingPort ") + std::to_string(_bindingPort) + "\n";
-    str+= std::string("isClusterAware : ") + (_isClusterAware ? "true" : "false") + "\n";
+    str+= "Listener bindingPort " + std::to_string(_bindingPort) + "\n";
+    str+= "isClusterAware : " + std::string(_isClusterAware ? "true" : "false") + "\n";
+    str+= "isLoadBalancing : " + std::string(_isLoadBalancing ? "true" : "false") + "\n";
     for (const auto &topic : _subTopics) {
-        str+= std::string("Cluster: Subscribing topic :") + topic + "\n";
+        str+= "Cluster: Subscribing topic :" + topic + "\n";
     }
+    str+= "Frontend connection string : " + getFrontendClusterProxyConnectionString() + "\n";
+    str+= "Backend connection string : " + getBackendClusterProxyConnectionString() + "\n";
     str+= "\n*************************\n";
     return str;
+}
+
+std::string fys::StartupDispatcherCtx::getFrontendClusterProxyConnectionString() const {
+    return "tcp://" + _clusterProxy.frontendAddress + ":" + std::to_string(_clusterProxy.frontendPort);
+}
+
+std::string fys::StartupDispatcherCtx::getBackendClusterProxyConnectionString() const {
+    return "tcp://" + _clusterProxy.backendAddress + ":" + std::to_string(_clusterProxy.backendPort);
 }

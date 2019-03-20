@@ -11,20 +11,39 @@
 
 namespace fys {
 
-    constexpr auto INIT_NAME            = "name";
-    constexpr auto INIT_TOPICS          = "topics";
-    constexpr auto INIT_ISCLUSTERAWARE  = "isClusterAware";
-    constexpr auto INIT_BINDINGPORT     = "bindingPort";
-    constexpr auto INIT_ISLOADBALANCING = "isLoadBalancing";
+    constexpr auto INIT_NAME            = "dispatcher.name";
+    constexpr auto INIT_TOPICS          = "dispatcher.topics";
+    constexpr auto INIT_ISCLUSTERAWARE  = "dispatcher.isClusterAware";
+    constexpr auto INIT_BINDINGPORT     = "dispatcher.bindingPort";
+    constexpr auto INIT_ISLOADBALANCING = "dispatcher.isLoadBalancing";
+    constexpr auto INIT_FRONTEND_PORT   = "proxy.frontend.port";
+    constexpr auto INIT_FRONTEND_ADDR   = "proxy.frontend.address";
+    constexpr auto INIT_BACKEND_PORT    = "proxy.backend.port";
+    constexpr auto INIT_BACKEND_ADDR    = "proxy.backend.address";
+
 
     class StartupDispatcherCtx {
+        struct ClusterProxy {
+            ushort frontendPort = 0;
+            ushort backendPort = 0;
+            std::string frontendAddress;
+            std::string backendAddress;
+        };
+
         public:
             StartupDispatcherCtx(int ac, const char *const *av);
 
             bool isClusterAware() const { return _isClusterAware; }
             ushort getBindingPort() const { return _bindingPort; }
-            const std::string &getName() const { return _name; }
+
             const std::vector<std::string> getSubscriptionTopics() const { return _subTopics; }
+            std::string getFrontendClusterProxyConnectionString() const;
+            std::string getBackendClusterProxyConnectionString () const;
+
+
+            /**
+             * @return debug string containing the context
+             */
             std::string toString() const;
 
         private:
@@ -45,6 +64,8 @@ namespace fys {
 
             ushort _bindingPort = 0;
             bool _verbose = false;
+
+            ClusterProxy _clusterProxy;
             std::vector<std::string> _subTopics;
 
             bool _isClusterAware = false;
