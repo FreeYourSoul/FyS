@@ -1,0 +1,39 @@
+{
+  "worldServer": {
+    "code": "WS00",
+    "conf": {
+      "begin_x": 0,
+      "end_x": 500,
+      "begin_y": 0,
+      "end_y": 500
+    },
+    "connection_warning_threshold": 1000,
+    "overlapServer": [
+      {
+        "code": "WS10",
+        "overlap_x": {
+          "condition": ">",
+          "value": 400
+        }
+      },
+      {
+        "code": "WS01",
+        "overlap_y": {
+          "condition": ">",
+          "value": 400
+        }
+      },
+      {
+        "code": "WS11",
+        "overlap_x": {
+          "condition": ">",
+          "value": 400
+        },
+        "overlap_y": {
+          "condition": ">",
+          "value": 400
+        }
+      }
+    ]
+  }
+}

@@ -1,7 +1,9 @@
 #include <DispatcherConnectionManager.hh>
 #include <StartupDispatcherCtx.hh>
 
-fys::network::DispatcherConnectionManager::DispatcherConnectionManager(int threadNumber, bool isLoadBalancing) :
+namespace fys::network {
+
+DispatcherConnectionManager::DispatcherConnectionManager(int threadNumber, bool isLoadBalancing) :
  _zmqContext(threadNumber),
  _listener(_zmqContext, zmq::socket_type::router),
  _dipatcher(_zmqContext, (isLoadBalancing) ? zmq::socket_type::dealer : zmq::socket_type::pub),
@@ -10,7 +12,7 @@ fys::network::DispatcherConnectionManager::DispatcherConnectionManager(int threa
                      false}) {
 }
 
-void fys::network::DispatcherConnectionManager::setupConnectionManager(const fys::StartupDispatcherCtx &ctx) {
+void DispatcherConnectionManager::setupConnectionManager(const fys::StartupDispatcherCtx &ctx) {
     if (ctx.isClusterAware()) {
         _clusterConnection.pubSocket.connect(ctx.getFrontendClusterProxyConnectionString());
         _clusterConnection.subSocket.connect(ctx.getBackendClusterProxyConnectionString());
@@ -24,13 +26,13 @@ void fys::network::DispatcherConnectionManager::setupConnectionManager(const fys
     _listener.bind("tcp://*:" + std::to_string(ctx.getBindingPort()));
 }
 
-void fys::network::DispatcherConnectionManager::subscribeToTopics(const std::vector<std::string> &topics) {
+void DispatcherConnectionManager::subscribeToTopics(const std::vector<std::string> &topics) {
     for (const auto &topic : topics) {
         _clusterConnection.subSocket.setsockopt(ZMQ_SUBSCRIBE, topic.c_str(), topic.size());
     }
 }
 
-std::pair<bool, bool> fys::network::DispatcherConnectionManager::poll() {
+std::pair<bool, bool> DispatcherConnectionManager::poll() {
     //  Initialize poll set
     zmq::pollitem_t items[] = {
             { _listener, 0, ZMQ_POLLIN, 0 },
@@ -42,11 +44,12 @@ std::pair<bool, bool> fys::network::DispatcherConnectionManager::poll() {
     return {listenerPolling, subSocketPolling};
 }
 
-bool fys::network::DispatcherConnectionManager::sendMessageToDispatcherSocket(zmq::multipart_t &&msg) {
+bool DispatcherConnectionManager::sendMessageToDispatcherSocket(zmq::multipart_t &&msg) {
     return msg.send(_dipatcher);
 }
 
-bool fys::network::DispatcherConnectionManager::sendMessageToClusterPubSocket(zmq::multipart_t &&msg) {
+bool DispatcherConnectionManager::sendMessageToClusterPubSocket(zmq::multipart_t &&msg) {
     return msg.send(_clusterConnection.pubSocket);
 }
 
+}
