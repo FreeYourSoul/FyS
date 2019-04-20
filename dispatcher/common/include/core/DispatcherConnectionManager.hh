@@ -48,9 +48,9 @@ namespace fys::network {
          *          if true, a Dealer socket is instantiated in order to dispatch messages
          *          if false, a Publisher socket is instantiated to do so
          */
-        explicit DispatcherConnectionManager(int threadNumber = 1,  bool isLoadBalancing = true);
+        explicit DispatcherConnectionManager(int threadNumber = 1,  bool isLoadBalancing = true) noexcept;
 
-        void setupConnectionManager(const fys::StartupDispatcherCtx &ctx);
+        void setupConnectionManager(const fys::StartupDispatcherCtx &ctx) noexcept;
 
         /**
          * @brief Poll the reader socket (the listener one and the subscriber one if the dispatcher is cluster
@@ -60,7 +60,7 @@ namespace fys::network {
          *         first  : is there anything on the listener socket to read
          *         second : is there anything on the subscriber socket to read
          */
-        std::pair<bool, bool> poll();
+        std::pair<bool, bool> poll() noexcept;
 
 
         /**
@@ -85,7 +85,7 @@ namespace fys::network {
          * @param handler function instance to call which take zmq::multipart object as parameter
          */
         template <typename Handler>
-        void dispatchMessageOnSubscriberSocket(Handler &&handler) {
+        void dispatchMessageOnSubscriberSocket(Handler &&handler) noexcept{
             if (!_clusterConnection.closed) {
                 zmq::multipart_t msg;
                 if (!msg.recv(_clusterConnection.subSocket))
@@ -95,15 +95,15 @@ namespace fys::network {
             }
         }
 
-        bool sendMessageToDispatcherSocket(zmq::multipart_t &&msg);
-        bool sendMessageToClusterPubSocket(zmq::multipart_t &&msg);
+        bool sendMessageToDispatcherSocket(zmq::multipart_t &&msg) noexcept;
+        bool sendMessageToClusterPubSocket(zmq::multipart_t &&msg) noexcept;
 
     private:
         /**
          * The dispatcher connect to the proxy and subscribe to specifics channels given as parameter
          * @param topics additional topics to subscribe to (customizable through the config file)
          */
-        void subscribeToTopics(const std::vector<std::string> &topics);
+        void subscribeToTopics(const std::vector<std::string> &topics) noexcept;
             
         private:
             zmq::context_t _zmqContext;

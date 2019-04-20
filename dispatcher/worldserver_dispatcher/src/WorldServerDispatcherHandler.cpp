@@ -8,11 +8,11 @@
 
 namespace fys::worldserver {
 
-void WorldServerDispatcherHandler::processInputMessage(zmq::multipart_t &&msg, network::DispatcherConnectionManager &manager) {
+void WorldServerDispatcherHandler::processInputMessage(zmq::multipart_t &&msg, network::DispatcherConnectionManager &manager) noexcept {
 
 }
 
-void WorldServerDispatcherHandler::processClusterMessage(zmq::multipart_t &&msg, network::DispatcherConnectionManager &manager) {
+void WorldServerDispatcherHandler::processClusterMessage(zmq::multipart_t &&msg, network::DispatcherConnectionManager &manager) noexcept {
 
 }
 

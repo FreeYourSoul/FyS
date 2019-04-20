@@ -35,7 +35,7 @@ namespace fys::worldserver {
 
     struct ProximityServerAxis {
 
-        bool isAtProximity(double axis) const {
+        bool isAtProximity(double axis) const noexcept {
             return (superiorTo) ? (axis > value) : (axis < value);
         }
 
@@ -47,13 +47,13 @@ namespace fys::worldserver {
     class WorldServerCtx : public StartupDispatcherCtx {
 
     public:
-        WorldServerCtx(int ac, const char *const *av);
+        WorldServerCtx(int ac, const char *const *av) noexcept;
 
     private:
         std::string _serverCode;
         std::pair<double, double> _serverBoundaries;
         std::vector<ProximityServerAxis> _xAxisServerProximity;
-        std::vector<ProximityServerAxis> _yAxisServerProximity.
+        std::vector<ProximityServerAxis> _yAxisServerProximity;
 
     };
 

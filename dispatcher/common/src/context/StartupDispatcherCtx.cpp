@@ -7,7 +7,7 @@
 
 namespace fys {
 
-StartupDispatcherCtx::StartupDispatcherCtx(int ac, const char *const *av) try {
+StartupDispatcherCtx::StartupDispatcherCtx(int ac, const char *const *av) noexcept try {
     _version = std::to_string(VERSION_MAJOR) + "." + std::to_string(VERSION_MINOR);
     TCLAP::CmdLine cli("FyS::Dispatcher", ' ', _version);
     TCLAP::ValueArg<std::string> configPath("c", "config", "Path of config file", true, "NONE", "string");
@@ -69,7 +69,7 @@ void StartupDispatcherCtx::initializeFromIni(const std::string &configFilePath) 
     }
 }
 
-std::string StartupDispatcherCtx::toString() const {
+std::string StartupDispatcherCtx::toString() const noexcept {
     std::string str;
     str = "\n*************************\n";
     str+= "[INFO] Dispatcher " + _name + " context VERSION: " + _version + "\n\n";
@@ -86,11 +86,11 @@ std::string StartupDispatcherCtx::toString() const {
     return str;
 }
 
-std::string StartupDispatcherCtx::getFrontendClusterProxyConnectionString() const {
+std::string StartupDispatcherCtx::getFrontendClusterProxyConnectionString() const noexcept {
     return "tcp://" + _clusterProxy.frontendAddress + ":" + std::to_string(_clusterProxy.frontendPort);
 }
 
-std::string StartupDispatcherCtx::getBackendClusterProxyConnectionString() const {
+std::string StartupDispatcherCtx::getBackendClusterProxyConnectionString() const noexcept {
     return "tcp://" + _clusterProxy.backendAddress + ":" + std::to_string(_clusterProxy.backendPort);
 }
 

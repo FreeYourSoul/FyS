@@ -1,14 +1,14 @@
-#include <zmq_addon.hpp>
 #include <chrono>
+#include <zmq_addon.hpp>
 #include <Dispatcher.hh>
 
 namespace fys {
 
-void DispatcherHandlerBase::processInputMessage(zmq::multipart_t &&msg, network::DispatcherConnectionManager &manager) {
+void DispatcherHandlerBase::processInputMessage(zmq::multipart_t &&msg, network::DispatcherConnectionManager &manager) noexcept {
     manager.sendMessageToDispatcherSocket(std::move(msg));
 }
 
-void DispatcherHandlerBase::processClusterMessage(zmq::multipart_t &&msg, network::DispatcherConnectionManager &manager) {
+void DispatcherHandlerBase::processClusterMessage(zmq::multipart_t &&msg, network::DispatcherConnectionManager &manager) noexcept {
     manager.sendMessageToDispatcherSocket(std::move(msg));
 }
 

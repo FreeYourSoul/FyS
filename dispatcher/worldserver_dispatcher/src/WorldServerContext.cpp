@@ -32,7 +32,8 @@ using json = nlohmann::json;
 
 namespace fys::worldserver {
 
-WorldServerCtx::WorldServerCtx(int ac, const char *const *av) : StartupDispatcherCtx(ac, av) {
+WorldServerCtx::WorldServerCtx(int ac, const char *const *av) noexcept : StartupDispatcherCtx(ac, av) {
+WorldServerCtx::WorldServerCtx(int ac, const char *const *av) noexcept : StartupDispatcherCtx(ac, av) {
     std::cout << _specificConfigPath;
     std::ifstream i(_specificConfigPath);
     json jsonConfig;

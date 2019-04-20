@@ -44,12 +44,12 @@ namespace fys::worldserver {
          * @brief This method is processing the inputMessage and dispatch it appropriately among the peers connected to
          * the DEALER socket
          */
-        void processInputMessage(zmq::multipart_t &&msg, network::DispatcherConnectionManager &manager);
+        void processInputMessage(zmq::multipart_t &&msg, network::DispatcherConnectionManager &manager) noexcept;
 
         /**
          * @brief This method is dispatching the message
          */
-        void processClusterMessage(zmq::multipart_t &&msg, network::DispatcherConnectionManager &manager);
+        void processClusterMessage(zmq::multipart_t &&msg, network::DispatcherConnectionManager &manager) noexcept;
 
     };
 

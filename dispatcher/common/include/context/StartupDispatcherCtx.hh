@@ -58,26 +58,25 @@ class StartupDispatcherCtx {
         };
 
         public:
-            StartupDispatcherCtx(int ac, const char *const *av);
+            StartupDispatcherCtx(int ac, const char *const *av) noexcept;
 
-            bool isClusterAware() const { return _isClusterAware; }
-            ushort getBindingPort() const { return _bindingPort; }
+            [[nodiscard]] constexpr bool isClusterAware() const noexcept { return _isClusterAware; }
+            [[nodiscard]] constexpr ushort getBindingPort() const noexcept { return _bindingPort; }
 
-            const std::vector<std::string> getSubscriptionTopics() const { return _subTopics; }
-            std::string getFrontendClusterProxyConnectionString() const;
-            std::string getBackendClusterProxyConnectionString () const;
+            [[nodiscard]] const std::vector<std::string> getSubscriptionTopics() const noexcept { return _subTopics; }
+            [[nodiscard]] std::string getFrontendClusterProxyConnectionString() const noexcept;
+            [[nodiscard]] std::string getBackendClusterProxyConnectionString () const noexcept;
 
             /**
              * @return debug string containing the context
              */
-            std::string toString() const;
+            std::string toString() const noexcept;
 
         private:
             void initializeFromIni(const std::string &configFilePath);
 
             template<typename T>
-            std::vector<T> parseToArray(const std::string &s)
-            {
+            [[nodiscard]] std::vector<T> parseToArray(const std::string &s) const noexcept {
                 std::vector<T> result;
                 std::stringstream ss(s);
                 std::string item;

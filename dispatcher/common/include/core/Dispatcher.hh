@@ -46,13 +46,13 @@ namespace fys
          * @brief This method is processing the inputMessage and dispatch it appropriately among the peers connected to
          * the dispatcher socket
          */
-        static void processInputMessage(zmq::multipart_t &&msg, network::DispatcherConnectionManager &manager);
+        static void processInputMessage(zmq::multipart_t &&msg, network::DispatcherConnectionManager &manager) noexcept;
 
         /**
          * @brief This method is dispatching the cluster message and forward it appropriately among the peers connected to
          * the dispatcher socket
          */
-        static void processClusterMessage(zmq::multipart_t &&msg, network::DispatcherConnectionManager &manager);
+        static void processClusterMessage(zmq::multipart_t &&msg, network::DispatcherConnectionManager &manager) noexcept;
     };
 
     /**

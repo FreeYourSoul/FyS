@@ -3,7 +3,7 @@
 
 namespace fys::network {
 
-DispatcherConnectionManager::DispatcherConnectionManager(int threadNumber, bool isLoadBalancing) :
+DispatcherConnectionManager::DispatcherConnectionManager(int threadNumber, bool isLoadBalancing) noexcept :
  _zmqContext(threadNumber),
  _listener(_zmqContext, zmq::socket_type::router),
  _dipatcher(_zmqContext, (isLoadBalancing) ? zmq::socket_type::dealer : zmq::socket_type::pub),
@@ -12,7 +12,7 @@ DispatcherConnectionManager::DispatcherConnectionManager(int threadNumber, bool 
                      false}) {
 }
 
-void DispatcherConnectionManager::setupConnectionManager(const fys::StartupDispatcherCtx &ctx) {
+void DispatcherConnectionManager::setupConnectionManager(const fys::StartupDispatcherCtx &ctx) noexcept {
     if (ctx.isClusterAware()) {
         _clusterConnection.pubSocket.connect(ctx.getFrontendClusterProxyConnectionString());
         _clusterConnection.subSocket.connect(ctx.getBackendClusterProxyConnectionString());
@@ -26,13 +26,13 @@ void DispatcherConnectionManager::setupConnectionManager(const fys::StartupDispa
     _listener.bind("tcp://*:" + std::to_string(ctx.getBindingPort()));
 }
 
-void DispatcherConnectionManager::subscribeToTopics(const std::vector<std::string> &topics) {
+void DispatcherConnectionManager::subscribeToTopics(const std::vector<std::string> &topics) noexcept {
     for (const auto &topic : topics) {
         _clusterConnection.subSocket.setsockopt(ZMQ_SUBSCRIBE, topic.c_str(), topic.size());
     }
 }
 
-std::pair<bool, bool> DispatcherConnectionManager::poll() {
+std::pair<bool, bool> DispatcherConnectionManager::poll() noexcept {
     //  Initialize poll set
     zmq::pollitem_t items[] = {
             { _listener, 0, ZMQ_POLLIN, 0 },
@@ -44,11 +44,11 @@ std::pair<bool, bool> DispatcherConnectionManager::poll() {
     return {listenerPolling, subSocketPolling};
 }
 
-bool DispatcherConnectionManager::sendMessageToDispatcherSocket(zmq::multipart_t &&msg) {
+bool DispatcherConnectionManager::sendMessageToDispatcherSocket(zmq::multipart_t &&msg) noexcept {
     return msg.send(_dipatcher);
 }
 
-bool DispatcherConnectionManager::sendMessageToClusterPubSocket(zmq::multipart_t &&msg) {
+bool DispatcherConnectionManager::sendMessageToClusterPubSocket(zmq::multipart_t &&msg) noexcept {
     return msg.send(_clusterConnection.pubSocket);
 }
 
