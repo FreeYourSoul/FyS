@@ -21,16 +21,40 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-//
-// Created by FyS on 4/7/19.
-//
 
-#include "../include/WorldServerContext.hh"
+#ifndef FYS_WORLDSERVERCONTEXT_HH
+#define FYS_WORLDSERVERCONTEXT_HH
+
+#include <ServiceContextBase.hh>
 
 namespace fys::ws {
 
-WorldServerCtx::WorldServerCtx(int ac, const char *const *av) noexcept : StartupDispatcherCtx(ac, av) {
+    struct ProximityServerAxis {
+
+        constexpr bool isAtProximity(double axis) const noexcept {
+            return (superiorTo) ? (axis > value) : (axis < value);
+        }
+
+        std::string code;
+        double value;
+        bool superiorTo;
+    };
+
+    class WorldServerContext : fys::common::ServiceContextBase {
+
+    public:
+        WorldServerContext(int ac, const char *const *av);
+
+        std::string toString() const noexcept;
+
+    private:
+        std::string _serverCode;
+        std::pair<double, double> _serverBoundaries;
+        std::vector<ProximityServerAxis> _xAxisServerProximity;
+        std::vector<ProximityServerAxis> _yAxisServerProximity;
+
+    };
+
 }
 
-
-}
+#endif //FYS_WORLDSERVERCONTEXT_HH

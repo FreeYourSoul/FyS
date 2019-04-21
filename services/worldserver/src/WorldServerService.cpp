@@ -21,16 +21,5 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-//
-// Created by FyS on 4/7/19.
-//
+#include "WorldServerService.hh"
 
-#include "../include/WorldServerContext.hh"
-
-namespace fys::ws {
-
-WorldServerCtx::WorldServerCtx(int ac, const char *const *av) noexcept : StartupDispatcherCtx(ac, av) {
-}
-
-
-}

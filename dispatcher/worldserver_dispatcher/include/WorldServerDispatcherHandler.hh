@@ -36,7 +36,7 @@ namespace fys {
     class StartupDispatcherCtx;
 }
 
-namespace fys::worldserver {
+namespace fys::ws {
 
     class WorldServerDispatcherHandler {
     protected:

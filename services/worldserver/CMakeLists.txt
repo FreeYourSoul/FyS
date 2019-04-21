@@ -9,8 +9,17 @@ if(CCACHE_FOUND)
     set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
 endif(CCACHE_FOUND)
 
+include_directories(${CMAKE_CURRENT_LIST_DIR}/include
+        ${CMAKE_CURRENT_LIST_DIR}/../common/include)
+
 add_executable(worldserver_service
-        ${CMAKE_CURRENT_LIST_DIR}/src/main.cpp)
+        ${CMAKE_CURRENT_LIST_DIR}/src/main.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../common/src/ServiceContextBase.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/src/WorldServerService.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/src/WorldServerService.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/WorldServerService.hh
+        ${CMAKE_CURRENT_LIST_DIR}/src/WorldServerContext.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/WorldServerContext.hh)
 
 target_compile_options(worldserver_service PRIVATE -O2 -fstack-protector-all -g)
 target_compile_options(worldserver_service PRIVATE -Wall -Wpedantic -Wextra -Wno-deprecated-declarations)

@@ -21,16 +21,34 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-//
-// Created by FyS on 4/7/19.
-//
 
-#include "../include/WorldServerContext.hh"
+#include <nlohmann/json.hpp>
+#include <iostream>
+#include <fstream>
+#include "WorldServerContext.hh"
+
+using json = nlohmann::json;
 
 namespace fys::ws {
 
-WorldServerCtx::WorldServerCtx(int ac, const char *const *av) noexcept : StartupDispatcherCtx(ac, av) {
-}
+    WorldServerContext::WorldServerContext(int ac, const char *const *av) :
+        common::ServiceContextBase(ac, av) {
+//        std::cout << _configFile;
+//        std::ifstream i(_configFile);
+//        json jsonConfig;
+//        i >> jsonConfig;
+    }
 
+    std::string WorldServerContext::toString() const noexcept {
+        std::string str;
+        str = "\n*************************\n";
+        str+= "[INFO] Service " + _name + " context VERSION: " + _version + "\n\n";
+        str+= "[INFO] World Server code: " + _serverCode + "\n";
+        str+= "[INFO] connectedPort: " + std::to_string(_connectingPort) + "\n";
+        str+= "[INFO] Dispatcher connected port: " + std::to_string(_dispatcherData.port) + "\n";
+        str+= "[INFO] Dispatcher connected host: " + _dispatcherData.address + "\n";
+        str+= "\n*************************\n";
+        return str;
+    }
 
 }
