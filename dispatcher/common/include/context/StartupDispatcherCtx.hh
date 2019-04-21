@@ -40,6 +40,7 @@ namespace fys {
         constexpr auto TOPICS          = "dispatcher.topics";
         constexpr auto ISCLUSTERAWARE  = "dispatcher.isClusterAware";
         constexpr auto BINDINGPORT     = "dispatcher.bindingPort";
+        constexpr auto DISPATCHERPORT  = "dispatcher.dispatcherPort";
         constexpr auto ISLOADBALANCING = "dispatcher.isLoadBalancing";
         constexpr auto TOPIC_GROUPS    = "dispatcher.topicGroups";
         constexpr auto SPECIFIC_CONFIG = "dispatcher.specific_config";
@@ -62,6 +63,7 @@ class StartupDispatcherCtx {
 
             [[nodiscard]] constexpr bool isClusterAware() const noexcept { return _isClusterAware; }
             [[nodiscard]] constexpr ushort getBindingPort() const noexcept { return _bindingPort; }
+            [[nodiscard]] constexpr ushort getDispatchingPort() const noexcept { return _dispatchingPort; };
 
             [[nodiscard]] const std::vector<std::string> getSubscriptionTopics() const noexcept { return _subTopics; }
             [[nodiscard]] std::string getFrontendClusterProxyConnectionString() const noexcept;
@@ -89,7 +91,14 @@ class StartupDispatcherCtx {
             std::string _version;
             std::string _name;
 
+            /**
+             * Client port
+             */
             ushort _bindingPort = 0;
+            /**
+             * Dispatching to service port (for publishing / load balancing)
+             */
+            ushort _dispatchingPort = 0;
             bool _verbose = false;
 
             ClusterProxy _clusterProxy;

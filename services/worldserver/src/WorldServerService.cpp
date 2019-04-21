@@ -21,16 +21,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-//
-// Created by FyS on 4/7/19.
-//
-
-#include "../include/WorldServerContext.hh"
+#include <spdlog/spdlog.h>
+#include <zmq_addon.hpp>
+#include "WorldServerService.hh"
 
 namespace fys::ws {
 
-WorldServerCtx::WorldServerCtx(int ac, const char *const *av) noexcept : StartupDispatcherCtx(ac, av) {
+void WorldServerService::runServerLoop() {
+    spdlog::get("c")->info("WorldServer loop started");
+
+    while (true) {
+        _connectionHandler.pollAndProcessSubMessage([this](zmq::multipart_t &&msg){
+            processMessage(std::move(msg));
+        });
+    }
 }
 
+void WorldServerService::processMessage(zmq::multipart_t &&msg) noexcept {
+
+}
 
 }

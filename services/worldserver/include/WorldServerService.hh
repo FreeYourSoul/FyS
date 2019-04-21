@@ -21,16 +21,28 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-//
-// Created by FyS on 4/7/19.
-//
+#ifndef FYS_WORLDSERVERSERVICE_HH
+#define FYS_WORLDSERVERSERVICE_HH
 
-#include "../include/WorldServerContext.hh"
+#include <ConnectionHandler.hh>
 
 namespace fys::ws {
 
-WorldServerCtx::WorldServerCtx(int ac, const char *const *av) noexcept : StartupDispatcherCtx(ac, av) {
+    class WorldServerService {
+
+    public:
+        void runServerLoop();
+
+    private:
+        void processMessage(zmq::multipart_t &&msg) noexcept;
+//        constexpr bool filterInvalidMsg() const;
+
+    private:
+        fys::ws::ConnectionHandler _connectionHandler;
+
+    };
+
 }
 
 
-}
+#endif //FYS_WORLDSERVERSERVICE_HH

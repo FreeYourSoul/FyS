@@ -12,7 +12,7 @@ StartupDispatcherCtx::StartupDispatcherCtx(int ac, const char *const *av) noexce
     TCLAP::CmdLine cli("FyS::Dispatcher", ' ', _version);
     TCLAP::ValueArg<std::string> configPath("c", "config", "Path of config file", true, "NONE", "string");
     TCLAP::ValueArg<std::string> configSpecificPath("s", "specificConfig", "Path of specific config file", false, "NONE", "string");
-    TCLAP::ValueArg<std::string> name("n", "name", "Name of the Dispatcher (used as key for the cluster)", false, "WS", "string");
+    TCLAP::ValueArg<std::string> name("n", "name", "Name of the Dispatcher (used as key for the cluster)", false, "", "string");
     TCLAP::ValueArg<ushort> changePort("p", "port", "Listening Port", false, 0, "integer");
     TCLAP::ValueArg<bool> aware("a", "aware", "Is aware of the other cluster member", false, true, "boolean");
     TCLAP::ValueArg<bool> loadBalance("l", "load_balance", "Dispatch in load balancing mode or publisher mode", false, true, "boolean");
@@ -29,9 +29,9 @@ StartupDispatcherCtx::StartupDispatcherCtx(int ac, const char *const *av) noexce
         this->initializeFromIni(configPath.getValue());
     if ("NONE" != configSpecificPath.getValue())
         _specificConfigPath = configSpecificPath.getValue();
-    if (_bindingPort > 0)
+    if (changePort.getValue() > 0)
         _bindingPort = changePort.getValue();
-    if (_name.empty())
+    if (!name.getValue().empty())
         _name = name.getValue();
     _isClusterAware = !aware.getValue() ? false : _isClusterAware;
     _isLoadBalancing = loadBalance.getValue();
@@ -51,6 +51,7 @@ void StartupDispatcherCtx::initializeFromIni(const std::string &configFilePath) 
     _clusterProxy.frontendAddress = pt.get<std::string>(fys::init_beacon::FRONTEND_ADDR);
     _clusterProxy.frontendPort = pt.get<ushort>(fys::init_beacon::FRONTEND_PORT);
     _bindingPort = pt.get<ushort>(fys::init_beacon::BINDINGPORT);
+    _dispatchingPort = pt.get<ushort>(fys::init_beacon::DISPATCHERPORT);
     _isClusterAware = pt.get<bool>(fys::init_beacon::ISCLUSTERAWARE);
     _isLoadBalancing = pt.get<bool>(fys::init_beacon::ISLOADBALANCING);
     _specificConfigPath = pt.get<std::string>(fys::init_beacon::SPECIFIC_CONFIG);
@@ -73,7 +74,8 @@ std::string StartupDispatcherCtx::toString() const noexcept {
     std::string str;
     str = "\n*************************\n";
     str+= "[INFO] Dispatcher " + _name + " context VERSION: " + _version + "\n\n";
-    str+= "[INFO] Listener bindingPort: " + std::to_string(_bindingPort) + "\n";
+    str+= "[INFO] Client Listener bindingPort: " + std::to_string(_bindingPort) + "\n";
+    str+= "[INFO] Service Dispatching Port: " + std::to_string(_dispatchingPort) + "\n";
     str+= "[INFO] isClusterAware: " + std::string(_isClusterAware ? "true" : "false") + "\n";
     str+= "[INFO] isLoadBalancing: " + std::string(_isLoadBalancing ? "true" : "false") + "\n";
     for (const auto &topic : _subTopics) {

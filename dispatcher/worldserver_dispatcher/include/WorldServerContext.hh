@@ -31,7 +31,7 @@
 #include <StartupDispatcherCtx.hh>
 #include <tclap/CmdLine.h>
 
-namespace fys::worldserver {
+namespace fys::ws {
 
     struct ProximityServerAxis {
 

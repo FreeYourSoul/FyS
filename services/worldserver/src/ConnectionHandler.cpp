@@ -21,16 +21,25 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-//
-// Created by FyS on 4/7/19.
-//
 
-#include "../include/WorldServerContext.hh"
+#include "ConnectionHandler.hh"
 
 namespace fys::ws {
 
-WorldServerCtx::WorldServerCtx(int ac, const char *const *av) noexcept : StartupDispatcherCtx(ac, av) {
+ConnectionHandler::ConnectionHandler(int threadNumber) noexcept :
+ _zmqContext(threadNumber),
+ _subSocket(_zmqContext, zmq::socket_type::sub),
+ _dispatcherConnection(_zmqContext, zmq::socket_type::dealer) {
+
 }
 
+void ConnectionHandler::setupConnectionManager(const fys::ws::WorldServerContext &ctx) {
+    _subSocket.connect(ctx.getDispatcherSubConnectionString());
+    _dispatcherConnection.connect(ctx.getDispatcherConnectionString());
+}
+
+void ConnectionHandler::sendMessageToDispatcher(zmq::multipart_t &&msg) noexcept {
+    msg.send(_dispatcherConnection);
+}
 
 }

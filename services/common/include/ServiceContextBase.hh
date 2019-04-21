@@ -21,16 +21,43 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-//
-// Created by FyS on 4/7/19.
-//
 
-#include "../include/WorldServerContext.hh"
+#ifndef FYS_SERVICECONTEXTBASE_HH
+#define FYS_SERVICECONTEXTBASE_HH
 
-namespace fys::ws {
+#include <string>
 
-WorldServerCtx::WorldServerCtx(int ac, const char *const *av) noexcept : StartupDispatcherCtx(ac, av) {
+namespace fys::common {
+
+    namespace init_beacon {
+        constexpr static auto SERVICE_NAME = "service.name";
+        constexpr static auto DISPATCHER_PORT = "dispatcher.port";
+        constexpr static auto DISPATCHER_SUBPORT = "dispatcher.subport";
+        constexpr static auto DISPATCHER_ADDR = "dispatcher.address";
+    }
+
+
+    struct DispatcherData {
+        std::string address;
+        ushort subscriberPort;
+        ushort port;
+    };
+
+    class ServiceContextBase {
+    public:
+        ServiceContextBase(int ac, const char *const *av);
+
+    private:
+        void initializeFromIni(const std::string &configFilePath);
+
+    protected:
+        std::string _version;
+        std::string _name;
+        std::string _configFile;
+        DispatcherData _dispatcherData;
+    };
+
 }
 
 
-}
+#endif //FYS_SERVICECONTEXTBASE_HH

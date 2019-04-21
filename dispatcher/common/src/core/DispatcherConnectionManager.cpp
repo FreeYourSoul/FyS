@@ -4,9 +4,10 @@
 namespace fys::network {
 
 DispatcherConnectionManager::DispatcherConnectionManager(int threadNumber, bool isLoadBalancing) noexcept :
+ _isLoadBalancing(isLoadBalancing),
  _zmqContext(threadNumber),
  _listener(_zmqContext, zmq::socket_type::router),
- _dipatcher(_zmqContext, (isLoadBalancing) ? zmq::socket_type::dealer : zmq::socket_type::pub),
+ _dispatcher(_zmqContext, (isLoadBalancing) ? zmq::socket_type::dealer : zmq::socket_type::pub),
  _clusterConnection({zmq::socket_t(_zmqContext, zmq::socket_type::sub),
                      zmq::socket_t(_zmqContext, zmq::socket_type::pub),
                      false}) {
@@ -24,6 +25,7 @@ void DispatcherConnectionManager::setupConnectionManager(const fys::StartupDispa
         _clusterConnection.closed = true;
     }
     _listener.bind("tcp://*:" + std::to_string(ctx.getBindingPort()));
+    _listener.bind("tcp://*:" + std::to_string(ctx.getDispatchingPort()));
 }
 
 void DispatcherConnectionManager::subscribeToTopics(const std::vector<std::string> &topics) noexcept {
@@ -35,8 +37,8 @@ void DispatcherConnectionManager::subscribeToTopics(const std::vector<std::strin
 std::pair<bool, bool> DispatcherConnectionManager::poll() noexcept {
     //  Initialize poll set
     zmq::pollitem_t items[] = {
-            { _listener, 0, ZMQ_POLLIN, 0 },
-            { _clusterConnection.subSocket, 0, ZMQ_POLLIN, 0 }
+        { _listener, 0, ZMQ_POLLIN, 0 },
+        { _clusterConnection.subSocket, 0, ZMQ_POLLIN, 0 }
     };
     zmq::poll(&items[0], _clusterConnection.closed ? 1 : 2, -1);
     bool listenerPolling = static_cast<bool>(items[0].revents & ZMQ_POLLIN);
@@ -45,7 +47,7 @@ std::pair<bool, bool> DispatcherConnectionManager::poll() noexcept {
 }
 
 bool DispatcherConnectionManager::sendMessageToDispatcherSocket(zmq::multipart_t &&msg) noexcept {
-    return msg.send(_dipatcher);
+    return msg.send(_dispatcher);
 }
 
 bool DispatcherConnectionManager::sendMessageToClusterPubSocket(zmq::multipart_t &&msg) noexcept {

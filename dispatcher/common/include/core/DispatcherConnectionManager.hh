@@ -85,7 +85,7 @@ namespace fys::network {
          * @param handler function instance to call which take zmq::multipart object as parameter
          */
         template <typename Handler>
-        void dispatchMessageOnSubscriberSocket(Handler &&handler) noexcept{
+        void dispatchMessageOnSubscriberSocket(Handler &&handler) noexcept {
             if (!_clusterConnection.closed) {
                 zmq::multipart_t msg;
                 if (!msg.recv(_clusterConnection.subSocket))
@@ -106,9 +106,10 @@ namespace fys::network {
         void subscribeToTopics(const std::vector<std::string> &topics) noexcept;
             
         private:
+            bool _isLoadBalancing;
             zmq::context_t _zmqContext;
             zmq::socket_t _listener;
-            zmq::socket_t _dipatcher;
+            zmq::socket_t _dispatcher;
 
             ClusterConnection _clusterConnection;
 

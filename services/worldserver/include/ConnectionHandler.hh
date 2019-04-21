@@ -21,16 +21,48 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-//
-// Created by FyS on 4/7/19.
-//
 
-#include "../include/WorldServerContext.hh"
+#ifndef FYS_CONNECTIONHANDLER_HH
+#define FYS_CONNECTIONHANDLER_HH
+
+#include <spdlog/spdlog.h>
+#include <zmq_addon.hpp>
+#include "WorldServerContext.hh"
 
 namespace fys::ws {
 
-WorldServerCtx::WorldServerCtx(int ac, const char *const *av) noexcept : StartupDispatcherCtx(ac, av) {
+    class ConnectionHandler {
+
+    public:
+        explicit ConnectionHandler(int threadNumber = 1) noexcept ;
+
+        void setupConnectionManager(const fys::ws::WorldServerContext& ctx);
+
+        template <typename Handler>
+        void pollAndProcessSubMessage(Handler handler) noexcept {
+            //  Initialize poll set
+            zmq::pollitem_t items[] = {
+                { _subSocket, 0, ZMQ_POLLIN, 0 }
+            };
+            zmq::poll(&items[0], 1, -1);
+            if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
+                zmq::multipart_t msg;
+                if (!msg.recv(_subSocket))
+                    spdlog::get("c")->error("Error while reading on the listener socket");
+                else
+                    handler(std::move(msg));
+            }
+        }
+
+        void sendMessageToDispatcher(zmq::multipart_t &&msg) noexcept;
+
+    private:
+        zmq::context_t _zmqContext;
+        zmq::socket_t _subSocket;
+        zmq::socket_t _dispatcherConnection;
+
+    };
+
 }
 
-
-}
+#endif //FYS_CONNECTIONHANDLER_HH
