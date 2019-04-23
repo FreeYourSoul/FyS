@@ -24,6 +24,7 @@
 #ifndef FYS_WORLDSERVERSERVICE_HH
 #define FYS_WORLDSERVERSERVICE_HH
 
+#include <engine/WorldServerEngine.hh>
 #include <ConnectionHandler.hh>
 
 namespace fys::ws {

@@ -26,6 +26,7 @@
 #define FYS_WORLDSERVERENGINE_HH
 
 #include <engine/PlayersData.hh>
+#include <engine/Map.hh>
 
 // forward declaration
 
