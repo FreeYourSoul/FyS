@@ -31,7 +31,8 @@ namespace fys::ws {
     class WorldServerService {
 
     public:
-        void runServerLoop();
+        explicit WorldServerService(const WorldServerContext &ctx) noexcept;
+        void runServerLoop() noexcept;
 
     private:
         void processMessage(zmq::multipart_t &&msg) noexcept;
@@ -39,7 +40,7 @@ namespace fys::ws {
 
     private:
         fys::ws::ConnectionHandler _connectionHandler;
-
+        fys::ws::WorldServerEngine _worldServer;
     };
 
 }

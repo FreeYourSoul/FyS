@@ -27,13 +27,19 @@
 
 namespace fys::ws {
 
-void WorldServerService::runServerLoop() {
+WorldServerService::WorldServerService(const WorldServerContext &ctx) noexcept {
+    _connectionHandler.setupConnectionManager(ctx);
+}
+
+void WorldServerService::runServerLoop() noexcept {
     spdlog::get("c")->info("WorldServer loop started");
 
     while (true) {
-        _connectionHandler.pollAndProcessSubMessage([this](zmq::multipart_t &&msg){
-            processMessage(std::move(msg));
-        });
+        _connectionHandler.pollAndProcessSubMessage(
+            [this](zmq::multipart_t &&msg) {
+                processMessage(std::move(msg));
+            }
+        );
     }
 }
 

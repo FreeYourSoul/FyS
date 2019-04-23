@@ -22,24 +22,26 @@
 // SOFTWARE.
 
 
-#include "ConnectionHandler.hh"
+#ifndef FYS_WORLDSERVERENGINE_HH
+#define FYS_WORLDSERVERENGINE_HH
+
+#include <engine/PlayersData.hh>
+
+// forward declaration
 
 namespace fys::ws {
 
-ConnectionHandler::ConnectionHandler(int threadNumber) noexcept :
- _zmqContext(threadNumber),
- _subSocket(_zmqContext, zmq::socket_type::sub),
- _dispatcherConnection(_zmqContext, zmq::socket_type::dealer) {
+    class WorldServerEngine {
+
+    public:
+
+    private:
+        PlayersData _data;
+        Map _map;
+
+    };
 
 }
 
-void ConnectionHandler::setupConnectionManager(const fys::ws::WorldServerContext &ctx) noexcept {
-    _subSocket.connect(ctx.getDispatcherSubConnectionString());
-    _dispatcherConnection.connect(ctx.getDispatcherConnectionString());
-}
 
-void ConnectionHandler::sendMessageToDispatcher(zmq::multipart_t &&msg) noexcept {
-    msg.send(_dispatcherConnection);
-}
-
-}
+#endif //FYS_WORLDSERVERENGINE_HH

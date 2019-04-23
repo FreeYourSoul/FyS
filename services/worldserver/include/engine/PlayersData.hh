@@ -22,24 +22,35 @@
 // SOFTWARE.
 
 
-#include "ConnectionHandler.hh"
+#ifndef FYS_PLAYERSDATA_HH
+#define FYS_PLAYERSDATA_HH
+
+#include <utility>
+#include <vector>
+#include <array>
 
 namespace fys::ws {
 
-ConnectionHandler::ConnectionHandler(int threadNumber) noexcept :
- _zmqContext(threadNumber),
- _subSocket(_zmqContext, zmq::socket_type::sub),
- _dispatcherConnection(_zmqContext, zmq::socket_type::dealer) {
+    using PlayerPosition = std::pair<double, double>;
+    using Token = std::array<char, 8>;
+
+    enum class PlayerStatus {
+        FIGHTING,
+        NORMAL
+    };
+
+    class PlayersData {
+    public:
+
+
+    private:
+        std::vector<PlayerPosition> _positions;
+        std::vector<PlayerStatus> _status;
+        std::vector<Token> _tokens;
+
+    };
 
 }
 
-void ConnectionHandler::setupConnectionManager(const fys::ws::WorldServerContext &ctx) noexcept {
-    _subSocket.connect(ctx.getDispatcherSubConnectionString());
-    _dispatcherConnection.connect(ctx.getDispatcherConnectionString());
-}
 
-void ConnectionHandler::sendMessageToDispatcher(zmq::multipart_t &&msg) noexcept {
-    msg.send(_dispatcherConnection);
-}
-
-}
+#endif //FYS_PLAYERSDATA_HH

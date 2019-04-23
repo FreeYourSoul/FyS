@@ -22,24 +22,15 @@
 // SOFTWARE.
 
 
-#include "ConnectionHandler.hh"
+#ifndef FYS_MAP_HH
+#define FYS_MAP_HH
 
 namespace fys::ws {
 
-ConnectionHandler::ConnectionHandler(int threadNumber) noexcept :
- _zmqContext(threadNumber),
- _subSocket(_zmqContext, zmq::socket_type::sub),
- _dispatcherConnection(_zmqContext, zmq::socket_type::dealer) {
+    class Map {
+
+    };
 
 }
 
-void ConnectionHandler::setupConnectionManager(const fys::ws::WorldServerContext &ctx) noexcept {
-    _subSocket.connect(ctx.getDispatcherSubConnectionString());
-    _dispatcherConnection.connect(ctx.getDispatcherConnectionString());
-}
-
-void ConnectionHandler::sendMessageToDispatcher(zmq::multipart_t &&msg) noexcept {
-    msg.send(_dispatcherConnection);
-}
-
-}
+#endif //FYS_MAP_HH

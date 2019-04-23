@@ -34,15 +34,16 @@ namespace fys::ws {
     class ConnectionHandler {
 
     public:
-        explicit ConnectionHandler(int threadNumber = 1) noexcept ;
+        explicit ConnectionHandler(int threadNumber = 1) noexcept;
 
-        void setupConnectionManager(const fys::ws::WorldServerContext& ctx);
+        void setupConnectionManager(const fys::ws::WorldServerContext& ctx) noexcept;
+        void sendMessageToDispatcher(zmq::multipart_t &&msg) noexcept;
 
         template <typename Handler>
         void pollAndProcessSubMessage(Handler handler) noexcept {
             //  Initialize poll set
             zmq::pollitem_t items[] = {
-                { _subSocket, 0, ZMQ_POLLIN, 0 }
+                    { _subSocket, 0, ZMQ_POLLIN, 0 }
             };
             zmq::poll(&items[0], 1, -1);
             if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
@@ -53,8 +54,6 @@ namespace fys::ws {
                     handler(std::move(msg));
             }
         }
-
-        void sendMessageToDispatcher(zmq::multipart_t &&msg) noexcept;
 
     private:
         zmq::context_t _zmqContext;

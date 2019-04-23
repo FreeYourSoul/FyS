@@ -19,6 +19,8 @@ add_executable(worldserver_service
         ${CMAKE_CURRENT_LIST_DIR}/src/main.cpp
         ${CMAKE_CURRENT_LIST_DIR}/../common/src/ServiceContextBase.cpp
         ${CMAKE_CURRENT_LIST_DIR}/../common/include/ServiceContextBase.hh
+        src/engine/WorldServerEngine.cpp
+        include/engine/WorldServerEngine.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/ConnectionHandler.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/ConnectionHandler.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/WorldServerService.cpp
