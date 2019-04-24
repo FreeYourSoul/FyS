@@ -27,6 +27,10 @@
 
 #include <string>
 #include <algorithm>
+#include <stdexcept>
+#include <iostream>
+#include <charconv>
+#include <random>
 
 namespace fys::util {
 
@@ -36,38 +40,40 @@ namespace fys::util {
  * Hide the array index (index that the player data are in) inside the token.
  *
  * The encoding follow this rule:
- * <size of sizeIndex:soz> <sizeIndex:si> <index>    <random>
- *    one char                 soz          si     12 - (1+soz+si)
+ * <offset until index>             <random>                 <index>
+ *      one char          KEY_SIZE - (1 + index size)    (KEYSIZE - offset)
  */
 class Key {
-    constexpr static unsigned KEY_SIZE = 12;
+    constexpr static unsigned KEY_SIZE = 8;
 
 public:
     explicit Key(unsigned index) {
+        static std::random_device rd;
+        static std::mt19937 g(rd());
         std::string fillerId = std::to_string(reinterpret_cast<unsigned long long>(this));
-        std::string id = generateId(index);
-
-        std::fill(_key, _key + KEY_SIZE, 'x');
-        std::copy_n(fillerId.begin(), KEY_SIZE, _key);
-        std::copy(id.begin(), id.end(), _key);
+        std::shuffle(fillerId.begin(), fillerId.end(), g);
+        std::string id = std::to_string(index);
+        unsigned offset = KEY_SIZE - id.size();
+        if (offset < 3 )
+            throw std::range_error(id.append(" is too big for being an index"));
+        std::string token = std::to_string(offset).append(fillerId.substr(0, offset - 1)).append(id);
+        std::copy_n(token.begin(), KEY_SIZE, _key);
     }
 
     bool operator==(const Key& other) {
         return std::equal(other._key, other._key + KEY_SIZE, _key);
     }
 
-private:
-    /**
-     * generate the id from the index,
-     *
-     * @param index will be generated into a specific id
-     * @return a string formatted as follow : <sizeOfSizeOfIndex><sizeOfIndex><index>
-     */
-    std::string generateId(unsigned index) {
-        std::string id = std::to_string(index);
-        std::string idSize = std::to_string(id.size());
-        id = std::to_string(idSize.size()).append(idSize).append(id);
-        return id;
+    unsigned getIndex() const {
+        unsigned res = 0;
+        unsigned offset = _key[0] - '0';
+        std::from_chars(_key + offset, _key + KEY_SIZE, res);
+        return res;
+    }
+
+    template<typename DisplayPolicy>
+    void display(DisplayPolicy policy) {
+        policy(_key);
     }
 
 private:
