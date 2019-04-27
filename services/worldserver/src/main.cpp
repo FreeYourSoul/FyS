@@ -5,6 +5,8 @@
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <WorldServerContext.hh>
 #include <WorldServerService.hh>
+#include <Key.hh>
+#include <iostream>
 
 int main(int ac, char **av) {
     try {
