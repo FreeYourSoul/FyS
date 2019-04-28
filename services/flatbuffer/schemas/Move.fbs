@@ -1,0 +1,19 @@
+// example IDL file
+
+namespace MyGame;
+
+enum Color : byte { Red = 1, Green, Blue }
+
+struct Vec3 {
+  x:float;
+  y:float;
+  z:float;
+}
+
+table Monster {
+  pos:Vec3;
+  mana:short = 150;
+  hp:short = 100;
+  color:Color = Blue;
+
+}

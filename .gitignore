@@ -1,3 +1,6 @@
+#ignore flatbuffer generated code
+**/flatbuffer/includes
+
 .idea
 **/.idea
 **/cmake-build-debug

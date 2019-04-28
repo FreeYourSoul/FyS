@@ -23,3 +23,9 @@
 
 
 #include "engine/PlayersData.hh"
+
+namespace fys::ws {
+
+
+
+}
