@@ -49,7 +49,7 @@ ServiceContextBase::ServiceContextBase(int ac, const char *const *av) try {
     this->initializeFromIni(configPath.getValue());
     if (dispatcherPort.getValue() > 0)
         _dispatcherData.port = dispatcherPort.getValue();
-    if ("NONE" != dispatcherHost.getValue())
+    if ("NONE" == dispatcherHost.getValue())
         _dispatcherData.address = dispatcherHost.getValue();
     if (subport.getValue() > 0)
         _dispatcherData.subscriberPort = subport.getValue();

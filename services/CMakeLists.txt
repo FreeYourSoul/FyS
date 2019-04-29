@@ -2,6 +2,7 @@ cmake_minimum_required( VERSION 3.6 )
 
 add_subdirectory(auth)
 add_subdirectory(chat)
+add_subdirectory(common)
 add_subdirectory(inv_exchange)
 add_subdirectory(inv_grab)
 add_subdirectory(inv_usage)

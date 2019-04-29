@@ -64,7 +64,7 @@ void StartupDispatcherCtx::initializeFromIni(const std::string &configFilePath) 
         _subTopics.reserve(topics.size());
         for (std::string &topic : topics) {
             for (std::string &group : topicGroups) {
-                _subTopics.emplace_back(group.append("_").append(topic));
+                _subTopics.emplace_back(std::string(group + "_").append(topic));
             }
         }
     }

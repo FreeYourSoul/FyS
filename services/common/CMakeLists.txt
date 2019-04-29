@@ -8,17 +8,24 @@ set(FLATBUFFER_SCHEMA_DIR "${FLAT_BUFFER_PATH}/schemas")
 set(FLAT_BUFFER_SCHEMAS
         ${FLATBUFFER_SCHEMA_DIR}/Move.fbs)
 
-build_flatbuffers("${FLAT_BUFFER_SCHEMAS}"
+if (TARGET generateFbs)
+else()
+    build_flatbuffers("${FLAT_BUFFER_SCHEMAS}"
         "${FLATBUFFER_SCHEMA_DIR}"
         generateFbs
         ""
         "${FLATBUFFER_INCLUDE_DIR}"
         ""
         "")
+endif()
 
 set(COMMON_SRCS
         ${CMAKE_CURRENT_LIST_DIR}/src/ServiceContextBase.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/ServiceContextBase.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/Key.hh)
-set(COMMON_INCLUDES_DIR
+set(COMMON_INCLUDE_DIR
         ${CMAKE_CURRENT_LIST_DIR}/include)
+
+include_directories(flatbuffer/includes)
+
+add_subdirectory(test)

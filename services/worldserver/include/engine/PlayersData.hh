@@ -25,14 +25,18 @@
 #ifndef FYS_PLAYERSDATA_HH
 #define FYS_PLAYERSDATA_HH
 
+#include <map>
 #include <utility>
 #include <vector>
 #include <array>
 
+namespace fys::util {
+    class Key;
+}
+
 namespace fys::ws {
 
     using PlayerPosition = std::pair<double, double>;
-    using Token = std::array<char, 8>;
 
     enum class PlayerStatus {
         FIGHTING,
@@ -41,12 +45,12 @@ namespace fys::ws {
 
     class PlayersData {
     public:
-
+        PlayersData();
 
     private:
         std::vector<PlayerPosition> _positions;
         std::vector<PlayerStatus> _status;
-        std::vector<Token> _tokens;
+        std::map<std::string, uint> _identityToIndex;
 
     };
 

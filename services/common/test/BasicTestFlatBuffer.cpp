@@ -21,14 +21,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#define FLATBUFFERS_DEBUG_VERIFICATION_FAILURE
 
-#include "engine/PlayersData.hh"
+#include <catch.hpp>
+#include <zmq_addon.hpp>
+#include <flatbuffers/flatbuffers.h>
+#include <Move_generated.h>
 
-constexpr static uint MAXIMUM_CONNECTED_PLAYERS = 1000;
+TEST_CASE("FlatBuffer test default") {
+    flatbuffers::FlatBufferBuilder fbb;
+    fys_fb::MoveT move;
+    move.x = 1;
+    move.y = 2;
+    fbb.Finish(fys_fb::Move::Pack(fbb, &move));
+    uint8_t *binary = fbb.GetBufferPointer();
+    auto ok = flatbuffers::Verifier(fbb.GetBufferPointer(), 16);
+    REQUIRE(fys_fb::VerifySizePrefixedMoveBuffer(ok));
 
-namespace fys::ws {
+    SECTION("Binary to FlatBuffer") {
+        const fys_fb::Move *fromBinary = fys_fb::GetMove(binary);
+        REQUIRE(fromBinary->x() == move.x);
+        REQUIRE(fromBinary->y() == move.y);
 
-PlayersData::PlayersData() : _positions(MAXIMUM_CONNECTED_PLAYERS), _status(MAXIMUM_CONNECTED_PLAYERS) {
-}
+    } // End section : Binary to Flatbuffer
+
+
+    SECTION("ZMQ Message to FlatBuffer") {
+        zmq::message_t msg(binary, fbb.GetSize());
+        const fys_fb::Move *fromBinary = fys_fb::GetMove(msg.data());
+        REQUIRE(fromBinary->x() == move.x);
+        REQUIRE(fromBinary->y() == move.y);
+    }
 
 }

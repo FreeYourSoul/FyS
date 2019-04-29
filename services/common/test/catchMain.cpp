@@ -21,14 +21,5 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
-#include "engine/PlayersData.hh"
-
-constexpr static uint MAXIMUM_CONNECTED_PLAYERS = 1000;
-
-namespace fys::ws {
-
-PlayersData::PlayersData() : _positions(MAXIMUM_CONNECTED_PLAYERS), _status(MAXIMUM_CONNECTED_PLAYERS) {
-}
-
-}
+#define CATCH_CONFIG_MAIN
+#include "catch.hpp"

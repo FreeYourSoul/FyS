@@ -17,7 +17,7 @@ endif(CCACHE_FOUND)
 
 include_directories(
         ${CMAKE_CURRENT_LIST_DIR}/include
-        ${COMMON_INCLUDES_DIR}
+        ${COMMON_INCLUDE_DIR}
         ${FLATBUFFER_INCLUDE_DIR}
         ${TMXLITE_HEADERS})
 

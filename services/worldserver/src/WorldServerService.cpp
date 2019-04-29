@@ -23,6 +23,8 @@
 
 #include <spdlog/spdlog.h>
 #include <zmq_addon.hpp>
+#include <flatbuffers/flatbuffers.h>
+//#include <Move_generated.h>
 #include "WorldServerService.hh"
 
 namespace fys::ws {

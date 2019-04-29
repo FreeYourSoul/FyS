@@ -1,19 +1,14 @@
 // example IDL file
 
-namespace MyGame;
+namespace fys_fb;
 
-enum Color : byte { Red = 1, Green, Blue }
+//flatc -c Move.fbs --gen-all
 
-struct Vec3 {
-  x:float;
-  y:float;
-  z:float;
-}
+table Move {
 
-table Monster {
-  pos:Vec3;
-  mana:short = 150;
-  hp:short = 100;
-  color:Color = Blue;
+  x:short = 150;
+  y:short = 100;
 
 }
+
+root_type Move;

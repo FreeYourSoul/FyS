@@ -25,6 +25,7 @@
 #ifndef FYS_WORLDSERVERENGINE_HH
 #define FYS_WORLDSERVERENGINE_HH
 
+#include <memory>
 #include <engine/PlayersData.hh>
 #include <engine/Map.hh>
 
@@ -36,9 +37,10 @@ namespace fys::ws {
 
     public:
 
+
     private:
-        PlayersData _data;
-        Map _map;
+        std::unique_ptr<PlayersData> _data;
+        std::unique_ptr<Map> _map;
 
     };
 

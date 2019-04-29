@@ -25,9 +25,49 @@
 #ifndef FYS_MAP_HH
 #define FYS_MAP_HH
 
+#include <optional>
+#include <vector>
+#include <string>
+
 namespace fys::ws {
 
+    class OverlapMaps {
+        struct Overlap {
+            bool operator()(double ix, double iy) {
+                return check(ix, iy);
+            }
+            bool (*check)(double, double);
+            double x;
+            double y;
+            std::string code;
+        };
+
+    public:
+        std::vector<std::string_view> getOverlaps(double x, double y) {
+            std::vector<std::string_view> ret(4);
+            for (auto &over : _overlaps) {
+                if (over(x, y))
+                    ret.push_back(over.code);
+            }
+            return ret;
+        }
+
+    private:
+        std::vector<Overlap> _overlaps;
+    };
+
+
     class Map {
+
+    public:
+        Map(Map &&) noexcept = default;
+        Map(const Map&) = delete;
+        Map &operator=(const Map&) = delete;
+
+        std::vector<std::string_view> getOverlapingMap(double x, double y);
+
+    private:
+        OverlapMaps _overlapMap;
 
     };
 

@@ -23,3 +23,11 @@
 
 
 #include "engine/Map.hh"
+
+namespace fys::ws {
+
+std::vector<std::string_view> Map::getOverlapingMap(double x, double y) {
+    return _overlapMap.getOverlaps(x, y);
+}
+
+}
