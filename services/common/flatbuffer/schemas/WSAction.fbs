@@ -1,0 +1,20 @@
+include "Direction.fbs";
+
+namespace fys.fb;
+
+union Action { Move, PnjInteract }
+
+table Move {
+    dir:Direction;
+}
+
+table PnjInteract {
+    idPnj:string;
+}
+
+table WSAction {
+    action:Action;
+    token_client:string;
+}
+
+root_type WSAction;

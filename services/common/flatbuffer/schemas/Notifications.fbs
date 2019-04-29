@@ -1,0 +1,9 @@
+namespace fys.fb.internal;
+
+table MoveNotification {
+    x:double = 0;
+    y:double = 0;
+    token_client:string;
+}
+
+root_type MoveNotification;

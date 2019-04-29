@@ -97,6 +97,7 @@ function(build_flatbuffers flatbuffers_schemas
                     OUTPUT ${generated_include}
                     COMMAND ${FLATC} ${FLATC_SCHEMA_ARGS}
                     -o ${generated_includes_dir}
+                    --gen-object-api
                     ${include_params}
                     -c ${schema}
                     DEPENDS ${FLATC_TARGET} ${schema} ${additional_dependencies}
