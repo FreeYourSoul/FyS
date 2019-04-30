@@ -23,6 +23,11 @@ else()
 endif()
 
 set(COMMON_SRCS
+        ${CMAKE_CURRENT_LIST_DIR}/flatbuffer/includes/ClientCom_generated.h
+        ${CMAKE_CURRENT_LIST_DIR}/flatbuffer/includes/Direction_generated.h
+        ${CMAKE_CURRENT_LIST_DIR}/flatbuffer/includes/Notifications_generated.h
+        ${CMAKE_CURRENT_LIST_DIR}/flatbuffer/includes/WSAction_generated.h
+        ${CMAKE_CURRENT_LIST_DIR}/src/ServiceContextBase.cpp
         ${CMAKE_CURRENT_LIST_DIR}/src/ServiceContextBase.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/ServiceContextBase.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/Key.hh)

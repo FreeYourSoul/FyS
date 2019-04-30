@@ -21,40 +21,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#define FLATBUFFERS_DEBUG_VERIFICATION_FAILURE
-
 #include <catch.hpp>
 #include <zmq_addon.hpp>
 #include <flatbuffers/flatbuffers.h>
 #include <WSAction_generated.h>
+#include <Direction_generated.h>
 
-TEST_CASE("FlatBuffer test default") {
-//    flatbuffers::FlatBufferBuilder fbb;
-//    fys_fb::MoveT move;
-//    move.x = 1;
-//    move.y = 2;
-//    auto p = fys_fb::Move::Pack(fbb, &move);
-//    fbb.Finish(p);
-//
-//    SECTION("Verifier") {
-//        auto ok = flatbuffers::Verifier(fbb.GetBufferPointer(), fbb.GetSize());
-//        REQUIRE(fys_fb::VerifyMoveBuffer(ok));
-//    }
-//    uint8_t *binary = fbb.GetBufferPointer();
-//
-//    SECTION("Binary to FlatBuffer") {
-//        const fys_fb::Move *fromBinary = fys_fb::GetMove(binary);
-//        REQUIRE(fromBinary->x() == move.x);
-//        REQUIRE(fromBinary->y() == move.y);
-//
-//    } // End section : Binary to Flatbuffer
-//
-//
-//    SECTION("ZMQ Message to FlatBuffer") {
-//        zmq::message_t msg(binary, fbb.GetSize());
-//        const fys_fb::Move *fromBinary = fys_fb::GetMove(msg.data());
-//        REQUIRE(fromBinary->x() == move.x);
-//        REQUIRE(fromBinary->y() == move.y);
-//    }
+TEST_CASE("FlatBuffer WSAction Move") {
+    flatbuffers::FlatBufferBuilder fbb;
+    auto move = fys::fb::CreateMove(fbb, fys::fb::Direction::Direction_DownRight);
+    auto token = fbb.CreateString("totoken");
+    auto p = fys::fb::CreateWSAction(fbb, fys::fb::Action::Action_Move, move.Union(), token);
+    fys::fb::FinishWSActionBuffer(fbb, p);
+
+    SECTION("Verifier") {
+        auto ok = flatbuffers::Verifier(fbb.GetBufferPointer(), fbb.GetSize());
+        CHECK(fys::fb::VerifyWSActionBuffer(ok));
+    }
+    uint8_t *binary = fbb.GetBufferPointer();
+
+    SECTION("Binary to FlatBuffer") {
+        const fys::fb::WSAction *fromBinary = fys::fb::GetWSAction(binary);
+        REQUIRE(fromBinary->action_as_Move()->dir() == fys::fb::Direction::Direction_DownRight);
+
+    } // End section : Binary to Flatbuffer
+
+
+    SECTION("ZMQ Message to FlatBuffer") {
+        zmq::message_t msg(binary, fbb.GetSize());
+        const fys::fb::WSAction *fromBinary = fys::fb::GetWSAction(msg.data());
+        REQUIRE(fromBinary->action_as_Move()->dir() == fys::fb::Direction::Direction_DownRight);
+    }
 
 }
