@@ -25,11 +25,16 @@
 #ifndef FYS_MAP_HH
 #define FYS_MAP_HH
 
+#include <bitset>
 #include <optional>
 #include <vector>
 #include <string>
+#include <variant>
+#include <utility>
 
 namespace fys::ws {
+
+    class ConnectionHandler;
 
     class OverlapMaps {
         struct Overlap {
@@ -56,6 +61,29 @@ namespace fys::ws {
         std::vector<Overlap> _overlaps;
     };
 
+    using PlayerTrigger = std::pair<ConnectionHandler &, const std::string &>;
+    using NPCTrigger = std::pair<void *, const std::string &>;
+
+    enum class eElementType {
+        BLOCK,
+        TRIGGER,
+        NONE
+    };
+
+    class MapElement {
+
+    public:
+        bool canGoToLevel(std::size_t goLevel) {
+            return changeLevel.test(goLevel);
+        }
+
+    private:
+        std::bitset<4> level;
+        std::bitset<4> changeLevel; // set on stairs to pass from a level to another
+        eElementType type;
+        std::variant<PlayerTrigger, NPCTrigger> trigger;
+
+    };
 
     class Map {
 
@@ -68,6 +96,9 @@ namespace fys::ws {
 
     private:
         OverlapMaps _overlapMap;
+        double _boundaryX;
+        double _boundaryY;
+        std::vector<std::vector<MapElement>> _mapElems;
 
     };
 
