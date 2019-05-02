@@ -24,10 +24,44 @@
 
 #include "engine/Map.hh"
 
+// variant visitor trick
+template<class... Ts> struct overloaded : Ts... { using Ts::operator()...; };
+template<class... Ts> overloaded(Ts...) -> overloaded<Ts...>;
+
 namespace fys::ws {
 
-std::vector<std::string_view> Map::getOverlapingMap(double x, double y) {
+// Map
+bool Map::canMoveTo(double x, double y) const {
+    if (x < 0.0 || x > _boundaryX || y < 0.0 || y > _boundaryY)
+        return false;
+    return _mapElems[static_cast<unsigned long>(x)][static_cast<unsigned long>(y)].canGoThrough();
+}
+
+std::vector<std::string_view> Map::getOverlapingMap(double x, double y) const {
     return _overlapMap.getOverlaps(x, y);
+}
+
+
+// Map Element
+constexpr bool MapElement::canGoToLevel(std::size_t goLevel) const {
+    return _changeLevel.test(goLevel);
+}
+
+constexpr bool MapElement::canGoThrough() const {
+    return _type != eElementType::BLOCK;
+}
+
+constexpr void MapElement::executePotentialTrigger(const std::string &token) const {
+    if (_type == eElementType::TRIGGER) {
+        std::visit(overloaded {
+            [](ConnectionHandler &trigger, const std::string &token) { // Player Trigger
+
+            },
+            [](void *trigger, const std::string &id) { // NPC Trigger
+
+            }
+        }, _trigger, token);
+    }
 }
 
 }

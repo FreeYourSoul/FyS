@@ -38,7 +38,7 @@ namespace fys::ws {
 
     class OverlapMaps {
         struct Overlap {
-            bool operator()(double ix, double iy) {
+            constexpr bool operator()(double ix, double iy) const {
                 return check(ix, iy);
             }
             bool (*check)(double, double);
@@ -48,9 +48,9 @@ namespace fys::ws {
         };
 
     public:
-        std::vector<std::string_view> getOverlaps(double x, double y) {
+        std::vector<std::string_view> getOverlaps(double x, double y) const {
             std::vector<std::string_view> ret(4);
-            for (auto &over : _overlaps) {
+            for (const auto &over : _overlaps) {
                 if (over(x, y))
                     ret.push_back(over.code);
             }
@@ -61,9 +61,6 @@ namespace fys::ws {
         std::vector<Overlap> _overlaps;
     };
 
-    using PlayerTrigger = std::pair<ConnectionHandler &, const std::string &>;
-    using NPCTrigger = std::pair<void *, const std::string &>;
-
     enum class eElementType {
         BLOCK,
         TRIGGER,
@@ -73,15 +70,15 @@ namespace fys::ws {
     class MapElement {
 
     public:
-        bool canGoToLevel(std::size_t goLevel) {
-            return changeLevel.test(goLevel);
-        }
+        constexpr bool canGoToLevel(std::size_t goLevel) const;
+        constexpr bool canGoThrough() const;
+        constexpr void executePotentialTrigger(const std::string& token) const;
 
     private:
-        std::bitset<4> level;
-        std::bitset<4> changeLevel; // set on stairs to pass from a level to another
-        eElementType type;
-        std::variant<PlayerTrigger, NPCTrigger> trigger;
+        std::bitset<4> _level;
+        std::bitset<4> _changeLevel; // set on stairs to pass from a level to another
+        eElementType _type = eElementType::NONE;
+        std::variant<ConnectionHandler &, void *> _trigger;
 
     };
 
@@ -92,7 +89,8 @@ namespace fys::ws {
         Map(const Map&) = delete;
         Map &operator=(const Map&) = delete;
 
-        std::vector<std::string_view> getOverlapingMap(double x, double y);
+        std::vector<std::string_view> getOverlapingMap(double x, double y) const;
+        bool canMoveTo(double x, double y) const;
 
     private:
         OverlapMaps _overlapMap;
