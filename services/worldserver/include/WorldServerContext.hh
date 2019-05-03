@@ -46,15 +46,16 @@ namespace fys::ws {
     public:
         WorldServerContext(int ac, const char *const *av);
 
-        std::string toString() const noexcept;
-        std::string getDispatcherSubConnectionString() const;
-        std::string getDispatcherConnectionString() const;
+        [[nodiscard]] std::string toString() const noexcept;
+        [[nodiscard]] std::string getDispatcherSubConnectionString() const noexcept;
+        [[nodiscard]] std::string getDispatcherConnectionString() const noexcept;
 
     private:
         void initWsContextWithJson(nlohmann::json &json);
 
     private:
         std::string _serverCode;
+        ushort _dispatcherConnectPort;
         std::pair<double, double> _serverXBoundaries;
         std::pair<double, double> _serverYBoundaries;
         std::vector<ProximityServerAxis> _xAxisServerProximity;

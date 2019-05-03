@@ -72,7 +72,7 @@ class StartupDispatcherCtx {
             /**
              * @return debug string containing the context
              */
-            std::string toString() const noexcept;
+            [[nodiscard]] std::string toString() const noexcept;
 
         private:
             void initializeFromIni(const std::string &configFilePath);
