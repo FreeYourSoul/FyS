@@ -70,7 +70,7 @@ namespace fys::ws {
     class MapElement {
 
     public:
-        constexpr bool canGoToLevel(std::size_t goLevel) const;
+        bool canGoToLevel(std::size_t goLevel) const;
         constexpr bool canGoThrough() const;
         constexpr void executePotentialTrigger(const std::string& token) const;
 
@@ -78,7 +78,7 @@ namespace fys::ws {
         std::bitset<4> _level;
         std::bitset<4> _changeLevel; // set on stairs to pass from a level to another
         eElementType _type = eElementType::NONE;
-        std::variant<ConnectionHandler &, void *> _trigger;
+        std::variant<ConnectionHandler *, void *> _trigger;
 
     };
 

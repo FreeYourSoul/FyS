@@ -33,10 +33,36 @@ namespace fys::ws {
 
     WorldServerContext::WorldServerContext(int ac, const char *const *av) :
         common::ServiceContextBase(ac, av) {
-//        std::cout << _configFile;
-//        std::ifstream i(_configFile);
-//        json jsonConfig;
-//        i >> jsonConfig;
+        std::cout << "OPOPOPOP : " << _configFile << "\n";
+        std::ifstream i(_configFile);
+        json jsonConfig;
+        i >> jsonConfig;
+        initWsContextWithJson(jsonConfig);
+    }
+
+    void WorldServerContext::initWsContextWithJson(json &json) {
+        auto wsJson = json["worldServer"];
+        auto confJson = wsJson["conf"];
+        auto overlapsJson = confJson["overlapServer"];
+
+        _serverCode = wsJson["code"].get<std::string>();
+        _serverXBoundaries = std::make_pair(confJson["begin_x"].get<double>(), confJson["end_x"].get<double>());
+        _serverYBoundaries = std::make_pair(confJson["begin_y"].get<double>(), confJson["end_y"].get<double>());
+        for (auto &[key, value] : overlapsJson.items()) {
+            ProximityServerAxis proximityServer;
+            proximityServer.code = value["code"].get<std::string>();
+
+            if (auto proxiXJson = value["overlap_x"]; !proxiXJson.is_null()) {
+                proximityServer.superiorTo = proxiXJson["condition"].get<std::string>().find(">") != std::string::npos;
+                proximityServer.value = proxiXJson["value"].get<double>();
+                _xAxisServerProximity.push_back(proximityServer);
+            }
+            if (auto proxiYJson = value["overlap_y"]; !proxiYJson.is_null()) {
+                proximityServer.superiorTo = proxiYJson["condition"].get<std::string>().find(">") != std::string::npos;
+                proximityServer.value = proxiYJson["value"].get<double>();
+                _yAxisServerProximity.push_back(std::move(proximityServer));
+            }
+        }
     }
 
     std::string WorldServerContext::toString() const noexcept {

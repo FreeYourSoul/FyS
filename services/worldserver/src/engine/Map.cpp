@@ -24,7 +24,7 @@
 
 #include "engine/Map.hh"
 
-// variant visitor trick
+// Variant visitor trick
 template<class... Ts> struct overloaded : Ts... { using Ts::operator()...; };
 template<class... Ts> overloaded(Ts...) -> overloaded<Ts...>;
 
@@ -43,7 +43,7 @@ std::vector<std::string_view> Map::getOverlapingMap(double x, double y) const {
 
 
 // Map Element
-constexpr bool MapElement::canGoToLevel(std::size_t goLevel) const {
+bool MapElement::canGoToLevel(std::size_t goLevel) const {
     return _changeLevel.test(goLevel);
 }
 
@@ -53,14 +53,14 @@ constexpr bool MapElement::canGoThrough() const {
 
 constexpr void MapElement::executePotentialTrigger(const std::string &token) const {
     if (_type == eElementType::TRIGGER) {
-        std::visit(overloaded {
-            [](ConnectionHandler &trigger, const std::string &token) { // Player Trigger
-
-            },
-            [](void *trigger, const std::string &id) { // NPC Trigger
-
-            }
-        }, _trigger, token);
+//        std::visit(overloaded {
+//            [](ConnectionHandler &trigger, const std::string &token) { // Player Trigger
+//
+//            },
+//            [](void *trigger, const std::string &id) { // NPC Trigger
+//
+//            }
+//        }, _trigger, token);
     }
 }
 

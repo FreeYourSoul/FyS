@@ -26,6 +26,7 @@
 #define FYS_WORLDSERVERCONTEXT_HH
 
 #include <ServiceContextBase.hh>
+#include <nlohmann/json.hpp>
 
 namespace fys::ws {
 
@@ -46,13 +47,16 @@ namespace fys::ws {
         WorldServerContext(int ac, const char *const *av);
 
         std::string toString() const noexcept;
-
         std::string getDispatcherSubConnectionString() const;
         std::string getDispatcherConnectionString() const;
 
     private:
+        void initWsContextWithJson(nlohmann::json &json);
+
+    private:
         std::string _serverCode;
-        std::pair<double, double> _serverBoundaries;
+        std::pair<double, double> _serverXBoundaries;
+        std::pair<double, double> _serverYBoundaries;
         std::vector<ProximityServerAxis> _xAxisServerProximity;
         std::vector<ProximityServerAxis> _yAxisServerProximity;
 
