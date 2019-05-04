@@ -1,7 +1,6 @@
 {
   "worldServer": {
     "code": "WS00",
-    "port": 5000,
     "connection_warning_threshold": 1000,
 
     "conf": {

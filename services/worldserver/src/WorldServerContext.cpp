@@ -33,7 +33,6 @@ namespace fys::ws {
 
     WorldServerContext::WorldServerContext(int ac, const char *const *av) :
         common::ServiceContextBase(ac, av) {
-        std::cout << "OPOPOPOP : " << _configFile << "\n";
         std::ifstream i(_configFile);
         json jsonConfig;
         i >> jsonConfig;
@@ -49,19 +48,22 @@ namespace fys::ws {
         _serverXBoundaries = std::make_pair(confJson["begin_x"].get<double>(), confJson["end_x"].get<double>());
         _serverYBoundaries = std::make_pair(confJson["begin_y"].get<double>(), confJson["end_y"].get<double>());
         for (auto &[key, value] : overlapsJson.items()) {
-            ProximityServerAxis proximityServer;
+            ProximityServer proximityServer;
             proximityServer.code = value["code"].get<std::string>();
 
             if (auto proxiXJson = value["overlap_x"]; !proxiXJson.is_null()) {
-                proximityServer.superiorTo = proxiXJson["condition"].get<std::string>().find(">") != std::string::npos;
-                proxiXJson["value"].get_to(proximityServer.value);
-                _xAxisServerProximity.push_back(proximityServer);
+                proximityServer.xAxisRequirement = {
+                        proxiXJson["value"].get<double>(),
+                        proxiXJson["condition"].get<std::string>().find(">") != std::string::npos
+                };
             }
             if (auto proxiYJson = value["overlap_y"]; !proxiYJson.is_null()) {
-                proximityServer.superiorTo = proxiYJson["condition"].get<std::string>().find(">") != std::string::npos;
-                proxiYJson["value"].get_to(proximityServer.value);
-                _yAxisServerProximity.push_back(std::move(proximityServer));
+                proximityServer.yAxisRequirement = {
+                        proxiYJson["value"].get<double>(),
+                        proxiYJson["condition"].get<std::string>().find(">") != std::string::npos
+                };
             }
+            _axisServerProximity.emplace_back(std::move(proximityServer));
         }
     }
 
@@ -74,19 +76,17 @@ namespace fys::ws {
         str+= "[INFO] Dispatcher subscribing port: " + std::to_string(_dispatcherData.subscriberPort) + "\n";
         str+= "[INFO] Dispatcher connected port: " + std::to_string(_dispatcherData.port) + "\n";
         str+= "[INFO] Dispatcher connected host: " + _dispatcherData.address + "\n";
-        str+= "\n====================\n[INFO] XAxisProximity elements\n";
-        for (const auto &prox : _xAxisServerProximity) {
+        for (const auto &prox : _axisServerProximity) {
             str+= "[INFO] element:\n";
             str+= "code: " + prox.code + "\n";
-            str+= "value: " + std::to_string(prox.value) + "\n";
-            str+= "isSup: " + std::to_string(prox.superiorTo) + "\n";
-        }
-        str+= "\n====================\n[INFO] YAxisProximity elements\n";
-        for (const auto &prox : _yAxisServerProximity) {
-            str+= "[INFO] element:\n";
-            str+= "code: " + prox.code + "\n";
-            str+= "value: " + std::to_string(prox.value) + "\n";
-            str+= "isSup: " + std::to_string(prox.superiorTo) + "\n";
+            if (prox.xAxisRequirement) {
+                str+= "Xvalue: " + std::to_string(prox.xAxisRequirement->value) + "\n";
+                str+= "XisSup: " + std::to_string(prox.xAxisRequirement->superiorTo) + "\n";
+            }
+            if (prox.yAxisRequirement) {
+                str+= "Yvalue: " + std::to_string(prox.yAxisRequirement->value) + "\n";
+                str+= "YisSup: " + std::to_string(prox.yAxisRequirement->superiorTo) + "\n";
+            }
         }
         str+= "\n*************************\n";
         return str;

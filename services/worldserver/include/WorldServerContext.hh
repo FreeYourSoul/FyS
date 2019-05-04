@@ -30,15 +30,25 @@
 
 namespace fys::ws {
 
-    struct ProximityServerAxis {
+    struct ProximityServer {
+        struct ProximityServerAxis {
+            double value;
+            bool superiorTo;
+        };
 
         constexpr bool isAtProximity(double axis) const noexcept {
-            return (superiorTo) ? (axis > value) : (axis < value);
+            bool xReq = xAxisRequirement.has_value();
+            bool yReq = yAxisRequirement.has_value();
+            if (xReq)
+                xReq = (xAxisRequirement->superiorTo) ? (axis > xAxisRequirement->value) : (axis < xAxisRequirement->value);
+            if (yReq)
+                yReq = (yAxisRequirement->superiorTo) ? (axis > yAxisRequirement->value) : (axis < yAxisRequirement->value);
+            return xReq && yReq;
         }
 
         std::string code;
-        double value;
-        bool superiorTo;
+        std::optional<ProximityServerAxis> xAxisRequirement = std::nullopt;
+        std::optional<ProximityServerAxis> yAxisRequirement = std::nullopt;
     };
 
     class WorldServerContext : fys::common::ServiceContextBase {
@@ -55,11 +65,9 @@ namespace fys::ws {
 
     private:
         std::string _serverCode;
-        ushort _dispatcherConnectPort;
         std::pair<double, double> _serverXBoundaries;
         std::pair<double, double> _serverYBoundaries;
-        std::vector<ProximityServerAxis> _xAxisServerProximity;
-        std::vector<ProximityServerAxis> _yAxisServerProximity;
+        std::vector<ProximityServer> _axisServerProximity;
 
     };
 
