@@ -31,11 +31,7 @@
 #include <vector>
 #include <variant>
 #include <utility>
-#include <tmxlite/Object.hpp>
-
-namespace tmx {
-    class Object;
-}
+#include <tmxlite/Types.hpp>
 
 namespace fys::map::algo {
     /**
@@ -113,8 +109,8 @@ namespace fys::ws {
         void setChangeLevel(std::size_t level) { _changeLevel.set(level); }
         constexpr void setType(eElementType type) { _type = type; }
 
-        void addCollision(tmx::Object object) {
-            _collisions.push_back(std::move(object));
+        void addCollision(const tmx::FloatRect &object) {
+            _collisions.emplace_back(object);
         }
 
         template <typename T>
@@ -130,7 +126,7 @@ namespace fys::ws {
         std::bitset<4> _changeLevel; // set on stairs to pass from a level to another
         eElementType _type = eElementType::NONE;
         std::variant<ConnectionHandler *, void *> _trigger;
-        std::vector<tmx::Object> _collisions;
+        std::vector<tmx::FloatRect> _collisions;
 
     };
 

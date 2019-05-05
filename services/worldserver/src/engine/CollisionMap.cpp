@@ -67,7 +67,7 @@ namespace fys::ws {
                                     x < getY(object.getAABB().left + object.getAABB().width, map.getTileSize().x); ++x)
                                 {
                                     _mapElems[y][x].setType(eElementType::BLOCK);
-                                    _mapElems[y][x].addCollision(object);
+                                    _mapElems[y][x].addCollision(object.getAABB());
                                 }
                             }
                         }
