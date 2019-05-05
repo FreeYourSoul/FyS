@@ -24,6 +24,7 @@
 #include <spdlog/spdlog.h>
 #include <tmxlite/Map.hpp>
 #include <tmxlite/Layer.hpp>
+#include <tmxlite/TileLayer.hpp>
 #include <WorldServerContext.hh>
 #include "engine/CollisionMap.hh"
 
@@ -45,19 +46,31 @@ namespace fys::ws {
         if (map.load(tmxMapPath)) {
             const auto& layers = map.getLayers();
 
+            _mapElems.reserve(unsigned(map.getBounds().height));
+            for (auto &elemOnY : _mapElems)
+                elemOnY.reserve(unsigned(map.getBounds().width));
+
             for (const auto& layer : layers) {
                 if (layer->getType() == tmx::Layer::Type::Object) {
                     const auto& objectLayer = layer->getLayerAs<tmx::ObjectGroup>();
-                    const auto& objects = objectLayer.getObjects();
-                    for(const auto& object : objects)
-                    {
-                        // Collision pleasureness
-                        //
+
+                    if (map::algo::isCollisionLayer(objectLayer)) {
+                        const auto& objects = objectLayer.getObjects();
+                        for (const auto& object : objects) {
+                            for (auto x = unsigned(object.getAABB().top); x < unsigned(object.getAABB().top + object.getAABB().height); ++x) {
+                                for (auto y = unsigned(object.getAABB().top); y < unsigned(object.getAABB().left + object.getAABB().width); ++y) {
+                                    _mapElems[x][y].setType(eElementType::BLOCK);
+                                    _mapElems[x][y].addCollision(object);
+                                }
+                            }
+                        }
                     }
                 }
-                else if(layer->getType() == tmx::Layer::Type::Tile) {
-//                    const auto& tileLayer = layer->getLayerAs<tmx::TileLayer>();
-                    //read out tile layer properties etc...
+                else if (layer->getType() == tmx::Layer::Type::Tile) {
+                    if (const auto& tileLayer = layer->getLayerAs<tmx::TileLayer>();
+                        map::algo::isNotCosmeticLayer(tileLayer)) {
+
+                    }
                 }
             }
         } else {
@@ -68,14 +81,19 @@ namespace fys::ws {
     bool CollisionMap::canMoveTo(double x, double y, std::size_t level) const noexcept {
         if (x < _boundaryX.first || x > _boundaryX.second || y < _boundaryY.first || y > _boundaryY.second)
             return false;
-        return _mapElems[static_cast<unsigned long>(x)][static_cast<unsigned long>(y)].canGoThrough(level);
+        return _mapElems[static_cast<unsigned long>(x)][static_cast<unsigned long>(y)].canGoThrough(x, y, level);
     }
 
     // CollisionMap Element
-    bool MapElement::canGoThrough(std::size_t level) const noexcept {
+    bool MapElement::canGoThrough(double x, double y, std::size_t level) const noexcept {
 //        bool canGoThrough = canGoToLevel(level);
 //        if (canGoThrough && _type == eElementType::BLOCK) {
-//            Check deeper
+//            for (const auto &col : _collisions) {
+//              const auto &aabb = col.getAABB();
+//              if (x >= aabb.left && x <= aabb.left + aabb.width &&
+//                  y >= aabb.top && y <= aabb.top + aabb.height)
+//                 return false;
+//            }
 //        }
 //        return canGoThrough;
         return canGoToLevel(level) && _type != eElementType::BLOCK;

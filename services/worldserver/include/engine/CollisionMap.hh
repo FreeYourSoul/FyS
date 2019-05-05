@@ -25,11 +25,33 @@
 #ifndef FYS_COLLISIONMAP_HH
 #define FYS_COLLISIONMAP_HH
 
+#include <algorithm>
 #include <bitset>
 #include <optional>
 #include <vector>
 #include <variant>
 #include <utility>
+#include <tmxlite/Object.hpp>
+
+namespace tmx {
+    class Object;
+}
+
+namespace fys::map::algo {
+    template <typename TmxLayer>
+    bool isNotCosmeticLayer(TmxLayer && layer) {
+        return std::none_of(layer.getProperties().begin(), layer.getProperties().end(), [](const auto &prop){
+            return prop.getName().find("cosmetic") != std::string::npos && prop.getBoolValue();
+        });
+    }
+
+    template <typename TmxLayer>
+    bool isCollisionLayer(TmxLayer && layer) {
+        return std::any_of(layer.getProperties().begin(), layer.getProperties().end(), [](const auto &prop){
+            return prop.getName().find("collision") != std::string::npos && prop.getBoolValue();
+        });
+    }
+}
 
 namespace fys::ws {
 
@@ -68,7 +90,20 @@ namespace fys::ws {
 
     public:
         constexpr void executePotentialTrigger(const std::string& token) const;
-        inline bool canGoThrough(std::size_t level) const noexcept;
+        inline bool canGoThrough(double x, double y, std::size_t level) const noexcept;
+
+        void setLevel(std::size_t level) { _level.set(level); }
+        void setChangeLevel(std::size_t level) { _changeLevel.set(level); }
+        constexpr void setType(eElementType type) { _type = type; }
+
+        void addCollision(tmx::Object object) {
+            _collisions.push_back(std::move(object));
+        }
+
+        template <typename T>
+        constexpr void setTrigger(T && trigger) {
+            _trigger = std::forward(trigger);
+        }
 
     private:
         inline bool canGoToLevel(std::size_t goLevel) const noexcept;
@@ -78,6 +113,7 @@ namespace fys::ws {
         std::bitset<4> _changeLevel; // set on stairs to pass from a level to another
         eElementType _type = eElementType::NONE;
         std::variant<ConnectionHandler *, void *> _trigger;
+        std::vector<tmx::Object> _collisions;
 
     };
 
