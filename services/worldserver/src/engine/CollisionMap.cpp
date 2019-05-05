@@ -26,6 +26,7 @@
 #include <tmxlite/Layer.hpp>
 #include <tmxlite/TileLayer.hpp>
 #include <WorldServerContext.hh>
+#include <iostream>
 #include "engine/CollisionMap.hh"
 
 // Variant visitor trick
@@ -39,6 +40,7 @@ namespace fys::ws {
         _boundaryX(ctx.getServerXBoundaries()),
         _boundaryY(ctx.getServerYBoundaries()),
         _serverProximity(ctx.getServerProximity()) {
+        buildMapFromTmx(ctx.getTMXMapPath());
     }
 
     void CollisionMap::buildMapFromTmx(const std::string &tmxMapPath) {
@@ -46,21 +48,26 @@ namespace fys::ws {
         if (map.load(tmxMapPath)) {
             const auto& layers = map.getLayers();
 
-            _mapElems.reserve(unsigned(map.getBounds().height));
+            _mapElems.resize(map.getTileCount().y);
             for (auto &elemOnY : _mapElems)
-                elemOnY.reserve(unsigned(map.getBounds().width));
+                elemOnY.resize(map.getTileCount().x);
 
             for (const auto& layer : layers) {
+                std::cout << "layer " << layer->getName() << "\n";
                 if (layer->getType() == tmx::Layer::Type::Object) {
                     const auto& objectLayer = layer->getLayerAs<tmx::ObjectGroup>();
 
                     if (map::algo::isCollisionLayer(objectLayer)) {
                         const auto& objects = objectLayer.getObjects();
                         for (const auto& object : objects) {
-                            for (auto x = unsigned(object.getAABB().top); x < unsigned(object.getAABB().top + object.getAABB().height); ++x) {
-                                for (auto y = unsigned(object.getAABB().top); y < unsigned(object.getAABB().left + object.getAABB().width); ++y) {
-                                    _mapElems[x][y].setType(eElementType::BLOCK);
-                                    _mapElems[x][y].addCollision(object);
+                            for (auto y = getX(object.getAABB().top, map.getTileSize().y);
+                                y < getX(object.getAABB().top + object.getAABB().height, map.getTileSize().y); ++y)
+                            {
+                                for (auto x = getY(object.getAABB().left, map.getTileSize().x);
+                                    x < getY(object.getAABB().left + object.getAABB().width, map.getTileSize().x); ++x)
+                                {
+                                    _mapElems[y][x].setType(eElementType::BLOCK);
+                                    _mapElems[y][x].addCollision(object);
                                 }
                             }
                         }
@@ -114,6 +121,16 @@ namespace fys::ws {
     //            }
     //        }, _trigger, token);
         }
+    }
+
+    unsigned getX(double x, unsigned tileSizeX)  {
+        static const unsigned gTileSizeX = tileSizeX;
+        return static_cast<unsigned>(x) / gTileSizeX;
+    }
+
+    unsigned getY(double y, unsigned tileSizeY)  {
+        static const unsigned gTileSizeY = tileSizeY;
+        return static_cast<unsigned>(y) / gTileSizeY;
     }
 
 }

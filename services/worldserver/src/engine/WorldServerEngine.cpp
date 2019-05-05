@@ -22,9 +22,16 @@
 // SOFTWARE.
 
 
+#include <memory>
+#include <engine/CollisionMap.hh>
+#include <WorldServerContext.hh>
 #include "engine/WorldServerEngine.hh"
 
 namespace fys::ws {
 
+    WorldServerEngine::WorldServerEngine(const fys::ws::WorldServerContext &ctx) :
+        _map(std::make_unique<fys::ws::CollisionMap>(ctx)) {
+
+    }
 
 }

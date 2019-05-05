@@ -24,13 +24,13 @@
 #include <spdlog/spdlog.h>
 #include <zmq_addon.hpp>
 #include <flatbuffers/flatbuffers.h>
-//#include <Move_generated.h>
 #include "WorldServerService.hh"
 
 namespace fys::ws {
 
-WorldServerService::WorldServerService(const WorldServerContext &ctx) noexcept {
+WorldServerService::WorldServerService(const WorldServerContext &ctx) : _worldServer(ctx) {
     _connectionHandler.setupConnectionManager(ctx);
+
 }
 
 void WorldServerService::runServerLoop() noexcept {

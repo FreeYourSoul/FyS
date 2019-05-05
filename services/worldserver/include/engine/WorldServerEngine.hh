@@ -27,20 +27,21 @@
 
 #include <memory>
 #include <engine/PlayersData.hh>
-#include <engine/CollisionMap.hh>
-
-// forward declaration
 
 namespace fys::ws {
+
+    // forward declaration
+    class WorldServerContext;
+    class CollisionMap;
 
     class WorldServerEngine {
 
     public:
-
+        WorldServerEngine(const WorldServerContext& ctx);
 
     private:
-        std::unique_ptr<PlayersData> _data;
         std::unique_ptr<CollisionMap> _map;
+        PlayersData _data;
 
     };
 

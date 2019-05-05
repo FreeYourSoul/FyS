@@ -45,6 +45,7 @@ namespace fys::ws {
         auto overlapsJson = confJson["overlapServer"];
 
         wsJson["code"].get_to(_serverCode);
+        wsJson["TMX_Map"].get_to(_tmxMapPath);
         _serverXBoundaries = std::make_pair(confJson["begin_x"].get<double>(), confJson["end_x"].get<double>());
         _serverYBoundaries = std::make_pair(confJson["begin_y"].get<double>(), confJson["end_y"].get<double>());
         for (auto &[key, value] : overlapsJson.items()) {
@@ -73,6 +74,7 @@ namespace fys::ws {
         str+= "[INFO] Service " + _name + " context VERSION: " + _version + "\n";
         str+= "[INFO] Config file used: " + _configFile + "\n\n";
         str+= "[INFO] World Server code: " + _serverCode + "\n";
+        str+= "[INFO] TMX Map path: " + _tmxMapPath + "\n";
         str+= "[INFO] Dispatcher subscribing port: " + std::to_string(_dispatcherData.subscriberPort) + "\n";
         str+= "[INFO] Dispatcher connected port: " + std::to_string(_dispatcherData.port) + "\n";
         str+= "[INFO] Dispatcher connected host: " + _dispatcherData.address + "\n";
@@ -92,6 +94,10 @@ namespace fys::ws {
         return str;
     }
 
+    const std::string &WorldServerContext::getTMXMapPath() const noexcept {
+        return _tmxMapPath;
+    }
+
     const std::vector<ProximityServer> &WorldServerContext::getServerProximity() const noexcept {
         return _serverProximity;
     }
@@ -101,7 +107,7 @@ namespace fys::ws {
     }
 
     const std::pair<double, double> &WorldServerContext::getServerYBoundaries() const noexcept {
-        return _serverXBoundaries;
+        return _serverYBoundaries;
     }
 
     std::string WorldServerContext::getDispatcherConnectionString() const noexcept {

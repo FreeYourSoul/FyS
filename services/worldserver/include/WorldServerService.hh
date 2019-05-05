@@ -32,7 +32,7 @@ namespace fys::ws {
     class WorldServerService {
 
     public:
-        explicit WorldServerService(const WorldServerContext &ctx) noexcept;
+        explicit WorldServerService(const WorldServerContext &ctx);
         void runServerLoop() noexcept;
 
     private:
@@ -40,8 +40,8 @@ namespace fys::ws {
 //        constexpr bool filterInvalidMsg() const;
 
     private:
-        fys::ws::ConnectionHandler _connectionHandler;
         fys::ws::WorldServerEngine _worldServer;
+        fys::ws::ConnectionHandler _connectionHandler;
     };
 
 }
