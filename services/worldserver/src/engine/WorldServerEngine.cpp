@@ -23,3 +23,8 @@
 
 
 #include "engine/WorldServerEngine.hh"
+
+namespace fys::ws {
+
+
+}

@@ -27,29 +27,9 @@
 
 #include <ServiceContextBase.hh>
 #include <nlohmann/json.hpp>
+#include <engine/CollisionMap.hh>
 
 namespace fys::ws {
-
-    struct ProximityServer {
-        struct ProximityServerAxis {
-            double value;
-            bool superiorTo;
-        };
-
-        constexpr bool isAtProximity(double axis) const noexcept {
-            bool xReq = xAxisRequirement.has_value();
-            bool yReq = yAxisRequirement.has_value();
-            if (xReq)
-                xReq = (xAxisRequirement->superiorTo) ? (axis > xAxisRequirement->value) : (axis < xAxisRequirement->value);
-            if (yReq)
-                yReq = (yAxisRequirement->superiorTo) ? (axis > yAxisRequirement->value) : (axis < yAxisRequirement->value);
-            return xReq && yReq;
-        }
-
-        std::string code;
-        std::optional<ProximityServerAxis> xAxisRequirement = std::nullopt;
-        std::optional<ProximityServerAxis> yAxisRequirement = std::nullopt;
-    };
 
     class WorldServerContext : fys::common::ServiceContextBase {
 
@@ -59,6 +39,9 @@ namespace fys::ws {
         [[nodiscard]] std::string toString() const noexcept;
         [[nodiscard]] std::string getDispatcherSubConnectionString() const noexcept;
         [[nodiscard]] std::string getDispatcherConnectionString() const noexcept;
+        [[nodiscard]] const std::pair<double, double> &getServerXBoundaries() const noexcept;
+        [[nodiscard]] const std::pair<double, double> &getServerYBoundaries() const noexcept;
+        [[nodiscard]] const std::vector<ProximityServer> &getServerProximity() const noexcept;
 
     private:
         void initWsContextWithJson(nlohmann::json &json);
@@ -67,7 +50,7 @@ namespace fys::ws {
         std::string _serverCode;
         std::pair<double, double> _serverXBoundaries;
         std::pair<double, double> _serverYBoundaries;
-        std::vector<ProximityServer> _axisServerProximity;
+        std::vector<ProximityServer> _serverProximity;
 
     };
 

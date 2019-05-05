@@ -45,7 +45,7 @@ namespace fys::ws {
 
     class PlayersData {
     public:
-        PlayersData();
+        explicit PlayersData(uint maxConnection = 1000) noexcept;
 
     private:
         std::vector<PlayerPosition> _positions;

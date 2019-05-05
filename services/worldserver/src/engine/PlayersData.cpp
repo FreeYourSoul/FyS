@@ -24,11 +24,10 @@
 
 #include "engine/PlayersData.hh"
 
-constexpr static uint MAXIMUM_CONNECTED_PLAYERS = 1000;
-
 namespace fys::ws {
 
-PlayersData::PlayersData() : _positions(MAXIMUM_CONNECTED_PLAYERS), _status(MAXIMUM_CONNECTED_PLAYERS) {
+PlayersData::PlayersData(uint maxConnection) noexcept : _positions(maxConnection), _status(maxConnection) {
+
 }
 
 }

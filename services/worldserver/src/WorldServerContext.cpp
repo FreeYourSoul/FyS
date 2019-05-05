@@ -63,7 +63,7 @@ namespace fys::ws {
                         proxiYJson["condition"].get<std::string>().find(">") != std::string::npos
                 };
             }
-            _axisServerProximity.emplace_back(std::move(proximityServer));
+            _serverProximity.emplace_back(std::move(proximityServer));
         }
     }
 
@@ -76,7 +76,7 @@ namespace fys::ws {
         str+= "[INFO] Dispatcher subscribing port: " + std::to_string(_dispatcherData.subscriberPort) + "\n";
         str+= "[INFO] Dispatcher connected port: " + std::to_string(_dispatcherData.port) + "\n";
         str+= "[INFO] Dispatcher connected host: " + _dispatcherData.address + "\n";
-        for (const auto &prox : _axisServerProximity) {
+        for (const auto &prox : _serverProximity) {
             str+= "[INFO] element:\n";
             str+= "code: " + prox.code + "\n";
             if (prox.xAxisRequirement) {
@@ -90,6 +90,18 @@ namespace fys::ws {
         }
         str+= "\n*************************\n";
         return str;
+    }
+
+    const std::vector<ProximityServer> &WorldServerContext::getServerProximity() const noexcept {
+        return _serverProximity;
+    }
+
+    const std::pair<double, double> &WorldServerContext::getServerXBoundaries() const noexcept {
+        return _serverXBoundaries;
+    }
+
+    const std::pair<double, double> &WorldServerContext::getServerYBoundaries() const noexcept {
+        return _serverXBoundaries;
     }
 
     std::string WorldServerContext::getDispatcherConnectionString() const noexcept {

@@ -27,8 +27,8 @@ add_executable(worldserver_service ${COMMON_SRCS}
         ${CMAKE_CURRENT_LIST_DIR}/include/engine/WorldServerEngine.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/engine/PlayersData.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/engine/PlayersData.hh
-        ${CMAKE_CURRENT_LIST_DIR}/src/engine/Map.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/include/engine/Map.hh
+        ${CMAKE_CURRENT_LIST_DIR}/src/engine/CollisionMap.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/engine/CollisionMap.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/ConnectionHandler.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/ConnectionHandler.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/WorldServerService.cpp

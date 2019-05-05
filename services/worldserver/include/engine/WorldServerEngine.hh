@@ -27,7 +27,7 @@
 
 #include <memory>
 #include <engine/PlayersData.hh>
-#include <engine/Map.hh>
+#include <engine/CollisionMap.hh>
 
 // forward declaration
 
@@ -40,7 +40,7 @@ namespace fys::ws {
 
     private:
         std::unique_ptr<PlayersData> _data;
-        std::unique_ptr<Map> _map;
+        std::unique_ptr<CollisionMap> _map;
 
     };
 

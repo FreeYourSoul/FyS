@@ -22,43 +22,40 @@
 // SOFTWARE.
 
 
-#ifndef FYS_MAP_HH
-#define FYS_MAP_HH
+#ifndef FYS_COLLISIONMAP_HH
+#define FYS_COLLISIONMAP_HH
 
 #include <bitset>
 #include <optional>
 #include <vector>
-#include <string>
 #include <variant>
 #include <utility>
 
 namespace fys::ws {
 
+    class WorldServerContext;
     class ConnectionHandler;
 
-    class OverlapMaps {
-        struct Overlap {
-            constexpr bool operator()(double ix, double iy) const {
-                return check(ix, iy);
-            }
-            bool (*check)(double, double);
-            double x;
-            double y;
-            std::string code;
+    class ProximityServer {
+        struct ProximityServerAxis {
+            double value;
+            bool superiorTo;
         };
 
     public:
-        std::vector<std::string_view> getOverlaps(double x, double y) const {
-            std::vector<std::string_view> ret(4);
-            for (const auto &over : _overlaps) {
-                if (over(x, y))
-                    ret.push_back(over.code);
-            }
-            return ret;
+        constexpr bool isAtProximity(double axis) const noexcept {
+            bool xReq = xAxisRequirement.has_value();
+            bool yReq = yAxisRequirement.has_value();
+            if (xReq)
+                xReq = (xAxisRequirement->superiorTo) ? (axis > xAxisRequirement->value) : (axis < xAxisRequirement->value);
+            if (yReq)
+                yReq = (yAxisRequirement->superiorTo) ? (axis > yAxisRequirement->value) : (axis < yAxisRequirement->value);
+            return xReq && yReq;
         }
 
-    private:
-        std::vector<Overlap> _overlaps;
+        std::string code;
+        std::optional<ProximityServerAxis> xAxisRequirement = std::nullopt;
+        std::optional<ProximityServerAxis> yAxisRequirement = std::nullopt;
     };
 
     enum class eElementType {
@@ -70,9 +67,11 @@ namespace fys::ws {
     class MapElement {
 
     public:
-        bool canGoToLevel(std::size_t goLevel) const;
-        constexpr bool canGoThrough() const;
         constexpr void executePotentialTrigger(const std::string& token) const;
+        inline bool canGoThrough(std::size_t level) const noexcept;
+
+    private:
+        inline bool canGoToLevel(std::size_t goLevel) const noexcept;
 
     private:
         std::bitset<4> _level;
@@ -82,24 +81,25 @@ namespace fys::ws {
 
     };
 
-    class Map {
+    class CollisionMap {
 
     public:
-        Map(Map &&) noexcept = default;
-        Map(const Map&) = delete;
-        Map &operator=(const Map&) = delete;
+        CollisionMap(const WorldServerContext& ctx);
+        CollisionMap(CollisionMap &&) noexcept = default;
+        CollisionMap(const CollisionMap&) = delete;
+        CollisionMap &operator=(const CollisionMap&) = delete;
 
-        std::vector<std::string_view> getOverlapingMap(double x, double y) const;
-        bool canMoveTo(double x, double y) const;
+        void buildMapFromTmx(const std::string &tmxMapPath);
+        bool canMoveTo(double x, double y, std::size_t level) const noexcept;
 
     private:
-        OverlapMaps _overlapMap;
-        double _boundaryX;
-        double _boundaryY;
+        std::pair<double, double> _boundaryX;
+        std::pair<double, double> _boundaryY;
+        std::vector<ProximityServer> _serverProximity;
         std::vector<std::vector<MapElement>> _mapElems;
 
     };
 
 }
 
-#endif //FYS_MAP_HH
+#endif //FYS_COLLISIONMAP_HH
