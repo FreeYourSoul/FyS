@@ -51,6 +51,8 @@ bool DispatcherConnectionManager::sendMessageToDispatcherSocket(zmq::multipart_t
 }
 
 bool DispatcherConnectionManager::sendMessageToClusterPubSocket(zmq::multipart_t &&msg) noexcept {
+    if (_clusterConnection.closed)
+        return false;
     return msg.send(_clusterConnection.pubSocket);
 }
 

@@ -33,9 +33,9 @@ ConnectionHandler::ConnectionHandler(int threadNumber) noexcept :
 }
 
 void ConnectionHandler::setupConnectionManager(const fys::ws::WorldServerContext &ctx) noexcept {
-    _dispatcherConnection.connect(ctx.getDispatcherConnectionString());
-    _subSocket.connect(ctx.getDispatcherSubConnectionString());
     _subSocket.setsockopt(ZMQ_SUBSCRIBE, ctx.getServerCode().c_str(), ctx.getServerCode().size());
+    _subSocket.connect(ctx.getDispatcherSubConnectionString());
+    _dispatcherConnection.connect(ctx.getDispatcherConnectionString());
 }
 
 void ConnectionHandler::sendMessageToDispatcher(zmq::multipart_t &&msg) noexcept {

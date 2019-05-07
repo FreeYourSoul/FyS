@@ -45,7 +45,7 @@ namespace fys::ws {
             zmq::pollitem_t items[] = {
                     { _subSocket, 0, ZMQ_POLLIN, 0 }
             };
-            zmq::poll(&items[0], 1, -1);
+            zmq::poll(&items[0], 1);
             if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
                 zmq::multipart_t msg;
                 if (!msg.recv(_subSocket))

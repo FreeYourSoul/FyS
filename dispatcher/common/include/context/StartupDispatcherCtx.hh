@@ -61,6 +61,7 @@ class StartupDispatcherCtx {
         public:
             StartupDispatcherCtx(int ac, const char *const *av) noexcept;
 
+            [[nodiscard]] constexpr bool isLoadBalancingEnabled() const noexcept { return _isLoadBalancing; }
             [[nodiscard]] constexpr bool isClusterAware() const noexcept { return _isClusterAware; }
             [[nodiscard]] constexpr ushort getBindingPort() const noexcept { return _bindingPort; }
             [[nodiscard]] constexpr ushort getDispatchingPort() const noexcept { return _dispatchingPort; };

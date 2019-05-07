@@ -25,13 +25,11 @@
 #define FYS_DISPATCHER_HH_
 
 #include <DispatcherConnectionManager.hh>
+#include <StartupDispatcherCtx.hh>
 
 // forward declarations
 namespace zmq {
     class multipart_t;
-}
-namespace fys {
-    class StartupDispatcherCtx;
 }
 
 namespace fys
@@ -63,11 +61,12 @@ namespace fys
      *  processClusterMessage() : Used to dispatch message from the subscriber socket (in case of ClusterAware)
      *
      */
+
     template <typename DispatcherHandler = DispatcherHandlerBase>
     class Dispatcher {
     public:
         explicit Dispatcher(fys::StartupDispatcherCtx &&ctx)  :
-            _connectionManager(1) {
+            _connectionManager(1, ctx.isLoadBalancingEnabled()) {
             _connectionManager.setupConnectionManager(ctx);
         }
 
@@ -85,11 +84,10 @@ namespace fys
                     });
                 }
             }
-
         }
 
     private:
         fys::network::DispatcherConnectionManager _connectionManager;
-    };
+};
 } 
 #endif // !FYS_DISPATCHER_HH_
