@@ -9,7 +9,6 @@ int main(int ac, char **av) {
         fys::ws::WorldServerCtx ctx(ac, av);
         spdlog::get("c")->info(ctx.toString());
         fys::Dispatcher dispatcher(std::move(ctx));
-
         dispatcher.runDispatching();
     }
     catch (const std::exception &e) {

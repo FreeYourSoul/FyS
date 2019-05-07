@@ -34,7 +34,7 @@ namespace fys {
         if (!name.getValue().empty())
             _name = name.getValue();
         _isClusterAware = !aware.getValue() ? false : _isClusterAware;
-        _isLoadBalancing = loadBalance.getValue();
+        _isLoadBalancing = !loadBalance.getValue() ? false : _isLoadBalancing;
         _verbose = verbose.getValue();
     }
     catch (std::exception &e) {

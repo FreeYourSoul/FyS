@@ -53,7 +53,6 @@ namespace fys::ws {
                 elemOnY.resize(map.getTileCount().x);
 
             for (const auto& layer : layers) {
-                std::cout << "layer " << layer->getName() << "\n";
                 if (layer->getType() == tmx::Layer::Type::Object) {
                     const auto& objectLayer = layer->getLayerAs<tmx::ObjectGroup>();
 

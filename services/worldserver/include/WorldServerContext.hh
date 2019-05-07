@@ -39,6 +39,7 @@ namespace fys::ws {
         [[nodiscard]] std::string toString() const noexcept;
         [[nodiscard]] std::string getDispatcherSubConnectionString() const noexcept;
         [[nodiscard]] std::string getDispatcherConnectionString() const noexcept;
+        [[nodiscard]] const std::string &getServerCode() const noexcept;
         [[nodiscard]] const std::string &getTMXMapPath() const noexcept;
         [[nodiscard]] const std::pair<double, double> &getServerXBoundaries() const noexcept;
         [[nodiscard]] const std::pair<double, double> &getServerYBoundaries() const noexcept;

@@ -46,7 +46,7 @@ void WorldServerService::runServerLoop() noexcept {
 }
 
 void WorldServerService::processMessage(zmq::multipart_t &&msg) noexcept {
-
+    spdlog::get("c")->info("process message {}", msg.str());
 }
 
 }

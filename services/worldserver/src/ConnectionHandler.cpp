@@ -21,7 +21,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
 #include "ConnectionHandler.hh"
 
 namespace fys::ws {
@@ -34,8 +33,9 @@ ConnectionHandler::ConnectionHandler(int threadNumber) noexcept :
 }
 
 void ConnectionHandler::setupConnectionManager(const fys::ws::WorldServerContext &ctx) noexcept {
-    _subSocket.connect(ctx.getDispatcherSubConnectionString());
     _dispatcherConnection.connect(ctx.getDispatcherConnectionString());
+    _subSocket.connect(ctx.getDispatcherSubConnectionString());
+    _subSocket.setsockopt(ZMQ_SUBSCRIBE, ctx.getServerCode().c_str(), ctx.getServerCode().size());
 }
 
 void ConnectionHandler::sendMessageToDispatcher(zmq::multipart_t &&msg) noexcept {

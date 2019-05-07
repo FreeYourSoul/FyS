@@ -36,11 +36,11 @@ namespace fys::ws {
     public:
         explicit ConnectionHandler(int threadNumber = 1) noexcept;
 
-        void setupConnectionManager(const fys::ws::WorldServerContext& ctx) noexcept;
-        void sendMessageToDispatcher(zmq::multipart_t &&msg) noexcept;
+        void setupConnectionManager(const fys::ws::WorldServerContext &ctx) noexcept;
+        void sendMessageToDispatcher(zmq::multipart_t && msg) noexcept;
 
         template <typename Handler>
-        void pollAndProcessSubMessage(Handler handler) noexcept {
+        void pollAndProcessSubMessage(Handler && handler) noexcept {
             //  Initialize poll set
             zmq::pollitem_t items[] = {
                     { _subSocket, 0, ZMQ_POLLIN, 0 }
@@ -51,7 +51,7 @@ namespace fys::ws {
                 if (!msg.recv(_subSocket))
                     spdlog::get("c")->error("Error while reading on the listener socket");
                 else
-                    handler(std::move(msg));
+                    std::forward<Handler>(handler)(std::move(msg));
             }
         }
 

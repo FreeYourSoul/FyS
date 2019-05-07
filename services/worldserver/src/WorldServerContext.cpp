@@ -78,6 +78,9 @@ namespace fys::ws {
         str+= "[INFO] Dispatcher subscribing port: " + std::to_string(_dispatcherData.subscriberPort) + "\n";
         str+= "[INFO] Dispatcher connected port: " + std::to_string(_dispatcherData.port) + "\n";
         str+= "[INFO] Dispatcher connected host: " + _dispatcherData.address + "\n";
+        str+= "[INFO] Dispatcher Subscriber connection string: " + getDispatcherSubConnectionString() + "\n";
+        str+= "[INFO] Dispatcher connection string: " + getDispatcherConnectionString() + "\n";
+
         for (const auto &prox : _serverProximity) {
             str+= "[INFO] element:\n";
             str+= "code: " + prox.code + "\n";
@@ -92,6 +95,10 @@ namespace fys::ws {
         }
         str+= "\n*************************\n";
         return str;
+    }
+
+    const std::string& WorldServerContext::getServerCode() const noexcept {
+        return _serverCode;
     }
 
     const std::string &WorldServerContext::getTMXMapPath() const noexcept {
