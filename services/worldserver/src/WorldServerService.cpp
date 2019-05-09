@@ -24,29 +24,42 @@
 #include <spdlog/spdlog.h>
 #include <zmq_addon.hpp>
 #include <flatbuffers/flatbuffers.h>
+#include <WSAction_generated.h>
 #include "WorldServerService.hh"
 
 namespace fys::ws {
 
-WorldServerService::WorldServerService(const WorldServerContext &ctx) : _worldServer(ctx) {
-    _connectionHandler.setupConnectionManager(ctx);
+    WorldServerService::WorldServerService(const WorldServerContext &ctx) : _worldServer(ctx) {
+        _connectionHandler.setupConnectionManager(ctx);
 
-}
-
-void WorldServerService::runServerLoop() noexcept {
-    spdlog::get("c")->info("WorldServer loop started");
-
-    while (true) {
-        _connectionHandler.pollAndProcessSubMessage(
-            [this](zmq::multipart_t &&msg) {
-                processMessage(std::move(msg));
-            }
-        );
     }
-}
 
-void WorldServerService::processMessage(zmq::multipart_t &&msg) noexcept {
-    spdlog::get("c")->info("process message {}", msg.str());
-}
+    void WorldServerService::runServerLoop() noexcept {
+        spdlog::get("c")->info("WorldServer loop started");
+
+        while (true) {
+            _connectionHandler.pollAndProcessSubMessage(
+                [this](zmq::multipart_t &&msg) {
+                    if (msg.size() != 3) {
+                        spdlog::get("c")->error("Received message is ill formatted, should contains 3 parts but has {}", msg.size());
+                        return;
+                    }
+                    processMessage(std::move(msg));
+                }
+            );
+        }
+    }
+
+    void WorldServerService::processMessage(zmq::multipart_t &&msg) noexcept {
+        spdlog::get("c")->debug("process message {}", msg.str());
+        const zmq::message_t &identity = msg.at(0);
+        const zmq::message_t &token = msg.at(1);
+        const zmq::message_t &content = msg.at(2);
+        const fys::fb::WSAction *msgFb = fys::fb::GetWSAction(content.data());
+
+        if (_worldServer.isValidMsg()) {
+
+        }
+    }
 
 }

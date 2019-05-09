@@ -29,9 +29,12 @@
 
 namespace fys::ws {
 
-    WorldServerEngine::WorldServerEngine(const fys::ws::WorldServerContext &ctx) :
-        _map(std::make_unique<fys::ws::CollisionMap>(ctx)) {
+    WorldServerEngine::WorldServerEngine(const fys::ws::WorldServerContext &ctx) : _map(ctx) {
 
+    }
+
+    bool WorldServerEngine::isValidMsg() const {
+        return true;
     }
 
 }

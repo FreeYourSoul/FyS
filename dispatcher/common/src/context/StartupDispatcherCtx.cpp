@@ -46,6 +46,7 @@ namespace fys {
         boost::property_tree::ptree pt;
         boost::property_tree::read_ini(configFilePath, pt);
 
+        _maxMsgSize = pt.get<uint>(fys::init_beacon::MAXMSGSIZE);
         _clusterProxy.backendAddress = pt.get<std::string>(fys::init_beacon::BACKEND_ADDR);
         _clusterProxy.backendPort= pt.get<ushort>(fys::init_beacon::BACKEND_PORT);
         _clusterProxy.frontendAddress = pt.get<std::string>(fys::init_beacon::FRONTEND_ADDR);

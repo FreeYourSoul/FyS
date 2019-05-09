@@ -39,8 +39,16 @@ namespace fys::ws {
     public:
         WorldServerEngine(const WorldServerContext& ctx);
 
+        /**
+         * Check if the given message is valid by checking the token of the character:
+         *   if a player sent the message, the token is checked as authentified or not.
+         *   if a message forward coming from a server, static check is done with the server token
+         * @return true if the message is valid, false otherwise
+         */
+        constexpr bool isValidMsg() const;
+
     private:
-        std::unique_ptr<CollisionMap> _map;
+        CollisionMap _map;
         PlayersData _data;
 
     };

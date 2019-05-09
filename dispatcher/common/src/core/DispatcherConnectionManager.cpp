@@ -24,6 +24,7 @@ void DispatcherConnectionManager::setupConnectionManager(const fys::StartupDispa
         _clusterConnection.subSocket.close();
         _clusterConnection.closed = true;
     }
+    _dispatcher.setsockopt(ZMQ_MAXMSGSIZE, ctx.getMaxMsgSize());
     _dispatcher.bind("tcp://*:" + std::to_string(ctx.getDispatchingPort()));
     _listener.bind("tcp://*:" + std::to_string(ctx.getBindingPort()));
 }

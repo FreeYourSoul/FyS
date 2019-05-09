@@ -37,7 +37,7 @@ namespace fys::ws {
 
     private:
         void processMessage(zmq::multipart_t &&msg) noexcept;
-//        constexpr bool filterInvalidMsg() const;
+        constexpr bool filterInvalidMsg() const;
 
     private:
         fys::ws::WorldServerEngine _worldServer;

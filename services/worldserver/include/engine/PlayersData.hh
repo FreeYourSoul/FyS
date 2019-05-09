@@ -25,7 +25,7 @@
 #ifndef FYS_PLAYERSDATA_HH
 #define FYS_PLAYERSDATA_HH
 
-#include <map>
+#include <unordered_map>
 #include <utility>
 #include <vector>
 #include <array>
@@ -35,8 +35,9 @@ namespace fys::util {
 }
 
 namespace fys::ws {
+    constexpr static double DEFAULT_DISTANCE = 30;
 
-    using PlayerPosition = std::pair<double, double>;
+    using PlayerPos = std::pair<double, double>;
 
     enum class PlayerStatus {
         FIGHTING,
@@ -44,13 +45,20 @@ namespace fys::ws {
     };
 
     class PlayersData {
+
     public:
         explicit PlayersData(uint maxConnection = 1000) noexcept;
 
+        std::vector<std::string_view> getPlayerIdtsArroundPlayer(const std::string &token,
+                double distance = DEFAULT_DISTANCE) const noexcept;
+        std::vector<std::string_view> getPlayerIdtsArroundPos(PlayerPos position,
+                double distance = DEFAULT_DISTANCE) const noexcept;
+
     private:
-        std::vector<PlayerPosition> _positions;
+        std::vector<PlayerPos> _positions;
         std::vector<PlayerStatus> _status;
-        std::map<std::string, uint> _identityToIndex;
+        std::vector<std::string> _identities;
+        std::unordered_map<std::string, uint> _tokenToIndex;
 
     };
 

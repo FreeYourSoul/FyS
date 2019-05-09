@@ -39,6 +39,7 @@ namespace fys {
         constexpr auto NAME            = "dispatcher.name";
         constexpr auto TOPICS          = "dispatcher.topics";
         constexpr auto ISCLUSTERAWARE  = "dispatcher.isClusterAware";
+        constexpr auto MAXMSGSIZE      = "dispatcher.maxMsgSize";
         constexpr auto BINDINGPORT     = "dispatcher.bindingPort";
         constexpr auto DISPATCHERPORT  = "dispatcher.dispatcherPort";
         constexpr auto ISLOADBALANCING = "dispatcher.isLoadBalancing";
@@ -64,7 +65,8 @@ class StartupDispatcherCtx {
             [[nodiscard]] constexpr bool isLoadBalancingEnabled() const noexcept { return _isLoadBalancing; }
             [[nodiscard]] constexpr bool isClusterAware() const noexcept { return _isClusterAware; }
             [[nodiscard]] constexpr ushort getBindingPort() const noexcept { return _bindingPort; }
-            [[nodiscard]] constexpr ushort getDispatchingPort() const noexcept { return _dispatchingPort; };
+            [[nodiscard]] constexpr ushort getDispatchingPort() const noexcept { return _dispatchingPort; }
+            [[nodiscard]] constexpr uint getMaxMsgSize() const noexcept { return _maxMsgSize; }
 
             [[nodiscard]] const std::vector<std::string> getSubscriptionTopics() const noexcept { return _subTopics; }
             [[nodiscard]] std::string getFrontendClusterProxyConnectionString() const noexcept;
@@ -100,6 +102,12 @@ class StartupDispatcherCtx {
              * Dispatching to service port (for publishing / load balancing)
              */
             ushort _dispatchingPort = 0;
+
+            /**
+             * Maximum size in byte of an inbound message
+             */
+            uint _maxMsgSize = 1024;
+
             bool _verbose = false;
 
             ClusterProxy _clusterProxy;

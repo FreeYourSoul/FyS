@@ -26,8 +26,18 @@
 
 namespace fys::ws {
 
-PlayersData::PlayersData(uint maxConnection) noexcept : _positions(maxConnection), _status(maxConnection) {
+    PlayersData::PlayersData(uint maxConnection) noexcept : _positions(maxConnection), _status(maxConnection) {
 
-}
+    }
+
+    std::vector<std::string_view> PlayersData::getPlayerIdtsArroundPlayer(const std::string &token,
+                                                                          double distance) const noexcept {
+
+    }
+
+    std::vector<std::string_view> PlayersData::getPlayerIdtsArroundPos(fys::ws::PlayerPos position,
+                                                                       double distance) const noexcept {
+
+    }
 
 }
