@@ -36,8 +36,7 @@ namespace fys::ws {
         void runServerLoop() noexcept;
 
     private:
-        void processMessage(zmq::multipart_t &&msg) noexcept;
-        constexpr bool filterInvalidMsg() const;
+        inline void processMessage(std::string &&idt, std::string &&token, const fb::WSAction *content) noexcept;
 
     private:
         fys::ws::WorldServerEngine _worldServer;

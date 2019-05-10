@@ -33,8 +33,8 @@ namespace fys::ws {
 
     }
 
-    bool WorldServerEngine::isValidMsg() const {
-        return true;
+    constexpr std::pair<bool, bool> WorldServerEngine::isAuthenticatedAndValid(const std::string &idt, const std::string &token) {
+        return {true, true};
     }
 
 }

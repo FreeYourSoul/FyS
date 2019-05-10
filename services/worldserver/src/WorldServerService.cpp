@@ -40,26 +40,29 @@ namespace fys::ws {
         while (true) {
             _connectionHandler.pollAndProcessSubMessage(
                 [this](zmq::multipart_t &&msg) {
+                    spdlog::get("c")->debug("message {}", msg.str());
                     if (msg.size() != 3) {
                         spdlog::get("c")->error("Received message is ill formatted, should contains 3 parts but has {}", msg.size());
                         return;
                     }
-                    processMessage(std::move(msg));
+                    std::string idt = std::string(static_cast<char*>(msg.at(0).data()), msg.at(0).size());
+                    std::string token = std::string(static_cast<char*>(msg.at(1).data()), msg.at(1).size());
+
+                    // TODO: What about first authentication of the server?
+                    // if server transition: token is equal to {SRV}:{AUTH|FWRD}:{SERVER_TOKEN}
+
+                    if (auto &[isAuth, isValid] = _worldServer.isAuthenticatedAndValid(idt, token); isValid && isValid)
+                        processMessage(std::move(idt), std::move(token), fys::fb::GetWSAction(msg.at(2).data()));
+                    else if (isValid)
+                        ;   // authenticate new player ; maybe better to have an authentication more explicit that this,
+                            // looks kind of "hackable"
                 }
             );
         }
     }
 
-    void WorldServerService::processMessage(zmq::multipart_t &&msg) noexcept {
-        spdlog::get("c")->debug("process message {}", msg.str());
-        const zmq::message_t &identity = msg.at(0);
-        const zmq::message_t &token = msg.at(1);
-        const zmq::message_t &content = msg.at(2);
-        const fys::fb::WSAction *msgFb = fys::fb::GetWSAction(content.data());
+    void WorldServerService::processMessage(std::string &&idt, std::string &&token, const fb::WSAction *content) noexcept {
 
-        if (_worldServer.isValidMsg()) {
-
-        }
     }
 
 }
