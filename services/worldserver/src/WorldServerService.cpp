@@ -48,14 +48,7 @@ namespace fys::ws {
                     std::string idt = std::string(static_cast<char*>(msg.at(0).data()), msg.at(0).size());
                     std::string token = std::string(static_cast<char*>(msg.at(1).data()), msg.at(1).size());
 
-                    // TODO: What about first authentication of the server?
-                    // if server transition: token is equal to {SRV}:{AUTH|FWRD}:{SERVER_TOKEN}
-
-                    if (auto &[isAuth, isValid] = _worldServer.isAuthenticatedAndValid(idt, token); isValid && isValid)
-                        processMessage(std::move(idt), std::move(token), fys::fb::GetWSAction(msg.at(2).data()));
-                    else if (isValid)
-                        ;   // authenticate new player ; maybe better to have an authentication more explicit that this,
-                            // looks kind of "hackable"
+                    processMessage(std::move(idt), std::move(token), fys::fb::GetWSAction(msg.at(2).data()));
                 }
             );
         }

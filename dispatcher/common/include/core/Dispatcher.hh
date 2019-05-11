@@ -44,13 +44,13 @@ namespace fys
          * @brief This method is processing the inputMessage and dispatch it appropriately among the peers connected to
          * the dispatcher socket
          */
-        static void processInputMessage(zmq::multipart_t &&msg, network::DispatcherConnectionManager &manager) noexcept;
+        void processInputMessage(zmq::multipart_t &&msg, network::DispatcherConnectionManager &manager) noexcept;
 
         /**
          * @brief This method is dispatching the cluster message and forward it appropriately among the peers connected to
          * the dispatcher socket
          */
-        static void processClusterMessage(zmq::multipart_t &&msg, network::DispatcherConnectionManager &manager) noexcept;
+        void processClusterMessage(zmq::multipart_t &&msg, network::DispatcherConnectionManager &manager) noexcept;
     };
 
     /**
@@ -70,24 +70,42 @@ namespace fys
             _connectionManager.setupConnectionManager(ctx);
         }
 
+
         void runDispatching() {
             while (true) {
                 auto [listenerSocketHasSomethingToPoll, subscriberSocketHasSomethingToPoll] = _connectionManager.poll();
                 if (listenerSocketHasSomethingToPoll) {
-                    _connectionManager.dispatchMessageOnListenerSocket([](zmq::multipart_t && msg, network::DispatcherConnectionManager &manager){
-                        DispatcherHandler::processInputMessage(std::move(msg), manager);
-                    });
+                    _connectionManager.dispatchMessageOnListenerSocket(
+                            [this](zmq::multipart_t && msg, network::DispatcherConnectionManager &manager){
+                                _dispatcher.processInputMessage(std::move(msg), manager);
+                            }
+                        );
                 }
                 else if (subscriberSocketHasSomethingToPoll) {
-                    _connectionManager.dispatchMessageOnSubscriberSocket([](zmq::multipart_t && msg, network::DispatcherConnectionManager &manager){
-                        DispatcherHandler::processClusterMessage(std::move(msg), manager);
-                    });
+                    _connectionManager.dispatchMessageOnSubscriberSocket(
+                            [this](zmq::multipart_t && msg, network::DispatcherConnectionManager &manager){
+                                _dispatcher.processClusterMessage(std::move(msg), manager);
+                            }
+                        );
                 }
             }
         }
 
+        /**
+         * Check if the player is currently authenticated:
+         *  first check the dispatcher cache
+         *
+         *  if the dispatcher doesn't contains information for this player, call the authentication server and get the
+         *  token for the player
+         *      (if authenticated): add this player identifier/token in the dispatcher cache
+         *
+         * @return a true if the player is authenticated, false otherwise
+         */
+        constexpr bool checkAuthentication(const std::string &idt, const std::string &token);
+
     private:
         fys::network::DispatcherConnectionManager _connectionManager;
+        DispatcherHandler _dispatcher;
 };
 } 
 #endif // !FYS_DISPATCHER_HH_
