@@ -80,7 +80,7 @@ namespace fys::ws {
                 }
             }
         } else {
-            spdlog::get("c")->error("TMX CollisionMap couldn't be loaded");
+            SPDLOG_ERROR("TMX CollisionMap couldn't be loaded");
         }
     }
 

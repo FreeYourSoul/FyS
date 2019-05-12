@@ -25,6 +25,7 @@
 #include <zmq_addon.hpp>
 #include <flatbuffers/flatbuffers.h>
 #include <WSAction_generated.h>
+#include <Notifications_generated.h>
 #include "WorldServerService.hh"
 
 namespace fys::ws {
@@ -35,27 +36,37 @@ namespace fys::ws {
     }
 
     void WorldServerService::runServerLoop() noexcept {
-        spdlog::get("c")->info("WorldServer loop started");
+        SPDLOG_INFO("WorldServer loop started");
 
         while (true) {
             _connectionHandler.pollAndProcessSubMessage(
                 [this](zmq::multipart_t &&msg) {
-                    spdlog::get("c")->debug("message {}", msg.str());
-                    if (msg.size() != 3) {
-                        spdlog::get("c")->error("Received message is ill formatted, should contains 3 parts but has {}", msg.size());
+                    if (msg.size() < 3 || msg.size() > 4) {
+                        SPDLOG_ERROR("Received message is ill formatted, should contains 3 to 4 parts but  has {},  "
+                                     "message is : {}", msg.size(), msg.str());
                         return;
                     }
                     std::string idt = std::string(static_cast<char*>(msg.at(0).data()), msg.at(0).size());
                     std::string token = std::string(static_cast<char*>(msg.at(1).data()), msg.at(1).size());
+                    std::optional<std::string> internalMagic;
+                    if (msg.size() == 4)
+                        internalMagic = std::string(static_cast<char*>(msg.at(3).data()), msg.at(3).size());
 
-                    processMessage(std::move(idt), std::move(token), fys::fb::GetWSAction(msg.at(2).data()));
+                    SPDLOG_DEBUG("message received with idt={}, token={},\nmsg={}", idt, token, msg.str());
+                    processMessage(std::move(idt), std::move(token), msg.at(2), internalMagic);
                 }
             );
         }
     }
 
-    void WorldServerService::processMessage(std::string &&idt, std::string &&token, const fb::WSAction *content) noexcept {
-
+    void WorldServerService::processMessage(std::string &&idt,
+            std::string &&token, const zmq::message_t &content, const std::optional<std::string>& internalMagic) {
+        if (internalMagic) {
+            // addi
+        }
+        else {
+            _worldServer.processPlayerInputMessage(std::move(idt), std::move(token), fys::fb::GetWSAction(content.data()));
+        }
     }
 
 }

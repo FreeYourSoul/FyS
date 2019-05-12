@@ -28,6 +28,11 @@
 #include <memory>
 #include <utility>
 #include <engine/PlayersData.hh>
+#include <engine/CollisionMap.hh>
+
+namespace fys::fb {
+    class WSAction;
+}
 
 namespace fys::ws {
 
@@ -39,7 +44,9 @@ namespace fys::ws {
 
     public:
         WorldServerEngine(const WorldServerContext& ctx);
-        
+
+        void processPlayerInputMessage(std::string &&idt, std::string &&token, const fys::fb::WSAction *action);
+
     private:
         CollisionMap _map;
         PlayersData _data;

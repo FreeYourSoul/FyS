@@ -55,7 +55,7 @@ ServiceContextBase::ServiceContextBase(int ac, const char *const *av) try {
         _dispatcherData.subscriberPort = subport.getValue();
 }
 catch (std::exception &e) {
-    spdlog::get("c")->error("Context of the service not initialized caused by : {}", e.what());
+    SPDLOG_ERROR("Context of the service not initialized caused by : {}", e.what());
 }
 
 void ServiceContextBase::initializeFromIni(const std::string &configFilePath) {

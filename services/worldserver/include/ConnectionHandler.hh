@@ -49,7 +49,7 @@ namespace fys::ws {
             if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
                 zmq::multipart_t msg;
                 if (!msg.recv(_subSocket))
-                    spdlog::get("c")->error("Error while reading on the listener socket");
+                    SPDLOG_ERROR("Error while reading on the listener socket");
                 else
                     std::forward<Handler>(handler)(std::move(msg));
             }

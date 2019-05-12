@@ -1,9 +1,34 @@
 namespace fys.fb.internal;
 
-table MoveNotification {
+enum Action { Move }
+
+table ActionNotification {
+    token_client:string;
     x:double = 0;
     y:double = 0;
-    token_client:string;
+    action:action;
 }
 
-root_type MoveNotification;
+root_type WSActionNotification;
+
+// Registration is needed only for WSServer and ChatServer, it is mainly done by the auth server
+// WSServer   : To get the initial position to set the player to in the universe
+// ChatServer : To give the base channel (zone channel) on which the client will automatically connect to
+union RegisterServer { WSServerReg, ChatServerReg }
+
+table ChatServerReg {
+    serverCode:string;
+}
+
+// Sent by the AuthServer, but also can be sent by the
+table WSServerReg {
+    serverCode:string;
+    xPos:double = 0;
+    yPos:double = 0;
+}
+
+table RegisterAuthenticatedPlayer {
+    registerTo:RegisterServer;
+}
+
+root_type RegisterAuthenticatedPlayer;

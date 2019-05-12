@@ -21,7 +21,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
 #include "engine/PlayersData.hh"
 
 namespace fys::ws {
@@ -30,12 +29,20 @@ namespace fys::ws {
 
     }
 
+    uint PlayersData::getIndexAndUpdatePlayerConnection(const std::string &token, std::string idt) {
+        if (auto it = _tokenToIndex.find(token); it != _tokenToIndex.end()) {
+            _identities.at(it->second) = std::move(idt);
+            return it->second;
+        }
+        return std::numeric_limits<uint>::max();
+    }
+
     std::vector<std::string_view> PlayersData::getPlayerIdtsArroundPlayer(const std::string &token,
                                                                           double distance) const noexcept {
 
     }
 
-    std::vector<std::string_view> PlayersData::getPlayerIdtsArroundPos(fys::ws::PlayerPos position,
+    std::vector<std::string_view> PlayersData::getPlayerIdtsArroundPos(fys::ws::Coordinate position,
                                                                        double distance) const noexcept {
 
     }

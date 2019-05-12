@@ -22,15 +22,24 @@
 // SOFTWARE.
 
 
-#include <memory>
-#include <engine/CollisionMap.hh>
+#include <spdlog/spdlog.h>
 #include <WorldServerContext.hh>
+#include <WSAction_generated.h>
 #include "engine/WorldServerEngine.hh"
 
 namespace fys::ws {
 
     WorldServerEngine::WorldServerEngine(const fys::ws::WorldServerContext &ctx) : _map(ctx) {
 
+    }
+
+    void WorldServerEngine::processPlayerInputMessage(std::string &&idt, std::string &&token, const fb::WSAction *action) {
+        if (const uint index = _data.getIndexAndUpdatePlayerConnection(token, std::move(idt));
+             index < std::numeric_limits<uint>::max()) {
+
+        } else {
+            SPDLOG_ERROR("Player of token {} has not been registered before sending messages", token);
+        }
     }
 
 }

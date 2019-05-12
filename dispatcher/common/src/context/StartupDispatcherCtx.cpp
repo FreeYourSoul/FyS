@@ -38,7 +38,7 @@ namespace fys {
         _verbose = verbose.getValue();
     }
     catch (std::exception &e) {
-        spdlog::get("c")->error("\"Context of the Dispatcher not initialized caused by : {}", e.what());
+        SPDLOG_ERROR("\"Context of the Dispatcher not initialized caused by : {}", e.what());
     }
 
 

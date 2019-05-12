@@ -37,7 +37,7 @@ namespace fys::util {
 namespace fys::ws {
     constexpr static double DEFAULT_DISTANCE = 30;
 
-    using PlayerPos = std::pair<double, double>;
+    using Coordinate = std::pair<double, double>;
 
     enum class PlayerStatus {
         FIGHTING,
@@ -49,13 +49,22 @@ namespace fys::ws {
     public:
         explicit PlayersData(uint maxConnection = 1000) noexcept;
 
+        /**
+         * Retrieve the index corresponding to the given token
+         *
+         * @param token
+         * @param idt
+         * @return
+         */
+        uint getIndexAndUpdatePlayerConnection(const std::string &token, std::string idt);
+
         std::vector<std::string_view> getPlayerIdtsArroundPlayer(const std::string &token,
                 double distance = DEFAULT_DISTANCE) const noexcept;
-        std::vector<std::string_view> getPlayerIdtsArroundPos(PlayerPos position,
+        std::vector<std::string_view> getPlayerIdtsArroundPos(Coordinate position,
                 double distance = DEFAULT_DISTANCE) const noexcept;
 
     private:
-        std::vector<PlayerPos> _positions;
+        std::vector<Coordinate> _positions;
         std::vector<PlayerStatus> _status;
         std::vector<std::string> _identities;
         std::unordered_map<std::string, uint> _tokenToIndex;
