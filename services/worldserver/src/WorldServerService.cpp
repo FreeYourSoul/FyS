@@ -62,10 +62,11 @@ namespace fys::ws {
     void WorldServerService::processMessage(std::string &&idt,
             std::string &&token, const zmq::message_t &content, const std::optional<std::string>& internalMagic) {
         if (internalMagic) {
-            // addi
+            // check internal magic to validate that the message is coming from internal server
         }
         else {
-            _worldServer.processPlayerInputMessage(std::move(idt), std::move(token), fys::fb::GetWSAction(content.data()));
+            _worldServer.processPlayerInputMessage(std::move(idt), std::move(token),
+                    fys::fb::GetWSAction(content.data()), _connectionHandler);
         }
     }
 

@@ -43,7 +43,7 @@ namespace fys::ws {
         void pollAndProcessSubMessage(Handler && handler) noexcept {
             //  Initialize poll set
             zmq::pollitem_t items[] = {
-                    { _subSocket, 0, ZMQ_POLLIN, 0 }
+                { _subSocket, 0, ZMQ_POLLIN, 0 }
             };
             zmq::poll(&items[0], 1);
             if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {

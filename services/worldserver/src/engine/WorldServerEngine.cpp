@@ -25,21 +25,37 @@
 #include <spdlog/spdlog.h>
 #include <WorldServerContext.hh>
 #include <WSAction_generated.h>
+#include <ConnectionHandler.hh>
 #include "engine/WorldServerEngine.hh"
 
 namespace fys::ws {
 
     WorldServerEngine::WorldServerEngine(const fys::ws::WorldServerContext &ctx) : _map(ctx) {
-
     }
 
-    void WorldServerEngine::processPlayerInputMessage(std::string &&idt, std::string &&token, const fb::WSAction *action) {
-        if (const uint index = _data.getIndexAndUpdatePlayerConnection(token, std::move(idt));
+    void WorldServerEngine::processPlayerInputMessage(std::string &&idt, std::string &&token,
+            const fb::WSAction *actionMsg, ConnectionHandler &handler)
+    {
+        if (const uint index = _data.getIndexAndUpdatePlayerConnection(token, idt);
              index < std::numeric_limits<uint>::max()) {
-
+            if (actionMsg->action_type() == fb::Action::Action_Move)
+                movePlayerAction(std::move(idt), std::move(token), actionMsg->action_as_Move());
+            else if (actionMsg->action_type() == fb::Action::Action_PnjInteract)
+                forwardMessageToOtherServer(std::move(idt), std::move(token), actionMsg->action_as_PnjInteract(), handler);
         } else {
             SPDLOG_ERROR("Player of token {} has not been registered before sending messages", token);
         }
     }
 
+    void WorldServerEngine::movePlayerAction(std::string &&idt, std::string &&token, const fys::fb::Move *action) {
+
+    }
+
+
+    void WorldServerEngine::forwardMessageToOtherServer(std::string &&idt, std::string &&token,
+            const fys::fb::PnjInteract *action, fys::ws::ConnectionHandler &handler) {
+        zmq::multipart_t msgToForward;
+//        msgToForward.addstr()
+        handler.sendMessageToDispatcher(std::move(msgToForward));
+    }
 }
