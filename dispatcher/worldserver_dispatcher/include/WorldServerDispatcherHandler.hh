@@ -38,8 +38,8 @@ namespace fys {
 
 namespace fys::ws {
 
-    class WorldServerDispatcherHandler {
-    protected:
+    class WorldServerDispatcherHandler : protected DispatcherHandlerBase {
+    public:
         /**
          * @brief This method is processing the inputMessage and dispatch it appropriately among the peers connected to
          * the DEALER socket

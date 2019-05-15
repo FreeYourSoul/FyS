@@ -24,6 +24,7 @@
 #ifndef FYS_DISPATCHER_HH_
 #define FYS_DISPATCHER_HH_
 
+#include <unordered_set>
 #include <DispatcherConnectionManager.hh>
 #include <StartupDispatcherCtx.hh>
 
@@ -51,6 +52,12 @@ namespace fys
          * the dispatcher socket
          */
         void processClusterMessage(zmq::multipart_t &&msg, network::DispatcherConnectionManager &manager) noexcept;
+
+    protected:
+        bool checkAuthentication(const zmq::multipart_t &msg, network::DispatcherConnectionManager &manager) noexcept;
+
+    private:
+        std::unordered_set<std::string> _authenticated;
     };
 
     /**
