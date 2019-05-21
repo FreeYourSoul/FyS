@@ -23,7 +23,7 @@ namespace fys {
         std::string token(static_cast<const char *>(msg.at(0).data()), msg.size());
         if (_authenticated.find(token) != _authenticated.end())
             return true;
-        // TODO should check authentication in synchronous
+        // TODO should check authentication directly in redis
         bool checkAuth = true;
         if (checkAuth)
             _authenticated.emplace(token);
