@@ -1,0 +1,36 @@
+@startuml
+
+
+participant launcher order 10
+entity dispatcher order 20
+participant configurationFile order 30
+collections dispatchers order 40
+
+launcher -> dispatcher : start dispatcher with arguments
+
+group 
+    alt configuration file provided
+        dispatcher -> dispatcher : configuration file check    
+        dispatcher <- configurationFile : retrieve configuration
+    else no configuration file
+        dispatcher -> dispatcher : override argument
+    else no configuration
+        dispatcher -x launcher : Error startup
+end
+
+dispatcher -> dispatcher : create ROUTER socket
+
+group startup
+
+    alt "isLoadBalancing" == true
+        dispatcher -> dispatcher : create DEALER socket
+    else "isLoadBalancing" == false
+        dispatcher -> dispatcher : create PUBLISHER socket
+
+end
+    group if "isClusterAware" == true
+        dispatcher -> dispatchers : notify itself / subscribe via proxy
+    end
+
+
+@enduml

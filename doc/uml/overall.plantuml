@@ -1,0 +1,116 @@
+@startuml
+
+skinparam linetype ortho
+actor Players
+
+node auth {
+    component AuthenticatorA [
+        Authenticator active
+    ]
+    component AuthenticatorP [
+        Authenticator passive
+    ]
+    
+}
+
+database DB_SQL {
+}
+
+database DB_Couchebase {   
+}
+
+cloud "Cloud Duplicable" {
+    
+    ' Package description 
+    package Dispatcher {
+        package InternalDispatcher {
+            component IGDispatcher [
+                IGDispatcher
+                LoadBalancing (Paranoid Pirate Pattern)
+            ]
+            component IEDispatcher [
+                IEDispatcher
+                LoadBalancing (Paranoid Pirate Pattern)
+            ]
+            component QSTDispatcher [
+                QSTDispatcher
+                LoadBalancing (Paranoid Pirate Pattern)
+            ]  
+        }
+        package publicDispatcher {
+            component IUDispatcher
+            component WSDispatcher [
+                WSDispatcher
+                ROUTER/DEALER (Broker)
+            ]
+            component ChatDispatcher [
+                ChatDispatcher
+                PUB/SUB ()
+            ]
+        }
+    }
+
+    package WorldServer {
+        interface ZMQ as ZMQWS
+        component Server as WSServer
+    }
+
+    together {
+        package InventoryUsage {
+            interface ZMQ as ZMQIU
+            component DBEnqueur as IUEnqueur
+            component Server as IUServer      
+        }
+        package InventoryExchange {
+            interface ZMQ as ZMQIE
+            component DBEnqueur as IEEnqueur
+            component Server as IEServer
+        }
+
+        package InventoryGrab {
+            interface ZMQ as ZMQIG
+            component DBEnqueur as IGEnqueur
+            component Server as IGServer
+        }
+        package Quest {
+            interface ZMQ as ZMQQST
+            component DBEnqueur as QSTEnqueur
+            component Server as QSTServer
+        }
+    }
+    package Chat {
+        interface ZMQ as ZMQChat
+        component Server as ServerChat
+    }
+
+
+}
+
+' Links
+Players             --> publicDispatcher
+Players             --> AuthenticatorA
+[AuthenticatorP] - [AuthenticatorA]
+[ChatDispatcher] <--  ZMQChat : sub
+[QSTDispatcher] <--   ZMQQST : sub
+[WSDispatcher] <---    ZMQWS   : sub
+[IGDispatcher] <--    ZMQIG   : sub
+[IEDispatcher] <--    ZMQIE   : sub
+[IUDispatcher] <--    ZMQIU   : sub
+ServerChat - ZMQChat
+WSServer -   ZMQWS
+IUServer -   ZMQIU
+IGServer -   ZMQIG
+IEServer -   ZMQIE
+QSTServer -  ZMQQST
+IUServer ---->   DB_SQL
+IGServer ---->   DB_SQL
+IEServer ---->   DB_SQL
+QSTServer ---->  DB_SQL
+IUServer --->   DB_Couchebase
+IGServer --->   DB_Couchebase
+QSTServer --->  DB_Couchebase
+
+ZMQWS --> InternalDispatcher : pub
+
+
+@enduml
