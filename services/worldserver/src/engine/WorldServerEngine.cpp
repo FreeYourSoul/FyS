@@ -36,10 +36,9 @@ namespace fys::ws {
     void WorldServerEngine::processPlayerInputMessage(std::string &&idt, std::string &&token,
             const fb::WSAction *actionMsg, ConnectionHandler &handler)
     {
-        if (const uint index = _data.getIndexAndUpdatePlayerConnection(token, idt);
-             index < std::numeric_limits<uint>::max()) {
+        if (const uint index = _data.getIndexAndUpdatePlayerConnection(token, idt); index < std::numeric_limits<uint>::max()) {
             if (actionMsg->action_type() == fb::Action::Action_Move)
-                movePlayerAction(std::move(idt), std::move(token), actionMsg->action_as_Move());
+                movePlayerAction(std::move(idt), index, actionMsg->action_as_Move());
             else if (actionMsg->action_type() == fb::Action::Action_PnjInteract)
                 forwardMessageToOtherServer(std::move(idt), std::move(token), actionMsg->action_as_PnjInteract(), handler);
         } else {
@@ -47,13 +46,16 @@ namespace fys::ws {
         }
     }
 
-    void WorldServerEngine::movePlayerAction(std::string &&idt, std::string &&token, const fys::fb::Move *action) {
+    void WorldServerEngine::movePlayerAction(std::string &&idt, uint indexPlayer, const fys::fb::Move *action)
+    {
 
+        // TODO move
     }
 
 
     void WorldServerEngine::forwardMessageToOtherServer(std::string &&idt, std::string &&token,
-            const fys::fb::PnjInteract *action, fys::ws::ConnectionHandler &handler) {
+            const fys::fb::PnjInteract *action, fys::ws::ConnectionHandler &handler)
+    {
         zmq::multipart_t msgToForward;
 //        msgToForward.addstr()
         handler.sendMessageToDispatcher(std::move(msgToForward));
