@@ -49,6 +49,8 @@ namespace fys::ws {
     public:
         explicit PlayersData(uint maxConnection = 1000) noexcept;
 
+
+        const Coordinate &getPlayerPosition(uint indexPlayer) const;
         /**
          * Retrieve the index corresponding to the given token
          *

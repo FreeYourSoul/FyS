@@ -48,6 +48,8 @@ namespace fys::ws {
 
     void WorldServerEngine::movePlayerAction(std::string &&idt, uint indexPlayer, const fys::fb::Move *action)
     {
+        double futurX;
+        double futurY;
 
         // TODO move
     }
