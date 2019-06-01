@@ -29,8 +29,8 @@ namespace fys::ws {
 
     }
 
-    const Coordinate& PlayersData::getPlayerPosition(uint indexPlayer) const {
-
+    Coordinate& PlayersData::getPlayerPosition(uint indexPlayer) {
+        return _positions.at(indexPlayer);
     }
 
     uint PlayersData::getIndexAndUpdatePlayerConnection(const std::string &token, std::string idt) {

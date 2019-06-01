@@ -106,10 +106,10 @@ namespace fys::ws {
     }
 
     bool MapElement::canGoToLevel(std::size_t goLevel) const noexcept {
-        return _level.test(goLevel) || _changeLevel.test(goLevel);
+        return goLevel == 0 || _level.test(goLevel) || _changeLevel.test(goLevel);
     }
 
-    constexpr void MapElement::executePotentialTrigger(const std::string &token) const {
+    constexpr void MapElement::executePotentialTrigger(uint indexPlayer) const {
         if (_type == eElementType::TRIGGER) {
     //        std::visit(overloaded {
     //            [](ConnectionHandler &trigger, const std::string &token) { // Player Trigger

@@ -1,11 +1,10 @@
-include "Direction.fbs";
 
 namespace fys.fb;
 
 union Action { Move, PnjInteract }
 
 table Move {
-    dir:Direction;
+    direction:double;
 }
 
 table PnjInteract {

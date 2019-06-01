@@ -46,12 +46,21 @@ namespace fys::ws {
         }
     }
 
-    void WorldServerEngine::movePlayerAction(std::string &&idt, uint indexPlayer, const fys::fb::Move *action)
+    void WorldServerEngine::movePlayerAction(std::string &&idt, uint indexPlayer, const fb::Move *action)
     {
-        double futurX;
-        double futurY;
+        Coordinate &currentPos = _data.getPlayerPosition(indexPlayer);
+        double angle = action->direction();
+        double velocity = 1;
+        Coordinate futurePos = {
+                currentPos.x * (velocity * std::cos(angle)),
+                currentPos.y * (velocity * std::sin(angle))
+        };
 
-        // TODO move
+        if (_map.canMoveTo(futurePos.x, futurePos.y, 0)) {
+            currentPos.x = futurePos.x;
+            currentPos.y = futurePos.y;
+            _map.executePotentialTrigger();
+        }
     }
 
 

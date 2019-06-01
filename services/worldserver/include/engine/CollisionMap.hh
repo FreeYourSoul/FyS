@@ -102,7 +102,7 @@ namespace fys::ws {
     class MapElement {
 
     public:
-        constexpr void executePotentialTrigger(const std::string& token) const;
+        constexpr void executePotentialTrigger(uint indexPlayer) const;
         inline bool canGoThrough(double x, double y, std::size_t level) const noexcept;
 
         void setLevel(std::size_t level) { _level.set(level); }
@@ -141,6 +141,7 @@ namespace fys::ws {
 
         void buildMapFromTmx(const std::string &tmxMapPath);
         bool canMoveTo(double x, double y, std::size_t level) const noexcept;
+        void executePotentialTrigger();
 
     private:
         std::pair<double, double> _boundaryX;

@@ -1,12 +1,12 @@
 namespace fys.fb.internal;
 
-enum Action { Move }
+enum Action : byte { Move }
 
-table ActionNotification {
+table WSActionNotification {
     token_client:string;
     x:double = 0;
     y:double = 0;
-    action:action;
+    action:Action;
 }
 
 root_type WSActionNotification;

@@ -1,3 +1,0 @@
-namespace fys.fb;
-
-enum Direction : byte { Top, Down, Right, Left, TopRight, TopLeft, DownRight, DownLeft }

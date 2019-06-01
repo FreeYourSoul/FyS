@@ -37,7 +37,11 @@ namespace fys::util {
 namespace fys::ws {
     constexpr static double DEFAULT_DISTANCE = 30;
 
-    using Coordinate = std::pair<double, double>;
+    struct Coordinate {
+        double x;
+        double y;
+    };
+//    using Coordinate = std::pair<double, double>;
 
     enum class PlayerStatus {
         FIGHTING,
@@ -50,7 +54,7 @@ namespace fys::ws {
         explicit PlayersData(uint maxConnection = 1000) noexcept;
 
 
-        const Coordinate &getPlayerPosition(uint indexPlayer) const;
+        Coordinate &getPlayerPosition(uint indexPlayer);
         /**
          * Retrieve the index corresponding to the given token
          *

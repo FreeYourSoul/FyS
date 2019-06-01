@@ -1,9 +1,7 @@
-include "Direction.fbs";
-
 namespace fys.fb;
 
 table MovePing {
-    dir:Direction;
+    direction:double;
     x:double = 0;
     y:double = 0;
     id:string;
