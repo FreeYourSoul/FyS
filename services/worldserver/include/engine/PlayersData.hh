@@ -35,15 +35,15 @@ namespace fys::util {
 }
 
 namespace fys::ws {
+    // unit of distance being a tile
     constexpr static double DEFAULT_DISTANCE = 30;
 
     struct Coordinate {
         double x;
         double y;
     };
-//    using Coordinate = std::pair<double, double>;
 
-    enum class PlayerStatus {
+    enum class PlayerStatus : uint {
         FIGHTING,
         NORMAL
     };
@@ -64,9 +64,9 @@ namespace fys::ws {
          */
         uint getIndexAndUpdatePlayerConnection(const std::string &token, std::string idt);
 
-        std::vector<std::string_view> getPlayerIdtsArroundPlayer(const std::string &token,
+        std::vector<std::string_view> getPlayerIdtsArroundPlayer(uint indexPlayer,
                 double distance = DEFAULT_DISTANCE) const noexcept;
-        std::vector<std::string_view> getPlayerIdtsArroundPos(Coordinate position,
+        std::vector<std::string_view> getPlayerIdtsArroundPos(const Coordinate &position,
                 double distance = DEFAULT_DISTANCE) const noexcept;
 
     private:

@@ -25,6 +25,7 @@
 #include <spdlog/spdlog.h>
 #include <WorldServerContext.hh>
 #include <WSAction_generated.h>
+#include <Notifications_generated.h>
 #include <ConnectionHandler.hh>
 #include "engine/WorldServerEngine.hh"
 
@@ -37,8 +38,11 @@ namespace fys::ws {
             const fb::WSAction *actionMsg, ConnectionHandler &handler)
     {
         if (const uint index = _data.getIndexAndUpdatePlayerConnection(token, idt); index < std::numeric_limits<uint>::max()) {
-            if (actionMsg->action_type() == fb::Action::Action_Move)
-                movePlayerAction(std::move(idt), index, actionMsg->action_as_Move());
+            if (actionMsg->action_type() == fb::Action::Action_Move) {
+                auto clientToNotify = movePlayerAction(std::move(idt), index, actionMsg->action_as_Move());
+                if (!clientToNotify.empty())
+                    notifyClientOfMove(clientToNotify, handler);
+            }
             else if (actionMsg->action_type() == fb::Action::Action_PnjInteract)
                 forwardMessageToOtherServer(std::move(idt), std::move(token), actionMsg->action_as_PnjInteract(), handler);
         } else {
@@ -46,7 +50,7 @@ namespace fys::ws {
         }
     }
 
-    void WorldServerEngine::movePlayerAction(std::string &&idt, uint indexPlayer, const fb::Move *action)
+    std::vector<std::string_view> WorldServerEngine::movePlayerAction(std::string &&idt, uint indexPlayer, const fb::Move *action)
     {
         Coordinate &currentPos = _data.getPlayerPosition(indexPlayer);
         double angle = action->direction();
@@ -60,12 +64,19 @@ namespace fys::ws {
             currentPos.x = futurePos.x;
             currentPos.y = futurePos.y;
             _map.executePotentialTrigger();
+            return _data.getPlayerIdtsArroundPos(currentPos);
         }
     }
 
+    void WorldServerEngine::notifyClientOfMove(const std::vector<std::string_view> &ids, ws::ConnectionHandler &conn) const
+    {
+        for (const auto &id : ids) {
+//            fys::fb::WSActionNotification notification;
+        }
+    }
 
     void WorldServerEngine::forwardMessageToOtherServer(std::string &&idt, std::string &&token,
-            const fys::fb::PnjInteract *action, fys::ws::ConnectionHandler &handler)
+            const fys::fb::PnjInteract *action, ws::ConnectionHandler &handler) const
     {
         zmq::multipart_t msgToForward;
 //        msgToForward.addstr()

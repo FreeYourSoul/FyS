@@ -41,12 +41,12 @@ namespace fys::ws {
         return std::numeric_limits<uint>::max();
     }
 
-    std::vector<std::string_view> PlayersData::getPlayerIdtsArroundPlayer(const std::string &token,
+    std::vector<std::string_view> PlayersData::getPlayerIdtsArroundPlayer(uint indexPlayer,
                                                                           double distance) const noexcept {
 
     }
 
-    std::vector<std::string_view> PlayersData::getPlayerIdtsArroundPos(fys::ws::Coordinate position,
+    std::vector<std::string_view> PlayersData::getPlayerIdtsArroundPos(const fys::ws::Coordinate &position,
                                                                        double distance) const noexcept {
 
     }
