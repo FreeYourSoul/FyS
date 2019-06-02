@@ -50,7 +50,8 @@ namespace fys::ws {
                 const fys::fb::WSAction *actionMsg, ConnectionHandler &handler);
 
     private:
-        std::vector<std::string_view> movePlayerAction(std::string &&idt, uint indexPlayer, const fys::fb::Move *action);
+        void movePlayerAction(std::string &&idt, uint indexPlayer, const fb::Move *action,
+                              ws::ConnectionHandler &conn);
         void notifyClientOfMove(const std::vector<std::string_view> &ids, ws::ConnectionHandler &conn) const;
         void forwardMessageToOtherServer(std::string &&idt, std::string &&token,
                 const fb::PnjInteract *action, ConnectionHandler &handler) const;

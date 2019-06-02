@@ -32,6 +32,7 @@
 #include <variant>
 #include <utility>
 #include <tmxlite/Types.hpp>
+#include "PlayersData.hh"
 
 namespace fys::map::algo {
     /**
@@ -96,6 +97,7 @@ namespace fys::ws {
     enum class eElementType {
         BLOCK,
         TRIGGER,
+        TP_TRIGGER,
         NONE
     };
 
@@ -103,12 +105,16 @@ namespace fys::ws {
 
     public:
         constexpr void executePotentialTrigger(uint indexPlayer) const;
+
+        /**
+         * check if the element is of type BLOCK, if it is, check every collision blockers on the mapElement
+         * to verify if the coordinate collide with them.
+         */
         inline bool canGoThrough(double x, double y, std::size_t level) const noexcept;
 
         void setLevel(std::size_t level) { _level.set(level); }
         void setChangeLevel(std::size_t level) { _changeLevel.set(level); }
         constexpr void setType(eElementType type) { _type = type; }
-
         void addCollision(const tmx::FloatRect &object) {
             _collisions.emplace_back(object);
         }
@@ -125,7 +131,7 @@ namespace fys::ws {
         std::bitset<4> _level;
         std::bitset<4> _changeLevel; // set on stairs to pass from a level to another
         eElementType _type = eElementType::NONE;
-        std::variant<ConnectionHandler *, void *> _trigger;
+        std::variant<ConnectionHandler *, void *> _trigger; // TODO: replace it with LUA script reference
         std::vector<tmx::FloatRect> _collisions;
 
     };
@@ -140,8 +146,12 @@ namespace fys::ws {
         CollisionMap &operator=(const CollisionMap&) = delete;
 
         void buildMapFromTmx(const std::string &tmxMapPath);
+        /**
+         * Check if the position is in the boundary of the map before checking on the map
+         * @return true if it is possible to move on the given position, false otherwise
+         */
         bool canMoveTo(double x, double y, std::size_t level) const noexcept;
-        void executePotentialTrigger();
+        void executePotentialTrigger(uint index, const Coordinate &positionOnMap, ws::ConnectionHandler &conn);
 
     private:
         std::pair<double, double> _boundaryX;

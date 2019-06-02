@@ -38,11 +38,8 @@ namespace fys::ws {
             const fb::WSAction *actionMsg, ConnectionHandler &handler)
     {
         if (const uint index = _data.getIndexAndUpdatePlayerConnection(token, idt); index < std::numeric_limits<uint>::max()) {
-            if (actionMsg->action_type() == fb::Action::Action_Move) {
-                auto clientToNotify = movePlayerAction(std::move(idt), index, actionMsg->action_as_Move());
-                if (!clientToNotify.empty())
-                    notifyClientOfMove(clientToNotify, handler);
-            }
+            if (actionMsg->action_type() == fb::Action::Action_Move)
+                movePlayerAction(std::move(idt), index, actionMsg->action_as_Move(), handler);
             else if (actionMsg->action_type() == fb::Action::Action_PnjInteract)
                 forwardMessageToOtherServer(std::move(idt), std::move(token), actionMsg->action_as_PnjInteract(), handler);
         } else {
@@ -50,7 +47,7 @@ namespace fys::ws {
         }
     }
 
-    std::vector<std::string_view> WorldServerEngine::movePlayerAction(std::string &&idt, uint indexPlayer, const fb::Move *action)
+    void WorldServerEngine::movePlayerAction(std::string &&idt, uint indexPlayer, const fb::Move *action, ws::ConnectionHandler &conn)
     {
         Coordinate &currentPos = _data.getPlayerPosition(indexPlayer);
         double angle = action->direction();
@@ -63,8 +60,10 @@ namespace fys::ws {
         if (_map.canMoveTo(futurePos.x, futurePos.y, 0)) {
             currentPos.x = futurePos.x;
             currentPos.y = futurePos.y;
-            _map.executePotentialTrigger();
-            return _data.getPlayerIdtsArroundPos(currentPos);
+            _map.executePotentialTrigger(indexPlayer, currentPos, conn);
+            auto clientToNotify = _data.getPlayerIdtsArroundPos(currentPos);
+            if (!clientToNotify.empty())
+                notifyClientOfMove(clientToNotify, conn);
         }
     }
 

@@ -29,10 +29,6 @@
 #include <iostream>
 #include "engine/CollisionMap.hh"
 
-// Variant visitor trick
-template<class... Ts> struct overloaded : Ts... { using Ts::operator()...; };
-template<class... Ts> overloaded(Ts...) -> overloaded<Ts...>;
-
 namespace fys::ws {
 
     // CollisionMap
@@ -84,42 +80,42 @@ namespace fys::ws {
         }
     }
 
+    void CollisionMap::executePotentialTrigger(uint indexPlayer,
+            const fys::ws::Coordinate &posOnMap, ws::ConnectionHandler &conn)
+   {
+
+   }
+
     bool CollisionMap::canMoveTo(double x, double y, std::size_t level) const noexcept {
         if (x < _boundaryX.first || x > _boundaryX.second || y < _boundaryY.first || y > _boundaryY.second)
             return false;
         return _mapElems[static_cast<unsigned long>(x)][static_cast<unsigned long>(y)].canGoThrough(x, y, level);
     }
 
+    constexpr void MapElement::executePotentialTrigger(uint indexPlayer) const {
+        if (_type == eElementType::TRIGGER) {
+
+        }
+        else if (_type == eElementType::TP_TRIGGER) {
+
+        }
+    }
+
     // CollisionMap Element
     bool MapElement::canGoThrough(double x, double y, std::size_t level) const noexcept {
-//        bool canGoThrough = canGoToLevel(level);
-//        if (canGoThrough && _type == eElementType::BLOCK) {
-//            for (const auto &col : _collisions) {
-//              const auto &aabb = col.getAABB();
-//              if (x >= aabb.left && x <= aabb.left + aabb.width &&
-//                  y >= aabb.top && y <= aabb.top + aabb.height)
-//                 return false;
-//            }
-//        }
-//        return canGoThrough;
-        return canGoToLevel(level) && _type != eElementType::BLOCK;
+        bool canGoThrough = canGoToLevel(level);
+        if (canGoThrough && _type == eElementType::BLOCK) {
+            return std::none_of(_collisions.begin(), _collisions.end(), [x, y](const auto &aabb) {
+                   return (x >= aabb.left && x <= aabb.left + aabb.width &&
+                            y >= aabb.top && y <= aabb.top + aabb.height);
+                });
+        }
+        return canGoThrough;
+//        return canGoToLevel(level) && _type != eElementType::BLOCK;
     }
 
     bool MapElement::canGoToLevel(std::size_t goLevel) const noexcept {
         return goLevel == 0 || _level.test(goLevel) || _changeLevel.test(goLevel);
-    }
-
-    constexpr void MapElement::executePotentialTrigger(uint indexPlayer) const {
-        if (_type == eElementType::TRIGGER) {
-    //        std::visit(overloaded {
-    //            [](ConnectionHandler &trigger, const std::string &token) { // Player Trigger
-    //
-    //            },
-    //            [](void *trigger, const std::string &id) { // NPC Trigger
-    //
-    //            }
-    //        }, _trigger, token);
-        }
     }
 
     unsigned getX(double x, unsigned tileSizeX)  {
