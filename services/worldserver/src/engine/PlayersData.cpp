@@ -48,7 +48,21 @@ namespace fys::ws {
 
     std::vector<std::string_view> PlayersData::getPlayerIdtsArroundPos(const fys::ws::Coordinate &position,
                                                                        double distance) const noexcept {
-
+        std::vector<std::string_view> playerIdts;
+        playerIdts.reserve(LIMIT_NOTIFICATIONS_MOVE);
+        for (std::size_t i = 0; i < _positions.size(); ++i) {
+            if (playerIdts.size() >= LIMIT_NOTIFICATIONS_MOVE)
+                break;
+            Coordinate minimumPos = { _position.at(i).x - distance, _position.at(i).y - distance};
+            Coordinate maximumPos = { _position.at(i).x + distance, _position.at(i).y + distance};
+            
+            if ((position.x > minimumPos.x && position.x < maximumPos.x) &&
+                (position.y > minimumPos.y && position.x < maximumPos.y)) 
+            {
+                playerIdts.emplace_back(_identities.at(i));
+            }
+        }
+        return playerIdts;
     }
 
 }

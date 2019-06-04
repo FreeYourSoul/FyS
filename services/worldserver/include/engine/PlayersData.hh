@@ -37,6 +37,7 @@ namespace fys::util {
 namespace fys::ws {
     // unit of distance being a tile
     constexpr static double DEFAULT_DISTANCE = 30;
+    constexpr static unsigned LIMIT_NOTIFICATIONS_MOVE = 50;
 
     struct Coordinate {
         double x;
@@ -66,6 +67,15 @@ namespace fys::ws {
 
         std::vector<std::string_view> getPlayerIdtsArroundPlayer(uint indexPlayer,
                 double distance = DEFAULT_DISTANCE) const noexcept;
+                
+        /**
+         * @brief Get the Players Identities Arround the given position
+         * 
+         * @param position to check arround
+         * @param distance radius arround the given point to search
+         * @return std::vector<std::string_view> vector of view on the identities of the players arround the given point
+         * @note identities are zmq code to reply to a specific client via a router socket
+         */
         std::vector<std::string_view> getPlayerIdtsArroundPos(const Coordinate &position,
                 double distance = DEFAULT_DISTANCE) const noexcept;
 

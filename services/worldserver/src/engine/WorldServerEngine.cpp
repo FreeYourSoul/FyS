@@ -61,9 +61,9 @@ namespace fys::ws {
             currentPos.x = futurePos.x;
             currentPos.y = futurePos.y;
             _map.executePotentialTrigger(indexPlayer, currentPos, conn);
-            auto clientToNotify = _data.getPlayerIdtsArroundPos(currentPos);
-            if (!clientToNotify.empty())
-                notifyClientOfMove(clientToNotify, conn);
+            auto clientsToNotify = _data.getPlayerIdtsArroundPos(currentPos);
+            if (!clientsToNotify.empty())
+                notifyClientOfMove(clientsToNotify, conn);
         }
     }
 
