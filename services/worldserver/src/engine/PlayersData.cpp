@@ -25,9 +25,9 @@
 
 namespace fys::ws {
 
-    PlayersData::PlayersData(uint maxConnection) noexcept : _positions(maxConnection), _status(maxConnection) {
-
-    }
+    PlayersData::PlayersData(uint maxConnection) noexcept :
+         _positions(maxConnection), _status(maxConnection), _identities(maxConnection), _tokenToIndex(maxConnection)
+    {}
 
     Coordinate& PlayersData::getPlayerPosition(uint indexPlayer) {
         return _positions.at(indexPlayer);
@@ -41,18 +41,28 @@ namespace fys::ws {
         return std::numeric_limits<uint>::max();
     }
 
-    std::vector<std::string_view> PlayersData::getPlayerIdtsArroundPlayer(uint indexPlayer,
-                                                                          double distance) const noexcept {
-
+    std::vector<std::string_view> PlayersData::getPlayerIdtsArroundPlayer(
+        uint indexPlayer,
+        std::optional<std::cref<Coordinate>> position,
+        double distance) const noexcept 
+    {
+        if (position && indexPlayer < _positions.size())
+            return getPlayerIdtsArroundPos(*position, distance, indexPlayer);
+        return getPlayerIdtsArroundPos(getPlayerPosition(indexPlayer), distance, indexPlayer);
     }
 
-    std::vector<std::string_view> PlayersData::getPlayerIdtsArroundPos(const fys::ws::Coordinate &position,
-                                                                       double distance) const noexcept {
+    std::vector<std::string_view> PlayersData::getPlayerIdtsArroundPos(const fys::ws::Coordinate &position, 
+                                                                        double distance,
+                                                                        uint ignoreIndex
+                                                                       ) const noexcept 
+    {
         std::vector<std::string_view> playerIdts;
         playerIdts.reserve(LIMIT_NOTIFICATIONS_MOVE);
         for (std::size_t i = 0; i < _positions.size(); ++i) {
             if (playerIdts.size() >= LIMIT_NOTIFICATIONS_MOVE)
                 break;
+            if (i == ignoreIndex)
+                continue;
             Coordinate minimumPos = { _position.at(i).x - distance, _position.at(i).y - distance};
             Coordinate maximumPos = { _position.at(i).x + distance, _position.at(i).y + distance};
             

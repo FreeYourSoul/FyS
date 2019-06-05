@@ -61,8 +61,7 @@ namespace fys::ws {
             currentPos.x = futurePos.x;
             currentPos.y = futurePos.y;
             _map.executePotentialTrigger(indexPlayer, currentPos, conn);
-            auto clientsToNotify = _data.getPlayerIdtsArroundPos(currentPos);
-            if (!clientsToNotify.empty())
+            if (auto clientsToNotify = _data.getPlayerIdtsArroundPos(currentPos); !clientsToNotify.empty())
                 notifyClientOfMove(clientsToNotify, conn);
         }
     }
@@ -70,7 +69,9 @@ namespace fys::ws {
     void WorldServerEngine::notifyClientOfMove(const std::vector<std::string_view> &ids, ws::ConnectionHandler &conn) const
     {
         for (const auto &id : ids) {
-//            fys::fb::WSActionNotification notification;
+            flatbuffers::FlatBufferBuilder fbb;
+            auto identity = fbb.CreateString(id);
+            auto p = fys::fb::CreateWSActionNotification(fbb, fys::fb::Action::Action_Move, move.Union(), token);
         }
     }
 

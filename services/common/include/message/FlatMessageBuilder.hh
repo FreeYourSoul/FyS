@@ -21,48 +21,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#pragma once
 
-#ifndef FYS_WORLDSERVERENGINE_HH
-#define FYS_WORLDSERVERENGINE_HH
+namespace fys::common {
 
-#include <memory>
-#include <utility>
-#include <engine/PlayersData.hh>
-#include <engine/CollisionMap.hh>
-#include <WSAction_generated.h>
-
-namespace fys::fb {
-    class WSAction;
-}
-
-namespace fys::ws {
-
-    // forward declaration
-    class WorldServerContext;
-    class CollisionMap;
-
-    class WorldServerEngine {
-
-    public:
-        WorldServerEngine(const WorldServerContext& ctx);
-
-        void processPlayerInputMessage(std::string &&idt, std::string &&token,
-                const fys::fb::WSAction *actionMsg, ConnectionHandler &handler);
-
-    private:
-        inline void movePlayerAction(std::string &&idt, uint indexPlayer, const fb::Move *action,
-                              ws::ConnectionHandler &conn);
-        inline void notifyClientOfMove(const std::vector<std::string_view> &ids, ws::ConnectionHandler &conn) const;
-        inline void forwardMessageToOtherServer(std::string &&idt, std::string &&token,
-                const fb::PnjInteract *action, ConnectionHandler &handler) const;
-
-    private:
-        CollisionMap _map;
-        PlayersData _data;
-
-    };
+// TODO create flat buffer message builder (and test them)
 
 }
-
-
-#endif //FYS_WORLDSERVERENGINE_HH

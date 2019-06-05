@@ -22,7 +22,7 @@ table ChatServerReg {
 
 // Sent by the AuthServer, but also can be sent by the WorldServer in order to 
 table WSServerReg {
-    serverCode:string; // naming may be bad
+    serverCode:string;
     xPos:double = 0;
     yPos:double = 0;
 }

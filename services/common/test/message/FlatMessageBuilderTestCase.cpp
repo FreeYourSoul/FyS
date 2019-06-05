@@ -21,48 +21,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include <catch.hpp>
 
-#ifndef FYS_WORLDSERVERENGINE_HH
-#define FYS_WORLDSERVERENGINE_HH
-
-#include <memory>
-#include <utility>
-#include <engine/PlayersData.hh>
-#include <engine/CollisionMap.hh>
-#include <WSAction_generated.h>
-
-namespace fys::fb {
-    class WSAction;
-}
-
-namespace fys::ws {
-
-    // forward declaration
-    class WorldServerContext;
-    class CollisionMap;
-
-    class WorldServerEngine {
-
-    public:
-        WorldServerEngine(const WorldServerContext& ctx);
-
-        void processPlayerInputMessage(std::string &&idt, std::string &&token,
-                const fys::fb::WSAction *actionMsg, ConnectionHandler &handler);
-
-    private:
-        inline void movePlayerAction(std::string &&idt, uint indexPlayer, const fb::Move *action,
-                              ws::ConnectionHandler &conn);
-        inline void notifyClientOfMove(const std::vector<std::string_view> &ids, ws::ConnectionHandler &conn) const;
-        inline void forwardMessageToOtherServer(std::string &&idt, std::string &&token,
-                const fb::PnjInteract *action, ConnectionHandler &handler) const;
-
-    private:
-        CollisionMap _map;
-        PlayersData _data;
-
-    };
+TEST_CASE("FlatMessageBuilder : Create WSActionNotification") {
 
 }
 
+TEST_CASE("FlatMessageBuilder : Create WSAction") {
 
-#endif //FYS_WORLDSERVERENGINE_HH
+    SECTION ("Move") {
+
+    }
+
+    SECTION("PnjInterract") {
+
+    }
+
+}
+
+TEST_CASE("FlatMessageBuilder : Create Communication") {
+
+}

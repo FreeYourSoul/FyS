@@ -66,7 +66,7 @@ namespace fys::ws {
         }
         else {
             _worldServer.processPlayerInputMessage(std::move(idt), std::move(token),
-                    fys::fb::GetWSAction(content.data()), _connectionHandler);
+                    fb::GetWSAction(content.data()), _connectionHandler);
         }
     }
 

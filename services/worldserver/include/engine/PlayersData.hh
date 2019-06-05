@@ -46,7 +46,8 @@ namespace fys::ws {
 
     enum class PlayerStatus : uint {
         FIGHTING,
-        NORMAL
+        MOVING,
+        STANDING
     };
 
     class PlayersData {
@@ -56,6 +57,7 @@ namespace fys::ws {
 
 
         Coordinate &getPlayerPosition(uint indexPlayer);
+        
         /**
          * Retrieve the index corresponding to the given token
          *
@@ -63,9 +65,18 @@ namespace fys::ws {
          * @param idt
          * @return
          */
-        uint getIndexAndUpdatePlayerConnection(const std::string &token, std::string idt);
+        inline uint getIndexAndUpdatePlayerConnection(const std::string &token, std::string idt);
 
-        std::vector<std::string_view> getPlayerIdtsArroundPlayer(uint indexPlayer,
+        /**
+         * @brief Get the Players Identities Arround the given player except himself
+         * 
+         * @param indexPlayer player
+         * @param position 
+         * @param distance 
+         * @return std::vector<std::string_view> 
+         */
+        inline std::vector<std::string_view> getPlayerIdtsArroundPlayer(uint indexPlayer,
+                std::optional<std::cref<Coordinate>> position,
                 double distance = DEFAULT_DISTANCE) const noexcept;
                 
         /**
@@ -77,7 +88,8 @@ namespace fys::ws {
          * @note identities are zmq code to reply to a specific client via a router socket
          */
         std::vector<std::string_view> getPlayerIdtsArroundPos(const Coordinate &position,
-                double distance = DEFAULT_DISTANCE) const noexcept;
+                double distance = DEFAULT_DISTANCE,
+                uint ignoreIndex = LIMIT_NOTIFICATIONS_MOVE) const noexcept;
 
     private:
         std::vector<Coordinate> _positions;
