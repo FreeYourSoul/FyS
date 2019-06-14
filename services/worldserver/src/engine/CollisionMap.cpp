@@ -66,34 +66,37 @@ namespace fys::ws {
 
         for (const auto& layer : layers) {
             if (layer->getType() == tmx::Layer::Type::Object) {
-                /**
-                 * If collision layer, fill every element from the layer in the map as BLOCK
-                 * and add the AABB (Axis Aligned Bounding Box) object in the collision list
-                 */
-                if (const auto& objectLayer = layer->getLayerAs<tmx::ObjectGroup>();
-                     map::algo::isCollisionLayer(objectLayer)) 
-                {
-                    const auto& objects = objectLayer.getObjects();
-                    for (const auto& object : objects) {
-                        for (auto y = getX(object.getAABB().top, map.getTileSize().y);
-                                y < getX(object.getAABB().top + object.getAABB().height, map.getTileSize().y); ++y)
-                        {
-                            for (auto x = getY(object.getAABB().left, map.getTileSize().x);
-                                x < getY(object.getAABB().left + object.getAABB().width, map.getTileSize().x); ++x)
-                            {
-                                _mapElems[y][x].setType(eElementType::BLOCK);
-                                _mapElems[y][x].addCollision(object.getAABB());
-                            }
-                        }
-                    }
+                const auto& objectLayer = layer->getLayerAs<tmx::ObjectGroup>();
+            
+                if (map::algo::isCollisionLayer(objectLayer)) {
+                    addCollisionInMap(objectLayer)
                 }
                 else if (map::algo::isTriggerLayer(objectLayer)) {
-                    // TODO : Add triggers on the map
+                    addTriggerInMap(objectLayer);
                 }
             }
         }
     }
 
+    void CollisionMap::addCollisionInMap(const tmx::ObjectGroup& collisionLayer) {
+        const auto& objects = collisionLayer.getObjects();
+        for (const auto& object : objects) {
+            for (auto y = getX(object.getAABB().top, map.getTileSize().y);
+                    y < getX(object.getAABB().top + object.getAABB().height, map.getTileSize().y); ++y)
+            {
+                for (auto x = getY(object.getAABB().left, map.getTileSize().x);
+                    x < getY(object.getAABB().left + object.getAABB().width, map.getTileSize().x); ++x)
+                {
+                    _mapElems[y][x].setType(eElementType::BLOCK);
+                    _mapElems[y][x].addCollision(object.getAABB());
+                }
+            }
+        }
+    }
+
+    void CollisionMap::addTriggerInMap(const tmx::ObjectGroup& triggerLayer) {
+        // TODO : Add triggers on the map
+    }
 
     void CollisionMap::executePotentialTrigger(uint indexPlayer,
             const fys::ws::PlayerInfo &posOnMap, ws::ConnectionHandler &conn)

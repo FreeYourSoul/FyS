@@ -152,6 +152,23 @@ namespace fys::ws {
         void executePotentialTrigger(uint index, const PlayerInfo &positionOnMap, ws::ConnectionHandler &conn);
 
     private:
+        /**
+         * @brief Add the the collision elements (witht their AABB objects) into the map.
+         * 
+         * AABB Objects stands for Axis-Aligned Bounding Box. Basically coordinates to use as hit box for the tiles.
+         */
+        void addCollisionInMap(const tmx::ObjectGroup& collisionLayer);
+        /**
+         * @brief Add the trigger elements into the map, and link the function associated to this trigger
+         * 
+         * A trigger is defined with an id, that is going to be checked against the database,
+         *   - Some specific trigger (teleportation trigger) will trigger a complete C++ code that is going to
+         *     teleport the player into another location
+         *   - The classical one is going to trigger a script retrieved from the DB thanks to the id defining the trigger
+         */
+        void addTriggerInMap(const tmx::ObjectGroup& triggerLayer);
+
+    private:
         std::pair<double, double> _boundaryX;
         std::pair<double, double> _boundaryY;
         std::vector<ProximityServer> _serverProximity;
