@@ -81,7 +81,7 @@ namespace fys::ws {
     }
 
     void CollisionMap::executePotentialTrigger(uint indexPlayer,
-            const fys::ws::Coordinate &posOnMap, ws::ConnectionHandler &conn)
+            const fys::ws::PlayerInfo &posOnMap, ws::ConnectionHandler &conn)
    {
 
    }

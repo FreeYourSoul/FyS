@@ -34,39 +34,50 @@ namespace fys::ws {
     WorldServerEngine::WorldServerEngine(const fys::ws::WorldServerContext &ctx) : _map(ctx) {
     }
 
+    void WorldServerEngine::executePendingActions(ws::ConnectionHandler &conn) {
+        _data.executeOnPlayers([this](uint indexPlayer, PlayerStatus statusPlayer, PlayerInfo& pi, const std::string &identityPlayer){
+            if (statusPlayer == PlayerStatus::MOVING) {
+                movePlayerAction(identityPlayer, indexPlayer, pi, conn);
+            }
+        });
+    }
+
     void WorldServerEngine::processPlayerInputMessage(std::string &&idt, std::string &&token,
             const fb::WSAction *actionMsg, ConnectionHandler &handler)
     {
-        if (const uint index = _data.getIndexAndUpdatePlayerConnection(token, idt); index < std::numeric_limits<uint>::max()) {
-            if (actionMsg->action_type() == fb::Action::Action_Move)
-                movePlayerAction(std::move(idt), index, actionMsg->action_as_Move(), handler);
-            else if (actionMsg->action_type() == fb::Action::Action_PnjInteract)
-                forwardMessageToOtherServer(std::move(idt), std::move(token), actionMsg->action_as_PnjInteract(), handler);
+        if (const uint index = _data.getIndexAndUpdatePlayerConnection(token, std::move(idt)); index < std::numeric_limits<uint>::max()) {
+            if (actionMsg->action_type() == fb::Action::Action_Move) {
+                _data.movePlayer(actionMsg->action_as_Move()->direction());
+            }
+            else if (actionMsg->action_type() == fb::Action::Action_Interruption) {
+                if (auto moveAction = actionMsg->action_as_Move(); moveAction->enterArena())
+                    _data.setPlayerArena(index, moveAction->arenaId());
+                else
+                    _data.stopPlayerMove(index);
+            }
         } else {
             SPDLOG_ERROR("Player of token {} has not been registered before sending messages", token);
         }
     }
 
-    void WorldServerEngine::movePlayerAction(std::string &&idt, uint indexPlayer, const fb::Move *action, ws::ConnectionHandler &conn)
+    void WorldServerEngine::movePlayerAction(const std::string &idt, uint indexPlayer, PlayerInfo &pi, ws::ConnectionHandler &conn)
     {
-        Coordinate &currentPos = _data.getPlayerPosition(indexPlayer);
-        double angle = action->direction();
         double velocity = 1;
-        Coordinate futurePos = {
-                currentPos.x * (velocity * std::cos(angle)),
-                currentPos.y * (velocity * std::sin(angle))
+        PlayerInfo futurePos = {
+                pi.x * (velocity * std::cos(pi.angle)),
+                pi.y * (velocity * std::sin(pi.angle))
         };
 
         if (_map.canMoveTo(futurePos.x, futurePos.y, 0)) {
-            currentPos.x = futurePos.x;
-            currentPos.y = futurePos.y;
+            pi.x = futurePos.x;
+            pi.y = futurePos.y;
             _map.executePotentialTrigger(indexPlayer, currentPos, conn);
             if (auto clientsToNotify = _data.getPlayerIdtsArroundPos(currentPos); !clientsToNotify.empty())
-                notifyClientOfMove(clientsToNotify, conn);
+                notifyClientsOfMove(clientsToNotify, conn);
         }
     }
 
-    void WorldServerEngine::notifyClientOfMove(const std::vector<std::string_view> &ids, ws::ConnectionHandler &conn) const
+    void WorldServerEngine::notifyClientsOfMove(const std::vector<std::string_view> &ids, ws::ConnectionHandler &conn) const
     {
         for (const auto &id : ids) {
             flatbuffers::FlatBufferBuilder fbb;
@@ -75,11 +86,4 @@ namespace fys::ws {
         }
     }
 
-    void WorldServerEngine::forwardMessageToOtherServer(std::string &&idt, std::string &&token,
-            const fys::fb::PnjInteract *action, ws::ConnectionHandler &handler) const
-    {
-        zmq::multipart_t msgToForward;
-//        msgToForward.addstr()
-        handler.sendMessageToDispatcher(std::move(msgToForward));
-    }
 }

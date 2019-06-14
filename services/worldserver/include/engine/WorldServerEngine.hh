@@ -49,12 +49,11 @@ namespace fys::ws {
         void processPlayerInputMessage(std::string &&idt, std::string &&token,
                 const fys::fb::WSAction *actionMsg, ConnectionHandler &handler);
 
+        void executePendingActions(ws::ConnectionHandler &conn);
+
     private:
-        inline void movePlayerAction(std::string &&idt, uint indexPlayer, const fb::Move *action,
-                              ws::ConnectionHandler &conn);
-        inline void notifyClientOfMove(const std::vector<std::string_view> &ids, ws::ConnectionHandler &conn) const;
-        inline void forwardMessageToOtherServer(std::string &&idt, std::string &&token,
-                const fb::PnjInteract *action, ConnectionHandler &handler) const;
+        inline void movePlayerAction(const std::string &idt, uint indexPlayer, PlayerInfo &pi, ws::ConnectionHandler &conn)
+        inline void notifyClientsOfMove(const std::vector<std::string_view> &ids, ws::ConnectionHandler &conn) const;
 
     private:
         CollisionMap _map;

@@ -56,6 +56,7 @@ namespace fys::ws {
                     processMessage(std::move(idt), std::move(token), msg.at(2), internalMagic);
                 }
             );
+            _worldServer.executePendingActions(_connectionHandler);
         }
     }
 

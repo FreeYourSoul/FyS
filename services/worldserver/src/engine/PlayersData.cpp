@@ -29,7 +29,7 @@ namespace fys::ws {
          _positions(maxConnection), _status(maxConnection), _identities(maxConnection), _tokenToIndex(maxConnection)
     {}
 
-    Coordinate& PlayersData::getPlayerPosition(uint indexPlayer) {
+    PlayerInfo& PlayersData::getPlayerPosition(uint indexPlayer) {
         return _positions.at(indexPlayer);
     }
 
@@ -43,7 +43,7 @@ namespace fys::ws {
 
     std::vector<std::string_view> PlayersData::getPlayerIdtsArroundPlayer(
         uint indexPlayer,
-        std::optional<std::cref<Coordinate>> position,
+        std::optional<std::cref<PlayerInfo>> position,
         double distance) const noexcept 
     {
         if (position && indexPlayer < _positions.size())
@@ -51,7 +51,7 @@ namespace fys::ws {
         return getPlayerIdtsArroundPos(getPlayerPosition(indexPlayer), distance, indexPlayer);
     }
 
-    std::vector<std::string_view> PlayersData::getPlayerIdtsArroundPos(const fys::ws::Coordinate &position, 
+    std::vector<std::string_view> PlayersData::getPlayerIdtsArroundPos(const fys::ws::PlayerInfo &position, 
                                                                         double distance,
                                                                         uint ignoreIndex
                                                                        ) const noexcept 
@@ -63,8 +63,8 @@ namespace fys::ws {
                 break;
             if (i == ignoreIndex)
                 continue;
-            Coordinate minimumPos = { _position.at(i).x - distance, _position.at(i).y - distance};
-            Coordinate maximumPos = { _position.at(i).x + distance, _position.at(i).y + distance};
+            PlayerInfo minimumPos = { _position.at(i).x - distance, _position.at(i).y - distance};
+            PlayerInfo maximumPos = { _position.at(i).x + distance, _position.at(i).y + distance};
             
             if ((position.x > minimumPos.x && position.x < maximumPos.x) &&
                 (position.y > minimumPos.y && position.x < maximumPos.y)) 

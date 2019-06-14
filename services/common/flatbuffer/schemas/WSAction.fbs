@@ -1,10 +1,15 @@
 
 namespace fys.fb;
 
-union Action { Move, PnjInteract }
+union Action { Move, Interruption, PnjInteract }
 
 table Move {
     direction:double;
+}
+
+table Interruption {
+    enterArena:bool;
+    arenaId:string;
 }
 
 table PnjInteract {

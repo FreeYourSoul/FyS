@@ -108,7 +108,7 @@ namespace fys::ws {
 
         /**
          * check if the element is of type BLOCK, if it is, check every collision blockers on the mapElement
-         * to verify if the coordinate collide with them.
+         * to verify if the PlayerInfo collide with them.
          */
         inline bool canGoThrough(double x, double y, std::size_t level) const noexcept;
 
@@ -151,7 +151,7 @@ namespace fys::ws {
          * @return true if it is possible to move on the given position, false otherwise
          */
         bool canMoveTo(double x, double y, std::size_t level) const noexcept;
-        void executePotentialTrigger(uint index, const Coordinate &positionOnMap, ws::ConnectionHandler &conn);
+        void executePotentialTrigger(uint index, const PlayerInfo &positionOnMap, ws::ConnectionHandler &conn);
 
     private:
         std::pair<double, double> _boundaryX;

@@ -39,9 +39,10 @@ namespace fys::ws {
     constexpr static double DEFAULT_DISTANCE = 30;
     constexpr static unsigned LIMIT_NOTIFICATIONS_MOVE = 50;
 
-    struct Coordinate {
+    struct PlayerInfo {
         double x;
         double y;
+        double angle;
     };
 
     enum class PlayerStatus : uint {
@@ -55,15 +56,35 @@ namespace fys::ws {
     public:
         explicit PlayersData(uint maxConnection = 1000) noexcept;
 
-
-        Coordinate &getPlayerPosition(uint indexPlayer);
+        PlayerInfo &accessPlayerPosition(uint indexPlayer);
         
+        template<typename Action>
+        void executeOnPlayers(Action && actionToExecute) {
+            for (uint i = 0; i < _status.size(); ++i) {
+                std::forward<Action>(i, actionToExecute)(_status.at(i), _positions.at(i), _identities.at(i));
+            }
+        }
+
+        void setPlayerMoveAction(uint index, double direction) {
+            _positions.angle = direction;
+            _status.at(index) = PlayerStatus::MOVING;
+        }
+
+        void stopPlayerMove(uint index) {
+            _status.at(index) = PlayerStatus::STANDING;
+        }
+
+        void setPlayerArena(uint index, const std:string &arenaId) {
+            _status.at(index) = PlayerStatus::FIGHTING;
+        }
+
         /**
          * Retrieve the index corresponding to the given token
          *
          * @param token
          * @param idt
-         * @return
+         * @return index corresponding to the given token, 
+         *         std::numeric_limits<uint>::max() is returned if no corresponding token
          */
         inline uint getIndexAndUpdatePlayerConnection(const std::string &token, std::string idt);
 
@@ -76,7 +97,7 @@ namespace fys::ws {
          * @return std::vector<std::string_view> 
          */
         inline std::vector<std::string_view> getPlayerIdtsArroundPlayer(uint indexPlayer,
-                std::optional<std::cref<Coordinate>> position,
+                std::optional<std::cref<PlayerInfo>> position,
                 double distance = DEFAULT_DISTANCE) const noexcept;
                 
         /**
@@ -87,12 +108,12 @@ namespace fys::ws {
          * @return std::vector<std::string_view> vector of view on the identities of the players arround the given point
          * @note identities are zmq code to reply to a specific client via a router socket
          */
-        std::vector<std::string_view> getPlayerIdtsArroundPos(const Coordinate &position,
+        std::vector<std::string_view> getPlayerIdtsArroundPos(const PlayerInfo &position,
                 double distance = DEFAULT_DISTANCE,
                 uint ignoreIndex = LIMIT_NOTIFICATIONS_MOVE) const noexcept;
 
     private:
-        std::vector<Coordinate> _positions;
+        std::vector<PlayerInfo> _positions;
         std::vector<PlayerStatus> _status;
         std::vector<std::string> _identities;
         std::unordered_map<std::string, uint> _tokenToIndex;
