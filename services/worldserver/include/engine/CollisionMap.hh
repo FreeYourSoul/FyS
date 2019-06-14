@@ -35,18 +35,6 @@
 #include "PlayersData.hh"
 
 namespace fys::map::algo {
-    /**
-     * Check if the given TileLayer is used only for cosmetic purpose, meaning it has no in-world impact.
-     * @tparam TmxLayer tmx::TileLayer
-     * @param layer perfect forwarding object
-     * @return true if the given Tile layer is used for cosmetic (no in-world impact), false otherwise
-     */
-    template <typename TmxLayer>
-    bool isNotCosmeticLayer(TmxLayer && layer) {
-        return std::none_of(layer.getProperties().begin(), layer.getProperties().end(), [](const auto &prop){
-            return prop.getName().find("cosmetic") != std::string::npos;
-        });
-    }
 
     /**
      * Check if the given object layer is used for collision
@@ -61,6 +49,19 @@ namespace fys::map::algo {
         });
     }
 
+    /**
+     * Check if the given object layer is used for any trigger
+     * @tparam TmxLayer tmx::GroupObjects layer
+     * @param layer perfect forwarding object
+     * @return true if the given group object layer is used for any trigger, false otherwise
+     */
+    template <typename TmxLayer>
+    bool isTriggerLayer(TmxLayer && layer) {
+        return std::any_of(layer.getProperties().begin(), layer.getProperties().end(), [](const auto &prop){
+            return prop.getName().find("trigger") != std::string::npos;
+        });
+    }
+
 } // end namespace map::algo
 
 namespace fys::ws {
@@ -68,9 +69,6 @@ namespace fys::ws {
     // forward declaration
     class WorldServerContext;
     class ConnectionHandler;
-
-    unsigned getX(double x, unsigned tileSizeX = 0);
-    unsigned getY(double y, unsigned tileSizeY = 0);
 
     class ProximityServer {
         struct ProximityServerAxis {

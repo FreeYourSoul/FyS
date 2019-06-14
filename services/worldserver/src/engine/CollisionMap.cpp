@@ -31,6 +31,19 @@
 
 namespace fys::ws {
 
+    namespace {
+        unsigned getX(double x, unsigned tileSizeX)  {
+            static const unsigned gTileSizeX = tileSizeX;
+            return static_cast<unsigned>(x) / gTileSizeX;
+        }
+
+        unsigned getY(double y, unsigned tileSizeY)  {
+            static const unsigned gTileSizeY = tileSizeY;
+            return static_cast<unsigned>(y) / gTileSizeY;
+        }
+    }
+    
+
     // CollisionMap
     CollisionMap::CollisionMap(const fys::ws::WorldServerContext &ctx) :
         _boundaryX(ctx.getServerXBoundaries()),
@@ -41,44 +54,46 @@ namespace fys::ws {
 
     void CollisionMap::buildMapFromTmx(const std::string &tmxMapPath) {
         tmx::Map map;
-        if (map.load(tmxMapPath)) {
-            const auto& layers = map.getLayers();
+        if (!map.load(tmxMapPath)) {
+            SPDLOG_ERROR("TMX CollisionMap couldn't be loaded");
+            return;
+        }
+        const auto& layers = map.getLayers();
 
-            _mapElems.resize(map.getTileCount().y);
-            for (auto &elemOnY : _mapElems)
-                elemOnY.resize(map.getTileCount().x);
+        _mapElems.resize(map.getTileCount().y);
+        for (auto &elemOnY : _mapElems)
+            elemOnY.resize(map.getTileCount().x);
 
-            for (const auto& layer : layers) {
-                if (layer->getType() == tmx::Layer::Type::Object) {
-                    const auto& objectLayer = layer->getLayerAs<tmx::ObjectGroup>();
-
-                    if (map::algo::isCollisionLayer(objectLayer)) {
-                        const auto& objects = objectLayer.getObjects();
-                        for (const auto& object : objects) {
-                            for (auto y = getX(object.getAABB().top, map.getTileSize().y);
+        for (const auto& layer : layers) {
+            if (layer->getType() == tmx::Layer::Type::Object) {
+                /**
+                 * If collision layer, fill every element from the layer in the map as BLOCK
+                 * and add the AABB (Axis Aligned Bounding Box) object in the collision list
+                 */
+                if (const auto& objectLayer = layer->getLayerAs<tmx::ObjectGroup>();
+                     map::algo::isCollisionLayer(objectLayer)) 
+                {
+                    const auto& objects = objectLayer.getObjects();
+                    for (const auto& object : objects) {
+                        for (auto y = getX(object.getAABB().top, map.getTileSize().y);
                                 y < getX(object.getAABB().top + object.getAABB().height, map.getTileSize().y); ++y)
+                        {
+                            for (auto x = getY(object.getAABB().left, map.getTileSize().x);
+                                x < getY(object.getAABB().left + object.getAABB().width, map.getTileSize().x); ++x)
                             {
-                                for (auto x = getY(object.getAABB().left, map.getTileSize().x);
-                                    x < getY(object.getAABB().left + object.getAABB().width, map.getTileSize().x); ++x)
-                                {
-                                    _mapElems[y][x].setType(eElementType::BLOCK);
-                                    _mapElems[y][x].addCollision(object.getAABB());
-                                }
+                                _mapElems[y][x].setType(eElementType::BLOCK);
+                                _mapElems[y][x].addCollision(object.getAABB());
                             }
                         }
                     }
                 }
-                else if (layer->getType() == tmx::Layer::Type::Tile) {
-                    if (const auto& tileLayer = layer->getLayerAs<tmx::TileLayer>();
-                        map::algo::isNotCosmeticLayer(tileLayer)) {
-
-                    }
+                else if (map::algo::isTriggerLayer(objectLayer)) {
+                    // TODO : Add triggers on the map
                 }
             }
-        } else {
-            SPDLOG_ERROR("TMX CollisionMap couldn't be loaded");
         }
     }
+
 
     void CollisionMap::executePotentialTrigger(uint indexPlayer,
             const fys::ws::PlayerInfo &posOnMap, ws::ConnectionHandler &conn)
@@ -116,16 +131,6 @@ namespace fys::ws {
 
     bool MapElement::canGoToLevel(std::size_t goLevel) const noexcept {
         return goLevel == 0 || _level.test(goLevel) || _changeLevel.test(goLevel);
-    }
-
-    unsigned getX(double x, unsigned tileSizeX)  {
-        static const unsigned gTileSizeX = tileSizeX;
-        return static_cast<unsigned>(x) / gTileSizeX;
-    }
-
-    unsigned getY(double y, unsigned tileSizeY)  {
-        static const unsigned gTileSizeY = tileSizeY;
-        return static_cast<unsigned>(y) / gTileSizeY;
     }
 
 }
