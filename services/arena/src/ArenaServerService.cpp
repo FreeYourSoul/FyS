@@ -21,47 +21,31 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
-#ifndef FYS_CONNECTIONHANDLER_HH
-#define FYS_CONNECTIONHANDLER_HH
-
 #include <spdlog/spdlog.h>
 #include <zmq_addon.hpp>
-#include "WorldServerContext.hh"
+#include <flatbuffers/flatbuffers.h>
+#include <WSAction_generated.h>
+#include <Notifications_generated.h>
+#include "ArenaServerService.hh"
 
-namespace fys::ws {
+namespace fys::arena {
 
-    class ConnectionHandler {
+    ArenaServerService::ArenaServerService(const WorldServerContext &ctx) : _worldServer(ctx) {
+        _connectionHandler.setupConnectionManager(ctx);
 
-    public:
-        explicit ConnectionHandler(int threadNumber = 1) noexcept;
+    }
 
-        void setupConnectionManager(const fys::ws::WorldServerContext &ctx) noexcept;
-        void sendMessageToDispatcher(zmq::multipart_t && msg) noexcept;
+    void ArenaServerService::runServerLoop() noexcept {
+        SPDLOG_INFO("ArenaServer loop started");
 
-        template <typename Handler>
-        void pollAndProcessSubMessage(Handler && handler) noexcept {
-            //  Initialize poll set
-            zmq::pollitem_t items[] = {
-                { _subSocket, 0, ZMQ_POLLIN, 0 }
-            };
-            zmq::poll(&items[0], 1);
-            if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
-                zmq::multipart_t msg;
-                if (!msg.recv(_subSocket))
-                    SPDLOG_ERROR("Error while reading on the listener socket");
-                else
-                    std::forward<Handler>(handler)(std::move(msg));
-            }
+        while (true) {
+            _connectionHandler.pollAndProcessSubMessage(
+                [this](zmq::multipart_t &&msg) {
+                });
         }
+    }
 
-    private:
-        zmq::context_t _zmqContext;
-        zmq::socket_t _subSocket; // todo rename _subConnectionOnDispatcher
-        zmq::socket_t _dispatcherConnection; // todo rename _connectionToDispatcher
-
-    };
+    void ArenaServerService::processMessage(std::string &&idt, std::string &&token, const zmq::message_t &content) {
+    }
 
 }
-
-#endif //FYS_CONNECTIONHANDLER_HH

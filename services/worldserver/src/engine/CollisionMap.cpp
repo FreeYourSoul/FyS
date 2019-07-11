@@ -98,11 +98,10 @@ namespace fys::ws {
         // TODO : Add triggers on the map
     }
 
-    void CollisionMap::executePotentialTrigger(uint indexPlayer,
-            const fys::ws::PlayerInfo &posOnMap, ws::ConnectionHandler &conn)
-   {
-
-   }
+    void CollisionMap::executePotentialTrigger(uint indexPlayer, const fys::ws::PlayerInfo &posOnMap, 
+                                                ws::ConnectionHandler &conn)
+    {
+    }
 
     bool CollisionMap::canMoveTo(double x, double y, std::size_t level) const noexcept {
         if (x < _boundaryX.first || x > _boundaryX.second || y < _boundaryY.first || y > _boundaryY.second)
@@ -110,6 +109,13 @@ namespace fys::ws {
         return _mapElems[static_cast<unsigned long>(x)][static_cast<unsigned long>(y)].canGoThrough(x, y, level);
     }
 
+
+
+
+
+
+
+    // CollisionMap Element
     constexpr void MapElement::executePotentialTrigger(uint indexPlayer) const {
         if (_type == eElementType::TRIGGER) {
 
@@ -119,7 +125,6 @@ namespace fys::ws {
         }
     }
 
-    // CollisionMap Element
     bool MapElement::canGoThrough(double x, double y, std::size_t level) const noexcept {
         bool canGoThrough = canGoToLevel(level);
         if (canGoThrough && _type == eElementType::BLOCK) {
@@ -129,7 +134,6 @@ namespace fys::ws {
                 });
         }
         return canGoThrough;
-//        return canGoToLevel(level) && _type != eElementType::BLOCK;
     }
 
     bool MapElement::canGoToLevel(std::size_t goLevel) const noexcept {

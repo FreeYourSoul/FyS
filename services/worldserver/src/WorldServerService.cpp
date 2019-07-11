@@ -54,8 +54,8 @@ namespace fys::ws {
 
                     SPDLOG_DEBUG("message received with idt={}, token={},\nmsg={}", idt, token, msg.str());
                     processMessage(std::move(idt), std::move(token), msg.at(2), internalMagic);
-                }
-            );
+                });
+            
             _worldServer.executePendingActions(_connectionHandler);
         }
     }
