@@ -12,7 +12,7 @@ enable_testing()
 add_executable(common_test
         ${CMAKE_CURRENT_LIST_DIR}/catchMain.cpp
         ${CMAKE_CURRENT_LIST_DIR}/WSActionFlatbufferTestCase.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/message/FlatMessageBuilderTestCase.cpp
+#        ${CMAKE_CURRENT_LIST_DIR}/message/FlatMessageBuilderTestCase.cpp
         )
 
 target_link_libraries(common_test cppzmq Catch2::Catch2)
