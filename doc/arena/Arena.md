@@ -29,7 +29,7 @@ It is a fighting system based on a ordering list of the player based on the spee
 First because its funnier to invent an original thing instead of copying existing concept. On top of that, while I loved FFX, I think some issue in the gameplay makes it a little bit too easy to play. Final Fantasy X is not particularly famous for being hard. And I try to solve those issue while also adding some elements making the gameplay maybe more enjoyable in a MMORPG context (multiplayer).  
 I would like first to thanks [CarNage64](https://www.twitch.tv/carnage64) whom is a twitch stream that speedrun FF7. He gave me advices on how the FFX is imperfect and how it could be improved.
 
-![ffx-fight](https://github.com/FreeYourSoul/FyS/tree/master/doc/other/FFX-Fight.png)
+![ffx-fight](https://raw.githubusercontent.com/FreeYourSoul/FyS/master/doc/other/FFX-Fight.png)
 
 ### What are the downsides of CTB?
 
