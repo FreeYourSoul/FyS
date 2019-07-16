@@ -16,7 +16,7 @@ The arena will have multiple requirement to fulfill:
 The fighting pit (FP) is an instance of a fight in the world of FyS Online. FyS Online has a turn per turn battle system called SRTb (**S**ide **R**eal **T**ime **B**attle).  
 This is strongly inspired from the Final Fantasy X battle (CTBB : Conditional Turn Based Battle) but is quite different in pratice.
 
-## Reminder of how CTBB (FFX battle system)
+## Reminder of how CTB (FFX battle system)
 
 ### Exanation taken from finalfantasy.fandom.com
 CTB is a turn-based system which does not operate in rounds, instead it uses an Act List that is affected through various means and thus does not guarantee that each participant in a battle will have an equal number of turns. Units with higher speed take more turns than slower ones, making speed more important than in other turn-based battle systems. Players can substitute party members mid-battle adding a new level of strategy.  
@@ -26,9 +26,16 @@ It is a fighting system based on a ordering list of the player based on the spee
 
 ## Why making a new battle system?
 
-First because its funnier to invent an original thing instead of copying existing concept. On top of that, while I loved FFX, I think some issue in the gameplay makes it a little bit too easy to play. It is try that Final Fantasy X is not particularly famous for being hard. And I try to solve those issue while also adding some element making the gameplay maybe more enjoyable in a MMORPG context.  
+First because its funnier to invent an original thing instead of copying existing concept. On top of that, while I loved FFX, I think some issue in the gameplay makes it a little bit too easy to play. Final Fantasy X is not particularly famous for being hard. And I try to solve those issue while also adding some elements making the gameplay maybe more enjoyable in a MMORPG context (multiplayer).  
 I would like first to thanks [CarNage64](https://www.twitch.tv/carnage64) whom is a twitch stream that speedrun FF7. He gave me advices on how the FFX is imperfect and how it could be improved.
 
 ### What are the downsides of CTB?
 
+The way CTB is designed present several issues:
+* Infinite time turn: Turns are potentially infinite, everything is based on the priority list displayed on the UI which is calculated based on the speed of your characters (and enemies). Which gives you all the time you want to elaborate a strategy, to heal your hurt characters at the last second (knowing perfectly that the opponent won't attack before you heal). This last point being important as the "stress of potential death" is almost not present. This point is certainly the biggest flaw in CTB.
+* Too easy to change characters: In CTB, you have 4 characters fighting and many more are waiting behind and can replace your character currently in play. This is a nice thing as it increase the number of playable character making the game more interesting. But the issue is that there is no penalty changing character in-fight (the turn of the switched character not being lost). This also makes the game easier as you can retreat your hurt character before the enemy attack, and makes him come back afterwards basically for free.
+* Not adapted for multiplayer
 
+# A new battle system SCTB (Side Condition Timed Battle)
+
+The name of the 

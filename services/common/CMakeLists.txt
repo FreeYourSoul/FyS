@@ -1,3 +1,5 @@
+cmake_minimum_required( VERSION 3.6 )
+
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_LIST_DIR}/cmake/modules/")
 find_package(FlatBuffers REQUIRED)
 
@@ -13,6 +15,7 @@ set(FLAT_BUFFER_SCHEMAS
 
 if (TARGET generateFbs)
 else()
+    message("Flatbuffer generation")
     build_flatbuffers("${FLAT_BUFFER_SCHEMAS}"
         "${FLATBUFFER_SCHEMA_DIR}"
         generateFbs
