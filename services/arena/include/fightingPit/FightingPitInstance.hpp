@@ -25,4 +25,29 @@
 #ifndef FYS_FIGHTINGPITINSTANCE_HH
 #define FYS_FIGHTINGPITINSTANCE_HH
 
+#include <optional>
+#include <PitContenders> 
+
+namespace fys::arena {
+
+    class FightingPit {
+
+        public:
+            FightingPit() : _layout(_contenders, _partyTeams) 
+            {}
+
+            void setUpContenders(std::optional<uint> contenderId);
+            
+            void addContender(Contender newContender);
+            void addPartyTeam(PartyTeam newTeam);
+
+        private:
+            FightingPitLayout   _layout;
+            PitContenders       _contenders;
+            AllyPartyTeams      _partyTeams;
+
+    };
+
+}
+
 #endif // !FYS_FIGHTINGPITINSTANCE_HH

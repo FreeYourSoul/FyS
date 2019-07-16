@@ -20,3 +20,30 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
+
+
+#ifndef FYS_FIGHTINGPITLAYOUT_HH
+#define FYS_FIGHTINGPITLAYOUT_HH
+
+#include <functional>
+
+namespace fys::arena {
+
+    class FightingPitLayout {
+
+    public:
+        FightingPitLayout(PitContenders &contenders, AllyPartyTeams &partyTeams) : _contenders(contenders), _partyTeams(partyTeams)
+        {}
+
+        void contenderMove();
+        void characterMove();
+
+    private:
+        std::reference_wrapper<PitContenders>       _contenders;
+        std::reference_wrapper<AllyPartyTeams>      _partyTeams;
+
+    };
+
+}
+
+#endif // !FYS_FIGHTINGPITLAYOUT_HH
