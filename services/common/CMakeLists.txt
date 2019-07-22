@@ -10,12 +10,11 @@ set(FLATBUFFER_SCHEMA_DIR "${FLAT_BUFFER_PATH}/schemas")
 set(FLAT_BUFFER_SCHEMAS
         ${FLATBUFFER_SCHEMA_DIR}/ClientCom.fbs
         ${FLATBUFFER_SCHEMA_DIR}/Notifications.fbs
-        ${FLATBUFFER_SCHEMA_DIR}/WSAction.fbs
-        ${FLATBUFFER_SCHEMA_DIR}/Direction.fbs)
+        ${FLATBUFFER_SCHEMA_DIR}/WSAction.fbs)
 
 if (TARGET generateFbs)
 else()
-    message("Flatbuffer generation")
+    message("Flatbuffer generation ${FLATBUFFER_INCLUDE_DIR}")
     build_flatbuffers("${FLAT_BUFFER_SCHEMAS}"
         "${FLATBUFFER_SCHEMA_DIR}"
         generateFbs

@@ -31,6 +31,7 @@
 #include <vector>
 #include <variant>
 #include <utility>
+#include <tmxlite/ObjectGroup.hpp>
 #include <tmxlite/Types.hpp>
 #include "PlayersData.hh"
 
@@ -157,7 +158,7 @@ namespace fys::ws {
          * 
          * AABB Objects stands for Axis-Aligned Bounding Box. Basically coordinates to use as hit box for the tiles.
          */
-        void addCollisionInMap(const tmx::ObjectGroup& collisionLayer);
+        void addCollisionInMap(const tmx::Vector2u &tileMapSize, const tmx::ObjectGroup& collisionLayer);
         /**
          * @brief Add the trigger elements into the map, and link the function associated to this trigger
          * 

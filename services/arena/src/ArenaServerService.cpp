@@ -24,14 +24,13 @@
 #include <spdlog/spdlog.h>
 #include <zmq_addon.hpp>
 #include <flatbuffers/flatbuffers.h>
-#include <WSAction_generated.h>
-#include <Notifications_generated.h>
+#include <ArenaServerContext.hh>
 #include "ArenaServerService.hh"
 
 namespace fys::arena {
 
-    ArenaServerService::ArenaServerService(const WorldServerContext &ctx) : _worldServer(ctx) {
-        _connectionHandler.setupConnectionManager(ctx);
+    ArenaServerService::ArenaServerService(const ArenaServerContext &ctx) {
+//        _connectionHandler.setupConnectionManager(ctx);
 
     }
 
@@ -39,9 +38,9 @@ namespace fys::arena {
         SPDLOG_INFO("ArenaServer loop started");
 
         while (true) {
-            _connectionHandler.pollAndProcessSubMessage(
-                [this](zmq::multipart_t &&msg) {
-                });
+//            _connectionHandler.pollAndProcessSubMessage(
+//                [this](zmq::multipart_t &&msg) {
+//                });
         }
     }
 

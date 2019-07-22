@@ -31,7 +31,11 @@ using json = nlohmann::json;
 
 namespace fys::arena {
 
-    ArenaServerContext::ArenaServerContext(int ac, const char *const *av) :
+    ArenaServerContext::ArenaServerContext(int ac, const char *const *av) {
+    }
+
+    std::string ArenaServerContext::toString() const {
+        return "";
     }
 
 }

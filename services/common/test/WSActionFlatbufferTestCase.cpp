@@ -21,15 +21,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <catch.hpp>
+#include <catch2/catch.hpp>
 #include <zmq_addon.hpp>
 #include <flatbuffers/flatbuffers.h>
 #include <WSAction_generated.h>
-#include <Direction_generated.h>
 
 TEST_CASE("FlatBuffer WSAction Move") {
     flatbuffers::FlatBufferBuilder fbb;
-    auto move = fys::fb::CreateMove(fbb, fys::fb::Direction::Direction_DownRight);
+    auto move = fys::fb::CreateMove(fbb, 42.42);
     auto token = fbb.CreateString("totoken");
     auto p = fys::fb::CreateWSAction(fbb, fys::fb::Action::Action_Move, move.Union(), token);
     fys::fb::FinishWSActionBuffer(fbb, p);
@@ -42,7 +41,7 @@ TEST_CASE("FlatBuffer WSAction Move") {
 
     SECTION("Binary to FlatBuffer") {
         const fys::fb::WSAction *fromBinary = fys::fb::GetWSAction(binary);
-        REQUIRE(fromBinary->action_as_Move()->dir() == fys::fb::Direction::Direction_DownRight);
+        REQUIRE(fromBinary->action_as_Move()->direction() == 42.42);
         REQUIRE("totoken" == std::string(fromBinary->token_client()->c_str()));
 
     } // End section : Binary to Flatbuffer
@@ -51,7 +50,7 @@ TEST_CASE("FlatBuffer WSAction Move") {
     SECTION("ZMQ Message to FlatBuffer") {
         zmq::message_t msg(binary, fbb.GetSize());
         const fys::fb::WSAction *fromBinary = fys::fb::GetWSAction(msg.data());
-        REQUIRE(fromBinary->action_as_Move()->dir() == fys::fb::Direction::Direction_DownRight);
+        REQUIRE(fromBinary->action_as_Move()->direction() == 42.42);
         REQUIRE("totoken" == std::string(fromBinary->token_client()->c_str()));
     }
 

@@ -35,7 +35,7 @@ namespace fys::ws {
     }
 
     void WorldServerEngine::executePendingActions(ws::ConnectionHandler &conn) {
-        _data.executeOnPlayers([this](uint indexPlayer, PlayerStatus statusPlayer, PlayerInfo& pi, const std::string &identityPlayer){
+        _data.executeOnPlayers([this, &conn](uint indexPlayer, PlayerStatus statusPlayer, PlayerInfo& pi, const std::string &identityPlayer){
             if (statusPlayer == PlayerStatus::MOVING) {
                 movePlayerAction(identityPlayer, indexPlayer, pi, conn);
             }
@@ -47,12 +47,12 @@ namespace fys::ws {
     {
         if (const uint index = _data.getIndexAndUpdatePlayerConnection(token, std::move(idt)); index < std::numeric_limits<uint>::max()) {
             if (actionMsg->action_type() == fb::Action::Action_Move) {
-                _data.movePlayer(actionMsg->action_as_Move()->direction());
+                _data.setPlayerMoveAction(index, actionMsg->action_as_Move()->direction());
             }
             else if (actionMsg->action_type() == fb::Action::Action_Interruption) {
-                if (auto moveAction = actionMsg->action_as_Move(); moveAction->enterArena())
-                    _data.setPlayerArena(index, moveAction->arenaId());
-                else
+//                if (auto moveAction = actionMsg->action_as_Move(); moveAction->enterArena())
+//                    _data.setPlayerArena(index, moveAction->arenaId());
+//                else
                     _data.stopPlayerMove(index);
             }
         } else {
@@ -71,8 +71,8 @@ namespace fys::ws {
         if (_map.canMoveTo(futurePos.x, futurePos.y, 0)) {
             pi.x = futurePos.x;
             pi.y = futurePos.y;
-            _map.executePotentialTrigger(indexPlayer, currentPos, conn);
-            if (auto clientsToNotify = _data.getPlayerIdtsArroundPos(currentPos); !clientsToNotify.empty())
+            _map.executePotentialTrigger(indexPlayer, pi, conn);
+            if (auto clientsToNotify = _data.getPlayerIdtsArroundPos(pi); !clientsToNotify.empty())
                 notifyClientsOfMove(clientsToNotify, conn);
         }
     }
@@ -80,9 +80,7 @@ namespace fys::ws {
     void WorldServerEngine::notifyClientsOfMove(const std::vector<std::string_view> &ids, ws::ConnectionHandler &conn) const
     {
         for (const auto &id : ids) {
-            flatbuffers::FlatBufferBuilder fbb;
-            auto identity = fbb.CreateString(id);
-            auto p = fys::fb::CreateWSActionNotification(fbb, fys::fb::Action::Action_Move, move.Union(), token);
+            // TODO: notify
         }
     }
 

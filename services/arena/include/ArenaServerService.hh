@@ -28,12 +28,13 @@
 
 namespace fys::arena {
 
-    class WorldServerContext;
+    class ArenaServerContext;
 
     class ArenaServerService {
     public:
-        ArenaServerService(const WorldServerContext &ctx);
+        ArenaServerService(const ArenaServerContext &ctx);
 
+        void runServerLoop() noexcept ;
 
     private:
         void processMessage(std::string &&idt, std::string &&token, const zmq::message_t &content);

@@ -41,3 +41,11 @@ The way CTB is designed present several issues:
 # A new battle system SCTB (Side Condition Timed Battle)
 
 The name of the 
+
+```plantuml
+@startuml
+node app
+database db
+app -- db
+@enduml
+```

@@ -31,6 +31,8 @@ namespace fys::arena {
     public:
         ArenaServerContext(int ac, const char *const *av);
 
+        std::string toString() const;
+
     private:
 
     };

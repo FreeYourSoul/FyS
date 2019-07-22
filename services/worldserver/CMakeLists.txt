@@ -23,10 +23,10 @@ include_directories(
 
 add_executable(worldserver_service ${COMMON_SRCS}
         ${CMAKE_CURRENT_LIST_DIR}/src/main.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/src/engine/WorldServerEngine.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/include/engine/WorldServerEngine.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/engine/PlayersData.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/engine/PlayersData.hh
+        ${CMAKE_CURRENT_LIST_DIR}/src/engine/WorldServerEngine.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/engine/WorldServerEngine.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/engine/CollisionMap.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/engine/CollisionMap.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/ConnectionHandler.cpp

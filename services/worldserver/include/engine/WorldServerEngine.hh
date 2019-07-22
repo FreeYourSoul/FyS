@@ -44,7 +44,7 @@ namespace fys::ws {
     class WorldServerEngine {
 
     public:
-        WorldServerEngine(const WorldServerContext& ctx);
+        explicit WorldServerEngine(const WorldServerContext& ctx);
 
         void processPlayerInputMessage(std::string &&idt, std::string &&token,
                 const fys::fb::WSAction *actionMsg, ConnectionHandler &handler);
@@ -52,7 +52,7 @@ namespace fys::ws {
         void executePendingActions(ws::ConnectionHandler &conn);
 
     private:
-        inline void movePlayerAction(const std::string &idt, uint indexPlayer, PlayerInfo &pi, ws::ConnectionHandler &conn)
+        inline void movePlayerAction(const std::string &idt, uint indexPlayer, PlayerInfo &pi, ws::ConnectionHandler &conn);
         inline void notifyClientsOfMove(const std::vector<std::string_view> &ids, ws::ConnectionHandler &conn) const;
 
     private:

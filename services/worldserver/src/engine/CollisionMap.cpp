@@ -69,7 +69,7 @@ namespace fys::ws {
                 const auto& objectLayer = layer->getLayerAs<tmx::ObjectGroup>();
             
                 if (map::algo::isCollisionLayer(objectLayer)) {
-                    addCollisionInMap(objectLayer)
+                    addCollisionInMap(map.getTileSize(), objectLayer);
                 }
                 else if (map::algo::isTriggerLayer(objectLayer)) {
                     addTriggerInMap(objectLayer);
@@ -78,14 +78,14 @@ namespace fys::ws {
         }
     }
 
-    void CollisionMap::addCollisionInMap(const tmx::ObjectGroup& collisionLayer) {
+    void CollisionMap::addCollisionInMap(const tmx::Vector2u &tileMapSize, const tmx::ObjectGroup& collisionLayer) {
         const auto& objects = collisionLayer.getObjects();
         for (const auto& object : objects) {
-            for (auto y = getX(object.getAABB().top, map.getTileSize().y);
-                    y < getX(object.getAABB().top + object.getAABB().height, map.getTileSize().y); ++y)
+            for (auto y = getX(object.getAABB().top, tileMapSize.y);
+                    y < getX(object.getAABB().top + object.getAABB().height, tileMapSize.y); ++y)
             {
-                for (auto x = getY(object.getAABB().left, map.getTileSize().x);
-                    x < getY(object.getAABB().left + object.getAABB().width, map.getTileSize().x); ++x)
+                for (auto x = getY(object.getAABB().left, tileMapSize.x);
+                    x < getY(object.getAABB().left + object.getAABB().width, tileMapSize.x); ++x)
                 {
                     _mapElems[y][x].setType(eElementType::BLOCK);
                     _mapElems[y][x].addCollision(object.getAABB());

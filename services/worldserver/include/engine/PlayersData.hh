@@ -25,6 +25,7 @@
 #ifndef FYS_PLAYERSDATA_HH
 #define FYS_PLAYERSDATA_HH
 
+#include <functional>
 #include <unordered_map>
 #include <utility>
 #include <vector>
@@ -40,9 +41,9 @@ namespace fys::ws {
     constexpr static unsigned LIMIT_NOTIFICATIONS_MOVE = 50;
 
     struct PlayerInfo {
-        double x;
-        double y;
-        double angle;
+        double x = 0.0;
+        double y = 0.0;
+        double angle = 0.0;
     };
 
     enum class PlayerStatus : uint {
@@ -61,12 +62,12 @@ namespace fys::ws {
         template<typename Action>
         void executeOnPlayers(Action && actionToExecute) {
             for (uint i = 0; i < _status.size(); ++i) {
-                std::forward<Action>(i, actionToExecute)(_status.at(i), _positions.at(i), _identities.at(i));
+                std::forward<Action>(actionToExecute)(i, _status.at(i), _positions.at(i), _identities.at(i));
             }
         }
 
         void setPlayerMoveAction(uint index, double direction) {
-            _positions.angle = direction;
+            _positions.at(index).angle = direction;
             _status.at(index) = PlayerStatus::MOVING;
         }
 
@@ -74,7 +75,7 @@ namespace fys::ws {
             _status.at(index) = PlayerStatus::STANDING;
         }
 
-        void setPlayerArena(uint index, const std:string &arenaId) {
+        void setPlayerArena(uint index, const std::string &arenaId) {
             _status.at(index) = PlayerStatus::FIGHTING;
         }
 
@@ -86,7 +87,7 @@ namespace fys::ws {
          * @return index corresponding to the given token, 
          *         std::numeric_limits<uint>::max() is returned if no corresponding token
          */
-        inline uint getIndexAndUpdatePlayerConnection(const std::string &token, std::string idt);
+        uint getIndexAndUpdatePlayerConnection(const std::string &token, std::string idt);
 
         /**
          * @brief Get the Players Identities Arround the given player except himself
@@ -97,7 +98,7 @@ namespace fys::ws {
          * @return std::vector<std::string_view> 
          */
         inline std::vector<std::string_view> getPlayerIdtsArroundPlayer(uint indexPlayer,
-                std::optional<std::cref<PlayerInfo>> position,
+                std::optional<std::reference_wrapper<PlayerInfo>> position,
                 double distance = DEFAULT_DISTANCE) const noexcept;
                 
         /**
