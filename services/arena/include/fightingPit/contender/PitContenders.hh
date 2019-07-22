@@ -22,33 +22,22 @@
 // SOFTWARE.
 
 
-#ifndef FYS_FIGHTINGPITINSTANCE_HH
-#define FYS_FIGHTINGPITINSTANCE_HH
-
-#include <optional>
-#include <PitContenders> 
+#ifndef FYS_PITCONTENDERS_HH
+#define FYS_PITCONTENDERS_HH
 
 namespace fys::arena {
 
-    class FightingPit {
+    class PitContenders {
 
     public:
-        public:
-            FightingPit() : _layout(_contenders, _partyTeams) 
-            {}
+    
 
-            void setUpContenders(std::optional<uint> contenderId);
-            
-            void addContender(Contender newContender);
-            void addPartyTeam(PartyTeam newTeam);
 
-        private:
-            FightingPitLayout   _layout;
-            PitContenders       _contenders;
-            AllyPartyTeams      _partyTeams;
+    private:
+        std::vector<std::unique_ptr<FightingContender> > _contenders;
 
     };
 
 }
 
-#endif // !FYS_FIGHTINGPITINSTANCE_HH
+#endif // !FYS_PITCONTENDERS_HH

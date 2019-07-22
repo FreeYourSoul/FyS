@@ -21,16 +21,4 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
-#ifndef FYS_PITCONTENDERS_HH
-#define FYS_PITCONTENDERS_HH
-
-namespace fys::arena {
-
-    class PitContenders {
-        
-    };
-
-}
-
-#endif // !FYS_PITCONTENDERS_HH
+#include <fightingPit/contender/PitContenders.hh>

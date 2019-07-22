@@ -28,7 +28,36 @@
 #include <functional>
 
 namespace fys::arena {
+    
 
+    /**
+     * @brief Layout of the fithing pit. Manage the positions of monsters and the players/monsters mouvements
+     * 
+     * The layout of the fighting pit can be taken as a draughtboard composed of 3 hexagons as shown as below
+     *                        _____         
+     *                       /     \        
+     *                 _____/  B    \        18 possible playable sides
+     *                /     \       /        6  possible ambush sides [A_NE, B_SW, A_SE, C_NW, C_N, B_S]
+     *               /  A    \_____/         
+     *               \       /     \
+     *                \_____/  C    \
+     *                      \       / 
+     *                       \_____/ 
+     *   
+     * Each hexagon represent the monster position. The Player can have character of its team spread on the lines representing 
+     * the sides of the hexagons.
+     * Here is the hexagon at coordinate A, with its sides (where the characters can stands to attack the monster).
+     *  
+     *           A_N
+     *           _____                N  = North
+     * A_NW     /     \    A_NE       NE = North-East
+     *         /  A    \              NW = North-West
+     *         \       /              S  = South
+     * A_SW     \_____/    A_SE       SE = South-East
+     *                                SW = South-West
+     *           A_S
+     * 
+     */
     class FightingPitLayout {
 
     public:

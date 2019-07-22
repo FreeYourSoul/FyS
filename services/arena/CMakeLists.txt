@@ -25,8 +25,10 @@ add_executable(arena_service ${COMMON_SRCS}
         ${CMAKE_CURRENT_LIST_DIR}/include/fightingPit/FightingPit.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/fightingPit/FightingPitLayout.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/fightingPit/FightingPitLayout.hh
-        ${CMAKE_CURRENT_LIST_DIR}/src/fightingPit/PitContenders.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/include/fightingPit/PitContenders.hh
+        ${CMAKE_CURRENT_LIST_DIR}/src/fightingPit/FightingPitAnnouncer.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/fightingPit/FightingPitAnnouncer.hh
+        ${CMAKE_CURRENT_LIST_DIR}/src/fightingPit/contender/PitContenders.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/fightingPit/contender/PitContenders.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/fightingPit/AllyPartyTeams.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/fightingPit/AllyPartyTeams.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/ArenaServerContext.cpp

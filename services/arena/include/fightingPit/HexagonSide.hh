@@ -21,34 +21,65 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#ifndef FYS_HEXAGONSIDE_HH
+#define FYS_HEXAGONSIDE_HH
 
-#ifndef FYS_FIGHTINGPITINSTANCE_HH
-#define FYS_FIGHTINGPITINSTANCE_HH
-
-#include <optional>
-#include <PitContenders> 
+#include <utility>
 
 namespace fys::arena {
 
-    class FightingPit {
-
+    class HexagonSide {
     public:
-        public:
-            FightingPit() : _layout(_contenders, _partyTeams) 
-            {}
+        enum class Hexagone {
+            A,
+            B,
+            C
+        };
 
-            void setUpContenders(std::optional<uint> contenderId);
-            
-            void addContender(Contender newContender);
-            void addPartyTeam(PartyTeam newTeam);
+        enum class Orientation {
+            A_N,
+            A_S,
+            A_NE,
+            A_NW,
+            A_SE,
+            A_SW,
+            B_N ,
+            B_S ,
+            B_NE,
+            B_NW,
+            B_SE,
+            B_SW,
+            C_N ,
+            C_S ,
+            C_NE,
+            C_NW,
+            C_SE,
+            C_SW,
+            NONE
+        };
 
-        private:
-            FightingPitLayout   _layout;
-            PitContenders       _contenders;
-            AllyPartyTeams      _partyTeams;
+        std::pair<Hexagone, Orientation> operator->() const { return _sideOrientation; }
 
+        bool move(const HexagonSide &destinationSide);
+        bool moveRight();
+        bool moveLeft();
+        bool moveBack();
+
+    private:
+        Orientation findLeft() const;
+        Orientation findRight() const;
+        Orientation findBack() const;
+        bool canMove(const HexagonSide &destinationSide) const;
+
+    private:
+        Hexagon     _hexagon;
+        Orientation _side;
     };
 
-}
 
-#endif // !FYS_FIGHTINGPITINSTANCE_HH
+    
+} // namespace fys::arena
+
+
+
+#endif // !FYS_HEXAGONSIDE_HH

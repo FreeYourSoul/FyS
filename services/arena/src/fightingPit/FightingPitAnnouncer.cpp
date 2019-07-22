@@ -22,33 +22,18 @@
 // SOFTWARE.
 
 
-#ifndef FYS_FIGHTINGPITINSTANCE_HH
-#define FYS_FIGHTINGPITINSTANCE_HH
-
-#include <optional>
-#include <PitContenders> 
+#include <figtingPit/FightingPitAnnouncer.hh>
 
 namespace fys::arena {
-
-    class FightingPit {
-
-    public:
-        public:
-            FightingPit() : _layout(_contenders, _partyTeams) 
-            {}
-
-            void setUpContenders(std::optional<uint> contenderId);
-            
-            void addContender(Contender newContender);
-            void addPartyTeam(PartyTeam newTeam);
-
-        private:
-            FightingPitLayout   _layout;
-            PitContenders       _contenders;
-            AllyPartyTeams      _partyTeams;
-
-    };
-
+    
+FightingPitAnnouncer::generateContenders() {
+    if (isScriptedEncounter() && !_idEncounter) {
+        // log encounter impossible
+        _isFightingPitCorrupted = true;
+        return *this;
+    }
+    
+    return *this;
 }
 
-#endif // !FYS_FIGHTINGPITINSTANCE_HH
+} // namespace fys::arena
