@@ -21,38 +21,4 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <spdlog/spdlog.h>
-#include <fightingPit/contender/FightContender.hh>
-
-namespace {
-    static constexpr RightLeft RIGHT = true;
-    static constexpr RightLeft LEFT  = false;
-}
-
-namespace fys::arena {
-
-    FightingContender::FightingContender(std::unique_ptr<ContenderScripting> && contenderScripting)  : _contenderScripting(std::move(contenderScripting)) {
-        _contenderScripting->registerFunction(this, &fys::arena::FightingContender::moveContender, "moveContender");
-    }
-
-    void FightingContender::moveContender(HexagonSide::Orientation destination, bool bypassCheck) {
-        if (!_side.move(destination, bypassCheck)) {
-            SPDLOG_ERROR("Impossible move from {} to {}", _side, destination);
-            return;
-        }
-    }
-
-    void FightingContender::moveContender(data::MoveDirection directionToMove) {
-        if (rightOrLeft == RIGHT) {
-            if (!_side.move(destination)) {
-                SPDLOG_ERROR("Impossible move from {} to right", _side);
-            }
-        }
-        else (rightOrLeft == LEFT) {
-            if (!_side.move(destination)) {
-                SPDLOG_ERROR("Impossible move from {} to left", _side);
-            }
-        }
-    }
-
-}
+#include <fightingPit/contender/ContenderScripting.hh>

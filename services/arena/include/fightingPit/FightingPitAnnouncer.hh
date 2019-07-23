@@ -51,7 +51,7 @@ namespace fys::arena {
         {}
 
         FightingPit buildFightingPit() const;
-        FightingPitAnnouncer &generateContenders();
+        FightingPitAnnouncer &generateContenders(/* TODO: send ConnectionHandler for allowing scripts to send messages */);
         FightingPitAnnouncer &generatePartyTeams();
 
         FightingPitAnnouncer &setEncounterId(uint idEncounter) {

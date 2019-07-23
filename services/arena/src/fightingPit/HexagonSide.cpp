@@ -150,9 +150,12 @@ namespace
 
 namespace fys::arena {
     
-    
-    bool HexagonSide::move(const HexagonSide &destinationSide) {
-        return true;
+    bool HexagonSide::move(HexagonSide::Orientation destinationSide, bool forceMovement) {
+        if (forceMovement || canMove(destinationSide)) {
+            changeSide(destinationSide);
+            return true;
+        }
+        return false;
     }
 
     bool HexagonSide::moveLeft() {
@@ -169,19 +172,32 @@ namespace fys::arena {
 
     // private API
 
-    HexagonSide::Orientation findLeft() const {
+    void HexagonSide::changeSide(HexagonSide::Orientation destination) {
+        if ( destination == HexagonSide::Orientation::A_N || destination == HexagonSide::Orientation::A_NE || destination == HexagonSide::Orientation::A_NW ||
+             destination == HexagonSide::Orientation::A_S || destination == HexagonSide::Orientation::A_SE || destination == HexagonSide::Orientation::A_SW)
+            _hexagon = HexagonSide::Hexagone::A;
+        else if ( destination == HexagonSide::Orientation::B_N || destination == HexagonSide::Orientation::B_NE || destination == HexagonSide::Orientation::B_NW ||
+                  destination == HexagonSide::Orientation::B_S || destination == HexagonSide::Orientation::B_SE || destination == HexagonSide::Orientation::B_SW)
+            _hexagon = HexagonSide::Hexagone::B;
+        else if ( destination == HexagonSide::Orientation::C_N || destination == HexagonSide::Orientation::C_NE || destination == HexagonSide::Orientation::C_NW ||
+                  destination == HexagonSide::Orientation::C_S || destination == HexagonSide::Orientation::C_SE || destination == HexagonSide::Orientation::C_SW)
+            _hexagon = HexagonSide::Hexagone::C;
+        _side = destination;
+    }
+
+    HexagonSide::Orientation HexagonSide::findLeft() const {
         return HexagonSide::Orientation::NONE;
     }
 
-    HexagonSide::Orientation findRight() const {
+    HexagonSide::Orientation HexagonSide::findRight() const {
         return HexagonSide::Orientation::NONE;
     }
 
-    HexagonSide::Orientation findBack() const {
+    HexagonSide::Orientation HexagonSide::findBack() const {
         return HexagonSide::Orientation::NONE;
     }
 
-    bool HexagonSide::canMove(const HexagonSide &destinationSide) const {
+    bool HexagonSide::canMove(HexagonSide::Orientation destinationSide) const {
         if (_hexagon == Hexagone::A)
             return HexaSide<HexaA>::isMoveable(_side, destinationSide);
         // else if (_hexagon == Hexagone::B)

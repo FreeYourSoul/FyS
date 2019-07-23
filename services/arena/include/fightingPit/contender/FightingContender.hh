@@ -25,13 +25,34 @@
 #ifndef FYS_FIGHTINGCONTENDER_HH
 #define FYS_FIGHTINGCONTENDER_HH
 
+#include <memory>
+#include <fightingPit/data/CommonTypes.hh>
+#include <fightingPit/HexagonSide.hh>
+
 namespace fys::arena {
 
     class FightingContender {
+    public:
+        static std::unique_ptr<FightingContender> makeFightingContender(ContenderScripting && contenderScripting) {
+            return std::make_unique<FightingContender>(std::move(contenderScripting));
+        }
+
+        void moveContender(HexagonSide::Orientation destination, bool bypassCheck = false);
+        /**
+         * @param rightOrLeft(bool) move contender to the right if true, left otherwise
+         */
+        void moveContender(data::MoveDirection rightOrLeft);
+
+        const data::Life &getLife() const { return _status.life; }
+        
 
     private:
-        std::vector<FightingPitLayout::HexagonSides> _sides;
-        
+        FightingContender(std::unique_ptr<ContenderScripting> && contenderScripting);
+
+    private:
+        std::unique_ptr<ContenderScripting> _contenderScripting;
+        HexagonSide _side;
+        data::Status _status;
     };
 
 }

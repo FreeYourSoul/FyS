@@ -60,16 +60,17 @@ namespace fys::arena {
 
         std::pair<Hexagone, Orientation> operator->() const { return _sideOrientation; }
 
-        bool move(const HexagonSide &destinationSide);
+        bool move(HexagonSide::Orientation destinationSide, bool forceMovement = false);
         bool moveRight();
         bool moveLeft();
         bool moveBack();
 
     private:
+        void changeSide(HexagonSide::Orientation);
         Orientation findLeft() const;
         Orientation findRight() const;
         Orientation findBack() const;
-        bool canMove(const HexagonSide &destinationSide) const;
+        bool canMove(HexagonSide::Orientation destinationSide) const;
 
     private:
         Hexagon     _hexagon;

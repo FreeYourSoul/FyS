@@ -21,38 +21,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <spdlog/spdlog.h>
-#include <fightingPit/contender/FightContender.hh>
 
-namespace {
-    static constexpr RightLeft RIGHT = true;
-    static constexpr RightLeft LEFT  = false;
-}
+#ifndef FYS_COMMONDATA_HH
+#define FYS_COMMONDATA_HH
 
-namespace fys::arena {
+namespace fys::arena::data
+{
+    struct Life {
+        uint current = 0;
+        uint total   = 0;
 
-    FightingContender::FightingContender(std::unique_ptr<ContenderScripting> && contenderScripting)  : _contenderScripting(std::move(contenderScripting)) {
-        _contenderScripting->registerFunction(this, &fys::arena::FightingContender::moveContender, "moveContender");
+        bool isDead() const { return current <= 0; }
+    };
+
+    struct Status {
+        Life life;
+        uint magicPoint;
+    };
+
+    enum MoveDirection {
+        BACK,
+        RIGHT,
+        LEFT
     }
+    
+} // namespace fys::arena::data
 
-    void FightingContender::moveContender(HexagonSide::Orientation destination, bool bypassCheck) {
-        if (!_side.move(destination, bypassCheck)) {
-            SPDLOG_ERROR("Impossible move from {} to {}", _side, destination);
-            return;
-        }
-    }
+struct 
 
-    void FightingContender::moveContender(data::MoveDirection directionToMove) {
-        if (rightOrLeft == RIGHT) {
-            if (!_side.move(destination)) {
-                SPDLOG_ERROR("Impossible move from {} to right", _side);
-            }
-        }
-        else (rightOrLeft == LEFT) {
-            if (!_side.move(destination)) {
-                SPDLOG_ERROR("Impossible move from {} to left", _side);
-            }
-        }
-    }
-
-}
+#endif // !FYS_COMMONDATA_HH
