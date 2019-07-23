@@ -29,10 +29,16 @@ add_executable(arena_service ${COMMON_SRCS}
         ${CMAKE_CURRENT_LIST_DIR}/include/fightingPit/FightingPitAnnouncer.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/fightingPit/contender/PitContenders.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/fightingPit/contender/PitContenders.hh
-        ${CMAKE_CURRENT_LIST_DIR}/src/fightingPit/AllyPartyTeams.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/include/fightingPit/AllyPartyTeams.hh
+        ${CMAKE_CURRENT_LIST_DIR}/src/fightingPit/contender/FightingContender.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/fightingPit/contender/FightingContender.hh
+        ${CMAKE_CURRENT_LIST_DIR}/src/fightingPit/contender/ContenderScripting.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/fightingPit/contender/ContenderScripting.hh
+        ${CMAKE_CURRENT_LIST_DIR}/src/fightingPit/team/AllyPartyTeams.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/fightingPit/team/AllyPartyTeams.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/ArenaServerContext.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/ArenaServerContext.hh
+        ${CMAKE_CURRENT_LIST_DIR}/src/fightingPit/HexagonSide.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/fightingPit/HexagonSide.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/ArenaServerService.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/ArenaServerService.hh)
 

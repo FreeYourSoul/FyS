@@ -22,4 +22,4 @@
 // SOFTWARE.
 
 
-#include "PartyTeam.hh"
+#include <fightingPit/team/PartyTeam.hh>

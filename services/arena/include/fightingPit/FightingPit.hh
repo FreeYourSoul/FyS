@@ -28,8 +28,9 @@
 #include <optional>
 #include <fightingPit/contender/PitContenders.hh>
 #include <fightingPit/contender/FightingContender.hh>
-#include "FightingPitLayout.hh"
-#include "AllyPartyTeams.hh"
+#include <fightingPit/FightingPitLayout.hh>
+#include <fightingPit/team/AllyPartyTeams.hh>
+#include <fightingPit/team/PartyTeam.hh>
 
 namespace fys::arena {
 

@@ -26,8 +26,11 @@
 #define FYS_FIGHTINGPITANNOUNCER_HH
 
 #include <optional>
-#include <fightingpit/contender/FightingContender.hh>
-#include <fightingpit/FightingPit.hh>
+#include <memory>
+#include <vector>
+#include <fightingPit/contender/PitContenders.hh>
+#include <fightingPit/team/AllyPartyTeams.hh>
+#include "FightingPit.hh"
 
 namespace fys::arena {
 

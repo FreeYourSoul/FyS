@@ -28,7 +28,10 @@
 #include <functional>
 
 namespace fys::arena {
-    
+
+    // forward declaration
+    class AllyPartyTeams;
+    class PitContenders;
 
     /**
      * @brief Layout of the fithing pit. Manage the positions of monsters and the players/monsters mouvements

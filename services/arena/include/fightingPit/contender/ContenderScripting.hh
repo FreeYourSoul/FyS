@@ -31,6 +31,8 @@ namespace fys::arena {
 
     class ContenderScripting {
 
+    public:
+
     private:
         chaiscript::ChaiScript chai;
 

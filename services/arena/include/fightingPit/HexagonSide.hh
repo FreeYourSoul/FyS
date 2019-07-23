@@ -25,12 +25,13 @@
 #define FYS_HEXAGONSIDE_HH
 
 #include <utility>
+#include <zconf.h>
 
 namespace fys::arena {
 
     class HexagonSide {
     public:
-        enum class Hexagone {
+        enum class Hexagon {
             A,
             B,
             C
@@ -58,7 +59,7 @@ namespace fys::arena {
             NONE
         };
 
-        std::pair<Hexagone, Orientation> operator->() const { return _sideOrientation; }
+        std::pair<Hexagon, Orientation> operator*() const { return std::make_pair(_hexagon, _side); }
 
         bool move(HexagonSide::Orientation destinationSide, bool forceMovement = false);
         bool moveRight();

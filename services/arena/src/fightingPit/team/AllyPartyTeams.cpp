@@ -22,4 +22,10 @@
 // SOFTWARE.
 
 
-#include <figtingPit/AllyPartyTeams.hh>
+#include <fightingPit/team/AllyPartyTeams.hh>
+
+namespace fys::arena {
+
+
+
+}

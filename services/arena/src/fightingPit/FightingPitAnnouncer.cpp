@@ -22,18 +22,18 @@
 // SOFTWARE.
 
 
-#include <figtingPit/FightingPitAnnouncer.hh>
+#include <fightingPit/FightingPitAnnouncer.hh>
 
 namespace fys::arena {
-    
-FightingPitAnnouncer::generateContenders() {
-    if (isScriptedEncounter() && !_idEncounter) {
-        // log encounter impossible
-        _isFightingPitCorrupted = true;
+
+    FightingPitAnnouncer & FightingPitAnnouncer::generateContenders() {
+        if (isScriptedEncounter() && !_idEncounter) {
+            // log encounter impossible
+            _isFightingPitCorrupted = true;
+            return *this;
+        }
+
         return *this;
     }
-    
-    return *this;
-}
 
 } // namespace fys::arena

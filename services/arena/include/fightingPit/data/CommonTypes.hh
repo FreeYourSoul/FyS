@@ -39,14 +39,12 @@ namespace fys::arena::data
         uint magicPoint;
     };
 
-    enum MoveDirection {
+enum MoveDirection {
         BACK,
         RIGHT,
         LEFT
-    }
+    };
     
 } // namespace fys::arena::data
-
-struct 
 
 #endif // !FYS_COMMONDATA_HH

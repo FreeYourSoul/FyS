@@ -25,10 +25,12 @@
 #ifndef FYS_PARTYTEAM_HH
 #define FYS_PARTYTEAM_HH
 
+namespace fys::arena {
 
-class PartyTeam {
+    class PartyTeam {
 
-};
+    };
 
+}
 
 #endif //FYS_PARTYTEAM_HH

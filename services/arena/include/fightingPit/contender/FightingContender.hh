@@ -27,15 +27,14 @@
 
 #include <memory>
 #include <fightingPit/data/CommonTypes.hh>
+#include <fightingPit/contender/FightingContender.hh>
+#include <fightingPit/contender/ContenderScripting.hh>
 #include <fightingPit/HexagonSide.hh>
 
 namespace fys::arena {
 
     class FightingContender {
     public:
-        static std::unique_ptr<FightingContender> makeFightingContender(ContenderScripting && contenderScripting) {
-            return std::make_unique<FightingContender>(std::move(contenderScripting));
-        }
 
         void moveContender(HexagonSide::Orientation destination, bool bypassCheck = false);
         /**
@@ -48,6 +47,11 @@ namespace fys::arena {
 
     private:
         FightingContender(std::unique_ptr<ContenderScripting> && contenderScripting);
+
+    public:
+        static FightingContender *makeFightingContender(std::unique_ptr<ContenderScripting> && contenderScripting) {
+            return new FightingContender(std::move(contenderScripting));
+        }
 
     private:
         std::unique_ptr<ContenderScripting> _contenderScripting;

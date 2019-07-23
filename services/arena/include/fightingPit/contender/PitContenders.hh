@@ -25,13 +25,18 @@
 #ifndef FYS_PITCONTENDERS_HH
 #define FYS_PITCONTENDERS_HH
 
+#include <memory>
+#include <vector>
+
 namespace fys::arena {
+
+    //forward declarations
+    class FightingContender;
 
     class PitContenders {
 
     public:
     
-
 
     private:
         std::vector<std::unique_ptr<FightingContender> > _contenders;
