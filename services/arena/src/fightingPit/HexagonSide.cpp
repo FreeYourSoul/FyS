@@ -40,22 +40,26 @@ namespace
     // Specialization to check the orientation
     template<typename ID, typename Orient>
     struct HexaSideOrient {
-        static bool isMoveable([[maybe_unused]]fys::arena::HexagonSide::Orientation dest) { return false; }
+        constexpr static bool isMoveable([[maybe_unused]]fys::arena::HexagonSide::Orientation dest) { return false; }
     };
 
     template<>
     struct HexaSideOrient<HexaA, North> {
-        static bool isMoveable(fys::arena::HexagonSide::Orientation dest) { return dest == h::A_NE || dest == h::A_NW; }
+        constexpr static bool isMoveable(fys::arena::HexagonSide::Orientation dest) { return dest == h::A_NE || dest == h::A_NW; }
     };
 
     template<>
     struct HexaSideOrient<HexaA, South> {
-        static bool isMoveable(fys::arena::HexagonSide::Orientation dest) { return dest == h::A_SE || dest == h::A_SW || dest == h::C_NW || dest == h::C_SW; }
+        constexpr static bool isMoveable(fys::arena::HexagonSide::Orientation dest) {
+            return
+                dest == h::A_SE || dest == h::A_SW ||
+                dest == h::C_NW || dest == h::C_SW;
+        }
     };
 
     template<>
     struct HexaSideOrient<HexaA, NorthEast> {
-        static bool isMoveable(fys::arena::HexagonSide::Orientation dest) {
+        constexpr static bool isMoveable(fys::arena::HexagonSide::Orientation dest) {
             return 
                 dest == h::A_N || dest == h::A_SE || 
                 dest == h::B_S || dest == h::B_NW || dest == h::B_SW || 
@@ -63,15 +67,14 @@ namespace
         } 
     };
 
-
     template<>
     struct HexaSideOrient<HexaA, NorthWest> {
-        static bool isMoveable(fys::arena::HexagonSide::Orientation dest) { return dest == h::A_N || dest == h::A_SW; }
+        constexpr static bool isMoveable(fys::arena::HexagonSide::Orientation dest) { return dest == h::A_N || dest == h::A_SW; }
     };
 
     template<> // A_SE
     struct HexaSideOrient<HexaA, SouthEast> {
-        static bool isMoveable(fys::arena::HexagonSide::Orientation dest) {
+        constexpr static bool isMoveable(fys::arena::HexagonSide::Orientation dest) {
             return 
                 dest == h::A_NE || dest == h::A_S || 
                 dest == h::B_S || dest == h::B_SW || 
@@ -81,7 +84,94 @@ namespace
 
     template<> // A_SW
     struct HexaSideOrient<HexaA, SouthWest> {
-        static bool isMoveable(fys::arena::HexagonSide::Orientation dest) { return dest == h::A_NW || dest == h::A_S; }
+        constexpr static bool isMoveable(fys::arena::HexagonSide::Orientation dest) { return dest == h::A_NW || dest == h::A_S; }
+    };
+
+    template <>
+    struct  HexaSideOrient<HexaB, North> {
+        constexpr static bool isMoveable(fys::arena::HexagonSide::Orientation dest) { return dest == h::B_NW || dest == h::B_NE; }
+    };
+
+    template <>
+    struct  HexaSideOrient<HexaB, NorthEast> {
+        constexpr static bool isMoveable(fys::arena::HexagonSide::Orientation dest) { return dest == h::B_N || dest == h::B_SE; }
+    };
+
+    template <>
+    struct  HexaSideOrient<HexaB, NorthWest> {
+        constexpr static bool isMoveable(fys::arena::HexagonSide::Orientation dest) {
+            return dest == h::B_N || dest == h::B_SW ||
+                   dest == h::A_N || dest == h::A_NE;
+        }
+    };
+
+    template <>
+    struct  HexaSideOrient<HexaB, South> {
+        constexpr static bool isMoveable(fys::arena::HexagonSide::Orientation dest) {
+            return dest == h::B_SW || dest == h::B_SE ||
+                   dest == h::C_N || dest == h::C_NE || dest == h::C_NW ||
+                   dest == h::A_NE || dest == h::A_SE;
+        }
+    };
+
+    template <>
+    struct  HexaSideOrient<HexaB, SouthEast> {
+        constexpr static bool isMoveable(fys::arena::HexagonSide::Orientation dest) {
+            return dest == h::B_S || dest == h::B_NE ||
+                   dest == h::C_N || dest == h::C_NE;
+        }
+    };
+
+    template <>
+    struct  HexaSideOrient<HexaB, SouthWest> {
+        constexpr static bool isMoveable(fys::arena::HexagonSide::Orientation dest) {
+            return dest == h::B_NW || dest == h::B_S ||
+                   dest == h::C_N || dest == h::C_NW ||
+                   dest == h::A_NE || dest == h::A_SE || dest == h::A_N;
+        }
+    };
+
+    template <>
+    struct  HexaSideOrient<HexaC, North> {
+        constexpr static bool isMoveable(fys::arena::HexagonSide::Orientation dest) {
+            return dest == h::C_NE || dest == h::C_NW ||
+                   dest == h::B_S || dest == h::B_SE || dest == h::B_SW ||
+                   dest == h::A_NE || dest == h::A_SE;
+        }
+    };
+
+    template <>
+    struct  HexaSideOrient<HexaC, NorthEast> {
+        constexpr static bool isMoveable(fys::arena::HexagonSide::Orientation dest) {
+            return dest == h::C_N || dest == h::C_SE ||
+                   dest == h::B_S || dest == h::B_SE;
+        }    };
+
+    template <>
+    struct  HexaSideOrient<HexaC, NorthWest> {
+        constexpr static bool isMoveable(fys::arena::HexagonSide::Orientation dest) {
+            return dest == h::C_N || dest == h::C_SW ||
+                    dest == h::A_SE || dest == h::A_S || dest == h::A_NE ||
+                    dest == h::B_S || dest == h::B_SW;
+        }
+    };
+
+    template <>
+    struct  HexaSideOrient<HexaC, South> {
+        constexpr static bool isMoveable(fys::arena::HexagonSide::Orientation dest) { return dest == h::C_SW || dest == h::C_SE; }
+    };
+
+    template <>
+    struct  HexaSideOrient<HexaC, SouthWest> {
+        constexpr static bool isMoveable(fys::arena::HexagonSide::Orientation dest) {
+            return dest == h::C_S || dest == h::C_NW ||
+                    dest == h::A_S || dest == h::A_SE;
+        }
+    };
+
+    template <>
+    struct  HexaSideOrient<HexaC, SouthEast> {
+        constexpr static bool isMoveable(fys::arena::HexagonSide::Orientation dest) { return dest == h::C_S || dest == h::C_NE; }
     };
 
 
@@ -91,20 +181,20 @@ namespace
 
     template <>
     struct HexaSide<HexaA> {
-        static bool isMoveable(fys::arena::HexagonSide::Orientation origin, fys::arena::HexagonSide::Orientation dest) {
+        constexpr static bool isMoveable(fys::arena::HexagonSide::Orientation origin, fys::arena::HexagonSide::Orientation dest) {
             if (origin == dest)
                 return false;
-            if (dest == fys::arena::HexagonSide::Orientation::A_S)
+            if (origin == fys::arena::HexagonSide::Orientation::A_S)
                 return HexaSideOrient<HexaA, South>::isMoveable(dest);
-            else if (dest == fys::arena::HexagonSide::Orientation::A_SE)
+            else if (origin == fys::arena::HexagonSide::Orientation::A_SE)
                 return HexaSideOrient<HexaA, SouthEast>::isMoveable(dest);
-            else if (dest == fys::arena::HexagonSide::Orientation::A_SW)
+            else if (origin == fys::arena::HexagonSide::Orientation::A_SW)
                 return HexaSideOrient<HexaA, SouthWest>::isMoveable(dest);
-            if (dest == fys::arena::HexagonSide::Orientation::A_N)
+            else if (origin == fys::arena::HexagonSide::Orientation::A_N)
                 return HexaSideOrient<HexaA, North>::isMoveable(dest);
-            else if (dest == fys::arena::HexagonSide::Orientation::A_NE)
+            else if (origin == fys::arena::HexagonSide::Orientation::A_NE)
                 return HexaSideOrient<HexaA, NorthEast>::isMoveable(dest);
-            else if (dest == fys::arena::HexagonSide::Orientation::A_NW)
+            else if (origin == fys::arena::HexagonSide::Orientation::A_NW)
                 return HexaSideOrient<HexaA, NorthWest>::isMoveable(dest);
             return false;
         } 
@@ -112,20 +202,20 @@ namespace
 
     template <>
     struct HexaSide<HexaB> {
-        static bool isMoveable(fys::arena::HexagonSide::Orientation origin, fys::arena::HexagonSide::Orientation dest) {
+        constexpr static bool isMoveable(fys::arena::HexagonSide::Orientation origin, fys::arena::HexagonSide::Orientation dest) {
             if (origin == dest)
                 return false;
-            if (dest == fys::arena::HexagonSide::Orientation::A_S)
+            if (origin == fys::arena::HexagonSide::Orientation::B_S)
                 return HexaSideOrient<HexaB, South>::isMoveable(dest);
-            else if (dest == fys::arena::HexagonSide::Orientation::B_SE)
+            else if (origin == fys::arena::HexagonSide::Orientation::B_SE)
                 return HexaSideOrient<HexaB, SouthEast>::isMoveable(dest);
-            else if (dest == fys::arena::HexagonSide::Orientation::B_SW)
+            else if (origin == fys::arena::HexagonSide::Orientation::B_SW)
                 return HexaSideOrient<HexaB, SouthWest>::isMoveable(dest);
-            if (dest == fys::arena::HexagonSide::Orientation::B_N)
+            if (origin == fys::arena::HexagonSide::Orientation::B_N)
                 return HexaSideOrient<HexaB, North>::isMoveable(dest);
-            else if (dest == fys::arena::HexagonSide::Orientation::B_NE)
+            else if (origin == fys::arena::HexagonSide::Orientation::B_NE)
                 return HexaSideOrient<HexaB, NorthEast>::isMoveable(dest);
-            else if (dest == fys::arena::HexagonSide::Orientation::B_NW)
+            else if (origin == fys::arena::HexagonSide::Orientation::B_NW)
                 return HexaSideOrient<HexaB, NorthWest>::isMoveable(dest);
             return false;
         } 
@@ -133,20 +223,20 @@ namespace
 
     template <>
     struct HexaSide<HexaC> {
-        static bool isMoveable(fys::arena::HexagonSide::Orientation origin, fys::arena::HexagonSide::Orientation dest) {
+        constexpr static bool isMoveable(fys::arena::HexagonSide::Orientation origin, fys::arena::HexagonSide::Orientation dest) {
             if (origin == dest)
                 return false;
-            if (dest == fys::arena::HexagonSide::Orientation::C_S)
+            if (origin == fys::arena::HexagonSide::Orientation::C_S)
                 return HexaSideOrient<HexaC, South>::isMoveable(dest);
-            else if (dest == fys::arena::HexagonSide::Orientation::C_SE)
+            else if (origin == fys::arena::HexagonSide::Orientation::C_SE)
                 return HexaSideOrient<HexaC, SouthEast>::isMoveable(dest);
-            else if (dest == fys::arena::HexagonSide::Orientation::C_SW)
+            else if (origin == fys::arena::HexagonSide::Orientation::C_SW)
                 return HexaSideOrient<HexaC, SouthWest>::isMoveable(dest);
-            if (dest == fys::arena::HexagonSide::Orientation::C_N)
+            if (origin == fys::arena::HexagonSide::Orientation::C_N)
                 return HexaSideOrient<HexaC, North>::isMoveable(dest);
-            else if (dest == fys::arena::HexagonSide::Orientation::C_NE)
+            else if (origin == fys::arena::HexagonSide::Orientation::C_NE)
                 return HexaSideOrient<HexaC, NorthEast>::isMoveable(dest);
-            else if (dest == fys::arena::HexagonSide::Orientation::C_NW)
+            else if (origin == fys::arena::HexagonSide::Orientation::C_NW)
                 return HexaSideOrient<HexaC, NorthWest>::isMoveable(dest);
             return false;
         } 
@@ -193,24 +283,59 @@ namespace fys::arena {
     }
 
     HexagonSide::Orientation HexagonSide::findLeft() const {
-        return HexagonSide::Orientation::NONE;
+        if (_side == HexagonSide::Orientation::A_N)
+            return HexagonSide::Orientation::A_NW;
+        else if (_side == HexagonSide::Orientation::B_N)
+            return HexagonSide::Orientation::B_NW;
+        else if (_side == HexagonSide::Orientation::C_N)
+            return HexagonSide::Orientation::C_NW;
+        return static_cast<HexagonSide::Orientation >(static_cast<int>(_side) - 1);
     }
 
     HexagonSide::Orientation HexagonSide::findRight() const {
-        return HexagonSide::Orientation::NONE;
+        if (_side == HexagonSide::Orientation::A_NW)
+            return HexagonSide::Orientation::A_N;
+        else if (_side == HexagonSide::Orientation::B_NW)
+            return HexagonSide::Orientation::B_N;
+        else if (_side == HexagonSide::Orientation::C_NW)
+            return HexagonSide::Orientation::C_N;
+        return static_cast<HexagonSide::Orientation >(static_cast<int>(_side) + 1);
     }
 
     HexagonSide::Orientation HexagonSide::findBack() const {
+        if (!isAmbushSide())
+            return HexagonSide::Orientation::NONE;
+
+        else if (_side == HexagonSide::Orientation::B_S)
+            return HexagonSide::Orientation::C_N;
+        else if (_side == HexagonSide::Orientation::C_N)
+            return HexagonSide::Orientation::B_S;
+
+        else if (_side == HexagonSide::Orientation::A_NE)
+            return HexagonSide::Orientation::B_SW;
+        else if (_side == HexagonSide::Orientation::B_SW)
+            return HexagonSide::Orientation::A_NE;
+
+        else if (_side == HexagonSide::Orientation::C_NW)
+            return HexagonSide::Orientation::A_SE;
+        else if (_side == HexagonSide::Orientation::A_SE)
+            return HexagonSide::Orientation::C_NW;
         return HexagonSide::Orientation::NONE;
+    }
+
+    bool HexagonSide::isAmbushSide() const {
+        return _side == Orientation::A_NE || _side == Orientation::A_SE ||
+                _side == Orientation::B_S || _side == Orientation::B_SW ||
+                _side == Orientation::C_N || _side == Orientation::C_NW;
     }
 
     bool HexagonSide::canMove(HexagonSide::Orientation destinationSide) const {
         if (_hexagon == Hexagon::A)
             return HexaSide<HexaA>::isMoveable(_side, destinationSide);
-        // else if (_hexagon == Hexagon::B)
-        //     return HexaSide<HexaB>::isMoveable(_side, destinationSide);
-        // else if (_hexagon == Hexagon::C)
-        //     return HexaSide<HexaC>::isMoveable(_side, destinationSide);
+         else if (_hexagon == Hexagon::B)
+             return HexaSide<HexaB>::isMoveable(_side, destinationSide);
+         else if (_hexagon == Hexagon::C)
+             return HexaSide<HexaC>::isMoveable(_side, destinationSide);
         return false;
     }
 

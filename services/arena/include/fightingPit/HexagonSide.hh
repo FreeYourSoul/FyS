@@ -37,27 +37,30 @@ namespace fys::arena {
             C
         };
 
-        enum class Orientation {
-            A_N,
-            A_S,
+        enum class Orientation : int {
+            A_N = 0,
             A_NE,
-            A_NW,
             A_SE,
+            A_S,
             A_SW,
+            A_NW,
             B_N ,
-            B_S ,
             B_NE,
-            B_NW,
             B_SE,
+            B_S ,
             B_SW,
+            B_NW,
             C_N ,
-            C_S ,
             C_NE,
-            C_NW,
             C_SE,
+            C_S ,
             C_SW,
+            C_NW,
             NONE
         };
+
+        HexagonSide(Hexagon hexagon = Hexagon::A, Orientation orientation = Orientation::NONE) :
+            _hexagon(hexagon), _side(orientation) {}
 
         std::pair<Hexagon, Orientation> operator*() const { return std::make_pair(_hexagon, _side); }
 
@@ -65,6 +68,8 @@ namespace fys::arena {
         bool moveRight();
         bool moveLeft();
         bool moveBack();
+
+        bool isAmbushSide() const;
 
     private:
         void changeSide(HexagonSide::Orientation);

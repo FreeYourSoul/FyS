@@ -21,24 +21,5 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
-
-TEST_CASE("FlatMessageBuilder : Create WSActionNotification") {
-
-}
-
-TEST_CASE("FlatMessageBuilder : Create WSAction") {
-
-    SECTION ("Move") {
-
-    }
-
-    SECTION("PnjInterract") {
-
-    }
-
-}
-
-TEST_CASE("FlatMessageBuilder : Create Communication") {
-
-}
