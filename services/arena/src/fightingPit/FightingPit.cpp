@@ -22,3 +22,23 @@
 // SOFTWARE.
 
 #include <fightingPit/FightingPit.hh>
+
+namespace fys::arena {
+
+    void FightingPit::startBattle() {
+
+    }
+
+    void FightingPit::addContender(fys::arena::FightingContender newContender) {
+
+    }
+
+    void FightingPit::addPartyTeam(fys::arena::PartyTeam newTeam) {
+
+    }
+
+    std::vector<SpeedOrder> FightingPit::retrieveOrdering() const {
+
+    }
+
+}

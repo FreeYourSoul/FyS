@@ -25,10 +25,14 @@
 #ifndef FYS_TEAMMEMBER_HH
 #define FYS_TEAMMEMBER_HH
 
+#include <fightingPit/data/PitParticipant.hh>
 
-class TeamMember {
+namespace fys::arena {
 
-};
+    class TeamMember : public PitParticipant {
 
+    };
+
+}
 
 #endif //FYS_TEAMMEMBER_HH

@@ -26,14 +26,40 @@
 
 namespace fys::arena {
 
+    FightingPit FightingPitAnnouncer::buildFightingPit() const {
+
+    }
+
     FightingPitAnnouncer & FightingPitAnnouncer::generateContenders() {
         if (isScriptedEncounter() && !_idEncounter) {
-            // log encounter impossible
+            // impossible because a scripted encounter need to have an ID
             _isFightingPitCorrupted = true;
             return *this;
         }
-
+        // todo : generated the contenders
         return *this;
     }
+
+    FightingPitAnnouncer& FightingPitAnnouncer::generatePartyTeams() {
+
+    }
+
+    void FightingPitAnnouncer::setupPartyTeam() {
+
+    }
+
+    std::vector<std::unique_ptr<FightingContender> > FightingPitAnnouncer::generateScriptedContenders() {
+        std::vector<std::unique_ptr<FightingContender> > resultContenders;
+
+        return resultContenders;
+    }
+
+    std::vector<std::unique_ptr<FightingContender> > FightingPitAnnouncer::generateRandomContenders() {
+        std::vector<std::unique_ptr<FightingContender> > resultContenders;
+
+        return resultContenders;
+    }
+
+
 
 } // namespace fys::arena

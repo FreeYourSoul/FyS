@@ -22,4 +22,9 @@
 // SOFTWARE.
 
 
-#include "TeamMember.hh"
+#include <fightingPit/team/TeamMember.hh>
+
+namespace fys::arena {
+
+
+}

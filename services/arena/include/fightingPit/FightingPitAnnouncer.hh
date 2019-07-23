@@ -89,6 +89,8 @@ namespace fys::arena {
 
         bool _isFightingPitCorrupted = false;
 
+        //TODO add the common cache retriever
+
     };
 
 }

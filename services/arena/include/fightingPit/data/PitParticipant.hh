@@ -21,16 +21,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <fightingPit/FightingPitLayout.hh>
+
+#ifndef FYS_PITPARTICIPANT_HH
+#define FYS_PITPARTICIPANT_HH
 
 namespace fys::arena {
 
-    void FightingPitLayout::characterMove() {
+    class PitParticipant {
 
-    }
+    public:
+        uint getPitParticipantSpeed() const {
+            return speed;
+        }
 
-    void FightingPitLayout::contenderMove() {
-
-    }
+    protected:
+        uint speed = 0;
+    };
 
 }
+
+#endif //FYS_PITPARTICIPANT_HH

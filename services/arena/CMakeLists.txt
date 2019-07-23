@@ -35,6 +35,8 @@ add_executable(arena_service ${COMMON_SRCS}
         ${CMAKE_CURRENT_LIST_DIR}/include/fightingPit/contender/ContenderScripting.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/fightingPit/team/AllyPartyTeams.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/fightingPit/team/AllyPartyTeams.hh
+        ${CMAKE_CURRENT_LIST_DIR}/src/fightingPit/team/TeamMember.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/fightingPit/team/TeamMember.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/ArenaServerContext.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/ArenaServerContext.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/fightingPit/HexagonSide.cpp

@@ -22,3 +22,9 @@
 // SOFTWARE.
 
 #include <fightingPit/contender/PitContenders.hh>
+
+namespace fys::arena {
+
+    
+
+}

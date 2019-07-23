@@ -25,6 +25,7 @@
 #ifndef FYS_FIGHTINGPITINSTANCE_HH
 #define FYS_FIGHTINGPITINSTANCE_HH
 
+#include <vector>
 #include <optional>
 #include <fightingPit/contender/PitContenders.hh>
 #include <fightingPit/contender/FightingContender.hh>
@@ -34,22 +35,31 @@
 
 namespace fys::arena {
 
+
+    /**
+     * @brief A fighting pit represent a specific instance of a battle.
+     *
+     * A fightingpit is composed of:
+     *  - a layout (mapping of how the monsters/players are spread on the board)
+     *  - a PitContenders object managing all the monsters and their behaviours (scripting)
+     *  - a AllyPartyTeams object managing the players, each client has a PartyTeam (multiple party teams possible for
+     *    one AllyPartyTeams) and the PartyTeam is composed of TeamMember that are the actual characters spread on the
+     *    gaming board.
+     */
     class FightingPit {
 
     public:
-        public:
-            FightingPit() : _layout(_contenders, _partyTeams) 
-            {}
+        FightingPit() : _layout(_contenders, _partyTeams) {}
 
-            void setupContenders(std::optional<uint> contenderId);
-            
-            void addContender(FightingContender newContender);
-            void addPartyTeam(PartyTeam newTeam);
+        void startBattle();
 
-        private:
-            FightingPitLayout   _layout;
-            PitContenders       _contenders;
-            AllyPartyTeams      _partyTeams;
+        void addContender(FightingContender newContender);
+        void addPartyTeam(PartyTeam newTeam);
+
+    private:
+        FightingPitLayout   _layout;
+        PitContenders       _contenders;
+        AllyPartyTeams      _partyTeams;
 
     };
 
