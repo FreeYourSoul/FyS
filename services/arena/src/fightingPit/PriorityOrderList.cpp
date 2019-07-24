@@ -22,36 +22,4 @@
 // SOFTWARE.
 
 
-#ifndef FYS_COMMONDATA_HH
-#define FYS_COMMONDATA_HH
-
-namespace fys::arena::data
-{
-
-    struct PriorityElem {
-        bool isContender;
-        uint speed;
-        uint idContender;
-    };
-
-    struct Life {
-        uint current = 0;
-        uint total   = 0;
-
-        bool isDead() const { return current <= 0; }
-    };
-
-    struct Status {
-        Life life;
-        uint magicPoint;
-    };
-
-    enum MoveDirection {
-        BACK,
-        RIGHT,
-        LEFT
-    };
-    
-} // namespace fys::arena::data
-
-#endif // !FYS_COMMONDATA_HH
+#include "PriorityOrderList.hh"

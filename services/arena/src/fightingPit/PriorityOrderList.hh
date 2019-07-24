@@ -22,36 +22,23 @@
 // SOFTWARE.
 
 
-#ifndef FYS_COMMONDATA_HH
-#define FYS_COMMONDATA_HH
+#ifndef FYS_PRIORITYORDERLIST_HH
+#define FYS_PRIORITYORDERLIST_HH
 
-namespace fys::arena::data
-{
+#include <fightingPit/data/CommonTypes.hh>
 
-    struct PriorityElem {
-        bool isContender;
-        uint speed;
-        uint idContender;
+namespace fys::arena {
+
+    class PriorityOrderList {
+
+    public:
+
+    private:
+        std::vector<data::PriorityElem> _prioList;
+
+
     };
 
-    struct Life {
-        uint current = 0;
-        uint total   = 0;
+}
 
-        bool isDead() const { return current <= 0; }
-    };
-
-    struct Status {
-        Life life;
-        uint magicPoint;
-    };
-
-    enum MoveDirection {
-        BACK,
-        RIGHT,
-        LEFT
-    };
-    
-} // namespace fys::arena::data
-
-#endif // !FYS_COMMONDATA_HH
+#endif //FYS_PRIORITYORDERLIST_HH

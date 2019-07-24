@@ -10,7 +10,7 @@ FreeYourSoul Online, a scalable mmorpg game
 
 ### Arena Service
 
-FreeYourSoul Online is using an original battle system inspired by Final Fantasy turn per turn systems. It is called Side Condition Timed Battle (SCTB) and it is explained into further details [here](doc/arena/Arena.md#arena).
+FreeYourSoul Online is using an original battle system inspired by Final Fantasy turn per turn systems. It is called Side Condition Timed Battle (SCTB) and it is explained into further details [here](doc/arena/Arena_BattleSystem.md#arena).
 
 ### World Service
 

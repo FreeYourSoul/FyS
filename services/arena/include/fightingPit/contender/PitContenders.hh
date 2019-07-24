@@ -35,6 +35,9 @@ namespace fys::arena {
 
     class PitContenders {
 
+    public:
+
+
     private:
         std::vector<std::unique_ptr<FightingContender> > _contenders;
 

@@ -61,6 +61,8 @@ namespace fys::arena {
         PitContenders       _contenders;
         AllyPartyTeams      _partyTeams;
 
+        PriorityOrderList _priorityOrderList;
+
     };
 
 }
