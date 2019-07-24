@@ -13,8 +13,8 @@ The arena will have multiple requirement to fulfill:
 
 # Fighting Pit
 
-The fighting pit (FP) is an instance of a fight in the world of FyS Online. FyS Online has a turn per turn battle system called SRTb (**S**ide **R**eal **T**ime **B**attle).  
-This is strongly inspired from the Final Fantasy X battle (CTBB : Conditional Turn Based Battle) but is quite different in pratice.
+The fighting pit (FP) is an instance of a fight in the world of FyS Online. FyS Online has a turn per turn battle system called SCTB (**S**ide **C**onditional **T**imed **B**attle).  
+This is strongly inspired from the Final Fantasy X battle (CTB : Conditional Turn Based Battle) but is quite different in pratice.
 
 ## Reminder of how CTB (FFX battle system)
 
