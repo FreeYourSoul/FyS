@@ -40,12 +40,55 @@ The way CTB is designed present several issues:
 
 # A new battle system SCTB (Side Condition Timed Battle)
 
-The name of the 
+Side Condition Timed Battle is a mix between CTB (FF-X battle system) and more classical battle system based on timers.  
+Let's peel the SCTB acronyme in order to understand the basics of this battle system.
 
-```plantuml
-@startuml
-node app
-database db
-app -- db
-@enduml
-```
+## Condition Timed
+
+Even if FF-X condition list, which make you able to know the ordering of the characters/opponnents turn, made the game easy. It was a pretty good idea as it gave an interesting strategic aspect to the battle, making you able to better play with the "limit" of your characters ressources (nearly dying, nearly out of magic power and so on...).  
+SCTB has the same condition list (based on characters/monsters speed), but in order to remove the easiness of FF-X battle system, each characters turn are timed. Plus a configurable difficulty mode makes you able to change this timer to be shorter (easy) or longer (hard). At the end of the timer, the character turn is skipped and the next character in the condition list takes it place.  
+  
+This "Condition Timed" part of SCTB remove the Infinite time turn problematic explained above.
+
+## Side
+
+Here is where SCTB makes a difference compared to other turn per turn battle system.  
+The field in which you fight your opponnent(s) is not flat like in pokemon (or Final Fantasy 1 to 10). But is composed of a total of 18 possible angles. The gaming board could be represented as 3 hexagons stuck together (see ascii art below).  
+Your team of characters (4 characters) will be on a SIDE of the below hexagon, same for the monster(s). Your characters can move independently from one side to another (adjacent side) to fight monsters.
+    
+                             _____             
+                            /     \          
+                      _____/  B    \        18 possible playable sides  
+                     /     \       /        6  possible ambush sides [A_NE, B_SW, A_SE, C_NW, C_N, B_S]  
+                    /  A    \_____/           
+                    \       /     \  
+                     \_____/  C    \  
+                           \       /   
+                            \_____/  
+
+Little monster (the size of your character) are going to be able to be on only one side of one of the three hexagon (the same as you character). Which means that if a character change sides, if the monster doesn't follow you, he won't be able to reach this monster from the new side.  
+You can thing of each sides as a separate battle happenning at the same time. There can be 18 battle front in total, and your characters can use a turn to change battle front (side) instead of doing another action (attacking for example).  
+This aspect add some strategy as some monster could have very powerfull area of effect spells that would touch ever.  
+  
+You can find bellow a very sketchy draw of example:
+
+![SCTB-MoveExample](https://raw.githubusercontent.com/FreeYourSoul/FyS/master/doc/other/ExampleFySArena.png)
+
+In this state the player is in the at the south west of the hexagon B, if the player decide to move all his characters to the left, the characters will be on the North west of Polygon B (as shown below). In this other side of the polygon B, another monster will be present.
+
+![SCTB-MoveExampleAfter](https://raw.githubusercontent.com/FreeYourSoul/FyS/master/doc/other/ExampleFySArenaAfter.png)
+
+### Large sized monster
+
+A Monsters can be big enough to be attacked from multiple sides. For example a big Hydra Boss monster could be on the 6 faces of the Hexagon A at the same time. Some characters of your team would be on the border north-east of the Hexagon A to fight one of the Head, others could be on the north border of the hexagon to fight another head. Or even at the back of the hydra (on the border south / south-east) where the characters would fight the tail of the Hydra.    
+
+### Multiplayer adapted
+
+18 battle front possible is really a lot, way more than all the normal encounters that will be usually made in the game (1 to (rarely) 3 battle front in random encounter). So why having that many of them ? The answer is simple, in MMORPG, two things are really appreciated by the players, the PvP (player vs player) to show off the individual skill of each players. And the PvE (Player vs Environment) to play in team and make succesful strategy against the game's traps.
+FyS Online is focusing on PvE for now, and the SCTB is particularly interesting for it as it would be the first (as far as I know) turn per turn game that would allow multiple player to play at the same time in a very good pace (not having to wait long before playing).  
+  
+**Multiple player that has to wait their turn?** : Yeah, souds horrible right ? if there is a maximum of 18 battle filed with, let's say 2 player by battle field. Then there is 36 players. You should wait for 36 player + the monsters turn before playing. It is impossible. But, what if each side, each battle field, have their own turns? Then it means for each battle field (each sides of the hexagone), you just have to wait for 1 player and the monster to play before your turn.
+And this is how SCTB works, there is one timer & one priority list by side, which makes it playable even with a lot of players.  
+The fact that you can move from one side to another is not inconsequential as most of the spells you can cast are limited to the current side your character is in, so strategy can be put in place in order to have healers coming to heal and protect themselves on a side that is less dangerous (for example).  
+  
+**But you said each player can move their character from side to side independantly:** Yes, making the characters able to move independently is the goal. It would increase the complexity of the game exponentialy for the players (as they will need to handle multiple turn at the same time from different sides). But it can have the issue of making too many players on one specific sides and thus slowing down the pace of the game greatly. Additional work on this part is required to make the gameplay fun. 

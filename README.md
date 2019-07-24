@@ -1,8 +1,31 @@
-# FyS
+# FyS Online
 
-FreeYourSoul, scalable mmorpg game
+FreeYourSoul Online, a scalable mmorpg game
 
-## Dependency
+## Dispatchers
+
+### What is a FyS dispatcher
+
+## Services
+
+### Arena Service
+
+FreeYourSoul Online is using an original battle system inspired by Final Fantasy turn per turn systems. It is called Side Condition Timed Battle (SCTB) and it is explained into further details [here](doc/arena/Arena.md#arena).
+
+### World Service
+
+### InventoryGrab Service
+
+### InventoryUse Service
+
+### Inventory Trade Service
+
+### Chat Service
+
+### Quest Service
+
+
+## External Dependency
 
 * [ZeroMQ](https://github.com/zeromq/libzmq)  
     Network library
@@ -14,5 +37,5 @@ FreeYourSoul, scalable mmorpg game
     Testing framework
 * [ChaiScript](https://github.com/ChaiScript/ChaiScript)  
     For scripting of monsters in the Arena (fighting mode)
-* [LUA](https://github.com/lua/lua)   --> soon to be
+* [LUA](https://github.com/lua/lua)   --> soon to be  
     For the scripting of NPC in the world map (when moving)
