@@ -25,6 +25,12 @@
 #include <fightingPit/PriorityOrderList.hh>
 
 namespace fys::arena {
+    
+    PriorityOrderList::PriorityOrderList(std::vector<data::PriorityElem> baseSpeed) : 
+                        _baseSpeed(std::move(baseSpeed)), _priorityList(_baseSpeed.size() * 4) 
+    {
+        sortBaseAndCalculatePriority();
+    }
 
     void PriorityOrderList::addParticipantInList(uint id, int speed, bool isContender) {
         _baseSpeed.emplace_back(id, speed, isContender);
@@ -46,11 +52,35 @@ namespace fys::arena {
     void PriorityOrderList::sortBaseAndCalculatePriority() {
         std::sort(_baseSpeed.begin(), _baseSpeed.end());
         if (_currentTurn == 0) {
-            _priorityList = _baseSpeed;
-            _analyzedList = _priorityList;
+            _analyzedList = _baseSpeed;
         }
-        else {
-            calculatePriority(_analyzedList, _currentTurn);
+        calculatePriority(_analyzedList, _currentTurn);
+    }
+
+    int PriorityOrderList::getComputedSpeed(const data::PriorityElem &elemToCompute) const {
+        for (std::size_t i = 0; i < _baseSpeed.size(); ++i) {
+            if (_baseSpeed.at(i).id == elemToCompute.id) {
+                uint idNextInLine = (i + 1 < _baseSpeed.size()) ? _baseSpeed.front().id : _baseSpeed.at(i + 1).id;
+                for (const auto &prioElemInList : _priorityList) {
+                    if (prioElemInList.id == idNextInLine) {
+                        return prioElemInList.speed;
+                    }
+                }
+            }
+        }
+        // TODO : Log warning about strange stuff happenning arround here
+        return 0;
+    }
+
+    void ProrityOrderList::enTurnRoutine() {
+        ++_currentTurn;
+        for (const auto &baseSpeedElem : _baseSpeed) {
+            for (std::size_t i = 0; i < _analyzedList.size(); ++i) {
+                if (_analyzedList.at(i).id == baseSpeedElem.id) {
+                    _analyzedList.at(i).speed += baseSpeedElem.speed + getFastestBaseSpeed();
+                    break;
+                }
+            }
         }
     }
 
@@ -59,17 +89,15 @@ namespace fys::arena {
             // log recalculation of priority ?
             return;
         }
+        std::sort(analyzedList.begin(), analyzedList.end());
         auto &fastest = analyzedList.back();
-        if (isPlayerSlowest(fastest.id))
-            ++_currentTurn;
+
         if (analyzedList.size() >= 2)
-            fastest.speed -= analyzedList.at(analyzedList.size() - 2).speed;
+            fastest.speed = getComputedSpeed(fastest);
         _priorityList.emplace_back(fastest);
-        if (fastest.speed > 0)
-            std::sort(analyzedList.begin(), analyzedList.end());
-        else
-            analyzedList.pop_back();
-        calculatePriority(analyzedList, _currentTurn);
+        if (isPlayerSlowest(fastest.id))
+            endTurnRoutine();
+        calculatePriority(analyzedList, turn);
     }
 
 }

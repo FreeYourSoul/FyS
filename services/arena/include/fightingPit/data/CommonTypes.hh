@@ -28,7 +28,7 @@
 namespace fys::arena::data
 {
 
-    struct PriorityElem {
+    struct PriorityElem { // Improve with strong typing on ID/SPEED
         PriorityElem() = default;
         PriorityElem(uint aid, int aspeed, bool aisContender) : id(aid), speed(aspeed), isContender(aisContender) {}
 
@@ -36,8 +36,17 @@ namespace fys::arena::data
         int  speed;
         bool isContender;
 
+        PriorityElem &operator-(const PriorityElem &other) {
+            speed -= other.speed;
+            return *this;
+        }
+
         bool operator<(const PriorityElem &other) {
             return speed < other.speed;
+        }
+
+        bool operator==(const PriorityElem &other) {
+            return id == other.id && speed == other.speed && isContender == other.isContender;
         }
 
     };
