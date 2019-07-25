@@ -1,3 +1,5 @@
+#include <utility>
+
 // MIT License
 //
 // Copyright (c) 2019 Quentin Balland
@@ -25,6 +27,7 @@
 #ifndef FYS_PRIORITYORDERLIST_HH
 #define FYS_PRIORITYORDERLIST_HH
 
+#include <vector>
 #include <fightingPit/data/CommonTypes.hh>
 
 namespace fys::arena {
@@ -32,10 +35,38 @@ namespace fys::arena {
     class PriorityOrderList {
 
     public:
+        PriorityOrderList() = default;
+        PriorityOrderList(std::vector<data::PriorityElem> baseSpeed)
+                            : _baseSpeed(std::move(baseSpeed)), _priorityList(_baseSpeed.size() * 2) {
+            sortBaseAndCalculatePriority();
+        }
+
+        void addParticipantInList(uint id, int speed, bool isContender);
+        void removeParticipantFromList(uint idParticipant);
+
+        data::PriorityElem getNext();
 
     private:
-        std::vector<data::PriorityElem> _prioList;
+        void sortBaseAndCalculatePriority();
+        void calculatePriority(std::vector<data::PriorityElem> &analyzedList, uint turn);
 
+        bool isPlayerSlowest(uint id) const {
+            return _baseSpeed.front().id == id;
+        }
+
+        int getFastestSpeed() const {
+            return _baseSpeed.back().speed;
+        }
+        int getSlowestSpeed() const {
+            return _baseSpeed.front().speed;
+        }
+
+    private:
+        std::vector<data::PriorityElem> _baseSpeed;
+        std::vector<data::PriorityElem> _priorityList;
+        // List used as temporary for the calculate priority
+        std::vector<data::PriorityElem> _analyzedList;
+        uint _currentTurn = 0;
 
     };
 

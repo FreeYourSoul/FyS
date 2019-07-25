@@ -37,8 +37,4 @@ namespace fys::arena {
 
     }
 
-    std::vector<SpeedOrder> FightingPit::retrieveOrdering() const {
-
-    }
-
 }

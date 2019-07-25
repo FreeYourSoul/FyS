@@ -30,12 +30,12 @@ namespace fys::arena {
     class PitParticipant {
 
     public:
-        uint getPitParticipantSpeed() const {
+        unsigned getPitParticipantSpeed() const {
             return speed;
         }
 
     protected:
-        uint speed = 0;
+        unsigned speed = 0;
     };
 
 }

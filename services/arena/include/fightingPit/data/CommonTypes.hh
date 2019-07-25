@@ -29,9 +29,17 @@ namespace fys::arena::data
 {
 
     struct PriorityElem {
+        PriorityElem() = default;
+        PriorityElem(uint aid, int aspeed, bool aisContender) : id(aid), speed(aspeed), isContender(aisContender) {}
+
+        uint id;
+        int  speed;
         bool isContender;
-        uint speed;
-        uint idContender;
+
+        bool operator<(const PriorityElem &other) {
+            return speed < other.speed;
+        }
+
     };
 
     struct Life {

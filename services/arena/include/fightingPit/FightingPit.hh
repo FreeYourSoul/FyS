@@ -32,6 +32,7 @@
 #include <fightingPit/FightingPitLayout.hh>
 #include <fightingPit/team/AllyPartyTeams.hh>
 #include <fightingPit/team/PartyTeam.hh>
+#include "PriorityOrderList.hh"
 
 namespace fys::arena {
 
