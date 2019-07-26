@@ -41,12 +41,12 @@ namespace fys::arena::data
             return *this;
         }
 
-        bool operator<(const PriorityElem &other) {
+        bool operator<(const PriorityElem &other) const {
             return speed < other.speed;
         }
 
-        bool operator==(const PriorityElem &other) {
-            return id == other.id && speed == other.speed && isContender == other.isContender;
+        bool operator==(const PriorityElem &other) const {
+            return id == other.id && isContender == other.isContender;
         }
 
     };

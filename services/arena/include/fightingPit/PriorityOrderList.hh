@@ -36,7 +36,7 @@ namespace fys::arena {
 
     public:
         PriorityOrderList() = default;
-        PriorityOrderList(std::vector<data::PriorityElem> baseSpeed)
+        PriorityOrderList(std::vector<data::PriorityElem> baseSpeed);
 
         void addParticipantInList(uint id, int speed, bool isContender);
         void removeParticipantFromList(uint idParticipant);
@@ -45,9 +45,14 @@ namespace fys::arena {
 
     private:
         void sortBaseAndCalculatePriority();
-        void calculatePriority(std::vector<data::PriorityElem> &analyzedList, uint turn);
-        void enTurnRoutine();
-        int computedSpeedForPriorityElem(data::PriorityElem &elemToCompute) const;
+        void calculatePriority(uint turn);
+        void endTurnRoutine();
+        int getComputedSpeed(const data::PriorityElem &elemToCompute) const;
+
+        /**
+         * Sort in a specific manner
+         */
+        void customSort();
 
         bool isPlayerSlowest(uint id) const {
             return _baseSpeed.front().id == id;
