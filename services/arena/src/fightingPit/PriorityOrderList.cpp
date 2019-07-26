@@ -33,7 +33,12 @@ namespace fys::arena {
     }
 
     void PriorityOrderList::addParticipantInList(uint id, int speed, bool isContender) {
+        if (std::any_of(_baseSpeed.begin(), _baseSpeed.end(), [id, isContender](const auto& prioElem) { return prioElem.id == id && prioElem.isContender == isContender; })) {
+            // TODO : log Warning about adding an already existing participant 
+            return;
+        }
         _baseSpeed.emplace_back(id, speed, isContender);
+        _priorityList.clear();
         sortBaseAndCalculatePriority();
     }
 
@@ -42,11 +47,21 @@ namespace fys::arena {
         _baseSpeed.erase(std::remove_if(_baseSpeed.begin(), _baseSpeed.end(), findParticipantPredicate), _priorityList.end());
         _priorityList.erase(std::remove_if(_priorityList.begin(), _priorityList.end(), findParticipantPredicate), _priorityList.end());
         _analyzedList.erase(std::remove_if(_analyzedList.begin(), _analyzedList.end(), findParticipantPredicate), _analyzedList.end());
+        _priorityList.clear();
         sortBaseAndCalculatePriority();
     }
 
     data::PriorityElem PriorityOrderList::getNext() {
-
+        if (_baseSpeed.empty()) {
+            return {0, 0, false};
+        }
+        if (_priorityList.empty()) {
+            sortBaseAndCalculatePriority();
+            return getNext();
+        }
+        PriorityElem next = _priorityList.back();
+        _priorityList.pop_back();
+        return next;
     }
 
     void PriorityOrderList::sortBaseAndCalculatePriority() {
@@ -60,7 +75,8 @@ namespace fys::arena {
     int PriorityOrderList::getComputedSpeed(const data::PriorityElem &elemToCompute) const {
         for (std::size_t i = 0; i < _baseSpeed.size(); ++i) {
             if (_baseSpeed.at(i).id == elemToCompute.id) {
-                uint idNextInLine = (i + 1 < _baseSpeed.size()) ? _baseSpeed.front().id : _baseSpeed.at(i + 1).id;
+                // ISSUE HERE :x
+                uint idNextInLine = (i - 1 > 0) ? _baseSpeed.back().id : _baseSpeed.at(i - 1).id;
                 for (const auto &prioElemInList : _priorityList) {
                     if (prioElemInList.id == idNextInLine) {
                         return prioElemInList.speed;
