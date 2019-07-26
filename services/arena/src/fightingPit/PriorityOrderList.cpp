@@ -96,11 +96,22 @@ namespace fys::arena {
         return 0;
     }
 
+
     void ProrityOrderList::enTurnRoutine() {
         ++_currentTurn;
         if (_baseSpeed.size() <= 1)
             return;
+        
+        // reorder equal speeds
+        if (auto found = std::adjacent_find(std::begin(_analyzedList), std::end(_analyzedList), [](const auto& e, const auto& e2){ return e.speed == e2.speed; }); 
+                 found != last) {
+            auto toSwap = std::adjacent_find(std::begin(_analyzedList),std::end(_analyzedList), [](const auto& e, const auto& e2){ return e.speed != e2.speed; });
+            std::reverse(found, toSwap + 1);
+        }
+
+        // reverse in order to have faster at the end (to use pop_back)
         std::reverse(std::begin(_analyzedList), std::end(_analyzedList));
+
         for (const auto &baseSpeedElem : _baseSpeed) {
             for (std::size_t i = 0; i < _analyzedList.size(); ++i) {
                 if (_analyzedList.at(i).id == baseSpeedElem.id) {
