@@ -50,11 +50,11 @@ TEST_CASE("PriorityOrderList test", "[service][arena]") {
 
         REQUIRE(5 == pol._priorityList.size());
         REQUIRE(5 == pol._analyzedList.size());
-        REQUIRE(fys::arena::data::PriorityElem(5, 30,  true), pol._baseSpeed.at(0));
-        REQUIRE(fys::arena::data::PriorityElem(2, 19, false), pol._baseSpeed.at(1));
+        REQUIRE(fys::arena::data::PriorityElem(5, 30,  true), pol._baseSpeed.at(4));
+        REQUIRE(fys::arena::data::PriorityElem(2, 19, false), pol._baseSpeed.at(3));
         REQUIRE(fys::arena::data::PriorityElem(1, 10,  true), pol._baseSpeed.at(2));
-        REQUIRE(fys::arena::data::PriorityElem(3, 3,  false), pol._baseSpeed.at(3));
-        REQUIRE(fys::arena::data::PriorityElem(4, 1,   true), pol._baseSpeed.at(4));
+        REQUIRE(fys::arena::data::PriorityElem(3, 3,  false), pol._baseSpeed.at(1));
+        REQUIRE(fys::arena::data::PriorityElem(4, 1,   true), pol._baseSpeed.at(0));
         for (std::size_t i = 0; i < pol._baseSpeed.size(); ++i) {
             REQUIRE(_baseSpeed.at(i) == pol._priorityList.at(i));
             REQUIRE(_baseSpeed.at(i) == pol._analyzedList.at(i));
@@ -70,11 +70,11 @@ TEST_CASE("PriorityOrderList test", "[service][arena]") {
         // 1:10
         // 3:3 
         // 4:2
-        REQUIRE(fys::arena::data::PriorityElem(5, 30, true)  == pol._analyzedList.at(0));
-        REQUIRE(fys::arena::data::PriorityElem(2, 19, false) == pol._analyzedList.at(1));
+        REQUIRE(fys::arena::data::PriorityElem(5, 30, true)  == pol._analyzedList.at(4));
+        REQUIRE(fys::arena::data::PriorityElem(2, 19, false) == pol._analyzedList.at(3));
         REQUIRE(fys::arena::data::PriorityElem(1, 10, true)  == pol._analyzedList.at(2));
-        REQUIRE(fys::arena::data::PriorityElem(3, 3, false) == pol._analyzedList.at(3));
-        REQUIRE(fys::arena::data::PriorityElem(4, 2, true)  == pol._analyzedList.at(4));
+        REQUIRE(fys::arena::data::PriorityElem(3, 3, false) == pol._analyzedList.at(1));
+        REQUIRE(fys::arena::data::PriorityElem(4, 2, true)  == pol._analyzedList.at(0));
 
         SECTION("Turn one check (init)") {
 
@@ -149,23 +149,23 @@ TEST_CASE("PriorityOrderList test", "[service][arena]") {
 
             REQUIRE(11 == pol._priorityList.size());
 
-            REQUIRE(5 == pol._priorityList.at(0).id);
-            REQUIRE(2 == pol._priorityList.at(1).id);
-            REQUIRE(5 == pol._priorityList.at(2).id);
-            REQUIRE(1 == pol._priorityList.at(3).id);
-            REQUIRE(2 == pol._priorityList.at(4).id);
-            REQUIRE(1 == pol._priorityList.at(5).id);
-            REQUIRE(1 == pol._priorityList.at(6).id);
-            REQUIRE(3 == pol._priorityList.at(7).id);
-            REQUIRE(5 == pol._priorityList.at(8).id);
+            REQUIRE(5 == pol._priorityList.at(10).id);
             REQUIRE(2 == pol._priorityList.at(9).id);
-            REQUIRE(4 == pol._priorityList.at(10).id);
+            REQUIRE(5 == pol._priorityList.at(8).id);
+            REQUIRE(1 == pol._priorityList.at(7).id);
+            REQUIRE(2 == pol._priorityList.at(6).id);
+            REQUIRE(1 == pol._priorityList.at(5).id);
+            REQUIRE(1 == pol._priorityList.at(4).id);
+            REQUIRE(3 == pol._priorityList.at(3).id);
+            REQUIRE(5 == pol._priorityList.at(2).id);
+            REQUIRE(2 == pol._priorityList.at(1).id);
+            REQUIRE(4 == pol._priorityList.at(0).id);
 
-            REQUIRE(fys::arena::data::PriorityElem(4, 2, true)  == pol._analyzedList.at(0));
-            REQUIRE(fys::arena::data::PriorityElem(2, 1, false) == pol._analyzedList.at(1));
+            REQUIRE(fys::arena::data::PriorityElem(4, 2, true)  == pol._analyzedList.at(4));
+            REQUIRE(fys::arena::data::PriorityElem(2, 1, false) == pol._analyzedList.at(3));
             REQUIRE(fys::arena::data::PriorityElem(1, 1, true)  == pol._analyzedList.at(2));
-            REQUIRE(fys::arena::data::PriorityElem(3, 1, false) == pol._analyzedList.at(3));
-            REQUIRE(fys::arena::data::PriorityElem(5, 0, true)  == pol._analyzedList.at(4));
+            REQUIRE(fys::arena::data::PriorityElem(3, 1, false) == pol._analyzedList.at(1));
+            REQUIRE(fys::arena::data::PriorityElem(5, 0, true)  == pol._analyzedList.at(0));
 
         } // End section : Turn one check (init)
 
@@ -183,11 +183,11 @@ TEST_CASE("PriorityOrderList test", "[service][arena]") {
         // 1:41
         // 3:34
         // 4:34
-        REQUIRE(fys::arena::data::PriorityElem(5, 60, true)  == pol._analyzedList.at(0));
-        REQUIRE(fys::arena::data::PriorityElem(2, 50, false) == pol._analyzedList.at(1));
+        REQUIRE(fys::arena::data::PriorityElem(5, 60, true)  == pol._analyzedList.at(4));
+        REQUIRE(fys::arena::data::PriorityElem(2, 50, false) == pol._analyzedList.at(3));
         REQUIRE(fys::arena::data::PriorityElem(1, 41, true)  == pol._analyzedList.at(2));
-        REQUIRE(fys::arena::data::PriorityElem(3, 34, false) == pol._analyzedList.at(3));
-        REQUIRE(fys::arena::data::PriorityElem(4, 34, true)  == pol._analyzedList.at(4));
+        REQUIRE(fys::arena::data::PriorityElem(3, 34, false) == pol._analyzedList.at(1));
+        REQUIRE(fys::arena::data::PriorityElem(4, 34, true)  == pol._analyzedList.at(0));
 
         pol.sortBaseAndCalculatePriority();
 
@@ -226,17 +226,17 @@ TEST_CASE("PriorityOrderList test", "[service][arena]") {
             */
             REQUIRE(5 == pol._priorityList.size());
 
-            REQUIRE(5 == pol._priorityList.at(0).id);
-            REQUIRE(2 == pol._priorityList.at(1).id);
+            REQUIRE(5 == pol._priorityList.at(4).id);
+            REQUIRE(2 == pol._priorityList.at(3).id);
             REQUIRE(1 == pol._priorityList.at(2).id);
-            REQUIRE(3 == pol._priorityList.at(3).id);
-            REQUIRE(4 == pol._priorityList.at(4).id);
+            REQUIRE(3 == pol._priorityList.at(1).id);
+            REQUIRE(4 == pol._priorityList.at(0).id);
 
-            REQUIRE(fys::arena::data::PriorityElem(4, 24, true) == pol._analyzedList.at(0));
-            REQUIRE(fys::arena::data::PriorityElem(5, 10, true) == pol._analyzedList.at(1));
+            REQUIRE(fys::arena::data::PriorityElem(4, 24, true) == pol._analyzedList.at(4));
+            REQUIRE(fys::arena::data::PriorityElem(5, 10, true) == pol._analyzedList.at(3));
             REQUIRE(fys::arena::data::PriorityElem(2, 9, false) == pol._analyzedList.at(2));
-            REQUIRE(fys::arena::data::PriorityElem(1, 7, true)  == pol._analyzedList.at(3));
-            REQUIRE(fys::arena::data::PriorityElem(3, 0, false) == pol._analyzedList.at(4));
+            REQUIRE(fys::arena::data::PriorityElem(1, 7, true)  == pol._analyzedList.at(1));
+            REQUIRE(fys::arena::data::PriorityElem(3, 0, false) == pol._analyzedList.at(0));
 
         } // End section : Turn two check
         
@@ -254,11 +254,11 @@ TEST_CASE("PriorityOrderList test", "[service][arena]") {
         // 4:56
         // 1:54
         // 3:33
-        REQUIRE(fys::arena::data::PriorityElem(5, 70, true)  == pol._analyzedList.at(0));
-        REQUIRE(fys::arena::data::PriorityElem(2, 58, false) == pol._analyzedList.at(1));
+        REQUIRE(fys::arena::data::PriorityElem(5, 70, true)  == pol._analyzedList.at(4));
+        REQUIRE(fys::arena::data::PriorityElem(2, 58, false) == pol._analyzedList.at(3));
         REQUIRE(fys::arena::data::PriorityElem(4, 56, true)  == pol._analyzedList.at(2));
-        REQUIRE(fys::arena::data::PriorityElem(1, 54, true)  == pol._analyzedList.at(3));
-        REQUIRE(fys::arena::data::PriorityElem(3, 33, false) == pol._analyzedList.at(4));
+        REQUIRE(fys::arena::data::PriorityElem(1, 54, true)  == pol._analyzedList.at(1));
+        REQUIRE(fys::arena::data::PriorityElem(3, 33, false) == pol._analyzedList.at(0));
 
         pol.sortBaseAndCalculatePriority();
         
@@ -285,15 +285,15 @@ TEST_CASE("PriorityOrderList test", "[service][arena]") {
             */
             REQUIRE(3 == pol._priorityList.size());
 
-            REQUIRE(5 == pol._priorityList.at(0).id);
+            REQUIRE(5 == pol._priorityList.at(2).id);
             REQUIRE(2 == pol._priorityList.at(1).id);
-            REQUIRE(4 == pol._priorityList.at(2).id);
+            REQUIRE(4 == pol._priorityList.at(0).id);
 
-            REQUIRE(fys::arena::data::PriorityElem(4, 2, true)   == pol._analyzedList.at(0));
-            REQUIRE(fys::arena::data::PriorityElem(1, 54, true)  == pol._analyzedList.at(1));
+            REQUIRE(fys::arena::data::PriorityElem(4, 2, true)   == pol._analyzedList.at(4));
+            REQUIRE(fys::arena::data::PriorityElem(1, 54, true)  == pol._analyzedList.at(3));
             REQUIRE(fys::arena::data::PriorityElem(3, 33, false) == pol._analyzedList.at(2));
-            REQUIRE(fys::arena::data::PriorityElem(5, 12, true)  == pol._analyzedList.at(3));
-            REQUIRE(fys::arena::data::PriorityElem(2, 2, false)  == pol._analyzedList.at(4));
+            REQUIRE(fys::arena::data::PriorityElem(5, 12, true)  == pol._analyzedList.at(1));
+            REQUIRE(fys::arena::data::PriorityElem(2, 2, false)  == pol._analyzedList.at(0));
 
         } // End section : Turn three check
 
@@ -311,11 +311,11 @@ TEST_CASE("PriorityOrderList test", "[service][arena]") {
         // 3:66
         // 2:41
         // 4:34
-        REQUIRE(fys::arena::data::PriorityElem(1, 94, true)  == pol._analyzedList.at(0));
-        REQUIRE(fys::arena::data::PriorityElem(5, 77, true)  == pol._analyzedList.at(1));
+        REQUIRE(fys::arena::data::PriorityElem(1, 94, true)  == pol._analyzedList.at(4));
+        REQUIRE(fys::arena::data::PriorityElem(5, 77, true)  == pol._analyzedList.at(3));
         REQUIRE(fys::arena::data::PriorityElem(3, 66, false) == pol._analyzedList.at(2));
-        REQUIRE(fys::arena::data::PriorityElem(2, 41, false) == pol._analyzedList.at(3));
-        REQUIRE(fys::arena::data::PriorityElem(4, 34, true)  == pol._analyzedList.at(4));
+        REQUIRE(fys::arena::data::PriorityElem(2, 41, false) == pol._analyzedList.at(1));
+        REQUIRE(fys::arena::data::PriorityElem(4, 34, true)  == pol._analyzedList.at(0));
 
         pol.sortBaseAndCalculatePriority();
 
@@ -378,39 +378,59 @@ TEST_CASE("PriorityOrderList test", "[service][arena]") {
 
     SECTION("Public API test") {
 
-        SECTION("addParticipantInList test") {
-
             REQUIRE(5 == pol._priorityList.size());
-            REQUIRE(fys::arena::data::PriorityElem(5, 30,  true), pol._baseSpeed.at(0));
-            REQUIRE(fys::arena::data::PriorityElem(2, 19, false), pol._baseSpeed.at(1));
+            REQUIRE(fys::arena::data::PriorityElem(5, 30,  true), pol._baseSpeed.at(4));
+            REQUIRE(fys::arena::data::PriorityElem(2, 19, false), pol._baseSpeed.at(3));
             REQUIRE(fys::arena::data::PriorityElem(1, 10,  true), pol._baseSpeed.at(2));
-            REQUIRE(fys::arena::data::PriorityElem(3, 3,  false), pol._baseSpeed.at(3));
-            REQUIRE(fys::arena::data::PriorityElem(4, 1,   true), pol._baseSpeed.at(4));
+            REQUIRE(fys::arena::data::PriorityElem(3, 3,  false), pol._baseSpeed.at(1));
+            REQUIRE(fys::arena::data::PriorityElem(4, 1,   true), pol._baseSpeed.at(0));
+
+        SECTION("getNext test") {
+
+
+
+        } // getNext test
+
+        SECTION("addParticipantInList test") {
 
             // Check "SortAndCalculatePriority normal setup test"::"Turn one check (init)" to verify that the turn is supposed to be set like that
             REQUIRE(11 == pol._priorityList.size());
-            REQUIRE(5 == pol._priorityList.at(0).id);
-            REQUIRE(2 == pol._priorityList.at(1).id);
-            REQUIRE(5 == pol._priorityList.at(2).id);
-            REQUIRE(1 == pol._priorityList.at(3).id);
-            REQUIRE(2 == pol._priorityList.at(4).id);
-            REQUIRE(1 == pol._priorityList.at(5).id);
-            REQUIRE(1 == pol._priorityList.at(6).id);
-            REQUIRE(3 == pol._priorityList.at(7).id);
-            REQUIRE(5 == pol._priorityList.at(8).id);
+            REQUIRE(5 == pol._priorityList.at(10).id);
             REQUIRE(2 == pol._priorityList.at(9).id);
-            REQUIRE(4 == pol._priorityList.at(10).id);
+            REQUIRE(5 == pol._priorityList.at(8).id);
+            REQUIRE(1 == pol._priorityList.at(7).id);
+            REQUIRE(2 == pol._priorityList.at(6).id);
+            REQUIRE(1 == pol._priorityList.at(5).id);
+            REQUIRE(1 == pol._priorityList.at(4).id);
+            REQUIRE(3 == pol._priorityList.at(3).id);
+            REQUIRE(5 == pol._priorityList.at(2).id);
+            REQUIRE(2 == pol._priorityList.at(1).id);
+            REQUIRE(4 == pol._priorityList.at(0).id);
 
             pol.addParticipantInList(6, 15, false);
 
             REQUIRE(6 == pol._priorityList.size());
-            REQUIRE(fys::arena::data::PriorityElem(5, 30,  true), pol._baseSpeed.at(0));
-            REQUIRE(fys::arena::data::PriorityElem(2, 19, false), pol._baseSpeed.at(1));
-            REQUIRE(fys::arena::data::PriorityElem(6, 15, false), pol._baseSpeed.at(2));
-            REQUIRE(fys::arena::data::PriorityElem(1, 10,  true), pol._baseSpeed.at(3));
-            REQUIRE(fys::arena::data::PriorityElem(3, 3,  false), pol._baseSpeed.at(4));
-            REQUIRE(fys::arena::data::PriorityElem(4, 1,   true), pol._baseSpeed.at(5));
+            REQUIRE(fys::arena::data::PriorityElem(5, 30,  true), pol._baseSpeed.at(5));
+            REQUIRE(fys::arena::data::PriorityElem(2, 19, false), pol._baseSpeed.at(4));
+            REQUIRE(fys::arena::data::PriorityElem(6, 15, false), pol._baseSpeed.at(3));
+            REQUIRE(fys::arena::data::PriorityElem(1, 10,  true), pol._baseSpeed.at(2));
+            REQUIRE(fys::arena::data::PriorityElem(3, 3,  false), pol._baseSpeed.at(1));
+            REQUIRE(fys::arena::data::PriorityElem(4, 1,   true), pol._baseSpeed.at(0));
 
+            pol.addParticipantInList(7, 17, false);
+            pol.addParticipantInList(8, 18, true);
+            pol.addParticipantInList(9, 19, false);
+
+            REQUIRE(9 == pol._priorityList.size());
+            REQUIRE(fys::arena::data::PriorityElem(5, 30,  true), pol._baseSpeed.at(8));
+            REQUIRE(fys::arena::data::PriorityElem(2, 19, false), pol._baseSpeed.at(7));
+            REQUIRE(fys::arena::data::PriorityElem(9, 19, false), pol._baseSpeed.at(6));
+            REQUIRE(fys::arena::data::PriorityElem(8, 18, true),  pol._baseSpeed.at(5));
+            REQUIRE(fys::arena::data::PriorityElem(7, 17, false), pol._baseSpeed.at(4));
+            REQUIRE(fys::arena::data::PriorityElem(6, 15, false), pol._baseSpeed.at(3));
+            REQUIRE(fys::arena::data::PriorityElem(1, 10,  true), pol._baseSpeed.at(2));
+            REQUIRE(fys::arena::data::PriorityElem(3, 3,  false), pol._baseSpeed.at(1));
+            REQUIRE(fys::arena::data::PriorityElem(4, 1,   true), pol._baseSpeed.at(0));
 
         } // End section : addParticipantInList test
 

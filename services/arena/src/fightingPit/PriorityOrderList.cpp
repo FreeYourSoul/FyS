@@ -37,9 +37,13 @@ namespace fys::arena {
             // TODO : log Warning about adding an already existing participant 
             return;
         }
+        if (_currentTurn > 0)
+            speed += getFastestBaseSpeed();
         _baseSpeed.emplace_back(id, speed, isContender);
         _priorityList.clear();
+        uint turn = _currentTurn;
         sortBaseAndCalculatePriority();
+        _currentTurn = turn;
     }
 
     void PriorityOrderList::removeParticipantFromList(uint idParticipant) {
@@ -48,7 +52,9 @@ namespace fys::arena {
         _priorityList.erase(std::remove_if(_priorityList.begin(), _priorityList.end(), findParticipantPredicate), _priorityList.end());
         _analyzedList.erase(std::remove_if(_analyzedList.begin(), _analyzedList.end(), findParticipantPredicate), _analyzedList.end());
         _priorityList.clear();
+        uint turn = _currentTurn;
         sortBaseAndCalculatePriority();
+        _currentTurn = turn;
     }
 
     data::PriorityElem PriorityOrderList::getNext() {
@@ -68,6 +74,9 @@ namespace fys::arena {
         std::sort(_baseSpeed.begin(), _baseSpeed.end());
         if (_currentTurn == 0) {
             _analyzedList = _baseSpeed;
+            _priorityList = _baseSpeed;
+            ++_currentTurn;
+            return;
         }
         calculatePriority(_analyzedList, _currentTurn);
     }
@@ -75,8 +84,7 @@ namespace fys::arena {
     int PriorityOrderList::getComputedSpeed(const data::PriorityElem &elemToCompute) const {
         for (std::size_t i = 0; i < _baseSpeed.size(); ++i) {
             if (_baseSpeed.at(i).id == elemToCompute.id) {
-                // ISSUE HERE :x
-                uint idNextInLine = (i - 1 > 0) ? _baseSpeed.back().id : _baseSpeed.at(i - 1).id;
+                uint idNextInLine = (i - 1 < 0) ? _baseSpeed.back().id : _baseSpeed.at(i - 1).id;
                 for (const auto &prioElemInList : _priorityList) {
                     if (prioElemInList.id == idNextInLine) {
                         return prioElemInList.speed;
@@ -92,6 +100,7 @@ namespace fys::arena {
         ++_currentTurn;
         if (_baseSpeed.size() <= 1)
             return;
+        std::reverse(std::begin(_analyzedList), std::end(_analyzedList));
         for (const auto &baseSpeedElem : _baseSpeed) {
             for (std::size_t i = 0; i < _analyzedList.size(); ++i) {
                 if (_analyzedList.at(i).id == baseSpeedElem.id) {
