@@ -17,9 +17,12 @@ include_directories(${CMAKE_CURRENT_LIST_DIR}/../include)
 
 add_executable(arena_test
         ${CMAKE_CURRENT_LIST_DIR}/catchMain.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/PriorityOrderList.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/PriorityOrderList.hh
         ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/HexagonSide.cpp
         ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/HexagonSide.hh
-        ${CMAKE_CURRENT_LIST_DIR}/HexagonSideTestCase.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/fightingPit/HexagonSideTestCase.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/fightingPit/PriorityOrderListTestCase.cpp
         )
 
 target_link_libraries(arena_test cppzmq Catch2::Catch2)

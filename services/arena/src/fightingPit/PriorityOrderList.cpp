@@ -74,6 +74,8 @@ namespace fys::arena {
 
     void ProrityOrderList::enTurnRoutine() {
         ++_currentTurn;
+        if (_baseSpeed.size() <= 1)
+            return;
         for (const auto &baseSpeedElem : _baseSpeed) {
             for (std::size_t i = 0; i < _analyzedList.size(); ++i) {
                 if (_analyzedList.at(i).id == baseSpeedElem.id) {
