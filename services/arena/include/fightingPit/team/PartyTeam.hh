@@ -25,9 +25,24 @@
 #ifndef FYS_PARTYTEAM_HH
 #define FYS_PARTYTEAM_HH
 
+#include <memory>
+#include <vector>
+#include <fightingPit/HexagonSide.hh>
+
 namespace fys::arena {
 
+    //forward declarations
+    class TeamMember;
+
     class PartyTeam {
+
+    public:
+        std::vector<std::shared_ptr<TeamMember>> getTeamMemberOnSide(HexagonSide::Orientation side);
+        std::vector<std::shared_ptr<TeamMember>> getChangingSideTeamMember();
+
+    private:
+        std::vector<std::shared_ptr<TeamMember> > _contenders;
+        std::vector<bool> _changeSideFlags;
 
     };
 

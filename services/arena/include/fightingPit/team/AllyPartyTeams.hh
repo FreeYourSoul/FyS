@@ -25,9 +25,20 @@
 #ifndef FYS_ALLYPARTYTEAMS_HH
 #define FYS_ALLYPARTYTEAMS_HH
 
+#include <memory>
+#include <fightingPit/team/PartyTeam.hh>
+
 namespace fys::arena {
 
     class AllyPartyTeams {
+
+    public:
+        void addPartyTeam(std::unique_ptr<PartyTeam> team) {
+            _partyTeams.emplace_back(std::move(team));
+        }
+
+    private:
+        std::vector<std::unique_ptr<PartyTeam>> _partyTeams;
 
     };
 

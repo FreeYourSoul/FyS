@@ -1,4 +1,6 @@
-// MIT License
+// MIT License        /**
+         * @param rightOrLeft(bool) move contender to the right if true, left otherwise
+         */
 //
 // Copyright (c) 2019 Quentin Balland
 // Repository : https://github.com/FreeYourSoul/FyS
@@ -29,12 +31,13 @@ namespace fys::arena {
 
     }
 
-    void FightingPit::addContender(fys::arena::FightingContender newContender) {
-
+    void FightingPit::addContender(std::shared_ptr<FightingContender> contender) {
+        _contenders.addContender(std::move(contender));
     }
 
-    void FightingPit::addPartyTeam(fys::arena::PartyTeam newTeam) {
-
+    void FightingPit::addPartyTeam(std::unique_ptr<PartyTeam> newTeam) {
+        _partyTeams.addPartyTeam(std::move(newTeam));
     }
+
 
 }

@@ -29,6 +29,8 @@ add_executable(arena_service ${COMMON_SRCS}
         ${CMAKE_CURRENT_LIST_DIR}/include/fightingPit/FightingPitAnnouncer.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/fightingPit/PriorityOrderList.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/fightingPit/PriorityOrderList.hh
+        ${CMAKE_CURRENT_LIST_DIR}/src/fightingPit/SideBattle.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/fightingPit/SideBattle.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/fightingPit/contender/PitContenders.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/fightingPit/contender/PitContenders.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/fightingPit/contender/FightingContender.cpp
@@ -37,6 +39,8 @@ add_executable(arena_service ${COMMON_SRCS}
         ${CMAKE_CURRENT_LIST_DIR}/include/fightingPit/contender/ContenderScripting.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/fightingPit/team/AllyPartyTeams.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/fightingPit/team/AllyPartyTeams.hh
+        ${CMAKE_CURRENT_LIST_DIR}/src/fightingPit/team/PartyTeam.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/fightingPit/team/PartyTeam.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/fightingPit/team/TeamMember.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/fightingPit/team/TeamMember.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/ArenaServerContext.cpp

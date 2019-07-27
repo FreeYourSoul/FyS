@@ -22,22 +22,8 @@
 // SOFTWARE.
 
 
-#ifndef FYS_PITPARTICIPANT_HH
-#define FYS_PITPARTICIPANT_HH
+#include <fightingPit/SideBattle.hh>
 
 namespace fys::arena {
 
-    class PitParticipant {
-
-    public:
-        unsigned getPitParticipantSpeed() const {
-            return speed;
-        }
-
-    protected:
-        unsigned speed = 0;
-    };
-
 }
-
-#endif //FYS_PITPARTICIPANT_HH

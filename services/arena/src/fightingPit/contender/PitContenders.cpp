@@ -21,10 +21,28 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include <fightingPit/contender/FightingContender.hh>
 #include <fightingPit/contender/PitContenders.hh>
 
 namespace fys::arena {
 
-    
+    std::vector<std::shared_ptr<FightingContender>> PitContenders::getChangingSideContenders() {
+        std::vector<std::shared_ptr<FightingContender>> result;
+        result.reserve(_changeSideFlags.size());
+        for (std::size_t i = 0; i < _changeSideFlags.size(); ++i) {
+            if (_changeSideFlags.at(i)) {
+                result.emplace_back(_contenders.at(i));
+            }
+        }
+        return result;
+    }
+
+    std::vector<std::shared_ptr<FightingContender>> PitContenders::getContenderOnSide(fys::arena::HexagonSide::Orientation side) {
+        std::vector<std::shared_ptr<FightingContender>> result;
+        std::copy_if(_contenders.begin(), _contenders.end(), result.begin(), [side](const auto &contenderPtr){
+            return (*contenderPtr->getHexagonSide()).second == side;
+        });
+        return result;
+    }
 
 }

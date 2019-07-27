@@ -27,14 +27,13 @@
 
 #include <memory>
 #include <fightingPit/data/CommonTypes.hh>
-#include <fightingPit/data/PitParticipant.hh>
 #include <fightingPit/contender/FightingContender.hh>
 #include <fightingPit/contender/ContenderScripting.hh>
 #include <fightingPit/HexagonSide.hh>
 
 namespace fys::arena {
 
-    class FightingContender : public PitParticipant {
+    class FightingContender {
     public:
 
         void moveContender(HexagonSide::Orientation destination, bool bypassCheck = false);

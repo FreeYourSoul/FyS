@@ -32,7 +32,7 @@
 #include <fightingPit/FightingPitLayout.hh>
 #include <fightingPit/team/AllyPartyTeams.hh>
 #include <fightingPit/team/PartyTeam.hh>
-#include "PriorityOrderList.hh"
+#include <fightingPit/SideBattle.hh>
 
 namespace fys::arena {
 
@@ -54,15 +54,15 @@ namespace fys::arena {
 
         void startBattle();
 
-        void addContender(FightingContender newContender);
-        void addPartyTeam(PartyTeam newTeam);
+        void addContender(std::shared_ptr<FightingContender> newContender);
+        void addPartyTeam(std::unique_ptr<PartyTeam> newTeam);
 
     private:
         FightingPitLayout   _layout;
         PitContenders       _contenders;
         AllyPartyTeams      _partyTeams;
 
-        PriorityOrderList _priorityOrderList;
+        std::vector<std::unique_ptr<SideBattle>> _sideBattles;
 
     };
 

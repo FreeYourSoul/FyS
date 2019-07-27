@@ -21,29 +21,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <algorithm>
-#include <fightingPit/team/TeamMember.hh>
-#include <fightingPit/team/PartyTeam.hh>
+
+#ifndef FYS_SIDEBATTLE_HH
+#define FYS_SIDEBATTLE_HH
+
+#include <functional>
+#include <fightingPit/HexagonSide.hh>
+#include <fightingPit/PriorityOrderList.hh>
 
 namespace fys::arena {
 
-    std::vector<std::shared_ptr<TeamMember>> PartyTeam::getChangingSideTeamMember() {
-        std::vector<std::shared_ptr<TeamMember>> result;
-        result.reserve(_changeSideFlags.size());
-        for (std::size_t i = 0; i < _changeSideFlags.size(); ++i) {
-            if (_changeSideFlags.at(i)) {
-                result.emplace_back(_contenders.at(i));
-            }
-        }
-        return result;
-    }
+    //forward declaration
+    class PitContenders;
+    class AllyPartyTeams;
 
-    std::vector<std::shared_ptr<TeamMember>> PartyTeam::getTeamMemberOnSide(fys::arena::HexagonSide::Orientation side) {
-        std::vector<std::shared_ptr<TeamMember>> result;
-        std::copy_if(_contenders.begin(), _contenders.end(), result.begin(), [side](const auto &contenderPtr){
-            return (*contenderPtr->getHexagonSide()).second == side;
-        });
-        return result;
-    }
+    class SideBattle {
+
+    public:
+        SideBattle(PitContenders &pitContenders, AllyPartyTeams &allyPartyTeams) :
+            _contenders(pitContenders), _partyTeams(allyPartyTeams) {}
+
+    private:
+        std::reference_wrapper<PitContenders> _contenders;
+        std::reference_wrapper<AllyPartyTeams> _partyTeams;
+        PriorityOrderList _priorityOrderList;
+        HexagonSide::Orientation _side;
+
+
+    };
 
 }
+
+
+#endif //FYS_SIDEBATTLE_HH

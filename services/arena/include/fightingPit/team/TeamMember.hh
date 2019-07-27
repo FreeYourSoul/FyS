@@ -25,11 +25,23 @@
 #ifndef FYS_TEAMMEMBER_HH
 #define FYS_TEAMMEMBER_HH
 
-#include <fightingPit/data/PitParticipant.hh>
+#include <fightingPit/HexagonSide.hh>
+#include <fightingPit/data/CommonTypes.hh>
 
 namespace fys::arena {
 
-    class TeamMember : public PitParticipant {
+    class TeamMember {
+
+    public:
+        void moveTeamMember(HexagonSide::Orientation destination, bool bypassCheck = false);
+        void moveTeamMember(data::MoveDirection rightOrLeft);
+
+        const data::Life &getLife() const { return _status.life; }
+        std::pair<HexagonSide::Hexagon, HexagonSide::Orientation> getHexagonSide() const { return *_side; }
+
+    private:
+        HexagonSide _side;
+        data::Status _status;
 
     };
 
