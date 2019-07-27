@@ -26,10 +26,16 @@
 #define private protected
 #include <fightingPit/PriorityOrderList.hh>
 
+constexpr static uint DONT_CARE = 0;
+
 class PriorityOrderListPassThrough : public fys::arena::PriorityOrderList {
 public:
+    void sortBaseAndCalculatePriority() {
+        _priorityList.clear();
+        fys::arena::PriorityOrderList::sortBaseAndCalculatePriority();
+    }
+
     using PriorityOrderList::PriorityOrderList;
-    using PriorityOrderList::sortBaseAndCalculatePriority;
     using PriorityOrderList::_priorityList;
     using PriorityOrderList::_analyzedList;
     using PriorityOrderList::_baseSpeed;
@@ -346,16 +352,17 @@ TEST_CASE("PriorityOrderList test", "[service][arena]") {
             REQUIRE(1 == polOne._analyzedList.size());
             REQUIRE(1 == polOne._baseSpeed.size());
 
-            REQUIRE(1337 == polOne.getNext().id);
-            REQUIRE(1337 == polOne.getNext().id);
-            REQUIRE(1337 == polOne.getNext().id);
-
             polOne.removeParticipantFromList(1);
             polOne.removeParticipantFromList(2);
             polOne.removeParticipantFromList(3);
             REQUIRE(1 == polOne._priorityList.size());
             REQUIRE(1 == polOne._analyzedList.size());
             REQUIRE(1 == polOne._baseSpeed.size());
+
+            REQUIRE(1337 == polOne.getNext().id);
+            REQUIRE(1337 == polOne.getNext().id);
+            REQUIRE(1337 == polOne.getNext().id);
+
         }
 
 
@@ -372,7 +379,44 @@ TEST_CASE("PriorityOrderList test", "[service][arena]") {
 
         SECTION("getNext test") {
 
+            REQUIRE(5 == pol._priorityList.size());
+            REQUIRE(fys::arena::data::PriorityElem(5, 30,  true) == pol.getNext());
+            REQUIRE(fys::arena::data::PriorityElem(2, 19, false) == pol.getNext());
+            REQUIRE(fys::arena::data::PriorityElem(1, 10,  true) == pol.getNext());
+            REQUIRE(fys::arena::data::PriorityElem(3, 3,  false) == pol.getNext());
+            REQUIRE(fys::arena::data::PriorityElem(4, 1,   true) == pol.getNext());
+            REQUIRE(pol._priorityList.empty());
 
+            //turn 1
+            REQUIRE(fys::arena::data::PriorityElem(5, DONT_CARE,  true)  == pol.getNext());
+            REQUIRE(10 == pol._priorityList.size());
+            REQUIRE(fys::arena::data::PriorityElem(2, DONT_CARE,  false) == pol.getNext());
+            REQUIRE(fys::arena::data::PriorityElem(5, DONT_CARE,  true)  == pol.getNext());
+            REQUIRE(fys::arena::data::PriorityElem(1, DONT_CARE,  true)  == pol.getNext());
+            REQUIRE(fys::arena::data::PriorityElem(2, DONT_CARE,  false) == pol.getNext());
+            REQUIRE(fys::arena::data::PriorityElem(1, DONT_CARE,  true)  == pol.getNext());
+            REQUIRE(fys::arena::data::PriorityElem(1, DONT_CARE,  true)  == pol.getNext());
+            REQUIRE(fys::arena::data::PriorityElem(3, DONT_CARE,  false) == pol.getNext());
+            REQUIRE(fys::arena::data::PriorityElem(5, DONT_CARE,  true)  == pol.getNext());
+            REQUIRE(fys::arena::data::PriorityElem(2, DONT_CARE,  false) == pol.getNext());
+            REQUIRE(fys::arena::data::PriorityElem(4, DONT_CARE,  true)  == pol.getNext());
+            REQUIRE(pol._priorityList.empty());
+
+            //turn 2
+            REQUIRE(fys::arena::data::PriorityElem(5, DONT_CARE,  true)  == pol.getNext());
+            REQUIRE(4 == pol._priorityList.size());
+            REQUIRE(fys::arena::data::PriorityElem(2, DONT_CARE,  false) == pol.getNext());
+            REQUIRE(fys::arena::data::PriorityElem(1, DONT_CARE,  true)  == pol.getNext());
+            REQUIRE(fys::arena::data::PriorityElem(3, DONT_CARE,  false)  == pol.getNext());
+            REQUIRE(fys::arena::data::PriorityElem(4, DONT_CARE,  true) == pol.getNext());
+            REQUIRE(pol._priorityList.empty());
+
+            //turn 3
+            REQUIRE(fys::arena::data::PriorityElem(5, DONT_CARE,  true)  == pol.getNext());
+            REQUIRE(2 == pol._priorityList.size());
+            REQUIRE(fys::arena::data::PriorityElem(2, DONT_CARE,  false) == pol.getNext());
+            REQUIRE(fys::arena::data::PriorityElem(4, DONT_CARE,  true)  == pol.getNext());
+            REQUIRE(pol._priorityList.empty());
 
         } // getNext test
 
@@ -412,6 +456,34 @@ TEST_CASE("PriorityOrderList test", "[service][arena]") {
             REQUIRE(fys::arena::data::PriorityElem(4, 2,   true) == pol._baseSpeed.at(0));
 
         } // End section : addParticipantInList test
+
+        SECTION("removeParticipantFromList test") {
+
+            REQUIRE(5 == pol._priorityList.size());
+            REQUIRE(fys::arena::data::PriorityElem{5, 30,  true} == pol._baseSpeed.at(4));
+            REQUIRE(fys::arena::data::PriorityElem(2, 19, false) == pol._baseSpeed.at(3));
+            REQUIRE(fys::arena::data::PriorityElem(1, 10,  true) == pol._baseSpeed.at(2));
+            REQUIRE(fys::arena::data::PriorityElem(3, 3,  false) == pol._baseSpeed.at(1));
+            REQUIRE(fys::arena::data::PriorityElem(4, 2,   true) == pol._baseSpeed.at(0));
+
+            pol.removeParticipantFromList(19);// not exist
+            REQUIRE(5 == pol._priorityList.size());
+
+            pol.removeParticipantFromList(1);
+            REQUIRE(4 == pol._priorityList.size());
+            REQUIRE(fys::arena::data::PriorityElem{5, 30,  true} == pol._baseSpeed.at(3));
+            REQUIRE(fys::arena::data::PriorityElem(2, 19, false) == pol._baseSpeed.at(2));
+            REQUIRE(fys::arena::data::PriorityElem(3, 3,  false) == pol._baseSpeed.at(1));
+            REQUIRE(fys::arena::data::PriorityElem(4, 2,   true) == pol._baseSpeed.at(0));
+
+            pol.removeParticipantFromList(2);
+            pol.removeParticipantFromList(3);
+            REQUIRE(2 == pol._priorityList.size());
+            REQUIRE(fys::arena::data::PriorityElem{5, 30,  true} == pol._baseSpeed.at(1));
+            REQUIRE(fys::arena::data::PriorityElem(4, 2,   true) == pol._baseSpeed.at(0));
+
+
+        } // End section : removeParticipantFromList test
 
     } // End section : Public API test
 

@@ -52,10 +52,6 @@ namespace fys::arena {
         _baseSpeed.erase(std::remove_if(_baseSpeed.begin(), _baseSpeed.end(), findParticipantPredicate), _baseSpeed.end());
         _priorityList.erase(std::remove_if(_priorityList.begin(), _priorityList.end(), findParticipantPredicate), _priorityList.end());
         _analyzedList.erase(std::remove_if(_analyzedList.begin(), _analyzedList.end(), findParticipantPredicate), _analyzedList.end());
-        _priorityList.clear();
-        uint turn = _currentTurn;
-        sortBaseAndCalculatePriority();
-        _currentTurn = turn;
     }
 
     data::PriorityElem PriorityOrderList::getNext() {
@@ -109,10 +105,6 @@ namespace fys::arena {
             ++_currentTurn;
             return;
         }
-        if (!_priorityList.empty()) {
-            // log warning
-            _priorityList.clear();
-        }
         calculatePriority(_currentTurn);
     }
 
@@ -137,7 +129,6 @@ namespace fys::arena {
         if (_baseSpeed.size() <= 1)
             return;
 
-
         for (const auto &baseSpeedElem : _baseSpeed) {
             for (auto &analyzedElem : _analyzedList) {
                 if (analyzedElem.id == baseSpeedElem.id) {
@@ -160,7 +151,7 @@ namespace fys::arena {
 
         auto &fastest = _analyzedList.back();
 
-        if (_analyzedList.size() >= 2)
+        if (_analyzedList.size() > 1)
             fastest.speed -= getComputedSpeed(fastest);
         _priorityList.emplace_back(fastest);
         if (isPlayerSlowest(fastest.id))
