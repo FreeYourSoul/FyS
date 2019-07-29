@@ -21,34 +21,48 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+
+#ifndef FYS_CONNECTIONHANDLER_HH
+#define FYS_CONNECTIONHANDLER_HH
+
 #include <spdlog/spdlog.h>
-#include <fightingPit/team/TeamMember.hh>
+#include <zmq_addon.hpp>
+#include "ArenaServerContext.hh"
 
 namespace fys::arena {
 
-    void TeamMember::moveTeamMember(HexagonSide::Orientation destination, bool bypassCheck) {
-        if (!_side.move(destination, bypassCheck)) {
-            SPDLOG_ERROR("Impossible move from {}:{} to {}", (*_side).first, (*_side).second, destination);
-            return;
-        }
-    }
+    class ConnectionHandler {
 
-    void TeamMember::moveTeamMember(data::MoveDirection directionToMove) {
-        if (directionToMove == data::MoveDirection::RIGHT) {
-            if (!_side.moveRight()) {
-                SPDLOG_ERROR("Impossible move from {}:{} to right", (*_side).first, (*_side).second);
+    public:
+        explicit ConnectionHandler(int threadNumber = 1) noexcept;
+
+        void setupConnectionManager(const ArenaServerContext &ctx) noexcept;
+        void sendMessageToDispatcher(zmq::multipart_t && msg) noexcept;
+
+        template <typename Handler>
+        void pollAndProcessSubMessage(Handler && handler) noexcept {
+            //  Initialize poll set
+            zmq::pollitem_t items[] = {
+                { _dealerConnectionToDispatcher, 0, ZMQ_POLLIN, 0 }
+            };
+            zmq::poll(&items[0], 1);
+            if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
+                zmq::multipart_t msg;
+                if (!msg.recv(_dealerConnectionToDispatcher)) {
+                    SPDLOG_ERROR("Error while reading on the listener socket");
+                }
+                else {
+                    std::forward<Handler>(handler)(std::move(msg));
+                }
             }
         }
-        else if (directionToMove == data::MoveDirection::LEFT) {
-            if (!_side.moveLeft()) {
-                SPDLOG_ERROR("Impossible move from {}:{} to left", (*_side).first, (*_side).second);
-            }
-        }
-        else if (directionToMove == data::MoveDirection::BACK) {
-            if (!_side.moveBack()) {
-                SPDLOG_ERROR("Impossible move from {}:{} to backside", (*_side).first, (*_side).second);
-            }
-        }
-    }
+
+    private:
+        zmq::context_t _zmqContext;
+        zmq::socket_t _dealerConnectionToDispatcher; // todo rename _subConnectionOnDispatcher
+
+    };
 
 }
+
+#endif //FYS_CONNECTIONHANDLER_HH

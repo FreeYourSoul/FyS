@@ -1,6 +1,4 @@
-// MIT License        /**
-         * @param rightOrLeft(bool) move contender to the right if true, left otherwise
-         */
+// MIT License
 //
 // Copyright (c) 2019 Quentin Balland
 // Repository : https://github.com/FreeYourSoul/FyS
@@ -23,20 +21,50 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include <spdlog/spdlog.h>
+#include <chrono>
 #include <fightingPit/FightingPit.hh>
+
+namespace {
+    std::chrono::milliseconds retrieveTimeInterludeFromLevelDegree(fys::arena::FightingPit::Level level) {
+        switch () {
+            case fys::arena::FightingPit::Level::EASY:
+                return std::chrono::milliseconds {20000};
+            case fys::arena::FightingPit::Level::MEDIUM :
+                return std::chrono::milliseconds {10000};
+            case fys::arena::FightingPit::Level::HARD :
+                return std::chrono::milliseconds {5000};
+            default:
+                return std::chrono::milliseconds {10000};
+        }
+    }
+}
 
 namespace fys::arena {
 
     void FightingPit::startBattle() {
+        std::chrono::milliseconds timerInterlude = retrieveTimeInterludeFromLevelDegree(_levelFightingPit);
+        while (_end == Ending::NOT_FINISHED) {
+            // TODO take player inputs
+            //          if player inputs, add pending action to character (override the pending action in case one already there)
+            readInputAndAppendPendingActions();
+            auto now = std::chrono::system_clock::now();
+            for (auto &side : _sideBattles) {
+                auto &currentParticipant = side->getCurrentParticipantTurn(now, timerInterlude);
 
+                if (currentParticipant->isContender) {
+                    // If non-playable character (ennemy NPC)
+                    // TODO execute monster script action
+                } else {
+                    // If character of a player
+                    // TODO check if character has a handling action and execute it
+                }
+            }
+        }
     }
 
-    void FightingPit::addContender(std::shared_ptr<FightingContender> contender) {
-        _contenders.addContender(std::move(contender));
-    }
+    void FightingPit::readInputAndAppendPendingActions() {
 
-    void FightingPit::addPartyTeam(std::unique_ptr<PartyTeam> newTeam) {
-        _partyTeams.addPartyTeam(std::move(newTeam));
     }
 
 

@@ -30,17 +30,19 @@
 namespace fys::arena {
 
     ArenaServerService::ArenaServerService(const ArenaServerContext &ctx) {
-//        _connectionHandler.setupConnectionManager(ctx);
-
+        _connectionHandler.setupConnectionManager(ctx);
     }
 
     void ArenaServerService::runServerLoop() noexcept {
         SPDLOG_INFO("ArenaServer loop started");
 
         while (true) {
-//            _connectionHandler.pollAndProcessSubMessage(
-//                [this](zmq::multipart_t &&msg) {
-//                });
+            // use http://zguide.zeromq.org/page:all#Divide-and-Conquer
+           _connectionHandler.pollAndProcessSubMessage(
+               [this](zmq::multipart_t &&msg) {
+                
+               }
+            );
         }
     }
 

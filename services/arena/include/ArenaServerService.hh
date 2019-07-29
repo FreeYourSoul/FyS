@@ -24,7 +24,8 @@
 #ifndef FYS_ARENASERVERSERVICE_HH
 #define FYS_ARENASERVERSERVICE_HH
 
-#include <zmq_addon.hpp>
+#include <ConnectionHandler.hh>
+#include <WorkerService.hh>
 
 namespace fys::arena {
 
@@ -34,13 +35,14 @@ namespace fys::arena {
     public:
         ArenaServerService(const ArenaServerContext &ctx);
 
-        void runServerLoop() noexcept ;
+        void runServerLoop() noexcept;
 
     private:
         void processMessage(std::string &&idt, std::string &&token, const zmq::message_t &content);
 
     private:
-    
+        ConnectionHandler   _connectionHandler;
+        WorkerService       _workerService;
     };
 
 }

@@ -45,6 +45,10 @@ add_executable(arena_service ${COMMON_SRCS}
         ${CMAKE_CURRENT_LIST_DIR}/include/fightingPit/team/TeamMember.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/ArenaServerContext.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/ArenaServerContext.hh
+        ${CMAKE_CURRENT_LIST_DIR}/src/ConnectionHandler.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/ConnectionHandler.hh
+        ${CMAKE_CURRENT_LIST_DIR}/src/WorkerService.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/WorkerService.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/fightingPit/HexagonSide.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/fightingPit/HexagonSide.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/ArenaServerService.cpp

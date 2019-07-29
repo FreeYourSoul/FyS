@@ -36,6 +36,10 @@ namespace fys::arena {
     class PitContenders;
     class AllyPartyTeams;
 
+    /**
+     * @brief Represent a battle on a specific side of one of the 3 hexagons
+     * 
+     */
     class SideBattle {
 
     public:
