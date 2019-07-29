@@ -26,6 +26,7 @@
 #define FYS_SIDEBATTLE_HH
 
 #include <functional>
+#include <chrono>
 #include <fightingPit/HexagonSide.hh>
 #include <fightingPit/PriorityOrderList.hh>
 
@@ -38,8 +39,27 @@ namespace fys::arena {
     class SideBattle {
 
     public:
-        SideBattle(PitContenders &pitContenders, AllyPartyTeams &allyPartyTeams) :
-            _contenders(pitContenders), _partyTeams(allyPartyTeams) {}
+        SideBattle(PitContenders &pitContenders, AllyPartyTeams &allyPartyTeams, HexagonSide::Orientation side) :
+                _contenders(pitContenders),
+                _partyTeams(allyPartyTeams),
+                _side(side) 
+        {}
+
+    private:
+        void endParticipantTurn(const std::chrono::milliseconds &timerInterlude) {
+            _endCurrentTurn = std::chrono::system_clock::now() + timerInterlude;
+            _priorityOrderList.getNext();
+        }
+
+        data::PriorityElem &getCurrentParticipantTurn(const std::chrono::system_clock::time_point &now, 
+                                                      const std::chrono::milliseconds &timerInterlude) {
+            auto end = now + timerInterlude;
+            if (_endCurrentTurn < end) {
+                return _priorityOrderList.getCurrent();
+            } 
+            _endCurrentTurn = end;
+            return _priorityOrderList.getNext();
+        }
 
     private:
         std::reference_wrapper<PitContenders> _contenders;
@@ -47,6 +67,7 @@ namespace fys::arena {
         PriorityOrderList _priorityOrderList;
         HexagonSide::Orientation _side;
 
+        std::chrono::system_clock::time_point _endCurrentTurn;
 
     };
 

@@ -41,7 +41,8 @@ namespace fys::arena {
         void addParticipantInList(uint id, int speed, bool isContender);
         void removeParticipantFromList(uint idParticipant);
 
-        data::PriorityElem getNext();
+        const data::PriorityElem &getCurrent() const { return _currentPrio; }
+        const data::PriorityElem &getNext();
 
     private:
         void sortBaseAndCalculatePriority();
@@ -71,6 +72,9 @@ namespace fys::arena {
         std::vector<data::PriorityElem> _priorityList;
         // List used as temporary for the calculate priority
         std::vector<data::PriorityElem> _analyzedList;
+
+        PriorityElem _currentPrio;
+
         uint _currentTurn = 0;
 
     };

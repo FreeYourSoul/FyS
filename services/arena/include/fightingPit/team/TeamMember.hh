@@ -43,6 +43,8 @@ namespace fys::arena {
         HexagonSide _side;
         data::Status _status;
 
+        // PendingAction _pendingAction; Todo
+
     };
 
 }

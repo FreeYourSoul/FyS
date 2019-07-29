@@ -35,9 +35,12 @@
 namespace fys::arena {
 
     /**
-     * @brief Builder class to create the FightingPit. It generate the position of the PitContenders and define
-     * if the fight is an ambush or not.
-     * 
+     * @brief Builder class to create the FightingPit. 
+     *   - It generate the position of the Pit participants (contenders and team)
+     *   - Define if the fight is an ambush or not.
+     *   - Download the required scripts for the contenders (if not in the cache).
+     *   - Download the required scripts for the team (if not in the cache)
+     *   - Set the level of the fighting pit 
      * 
      */
     class FightingPitAnnouncer {
@@ -50,7 +53,10 @@ namespace fys::arena {
     };
 
     public:
-        FightingPitAnnouncer(EncounterType type, uint idEncounter = 0) : _encounterType(type), _idEncounter(idEncounter) 
+        FightingPitAnnouncer(EncounterType type, uint idEncounter = 0) : 
+                _encounterType(type), 
+                _idEncounter(idEncounter),
+                _fightingPitLevel(FightingPit::Level::MEDIUM)
         {}
 
         FightingPit buildFightingPit() const;
@@ -65,6 +71,8 @@ namespace fys::arena {
             _isAmbushEnforced = ambushEnforced; 
             return *this;
         }
+
+        FightingPit::Level getFightinPitLevel() const { return _fightingPitLevel; }
 
     private:
 
@@ -81,6 +89,7 @@ namespace fys::arena {
     private:
         EncounterType _encounterType;
         uint _idEncounter;
+        FightingPit::Level  _fightingPitLevel;
 
         std::optional<bool> _isAmbushEnforced;
 

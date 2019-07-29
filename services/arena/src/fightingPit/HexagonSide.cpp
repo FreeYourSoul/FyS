@@ -76,9 +76,9 @@ namespace
     struct HexaSideOrient<HexaA, SouthEast> {
         constexpr static bool isMoveable(fys::arena::HexagonSide::Orientation dest) {
             return 
-                dest == h::A_NE || dest == h::A_S || 
-                dest == h::B_S || dest == h::B_SW || 
-                dest == h::C_N || dest == h::C_NW || dest == h::C_SW; 
+                dest == h::A_NE || dest == h::A_S  || 
+                dest == h::B_S  || dest == h::B_SW || 
+                dest == h::C_N  || dest == h::C_NW || dest == h::C_SW; 
         } 
     };
 
@@ -109,7 +109,7 @@ namespace
     struct  HexaSideOrient<HexaB, South> {
         constexpr static bool isMoveable(fys::arena::HexagonSide::Orientation dest) {
             return dest == h::B_SW || dest == h::B_SE ||
-                   dest == h::C_N || dest == h::C_NE || dest == h::C_NW ||
+                   dest == h::C_N  || dest == h::C_NE || dest == h::C_NW ||
                    dest == h::A_NE || dest == h::A_SE;
         }
     };
@@ -126,7 +126,7 @@ namespace
     struct  HexaSideOrient<HexaB, SouthWest> {
         constexpr static bool isMoveable(fys::arena::HexagonSide::Orientation dest) {
             return dest == h::B_NW || dest == h::B_S ||
-                   dest == h::C_N || dest == h::C_NW ||
+                   dest == h::C_N  || dest == h::C_NW ||
                    dest == h::A_NE || dest == h::A_SE || dest == h::A_N;
         }
     };
@@ -135,7 +135,7 @@ namespace
     struct  HexaSideOrient<HexaC, North> {
         constexpr static bool isMoveable(fys::arena::HexagonSide::Orientation dest) {
             return dest == h::C_NE || dest == h::C_NW ||
-                   dest == h::B_S || dest == h::B_SE || dest == h::B_SW ||
+                   dest == h::B_S  || dest == h::B_SE || dest == h::B_SW ||
                    dest == h::A_NE || dest == h::A_SE;
         }
     };
@@ -150,9 +150,9 @@ namespace
     template <>
     struct  HexaSideOrient<HexaC, NorthWest> {
         constexpr static bool isMoveable(fys::arena::HexagonSide::Orientation dest) {
-            return dest == h::C_N || dest == h::C_SW ||
+            return dest == h::C_N   || dest == h::C_SW ||
                     dest == h::A_SE || dest == h::A_S || dest == h::A_NE ||
-                    dest == h::B_S || dest == h::B_SW;
+                    dest == h::B_S  || dest == h::B_SW;
         }
     };
 
@@ -164,7 +164,7 @@ namespace
     template <>
     struct  HexaSideOrient<HexaC, SouthWest> {
         constexpr static bool isMoveable(fys::arena::HexagonSide::Orientation dest) {
-            return dest == h::C_S || dest == h::C_NW ||
+            return dest == h::C_S  || dest == h::C_NW ||
                     dest == h::A_S || dest == h::A_SE;
         }
     };

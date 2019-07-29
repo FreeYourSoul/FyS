@@ -50,7 +50,16 @@ namespace fys::arena {
     class FightingPit {
 
     public:
-        FightingPit() : _layout(_contenders, _partyTeams) {}
+        enum Level {
+            EASY,
+            MEDIUM,
+            HARD
+        };
+
+        FightingPit(Level levelFigtingPit) : 
+                _levelFightingPit(levelFightingPit), 
+                _layout(_contenders, _partyTeams) 
+        {}
 
         void startBattle();
 
@@ -58,9 +67,10 @@ namespace fys::arena {
         void addPartyTeam(std::unique_ptr<PartyTeam> newTeam);
 
     private:
-        FightingPitLayout   _layout;
+        Level               _levelFightingPit;
         PitContenders       _contenders;
         AllyPartyTeams      _partyTeams;
+        FightingPitLayout   _layout;
 
         std::vector<std::unique_ptr<SideBattle>> _sideBattles;
 

@@ -62,9 +62,9 @@ namespace fys::arena {
             sortBaseAndCalculatePriority();
             return getNext();
         }
-        data::PriorityElem next = _priorityList.back();
+        _currentPrio = _priorityList.back();
         _priorityList.pop_back();
-        return next;
+        return _currentPrio;
     }
 
     void PriorityOrderList::customSort() {
