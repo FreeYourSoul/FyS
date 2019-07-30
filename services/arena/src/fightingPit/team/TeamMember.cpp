@@ -21,14 +21,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
+#include <spdlog/spdlog.h>
 #include <fightingPit/team/TeamMember.hh>
 
 namespace fys::arena {
 
     void TeamMember::moveTeamMember(HexagonSide::Orientation destination, bool bypassCheck) {
         if (!_side.move(destination, bypassCheck)) {
-            //            SPDLOG_ERROR("Impossible move from {} to {}", *_side, destination);
+            SPDLOG_ERROR("Impossible move from {}:{} to {}", (*_side).first, (*_side).second, destination);
             return;
         }
     }
@@ -36,17 +36,17 @@ namespace fys::arena {
     void TeamMember::moveTeamMember(data::MoveDirection directionToMove) {
         if (directionToMove == data::MoveDirection::RIGHT) {
             if (!_side.moveRight()) {
-                //                SPDLOG_ERROR("Impossible move from {} to right", *_side);
+                SPDLOG_ERROR("Impossible move from {}:{} to right", (*_side).first, (*_side).second);
             }
         }
         else if (directionToMove == data::MoveDirection::LEFT) {
             if (!_side.moveLeft()) {
-                //                SPDLOG_ERROR("Impossible move from {} to left", *_side);
+                SPDLOG_ERROR("Impossible move from {}:{} to left", (*_side).first, (*_side).second);
             }
         }
         else if (directionToMove == data::MoveDirection::BACK) {
             if (!_side.moveBack()) {
-                //                SPDLOG_ERROR("Impossible move from {} to backside", *_side);
+                SPDLOG_ERROR("Impossible move from {}:{} to backside", (*_side).first, (*_side).second);
             }
         }
     }

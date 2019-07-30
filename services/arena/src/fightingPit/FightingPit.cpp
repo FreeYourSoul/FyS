@@ -1,6 +1,4 @@
-// MIT License        /**
-         * @param rightOrLeft(bool) move contender to the right if true, left otherwise
-         */
+// MIT License
 //
 // Copyright (c) 2019 Quentin Balland
 // Repository : https://github.com/FreeYourSoul/FyS
@@ -28,7 +26,13 @@
 namespace fys::arena {
 
     void FightingPit::startBattle() {
-
+        // while (_end == Ending::NOT_FINISHED) {
+            // TODO take player inputs
+            //          if player inputs, add pending action to character (override the pending action in case one already there)
+            // TODO get current participant to play
+            //          if monster execute monster script action
+            //          if player check if character has a handling action and execute it
+        // }
     }
 
     void FightingPit::addContender(std::shared_ptr<FightingContender> contender) {
