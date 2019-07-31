@@ -21,31 +21,48 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+
+#ifndef FYS_CONNECTIONHANDLER_HH
+#define FYS_CONNECTIONHANDLER_HH
+
 #include <spdlog/spdlog.h>
 #include <zmq_addon.hpp>
-#include <flatbuffers/flatbuffers.h>
-#include <ArenaServerContext.hh>
-#include "ArenaServerService.hh"
+#include "ArenaServerContext.hh"
 
 namespace fys::arena {
 
-    ArenaServerService::ArenaServerService(const ArenaServerContext &ctx) {
-        _connectionHandler.setupConnectionManager(ctx);
-    }
+    class ConnectionHandler {
 
-    void ArenaServerService::runServerLoop() noexcept {
-        SPDLOG_INFO("ArenaServer loop started");
+    public:
+        explicit ConnectionHandler(int threadNumber = 1) noexcept;
 
-        while (true) {
-           _connectionHandler.pollAndProcessSubMessage(
-               [this](zmq::multipart_t &&msg) {
-                
-               }
-            );
+        void setupConnectionManager(const ArenaServerContext &ctx) noexcept;
+        void sendMessageToDispatcher(zmq::multipart_t && msg) noexcept;
+
+        template <typename Handler>
+        void pollAndProcessSubMessage(Handler && handler) noexcept {
+            //  Initialize poll set
+            zmq::pollitem_t items[] = {
+                { _dealerConnectionToDispatcher, 0, ZMQ_POLLIN, 0 }
+            };
+            zmq::poll(&items[0], 1);
+            if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
+                zmq::multipart_t msg;
+                if (!msg.recv(_dealerConnectionToDispatcher)) {
+                    SPDLOG_ERROR("Error while reading on the listener socket");
+                }
+                else {
+                    std::forward<Handler>(handler)(std::move(msg));
+                }
+            }
         }
-    }
 
-    void ArenaServerService::processMessage(std::string &&idt, std::string &&token, const zmq::message_t &content) {
-    }
+    private:
+        zmq::context_t _zmqContext;
+        zmq::socket_t _dealerConnectionToDispatcher; // todo rename _subConnectionOnDispatcher
+
+    };
 
 }
+
+#endif //FYS_CONNECTIONHANDLER_HH

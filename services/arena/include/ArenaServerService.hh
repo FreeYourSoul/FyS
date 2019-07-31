@@ -40,7 +40,8 @@ namespace fys::arena {
         void processMessage(std::string &&idt, std::string &&token, const zmq::message_t &content);
 
     private:
-    
+        ConnectionHandler   _connectionHandler;
+
     };
 
 }

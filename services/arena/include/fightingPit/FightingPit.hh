@@ -56,18 +56,30 @@ namespace fys::arena {
             HARD
         };
 
+        enum Ending {
+            CONTENDER_WIN,
+            ALLY_WIN,
+            NOT_FINISHED
+        };
+
         FightingPit(Level levelFigtingPit) : 
+                _end(Ending::NOT_FINISHED),
                 _levelFightingPit(levelFightingPit), 
                 _layout(_contenders, _partyTeams) 
         {}
 
         void startBattle();
 
-        void addContender(std::shared_ptr<FightingContender> newContender);
-        void addPartyTeam(std::unique_ptr<PartyTeam> newTeam);
+        void addContender(std::shared_ptr<FightingContender> newContender) { _contenders.addContender(std::move(contender)); }
+        void addPartyTeam(std::unique_ptr<PartyTeam> newTeam) { _partyTeams.addPartyTeam(std::move(newTeam)); }
+    
+    private:
+        void readInputAndAppendPendingActions();
 
     private:
+        Ending              _end;
         Level               _levelFightingPit;
+        // TODO : add connection handler
         PitContenders       _contenders;
         AllyPartyTeams      _partyTeams;
         FightingPitLayout   _layout;

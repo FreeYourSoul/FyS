@@ -21,31 +21,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <spdlog/spdlog.h>
-#include <zmq_addon.hpp>
-#include <flatbuffers/flatbuffers.h>
-#include <ArenaServerContext.hh>
-#include "ArenaServerService.hh"
+#include "ConnectionHandler.hh"
 
-namespace fys::arena {
+namespace fys::ws {
 
-    ArenaServerService::ArenaServerService(const ArenaServerContext &ctx) {
-        _connectionHandler.setupConnectionManager(ctx);
-    }
+ConnectionHandler::ConnectionHandler(int threadNumber) noexcept :
+ _zmqContext(threadNumber),
+ _subSocket(_dealerConnectionToDispatcher, zmq::socket_type::dealer)
 
-    void ArenaServerService::runServerLoop() noexcept {
-        SPDLOG_INFO("ArenaServer loop started");
+}
 
-        while (true) {
-           _connectionHandler.pollAndProcessSubMessage(
-               [this](zmq::multipart_t &&msg) {
-                
-               }
-            );
-        }
-    }
+void ConnectionHandler::setupConnectionManager(const fys::ws::WorldServerContext &ctx) noexcept {
+    _dealerConnectionToDispatcher.setsockopt(ZMQ_SUBSCRIBE, ctx.getServerCode().c_str(), ctx.getServerCode().size());
+    _dealerConnectionToDispatcher.connect(ctx.getDispatcherSubConnectionString());
+}
 
-    void ArenaServerService::processMessage(std::string &&idt, std::string &&token, const zmq::message_t &content) {
-    }
+void ConnectionHandler::sendMessageToDispatcher(zmq::multipart_t &&msg) noexcept {
+    msg.send(_dealerConnectionToDispatcher);
+}
 
 }
