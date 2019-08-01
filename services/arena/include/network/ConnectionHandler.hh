@@ -21,30 +21,48 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef FYS_ARENASERVERSERVICE_HH
-#define FYS_ARENASERVERSERVICE_HH
 
-#include <network/ConnectionHandler.hh>
-#include <network/WorkerService.hh>
+#ifndef FYS_CONNECTIONHANDLER_HH
+#define FYS_CONNECTIONHANDLER_HH
+
+#include <spdlog/spdlog.h>
+#include <zmq_addon.hpp>
+#include "ArenaServerContext.hh"
 
 namespace fys::arena {
 
-    class ArenaServerContext;
+    class ConnectionHandler {
 
-    class ArenaServerService {
     public:
-        ArenaServerService(const ArenaServerContext &ctx);
+        explicit ConnectionHandler(int threadNumber = 1) noexcept;
 
-        void runServerLoop() noexcept;
+        void setupConnectionManager(const ArenaServerContext &ctx) noexcept;
+        void sendMessageToDispatcher(zmq::multipart_t && msg) noexcept;
+
+        template <typename Handler>
+        void pollAndProcessSubMessage(Handler && handler) noexcept {
+            //  Initialize poll set
+            zmq::pollitem_t items[] = {
+                { _dealerConnectionToDispatcher, 0, ZMQ_POLLIN, 0 }
+            };
+            zmq::poll(&items[0], 1);
+            if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
+                zmq::multipart_t msg;
+                if (!msg.recv(_dealerConnectionToDispatcher)) {
+                    SPDLOG_ERROR("Error while reading on the listener socket");
+                }
+                else {
+                    std::forward<Handler>(handler)(std::move(msg));
+                }
+            }
+        }
 
     private:
-        void processMessage(std::string &&idt, std::string &&token, const zmq::message_t &content);
+        zmq::context_t _zmqContext;
+        zmq::socket_t _dealerConnectionToDispatcher; // todo rename _subConnectionOnDispatcher
 
-    private:
-        ConnectionHandler   _connectionHandler;
-        WorkerService       _workerService;
     };
 
 }
 
-#endif // !FYS_ARENASERVERSERVICE_HH
+#endif //FYS_CONNECTIONHANDLER_HH

@@ -21,22 +21,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include <network/ConnectionHandler.hh>
 
-#ifndef FYS_ARENASERVERCONTEXT_HH
-#define FYS_ARENASERVERCONTEXT_HH
+namespace fys::ws {
 
-namespace fys::arena {
-
-    class ArenaServerContext : fys::common::ServiceContextBase {
-    public:
-        ArenaServerContext(int ac, const char *const *av);
-
-        std::string toString() const;
-
-        std::string getDispatcherConnectionString() const noexcept;
-
-    };
+ConnectionHandler::ConnectionHandler(int threadNumber) noexcept :
+ _zmqContext(threadNumber),
+ _subSocket(_dealerConnectionToDispatcher, zmq::socket_type::dealer)
 
 }
 
-#endif // !FYS_ARENASERVERCONTEXT_HH
+void ConnectionHandler::setupConnectionManager(const fys::ws::WorldServerContext &ctx) noexcept {
+    _dealerConnectionToDispatcher.setsockopt(ZMQ_SUBSCRIBE, ctx.getServerCode().c_str(), ctx.getServerCode().size());
+    _dealerConnectionToDispatcher.connect(ctx.getDispatcherSubConnectionString());
+}
+
+void ConnectionHandler::sendMessageToDispatcher(zmq::multipart_t &&msg) noexcept {
+    msg.send(_dealerConnectionToDispatcher);
+}
+
+}

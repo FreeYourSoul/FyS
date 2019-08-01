@@ -21,22 +21,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#ifndef FYS_WORKERCONNECTION_HH
+#define FYS_WORKERCONNECTION_HH
 
-#ifndef FYS_ARENASERVERCONTEXT_HH
-#define FYS_ARENASERVERCONTEXT_HH
+#include <zmq_addon.hpp>
 
-namespace fys::arena {
+ namespace fys::arena {
+ 
+    class WorkerConnection {
 
-    class ArenaServerContext : fys::common::ServiceContextBase {
     public:
-        ArenaServerContext(int ac, const char *const *av);
+        
 
-        std::string toString() const;
-
-        std::string getDispatcherConnectionString() const noexcept;
+    private:
+        zmq::context_t _ctx;
+        zmq::socket_t _workerServiceConnection;     
 
     };
 
-}
+ }
 
-#endif // !FYS_ARENASERVERCONTEXT_HH
+#endif // !FYS_WORKERCONNECTION_HH

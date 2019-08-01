@@ -21,22 +21,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include <network/WorkerConnection.hh>
 
-#ifndef FYS_ARENASERVERCONTEXT_HH
-#define FYS_ARENASERVERCONTEXT_HH
-
-namespace fys::arena {
-
-    class ArenaServerContext : fys::common::ServiceContextBase {
-    public:
-        ArenaServerContext(int ac, const char *const *av);
-
-        std::string toString() const;
-
-        std::string getDispatcherConnectionString() const noexcept;
-
-    };
-
+namespace fys::arena
+{
 }
-
-#endif // !FYS_ARENASERVERCONTEXT_HH

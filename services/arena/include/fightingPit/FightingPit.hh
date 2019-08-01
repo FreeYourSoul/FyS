@@ -46,6 +46,9 @@ namespace fys::arena {
      *  - a AllyPartyTeams object managing the players, each client has a PartyTeam (multiple party teams possible for
      *    one AllyPartyTeams) and the PartyTeam is composed of TeamMember that are the actual characters spread on the
      *    gaming board.
+     *  - The 18 instances of SideBattle
+     * 
+     * @see SideBattle
      */
     class FightingPit {
 
@@ -57,6 +60,7 @@ namespace fys::arena {
         };
 
         enum Ending {
+            ON_HOLD, // TODO : make a on hold mecanism for joining raid
             CONTENDER_WIN,
             ALLY_WIN,
             NOT_FINISHED
@@ -64,13 +68,13 @@ namespace fys::arena {
 
         FightingPit(Level levelFigtingPit) : 
                 _end(Ending::NOT_FINISHED),
-                _levelFightingPit(levelFightingPit), 
+                _levelFightingPit(levelFigtingPit),
                 _layout(_contenders, _partyTeams) 
         {}
 
         void startBattle();
 
-        void addContender(std::shared_ptr<FightingContender> newContender) { _contenders.addContender(std::move(contender)); }
+        void addContender(std::shared_ptr<FightingContender> newContender) { _contenders.addContender(std::move(newContender)); }
         void addPartyTeam(std::unique_ptr<PartyTeam> newTeam) { _partyTeams.addPartyTeam(std::move(newTeam)); }
     
     private:
@@ -79,7 +83,7 @@ namespace fys::arena {
     private:
         Ending              _end;
         Level               _levelFightingPit;
-        // TODO : add connection handler
+        // TODO : add connection handler to WorkerService
         PitContenders       _contenders;
         AllyPartyTeams      _partyTeams;
         FightingPitLayout   _layout;

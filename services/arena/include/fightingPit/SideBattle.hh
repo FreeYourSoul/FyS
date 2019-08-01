@@ -36,6 +36,10 @@ namespace fys::arena {
     class PitContenders;
     class AllyPartyTeams;
 
+    /**
+     * @brief Represent a battle on a specific side of one of the 3 hexagons
+     * 
+     */
     class SideBattle {
 
     public:
@@ -45,29 +49,25 @@ namespace fys::arena {
                 _side(side) 
         {}
 
+    public:
+        const data::PriorityElem &getCurrentParticipantTurn(const std::chrono::system_clock::time_point &now,
+                                                            const std::chrono::milliseconds &timerInterlude);
+
+
     private:
         void endParticipantTurn(const std::chrono::milliseconds &timerInterlude) {
             _endCurrentTurn = std::chrono::system_clock::now() + timerInterlude;
             _priorityOrderList.getNext();
         }
-
-        data::PriorityElem &getCurrentParticipantTurn(const std::chrono::system_clock::time_point &now, 
-                                                      const std::chrono::milliseconds &timerInterlude) {
-            auto end = now + timerInterlude;
-            if (_endCurrentTurn < end) {
-                return _priorityOrderList.getCurrent();
-            } 
-            _endCurrentTurn = end;
-            return _priorityOrderList.getNext();
-        }
+ 
 
     private:
-        std::reference_wrapper<PitContenders> _contenders;
-        std::reference_wrapper<AllyPartyTeams> _partyTeams;
-        PriorityOrderList _priorityOrderList;
+        std::reference_wrapper<PitContenders>  _contenders; // possibly useless
+        std::reference_wrapper<AllyPartyTeams> _partyTeams; // possibly useless
+        PriorityOrderList        _priorityOrderList;
         HexagonSide::Orientation _side;
 
-        std::chrono::system_clock::time_point _endCurrentTurn;
+        std::chrono::system_clock::time_point  _endCurrentTurn;
 
     };
 
