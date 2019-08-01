@@ -26,4 +26,16 @@
 
 namespace fys::arena {
 
+    const data::PriorityElem &SideBattle::getCurrentParticipantTurn(
+                                const std::chrono::system_clock::time_point &now, 
+                                const std::chrono::milliseconds &timerInterlude)
+    {
+        auto end = now + timerInterlude;
+        if (_endCurrentTurn < end) {
+            return _priorityOrderList.getCurrent();
+        } 
+        _endCurrentTurn = end;
+        return _priorityOrderList.getNext();
+    }
+
 }

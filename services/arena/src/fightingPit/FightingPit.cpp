@@ -45,12 +45,11 @@ namespace fys::arena {
     void FightingPit::startBattle() {
         std::chrono::milliseconds timerInterlude = retrieveTimeInterludeFromLevelDegree(_levelFightingPit);
         while (_end == Ending::NOT_FINISHED) {
-            // TODO take player inputs
-            //          if player inputs, add pending action to character (override the pending action in case one already there)
+          
             readInputAndAppendPendingActions();
             auto now = std::chrono::system_clock::now();
             for (auto &side : _sideBattles) {
-                auto &currentParticipant = side->getCurrentParticipantTurn(now, timerInterlude);
+                const auto &currentParticipant = side->getCurrentParticipantTurn(now, timerInterlude);
 
                 if (currentParticipant->isContender) {
                     // If non-playable character (ennemy NPC)
@@ -64,7 +63,8 @@ namespace fys::arena {
     }
 
     void FightingPit::readInputAndAppendPendingActions() {
-
+        // TODO take player inputs
+        //          if player inputs, add pending action to character (override the pending action in case one already there)
     }
 
 

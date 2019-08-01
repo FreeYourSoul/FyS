@@ -54,24 +54,17 @@ namespace fys::arena {
             _endCurrentTurn = std::chrono::system_clock::now() + timerInterlude;
             _priorityOrderList.getNext();
         }
-
-        data::PriorityElem &getCurrentParticipantTurn(const std::chrono::system_clock::time_point &now, 
-                                                      const std::chrono::milliseconds &timerInterlude) {
-            auto end = now + timerInterlude;
-            if (_endCurrentTurn < end) {
-                return _priorityOrderList.getCurrent();
-            } 
-            _endCurrentTurn = end;
-            return _priorityOrderList.getNext();
-        }
+ 
+        const data::PriorityElem &getCurrentParticipantTurn(const std::chrono::system_clock::time_point &now, 
+                                                            const std::chrono::milliseconds &timerInterlude);
 
     private:
-        std::reference_wrapper<PitContenders> _contenders;
-        std::reference_wrapper<AllyPartyTeams> _partyTeams;
-        PriorityOrderList _priorityOrderList;
+        std::reference_wrapper<PitContenders>  _contenders; // possibly useless
+        std::reference_wrapper<AllyPartyTeams> _partyTeams; // possibly useless
+        PriorityOrderList        _priorityOrderList;
         HexagonSide::Orientation _side;
 
-        std::chrono::system_clock::time_point _endCurrentTurn;
+        std::chrono::system_clock::time_point  _endCurrentTurn;
 
     };
 

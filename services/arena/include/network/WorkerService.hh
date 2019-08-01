@@ -25,7 +25,7 @@
 #define FYS_WORKERSERVICE_HH
 
 #include <zmq_addon.hpp>
-#include <FightingPitAnnouncer.hh>
+#include <fightingPit/FightingPitAnnouncer.hh>
 
  namespace fys::arena {
  

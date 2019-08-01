@@ -21,30 +21,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef FYS_ARENASERVERSERVICE_HH
-#define FYS_ARENASERVERSERVICE_HH
-
-#include <network/ConnectionHandler.hh>
 #include <network/WorkerService.hh>
 
-namespace fys::arena {
+namespace fys::arena
+{
 
-    class ArenaServerContext;
+    void WorkerService::generateFightingPit(FightingPitAnnouncer announcer) {
 
-    class ArenaServerService {
-    public:
-        ArenaServerService(const ArenaServerContext &ctx);
+    }
+    
+    void WorkerService::forwardMessageToFightingPit(const std::string &fightingArenaId/* , FightingMessage*/) {
 
-        void runServerLoop() noexcept;
-
-    private:
-        void processMessage(std::string &&idt, std::string &&token, const zmq::message_t &content);
-
-    private:
-        ConnectionHandler   _connectionHandler;
-        WorkerService       _workerService;
-    };
-
-}
-
-#endif // !FYS_ARENASERVERSERVICE_HH
+    }
+    
+} // namespace fys::arena

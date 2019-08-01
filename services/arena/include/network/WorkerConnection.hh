@@ -21,23 +21,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include "ConnectionHandler.hh"
+#ifndef FYS_WORKERCONNECTION_HH
+#define FYS_WORKERCONNECTION_HH
 
-namespace fys::ws {
+#include <zmq_addon.hpp>
 
-ConnectionHandler::ConnectionHandler(int threadNumber) noexcept :
- _zmqContext(threadNumber),
- _subSocket(_dealerConnectionToDispatcher, zmq::socket_type::dealer)
+ namespace fys::arena {
+ 
+    class WorkerConnection {
 
-}
+    public:
+        
 
-void ConnectionHandler::setupConnectionManager(const fys::ws::WorldServerContext &ctx) noexcept {
-    _dealerConnectionToDispatcher.setsockopt(ZMQ_SUBSCRIBE, ctx.getServerCode().c_str(), ctx.getServerCode().size());
-    _dealerConnectionToDispatcher.connect(ctx.getDispatcherSubConnectionString());
-}
+    private:
+        zmq::context_t _ctx;
+        zmq::socket_t _workerServiceConnection;     
 
-void ConnectionHandler::sendMessageToDispatcher(zmq::multipart_t &&msg) noexcept {
-    msg.send(_dealerConnectionToDispatcher);
-}
+    };
 
-}
+ }
+
+#endif // !FYS_WORKERCONNECTION_HH

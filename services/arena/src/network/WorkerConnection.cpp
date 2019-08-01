@@ -21,17 +21,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <WorkerService.hh>
+#include <network/WorkerConnection.hh>
 
 namespace fys::arena
 {
-
-    void WorkerService::generateFightingPit(FightingPitAnnouncer announcer) {
-
-    }
-    
-    void WorkerService::forwardMessageToFightingPit(const std::string &fightingArenaId/* , FightingMessage*/) {
-
-    }
-    
-} // namespace fys::arena
+}

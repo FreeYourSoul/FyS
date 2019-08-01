@@ -22,10 +22,8 @@
 // SOFTWARE.
 
 #include <spdlog/spdlog.h>
-#include <spdlog/sinks/stdout_color_sinks.h>
 #include <ArenaServerContext.hh>
 #include <ArenaServerService.hh>
-#include <Key.hh>
 
 int main(int ac, char **av) {
     try {
