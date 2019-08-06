@@ -3,7 +3,7 @@
 This is a library that is used in order to retrieve data from the database, and cache it in order to not have expensive db call.  
   
 For example;  
-in the case of the Arena Service ([Battle service]()). At the start of a battle, the contenders (monsters) that the player are facing are selected and thus known. The Service will have to fetch how the contenders behaviour are (stats, attacks, artificial intelligence and so on..), this logic is stored as chai scripts in the DB. When the battle end, if necessary, the memory is flushed for the next battle (new contenders / actions to fetch).  
+in the case of the Arena Service ([Battle service](services/Arena_BattleSystem.md#arena)). At the start of a battle, the contenders (monsters) that the player are facing are selected and thus known. The Service will have to fetch how the contenders behaviour are (stats, attacks, artificial intelligence and so on..), this logic is stored as chai scripts in the DB. When the battle end, if necessary, the memory is flushed for the next battle (new contenders / actions to fetch).  
 But in case the same contender is selected for the next fight, it would be a waster to retrieve the behaviours twice in the database.  
 
 ## To resolve this issue : CML is composed of 3 distincts steps:

@@ -1,5 +1,3 @@
-#include <utility>
-
 // MIT License
 //
 // Copyright (c) 2019 Quentin Balland
@@ -27,6 +25,7 @@
 #ifndef FYS_PRIORITYORDERLIST_HH
 #define FYS_PRIORITYORDERLIST_HH
 
+#include <utility>
 #include <vector>
 #include <fightingPit/data/CommonTypes.hh>
 
