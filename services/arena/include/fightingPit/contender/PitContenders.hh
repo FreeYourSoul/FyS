@@ -41,7 +41,7 @@ namespace fys::arena {
         std::vector<std::shared_ptr<FightingContender>> getContenderOnSide(HexagonSide::Orientation side);
         std::vector<std::shared_ptr<FightingContender>> getChangingSideContenders();
 
-        void executeContenderAction(const data::PriorityElem &contender);
+        void executeContenderAction(const data::PriorityElem &contender, PitContenders &pitContenders, AllyPartyTeams &AllyPartyTeams);
 
         void addContender(std::shared_ptr<FightingContender> contender) {
             _contenders.emplace_back(std::move(contender));

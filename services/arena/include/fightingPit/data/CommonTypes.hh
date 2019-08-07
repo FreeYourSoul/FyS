@@ -61,6 +61,7 @@ namespace fys::arena::data
     struct Status {
         Life life;
         uint magicPoint;
+        // todo add a vector of INT representing alter status (boost / debuff and so on...)
     };
 
     enum MoveDirection {

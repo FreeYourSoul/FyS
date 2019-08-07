@@ -35,11 +35,12 @@ namespace fys::arena {
 
     class FightingContender {
     public:
-        void executeAction();
+        void executeAction(PitContenders &pitContenders, AllyPartyTeams &AllyPartyTeams);
         void moveContender(HexagonSide::Orientation destination, bool bypassCheck = false);
         void moveContender(data::MoveDirection rightOrLeft);
 
         const data::Life &getLife() const { return _status.life; }
+        data::Status &accessStatus() { return _status; }
 
     private:
         FightingContender(std::unique_ptr<ContenderScripting> && contenderScripting);

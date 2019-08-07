@@ -37,6 +37,7 @@ namespace fys::arena {
         void moveTeamMember(data::MoveDirection rightOrLeft);
 
         const data::Life &getLife() const { return _status.life; }
+        data::Status &accessStatus() { return _status; }
         std::pair<HexagonSide::Hexagon, HexagonSide::Orientation> getHexagonSide() const { return *_side; }
 
     private:

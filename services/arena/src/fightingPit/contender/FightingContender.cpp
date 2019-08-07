@@ -31,8 +31,8 @@ namespace fys::arena {
 //        _contenderScripting->registerFunction(this, &fys::arena::FightingContender::moveContender, "moveContender");
     }
 
-    void FightingContender::executeAction() {
-        
+    void FightingContender::executeAction(PitContenders &pitContenders, AllyPartyTeams &AllyPartyTeams) {
+        _contenderScripting->executeAction(pitContenders, allyPartyTeams);
     }
 
     void FightingContender::moveContender(HexagonSide::Orientation destination, bool bypassCheck) {

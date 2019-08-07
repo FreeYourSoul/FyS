@@ -26,6 +26,8 @@
 #include <chaiscript/utility/utility.hpp>
 #include <fightingPit/contender/ContenderScripting.hh>
 
+using namespace chaiscript;
+
 namespace fys::arena {
 
     ContenderScripting::ContenderScripting() : _chai(chaiscript::Std_Lib::library()), {
@@ -36,18 +38,60 @@ namespace fys::arena {
     void ContenderScripting::registerChaiAllies() {
 
         chaiscript::ModulePtr m = chaiscript::ModulePtr(new chaiscript::Module());
-        chaiscript::utility::add_class<fys::arena::AllyPartyTeams>(*m,
-            "Utility_Test",
-            { constructor<PartyTeam ()>(),
-              constructor<PartyTeam (const AllyPartyTeams &)>() },
+        
+        chaiscript::utility::add_class<fys::arena::TeamMember>(*m,
+            "TeamMember",
             { 
-                {fun(&AllyPartyTeams::function), "function"},
+              constructor<TeamMember ()>(),
+              constructor<TeamMember (const TeamMember &)>() 
+            },
+            { 
+                {fun(&TeamMember::accessStatus), "accessStatus"},
             }
         );
+
+        _chai.add(chaiscript::vector_conversion<std::vector<std::shared_ptr<TeamMember>>>());
+
+        chaiscript::utility::add_class<fys::arena::AllyPartyTeams>(*m,
+            "AllyPartyTeams",
+            { 
+              constructor<AllyPartyTeams ()>(),
+              constructor<AllyPartyTeams (const AllyPartyTeams &)>() 
+            },
+            { 
+                {fun(&AllyPartyTeams::accessAlliesOnSide), "accessAlliesOnSide"},
+            }
+        );
+        _chai.add(m);
     }
 
     void ContenderScripting::registerChaiPitContender() {
+        chaiscript::ModulePtr m = chaiscript::ModulePtr(new chaiscript::Module());
         
+        chaiscript::utility::add_class<fys::arena::FightingContender>(*m,
+            "FightingContender",
+            { 
+              constructor<FightingContender ()>(),
+              constructor<FightingContender (const FightingContender &)>() 
+            },
+            { 
+                {fun(&FightingContender::accessStatus), "accessStatus"},
+            }
+        );
+
+        _chai.add(chaiscript::vector_conversion<std::vector<std::shared_ptr<FightingContender>>>());
+
+        chaiscript::utility::add_class<fys::arena::PitContenders>(*m,
+            "PitContenders",
+            { 
+              constructor<PitContenders ()>(),
+              constructor<PitContenders (const PitContenders &)>() 
+            },
+            { 
+                {fun(&PitContenders::getContenderOnSide), "getContenderOnSide"},
+            }
+        );
+        _chai.add(m);
     }
 
     void ContenderScripting::loadContenderScript(const std::string &script) {
@@ -58,17 +102,15 @@ namespace fys::arena {
         _chai.eval(std::string("var ").append(_contenderId).append(" = ").append(_contendeName).append("()"));
     }
     
-
     void ContenderScripting::loadContenderScriptFromFile(const std::string &filePath) {
         
     }
 
-    void ContenderScripting::executeAction(PitContenders &pc, AllyPartyTeams &apt) {
-        _chai.eval<std::function<void (PitContenders &, AllyPartyTeams &)>> (R"(
-            fun(pitContenders, allyPartyTeams) { 
-                
-            }
-        )") (pc, apt);
+    // returning the function object may be better ?? 
+    void ContenderScripting::executeAction(PitContenders &pc, AllyPartyTeams &apt) { 
+        std::string action = 
+            std::string("fun(pitContenders, allyPartyTeams){\n").append(_contenderId).append(".runScriptedAction(pitContenders, allyPartyTeams)\n}\n");
+        _chai.eval<std::function<void (PitContenders &, AllyPartyTeams &)>> (action) (pc, apt);
     }
 
 }
