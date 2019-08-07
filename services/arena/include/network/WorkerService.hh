@@ -53,6 +53,7 @@
 
         void forwardMessageToFightingPit(const std::string &fightingArenaId/* , FightingMessage*/);
 
+
     private:
         zmq::socket_t       _workerRouter;
 

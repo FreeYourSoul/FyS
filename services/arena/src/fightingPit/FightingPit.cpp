@@ -52,7 +52,7 @@ namespace fys::arena {
 
                 if (currentParticipant.isContender) {
                     // If non-playable character (ennemy NPC)
-                    // TODO execute monster script action
+                    _contenders.executeContenderAction(currentParticipant);
                 } else {
                     // If character of a player
                     // TODO check if character has a handling action and execute it

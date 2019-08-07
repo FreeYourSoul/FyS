@@ -31,11 +31,13 @@
     class WorkerConnection {
 
     public:
-        
+        WorkerConnection() noexcept :
+        _ctx(1), _workerServiceConnection(_ctx, zmq::socket_type::dealer)
+        { }
 
     private:
         zmq::context_t _ctx;
-        zmq::socket_t _workerServiceConnection;     
+        zmq::socket_t _workerServiceConnection;
 
     };
 

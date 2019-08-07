@@ -35,15 +35,11 @@ namespace fys::arena {
 
     class FightingContender {
     public:
-
+        void executeAction();
         void moveContender(HexagonSide::Orientation destination, bool bypassCheck = false);
-        /**
-         * @param rightOrLeft(bool) move contender to the right if true, left otherwise
-         */
         void moveContender(data::MoveDirection rightOrLeft);
 
         const data::Life &getLife() const { return _status.life; }
-        
 
     private:
         FightingContender(std::unique_ptr<ContenderScripting> && contenderScripting);

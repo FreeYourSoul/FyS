@@ -25,10 +25,14 @@
 #ifndef FYS_ALLYPARTYTEAMS_HH
 #define FYS_ALLYPARTYTEAMS_HH
 
+#include <vector>
 #include <memory>
-#include <fightingPit/team/PartyTeam.hh>
 
 namespace fys::arena {
+
+    // forward declarations
+    class PartyTeam;
+    class TeamMember;
 
     class AllyPartyTeams {
 
@@ -36,6 +40,8 @@ namespace fys::arena {
         void addPartyTeam(std::unique_ptr<PartyTeam> team) {
             _partyTeams.emplace_back(std::move(team));
         }
+
+        std::vector<std::shared_ptr<TeamMember>> getAlliesOnSide(HexagonSide::Orientation side) const;
 
     private:
         std::vector<std::unique_ptr<PartyTeam>> _partyTeams;

@@ -45,4 +45,12 @@ namespace fys::arena {
         return result;
     }
 
+    void PitContenders::executeContenderAction(const data::PriorityElem &contender) {
+        if (!contender.isContender && contender.id < _contenders.size()) {
+            // TODO log error on execute
+            return;
+        }
+        _contenders.at(contender.id)->executeAction();
+    }
+
 }

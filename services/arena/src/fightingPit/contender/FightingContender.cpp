@@ -31,6 +31,10 @@ namespace fys::arena {
 //        _contenderScripting->registerFunction(this, &fys::arena::FightingContender::moveContender, "moveContender");
     }
 
+    void FightingContender::executeAction() {
+        
+    }
+
     void FightingContender::moveContender(HexagonSide::Orientation destination, bool bypassCheck) {
         if (!_side.move(destination, bypassCheck)) {
             SPDLOG_ERROR("Impossible move from {}:{} to {}", (*_side).first, (*_side).second, destination);

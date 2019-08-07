@@ -32,9 +32,24 @@ namespace fys::arena {
     class ContenderScripting {
 
     public:
+        ContenderScripting();
+
+        void executeAction();
+        
+        void loadContenderScript(const std::string& script);
+        void loadContenderScriptFromFile(const std::string& scriptFile);
+
+        void setContenderName(std::string contenderName) { _contenderName = std::move(contenderName); }
+        void setContenderId(std::string contenderId) { _contenderId = std::move(contenderId); }
 
     private:
-        chaiscript::ChaiScript chai;
+        void registerChaiAllies();
+        void registerChaiPitContender();
+
+    private:
+        chaiscript::ChaiScript _chai;
+        std::string _contenderName;
+        std::string _contenderId;
 
     };
 

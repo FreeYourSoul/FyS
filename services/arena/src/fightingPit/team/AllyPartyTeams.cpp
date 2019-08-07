@@ -22,10 +22,18 @@
 // SOFTWARE.
 
 
+#include <fightingPit/team/PartyTeam.hh>
 #include <fightingPit/team/AllyPartyTeams.hh>
 
 namespace fys::arena {
 
+    std::vector<std::shared_ptr<TeamMember>> AllyPartyTeams::getAlliesOnSide(HexagonSide::Orientation side) const {
+        std::vector<std::shared_ptr<TeamMember>> toReturn;
 
+        for (const auto &partyTeamPtr : _partyTeams) {
+            // toReturn.concat(partyTeamPtr->getTeamMemberOnSide(side));
+        }
+        return toReturn;
+    }
 
 }

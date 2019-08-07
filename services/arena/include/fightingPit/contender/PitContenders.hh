@@ -27,6 +27,7 @@
 
 #include <memory>
 #include <vector>
+#include <fightingPit/data/CommonTypes.hh>
 #include <fightingPit/HexagonSide.hh>
 
 namespace fys::arena {
@@ -39,6 +40,8 @@ namespace fys::arena {
     public:
         std::vector<std::shared_ptr<FightingContender>> getContenderOnSide(HexagonSide::Orientation side);
         std::vector<std::shared_ptr<FightingContender>> getChangingSideContenders();
+
+        void executeContenderAction(const data::PriorityElem &contender);
 
         void addContender(std::shared_ptr<FightingContender> contender) {
             _contenders.emplace_back(std::move(contender));
