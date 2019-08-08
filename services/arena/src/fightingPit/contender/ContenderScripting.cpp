@@ -94,23 +94,39 @@ namespace fys::arena {
         _chai.add(m);
     }
 
+
     void ContenderScripting::loadContenderScript(const std::string &script) {
-        // load script content (containing the class)
-        _chai.eval(script);
+        if (!script.empty())
+            _chai.eval(script);
+
+
+        // _chai.add(chaiscript::fun<std::function<data::Status()>>([]() {
+
+        // }), getChaiMethodName("getStatus"));
+
+        // _chai.add(chaiscript::fun<std::function<int()>>([]() {
+
+        // }), getChaiMethodName("getSide"));
 
         // instantiate the contender in chai engine
-        _chai.eval(std::string("var ").append(_contenderId).append(" = ").append(_contendeName).append("()"));
+        _chai.eval(std::string("var ").append(getChaiContenderId()).append(" = ").append(_contendeName).append("()"));
     }
     
     void ContenderScripting::loadContenderScriptFromFile(const std::string &filePath) {
-        
+        // load script content (containing the class)
+        _chai.eval_file(filePath);
+        loadContenderScript("");
     }
 
     // returning the function object may be better ?? 
+    // TODO : change the PitContender and AllyPartyTeam into loadContenderScript
     void ContenderScripting::executeAction(PitContenders &pc, AllyPartyTeams &apt) { 
+        _chai.set_global(chaiscript::var(std::ref(pc), "pitContenders");
+        _chai.set_global(chaiscript::var(std::ref(apt), "allyPartyTeams");
+
         std::string action = 
-            std::string("fun(pitContenders, allyPartyTeams){\n").append(_contenderId).append(".runScriptedAction(pitContenders, allyPartyTeams)\n}\n");
-        _chai.eval<std::function<void (PitContenders &, AllyPartyTeams &)>> (action) (pc, apt);
+            std::string("fun(contenderId){\n").append(getChaiContenderId()).append(".runScriptedAction(contenderId)\n}\n");
+        _chai.eval<std::function<void (unsigned int)>> (action) (_contenderId);
     }
 
 }

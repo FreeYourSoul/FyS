@@ -29,6 +29,7 @@
 
 namespace fys::arena {
 
+    // TODO:  Class should inherit from a generic class for scripting (as Ally are also going to use a lot of the same config)
     class ContenderScripting {
 
     public:
@@ -40,16 +41,19 @@ namespace fys::arena {
         void loadContenderScriptFromFile(const std::string& scriptFile);
 
         void setContenderName(std::string contenderName) { _contenderName = std::move(contenderName); }
-        void setContenderId(std::string contenderId) { _contenderId = std::move(contenderId); }
+        void setContenderId(uint contenderId) { _contenderId = contenderId; }
 
     private:
         void registerChaiAllies();
         void registerChaiPitContender();
 
+        std::string getChaiMethodName(std::string && methodName) const { return _contenderName.append("::").append(std::move(methodName)); }
+        std::string getChaiContenderId() const { return std::string("contender_").append(std::to_string(cotnenderId)); }
+
     private:
         chaiscript::ChaiScript _chai;
         std::string _contenderName;
-        std::string _contenderId;
+        uint _contenderId;
 
     };
 
