@@ -100,6 +100,17 @@ namespace fys::arena {
             _chai.eval(script);
 
 
+        _chai.add(chaiscript::fun< std::function<void()> >([]() {
+                // Create message with data :
+                //     * [Optional]  Target (if any)
+                //     * [Mandatory] Contender id 
+                //     * [Mandatory] Spell/Action id
+                //     * [Mandatory] Description String (Heal of 15, Damage of 17, Critical Damage of 55, Buff intelligence....)
+                // get Allies on the contender side
+            }
+            , getChaiMethodName("sendContenderAction")
+        );
+
         // _chai.add(chaiscript::fun<std::function<data::Status()>>([]() {
 
         // }), getChaiMethodName("getStatus"));
@@ -109,7 +120,7 @@ namespace fys::arena {
         // }), getChaiMethodName("getSide"));
 
         // instantiate the contender in chai engine
-        _chai.eval(std::string("var ").append(getChaiContenderId()).append(" = ").append(_contendeName).append("()"));
+        _chai.eval(std::string("var ").append(getChaiContenderId()).append(" = ").append(_contendeName).append("();"));
     }
     
     void ContenderScripting::loadContenderScriptFromFile(const std::string &filePath) {
@@ -125,7 +136,7 @@ namespace fys::arena {
         _chai.set_global(chaiscript::var(std::ref(apt), "allyPartyTeams");
 
         std::string action = 
-            std::string("fun(contenderId){\n").append(getChaiContenderId()).append(".runScriptedAction(contenderId)\n}\n");
+            std::string("fun(contenderId){\n").append(getChaiContenderId()).append(".runScriptedAction(contenderId);\n}\n");
         _chai.eval<std::function<void (unsigned int)>> (action) (_contenderId);
     }
 

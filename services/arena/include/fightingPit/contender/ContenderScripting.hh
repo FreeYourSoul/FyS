@@ -47,7 +47,7 @@ namespace fys::arena {
         void registerChaiAllies();
         void registerChaiPitContender();
 
-        std::string getChaiMethodName(std::string && methodName) const { return _contenderName.append("::").append(std::move(methodName)); }
+        std::string getChaiMethodName(std::string && methodName) const { return _contenderName.append("_").append(std::move(methodName)); }
         std::string getChaiContenderId() const { return std::string("contender_").append(std::to_string(cotnenderId)); }
 
     private:
