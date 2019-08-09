@@ -35,7 +35,7 @@
 #include <fightingPit/SideBattle.hh>
 
 namespace fys::arena {
-
+    class FightingPitAnnouncer;
 
     /**
      * @brief A fighting pit represent a specific instance of a battle.
@@ -51,6 +51,8 @@ namespace fys::arena {
      * @see SideBattle
      */
     class FightingPit {
+
+        friend class FightingPitAnnouncer;
 
     public:
         enum Level {

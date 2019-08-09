@@ -53,20 +53,22 @@ namespace fys::arena {
     };
 
     public:
-        FightingPitAnnouncer(EncounterType type, uint idEncounter = 0) : 
-                _encounterType(type), 
-                _idEncounter(idEncounter),
-                _fightingPitLevel(FightingPit::Level::MEDIUM)
-        {}
+        FightingPitAnnouncer() = default;
 
         FightingPit buildFightingPit() const;
-        FightingPitAnnouncer &generateContenders(/* TODO: send ConnectionHandler for allowing scripts to send messages */);
+        FightingPitAnnouncer &generateContenders();
         FightingPitAnnouncer &generatePartyTeams();
+
+        FightingPitAnnouncer &setEncounterType(EncounterType encounterType) {
+            _encounterType = encounterType; 
+            return *this;
+        }
 
         FightingPitAnnouncer &setEncounterId(uint idEncounter) {
             _idEncounter = idEncounter; 
             return *this;
         }
+
         FightingPitAnnouncer &enforceAmbush(bool ambushEnforced) { 
             _isAmbushEnforced = ambushEnforced; 
             return *this;
@@ -87,9 +89,9 @@ namespace fys::arena {
         bool isScriptedEncounter() const { return _encounterType != EncounterType::RANDOM; }
 
     private:
-        EncounterType _encounterType;
-        uint _idEncounter;
-        FightingPit::Level  _fightingPitLevel;
+        uint            _idEncounter        = 0;
+        EncounterType   _encounterType      = FightingPit::EncounterType::RANDOM;
+        Level           _fightingPitLevel   = FightingPit::Level::MEDIUM;
 
         std::optional<bool> _isAmbushEnforced;
 

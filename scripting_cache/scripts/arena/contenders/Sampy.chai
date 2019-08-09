@@ -1,0 +1,35 @@
+
+class Sampy {
+
+    def Sampy() { }
+
+    def decideAction() {
+        var action;
+        
+        // select action strategy
+        return action;
+    }
+
+    def decideTarget(requireEnnemyTarget, requireAllyTarget) {
+        var target;
+        if (requireAllyTarget) {
+            // AllyTarget selection strategy
+        }
+        else if (requireEnnemyTarget) {
+            // EnnemyTarget selection strategy
+        }
+        return target;
+    }
+
+    def runScriptedAction(contenderId) {
+        var action = decideAction();
+        var target = decideTarget(action.requireEnnemyTarget(), action.requireAllyTarget());
+        var targetId;
+
+        if (target.is_var_def())
+            targetId = target.getId()
+        action.executeAction(target);
+        Sampy_sendContenderAction(action.getId(), targetId);
+    }
+
+}
