@@ -45,20 +45,33 @@ class Sampy {
         return actionList[0].action;
     }
 
-    def decideTarget(requireEnnemyTarget, requireAllyTarget) {
+    // EnnemyTarget selection strategy
+    def decideTarget(requireEnnemyTarget, requireAllyTarget) : requireEnnemyTarget && !requireAllyTarget {
         var target;
-        if (requireAllyTarget) {
-            // AllyTarget selection strategy
-        }
-        else if (requireEnnemyTarget) {
-            // EnnemyTarget selection strategy
-        }
+
         return target;
     }
 
+    // AllyTarget selection strategy
+    def decideTarget(requireEnnemyTarget, requireAllyTarget) : !requireEnnemyTarget && requireAllyTarget {
+        var target;
+
+        return target;
+    }
+
+    // Impossible targeting
+    def decideTarget(requireEnnemyTarget, requireAllyTarget) : requireEnnemyTarget && requireAllyTarget {
+        print("[ERROR] : Only one target can be taken");
+        return;
+    }
+    // no targeting
+    def decideTarget(requireEnnemyTarget, requireAllyTarget) : !requireEnnemyTarget && !requireAllyTarget {
+        return;
+    }
+
     def runScriptedAction() {
-        var action = decideAction();
-        var target = decideTarget(action.requireEnnemyTarget(), action.requireAllyTarget());
+        var action = this.decideAction();
+        var target = this.decideTarget(action.requireEnnemyTarget(), action.requireAllyTarget());
         var targetId = -1;
 
         if (target.is_var_def())
