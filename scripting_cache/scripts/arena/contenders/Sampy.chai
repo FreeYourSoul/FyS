@@ -1,13 +1,48 @@
+class Action {
+    var percentage;
+    var action;
+    var actionName;
 
+    def Action(actionName, percentage) { // maybe send directly an instance of the type wanted
+        this.percentage = percentage;
+        this.actionName = actionName; // create instance of wanted class thanks to this
+    }
+};
+
+/*
+Sample Monster Used For testing Purpose :-D
+*/
 class Sampy {
 
-    def Sampy() { }
+    var id
+    var baseDamage = 0;
+    var criticalDamage = 0;
 
+    var actionList = 
+    [
+        Action("baseAttack", 50), 
+        Action("groundStrike", 20), 
+        Action("buffStrenght", 15), 
+        Action("lightHeal", 15)
+    ]
+
+    def Sampy(contenderId) { 
+        this.id = contenderId
+        this.baseDamage = 20;
+        this.criticalDamage = 20;
+    }
+
+    // select action strategy
     def decideAction() {
-        var action;
-        
-        // select action strategy
-        return action;
+        var rng = 71; // todo : RNG calling cpp 
+        var accumulate = 0;
+        for (var i = 0; i < actionList.size(); ++i) {
+            accumulate += actionList[i].percentage;
+            if (accumulate > rng) {
+                return actionList[i].action;
+            }
+        }
+        return actionList[0].action;
     }
 
     def decideTarget(requireEnnemyTarget, requireAllyTarget) {
@@ -21,15 +56,17 @@ class Sampy {
         return target;
     }
 
-    def runScriptedAction(contenderId) {
+    def runScriptedAction() {
         var action = decideAction();
         var target = decideTarget(action.requireEnnemyTarget(), action.requireAllyTarget());
-        var targetId;
+        var targetId = -1;
 
         if (target.is_var_def())
             targetId = target.getId()
-        action.executeAction(target);
+        action.execute(id, target);
         Sampy_sendContenderAction(action.getId(), targetId);
     }
 
-}
+    def defineSpawningPositino()
+
+};
