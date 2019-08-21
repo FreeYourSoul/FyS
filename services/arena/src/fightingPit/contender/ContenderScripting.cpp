@@ -25,6 +25,7 @@
 #include <chaiscript/chaiscript_stdlib.hpp>
 #include <chaiscript/utility/utility.hpp>
 #include <fightingPit/contender/ContenderScripting.hh>
+#include <stdlib.h>
 
 using namespace chaiscript;
 
@@ -110,6 +111,10 @@ namespace fys::arena {
             }
             , getChaiMethodName("sendContenderAction")
         );
+
+        _chai.add(chaiscript::fun<std::function<int ()>>() {
+            return ::rand() % 100;
+        }, "generateRandomNumber");
 
         // _chai.add(chaiscript::fun<std::function<data::Status()>>([]() {
 

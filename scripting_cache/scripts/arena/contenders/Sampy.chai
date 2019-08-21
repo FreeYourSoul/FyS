@@ -34,7 +34,7 @@ class Sampy {
 
     // select action strategy
     def decideAction() {
-        var rng = 71; // todo : RNG calling cpp 
+        var rng = generateRandomNumber();
         var accumulate = 0;
         for (var i = 0; i < actionList.size(); ++i) {
             accumulate += actionList[i].percentage;
@@ -74,8 +74,9 @@ class Sampy {
         var target = this.decideTarget(action.requireEnnemyTarget(), action.requireAllyTarget());
         var targetId = -1;
 
-        if (target.is_var_def())
+        if (target.is_var_def()) {
             targetId = target.getId()
+        }
         action.execute(id, target);
         Sampy_sendContenderAction(action.getId(), targetId);
     }
