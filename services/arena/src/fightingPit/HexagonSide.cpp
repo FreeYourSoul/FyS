@@ -344,3 +344,51 @@ namespace fys::arena {
 
 } // namespace fys::arena
 
+std::ostream &operator<<(std::ostream& os, fys::arena::HexagonSide::Orientation orientation) {
+    switch (orientation) {
+        case fys::arena::HexagonSide::Orientation::A_N:
+        case fys::arena::HexagonSide::Orientation::B_N:
+        case fys::arena::HexagonSide::Orientation::C_N:
+            return os << "[North]";
+        case fys::arena::HexagonSide::Orientation::A_S:
+        case fys::arena::HexagonSide::Orientation::B_S:
+        case fys::arena::HexagonSide::Orientation::C_S:
+            return os << "[South]";
+        case fys::arena::HexagonSide::Orientation::A_NE:
+        case fys::arena::HexagonSide::Orientation::B_NE:
+        case fys::arena::HexagonSide::Orientation::C_NE:
+            return os << "[NorthEast]";
+        case fys::arena::HexagonSide::Orientation::A_NW:
+        case fys::arena::HexagonSide::Orientation::B_NW:
+        case fys::arena::HexagonSide::Orientation::C_NW:
+            return os << "[NorthWest]";
+        case fys::arena::HexagonSide::Orientation::A_SE:
+        case fys::arena::HexagonSide::Orientation::B_SE:
+        case fys::arena::HexagonSide::Orientation::C_SE:
+            return os << "[SouthEast]";
+        case fys::arena::HexagonSide::Orientation::A_SW:
+        case fys::arena::HexagonSide::Orientation::B_SW:
+        case fys::arena::HexagonSide::Orientation::C_SW:
+            return os << "[SouthWest]";
+        case fys::arena::HexagonSide::Orientation::NONE:
+            return os << "[NONE(ERROR)]";
+    }
+    return os;
+}
+
+std::ostream &operator<<(std::ostream &os, fys::arena::HexagonSide::Hexagon hexagon) {
+    switch (hexagon) {
+        case fys::arena::HexagonSide::Hexagon::A:
+            return os << "[A]";
+        case fys::arena::HexagonSide::Hexagon::B:
+            return os << "[B]";
+        case fys::arena::HexagonSide::Hexagon::C:
+            return os << "[C]";
+    }
+    return os;
+}
+
+std::ostream &operator<<(std::ostream& os, fys::arena::HexagonSide hexagonSide) {
+    auto hs = *hexagonSide;
+    return os << "HexagonSide:" << hs.first << hs.second;
+}

@@ -25,9 +25,14 @@
 #ifndef FYS_CONTENDERSCRIPTING_HH
 #define FYS_CONTENDERSCRIPTING_HH
 
-#include <chaiscript/chaiscript.hpp>
+#include <string>
+//#include <chaiscript/chaiscript.hpp>
 
 namespace fys::arena {
+
+    // forward declarations
+    class PitContenders;
+    class AllyPartyTeams;
 
     // TODO:  Class should inherit from a generic class for scripting (as Ally are also going to use a lot of the same config)
     class ContenderScripting {
@@ -35,7 +40,7 @@ namespace fys::arena {
     public:
         ContenderScripting();
 
-        void executeAction();
+        void executeAction(PitContenders &pitContenders, AllyPartyTeams &allyPartyTeams);
         
         void loadContenderScript(const std::string& script);
         void loadContenderScriptFromFile(const std::string& scriptFile);
@@ -47,11 +52,11 @@ namespace fys::arena {
         void registerChaiAllies();
         void registerChaiPitContender();
 
-        std::string getChaiMethodName(std::string && methodName) const { return _contenderName.append("_").append(std::move(methodName)); }
-        std::string getChaiContenderId() const { return std::string("contender_").append(std::to_string(cotnenderId)); }
+        [[nodiscard]] std::string getChaiMethodName(std::string && methodName) const { return _contenderName + "_" + std::move(methodName); }
+        [[nodiscard]] std::string getChaiContenderId() const { return std::string("contender_").append(std::to_string(_contenderId)); }
 
     private:
-        chaiscript::ChaiScript _chai;
+//        chaiscript::ChaiScript _chai;
         std::string _contenderName;
         uint _contenderId;
 

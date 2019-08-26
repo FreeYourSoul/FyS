@@ -72,7 +72,7 @@ namespace fys::arena {
 
         // reorder equal speeds
         if (auto found = std::adjacent_find(_analyzedList.begin(), _analyzedList.end(),
-                [](const auto& e, const auto& e2) {
+                [this](const auto& e, const auto& e2) {
                     if (e.speed == e2.speed) {
                         uint baseSpeedE = 0;
                         uint baseSpeedE2 = 0;
@@ -88,8 +88,9 @@ namespace fys::arena {
                 }); 
             found != _analyzedList.end())
         {
-            if (auto toSwap = std::adjacent_find(_analyzedList.begin(),_analyzedList.end(), [](const auto& e, const auto& e2) { return e.speed != e2.speed; });
-                     toSwap != _analyzedList.end())
+            if (auto toSwap = std::adjacent_find(_analyzedList.begin(),_analyzedList.end(),
+                    [](const auto& e, const auto& e2) { return e.speed != e2.speed; });
+                toSwap != _analyzedList.end())
             {
                 std::reverse(found, toSwap + 1);
             }

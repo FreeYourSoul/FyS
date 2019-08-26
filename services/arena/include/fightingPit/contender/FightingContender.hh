@@ -27,11 +27,14 @@
 
 #include <memory>
 #include <fightingPit/data/CommonTypes.hh>
-#include <fightingPit/contender/FightingContender.hh>
-#include <fightingPit/contender/ContenderScripting.hh>
 #include <fightingPit/HexagonSide.hh>
 
 namespace fys::arena {
+
+    // forward declarations
+    class PitContenders;
+    class ContenderScripting;
+    class AllyPartyTeams;
 
     class FightingContender {
     public:
@@ -39,11 +42,12 @@ namespace fys::arena {
         void moveContender(HexagonSide::Orientation destination, bool bypassCheck = false);
         void moveContender(data::MoveDirection rightOrLeft);
 
-        const data::Life &getLife() const { return _status.life; }
+        [[nodiscard]] const data::Life &getLife() const { return _status.life; }
+        [[nodiscard]] std::pair<HexagonSide::Hexagon, HexagonSide::Orientation> getHexagonSide() const { return *_side; }
         data::Status &accessStatus() { return _status; }
 
     private:
-        FightingContender(std::unique_ptr<ContenderScripting> && contenderScripting);
+        explicit FightingContender(std::unique_ptr<ContenderScripting> && contenderScripting);
 
     public:
         static FightingContender *makeFightingContender(std::unique_ptr<ContenderScripting> && contenderScripting) {

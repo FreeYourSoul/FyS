@@ -21,7 +21,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include <fmt/ostream.h>
 #include <spdlog/spdlog.h>
+#include <fightingPit/contender/ContenderScripting.hh>
 #include <fightingPit/contender/FightingContender.hh>
 
 namespace fys::arena {
@@ -31,13 +33,13 @@ namespace fys::arena {
 //        _contenderScripting->registerFunction(this, &fys::arena::FightingContender::moveContender, "moveContender");
     }
 
-    void FightingContender::executeAction(PitContenders &pitContenders, AllyPartyTeams &AllyPartyTeams) {
+    void FightingContender::executeAction(PitContenders &pitContenders, AllyPartyTeams &allyPartyTeams) {
         _contenderScripting->executeAction(pitContenders, allyPartyTeams);
     }
 
     void FightingContender::moveContender(HexagonSide::Orientation destination, bool bypassCheck) {
         if (!_side.move(destination, bypassCheck)) {
-            SPDLOG_ERROR("Impossible move from {}:{} to {}", (*_side).first, (*_side).second, destination);
+            SPDLOG_ERROR("Impossible move from {} to {}", _side, destination);
             return;
         }
     }
@@ -45,17 +47,17 @@ namespace fys::arena {
     void FightingContender::moveContender(data::MoveDirection directionToMove) {
         if (directionToMove == data::MoveDirection::RIGHT) {
             if (!_side.moveRight()) {
-                SPDLOG_ERROR("Impossible move from {}:{} to right", (*_side).first, (*_side).second);
+                SPDLOG_ERROR("Impossible move from {} to right", _side);
             }
         }
         else if (directionToMove == data::MoveDirection::LEFT) {
             if (!_side.moveLeft()) {
-                SPDLOG_ERROR("Impossible move from {}:{} to left", (*_side).first, (*_side).second);
+                SPDLOG_ERROR("Impossible move from {} to left", _side);
             }
         }
         else if (directionToMove == data::MoveDirection::BACK) {
             if (!_side.moveBack()) {
-                SPDLOG_ERROR("Impossible move from {}:{} to backside", (*_side).first, (*_side).second);
+                SPDLOG_ERROR("Impossible move from {} to backside", _side);
             }
         }
     }

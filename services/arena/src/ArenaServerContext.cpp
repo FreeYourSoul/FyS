@@ -39,8 +39,6 @@ namespace fys::arena {
         str = "\n*************************\n";
         str+= "[INFO] Service " + _name + " context VERSION: " + _version + "\n";
         str+= "[INFO] Config file used: " + _configFile + "\n\n";
-        str+= "[INFO] World Server code: " + _serverCode + "\n";
-        str+= "[INFO] TMX Map path: " + _tmxMapPath + "\n";
         str+= "[INFO] Dispatcher connected port: " + std::to_string(_dispatcherData.port) + "\n";
         str+= "[INFO] Dispatcher connected host: " + _dispatcherData.address + "\n";
         str+= "[INFO] Dispatcher connection string: " + getDispatcherConnectionString() + "\n";

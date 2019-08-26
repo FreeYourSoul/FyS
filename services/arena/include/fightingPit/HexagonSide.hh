@@ -26,6 +26,7 @@
 
 #include <utility>
 #include <zconf.h>
+#include <ostream>
 
 namespace fys::arena {
 
@@ -59,7 +60,7 @@ namespace fys::arena {
             NONE
         };
 
-        HexagonSide(Hexagon hexagon = Hexagon::A, Orientation orientation = Orientation::NONE) :
+        explicit HexagonSide(Hexagon hexagon = Hexagon::A, Orientation orientation = Orientation::NONE) :
             _hexagon(hexagon), _side(orientation) {}
 
         std::pair<Hexagon, Orientation> operator*() const { return std::make_pair(_hexagon, _side); }
@@ -69,24 +70,24 @@ namespace fys::arena {
         bool moveLeft();
         bool moveBack();
 
-        bool isAmbushSide() const;
+        [[nodiscard]] bool isAmbushSide() const;
 
     private:
         void changeSide(HexagonSide::Orientation);
-        Orientation findLeft() const;
-        Orientation findRight() const;
-        Orientation findBack() const;
-        bool canMove(HexagonSide::Orientation destinationSide) const;
+        [[nodiscard]] Orientation findLeft() const;
+        [[nodiscard]] Orientation findRight() const;
+        [[nodiscard]] Orientation findBack() const;
+        [[nodiscard]] bool canMove(HexagonSide::Orientation destinationSide) const;
 
     private:
         Hexagon     _hexagon;
         Orientation _side;
     };
 
-
-    
 } // namespace fys::arena
 
-
+std::ostream &operator<<(std::ostream &os, fys::arena::HexagonSide::Orientation orientation);
+std::ostream &operator<<(std::ostream &os, fys::arena::HexagonSide::Hexagon hexagon);
+std::ostream &operator<<(std::ostream &os, fys::arena::HexagonSide hexagonSide);
 
 #endif // !FYS_HEXAGONSIDE_HH

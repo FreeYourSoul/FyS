@@ -23,17 +23,15 @@
 
 #include <network/ConnectionHandler.hh>
 
-namespace fys::ws {
+namespace fys::arena {
 
 ConnectionHandler::ConnectionHandler(int threadNumber) noexcept :
  _zmqContext(threadNumber),
- _subSocket(_dealerConnectionToDispatcher, zmq::socket_type::dealer)
-
+ _dealerConnectionToDispatcher(_zmqContext, zmq::socket_type::dealer) {
 }
 
-void ConnectionHandler::setupConnectionManager(const fys::ws::WorldServerContext &ctx) noexcept {
-    _dealerConnectionToDispatcher.setsockopt(ZMQ_SUBSCRIBE, ctx.getServerCode().c_str(), ctx.getServerCode().size());
-    _dealerConnectionToDispatcher.connect(ctx.getDispatcherSubConnectionString());
+void ConnectionHandler::setupConnectionManager(const fys::arena::ArenaServerContext &ctx) noexcept {
+    _dealerConnectionToDispatcher.connect(ctx.getDispatcherConnectionString());
 }
 
 void ConnectionHandler::sendMessageToDispatcher(zmq::multipart_t &&msg) noexcept {

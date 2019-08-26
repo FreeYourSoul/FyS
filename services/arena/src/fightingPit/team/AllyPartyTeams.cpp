@@ -27,7 +27,11 @@
 
 namespace fys::arena {
 
-    std::vector<std::shared_ptr<TeamMember>> AllyPartyTeams::getAlliesOnSide(HexagonSide::Orientation side) const {
+    void AllyPartyTeams::addPartyTeam(std::unique_ptr<PartyTeam> team)  {
+        _partyTeams.emplace_back(std::move(team));
+    }
+
+    std::vector<std::shared_ptr<TeamMember>> AllyPartyTeams::accessAlliesOnSide(HexagonSide::Orientation side) {
         std::vector<std::shared_ptr<TeamMember>> toReturn;
 
         for (const auto &partyTeamPtr : _partyTeams) {

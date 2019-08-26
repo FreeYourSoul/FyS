@@ -37,9 +37,7 @@ namespace fys::arena {
     class AllyPartyTeams {
 
     public:
-        void addPartyTeam(std::unique_ptr<PartyTeam> team) {
-            _partyTeams.emplace_back(std::move(team));
-        }
+        void addPartyTeam(std::unique_ptr<PartyTeam> team);
 
         // Use only by scripts (TODO : Isolate this)
         std::vector<std::shared_ptr<TeamMember>> accessAlliesOnSide(HexagonSide::Orientation side);

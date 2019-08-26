@@ -30,7 +30,7 @@ FreeYourSoul Online is using an original battle system inspired by Final Fantasy
 * [ZeroMQ](https://github.com/zeromq/libzmq)  
     Network library
 * [spdlog](https://github.com/gabime/spdlog)  
-    Logging framework
+    Logging framework, usage of fmt library for logging
 * [FSeam](https://github.com/FreeYourSoul/FSeam)  
     Mocking framework
 * [Catch2](https://github.com/catchorg/Catch2)  
@@ -39,3 +39,4 @@ FreeYourSoul Online is using an original battle system inspired by Final Fantasy
     For scripting of monsters in the Arena (fighting mode)
 * [LUA](https://github.com/lua/lua)   --> soon to be  
     For the scripting of NPC in the world map (when moving)
+

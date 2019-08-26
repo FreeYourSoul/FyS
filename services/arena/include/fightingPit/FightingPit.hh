@@ -55,7 +55,7 @@ namespace fys::arena {
         friend class FightingPitAnnouncer;
 
     public:
-        enum Level {
+        enum Level : uint {
             EASY,
             MEDIUM,
             HARD
@@ -68,7 +68,7 @@ namespace fys::arena {
             NOT_FINISHED
         };
 
-        FightingPit(Level levelFigtingPit) : 
+        explicit FightingPit(Level levelFigtingPit) :
                 _end(Ending::NOT_FINISHED),
                 _levelFightingPit(levelFigtingPit),
                 _layout(_contenders, _partyTeams) 

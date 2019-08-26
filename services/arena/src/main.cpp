@@ -24,8 +24,8 @@
 #include <spdlog/spdlog.h>
 #include <ArenaServerContext.hh>
 #include <ArenaServerService.hh>
-#include <stdlib.h> 
-#include <time.h>
+#include <cstdlib>
+#include <ctime>
 
 int main(int ac, char **av) {
     try {
@@ -34,7 +34,7 @@ int main(int ac, char **av) {
         SPDLOG_INFO(ctx.toString());
         fys::arena::ArenaServerService serverService(ctx);
 
-        ::srand(::time(NULL));
+        std::srand(std::time(0));
         serverService.runServerLoop();
     }
     catch (const std::exception &e) {

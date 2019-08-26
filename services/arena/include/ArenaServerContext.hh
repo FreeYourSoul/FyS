@@ -25,15 +25,17 @@
 #ifndef FYS_ARENASERVERCONTEXT_HH
 #define FYS_ARENASERVERCONTEXT_HH
 
+#include <ServiceContextBase.hh>
+
 namespace fys::arena {
 
     class ArenaServerContext : fys::common::ServiceContextBase {
     public:
         ArenaServerContext(int ac, const char *const *av);
 
-        std::string toString() const;
+        [[nodiscard]] std::string toString() const;
 
-        std::string getDispatcherConnectionString() const noexcept;
+        [[nodiscard]] std::string getDispatcherConnectionString() const noexcept;
 
     };
 

@@ -50,13 +50,13 @@ namespace fys::arena {
             FightingPitAnnouncer fpa;
 
             // Retrieving data from newFightRequest
-            EncounterType encounterType = FightingPit::EncounterType::RANDOM
-            Level levelFight = FightingPit::Level::MEDIUM;
+            FightingPitAnnouncer::EncounterType encounterType = FightingPitAnnouncer::EncounterType::RANDOM;
+            FightingPit::Level levelFight = FightingPit::Level::MEDIUM;
             bool ambush = false;
 
             fpa.setEncounterType(encounterType);
-            fpa.setEncounterId(0);
-            fpa.setEncounterLevel(levelFight);
+            fpa.setEncounterId(0u);
+            fpa.setFightingPitLevel(levelFight);
             fpa.enforceAmbush(ambush);
             fpa.generateContenders().generatePartyTeams();
         // }

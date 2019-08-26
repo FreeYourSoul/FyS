@@ -49,12 +49,14 @@
       */
     class WorkerService {
     public:
+        explicit WorkerService() : _ctx(1), _workerRouter(_ctx, zmq::socket_type::router) {}
         void generateFightingPit(FightingPitAnnouncer announcer);
 
         void forwardMessageToFightingPit(const std::string &fightingArenaId/* , FightingMessage*/);
 
 
     private:
+        zmq::context_t      _ctx;
         zmq::socket_t       _workerRouter;
 
         // map of client identitier to FightingArenaId

@@ -21,7 +21,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
+#include <fightingPit/contender/ContenderScripting.hh>
+#include <fightingPit/contender/FightingContender.hh>
 #include <fightingPit/FightingPitAnnouncer.hh>
 
 namespace fys::arena {

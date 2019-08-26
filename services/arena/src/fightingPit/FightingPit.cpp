@@ -27,7 +27,7 @@
 
 namespace {
     std::chrono::milliseconds retrieveTimeInterludeFromLevelDegree(fys::arena::FightingPit::Level level) {
-        switch () {
+        switch (level) {
             case fys::arena::FightingPit::Level::EASY:
                 return std::chrono::milliseconds {20000};
             case fys::arena::FightingPit::Level::MEDIUM :
@@ -52,7 +52,7 @@ namespace fys::arena {
 
                 if (currentParticipant.isContender) {
                     // If non-playable character (ennemy NPC)
-                    _contenders.executeContenderAction(currentParticipant, _pitContenders, _partyTeams);
+                    _contenders.executeContenderAction(currentParticipant, _partyTeams);
                 } else {
                     // If character of a player
                     // TODO check if character has a handling action and execute it

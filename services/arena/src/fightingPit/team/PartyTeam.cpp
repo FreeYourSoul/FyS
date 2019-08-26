@@ -41,7 +41,7 @@ namespace fys::arena {
     std::vector<std::shared_ptr<TeamMember>> PartyTeam::getTeamMemberOnSide(fys::arena::HexagonSide::Orientation side) {
         std::vector<std::shared_ptr<TeamMember>> result;
         std::copy_if(_contenders.begin(), _contenders.end(), result.begin(), [side](const auto &contenderPtr){
-            return (*contenderPtr->getHexagonSide()).second == side;
+            return contenderPtr->getHexagonSide().second == side;
         });
         return result;
     }

@@ -21,6 +21,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include <algorithm>
 #include <fightingPit/contender/FightingContender.hh>
 #include <fightingPit/contender/PitContenders.hh>
 
@@ -40,17 +41,17 @@ namespace fys::arena {
     std::vector<std::shared_ptr<FightingContender>> PitContenders::getContenderOnSide(fys::arena::HexagonSide::Orientation side) {
         std::vector<std::shared_ptr<FightingContender>> result;
         std::copy_if(_contenders.begin(), _contenders.end(), result.begin(), [side](const auto &contenderPtr){
-            return (*contenderPtr->getHexagonSide()).second == side;
+            return contenderPtr->getHexagonSide().second == side;
         });
         return result;
     }
 
-    void PitContenders::executeContenderAction(const data::PriorityElem &contender, PitContenders &pitContenders, AllyPartyTeams &AllyPartyTeams) {
+    void PitContenders::executeContenderAction(const data::PriorityElem &contender, AllyPartyTeams &AllyPartyTeams) {
         if (!contender.isContender && contender.id < _contenders.size()) {
             // TODO log error on execute
             return;
         }
-        _contenders.at(contender.id)->executeAction(pitContenders, AllyPartyTeams);
+        _contenders.at(contender.id)->executeAction(*this, AllyPartyTeams);
     }
 
 }
