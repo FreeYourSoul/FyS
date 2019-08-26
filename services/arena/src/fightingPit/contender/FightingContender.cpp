@@ -30,8 +30,15 @@ namespace fys::arena {
 
     FightingContender::FightingContender(std::unique_ptr<ContenderScripting> && contenderScripting)
     : _contenderScripting(std::move(contenderScripting)) {
-//        _contenderScripting->registerFunction(this, &fys::arena::FightingContender::moveContender, "moveContender");
     }
+
+//    FightingContender::FightingContender(const fys::arena::FightingContender &other) {
+//        if (&other != this) {
+//            _side = other._side;
+//            _status = other._status;
+//            _contenderScripting = nullptr;
+//        }
+//    }
 
     void FightingContender::executeAction(PitContenders &pitContenders, AllyPartyTeams &allyPartyTeams) {
         _contenderScripting->executeAction(pitContenders, allyPartyTeams);

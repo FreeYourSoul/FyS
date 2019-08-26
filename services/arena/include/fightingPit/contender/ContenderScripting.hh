@@ -26,7 +26,7 @@
 #define FYS_CONTENDERSCRIPTING_HH
 
 #include <string>
-//#include <chaiscript/chaiscript.hpp>
+#include <chaiscript/chaiscript.hpp>
 
 namespace fys::arena {
 
@@ -49,14 +49,15 @@ namespace fys::arena {
         void setContenderId(uint contenderId) { _contenderId = contenderId; }
 
     private:
-        void registerChaiAllies();
-        void registerChaiPitContender();
+        void registerCommon(chaiscript::ModulePtr m);
+        void registerChaiAllies(chaiscript::ModulePtr m);
+        void registerChaiPitContender(chaiscript::ModulePtr m);
 
         [[nodiscard]] std::string getChaiMethodName(std::string && methodName) const { return _contenderName + "_" + std::move(methodName); }
         [[nodiscard]] std::string getChaiContenderId() const { return std::string("contender_").append(std::to_string(_contenderId)); }
 
     private:
-//        chaiscript::ChaiScript _chai;
+        chaiscript::ChaiScript _chai;
         std::string _contenderName;
         uint _contenderId;
 

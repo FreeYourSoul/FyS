@@ -57,7 +57,7 @@ add_executable(arena_service ${COMMON_SRCS}
         ${CMAKE_CURRENT_LIST_DIR}/src/ArenaServerService.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/ArenaServerService.hh)
 
-target_link_libraries(arena_service cppzmq ${Flatbuffers_LIBRARIES} fmt::fmt)
+target_link_libraries(arena_service cppzmq ${Flatbuffers_LIBRARIES} fmt::fmt dl)
 
 target_compile_options(arena_service PRIVATE -O0 -fstack-protector-all -g)
 target_compile_options(arena_service PRIVATE -Wall -Wpedantic -Wextra -Wno-deprecated-declarations)

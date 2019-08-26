@@ -38,6 +38,9 @@ namespace fys::arena {
 
     class FightingContender {
     public:
+        FightingContender(const FightingContender &other) = delete;
+        FightingContender(FightingContender &&other) noexcept = default;
+
         void executeAction(PitContenders &pitContenders, AllyPartyTeams &AllyPartyTeams);
         void moveContender(HexagonSide::Orientation destination, bool bypassCheck = false);
         void moveContender(data::MoveDirection rightOrLeft);
