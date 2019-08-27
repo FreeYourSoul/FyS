@@ -1,0 +1,86 @@
+class Action {
+    var percentage;
+    var action;
+    var actionName;
+
+    def Action(actionName, percentage) { // maybe send directly an instance of the type wanted
+        this.percentage = percentage;
+        this.actionName = actionName; // create instance of wanted class thanks to this
+    }
+};
+
+/*
+Sample Monster Used For testing Purpose :-D
+*/
+class Sampy {
+
+    var id
+    var baseDamage = 0;
+    var criticalDamage = 0;
+
+    var actionList = 
+    [
+        Action("baseAttack", 50), 
+        Action("groundStrike", 20), 
+        Action("buffStrenght", 15), 
+        Action("lightHeal", 15)
+    ]
+
+    def Sampy(contenderId) { 
+        this.id = contenderId
+        this.baseDamage = 20;
+        this.criticalDamage = 20;
+    }
+
+    // select action strategy
+    def decideAction() {
+        var rng = generateRandomNumber();
+        var accumulate = 0;
+        for (var i = 0; i < actionList.size(); ++i) {
+            accumulate += actionList[i].percentage;
+            if (accumulate > rng) {
+                return actionList[i].action;
+            }
+        }
+        return actionList[0].action;
+    }
+
+    // EnnemyTarget selection strategy
+    def decideTarget(requireEnnemyTarget, requireAllyTarget) : requireEnnemyTarget && !requireAllyTarget {
+        var target;
+
+        return target;
+    }
+
+    // AllyTarget selection strategy
+    def decideTarget(requireEnnemyTarget, requireAllyTarget) : !requireEnnemyTarget && requireAllyTarget {
+        var target;
+
+        return target;
+    }
+
+    // Impossible targeting
+    def decideTarget(requireEnnemyTarget, requireAllyTarget) : requireEnnemyTarget && requireAllyTarget {
+        print("[ERROR] : Only one target can be taken");
+        return;
+    }
+    // no targeting
+    def decideTarget(requireEnnemyTarget, requireAllyTarget) : !requireEnnemyTarget && !requireAllyTarget {
+        return;
+    }
+
+    def runScriptedAction() {
+        var action = this.decideAction();
+        var target = this.decideTarget(action.requireEnnemyTarget(), action.requireAllyTarget());
+        var targetId = -1;
+
+        if (target.is_var_def()) {
+            targetId = target.getId()
+        }
+        action.execute(id, target);
+        Sampy_sendContenderAction(action.getId(), targetId);
+    }
+
+    def defineSpawningPositino()
+
+};
