@@ -152,7 +152,7 @@ namespace fys::arena {
     void ContenderScripting::loadContenderScriptFromFile(const std::string &filePath) {
         // load script content (containing the class)
         _chai.eval_file(filePath);
-        loadContenderScript("");
+        loadContenderScript({});
     }
 
     // returning the function object may be better ?? 
