@@ -27,6 +27,8 @@
 #include <chaiscript/utility/utility.hpp>
 #include <chaiscript/dispatchkit/bootstrap_stl.hpp>
 
+#include <network/ConnectionHandler.hh>
+
 #include <fightingPit/team/TeamMember.hh>
 #include <fightingPit/team/AllyPartyTeams.hh>
 
@@ -103,6 +105,8 @@ namespace fys::arena {
                 { fun(&AllyPartyTeams::accessAlliesOnSide), "accessAlliesOnSide" },
             }
         );
+
+        // TODO add utility function to get contender with specific ID from a vector of ally
     }
 
     void ContenderScripting::registerChaiPitContender(chaiscript::ModulePtr m) {
@@ -124,20 +128,30 @@ namespace fys::arena {
                 {fun(&PitContenders::getContenderOnSide), "getContenderOnSide"},
             }
         );
+
+        // TODO add utility function to get contender with specific ID from a vector of contender
     }
 
 
-    void ContenderScripting::loadContenderScript(const std::string &script) {
+    void ContenderScripting::loadContenderScript(ConnectionHandler &connectionHandler, const std::string &script) {
         if (!script.empty())
             _chai.eval(script);
 
-        _chai.add(chaiscript::fun< std::function<void()> >([]() {
-                // Create message with data :
-                //     * [Optional]  Target (if any)
-                //     * [Mandatory] Contender id
-                //     * [Mandatory] Spell/Action id
-                //     * [Mandatory] Description String (Heal of 15, Damage of 17, Critical Damage of 55, Buff intelligence....)
-                // get Allies on the contender side
+        _chai.add(chaiscript::fun< std::function<void()> >([connectionHandler&](
+                    std::string targetId,           // [Optional]  Target (if any) TODO : Should be a pair of <bool, uint>
+                    uint contenderId,               // [Mandatory] id of the contender
+                    uint spellId,                   // [Mandatory] Spell/Action id
+                    std::string descriptionString,  // [Mandatory] Description String (Heal of 15, Damage of 17, Critical Damage of 55, Buff intelligence....)
+                    ) {
+                // instantiate a message to send
+                if (!targetId.empty() && targetId.size() > 1) {
+                    bool isFriendlyTarget = (target.at(0) == 'F');
+                    uint idTargetInteger = std::stoi(targetId.substr(1));
+                    // set the id value of the message to send
+                }
+                // continue setting values
+                // send the data to connectionHandler
+
             }
         ), getChaiMethodName("sendContenderAction"));
 
@@ -149,10 +163,10 @@ namespace fys::arena {
         _chai.eval(std::string("var ").append(getChaiContenderId()).append(" = ").append(_contenderName).append("();"));
     }
     
-    void ContenderScripting::loadContenderScriptFromFile(const std::string &filePath) {
+    void ContenderScripting::loadContenderScriptFromFile(ConnectionHandler &connectionHandler, const std::string &filePath) {
         // load script content (containing the class)
         _chai.eval_file(filePath);
-        loadContenderScript("");
+        loadContenderScript(connectionHandler, "");
     }
 
     // returning the function object may be better ?? 
@@ -163,7 +177,10 @@ namespace fys::arena {
 
         std::string action = 
             std::string("fun(contenderId){\n").append(getChaiContenderId()).append(".runScriptedAction(contenderId);\n}\n");
-        _chai.eval<std::function<void (unsigned int)>> (action) (_contenderId);
+        auto & funcAction = _chai.eval<std::function<bool (unsigned int)>> (action);
+        if (!funcAction(_contenderId)) {
+            // log error in cpp
+        }
     }
 
 }

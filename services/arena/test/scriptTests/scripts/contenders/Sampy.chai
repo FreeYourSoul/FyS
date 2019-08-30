@@ -1,4 +1,4 @@
-class Action {
+class SampyActionDesc {
     var percentage;
     var action;
     var actionName;
@@ -18,12 +18,13 @@ class Sampy {
     var baseDamage = 0;
     var criticalDamage = 0;
 
+    var isEnemySelected = true;
+    var isFriendTargetSelected = false;
+
     var actionList = 
     [
-        Action("baseAttack", 50), 
-        Action("groundStrike", 20), 
-        Action("buffStrenght", 15), 
-        Action("lightHeal", 15)
+        SampyActionDesc("baseAttack", 50),
+        SampyActionDesc("groundStrike", 20)
     ]
 
     def Sampy(contenderId) { 
@@ -72,13 +73,22 @@ class Sampy {
     def runScriptedAction() {
         var action = this.decideAction();
         var target = this.decideTarget(action.requireEnnemyTarget(), action.requireAllyTarget());
-        var targetId = -1;
+        var targetId = "";
 
         if (target.is_var_def()) {
-            targetId = target.getId()
+            if (action.requireEnnemyTarget()) {
+                targetId = "E";
+            }
+            else  {
+                targetId = "F";
+            }
+            targetId += target.getId();
         }
-        action.execute(id, target);
-        Sampy_sendContenderAction(action.getId(), targetId);
+        if (!action.execute(this.id, target)) {
+            return false;
+        }
+        Sampy_sendContenderAction(targetId, this.id, action.getId());
+        return true;
     }
 
     def defineSpawningPositino()

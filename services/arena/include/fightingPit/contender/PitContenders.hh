@@ -44,7 +44,7 @@ namespace fys::arena {
 
         void executeContenderAction(const data::PriorityElem &contender, AllyPartyTeams &AllyPartyTeams);
 
-        void addContender(std::shared_ptr<FightingContender> contender) {
+        void addContender(std::shared_ptr<FightingContender> && contender) {
             _contenders.emplace_back(std::move(contender));
             _changeSideFlags.emplace_back(true);
         }

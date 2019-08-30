@@ -27,7 +27,7 @@
 
 namespace fys::arena {
 
-    void AllyPartyTeams::addPartyTeam(std::unique_ptr<PartyTeam> team)  {
+    void AllyPartyTeams::addPartyTeam(std::unique_ptr<PartyTeam> && team)  {
         _partyTeams.emplace_back(std::move(team));
     }
 
