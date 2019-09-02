@@ -62,7 +62,7 @@ TEST_CASE("Test Sampy", "[script_test]") {
             CustomComparator<zmq::multipart_t>([](auto && test){
                 // verify multipart message contains the selection of the weakest enemy (teamMember1)
                 return true;
-            }));
+            }), 1);
 
         pc.executeAction(pc, apt);
 
@@ -70,7 +70,26 @@ TEST_CASE("Test Sampy", "[script_test]") {
 
     } // End section : Test Enemy selection
 
-    SECTION("") {
+    SECTION("Test action selection") {
+
+        fseamMock->expectArg<FSeam::ConnectionHandler::sendMessageToDispatcher>(
+            CustomComparator<zmq::multipart_t>([](auto && test){
+                // verify multipart message contains the selection of a specific action
+                return true;
+            }), 1);
+
+        pc.executeAction(pc, apt);
+
+
+        fseamMock->expectArg<FSeam::ConnectionHandler::sendMessageToDispatcher>(
+            CustomComparator<zmq::multipart_t>([](auto && test){
+                // verify multipart message contains the selection of a specific action
+                return true;
+            }), 1);
+
+        pc.executeAction(pc, apt);
+
+        REQUIRE(fseamMock->verify(FSeam::ConnectionHandler::sendMessageToDispatcher::NAME));
 
     } // End section : 
 

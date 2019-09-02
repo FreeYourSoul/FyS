@@ -14,11 +14,11 @@ Sample Monster Used For testing Purpose :-D
 */
 class Sampy {
 
-    var id
+    var id;
     var baseDamage = 0;
     var criticalDamage = 0;
 
-    var isEnemySelected = true;
+    var isEnemySelected = false;
     var isFriendTargetSelected = false;
 
     var actionList = 
@@ -35,7 +35,7 @@ class Sampy {
 
     // select action strategy
     def decideAction() {
-        var rng = generateRandomNumber();
+        var rng = ;
         var accumulate = 0;
         for (var i = 0; i < actionList.size(); ++i) {
             accumulate += actionList[i].percentage;
@@ -49,14 +49,14 @@ class Sampy {
     // EnnemyTarget selection strategy
     def decideTarget(requireEnnemyTarget, requireAllyTarget) : requireEnnemyTarget && !requireAllyTarget {
         var target;
-
+        this.isEnemySelected = true;
         return target;
     }
 
     // AllyTarget selection strategy
     def decideTarget(requireEnnemyTarget, requireAllyTarget) : !requireEnnemyTarget && requireAllyTarget {
         var target;
-
+        this.isFriendTargetSelected = true;
         return target;
     }
 
@@ -91,6 +91,8 @@ class Sampy {
         return true;
     }
 
-    def defineSpawningPositino()
+    def defineSpawningPosition() {
+        
+    }
 
 };
