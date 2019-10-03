@@ -23,7 +23,7 @@
 
 #include "ConnectionHandler.hh"
 
-namespace fys::arena {
+namespace fys::ws {
 
 ConnectionHandler::ConnectionHandler(int threadNumber) noexcept :
  _zmqContext(threadNumber),
