@@ -25,6 +25,7 @@
 #ifndef FYS_TEAMMEMBER_HH
 #define FYS_TEAMMEMBER_HH
 
+#include <memory>
 #include <fightingPit/HexagonSide.hh>
 #include <fightingPit/data/CommonTypes.hh>
 
@@ -47,6 +48,8 @@ namespace fys::arena {
         // PendingAction _pendingAction; Todo
 
     };
+
+    using TeamMemberSPtr = std::shared_ptr<TeamMember>;
 
 }
 

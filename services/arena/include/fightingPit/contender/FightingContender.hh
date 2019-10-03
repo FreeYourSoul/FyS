@@ -63,6 +63,8 @@ namespace fys::arena {
         data::Status _status;
     };
 
+    using FightingContenderSPtr = std::shared_ptr<FightingContender>;
+
 }
 
 #endif // !FYS_FIGHTINGCONTENDER_HH

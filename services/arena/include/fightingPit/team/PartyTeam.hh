@@ -46,6 +46,8 @@ namespace fys::arena {
 
     };
 
+    using PartyTeamUPtr = std::unique_ptr<PartyTeam>;
+
 }
 
 #endif //FYS_PARTYTEAM_HH

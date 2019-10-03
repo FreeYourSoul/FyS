@@ -1,4 +1,4 @@
-class Action {
+class SampyActionDesc {
     var percentage;
     var action;
     var actionName;
@@ -14,16 +14,17 @@ Sample Monster Used For testing Purpose :-D
 */
 class Sampy {
 
-    var id
+    var id;
     var baseDamage = 0;
     var criticalDamage = 0;
 
+    var isEnemySelected = false;
+    var isFriendTargetSelected = false;
+
     var actionList = 
     [
-        Action("baseAttack", 50), 
-        Action("groundStrike", 20), 
-        Action("buffStrenght", 15), 
-        Action("lightHeal", 15)
+        SampyActionDesc("baseAttack", 50),
+        SampyActionDesc("groundStrike", 20)
     ]
 
     def Sampy(contenderId) { 
@@ -34,7 +35,7 @@ class Sampy {
 
     // select action strategy
     def decideAction() {
-        var rng = generateRandomNumber();
+        var rng = ;
         var accumulate = 0;
         for (var i = 0; i < actionList.size(); ++i) {
             accumulate += actionList[i].percentage;
@@ -48,14 +49,14 @@ class Sampy {
     // EnnemyTarget selection strategy
     def decideTarget(requireEnnemyTarget, requireAllyTarget) : requireEnnemyTarget && !requireAllyTarget {
         var target;
-
+        this.isEnemySelected = true;
         return target;
     }
 
     // AllyTarget selection strategy
     def decideTarget(requireEnnemyTarget, requireAllyTarget) : !requireEnnemyTarget && requireAllyTarget {
         var target;
-
+        this.isFriendTargetSelected = true;
         return target;
     }
 
@@ -72,15 +73,26 @@ class Sampy {
     def runScriptedAction() {
         var action = this.decideAction();
         var target = this.decideTarget(action.requireEnnemyTarget(), action.requireAllyTarget());
-        var targetId = -1;
+        var targetId = "";
 
         if (target.is_var_def()) {
-            targetId = target.getId()
+            if (action.requireEnnemyTarget()) {
+                targetId = "E";
+            }
+            else  {
+                targetId = "F";
+            }
+            targetId += target.getId();
         }
-        action.execute(id, target);
-        Sampy_sendContenderAction(action.getId(), targetId);
+        if (!action.execute(this.id, target)) {
+            return false;
+        }
+        Sampy_sendContenderAction(targetId, this.id, action.getId());
+        return true;
     }
 
-    def defineSpawningPositino()
+    def defineSpawningPosition() {
+        
+    }
 
 };

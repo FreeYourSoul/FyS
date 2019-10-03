@@ -25,12 +25,14 @@
 #ifndef FYS_CONTENDERSCRIPTING_HH
 #define FYS_CONTENDERSCRIPTING_HH
 
+#include <memory>
 #include <string>
 #include <chaiscript/chaiscript.hpp>
 
 namespace fys::arena {
 
     // forward declarations
+    class ConnectionHandler;
     class PitContenders;
     class AllyPartyTeams;
 
@@ -42,8 +44,8 @@ namespace fys::arena {
 
         void executeAction(PitContenders &pitContenders, AllyPartyTeams &allyPartyTeams);
         
-        void loadContenderScript(const std::string& script);
-        void loadContenderScriptFromFile(const std::string& scriptFile);
+        void loadContenderScript(ConnectionHandler &connectionHandler, const std::string& script);
+        void loadContenderScriptFromFile(ConnectionHandler &connectionHandler, const std::string& scriptFile);
 
         void setContenderName(std::string contenderName) { _contenderName = std::move(contenderName); }
         void setContenderId(uint contenderId) { _contenderId = contenderId; }
@@ -62,6 +64,8 @@ namespace fys::arena {
         uint _contenderId;
 
     };
+
+    using ContenderScriptingUPtr = std::unique_ptr<ContenderScripting>;
 
 }
 
