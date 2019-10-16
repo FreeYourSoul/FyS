@@ -32,16 +32,8 @@ namespace fys::arena {
     : _contenderScripting(std::move(contenderScripting)) {
     }
 
-//    FightingContender::FightingContender(const fys::arena::FightingContender &other) {
-//        if (&other != this) {
-//            _side = other._side;
-//            _status = other._status;
-//            _contenderScripting = nullptr;
-//        }
-//    }
-
-    void FightingContender::executeAction(PitContenders &pitContenders, AllyPartyTeams &allyPartyTeams) {
-        _contenderScripting->executeAction(pitContenders, allyPartyTeams);
+    void FightingContender::executeAction() {
+        _contenderScripting->executeAction();
     }
 
     void FightingContender::moveContender(HexagonSide::Orientation destination, bool bypassCheck) {

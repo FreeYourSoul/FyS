@@ -1,5 +1,7 @@
 cmake_minimum_required( VERSION 3.6 )
 
+project(FyS_Service CXX)
+
 set_property(TARGET PROPERTY CXX_STANDARD 17)
 
 set(RELATIVE_TO_COMMON /dispatcher/common/)

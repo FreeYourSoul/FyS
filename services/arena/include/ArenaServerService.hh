@@ -24,8 +24,8 @@
 #ifndef FYS_ARENASERVERSERVICE_HH
 #define FYS_ARENASERVERSERVICE_HH
 
-#include <network/ConnectionHandler.hh>
 #include <network/WorkerService.hh>
+#include <ConnectionHandler.hh>
 
 namespace fys::arena {
 
@@ -33,7 +33,7 @@ namespace fys::arena {
 
     class ArenaServerService {
     public:
-        ArenaServerService(const ArenaServerContext &ctx);
+        explicit ArenaServerService(const ArenaServerContext &ctx);
 
         void runServerLoop() noexcept;
 

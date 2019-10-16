@@ -22,28 +22,32 @@
 // SOFTWARE.
 
 
-#ifndef FYS_CONNECTIONHANDLER_HH
-#define FYS_CONNECTIONHANDLER_HH
+#ifndef FYS_ARENA_CONNECTIONHANDLER_HH
+#define FYS_ARENA_CONNECTIONHANDLER_HH
 
 #include <spdlog/spdlog.h>
 #include <zmq_addon.hpp>
-#include "ArenaServerContext.hh"
 
 namespace fys::arena {
+
+    class ArenaServerContext;
 
     class ConnectionHandler {
 
     public:
-        explicit ConnectionHandler(int threadNumber = 1) noexcept;
+        explicit ConnectionHandler(int threadNumber = 1) noexcept :
+                _zmqContext(threadNumber),
+                _dealerConnectionToDispatcher(_zmqContext, zmq::socket_type::dealer)
+        { }
 
-        void setupConnectionManager(const ArenaServerContext &ctx) noexcept;
+        void setupConnectionManager(const fys::arena::ArenaServerContext &ctx) noexcept;
         void sendMessageToDispatcher(zmq::multipart_t && msg) noexcept;
 
         template <typename Handler>
         void pollAndProcessSubMessage(Handler && handler) noexcept {
             //  Initialize poll set
             zmq::pollitem_t items[] = {
-                { _dealerConnectionToDispatcher, 0, ZMQ_POLLIN, 0 }
+                    { _dealerConnectionToDispatcher, 0, ZMQ_POLLIN, 0 }
             };
             zmq::poll(&items[0], 1);
             if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
@@ -65,4 +69,5 @@ namespace fys::arena {
 
 }
 
-#endif //FYS_CONNECTIONHANDLER_HH
+
+#endif //FYS_ARENA_CONNECTIONHANDLER_HH

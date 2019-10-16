@@ -32,7 +32,7 @@ namespace fys::arena {
         result.reserve(_changeSideFlags.size());
         for (std::size_t i = 0; i < _changeSideFlags.size(); ++i) {
             if (_changeSideFlags.at(i)) {
-                result.emplace_back(_contenders.at(i));
+                result.emplace_back(_members.at(i));
             }
         }
         return result;
@@ -40,7 +40,7 @@ namespace fys::arena {
 
     std::vector<std::shared_ptr<TeamMember>> PartyTeam::getTeamMemberOnSide(fys::arena::HexagonSide::Orientation side) {
         std::vector<std::shared_ptr<TeamMember>> result;
-        std::copy_if(_contenders.begin(), _contenders.end(), result.begin(), [side](const auto &contenderPtr){
+        std::copy_if(_members.begin(), _members.end(), result.begin(), [side](const auto &contenderPtr){
             return contenderPtr->getHexagonSide().second == side;
         });
         return result;

@@ -38,24 +38,17 @@ namespace fys::arena {
 
     class FightingContender {
     public:
+        explicit FightingContender(std::unique_ptr<ContenderScripting> && contenderScripting);
         FightingContender(const FightingContender &other) = delete;
         FightingContender(FightingContender &&other) noexcept = default;
 
-        void executeAction(PitContenders &pitContenders, AllyPartyTeams &AllyPartyTeams);
+        void executeAction();
         void moveContender(HexagonSide::Orientation destination, bool bypassCheck = false);
         void moveContender(data::MoveDirection rightOrLeft);
 
         [[nodiscard]] const data::Life &getLife() const { return _status.life; }
         [[nodiscard]] std::pair<HexagonSide::Hexagon, HexagonSide::Orientation> getHexagonSide() const { return *_side; }
         data::Status &accessStatus() { return _status; }
-
-    private:
-        explicit FightingContender(std::unique_ptr<ContenderScripting> && contenderScripting);
-
-    public:
-        static FightingContender *makeFightingContender(std::unique_ptr<ContenderScripting> && contenderScripting) {
-            return new FightingContender(std::move(contenderScripting));
-        }
 
     private:
         std::unique_ptr<ContenderScripting> _contenderScripting;

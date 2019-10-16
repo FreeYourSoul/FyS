@@ -4,11 +4,13 @@ project(arena_test CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_COMPILER /usr/bin/g++)
 
-
-find_package(FSeam)
 find_package(cppzmq REQUIRED)
 find_package(Catch2 REQUIRED)
+find_package(fmt)
+find_package(FSeam)
 include(Catch)
+
+include(${CMAKE_CURRENT_LIST_DIR}/../../common/CMakeLists.txt)
 
 enable_testing()
 
@@ -33,26 +35,29 @@ addFSeamTests(
         FILES_AS_SOURCE #source tested
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/contender/ContenderScripting.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/contender/FightingContender.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/contender/PitContender.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/contender/PitContenders.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/team/AllyPartyTeams.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/team/PartyTeam.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/team/TeamMember.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/HexagonSide.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/contender/ContenderScripting.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/contender/FightingContender.hh
-        ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/contender/PitContender.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/contender/PitContenders.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/team/AllyPartyTeams.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/team/PartyTeam.hh
-        ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/team/TeamMember.hh     
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/team/TeamMember.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/HexagonSide.hh
 
-        FOLDER_INCLUDES  ${CMAKE_CURRENT_SOURCE_DIR}/../include
+        FOLDER_INCLUDES
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include
 
         TST_SRC #test files
         ${CMAKE_CURRENT_SOURCE_DIR}/catchMain.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/Contender_SampyTestCase.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/scriptTests/Contender_SampyTestCase.cpp
 
         TO_MOCK
-        ${CMAKE_CURRENT_SOURCE_DIR}/../include/network/ConnectionHandler.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/ConnectionHandler.hh
 )
-
-target_link_libraries(arena_test cppzmq Catch2::Catch2)
+target_link_libraries(sampy_test cppzmq fmt::fmt dl)
+target_link_libraries(arena_test cppzmq Catch2::Catch2 fmt::fmt dl)
 catch_discover_tests(arena_test)

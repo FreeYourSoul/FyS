@@ -39,4 +39,4 @@ set(COMMON_INCLUDE_DIR
 
 include_directories(flatbuffer/includes)
 
-add_subdirectory(test)
+#add_subdirectory(test)

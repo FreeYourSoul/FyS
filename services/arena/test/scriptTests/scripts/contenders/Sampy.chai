@@ -3,96 +3,102 @@ class SampyActionDesc {
     var action;
     var actionName;
 
-    def Action(actionName, percentage) { // maybe send directly an instance of the type wanted
-        this.percentage = percentage;
-        this.actionName = actionName; // create instance of wanted class thanks to this
+    def SampyActionDesc(x, y, z) {
+        this.actionName = x;
+        this.action = y;
+        this.percentage = z;
     }
+
+    def Action(actionName, percentage) { // maybe send directly an instance of the type wanted
+        this.percentage = percentage
+        this.actionName = actionName // create instance of wanted class thanks to this
+    }
+}
+
+class Attack {
+
+    def Attack() {}
+
+    def decideAction() {
+        return true;
+    }
+
+    def requireAllyTarget() {
+        return false
+    }
+
+    def requireEnemyTarget() {
+        return false
+    }
+
+    def execute() {
+        return false
+    }
+
+    def getId() {
+        return 1
+    }
+
 };
 
-/*
-Sample Monster Used For testing Purpose :-D
-*/
+//Sample Monster Used For testing Purpose :-D
 class Sampy {
 
     var id;
-    var baseDamage = 0;
-    var criticalDamage = 0;
+    var baseDamage;
+    var criticalDamage;
+    var isEnemySelected;
+    var isFriendTargetSelected;
+    var actionList;
 
-    var isEnemySelected = false;
-    var isFriendTargetSelected = false;
-
-    var actionList = 
-    [
-        SampyActionDesc("baseAttack", 50),
-        SampyActionDesc("groundStrike", 20)
-    ]
-
-    def Sampy(contenderId) { 
+    def Sampy(contenderId) {
         this.id = contenderId
-        this.baseDamage = 20;
-        this.criticalDamage = 20;
+        this.baseDamage = 20
+        this.criticalDamage = 20
+        this.actionList = [
+            SampyActionDesc("baseAttack", Attack(), 50),
+            SampyActionDesc("groundStrike", Attack(), 20)
+        ]
     }
 
     // select action strategy
     def decideAction() {
-        var rng = ;
-        var accumulate = 0;
-        for (var i = 0; i < actionList.size(); ++i) {
-            accumulate += actionList[i].percentage;
-            if (accumulate > rng) {
-                return actionList[i].action;
-            }
-        }
-        return actionList[0].action;
+
     }
 
     // EnnemyTarget selection strategy
-    def decideTarget(requireEnnemyTarget, requireAllyTarget) : requireEnnemyTarget && !requireAllyTarget {
+    def decideTarget(requireEnemyTarget, requireAllyTarget) : requireEnemyTarget && !requireAllyTarget {
         var target;
         this.isEnemySelected = true;
         return target;
     }
 
     // AllyTarget selection strategy
-    def decideTarget(requireEnnemyTarget, requireAllyTarget) : !requireEnnemyTarget && requireAllyTarget {
+    def decideTarget(requireEnemyTarget, requireAllyTarget) : !requireEnemyTarget && requireAllyTarget {
         var target;
         this.isFriendTargetSelected = true;
         return target;
     }
 
     // Impossible targeting
-    def decideTarget(requireEnnemyTarget, requireAllyTarget) : requireEnnemyTarget && requireAllyTarget {
+    def decideTarget(requireEnemyTarget, requireAllyTarget) : requireEnemyTarget && requireAllyTarget {
         print("[ERROR] : Only one target can be taken");
         return;
     }
     // no targeting
-    def decideTarget(requireEnnemyTarget, requireAllyTarget) : !requireEnnemyTarget && !requireAllyTarget {
+    def decideTarget(requireEnemyTarget, requireAllyTarget) : !requireEnemyTarget && !requireAllyTarget {
         return;
     }
 
-    def runScriptedAction() {
-        var action = this.decideAction();
-        var target = this.decideTarget(action.requireEnnemyTarget(), action.requireAllyTarget());
-        var targetId = "";
+    def runScriptedAction(id) {
+        var &thisContender = pitContenders.getFightingContender(id);
+        var &thisStatus = thisContender.accessStatus();
 
-        if (target.is_var_def()) {
-            if (action.requireEnnemyTarget()) {
-                targetId = "E";
-            }
-            else  {
-                targetId = "F";
-            }
-            targetId += target.getId();
-        }
-        if (!action.execute(this.id, target)) {
-            return false;
-        }
-        Sampy_sendContenderAction(targetId, this.id, action.getId());
-        return true;
+        return 1;
     }
 
     def defineSpawningPosition() {
-        
+
     }
 
 };

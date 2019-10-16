@@ -29,6 +29,7 @@
 #include <vector>
 #include <fightingPit/data/CommonTypes.hh>
 #include <fightingPit/HexagonSide.hh>
+#include <chaiscript/chaiscript.hpp>
 
 namespace fys::arena {
 
@@ -39,18 +40,32 @@ namespace fys::arena {
     class PitContenders {
 
     public:
+        chaiscript::ChaiScript &setupScriptEngine(AllyPartyTeams &AllyPartyTeams);
         std::vector<std::shared_ptr<FightingContender>> getContenderOnSide(HexagonSide::Orientation side);
         std::vector<std::shared_ptr<FightingContender>> getChangingSideContenders();
+        std::shared_ptr<FightingContender> getFightingContender(std::size_t pos) { return _contenders.at(pos); }
 
-        void executeContenderAction(const data::PriorityElem &contender, AllyPartyTeams &AllyPartyTeams);
+        void executeContenderAction(const data::PriorityElem &contender);
 
-        void addContender(std::shared_ptr<FightingContender> && contender) {
+        void addContender(std::shared_ptr<FightingContender> contender) {
             _contenders.emplace_back(std::move(contender));
             _changeSideFlags.emplace_back(true);
         }
 
     private:
+        void registerCommon(chaiscript::ModulePtr m);
+        void registerChaiAllies(chaiscript::ModulePtr m);
+        void registerChaiPitContender(chaiscript::ModulePtr m);
+
+    private:
+        chaiscript::ChaiScript _chai;
+
         std::vector<std::shared_ptr<FightingContender> > _contenders;
+
+        /**
+         * Flags determining which contenders are going to move from one side to another
+         * (only _contenders having this flag (index equivalent) set to true have their position refreshed
+         */
         std::vector<bool> _changeSideFlags;
 
     };

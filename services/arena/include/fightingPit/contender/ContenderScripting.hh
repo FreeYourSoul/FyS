@@ -27,23 +27,28 @@
 
 #include <memory>
 #include <string>
-#include <chaiscript/chaiscript.hpp>
 
+// forward declarations
+namespace chaiscript {
+    class ChaiScript;
+}
 namespace fys::arena {
-
-    // forward declarations
     class ConnectionHandler;
     class PitContenders;
     class AllyPartyTeams;
+}
+
+namespace fys::arena {
 
     // TODO:  Class should inherit from a generic class for scripting (as Ally are also going to use a lot of the same config)
     class ContenderScripting {
 
     public:
-        ContenderScripting();
+        explicit ContenderScripting(chaiscript::ChaiScript &chai) : _chai(chai)
+        {}
 
-        void executeAction(PitContenders &pitContenders, AllyPartyTeams &allyPartyTeams);
-        
+        void executeAction();
+
         void loadContenderScript(ConnectionHandler &connectionHandler, const std::string& script);
         void loadContenderScriptFromFile(ConnectionHandler &connectionHandler, const std::string& scriptFile);
 
@@ -51,17 +56,13 @@ namespace fys::arena {
         void setContenderId(uint contenderId) { _contenderId = contenderId; }
 
     private:
-        void registerCommon(chaiscript::ModulePtr m);
-        void registerChaiAllies(chaiscript::ModulePtr m);
-        void registerChaiPitContender(chaiscript::ModulePtr m);
-
         [[nodiscard]] std::string getChaiMethodName(std::string && methodName) const { return _contenderName + "_" + std::move(methodName); }
-        [[nodiscard]] std::string getChaiContenderId() const { return std::string("contender_").append(std::to_string(_contenderId)); }
+        [[nodiscard]] std::string getChaiContenderId() const { return std::string("contender_").append(_contenderName).append(std::to_string(_contenderId)); }
 
     private:
-        chaiscript::ChaiScript _chai;
+        std::reference_wrapper<chaiscript::ChaiScript> _chai;
         std::string _contenderName;
-        uint _contenderId;
+        uint _contenderId{};
 
     };
 

@@ -27,6 +27,7 @@
 
 #include <memory>
 #include <vector>
+#include <utility>
 #include <fightingPit/HexagonSide.hh>
 
 namespace fys::arena {
@@ -40,8 +41,12 @@ namespace fys::arena {
         std::vector<std::shared_ptr<TeamMember>> getTeamMemberOnSide(HexagonSide::Orientation side);
         std::vector<std::shared_ptr<TeamMember>> getChangingSideTeamMember();
 
+        void addPartyTeam(std::shared_ptr<TeamMember> member) {
+            _members.emplace_back(std::move(member));
+        }
+
     private:
-        std::vector<std::shared_ptr<TeamMember> > _contenders;
+        std::vector<std::shared_ptr<TeamMember> > _members;
         std::vector<bool> _changeSideFlags;
 
     };
