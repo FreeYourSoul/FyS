@@ -21,7 +21,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include <algorithm>
 
+#include <algorithm/algorithm.hh>
+#include <fightingPit/team/TeamMember.hh>
 #include <fightingPit/team/PartyTeam.hh>
 #include <fightingPit/team/AllyPartyTeams.hh>
 
@@ -31,13 +34,27 @@ namespace fys::arena {
         _partyTeams.emplace_back(std::move(team));
     }
 
-    std::vector<std::shared_ptr<TeamMember>> AllyPartyTeams::accessAlliesOnSide(HexagonSide::Orientation side) {
-        std::vector<std::shared_ptr<TeamMember>> toReturn;
+    std::shared_ptr<TeamMember>
+    AllyPartyTeams::selectSuitableMember(ComparatorSelection<TeamMember> comp) {
+        if (_partyTeams.empty() || _partyTeams.front()->accessTeamMembers().empty())
+            return nullptr;
+        auto suitable = _partyTeams.front()->accessTeamMembers().begin();
+        for (auto & _partyTeam : _partyTeams) {
+            auto &teamMembers = _partyTeam->accessTeamMembers();
+            auto suitableTmp = fys::find_most_suitable(teamMembers.begin(), teamMembers.end(), comp, suitable);
 
-        for (const auto &partyTeamPtr : _partyTeams) {
-            // toReturn.concat(partyTeamPtr->getTeamMemberOnSide(side));
+            if (suitableTmp != teamMembers.end())
+                suitable = suitableTmp;
         }
-        return toReturn;
+        return *suitable;
     }
+
+    std::shared_ptr<TeamMember>
+    AllyPartyTeams::selectSuitableMemberOnSide(HexagonSide::Orientation side, ComparatorSelection<TeamMember> comp) {
+        return selectSuitableMember([&side, &comp](auto current, auto next) -> bool {
+            return current->getHexagonSideOrient() == side && comp(current, next);
+        });
+    }
+
 
 }

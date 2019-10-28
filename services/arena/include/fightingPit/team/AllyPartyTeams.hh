@@ -30,6 +30,9 @@
 
 namespace fys::arena {
 
+    template <typename T>
+    using ComparatorSelection = std::function<bool(std::shared_ptr<T>, std::shared_ptr<T>)>;
+
     // forward declarations
     class PartyTeam;
     class TeamMember;
@@ -39,8 +42,10 @@ namespace fys::arena {
     public:
         void addPartyTeam(std::unique_ptr<PartyTeam> && team);
 
-        // Use only by scripts (TODO : Isolate this)
-        std::vector<std::shared_ptr<TeamMember>> accessAlliesOnSide(HexagonSide::Orientation side);
+        [[nodiscard]] std::shared_ptr<TeamMember>
+            selectSuitableMember(ComparatorSelection<TeamMember> comp);
+        [[nodiscard]] std::shared_ptr<TeamMember>
+            selectSuitableMemberOnSide(HexagonSide::Orientation side, ComparatorSelection<TeamMember> comp);
 
     private:
         std::vector<std::unique_ptr<PartyTeam>> _partyTeams;

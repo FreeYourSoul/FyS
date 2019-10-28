@@ -21,14 +21,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include <fmt/format.h>
 #include <chaiscript/chaiscript.hpp>
 #include <chaiscript/chaiscript_basic.hpp>
 #include <chaiscript/utility/utility.hpp>
-#include <chaiscript/dispatchkit/bootstrap_stl.hpp>
-
-#include <ConnectionHandler.hh>
 
 #include <fightingPit/contender/ContenderScripting.hh>
+
+#include <ConnectionHandler.hh>
 
 using namespace chaiscript;
 
@@ -61,33 +61,31 @@ namespace fys::arena {
         }), "generateRandomNumber");
 
         // instantiate the contender in chai engine
-        std::string createVar = std::string("global ")
-                .append(getChaiContenderId())
-                .append(" = ")
-                .append(_contenderName).append("(").append(std::to_string(_contenderId)).append(");");
+        std::string createVar = fmt::format("global {}={}({});",
+                getChaiContenderId(), _contenderName, std::to_string(_contenderId));
         _chai.get().eval(createVar);
     }
 
     void ContenderScripting::loadContenderScriptFromFile(ConnectionHandler &connectionHandler, const std::string &filePath) {
         // load script content (containing the class)
-        _chai.get().eval_file(filePath);
-        loadContenderScript(connectionHandler, "");
+        try {
+            _chai.get().eval_file(filePath);
+            loadContenderScript(connectionHandler, "");
+        } catch(std::exception &ex) {
+            SPDLOG_ERROR("Error caught on scripting loading {}", ex.what());
+        }
     }
 
     void ContenderScripting::executeAction() {
-        std::string action = std::string("fun(contenderId){\nreturn ").append(getChaiContenderId()).append(".runScriptedAction(contenderId);\n}\n");
+        std::string action = fmt::format("fun(contenderId){{ return {}.runScriptedAction(contenderId);}}", getChaiContenderId());
         auto funcAction = _chai.get().eval<std::function<int (unsigned int)>> (action);
         try {
-            if (!funcAction(_contenderId)) {
-                // log error in cpp
-                std::cerr << "Error annoying\n";
-            }
-            else {
-                std::cout << "Action executed\n";
-            }
+            auto o = _chai.get().get_locals();
+            if (funcAction(_contenderId))
+                std::cout << "Action executed\n"; // TODO change it
         }
-        catch (...) {
-            std::cerr << "Exception on script";
+        catch (std::exception &ex) {
+            SPDLOG_ERROR("Error caught on script execution {}", ex.what());
         }
     }
 }

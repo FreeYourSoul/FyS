@@ -52,7 +52,7 @@ namespace fys::arena {
 
                 if (currentParticipant.isContender) {
                     // If non-playable character (ennemy NPC)
-                    _contenders.executeContenderAction(currentParticipant, _partyTeams);
+                    _contenders.executeContenderAction(currentParticipant);
                 } else {
                     // If character of a player
                     // TODO check if character has a handling action and execute it

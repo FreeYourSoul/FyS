@@ -1,104 +1,131 @@
+//<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>  ACTIONS  <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+
+class Sleep {
+    def Sleep() {}
+
+    def requireAllyTarget() { 0; }
+
+    def requireEnemyTarget() { 0; }
+
+    def execute(targetStatus) {
+        targetStatus.magicPoint = 42;
+        1;
+    }
+
+    def rangeAnySide() { 0; }
+
+    def getId() { 0; }
+};
+
+class Attack {
+    var power;
+
+    def Attack(v) {
+        this.power = v;
+    }
+
+    def requireAllyTarget() { 0; }
+
+    def requireEnemyTarget() { 1; }
+
+    def rangeAnySide() { 0; }
+
+    def execute(targetStatus) {
+        if (targetStatus.life.current > this.power) {
+            targetStatus.life.current = targetStatus.life.current - this.power;
+        }
+        else {
+            targetStatus.life.current = 0;
+        }
+        1;
+    }
+
+    def getId() { 1; }
+
+};
+
+
+//<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>  SAMPY  <><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+
 class SampyActionDesc {
-    var percentage;
     var action;
     var actionName;
 
-    def SampyActionDesc(x, y, z) {
+    def SampyActionDesc(x, y) {
         this.actionName = x;
         this.action = y;
-        this.percentage = z;
-    }
-
-    def Action(actionName, percentage) { // maybe send directly an instance of the type wanted
-        this.percentage = percentage
-        this.actionName = actionName // create instance of wanted class thanks to this
-    }
-}
-
-class Attack {
-
-    def Attack() {}
-
-    def decideAction() {
-        return true;
-    }
-
-    def requireAllyTarget() {
-        return false
-    }
-
-    def requireEnemyTarget() {
-        return false
-    }
-
-    def execute() {
-        return false
-    }
-
-    def getId() {
-        return 1
     }
 
 };
+
 
 //Sample Monster Used For testing Purpose :-D
 class Sampy {
 
     var id;
-    var baseDamage;
-    var criticalDamage;
-    var isEnemySelected;
-    var isFriendTargetSelected;
-    var actionList;
+    var actions;
 
     def Sampy(contenderId) {
         this.id = contenderId
-        this.baseDamage = 20
-        this.criticalDamage = 20
-        this.actionList = [
-            SampyActionDesc("baseAttack", Attack(), 50),
-            SampyActionDesc("groundStrike", Attack(), 20)
-        ]
+        var ooo = SampyActionDesc("groundStrike", Attack(80));
+        var oo = SampyActionDesc("baseAttack", Attack(50));
+        var o = SampyActionDesc("sleep", Sleep());
+        this.actions = [
+            "baseAttack":oo,
+            "groundStrike":ooo,
+            "sleep":o
+         ];
+    }
+
+    def getActionByName(name) {
+        this.actions[name].action;
     }
 
     // select action strategy
-    def decideAction() {
-
+    def decideAction(life) {
+        var percent = life.current / life.total * 100;
+        if (percent == 100) {
+            return this.getActionByName("sleep")
+        }
+        if (percent < 50) {
+            return this.getActionByName("baseAttack");
+        }
+        else {
+            return this.getActionByName("groundStrike");
+        }
     }
 
     // EnnemyTarget selection strategy
-    def decideTarget(requireEnemyTarget, requireAllyTarget) : requireEnemyTarget && !requireAllyTarget {
-        var target;
-        this.isEnemySelected = true;
-        return target;
+    def decideTarget(thisC, requireEnemyTarget, requireAllyTarget) : requireEnemyTarget == 1 && requireAllyTarget == 0 {
+        var comparator = fun(current, next) { current.getStatus().life.current > next.getStatus().life.current; };
+        allyPartyTeams.selectSuitableMemberOnSide(thisC.getHexagonSideOrient(), comparator);
     }
 
     // AllyTarget selection strategy
-    def decideTarget(requireEnemyTarget, requireAllyTarget) : !requireEnemyTarget && requireAllyTarget {
-        var target;
-        this.isFriendTargetSelected = true;
-        return target;
+    def decideTarget(thisC, requireEnemyTarget, requireAllyTarget) : requireEnemyTarget == 0 && requireAllyTarget == 1 {
+        1;
+    }
+
+    // no targeting
+    def decideTarget(thisC, requireEnemyTarget, requireAllyTarget) : requireEnemyTarget == 0 && requireAllyTarget == 0 {
+        thisC;
     }
 
     // Impossible targeting
-    def decideTarget(requireEnemyTarget, requireAllyTarget) : requireEnemyTarget && requireAllyTarget {
+    def decideTarget(requireEnemyTarget, requireAllyTarget) : requireEnemyTarget == 1 && requireAllyTarget == 1{
         print("[ERROR] : Only one target can be taken");
-        return;
-    }
-    // no targeting
-    def decideTarget(requireEnemyTarget, requireAllyTarget) : !requireEnemyTarget && !requireAllyTarget {
-        return;
     }
 
     def runScriptedAction(id) {
         var &thisContender = pitContenders.getFightingContender(id);
         var &thisStatus = thisContender.accessStatus();
-
-        return 1;
+        var &action = this.decideAction(thisStatus.life);
+        var &target = this.decideTarget(thisContender, action.requireEnemyTarget(), action.requireAllyTarget());
+        action.execute(target.accessStatus());
     }
 
     def defineSpawningPosition() {
-
+        // todo Create generic script to define a position
     }
 
 };

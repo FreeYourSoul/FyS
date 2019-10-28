@@ -46,9 +46,9 @@ namespace fys::arena {
         void moveContender(HexagonSide::Orientation destination, bool bypassCheck = false);
         void moveContender(data::MoveDirection rightOrLeft);
 
-        [[nodiscard]] const data::Life &getLife() const { return _status.life; }
+        [[nodiscard]] data::Status &accessStatus() { return _status; }
         [[nodiscard]] std::pair<HexagonSide::Hexagon, HexagonSide::Orientation> getHexagonSide() const { return *_side; }
-        data::Status &accessStatus() { return _status; }
+        [[nodiscard]] HexagonSide::Orientation getHexagonSideOrient() const { return (*_side).second; }
 
     private:
         std::unique_ptr<ContenderScripting> _contenderScripting;

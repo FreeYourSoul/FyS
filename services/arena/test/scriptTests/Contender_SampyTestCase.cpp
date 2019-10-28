@@ -29,7 +29,6 @@
 #include <fightingPit/team/PartyTeam.hh>
 #include <fightingPit/team/TeamMember.hh>
 
-#include <iostream>
 #include <FSeamMockData.hpp>
 
 
@@ -39,8 +38,7 @@
  */
 
 TEST_CASE("Test Sampy", "[script_test]") {
-    
-    auto fseamMock = FSeam::getDefault<fys::arena::ConnectionHandler>();
+
     fys::arena::ConnectionHandler ch;
 
     fys::arena::PitContenders pc;
@@ -48,7 +46,7 @@ TEST_CASE("Test Sampy", "[script_test]") {
     fys::arena::ContenderScriptingUPtr sampy = std::make_unique<fys::arena::ContenderScripting>(pc.setupScriptEngine(apt));
     sampy->setContenderId(0);
     sampy->setContenderName("Sampy");
-    sampy->loadContenderScriptFromFile(ch, "/home/FyS/Project/FyS/services/arena/test/scriptTests/scripts/contenders/Sampy.chai");
+    sampy->loadContenderScriptFromFile(ch, "/home/FyS/Project/FyS/services/arena/test/scriptTests/scripts_lnk/arena/contenders/Sampy.chai");
 
     auto fpc = std::make_shared<fys::arena::FightingContender>(std::move(sampy));
     pc.addContender(fpc);
@@ -56,55 +54,79 @@ TEST_CASE("Test Sampy", "[script_test]") {
     fys::arena::PartyTeamUPtr pt = std::make_unique<fys::arena::PartyTeam>();
     fys::arena::TeamMemberSPtr teamMember1 = std::make_shared<fys::arena::TeamMember>();
     fys::arena::TeamMemberSPtr teamMember2 = std::make_shared<fys::arena::TeamMember>();
-    
+
     pt->addPartyTeam(teamMember1);
     pt->addPartyTeam(teamMember2);
 
-    SECTION("Test Enemy selection") {
-        fpc->accessStatus().life.current = 42;
+    fpc->moveContender(fys::arena::HexagonSide::Orientation::A_N, true);
+    teamMember1->moveTeamMember(fys::arena::HexagonSide::Orientation::A_N, true);
+    teamMember2->moveTeamMember(fys::arena::HexagonSide::Orientation::A_N, true);
 
+    apt.addPartyTeam(std::move(pt));
+
+    SECTION("Test Enemy&Attack selection") {
+        fpc->accessStatus().life.current = 16;
+        fpc->accessStatus().life.total = 100;
         teamMember1->accessStatus().life.current = 10;
         teamMember1->accessStatus().life.total = 100;
         teamMember2->accessStatus().life.current = 90;
         teamMember2->accessStatus().life.total = 110;
 
-        fseamMock->expectArg<FSeam::ConnectionHandler::sendMessageToDispatcher>(
-            FSeam::CustomComparator<zmq::multipart_t &>([](auto && test){
-                // verify multipart message contains the selection of the weakest enemy (teamMember1)
-                std::cout << "okok\n";
-                return true;
-            }), FSeam::VerifyCompare{1});
-
         fys::arena::data::PriorityElem e{0,1, true};
-        pc.executeContenderAction(e);
-        REQUIRE(42 == fpc->accessStatus().life.current);
-        REQUIRE(fseamMock->verify(FSeam::ConnectionHandler::sendMessageToDispatcher::NAME, 1));
+
+        SECTION("Test Action selection") {
+            fpc->accessStatus().life.current = 100;
+            fpc->accessStatus().life.total = 100;
+            fpc->accessStatus().magicPoint = 0;
+
+            REQUIRE(100 == fpc->accessStatus().life.current);
+            REQUIRE(0 == fpc->accessStatus().magicPoint);
+
+            pc.executeContenderAction(e);
+
+            REQUIRE(42 == fpc->accessStatus().magicPoint);          // Sleeping set the magicPoint to 42
+
+
+        } // End section : Test baseAttack selection
+
+        SECTION("Test Action Selection BaseAttack") {
+            teamMember1->accessStatus().life.current = 10;
+            teamMember1->accessStatus().life.total = 100;
+
+            REQUIRE(16 == fpc->accessStatus().life.current);    // 16 < ( 50% of 100hp) so baseAttack is decided (50 damage)
+            pc.executeContenderAction(e);
+
+            REQUIRE(0 == teamMember1->accessStatus().life.current); // lower life opponent selected (teamMember1 with 10 life point)
+            REQUIRE(teamMember1->accessStatus().life.isDead());
+
+        } // Test Action Selection BaseAttack
+
+        SECTION("Test Selection Change of enemy") {
+            teamMember2->accessStatus().life.current = 9;       // teamMember2.life.current < teamMember1.life.current
+
+            REQUIRE(16 == fpc->accessStatus().life.current);    // 16 < ( 50% of 100hp) so baseAttack is decided (50 damage)
+            pc.executeContenderAction(e);
+
+            REQUIRE(0 == teamMember2->accessStatus().life.current); // lower life opponent selected (teamMember1 with 10 life point)
+            REQUIRE(teamMember2->accessStatus().life.isDead());
+
+        } // Test Action Selection BaseAttack
 
     } // End section : Test Enemy selection
 
-    SECTION("Test action selection") {
-
-//        fseamMock->expectArg<FSeam::ConnectionHandler::sendMessageToDispatcher>(
-//            FSeam::CustomComparator<zmq::multipart_t>([](auto && test){
-//                // verify multipart message contains the selection of a specific action
-//                return true;
-//            }), 1);
-
-//        pc.executeAction({}, apt);
+    SECTION("Test network message") {
+        auto fseamMock = FSeam::getDefault<fys::arena::ConnectionHandler>();
 
 
-//        fseamMock->expectArg<FSeam::ConnectionHandler::sendMessageToDispatcher>(
-//            FSeam::CustomComparator<zmq::multipart_t>([](auto && test){
-//                // verify multipart message contains the selection of a specific action
-//                return true;
-//            }), 1);
+        // fseamMock->expectArg<FSeam::ConnectionHandler::sendMessageToDispatcher>(
+        //     FSeam::CustomComparator<zmq::multipart_t &>([](auto && test) {
+        //         // verify multipart message contains the selection of the weakest enemy (teamMember1)
+        //         return true;
+        //     }), FSeam::VerifyCompare{1});
+        // REQUIRE(fseamMock->verify(FSeam::ConnectionHandler::sendMessageToDispatcher::NAME, 1));
 
-//        pc.executeAction(pc, apt);
+        FSeam::MockVerifier::cleanUp();
 
-//        REQUIRE(fseamMock->verify(FSeam::ConnectionHandler::sendMessageToDispatcher::NAME));
-
-    } // End section : 
-
-    FSeam::MockVerifier::cleanUp();
+    } // End of Section : Test network message
 
 } // End TestCase : Test Sampy

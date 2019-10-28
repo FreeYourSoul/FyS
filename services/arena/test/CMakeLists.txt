@@ -58,6 +58,8 @@ addFSeamTests(
         TO_MOCK
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/ConnectionHandler.hh
 )
+target_compile_definitions(sampy_test PUBLIC CHAISCRIPT_NO_THREADS)
 target_link_libraries(sampy_test cppzmq fmt::fmt dl)
+target_compile_definitions(arena_test PUBLIC -DCHAISCRIPT_NO_THREADS)
 target_link_libraries(arena_test cppzmq Catch2::Catch2 fmt::fmt dl)
 catch_discover_tests(arena_test)

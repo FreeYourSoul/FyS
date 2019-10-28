@@ -27,11 +27,15 @@
 
 #include <memory>
 #include <vector>
+#include <functional>
 #include <fightingPit/data/CommonTypes.hh>
 #include <fightingPit/HexagonSide.hh>
 #include <chaiscript/chaiscript.hpp>
 
 namespace fys::arena {
+
+    template <typename T>
+    using ComparatorSelection = std::function<bool(std::shared_ptr<T>, std::shared_ptr<T>)>;
 
     //forward declarations
     class FightingContender;
@@ -41,9 +45,17 @@ namespace fys::arena {
 
     public:
         chaiscript::ChaiScript &setupScriptEngine(AllyPartyTeams &AllyPartyTeams);
-        std::vector<std::shared_ptr<FightingContender>> getContenderOnSide(HexagonSide::Orientation side);
-        std::vector<std::shared_ptr<FightingContender>> getChangingSideContenders();
-        std::shared_ptr<FightingContender> getFightingContender(std::size_t pos) { return _contenders.at(pos); }
+        [[nodiscard]]std::vector<std::shared_ptr<FightingContender>> getContenderOnSide(HexagonSide::Orientation side) const;
+        [[nodiscard]]std::vector<std::shared_ptr<FightingContender>> getChangingSideContenders() const;
+
+        // scripting utility
+        [[nodiscard]]std::shared_ptr<FightingContender>
+                selectSuitableContender(ComparatorSelection<FightingContender> comp);
+        [[nodiscard]]std::shared_ptr<FightingContender>
+                selectSuitableContenderOnSide(HexagonSide::Orientation side, ComparatorSelection<FightingContender> comp);
+
+        [[nodiscard]]std::shared_ptr<FightingContender>
+                getFightingContender(std::size_t pos) const { return _contenders.at(pos); }
 
         void executeContenderAction(const data::PriorityElem &contender);
 

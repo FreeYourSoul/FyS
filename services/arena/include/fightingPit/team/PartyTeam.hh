@@ -38,8 +38,10 @@ namespace fys::arena {
     class PartyTeam {
 
     public:
-        std::vector<std::shared_ptr<TeamMember>> getTeamMemberOnSide(HexagonSide::Orientation side);
-        std::vector<std::shared_ptr<TeamMember>> getChangingSideTeamMember();
+        [[nodiscard]] std::vector<std::shared_ptr<TeamMember>> getTeamMemberOnSide(HexagonSide::Orientation side) const;
+        [[nodiscard]] std::vector<std::shared_ptr<TeamMember>> getChangingSideTeamMember() const;
+        [[nodiscard]] const std::vector<std::shared_ptr<TeamMember>> &getTeamMembers() const { return _members; }
+        [[nodiscard]] std::vector<std::shared_ptr<TeamMember>> &accessTeamMembers() { return _members; }
 
         void addPartyTeam(std::shared_ptr<TeamMember> member) {
             _members.emplace_back(std::move(member));

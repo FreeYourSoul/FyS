@@ -440,10 +440,9 @@ TEST_CASE("HexagonSide test", "[service][arena]") {
 
         } // End section : Hexagon A : A_SW
 
-        SECTION("Hexagon A : Impossible Position") {
+        SECTION("Impossible Position") {
             fys::arena::HexagonSide hexagon(fys::arena::HexagonSide::Hexagon::B, fys::arena::HexagonSide::Orientation::B_SW);
-            // todo
-
+            REQUIRE_FALSE(hexagon.move(fys::arena::HexagonSide::Orientation::NONE));
         } // End section
 
         SECTION("Hexagon B : B_N") {

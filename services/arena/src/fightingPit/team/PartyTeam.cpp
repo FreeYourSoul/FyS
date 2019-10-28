@@ -24,10 +24,11 @@
 #include <algorithm>
 #include <fightingPit/team/TeamMember.hh>
 #include <fightingPit/team/PartyTeam.hh>
+#include <algorithm/algorithm.hh>
 
 namespace fys::arena {
 
-    std::vector<std::shared_ptr<TeamMember>> PartyTeam::getChangingSideTeamMember() {
+    std::vector<std::shared_ptr<TeamMember>> PartyTeam::getChangingSideTeamMember() const {
         std::vector<std::shared_ptr<TeamMember>> result;
         result.reserve(_changeSideFlags.size());
         for (std::size_t i = 0; i < _changeSideFlags.size(); ++i) {
@@ -35,12 +36,13 @@ namespace fys::arena {
                 result.emplace_back(_members.at(i));
             }
         }
+        result.shrink_to_fit();
         return result;
     }
 
-    std::vector<std::shared_ptr<TeamMember>> PartyTeam::getTeamMemberOnSide(fys::arena::HexagonSide::Orientation side) {
+    std::vector<std::shared_ptr<TeamMember>> PartyTeam::getTeamMemberOnSide(fys::arena::HexagonSide::Orientation side) const {
         std::vector<std::shared_ptr<TeamMember>> result;
-        std::copy_if(_members.begin(), _members.end(), result.begin(), [side](const auto &contenderPtr){
+        std::copy_if(_members.begin(), _members.end(), std::back_inserter(result), [side](const auto &contenderPtr){
             return contenderPtr->getHexagonSide().second == side;
         });
         return result;

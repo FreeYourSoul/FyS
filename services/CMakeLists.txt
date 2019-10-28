@@ -1,6 +1,7 @@
 cmake_minimum_required( VERSION 3.6 )
 
 add_subdirectory(common)
+add_subdirectory(common/test)
 add_subdirectory(arena)
 add_subdirectory(auth)
 add_subdirectory(chat)
