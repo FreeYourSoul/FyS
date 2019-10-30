@@ -31,7 +31,6 @@
 
 #include <FSeamMockData.hpp>
 
-
 /**
  * @brief Sampy is a script representing a sample monster and also contains standalone scripts.
  *        It is used in order to test the implementation of ChaiScript int FyS Online.
@@ -77,14 +76,14 @@ TEST_CASE("Test Sampy", "[script_test]") {
         SECTION("Test Action selection") {
             fpc->accessStatus().life.current = 100;
             fpc->accessStatus().life.total = 100;
-            fpc->accessStatus().magicPoint = 0;
+            fpc->accessStatus().magicPoint.total = 0;
 
             REQUIRE(100 == fpc->accessStatus().life.current);
-            REQUIRE(0 == fpc->accessStatus().magicPoint);
+            REQUIRE(0 == fpc->accessStatus().magicPoint.current);
 
             pc.executeContenderAction(e);
 
-            REQUIRE(42 == fpc->accessStatus().magicPoint);          // Sleeping set the magicPoint to 42
+            REQUIRE(42 == fpc->accessStatus().magicPoint.current);          // Sleeping set the magicPoint to 42
 
 
         } // End section : Test baseAttack selection

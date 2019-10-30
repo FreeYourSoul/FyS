@@ -21,6 +21,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include <spdlog/spdlog.h>
 #include <algorithm>
 #include <fightingPit/PriorityOrderList.hh>
 
@@ -34,7 +35,7 @@ namespace fys::arena {
 
     void PriorityOrderList::addParticipantInList(uint id, int speed, bool isContender) {
         if (std::any_of(_baseSpeed.begin(), _baseSpeed.end(), [id, isContender](const auto& prioElem) { return prioElem.id == id && prioElem.isContender == isContender; })) {
-            // TODO : log Warning about adding an already existing participant 
+            SPDLOG_WARN("Cannot add participant in order list : Participant of id {} already existing", id);
             return;
         }
         _baseSpeed.emplace_back(id, speed, isContender);

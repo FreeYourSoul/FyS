@@ -50,9 +50,13 @@ namespace fys::arena {
 
         // scripting utility
         [[nodiscard]]std::shared_ptr<FightingContender>
-                selectSuitableContender(ComparatorSelection<FightingContender> comp);
+            selectSuitableContender(ComparatorSelection<FightingContender> comp);
         [[nodiscard]]std::shared_ptr<FightingContender>
-                selectSuitableContenderOnSide(HexagonSide::Orientation side, ComparatorSelection<FightingContender> comp);
+            selectSuitableContenderOnSide(HexagonSide::Orientation side, ComparatorSelection<FightingContender> comp);
+        [[nodiscard]]std::shared_ptr<FightingContender>
+            selectSuitableContenderAlive(ComparatorSelection<FightingContender> comp);
+        [[nodiscard]]std::shared_ptr<FightingContender>
+            selectSuitableContenderOnSideAlive(HexagonSide::Orientation side, ComparatorSelection<FightingContender> comp);
 
         [[nodiscard]]std::shared_ptr<FightingContender>
                 getFightingContender(std::size_t pos) const { return _contenders.at(pos); }

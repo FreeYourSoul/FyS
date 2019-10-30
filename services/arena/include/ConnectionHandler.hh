@@ -63,7 +63,7 @@ namespace fys::arena {
 
     private:
         zmq::context_t _zmqContext;
-        zmq::socket_t _dealerConnectionToDispatcher; // todo rename _subConnectionOnDispatcher
+        zmq::socket_t _dealerConnectionToDispatcher;
 
     };
 

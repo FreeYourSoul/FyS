@@ -72,7 +72,7 @@ namespace fys::arena {
         // List used as temporary for the calculate priority
         std::vector<data::PriorityElem> _analyzedList;
 
-        data::PriorityElem _currentPrio;
+        data::PriorityElem _currentPrio {};
 
         uint _currentTurn = 0;
 

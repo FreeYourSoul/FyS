@@ -57,6 +57,14 @@ namespace fys::arena {
                 }
         );
 
+        chaiscript::utility::add_class<fys::arena::data::MagicPoint>(
+                *m, "MagicPoint", {},
+                {
+                        {fun(&data::MagicPoint::current), "current"},
+                        {fun(&data::MagicPoint::total),   "total"}
+                }
+        );
+
         chaiscript::utility::add_class<fys::arena::data::Status>(
                 *m, "Status", {},
                 {
@@ -123,11 +131,12 @@ namespace fys::arena {
                 {},
                 {
                         {fun(&AllyPartyTeams::selectSuitableMemberOnSide), "selectSuitableMemberOnSide"},
-                        {fun(&AllyPartyTeams::selectSuitableMember), "selectSuitableMember"}
+                        {fun(&AllyPartyTeams::selectSuitableMember), "selectSuitableMember"},
+                        {fun(&AllyPartyTeams::selectSuitableMemberOnSideAlive), "selectSuitableMemberOnSideAlive"},
+                        {fun(&AllyPartyTeams::selectSuitableMemberAlive), "selectSuitableMemberAlive"}
                 }
         );
 
-        // TODO add utility function to get contender with specific ID from a vector of ally
     }
 
     void PitContenders::registerChaiPitContender(chaiscript::ModulePtr m) {
@@ -150,6 +159,8 @@ namespace fys::arena {
                 {
                         {fun(&PitContenders::selectSuitableContenderOnSide), "selectSuitableContenderOnSide"},
                         {fun(&PitContenders::selectSuitableContender), "selectSuitableContender"},
+                        {fun(&PitContenders::selectSuitableContenderOnSideAlive), "selectSuitableContenderOnSideAlive"},
+                        {fun(&PitContenders::selectSuitableContenderAlive), "selectSuitableContenderAlive"},
                         {fun(&PitContenders::getFightingContender), "getFightingContender"},
                         {fun(&PitContenders::getContenderOnSide),   "getContenderOnSide"}
                 }
@@ -176,25 +187,47 @@ namespace fys::arena {
         return result;
     }
 
-     std::shared_ptr<FightingContender>
-     PitContenders::selectSuitableContenderOnSide(HexagonSide::Orientation side, ComparatorSelection<FightingContender> comp) {
-         std::vector<std::shared_ptr<FightingContender>> result;
-         auto it = fys::find_most_suitable(_contenders.begin(), _contenders.end(), [side, &comp](auto &current, auto &next){
-             return next->getHexagonSideOrient() == side && comp(current, next);
-         });
-         if (it == _contenders.end())
-             return nullptr;
-         return *it;
-     }
+    std::shared_ptr<FightingContender>
+    PitContenders::selectSuitableContenderOnSide(HexagonSide::Orientation side, ComparatorSelection<FightingContender> comp) {
+        std::vector<std::shared_ptr<FightingContender>> result;
+        auto it = fys::find_most_suitable(_contenders.begin(), _contenders.end(), [side, &comp](auto &current, auto &next){
+            return current->getHexagonSideOrient() == side && comp(current, next);
+        });
+        if (it == _contenders.end())
+            return nullptr;
+        return *it;
+    }
 
-     std::shared_ptr<FightingContender>
-     PitContenders::selectSuitableContender(ComparatorSelection<FightingContender> comp) {
-         std::vector<std::shared_ptr<FightingContender>> result;
-         auto it = fys::find_most_suitable(_contenders.begin(), _contenders.end(), comp);
-         if (it == _contenders.end())
-             return nullptr;
-         return *it;
-     }
+    std::shared_ptr<FightingContender>
+    PitContenders::selectSuitableContenderOnSideAlive(HexagonSide::Orientation side, ComparatorSelection<FightingContender> comp) {
+        std::vector<std::shared_ptr<FightingContender>> result;
+        auto it = fys::find_most_suitable(_contenders.begin(), _contenders.end(), [side, &comp](auto &current, auto &next){
+            return !current->accessStatus().life.isDead() && current->getHexagonSideOrient() == side && comp(current, next);
+        });
+        if (it == _contenders.end())
+            return nullptr;
+        return *it;
+    }
+
+    std::shared_ptr<FightingContender>
+    PitContenders::selectSuitableContender(ComparatorSelection<FightingContender> comp) {
+        std::vector<std::shared_ptr<FightingContender>> result;
+        auto it = fys::find_most_suitable(_contenders.begin(), _contenders.end(), comp);
+        if (it == _contenders.end())
+            return nullptr;
+        return *it;
+    }
+
+    std::shared_ptr<FightingContender>
+    PitContenders::selectSuitableContenderAlive(ComparatorSelection<FightingContender> comp) {
+        std::vector<std::shared_ptr<FightingContender>> result;
+        auto it = fys::find_most_suitable(_contenders.begin(), _contenders.end(), [&comp](auto &current, auto &next){
+            return !current->accessStatus().life.isDead() && comp(current, next);
+        });
+        if (it == _contenders.end())
+            return nullptr;
+        return *it;
+    }
 
     void PitContenders::executeContenderAction(const data::PriorityElem &contender) {
         if (!contender.isContender && contender.id < _contenders.size()) {

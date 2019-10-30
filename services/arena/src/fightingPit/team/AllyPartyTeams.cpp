@@ -50,9 +50,23 @@ namespace fys::arena {
     }
 
     std::shared_ptr<TeamMember>
+    AllyPartyTeams::selectSuitableMemberAlive(ComparatorSelection<TeamMember> comp) {
+        return selectSuitableMember([&comp](auto current, auto next) -> bool {
+            return (!current->accessStatus().life.isDead()) && comp(current, next);
+        });
+    }
+
+    std::shared_ptr<TeamMember>
     AllyPartyTeams::selectSuitableMemberOnSide(HexagonSide::Orientation side, ComparatorSelection<TeamMember> comp) {
-        return selectSuitableMember([&side, &comp](auto current, auto next) -> bool {
+        return selectSuitableMember([side, &comp](auto current, auto next) -> bool {
             return current->getHexagonSideOrient() == side && comp(current, next);
+        });
+    }
+
+    std::shared_ptr<TeamMember>
+    AllyPartyTeams::selectSuitableMemberOnSideAlive(HexagonSide::Orientation side, ComparatorSelection<TeamMember> comp) {
+        return selectSuitableMember([side, &comp](auto current, auto next) -> bool {
+            return (!current->accessStatus().life.isDead()) && current->getHexagonSideOrient() == side && comp(current, next);
         });
     }
 

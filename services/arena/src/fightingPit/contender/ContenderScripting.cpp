@@ -82,7 +82,7 @@ namespace fys::arena {
         try {
             auto o = _chai.get().get_locals();
             if (funcAction(_contenderId))
-                std::cout << "Action executed\n"; // TODO change it
+                SPDLOG_DEBUG("Contender {}_{} executed action", _contenderName, _contenderId);
         }
         catch (std::exception &ex) {
             SPDLOG_ERROR("Error caught on script execution {}", ex.what());

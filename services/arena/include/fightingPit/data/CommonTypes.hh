@@ -25,6 +25,8 @@
 #ifndef FYS_COMMONDATA_HH
 #define FYS_COMMONDATA_HH
 
+#include <vector>
+
 namespace fys::arena::data
 {
 
@@ -55,13 +57,20 @@ namespace fys::arena::data
         uint current = 0;
         uint total   = 0;
 
-        bool isDead() const { return current <= 0; }
+        [[nodiscard]] bool isDead() const { return current == 0; }
     };
+
+    struct MagicPoint {
+        uint current = 0;
+        uint total   = 0;
+    };
+
+    using AlterationId = uint;
 
     struct Status {
         Life life;
-        uint magicPoint;
-        // todo add a vector of INT representing alter status (boost / debuff and so on...)
+        MagicPoint magicPoint;
+        std::vector<AlterationId> alterations;
     };
 
     enum MoveDirection {

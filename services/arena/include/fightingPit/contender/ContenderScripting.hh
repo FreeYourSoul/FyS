@@ -40,7 +40,6 @@ namespace fys::arena {
 
 namespace fys::arena {
 
-    // TODO:  Class should inherit from a generic class for scripting (as Ally are also going to use a lot of the same config)
     class ContenderScripting {
 
     public:

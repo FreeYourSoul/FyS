@@ -62,10 +62,10 @@ namespace fys::arena {
         };
 
         enum Ending {
-            ON_HOLD, // TODO : make a on hold mecanism for joining raid
+            ON_HOLD,        // on hold mechanism for joining raid
             CONTENDER_WIN,
             ALLY_WIN,
-            NOT_FINISHED
+            NOT_FINISHED    // on going
         };
 
         explicit FightingPit(Level levelFigtingPit) :

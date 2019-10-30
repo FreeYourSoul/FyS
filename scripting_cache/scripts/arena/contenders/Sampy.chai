@@ -35,7 +35,7 @@ class Sleep {
     }
 
     def execute(targetStatus) {
-        targetStatus.magicPoint = 42;
+        targetStatus.magicPoint.current = 42;
         return 1;
     }
 
@@ -137,7 +137,7 @@ class Sampy {
     // EnnemyTarget selection strategy
     def decideTarget(thisC, requireEnemyTarget, requireAllyTarget) : requireEnemyTarget == 1 && requireAllyTarget == 0 {
         var comparator = fun(current, next) { (current.accessStatus().life.current > next.accessStatus().life.current) ? 1 : 0; }
-        allyPartyTeams.selectSuitableMemberOnSide(thisC.getHexagonSideOrient(), comparator);
+        allyPartyTeams.selectSuitableMemberOnSideAlive(thisC.getHexagonSideOrient(), comparator);
     }
 
     // AllyTarget selection strategy
