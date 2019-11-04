@@ -22,41 +22,27 @@
 // SOFTWARE.
 
 
-#ifndef FYS_SERVICE_CML_HH
-#define FYS_SERVICE_CML_HH
-
-#include <memory>
-#include <string>
-#include <unordered_map>
+#include <Cml.hh>
 
 namespace fys::cache {
 
-    namespace {
-        struct InMemoryCached {
-            int timestamp;
-            std::string content;
-        };
+    /**
+     * @return true if the key represent a cached data in the local storage (filesystem)
+     */
+    bool Cml::isInLocalStorage(const std::string &key) const {
+
     }
 
-    class Cml {
+    std::string_view Cml::findInCache(const std::string &key)  {
+        std::string content;
 
-    public:
-        explicit Cml(std::string pathLocalStorage) :
-            _localPathStorage(std::move(pathLocalStorage))
-        {}
+        if (auto it = _inMemCache.find(key); it != _inMemCache.end()) {
+            content = it->second;
+        }
+        else if (isInLocalStorage(key)) {
 
-        std::string_view findInCache(const std::string &key);
-
-    private:
-        bool isInLocalStorage(const std::string &key) const;
-
-    private:
-        std::string _localPathStorage;
-        std::unordered_map<std::string, InMemoryCached> _inMemCache;
-
-    };
+        }
+        return content;
+    }
 
 }
-
-
-#endif //FYS_SERVICE_CML_HH

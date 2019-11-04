@@ -60,7 +60,7 @@ add_executable(arena_service ${COMMON_SRCS}
 target_compile_definitions(arena_service PUBLIC -DCHAISCRIPT_NO_THREADS)
 target_link_libraries(arena_service cppzmq ${Flatbuffers_LIBRARIES} fmt::fmt dl)
 
-target_compile_options(arena_service PRIVATE -O0 -fstack-protector-all -g)
+target_compile_options(arena_service PRIVATE -O2 -fstack-protector-all -g)
 target_compile_options(arena_service PRIVATE -Wall -Wpedantic -Wextra -Wno-deprecated-declarations)
 
 add_subdirectory(test)

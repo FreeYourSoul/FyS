@@ -22,41 +22,8 @@
 // SOFTWARE.
 
 
-#ifndef FYS_SERVICE_CML_HH
-#define FYS_SERVICE_CML_HH
-
-#include <memory>
-#include <string>
-#include <unordered_map>
+#include "DatabasePolicy.hh"
 
 namespace fys::cache {
 
-    namespace {
-        struct InMemoryCached {
-            int timestamp;
-            std::string content;
-        };
-    }
-
-    class Cml {
-
-    public:
-        explicit Cml(std::string pathLocalStorage) :
-            _localPathStorage(std::move(pathLocalStorage))
-        {}
-
-        std::string_view findInCache(const std::string &key);
-
-    private:
-        bool isInLocalStorage(const std::string &key) const;
-
-    private:
-        std::string _localPathStorage;
-        std::unordered_map<std::string, InMemoryCached> _inMemCache;
-
-    };
-
 }
-
-
-#endif //FYS_SERVICE_CML_HH

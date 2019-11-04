@@ -38,5 +38,5 @@ add_executable(worldserver_service ${COMMON_SRCS}
 
 target_link_libraries(worldserver_service cppzmq ${TMXLITE_LIBRARIES} ${Flatbuffers_LIBRARIES})
 
-target_compile_options(worldserver_service PRIVATE -O0 -fstack-protector-all -g)
+target_compile_options(worldserver_service PRIVATE -O2 -fstack-protector-all -g)
 target_compile_options(worldserver_service PRIVATE -Wall -Wpedantic -Wextra -Wno-deprecated-declarations)
