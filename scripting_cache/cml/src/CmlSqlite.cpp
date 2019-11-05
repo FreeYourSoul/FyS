@@ -22,8 +22,11 @@
 // SOFTWARE.
 
 
-#include "DatabasePolicy.hh"
+#include "CmlSqlite.hh"
 
 namespace fys::cache {
 
+    void CmlSqlite::createFileInLocalStorage(const fys::cache::CmlKey &cmlKey) {
+
+    }
 }

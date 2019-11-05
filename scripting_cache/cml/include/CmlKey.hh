@@ -22,20 +22,28 @@
 // SOFTWARE.
 
 
-#ifndef FYS_SERVICE_DATABASEPOLICY_HH
-#define FYS_SERVICE_DATABASEPOLICY_HH
+#ifndef FYS_SERVICE_CMLKEY_HH
+#define FYS_SERVICE_CMLKEY_HH
 
-#include <Cml.hh>
+#include <algorithm>
+#include <filesystem>
 
 namespace fys::cache {
+    class CmlKey {
+    public:
+        CmlKey(std::filesystem::path basePath, std::string key): _path(std::move(basePath)), _key(key) {
+            std::replace(key.begin(), key.end(), ':', '/');
+            _path /= key;
+        }
 
-    class CmlSqlite : Cml {
-    protected:
-        void createFileInLocalStorage(const CmlKey &cmlKey) override;
+        [[nodiscard]] const std::filesystem::path &getPath() const { return _path; }
+        [[nodiscard]] const std::string &getKey() const { return _key; }
+
+    private:
+        std::filesystem::path _path;
+        std::string _key;
 
     };
-
 }
 
-
-#endif //FYS_SERVICE_DATABASEPOLICY_HH
+#endif //FYS_SERVICE_CMLKEY_HH

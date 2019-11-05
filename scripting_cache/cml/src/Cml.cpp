@@ -21,28 +21,65 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
+#include <optional>
+#include <fstream>
 #include <Cml.hh>
+#include <CmlKey.hh>
 
 namespace fys::cache {
+
+    namespace {
+        std::string readFile(const std::filesystem::path& path)
+        {
+            // Open the stream to 'lock' the file.
+            std::ifstream f{ path };
+
+            // Obtain the size of the file.
+            const auto sz = std::filesystem::file_size(path);
+
+            // Create a buffer.
+            std::string result(sz, ' ');
+
+            // Read the whole file into the buffer.
+            f.read(result.data(), sz);
+
+            return result;
+        }
+    }
 
     /**
      * @return true if the key represent a cached data in the local storage (filesystem)
      */
-    bool Cml::isInLocalStorage(const std::string &key) const {
-
+    bool Cml::isInLocalStorage(const CmlKey &cmlKey) const {
+        return std::filesystem::exists(cmlKey.getKey());
     }
 
-    std::string_view Cml::findInCache(const std::string &key)  {
-        std::string content;
+    bool Cml::isInLocalStorageAndUpToDate(const CmlKey &cmlKey, long timestamp) const {
+        if (std::filesystem::exists(cmlKey.getKey())) {
+            return std::filesystem::last_write_time(cmlKey.getKey()).time_since_epoch().count() <= timestamp;
+        }
+        return false;
+    }
 
+    std::string_view Cml::findInCache(const std::string &key, bool first)  {
+        CmlKey cmlKey(_localPathStorage, key);
+
+        // Check in-memory (and check if file has been updated)
         if (auto it = _inMemCache.find(key); it != _inMemCache.end()) {
-            content = it->second;
+            if (isInLocalStorageAndUpToDate(cmlKey, it->second.timestamp)) {
+                return it->second.content;
+            }
         }
-        else if (isInLocalStorage(key)) {
-
+        // Check in filesystem cache
+        if (isInLocalStorage(cmlKey)) {
+            _inMemCache[key] = InMemoryCached{ std::chrono::system_clock::now().time_since_epoch().count(),
+                                               readFile(cmlKey.getPath()) };
+            return _inMemCache[key].content;
         }
-        return content;
+        if (!first)
+            return "";
+        createFileInLocalStorage(cmlKey);
+        return findInCache(key, false);
     }
 
 }

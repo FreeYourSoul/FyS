@@ -16,9 +16,12 @@ include_directories(${CMAKE_CURRENT_LIST_DIR}/include)
 
 add_library(cml
         ${CMAKE_CURRENT_LIST_DIR}/src/Cml.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/include/Cml.hh)
+        ${CMAKE_CURRENT_LIST_DIR}/include/Cml.hh
+        ${CMAKE_CURRENT_LIST_DIR}/include/CmlKey.hh
+        ${CMAKE_CURRENT_LIST_DIR}/src/CmlSqlite.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/CmlSqlite.hh)
 
-target_link_libraries(cml fmt::fmt dl)
+target_link_libraries(cml fmt::fmt dl stdc++fs)
 
 target_compile_options(cml PRIVATE -O2 -fstack-protector-all -g)
 target_compile_options(cml PRIVATE -Wall -Wpedantic -Wextra -Wno-deprecated-declarations)

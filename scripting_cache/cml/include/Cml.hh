@@ -28,30 +28,36 @@
 #include <memory>
 #include <string>
 #include <unordered_map>
+#include <filesystem>
+#include <functional>
 
 namespace fys::cache {
 
-    namespace {
-        struct InMemoryCached {
-            int timestamp;
-            std::string content;
-        };
-    }
+    class CmlKey;
+
+    struct InMemoryCached {
+        long timestamp;
+        std::string content;
+    };
 
     class Cml {
 
     public:
-        explicit Cml(std::string pathLocalStorage) :
+        template <typename DataStoragePolicy>
+        explicit Cml(std::filesystem::path pathLocalStorage, DataStoragePolicy &policy) :
             _localPathStorage(std::move(pathLocalStorage))
-        {}
+        { }
 
-        std::string_view findInCache(const std::string &key);
+        std::string_view findInCache(const std::string &key, bool first = true);
+
+        virtual void createFileInLocalStorage(const CmlKey &cmlKey) = 0;
 
     private:
-        bool isInLocalStorage(const std::string &key) const;
+        bool isInLocalStorageAndUpToDate(const CmlKey &cmlKey, long timestamp) const;
+        bool isInLocalStorage(const CmlKey &cmlKey) const;
 
     private:
-        std::string _localPathStorage;
+        std::filesystem::path _localPathStorage;
         std::unordered_map<std::string, InMemoryCached> _inMemCache;
 
     };
