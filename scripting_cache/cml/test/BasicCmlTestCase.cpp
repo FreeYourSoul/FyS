@@ -83,7 +83,8 @@ TEST_CASE("Test findInCache for Basic CML", "[cml_test]") {
         } // End Section : Test file in folder
 
         SECTION("Test Multiple line file") {
-            std::string contentToFind = R"d(A thing of beauty is a joy for ever:
+            std::string contentToFind =
+R"d(A thing of beauty is a joy for ever:
 Its loveliness increases; it will never
 Pass into nothingness; but still will keep
 A bower quiet for us, and a sleep

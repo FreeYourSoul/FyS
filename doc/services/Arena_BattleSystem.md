@@ -1,6 +1,5 @@
 # Arena 
 
-
 The Arena is the name for the service that is managing FyS Online fighting phase. An instance of a fight is called a **Fighting Pit**.  
 In further explanation, the service will be called Arena and Fighting Pit will be called FP (for faster writing, because as any developer, I am lazy to write down long names).
 
