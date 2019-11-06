@@ -22,11 +22,14 @@
 // SOFTWARE.
 
 #include <catch2/catch.hpp>
+#define private protected
 #include <Cml.hh>
 
 class CmlBaseTest : public fys::cache::Cml {
 public:
     using fys::cache::Cml::Cml;
+    using fys::cache::Cml::isInLocalStorageAndUpToDate;
+    using fys::cache::Cml::_inMemCache;
 
     bool _localStorageCalled = false;
 
@@ -35,17 +38,109 @@ public:
     }
 };
 
-TEST_CASE("Test Basic CML", "[cml_test]") {
+std::string getLocalPathStorage() {
+    string file_path = __FILE__;
+    auto it = file_path.rfind("\\");
+    if (it == file_path.end())
+        it = file_path.rfind("/");
+    return file_path.substr(0, it) + "/testCacheDir";
+}
 
-    CmlBaseTest cbt("/home/FyS/Project/FyS/scripting_cache/cml/test/testCacheDir");
+TEST_CASE("Test findInCache for Basic CML", "[cml_test]") {
+    CmlBaseTest cbt(getLocalPathStorage());
 
-    SECTION("Test in memcache") {
+    SECTION("Test call of createFileInLocalStorage") {
+        cbt.findInCache("inner_folder:test");
+        REQUIRE_TRUE(cbt._localStorageCalled);
 
-    } // End section : Test in memcache
+    } // End Section : Test call of createFileInLocalStorage
 
-    SECTION("Test on filesystem") {
+    SECTION("Test CML on filesystem") {
+        REQUIRE(cbt._inMemCache.find("test1") == _inMemCache.end());
+        REQUIRE(cbt._inMemCache.find("inner_folder:test2") == _inMemCache.end());
+        REQUIRE(cbt._inMemCache.find("inner_folder:inner_folder_1:test3") == _inMemCache.end());
+        
+        SECTION("Test file at root") {
+            std::string_view cacheContent = cbt.findInCache("test1");
 
-    } // End section : Test on filesystem
+            REQUIRE("test1 content" == cacheContent);
+            REQUIRE_FALSE(cbt._localStorageCalled);
+            REQUIRE(cbt._inMemCache.find("test1") != _inMemCache.end());
 
+        } // End Section : Test file at root
+
+        SECTION("Test file in folder") {
+            std::string_view cacheTest2 = cbt.findInCache("inner_folder:test2");
+            std::string_view cacheTest3 = cbt.findInCache("inner_folder:inner_folder_1:test3");
+
+            REQUIRE("test2 content" == cacheContent2);
+            REQUIRE("test3 content" == cacheContent3);
+            REQUIRE_FALSE(cbt._localStorageCalled);
+            REQUIRE(cbt._inMemCache.find("inner_folder:test2") != _inMemCache.end());
+            REQUIRE(cbt._inMemCache.find("inner_folder:inner_folder_1:test3") != _inMemCache.end());
+
+        } // End Section : Test file in folder
+
+    } // End section : Test CML on filesystem
 
 } // End TestCase : Test Basic CML
+
+TEST_CASE("Test isInLocalStorageAndUpToDate for Basic CML", "[cml_test]") {
+    CmlBaseTest cbt(getCurrentFilePath() + "/testCacheDir");
+    const CmlKey key1 = fys::cache::CmlKey{getLocalPathStorage(), "test1"};
+    const CmlKey key2 = fys::cache::CmlKey{getLocalPathStorage(), "inner_folder:test2"};
+    const CmlKey key3 = fys::cache::CmlKey{getLocalPathStorage(), "inner_folder:inner_folder_1:test3"};
+
+    // Get from filesystem and store in memcache
+    cbt.findInCache("test1");
+    cbt.findInCache("inner_folder:test2");
+
+    SECTION("isInLocalStorageAndUpToDate true") {
+        cbt.findInCache(key1.getKey());
+
+        if (auto it = _inMemCache.find(key1.getKey()); it != _inMemCache.end()) {
+            REQUIRE(isInLocalStorageAndUpToDate(key1, it->second.timestamp));
+            REQUIRE("test1 content" == it->second.content);
+        }
+        else
+            FAIL("test1 has not been found in memcache");
+
+        if (auto it = _inMemCache.find(key2.getKey()); it != _inMemCache.end()) {
+            REQUIRE(isInLocalStorageAndUpToDate(key2, it->second.timestamp));
+            REQUIRE("test2 content" == it->second.content);
+        }
+        else
+            FAIL("test2 has not been found in memcache");
+
+    } // End Section : isInLocalStorageAndUpToDate
+
+    SECTION("isInLocalStorageAndUpToDate false: Not in memCache") {
+        if (auto it = _inMemCache.find(key3.getKey()); it != _inMemCache.end()) {
+            FAIL("test3 has not been found in memcache before being called");
+        }
+        cbt.findInCache("inner_folder:test2");
+        if (auto it = _inMemCache.find(key3.getKey()); it != _inMemCache.end()) {
+            REQUIRE(isInLocalStorageAndUpToDate(key3, it->second.timestamp));
+            REQUIRE("test3 content" == it->second.content);
+        }
+        else
+            FAIL("test3 has not been found in memcache");
+
+    } // End Section : isInLocalStorageAndUpToDate false: Not in memCache
+
+    SECTION("isInLocalStorageAndUpToDate false: timestamp changed") {
+        if (auto it = _inMemCache.find(key3.getKey()); it != _inMemCache.end()) {
+            FAIL("test3 has not been found in memcache before being called");
+        }
+        cbt.findInCache("inner_folder:test2");
+        if (auto it = _inMemCache.find(key3.getKey()); it != _inMemCache.end()) {
+            // Add 90seconds on the timestamp to represent a file update
+            REQUIRE(isInLocalStorageAndUpToDate(key3, it->second.timestamp + 90)); 
+            REQUIRE("test3 content" == it->second.content);
+        }
+        else
+            FAIL("test3 has not been found in memcache");
+
+    } // End Section : isInLocalStorageAndUpToDate false: Not in memCache
+
+} // End TestCase : Test Implementation for Basic CML

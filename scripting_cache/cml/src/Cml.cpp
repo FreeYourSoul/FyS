@@ -55,7 +55,7 @@ namespace fys::cache {
     }
 
     bool Cml::isInLocalStorageAndUpToDate(const CmlKey &cmlKey, long timestamp) const {
-        if (std::filesystem::exists(cmlKey.getKey())) {
+        if (isInLocalStorage(cmlKey.getKey())) {
             return std::filesystem::last_write_time(cmlKey.getKey()).time_since_epoch().count() <= timestamp;
         }
         return false;
