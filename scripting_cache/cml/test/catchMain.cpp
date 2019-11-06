@@ -21,47 +21,5 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
-#ifndef FYS_SERVICE_CML_HH
-#define FYS_SERVICE_CML_HH
-
-#include <memory>
-#include <string>
-#include <unordered_map>
-#include <filesystem>
-#include <functional>
-
-namespace fys::cache {
-
-    class CmlKey;
-
-    struct InMemoryCached {
-        long timestamp;
-        std::string content;
-    };
-
-    class Cml {
-
-    public:
-        explicit Cml(std::filesystem::path pathLocalStorage) :
-            _localPathStorage(std::move(pathLocalStorage))
-        { }
-
-        std::string_view findInCache(const std::string &key, bool first = true);
-
-        virtual void createFileInLocalStorage(const CmlKey &cmlKey) = 0;
-
-    private:
-        bool isInLocalStorageAndUpToDate(const CmlKey &cmlKey, long timestamp) const;
-        bool isInLocalStorage(const CmlKey &cmlKey) const;
-
-    private:
-        std::filesystem::path _localPathStorage;
-        std::unordered_map<std::string, InMemoryCached> _inMemCache;
-
-    };
-
-}
-
-
-#endif //FYS_SERVICE_CML_HH
+#define CATCH_CONFIG_MAIN
+#include <catch2/catch.hpp>

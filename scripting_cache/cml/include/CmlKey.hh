@@ -34,29 +34,29 @@ namespace fys::cache {
         CmlKey(std::filesystem::path basePath, std::string key): _path(std::move(basePath)), _key(std::move(key)) {
             std::replace(_key.begin(), _key.end(), ':', '/');
             _path /= key;
-            tokenizeKey(":");
         }
 
         [[nodiscard]] const std::filesystem::path &getPath() const { return _path; }
         [[nodiscard]] const std::string &getKey() const { return _key; }
 
     private:
-        void tokenizeKey(const std::string &input, const std::string &separators) {
+        static std::vector<std::string> tokenizeKey(const CmlKey &key, const std::string &separators) {
+            std::vector<std::string> token;
             std::size_t pos = 0;
-            while (pos != _key.size()) {
-                std::size_t from = _key.find_first_not_of(separators, pos);
+            while (pos != key._key.size()) {
+                std::size_t from = key._key.find_first_not_of(separators, pos);
                 if (from == std::string::npos)
                     break;
 
-                std::size_t to = _key.find_first_of(separators, from + 1);
+                std::size_t to = key._key.find_first_of(separators, from + 1);
                 if (to == std::string::npos) 
-                    to = _key.size();
+                    to = key._key.size();
 
                 std::string temp;
                 for (std::size_t i = from; i != to; i++) 
-                    temp.push_back(_key[i]);
+                    temp.push_back(key._key[i]);
 
-                _token.emplace_back(std::move(temp));
+                token.emplace_back(std::move(temp));
                 pos = to;
             }
         }
@@ -64,7 +64,6 @@ namespace fys::cache {
     private:
         std::filesystem::path _path;
         std::string _key;
-        std::vector<std::string> _token;
 
     };
 }

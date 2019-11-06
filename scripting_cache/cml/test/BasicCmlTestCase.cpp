@@ -21,47 +21,31 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include <catch2/catch.hpp>
+#include <Cml.hh>
 
-#ifndef FYS_SERVICE_CML_HH
-#define FYS_SERVICE_CML_HH
+class CmlBaseTest : public fys::cache::Cml {
+public:
+    using fys::cache::Cml::Cml;
 
-#include <memory>
-#include <string>
-#include <unordered_map>
-#include <filesystem>
-#include <functional>
+    bool _localStorageCalled = false;
 
-namespace fys::cache {
+    void createFileInLocalStorage(const fys::cache::CmlKey &cmlKey) override {
+        _localStorageCalled = true;
+    }
+};
 
-    class CmlKey;
+TEST_CASE("Test Basic CML", "[cml_test]") {
 
-    struct InMemoryCached {
-        long timestamp;
-        std::string content;
-    };
+    CmlBaseTest cbt("/home/FyS/Project/FyS/scripting_cache/cml/test/testCacheDir");
 
-    class Cml {
+    SECTION("Test in memcache") {
 
-    public:
-        explicit Cml(std::filesystem::path pathLocalStorage) :
-            _localPathStorage(std::move(pathLocalStorage))
-        { }
+    } // End section : Test in memcache
 
-        std::string_view findInCache(const std::string &key, bool first = true);
+    SECTION("Test on filesystem") {
 
-        virtual void createFileInLocalStorage(const CmlKey &cmlKey) = 0;
-
-    private:
-        bool isInLocalStorageAndUpToDate(const CmlKey &cmlKey, long timestamp) const;
-        bool isInLocalStorage(const CmlKey &cmlKey) const;
-
-    private:
-        std::filesystem::path _localPathStorage;
-        std::unordered_map<std::string, InMemoryCached> _inMemCache;
-
-    };
-
-}
+    } // End section : Test on filesystem
 
 
-#endif //FYS_SERVICE_CML_HH
+} // End TestCase : Test Basic CML
