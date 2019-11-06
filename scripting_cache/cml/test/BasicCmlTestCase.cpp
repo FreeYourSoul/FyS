@@ -81,6 +81,23 @@ TEST_CASE("Test findInCache for Basic CML", "[cml_test]") {
 
         } // End Section : Test file in folder
 
+        SECTION("Test Multiple line file") {
+            std::string contentToFind = R
+"A thing of beauty is a joy for ever:
+Its loveliness increases; it will never
+Pass into nothingness; but still will keep
+A bower quiet for us, and a sleep
+Full of sweet dreams, and health, and quiet breathing.
+
+– John Keats (1)";
+            std::string_view cacheTest4 = cbt.findInCache("inner_folder:inner_folder_1:test4");
+
+            REQUIRE(contentToFind == cacheContent3);
+            REQUIRE_FALSE(cbt._localStorageCalled);
+            REQUIRE(cbt._inMemCache.find("inner_folder:inner_folder_1:test4") != _inMemCache.end());
+
+        }
+
     } // End section : Test CML on filesystem
 
 } // End TestCase : Test Basic CML
