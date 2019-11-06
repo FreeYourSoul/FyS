@@ -23,6 +23,6 @@ add_executable(cml_test
         ${CMAKE_CURRENT_LIST_DIR}/catchMain.cpp
         ${CMAKE_CURRENT_LIST_DIR}/BasicCmlTestCase.cpp
         )
-
-target_link_libraries(cml_test Catch2::Catch2)
+set(CMAKE_BUILD_TYPE Debug)
+target_link_libraries(cml_test Catch2::Catch2 stdc++fs)
 catch_discover_tests(cml_test)

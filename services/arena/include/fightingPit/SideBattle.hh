@@ -50,8 +50,8 @@ namespace fys::arena {
         {}
 
     public:
-        const data::PriorityElem &getCurrentParticipantTurn(const std::chrono::system_clock::time_point &now,
-                                                            const std::chrono::milliseconds &timerInterlude);
+        data::PriorityElem getCurrentParticipantTurn(const std::chrono::system_clock::time_point &now,
+                                                     const std::chrono::milliseconds &timerInterlude);
 
 
     private:

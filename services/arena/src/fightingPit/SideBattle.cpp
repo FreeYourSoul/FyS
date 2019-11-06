@@ -21,12 +21,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
 #include <fightingPit/SideBattle.hh>
 
 namespace fys::arena {
 
-    const data::PriorityElem &SideBattle::getCurrentParticipantTurn(
+    data::PriorityElem SideBattle::getCurrentParticipantTurn(
                                 const std::chrono::system_clock::time_point &now, 
                                 const std::chrono::milliseconds &timerInterlude)
     {

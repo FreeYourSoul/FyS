@@ -26,10 +26,8 @@
 #define FYS_SERVICE_CML_HH
 
 #include <memory>
-#include <string>
 #include <unordered_map>
 #include <filesystem>
-#include <functional>
 
 namespace fys::cache {
 
@@ -43,6 +41,7 @@ namespace fys::cache {
     class Cml {
 
     public:
+        virtual ~Cml() = default;
         explicit Cml(std::filesystem::path pathLocalStorage) :
             _localPathStorage(std::move(pathLocalStorage))
         { }
@@ -52,10 +51,11 @@ namespace fys::cache {
         virtual void createFileInLocalStorage(const CmlKey &cmlKey) = 0;
 
     private:
-        bool isInLocalStorageAndUpToDate(const CmlKey &cmlKey, long timestamp) const;
         bool isInLocalStorage(const CmlKey &cmlKey) const;
 
-    private:
+    protected:
+        bool isInLocalStorageAndUpToDate(const CmlKey &cmlKey, long timestamp) const;
+
         std::filesystem::path _localPathStorage;
         std::unordered_map<std::string, InMemoryCached> _inMemCache;
 

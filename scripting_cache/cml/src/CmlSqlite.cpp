@@ -26,7 +26,7 @@
 
 namespace fys::cache {
 
-    void CmlSqlite::createFileInLocalStorage(const fys::cache::CmlKey &cmlKey) {
+    void CmlSqlite::createFileInLocalStorage(const fys::cache::CmlKey &) {
 
     }
 }

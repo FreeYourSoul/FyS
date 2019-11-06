@@ -27,13 +27,13 @@
 
 #include <algorithm>
 #include <filesystem>
-
+#include <iostream>
 namespace fys::cache {
     class CmlKey {
     public:
-        CmlKey(std::filesystem::path basePath, std::string key): _path(std::move(basePath)), _key(std::move(key)) {
-            std::replace(_key.begin(), _key.end(), ':', '/');
-            _path /= key;
+        CmlKey(std::filesystem::path basePath, std::string key): _path(std::move(basePath)), _key(key) {
+            std::replace(key.begin(), key.end(), ':', '/');
+            _path /= std::filesystem::path(key);
         }
 
         [[nodiscard]] const std::filesystem::path &getPath() const { return _path; }
@@ -59,6 +59,7 @@ namespace fys::cache {
                 token.emplace_back(std::move(temp));
                 pos = to;
             }
+            return token;
         }
 
     private:
