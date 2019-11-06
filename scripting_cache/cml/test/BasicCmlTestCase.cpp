@@ -23,7 +23,7 @@
 
 #include <catch2/catch.hpp>
 #include <CmlKey.hh>
-//#define private protected
+#define private protected
 #include <Cml.hh>
 
 class CmlBaseTest : public fys::cache::Cml {

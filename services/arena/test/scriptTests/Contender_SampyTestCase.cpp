@@ -31,11 +31,18 @@
 
 #include <FSeamMockData.hpp>
 
+std::string getPathSampyChaiScript() {
+    std::string file_path = __FILE__;
+    std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
+    if (dir_path.size() == file_path.size())
+        dir_path = file_path.substr(0, file_path.rfind('/'));
+    return dir_path + "/scripts_lnk/arena/contenders/Sampy.chai";
+}
+
 /**
  * @brief Sampy is a script representing a sample monster and also contains standalone scripts.
  *        It is used in order to test the implementation of ChaiScript int FyS Online.
  */
-
 TEST_CASE("Test Sampy", "[script_test]") {
 
     fys::arena::ConnectionHandler ch;
@@ -45,7 +52,7 @@ TEST_CASE("Test Sampy", "[script_test]") {
     fys::arena::ContenderScriptingUPtr sampy = std::make_unique<fys::arena::ContenderScripting>(pc.setupScriptEngine(apt));
     sampy->setContenderId(0);
     sampy->setContenderName("Sampy");
-    sampy->loadContenderScriptFromFile(ch, "/home/FyS/Project/FyS/services/arena/test/scriptTests/scripts_lnk/arena/contenders/Sampy.chai");
+    sampy->loadContenderScriptFromFile(ch, getPathSampyChaiScript());
 
     auto fpc = std::make_shared<fys::arena::FightingContender>(std::move(sampy));
     pc.addContender(fpc);

@@ -52,10 +52,9 @@ namespace fys::cache {
 
     private:
         bool isInLocalStorage(const CmlKey &cmlKey) const;
-
-    protected:
         bool isInLocalStorageAndUpToDate(const CmlKey &cmlKey, long timestamp) const;
 
+    private:
         std::filesystem::path _localPathStorage;
         std::unordered_map<std::string, InMemoryCached> _inMemCache;
 
