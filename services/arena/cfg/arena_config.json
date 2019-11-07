@@ -1,0 +1,7 @@
+{
+  "Arena": {
+    "code": "ARN1",
+    "connection_warning_threshold": 500,
+    "script_storage_cache": "/tmp/ARN_cache/"
+  }
+}

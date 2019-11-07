@@ -21,6 +21,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include <spdlog/spdlog.h>
 #include <optional>
 #include <fstream>
 #include <Cml.hh>
@@ -29,8 +30,7 @@
 namespace fys::cache {
 
     namespace {
-        std::string readFile(const std::filesystem::path& path)
-        {
+        std::string readFile(const std::filesystem::path& path) {
             // Open the stream to 'lock' the file.
             std::ifstream f{ path };
 
@@ -45,6 +45,18 @@ namespace fys::cache {
 
             return result;
         }
+
+        void writeFile(const std::filesystem::path& file, const std::string &content) {
+            std::ofstream out(file.string());
+            out << content << std::endl;
+            out.close();
+        }
+
+    }
+
+    explicit Cml::Cml(std::string pathLocalStorage) : _localPathStorage(std::move(pathLocalStorage)) { 
+        if (!std::filesystem::create_directories(_localPathStorage))
+            SPDLOG_ERROR("Couldn't create directories for path : {}", _localPathStorage.string());
     }
 
     /**
@@ -80,6 +92,14 @@ namespace fys::cache {
             return "";
         createFileInLocalStorage(cmlKey);
         return findInCache(key, false);
+    }
+
+    void Cml::createFile(const std::filesyste::path &pathToFile, const std::string &content) const {
+        if (!std::filesystem::create_directories(pathToFile.parent_path())) {
+            SPDLOG_ERROR("Couldn't create directories for path : {}", _localPathStorage.string());
+            return;
+        }
+        writeFile(pathToFile, content);
     }
 
 }

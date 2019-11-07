@@ -34,7 +34,7 @@ namespace fys::cache {
     class CmlKey;
 
     struct InMemoryCached {
-        long timestamp;
+        long timestamp; // change to std::filesystem::file_time_type
         std::string content;
     };
 
@@ -42,17 +42,16 @@ namespace fys::cache {
 
     public:
         virtual ~Cml() = default;
-        explicit Cml(std::filesystem::path pathLocalStorage) :
-            _localPathStorage(std::move(pathLocalStorage))
-        { }
+        explicit Cml(std::filesystem::path pathLocalStorage);
 
-        std::string_view findInCache(const std::string &key, bool first = true);
+        inline std::string_view findInCache(const std::string &key, bool first = true);
 
         virtual void createFileInLocalStorage(const CmlKey &cmlKey) = 0;
+        inline void createFile(const std::filesystem::path &pathToFile, const std::string &content) const;
 
     private:
-        bool isInLocalStorage(const CmlKey &cmlKey) const;
-        bool isInLocalStorageAndUpToDate(const CmlKey &cmlKey, long timestamp) const;
+        inline bool isInLocalStorage(const CmlKey &cmlKey) const;
+        inline bool isInLocalStorageAndUpToDate(const CmlKey &cmlKey, long timestamp) const;
 
     private:
         std::filesystem::path _localPathStorage;

@@ -47,7 +47,7 @@ std::string getLocalPathStorage() {
     return dir_path + "/testCacheDir";
 }
 
-TEST_CASE("Test findInCache for Basic CML", "[cml_test]") {
+TEST_CASE("findInCache for Basic CML", "[cml_test]") {
     CmlBaseTest cbt(getLocalPathStorage());
 
     SECTION("Test call of createFileInLocalStorage") {
@@ -103,7 +103,7 @@ John Keats)d";
 
 } // End TestCase : Test Basic CML
 
-TEST_CASE("Test isInLocalStorageAndUpToDate for Basic CML", "[cml_test]") {
+TEST_CASE("isInLocalStorageAndUpToDate for Basic CML", "[cml_test]") {
     CmlBaseTest cbt(getLocalPathStorage());
     const fys::cache::CmlKey key1 = fys::cache::CmlKey{getLocalPathStorage(), "test1"};
     const fys::cache::CmlKey key2 = fys::cache::CmlKey{getLocalPathStorage(), "inner_folder:test2"};
@@ -163,4 +163,36 @@ TEST_CASE("Test isInLocalStorageAndUpToDate for Basic CML", "[cml_test]") {
 
     } // End Section : isInLocalStorageAndUpToDate false: Not in memCache
 
-} // End TestCase : Test Implementation for Basic CML
+    SECTION("createFile") {
+        std::filesystem::path pathToCreate(getLocalPathStorage() + "/imaginary");
+        std::filesystem::path basePath = pathToCreate;
+        std::filesystem::remove_all(basePath);
+
+        REQUIRE_FALSE(std::filesystem::exists(pathToCreate));
+        pathToCreate /= "cloud";
+        REQUIRE_FALSE(std::filesystem::exists(pathToCreate));
+        pathToCreate /= "surfing";
+        REQUIRE_FALSE(std::filesystem::exists(pathToCreate));
+        pathToCreate /= "testing.txt";
+
+        cbt.createFile(pathToCreate, "this is a crazy funny test");
+
+        std::filesystem::path pathVerify = basePath;
+        REQUIRE(std::filesystem::exists(pathVerify));
+        pathVerify /= "cloud";
+        REQUIRE(std::filesystem::exists(pathVerify));
+        pathVerify /= "surfing";
+        REQUIRE(std::filesystem::exists(pathVerify));
+        pathVerify /= "testing.txt";
+
+        REQUIRE(std::filesystem::exists(pathToCreate));
+        REQUIRE(std::filesystem::exists(pathVerify));
+        REQUIRE(pathVerify == pathToCreate);
+
+        REQUIRE("this is a crazy funny test" == cbt.findInCache("imaginary:cloud:surfing:testing.txt"));
+
+        std::filesystem::remove_all(basePath);
+        
+    } // End Section : createFile
+
+} // End TestCase : Implementation for Basic CML

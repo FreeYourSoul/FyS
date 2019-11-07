@@ -37,6 +37,9 @@ namespace fys::arena {
 
         [[nodiscard]] std::string getDispatcherConnectionString() const noexcept;
 
+    private:
+        std::string _code;
+        std::filesystem::path _pathLocalStorageCache;
     };
 
 }
