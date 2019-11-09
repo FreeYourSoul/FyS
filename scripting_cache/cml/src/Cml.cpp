@@ -54,9 +54,8 @@ namespace fys::cache {
 
     }
 
-    explicit Cml::Cml(std::string pathLocalStorage) : _localPathStorage(std::move(pathLocalStorage)) { 
-        if (!std::filesystem::create_directories(_localPathStorage))
-            SPDLOG_ERROR("Couldn't create directories for path : {}", _localPathStorage.string());
+    Cml::Cml(std::filesystem::path pathLocalStorage) : _localPathStorage(std::move(pathLocalStorage)) {
+        std::filesystem::create_directories(_localPathStorage);
     }
 
     /**
@@ -94,7 +93,7 @@ namespace fys::cache {
         return findInCache(key, false);
     }
 
-    void Cml::createFile(const std::filesyste::path &pathToFile, const std::string &content) const {
+    void Cml::createFile(const std::filesystem::path &pathToFile, const std::string &content) const {
         if (!std::filesystem::create_directories(pathToFile.parent_path())) {
             SPDLOG_ERROR("Couldn't create directories for path : {}", _localPathStorage.string());
             return;

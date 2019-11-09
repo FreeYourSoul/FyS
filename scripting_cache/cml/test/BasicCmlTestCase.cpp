@@ -188,11 +188,10 @@ TEST_CASE("isInLocalStorageAndUpToDate for Basic CML", "[cml_test]") {
         REQUIRE(std::filesystem::exists(pathToCreate));
         REQUIRE(std::filesystem::exists(pathVerify));
         REQUIRE(pathVerify == pathToCreate);
-
-        REQUIRE("this is a crazy funny test" == cbt.findInCache("imaginary:cloud:surfing:testing.txt"));
+        CHECK("this is a crazy funny test\n" == cbt.findInCache("imaginary:cloud:surfing:testing.txt"));
 
         std::filesystem::remove_all(basePath);
-        
+
     } // End Section : createFile
 
 } // End TestCase : Implementation for Basic CML

@@ -1,6 +1,6 @@
 # Documentation
 
-Developper documentation, can be used as "spec" but not fully defined.
+Developer documentation, can be used as "spec" but not fully defined.
 
 * [Service Documentation](services/README.md)
     * [Arena : Battle system explanations](services/Arena_BattleSystem.md#arena)

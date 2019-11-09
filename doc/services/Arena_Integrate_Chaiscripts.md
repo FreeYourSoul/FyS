@@ -5,14 +5,12 @@
 
 ## Introduction : Chaiscript
 
-### Shared data between Chaiscript and arena core (cpp code)
-
-## Integrate AI scripts
-
 ### Existing C++/Chai Mapping
 
 ```cpp
 ```
+
+## Integrate AI scripts
 
 ### Template
 
