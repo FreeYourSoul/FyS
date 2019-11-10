@@ -18,6 +18,8 @@ add_library(cml
         ${CMAKE_CURRENT_LIST_DIR}/src/Cml.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/Cml.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/CmlKey.hh
+        ${CMAKE_CURRENT_LIST_DIR}/include/CmlCopy.hh
+        ${CMAKE_CURRENT_LIST_DIR}/src/CmlCopy.cpp
         ${CMAKE_CURRENT_LIST_DIR}/src/CmlSqlite.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/CmlSqlite.hh)
 

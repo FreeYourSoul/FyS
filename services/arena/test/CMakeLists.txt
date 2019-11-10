@@ -14,7 +14,9 @@ include(${CMAKE_CURRENT_LIST_DIR}/../../common/CMakeLists.txt)
 
 enable_testing()
 
-include_directories(${CMAKE_CURRENT_LIST_DIR}/../include)
+include_directories(
+        ${COMMON_INCLUDE_DIR}
+        ${CMAKE_CURRENT_LIST_DIR}/../include)
 
 add_executable(arena_test
         #source tested

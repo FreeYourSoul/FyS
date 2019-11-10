@@ -28,7 +28,7 @@
 
 class CmlBaseTest : public fys::cache::Cml {
 public:
-    CmlBaseTest(std::string v) : fys::cache::Cml(std::filesystem::path(std::move(v))) {}
+    explicit CmlBaseTest(std::string v) : fys::cache::Cml(std::filesystem::path(std::move(v))) {}
     using fys::cache::Cml::isInLocalStorageAndUpToDate;
     using fys::cache::Cml::_inMemCache;
 
@@ -39,12 +39,14 @@ public:
     }
 };
 
-std::string getLocalPathStorage() {
-    std::string file_path = __FILE__;
-    std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
-    if (dir_path.size() == file_path.size())
-        dir_path = file_path.substr(0, file_path.rfind('/'));
-    return dir_path + "/testCacheDir";
+namespace {
+    std::string getLocalPathStorage() {
+        std::string file_path = __FILE__;
+        std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
+        if (dir_path.size() == file_path.size())
+            dir_path = file_path.substr(0, file_path.rfind('/'));
+        return dir_path + "/testCacheDir";
+    }
 }
 
 TEST_CASE("findInCache for Basic CML", "[cml_test]") {

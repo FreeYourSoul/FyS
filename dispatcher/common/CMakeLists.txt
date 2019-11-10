@@ -10,6 +10,7 @@ set (VERSION_MINOR 0)
 
 set(COMMON_DIR ${CMAKE_SOURCE_DIR}${RELATIVE_TO_COMMON})
 
+find_package(cppzmq REQUIRED)
 find_package(TCLAP REQUIRED)
 
 # configure a header file to pass some of the CMake settings
@@ -24,7 +25,7 @@ include_directories(
         ${COMMON_DIR}/include/core
 )
 
-include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+#include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 
 find_program(CCACHE_FOUND ccache)
 if(CCACHE_FOUND)
@@ -41,5 +42,5 @@ if (NOT TARGET common_dispatcher)
             ${COMMON_DIR}/src/core/Dispatcher.cpp
             ${COMMON_DIR}/src/core/DispatcherConnectionManager.cpp)
     target_link_libraries(common_dispatcher
-            PUBLIC ${CONAN_LIBS_ZMQ})
+            PUBLIC cppzmq)
 endif ()

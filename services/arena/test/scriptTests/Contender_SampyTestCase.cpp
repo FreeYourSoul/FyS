@@ -22,6 +22,7 @@
 // SOFTWARE.
 
 #include <catch2/catch.hpp>
+#include <ArenaServerContext.hh>
 #include <fightingPit/contender/ContenderScripting.hh>
 #include <fightingPit/contender/FightingContender.hh>
 #include <fightingPit/contender/PitContenders.hh>
@@ -124,11 +125,11 @@ TEST_CASE("Test Sampy", "[script_test]") {
         auto fseamMock = FSeam::getDefault<fys::arena::ConnectionHandler>();
 
 
-        // fseamMock->expectArg<FSeam::ConnectionHandler::sendMessageToDispatcher>(
-        //     FSeam::CustomComparator<zmq::multipart_t &>([](auto && test) {
-        //         // verify multipart message contains the selection of the weakest enemy (teamMember1)
-        //         return true;
-        //     }), FSeam::VerifyCompare{1});
+//         fseamMock->expectArg<FSeam::ConnectionHandler::sendMessageToDispatcher>(
+//             FSeam::CustomComparator<zmq::multipart_t &>([](auto && test) {
+//                 // verify multipart message contains the selection of the weakest enemy (teamMember1)
+//                 return true;
+//             }), FSeam::VerifyCompare{1});
         // REQUIRE(fseamMock->verify(FSeam::ConnectionHandler::sendMessageToDispatcher::NAME, 1));
 
         FSeam::MockVerifier::cleanUp();

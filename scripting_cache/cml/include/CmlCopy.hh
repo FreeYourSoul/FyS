@@ -22,4 +22,26 @@
 // SOFTWARE.
 
 
-#include "CmlSql.hh"
+#ifndef FYS_SERVICE_CMLSQL_HH
+#define FYS_SERVICE_CMLSQL_HH
+
+#include <Cml.hh>
+
+namespace fys::cache {
+    class CmlCopy : public Cml {
+    public:
+        ~CmlCopy() override {}
+        CmlCopy(const std::string &pathLocalStorage,
+                const std::string &pathCopy) : Cml(pathLocalStorage), _copyPathStorage(pathCopy) {}
+
+    protected:
+        void createFileInLocalStorage(const CmlKey &cmlKey) override;
+
+    private:
+        std::filesystem::path _copyPathStorage;
+
+    };
+}
+
+
+#endif //FYS_SERVICE_CMLSQL_HH

@@ -62,5 +62,3 @@ target_link_libraries(arena_service cppzmq ${Flatbuffers_LIBRARIES} fmt::fmt dl)
 
 target_compile_options(arena_service PRIVATE -O2 -fstack-protector-all -g)
 target_compile_options(arena_service PRIVATE -Wall -Wpedantic -Wextra -Wno-deprecated-declarations)
-
-add_subdirectory(test)

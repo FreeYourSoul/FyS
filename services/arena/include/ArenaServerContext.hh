@@ -25,6 +25,7 @@
 #ifndef FYS_ARENASERVERCONTEXT_HH
 #define FYS_ARENASERVERCONTEXT_HH
 
+#include <filesystem>
 #include <ServiceContextBase.hh>
 
 namespace fys::arena {

@@ -21,27 +21,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
-#ifndef FYS_SERVICE_CMLSQL_HH
-#define FYS_SERVICE_CMLSQL_HH
-
-#include <Cml.hh>
+#include <CmlKey.hh>
+#include "CmlCopy.hh"
 
 namespace fys::cache {
-    class CmlSql : public Cml {
-    public:
-        CmlSql(const std::string &pathLocalStorage,
-                const std::string &addressSqlServer,
-                ushort portSqlServer) : Cml(pathLocalStorage) {}
 
-        std::string findInCache(const std::string &key) {
-            return Cml::findInCache(*this, key);
-        }
+    void CmlCopy::createFileInLocalStorage(const fys::cache::CmlKey &cmlKey) {
+        CmlKey k(_copyPathStorage, cmlKey.getKey());
+        std::error_code e;
+        std::filesystem::create_directories(cmlKey.getPath().parent_path(), e);
+        std::filesystem::copy(k.getPath(), cmlKey.getPath(), e);
+    }
 
-    private:
-
-    };
 }
-
-
-#endif //FYS_SERVICE_CMLSQL_HH

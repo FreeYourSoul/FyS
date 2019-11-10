@@ -48,7 +48,7 @@ namespace fys::arena {
             readInputAndAppendPendingActions();
             auto now = std::chrono::system_clock::now();
             for (auto &side : _sideBattles) {
-                auto &currentParticipant = side->getCurrentParticipantTurn(now, timerInterlude);
+                auto currentParticipant = side->getCurrentParticipantTurn(now, timerInterlude);
 
                 if (currentParticipant.isContender) {
                     // If non-playable character (ennemy NPC)
