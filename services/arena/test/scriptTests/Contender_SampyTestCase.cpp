@@ -124,7 +124,6 @@ TEST_CASE("Test Sampy", "[script_test]") {
     SECTION("Test network message") {
         auto fseamMock = FSeam::getDefault<fys::arena::ConnectionHandler>();
 
-
 //         fseamMock->expectArg<FSeam::ConnectionHandler::sendMessageToDispatcher>(
 //             FSeam::CustomComparator<zmq::multipart_t &>([](auto && test) {
 //                 // verify multipart message contains the selection of the weakest enemy (teamMember1)

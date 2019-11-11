@@ -7,7 +7,7 @@ include(${CMAKE_CURRENT_LIST_DIR}/../common/CMakeLists.txt)
 
 find_package(nlohmann_json  REQUIRED)
 find_package(cppzmq         REQUIRED)
-find_package(fmt)
+find_package(fmt            REQUIRED)
 
 find_program(CCACHE_FOUND ccache)
 if(CCACHE_FOUND)
@@ -17,6 +17,7 @@ endif(CCACHE_FOUND)
 
 include_directories(
         ${CMAKE_CURRENT_LIST_DIR}/include
+        ${fmt_INCLUDE_DIRS}
         ${COMMON_INCLUDE_DIR}
         ${FLATBUFFER_INCLUDE_DIR})
 
@@ -58,7 +59,7 @@ add_executable(arena_service ${COMMON_SRCS}
         ${CMAKE_CURRENT_LIST_DIR}/include/ArenaServerService.hh)
 
 target_compile_definitions(arena_service PUBLIC -DCHAISCRIPT_NO_THREADS)
-target_link_libraries(arena_service cppzmq ${Flatbuffers_LIBRARIES} fmt::fmt dl)
+target_link_libraries(arena_service cppzmq ${Flatbuffers_LIBRARIES} fmt::fmt dl cml)
 
-target_compile_options(arena_service PRIVATE -O2 -fstack-protector-all -g)
+target_compile_options(arena_service PRIVATE -O2 -fstack-protector-all -g -lfmt)
 target_compile_options(arena_service PRIVATE -Wall -Wpedantic -Wextra -Wno-deprecated-declarations)
