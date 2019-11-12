@@ -21,32 +21,38 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef FYS_ARENASERVERSERVICE_HH
-#define FYS_ARENASERVERSERVICE_HH
+#include <map>
 
-#include <network/WorkerService.hh>
-#include <ConnectionHandler.hh>
-#include <CmlCopy.hh>
+namespace fys
+{
+    template<typename T>
+    class BoundaryMap {
+        public:
 
-namespace fys::arena {
+            auto get(int index) const {
+                return _map.lower_bound(index);
+            }
 
-    class ArenaServerContext;
+            void insert(int index, T && element) {
+                auto it = get(index);
+                if (it == _map.end()) {
+                    _map[index] = std::forward<T>(element);
+                }
+                else if (element != it->second) {
+                    _map[it->first + 1] = std::forward<T>(element);                    
+                }
+                else {
+                    _map.erase(it);
+                    _map[it->first] = std::forward<T>(element);                    
+                }
+            }
 
-    class ArenaServerService {
-    public:
-        explicit ArenaServerService(const ArenaServerContext &ctx);
+            auto end() const {
+                return _map.end();
+            }
 
-        void runServerLoop() noexcept;
-
-    private:
-        void processMessage(std::string &&idt, std::string &&token, const zmq::message_t &content);
-
-    private:
-        cache::CmlCopy      _cache;
-        ConnectionHandler   _connectionHandler;
-        WorkerService       _workerService;
+        private:
+            std::map<int, T> _map;
     };
 
-}
-
-#endif // !FYS_ARENASERVERSERVICE_HH
+} // namespace fys

@@ -30,6 +30,7 @@ set(COMMON_SRCS
         ${CMAKE_CURRENT_LIST_DIR}/flatbuffer/includes/WSAction_generated.h
         ${CMAKE_CURRENT_LIST_DIR}/src/ServiceContextBase.cpp
         ${CMAKE_CURRENT_LIST_DIR}/src/ServiceContextBase.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/BoundaryMap.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/ServiceContextBase.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/algorithm/algorithm.hh
 #        ${CMAKE_CURRENT_LIST_DIR}/src/message/FlatMessageBuilder.cpp

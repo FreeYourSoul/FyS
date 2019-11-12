@@ -27,11 +27,21 @@
 #include <fstream>
 #include "ArenaServerContext.hh"
 
-using json = nlohmann::json;
 
 namespace fys::arena {
 
     ArenaServerContext::ArenaServerContext(int ac, const char *const *av) : common::ServiceContextBase(ac, av) {
+        std::ifstream i(_configFile);
+        json jsonConfig;
+        i >> jsonConfig;
+        parseArenaConfigFile(jsonConfig);
+    }
+
+    void ArenaServerContext::parseArenaConfigFile(const json &configContent) {
+        auto &arena = configContent["Arena"];
+        arena["code"].get_to(_code);
+        configContent["script_cache_source"].get_to(_pathSourceCache);
+        configContent["script_storage_cache"].get_to(_pathLocalStorageCache);
     }
 
     std::string ArenaServerContext::toString() const {
@@ -49,5 +59,6 @@ namespace fys::arena {
     std::string ArenaServerContext::getDispatcherConnectionString() const noexcept {
         return std::string("tcp://").append(_dispatcherData.address).append(":").append(std::to_string(_dispatcherData.port));
     }
+
 
 }

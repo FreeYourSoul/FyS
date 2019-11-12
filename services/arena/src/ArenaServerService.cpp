@@ -29,7 +29,8 @@
 
 namespace fys::arena {
 
-    ArenaServerService::ArenaServerService(const ArenaServerContext &ctx) {
+    ArenaServerService::ArenaServerService(const ArenaServerContext &ctx) :
+      _cache(ctx.getPathLocalStorageCache(), ctx.getPathSourceCache()) {
         _connectionHandler.setupConnectionManager(ctx);
     }
 

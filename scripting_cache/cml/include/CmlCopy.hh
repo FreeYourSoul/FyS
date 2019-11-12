@@ -25,6 +25,7 @@
 #ifndef FYS_SERVICE_CMLSQL_HH
 #define FYS_SERVICE_CMLSQL_HH
 
+#include <spdlog/spdlog.h>
 #include <Cml.hh>
 
 namespace fys::cache {
@@ -32,7 +33,10 @@ namespace fys::cache {
     public:
         ~CmlCopy() override {}
         CmlCopy(const std::string &pathLocalStorage,
-                const std::string &pathCopy) : Cml(pathLocalStorage), _copyPathStorage(pathCopy) {}
+                const std::string &pathCopy) : Cml(pathLocalStorage), _copyPathStorage(pathCopy) {
+            if (!std::filesystem::exists(_copyPathStorage))
+                SPDLOG_ERROR("Path copy does not exist {}", pathCopy);
+        }
 
     protected:
         void createFileInLocalStorage(const CmlKey &cmlKey) override;

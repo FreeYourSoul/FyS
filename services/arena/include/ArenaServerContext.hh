@@ -25,22 +25,27 @@
 #ifndef FYS_ARENASERVERCONTEXT_HH
 #define FYS_ARENASERVERCONTEXT_HH
 
-#include <filesystem>
 #include <ServiceContextBase.hh>
 
 namespace fys::arena {
+    using json = nlohmann::json;
 
     class ArenaServerContext : fys::common::ServiceContextBase {
     public:
         ArenaServerContext(int ac, const char *const *av);
 
         [[nodiscard]] std::string toString() const;
-
         [[nodiscard]] std::string getDispatcherConnectionString() const noexcept;
+        [[nodiscard]] const std::string &getPathLocalStorageCache() const { return _pathLocalStorageCache; }
+        [[nodiscard]] const std::string &getPathSourceCache() const { return _pathSourceCache; }
+
+    private:
+        void parseArenaConfigFile(const json &configContent);
 
     private:
         std::string _code;
-        std::filesystem::path _pathLocalStorageCache;
+        std::string _pathLocalStorageCache;
+        std::string _pathSourceCache;
     };
 
 }

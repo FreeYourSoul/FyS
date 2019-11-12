@@ -32,6 +32,10 @@
 #include <fightingPit/team/AllyPartyTeams.hh>
 #include "FightingPit.hh"
 
+namespace fys::cache {
+    class Cml;
+}
+
 namespace fys::arena {
 
     /**
@@ -53,9 +57,9 @@ namespace fys::arena {
     };
 
     public:
-        FightingPitAnnouncer() = default;
+        explicit FightingPitAnnouncer(cache::Cml &cml) : _cache(cml) {}
 
-        [[nodiscard]] FightingPit buildFightingPit() const;
+        [[nodiscard]] FightingPit buildFightingPit(const std::string &wsId, std::pair<double, double> pos) const;
         FightingPitAnnouncer &generateContenders();
         FightingPitAnnouncer &generatePartyTeams();
 
@@ -69,17 +73,10 @@ namespace fys::arena {
             return *this;
         }
 
-        FightingPitAnnouncer &setFightingPitLevel(FightingPit::Level level) {
-            _fightingPitLevel = level;
-            return *this;
-        }
-
-        FightingPitAnnouncer &enforceAmbush(bool ambushEnforced) { 
+        FightingPitAnnouncer &enforceAmbush(bool ambushEnforced) {
             _isAmbushEnforced = ambushEnforced; 
             return *this;
         }
-
-        [[nodiscard]] FightingPit::Level getFightingPitLevel() const { return _fightingPitLevel; }
 
     private:
 
@@ -94,9 +91,16 @@ namespace fys::arena {
         [[nodiscard]] bool isScriptedEncounter() const { return _encounterType != EncounterType::RANDOM; }
 
     private:
+        cache::Cml          &_cache;
+
+        /**
+         *   range           desc
+         *     0    : random encounter generation
+         * [1001-*] : globally defined encounters
+         * [1-1000] : zone defined encounters
+         */
         uint                _idEncounter        = 0;
         EncounterType       _encounterType      = EncounterType::RANDOM;
-        FightingPit::Level  _fightingPitLevel   = FightingPit::Level::MEDIUM;
 
         std::optional<bool> _isAmbushEnforced;
 

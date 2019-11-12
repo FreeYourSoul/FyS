@@ -21,17 +21,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include <nlohmann/json.hpp>
 #include <fightingPit/contender/ContenderScripting.hh>
 #include <fightingPit/contender/FightingContender.hh>
 #include <fightingPit/FightingPitAnnouncer.hh>
 
 namespace fys::arena {
+    using json = nlohmann::json;
 
-    FightingPit FightingPitAnnouncer::buildFightingPit() const {
-
+    FightingPit FightingPitAnnouncer::buildFightingPit(const std::string &wsId, std::pair<double, double> pos) const {
     }
 
-    FightingPitAnnouncer & FightingPitAnnouncer::generateContenders() {
+    FightingPitAnnouncer &FightingPitAnnouncer::generateContenders() {
         if (isScriptedEncounter() && !_idEncounter) {
             // impossible because a scripted encounter need to have an ID
             _isFightingPitCorrupted = true;
@@ -41,7 +42,7 @@ namespace fys::arena {
         return *this;
     }
 
-    FightingPitAnnouncer& FightingPitAnnouncer::generatePartyTeams() {
+    FightingPitAnnouncer &FightingPitAnnouncer::generatePartyTeams() {
 
     }
 
