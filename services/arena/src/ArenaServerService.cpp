@@ -48,16 +48,14 @@ namespace fys::arena {
 
     void ArenaServerService::processMessage(std::string &&idt, std::string &&token, const zmq::message_t &content) {
         // if (request new fighting) {
-            FightingPitAnnouncer fpa;
+            FightingPitAnnouncer fpa(_cache);
 
             // Retrieving data from newFightRequest
             FightingPitAnnouncer::EncounterType encounterType = FightingPitAnnouncer::EncounterType::RANDOM;
-            FightingPit::Level levelFight = FightingPit::Level::MEDIUM;
             bool ambush = false;
 
             fpa.setEncounterType(encounterType);
             fpa.setEncounterId(0u);
-            fpa.setFightingPitLevel(levelFight);
             fpa.enforceAmbush(ambush);
             fpa.generateContenders().generatePartyTeams();
         // }
