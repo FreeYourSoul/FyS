@@ -22,36 +22,33 @@
 // SOFTWARE.
 
 
-#ifndef FYS_ARENASERVERCONTEXT_HH
-#define FYS_ARENASERVERCONTEXT_HH
+#ifndef FYS_SERVICE_DBCONNECTOR_HH
+#define FYS_SERVICE_DBCONNECTOR_HH
 
-#include <ServiceContextBase.hh>
+#include <memory>
+
+namespace mariadb {
+    class account;
+    using account_ref = std::shared_ptr<account>;
+}
 
 namespace fys::arena {
-    using json = nlohmann::json;
+    class ArenaServerContext;
+}
 
-    class ArenaServerContext : fys::common::ServiceContextBase {
+namespace fys::network {
+
+    class DBConnector {
+
     public:
-        ArenaServerContext(int ac, const char *const *av);
+        explicit DBConnector(const arena::ArenaServerContext &ctx);
 
-        [[nodiscard]] std::string toString() const;
-        [[nodiscard]] std::string getDispatcherConnectionString() const noexcept;
-        [[nodiscard]] const std::string &getPathLocalStorageCache() const { return _pathLocalStorageCache; }
-        [[nodiscard]] const std::string &getPathSourceCache() const { return _pathSourceCache; }
-        [[nodiscard]] const std::string &getDbHost() const { return _dbHost; }
-        [[nodiscard]] uint getDbPort() const { return _dbPort; }
+
 
     private:
-        void parseArenaConfigFile(const json &configContent);
-
-    private:
-        std::string _code;
-        std::string _pathLocalStorageCache;
-        std::string _pathSourceCache;
-        std::string _dbHost;
-        uint _dbPort = 3306;
+        mariadb::account_ref _refDb;
     };
 
 }
 
-#endif // !FYS_ARENASERVERCONTEXT_HH
+#endif //FYS_SERVICE_DBCONNECTOR_HH

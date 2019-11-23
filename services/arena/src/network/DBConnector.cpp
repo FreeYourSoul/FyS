@@ -21,37 +21,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include <mariadb++/account.hpp>
+#include <mariadb++/statement.hpp>
+#include <ArenaServerContext.hh>
+#include <network/DBConnector.hh>
 
-#ifndef FYS_ARENASERVERCONTEXT_HH
-#define FYS_ARENASERVERCONTEXT_HH
+namespace fys::network {
 
-#include <ServiceContextBase.hh>
+    DBConnector::DBConnector(const arena::ArenaServerContext &ctx) {
+        _refDb = mariadb::account::create(ctx.getDbHost(), "Arena", "ArenaPWD", "fys", ctx.getDbPort());
+    }
 
-namespace fys::arena {
-    using json = nlohmann::json;
 
-    class ArenaServerContext : fys::common::ServiceContextBase {
-    public:
-        ArenaServerContext(int ac, const char *const *av);
-
-        [[nodiscard]] std::string toString() const;
-        [[nodiscard]] std::string getDispatcherConnectionString() const noexcept;
-        [[nodiscard]] const std::string &getPathLocalStorageCache() const { return _pathLocalStorageCache; }
-        [[nodiscard]] const std::string &getPathSourceCache() const { return _pathSourceCache; }
-        [[nodiscard]] const std::string &getDbHost() const { return _dbHost; }
-        [[nodiscard]] uint getDbPort() const { return _dbPort; }
-
-    private:
-        void parseArenaConfigFile(const json &configContent);
-
-    private:
-        std::string _code;
-        std::string _pathLocalStorageCache;
-        std::string _pathSourceCache;
-        std::string _dbHost;
-        uint _dbPort = 3306;
-    };
 
 }
-
-#endif // !FYS_ARENASERVERCONTEXT_HH

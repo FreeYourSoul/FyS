@@ -42,6 +42,8 @@ namespace fys::arena {
         arena["code"].get_to(_code);
         configContent["script_cache_source"].get_to(_pathSourceCache);
         configContent["script_storage_cache"].get_to(_pathLocalStorageCache);
+        configContent["db_hostname"].get_to(_dbHost);
+        configContent["db_port"].get_to(_dbPort);
     }
 
     std::string ArenaServerContext::toString() const {

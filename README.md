@@ -39,4 +39,6 @@ FreeYourSoul Online is using an original battle system inspired by Final Fantasy
     For scripting of monsters in the Arena (fighting mode)
 * [LUA](https://github.com/lua/lua)   --> soon to be  
     For the scripting of NPC in the world map (when moving)
+* [Mariadbpp](https://github.com/viaduck/mariadbpp) :   
+    Used as Maria DB connector
 
