@@ -1,0 +1,29 @@
+class light_heal {
+    var power;
+
+    def light_heal(level) {
+        this.power = 50 * (2 * level);
+    }
+
+    def requireAllyTarget() {
+        0;
+    }
+
+    def requireEnemyTarget() {
+        1;
+    }
+
+    def rangeAnySide() {
+        0;
+    }
+
+    def execute(targetStatus) {
+        targetStatus.life.current = targetStatus.life.current + this.power;
+        1;
+    }
+
+    def getId() {
+        2;
+    }
+
+};

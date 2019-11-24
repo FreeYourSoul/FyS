@@ -32,6 +32,15 @@ namespace fys::network {
         _refDb = mariadb::account::create(ctx.getDbHost(), "Arena", "ArenaPWD", "fys", ctx.getDbPort());
     }
 
+    std::vector<fys::arena::TeamMember> DBConnector::retrieveCharacters() {
+        auto res = std::vector<fys::arena::TeamMember>();
+        return res;
+    }
+
+    std::vector<std::string> DBConnector::retrieveAttacksKeys() {
+        auto res = std::vector<std::string>();
+        return res;
+    }
 
 
 }

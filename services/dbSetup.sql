@@ -9,10 +9,10 @@ CREATE TABLE `team_character` (
   `secondary_max` int(11) DEFAULT NULL,
   `secondary` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_character`,`id_user`),
-  UNIQUE KEY `id_character_UNIQUE` (`id_character`),
-  UNIQUE KEY `id_user_UNIQUE` (`id_user`)
+  UNIQUE KEY `id_character_UNIQUE` (`id_character`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
+# Only handled by LocalContent for now (NAS) Maybe switch to database later on
 CREATE TABLE `contenders` (
   `key` char(45) NOT NULL,
   `content` varchar(20000) NOT NULL,
@@ -21,6 +21,7 @@ CREATE TABLE `contenders` (
   UNIQUE KEY `name_UNIQUE` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+# Only handled by LocalContent for now (NAS) Maybe switch to database later on
 CREATE TABLE `attack` (
   `id_attack` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) NOT NULL,
@@ -29,6 +30,7 @@ CREATE TABLE `attack` (
   UNIQUE KEY `attack_id_UNIQUE` (`id_attack`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
+# Only handled by LocalContent for now (NAS) Maybe switch to database later on
 CREATE TABLE `encounters` (
   `key` char(45) NOT NULL,
   `content` varchar(5000) NOT NULL,

@@ -34,6 +34,7 @@ namespace mariadb {
 
 namespace fys::arena {
     class ArenaServerContext;
+    class TeamMember;
 }
 
 namespace fys::network {
@@ -43,7 +44,8 @@ namespace fys::network {
     public:
         explicit DBConnector(const arena::ArenaServerContext &ctx);
 
-
+        std::vector<fys::arena::TeamMember> retrieveCharacters();
+        std::vector<std::string> retrieveAttacksKeys();
 
     private:
         mariadb::account_ref _refDb;
