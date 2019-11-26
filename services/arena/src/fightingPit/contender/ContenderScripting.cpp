@@ -35,8 +35,8 @@ using namespace chaiscript;
 namespace fys::arena {
 
     void ContenderScripting::loadContenderScript(ConnectionHandler &connectionHandler, const std::string &script) {
-        if (!script.empty())
-            _chai.get().eval(script);
+        if (!script.empty()) 
+            _chai.get().eval(script); // TODO : Use ChaiRegister
 
         _chai.get().add(chaiscript::fun<std::function<void(std::string, uint, uint, std::string)> >([&connectionHandler] (
                     std::string targetId,                 // [Optional]  Target (if any) TODO : Should be a pair of <bool, uint>

@@ -43,7 +43,7 @@ namespace fys::arena {
     }
 
     FightingPitAnnouncer &FightingPitAnnouncer::generatePartyTeams() {
-
+        
     }
 
     void FightingPitAnnouncer::setupPartyTeam() {
