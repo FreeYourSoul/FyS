@@ -37,12 +37,16 @@ namespace fys::arena {
         void moveTeamMember(HexagonSide::Orientation destination, bool bypassCheck = false);
         void moveTeamMember(data::MoveDirection rightOrLeft);
 
+        void setName(const std::string &name) { _name = name; }
+
         [[nodiscard]] data::Status &accessStatus() { return _status; }
         [[nodiscard]] std::pair<HexagonSide::Hexagon, HexagonSide::Orientation> getHexagonSide() const { return *_side; }
         [[nodiscard]] HexagonSide::Orientation getHexagonSideOrient() const { return (*_side).second; }
+        [[nodiscard]] const std::string &getName() const { return _name; }
 
     private:
         HexagonSide _side;
+        std::string _name;
         data::Status _status;
 
         // PendingAction _pendingAction; Todo

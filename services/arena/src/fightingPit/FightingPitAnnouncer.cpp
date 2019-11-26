@@ -30,6 +30,7 @@ namespace fys::arena {
     using json = nlohmann::json;
 
     FightingPit FightingPitAnnouncer::buildFightingPit(const std::string &wsId, std::pair<double, double> pos) const {
+
     }
 
     FightingPitAnnouncer &FightingPitAnnouncer::generateContenders() {

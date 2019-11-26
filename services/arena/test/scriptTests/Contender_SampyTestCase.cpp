@@ -23,6 +23,7 @@
 
 #include <catch2/catch.hpp>
 #include <ArenaServerContext.hh>
+#include <ChaiRegister.hh>
 #include <fightingPit/contender/ContenderScripting.hh>
 #include <fightingPit/contender/FightingContender.hh>
 #include <fightingPit/contender/PitContenders.hh>
@@ -50,7 +51,10 @@ TEST_CASE("Test Sampy", "[script_test]") {
 
     fys::arena::PitContenders pc;
     fys::arena::AllyPartyTeams apt;
-    fys::arena::ContenderScriptingUPtr sampy = std::make_unique<fys::arena::ContenderScripting>(pc.setupScriptEngine(apt));
+    chaiscript::ChaiScript chai;
+
+    fys::arena::ChaiRegister::registerChai(chai, pc, apt);
+    fys::arena::ContenderScriptingUPtr sampy = std::make_unique<fys::arena::ContenderScripting>(chai);
     sampy->setContenderId(0);
     sampy->setContenderName("Sampy");
     sampy->loadContenderScriptFromFile(ch, getPathSampyChaiScript());

@@ -44,7 +44,7 @@ namespace fys::network {
     public:
         explicit DBConnector(const arena::ArenaServerContext &ctx);
 
-        std::vector<fys::arena::TeamMember> retrieveCharacters();
+        std::vector<fys::arena::TeamMember> retrieveTeamCharacters(const std::string &user);
         std::vector<std::string> retrieveAttacksKeys();
 
     private:

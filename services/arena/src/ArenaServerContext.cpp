@@ -22,11 +22,9 @@
 // SOFTWARE.
 
 
-#include <nlohmann/json.hpp>
 #include <iostream>
 #include <fstream>
 #include "ArenaServerContext.hh"
-
 
 namespace fys::arena {
 
@@ -37,7 +35,7 @@ namespace fys::arena {
         parseArenaConfigFile(jsonConfig);
     }
 
-    void ArenaServerContext::parseArenaConfigFile(const json &configContent) {
+    void ArenaServerContext::parseArenaConfigFile(const nlohmann::json &configContent) {
         auto &arena = configContent["Arena"];
         arena["code"].get_to(_code);
         configContent["script_cache_source"].get_to(_pathSourceCache);
@@ -61,6 +59,5 @@ namespace fys::arena {
     std::string ArenaServerContext::getDispatcherConnectionString() const noexcept {
         return std::string("tcp://").append(_dispatcherData.address).append(":").append(std::to_string(_dispatcherData.port));
     }
-
 
 }

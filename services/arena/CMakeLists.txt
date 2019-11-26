@@ -51,6 +51,8 @@ add_executable(arena_service ${COMMON_SRCS}
         ${CMAKE_CURRENT_LIST_DIR}/include/ArenaServerContext.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/ConnectionHandler.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/ConnectionHandler.hh
+        ${CMAKE_CURRENT_LIST_DIR}/src/ChaiRegister.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/ChaiRegister.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/network/DBConnector.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/network/DBConnector.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/network/WorkerService.cpp

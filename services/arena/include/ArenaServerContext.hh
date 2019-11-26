@@ -25,10 +25,10 @@
 #ifndef FYS_ARENASERVERCONTEXT_HH
 #define FYS_ARENASERVERCONTEXT_HH
 
+#include <nlohmann/json.hpp>
 #include <ServiceContextBase.hh>
 
 namespace fys::arena {
-    using json = nlohmann::json;
 
     class ArenaServerContext : fys::common::ServiceContextBase {
     public:
@@ -42,7 +42,7 @@ namespace fys::arena {
         [[nodiscard]] uint getDbPort() const { return _dbPort; }
 
     private:
-        void parseArenaConfigFile(const json &configContent);
+        void parseArenaConfigFile(const nlohmann::json &configContent);
 
     private:
         std::string _code;

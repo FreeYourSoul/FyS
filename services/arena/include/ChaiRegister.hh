@@ -27,11 +27,11 @@
 #include <memory>
 
 // forward declarations
-namespace chaiscript{
-    class chai;
+namespace chaiscript {
+    class ChaiScript;
     class Module;
+    using ModulePtr = std::shared_ptr<chaiscript::Module>;
 } 
-using ModulePtr = std::shared_ptr<chaiscript::Module>;
 namespace fys::arena {
     class ConnectionHandler;
     class PitContenders;
@@ -42,13 +42,13 @@ namespace fys::arena {
 
     class ChaiRegister {
     public:
-        static void registerChai(chaiscript::chai &chai, fys::arena::PitContenders& pc, fys::arena::AllyPartyTeams &apt);
-        static void registerUtility(chaiscript::chai &chai, fys::arena::ConnectionHandler &connectionHandler);
+        static void registerChai(chaiscript::ChaiScript &chai, fys::arena::PitContenders& pc, fys::arena::AllyPartyTeams &apt);
+        static void registerUtility(chaiscript::ChaiScript &chai, fys::arena::ConnectionHandler &connectionHandler);
 
     private:
         static void registerCommon(chaiscript::ModulePtr m);
-        static void registerFightingPitContender(chaiscript::ModulePtr m);
-        static void registerTeamAllies(chaiscript::ModulePtr m);
+        static void registerFightingPitContender(chaiscript::ChaiScript &chai, chaiscript::ModulePtr m);
+        static void registerTeamAllies(chaiscript::ChaiScript &chai, chaiscript::ModulePtr m);
     
     };
 

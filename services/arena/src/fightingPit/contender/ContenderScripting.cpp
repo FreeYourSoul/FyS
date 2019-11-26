@@ -23,7 +23,6 @@
 
 #include <fmt/format.h>
 #include <chaiscript/chaiscript.hpp>
-#include <chaiscript/chaiscript_basic.hpp>
 #include <chaiscript/utility/utility.hpp>
 
 #include <fightingPit/contender/ContenderScripting.hh>
@@ -35,30 +34,8 @@ using namespace chaiscript;
 namespace fys::arena {
 
     void ContenderScripting::loadContenderScript(ConnectionHandler &connectionHandler, const std::string &script) {
-        if (!script.empty()) 
+        if (!script.empty())
             _chai.get().eval(script); // TODO : Use ChaiRegister
-
-        _chai.get().add(chaiscript::fun<std::function<void(std::string, uint, uint, std::string)> >([&connectionHandler] (
-                    std::string targetId,                 // [Optional]  Target (if any) TODO : Should be a pair of <bool, uint>
-                    uint contenderId,                     // [Mandatory] id of the contender
-                    uint spellId,                         // [Mandatory] Spell/Action id
-                    const std::string &descriptionString  // [Mandatory] Description String (Heal of 15, Damage of 17, Critical Damage of 55, Buff intelligence....)
-                ) {
-                // instantiate a message to send
-                if (!targetId.empty() && targetId.size() > 1) {
-                    bool isFriendlyTarget = (targetId.at(0) == 'F');
-                    uint idTargetInteger = std::stoi(targetId.substr(1));
-                    // set the id value of the message to send
-                }
-                // continue setting values
-                // send the data to connectionHandler
-
-            }
-        ), getChaiMethodName("sendContenderAction"));
-
-        _chai.get().add(chaiscript::fun<std::function<unsigned ()> >([]() {
-            return std::rand() % 100;
-        }), "generateRandomNumber");
 
         // instantiate the contender in chai engine
         std::string createVar = fmt::format("global {}={}({});",

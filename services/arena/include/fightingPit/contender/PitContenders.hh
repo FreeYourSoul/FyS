@@ -44,7 +44,6 @@ namespace fys::arena {
     class PitContenders {
 
     public:
-        chaiscript::ChaiScript &setupScriptEngine(AllyPartyTeams &AllyPartyTeams); // TODO remove (use ChaiRegister)
         [[nodiscard]]std::vector<std::shared_ptr<FightingContender>> getContenderOnSide(HexagonSide::Orientation side) const;
         [[nodiscard]]std::vector<std::shared_ptr<FightingContender>> getChangingSideContenders() const;
 
@@ -67,11 +66,6 @@ namespace fys::arena {
             _contenders.emplace_back(std::move(contender));
             _changeSideFlags.emplace_back(true);
         }
-
-    private:
-        void registerCommon(chaiscript::ModulePtr m);// TODO remove (use ChaiRegister)
-        void registerChaiAllies(chaiscript::ModulePtr m);// TODO remove (use ChaiRegister)
-        void registerChaiPitContender(chaiscript::ModulePtr m);// TODO remove (use ChaiRegister)
 
     private:
         chaiscript::ChaiScript _chai;
