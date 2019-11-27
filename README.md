@@ -1,3 +1,6 @@
+[![Documentation Status](https://readthedocs.org/projects/fys/badge/?version=latest)](https://fys.readthedocs.io/en/latest/?badge=latest)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/FreeYourSoul/FyS/master/LICENSE)
+
 # FyS Online
 
 FreeYourSoul Online, a scalable mmorpg game
@@ -10,7 +13,7 @@ FreeYourSoul Online, a scalable mmorpg game
 
 ### Arena Service
 
-FreeYourSoul Online is using an original battle system inspired by Final Fantasy turn per turn systems. It is called Side Condition Timed Battle (SCTB) and it is explained into further details [here](doc/services/Arena_BattleSystem.md#arena).
+FreeYourSoul Online is using an original battle system inspired by Final Fantasy turn per turn systems. It is called Side Condition Timed Battle (SCTB) and it is explained into further details [here](docs/services/Arena_BattleSystem.md#arena).
 
 ### World Service
 

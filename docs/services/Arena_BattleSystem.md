@@ -71,11 +71,11 @@ This aspect add some strategy as some monster could have very powerfull area of 
   
 You can find bellow a very sketchy draw of example:
 
-![SCTB-MoveExample](https://raw.githubusercontent.com/FreeYourSoul/FyS/master/doc/other/ExampleFySArena.png)
+![SCTB-MoveExample](https://raw.githubusercontent.com/FreeYourSoul/FyS/master/docs/assets/ExampleFySArena.png)
 
 In this state the player is in the at the south west of the hexagon B, if the player decide to move all his characters to the left, the characters will be on the North west of Polygon B (as shown below). In this other side of the polygon B, another monster will be present.
 
-![SCTB-MoveExampleAfter](https://raw.githubusercontent.com/FreeYourSoul/FyS/master/doc/other/ExampleFySArenaAfter.png)
+![SCTB-MoveExampleAfter](https://raw.githubusercontent.com/FreeYourSoul/FyS/master/docs/assets/ExampleFySArenaAfter.png)
 
 ### Large sized monster
 

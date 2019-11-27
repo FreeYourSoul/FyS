@@ -9,4 +9,4 @@ The submodule containing all the scripts that are going to be stored and retriev
 ## Cache Manager Library (CML)
 
 This is a library that is used in order to retrieve data from the database, and cache it in order to not have expensive db call.   
-More information [here](../doc/CML.md)
+More information [here](../docs/CML.md)

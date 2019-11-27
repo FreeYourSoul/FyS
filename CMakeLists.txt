@@ -1,6 +1,6 @@
 cmake_minimum_required( VERSION 3.6 )
 
-project(FyS_Service CXX)
+project(FyS_Online CXX)
 
 set_property(TARGET PROPERTY CXX_STANDARD 17)
 

@@ -17,7 +17,7 @@ Thanks to those 3 steps, in the second attempt to retrieve the contender data.
 2. If it is not a hot script, the local file system is checking for the existance of the file that should correspond the script.  
 3. If it is found, it will be loaded, otherwise the database is requested.
 
-![conditionalDiagramCML](../doc/other/conditionalDiagramCML.png)
+![conditionalDiagramCML](../docs/assets/conditionalDiagramCML.png)
 
 ## Up to date
 
