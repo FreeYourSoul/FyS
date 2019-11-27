@@ -22,6 +22,7 @@
 // SOFTWARE.
 
 #include <catch2/catch.hpp>
+#include <chaiscript/chaiscript.hpp>
 #include <ArenaServerContext.hh>
 #include <ChaiRegister.hh>
 #include <fightingPit/contender/ContenderScripting.hh>
@@ -47,17 +48,15 @@ std::string getPathSampyChaiScript() {
  */
 TEST_CASE("Test Sampy", "[script_test]") {
 
-    fys::arena::ConnectionHandler ch;
-
     fys::arena::PitContenders pc;
     fys::arena::AllyPartyTeams apt;
-    chaiscript::ChaiScript chai;
+    auto chai = fys::arena::ChaiRegister::createChaiInstance(pc, apt);
 
-    fys::arena::ChaiRegister::registerChai(chai, pc, apt);
-    fys::arena::ContenderScriptingUPtr sampy = std::make_unique<fys::arena::ContenderScripting>(chai);
+    fys::arena::ContenderScriptingUPtr sampy = std::make_unique<fys::arena::ContenderScripting>(*chai);
     sampy->setContenderId(0);
     sampy->setContenderName("Sampy");
-    sampy->loadContenderScriptFromFile(ch, getPathSampyChaiScript());
+    sampy->loadContenderScriptFromFile(getPathSampyChaiScript());
+    sampy->loadContenderScriptFromFile(getPathSampyChaiScript());
 
     auto fpc = std::make_shared<fys::arena::FightingContender>(std::move(sampy));
     pc.addContender(fpc);

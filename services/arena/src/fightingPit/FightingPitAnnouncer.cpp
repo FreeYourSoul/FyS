@@ -22,6 +22,8 @@
 // SOFTWARE.
 
 #include <nlohmann/json.hpp>
+
+#include <ConnectionHandler.hh>
 #include <fightingPit/contender/ContenderScripting.hh>
 #include <fightingPit/contender/FightingContender.hh>
 #include <fightingPit/FightingPitAnnouncer.hh>
@@ -29,11 +31,11 @@
 namespace fys::arena {
     using json = nlohmann::json;
 
-    FightingPit FightingPitAnnouncer::buildFightingPit(const std::string &wsId, std::pair<double, double> pos) const {
+    FightingPit FightingPitAnnouncer::buildFightingPit(ConnectionHandler &connectionHandler) const {
 
     }
 
-    FightingPitAnnouncer &FightingPitAnnouncer::generateContenders() {
+    FightingPitAnnouncer &FightingPitAnnouncer::generateContenders(const std::string &wsId) {
         if (isScriptedEncounter() && !_idEncounter) {
             // impossible because a scripted encounter need to have an ID
             _isFightingPitCorrupted = true;

@@ -29,8 +29,6 @@
 #include <fightingPit/team/TeamMember.hh>
 #include <fightingPit/team/AllyPartyTeams.hh>
 
-using namespace chaiscript;
-
 namespace fys::arena {
 
     std::vector<std::shared_ptr<FightingContender>> PitContenders::getChangingSideContenders() const {
@@ -54,7 +52,7 @@ namespace fys::arena {
     }
 
     std::shared_ptr<FightingContender>
-    PitContenders::selectSuitableContenderOnSide(HexagonSide::Orientation side, ComparatorSelection<FightingContender> comp) {
+    PitContenders::selectSuitableContenderOnSide(HexagonSide::Orientation side, ComparatorSelection<FightingContender> comp) const {
         std::vector<std::shared_ptr<FightingContender>> result;
         auto it = fys::find_most_suitable(_contenders.begin(), _contenders.end(), [side, &comp](auto &current, auto &next){
             return current->getHexagonSideOrient() == side && comp(current, next);
@@ -65,7 +63,7 @@ namespace fys::arena {
     }
 
     std::shared_ptr<FightingContender>
-    PitContenders::selectSuitableContenderOnSideAlive(HexagonSide::Orientation side, ComparatorSelection<FightingContender> comp) {
+    PitContenders::selectSuitableContenderOnSideAlive(HexagonSide::Orientation side, ComparatorSelection<FightingContender> comp) const {
         std::vector<std::shared_ptr<FightingContender>> result;
         auto it = fys::find_most_suitable(_contenders.begin(), _contenders.end(), [side, &comp](auto &current, auto &next){
             return !current->accessStatus().life.isDead() && current->getHexagonSideOrient() == side && comp(current, next);
@@ -76,7 +74,7 @@ namespace fys::arena {
     }
 
     std::shared_ptr<FightingContender>
-    PitContenders::selectSuitableContender(ComparatorSelection<FightingContender> comp) {
+    PitContenders::selectSuitableContender(ComparatorSelection<FightingContender> comp) const {
         std::vector<std::shared_ptr<FightingContender>> result;
         auto it = fys::find_most_suitable(_contenders.begin(), _contenders.end(), comp);
         if (it == _contenders.end())
@@ -85,7 +83,7 @@ namespace fys::arena {
     }
 
     std::shared_ptr<FightingContender>
-    PitContenders::selectSuitableContenderAlive(ComparatorSelection<FightingContender> comp) {
+    PitContenders::selectSuitableContenderAlive(ComparatorSelection<FightingContender> comp) const {
         std::vector<std::shared_ptr<FightingContender>> result;
         auto it = fys::find_most_suitable(_contenders.begin(), _contenders.end(), [&comp](auto &current, auto &next){
             return !current->accessStatus().life.isDead() && comp(current, next);

@@ -30,7 +30,6 @@
 #include <functional>
 #include <fightingPit/data/CommonTypes.hh>
 #include <fightingPit/HexagonSide.hh>
-#include <chaiscript/chaiscript.hpp>
 
 namespace fys::arena {
 
@@ -49,13 +48,13 @@ namespace fys::arena {
 
         // scripting utility
         [[nodiscard]]std::shared_ptr<FightingContender>
-            selectSuitableContender(ComparatorSelection<FightingContender> comp);
+            selectSuitableContender(ComparatorSelection<FightingContender> comp) const;
         [[nodiscard]]std::shared_ptr<FightingContender>
-            selectSuitableContenderOnSide(HexagonSide::Orientation side, ComparatorSelection<FightingContender> comp);
+            selectSuitableContenderOnSide(HexagonSide::Orientation side, ComparatorSelection<FightingContender> comp) const;
         [[nodiscard]]std::shared_ptr<FightingContender>
-            selectSuitableContenderAlive(ComparatorSelection<FightingContender> comp);
+            selectSuitableContenderAlive(ComparatorSelection<FightingContender> comp) const;
         [[nodiscard]]std::shared_ptr<FightingContender>
-            selectSuitableContenderOnSideAlive(HexagonSide::Orientation side, ComparatorSelection<FightingContender> comp);
+            selectSuitableContenderOnSideAlive(HexagonSide::Orientation side, ComparatorSelection<FightingContender> comp) const;
 
         [[nodiscard]]std::shared_ptr<FightingContender>
                 getFightingContender(std::size_t pos) const { return _contenders.at(pos); }
@@ -68,8 +67,6 @@ namespace fys::arena {
         }
 
     private:
-        chaiscript::ChaiScript _chai;
-
         std::vector<std::shared_ptr<FightingContender> > _contenders;
 
         /**

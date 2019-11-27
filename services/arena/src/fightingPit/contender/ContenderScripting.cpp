@@ -22,20 +22,19 @@
 // SOFTWARE.
 
 #include <fmt/format.h>
+#include <spdlog/spdlog.h>
 #include <chaiscript/chaiscript.hpp>
 #include <chaiscript/utility/utility.hpp>
 
 #include <fightingPit/contender/ContenderScripting.hh>
 
-#include <ConnectionHandler.hh>
-
 using namespace chaiscript;
 
 namespace fys::arena {
 
-    void ContenderScripting::loadContenderScript(ConnectionHandler &connectionHandler, const std::string &script) {
+    void ContenderScripting::loadContenderScript(const std::string &script) {
         if (!script.empty())
-            _chai.get().eval(script); // TODO : Use ChaiRegister
+            _chai.get().eval(script);
 
         // instantiate the contender in chai engine
         std::string createVar = fmt::format("global {}={}({});",
@@ -43,14 +42,14 @@ namespace fys::arena {
         _chai.get().eval(createVar);
     }
 
-    void ContenderScripting::loadContenderScriptFromFile(ConnectionHandler &connectionHandler, const std::string &filePath) {
+    void ContenderScripting::loadContenderScriptFromFile(const std::string &filePath) {
         // load script content (containing the class)
         try {
             _chai.get().eval_file(filePath);
-            loadContenderScript(connectionHandler, "");
         } catch(std::exception &ex) {
             SPDLOG_ERROR("Error caught on scripting loading {}", ex.what());
         }
+        loadContenderScript();
     }
 
     void ContenderScripting::executeAction() {

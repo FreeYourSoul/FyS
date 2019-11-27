@@ -45,7 +45,7 @@ namespace fys::arena {
      *   - Download the required scripts for the contenders (if not in the cache).
      *   - Download the required scripts for the team (if not in the cache)
      *   - Set the level of the fighting pit 
-     * 
+     *
      */
     class FightingPitAnnouncer {
 
@@ -59,8 +59,8 @@ namespace fys::arena {
     public:
         explicit FightingPitAnnouncer(cache::Cml &cml) : _cache(cml) {}
 
-        [[nodiscard]] FightingPit buildFightingPit(const std::string &wsId, std::pair<double, double> pos) const;
-        FightingPitAnnouncer &generateContenders();
+        [[nodiscard]] FightingPit buildFightingPit(fys::arena::ConnectionHandler &connectionHandler) const;
+        FightingPitAnnouncer &generateContenders(const std::string &wsId);
         FightingPitAnnouncer &generatePartyTeams();
 
         FightingPitAnnouncer &setEncounterType(EncounterType encounterType) {

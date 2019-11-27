@@ -43,11 +43,10 @@ namespace fys::arena {
     class ChaiRegister {
     public:
         static std::unique_ptr<chaiscript::ChaiScript> createChaiInstance(PitContenders &pc, AllyPartyTeams &apt);
-
-        static void registerChai(chaiscript::ChaiScript &chai, fys::arena::PitContenders& pc, fys::arena::AllyPartyTeams &apt);
         static void registerUtility(chaiscript::ChaiScript &chai, fys::arena::ConnectionHandler &connectionHandler);
 
     private:
+        static void registerChai(chaiscript::ChaiScript &chai, fys::arena::PitContenders& pc, fys::arena::AllyPartyTeams &apt);
         static void registerCommon(chaiscript::ModulePtr m);
         static void registerFightingPitContender(chaiscript::ChaiScript &chai, chaiscript::ModulePtr m);
         static void registerTeamAllies(chaiscript::ChaiScript &chai, chaiscript::ModulePtr m);

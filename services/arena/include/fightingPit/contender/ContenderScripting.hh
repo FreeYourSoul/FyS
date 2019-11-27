@@ -48,8 +48,8 @@ namespace fys::arena {
 
         void executeAction();
 
-        void loadContenderScript(ConnectionHandler &connectionHandler, const std::string& script);
-        void loadContenderScriptFromFile(ConnectionHandler &connectionHandler, const std::string& scriptFile);
+        void loadContenderScript(const std::string& script = "");
+        void loadContenderScriptFromFile(const std::string& scriptFile);
 
         void setContenderName(std::string contenderName) { _contenderName = std::move(contenderName); }
         void setContenderId(uint contenderId) { _contenderId = contenderId; }
