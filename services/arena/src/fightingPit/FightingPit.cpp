@@ -23,6 +23,9 @@
 
 #include <spdlog/spdlog.h>
 #include <chrono>
+#include <fightingPit/team/PartyTeam.hh>
+#include <fightingPit/contender/FightingContender.hh>
+#include <fightingPit/SideBattle.hh>
 #include <fightingPit/FightingPit.hh>
 
 namespace {

@@ -40,9 +40,9 @@ using chaiscript::fun;
 namespace fys::arena {
 
 void ChaiRegister::registerChai(chaiscript::ChaiScript &chai, PitContenders& pc, AllyPartyTeams &apt) {
-    chaiscript::ModulePtr m = std::make_shared<chaiscript::Module>();
 
     try {
+        chaiscript::ModulePtr m = std::make_shared<chaiscript::Module>();
         registerCommon(m);
         registerFightingPitContender(chai, m);
         registerTeamAllies(chai, m);
@@ -213,6 +213,11 @@ void ChaiRegister::registerTeamAllies(chaiscript::ChaiScript &chai, chaiscript::
 
 }
 
+    std::unique_ptr<chaiscript::ChaiScript> ChaiRegister::createChaiInstance(PitContenders &pc, AllyPartyTeams &apt) {
+        auto chai = std::make_unique<chaiscript::ChaiScript>();
+        registerChai(*chai, pc, apt);
+        return chai;
+    }
 
-    
+
 }

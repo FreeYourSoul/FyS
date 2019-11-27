@@ -28,11 +28,19 @@
 #include <vector>
 #include <optional>
 #include <fightingPit/contender/PitContenders.hh>
-#include <fightingPit/contender/FightingContender.hh>
 #include <fightingPit/FightingPitLayout.hh>
 #include <fightingPit/team/AllyPartyTeams.hh>
-#include <fightingPit/team/PartyTeam.hh>
-#include <fightingPit/SideBattle.hh>
+#include <ChaiRegister.hh>
+
+// forward declarations
+namespace chaiscript {
+    class ChaiScript;
+}
+namespace fys::arena {
+    class FightingContender;
+    class SideBattle;
+    class PartyTeam;
+};
 
 namespace fys::arena {
     class FightingPitAnnouncer;
@@ -68,10 +76,11 @@ namespace fys::arena {
             NOT_FINISHED    // on going
         };
 
-        explicit FightingPit(Level levelFigtingPit) :
+        explicit FightingPit(Level levelFightingPit) :
                 _end(Ending::NOT_FINISHED),
-                _levelFightingPit(levelFigtingPit),
-                _layout(_contenders, _partyTeams) 
+                _levelFightingPit(levelFightingPit),
+                _layout(_contenders, _partyTeams),
+                _chaiPtr(ChaiRegister::createChaiInstance(_contenders, _partyTeams))
         {}
 
         void startBattle();
@@ -90,6 +99,7 @@ namespace fys::arena {
         AllyPartyTeams      _partyTeams;
         FightingPitLayout   _layout;
 
+        std::unique_ptr<chaiscript::ChaiScript> _chaiPtr;
         std::vector<std::unique_ptr<SideBattle>> _sideBattles;
 
     };
