@@ -41,3 +41,7 @@
 *.exe
 *.out
 *.app
+docs/Doxyfile
+docs/build/
+docs/doxygen/
+docs/sphinx/
