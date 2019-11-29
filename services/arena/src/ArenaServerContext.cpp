@@ -21,27 +21,68 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
+#include <spdlog/spdlog.h>
+#include <utility>
 #include <iostream>
 #include <fstream>
+
 #include "ArenaServerContext.hh"
+
+using namespace nlohmann;
 
 namespace fys::arena {
 
     ArenaServerContext::ArenaServerContext(int ac, const char *const *av) : common::ServiceContextBase(ac, av) {
         std::ifstream i(_configFile);
+        SPDLOG_INFO("start parsing file {}", _configFile);
         json jsonConfig;
         i >> jsonConfig;
         parseArenaConfigFile(jsonConfig);
     }
 
-    void ArenaServerContext::parseArenaConfigFile(const nlohmann::json &configContent) {
+    void ArenaServerContext::parseArenaConfigFile(const json &configContent) {
+
         auto &arena = configContent["Arena"];
         arena["code"].get_to(_code);
-        configContent["script_cache_source"].get_to(_pathSourceCache);
-        configContent["script_storage_cache"].get_to(_pathLocalStorageCache);
-        configContent["db_hostname"].get_to(_dbHost);
-        configContent["db_port"].get_to(_dbPort);
+        arena["script_cache_source"].get_to(_pathSourceCache);
+        arena["script_storage_cache"].get_to(_pathLocalStorageCache);
+        arena["db_hostname"].get_to(_dbHost);
+        arena["db_port"].get_to(_dbPort);
+
+        auto &encounter = arena["encounter"];
+        _encounterContext._rangeEncounter[0] = std::make_pair(encounter["range"]["easy"][0].get<uint>(), encounter["range"]["easy"][1].get<uint>());
+        _encounterContext._rangeEncounter[1] = std::make_pair(encounter["range"]["medium"][0].get<uint>(), encounter["range"]["medium"][1].get<uint>());
+        _encounterContext._rangeEncounter[2] = std::make_pair(encounter["range"]["hard"][0].get<uint>(), encounter["range"]["hard"][1].get<uint>());
+
+        auto &contenders = encounter["contenders"];
+        for (auto &contender : contenders) {
+            EncounterContext::EncounterDesc desc = {
+                    contender["key"].get<std::string>(),
+                    contender.find("max_encountering") != contender.end() ? contender["max_encountering"].get<uint>() : 99,
+                    {
+                            contender["chance"]["easy"].get<uint>(),
+                            contender["chance"]["medium"].get<uint>(),
+                            contender["chance"]["hard"].get<uint>()
+                    }
+            };
+            _encounterContext._contenders.emplace_back(std::move(desc));
+        }
+        if (!validateEncounterContext())
+            throw std::runtime_error("Encounter Context invalid");
+    }
+
+    bool ArenaServerContext::validateEncounterContext() const {
+        for (int i = 0; i < 3; ++i) {
+            uint total = 0;
+            for (auto desc : _encounterContext._contenders) {
+                total += desc.chance[i];
+            }
+            if (total != 100) {
+                SPDLOG_ERROR("Encounter Context invalid because of % chance for {} is {} while it should be equal 100", i, total);
+                return false;
+            }
+        }
+        return true;
     }
 
     std::string ArenaServerContext::toString() const {

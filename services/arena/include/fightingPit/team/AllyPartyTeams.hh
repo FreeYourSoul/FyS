@@ -27,6 +27,7 @@
 
 #include <vector>
 #include <memory>
+#include <fightingPit/team/PartyTeam.hh>
 
 namespace fys::arena {
 
@@ -34,7 +35,6 @@ namespace fys::arena {
     using ComparatorSelection = std::function<bool(std::shared_ptr<T>, std::shared_ptr<T>)>;
 
     // forward declarations
-    class PartyTeam;
     class TeamMember;
 
     class AllyPartyTeams {

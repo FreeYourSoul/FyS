@@ -23,6 +23,7 @@
 
 #include <spdlog/spdlog.h>
 #include <chrono>
+#include <chaiscript/chaiscript.hpp>
 #include <fightingPit/team/PartyTeam.hh>
 #include <fightingPit/contender/FightingContender.hh>
 #include <fightingPit/SideBattle.hh>
@@ -44,6 +45,13 @@ namespace {
 }
 
 namespace fys::arena {
+
+    FightingPit::FightingPit(fys::arena::FightingPit::Level levelFightingPit) :
+            _end(Ending::NOT_FINISHED),
+            _levelFightingPit(levelFightingPit),
+            _layout(_contenders, _partyTeams),
+            _chaiPtr(ChaiRegister::createChaiInstance(_contenders, _partyTeams))
+    {}
 
     void FightingPit::startBattle() {
         std::chrono::milliseconds timerInterlude = retrieveTimeInterludeFromLevelDegree(_levelFightingPit);

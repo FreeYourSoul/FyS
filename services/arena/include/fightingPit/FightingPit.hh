@@ -40,7 +40,7 @@ namespace fys::arena {
     class FightingContender;
     class SideBattle;
     class PartyTeam;
-};
+}
 
 namespace fys::arena {
     class FightingPitAnnouncer;
@@ -76,13 +76,7 @@ namespace fys::arena {
             NOT_FINISHED    // on going
         };
 
-        explicit FightingPit(Level levelFightingPit) :
-                _end(Ending::NOT_FINISHED),
-                _levelFightingPit(levelFightingPit),
-                _layout(_contenders, _partyTeams),
-                _chaiPtr(ChaiRegister::createChaiInstance(_contenders, _partyTeams))
-        {}
-
+        explicit FightingPit(Level levelFightingPit);
         void startBattle();
 
         void addContender(std::shared_ptr<FightingContender> newContender) { _contenders.addContender(std::move(newContender)); }

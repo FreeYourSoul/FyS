@@ -1,0 +1,165 @@
+// MIT License
+//
+// Copyright (c) 2019 Quentin Balland
+// Repository : https://github.com/FreeYourSoul/FyS
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+//         of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+//         to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//         copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+//         copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//         AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+//<><><><><><><><><><><><><><><><><><><><><>  ACTIONS  <><><><><><><><><><><><><><><><><><><><><><><>
+
+class Sleep {
+    def Sleep() {}
+
+    def requireAllyTarget() {
+        return 0;
+    }
+
+    def requireEnemyTarget() {
+        return 0;
+    }
+
+    def execute(targetStatus) {
+        targetStatus.magicPoint.current = 42;
+        return 1;
+    }
+
+    def rangeAnySide() {
+        return 0;
+    }
+
+    def getId() {
+        return 0;
+    }
+};
+
+class Attack {
+    var power;
+
+    def Attack(v) {
+        this.power = v;
+    }
+
+    def requireAllyTarget() {
+        return 0;
+    }
+
+    def requireEnemyTarget() {
+        return 1;
+    }
+
+    def rangeAnySide() {
+        return 0;
+    }
+
+    def execute(targetStatus) {
+        if (targetStatus.life.current > this.power) {
+            targetStatus.life.current = targetStatus.life.current - this.power;
+        }
+        else {
+            targetStatus.life.current = 0;
+        }
+        return 1;
+    }
+
+    def getId() {
+        return 1;
+    }
+
+};
+
+
+//<><><><><><><><><><><><><><><><><><><><><>  SAMPY  <><><><><><><><><><><><><><><><><><><><><><><>
+
+class SampyActionDesc {
+    var action;
+    var actionName;
+
+    def SampyActionDesc(x, y) {
+        this.actionName = x;
+        this.action = y;
+    }
+
+};
+
+
+//Sample Monster Used For testing Purpose :-D
+class Sampy {
+
+    var id;
+    var actions;
+
+    def Sampy(contenderId) {
+        this.id = contenderId
+        var ooo = SampyActionDesc("groundStrike", Attack(80));
+        var oo = SampyActionDesc("baseAttack", Attack(50));
+        var o = SampyActionDesc("sleep", Sleep());
+        this.actions = [
+            "baseAttack":oo,
+            "groundStrike":ooo,
+            "sleep":o
+         ];
+    }
+
+    def getActionByName(name) {
+        return this.actions[name].action;
+    }
+
+    // select action strategy
+    def decideAction(life) {
+        var percent = life.current / life.total * 100;
+        if (percent == 100) {
+            return this.getActionByName("sleep")
+        }
+        if (percent < 50) {
+            return this.getActionByName("baseAttack");
+        }
+        else {
+            return this.getActionByName("groundStrike");
+        }
+    }
+
+    // EnnemyTarget selection strategy
+    def decideTarget(thisC, requireEnemyTarget, requireAllyTarget) : requireEnemyTarget == 1 && requireAllyTarget == 0 {
+        var comparator = fun(current, next) { (current.accessStatus().life.current > next.accessStatus().life.current) ? 1 : 0; }
+        allyPartyTeams.selectSuitableMemberOnSideAlive(thisC.getHexagonSideOrient(), comparator);
+    }
+
+    // AllyTarget selection strategy
+    def decideTarget(thisC, requireEnemyTarget, requireAllyTarget) : requireEnemyTarget == 0 && requireAllyTarget == 1 {
+        return 1;
+    }
+
+    // no targeting
+    def decideTarget(thisC, requireEnemyTarget, requireAllyTarget) : requireEnemyTarget == 0 && requireAllyTarget == 0 {
+        return thisC;
+    }
+
+    def runScriptedAction(id) {
+        var &thisContender = pitContenders.getFightingContender(id);
+        var &thisStatus = thisContender.accessStatus();
+        var &action = this.decideAction(thisStatus.life);
+        var &target = this.decideTarget(thisContender, action.requireEnemyTarget(), action.requireAllyTarget());
+        return action.execute(target.accessStatus());
+    }
+
+    def defineSpawningPosition() {
+        // todo Create generic script to define a position
+    }
+
+};

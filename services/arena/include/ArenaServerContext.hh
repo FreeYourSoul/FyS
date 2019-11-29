@@ -25,10 +25,22 @@
 #ifndef FYS_ARENASERVERCONTEXT_HH
 #define FYS_ARENASERVERCONTEXT_HH
 
+#include <array>
 #include <nlohmann/json.hpp>
 #include <ServiceContextBase.hh>
 
 namespace fys::arena {
+
+    struct EncounterContext {
+        struct EncounterDesc {
+            std::string key;
+            uint maxEncountering;
+            std::array<uint, 3> chance;
+        };
+
+        std::array<std::pair<uint, uint>, 3> _rangeEncounter;
+        std::vector<EncounterDesc>        _contenders;
+    };
 
     class ArenaServerContext : fys::common::ServiceContextBase {
     public:
@@ -43,6 +55,7 @@ namespace fys::arena {
 
     private:
         void parseArenaConfigFile(const nlohmann::json &configContent);
+        bool validateEncounterContext() const;
 
     private:
         std::string _code;
@@ -50,6 +63,8 @@ namespace fys::arena {
         std::string _pathSourceCache;
         std::string _dbHost;
         uint _dbPort = 3306;
+
+        EncounterContext _encounterContext;
     };
 
 }
