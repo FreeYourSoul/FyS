@@ -115,14 +115,15 @@ namespace fys::arena {
         for (std::size_t i = 0; i < _baseSpeed.size(); ++i) {
             if (_baseSpeed.at(i).id == elemToCompute.id) {
                 uint idNextInLine = (i == 0) ? _baseSpeed.back().id : _baseSpeed.at(i - 1).id;
-                for (const auto &analistElem : _analyzedList) {
-                    if (analistElem.id == idNextInLine) {
-                        return analistElem.speed ? analistElem.speed : 1;
-                    }
+                if (auto it = std::find_if(_analyzedList.begin(), _analyzedList.end(),
+                       [idNextInLine](const auto &analistElem) {
+                           return analistElem.id == idNextInLine;
+                       }); it != _analyzedList.end()) {
+                    return it->speed ? it->speed : 1;
                 }
             }
         }
-        // TODO : Log warning about strange stuff happenning arround here
+        // TODO : Log warning about strange stuff happening around here
         return 1;
     }
 
@@ -133,11 +134,12 @@ namespace fys::arena {
             return;
 
         for (const auto &baseSpeedElem : _baseSpeed) {
-            for (auto &analyzedElem : _analyzedList) {
-                if (analyzedElem.id == baseSpeedElem.id) {
-                    analyzedElem.speed += baseSpeedElem.speed + getFastestBaseSpeed();
-                    break;
-                }
+            if (auto it = std::find_if(_analyzedList.begin(), _analyzedList.end(),
+                                       [baseId = baseSpeedElem.id](const auto &analyzedElem) {
+                                           return analyzedElem.id == baseId;
+                                       });
+                    it != _analyzedList.end()) {
+                it->speed += baseSpeedElem.speed + getFastestBaseSpeed();
             }
         }
         // reverse in order to have faster at the end (to use pop_back)

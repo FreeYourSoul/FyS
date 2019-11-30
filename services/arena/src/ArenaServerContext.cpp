@@ -22,6 +22,7 @@
 // SOFTWARE.
 
 #include <spdlog/spdlog.h>
+#include <numeric>
 #include <utility>
 #include <iostream>
 #include <fstream>
@@ -58,7 +59,7 @@ namespace fys::arena {
         for (auto &contender : contenders) {
             EncounterContext::EncounterDesc desc = {
                     contender["key"].get<std::string>(),
-                    contender.find("max_encountering") != contender.end() ? contender["max_encountering"].get<uint>() : 99,
+                    contender.value("max_encountering", 99u),
                     {
                             contender["chance"]["easy"].get<uint>(),
                             contender["chance"]["medium"].get<uint>(),
@@ -74,9 +75,8 @@ namespace fys::arena {
     bool ArenaServerContext::validateEncounterContext() const {
         for (int i = 0; i < 3; ++i) {
             uint total = 0;
-            for (auto desc : _encounterContext._contenders) {
-                total += desc.chance[i];
-            }
+            total = std::accumulate(_encounterContext._contenders.begin(), _encounterContext._contenders.end(), 0,
+                                    [i](const uint val, const auto &rhs) -> uint { return val + rhs.chance[i]; });
             if (total != 100) {
                 SPDLOG_ERROR("Encounter Context invalid because of % chance for {} is {} while it should be equal 100", i, total);
                 return false;
@@ -87,7 +87,7 @@ namespace fys::arena {
 
     std::string ArenaServerContext::toString() const {
         std::string str;
-        str = "\n*************************\n";
+        str = "dump context\n*************************\n";
         str+= "[INFO] Service " + _name + " context VERSION: " + _version + "\n";
         str+= "[INFO] Config file used: " + _configFile + "\n\n";
         str+= "[INFO] Dispatcher connected port: " + std::to_string(_dispatcherData.port) + "\n";

@@ -1,4 +1,5 @@
 #include <spdlog/spdlog.h>
+#include <numeric>
 #include <tclap/ValueArg.h>
 #include <tclap/CmdLine.h>
 #include <boost/property_tree/ini_parser.hpp>
@@ -79,9 +80,9 @@ namespace fys {
         str+= "[INFO] Service Dispatching Port: " + std::to_string(_dispatchingPort) + "\n";
         str+= "[INFO] isClusterAware: " + std::string(_isClusterAware ? "true" : "false") + "\n";
         str+= "[INFO] isLoadBalancing: " + std::string(_isLoadBalancing ? "true" : "false") + "\n";
-        for (const auto &topic : _subTopics) {
-            str+= "[INFO] Cluster: Subscribing topic: " + topic + "\n";
-        }
+        str += std::accumulate(_subTopics.begin(), _subTopics.end(), std::string{}, [](std::string a, std::string b){
+            return std::move(a) + "[INFO] Cluster: Subscribing topic: " + std::move(b) + "\n";
+        });
         str+= "[INFO] Frontend connection string: " + getFrontendClusterProxyConnectionString() + "\n";
         str+= "[INFO] Backend connection string: " + getBackendClusterProxyConnectionString() + "\n";
         str+= "[INFO] Specific configuration file: " + _specificConfigPath + "\n";

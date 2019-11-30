@@ -1,7 +1,9 @@
+[![CodeGrade](https://www.code-inspector.com/project/1982/status/svg)](https://www.code-inspector.com/project/dashboard/1982)
+[![BCH compliance](https://bettercodehub.com/edge/badge/FreeYourSoul/FyS?branch=master)](https://bettercodehub.com/)
 [![Documentation Status](https://readthedocs.org/projects/fys/badge/?version=latest)](https://fys.readthedocs.io/en/latest/?badge=latest)
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/FreeYourSoul/FyS/master/LICENSE)
 [![HitCount](http://hits.dwyl.io/FreeYourSoul/FyS.svg)](http://hits.dwyl.io/FreeYourSoul/FyS)
 
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/FreeYourSoul/FyS/master/LICENSE)
 [![](https://tokei.rs/b1/github/FreeYourSoul/FyS?category=files)](https://github.com/FreeYourSoul/FyS)
 [![](https://tokei.rs/b1/github/FreeYourSoul/FyS?category=lines)](https://github.com/FreeYourSoul/FyS)
 [![](https://tokei.rs/b1/github/FreeYourSoul/FyS?category=code)](https://github.com/FreeYourSoul/FyS)

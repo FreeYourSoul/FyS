@@ -34,7 +34,6 @@ int main(int ac, char **av) {
         SPDLOG_INFO(ctx.toString());
         fys::arena::ArenaServerService serverService(ctx);
 
-        std::srand(std::time(0));
         serverService.runServerLoop();
     }
     catch (const std::exception &e) {
