@@ -50,10 +50,14 @@ namespace fys::arena {
         arena["db_hostname"].get_to(_dbHost);
         arena["db_port"].get_to(_dbPort);
 
-        auto &encounter = arena["encounter"];
-        _encounterContext._rangeEncounter[0] = std::make_pair(encounter["range"]["easy"][0].get<uint>(), encounter["range"]["easy"][1].get<uint>());
-        _encounterContext._rangeEncounter[1] = std::make_pair(encounter["range"]["medium"][0].get<uint>(), encounter["range"]["medium"][1].get<uint>());
-        _encounterContext._rangeEncounter[2] = std::make_pair(encounter["range"]["hard"][0].get<uint>(), encounter["range"]["hard"][1].get<uint>());
+        std::ifstream i(arena["zone_configuration"].get<std::string>());
+        json jsonConfig;
+        i >> jsonConfig;
+        auto &encounter = jsonConfig["encounter"];
+        const std::string &zone = encounter["range"]["zone"].get<std::string>();
+        _encounterContext._rangeEncounterPerZone[zone][0] = std::make_pair(encounter["range"]["easy"][0].get<uint>(), encounter["range"]["easy"][1].get<uint>());
+        _encounterContext._rangeEncounterPerZone[zone][1] = std::make_pair(encounter["range"]["medium"][0].get<uint>(), encounter["range"]["medium"][1].get<uint>());
+        _encounterContext._rangeEncounterPerZone[zone][2] = std::make_pair(encounter["range"]["hard"][0].get<uint>(), encounter["range"]["hard"][1].get<uint>());
 
         auto &contenders = encounter["contenders"];
         for (auto &contender : contenders) {
@@ -66,20 +70,23 @@ namespace fys::arena {
                             contender["chance"]["hard"].get<uint>()
                     }
             };
-            _encounterContext._contenders.emplace_back(std::move(desc));
+            _encounterContext._contendersPerZone[contender["zone"].get<std::string>()].emplace_back(std::move(desc));
         }
         if (!validateEncounterContext())
             throw std::runtime_error("Encounter Context invalid");
     }
 
     bool ArenaServerContext::validateEncounterContext() const {
-        for (int i = 0; i < 3; ++i) {
-            uint total = 0;
-            total = std::accumulate(_encounterContext._contenders.begin(), _encounterContext._contenders.end(), 0,
-                                    [i](const uint val, const auto &rhs) -> uint { return val + rhs.chance[i]; });
-            if (total != 100) {
-                SPDLOG_ERROR("Encounter Context invalid because of % chance for {} is {} while it should be equal 100", i, total);
-                return false;
+        for (auto &[k, v] : _encounterContext._contendersPerZone) {
+            for (int i = 0; i < 3; ++i) {
+                uint total = 0;
+                total = std::accumulate(v.begin(), v.end(), 0,
+                                        [i](const uint val, const auto &rhs) -> uint { return val + rhs.chance[i]; });
+                if (total != 100) {
+                    SPDLOG_ERROR("Encounter Context invalid because of % chance for zone {} : "
+                                 "difficulty {} is {} while it should be equal 100", k, i, total);
+                    return false;
+                }
             }
         }
         return true;

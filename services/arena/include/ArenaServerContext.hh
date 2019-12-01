@@ -38,8 +38,8 @@ namespace fys::arena {
             std::array<uint, 3> chance;
         };
 
-        std::array<std::pair<uint, uint>, 3> _rangeEncounter;
-        std::vector<EncounterDesc>        _contenders;
+        std::map<std::string, std::array<std::pair<uint, uint>, 3>> _rangeEncounterPerZone;
+        std::map<std::string, std::vector<EncounterDesc>> _contendersPerZone;
     };
 
     class ArenaServerContext : fys::common::ServiceContextBase {
