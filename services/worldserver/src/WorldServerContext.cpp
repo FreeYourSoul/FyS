@@ -82,15 +82,15 @@ namespace fys::ws {
         str+= "[INFO] Dispatcher connection string: " + getDispatcherConnectionString() + "\n";
 
         for (const auto &prox : _serverProximity) {
-            str+= "[INFO] element:\n";
+            str+= "[INFO] element:\n       ";
             str+= "code: " + prox.code + "\n";
             if (prox.xAxisRequirement) {
-                str+= "Xvalue: " + std::to_string(prox.xAxisRequirement->value) + "\n";
-                str+= "XisSup: " + std::to_string(prox.xAxisRequirement->superiorTo) + "\n";
+                str+= "       Xvalue: " + std::to_string(prox.xAxisRequirement->value) + "\n";
+                str+= "       XisSup: " + std::to_string(prox.xAxisRequirement->superiorTo) + "\n";
             }
             if (prox.yAxisRequirement) {
-                str+= "Yvalue: " + std::to_string(prox.yAxisRequirement->value) + "\n";
-                str+= "YisSup: " + std::to_string(prox.yAxisRequirement->superiorTo) + "\n";
+                str+= "       Yvalue: " + std::to_string(prox.yAxisRequirement->value) + "\n";
+                str+= "       YisSup: " + std::to_string(prox.yAxisRequirement->superiorTo) + "\n";
             }
         }
         str+= "\n*************************\n";

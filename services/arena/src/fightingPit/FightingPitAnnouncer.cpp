@@ -23,34 +23,32 @@
 
 #include <nlohmann/json.hpp>
 
+#include <ArenaServerContext.hh>
 #include <ConnectionHandler.hh>
+#include <RandomGenerator.hh>
 #include <fightingPit/contender/ContenderScripting.hh>
 #include <fightingPit/contender/FightingContender.hh>
 #include <fightingPit/FightingPitAnnouncer.hh>
+#include <fightingPit/FightingPit.hh>
 
 namespace fys::arena {
     using json = nlohmann::json;
 
-    FightingPit FightingPitAnnouncer::buildFightingPit(ConnectionHandler &connectionHandler) const {
-
+    std::shared_ptr<FightingPit> FightingPitAnnouncer::buildFightingPit(const ArenaServerContext &ctx, ConnectionHandler &connectionHandler) const {
     }
 
-    FightingPitAnnouncer &FightingPitAnnouncer::generateContenders(const std::string &wsId) {
-        if (isScriptedEncounter() && !_idEncounter) {
-            // impossible because a scripted encounter need to have an ID
-            _isFightingPitCorrupted = true;
-            return *this;
+    void FightingPitAnnouncer::generateContenders(const EncounterContext &ctx, const std::string &wsId) {
+        const auto & range = ctx._rangeEncounterPerZone.at(wsId).at(static_cast<std::size_t>(_difficulty));
+        unsigned numberContenders = fys::util::RandomGenerator::generateInRange(range.first, range.second);
+        while (numberContenders--) {
+            std::make_unique<ContenderScripting>(_)
+            std::shared_ptr<FightingContender> addContender;
+            _pitContenders.addContender(std::move(addContender));
         }
-        // todo : generated the contenders
-        return *this;
     }
 
-    FightingPitAnnouncer &FightingPitAnnouncer::generatePartyTeams() {
+    void FightingPitAnnouncer::generatePartyTeams() {
         
-    }
-
-    void FightingPitAnnouncer::setupPartyTeam() {
-
     }
 
     std::vector<std::unique_ptr<FightingContender> > FightingPitAnnouncer::generateScriptedContenders() {

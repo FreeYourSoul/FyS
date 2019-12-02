@@ -22,6 +22,7 @@
 // SOFTWARE.
 
 #include <spdlog/spdlog.h>
+#include <functional>
 #include <zmq_addon.hpp>
 #include <flatbuffers/flatbuffers.h>
 #include <ArenaServerContext.hh>
@@ -30,7 +31,7 @@
 namespace fys::arena {
 
     ArenaServerService::ArenaServerService(const ArenaServerContext &ctx) :
-      _cache(ctx.getPathLocalStorageCache(), ctx.getPathSourceCache()) {
+      _ctx(ctx), _cache(ctx.getPathLocalStorageCache(), ctx.getPathSourceCache()) {
         _connectionHandler.setupConnectionManager(ctx);
     }
 
@@ -40,7 +41,13 @@ namespace fys::arena {
         while (true) {
            _connectionHandler.pollAndProcessSubMessage(
                [this](zmq::multipart_t &&msg) {
-                
+                   // if new arena request, create the new arena
+
+                   // get id of the arena from message to forward the message to the correct arena instance
+
+                   // register player incoming into arena instance (done for new arena or if the incoming
+                   // message is a joining message)
+
                }
             );
         }
@@ -57,7 +64,8 @@ namespace fys::arena {
             fpa.setEncounterType(encounterType);
             fpa.setEncounterId(0u);
             fpa.enforceAmbush(ambush);
-            fpa.generateContenders("").generatePartyTeams();
+            fpa.generateContenders(_ctx.get().getEncounterContext(), "");
+            fpa.generatePartyTeams();
         // }
     }
 

@@ -30,10 +30,14 @@
 #include <vector>
 #include <fightingPit/contender/PitContenders.hh>
 #include <fightingPit/team/AllyPartyTeams.hh>
-#include "FightingPit.hh"
+#include <fightingPit/FightingPit.hh>
 
+// forward declarations
 namespace fys::cache {
     class Cml;
+}
+namespace fys::arena {
+    class EncounterContext;
 }
 
 namespace fys::arena {
@@ -50,48 +54,49 @@ namespace fys::arena {
     class FightingPitAnnouncer {
 
     public:
-    enum EncounterType {
-        RANDOM,
-        QUEST,
-        BOSS
-    };
+        enum EncounterType {
+            RANDOM,
+            SCRIPTED
+        };
 
     public:
         explicit FightingPitAnnouncer(cache::Cml &cml) : _cache(cml) {}
 
-        [[nodiscard]] FightingPit buildFightingPit(fys::arena::ConnectionHandler &connectionHandler) const;
-        FightingPitAnnouncer &generateContenders(const std::string &wsId);
-        FightingPitAnnouncer &generatePartyTeams();
+        [[nodiscard]] std::shared_ptr<FightingPit>
+        buildFightingPit(const ArenaServerContext &ctx, fys::arena::ConnectionHandler &connectionHandler) const;
 
-        FightingPitAnnouncer &setEncounterType(EncounterType encounterType) {
-            _encounterType = encounterType; 
-            return *this;
+        void setEncounterType(EncounterType encounterType) {
+            if (encounterType == RANDOM)
+                _idEncounter = 0;
+            _encounterType = encounterType;
         }
 
-        FightingPitAnnouncer &setEncounterId(uint idEncounter) {
-            _idEncounter = idEncounter; 
-            return *this;
+        void setEncounterId(uint idEncounter) {
+            if (_encounterType == RANDOM && !idEncounter)
+                _encounterType = SCRIPTED;
+            _idEncounter = idEncounter;
         }
 
-        FightingPitAnnouncer &enforceAmbush(bool ambushEnforced) {
-            _isAmbushEnforced = ambushEnforced; 
-            return *this;
-        }
+        void enforceAmbush(bool ambushEnforced) { _isAmbushEnforced = ambushEnforced; }
+
+        void setDifficulty(FightingPit::Level level) { _difficulty = level; }
 
     private:
-
-        void setupPartyTeam();
+        void generateContenders(const EncounterContext &ctx, const std::string &wsId);
+        void generatePartyTeams();
 
         // Generation of contenders
 
         std::vector<std::unique_ptr<FightingContender> > generateScriptedContenders();
+
         std::vector<std::unique_ptr<FightingContender> > generateRandomContenders();
 
-        [[nodiscard]] bool isBossEncounter() const { return _encounterType == EncounterType::BOSS; }
         [[nodiscard]] bool isScriptedEncounter() const { return _encounterType != EncounterType::RANDOM; }
 
+        [[nodiscard]] bool isRandomEncounter() const { return _encounterType == EncounterType::RANDOM; }
+
     private:
-        cache::Cml          &_cache;
+        cache::Cml &_cache;
 
         /**
          *   range           desc
@@ -99,15 +104,14 @@ namespace fys::arena {
          * [1001-*] : globally defined encounters
          * [1-1000] : zone defined encounters
          */
-        uint                _idEncounter        = 0;
-        EncounterType       _encounterType      = EncounterType::RANDOM;
+        uint _idEncounter = 0;
+        FightingPit::Level _difficulty = FightingPit::Level::MEDIUM;
+        EncounterType _encounterType = EncounterType::RANDOM;
 
         std::optional<bool> _isAmbushEnforced;
 
-        PitContenders   _pitContenders;
-        AllyPartyTeams  _partyTeams;
-
-        bool _isFightingPitCorrupted = false;
+        PitContenders _pitContenders;
+        AllyPartyTeams _partyTeams;
 
         //TODO add the common cache retriever
 

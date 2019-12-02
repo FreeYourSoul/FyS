@@ -77,10 +77,19 @@ namespace fys::arena {
     }
 
     bool ArenaServerContext::validateEncounterContext() const {
-        for (auto &[k, v] : _encounterContext._contendersPerZone) {
+        for (const auto &[k, v] : _encounterContext._rangeEncounterPerZone) {
+            for (int i = 0; i < 3; ++i) {
+                if (v.at(i).first <= 0) {
+                    SPDLOG_ERROR("Encounter Context invalid because of range for {} : "
+                                 "difficulty {} minimum is 0 or less while it should be at least 1", k, i);
+                    return false;
+                }
+            }
+        }
+        for (const auto &[k, v] : _encounterContext._contendersPerZone) {
             for (int i = 0; i < 3; ++i) {
                 uint total = 0;
-                total = std::accumulate(v.begin(), v.end(), 0,
+                total = std::accumulate(v.cbegin(), v.cend(), 0,
                                         [i](const uint val, const auto &rhs) -> uint { return val + rhs.chance[i]; });
                 if (total != 100) {
                     SPDLOG_ERROR("Encounter Context invalid because of % chance for zone {} : "

@@ -21,33 +21,52 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef FYS_ARENASERVERSERVICE_HH
-#define FYS_ARENASERVERSERVICE_HH
 
-#include <network/WorkerService.hh>
-#include <ConnectionHandler.hh>
-#include <CmlCopy.hh>
+#ifndef FYS_ONLINE_RANDOMGENERATOR_HH
+#define FYS_ONLINE_RANDOMGENERATOR_HH
 
-namespace fys::arena {
+#include <random>
+#include <chrono>
 
-    class ArenaServerContext;
+namespace fys::util {
 
-    class ArenaServerService {
+    class RandomGenerator
+    {
     public:
-        explicit ArenaServerService(const ArenaServerContext &ctx);
+        static fys::util::RandomGenerator& getInstance() {
+            static fys::util::RandomGenerator s{};
+            return s;
+        }
 
-        void runServerLoop() noexcept;
+        template <typename Type>
+        static Type generateInRange(Type rA, Type rB) {
+            static_assert(std::is_integral_v<Type> || std::is_floating_point_v<Type>);
+            if constexpr (std::is_integral_v<Type>) {
+                std::uniform_int_distribution<Type> distribution(rA, rB);
+                return getInstance().get()(distribution);
+            }
+            else if constexpr (std::is_floating_point_v<Type>) {
+                std::uniform_real_distribution<Type> distribution(rA, rB);
+                return getInstance().get()(distribution);
+            }
+        }
+
+        RandomGenerator(RandomGenerator const&) = delete;
+        RandomGenerator& operator=(RandomGenerator const&) = delete;
+
+
+        std::mt19937 & get() {
+            return mt;
+        }
 
     private:
-        void processMessage(std::string &&idt, std::string &&token, const zmq::message_t &content);
+        RandomGenerator();
+        ~RandomGenerator() = default;
 
-    private:
-        std::reference_wrapper<const ArenaServerContext> _ctx;
-        cache::CmlCopy      _cache;
-        ConnectionHandler   _connectionHandler;
-        WorkerService       _workerService;
+
+        std::mt19937 mt;
     };
 
 }
 
-#endif // !FYS_ARENASERVERSERVICE_HH
+#endif //FYS_ONLINE_RANDOMGENERATOR_HH

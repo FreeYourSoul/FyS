@@ -27,18 +27,16 @@
 
 #include <vector>
 #include <optional>
+#include <chaiscript/chaiscript.hpp>
 #include <fightingPit/contender/PitContenders.hh>
 #include <fightingPit/FightingPitLayout.hh>
+#include <fightingPit/SideBattle.hh>
 #include <fightingPit/team/AllyPartyTeams.hh>
 #include <ChaiRegister.hh>
 
 // forward declarations
-namespace chaiscript {
-    class ChaiScript;
-}
 namespace fys::arena {
     class FightingContender;
-    class SideBattle;
     class PartyTeam;
 }
 
@@ -64,9 +62,9 @@ namespace fys::arena {
 
     public:
         enum Level : uint {
-            EASY,
-            MEDIUM,
-            HARD
+            EASY    = 0,
+            MEDIUM  = 1,
+            HARD    = 2
         };
 
         enum Ending {
@@ -77,8 +75,10 @@ namespace fys::arena {
         };
 
         explicit FightingPit(Level levelFightingPit);
-        void startBattle();
 
+        const std::unique_ptr<chaiscript::ChaiScript> &getChaiPtr() const { return _chaiPtr; }
+
+        void startBattle();
         void addContender(std::shared_ptr<FightingContender> newContender) { _contenders.addContender(std::move(newContender)); }
         void addPartyTeam(std::unique_ptr<PartyTeam> newTeam) { _partyTeams.addPartyTeam(std::move(newTeam)); }
     

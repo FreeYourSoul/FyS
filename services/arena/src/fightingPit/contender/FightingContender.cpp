@@ -28,7 +28,7 @@
 
 namespace fys::arena {
 
-    FightingContender::FightingContender(std::unique_ptr<ContenderScripting> && contenderScripting)
+    FightingContender::FightingContender(std::unique_ptr<ContenderScripting> contenderScripting)
     : _contenderScripting(std::move(contenderScripting)) {
     }
 

@@ -21,33 +21,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef FYS_ARENASERVERSERVICE_HH
-#define FYS_ARENASERVERSERVICE_HH
 
-#include <network/WorkerService.hh>
-#include <ConnectionHandler.hh>
-#include <CmlCopy.hh>
+#include "RandomGenerator.hh"
 
-namespace fys::arena {
+namespace fys::util {
 
-    class ArenaServerContext;
+    RandomGenerator::RandomGenerator() {
+        std::random_device rd;
 
-    class ArenaServerService {
-    public:
-        explicit ArenaServerService(const ArenaServerContext &ctx);
-
-        void runServerLoop() noexcept;
-
-    private:
-        void processMessage(std::string &&idt, std::string &&token, const zmq::message_t &content);
-
-    private:
-        std::reference_wrapper<const ArenaServerContext> _ctx;
-        cache::CmlCopy      _cache;
-        ConnectionHandler   _connectionHandler;
-        WorkerService       _workerService;
-    };
+        if (rd.entropy() != 0) {
+            mt.seed(rd());
+        }
+        else {
+            auto seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
+            mt.seed(seed);
+        }
+    }
 
 }
-
-#endif // !FYS_ARENASERVERSERVICE_HH

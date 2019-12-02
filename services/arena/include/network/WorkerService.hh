@@ -27,7 +27,12 @@
 #include <zmq_addon.hpp>
 #include <fightingPit/FightingPitAnnouncer.hh>
 
- namespace fys::arena {
+// forward declarations
+namespace fys::arena {
+    class FightingPit;
+}
+
+namespace fys::arena {
  
      /**
       * @brief Manage the fighting pits : 
@@ -59,8 +64,9 @@
         zmq::context_t      _ctx;
         zmq::socket_t       _workerRouter;
 
-        // map of client identitier to FightingArenaId
+        // map of client identifier to FightingArenaId
         std::unordered_map<std::string, std::string> _idOnArenaId;
+        std::unordered_map<std::string, std::unique_ptr<FightingPit>> _arenaInstances;
     };
 
 }

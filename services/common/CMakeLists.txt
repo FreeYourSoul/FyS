@@ -28,13 +28,12 @@ set(COMMON_SRCS
         ${CMAKE_CURRENT_LIST_DIR}/flatbuffer/includes/ClientCom_generated.h
         ${CMAKE_CURRENT_LIST_DIR}/flatbuffer/includes/Notifications_generated.h
         ${CMAKE_CURRENT_LIST_DIR}/flatbuffer/includes/WSAction_generated.h
+        ${CMAKE_CURRENT_LIST_DIR}/src/RandomGenerator.cpp
         ${CMAKE_CURRENT_LIST_DIR}/src/ServiceContextBase.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/src/ServiceContextBase.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/RandomGenerator.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/BoundaryMap.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/ServiceContextBase.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/algorithm/algorithm.hh
-#        ${CMAKE_CURRENT_LIST_DIR}/src/message/FlatMessageBuilder.cpp
-#        ${CMAKE_CURRENT_LIST_DIR}/include/message/FlatMessageBuilder.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/Key.hh)
 set(COMMON_INCLUDE_DIR
         ${CMAKE_CURRENT_LIST_DIR}/include)

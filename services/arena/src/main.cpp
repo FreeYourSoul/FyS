@@ -22,6 +22,7 @@
 // SOFTWARE.
 
 #include <spdlog/spdlog.h>
+#include <random>
 #include <ArenaServerContext.hh>
 #include <ArenaServerService.hh>
 #include <cstdlib>

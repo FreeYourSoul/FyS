@@ -138,7 +138,7 @@ namespace fys::ws {
     class CollisionMap {
 
     public:
-        CollisionMap(const WorldServerContext& ctx);
+        explicit CollisionMap(const WorldServerContext& ctx);
 
         CollisionMap(CollisionMap &&) noexcept = default;
         CollisionMap(const CollisionMap&) = delete;

@@ -38,7 +38,7 @@ namespace fys::arena {
 
     class FightingContender {
     public:
-        explicit FightingContender(std::unique_ptr<ContenderScripting> && contenderScripting);
+        explicit FightingContender(std::unique_ptr<ContenderScripting> contenderScripting);
         FightingContender(const FightingContender &other) = delete;
         FightingContender(FightingContender &&other) noexcept = default;
 

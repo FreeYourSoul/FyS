@@ -23,10 +23,7 @@
 
 #include <spdlog/spdlog.h>
 #include <chrono>
-#include <chaiscript/chaiscript.hpp>
-#include <fightingPit/team/PartyTeam.hh>
 #include <fightingPit/contender/FightingContender.hh>
-#include <fightingPit/SideBattle.hh>
 #include <fightingPit/FightingPit.hh>
 
 namespace {

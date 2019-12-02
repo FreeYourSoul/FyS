@@ -48,6 +48,7 @@ namespace fys::arena {
 
         [[nodiscard]] std::string toString() const;
         [[nodiscard]] std::string getDispatcherConnectionString() const noexcept;
+        [[nodiscard]] const EncounterContext &getEncounterContext() const noexcept { return _encounterContext; }
         [[nodiscard]] const std::string &getPathLocalStorageCache() const { return _pathLocalStorageCache; }
         [[nodiscard]] const std::string &getPathSourceCache() const { return _pathSourceCache; }
         [[nodiscard]] const std::string &getDbHost() const { return _dbHost; }
