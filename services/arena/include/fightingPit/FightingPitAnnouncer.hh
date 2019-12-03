@@ -63,7 +63,7 @@ namespace fys::arena {
         explicit FightingPitAnnouncer(cache::Cml &cml) : _cache(cml) {}
 
         [[nodiscard]] std::shared_ptr<FightingPit>
-        buildFightingPit(const ArenaServerContext &ctx, fys::arena::ConnectionHandler &connectionHandler) const;
+        buildFightingPit(const ArenaServerContext &ctx, ConnectionHandler &connectionHandler, const std::string &wsId);
 
         void setEncounterType(EncounterType encounterType) {
             if (encounterType == RANDOM)
@@ -82,7 +82,8 @@ namespace fys::arena {
         void setDifficulty(FightingPit::Level level) { _difficulty = level; }
 
     private:
-        void generateContenders(const EncounterContext &ctx, const std::string &wsId);
+        void generateContenders(const FightingPit &fp, const EncounterContext &ctx, const std::string &wsId);
+
         void generatePartyTeams();
 
         // Generation of contenders

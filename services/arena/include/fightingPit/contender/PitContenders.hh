@@ -63,7 +63,7 @@ namespace fys::arena {
 
         void addContender(std::shared_ptr<FightingContender> contender) {
             _contenders.emplace_back(std::move(contender));
-            _changeSideFlags.emplace_back(true);
+            _changeSideFlags.emplace_back(false);
         }
 
     private:

@@ -59,7 +59,7 @@ namespace fys::arena {
                 auto currentParticipant = side->getCurrentParticipantTurn(now, timerInterlude);
 
                 if (currentParticipant.isContender) {
-                    // If non-playable character (ennemy NPC)
+                    // If non-playable character (enemy NPC)
                     _contenders.executeContenderAction(currentParticipant);
                 } else {
                     // If character of a player

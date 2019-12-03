@@ -23,6 +23,7 @@
 
 #include <nlohmann/json.hpp>
 
+#include <algorithm/algorithm.hh>
 #include <ArenaServerContext.hh>
 #include <ConnectionHandler.hh>
 #include <RandomGenerator.hh>
@@ -34,21 +35,33 @@
 namespace fys::arena {
     using json = nlohmann::json;
 
-    std::shared_ptr<FightingPit> FightingPitAnnouncer::buildFightingPit(const ArenaServerContext &ctx, ConnectionHandler &connectionHandler) const {
+    std::shared_ptr<FightingPit>
+    FightingPitAnnouncer::buildFightingPit(const ArenaServerContext &ctx, ConnectionHandler &connectionHandler,
+                                           const std::string &wsId) {
+        std::shared_ptr<FightingPit> fp = std::make_shared<FightingPit>(_difficulty);
+        generateContenders(*fp, ctx.getEncounterContext(), wsId);
+        return fp;
     }
 
-    void FightingPitAnnouncer::generateContenders(const EncounterContext &ctx, const std::string &wsId) {
-        const auto & range = ctx._rangeEncounterPerZone.at(wsId).at(static_cast<std::size_t>(_difficulty));
+    void FightingPitAnnouncer::generateContenders(const FightingPit &fp, const EncounterContext &ctx,
+                                                  const std::string &wsId) {
+        const auto &range = ctx._rangeEncounterPerZone.at(wsId).at(static_cast<std::size_t>(_difficulty));
         unsigned numberContenders = fys::util::RandomGenerator::generateInRange(range.first, range.second);
+        auto &contenderForZone = ctx._contendersPerZone.at(wsId);
         while (numberContenders--) {
-            std::make_unique<ContenderScripting>(_)
-            std::shared_ptr<FightingContender> addContender;
-            _pitContenders.addContender(std::move(addContender));
+            int rngMonster = fys::util::RandomGenerator::generateInRange(0, 100);
+            auto desc = fys::find_most_suitable(contenderForZone.begin(), contenderForZone.end(),
+                                                [](const auto &suitable, const auto &next) {
+                                                    return true;
+                                                });
+
+            auto cont = std::make_shared<FightingContender>(std::make_unique<ContenderScripting>(*fp.getChaiPtr()));
+            _pitContenders.addContender(std::move(cont));
         }
     }
 
     void FightingPitAnnouncer::generatePartyTeams() {
-        
+
     }
 
     std::vector<std::unique_ptr<FightingContender> > FightingPitAnnouncer::generateScriptedContenders() {
@@ -62,7 +75,6 @@ namespace fys::arena {
 
         return resultContenders;
     }
-
 
 
 } // namespace fys::arena
