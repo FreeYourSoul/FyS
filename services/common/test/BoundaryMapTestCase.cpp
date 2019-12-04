@@ -25,7 +25,7 @@
 #include <string>
 #include <BoundaryMap.hh>
 
-TEST_CASE ("BoundaryMap test case", "[common][utils]") {
+TEST_CASE ("BoundaryMap test case", "[common][util]") {
 
     fys::BoundaryMap<std::string> bmap;
 
@@ -34,6 +34,7 @@ TEST_CASE ("BoundaryMap test case", "[common][utils]") {
         bmap.insert(2, "321654");
         bmap.insert(3, "987654");
 
+        REQUIRE_FALSE(bmap.end() == bmap.get(1));
         REQUIRE("123456" == bmap.get(1)->second);
         REQUIRE("321654" == bmap.get(2)->second);
         REQUIRE("987654" == bmap.get(3)->second);

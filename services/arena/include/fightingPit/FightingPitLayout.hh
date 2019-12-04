@@ -34,7 +34,7 @@ namespace fys::arena {
     class PitContenders;
 
     /**
-     * @brief Layout of the fithing pit. Manage the positions of monsters and the players/monsters mouvements
+     * @brief Layout of the fighting pit. Manage the positions of monsters and the players/monsters movements
      * 
      * The layout of the fighting pit can be taken as a draughtboard composed of 3 hexagons as shown as below
      *                        _____         

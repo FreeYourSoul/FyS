@@ -100,4 +100,9 @@ namespace fys::arena {
         _contenders.at(contender.id)->executeAction();
     }
 
+    void PitContenders::addContender(const std::shared_ptr<FightingContender> &contender)  {
+        _contenders.emplace_back(contender);
+        _changeSideFlags.emplace_back(false);
+        contender->setupContender();
+    }
 }

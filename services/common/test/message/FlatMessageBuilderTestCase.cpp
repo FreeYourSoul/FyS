@@ -23,7 +23,7 @@
 
 #include <catch2/catch.hpp>
 
-TEST_CASE("FlatMessageBuilder : Create WSActionNotification") {
+TEST_CASE("FlatMessageBuilder : Create WSActionNotification", "[common]") {
 
 }
 

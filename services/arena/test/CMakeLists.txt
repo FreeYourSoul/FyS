@@ -19,17 +19,49 @@ include_directories(
         ${CMAKE_CURRENT_LIST_DIR}/../../../scripting_cache/cml/include
         ${CMAKE_CURRENT_LIST_DIR}/../include)
 
-add_executable(arena_test
-        #source tested
+addFSeamTests(
+        DESTINATION_TARGET arena_test
+
+        FILES_AS_SOURCE #source tested
+        ${COMMON_SRCS}
         ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/PriorityOrderList.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/PriorityOrderList.hh
         ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/HexagonSide.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/FightingPitAnnouncer.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/FightingPitLayout.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/SideBattle.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/FightingPit.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/contender/FightingContender.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/contender/PitContenders.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/contender/ContenderScripting.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/team/AllyPartyTeams.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/team/TeamMember.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/team/PartyTeam.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/ChaiRegister.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../include/ChaiRegister.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/team/PartyTeam.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/team/TeamMember.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/team/AllyPartyTeams.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/contender/ContenderScripting.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/contender/PitContenders.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/contender/FightingContender.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/FightingPit.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/SideBattle.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/FightingPitLayout.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/FightingPitAnnouncer.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/PriorityOrderList.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/HexagonSide.hh
 
-        #test files
+        FOLDER_INCLUDES
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include
+
+        TST_SRC #test files
         ${CMAKE_CURRENT_LIST_DIR}/catchMain.cpp
         ${CMAKE_CURRENT_LIST_DIR}/fightingPit/HexagonSideTestCase.cpp
         ${CMAKE_CURRENT_LIST_DIR}/fightingPit/PriorityOrderListTestCase.cpp
+
+        TO_MOCK
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/ConnectionHandler.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../../common/include/RandomGenerator.hh
 )
 
 addFSeamTests(
@@ -67,5 +99,5 @@ addFSeamTests(
 target_compile_definitions(sampy_test PUBLIC CHAISCRIPT_NO_THREADS)
 target_link_libraries(sampy_test cppzmq fmt::fmt dl cml)
 target_compile_definitions(arena_test PUBLIC -DCHAISCRIPT_NO_THREADS)
-target_link_libraries(arena_test cppzmq Catch2::Catch2 fmt::fmt dl)
+target_link_libraries(arena_test cppzmq Catch2::Catch2 fmt::fmt dl cml)
 catch_discover_tests(arena_test)

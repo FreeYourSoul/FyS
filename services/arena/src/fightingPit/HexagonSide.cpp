@@ -27,9 +27,9 @@ namespace
 {
     using h = fys::arena::HexagonSide::Orientation;
 
-    struct HexaA {};
-    struct HexaB {};
-    struct HexaC {};
+    struct HexaA;
+    struct HexaB;
+    struct HexaC;
     struct South;
     struct SouthEast;
     struct SouthWest;

@@ -56,7 +56,6 @@ namespace fys::arena {
                                            const std::string &wsId) {
         std::shared_ptr<FightingPit> fp = std::make_shared<FightingPit>(_difficulty);
         generateContenders(*fp, ctx.getEncounterContext(), wsId);
-        generatePartyTeams();
         return fp;
     }
 
@@ -69,16 +68,15 @@ namespace fys::arena {
         while (numberContenders--) {
             int rngMonster = fys::util::RandomGenerator::generateInRange(0, 100);
             auto desc = boundaryMap.get(rngMonster)->second; // TODO add security at context creation to enforce that
-            int levelMonster = fys::util::RandomGenerator::generateInRange(1, 10);
+            int levelMonster = fys::util::RandomGenerator::generateInRange(1, 10); // TODO, add this range in the configuration
             auto contenderScript = std::make_unique<ContenderScripting>(*fp.getChaiPtr(), levelMonster);
-            auto cont = std::make_shared<FightingContender>(std::move(contenderScript));
-            _pitContenders.addContender(std::move(cont));
             contenderScript->loadContenderScript(_cache.findInCache(desc.key).data());
+            _pitContenders.addContender(std::make_shared<FightingContender>(std::move(contenderScript)));
         }
     }
 
-    void FightingPitAnnouncer::generatePartyTeams() {
-
+    void FightingPitAnnouncer::generatePartyTeams(const std::string &userName) {
+        // TODO get data from DB to initialize party team
     }
 
 } // namespace fys::arena

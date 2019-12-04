@@ -37,6 +37,7 @@ namespace fys::cache {
     class Cml;
 }
 namespace fys::arena {
+    class ArenaServerContext;
     class EncounterContext;
 }
 
@@ -65,6 +66,8 @@ namespace fys::arena {
         [[nodiscard]] std::shared_ptr<FightingPit>
         buildFightingPit(const ArenaServerContext &ctx, ConnectionHandler &connectionHandler, const std::string &wsId);
 
+        void generatePartyTeams(const std::string &userName);
+
         void setEncounterType(EncounterType encounterType) {
             if (encounterType == RANDOM)
                 _idEncounter = 0;
@@ -84,7 +87,6 @@ namespace fys::arena {
     private:
         void generateContenders(const FightingPit &fp, const EncounterContext &ctx, const std::string &wsId);
 
-        void generatePartyTeams();
 
         [[nodiscard]] bool isScriptedEncounter() const { return _encounterType != EncounterType::RANDOM; }
         [[nodiscard]] bool isRandomEncounter() const { return _encounterType == EncounterType::RANDOM; }

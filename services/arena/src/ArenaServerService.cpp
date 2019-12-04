@@ -64,8 +64,6 @@ namespace fys::arena {
             fpa.setEncounterType(encounterType);
             fpa.setEncounterId(0u);
             fpa.enforceAmbush(ambush);
-            fpa.generateContenders(_ctx.get().getEncounterContext(), "");
-            fpa.generatePartyTeams();
         // }
     }
 
