@@ -72,7 +72,6 @@ namespace fys::arena {
             };
             _encounterContext._contendersPerZone[contender["zone"].get<std::string>()].emplace_back(std::move(desc));
         }
-        for (auto &[k, v] : )
         if (!validateEncounterContext())
             throw std::runtime_error("Encounter Context invalid");
     }

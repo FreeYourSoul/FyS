@@ -16,6 +16,7 @@ enable_testing()
 
 include_directories(
         ${COMMON_INCLUDE_DIR}
+        ${CMAKE_CURRENT_LIST_DIR}/../../../scripting_cache/cml/include
         ${CMAKE_CURRENT_LIST_DIR}/../include)
 
 add_executable(arena_test
@@ -35,6 +36,7 @@ addFSeamTests(
         DESTINATION_TARGET sampy_test
 
         FILES_AS_SOURCE #source tested
+        ${COMMON_SRCS}
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/contender/ContenderScripting.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/contender/FightingContender.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/contender/PitContenders.cpp
@@ -63,7 +65,7 @@ addFSeamTests(
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/ConnectionHandler.hh
 )
 target_compile_definitions(sampy_test PUBLIC CHAISCRIPT_NO_THREADS)
-target_link_libraries(sampy_test cppzmq fmt::fmt dl)
+target_link_libraries(sampy_test cppzmq fmt::fmt dl cml)
 target_compile_definitions(arena_test PUBLIC -DCHAISCRIPT_NO_THREADS)
 target_link_libraries(arena_test cppzmq Catch2::Catch2 fmt::fmt dl)
 catch_discover_tests(arena_test)

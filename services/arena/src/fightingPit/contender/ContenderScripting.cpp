@@ -37,8 +37,8 @@ namespace fys::arena {
             _chai.get().eval(script);
 
         // instantiate the contender in chai engine
-        std::string createVar = fmt::format("global {}={}({});",
-                getChaiContenderId(), _contenderName, std::to_string(_contenderId));
+        std::string createVar = fmt::format("global {}={}({},{});",
+                getChaiContenderId(), _contenderName, _contenderId, _level);
         _chai.get().eval(createVar);
     }
 
@@ -50,6 +50,10 @@ namespace fys::arena {
             SPDLOG_ERROR("Error caught on scripting loading {}", ex.what());
         }
         loadContenderScript();
+    }
+
+    void ContenderScripting::setupContender() {
+        _chai.get().eval(getChaiContenderId() + ".setupContender();");
     }
 
     void ContenderScripting::executeAction() {

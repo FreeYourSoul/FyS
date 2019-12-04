@@ -43,6 +43,7 @@ namespace fys::arena {
         FightingContender(FightingContender &&other) noexcept = default;
 
         void executeAction();
+        void setupContender();
         void moveContender(HexagonSide::Orientation destination, bool bypassCheck = false);
         void moveContender(data::MoveDirection rightOrLeft);
 

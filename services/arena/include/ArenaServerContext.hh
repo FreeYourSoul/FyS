@@ -33,6 +33,10 @@ namespace fys::arena {
 
     struct EncounterContext {
         struct EncounterDesc {
+            bool operator!=(const EncounterDesc &other) const {
+                return std::make_tuple(key, maxEncountering, chance) != std::make_tuple(key, maxEncountering, chance);
+            }
+
             std::string key;
             uint maxEncountering;
             std::array<uint, 3> chance;

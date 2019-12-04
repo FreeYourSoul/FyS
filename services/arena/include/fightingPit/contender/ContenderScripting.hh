@@ -43,10 +43,15 @@ namespace fys::arena {
     class ContenderScripting {
 
     public:
-        explicit ContenderScripting(chaiscript::ChaiScript &chai) : _chai(chai)
+        explicit ContenderScripting(chaiscript::ChaiScript &chai, uint level) : _chai(chai), _level(level)
         {}
 
         void executeAction();
+
+        /**
+         * Method called after the contender has been added in the fighting pit, in order to initialize its stats
+         */
+        void setupContender();
 
         void loadContenderScript(const std::string& script = "");
         void loadContenderScriptFromFile(const std::string& scriptFile);
@@ -61,6 +66,7 @@ namespace fys::arena {
     private:
         std::reference_wrapper<chaiscript::ChaiScript> _chai;
         std::string _contenderName;
+        uint _level;
         uint _contenderId{};
 
     };

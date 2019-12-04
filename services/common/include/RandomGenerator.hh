@@ -43,11 +43,11 @@ namespace fys::util {
             static_assert(std::is_integral_v<Type> || std::is_floating_point_v<Type>);
             if constexpr (std::is_integral_v<Type>) {
                 std::uniform_int_distribution<Type> distribution(rA, rB);
-                return getInstance().get()(distribution);
+                return distribution(getInstance().get());
             }
             else if constexpr (std::is_floating_point_v<Type>) {
                 std::uniform_real_distribution<Type> distribution(rA, rB);
-                return getInstance().get()(distribution);
+                return distribution(getInstance().get());
             }
         }
 

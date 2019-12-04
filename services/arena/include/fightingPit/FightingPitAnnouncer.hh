@@ -86,14 +86,7 @@ namespace fys::arena {
 
         void generatePartyTeams();
 
-        // Generation of contenders
-
-        std::vector<std::unique_ptr<FightingContender> > generateScriptedContenders();
-
-        std::vector<std::unique_ptr<FightingContender> > generateRandomContenders();
-
         [[nodiscard]] bool isScriptedEncounter() const { return _encounterType != EncounterType::RANDOM; }
-
         [[nodiscard]] bool isRandomEncounter() const { return _encounterType == EncounterType::RANDOM; }
 
     private:

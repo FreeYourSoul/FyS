@@ -17,10 +17,10 @@ endif(CCACHE_FOUND)
 
 include_directories(
         ${CMAKE_CURRENT_LIST_DIR}/include
+        ${CMAKE_CURRENT_LIST_DIR}/../../scripting_cache/cml/include
         ${fmt_INCLUDE_DIRS}
         ${COMMON_INCLUDE_DIR}
         ${FLATBUFFER_INCLUDE_DIR}
-        ../../scripting_cache/cml/include
 )
 
 add_executable(arena_service ${COMMON_SRCS}

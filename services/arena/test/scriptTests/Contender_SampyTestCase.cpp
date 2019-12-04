@@ -52,10 +52,9 @@ TEST_CASE("Test Sampy", "[script_test]") {
     fys::arena::AllyPartyTeams apt;
     auto chai = fys::arena::ChaiRegister::createChaiInstance(pc, apt);
 
-    fys::arena::ContenderScriptingUPtr sampy = std::make_unique<fys::arena::ContenderScripting>(*chai);
-    sampy->setContenderId(0);
+    fys::arena::ContenderScriptingUPtr sampy = std::make_unique<fys::arena::ContenderScripting>(*chai, 1);
+    sampy->setContenderId(0u);
     sampy->setContenderName("Sampy");
-    sampy->loadContenderScriptFromFile(getPathSampyChaiScript());
     sampy->loadContenderScriptFromFile(getPathSampyChaiScript());
 
     auto fpc = std::make_shared<fys::arena::FightingContender>(std::move(sampy));
@@ -74,6 +73,14 @@ TEST_CASE("Test Sampy", "[script_test]") {
 
     apt.addPartyTeam(std::move(pt));
 
+    SECTION("Test initialization") {
+        REQUIRE(153 == fpc->accessStatus().life.current);
+        REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.current);
+        REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.total);
+        REQUIRE(100 == pc.getFightingContender(0)->accessStatus().magicPoint.total);
+        REQUIRE(100 == pc.getFightingContender(0)->accessStatus().magicPoint.total);
+    }
+
     SECTION("Test Enemy&Attack selection") {
         fpc->accessStatus().life.current = 16;
         fpc->accessStatus().life.total = 100;
@@ -90,8 +97,7 @@ TEST_CASE("Test Sampy", "[script_test]") {
             fpc->accessStatus().magicPoint.total = 0;
 
             REQUIRE(100 == fpc->accessStatus().life.current);
-            REQUIRE(0 == fpc->accessStatus().magicPoint.current);
-
+            REQUIRE(100 == fpc->accessStatus().magicPoint.current);
             pc.executeContenderAction(e);
 
             REQUIRE(42 == fpc->accessStatus().magicPoint.current);          // Sleeping set the magicPoint to 42
