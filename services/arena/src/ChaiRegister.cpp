@@ -94,14 +94,14 @@ void ChaiRegister::registerUtility(chaiscript::ChaiScript &chai, ConnectionHandl
                 }
         ), "sendContenderAction");
 
-    chai.add(chaiscript::fun<std::function<double (double, double)> >(
-            [](double rangeA, double rangeB) {
-                return util::RandomGenerator::generateInRange(rangeA, rangeB);
-            }), "generateRandomNumber");
-    chai.add(chaiscript::fun<std::function<unsigned(unsigned, unsigned)> >(
-            [](unsigned rangeA, unsigned rangeB) {
-                return util::RandomGenerator::generateInRange(rangeA, rangeB);
-            }), "generateRandomNumber");
+//    chai.add(chaiscript::fun<std::function<double (double, double)> >(
+//            [](double rangeA, double rangeB) {
+//                return util::RandomGenerator::generateInRange(rangeA, rangeB);
+//            }), "generateRandomNumber");
+//    chai.add(chaiscript::fun<std::function<unsigned(unsigned, unsigned)> >(
+//            [](unsigned rangeA, unsigned rangeB) {
+//                return util::RandomGenerator::generateInRange(rangeA, rangeB);
+//            }), "generateRandomNumber");
 }
 
 void ChaiRegister::registerCommon(chaiscript::ModulePtr m) {

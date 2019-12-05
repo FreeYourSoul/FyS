@@ -1,5 +1,7 @@
 cmake_minimum_required( VERSION 3.6 )
 
+project(common)
+
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_LIST_DIR}/../../cmake/modules/")
 find_package(FlatBuffers REQUIRED)
 

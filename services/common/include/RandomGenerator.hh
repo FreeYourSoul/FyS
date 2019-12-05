@@ -25,6 +25,7 @@
 #ifndef FYS_ONLINE_RANDOMGENERATOR_HH
 #define FYS_ONLINE_RANDOMGENERATOR_HH
 
+#include <memory>
 #include <random>
 #include <chrono>
 
@@ -43,11 +44,11 @@ namespace fys::util {
             static_assert(std::is_integral_v<Type> || std::is_floating_point_v<Type>);
             if constexpr (std::is_integral_v<Type>) {
                 std::uniform_int_distribution<Type> distribution(rA, rB);
-                return distribution(getInstance().get());
+                return distribution(*getInstance().get());
             }
             else if constexpr (std::is_floating_point_v<Type>) {
                 std::uniform_real_distribution<Type> distribution(rA, rB);
-                return distribution(getInstance().get());
+                return distribution(*getInstance().get());
             }
         }
 
@@ -55,16 +56,24 @@ namespace fys::util {
         RandomGenerator& operator=(RandomGenerator const&) = delete;
 
 
-        std::mt19937 & get() {
-            return mt;
-        }
+        std::shared_ptr<std::mt19937> get();
 
     private:
-        RandomGenerator();
+        RandomGenerator() : mt(std::make_shared<std::mt19937>()) {
+            std::random_device rd;
+
+            if (rd.entropy() != 0) {
+                mt->seed(rd());
+            }
+            else {
+                auto seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
+                mt->seed(seed);
+            }
+        }
+
         ~RandomGenerator() = default;
 
-
-        std::mt19937 mt;
+        std::shared_ptr<std::mt19937> mt;
     };
 
 }

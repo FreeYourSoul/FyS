@@ -21,10 +21,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "cert-msc32-c"
+
 #include <catch2/catch.hpp>
 #include <fightingPit/FightingPitAnnouncer.hh>
+#include <RandomGenerator.hh>
 #include <CmlKey.hh>
 #include <Cml.hh>
+#include <ArenaServerContext.hh>
+#include <FSeamMockData.hpp>
 
 class CmlBase : public fys::cache::Cml {
 public:
@@ -45,12 +51,92 @@ namespace {
 }
 
 TEST_CASE("FightingPitAnnouncer test", "[service][arena]") {
-
-    SECTION("RNG test") {
-
-    } // End section : RNG test
-
+    auto fseamMock = FSeam::getDefault<fys::util::RandomGenerator>();
     auto cml = CmlBase(getLocalPathStorage());
-    fys::arena::FightingPitAnnouncer fpa(cml);
+    fys::arena::EncounterContext ctx;
+    ctx._rangeEncounterPerZone["WS00"] = {
+            std::make_pair(1, 4), // ez
+            std::make_pair(2, 4), // medium
+            std::make_pair(3, 5)  // hard
+    };
+    ctx._contendersPerZone["WS00"] = {
+            fys::arena::EncounterContext::EncounterDesc{
+                    "arena::contenders::Sampy.chai", 3,
+                    {60, 60, 60}
+            },
+            fys::arena::EncounterContext::EncounterDesc {
+                    "arena::contenders::Sampy.chai", 3,
+                    {40, 40, 40}
+            }
+    };
+
+    SECTION("test seed 42") {
+        std::shared_ptr<std::mt19937> mt = std::make_shared<std::mt19937>(42);
+        fseamMock->dupeReturn<FSeam::RandomGenerator::get>(mt);
+
+        SECTION("test seed ez") {
+            REQUIRE(2 == fys::util::RandomGenerator::generateInRange(1, 4));
+            // encounter 1
+            REQUIRE(80 == fys::util::RandomGenerator::generateInRange(0, 100));
+            REQUIRE(10 == fys::util::RandomGenerator::generateInRange(1, 10));
+            // encounter 2
+            REQUIRE(18 == fys::util::RandomGenerator::generateInRange(0, 100));
+            REQUIRE(8 == fys::util::RandomGenerator::generateInRange(1, 10));
+
+        } // End section : test seed ez
+        SECTION("test seed medium") {
+            REQUIRE(3 == fys::util::RandomGenerator::generateInRange(2, 4));
+            // encounter 1
+            REQUIRE(80 == fys::util::RandomGenerator::generateInRange(0, 100));
+            REQUIRE(10 == fys::util::RandomGenerator::generateInRange(1, 10));
+            // encounter 2
+            REQUIRE(18 == fys::util::RandomGenerator::generateInRange(0, 100));
+            REQUIRE(8 == fys::util::RandomGenerator::generateInRange(1, 10));
+            // encounter 3
+            REQUIRE(78 == fys::util::RandomGenerator::generateInRange(0, 100));
+            REQUIRE(6 == fys::util::RandomGenerator::generateInRange(1, 10));
+        } // End section : test seed medium
+
+        SECTION("test seed hard") {
+            REQUIRE(4 == fys::util::RandomGenerator::generateInRange(3, 5));
+            // encounter 1
+            REQUIRE(80 == fys::util::RandomGenerator::generateInRange(0, 100));
+            REQUIRE(10 == fys::util::RandomGenerator::generateInRange(1, 10));
+            // encounter 2
+            REQUIRE(18 == fys::util::RandomGenerator::generateInRange(0, 100));
+            REQUIRE(8 == fys::util::RandomGenerator::generateInRange(1, 10));
+            // encounter 3
+            REQUIRE(78 == fys::util::RandomGenerator::generateInRange(0, 100));
+            REQUIRE(6 == fys::util::RandomGenerator::generateInRange(1, 10));
+            // encounter 4
+            REQUIRE(60 == fys::util::RandomGenerator::generateInRange(0, 100));
+            REQUIRE(2 == fys::util::RandomGenerator::generateInRange(1, 10));
+        } // End section : test seed hard
+
+        SECTION("test generate contender") {
+            fys::arena::FightingPitAnnouncer fpa(cml);
+            fpa.setDifficulty(fys::arena::FightingPit::EASY);
+
+        } // End section : test generate contender
+
+    } // End section : RNG test 42
+
+    SECTION("test seed 1337") {
+        std::mt19937 mt(1337);
+
+        SECTION("test seed") {
+
+        } // End section : test seed
+
+        SECTION("test generate contender") {
+            fys::arena::FightingPitAnnouncer fpa(cml);
+
+        } // End section : test generate contender
+
+    } // End section : RNG test 1337
+
 } // End TestCase : FightingPitAnnouncer test
 
+
+
+#pragma clang diagnostic pop

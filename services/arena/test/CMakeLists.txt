@@ -58,6 +58,7 @@ addFSeamTests(
         ${CMAKE_CURRENT_LIST_DIR}/catchMain.cpp
         ${CMAKE_CURRENT_LIST_DIR}/fightingPit/HexagonSideTestCase.cpp
         ${CMAKE_CURRENT_LIST_DIR}/fightingPit/PriorityOrderListTestCase.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/fightingPit/FightingPitAnnouncerTestCase.cpp
 
         TO_MOCK
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/ConnectionHandler.hh
