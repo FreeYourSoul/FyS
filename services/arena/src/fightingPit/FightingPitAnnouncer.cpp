@@ -52,6 +52,7 @@ namespace {
     std::string getNameFromKey(const std::string &key) {
         return key.substr(key.find_last_of(':') + 1, key.find_last_of('.') - key.find_last_of(':') - 1);
     }
+
 }
 
 namespace fys::arena {
@@ -76,9 +77,10 @@ namespace fys::arena {
             auto desc = boundaryMap.get(rngMonster)->second; // TODO add security at context creation to enforce that
             int levelMonster = fys::util::RandomGenerator::generateInRange(1, 10); // TODO, add this range in the configuration
             auto contenderScript = std::make_unique<ContenderScripting>(*fp.getChaiPtr(), levelMonster);
+            std::string name = getNameFromKey(desc.key);
             contenderScript->setContenderId(i);
-            contenderScript->setContenderName(getNameFromKey(desc.key));
-            contenderScript->loadContenderScript(_cache.findInCache(desc.key).data());
+            contenderScript->setContenderName(name);
+            contenderScript->loadContenderScript(getScriptString(name, desc));
             fp.addContender(std::make_shared<FightingContender>(std::move(contenderScript)));
         }
     }
@@ -86,5 +88,13 @@ namespace fys::arena {
     void FightingPitAnnouncer::generatePartyTeams(const std::string &userName) {
         // TODO get data from DB to initialize party team
     }
+
+    std::string FightingPitAnnouncer::getScriptString(std::string name, const EncounterContext::EncounterDesc &desc) {
+        if (std::any_of(_loadedScript.cbegin(), _loadedScript.cend(), [&name](const auto &s){ return s == name; } ))
+            return "";
+        _loadedScript.emplace_back(std::move(name));
+        return _cache.findInCache(desc.key).data();
+    }
+
 
 } // namespace fys::arena

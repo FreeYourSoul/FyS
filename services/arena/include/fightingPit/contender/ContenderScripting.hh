@@ -59,6 +59,10 @@ namespace fys::arena {
         void setContenderName(std::string contenderName) { _contenderName = std::move(contenderName); }
         void setContenderId(uint contenderId) { _contenderId = contenderId; }
 
+        const std::string &getContenderName() const { return _contenderName; }
+        uint getContenderId() const { return _contenderId; }
+        uint getLevel() const { return _level; }
+
     private:
         [[nodiscard]] std::string getChaiMethodName(std::string && methodName) const { return _contenderName + "_" + std::move(methodName); }
         [[nodiscard]] std::string getChaiContenderId() const { return std::string("contender_").append(_contenderName).append(std::to_string(_contenderId)); }

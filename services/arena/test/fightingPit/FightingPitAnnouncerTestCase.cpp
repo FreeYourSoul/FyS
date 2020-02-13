@@ -28,6 +28,8 @@
 #include <FSeamMockData.hpp>
 #include <ArenaServerContext.hh>
 #include <fightingPit/FightingPitAnnouncer.hh>
+#include <fightingPit/contender/FightingContender.hh>
+#include <fightingPit/contender/ContenderScripting.hh>
 #include <RandomGenerator.hh>
 #include <CmlKey.hh>
 #include <Cml.hh>
@@ -116,15 +118,71 @@ TEST_CASE("FightingPitAnnouncer test", "[service][arena]") {
             REQUIRE(2 == fys::util::RandomGenerator::generateInRange(1, 10));
         } // End section : test seed hard
 
-        SECTION("test generate contender Easy") { // 2 80 10 28 8
+        SECTION("test generate contender Easy") { // seed 2 80 10 28 8
             fys::arena::FightingPitAnnouncer fpa(cml);
             fpa.setDifficulty(fys::arena::FightingPit::EASY);
             fpa.setEncounterType(fys::arena::FightingPitAnnouncer::EncounterType::RANDOM);
             auto fightingPit = fpa.buildFightingPit(ctx, handler, "WS00");
 
             REQUIRE(2 == fightingPit->getPitContenders().getNumberContender());
-            REQUIRE(fightingPit->getPitContenders().getFightingContender(0)->);
+
+            REQUIRE("Slime" == fightingPit->getPitContenders().getFightingContender(0)->getContenderScripting()->getContenderName());
+            REQUIRE(0 == fightingPit->getPitContenders().getFightingContender(0)->getContenderScripting()->getContenderId());
+            REQUIRE(10 == fightingPit->getPitContenders().getFightingContender(0)->getContenderScripting()->getLevel());
+
+            REQUIRE("Sampy" == fightingPit->getPitContenders().getFightingContender(1)->getContenderScripting()->getContenderName());
+            REQUIRE(1 == fightingPit->getPitContenders().getFightingContender(1)->getContenderScripting()->getContenderId());
+            REQUIRE(8 == fightingPit->getPitContenders().getFightingContender(1)->getContenderScripting()->getLevel());
+
         } // End section : test generate contender Easy
+
+        SECTION("test generate contender Medium") { // seed 3 80 10 18 8 78 6
+            fys::arena::FightingPitAnnouncer fpa(cml);
+            fpa.setDifficulty(fys::arena::FightingPit::MEDIUM);
+            fpa.setEncounterType(fys::arena::FightingPitAnnouncer::EncounterType::RANDOM);
+            auto fightingPit = fpa.buildFightingPit(ctx, handler, "WS00");
+
+            REQUIRE(3 == fightingPit->getPitContenders().getNumberContender());
+
+            REQUIRE("Slime" == fightingPit->getPitContenders().getFightingContender(0)->getContenderScripting()->getContenderName());
+            REQUIRE(0 == fightingPit->getPitContenders().getFightingContender(0)->getContenderScripting()->getContenderId());
+            REQUIRE(10 == fightingPit->getPitContenders().getFightingContender(0)->getContenderScripting()->getLevel());
+
+            REQUIRE("Sampy" == fightingPit->getPitContenders().getFightingContender(1)->getContenderScripting()->getContenderName());
+            REQUIRE(1 == fightingPit->getPitContenders().getFightingContender(1)->getContenderScripting()->getContenderId());
+            REQUIRE(8 == fightingPit->getPitContenders().getFightingContender(1)->getContenderScripting()->getLevel());
+
+            REQUIRE("Slime" == fightingPit->getPitContenders().getFightingContender(2)->getContenderScripting()->getContenderName());
+            REQUIRE(2 == fightingPit->getPitContenders().getFightingContender(2)->getContenderScripting()->getContenderId());
+            REQUIRE(6 == fightingPit->getPitContenders().getFightingContender(2)->getContenderScripting()->getLevel());
+
+        } // End section : test generate contender Medium
+
+        SECTION("test generate contender Hard") { // seed 4 80 10 18 8 78 6 60 2
+            fys::arena::FightingPitAnnouncer fpa(cml);
+            fpa.setDifficulty(fys::arena::FightingPit::HARD);
+            fpa.setEncounterType(fys::arena::FightingPitAnnouncer::EncounterType::RANDOM);
+            auto fightingPit = fpa.buildFightingPit(ctx, handler, "WS00");
+
+            REQUIRE(4 == fightingPit->getPitContenders().getNumberContender());
+
+            REQUIRE("Slime" == fightingPit->getPitContenders().getFightingContender(0)->getContenderScripting()->getContenderName());
+            REQUIRE(0 == fightingPit->getPitContenders().getFightingContender(0)->getContenderScripting()->getContenderId());
+            REQUIRE(10 == fightingPit->getPitContenders().getFightingContender(0)->getContenderScripting()->getLevel());
+
+            REQUIRE("Sampy" == fightingPit->getPitContenders().getFightingContender(1)->getContenderScripting()->getContenderName());
+            REQUIRE(1 == fightingPit->getPitContenders().getFightingContender(1)->getContenderScripting()->getContenderId());
+            REQUIRE(8 == fightingPit->getPitContenders().getFightingContender(1)->getContenderScripting()->getLevel());
+
+            REQUIRE("Slime" == fightingPit->getPitContenders().getFightingContender(2)->getContenderScripting()->getContenderName());
+            REQUIRE(2 == fightingPit->getPitContenders().getFightingContender(2)->getContenderScripting()->getContenderId());
+            REQUIRE(6 == fightingPit->getPitContenders().getFightingContender(2)->getContenderScripting()->getLevel());
+
+            REQUIRE("Sampy" == fightingPit->getPitContenders().getFightingContender(3)->getContenderScripting()->getContenderName());
+            REQUIRE(3 == fightingPit->getPitContenders().getFightingContender(3)->getContenderScripting()->getContenderId());
+            REQUIRE(2 == fightingPit->getPitContenders().getFightingContender(3)->getContenderScripting()->getLevel());
+
+        } // End section : test generate contender Hard
 
     } // End section : RNG test 42
 

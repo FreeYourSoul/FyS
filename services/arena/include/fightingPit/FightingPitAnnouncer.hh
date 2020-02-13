@@ -90,6 +90,7 @@ namespace fys::arena {
         [[nodiscard]] bool isAmbushEnforced() const { return _isAmbushEnforced && *_isAmbushEnforced; }
 
     private:
+        inline std::string getScriptString(std::string name, const EncounterContext::EncounterDesc &desc);
         void generateContenders(FightingPit &fp, const EncounterContext &ctx, const std::string &wsId);
 
         [[nodiscard]] bool isScriptedEncounter() const { return _encounterType != EncounterType::RANDOM; }
@@ -109,6 +110,8 @@ namespace fys::arena {
         EncounterType _encounterType = EncounterType::RANDOM;
 
         std::optional<bool> _isAmbushEnforced;
+
+        std::vector<std::string> _loadedScript;
 
         //TODO add the common cache retriever
 

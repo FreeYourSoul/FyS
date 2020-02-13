@@ -33,8 +33,13 @@ using namespace chaiscript;
 namespace fys::arena {
 
     void ContenderScripting::loadContenderScript(const std::string &script) {
-        if (!script.empty())
-            _chai.get().eval(script);
+        if (!script.empty()) {
+            try {
+                _chai.get().eval(script);
+            } catch (std::exception &e) {
+                SPDLOG_ERROR("Error caught on scripting loading {}", e.what());
+            }
+        }
 
         // instantiate the contender in chai engine
         std::string createVar = fmt::format("global {}={}({},{});",
