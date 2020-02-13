@@ -43,21 +43,25 @@ namespace fys::arena {
     class PitContenders {
 
     public:
-        [[nodiscard]]std::vector<std::shared_ptr<FightingContender>> getContenderOnSide(HexagonSide::Orientation side) const;
-        [[nodiscard]]std::vector<std::shared_ptr<FightingContender>> getChangingSideContenders() const;
+        PitContenders() = default;
+        PitContenders(const PitContenders& other) {}
+        [[nodiscard]] std::vector<std::shared_ptr<FightingContender>> getContenderOnSide(HexagonSide::Orientation side) const;
+        [[nodiscard]] std::vector<std::shared_ptr<FightingContender>> getChangingSideContenders() const;
 
         // scripting utility
-        [[nodiscard]]std::shared_ptr<FightingContender>
+        [[nodiscard]] std::shared_ptr<FightingContender>
             selectSuitableContender(ComparatorSelection<FightingContender> comp) const;
-        [[nodiscard]]std::shared_ptr<FightingContender>
+        [[nodiscard]] std::shared_ptr<FightingContender>
             selectSuitableContenderOnSide(HexagonSide::Orientation side, ComparatorSelection<FightingContender> comp) const;
-        [[nodiscard]]std::shared_ptr<FightingContender>
+        [[nodiscard]] std::shared_ptr<FightingContender>
             selectSuitableContenderAlive(ComparatorSelection<FightingContender> comp) const;
-        [[nodiscard]]std::shared_ptr<FightingContender>
+        [[nodiscard]] std::shared_ptr<FightingContender>
             selectSuitableContenderOnSideAlive(HexagonSide::Orientation side, ComparatorSelection<FightingContender> comp) const;
 
         [[nodiscard]]std::shared_ptr<FightingContender>
                 getFightingContender(std::size_t pos) const { return _contenders.at(pos); }
+
+        [[nodiscard]] std::size_t getNumberContender() const { return _contenders.size(); }
 
         void executeContenderAction(const data::PriorityElem &contender);
 

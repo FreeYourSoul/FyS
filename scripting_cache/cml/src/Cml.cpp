@@ -55,7 +55,11 @@ namespace fys::cache {
     }
 
     Cml::Cml(std::filesystem::path pathLocalStorage) : _localPathStorage(std::move(pathLocalStorage)) {
-        std::filesystem::create_directories(_localPathStorage);
+        try {
+            std::filesystem::create_directories(_localPathStorage);
+        } catch (std::exception &e) {
+            SPDLOG_WARN(e.what());
+        }
     }
 
     /**
@@ -73,6 +77,7 @@ namespace fys::cache {
     }
 
     std::string_view Cml::findInCache(const std::string &key, bool first)  {
+        auto str = _localPathStorage.string();
         CmlKey cmlKey(_localPathStorage, key);
 
         // Check in-memory (and check if file has been updated)

@@ -81,7 +81,11 @@ namespace fys::arena {
         void startBattle();
         void addContender(std::shared_ptr<FightingContender> newContender) { _contenders.addContender(std::move(newContender)); }
         void addPartyTeam(std::unique_ptr<PartyTeam> newTeam) { _partyTeams.addPartyTeam(std::move(newTeam)); }
-    
+
+        const PitContenders &getPitContenders() const { return _contenders; }
+        const AllyPartyTeams &getPartyTeam() const { return _partyTeams; }
+        const FightingPitLayout &getLayout() const { return _layout; }
+
     private:
         void readInputAndAppendPendingActions();
 

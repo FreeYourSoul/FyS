@@ -25,12 +25,13 @@
 #pragma ide diagnostic ignored "cert-msc32-c"
 
 #include <catch2/catch.hpp>
+#include <FSeamMockData.hpp>
+#include <ArenaServerContext.hh>
 #include <fightingPit/FightingPitAnnouncer.hh>
 #include <RandomGenerator.hh>
 #include <CmlKey.hh>
 #include <Cml.hh>
-#include <ArenaServerContext.hh>
-#include <FSeamMockData.hpp>
+
 
 class CmlBase : public fys::cache::Cml {
 public:
@@ -52,6 +53,8 @@ namespace {
 
 TEST_CASE("FightingPitAnnouncer test", "[service][arena]") {
     auto fseamMock = FSeam::getDefault<fys::util::RandomGenerator>();
+    fys::arena::ConnectionHandler handler {};
+    auto fseamConnectionHandlerMock = FSeam::get(&handler);
     auto cml = CmlBase(getLocalPathStorage());
     fys::arena::EncounterContext ctx;
     ctx._rangeEncounterPerZone["WS00"] = {
@@ -61,11 +64,11 @@ TEST_CASE("FightingPitAnnouncer test", "[service][arena]") {
     };
     ctx._contendersPerZone["WS00"] = {
             fys::arena::EncounterContext::EncounterDesc{
-                    "arena::contenders::Sampy.chai", 3,
+                    "arena:contenders:Sampy.chai", 3,
                     {60, 60, 60}
             },
             fys::arena::EncounterContext::EncounterDesc {
-                    "arena::contenders::Sampy.chai", 3,
+                    "arena:contenders:Slime.chai", 3,
                     {40, 40, 40}
             }
     };
@@ -113,11 +116,15 @@ TEST_CASE("FightingPitAnnouncer test", "[service][arena]") {
             REQUIRE(2 == fys::util::RandomGenerator::generateInRange(1, 10));
         } // End section : test seed hard
 
-        SECTION("test generate contender") {
+        SECTION("test generate contender Easy") { // 2 80 10 28 8
             fys::arena::FightingPitAnnouncer fpa(cml);
             fpa.setDifficulty(fys::arena::FightingPit::EASY);
+            fpa.setEncounterType(fys::arena::FightingPitAnnouncer::EncounterType::RANDOM);
+            auto fightingPit = fpa.buildFightingPit(ctx, handler, "WS00");
 
-        } // End section : test generate contender
+            REQUIRE(2 == fightingPit->getPitContenders().getNumberContender());
+            REQUIRE(fightingPit->getPitContenders().getFightingContender(0)->);
+        } // End section : test generate contender Easy
 
     } // End section : RNG test 42
 

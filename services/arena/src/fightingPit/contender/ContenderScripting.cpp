@@ -53,7 +53,11 @@ namespace fys::arena {
     }
 
     void ContenderScripting::setupContender() {
-        _chai.get().eval(getChaiContenderId() + ".setupContender();");
+        try {
+            _chai.get().eval(getChaiContenderId() + ".setupContender();");
+        } catch (std::exception &e) {
+            SPDLOG_ERROR("setupContender failed for {} : {}", getChaiContenderId(), e.what());
+        }
     }
 
     void ContenderScripting::executeAction() {

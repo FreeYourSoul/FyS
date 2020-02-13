@@ -84,7 +84,7 @@ class Attack {
 };
 
 
-//<><><><><><><><><><><><><><><><><><><><><>  SAMPY  <><><><><><><><><><><><><><><><><><><><><><><>
+//<><><><><><><><><><><><><><><><><><><><><>  Ogre  <><><><><><><><><><><><><><><><><><><><><><><>
 
 class SampyActionDesc {
     var action;
@@ -99,31 +99,31 @@ class SampyActionDesc {
 
 
 //Sample Monster Used For testing Purpose :-D
-class Sampy {
+class Ogre {
 
-    attr id;
     attr level;
+    attr id;
     attr actions;
 
     def Sampy(contenderId, level) {
         this.level = level;
-        this.id = contenderId;
+        this.id = contenderId
+        var ooo = SampyActionDesc("groundStrike", Attack(80));
+        var oo = SampyActionDesc("baseAttack", Attack(50));
+        var o = SampyActionDesc("sleep", Sleep());
         this.actions = [
-            "baseAttack":   SampyActionDesc("baseAttack", Attack(50)),
-            "groundStrike": SampyActionDesc("groundStrike", Attack(80)),
-            "sleep":        SampyActionDesc("sleep", Sleep())
+            "baseAttack":oo,
+            "groundStrike":ooo,
+            "sleep":o
          ];
-    }
 
-    def setupContender() {
-        var &thisContender = pitContenders.getFightingContender(this.id);
-        var &thisStatus = thisContender.accessStatus();
-        var addLifePerLevel = 150 * 0.02; // +2% life per level
-        thisStatus.life.total   = 150 + (addLifePerLevel * this.level);
-        thisStatus.life.current = thisStatus.life.total;
-        thisStatus.magicPoint.total = 100;
-        thisStatus.magicPoint.current = thisStatus.magicPoint.total;
-     }
+         var addLifePerLevel = 150 * 1.02; // +2% life per level
+         thisStatus.life.total   = 150 + (addLifePerLevel * level);
+         thisStatus.life.current = thisStatus.life.total;
+         thisStatus.magicPoint.total = 100;
+         thisStatus.magicPoint.current = thisStatus.magicPoint.total;
+
+    }
 
     def getActionByName(name) {
         return this.actions[name].action;
@@ -133,13 +133,13 @@ class Sampy {
     def decideAction(life) {
         var percent = life.current / life.total * 100;
         if (percent == 100) {
-            this.getActionByName("sleep")
+            return this.getActionByName("sleep")
         }
-        else if (percent < 50) {
-            this.getActionByName("baseAttack");
+        if (percent < 50) {
+            return this.getActionByName("baseAttack");
         }
         else {
-            this.getActionByName("groundStrike");
+            return this.getActionByName("groundStrike");
         }
     }
 
@@ -165,6 +165,10 @@ class Sampy {
         var &action = this.decideAction(thisStatus.life);
         var &target = this.decideTarget(thisContender, action.requireEnemyTarget(), action.requireAllyTarget());
         return action.execute(target.accessStatus());
+    }
+
+    def setupContender() {
+
     }
 
 };

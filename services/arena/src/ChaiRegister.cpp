@@ -51,7 +51,7 @@ void ChaiRegister::registerChai(chaiscript::ChaiScript &chai, PitContenders& pc,
         registerTeamAllies(chai, m);
 
         chai.add(m);
-        chai.set_global(chaiscript::var(std::ref(pc)), "pitContenders");
+        chai.set_global(chaiscript::var(std::ref(pc)),  "pitContenders");
         chai.set_global(chaiscript::var(std::ref(apt)), "allyPartyTeams");
     }
     catch (std::exception &ex) {

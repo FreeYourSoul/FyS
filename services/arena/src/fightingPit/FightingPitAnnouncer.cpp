@@ -41,10 +41,16 @@ namespace {
     makeContenderRngBoundaryMap(const std::vector<fys::arena::EncounterContext::EncounterDesc> &zoneContenders,
                                 fys::arena::FightingPit::Level difficulty) {
         BoundaryMapEncounter bm;
+        int val = 0;
         for (const auto &zc : zoneContenders) {
-            bm.insert(zc.chance.at(static_cast<int>(difficulty)), zc);
+            val += zc.chance.at(static_cast<int>(difficulty));
+            bm.insert(val, zc);
         }
         return bm;
+    }
+
+    std::string getNameFromKey(const std::string &key) {
+        return key.substr(key.find_last_of(':') + 1, key.find_last_of('.') - key.find_last_of(':') - 1);
     }
 }
 
@@ -52,26 +58,28 @@ namespace fys::arena {
     using json = nlohmann::json;
 
     std::shared_ptr<FightingPit>
-    FightingPitAnnouncer::buildFightingPit(const ArenaServerContext &ctx, ConnectionHandler &connectionHandler,
+    FightingPitAnnouncer::buildFightingPit(const EncounterContext &ctx, ConnectionHandler &connectionHandler,
                                            const std::string &wsId) {
         std::shared_ptr<FightingPit> fp = std::make_shared<FightingPit>(_difficulty);
-        generateContenders(*fp, ctx.getEncounterContext(), wsId);
+        generateContenders(*fp, ctx, wsId);
         return fp;
     }
 
-    void FightingPitAnnouncer::generateContenders(const FightingPit &fp, const EncounterContext &ctx,
+    void FightingPitAnnouncer::generateContenders(FightingPit &fp, const EncounterContext &ctx,
                                                   const std::string &wsId) {
         const auto &range = ctx._rangeEncounterPerZone.at(wsId).at(static_cast<std::size_t>(_difficulty));
         unsigned numberContenders = fys::util::RandomGenerator::generateInRange(range.first, range.second);
         auto boundaryMap = makeContenderRngBoundaryMap(ctx._contendersPerZone.at(wsId), _difficulty);
 
-        while (numberContenders--) {
+        for (int i = 0; i < numberContenders; ++i) {
             int rngMonster = fys::util::RandomGenerator::generateInRange(0, 100);
             auto desc = boundaryMap.get(rngMonster)->second; // TODO add security at context creation to enforce that
             int levelMonster = fys::util::RandomGenerator::generateInRange(1, 10); // TODO, add this range in the configuration
             auto contenderScript = std::make_unique<ContenderScripting>(*fp.getChaiPtr(), levelMonster);
+            contenderScript->setContenderId(i);
+            contenderScript->setContenderName(getNameFromKey(desc.key));
             contenderScript->loadContenderScript(_cache.findInCache(desc.key).data());
-            _pitContenders.addContender(std::make_shared<FightingContender>(std::move(contenderScript)));
+            fp.addContender(std::make_shared<FightingContender>(std::move(contenderScript)));
         }
     }
 

@@ -34,6 +34,7 @@ namespace fys::cache {
         CmlKey(std::filesystem::path basePath, std::string key): _path(std::move(basePath)), _key(key) {
             std::replace(key.begin(), key.end(), ':', '/');
             _path /= std::filesystem::path(key);
+            auto ok = _path.string();
         }
 
         [[nodiscard]] const std::filesystem::path &getPath() const { return _path; }

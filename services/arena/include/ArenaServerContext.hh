@@ -34,7 +34,7 @@ namespace fys::arena {
     struct EncounterContext {
         struct EncounterDesc {
             bool operator!=(const EncounterDesc &other) const {
-                return std::make_tuple(key, maxEncountering, chance) != std::make_tuple(key, maxEncountering, chance);
+                return std::make_tuple(key, maxEncountering, chance) != std::make_tuple(other.key, other.maxEncountering, other.chance);
             }
 
             std::string key;
@@ -47,7 +47,7 @@ namespace fys::arena {
     };
 
     class ArenaServerContext : fys::common::ServiceContextBase {
-    public:
+public:
         ArenaServerContext(int ac, const char *const *av);
 
         [[nodiscard]] std::string toString() const;

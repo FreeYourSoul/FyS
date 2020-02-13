@@ -62,7 +62,6 @@ namespace fys::arena {
             bool ambush = false;
 
             fpa.setEncounterType(encounterType);
-            fpa.setEncounterId(0u);
             fpa.enforceAmbush(ambush);
         // }
     }
