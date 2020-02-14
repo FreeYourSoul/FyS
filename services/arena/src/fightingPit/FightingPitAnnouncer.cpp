@@ -80,7 +80,7 @@ namespace fys::arena {
             std::string name = getNameFromKey(desc.key);
             contenderScript->setContenderId(i);
             contenderScript->setContenderName(name);
-            contenderScript->loadContenderScript(getScriptString(name, desc));
+            contenderScript->loadContenderScript(getScriptString(std::move(name), desc));
             fp.addContender(std::make_shared<FightingContender>(std::move(contenderScript)));
         }
     }

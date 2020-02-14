@@ -187,19 +187,40 @@ TEST_CASE("FightingPitAnnouncer test", "[service][arena]") {
     } // End section : RNG test 42
 
     SECTION("test seed 1337") {
-        std::mt19937 mt(1337);
+        std::shared_ptr<std::mt19937> mt = std::make_shared<std::mt19937>(1337);
+        fseamMock->dupeReturn<FSeam::RandomGenerator::get>(mt);
 
-        SECTION("test seed") {
+        SECTION("test seed Easy") {
+            REQUIRE(2 == fys::util::RandomGenerator::generateInRange(1, 4));
+            // encounter 1
+            REQUIRE(56 == fys::util::RandomGenerator::generateInRange(0, 100));
+            REQUIRE(2 == fys::util::RandomGenerator::generateInRange(1, 10));
+            // encounter 2
+            REQUIRE(21 == fys::util::RandomGenerator::generateInRange(0, 100));
+            REQUIRE(3 == fys::util::RandomGenerator::generateInRange(1, 10));
+        } // End section : test seed Easy
 
-        } // End section : test seed
-
-        SECTION("test generate contender") {
+        SECTION("test generate contender Easy") { // seed 2 56 2 21 3
             fys::arena::FightingPitAnnouncer fpa(cml);
+            fpa.setDifficulty(fys::arena::FightingPit::EASY);
+            fpa.setEncounterType(fys::arena::FightingPitAnnouncer::EncounterType::RANDOM);
+            auto fightingPit = fpa.buildFightingPit(ctx, handler, "WS00");
 
-        } // End section : test generate contender
+            REQUIRE(2 == fightingPit->getPitContenders().getNumberContender());
+
+            REQUIRE("Sampy" == fightingPit->getPitContenders().getFightingContender(0)->getContenderScripting()->getContenderName());
+            REQUIRE(0 == fightingPit->getPitContenders().getFightingContender(0)->getContenderScripting()->getContenderId());
+            REQUIRE(2 == fightingPit->getPitContenders().getFightingContender(0)->getContenderScripting()->getLevel());
+
+            REQUIRE("Sampy" == fightingPit->getPitContenders().getFightingContender(1)->getContenderScripting()->getContenderName());
+            REQUIRE(1 == fightingPit->getPitContenders().getFightingContender(1)->getContenderScripting()->getContenderId());
+            REQUIRE(3 == fightingPit->getPitContenders().getFightingContender(1)->getContenderScripting()->getLevel());
+
+        } // End section : test generate contender Easy
 
     } // End section : RNG test 1337
 
+    FSeam::MockVerifier::cleanUp();
 } // End TestCase : FightingPitAnnouncer test
 
 
