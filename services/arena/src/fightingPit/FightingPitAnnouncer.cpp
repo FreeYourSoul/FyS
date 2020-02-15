@@ -30,6 +30,8 @@
 #include <RandomGenerator.hh>
 #include <fightingPit/contender/ContenderScripting.hh>
 #include <fightingPit/contender/FightingContender.hh>
+#include <fightingPit/team/PartyTeam.hh>
+#include <fightingPit/team/TeamMember.hh>
 #include <fightingPit/FightingPitAnnouncer.hh>
 #include <fightingPit/FightingPit.hh>
 #include <BoundaryMap.hh>
@@ -85,8 +87,49 @@ namespace fys::arena {
         }
     }
 
-    void FightingPitAnnouncer::generatePartyTeams(const std::string &userName) {
+    AllyPartyTeams FightingPitAnnouncer::generateAllyPartyTeam(const std::string &userName) {
+        AllyPartyTeams apt;
+        auto team = std::make_unique<PartyTeam>(userName);
+
+        // Temporary hard coded party team
+        auto tm1 = std::make_shared<TeamMember>();
+        auto tm2 = std::make_shared<TeamMember>();
+        auto tm3 = std::make_shared<TeamMember>();
+        auto tm4 = std::make_shared<TeamMember>();
+
+        tm1->setName("Elvo");
+        auto &s1 = tm1->accessStatus();
+        s1.life.total = 100;
+        s1.life.current = 100;
+        s1.magicPoint.total = 20;
+        s1.magicPoint.current = 20;
+        tm2->setName("Mirael");
+        auto &s2 = tm2->accessStatus();
+        s2.life.total = 200;
+        s2.life.current = 200;
+        s2.magicPoint.total = 0;
+        s2.magicPoint.current = 0;
+        tm3->setName("FySton");
+        auto &s3 = tm3->accessStatus();
+        s3.life.total = 550;
+        s3.life.current = 550;
+        s3.magicPoint.total = 10;
+        s3.magicPoint.current = 10;
+        tm4->setName("Simon");
+        auto &s4 = tm4->accessStatus();
+        s4.life.total = 140;
+        s4.life.current = 140;
+        s4.magicPoint.total = 10;
+        s4.magicPoint.current = 10;
+
+        team->addPartyTeam(tm1);
+        team->addPartyTeam(tm2);
+        team->addPartyTeam(tm3);
+        team->addPartyTeam(tm4);
         // TODO get data from DB to initialize party team
+
+        apt.addPartyTeam(std::move(team));
+        return apt;
     }
 
     std::string FightingPitAnnouncer::getScriptString(std::string name, const EncounterContext::EncounterDesc &desc) {

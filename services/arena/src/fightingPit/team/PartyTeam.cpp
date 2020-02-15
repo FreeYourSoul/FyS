@@ -48,4 +48,8 @@ namespace fys::arena {
         return result;
     }
 
+    void PartyTeam::addPartyTeam(std::shared_ptr<TeamMember> member) {
+        _members.emplace_back(std::move(member));
+    }
+
 }

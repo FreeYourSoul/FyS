@@ -66,7 +66,7 @@ namespace fys::arena {
         [[nodiscard]] std::shared_ptr<FightingPit>
         buildFightingPit(const EncounterContext &ctx, ConnectionHandler &connectionHandler, const std::string &wsId);
 
-        void generatePartyTeams(const std::string &userName);
+        fys::arena::AllyPartyTeams generateAllyPartyTeam(const std::string &userName);
 
         void setEncounterType(EncounterType encounterType) {
             if (encounterType == RANDOM)
