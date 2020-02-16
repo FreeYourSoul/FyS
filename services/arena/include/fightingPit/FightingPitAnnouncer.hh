@@ -63,7 +63,7 @@ namespace fys::arena {
     public:
         explicit FightingPitAnnouncer(cache::Cml &cml) : _cache(cml) {}
 
-        [[nodiscard]] std::shared_ptr<FightingPit>
+        [[nodiscard]] std::unique_ptr<FightingPit>
         buildFightingPit(const EncounterContext &ctx, ConnectionHandler &connectionHandler, const std::string &wsId);
 
         fys::arena::AllyPartyTeams generateAllyPartyTeam(const std::string &userName);
@@ -112,6 +112,8 @@ namespace fys::arena {
         std::optional<bool> _isAmbushEnforced;
 
         std::vector<std::string> _loadedScript;
+
+        std::string _creatorUserName;
 
         //TODO add the common cache retriever
 

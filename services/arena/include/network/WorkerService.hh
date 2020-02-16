@@ -54,19 +54,29 @@ namespace fys::arena {
       */
     class WorkerService {
     public:
-        explicit WorkerService() : _ctx(1), _workerRouter(_ctx, zmq::socket_type::router) {}
-        void generateFightingPit(FightingPitAnnouncer announcer);
+        explicit WorkerService() : _ctx(1), _workerRouter(_ctx, zmq::socket_type::router), _currentArenaId(0) {}
 
-        void forwardMessageToFightingPit(const std::string &fightingArenaId/* , FightingMessage*/);
+        /**
+         * @brief Add a fighting pit to the worker service, adding this instance to the on-going/accessible fighting pit
+         * of the arena server. Create an id for the newly created arena and set it to the fighting pit.
+         *
+         * @param fp FightingPit to add in the current WorkerService
+         * @todo : test that the arena id generation works properly
+         */
+        void addFightingPit(std::unique_ptr<FightingPit> fp);
+
+        void forwardMessageToFightingPit(unsigned fightingArenaId/* , FightingMessage*/);
 
 
     private:
         zmq::context_t      _ctx;
         zmq::socket_t       _workerRouter;
+        unsigned            _currentArenaId;
 
         // map of client identifier to FightingArenaId
-        std::unordered_map<std::string, std::string> _idOnArenaId;
-        std::unordered_map<std::string, std::unique_ptr<FightingPit>> _arenaInstances;
+        std::unordered_map<unsigned, std::string> _idOnArenaId;
+        std::unordered_map<unsigned, std::unique_ptr<FightingPit>> _arenaInstances;
+
     };
 
 }

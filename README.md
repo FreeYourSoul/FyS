@@ -14,7 +14,7 @@ FreeYourSoul Online, a scalable mmorpg game
 
 ## Dispatchers
 
-### What is a FyS dispatcher
+### What is a FyS dispatcher?
 
 ## Services
 

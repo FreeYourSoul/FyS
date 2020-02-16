@@ -74,7 +74,7 @@ namespace fys::arena {
             NOT_FINISHED    // on going
         };
 
-        explicit FightingPit(Level levelFightingPit);
+        explicit FightingPit(std::string creatorUserName, Level levelFightingPit);
 
         const std::unique_ptr<chaiscript::ChaiScript> &getChaiPtr() const { return _chaiPtr; }
 
@@ -82,9 +82,13 @@ namespace fys::arena {
         void addContender(std::shared_ptr<FightingContender> newContender) { _contenders.addContender(std::move(newContender)); }
         void addPartyTeam(std::unique_ptr<PartyTeam> newTeam) { _partyTeams.addPartyTeam(std::move(newTeam)); }
 
+        const std::string &getCreatorUserName() const { return _creatorUserName; }
         const PitContenders &getPitContenders() const { return _contenders; }
         const AllyPartyTeams &getPartyTeam() const { return _partyTeams; }
         const FightingPitLayout &getLayout() const { return _layout; }
+
+        unsigned getArenaId() const { return _arenaId; }
+        void setArenaId(unsigned arenaId) { _arenaId = arenaId; }
 
     private:
         void readInputAndAppendPendingActions();
@@ -96,6 +100,8 @@ namespace fys::arena {
         PitContenders       _contenders;
         AllyPartyTeams      _partyTeams;
         FightingPitLayout   _layout;
+        std::string         _creatorUserName;
+        unsigned            _arenaId;
 
         std::unique_ptr<chaiscript::ChaiScript> _chaiPtr;
         std::vector<std::unique_ptr<SideBattle>> _sideBattles;

@@ -53,6 +53,7 @@ namespace fys::arena {
 
     private:
         std::vector<std::unique_ptr<PartyTeam>> _partyTeams;
+        std::string _creatorUserName;
 
     };
 

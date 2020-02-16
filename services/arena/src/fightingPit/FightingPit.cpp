@@ -43,10 +43,11 @@ namespace {
 
 namespace fys::arena {
 
-    FightingPit::FightingPit(fys::arena::FightingPit::Level levelFightingPit) :
+    FightingPit::FightingPit(std::string creatorUserName, fys::arena::FightingPit::Level levelFightingPit) :
             _end(Ending::NOT_FINISHED),
             _levelFightingPit(levelFightingPit),
             _layout(_contenders, _partyTeams),
+            _creatorUserName(std::move(creatorUserName)),
             _chaiPtr(ChaiRegister::createChaiInstance(_contenders, _partyTeams))
     {}
 

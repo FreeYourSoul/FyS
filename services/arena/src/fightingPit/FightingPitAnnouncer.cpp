@@ -60,10 +60,13 @@ namespace {
 namespace fys::arena {
     using json = nlohmann::json;
 
-    std::shared_ptr<FightingPit>
+    std::unique_ptr<FightingPit>
     FightingPitAnnouncer::buildFightingPit(const EncounterContext &ctx, ConnectionHandler &connectionHandler,
                                            const std::string &wsId) {
-        std::shared_ptr<FightingPit> fp = std::make_shared<FightingPit>(_difficulty);
+        if (_creatorUserName.empty()) {
+            SPDLOG_WARN("FightingPit built invalid (no creator of the pit registered, a call to generateAllyPartyTeam function is required)");
+        }
+        std::unique_ptr<FightingPit> fp = std::make_unique<FightingPit>(_creatorUserName, _difficulty);
         generateContenders(*fp, ctx, wsId);
         return fp;
     }
@@ -91,6 +94,7 @@ namespace fys::arena {
         AllyPartyTeams apt;
         auto team = std::make_unique<PartyTeam>(userName);
 
+        _creatorUserName = userName;
         // Temporary hard coded party team
         auto tm1 = std::make_shared<TeamMember>();
         auto tm2 = std::make_shared<TeamMember>();

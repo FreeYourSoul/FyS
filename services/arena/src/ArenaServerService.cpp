@@ -59,10 +59,19 @@ namespace fys::arena {
 
             // Retrieving data from newFightRequest
             FightingPitAnnouncer::EncounterType encounterType = FightingPitAnnouncer::EncounterType::RANDOM;
+            FightingPit::Level level = FightingPit::EASY;
+            const std::string serverCode = "WS00";
             bool ambush = false;
 
+            fpa.setDifficulty(level);
             fpa.setEncounterType(encounterType);
             fpa.enforceAmbush(ambush);
+            _workerService.addFightingPit(fpa.buildFightingPit(_ctx.get().getEncounterContext(), _connectionHandler, serverCode));
+        // }
+        // else {
+            unsigned fightingPitId = 1; // todo get the correct if from the content of the zmq message
+            //FightingPitMessage fightingPitMessage;
+            _workerService.forwardMessageToFightingPit(fightingPitId/*, fightingPitMessage*/);
         // }
     }
 

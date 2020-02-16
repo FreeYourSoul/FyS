@@ -21,16 +21,33 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include <spdlog/spdlog.h>
 #include <network/WorkerService.hh>
 
 namespace fys::arena
 {
 
-    void WorkerService::generateFightingPit(FightingPitAnnouncer announcer) {
+    void WorkerService::addFightingPit(std::unique_ptr<FightingPit> fp) {
+        if (!fp) {
+            SPDLOG_ERROR("Cannot add fighting pit in WorkerService");
+            return;
+        }
+        if (_arenaInstances.size() >= std::numeric_limits<decltype(_currentArenaId)>::max()) {
+            SPDLOG_ERROR("Cannot add fighting pit in WorkerService (worker full)");
+            return;
+        }
+        while (++_currentArenaId != 0 && _arenaInstances.find(_currentArenaId) != _arenaInstances.end());
 
+        fp->setArenaId(_currentArenaId);
+        _arenaInstances[_currentArenaId] = std::move(fp);
+        return;
     }
     
-    void WorkerService::forwardMessageToFightingPit(const std::string &fightingArenaId/* , FightingMessage*/) {
+    void WorkerService::forwardMessageToFightingPit(unsigned fightingArenaId/* , FightingMessage*/) {
+        if (_arenaInstances.find(fightingArenaId) == _arenaInstances.end()) {
+            SPDLOG_WARN("Request received for arena id {}, but arena isn't defined", fightingArenaId);
+            return;
+        }
 
     }
     
