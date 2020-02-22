@@ -40,6 +40,9 @@ namespace fys::arena {
                 _dealerConnectionToDispatcher(_zmqContext, zmq::socket_type::dealer)
         { }
 
+        /**
+         * @brief Connect to the Arena dispatcher in order to receive request from the WS to create new fightingPit
+         */
         void setupConnectionManager(const fys::arena::ArenaServerContext &ctx) noexcept;
         void sendMessageToDispatcher(zmq::multipart_t && msg) noexcept;
 

@@ -46,7 +46,11 @@ namespace fys::ws {
                                      "message is : {}", msg.size(), msg.str());
                         return;
                     }
-                    std::string idt = std::string(static_cast<char*>(msg.at(0).data()), msg.at(0).size());
+                    // part0 = idt
+                    // part1 = token
+                    // part2 = content
+                    // part3 = magic internal server
+                    std::string idt = std::string(static_cast<char*>  (msg.at(0).data()), msg.at(0).size());
                     std::string token = std::string(static_cast<char*>(msg.at(1).data()), msg.at(1).size());
                     std::optional<std::string> internalMagic;
                     if (msg.size() == 4)

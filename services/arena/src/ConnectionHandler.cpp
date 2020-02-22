@@ -27,6 +27,8 @@
 namespace fys::arena {
 
 void ConnectionHandler::setupConnectionManager(const fys::arena::ArenaServerContext &ctx) noexcept {
+    //todo
+    // connect to dispatcher
 }
 
 void ConnectionHandler::sendMessageToDispatcher(zmq::multipart_t &&msg) noexcept {

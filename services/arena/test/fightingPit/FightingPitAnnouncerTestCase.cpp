@@ -120,6 +120,7 @@ TEST_CASE("FightingPitAnnouncer test", "[service][arena]") {
 
         SECTION("test generate contender Easy") { // seed 2 80 10 28 8
             fys::arena::FightingPitAnnouncer fpa(cml);
+            fpa.setCreatorUserName("");
             fpa.setDifficulty(fys::arena::FightingPit::EASY);
             fpa.setEncounterType(fys::arena::FightingPitAnnouncer::EncounterType::RANDOM);
             auto fightingPit = fpa.buildFightingPit(ctx, handler, "WS00");
@@ -138,6 +139,7 @@ TEST_CASE("FightingPitAnnouncer test", "[service][arena]") {
 
         SECTION("test generate contender Medium") { // seed 3 80 10 18 8 78 6
             fys::arena::FightingPitAnnouncer fpa(cml);
+            fpa.setCreatorUserName("");
             fpa.setDifficulty(fys::arena::FightingPit::MEDIUM);
             fpa.setEncounterType(fys::arena::FightingPitAnnouncer::EncounterType::RANDOM);
             auto fightingPit = fpa.buildFightingPit(ctx, handler, "WS00");
@@ -160,6 +162,7 @@ TEST_CASE("FightingPitAnnouncer test", "[service][arena]") {
 
         SECTION("test generate contender Hard") { // seed 4 80 10 18 8 78 6 60 2
             fys::arena::FightingPitAnnouncer fpa(cml);
+            fpa.setCreatorUserName("");
             fpa.setDifficulty(fys::arena::FightingPit::HARD);
             fpa.setEncounterType(fys::arena::FightingPitAnnouncer::EncounterType::RANDOM);
             auto fightingPit = fpa.buildFightingPit(ctx, handler, "WS00");
@@ -202,6 +205,7 @@ TEST_CASE("FightingPitAnnouncer test", "[service][arena]") {
 
         SECTION("test generate contender Easy") { // seed 2 56 2 21 3
             fys::arena::FightingPitAnnouncer fpa(cml);
+            fpa.setCreatorUserName("");
             fpa.setDifficulty(fys::arena::FightingPit::EASY);
             fpa.setEncounterType(fys::arena::FightingPitAnnouncer::EncounterType::RANDOM);
             auto fightingPit = fpa.buildFightingPit(ctx, handler, "WS00");

@@ -24,6 +24,7 @@
 #ifndef FYS_ARENASERVERSERVICE_HH
 #define FYS_ARENASERVERSERVICE_HH
 
+#include <unordered_map>
 #include <network/WorkerService.hh>
 #include <ConnectionHandler.hh>
 #include <CmlCopy.hh>
@@ -32,6 +33,38 @@ namespace fys::arena {
 
     class ArenaServerContext;
 
+    /**
+     * A player is awaited to generate an arena
+     * AwaitingArena represent a player and the information relating to the arena that has to be generated
+     */
+    struct AwaitingArena {
+        std::string _namePlayer;
+
+        // fighting pit data
+        bool _isAmbush;
+        std::string _serverCode;
+        uint _encounterId;
+        FightingPit::Level _levelFightingPit;
+
+
+    };
+
+    /**
+     * @brief Class managing an Arena Server.
+     *
+     * @details An arena server is a server handling multiple arena fighting pit instance at once.
+     * In order to properly works, it need to work with an ArenaDispatcher, which is a proxy for the WorldServer to
+     * communicate with Arena.
+     * In case of a new encounter for a player, the following workflow apply:
+     * - Player is moving / doing an action on the WorldMap (managed by a WorldServer) that is triggering a new encounter
+     * - WorldServer send a message to a ArenaDispatcher containing basic configuration data to generate a fighting pit
+     *   and authentication information, those are the following:
+     *          - a generated token (used as authentication key)
+     *          - the difficulty of the fight (configuration of the player)
+     *          - the type of encounter (Random, Scripted etc...)
+     *          - the id of encounter (if it is a scripted one)
+     *          -
+     */
     class ArenaServerService {
     public:
         explicit ArenaServerService(const ArenaServerContext &ctx);
@@ -39,13 +72,17 @@ namespace fys::arena {
         void runServerLoop() noexcept;
 
     private:
-        void processMessage(std::string &&idt, std::string &&token, const zmq::message_t &content);
+        void createNewFightingPit(AwaitingArena && arenaToCreate);
+        void processMessage(std::string && idt, std::string && token, const zmq::message_t & content);
 
     private:
         std::reference_wrapper<const ArenaServerContext> _ctx;
         cache::CmlCopy      _cache;
         ConnectionHandler   _connectionHandler;
         WorkerService       _workerService;
+
+        // map of token on awaiting arena
+        std::unordered_map<std::string, AwaitingArena> _awaitingArena;
     };
 
 }

@@ -39,40 +39,48 @@ namespace fys::arena {
         SPDLOG_INFO("ArenaServer loop started");
 
         while (true) {
+            // parse message when coming from world server
            _connectionHandler.pollAndProcessSubMessage(
-               [this](zmq::multipart_t &&msg) {
-                   // if new arena request, create the new arena
+               [this](zmq::multipart_t && worldServerMessage) {
 
-                   // get id of the arena from message to forward the message to the correct arena instance
-
-                   // register player incoming into arena instance (done for new arena or if the incoming
-                   // message is a joining message)
-
+                   // register player incoming into arena instance
+                   _awaitingArena["token"] = {
+                           "name",
+                           true, // isAmbush
+                           "WS_Code", // World Server Code
+                           0, // encounter code
+                           FightingPit::EASY // level difficulty
+                   };
                }
             );
+
+           // parse message when coming from players
+           _workerService.pollAndProcessPlayerMessage(
+               [this](zmq::multipart_t && playerMessage){
+
+                }
+           );
         }
     }
 
+    void ArenaServerService::createNewFightingPit(AwaitingArena && arenaToCreate) {
+        FightingPitAnnouncer fpa(_cache);
+
+        fpa.setDifficulty(arenaToCreate._levelFightingPit);
+        fpa.setEncounterId(arenaToCreate._encounterId);
+        fpa.enforceAmbush(arenaToCreate._isAmbush);
+        fpa.setCreatorUserName(std::move(arenaToCreate._namePlayer));
+        _workerService.addFightingPit(
+                fpa.buildFightingPit(
+                        _ctx.get().getEncounterContext(),
+                        _connectionHandler,
+                        arenaToCreate._serverCode));
+    }
+
     void ArenaServerService::processMessage(std::string &&idt, std::string &&token, const zmq::message_t &content) {
-        // if (request new fighting) {
-            FightingPitAnnouncer fpa(_cache);
-
-            // Retrieving data from newFightRequest
-            FightingPitAnnouncer::EncounterType encounterType = FightingPitAnnouncer::EncounterType::RANDOM;
-            FightingPit::Level level = FightingPit::EASY;
-            const std::string serverCode = "WS00";
-            bool ambush = false;
-
-            fpa.setDifficulty(level);
-            fpa.setEncounterType(encounterType);
-            fpa.enforceAmbush(ambush);
-            _workerService.addFightingPit(fpa.buildFightingPit(_ctx.get().getEncounterContext(), _connectionHandler, serverCode));
-        // }
-        // else {
-            unsigned fightingPitId = 1; // todo get the correct if from the content of the zmq message
-            //FightingPitMessage fightingPitMessage;
-            _workerService.forwardMessageToFightingPit(fightingPitId/*, fightingPitMessage*/);
-        // }
+        unsigned fightingPitId = 1; // todo get the correct if from the content of the zmq message
+        //FightingPitMessage fightingPitMessage;
+        _workerService.forwardMessageToFightingPit(fightingPitId/*, fightingPitMessage*/);
     }
 
 }

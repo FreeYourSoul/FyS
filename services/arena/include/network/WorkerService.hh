@@ -65,6 +65,24 @@ namespace fys::arena {
          */
         void addFightingPit(std::unique_ptr<FightingPit> fp);
 
+        template <typename Handler>
+        void pollAndProcessPlayerMessage(Handler && handler) noexcept {
+            //  Initialize poll set
+            zmq::pollitem_t items[] = {
+                    { _workerRouter, 0, ZMQ_POLLIN, 0 }
+            };
+            zmq::poll(&items[0], 1);
+            if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
+                zmq::multipart_t msg;
+                if (!msg.recv(_workerRouter)) {
+                    SPDLOG_ERROR("Error while reading on the listener socket");
+                }
+                else {
+                    std::forward<Handler>(handler)(std::move(msg));
+                }
+            }
+        }
+
         void forwardMessageToFightingPit(unsigned fightingArenaId/* , FightingMessage*/);
 
 

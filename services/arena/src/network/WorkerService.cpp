@@ -40,7 +40,6 @@ namespace fys::arena
 
         fp->setArenaId(_currentArenaId);
         _arenaInstances[_currentArenaId] = std::move(fp);
-        return;
     }
     
     void WorkerService::forwardMessageToFightingPit(unsigned fightingArenaId/* , FightingMessage*/) {

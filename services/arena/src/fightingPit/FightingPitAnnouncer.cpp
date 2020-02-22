@@ -65,6 +65,7 @@ namespace fys::arena {
                                            const std::string &wsId) {
         if (_creatorUserName.empty()) {
             SPDLOG_WARN("FightingPit built invalid (no creator of the pit registered, a call to generateAllyPartyTeam function is required)");
+            return nullptr;
         }
         std::unique_ptr<FightingPit> fp = std::make_unique<FightingPit>(_creatorUserName, _difficulty);
         generateContenders(*fp, ctx, wsId);

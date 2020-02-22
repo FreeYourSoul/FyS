@@ -80,13 +80,14 @@ namespace fys::arena {
             _idEncounter = idEncounter;
         }
 
+        void setCreatorUserName(std::string creatorUserName) { _creatorUserName = std::move(creatorUserName); }
         void enforceAmbush(bool ambushEnforced) { _isAmbushEnforced = ambushEnforced; }
-
         void setDifficulty(FightingPit::Level level) { _difficulty = level; }
 
         [[nodiscard]] EncounterType getEncounterType() const { return _encounterType; }
         [[nodiscard]] FightingPit::Level getDifficulty() const { return _difficulty; }
         [[nodiscard]] uint getIdEncounter() const { return _idEncounter; }
+        [[nodiscard]] const std::string &getCreatorUserName() const { return _creatorUserName; }
         [[nodiscard]] bool isAmbushEnforced() const { return _isAmbushEnforced && *_isAmbushEnforced; }
 
     private:
