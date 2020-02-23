@@ -75,7 +75,7 @@ namespace fys::arena {
             if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
                 zmq::multipart_t msg;
                 if (!msg.recv(_workerRouter)) {
-                    SPDLOG_ERROR("Error while reading on the listener socket");
+                    SPDLOG_ERROR("Error while reading on the arena worker listener socket");
                 }
                 else {
                     std::forward<Handler>(handler)(std::move(msg));

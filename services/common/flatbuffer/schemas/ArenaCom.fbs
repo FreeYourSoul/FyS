@@ -1,0 +1,26 @@
+namespace fys.fb;
+
+enum Level : byte { EASY, MEDIUM, HARD }
+
+// Used by the WorldServer to trigger new encounter/join to an ArenaServer
+table FightingPitEncounter {
+    user_name:string;
+    token_auth:string;
+    level_encounter:Level (optional);
+    id_encounter:long;
+    new_encounter:bool; // set to true if it is a new encounter
+}
+
+// Used as reply from the ArenaServer to the client
+// Used by the client as authentication on the ArenaServer (connection_str set)
+// Used by the client to join an existing FightingPit (id_fightingpit set)
+table ArenaServerAuth {
+    user_name:string;
+    token_auth:string;
+    ip:string;
+    connection_str:string (optional);
+    id_fightingpit:long(optional);
+    world_server_code:string;
+}
+
+root_type FightingPitEncounter;

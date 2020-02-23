@@ -34,15 +34,16 @@ namespace fys::arena {
     class ArenaServerContext;
 
     /**
-     * A player is awaited to generate an arena
-     * AwaitingArena represent a player and the information relating to the arena that has to be generated
+     * An arena is awaited to be generated
+     * AwaitingArena represent a player that is the trigger of a new fighting pit, and the information relating to the
+     * arena that has to be generated.
      */
     struct AwaitingArena {
         std::string _namePlayer;
 
         // fighting pit data
-        bool _isAmbush;
         std::string _serverCode;
+        bool _isAmbush;
         uint _encounterId;
         FightingPit::Level _levelFightingPit;
 
@@ -51,19 +52,37 @@ namespace fys::arena {
 
     /**
      * @brief Class managing an Arena Server.
-     *
-     * @details An arena server is a server handling multiple arena fighting pit instance at once.
+     *<br/>
+     * An arena server is a server handling multiple arena fighting pit instance at once.
      * In order to properly works, it need to work with an ArenaDispatcher, which is a proxy for the WorldServer to
      * communicate with Arena.
-     * In case of a new encounter for a player, the following workflow apply:
-     * - Player is moving / doing an action on the WorldMap (managed by a WorldServer) that is triggering a new encounter
-     * - WorldServer send a message to a ArenaDispatcher containing basic configuration data to generate a fighting pit
-     *   and authentication information, those are the following:
-     *          - a generated token (used as authentication key)
-     *          - the difficulty of the fight (configuration of the player)
-     *          - the type of encounter (Random, Scripted etc...)
-     *          - the id of encounter (if it is a scripted one)
-     *          -
+     *
+     * @createNewFightingPit In case of a new encounter for a player, the following workflow apply:
+     * 1 - Player is moving / doing an action on the WorldMap (managed by a WorldServer) that is triggering a new
+     *     encounter.
+     *     <br/><br/>
+     * 2 - WorldServer send a message to a ArenaDispatcher containing configuration data to generate a fighting pit and
+     *     authentication information, those are the following:<br/>
+     *          2.a - a generated token (used as authentication key)<br/>
+     *          2.b - the difficulty of the fight (configuration of the player)<br/>
+     *          2.c - the id of encounter; if equal to 0, it is a random encounter. scripted id otherwise.<br/>
+     * 3 - The Dispatcher forward the message to an ArenaServer that is going to register the incoming player that will
+     *     initiate the creation of the fighting pit.
+     *     <br/><br/>
+     * 4 - The Arena server reply to the dispatcher (that will reply to the WorldServer), the message will return to the
+     *     player, message containing the ip (connection string) of the ArenaServer that will create the fighting pit.
+     *     <br/><br/>
+     * 5 - The Player can then directly connect to the ArenaServer using the token to validate the authentication, The
+     *     Arena service validate the connection, and use the data (difficulty ect..) in order to generate the
+     *     fighting pit (with an id unique). When the fight is setup, the initial handshake with the client contains the
+     *     id of the fighting pit in order to enable other player to join.
+     *     <br/>
+     *
+     * @joinFightingPit Another player than the creator can join an existing arena by specifying its fighting pit id to
+     * the WorldServer, which will check if the position of the joining player is close enough of the creator of the
+     * fighting pit. The ArenaServer is then just going to check the existence of the id and will add the player into
+     * the fight.
+     *
      */
     class ArenaServerService {
     public:

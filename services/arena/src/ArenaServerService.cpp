@@ -46,10 +46,10 @@ namespace fys::arena {
                    // register player incoming into arena instance
                    _awaitingArena["token"] = {
                            "name",
-                           true, // isAmbush
-                           "WS_Code", // World Server Code
-                           0, // encounter code
-                           FightingPit::EASY // level difficulty
+                           "WS_Code",           // World Server Code
+                           true,                // isAmbush
+                           0,                   // Encounter Code
+                           FightingPit::EASY    // Level Difficulty
                    };
                }
             );
@@ -77,7 +77,7 @@ namespace fys::arena {
                         arenaToCreate._serverCode));
     }
 
-    void ArenaServerService::processMessage(std::string &&idt, std::string &&token, const zmq::message_t &content) {
+    void ArenaServerService::processMessage(std::string && idt, std::string && token, const zmq::message_t & content) {
         unsigned fightingPitId = 1; // todo get the correct if from the content of the zmq message
         //FightingPitMessage fightingPitMessage;
         _workerService.forwardMessageToFightingPit(fightingPitId/*, fightingPitMessage*/);
