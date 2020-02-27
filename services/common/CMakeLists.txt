@@ -10,6 +10,8 @@ set(FLATBUFFER_INCLUDE_DIR "${FLAT_BUFFER_PATH}/includes")
 set(FLATBUFFER_SCHEMA_DIR "${FLAT_BUFFER_PATH}/schemas")
 
 set(FLAT_BUFFER_SCHEMAS
+        ${FLATBUFFER_SCHEMA_DIR}/arena/ArenaServerAuth.fbs
+        ${FLATBUFFER_SCHEMA_DIR}/arena/FightingPitEncounter.fbs
         ${FLATBUFFER_SCHEMA_DIR}/ClientCom.fbs
         ${FLATBUFFER_SCHEMA_DIR}/Notifications.fbs
         ${FLATBUFFER_SCHEMA_DIR}/WSAction.fbs)

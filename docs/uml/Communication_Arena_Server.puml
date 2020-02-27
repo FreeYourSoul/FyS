@@ -1,0 +1,33 @@
+@startuml
+skinparam linetype ortho
+
+actor Player
+entity World_Server
+entity Arena_Server
+
+
+== Initial authentication ==
+
+Player       ->  World_Server: Action triggering encounter
+note right: (move, quest...)
+
+World_Server --> World_Server: Triggering encounter
+note over World_Server
+    generate a token for the player to authenticate.
+    get information on the encounter to send them to arena server
+    * unique name of the player
+    * token previously generated
+    * id of the encounter (if scripted)
+    * difficulty set by the player (easy/medium/hard)
+    * world server position (used to generate appropriate encounter)
+end note
+World_Server ->  Arena_Server: Send **FightingPitEncounter**   fb object
+
+Arena_Server --> Arena_Server: Register player in the server, token/name for authentication...
+World_Server <- Arena_Server: Another authentication Request
+Player <-- World_Server: another authentication Response
+
+== Player to Arena Server ==
+Player -> Arena_Server: direct connection
+
+@enduml

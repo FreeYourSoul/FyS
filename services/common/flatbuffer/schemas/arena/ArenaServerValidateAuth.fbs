@@ -1,0 +1,10 @@
+namespace fys.fb;
+
+// Used by the client to join an existing FightingPit (id_fightingpit set)
+table ArenaServerValidateAuth {
+    user_name:string;
+    token_auth:string;
+    world_server_code:string;
+}
+
+root_type ArenaServerValidateAuth;

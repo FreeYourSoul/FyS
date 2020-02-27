@@ -26,7 +26,7 @@
 #include <flatbuffers/flatbuffers.h>
 #include <WSAction_generated.h>
 
-TEST_CASE("FlatBuffer WSAction Move", "[common]") {
+TEST_CASE("FlatBuffer WSAction Move", "[common][fb]") {
     flatbuffers::FlatBufferBuilder fbb;
     auto move = fys::fb::CreateMove(fbb, 42.42);
     auto token = fbb.CreateString("totoken");

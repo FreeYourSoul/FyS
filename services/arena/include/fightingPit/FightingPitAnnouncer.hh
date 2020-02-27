@@ -28,6 +28,7 @@
 #include <optional>
 #include <memory>
 #include <vector>
+#include <ArenaServerContext.hh>
 #include <fightingPit/contender/PitContenders.hh>
 #include <fightingPit/team/AllyPartyTeams.hh>
 #include <fightingPit/FightingPit.hh>
@@ -35,10 +36,6 @@
 // forward declarations
 namespace fys::cache {
     class Cml;
-}
-namespace fys::arena {
-    class ArenaServerContext;
-    class EncounterContext;
 }
 
 namespace fys::arena {

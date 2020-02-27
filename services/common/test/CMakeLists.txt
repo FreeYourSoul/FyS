@@ -12,6 +12,7 @@ enable_testing()
 add_executable(common_test
         ${CMAKE_CURRENT_LIST_DIR}/catchMain.cpp
         ${CMAKE_CURRENT_LIST_DIR}/WSActionFlatbufferTestCase.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/ArenaComFlatbufferTestCase.cpp
         ${CMAKE_CURRENT_LIST_DIR}/AlgorithmTestCase.cpp
         ${CMAKE_CURRENT_LIST_DIR}/BoundaryMapTestCase.cpp
 )

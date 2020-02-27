@@ -60,7 +60,7 @@ TEST_CASE("Test Sampy", "[script_test]") {
     auto fpc = std::make_shared<fys::arena::FightingContender>(std::move(sampy));
     pc.addContender(fpc);
 
-    fys::arena::PartyTeamUPtr pt = std::make_unique<fys::arena::PartyTeam>();
+    fys::arena::PartyTeamUPtr pt = std::make_unique<fys::arena::PartyTeam>("");
     fys::arena::TeamMemberSPtr teamMember1 = std::make_shared<fys::arena::TeamMember>();
     fys::arena::TeamMemberSPtr teamMember2 = std::make_shared<fys::arena::TeamMember>();
 

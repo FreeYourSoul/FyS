@@ -1,0 +1,15 @@
+namespace fys.fb;
+
+// Used as reply from the ArenaServer to the client
+// connection_str is used by the client as authentication on the ArenaServer
+// id_fightingpit is used by the client to join an existing FightingPit
+table ArenaServerAuth {
+    user_name:string;
+    token_auth:string;
+    ip:string;
+    connection_str:string;
+    id_fightingpit:long;
+    world_server_code:string;
+}
+
+root_type ArenaServerAuth;
