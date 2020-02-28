@@ -5,6 +5,12 @@ actor Player
 entity World_Server
 entity Arena_Server
 
+note over Player, Arena_Server #FAA
+
+The difference between an initial authentication and a fightingpit join is a  boolean
+called new_encounter representing if the current player is initiating a fight or joining
+
+end note
 
 == Initial authentication ==
 
@@ -15,19 +21,25 @@ World_Server --> World_Server: Triggering encounter
 note over World_Server
     generate a token for the player to authenticate.
     get information on the encounter to send them to arena server
-    * unique name of the player
-    * token previously generated
-    * id of the encounter (if scripted)
-    * difficulty set by the player (easy/medium/hard)
-    * world server position (used to generate appropriate encounter)
+    * __unique name__ of the player
+    * __token__ previously generated
+    * __id of the encounter__  (if scripted)
+    * __difficulty__ set by the player (easy/medium/hard)
+    * __world server position__   (used to generate appropriate encounter, x and y)
 end note
 World_Server ->  Arena_Server: Send **FightingPitEncounter**   fb object
 
 Arena_Server --> Arena_Server: Register player in the server, token/name for authentication...
-World_Server <- Arena_Server: Another authentication Request
-Player <-- World_Server: another authentication Response
+World_Server <- Arena_Server: Reply **ArenaServerAuth**  fb object to the world server
+Player <-- World_Server: forward reply
 
-== Player to Arena Server ==
-Player -> Arena_Server: direct connection
+note over Player
+    get the authentication information from the ArenaServerAuth
+    and fill the following info in the ArenaServerValidateAuth:
+    * __unique name__ of the player
+    * __authentication token__ got from the ArenaServerAuth
+    * __id of the world server__
+end note
+Player -> Arena_Server: direct connection, send  **ArenaServerValidateAuth**  fb object
 
 @enduml
