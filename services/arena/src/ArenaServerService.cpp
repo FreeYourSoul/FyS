@@ -41,7 +41,7 @@ namespace fys::arena {
         while (true) {
             // parse message when coming from world server
            _connectionHandler.pollAndProcessSubMessage(
-               [this](zmq::multipart_t && worldServerMessage) {
+               [this](std::string && wsDispatcherRouterIdentity, zmq::message_t && worldServerMessage) {
 
                    // register player incoming into arena instance
                    _awaitingArena["token"] = {

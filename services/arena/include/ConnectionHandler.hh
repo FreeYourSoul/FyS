@@ -59,7 +59,9 @@ namespace fys::arena {
                     SPDLOG_ERROR("Error while reading on the listener socket");
                 }
                 else {
-                    std::forward<Handler>(handler)(std::move(msg));
+                    // first element is the identity frame for the router of the dispatcher (connected to WS)
+                    // second element is the message frame
+                    std::forward<Handler>(handler)(msg.popstr(), msg.pop());
                 }
             }
         }

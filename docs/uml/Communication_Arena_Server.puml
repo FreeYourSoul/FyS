@@ -17,6 +17,7 @@ end note
 Player       ->  World_Server: Action triggering encounter
 note right: (move, quest...)
 
+activate World_Server
 World_Server --> World_Server: Triggering encounter
 note over World_Server
     generate a token for the player to authenticate.
@@ -29,11 +30,14 @@ note over World_Server
 end note
 World_Server ->  Arena_Server: Send **FightingPitEncounter**   fb object
 
+deactivate World_Server
+activate Arena_Server
 Arena_Server --> Arena_Server: Register player in the server, token/name for authentication...
 World_Server <- Arena_Server: Reply **ArenaServerAuth**  fb object to the world server
+deactivate Arena_Server
 Player <-- World_Server: forward reply
 
-note over Player
+note over Player, World_Server
     get the authentication information from the ArenaServerAuth
     and fill the following info in the ArenaServerValidateAuth:
     * __unique name__ of the player
