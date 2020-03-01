@@ -25,8 +25,39 @@
 #include <functional>
 #include <zmq_addon.hpp>
 #include <flatbuffers/flatbuffers.h>
+#include <FightingPitEncounter_generated.h>
 #include <ArenaServerContext.hh>
+#include <ProtocolHelper.hh>
 #include "ArenaServerService.hh"
+
+namespace {
+    fys::arena::FightingPit::Level levelDifficultyFromFb(const fys::fb::Level &level) {
+        switch (level) {
+            case fys::fb::Level_EASY:
+                return fys::arena::FightingPit::EASY;
+            case fys::fb::Level_MEDIUM:
+                return fys::arena::FightingPit::MEDIUM;
+            case fys::fb::Level_HARD:
+                return fys::arena::FightingPit::HARD;
+            default:
+                return fys::arena::FightingPit::EASY;
+        }
+    }
+
+    void forwardReplyToDispatcherClient(const fys::arena::AwaitingArena & awaitingArena) {
+        flatbuffers::FlatBufferBuilder fbb;
+        auto asaFb = fys::fb::CreateArenaServerAuth(
+                fbb,
+                fbb.CreateString(awaitingArena._namePlayer),
+                fbb.CreateString(awaitingArena._token),
+                fbb.CreateString("localhost"),
+                fbb.CreateString("tcp://localhost:4242"),
+                42,
+                fbb.CreateString(awaitingArena._serverCode));
+        fys::fb::FinishArenaServerAuthBuffer(fbb, asaFb);
+        const fys::fb::ArenaServerAuth *asa = fys::fb::GetArenaServerAuth(fbb.GetBufferPointer());;
+    }
+}
 
 namespace fys::arena {
 
@@ -42,15 +73,25 @@ namespace fys::arena {
             // parse message when coming from world server
            _connectionHandler.pollAndProcessSubMessage(
                [this](std::string && wsDispatcherRouterIdentity, zmq::message_t && worldServerMessage) {
+                   const auto *binary = fys::fb::GetFightingPitEncounter(worldServerMessage.data());
 
                    // register player incoming into arena instance
-                   _awaitingArena["token"] = {
-                           "name",
-                           "WS_Code",           // World Server Code
-                           true,                // isAmbush
-                           0,                   // Encounter Code
-                           FightingPit::EASY    // Level Difficulty
-                   };
+                   const auto [elem, hasBeenInserted] = _awaitingArena.insert(
+                       {
+                        binary->token_auth()->str(),
+                        AwaitingArena {
+                               binary->user_name()->str(),
+                               binary->token_auth()->str(),
+                               binary->world_server_id()->str(),
+                               binary->is_ambush(),
+                               binary->id_encounter(),
+                               levelDifficultyFromFb(binary->level_encounter())
+                           }
+                       }
+                   );
+                   // if a new player has been registered
+                   if (hasBeenInserted)
+                       forwardReplyToDispatcherClient(elem);
                }
             );
 

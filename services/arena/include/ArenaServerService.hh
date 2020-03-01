@@ -40,6 +40,7 @@ namespace fys::arena {
      */
     struct AwaitingArena {
         std::string _namePlayer;
+        std::string _token;
 
         // fighting pit data
         std::string _serverCode;

@@ -10,7 +10,8 @@ table FightingPitEncounter {
     x_player:double = 0;
     y_player:double = 0;
     level_encounter:Level;
-    id_encounter:long;
+    id_encounter:uint;
+    is_ambush:bool;
     new_encounter:bool; // set to true if it is a new encounter
 }
 
