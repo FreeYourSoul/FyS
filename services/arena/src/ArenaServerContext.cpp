@@ -105,6 +105,8 @@ namespace fys::arena {
         std::string str;
         str = "dump context\n*************************\n";
         str+= "[INFO] Service " + _name + " context VERSION: " + _version + "\n";
+        str+= "[INFO] Subscriber connection to dispatcher string: " + getSubscriptionConnectionString() + "\n";
+        str+= "[INFO] Dealer connection to dispatcher string: " + getDispatcherConnectionString() + "\n";
         str+= "[INFO] Config file used: " + _configFile + "\n\n";
         str+= "[INFO] Dispatcher connected port: " + std::to_string(_dispatcherData.port) + "\n";
         str+= "[INFO] Dispatcher connected host: " + _dispatcherData.address + "\n";
@@ -115,6 +117,10 @@ namespace fys::arena {
 
     std::string ArenaServerContext::getDispatcherConnectionString() const noexcept {
         return std::string("tcp://").append(_dispatcherData.address).append(":").append(std::to_string(_dispatcherData.port));
+    }
+
+    std::string ArenaServerContext::getSubscriptionConnectionString() const noexcept {
+        return std::string("tcp://").append(_dispatcherData.address).append(":").append(std::to_string(_dispatcherData.subscriberPort));
     }
 
 }

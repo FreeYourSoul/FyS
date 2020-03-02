@@ -92,6 +92,7 @@ namespace fys::arena {
         void runServerLoop() noexcept;
 
     private:
+        void forwardReplyToDispatcherClient(const fys::arena::AwaitingArena & awaitingArena);
         void createNewFightingPit(AwaitingArena && arenaToCreate);
         void processMessage(std::string && idt, std::string && token, const zmq::message_t & content);
 

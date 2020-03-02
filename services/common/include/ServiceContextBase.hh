@@ -31,11 +31,13 @@ namespace fys::common {
 
     namespace init_beacon {
         constexpr static auto SERVICE_NAME = "service.name";
+        constexpr static auto HOSTNAME = "service.hostname";
+        constexpr static auto PORT = "service.port";
+
         constexpr static auto DISPATCHER_PORT = "dispatcher.port";
         constexpr static auto DISPATCHER_SUBPORT = "dispatcher.subport";
         constexpr static auto DISPATCHER_ADDR = "dispatcher.address";
     }
-
 
     struct DispatcherData {
         std::string address;
@@ -47,6 +49,10 @@ namespace fys::common {
     public:
         ServiceContextBase(int ac, const char *const *av);
 
+        [[nodiscard]] std::string getConnectionString() const;
+        [[nodiscard]] ushort getPort() const { return _port; }
+        [[nodiscard]] const std::string &getHostname() const { return _hostname; }
+
     private:
         void initializeFromIni(const std::string &configFilePath);
 
@@ -54,6 +60,10 @@ namespace fys::common {
         std::string _version;
         std::string _name;
         std::string _configFile;
+
+        std::string _hostname;
+        ushort _port;
+
         DispatcherData _dispatcherData;
     };
 

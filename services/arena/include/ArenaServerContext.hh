@@ -46,12 +46,13 @@ namespace fys::arena {
         std::map<std::string, std::vector<EncounterDesc>> _contendersPerZone;
     };
 
-    class ArenaServerContext : fys::common::ServiceContextBase {
+    class ArenaServerContext : public fys::common::ServiceContextBase {
 public:
         ArenaServerContext(int ac, const char *const *av);
 
         [[nodiscard]] std::string toString() const;
         [[nodiscard]] std::string getDispatcherConnectionString() const noexcept;
+        [[nodiscard]] std::string getSubscriptionConnectionString() const noexcept;
         [[nodiscard]] const EncounterContext &getEncounterContext() const noexcept { return _encounterContext; }
         [[nodiscard]] const std::string &getPathLocalStorageCache() const { return _pathLocalStorageCache; }
         [[nodiscard]] const std::string &getPathSourceCache() const { return _pathSourceCache; }

@@ -43,20 +43,6 @@ namespace {
                 return fys::arena::FightingPit::EASY;
         }
     }
-
-    void forwardReplyToDispatcherClient(const fys::arena::AwaitingArena & awaitingArena) {
-        flatbuffers::FlatBufferBuilder fbb;
-        auto asaFb = fys::fb::CreateArenaServerAuth(
-                fbb,
-                fbb.CreateString(awaitingArena._namePlayer),
-                fbb.CreateString(awaitingArena._token),
-                fbb.CreateString("localhost"),
-                fbb.CreateString("tcp://localhost:4242"),
-                42,
-                fbb.CreateString(awaitingArena._serverCode));
-        fys::fb::FinishArenaServerAuthBuffer(fbb, asaFb);
-        const fys::fb::ArenaServerAuth *asa = fys::fb::GetArenaServerAuth(fbb.GetBufferPointer());;
-    }
 }
 
 namespace fys::arena {
@@ -76,7 +62,7 @@ namespace fys::arena {
                    const auto *binary = fys::fb::GetFightingPitEncounter(worldServerMessage.data());
 
                    // register player incoming into arena instance
-                   const auto [elem, hasBeenInserted] = _awaitingArena.insert(
+                   const auto &[elem, hasBeenInserted] = _awaitingArena.insert(
                        {
                         binary->token_auth()->str(),
                         AwaitingArena {
@@ -91,7 +77,7 @@ namespace fys::arena {
                    );
                    // if a new player has been registered
                    if (hasBeenInserted)
-                       forwardReplyToDispatcherClient(elem);
+                       forwardReplyToDispatcherClient(elem->second);
                }
             );
 
@@ -102,6 +88,23 @@ namespace fys::arena {
                 }
            );
         }
+    }
+
+    void ArenaServerService::forwardReplyToDispatcherClient(const fys::arena::AwaitingArena & awaitingArena) {
+        flatbuffers::FlatBufferBuilder fbb;
+        auto asaFb = fys::fb::CreateArenaServerAuth(
+                fbb,
+                fbb.CreateString(awaitingArena._namePlayer),
+                fbb.CreateString(awaitingArena._token),
+                fbb.CreateString(_ctx.get().getHostname()),
+                fbb.CreateString(_ctx.get().getConnectionString()),
+                _ctx.get().getPort(),
+                fbb.CreateString(awaitingArena._serverCode));
+        fys::fb::FinishArenaServerAuthBuffer(fbb, asaFb);
+        zmq::multipart_t msg;
+        msg.addstr(awaitingArena._token);
+        msg.addmem(fbb.GetBufferPointer(), fbb.GetSize());
+        _connectionHandler.sendMessageToDispatcher(std::move(msg));
     }
 
     void ArenaServerService::createNewFightingPit(AwaitingArena && arenaToCreate) {

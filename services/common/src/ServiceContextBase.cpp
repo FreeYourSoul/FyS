@@ -63,10 +63,16 @@ void ServiceContextBase::initializeFromIni(const std::string &configFilePath) {
     boost::property_tree::read_ini(configFilePath, pt);
 
     _name = pt.get<std::string>(fys::common::init_beacon::SERVICE_NAME);
+    _hostname = pt.get<std::string>(fys::common::init_beacon::HOSTNAME);
+    _port = pt.get<ushort>(fys::common::init_beacon::PORT);
     _dispatcherData.subscriberPort = pt.get<ushort>(fys::common::init_beacon::DISPATCHER_SUBPORT);
     _dispatcherData.port = pt.get<ushort>(fys::common::init_beacon::DISPATCHER_PORT);
     _dispatcherData.address = pt.get<std::string>(fys::common::init_beacon::DISPATCHER_ADDR);
 
+}
+
+std::string ServiceContextBase::getConnectionString() const {
+    return std::string("tcp://").append(_hostname).append(":").append(std::to_string(_port));
 }
 
 }

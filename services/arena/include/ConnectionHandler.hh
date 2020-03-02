@@ -37,6 +37,7 @@ namespace fys::arena {
     public:
         explicit ConnectionHandler(int threadNumber = 1) noexcept :
                 _zmqContext(threadNumber),
+                _subConnectionToDispatcher(_zmqContext, zmq::socket_type::sub),
                 _dealerConnectionToDispatcher(_zmqContext, zmq::socket_type::dealer)
         { }
 
@@ -46,6 +47,12 @@ namespace fys::arena {
         void setupConnectionManager(const fys::arena::ArenaServerContext &ctx) noexcept;
         void sendMessageToDispatcher(zmq::multipart_t && msg) noexcept;
 
+        /**
+         * Read on the subscriber socket (connection with the dispatcher)
+         * and reply to dispatcher with the dealer socket connection (which will forward the message the the proper WorldServer)
+         * @tparam Lambda type following the signature => void (string, zmq::message_t)
+         * @param handler Handler handler to call when receiving a message
+         */
         template <typename Handler>
         void pollAndProcessSubMessage(Handler && handler) noexcept {
             //  Initialize poll set
@@ -68,6 +75,10 @@ namespace fys::arena {
 
     private:
         zmq::context_t _zmqContext;
+
+        // read from (connection to get data from the dispatcher)
+        zmq::socket_t _subConnectionToDispatcher;
+        // write to reply (forwarded to the world server)
         zmq::socket_t _dealerConnectionToDispatcher;
 
     };
