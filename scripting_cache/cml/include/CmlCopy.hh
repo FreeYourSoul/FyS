@@ -35,7 +35,7 @@ namespace fys::cache {
         CmlCopy(const std::string &pathLocalStorage,
                 const std::string &pathCopy) : Cml(pathLocalStorage), _copyPathStorage(pathCopy) {
             if (!std::filesystem::exists(_copyPathStorage))
-                SPDLOG_ERROR("Path copy does not exist {}", pathCopy);
+                spdlog::error("Path copy does not exist {}", pathCopy);
         }
 
     protected:

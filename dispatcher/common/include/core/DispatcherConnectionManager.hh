@@ -73,7 +73,7 @@ namespace fys::network {
         void dispatchMessageOnListenerSocket(Handler &&handler) {
             zmq::multipart_t msg;
             if (!msg.recv(_listener))
-                SPDLOG_ERROR("Error while reading on the listener socket");
+                spdlog::error("Error while reading on the listener socket");
             else
                 handler(std::move(msg), *this);
         }
@@ -89,7 +89,7 @@ namespace fys::network {
             if (!_clusterConnection.closed) {
                 zmq::multipart_t msg;
                 if (!msg.recv(_clusterConnection.subSocket))
-                    SPDLOG_ERROR("Error while reading on the cluster subscriber socket");
+                    spdlog::error("Error while reading on the cluster subscriber socket");
                 else
                     handler(std::move(msg), *this);
             }

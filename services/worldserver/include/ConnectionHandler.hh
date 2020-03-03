@@ -43,13 +43,13 @@ namespace fys::ws {
         void pollAndProcessSubMessage(Handler && handler) noexcept {
             //  Initialize poll set
             zmq::pollitem_t items[] = {
-                { _subSocket, 0, ZMQ_POLLIN, 0 }
+                {_subConnectionOnDispatcher, 0, ZMQ_POLLIN, 0 }
             };
             zmq::poll(&items[0], 1);
             if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
                 zmq::multipart_t msg;
-                if (!msg.recv(_subSocket)) {
-                    SPDLOG_ERROR("Error while reading on the listener socket");
+                if (!msg.recv(_subConnectionOnDispatcher)) {
+                    spdlog::error("Error while reading on the listener socket");
                 }
                 else {
                     std::forward<Handler>(handler)(std::move(msg));
@@ -59,8 +59,8 @@ namespace fys::ws {
 
     private:
         zmq::context_t _zmqContext;
-        zmq::socket_t _subSocket; // todo rename _subConnectionOnDispatcher
-        zmq::socket_t _dispatcherConnection; // todo rename _connectionToDispatcher
+        zmq::socket_t _subConnectionOnDispatcher;
+        zmq::socket_t _connectionToDispatcher;
 
     };
 

@@ -50,7 +50,7 @@ namespace fys::cache {
         void createFile(const std::filesystem::path &pathToFile, const std::string &content) const;
 
     private:
-        inline bool isInLocalStorage(const CmlKey &cmlKey) const;
+        static inline bool isInLocalStorage(const CmlKey &cmlKey) ;
         inline bool isInLocalStorageAndUpToDate(const CmlKey &cmlKey, long timestamp) const;
 
     private:

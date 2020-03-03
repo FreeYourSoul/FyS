@@ -56,7 +56,7 @@ namespace fys::ws {
                     _data.stopPlayerMove(index);
             }
         } else {
-            SPDLOG_ERROR("Player of token {} has not been registered before sending messages", token);
+            spdlog::error("Player of token {} has not been registered before sending messages", token);
         }
     }
 

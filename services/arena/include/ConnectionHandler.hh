@@ -65,7 +65,7 @@ namespace fys::arena {
             if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
                 zmq::multipart_t msg;
                 if (!msg.recv(_dealerConnectionToDispatcher)) {
-                    SPDLOG_ERROR("Error while reading on the listener socket");
+                    spdlog::error("Error while reading on the listener socket");
                 }
                 else {
                     // first element is the identity frame for the router of the dispatcher (connected to WS)

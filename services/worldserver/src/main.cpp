@@ -31,12 +31,12 @@ int main(int ac, char **av) {
     try {
         spdlog::set_pattern("[%D %H:%M:%S][ %@ ][%L]: %v");
         fys::ws::WorldServerContext ctx(ac, av);
-        SPDLOG_INFO(ctx.toString());
+        spdlog::info(ctx.toString());
         fys::ws::WorldServerService serverService(ctx);
         serverService.runServerLoop();
     }
     catch (const std::exception &e) {
-        SPDLOG_ERROR("Main caught an exception: {}", e.what());
+        spdlog::error("Main caught an exception: {}", e.what());
     }
     return 0;
 }

@@ -12,7 +12,7 @@ int main(int ac, char **av) {
         dispatcher.runDispatching();
     }
     catch (const std::exception &e) {
-        SPDLOG_ERROR("Main caught an exception: {}", e.what());
+        spdlog::error("Main caught an exception: {}", e.what());
     }
     return 0;
 }
