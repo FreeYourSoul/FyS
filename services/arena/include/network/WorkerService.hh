@@ -61,12 +61,19 @@ namespace fys::arena {
          * of the arena server. Create an id for the newly created arena and set it to the fighting pit.
          *
          * @param fp FightingPit to add in the current WorkerService
+         * @return newly added fighting pit id, or 0 (FightingPit::CREATION_ERROR) if an error occured
          * @todo : test that the arena id generation works properly
          */
-        void addFightingPit(std::unique_ptr<FightingPit> fp);
+        unsigned addFightingPit(std::unique_ptr<FightingPit> fp);
 
-        template <typename Handler>
-        void pollAndProcessPlayerMessage(Handler && handler) noexcept {
+        /**
+         * Read on the router socket (connection with the players) and reply to them thanks to the zmq::router protocol
+         * @tparam Lambda type following the signature => void (string, zmq::message_t)
+         * @param HandlerAuth   Handler handler to call when receiving a message to authenticate an awaited player
+         * @param HandlerInGame Handler handler to call when receiving a message to do a player action on a fightingPit
+         */
+        template <typename HandlerAuth, typename HandlerInGame>
+        void pollAndProcessMessageFromPlayer(HandlerAuth && handlerAuth, HandlerInGame && handlerInGame) noexcept {
             //  Initialize poll set
             zmq::pollitem_t items[] = {
                     { _workerRouter, 0, ZMQ_POLLIN, 0 }
@@ -78,12 +85,21 @@ namespace fys::arena {
                     SPDLOG_ERROR("Error while reading on the arena worker listener socket");
                 }
                 else {
-                    std::forward<Handler>(handler)(std::move(msg));
+                    auto identity = msg.pop();
+                    if ("auth" == msg.popstr())
+                        std::forward<HandlerAuth>(handlerAuth)(std::move(identity), msg.pop());
+                    else
+                        std::forward<HandlerInGame>(handlerInGame)(std::move(identity), msg.pop());
                 }
             }
         }
 
-        void forwardMessageToFightingPit(unsigned fightingArenaId/* , FightingMessage*/);
+        /**
+         * @brief Do elementary check (does the fighting arena exist), then forward the message to the fighting pit
+         * @param fightingArenaId id of the arena to forward the message to
+         * @param fightingMsg message to forward
+         */
+        void forwardMessageToFightingPit(unsigned fightingArenaId/* , const FightingMessage & fightingMsg*/);
 
 
     private:

@@ -25,6 +25,7 @@
 #define FYS_ARENASERVERSERVICE_HH
 
 #include <unordered_map>
+#include <optional>
 #include <network/WorkerService.hh>
 #include <ConnectionHandler.hh>
 #include <CmlCopy.hh>
@@ -33,21 +34,36 @@ namespace fys::arena {
 
     class ArenaServerContext;
 
-    /**
-     * An arena is awaited to be generated
-     * AwaitingArena represent a player that is the trigger of a new fighting pit, and the information relating to the
-     * arena that has to be generated.
-     */
+     /**
+      * @brief contains the information related to the arena that has to be generated
+      */
     struct AwaitingArena {
-        std::string _namePlayer;
-        std::string _token;
+        std::string serverCode;
+        bool isAmbush;
+        unsigned encounterId;
+        FightingPit::Level levelFightingPit;
+    };
 
-        // fighting pit data
-        std::string _serverCode;
-        bool _isAmbush;
-        uint _encounterId;
-        FightingPit::Level _levelFightingPit;
+    /**
+     * @brief A Player is awaited whom could generate a new FightingPit if _fightingPitId is not set
+     * AwaitingPlayerArena represent a player that is the trigger of a new fighting pit or a join action of an existing
+     * one, it contains the information related to the arena that has to be generated (none required when joining).
+     */
+    struct AwaitingPlayerArena {
+        static constexpr unsigned GENERATE_ARENA = 0;
 
+        std::string namePlayer;
+        std::string token;
+
+        // if set, a new arena is generated at the client authentication, otherwise the player just join the fightingpit
+        unsigned fightingPitId = 0;
+
+        // in case of generation, data of the fighting pit to generate
+        std::optional<AwaitingArena> gen;
+
+        bool hasToBeGenerated() const {
+            return fightingPitId == GENERATE_ARENA && static_cast<bool>(gen);
+        }
 
     };
 
@@ -60,7 +76,7 @@ namespace fys::arena {
      *
      * @createNewFightingPit In case of a new encounter for a player, the following workflow apply:
      * 1 - Player is moving / doing an action on the WorldMap (managed by a WorldServer) that is triggering a new
-     *     encounter.
+     *     encounter. [publisher socket send notification]
      *     <br/><br/>
      * 2 - WorldServer send a message to a ArenaDispatcher containing configuration data to generate a fighting pit and
      *     authentication information, those are the following:<br/>
@@ -89,12 +105,16 @@ namespace fys::arena {
     public:
         explicit ArenaServerService(const ArenaServerContext &ctx);
 
+        /**
+         * @brief Run infinite loop that poll on the connections of the dispatcher, then of the players.
+         * @note This method contains the code of the deserialization of flatbuffer message (ioc with lambda) and then
+         *       check if the incoming message is coming from an authorized user.
+         */
         void runServerLoop() noexcept;
 
     private:
-        void forwardReplyToDispatcherClient(const fys::arena::AwaitingArena & awaitingArena);
-        void createNewFightingPit(AwaitingArena && arenaToCreate);
-        void processMessage(std::string && idt, std::string && token, const zmq::message_t & content);
+        void forwardReplyToDispatcherClient(zmq::message_t && wsIdentity, const fys::arena::AwaitingPlayerArena & awaitingArena);
+        void createNewFightingPit(AwaitingPlayerArena && awaited);
 
     private:
         std::reference_wrapper<const ArenaServerContext> _ctx;
@@ -103,7 +123,7 @@ namespace fys::arena {
         WorkerService       _workerService;
 
         // map of token on awaiting arena
-        std::unordered_map<std::string, AwaitingArena> _awaitingArena;
+        std::unordered_map<std::string, AwaitingPlayerArena> _awaitingArena;
     };
 
 }

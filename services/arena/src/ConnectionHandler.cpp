@@ -27,10 +27,6 @@
 namespace fys::arena {
 
 void ConnectionHandler::setupConnectionManager(const fys::arena::ArenaServerContext &ctx) noexcept {
-    // subscribe to dispatcher to get update (newcomer player/new fightingpit)
-    _subConnectionToDispatcher.connect(ctx.getSubscriptionConnectionString());
-    _subConnectionToDispatcher.setsockopt(ZMQ_SUBSCRIBE, "", 0);
-
     // connect to dispatcher with the dispatcher
     _dealerConnectionToDispatcher.connect(ctx.getDispatcherConnectionString());
 }

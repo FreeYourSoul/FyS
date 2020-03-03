@@ -37,7 +37,6 @@ namespace fys::arena {
     public:
         explicit ConnectionHandler(int threadNumber = 1) noexcept :
                 _zmqContext(threadNumber),
-                _subConnectionToDispatcher(_zmqContext, zmq::socket_type::sub),
                 _dealerConnectionToDispatcher(_zmqContext, zmq::socket_type::dealer)
         { }
 
@@ -45,16 +44,19 @@ namespace fys::arena {
          * @brief Connect to the Arena dispatcher in order to receive request from the WS to create new fightingPit
          */
         void setupConnectionManager(const fys::arena::ArenaServerContext &ctx) noexcept;
+        /**
+         * @brief Reply to the dispatcher using the dealer (direct connection) socket
+         */
         void sendMessageToDispatcher(zmq::multipart_t && msg) noexcept;
 
         /**
-         * Read on the subscriber socket (connection with the dispatcher)
-         * and reply to dispatcher with the dealer socket connection (which will forward the message the the proper WorldServer)
+         * Read on the dealer socket (connection with the dispatcher) and reply to dispatcher to this socket connection
+         * (which will forward the message the the proper WorldServer)
          * @tparam Lambda type following the signature => void (string, zmq::message_t)
          * @param handler Handler handler to call when receiving a message
          */
         template <typename Handler>
-        void pollAndProcessSubMessage(Handler && handler) noexcept {
+        void pollAndProcessMessageFromDispatcher(Handler && handler) noexcept {
             //  Initialize poll set
             zmq::pollitem_t items[] = {
                     { _dealerConnectionToDispatcher, 0, ZMQ_POLLIN, 0 }
@@ -68,7 +70,7 @@ namespace fys::arena {
                 else {
                     // first element is the identity frame for the router of the dispatcher (connected to WS)
                     // second element is the message frame
-                    std::forward<Handler>(handler)(msg.popstr(), msg.pop());
+                    std::forward<Handler>(handler)(msg.pop(), msg.pop());
                 }
             }
         }
@@ -76,8 +78,6 @@ namespace fys::arena {
     private:
         zmq::context_t _zmqContext;
 
-        // read from (connection to get data from the dispatcher)
-        zmq::socket_t _subConnectionToDispatcher;
         // write to reply (forwarded to the world server)
         zmq::socket_t _dealerConnectionToDispatcher;
 

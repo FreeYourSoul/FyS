@@ -27,27 +27,28 @@
 namespace fys::arena
 {
 
-    void WorkerService::addFightingPit(std::unique_ptr<FightingPit> fp) {
+    unsigned WorkerService::addFightingPit(std::unique_ptr<FightingPit> fp) {
         if (!fp) {
             SPDLOG_ERROR("Cannot add fighting pit in WorkerService");
-            return;
+            return FightingPit::CREATION_ERROR;
         }
         if (_arenaInstances.size() >= std::numeric_limits<decltype(_currentArenaId)>::max()) {
             SPDLOG_ERROR("Cannot add fighting pit in WorkerService (worker full)");
-            return;
+            return FightingPit::CREATION_ERROR;
         }
         while (++_currentArenaId != 0 && _arenaInstances.find(_currentArenaId) != _arenaInstances.end());
 
         fp->setArenaId(_currentArenaId);
         _arenaInstances[_currentArenaId] = std::move(fp);
+        return _currentArenaId;
     }
     
-    void WorkerService::forwardMessageToFightingPit(unsigned fightingArenaId/* , FightingMessage*/) {
+    void WorkerService::forwardMessageToFightingPit(unsigned fightingArenaId/* , const FightingMessage & fightingMsg*/) {
         if (_arenaInstances.find(fightingArenaId) == _arenaInstances.end()) {
             SPDLOG_WARN("Request received for arena id {}, but arena isn't defined", fightingArenaId);
             return;
         }
-
+        // todo: append action to fightingpit
     }
     
 } // namespace fys::arena

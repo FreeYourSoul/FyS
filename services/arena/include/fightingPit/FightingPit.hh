@@ -61,6 +61,9 @@ namespace fys::arena {
         friend class FightingPitAnnouncer;
 
     public:
+        // used as a wrong id when a fighting pit is wrongly generated
+        static constexpr unsigned CREATION_ERROR = 0;
+
         enum Level : uint {
             EASY    = 0,
             MEDIUM  = 1,
@@ -94,7 +97,7 @@ namespace fys::arena {
         void readInputAndAppendPendingActions();
 
     private:
-        Ending              _end;
+        Ending              _end = ON_HOLD;
         Level               _levelFightingPit;
         // TODO : add connection handler to WorkerService
         PitContenders       _contenders;

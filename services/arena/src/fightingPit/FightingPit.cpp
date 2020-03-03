@@ -44,7 +44,7 @@ namespace {
 namespace fys::arena {
 
     FightingPit::FightingPit(std::string creatorUserName, fys::arena::FightingPit::Level levelFightingPit) :
-            _end(Ending::NOT_FINISHED),
+            _end(Ending::ON_HOLD),
             _levelFightingPit(levelFightingPit),
             _layout(_contenders, _partyTeams),
             _creatorUserName(std::move(creatorUserName)),
@@ -54,7 +54,6 @@ namespace fys::arena {
     void FightingPit::startBattle() {
         std::chrono::milliseconds timerInterlude = retrieveTimeInterludeFromLevelDegree(_levelFightingPit);
         while (_end == Ending::NOT_FINISHED) {
-            readInputAndAppendPendingActions();
             auto now = std::chrono::system_clock::now();
             for (auto &side : _sideBattles) {
                 auto currentParticipant = side->getCurrentParticipantTurn(now, timerInterlude);
