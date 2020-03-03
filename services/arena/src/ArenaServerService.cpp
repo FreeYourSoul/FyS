@@ -26,11 +26,14 @@
 #include <zmq_addon.hpp>
 #include <flatbuffers/flatbuffers.h>
 #include <FightingPitEncounter_generated.h>
-#include <ArenaServerContext.hh>
 #include <ArenaServerAuth_generated.h>
+#include <ArenaServerValidateAuth_generated.h>
+#include <ArenaServerContext.hh>
 #include "ArenaServerService.hh"
 
+// anonymous namespace used for utility function to extract data from flatbuffer
 namespace {
+
     fys::arena::FightingPit::Level translateLevelFromFlatbuffer(const fys::fb::Level &level) {
         switch (level) {
             case fys::fb::Level_EASY:
@@ -43,6 +46,28 @@ namespace {
                 return fys::arena::FightingPit::EASY;
         }
     }
+
+    fys::arena::AwaitingPlayerArena createAwaitingPlayer(const fys::fb::FightingPitEncounter *binary) {
+        SPDLOG_INFO("");
+        std::optional<fys::arena::AwaitingArena> awaitingArena = std::nullopt;
+
+        // if fighting_pit_id is 0, a new arena has to be generated furthermore data are extracted
+        if (!binary->fighting_pit_id()) {
+            awaitingArena = fys::arena::AwaitingArena {
+                binary->world_server_id()->str(),
+                binary->is_ambush(),
+                binary->id_encounter(),
+                translateLevelFromFlatbuffer(binary->level_encounter())
+            };
+        }
+        return fys::arena::AwaitingPlayerArena {
+                binary->user_name()->str(),
+                binary->token_auth()->str(),
+                binary->fighting_pit_id(),
+                std::move(awaitingArena)
+        };
+    }
+
 }
 
 namespace fys::arena {
@@ -60,26 +85,10 @@ namespace fys::arena {
                     [this](zmq::message_t && identityWs, zmq::message_t && worldServerMessage) {
                         const auto *binary = fys::fb::GetFightingPitEncounter(worldServerMessage.data());
 
-                        // register player incoming into arena instance
+                        // register player incoming into arena instance with token given by worldserver used as key
                         const auto &[elem, playerHasBeenCorrectlyRegistered] = _awaitingArena.insert(
-                            {
-                                // authentication token given by worldserver used as key
-                                binary->token_auth()->str(),
-
-                                // Creation of the AwaitingPlayerArena representing an awaited player
-                                AwaitingPlayerArena {
-                                        binary->user_name()->str(),
-                                        binary->token_auth()->str(),
-                                        AwaitingPlayerArena::GENERATE_ARENA,
-                                        AwaitingArena {
-                                                binary->world_server_id()->str(),
-                                                binary->is_ambush(),
-                                                binary->id_encounter(),
-                                                translateLevelFromFlatbuffer(binary->level_encounter())
-                                        }
-                                }
-                            }
-                        );
+                                { binary->token_auth()->str(), createAwaitingPlayer(binary) }
+                            );
                         if (playerHasBeenCorrectlyRegistered)
                             forwardReplyToDispatcherClient(std::move(identityWs), elem->second);
                     }
@@ -88,9 +97,18 @@ namespace fys::arena {
             _workerService.pollAndProcessMessageFromPlayer(
                     // Authentication handler
                     [this](zmq::message_t && identityPlayer, zmq::message_t && authMessage) {
-                        // todo
-                        // deserialize authMessage
-                        // Check if the player is awaited thanks to the token
+                        const auto *binary = fys::fb::GetArenaServerValidateAuth(authMessage.data());
+                        const std::string userName = binary->user_name()->str();
+                        const std::string tokenAuth = binary->token_auth()->str();
+                        const auto &[isAwaited, playerAwaitedIt] = isPlayerAwaited(userName, tokenAuth, binary->fighting_pit_id());
+
+                        if (!isAwaited) {
+                            SPDLOG_WARN("Player {} tried to authenticate on Arena server {} without being awaited.", userName, _ctx.get().getServerCode());
+                            // todo return error to server then forwarded
+                            return;
+                        }
+                        if (playerAwaitedIt->second.hasToBeGenerated())
+                            createNewFightingPit(playerAwaitedIt);
                         // Create FightingPit if the awaited player is a creator
                         // Join the requested FightingPit otherwise
                     },
@@ -105,6 +123,14 @@ namespace fys::arena {
                     }
             );
         }
+    }
+
+    std::pair<bool, const std::unordered_map<std::string, AwaitingPlayerArena>::const_iterator>
+    ArenaServerService::isPlayerAwaited(const std::string &name, const std::string &token, unsigned idFightingPit) const {
+        if (const auto it = _awaitingArena.find(token);
+        it != _awaitingArena.end() && it->second.namePlayer == name && it->second.fightingPitId == idFightingPit)
+            return { true, it };
+        return {false, _awaitingArena.cend() };
     }
 
     void ArenaServerService::forwardReplyToDispatcherClient(zmq::message_t && identityWs, const fys::arena::AwaitingPlayerArena & awaitingArena) {
@@ -124,15 +150,18 @@ namespace fys::arena {
         _connectionHandler.sendMessageToDispatcher(std::move(msg));
     }
 
-    void ArenaServerService::createNewFightingPit(AwaitingPlayerArena && awaited) {
+    void ArenaServerService::createNewFightingPit(AwaitingPlayerArenaIt it) {
         FightingPitAnnouncer fpa(_cache);
 
-        fpa.setDifficulty(awaited.gen->levelFightingPit);
-        fpa.setEncounterId(awaited.gen->encounterId);
-        fpa.enforceAmbush(awaited.gen->isAmbush);
-        fpa.setCreatorUserName(std::move(awaited.namePlayer));
+        fpa.setDifficulty(it->second.gen->levelFightingPit);
+        fpa.setEncounterId(it->second.gen->encounterId);
+        fpa.enforceAmbush(it->second.gen->isAmbush);
+        fpa.generateAllyPartyTeam(it->second.namePlayer, it->second.token);
         _workerService.addFightingPit(
-                fpa.buildFightingPit(_ctx.get().getEncounterContext(), _connectionHandler, awaited.gen->serverCode));
+                fpa.buildFightingPit(_ctx.get().getEncounterContext(), _connectionHandler, it->second.gen->serverCode));
+        // remove player from awaited player
+        _awaitingArena.erase(it);
     }
+
 
 }

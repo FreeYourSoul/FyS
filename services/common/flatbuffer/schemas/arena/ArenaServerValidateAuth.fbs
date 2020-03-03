@@ -4,7 +4,7 @@ namespace fys.fb;
 table ArenaServerValidateAuth {
     user_name:string;
     token_auth:string;
-    world_server_code:string;
+    fighting_pit_id:uint; // id of the fighting pit to join, set to 0 if it is a new encounter
 }
 
 root_type ArenaServerValidateAuth;

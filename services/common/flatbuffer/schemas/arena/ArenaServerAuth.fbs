@@ -8,8 +8,9 @@ table ArenaServerAuth {
     token_auth:string;
     ip:string;
     connection_str:string;
-    id_fightingpit:long;
+    id_fightingpit:uint;
+    // todo replace by arena server code (dispatcher has to store the arenacode to do a mapping)
     world_server_code:string;
 }
-
+// add error code ?
 root_type ArenaServerAuth;

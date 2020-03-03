@@ -101,7 +101,7 @@ namespace fys::arena {
         return true;
     }
 
-    std::string ArenaServerContext::toString() const {
+    std::string ArenaServerContext::toString() const noexcept {
         std::string str;
         str = "dump context\n*************************\n";
         str+= "[INFO] Service " + _name + " context VERSION: " + _version + "\n";

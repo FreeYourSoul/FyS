@@ -77,11 +77,17 @@ namespace fys::arena {
             NOT_FINISHED    // on going
         };
 
+        struct AuthenticatedPlayer {
+            std::string name;
+            std::string token;
+        };
+
         explicit FightingPit(std::string creatorUserName, Level levelFightingPit);
 
         const std::unique_ptr<chaiscript::ChaiScript> &getChaiPtr() const { return _chaiPtr; }
 
         void startBattle();
+        void addAuthenticatedUser(std::string userName, std::string userToken);
         void addContender(std::shared_ptr<FightingContender> newContender) { _contenders.addContender(std::move(newContender)); }
         void addPartyTeam(std::unique_ptr<PartyTeam> newTeam) { _partyTeams.addPartyTeam(std::move(newTeam)); }
 
@@ -104,7 +110,9 @@ namespace fys::arena {
         AllyPartyTeams      _partyTeams;
         FightingPitLayout   _layout;
         std::string         _creatorUserName;
+
         unsigned            _arenaId;
+        std::vector<AuthenticatedPlayer> _authenticatedPlayers;
 
         std::unique_ptr<chaiscript::ChaiScript> _chaiPtr;
         std::vector<std::unique_ptr<SideBattle>> _sideBattles;

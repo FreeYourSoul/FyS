@@ -39,7 +39,7 @@ TEST_CASE("FlatBuffer ArenaCom FightingPitEncounter", "[common][fb]") {
             fys::fb::Level::Level_EASY,
             4242,
             false,
-            true);
+            1337);
     fys::fb::FinishFightingPitEncounterBuffer(fbb, fp);
 
     SECTION("Verifier") {
@@ -54,7 +54,7 @@ TEST_CASE("FlatBuffer ArenaCom FightingPitEncounter", "[common][fb]") {
         REQUIRE("token_authentication" == fromBinary->token_auth()->str());
         REQUIRE(4242 == fromBinary->id_encounter());
         REQUIRE_FALSE(fromBinary->is_ambush());
-        REQUIRE(fromBinary->new_encounter());
+        REQUIRE(1337 == fromBinary->fighting_pit_id());
 
     } // End section : Binary to Flatbuffer
 

@@ -63,7 +63,7 @@ namespace fys::arena {
         [[nodiscard]] std::unique_ptr<FightingPit>
         buildFightingPit(const EncounterContext &ctx, ConnectionHandler &connectionHandler, const std::string &wsId);
 
-        fys::arena::AllyPartyTeams generateAllyPartyTeam(const std::string &userName);
+        fys::arena::AllyPartyTeams generateAllyPartyTeam(const std::string &userName, const std::string & token);
 
         void setEncounterType(EncounterType encounterType) {
             if (encounterType == RANDOM)
@@ -78,14 +78,16 @@ namespace fys::arena {
         }
 
         void setCreatorUserName(std::string creatorUserName) { _creatorUserName = std::move(creatorUserName); }
-        void enforceAmbush(bool ambushEnforced) { _isAmbushEnforced = ambushEnforced; }
-        void setDifficulty(FightingPit::Level level) { _difficulty = level; }
+        void setCreatorUserToken(std::string creatorUserToken) { _creatorUserToken = std::move(creatorUserToken); }
+        void enforceAmbush(bool ambushEnforced) noexcept { _isAmbushEnforced = ambushEnforced; }
+        void setDifficulty(FightingPit::Level level) noexcept { _difficulty = level; }
 
-        [[nodiscard]] EncounterType getEncounterType() const { return _encounterType; }
-        [[nodiscard]] FightingPit::Level getDifficulty() const { return _difficulty; }
-        [[nodiscard]] uint getIdEncounter() const { return _idEncounter; }
-        [[nodiscard]] const std::string &getCreatorUserName() const { return _creatorUserName; }
-        [[nodiscard]] bool isAmbushEnforced() const { return _isAmbushEnforced && *_isAmbushEnforced; }
+        [[nodiscard]] EncounterType getEncounterType() const noexcept { return _encounterType; }
+        [[nodiscard]] FightingPit::Level getDifficulty() const noexcept { return _difficulty; }
+        [[nodiscard]] uint getIdEncounter() const noexcept { return _idEncounter; }
+        [[nodiscard]] const std::string &getCreatorUserName() const noexcept { return _creatorUserName; }
+        [[nodiscard]] const std::string &getCreatorUserToken() const noexcept { return _creatorUserToken; }
+        [[nodiscard]] bool isAmbushEnforced() const noexcept { return _isAmbushEnforced && *_isAmbushEnforced; }
 
     private:
         inline std::string getScriptString(std::string name, const EncounterContext::EncounterDesc &desc);
@@ -112,6 +114,7 @@ namespace fys::arena {
         std::vector<std::string> _loadedScript;
 
         std::string _creatorUserName;
+        std::string _creatorUserToken;
 
         //TODO add the common cache retriever
 

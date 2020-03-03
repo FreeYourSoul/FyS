@@ -50,8 +50,6 @@ namespace fys::arena {
      * one, it contains the information related to the arena that has to be generated (none required when joining).
      */
     struct AwaitingPlayerArena {
-        static constexpr unsigned GENERATE_ARENA = 0;
-
         std::string namePlayer;
         std::string token;
 
@@ -62,7 +60,7 @@ namespace fys::arena {
         std::optional<AwaitingArena> gen;
 
         bool hasToBeGenerated() const {
-            return fightingPitId == GENERATE_ARENA && static_cast<bool>(gen);
+            return fightingPitId == 0 && static_cast<bool>(gen);
         }
 
     };
@@ -102,8 +100,10 @@ namespace fys::arena {
      *
      */
     class ArenaServerService {
+        using AwaitingPlayerArenaIt = const std::unordered_map<std::string, AwaitingPlayerArena>::const_iterator;
+
     public:
-        explicit ArenaServerService(const ArenaServerContext &ctx);
+        explicit ArenaServerService(const ArenaServerContext & ctx);
 
         /**
          * @brief Run infinite loop that poll on the connections of the dispatcher, then of the players.
@@ -114,7 +114,10 @@ namespace fys::arena {
 
     private:
         void forwardReplyToDispatcherClient(zmq::message_t && wsIdentity, const fys::arena::AwaitingPlayerArena & awaitingArena);
-        void createNewFightingPit(AwaitingPlayerArena && awaited);
+
+        std::pair<bool, AwaitingPlayerArenaIt>
+        isPlayerAwaited(const std::string & name, const std::string & token, unsigned idFightingPit) const;
+        void createNewFightingPit(AwaitingPlayerArenaIt awaitedIt);
 
     private:
         std::reference_wrapper<const ArenaServerContext> _ctx;

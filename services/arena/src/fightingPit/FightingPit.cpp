@@ -74,5 +74,8 @@ namespace fys::arena {
         //          if player inputs, add pending action to character (override the pending action in case one already there)
     }
 
+    void FightingPit::addAuthenticatedUser(std::string userName, std::string userToken) {
+        _authenticatedPlayers.push_back({ std::move(userName), std::move(userToken) });
+    }
 
 }

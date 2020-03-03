@@ -12,7 +12,7 @@ table FightingPitEncounter {
     level_encounter:Level;
     id_encounter:uint;
     is_ambush:bool;
-    new_encounter:bool; // set to true if it is a new encounter
+    fighting_pit_id:uint; // id of the fighting pit to join, set to 0 if it is a new encounter
 }
 
 root_type FightingPitEncounter;

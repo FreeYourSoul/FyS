@@ -50,14 +50,14 @@ namespace fys::arena {
 public:
         ArenaServerContext(int ac, const char *const *av);
 
-        [[nodiscard]] std::string toString() const;
+        [[nodiscard]] std::string toString() const noexcept;
         [[nodiscard]] std::string getDispatcherConnectionString() const noexcept;
-        [[nodiscard]] std::string getSubscriptionConnectionString() const noexcept;
+        [[nodiscard]] const std::string &getServerCode() const noexcept { return _code; }
         [[nodiscard]] const EncounterContext &getEncounterContext() const noexcept { return _encounterContext; }
-        [[nodiscard]] const std::string &getPathLocalStorageCache() const { return _pathLocalStorageCache; }
-        [[nodiscard]] const std::string &getPathSourceCache() const { return _pathSourceCache; }
-        [[nodiscard]] const std::string &getDbHost() const { return _dbHost; }
-        [[nodiscard]] uint getDbPort() const { return _dbPort; }
+        [[nodiscard]] const std::string &getPathLocalStorageCache() const noexcept { return _pathLocalStorageCache; }
+        [[nodiscard]] const std::string &getPathSourceCache() const noexcept { return _pathSourceCache; }
+        [[nodiscard]] const std::string &getDbHost() const noexcept { return _dbHost; }
+        [[nodiscard]] uint getDbPort() const noexcept { return _dbPort; }
 
     private:
         void parseArenaConfigFile(const nlohmann::json &configContent);

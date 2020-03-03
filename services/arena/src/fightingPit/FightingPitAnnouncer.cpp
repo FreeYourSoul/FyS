@@ -63,11 +63,12 @@ namespace fys::arena {
     std::unique_ptr<FightingPit>
     FightingPitAnnouncer::buildFightingPit(const EncounterContext &ctx, ConnectionHandler &connectionHandler,
                                            const std::string &wsId) {
-        if (_creatorUserName.empty()) {
+        if (_creatorUserName.empty() || _creatorUserToken.empty()) {
             SPDLOG_WARN("FightingPit built invalid (no creator of the pit registered, a call to generateAllyPartyTeam function is required)");
             return nullptr;
         }
         std::unique_ptr<FightingPit> fp = std::make_unique<FightingPit>(_creatorUserName, _difficulty);
+        fp->addAuthenticatedUser(std::move(_creatorUserName), std::move(_creatorUserToken));
         generateContenders(*fp, ctx, wsId);
         return fp;
     }
@@ -91,11 +92,12 @@ namespace fys::arena {
         }
     }
 
-    AllyPartyTeams FightingPitAnnouncer::generateAllyPartyTeam(const std::string &userName) {
+    AllyPartyTeams FightingPitAnnouncer::generateAllyPartyTeam(const std::string & userName, const std::string & token) {
         AllyPartyTeams apt;
         auto team = std::make_unique<PartyTeam>(userName);
 
         _creatorUserName = userName;
+        _creatorUserToken = token;
         // Temporary hard coded party team
         auto tm1 = std::make_shared<TeamMember>();
         auto tm2 = std::make_shared<TeamMember>();
