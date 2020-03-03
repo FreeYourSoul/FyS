@@ -37,7 +37,7 @@ namespace fys::arena {
             try {
                 _chai.get().eval(script);
             } catch (std::exception &e) {
-                spdlog::error("Error caught on scripting loading {}", e.what());
+                SPDLOG_ERROR("Error caught on scripting loading {}", e.what());
             }
         }
 
@@ -52,7 +52,7 @@ namespace fys::arena {
         try {
             _chai.get().eval_file(filePath);
         } catch(std::exception &ex) {
-            spdlog::error("Error caught on scripting loading {}", ex.what());
+            SPDLOG_ERROR("Error caught on scripting loading {}", ex.what());
         }
         loadContenderScript();
     }
@@ -61,7 +61,7 @@ namespace fys::arena {
         try {
             _chai.get().eval(getChaiContenderId() + ".setupContender();");
         } catch (std::exception &e) {
-            spdlog::error("setupContender failed for {} : {}", getChaiContenderId(), e.what());
+            SPDLOG_ERROR("setupContender failed for {} : {}", getChaiContenderId(), e.what());
         }
     }
 
@@ -74,7 +74,7 @@ namespace fys::arena {
                 SPDLOG_DEBUG("Contender {}_{} executed action", _contenderName, _contenderId);
         }
         catch (std::exception &ex) {
-            spdlog::error("Error caught on script execution {}", ex.what());
+            SPDLOG_ERROR("Error caught on script execution {}", ex.what());
         }
     }
 }

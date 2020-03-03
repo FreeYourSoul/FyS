@@ -55,7 +55,7 @@ namespace fys::ws {
     void CollisionMap::buildMapFromTmx(const std::string &tmxMapPath) {
         tmx::Map map;
         if (!map.load(tmxMapPath)) {
-            spdlog::error("TMX CollisionMap couldn't be loaded");
+            SPDLOG_ERROR("TMX CollisionMap couldn't be loaded");
             return;
         }
         const auto& layers = map.getLayers();

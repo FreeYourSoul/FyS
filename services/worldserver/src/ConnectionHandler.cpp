@@ -26,20 +26,20 @@
 namespace fys::ws {
 
 ConnectionHandler::ConnectionHandler(int threadNumber) noexcept :
-        _zmqContext(threadNumber),
-        _subConnectionOnDispatcher(_zmqContext, zmq::socket_type::sub),
-        _connectionToDispatcher(_zmqContext, zmq::socket_type::dealer) {
+ _zmqContext(threadNumber),
+ _subSocket(_zmqContext, zmq::socket_type::sub),
+ _dispatcherConnection(_zmqContext, zmq::socket_type::dealer) {
 
 }
 
 void ConnectionHandler::setupConnectionManager(const fys::ws::WorldServerContext &ctx) noexcept {
-    _subConnectionOnDispatcher.connect(ctx.getDispatcherSubConnectionString());
-    _subConnectionOnDispatcher.setsockopt(ZMQ_SUBSCRIBE, ctx.getServerCode().c_str(), ctx.getServerCode().size());
-    _connectionToDispatcher.connect(ctx.getDispatcherConnectionString());
+    _subSocket.setsockopt(ZMQ_SUBSCRIBE, ctx.getServerCode().c_str(), ctx.getServerCode().size());
+    _subSocket.connect(ctx.getDispatcherSubConnectionString());
+    _dispatcherConnection.connect(ctx.getDispatcherConnectionString());
 }
 
 void ConnectionHandler::sendMessageToDispatcher(zmq::multipart_t &&msg) noexcept {
-    msg.send(_connectionToDispatcher);
+    msg.send(_dispatcherConnection);
 }
 
 }

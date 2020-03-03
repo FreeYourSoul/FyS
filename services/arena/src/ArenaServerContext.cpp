@@ -35,7 +35,7 @@ namespace fys::arena {
 
     ArenaServerContext::ArenaServerContext(int ac, const char *const *av) : common::ServiceContextBase(ac, av) {
         std::ifstream i(_configFile);
-        spdlog::info("start parsing file {}", _configFile);
+        SPDLOG_INFO("start parsing file {}", _configFile);
         json jsonConfig;
         i >> jsonConfig;
         parseArenaConfigFile(jsonConfig);
@@ -80,7 +80,7 @@ namespace fys::arena {
         for (const auto &[k, v] : _encounterContext._rangeEncounterPerZone) {
             for (int i = 0; i < 3; ++i) {
                 if (v.at(i).first <= 0) {
-                    spdlog::error("Encounter Context invalid because of range for {} : "
+                    SPDLOG_ERROR("Encounter Context invalid because of range for {} : "
                                  "difficulty {} minimum is 0 or less while it should be at least 1", k, i);
                     return false;
                 }
@@ -92,7 +92,7 @@ namespace fys::arena {
                 total = std::accumulate(v.cbegin(), v.cend(), 0,
                                         [i](const uint val, const auto &rhs) -> uint { return val + rhs.chance[i]; });
                 if (total != 100) {
-                    spdlog::error("Encounter Context invalid because of % chance for zone {} : "
+                    SPDLOG_ERROR("Encounter Context invalid because of % chance for zone {} : "
                                  "difficulty {} is {} while it should be equal 100", k, i, total);
                     return false;
                 }

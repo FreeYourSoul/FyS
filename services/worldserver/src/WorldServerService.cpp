@@ -36,13 +36,13 @@ namespace fys::ws {
     }
 
     void WorldServerService::runServerLoop() noexcept {
-        spdlog::info("WorldServer loop started");
+        SPDLOG_INFO("WorldServer loop started");
 
         while (true) {
             _connectionHandler.pollAndProcessSubMessage(
-                [this](zmq::multipart_t && msg) {
+                [this](zmq::multipart_t &&msg) {
                     if (msg.size() < 3 || msg.size() > 4) {
-                        spdlog::error("Received message is ill formatted, should contains 3 to 4 parts but  has {},  "
+                        SPDLOG_ERROR("Received message is ill formatted, should contains 3 to 4 parts but  has {},  "
                                      "message is : {}", msg.size(), msg.str());
                         return;
                     }

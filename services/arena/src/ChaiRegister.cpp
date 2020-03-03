@@ -24,8 +24,11 @@
 
 #include <spdlog/spdlog.h>
 #include <functional>
+#include <random>
 
 #include <chaiscript/chaiscript.hpp>
+
+#include <RandomGenerator.hh>
 
 #include <fightingPit/contender/FightingContender.hh>
 #include <fightingPit/contender/PitContenders.hh>
@@ -52,7 +55,7 @@ void ChaiRegister::registerChai(chaiscript::ChaiScript &chai, PitContenders& pc,
         chai.set_global(chaiscript::var(std::ref(apt)), "allyPartyTeams");
     }
     catch (std::exception &ex) {
-        spdlog::error("Error caught on script execution {}", ex.what());
+        SPDLOG_ERROR("Error caught on script execution {}", ex.what());
     }
 
 }

@@ -30,7 +30,7 @@
 namespace fys::cache {
 
     namespace {
-        std::string readFile(const std::filesystem::path & path) {
+        std::string readFile(const std::filesystem::path& path) {
             // Open the stream to 'lock' the file.
             std::ifstream f{ path };
 
@@ -46,7 +46,7 @@ namespace fys::cache {
             return result;
         }
 
-        void writeFile(const std::filesystem::path & file, const std::string & content) {
+        void writeFile(const std::filesystem::path& file, const std::string &content) {
             std::ofstream out(file.string());
             out << content << std::endl;
             out.close();
@@ -56,25 +56,25 @@ namespace fys::cache {
 
     Cml::Cml(std::filesystem::path pathLocalStorage) : _localPathStorage(std::move(pathLocalStorage)) {
         try {
-            std::filesystem::create_directories(_localPathStorage);
+            bool ec = std::filesystem::create_directories(_localPathStorage);
         } catch (...) { }
     }
 
     /**
      * @return true if the key represent a cached data in the local storage (filesystem)
      */
-    bool Cml::isInLocalStorage(const CmlKey & cmlKey) {
+    bool Cml::isInLocalStorage(const CmlKey &cmlKey) const {
         return std::filesystem::exists(cmlKey.getPath());
     }
 
-    bool Cml::isInLocalStorageAndUpToDate(const CmlKey & cmlKey, long timestamp) const {
+    bool Cml::isInLocalStorageAndUpToDate(const CmlKey &cmlKey, long timestamp) const {
         if (isInLocalStorage(cmlKey)) {
             return std::filesystem::last_write_time(cmlKey.getPath()).time_since_epoch().count() <= timestamp;
         }
         return false;
     }
 
-    std::string_view Cml::findInCache(const std::string & key, bool first)  {
+    std::string_view Cml::findInCache(const std::string &key, bool first)  {
         auto str = _localPathStorage.string();
         CmlKey cmlKey(_localPathStorage, key);
 
@@ -96,9 +96,9 @@ namespace fys::cache {
         return findInCache(key, false);
     }
 
-    void Cml::createFile(const std::filesystem::path & pathToFile, const std::string & content) const {
+    void Cml::createFile(const std::filesystem::path &pathToFile, const std::string &content) const {
         if (!std::filesystem::create_directories(pathToFile.parent_path())) {
-            spdlog::error("Couldn't create directories for path : {}", _localPathStorage.string());
+            SPDLOG_ERROR("Couldn't create directories for path : {}", _localPathStorage.string());
             return;
         }
         writeFile(pathToFile, content);

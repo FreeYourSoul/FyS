@@ -29,7 +29,7 @@ namespace fys::arena {
 
     void TeamMember::moveTeamMember(HexagonSide::Orientation destination, bool bypassCheck) {
         if (!_side.move(destination, bypassCheck)) {
-            spdlog::error("Impossible move from {} to {}", _side, destination);
+            SPDLOG_ERROR("Impossible move from {} to {}", _side, destination);
             return;
         }
     }
@@ -37,17 +37,17 @@ namespace fys::arena {
     void TeamMember::moveTeamMember(data::MoveDirection directionToMove) {
         if (directionToMove == data::MoveDirection::RIGHT) {
             if (!_side.moveRight()) {
-                spdlog::error("Impossible move from {} to right", _side);
+                SPDLOG_ERROR("Impossible move from {} to right", _side);
             }
         }
         else if (directionToMove == data::MoveDirection::LEFT) {
             if (!_side.moveLeft()) {
-                spdlog::error("Impossible move from {} to left", _side);
+                SPDLOG_ERROR("Impossible move from {} to left", _side);
             }
         }
         else if (directionToMove == data::MoveDirection::BACK) {
             if (!_side.moveBack()) {
-                spdlog::error("Impossible move from {} to backside", _side);
+                SPDLOG_ERROR("Impossible move from {} to backside", _side);
             }
         }
     }

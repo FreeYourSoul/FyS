@@ -64,7 +64,7 @@ namespace fys::arena {
     FightingPitAnnouncer::buildFightingPit(const EncounterContext &ctx, ConnectionHandler &connectionHandler,
                                            const std::string &wsId) {
         if (_creatorUserName.empty() || _creatorUserToken.empty()) {
-            spdlog::warn("FightingPit built invalid (no creator of the pit registered, a call to generateAllyPartyTeam function is required)");
+            SPDLOG_WARN("FightingPit built invalid (no creator of the pit registered, a call to generateAllyPartyTeam function is required)");
             return nullptr;
         }
         std::unique_ptr<FightingPit> fp = std::make_unique<FightingPit>(_creatorUserName, _difficulty);
@@ -79,7 +79,7 @@ namespace fys::arena {
         unsigned numberContenders = fys::util::RandomGenerator::generateInRange(range.first, range.second);
         auto boundaryMap = makeContenderRngBoundaryMap(ctx._contendersPerZone.at(wsId), _difficulty);
 
-        for (unsigned i = 0; i < numberContenders; ++i) {
+        for (int i = 0; i < numberContenders; ++i) {
             int rngMonster = fys::util::RandomGenerator::generateInRange(0, 100);
             auto desc = boundaryMap.get(rngMonster)->second; // TODO add security at context creation to enforce that
             int levelMonster = fys::util::RandomGenerator::generateInRange(1, 10); // TODO, add this range in the configuration

@@ -48,6 +48,7 @@ namespace {
     }
 
     fys::arena::AwaitingPlayerArena createAwaitingPlayer(const fys::fb::FightingPitEncounter *binary) {
+        SPDLOG_INFO("");
         std::optional<fys::arena::AwaitingArena> awaitingArena = std::nullopt;
 
         // if fighting_pit_id is 0, a new arena has to be generated furthermore data are extracted
@@ -77,7 +78,7 @@ namespace fys::arena {
     }
 
     void ArenaServerService::runServerLoop() noexcept {
-        spdlog::info("ArenaServer loop started");
+        SPDLOG_INFO("ArenaServer loop started");
 
         while (true) {
             _connectionHandler.pollAndProcessMessageFromDispatcher(
@@ -101,10 +102,8 @@ namespace fys::arena {
                         const std::string tokenAuth = binary->token_auth()->str();
                         const auto &[isAwaited, playerAwaitedIt] = isPlayerAwaited(userName, tokenAuth, binary->fighting_pit_id());
 
-                        spdlog::info("");
-                        SPDLOG_INFO("Incoming Authentication Message: {}", authMessage.str());
                         if (!isAwaited) {
-                            spdlog::warn("Player {} tried to authenticate on Arena server {} without being awaited.", userName, _ctx.get().getServerCode());
+                            SPDLOG_WARN("Player {} tried to authenticate on Arena server {} without being awaited.", userName, _ctx.get().getServerCode());
                             // todo return error to server then forwarded
                             return;
                         }
@@ -120,7 +119,6 @@ namespace fys::arena {
                         // deserialize playerMessage
                         // Check if the player is authenticated on the fightingpit thanks to the token
                         // forward the message
-                        SPDLOG_INFO("Incoming Player Message: {}", playerMessage.str());
 
                     }
             );
@@ -159,8 +157,6 @@ namespace fys::arena {
         fpa.setEncounterId(it->second.gen->encounterId);
         fpa.enforceAmbush(it->second.gen->isAmbush);
         fpa.generateAllyPartyTeam(it->second.namePlayer, it->second.token);
-        spdlog::info("Player {}:{} generated a FightingPit level {}, encounterId {}",
-                it->second.namePlayer, it->second.token, it->second.gen->levelFightingPit, it->second.gen->encounterId);
         _workerService.addFightingPit(
                 fpa.buildFightingPit(_ctx.get().getEncounterContext(), _connectionHandler, it->second.gen->serverCode));
         // remove player from awaited player
