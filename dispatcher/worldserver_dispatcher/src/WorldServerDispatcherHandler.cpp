@@ -9,10 +9,9 @@
 namespace fys::ws {
 
     void WorldServerDispatcherHandler::processInputMessage(zmq::multipart_t &&msg,
-            network::DispatcherConnectionManager &manager) noexcept {
-        if (checkAuthentication(msg, manager)) {
+            network::DispatcherConnectionManager &manager) noexcept
+    {
 
-        }
     }
 
     void WorldServerDispatcherHandler::processClusterMessage(zmq::multipart_t &&msg,

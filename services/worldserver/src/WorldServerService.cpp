@@ -56,6 +56,10 @@ namespace fys::ws {
                     if (msg.size() == 4)
                         internalMagic = std::string(static_cast<char*>(msg.at(3).data()), msg.at(3).size());
 
+                    if (internalMagic && "testing player" == *internalMagic) {
+                        SPDLOG_DEBUG("<><><<><><><><><><><>We went inside the testing<><><<><><><><><><><>");
+                    }
+
                     SPDLOG_DEBUG("message received with idt={}, token={},\nmsg={}", idt, token, msg.str());
                     processMessage(std::move(idt), std::move(token), msg.at(2), internalMagic);
                 });

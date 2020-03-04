@@ -35,10 +35,12 @@ endif(CCACHE_FOUND)
 
 if (NOT TARGET common_dispatcher)
     add_library(common_dispatcher
+            ${COMMON_DIR}/include/core/SimpleProxy.hh
             ${COMMON_DIR}/include/core/Dispatcher.hh
             ${COMMON_DIR}/include/core/DispatcherConnectionManager.hh
             ${COMMON_DIR}/include/context/StartupDispatcherCtx.hh
             ${COMMON_DIR}/src/context/StartupDispatcherCtx.cpp
+            ${COMMON_DIR}/src/core/SimpleProxy.cpp
             ${COMMON_DIR}/src/core/Dispatcher.cpp
             ${COMMON_DIR}/src/core/DispatcherConnectionManager.cpp)
     target_link_libraries(common_dispatcher

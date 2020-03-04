@@ -35,23 +35,29 @@ void DispatcherConnectionManager::subscribeToTopics(const std::vector<std::strin
     }
 }
 
-std::pair<bool, bool> DispatcherConnectionManager::poll() noexcept {
+std::tuple<bool, bool, bool> DispatcherConnectionManager::poll() noexcept {
     //  Initialize poll set
     zmq::pollitem_t items[] = {
         { _listener, 0, ZMQ_POLLIN, 0 },
-        { _clusterConnection.subSocket, 0, ZMQ_POLLIN, 0 }
+        { _clusterConnection.subSocket, 0, ZMQ_POLLIN, 0 },
+        { _dispatcher, 0, ZMQ_POLLIN, 0 }
     };
     zmq::poll(&items[0], _clusterConnection.closed ? 1 : 2, -1);
     bool listenerPolling = static_cast<bool>(items[0].revents & ZMQ_POLLIN);
     bool subSocketPolling = static_cast<bool>(_clusterConnection.closed ? false : (items[1].revents & ZMQ_POLLIN));
-    return {listenerPolling, subSocketPolling};
+    bool dispatcherRespPolling = static_cast<bool>(items[2].revents & ZMQ_POLLIN);
+    return {listenerPolling, subSocketPolling, dispatcherRespPolling};
 }
 
-bool DispatcherConnectionManager::sendMessageToDispatcherSocket(zmq::multipart_t &&msg) noexcept {
+bool DispatcherConnectionManager::replyToListenerSocket(zmq::multipart_t && msg) noexcept {
+    return msg.send(_listener);
+}
+
+bool DispatcherConnectionManager::sendMessageToDispatcherSocket(zmq::multipart_t && msg) noexcept {
     return msg.send(_dispatcher);
 }
 
-bool DispatcherConnectionManager::sendMessageToClusterPubSocket(zmq::multipart_t &&msg) noexcept {
+bool DispatcherConnectionManager::sendMessageToClusterPubSocket(zmq::multipart_t && msg) noexcept {
     if (_clusterConnection.closed)
         return false;
     return msg.send(_clusterConnection.pubSocket);

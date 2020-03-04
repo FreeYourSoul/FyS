@@ -40,6 +40,8 @@ namespace fys
      * basic implementation of the dispatcher
      */
     class DispatcherHandlerBase {
+        static constexpr unsigned CACHE_VALIDITY = 600; // in seconds
+
     public:
         /**
          * @brief This method is processing the inputMessage and dispatch it appropriately among the peers connected to
@@ -53,11 +55,12 @@ namespace fys
          */
         void processClusterMessage(zmq::multipart_t &&msg, network::DispatcherConnectionManager &manager) noexcept;
 
-    protected:
-        bool checkAuthentication(const zmq::multipart_t &msg, network::DispatcherConnectionManager &manager) noexcept;
+        void forwardMessageToFrontend(zmq::multipart_t && msg, network::DispatcherConnectionManager & manager) noexcept;
+
 
     private:
-        std::unordered_set<std::string> _authenticated;
+        // map of token over timestamp, the timestamp representing the last time the token has been checked
+        std::unordered_map<std::string, unsigned> _authenticated;
     };
 
     /**
@@ -80,35 +83,32 @@ namespace fys
 
         void runDispatching() {
             while (true) {
-                auto [listenerSocketHasSomethingToPoll, subscriberSocketHasSomethingToPoll] = _connectionManager.poll();
+                auto [listenerSocketHasSomethingToPoll,
+                      subscriberSocketHasSomethingToPoll,
+                      dispatcherSocketHasSomethingToPoll] = _connectionManager.poll();
                 if (listenerSocketHasSomethingToPoll) {
-                    _connectionManager.dispatchMessageOnListenerSocket(
-                            [this](zmq::multipart_t && msg, network::DispatcherConnectionManager &manager){
+                    _connectionManager.dispatchMessageFromListenerSocket(
+                            [this](zmq::multipart_t &&msg, network::DispatcherConnectionManager &manager) {
                                 _dispatcher.processInputMessage(std::move(msg), manager);
                             }
-                        );
+                    );
                 }
-                else if (subscriberSocketHasSomethingToPoll) {
-                    _connectionManager.dispatchMessageOnSubscriberSocket(
-                            [this](zmq::multipart_t && msg, network::DispatcherConnectionManager &manager){
+                if (subscriberSocketHasSomethingToPoll) {
+                    _connectionManager.dispatchMessageFromSubscriberSocket(
+                            [this](zmq::multipart_t &&msg, network::DispatcherConnectionManager &manager) {
                                 _dispatcher.processClusterMessage(std::move(msg), manager);
+                            }
+                    );
+                }
+                if (dispatcherSocketHasSomethingToPoll) {
+                    _connectionManager.dispatchMessageFromDispatcherSocket(
+                            [this](zmq::multipart_t && msg, network::DispatcherConnectionManager &manager){
+                                _dispatcher.forwardMessageToFrontend(std::move(msg), manager);
                             }
                         );
                 }
             }
         }
-
-        /**
-         * Check if the player is currently authenticated:
-         *  first check the dispatcher cache
-         *
-         *  if the dispatcher doesn't contains information for this player, call the authentication server and get the
-         *  token for the player
-         *      (if authenticated): add this player identifier/token in the dispatcher cache
-         *
-         * @return a true if the player is authenticated, false otherwise
-         */
-        constexpr bool checkAuthentication(const std::string &idt, const std::string &token);
 
     private:
         fys::network::DispatcherConnectionManager _connectionManager;

@@ -68,7 +68,9 @@ class StartupDispatcherCtx {
             [[nodiscard]] constexpr ushort getDispatchingPort() const noexcept { return _dispatchingPort; }
             [[nodiscard]] constexpr uint getMaxMsgSize() const noexcept { return _maxMsgSize; }
 
-            [[nodiscard]] const std::vector<std::string> getSubscriptionTopics() const noexcept { return _subTopics; }
+            [[nodiscard]] const std::vector<std::string> &getSubscriptionTopics() const noexcept { return _subTopics; }
+            [[nodiscard]] std::string getListenerBindingString() const noexcept;
+            [[nodiscard]] std::string getDispatcherBindingString() const noexcept;
             [[nodiscard]] std::string getFrontendClusterProxyConnectionString() const noexcept;
             [[nodiscard]] std::string getBackendClusterProxyConnectionString () const noexcept;
 

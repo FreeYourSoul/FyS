@@ -90,6 +90,14 @@ namespace fys {
         return str;
     }
 
+    std::string StartupDispatcherCtx::getListenerBindingString() const noexcept {
+        return "tcp://" + _clusterProxy.frontendAddress + ":" + std::to_string(_bindingPort);
+    }
+
+    std::string StartupDispatcherCtx::getDispatcherBindingString() const noexcept {
+        return "tcp://" + _clusterProxy.backendAddress + ":" + std::to_string(_dispatchingPort);
+    }
+
     std::string StartupDispatcherCtx::getFrontendClusterProxyConnectionString() const noexcept {
         return "tcp://" + _clusterProxy.frontendAddress + ":" + std::to_string(_clusterProxy.frontendPort);
     }
