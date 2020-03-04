@@ -18,11 +18,7 @@ include(${CMAKE_SOURCE_DIR}${RELATIVE_TO_COMMON}CMakeLists.txt)
 
 #Build executable
 add_executable(arena_dispatcher
-        ${CMAKE_CURRENT_LIST_DIR}/src/main.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/src/ArenaDispatcherContext.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/include/ArenaDispatcherContext.hh
-        ${CMAKE_CURRENT_LIST_DIR}/src/ArenaDispatcherHandler.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/include/ArenaDispatcherHandler.hh)
+        ${CMAKE_CURRENT_LIST_DIR}/src/main.cpp)
 
 target_compile_options(arena_dispatcher PRIVATE -O2 -fstack-protector-all -g)
 target_compile_options(arena_dispatcher PRIVATE -Wall -Wpedantic -Wextra -Wno-deprecated-declarations)

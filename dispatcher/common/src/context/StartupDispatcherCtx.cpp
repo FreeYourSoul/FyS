@@ -77,7 +77,9 @@ namespace fys {
         str = "\n*************************\n";
         str+= "[INFO] Dispatcher " + _name + " context VERSION: " + _version + "\n\n";
         str+= "[INFO] Client Listener bindingPort: " + std::to_string(_bindingPort) + "\n";
+        str+= "[INFO] Listener connection string: " + getListenerBindingString() + "\n";
         str+= "[INFO] Service Dispatching Port: " + std::to_string(_dispatchingPort) + "\n";
+        str+= "[INFO] Dispatcher connection string: " + getDispatcherBindingString() + "\n";
         str+= "[INFO] isClusterAware: " + std::string(_isClusterAware ? "true" : "false") + "\n";
         str+= "[INFO] isLoadBalancing: " + std::string(_isLoadBalancing ? "true" : "false") + "\n";
         str += std::accumulate(_subTopics.begin(), _subTopics.end(), std::string{}, [](std::string a, std::string b){
@@ -91,11 +93,11 @@ namespace fys {
     }
 
     std::string StartupDispatcherCtx::getListenerBindingString() const noexcept {
-        return "tcp://" + _clusterProxy.frontendAddress + ":" + std::to_string(_bindingPort);
+        return "tcp://*:" + std::to_string(_bindingPort);
     }
 
     std::string StartupDispatcherCtx::getDispatcherBindingString() const noexcept {
-        return "tcp://" + _clusterProxy.backendAddress + ":" + std::to_string(_dispatchingPort);
+        return "tcp://*:" + std::to_string(_dispatchingPort);
     }
 
     std::string StartupDispatcherCtx::getFrontendClusterProxyConnectionString() const noexcept {
