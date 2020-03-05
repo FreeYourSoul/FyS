@@ -98,19 +98,22 @@ namespace fys::arena {
                     // Authentication handler
                     [this](zmq::message_t && identityPlayer, zmq::message_t && authMessage) {
                         const auto *binary = fys::fb::GetArenaServerValidateAuth(authMessage.data());
-                        const std::string userName = binary->user_name()->str();
+                        std::string userName = binary->user_name()->str();
                         const std::string tokenAuth = binary->token_auth()->str();
                         const auto &[isAwaited, playerAwaitedIt] = isPlayerAwaited(userName, tokenAuth, binary->fighting_pit_id());
+                        unsigned fightingPitId = playerAwaitedIt->second.fightingPitId;
+                        zmq::multipart_t response;
 
+                        response.add(std::move(identityPlayer));
                         if (!isAwaited) {
-                            SPDLOG_WARN("Player {} tried to authenticate on Arena server {} without being awaited.", userName, _ctx.get().getServerCode());
-                            // todo return error to server then forwarded
+                            spdlog::warn("Player {} tried to authenticate on Arena server {} without being awaited.", userName, _ctx.get().getServerCode());
                             return;
                         }
                         if (playerAwaitedIt->second.hasToBeGenerated())
-                            createNewFightingPit(playerAwaitedIt);
-                        // Create FightingPit if the awaited player is a creator
-                        // Join the requested FightingPit otherwise
+                            fightingPitId = createNewFightingPit(playerAwaitedIt);
+                        else
+                            _workerService.playerJoinFightingPit(std::move(userName), fightingPitId);
+                        // fill response
                     },
 
                     // InGame handler
@@ -119,7 +122,8 @@ namespace fys::arena {
                         // deserialize playerMessage
                         // Check if the player is authenticated on the fightingpit thanks to the token
                         // forward the message
-
+                        zmq::multipart_t response;
+                        response.add(std::move(identityPlayer));
                     }
             );
         }
@@ -150,17 +154,18 @@ namespace fys::arena {
         _connectionHandler.sendMessageToDispatcher(std::move(msg));
     }
 
-    void ArenaServerService::createNewFightingPit(AwaitingPlayerArenaIt it) {
+    unsigned ArenaServerService::createNewFightingPit(AwaitingPlayerArenaIt it) {
         FightingPitAnnouncer fpa(_cache);
 
         fpa.setDifficulty(it->second.gen->levelFightingPit);
         fpa.setEncounterId(it->second.gen->encounterId);
         fpa.enforceAmbush(it->second.gen->isAmbush);
         fpa.generateAllyPartyTeam(it->second.namePlayer, it->second.token);
-        _workerService.addFightingPit(
+        unsigned id = _workerService.addFightingPit(
                 fpa.buildFightingPit(_ctx.get().getEncounterContext(), _connectionHandler, it->second.gen->serverCode));
         // remove player from awaited player
         _awaitingArena.erase(it);
+        return id;
     }
 
 

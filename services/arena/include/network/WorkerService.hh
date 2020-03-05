@@ -67,6 +67,13 @@ namespace fys::arena {
         unsigned addFightingPit(std::unique_ptr<FightingPit> fp);
 
         /**
+         *
+         * @param userName player name to join the fightingpit
+         * @param fightingPitId
+         */
+        void playerJoinFightingPit(std::string userName, unsigned fightingPitId);
+
+        /**
          * Read on the router socket (connection with the players) and reply to them thanks to the zmq::router protocol
          * @tparam Lambda type following the signature => void (string, zmq::message_t)
          * @param HandlerAuth   Handler handler to call when receiving a message to authenticate an awaited player

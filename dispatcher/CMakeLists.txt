@@ -1,6 +1,6 @@
 cmake_minimum_required( VERSION 3.6 )
 
-set_property(TARGET PROPERTY CXX_STANDARD 17)
+set_property(TARGET PROPERTY CXX_STANDARD 20)
 
 if (NOT RELATIVE_TO_COMMON)
     set(RELATIVE_TO_COMMON /common/)

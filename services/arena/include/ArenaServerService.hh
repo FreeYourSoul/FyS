@@ -115,9 +115,10 @@ namespace fys::arena {
     private:
         void forwardReplyToDispatcherClient(zmq::message_t && wsIdentity, const fys::arena::AwaitingPlayerArena & awaitingArena);
 
-        std::pair<bool, AwaitingPlayerArenaIt>
-        isPlayerAwaited(const std::string & name, const std::string & token, unsigned idFightingPit) const;
-        void createNewFightingPit(AwaitingPlayerArenaIt awaitedIt);
+        [[nodiscard]] unsigned createNewFightingPit(AwaitingPlayerArenaIt awaitedIt);
+        [[nodiscard]] std::pair<bool, AwaitingPlayerArenaIt>
+            isPlayerAwaited(const std::string & name, const std::string & token, unsigned idFightingPit) const;
+
 
     private:
         std::reference_wrapper<const ArenaServerContext> _ctx;

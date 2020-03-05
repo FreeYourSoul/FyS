@@ -40,7 +40,7 @@ namespace fys::ws {
 
         while (true) {
             _connectionHandler.pollAndProcessSubMessage(
-                [this](zmq::multipart_t &&msg) {
+                [this](zmq::multipart_t && msg) {
                     if (msg.size() < 3 || msg.size() > 4) {
                         SPDLOG_ERROR("Received message is ill formatted, should contains 3 to 4 parts but  has {},  "
                                      "message is : {}", msg.size(), msg.str());

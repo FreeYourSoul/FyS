@@ -50,5 +50,9 @@ namespace fys::arena
         }
         // todo: append action to fightingpit
     }
+
+    void WorkerService::playerJoinFightingPit(std::string userName, unsigned fightingPitId) {
+
+    }
     
 } // namespace fys::arena

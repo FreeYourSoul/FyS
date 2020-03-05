@@ -1,6 +1,6 @@
 cmake_minimum_required( VERSION 3.6 )
 project(worldserver_dispatcher CXX)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_COMPILER /usr/bin/g++)
 
 find_package(nlohmann_json REQUIRED)
