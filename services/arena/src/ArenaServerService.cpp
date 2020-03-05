@@ -113,7 +113,6 @@ namespace fys::arena {
                             fightingPitId = createNewFightingPit(playerAwaitedIt);
                         else
                             _workerService.playerJoinFightingPit(std::move(userName), fightingPitId);
-                        // fill response
                     },
 
                     // InGame handler
