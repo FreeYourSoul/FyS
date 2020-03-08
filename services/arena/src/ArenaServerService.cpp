@@ -106,7 +106,8 @@ namespace fys::arena {
 
                         response.add(std::move(identityPlayer));
                         if (!isAwaited) {
-                            spdlog::warn("Player {} tried to authenticate on Arena server {} without being awaited.", userName, _ctx.get().getServerCode());
+                            spdlog::warn("Player {} tried to authenticate on Arena server {} without being awaited.",
+                                    userName, _ctx.get().getServerCode());
                             return;
                         }
                         if (playerAwaitedIt->second.hasToBeGenerated())
