@@ -64,13 +64,14 @@ namespace fys::arena {
             zmq::poll(&items[0], 1);
             if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
                 zmq::multipart_t msg;
-                if (!msg.recv(_dealerConnectionToDispatcher)) {
+                if (!msg.recv(_dealerConnectionToDispatcher) || msg.size() != 2) {
                     SPDLOG_ERROR("Error while reading on the listener socket");
                 }
                 else {
                     // first element is the identity frame for the router of the dispatcher (connected to WS)
+                    auto identity = msg.pop();
                     // second element is the message frame
-                    std::forward<Handler>(handler)(msg.pop(), msg.pop());
+                    std::forward<Handler>(handler)(std::move(identity), msg.pop());
                 }
             }
         }

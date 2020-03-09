@@ -30,6 +30,7 @@ else()
 endif()
 
 set(COMMON_SRCS
+        ${CMAKE_CURRENT_LIST_DIR}/flatbuffer/includes/FightingPitEncounter_generated.h
         ${CMAKE_CURRENT_LIST_DIR}/flatbuffer/includes/ClientCom_generated.h
         ${CMAKE_CURRENT_LIST_DIR}/flatbuffer/includes/Notifications_generated.h
         ${CMAKE_CURRENT_LIST_DIR}/flatbuffer/includes/WSAction_generated.h

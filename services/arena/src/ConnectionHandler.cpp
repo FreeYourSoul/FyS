@@ -31,8 +31,11 @@ void ConnectionHandler::setupConnectionManager(const fys::arena::ArenaServerCont
     _dealerConnectionToDispatcher.connect(ctx.getDispatcherConnectionString());
 }
 
-void ConnectionHandler::sendMessageToDispatcher(zmq::multipart_t &&msg) noexcept {
-    msg.send(_dealerConnectionToDispatcher);
+void ConnectionHandler::sendMessageToDispatcher(zmq::multipart_t && msg) noexcept {
+    if (_dealerConnectionToDispatcher.connected()) {
+        SPDLOG_INFO(" Message send to dispatcher {} \n", msg.str());
+        msg.send(_dealerConnectionToDispatcher);
+    }
 }
 
 }

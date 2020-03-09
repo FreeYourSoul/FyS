@@ -48,7 +48,6 @@ namespace {
     }
 
     fys::arena::AwaitingPlayerArena createAwaitingPlayer(const fys::fb::FightingPitEncounter *binary) {
-        SPDLOG_INFO("");
         std::optional<fys::arena::AwaitingArena> awaitingArena = std::nullopt;
 
         // if fighting_pit_id is 0, a new arena has to be generated furthermore data are extracted
@@ -146,7 +145,7 @@ namespace fys::arena {
                 fbb.CreateString(_ctx.get().getHostname()),
                 fbb.CreateString(_ctx.get().getConnectionString()),
                 _ctx.get().getPort(),
-                fbb.CreateString(awaitingArena.gen->serverCode));
+                awaitingArena.gen ? fbb.CreateString(awaitingArena.gen->serverCode) : fbb.CreateString(""));
         fys::fb::FinishArenaServerAuthBuffer(fbb, asaFb);
         zmq::multipart_t msg;
         msg.add(std::move(identityWs));

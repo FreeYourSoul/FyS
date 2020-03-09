@@ -50,15 +50,19 @@ std::tuple<bool, bool, bool> DispatcherConnectionManager::poll() noexcept {
 }
 
 bool DispatcherConnectionManager::replyToListenerSocket(zmq::multipart_t && msg) noexcept {
+    if (!_listener.connected())
+        return false;
     return msg.send(_listener);
 }
 
 bool DispatcherConnectionManager::sendMessageToDispatcherSocket(zmq::multipart_t && msg) noexcept {
+    if (!_dispatcher.connected())
+        return false;
     return msg.send(_dispatcher);
 }
 
 bool DispatcherConnectionManager::sendMessageToClusterPubSocket(zmq::multipart_t && msg) noexcept {
-    if (_clusterConnection.closed)
+    if (_clusterConnection.closed || !_clusterConnection.pubSocket.connected())
         return false;
     return msg.send(_clusterConnection.pubSocket);
 }

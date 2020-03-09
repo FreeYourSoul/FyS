@@ -39,7 +39,8 @@ void ConnectionHandler::setupConnectionManager(const fys::ws::WorldServerContext
 }
 
 void ConnectionHandler::sendMessageToDispatcher(zmq::multipart_t &&msg) noexcept {
-    msg.send(_dispatcherConnection);
+    if (_dispatcherConnection.connected())
+        msg.send(_dispatcherConnection);
 }
 
 }
