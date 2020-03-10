@@ -47,7 +47,7 @@ namespace fys
      * The most suitable follow the comparator.
      *
      * For example the most suitable following this comparator [](auto currentSuitable, auto next) { return currentSuitable < next; }
-     * will be the bigest element of the container.
+     * will be the biggest element of the container.
      *
      * @param first iterator start of the container
      * @param last iterator end of the container

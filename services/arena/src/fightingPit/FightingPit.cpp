@@ -78,4 +78,8 @@ namespace fys::arena {
         _authenticatedPlayers.push_back({ std::move(userName), std::move(userToken) });
     }
 
+    bool FightingPit::isPlayerParticipant(const std::string &name, const std::string &token) const {
+        return std::any_of(_authenticatedPlayers.begin(), _authenticatedPlayers.end(),
+                           [&name, &token](auto & authPlayer) { return authPlayer.name == name && authPlayer.token == token; } );
+    }
 }

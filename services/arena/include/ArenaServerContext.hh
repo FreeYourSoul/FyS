@@ -52,6 +52,7 @@ public:
 
         [[nodiscard]] std::string toString() const noexcept;
         [[nodiscard]] std::string getDispatcherConnectionString() const noexcept;
+        [[nodiscard]] std::string getPlayerBindingString() const noexcept;
         [[nodiscard]] const std::string &getServerCode() const noexcept { return _code; }
         [[nodiscard]] const EncounterContext &getEncounterContext() const noexcept { return _encounterContext; }
         [[nodiscard]] const std::string &getPathLocalStorageCache() const noexcept { return _pathLocalStorageCache; }
@@ -69,6 +70,7 @@ public:
         std::string _pathSourceCache;
         std::string _dbHost;
         uint _dbPort = 3306;
+        uint _playerConnectionPort;
 
         EncounterContext _encounterContext;
     };

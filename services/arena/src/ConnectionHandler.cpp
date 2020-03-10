@@ -26,19 +26,15 @@
 
 namespace fys::arena {
 
-    static const fys::arena::ArenaServerContext *ctxw;
-
-
     void ConnectionHandler::setupConnectionManager(const fys::arena::ArenaServerContext &ctx) noexcept {
         // todo add a heartbeat to re-connect to dispatcher if no message after some time?
-        ctxw = &ctx;
         // connect to dispatcher with the dispatcher
         _dealerConnectionToDispatcher.connect(ctx.getDispatcherConnectionString());
     }
 
     void ConnectionHandler::sendMessageToDispatcher(zmq::multipart_t && msg) noexcept {
         if (_dealerConnectionToDispatcher.connected()) {
-            SPDLOG_INFO("Message send to dispatcher {} \n", msg.str());
+            SPDLOG_INFO("Message send to dispatcher {}", msg.str());
             msg.send(_dealerConnectionToDispatcher);
         }
     }

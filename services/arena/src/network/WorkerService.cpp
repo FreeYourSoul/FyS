@@ -27,6 +27,10 @@
 namespace fys::arena
 {
 
+    void WorkerService::setupConnectionManager(const fys::arena::ArenaServerContext &ctx) noexcept {
+        _workerRouter.bind(ctx.getPlayerBindingString());
+    }
+
     unsigned WorkerService::addFightingPit(std::unique_ptr<FightingPit> fp) {
         if (!fp) {
             SPDLOG_ERROR("Cannot add fighting pit in WorkerService");
@@ -54,5 +58,11 @@ namespace fys::arena
     void WorkerService::playerJoinFightingPit(std::string userName, unsigned fightingPitId) {
 
     }
-    
+
+    bool WorkerService::isPlayerAuthenticated(const std::string &name, const std::string &token, unsigned fightingArenaId) const {
+        auto it = _arenaInstances.find(fightingArenaId);
+        return it != _arenaInstances.end() && it->second->isPlayerParticipant(name, token);
+    }
+
+
 } // namespace fys::arena

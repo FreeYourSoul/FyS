@@ -54,7 +54,14 @@ namespace fys::arena {
       */
     class WorkerService {
     public:
-        explicit WorkerService() : _ctx(1), _workerRouter(_ctx, zmq::socket_type::router), _currentArenaId(0) {}
+        explicit WorkerService() :
+            _ctx(1), _workerRouter(_ctx, zmq::socket_type::router), _currentArenaId(0)
+        { }
+
+        /**
+         * @brief Bind the ArenaService for the player to connect directly to the Arena
+         */
+        void setupConnectionManager(const fys::arena::ArenaServerContext &ctx) noexcept;
 
         /**
          * @brief Add a fighting pit to the worker service, adding this instance to the on-going/accessible fighting pit
@@ -91,23 +98,38 @@ namespace fys::arena {
                 if (!msg.recv(_workerRouter, ZMQ_NOBLOCK)) {
                     SPDLOG_ERROR("Error while reading on the arena worker listener socket");
                 }
+                else if (auto s = msg.size(); s != 3) {
+                    SPDLOG_WARN("An incoming message with {} instead of 3 has been read", s);
+                }
                 else {
                     auto identity = msg.pop();
-                    if ("auth" == msg.popstr())
+                    auto intermediate = msg.pop();
+                    if ("auth" == intermediate.str())
                         std::forward<HandlerAuth>(handlerAuth)(std::move(identity), msg.pop());
                     else
-                        std::forward<HandlerInGame>(handlerInGame)(std::move(identity), msg.pop());
+                        std::forward<HandlerInGame>(handlerInGame)(std::move(identity), intermediate, msg.pop());
                 }
             }
         }
 
         /**
-         * @brief Do elementary check (does the fighting arena exist), then forward the message to the fighting pit
+         * Check if the player defined by an unique name/token is authenticated on the given fightingArenaId
+         *
+         * @param name player name
+         * @param token authentication token
+         * @param fightingArenaId arena to check if the player is authenticated on
+         * @return true if the player is authenticated on the given fightingPit, return false otherwise
+         */
+        [[nodiscard]] bool
+        isPlayerAuthenticated(const std::string & name, const std::string & token, unsigned fightingArenaId) const;
+
+        /**
+         * Forward the message to the given fighting pit
+         *
          * @param fightingArenaId id of the arena to forward the message to
          * @param fightingMsg message to forward
          */
         void forwardMessageToFightingPit(unsigned fightingArenaId/* , const FightingMessage & fightingMsg*/);
-
 
     private:
         zmq::context_t      _ctx;
@@ -115,7 +137,7 @@ namespace fys::arena {
         unsigned            _currentArenaId;
 
         // map of client identifier to FightingArenaId
-        std::unordered_map<unsigned, std::string> _idOnArenaId;
+        std::unordered_map<std::string, unsigned> _idOnArenaId;
         std::unordered_map<unsigned, std::unique_ptr<FightingPit>> _arenaInstances;
 
     };

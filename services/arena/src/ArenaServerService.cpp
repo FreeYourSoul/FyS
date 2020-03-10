@@ -74,6 +74,7 @@ namespace fys::arena {
     ArenaServerService::ArenaServerService(const ArenaServerContext &ctx) :
       _ctx(ctx), _cache(ctx.getPathLocalStorageCache(), ctx.getPathSourceCache()) {
         _connectionHandler.setupConnectionManager(ctx);
+        _workerService.setupConnectionManager(ctx);
     }
 
     void ArenaServerService::runServerLoop() noexcept {
@@ -116,13 +117,18 @@ namespace fys::arena {
                     },
 
                     // InGame handler
-                    [this](zmq::message_t && identityPlayer, zmq::message_t && playerMessage) {
+                    [this](zmq::message_t && identityPlayer, const zmq::message_t & intermediate, zmq::message_t && playerMessage) {
                         // todo
                         // deserialize playerMessage
-                        // Check if the player is authenticated on the fightingpit thanks to the token
                         // forward the message
                         zmq::multipart_t response;
                         response.add(std::move(identityPlayer));
+                        const auto authFrame = fys::fb::GetArenaServerValidateAuth(intermediate.data());
+
+                        if (_workerService.isPlayerAuthenticated(
+                                authFrame->user_name()->str(), authFrame->token_auth()->str(), authFrame->fighting_pit_id())) {
+
+                        }
                     }
             );
         }
@@ -169,4 +175,4 @@ namespace fys::arena {
     }
 
 
-}
+} // namespace fys::arena

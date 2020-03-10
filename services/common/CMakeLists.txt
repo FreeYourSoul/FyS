@@ -10,6 +10,7 @@ set(FLATBUFFER_INCLUDE_DIR "${FLAT_BUFFER_PATH}/includes")
 set(FLATBUFFER_SCHEMA_DIR "${FLAT_BUFFER_PATH}/schemas")
 
 set(FLAT_BUFFER_SCHEMAS
+        ${FLATBUFFER_SCHEMA_DIR}/arena/ArenaFightAction.fbs
         ${FLATBUFFER_SCHEMA_DIR}/arena/ArenaServerValidateAuth.fbs
         ${FLATBUFFER_SCHEMA_DIR}/arena/ArenaServerAuth.fbs
         ${FLATBUFFER_SCHEMA_DIR}/arena/FightingPitEncounter.fbs
@@ -31,6 +32,9 @@ endif()
 
 set(COMMON_SRCS
         ${CMAKE_CURRENT_LIST_DIR}/flatbuffer/includes/FightingPitEncounter_generated.h
+        ${CMAKE_CURRENT_LIST_DIR}/flatbuffer/includes/ArenaFightAction_generated.h
+        ${CMAKE_CURRENT_LIST_DIR}/flatbuffer/includes/ArenaServerValidateAuth_generated.h
+        ${CMAKE_CURRENT_LIST_DIR}/flatbuffer/includes/ArenaServerAuth_generated.h
         ${CMAKE_CURRENT_LIST_DIR}/flatbuffer/includes/ClientCom_generated.h
         ${CMAKE_CURRENT_LIST_DIR}/flatbuffer/includes/Notifications_generated.h
         ${CMAKE_CURRENT_LIST_DIR}/flatbuffer/includes/WSAction_generated.h

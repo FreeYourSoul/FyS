@@ -97,6 +97,7 @@ namespace fys::arena {
          * @param userToken token of the player to add
          */
         void addAuthenticatedUser(std::string userName, std::string userToken);
+        bool isPlayerParticipant(const std::string & name, const std::string & token) const;
 
         const std::string &getCreatorUserName() const { return _creatorUserName; }
         const PitContenders &getPitContenders() const { return _contenders; }

@@ -22,9 +22,9 @@
 // SOFTWARE.
 
 #include <catch2/catch.hpp>
-#include <zmq_addon.hpp>
 #include <flatbuffers/flatbuffers.h>
 #include <ArenaServerAuth_generated.h>
+#include <ArenaServerValidateAuth_generated.h>
 #include <FightingPitEncounter_generated.h>
 
 TEST_CASE("FlatBuffer ArenaCom FightingPitEncounter", "[common][fb]") {
@@ -33,10 +33,10 @@ TEST_CASE("FlatBuffer ArenaCom FightingPitEncounter", "[common][fb]") {
             fbb,
             fbb.CreateString("name"),
             fbb.CreateString("token_authentication"),
-            4242,
+            1337,
             fbb.CreateString("WS001"),
             fys::fb::Level::Level_EASY,
-            1337,
+            4242,
             false,
             0.0,
             0.0);
@@ -91,3 +91,29 @@ TEST_CASE("FlatBuffer ArenaCom ArenaServerAuth", "[common][fb]") {
     } // End section : Binary to Flatbuffer
 
 } // End Test Case : FlatBuffer ArenaCom ArenaServerAuth
+
+TEST_CASE("FlatBuffer ArenaCom ArenaServerValidateAuth", "[common][fb]") {
+
+    flatbuffers::FlatBufferBuilder fbb;
+    auto asva = fys::fb::CreateArenaServerValidateAuth(
+            fbb,
+            fbb.CreateString("name"),
+            fbb.CreateString("token_authentication"),
+            42);
+    fys::fb::FinishArenaServerValidateAuthBuffer(fbb, asva);
+
+    SECTION("Verifier") {
+        auto ok = flatbuffers::Verifier(fbb.GetBufferPointer(), fbb.GetSize());
+        CHECK(fys::fb::VerifyArenaServerValidateAuthBuffer(ok));
+    }
+    uint8_t *binary = fbb.GetBufferPointer();
+
+    SECTION("Binary to FlatBuffer") {
+        const fys::fb::ArenaServerValidateAuth *fromBinary = fys::fb::GetArenaServerValidateAuth(binary);
+        REQUIRE("name" == fromBinary->user_name()->str());
+        REQUIRE("token_authentication" == fromBinary->token_auth()->str());
+        REQUIRE(42 == fromBinary->fighting_pit_id());
+
+    } // End section : Binary to Flatbuffer
+
+} // End Test Case : FlatBuffer ArenaCom ArenaServerValidateAuth

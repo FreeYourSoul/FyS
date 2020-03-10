@@ -45,6 +45,7 @@ namespace fys::arena {
 
         auto &arena = configContent["Arena"];
         arena["code"].get_to(_code);
+        arena["player_connection_port"].get_to(_playerConnectionPort);
         arena["script_cache_source"].get_to(_pathSourceCache);
         arena["script_storage_cache"].get_to(_pathLocalStorageCache);
         arena["db_hostname"].get_to(_dbHost);
@@ -109,12 +110,17 @@ namespace fys::arena {
         str+= "[INFO] Dispatcher connected port: " + std::to_string(_dispatcherData.port) + "\n";
         str+= "[INFO] Dispatcher connected host: " + _dispatcherData.address + "\n";
         str+= "[INFO] Dispatcher connection string: " + getDispatcherConnectionString() + "\n";
+        str+= "[INFO] Player binding string: " + getPlayerBindingString() + "\n";
         str+= "\n*************************\n";
         return str;
     }
 
     std::string ArenaServerContext::getDispatcherConnectionString() const noexcept {
         return std::string("tcp://").append(_dispatcherData.address).append(":").append(std::to_string(_dispatcherData.port));
+    }
+
+    std::string ArenaServerContext::getPlayerBindingString() const noexcept {
+        return std::string("tcp://*:").append(std::to_string(_playerConnectionPort));
     }
 
 }

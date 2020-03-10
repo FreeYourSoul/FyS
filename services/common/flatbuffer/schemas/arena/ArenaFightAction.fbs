@@ -1,0 +1,8 @@
+namespace fys.fb;
+
+// Used by the client to join an existing FightingPit (id_fightingpit set)
+table ArenaFightAction {
+    ok:uint;
+}
+
+root_type ArenaFightAction;
