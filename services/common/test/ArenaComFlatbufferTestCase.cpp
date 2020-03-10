@@ -85,7 +85,7 @@ TEST_CASE("FlatBuffer ArenaCom ArenaServerAuth", "[common][fb]") {
         REQUIRE("token_authentication" == fromBinary->token_auth()->str());
         REQUIRE("localhost" == fromBinary->ip()->str());
         REQUIRE("tcp://localhost:4242" == fromBinary->connection_str()->str());
-        REQUIRE("WS001" == fromBinary->world_server_code()->str());
+        REQUIRE("WS001" == fromBinary->arena_server_code()->str());
         REQUIRE(42 == fromBinary->id_fightingpit());
 
     } // End section : Binary to Flatbuffer

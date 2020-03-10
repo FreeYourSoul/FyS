@@ -6,13 +6,15 @@ enum Level : byte { EASY, MEDIUM, HARD }
 table FightingPitEncounter {
     user_name:string;
     token_auth:string;
+
+    // id of the fighting pit to join, set to 0 if it is a new encounter
+    fighting_pit_id:uint;
+
+    // used for generation of the fighting pit
     world_server_id:string;
-    x_player:double = 0;
-    y_player:double = 0;
     level_encounter:Level;
     id_encounter:uint;
     is_ambush:bool;
-    fighting_pit_id:uint; // id of the fighting pit to join, set to 0 if it is a new encounter
 }
 
 root_type FightingPitEncounter;
