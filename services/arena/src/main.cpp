@@ -30,7 +30,7 @@
 
 int main(int ac, char **av) {
     try {
-        spdlog::set_pattern("[%D %H:%M:%S][ %@ ][%L]: %v");
+        spdlog::set_pattern("[%D %H:%M:%S][ %=30@ ][%L]: %v");
         fys::arena::ArenaServerContext ctx(ac, av);
         SPDLOG_INFO(ctx.toString());
         fys::arena::ArenaServerService serverService(ctx);

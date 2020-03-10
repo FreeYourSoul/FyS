@@ -29,7 +29,7 @@
 
 int main(int ac, char **av) {
     try {
-        spdlog::set_pattern("[%D %H:%M:%S][ %@ ][%L]: %v");
+        spdlog::set_pattern("[%D %H:%M:%S][%=30@][%L]: %v");
         fys::ws::WorldServerContext ctx(ac, av);
         SPDLOG_INFO(ctx.toString());
         fys::ws::WorldServerService serverService(ctx);
