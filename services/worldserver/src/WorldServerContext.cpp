@@ -93,7 +93,7 @@ namespace fys::ws {
                 str+= "       YisSup: " + std::to_string(prox.yAxisRequirement->superiorTo) + "\n";
             }
         }
-        str+= "\n*************************\n";
+        str+= "\n*************************";
         return str;
     }
 

@@ -159,9 +159,10 @@ namespace fys::arena {
         fpa.setDifficulty(it->second.gen->levelFightingPit);
         fpa.setEncounterId(it->second.gen->encounterId);
         fpa.enforceAmbush(it->second.gen->isAmbush);
-        fpa.generateAllyPartyTeam(it->second.namePlayer, it->second.token);
+        fpa.setCreatorUserName(it->second.namePlayer);
+        fpa.setCreatorUserToken(it->second.token);
         unsigned id = _workerService.addFightingPit(
-                fpa.buildFightingPit(_ctx.get().getEncounterContext(), _connectionHandler, it->second.gen->serverCode));
+                fpa.buildFightingPit(_ctx.get().getEncounterContext(), it->second.gen->serverCode));
         // remove player from awaited player
         _awaitingArena.erase(it);
         return id;

@@ -61,10 +61,10 @@ namespace fys::arena {
             zmq::pollitem_t items[] = {
                     { _dealerConnectionToDispatcher, 0, ZMQ_POLLIN, 0 }
             };
-            zmq::poll(&items[0], 1);
+            zmq::poll(&items[0], 1, 100);
             if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
                 zmq::multipart_t msg;
-                if (!msg.recv(_dealerConnectionToDispatcher) || msg.size() != 2) {
+                if (!msg.recv(_dealerConnectionToDispatcher, ZMQ_NOBLOCK) || msg.size() != 2) {
                     SPDLOG_ERROR("Error while reading on the listener socket");
                 }
                 else {

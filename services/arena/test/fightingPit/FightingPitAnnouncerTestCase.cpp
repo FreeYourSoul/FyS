@@ -124,7 +124,7 @@ TEST_CASE("FightingPitAnnouncer test", "[service][arena]") {
             fpa.setCreatorUserToken(" ");
             fpa.setDifficulty(fys::arena::FightingPit::EASY);
             fpa.setEncounterType(fys::arena::FightingPitAnnouncer::EncounterType::RANDOM);
-            auto fightingPit = fpa.buildFightingPit(ctx, handler, "WS00");
+            auto fightingPit = fpa.buildFightingPit(ctx, "WS00");
 
             REQUIRE(2 == fightingPit->getPitContenders().getNumberContender());
 
@@ -144,7 +144,7 @@ TEST_CASE("FightingPitAnnouncer test", "[service][arena]") {
             fpa.setCreatorUserName(" ");
             fpa.setDifficulty(fys::arena::FightingPit::MEDIUM);
             fpa.setEncounterType(fys::arena::FightingPitAnnouncer::EncounterType::RANDOM);
-            auto fightingPit = fpa.buildFightingPit(ctx, handler, "WS00");
+            auto fightingPit = fpa.buildFightingPit(ctx, "WS00");
 
             REQUIRE(3 == fightingPit->getPitContenders().getNumberContender());
 
@@ -168,7 +168,7 @@ TEST_CASE("FightingPitAnnouncer test", "[service][arena]") {
             fpa.setCreatorUserName(" ");
             fpa.setDifficulty(fys::arena::FightingPit::HARD);
             fpa.setEncounterType(fys::arena::FightingPitAnnouncer::EncounterType::RANDOM);
-            auto fightingPit = fpa.buildFightingPit(ctx, handler, "WS00");
+            auto fightingPit = fpa.buildFightingPit(ctx, "WS00");
 
             REQUIRE(4 == fightingPit->getPitContenders().getNumberContender());
 
@@ -212,7 +212,7 @@ TEST_CASE("FightingPitAnnouncer test", "[service][arena]") {
             fpa.setCreatorUserName(" ");
             fpa.setDifficulty(fys::arena::FightingPit::EASY);
             fpa.setEncounterType(fys::arena::FightingPitAnnouncer::EncounterType::RANDOM);
-            auto fightingPit = fpa.buildFightingPit(ctx, handler, "WS00");
+            auto fightingPit = fpa.buildFightingPit(ctx, "WS00");
 
             REQUIRE(2 == fightingPit->getPitContenders().getNumberContender());
 

@@ -61,8 +61,7 @@ namespace fys::arena {
     using json = nlohmann::json;
 
     std::unique_ptr<FightingPit>
-    FightingPitAnnouncer::buildFightingPit(const EncounterContext &ctx, ConnectionHandler &connectionHandler,
-                                           const std::string &wsId) {
+    FightingPitAnnouncer::buildFightingPit(const EncounterContext &ctx, const std::string &wsId) {
         if (_creatorUserName.empty() || _creatorUserToken.empty()) {
             SPDLOG_WARN("FightingPit built invalid (no creator of the pit registered, a call to generateAllyPartyTeam function is required)");
             return nullptr;
@@ -70,16 +69,17 @@ namespace fys::arena {
         std::unique_ptr<FightingPit> fp = std::make_unique<FightingPit>(_creatorUserName, _difficulty);
         fp->addAuthenticatedUser(std::move(_creatorUserName), std::move(_creatorUserToken));
         generateContenders(*fp, ctx, wsId);
+        fp->initializePartyTeam(generateAllyPartyTeam());
         return fp;
     }
 
     void FightingPitAnnouncer::generateContenders(FightingPit &fp, const EncounterContext &ctx,
                                                   const std::string &wsId) {
         const auto &range = ctx._rangeEncounterPerZone.at(wsId).at(static_cast<std::size_t>(_difficulty));
-        unsigned numberContenders = fys::util::RandomGenerator::generateInRange(range.first, range.second);
-        auto boundaryMap = makeContenderRngBoundaryMap(ctx._contendersPerZone.at(wsId), _difficulty);
+        const unsigned numberContenders = fys::util::RandomGenerator::generateInRange(range.first, range.second);
+        const auto boundaryMap = makeContenderRngBoundaryMap(ctx._contendersPerZone.at(wsId), _difficulty);
 
-        for (int i = 0; i < numberContenders; ++i) {
+        for (unsigned i = 0; i < numberContenders; ++i) {
             int rngMonster = fys::util::RandomGenerator::generateInRange(0, 100);
             auto desc = boundaryMap.get(rngMonster)->second; // TODO add security at context creation to enforce that
             int levelMonster = fys::util::RandomGenerator::generateInRange(1, 10); // TODO, add this range in the configuration
@@ -92,12 +92,10 @@ namespace fys::arena {
         }
     }
 
-    AllyPartyTeams FightingPitAnnouncer::generateAllyPartyTeam(const std::string & userName, const std::string & token) {
+    AllyPartyTeams FightingPitAnnouncer::generateAllyPartyTeam() {
         AllyPartyTeams apt;
-        auto team = std::make_unique<PartyTeam>(userName);
+        auto team = std::make_unique<PartyTeam>(_creatorUserName);
 
-        _creatorUserName = userName;
-        _creatorUserToken = token;
         // Temporary hard coded party team
         auto tm1 = std::make_shared<TeamMember>();
         auto tm2 = std::make_shared<TeamMember>();

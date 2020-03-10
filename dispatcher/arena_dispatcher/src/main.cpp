@@ -5,11 +5,13 @@
 
 int main(int ac, char **av) {
     try {
-        auto console = spdlog::stdout_color_mt("c");
+        spdlog::set_pattern("[%D %H:%M:%S][ %=30@ ][%L]: %v");
         fys::StartupDispatcherCtx ctx(ac, av);
-        SPDLOG_INFO(ctx.toString());
-        fys::SimpleProxy dispatcher(ctx);
+        int major, minor, patch;
+        zmq_version(&major, &minor, &patch);
+        SPDLOG_INFO("Version ZMQ : {}.{}.{}\n{}", major, minor, patch, ctx.toString());
 
+        fys::SimpleProxy dispatcher(ctx);
         dispatcher.startProxy();
     }
     catch (const std::exception &e) {

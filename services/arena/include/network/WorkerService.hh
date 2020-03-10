@@ -85,10 +85,10 @@ namespace fys::arena {
             zmq::pollitem_t items[] = {
                     { _workerRouter, 0, ZMQ_POLLIN, 0 }
             };
-            zmq::poll(&items[0], 1);
+            zmq::poll(&items[0], 1, 100);
             if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
                 zmq::multipart_t msg;
-                if (!msg.recv(_workerRouter)) {
+                if (!msg.recv(_workerRouter, ZMQ_NOBLOCK)) {
                     SPDLOG_ERROR("Error while reading on the arena worker listener socket");
                 }
                 else {

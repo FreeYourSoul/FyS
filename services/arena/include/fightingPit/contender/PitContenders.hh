@@ -65,7 +65,7 @@ namespace fys::arena {
 
         void executeContenderAction(const data::PriorityElem &contender);
 
-        void addContender(const std::shared_ptr<FightingContender>& contender);
+        void addContender(const std::shared_ptr<FightingContender> & contender);
 
     private:
         std::vector<std::shared_ptr<FightingContender> > _contenders;

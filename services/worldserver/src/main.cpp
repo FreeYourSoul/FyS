@@ -31,7 +31,10 @@ int main(int ac, char **av) {
     try {
         spdlog::set_pattern("[%D %H:%M:%S][%=30@][%L]: %v");
         fys::ws::WorldServerContext ctx(ac, av);
-        SPDLOG_INFO(ctx.toString());
+        int major, minor, patch;
+        zmq_version(&major, &minor, &patch);
+        SPDLOG_INFO("Version ZMQ : {}.{}.{}\n{}", major, minor, patch, ctx.toString());
+
         fys::ws::WorldServerService serverService(ctx);
         serverService.runServerLoop();
     }

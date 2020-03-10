@@ -25,16 +25,16 @@
 #include <random>
 #include <ArenaServerContext.hh>
 #include <ArenaServerService.hh>
-#include <cstdlib>
-#include <ctime>
 
 int main(int ac, char **av) {
     try {
         spdlog::set_pattern("[%D %H:%M:%S][ %=30@ ][%L]: %v");
         fys::arena::ArenaServerContext ctx(ac, av);
-        SPDLOG_INFO(ctx.toString());
-        fys::arena::ArenaServerService serverService(ctx);
+        int major, minor, patch;
+        zmq_version(&major, &minor, &patch);
+        SPDLOG_INFO("Version ZMQ : {}.{}.{}\n{}", major, minor, patch, ctx.toString());
 
+        fys::arena::ArenaServerService serverService(ctx);
         serverService.runServerLoop();
     }
     catch (const std::exception &e) {

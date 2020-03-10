@@ -33,13 +33,13 @@ TEST_CASE("FlatBuffer ArenaCom FightingPitEncounter", "[common][fb]") {
             fbb,
             fbb.CreateString("name"),
             fbb.CreateString("token_authentication"),
-            fbb.CreateString("WS001"),
-            0.0,
-            0.0,
-            fys::fb::Level::Level_EASY,
             4242,
+            fbb.CreateString("WS001"),
+            fys::fb::Level::Level_EASY,
+            1337,
             false,
-            1337);
+            0.0,
+            0.0);
     fys::fb::FinishFightingPitEncounterBuffer(fbb, fp);
 
     SECTION("Verifier") {

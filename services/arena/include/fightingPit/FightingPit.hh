@@ -87,9 +87,16 @@ namespace fys::arena {
         const std::unique_ptr<chaiscript::ChaiScript> &getChaiPtr() const { return _chaiPtr; }
 
         void startBattle();
-        void addAuthenticatedUser(std::string userName, std::string userToken);
-        void addContender(std::shared_ptr<FightingContender> newContender) { _contenders.addContender(std::move(newContender)); }
+        void addContender(const std::shared_ptr<FightingContender> & newContender) { _contenders.addContender(newContender); }
+        void initializePartyTeam(AllyPartyTeams && allyPartyTeams) { _partyTeams = std::move(allyPartyTeams); }
         void addPartyTeam(std::unique_ptr<PartyTeam> newTeam) { _partyTeams.addPartyTeam(std::move(newTeam)); }
+        /**
+         * Add an authenticated player in the fighting pit, the player authentication is not verified an thus must be
+         * verified beforehand.
+         * @param userName unique name of the player to add
+         * @param userToken token of the player to add
+         */
+        void addAuthenticatedUser(std::string userName, std::string userToken);
 
         const std::string &getCreatorUserName() const { return _creatorUserName; }
         const PitContenders &getPitContenders() const { return _contenders; }

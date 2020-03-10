@@ -94,14 +94,14 @@ namespace fys::arena {
         return *it;
     }
 
-    void PitContenders::executeContenderAction(const data::PriorityElem &contender) {
+    void PitContenders::executeContenderAction(const data::PriorityElem & contender) {
         if (!contender.isContender && contender.id < _contenders.size()) {
             return;
         }
         _contenders.at(contender.id)->executeAction();
     }
 
-    void PitContenders::addContender(const std::shared_ptr<FightingContender> &contender)  {
+    void PitContenders::addContender(const std::shared_ptr<FightingContender> & contender)  {
         _contenders.emplace_back(contender);
         _changeSideFlags.emplace_back(false);
         contender->setupContender();
