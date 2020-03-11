@@ -27,7 +27,10 @@
 
 #include <vector>
 #include <optional>
+#include <chrono>
+
 #include <chaiscript/chaiscript.hpp>
+
 #include <fightingPit/contender/PitContenders.hh>
 #include <fightingPit/FightingPitLayout.hh>
 #include <fightingPit/SideBattle.hh>
@@ -60,16 +63,6 @@ namespace fys::arena {
 
         friend class FightingPitAnnouncer;
 
-    public:
-        // used as a wrong id when a fighting pit is wrongly generated
-        static constexpr unsigned CREATION_ERROR = 0;
-
-        enum Level : uint {
-            EASY    = 0,
-            MEDIUM  = 1,
-            HARD    = 2
-        };
-
         enum Ending {
             ON_HOLD,        // on hold mechanism for joining raid
             CONTENDER_WIN,
@@ -82,11 +75,21 @@ namespace fys::arena {
             std::string token;
         };
 
+    public:
+        // used as a wrong id when a fighting pit is wrongly generated
+        static constexpr unsigned CREATION_ERROR = 0;
+
+        enum Level : uint {
+            EASY    = 0,
+            MEDIUM  = 1,
+            HARD    = 2
+        };
+
         explicit FightingPit(std::string creatorUserName, Level levelFightingPit);
 
         const std::unique_ptr<chaiscript::ChaiScript> &getChaiPtr() const { return _chaiPtr; }
 
-        void startBattle();
+        void continueBattle(const std::chrono::system_clock::time_point & now);
         void addContender(const std::shared_ptr<FightingContender> & newContender) { _contenders.addContender(newContender); }
         void initializePartyTeam(AllyPartyTeams && allyPartyTeams) { _partyTeams = std::move(allyPartyTeams); }
         void addPartyTeam(std::unique_ptr<PartyTeam> newTeam) { _partyTeams.addPartyTeam(std::move(newTeam)); }
@@ -108,11 +111,9 @@ namespace fys::arena {
         void setArenaId(unsigned arenaId) { _arenaId = arenaId; }
 
     private:
-        void readInputAndAppendPendingActions();
-
-    private:
         Ending              _end = ON_HOLD;
         Level               _levelFightingPit;
+        std::chrono::milliseconds _timeInterlude;
         // TODO : add connection handler to WorkerService
         PitContenders       _contenders;
         AllyPartyTeams      _partyTeams;

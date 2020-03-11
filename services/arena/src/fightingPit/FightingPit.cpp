@@ -22,7 +22,6 @@
 // SOFTWARE.
 
 #include <spdlog/spdlog.h>
-#include <chrono>
 #include <fightingPit/contender/FightingContender.hh>
 #include <fightingPit/FightingPit.hh>
 
@@ -46,32 +45,24 @@ namespace fys::arena {
     FightingPit::FightingPit(std::string creatorUserName, fys::arena::FightingPit::Level levelFightingPit) :
             _end(Ending::ON_HOLD),
             _levelFightingPit(levelFightingPit),
+            _timeInterlude(retrieveTimeInterludeFromLevelDegree(_levelFightingPit)),
             _layout(_contenders, _partyTeams),
             _creatorUserName(std::move(creatorUserName)),
             _chaiPtr(ChaiRegister::createChaiInstance(_contenders, _partyTeams))
     {}
 
-    void FightingPit::startBattle() {
-        std::chrono::milliseconds timerInterlude = retrieveTimeInterludeFromLevelDegree(_levelFightingPit);
-        while (_end == Ending::NOT_FINISHED) {
-            auto now = std::chrono::system_clock::now();
-            for (auto &side : _sideBattles) {
-                auto currentParticipant = side->getCurrentParticipantTurn(now, timerInterlude);
+    void FightingPit::continueBattle(const std::chrono::system_clock::time_point & now) {
+        for (auto &side : _sideBattles) {
+            auto currentParticipant = side->getCurrentParticipantTurn(now, _timeInterlude);
 
-                if (currentParticipant.isContender) {
-                    // If non-playable character (enemy NPC)
-                    _contenders.executeContenderAction(currentParticipant);
-                } else {
-                    // If character of a player
-                    // TODO check if character has a handling action and execute it
-                }
+            if (currentParticipant.isContender) {
+                // non-playable character (enemy NPC)
+                _contenders.executeContenderAction(currentParticipant);
+            } else {
+                // character of a player
+                // TODO check if character has a handling action and execute it
             }
         }
-    }
-
-    void FightingPit::readInputAndAppendPendingActions() {
-        // TODO take player inputs
-        //          if player inputs, add pending action to character (override the pending action in case one already there)
     }
 
     void FightingPit::addAuthenticatedUser(std::string userName, std::string userToken) {
