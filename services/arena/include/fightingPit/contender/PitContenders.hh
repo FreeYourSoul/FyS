@@ -67,6 +67,8 @@ namespace fys::arena {
 
         void addContender(const std::shared_ptr<FightingContender> & contender);
 
+        unsigned contenderOnSide(HexagonSide::Orientation side) const;
+
     private:
         std::vector<std::shared_ptr<FightingContender> > _contenders;
 

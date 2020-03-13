@@ -106,4 +106,12 @@ namespace fys::arena {
         _changeSideFlags.emplace_back(false);
         contender->setupContender();
     }
+
+    unsigned PitContenders::contenderOnSide(HexagonSide::Orientation side) const {
+        return std::count_if(_contenders.cbegin(), _contenders.cend(),
+                [side](const auto & contender) {
+                    return side = contender->getHexagonSideOrient();
+                }
+        );
+    }
 }

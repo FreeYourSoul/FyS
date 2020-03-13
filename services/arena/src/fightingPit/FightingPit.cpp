@@ -22,6 +22,8 @@
 // SOFTWARE.
 
 #include <spdlog/spdlog.h>
+#include <algorithm>
+#include <HexagonSide>
 #include <fightingPit/contender/FightingContender.hh>
 #include <fightingPit/FightingPit.hh>
 
@@ -46,7 +48,7 @@ namespace fys::arena {
             _end(Ending::ON_HOLD),
             _levelFightingPit(levelFightingPit),
             _timeInterlude(retrieveTimeInterludeFromLevelDegree(_levelFightingPit)),
-            _layout(_contenders, _partyTeams),
+            _layoutMapping(_contenders, _partyTeams),
             _creatorUserName(std::move(creatorUserName)),
             _chaiPtr(ChaiRegister::createChaiInstance(_contenders, _partyTeams))
     {}
@@ -72,5 +74,23 @@ namespace fys::arena {
     bool FightingPit::isPlayerParticipant(const std::string &name, const std::string &token) const {
         return std::any_of(_authenticatedPlayers.begin(), _authenticatedPlayers.end(),
                            [&name, &token](auto & authPlayer) { return authPlayer.name == name && authPlayer.token == token; } );
+    }
+
+    void FightingPit::forwardMessageToTeamMember(unsigned idMember) {
+        auto member = _partyTeams.selectMemberById(idMember);
+        if (!member) {
+            SPDLOG_ERROR("Trying to forward a message to team member {} whom doesn't exist", idMember);
+            return;
+        }
+        // todo add in pending action list
+    }
+
+    void FightingPit::addPartyTeam(std::unique_ptr<PartyTeam> pt) {
+        _partyTeams.addPartyTeam(std::move(pt));
+        std::sort(_sideBattles.begin(), _sideBattles.end(),
+                [this](auto & sideLhs, auto & sideRhs) {
+                    return _layoutMapping.activeCharactersOnSide(sideLhs) < _layoutMapping.activeCharactersOnSide(sideRhs);
+                }
+        );
     }
 }

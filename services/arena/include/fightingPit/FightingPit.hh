@@ -65,9 +65,9 @@ namespace fys::arena {
 
         enum Ending {
             ON_HOLD,        // on hold mechanism for joining raid
+            NOT_FINISHED,    // on going
             CONTENDER_WIN,
-            ALLY_WIN,
-            NOT_FINISHED    // on going
+            ALLY_WIN
         };
 
         struct AuthenticatedPlayer {
@@ -87,12 +87,18 @@ namespace fys::arena {
 
         explicit FightingPit(std::string creatorUserName, Level levelFightingPit);
 
-        const std::unique_ptr<chaiscript::ChaiScript> &getChaiPtr() const { return _chaiPtr; }
-
+        /**
+         *
+         * @param now
+         */
         void continueBattle(const std::chrono::system_clock::time_point & now);
-        void addContender(const std::shared_ptr<FightingContender> & newContender) { _contenders.addContender(newContender); }
-        void initializePartyTeam(AllyPartyTeams && allyPartyTeams) { _partyTeams = std::move(allyPartyTeams); }
-        void addPartyTeam(std::unique_ptr<PartyTeam> newTeam) { _partyTeams.addPartyTeam(std::move(newTeam)); }
+
+        /**
+         *
+         * @param idMember
+         */
+        void forwardMessageToTeamMember(unsigned idMember);
+
         /**
          * Add an authenticated player in the fighting pit, the player authentication is not verified an thus must be
          * verified beforehand.
@@ -100,31 +106,42 @@ namespace fys::arena {
          * @param userToken token of the player to add
          */
         void addAuthenticatedUser(std::string userName, std::string userToken);
+        /**
+         * Check if given player (defined by name/token) is authenticated
+         * @param name unique name of the player to check
+         * @param token token of the player to check
+         * @return true if the player is authenticated, false otherwise
+         */
         bool isPlayerParticipant(const std::string & name, const std::string & token) const;
 
-        const std::string &getCreatorUserName() const { return _creatorUserName; }
-        const PitContenders &getPitContenders() const { return _contenders; }
-        const AllyPartyTeams &getPartyTeam() const { return _partyTeams; }
-        const FightingPitLayout &getLayout() const { return _layout; }
+        void addPartyTeam(std::unique_ptr<PartyTeam> pt);
+        void addContender(const std::shared_ptr<FightingContender> & fc) { _contenders.addContender(fc); }
 
+        const PitContenders &getPitContenders() const { return _contenders; }
+        const std::unique_ptr<chaiscript::ChaiScript> &getChaiPtr() const { return _chaiPtr; }
+        const std::string &getCreatorUserName() const { return _creatorUserName; }
         unsigned getArenaId() const { return _arenaId; }
+
         void setArenaId(unsigned arenaId) { _arenaId = arenaId; }
+        void initializePartyTeam(AllyPartyTeams && allyPartyTeams) { _partyTeams = std::move(allyPartyTeams); }
 
     private:
-        Ending              _end = ON_HOLD;
-        Level               _levelFightingPit;
-        std::chrono::milliseconds _timeInterlude;
-        // TODO : add connection handler to WorkerService
-        PitContenders       _contenders;
-        AllyPartyTeams      _partyTeams;
-        FightingPitLayout   _layout;
-        std::string         _creatorUserName;
+        Ending                      _end = ON_HOLD;
+        Level                       _levelFightingPit;
+        std::chrono::milliseconds   _timeInterlude;
+        PitContenders               _contenders;
+        AllyPartyTeams              _partyTeams;
 
-        unsigned            _arenaId;
+        // mapping of the contenders/NPC with the layout of the FightingPit
+        FightingPitLayout   _layoutMapping;
+
+        std::string         _creatorUserName; // useless ?
+        unsigned            _arenaId;         // useless ?
+
         std::vector<AuthenticatedPlayer> _authenticatedPlayers;
 
-        std::unique_ptr<chaiscript::ChaiScript> _chaiPtr;
-        std::vector<std::unique_ptr<SideBattle>> _sideBattles;
+        std::unique_ptr<chaiscript::ChaiScript>     _chaiPtr;
+        std::vector<std::unique_ptr<SideBattle>>    _sideBattles;
 
     };
 

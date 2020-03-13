@@ -21,6 +21,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include <spdlog/spdlog.h>
 #include <algorithm>
 #include <fightingPit/team/TeamMember.hh>
 #include <fightingPit/team/PartyTeam.hh>
@@ -50,6 +51,26 @@ namespace fys::arena {
 
     void PartyTeam::addPartyTeam(std::shared_ptr<TeamMember> member) {
         _members.emplace_back(std::move(member));
+    }
+
+    void PartyTeam::addPendingActionToTeamMember(unsigned id) {
+        auto it = std::find_if(_members.begin(), _members.end(), [id](const auto & teamMember) {
+            return id == teamMember->getId();
+        });
+        if (it != _members.end()) {
+//            it->get()->
+        }
+        else {
+            SPDLOG_ERROR("Adding pending action to a non existing team member of id {}", id);
+        }
+    }
+
+    unsigned PartyTeam::allyOnSide(HexagonSide::Orientation side) const {
+        return std::count_if(_members.cbegin(), _members.cend(),
+                 [side](const auto & contender) {
+                     return side = contender->getHexagonSideOrient();
+                 }
+        );
     }
 
 }

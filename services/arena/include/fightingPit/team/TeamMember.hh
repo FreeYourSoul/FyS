@@ -28,6 +28,7 @@
 #include <memory>
 #include <fightingPit/HexagonSide.hh>
 #include <fightingPit/data/CommonTypes.hh>
+#include <SizedQueue.hh>
 
 namespace fys::arena {
 
@@ -37,19 +38,22 @@ namespace fys::arena {
         void moveTeamMember(HexagonSide::Orientation destination, bool bypassCheck = false);
         void moveTeamMember(data::MoveDirection rightOrLeft);
 
-        void setName(const std::string &name) { _name = name; }
+        void setName(const std::string & name) { _name = name; }
+        void setId(unsigned id) { _id = id; }
 
         [[nodiscard]] data::Status &accessStatus() { return _status; }
         [[nodiscard]] std::pair<HexagonSide::Hexagon, HexagonSide::Orientation> getHexagonSide() const { return *_side; }
         [[nodiscard]] HexagonSide::Orientation getHexagonSideOrient() const { return (*_side).second; }
         [[nodiscard]] const std::string &getName() const { return _name; }
+        [[nodiscard]] unsigned getId() const { return _id; }
 
     private:
         HexagonSide _side;
         std::string _name;
+        unsigned _id;
         data::Status _status;
 
-        // PendingAction _pendingAction; Todo
+        // fys::common::SizedQueue<PendingAction> _pendingActions; Todo
 
     };
 

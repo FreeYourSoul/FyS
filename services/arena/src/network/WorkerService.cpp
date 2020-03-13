@@ -22,6 +22,7 @@
 // SOFTWARE.
 
 #include <spdlog/spdlog.h>
+#include <chrono>
 #include <network/WorkerService.hh>
 
 namespace fys::arena
@@ -29,6 +30,21 @@ namespace fys::arena
 
     void WorkerService::setupConnectionManager(const fys::arena::ArenaServerContext &ctx) noexcept {
         _workerRouter.bind(ctx.getPlayerBindingString());
+    }
+
+    void WorkerService::startFightingPitsThread() {
+        SPDLOG_INFO("WorkerService FightingPit game loops started");
+
+        std::thread t([this](){
+            using namespace std::chrono_literals;
+            while (true) {
+                auto now = std::chrono::system_clock::now();
+                for (auto & [id, fp] : _arenaInstances) {
+                    fp->continueBattle(now);
+                }
+                std::this_thread::sleep_for(1000ms); // todo sleep something smart
+            }
+        });
     }
 
     unsigned WorkerService::addFightingPit(std::unique_ptr<FightingPit> fp) {
@@ -47,21 +63,24 @@ namespace fys::arena
         return _currentArenaId;
     }
     
-    void WorkerService::forwardMessageToFightingPit(unsigned fightingArenaId/* , const FightingMessage & fightingMsg*/) {
-        if (_arenaInstances.find(fightingArenaId) == _arenaInstances.end()) {
-            SPDLOG_WARN("Request received for arena id {}, but arena isn't defined", fightingArenaId);
-            return;
-        }
-        // todo: append action to fightingpit
-    }
+//    void WorkerService::forwardMessageToFightingPit(unsigned fightingArenaId/* , const FightingMessage & fightingMsg*/) {
+//        auto &fp = _arenaInstances.at(fightingArenaId);
+//        // todo forward action to fp (for fp to register the pending action)
+//    }
 
     void WorkerService::playerJoinFightingPit(std::string userName, unsigned fightingPitId) {
 
     }
 
-    bool WorkerService::isPlayerAuthenticated(const std::string &name, const std::string &token, unsigned fightingArenaId) const {
-        auto it = _arenaInstances.find(fightingArenaId);
-        return it != _arenaInstances.end() && it->second->isPlayerParticipant(name, token);
+    std::optional<std::reference_wrapper<FightingPit>>
+    WorkerService::getAuthenticatedPlayerFightingPit(const std::string &name, const std::string &token, unsigned fightingArenaId) {
+        if (auto it = _arenaInstances.find(fightingArenaId);
+           (it != _arenaInstances.end() && it->second->isPlayerParticipant(name, token)))
+        {
+            return *it->second;
+        }
+        SPDLOG_WARN("Request received from {}:{} for arena id {}, but arena isn't defined", name, token, fightingArenaId);
+        return std::nullopt;
     }
 
 

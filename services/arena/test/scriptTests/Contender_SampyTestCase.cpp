@@ -49,7 +49,7 @@ std::string getPathSampyChaiScript() {
 TEST_CASE("Test Sampy", "[script_test]") {
 
     fys::arena::PitContenders pc;
-    fys::arena::AllyPartyTeams apt;
+    fys::arena::AllyPartyTeams apt("owner");
     auto chai = fys::arena::ChaiRegister::createChaiInstance(pc, apt);
 
     fys::arena::ContenderScriptingUPtr sampy = std::make_unique<fys::arena::ContenderScripting>(*chai, 1);

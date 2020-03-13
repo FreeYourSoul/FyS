@@ -58,6 +58,8 @@ namespace fys::arena {
             _ctx(1), _workerRouter(_ctx, zmq::socket_type::router), _currentArenaId(0)
         { }
 
+        void startFightingPitsThread();
+
         /**
          * @brief Bind the ArenaService for the player to connect directly to the Arena
          */
@@ -114,14 +116,15 @@ namespace fys::arena {
 
         /**
          * Check if the player defined by an unique name/token is authenticated on the given fightingArenaId
+         * And return the given fightingpit if it's the case
          *
          * @param name player name
          * @param token authentication token
          * @param fightingArenaId arena to check if the player is authenticated on
-         * @return true if the player is authenticated on the given fightingPit, return false otherwise
+         * @return A reference to the fighting pit if the player is authenticated on the given fightingPit, return nullopt otherwise
          */
-        [[nodiscard]] bool
-        isPlayerAuthenticated(const std::string & name, const std::string & token, unsigned fightingArenaId) const;
+        [[nodiscard]] std::optional<std::reference_wrapper<FightingPit>>
+            getAuthenticatedPlayerFightingPit(const std::string & name, const std::string & token, unsigned fightingArenaId);
 
         /**
          * Forward the message to the given fighting pit

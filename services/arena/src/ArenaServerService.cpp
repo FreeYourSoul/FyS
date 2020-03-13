@@ -80,6 +80,7 @@ namespace fys::arena {
     void ArenaServerService::runServerLoop() noexcept {
         SPDLOG_INFO("ArenaServer loop started");
 
+        _workerService.startFightingPitsThread();
         while (true) {
             _connectionHandler.pollAndProcessMessageFromDispatcher(
                     [this](zmq::message_t && identityWs, zmq::message_t && worldServerMessage) {
@@ -118,16 +119,19 @@ namespace fys::arena {
 
                     // InGame handler
                     [this](zmq::message_t && identityPlayer, const zmq::message_t & intermediate, zmq::message_t && playerMessage) {
-                        // todo
-                        // deserialize playerMessage
-                        // forward the message
                         zmq::multipart_t response;
                         response.add(std::move(identityPlayer));
                         const auto authFrame = fys::fb::GetArenaServerValidateAuth(intermediate.data());
+                        auto fp = _workerService.getAuthenticatedPlayerFightingPit(
+                                authFrame->user_name()->str(),
+                                authFrame->token_auth()->str(),
+                                authFrame->fighting_pit_id());
 
-                        if (_workerService.isPlayerAuthenticated(
-                                authFrame->user_name()->str(), authFrame->token_auth()->str(), authFrame->fighting_pit_id())) {
-
+                        if (fp) {
+                            unsigned idTeamMember = 0;
+                            fp->get().forwardMessageToTeamMember(idTeamMember);
+                            // todo create an action message to forward
+                            // _workerService.forwardMessageToFightingPit(authFrame->fighting_pit_id(), );
                         }
                     }
             );

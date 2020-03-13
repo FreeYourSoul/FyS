@@ -22,6 +22,7 @@
 // SOFTWARE.
 
 #include <algorithm>
+#include <numeric>
 
 #include <algorithm/algorithm.hh>
 #include <fightingPit/team/TeamMember.hh>
@@ -68,6 +69,29 @@ namespace fys::arena {
         return selectSuitableMember([side, &comp](auto current, auto next) -> bool {
             return (!current->accessStatus().life.isDead()) && current->getHexagonSideOrient() == side && comp(current, next);
         });
+    }
+
+    std::shared_ptr<TeamMember> AllyPartyTeams::selectMemberById(unsigned idMember) {
+        if (_partyTeams.empty() || _partyTeams.front()->accessTeamMembers().empty())
+            return nullptr;
+        for (auto & _partyTeam : _partyTeams) {
+            auto &teamMembers = _partyTeam->accessTeamMembers();
+            auto teamMember = std::find_if(teamMembers.begin(), teamMembers.end(), [idMember](const auto & tm) {
+                return idMember == tm->getId();
+            });
+
+            if (teamMember != teamMembers.end())
+                return *teamMember;
+        }
+        return nullptr;
+    }
+
+    unsigned AllyPartyTeams::allyOnSide(HexagonSide::Orientation side) const {
+        return std::accumulate(_partyTeams.cbegin(), _partyTeams.cend(), 0u,
+                [side](unsigned count, const auto & party) {
+                    return count + party->allyOnSide();
+                }
+        );
     }
 
 

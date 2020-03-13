@@ -27,6 +27,8 @@
 
 #include <functional>
 
+#include <fightingPit/HexagonSide.hh>
+
 namespace fys::arena {
 
     // forward declaration
@@ -35,7 +37,8 @@ namespace fys::arena {
 
     /**
      * @brief Layout of the fighting pit. Manage the positions of monsters and the players/monsters movements
-     * 
+     *
+     * This class is mapping the characters (contenders or NPC) with the layout of the fightingpit.
      * The layout of the fighting pit can be taken as a draughtboard composed of 3 hexagons as shown as below
      *                        _____         
      *                       /     \        
@@ -66,6 +69,13 @@ namespace fys::arena {
     public:
         FightingPitLayout(PitContenders &contenders, AllyPartyTeams &partyTeams) : _contenders(contenders), _partyTeams(partyTeams)
         {}
+
+        /**
+         * Retrieve the number of active characters (contenders or players) on the given side
+         * @param side to check the contender and/or players
+         * @return number of active player on the side
+         */
+        unsigned activeCharactersOnSide(HexagonSide::Orientation side) const;
 
         void contenderMove();
         void characterMove();

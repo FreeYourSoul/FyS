@@ -49,6 +49,10 @@ namespace fys::arena {
 
         void addPartyTeam(std::shared_ptr<TeamMember> member);
 
+        void addPendingActionToTeamMember(unsigned id);
+
+        unsigned allyOnSide(HexagonSide::Orientation side) const;
+
     private:
         std::string _userName;
         std::vector<std::shared_ptr<TeamMember> > _members;

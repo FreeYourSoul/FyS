@@ -49,9 +49,18 @@ namespace fys::arena {
                 _side(side) 
         {}
 
-    public:
+        /**
+         * Get the next participant in the fighting pit turn (can be either an NPC, or a contender) depending on their
+         * speed. This Calculation is made in the fys::arena::PriorityOrderList.
+         *
+         * @param now timing now in milliseconds (timestamp)
+         * @param timerInterlude timing of a turn for a player (depend on the level set by the creator of the arena)
+         * @return PriorityElem representing the next player to play its turn
+         */
         data::PriorityElem getCurrentParticipantTurn(const std::chrono::system_clock::time_point &now,
                                                      const std::chrono::milliseconds &timerInterlude);
+
+        HexagonSide::Orientation getSide() const { return _side; }
 
 
     private:
