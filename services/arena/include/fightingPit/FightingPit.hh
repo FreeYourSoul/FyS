@@ -126,6 +126,15 @@ namespace fys::arena {
         void initializePartyTeam(AllyPartyTeams && allyPartyTeams) { _partyTeams = std::move(allyPartyTeams); }
 
     private:
+        /**
+         * Check if the fight has started, if it has check if the fight is finished (winner determined)
+         * If ally wins, a generation of the loot is made and returned to the clients
+         * If enemy wins, a notification is sent to players
+         * @return true if the fight has been terminated, false otherwise
+         */
+        bool checkEndStatusFightingPit();
+
+    private:
         Ending                      _end = ON_HOLD;
         Level                       _levelFightingPit;
         std::chrono::milliseconds   _timeInterlude;

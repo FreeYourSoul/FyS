@@ -53,7 +53,25 @@ namespace fys::arena {
             _chaiPtr(ChaiRegister::createChaiInstance(_contenders, _partyTeams))
     {}
 
+    bool FightingPit::checkEndStatusFightingPit() {
+        switch (_end) {
+            case Ending::NOT_FINISHED:
+                return true;
+            case Ending::ON_HOLD:
+                return false;
+            case Ending::ALLY_WIN:
+                // todo Send failure of the fight, close the fight properly (release resource if any)
+                return false;
+            case Ending::CONTENDER_WIN:
+                // todo Send failure of the fight, close the fight properly (release resource if any)
+                return false;
+        }
+        return _end == Ending::ON_HOLD;
+    }
+
     void FightingPit::continueBattle(const std::chrono::system_clock::time_point & now) {
+        if (checkEndStatusFightingPit())
+            return;
         for (auto &side : _sideBattles) {
             auto currentParticipant = side->getCurrentParticipantTurn(now, _timeInterlude);
 
@@ -88,8 +106,8 @@ namespace fys::arena {
     void FightingPit::addPartyTeam(std::unique_ptr<PartyTeam> pt) {
         _partyTeams.addPartyTeam(std::move(pt));
         std::sort(_sideBattles.begin(), _sideBattles.end(),
-                [this](auto & sideLhs, auto & sideRhs) {
-                    return _layoutMapping.activeCharactersOnSide(sideLhs) < _layoutMapping.activeCharactersOnSide(sideRhs);
+                [this](auto & lhs, auto & rhs) {
+                    return _layoutMapping.activeCharactersOnSide(lhs) < _layoutMapping.activeCharactersOnSide(rhs);
                 }
         );
     }
