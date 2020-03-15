@@ -24,6 +24,7 @@
 #ifndef FYS_WORKERSERVICE_HH
 #define FYS_WORKERSERVICE_HH
 
+#include <spdlog/spdlog.h>
 #include <zmq_addon.hpp>
 #include <fightingPit/FightingPitAnnouncer.hh>
 
@@ -39,7 +40,7 @@ namespace fys::arena {
       *   - generate a fighting pit
       *   - assign an ID to it
       *   - assign a dedicated thread to it
-      * 
+      * Pascal obispo
       * Fighting pit are created by the WorkerService using the FightingPitAnnouncer as builder in order to 
       * ensure that the fightingpit is ready to host a battle, and then start the fighting pit in a dedicated
       * thread.
@@ -71,7 +72,6 @@ namespace fys::arena {
          *
          * @param fp FightingPit to add in the current WorkerService
          * @return newly added fighting pit id, or 0 (FightingPit::CREATION_ERROR) if an error occured
-         * @todo : test that the arena id generation works properly
          */
         unsigned addFightingPit(std::unique_ptr<FightingPit> fp);
 
@@ -133,6 +133,8 @@ namespace fys::arena {
          * @param fightingMsg message to forward
          */
         void forwardMessageToFightingPit(unsigned fightingArenaId/* , const FightingMessage & fightingMsg*/);
+
+        const std::unique_ptr<FightingPit> &getFightingPitInstance(unsigned arenaId) const { return _arenaInstances.at(arenaId); }
 
     private:
         zmq::context_t      _ctx;

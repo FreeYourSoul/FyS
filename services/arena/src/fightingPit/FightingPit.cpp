@@ -23,7 +23,6 @@
 
 #include <spdlog/spdlog.h>
 #include <algorithm>
-#include <HexagonSide>
 #include <fightingPit/contender/FightingContender.hh>
 #include <fightingPit/FightingPit.hh>
 
@@ -107,7 +106,7 @@ namespace fys::arena {
         _partyTeams.addPartyTeam(std::move(pt));
         std::sort(_sideBattles.begin(), _sideBattles.end(),
                 [this](auto & lhs, auto & rhs) {
-                    return _layoutMapping.activeCharactersOnSide(lhs) < _layoutMapping.activeCharactersOnSide(rhs);
+                    return _layoutMapping.activeCharactersOnSide(lhs->getSide()) < _layoutMapping.activeCharactersOnSide(rhs->getSide());
                 }
         );
     }

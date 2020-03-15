@@ -36,7 +36,9 @@ addFSeamTests(
         ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/team/AllyPartyTeams.cpp
         ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/team/TeamMember.cpp
         ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/team/PartyTeam.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/network/WorkerService.cpp
         ${CMAKE_CURRENT_LIST_DIR}/../src/ChaiRegister.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/ArenaServerContext.cpp
         ${CMAKE_CURRENT_LIST_DIR}/../include/ChaiRegister.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/team/PartyTeam.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/team/TeamMember.hh
@@ -50,14 +52,18 @@ addFSeamTests(
         ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/FightingPitAnnouncer.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/PriorityOrderList.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/HexagonSide.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/network/WorkerService.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/ArenaServerContext.hh
 
         FOLDER_INCLUDES
         ${CMAKE_CURRENT_SOURCE_DIR}/../include
 
         TST_SRC #test files
         ${CMAKE_CURRENT_LIST_DIR}/catchMain.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/fightingPit/WorkerServiceTestCase.cpp
         ${CMAKE_CURRENT_LIST_DIR}/fightingPit/HexagonSideTestCase.cpp
         ${CMAKE_CURRENT_LIST_DIR}/fightingPit/PriorityOrderListTestCase.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/fightingPit/FightingPitTestCase.cpp
         ${CMAKE_CURRENT_LIST_DIR}/fightingPit/FightingPitAnnouncerTestCase.cpp
 
         TO_MOCK

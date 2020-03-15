@@ -89,7 +89,7 @@ namespace fys::arena {
     unsigned AllyPartyTeams::allyOnSide(HexagonSide::Orientation side) const {
         return std::accumulate(_partyTeams.cbegin(), _partyTeams.cend(), 0u,
                 [side](unsigned count, const auto & party) {
-                    return count + party->allyOnSide();
+                    return count + party->allyOnSide(side);
                 }
         );
     }

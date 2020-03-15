@@ -63,10 +63,10 @@ namespace fys::arena
         return _currentArenaId;
     }
     
-//    void WorkerService::forwardMessageToFightingPit(unsigned fightingArenaId/* , const FightingMessage & fightingMsg*/) {
-//        auto &fp = _arenaInstances.at(fightingArenaId);
-//        // todo forward action to fp (for fp to register the pending action)
-//    }
+    void WorkerService::forwardMessageToFightingPit(unsigned fightingArenaId/* , const FightingMessage & fightingMsg*/) {
+        auto &fp = _arenaInstances.at(fightingArenaId);
+        // todo forward action to fp (for fp to register the pending action)
+    }
 
     void WorkerService::playerJoinFightingPit(std::string userName, unsigned fightingPitId) {
 

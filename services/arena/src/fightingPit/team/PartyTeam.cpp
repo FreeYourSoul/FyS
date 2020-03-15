@@ -68,7 +68,7 @@ namespace fys::arena {
     unsigned PartyTeam::allyOnSide(HexagonSide::Orientation side) const {
         return std::count_if(_members.cbegin(), _members.cend(),
                  [side](const auto & contender) {
-                     return side = contender->getHexagonSideOrient();
+                     return side == contender->getHexagonSideOrient();
                  }
         );
     }

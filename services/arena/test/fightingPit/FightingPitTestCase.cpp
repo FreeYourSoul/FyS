@@ -21,22 +21,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <fightingPit/contender/PitContenders.hh>
-#include <fightingPit/team/AllyPartyTeams.hh>
-#include <fightingPit/FightingPitLayout.hh>
+#include <catch2/catch.hpp>
 
-namespace fys::arena {
+#include <network/WorkerService.hh>
 
-    unsigned FightingPitLayout::activeCharactersOnSide(HexagonSide::Orientation side) const {
-        return _contenders.get().contenderOnSide(side) + _partyTeams.get().allyOnSide(side);
-    }
+TEST_CASE("FightingPit test", "[service][arena]") {
 
-    void FightingPitLayout::characterMove() {
+    auto fp = std::make_unique<fys::arena::FightingPit>("1", fys::arena::FightingPit::EASY);
 
-    }
+    SECTION("addPartyTeam test") {
 
-    void FightingPitLayout::contenderMove() {
+    } // End section : addPartyTeam test
 
-    }
-
-}
+} // End TestCase : FightingPit test
