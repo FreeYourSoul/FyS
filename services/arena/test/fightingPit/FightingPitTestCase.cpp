@@ -33,4 +33,8 @@ TEST_CASE("FightingPit test", "[service][arena]") {
 
     } // End section : addPartyTeam test
 
+    SECTION("fighting pit loop test") {
+
+    } // End section : fighting pit loop test
+
 } // End TestCase : FightingPit test
