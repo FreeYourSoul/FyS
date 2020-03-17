@@ -28,8 +28,13 @@
 #include <fightingPit/team/TeamMember.hh>
 #include <fightingPit/team/PartyTeam.hh>
 #include <fightingPit/team/AllyPartyTeams.hh>
+#include <type_traits>
 
 namespace fys::arena {
+
+    void AllyPartyTeams::executeAllyAction(const data::PriorityElem &contender) {
+        _partyTeams
+    }
 
     void AllyPartyTeams::addPartyTeam(std::unique_ptr<PartyTeam> && team)  {
         _partyTeams.emplace_back(std::move(team));
@@ -40,8 +45,8 @@ namespace fys::arena {
         if (_partyTeams.empty() || _partyTeams.front()->accessTeamMembers().empty())
             return nullptr;
         auto suitable = _partyTeams.front()->accessTeamMembers().begin();
-        for (auto & _partyTeam : _partyTeams) {
-            auto &teamMembers = _partyTeam->accessTeamMembers();
+        for (auto & partyTeam : _partyTeams) {
+            auto &teamMembers = partyTeam->accessTeamMembers();
             auto suitableTmp = fys::find_most_suitable(teamMembers.begin(), teamMembers.end(), comp, suitable);
 
             if (suitableTmp != teamMembers.end())
@@ -74,8 +79,8 @@ namespace fys::arena {
     std::shared_ptr<TeamMember> AllyPartyTeams::selectMemberById(unsigned idMember) {
         if (_partyTeams.empty() || _partyTeams.front()->accessTeamMembers().empty())
             return nullptr;
-        for (auto & _partyTeam : _partyTeams) {
-            auto &teamMembers = _partyTeam->accessTeamMembers();
+        for (auto & partyTeam : _partyTeams) {
+            const auto &teamMembers = partyTeam->accessTeamMembers();
             auto teamMember = std::find_if(teamMembers.begin(), teamMembers.end(), [idMember](const auto & tm) {
                 return idMember == tm->getId();
             });
@@ -86,13 +91,23 @@ namespace fys::arena {
         return nullptr;
     }
 
-    unsigned AllyPartyTeams::allyOnSide(HexagonSide::Orientation side) const {
+    unsigned AllyPartyTeams::allyNumberOnSide(HexagonSide::Orientation side) const {
         return std::accumulate(_partyTeams.cbegin(), _partyTeams.cend(), 0u,
-                [side](unsigned count, const auto & party) {
-                    return count + party->allyOnSide(side);
+                [side](unsigned count, const PartyTeamUPtr & party) {
+                    return count + party->allyNumberOnSide(side);
                 }
         );
     }
 
+    std::vector<std::shared_ptr<TeamMember>> AllyPartyTeams::getMembersBySide(HexagonSide::Orientation side) const {
+        std::vector<std::shared_ptr<TeamMember>> ret;
+        if (_partyTeams.empty() || _partyTeams.front()->getTeamMembers().empty())
+            return ret;
+        for (const auto & partyTeam : _partyTeams) {
+            const auto & membersOnSide = partyTeam->getTeamMemberOnSide(side);
+            std::copy(membersOnSide.begin(), membersOnSide.end(), std::back_inserter(ret));
+        }
+        return ret;
+    }
 
 }

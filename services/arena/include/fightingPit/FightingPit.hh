@@ -114,8 +114,11 @@ namespace fys::arena {
          */
         bool isPlayerParticipant(const std::string & name, const std::string & token) const;
 
+        /**
+         * Used to add a new party team (incoming player in the fighting pit)
+         * @param pt party team to add
+         */
         void addPartyTeam(std::unique_ptr<PartyTeam> pt);
-        void addContender(const std::shared_ptr<FightingContender> & fc) { _contenders.addContender(fc); }
 
         const PitContenders &getPitContenders() const { return _contenders; }
         const std::unique_ptr<chaiscript::ChaiScript> &getChaiPtr() const { return _chaiPtr; }
@@ -123,7 +126,6 @@ namespace fys::arena {
         unsigned getArenaId() const { return _arenaId; }
 
         void setArenaId(unsigned arenaId) { _arenaId = arenaId; }
-        void initializePartyTeam(AllyPartyTeams && allyPartyTeams) { _partyTeams = std::move(allyPartyTeams); }
 
     private:
         /**
@@ -133,6 +135,12 @@ namespace fys::arena {
          * @return true if the fight has been terminated, false otherwise
          */
         bool checkEndStatusFightingPit();
+
+        // initialize methods used by FightingPitAnnouncer
+
+        void initializePartyTeam(AllyPartyTeams && allyPartyTeams) { _partyTeams = std::move(allyPartyTeams); }
+        void initializePriorityList();
+        void addContender(const std::shared_ptr<FightingContender> & fc) { _contenders.addContender(fc); }
 
     private:
         Ending                      _end = ON_HOLD;

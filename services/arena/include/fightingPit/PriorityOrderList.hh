@@ -36,7 +36,7 @@ namespace fys::arena {
     public:
         PriorityOrderList() = default;
         explicit PriorityOrderList(std::vector<data::PriorityElem> baseSpeed);
-
+        
         void addParticipantInList(uint id, int speed, bool isContender);
         void removeParticipantFromList(uint idParticipant);
 

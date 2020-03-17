@@ -51,7 +51,7 @@ namespace fys::arena {
 
         void addPendingActionToTeamMember(unsigned id);
 
-        unsigned allyOnSide(HexagonSide::Orientation side) const;
+        unsigned allyNumberOnSide(HexagonSide::Orientation side) const;
 
     private:
         std::string _userName;

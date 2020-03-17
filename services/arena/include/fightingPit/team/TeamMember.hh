@@ -41,9 +41,10 @@ namespace fys::arena {
         void setName(const std::string & name) { _name = name; }
         void setId(unsigned id) { _id = id; }
 
-        [[nodiscard]] data::Status &accessStatus() { return _status; }
         [[nodiscard]] std::pair<HexagonSide::Hexagon, HexagonSide::Orientation> getHexagonSide() const { return *_side; }
         [[nodiscard]] HexagonSide::Orientation getHexagonSideOrient() const { return (*_side).second; }
+        [[nodiscard]] data::Status &accessStatus() { return _status; }
+        [[nodiscard]] const data::Status &getStatus() const { return _status; }
         [[nodiscard]] const std::string &getName() const { return _name; }
         [[nodiscard]] unsigned getId() const { return _id; }
 

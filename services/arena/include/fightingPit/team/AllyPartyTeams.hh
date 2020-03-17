@@ -50,9 +50,14 @@ namespace fys::arena {
             selectSuitableMemberAlive(ComparatorSelection<TeamMember> comp);
         [[nodiscard]] std::shared_ptr<TeamMember>
             selectSuitableMemberOnSideAlive(HexagonSide::Orientation side, ComparatorSelection<TeamMember> comp);
-        [[nodiscard]] std::shared_ptr<TeamMember> selectMemberById(unsigned idMember);
+        [[nodiscard]] std::shared_ptr<TeamMember>
+            selectMemberById(unsigned idMember);
+        [[nodiscard]] std::vector<std::shared_ptr<TeamMember>>
+            getMembersBySide(HexagonSide::Orientation side) const;
 
-        unsigned allyOnSide(HexagonSide::Orientation side) const;
+        unsigned allyNumberOnSide(HexagonSide::Orientation side) const;
+
+        void executeAllyAction(const data::PriorityElem & contender);
 
     private:
         std::vector<std::unique_ptr<PartyTeam>> _partyTeams;

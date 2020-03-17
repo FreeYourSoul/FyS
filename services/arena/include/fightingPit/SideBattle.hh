@@ -60,6 +60,11 @@ namespace fys::arena {
         data::PriorityElem getCurrentParticipantTurn(const std::chrono::system_clock::time_point &now,
                                                      const std::chrono::milliseconds &timerInterlude);
 
+        void addParticipantInList(uint id, int speed, bool isContender) {
+            _priorityOrderList.addParticipantInList(id, speed, isContender);
+        }
+
+
         HexagonSide::Orientation getSide() const { return _side; }
 
 

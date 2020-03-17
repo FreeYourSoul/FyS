@@ -70,6 +70,7 @@ namespace fys::arena::data
     struct Status {
         Life life;
         MagicPoint magicPoint;
+        uint speed;
         std::vector<AlterationId> alterations;
     };
 

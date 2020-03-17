@@ -28,7 +28,7 @@
 namespace fys::arena {
 
     unsigned FightingPitLayout::activeCharactersOnSide(HexagonSide::Orientation side) const {
-        return _contenders.get().contenderOnSide(side) + _partyTeams.get().allyOnSide(side);
+        return _contenders.get().contenderOnSide(side) + _partyTeams.get().allyNumberOnSide(side);
     }
 
     void FightingPitLayout::characterMove() {

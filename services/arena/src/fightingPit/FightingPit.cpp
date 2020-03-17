@@ -25,6 +25,7 @@
 #include <algorithm>
 #include <fightingPit/contender/FightingContender.hh>
 #include <fightingPit/FightingPit.hh>
+#include <fightingPit/team/TeamMember.hh>
 
 namespace {
     std::chrono::milliseconds retrieveTimeInterludeFromLevelDegree(fys::arena::FightingPit::Level level) {
@@ -79,7 +80,7 @@ namespace fys::arena {
                 _contenders.executeContenderAction(currentParticipant);
             } else {
                 // character of a player
-                // TODO check if character has a handling action and execute it
+                _partyTeams.executeAllyAction(currentParticipant);
             }
         }
     }
@@ -109,5 +110,19 @@ namespace fys::arena {
                     return _layoutMapping.activeCharactersOnSide(lhs->getSide()) < _layoutMapping.activeCharactersOnSide(rhs->getSide());
                 }
         );
+    }
+
+    void FightingPit::initializePriorityList() {
+        for (auto & sb : _sideBattles) {
+            const auto & memberBySide = _partyTeams.getMembersBySide(sb->getSide());
+            const auto & contenderBySide = _contenders.getContenderOnSide(sb->getSide());
+
+            for (const TeamMemberSPtr & member : memberBySide) {
+                sb->addParticipantInList(member->getId(), member->getStatus().speed, false);
+            }
+            for (unsigned i = 0; i < contenderBySide.size(); ++i) {
+                sb->addParticipantInList(i, contenderBySide.at(i)->getStatus().speed, true);
+            }
+        };
     }
 }

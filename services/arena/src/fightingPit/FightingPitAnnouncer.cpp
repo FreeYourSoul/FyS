@@ -70,6 +70,8 @@ namespace fys::arena {
         fp->addAuthenticatedUser(std::move(_creatorUserName), std::move(_creatorUserToken));
         generateContenders(*fp, ctx, wsId);
         fp->initializePartyTeam(generateAllyPartyTeam());
+        fp->initializePriorityList();
+
         return fp;
     }
 
@@ -108,24 +110,28 @@ namespace fys::arena {
         s1.life.current = 100;
         s1.magicPoint.total = 20;
         s1.magicPoint.current = 20;
+        s1.speed = 10;
         tm2->setName("Mirael");
         auto &s2 = tm2->accessStatus();
         s2.life.total = 200;
         s2.life.current = 200;
         s2.magicPoint.total = 0;
         s2.magicPoint.current = 0;
+        s2.speed = 15;
         tm3->setName("FySton");
         auto &s3 = tm3->accessStatus();
         s3.life.total = 550;
         s3.life.current = 550;
         s3.magicPoint.total = 10;
         s3.magicPoint.current = 10;
+        s3.speed = 20;
         tm4->setName("Simon");
         auto &s4 = tm4->accessStatus();
         s4.life.total = 140;
         s4.life.current = 140;
         s4.magicPoint.total = 10;
         s4.magicPoint.current = 10;
+        s4.speed = 25;
 
         team->addPartyTeam(tm1);
         team->addPartyTeam(tm2);
@@ -143,6 +149,5 @@ namespace fys::arena {
         _loadedScript.emplace_back(std::move(name));
         return _cache.findInCache(desc.key).data();
     }
-
 
 } // namespace fys::arena
