@@ -33,7 +33,6 @@
 namespace fys::arena {
 
     void AllyPartyTeams::executeAllyAction(const data::PriorityElem &contender) {
-        _partyTeams
     }
 
     void AllyPartyTeams::addPartyTeam(std::unique_ptr<PartyTeam> && team)  {

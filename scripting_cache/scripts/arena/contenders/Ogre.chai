@@ -95,6 +95,7 @@ class Ogre {
          ];
 
          var addLifePerLevel = 150 * 1.02; // +2% life per level
+         thisStatus.speed = 5;
          thisStatus.life.total   = 150 + (addLifePerLevel * level);
          thisStatus.life.current = thisStatus.life.total;
          thisStatus.magicPoint.total = 100;

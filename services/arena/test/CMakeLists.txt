@@ -63,7 +63,6 @@ addFSeamTests(
         ${CMAKE_CURRENT_LIST_DIR}/fightingPit/WorkerServiceTestCase.cpp
         ${CMAKE_CURRENT_LIST_DIR}/fightingPit/HexagonSideTestCase.cpp
         ${CMAKE_CURRENT_LIST_DIR}/fightingPit/PriorityOrderListTestCase.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/fightingPit/FightingPitTestCase.cpp
         ${CMAKE_CURRENT_LIST_DIR}/fightingPit/FightingPitAnnouncerTestCase.cpp
 
         TO_MOCK

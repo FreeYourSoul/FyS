@@ -98,12 +98,19 @@ namespace fys::arena {
         void enforceAmbush(bool ambushEnforced) noexcept { _isAmbushEnforced = ambushEnforced; }
         void setDifficulty(FightingPit::Level level) noexcept { _difficulty = level; }
 
-        [[nodiscard]] EncounterType getEncounterType() const noexcept { return _encounterType; }
-        [[nodiscard]] FightingPit::Level getDifficulty() const noexcept { return _difficulty; }
-        [[nodiscard]] uint getIdEncounter() const noexcept { return _idEncounter; }
-        [[nodiscard]] const std::string &getCreatorUserName() const noexcept { return _creatorUserName; }
-        [[nodiscard]] const std::string &getCreatorUserToken() const noexcept { return _creatorUserToken; }
-        [[nodiscard]] bool isAmbushEnforced() const noexcept { return _isAmbushEnforced && *_isAmbushEnforced; }
+//        [[nodiscard]] EncounterType getEncounterType() const noexcept { return _encounterType; }
+//        [[nodiscard]] FightingPit::Level getDifficulty() const noexcept { return _difficulty; }
+//        [[nodiscard]] uint getIdEncounter() const noexcept { return _idEncounter; }
+//        [[nodiscard]] const std::string &getCreatorUserName() const noexcept { return _creatorUserName; }
+//        [[nodiscard]] const std::string &getCreatorUserToken() const noexcept { return _creatorUserToken; }
+//        [[nodiscard]] bool isAmbushEnforced() const noexcept { return _isAmbushEnforced && *_isAmbushEnforced; }
+
+        // for testing validation purpose
+        static const AllyPartyTeams &getPartyTeams(const std::unique_ptr<FightingPit> & fp)   { return fp->_partyTeams; }
+        static const PitContenders &getPitContenders(const std::unique_ptr<FightingPit> & fp) { return fp->_contenders; }
+        static const std::string &getCreatorUserName(const std::unique_ptr<FightingPit> & fp) { return fp->_creatorUserName;}
+        static SideBattle &getSideBattleForSide(const std::unique_ptr<FightingPit> & fp, HexagonSide::Orientation side);
+        static unsigned getArenaId(const std::unique_ptr<FightingPit> & fp) { return fp->_arenaId; }
 
     private:
         /**
@@ -114,7 +121,7 @@ namespace fys::arena {
          */
         inline fys::arena::AllyPartyTeams generateAllyPartyTeam();
 
-        inline std::string getScriptString(std::string name, const EncounterContext::EncounterDesc &desc);
+        inline std::string getScriptContentString(std::string name, const EncounterContext::EncounterDesc &desc);
         void generateContenders(FightingPit &fp, const EncounterContext &ctx, const std::string &wsId);
 
         [[nodiscard]] bool isScriptedEncounter() const { return _encounterType != EncounterType::RANDOM; }

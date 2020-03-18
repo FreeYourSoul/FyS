@@ -46,8 +46,8 @@ namespace fys::arena {
     std::vector<std::shared_ptr<FightingContender>>
     PitContenders::getContenderOnSide(HexagonSide::Orientation side) const {
         std::vector<std::shared_ptr<FightingContender>> result;
-        std::copy_if(_contenders.begin(), _contenders.end(), result.begin(), [side](const auto &contenderPtr) {
-            return contenderPtr->getHexagonSide().second == side;
+        std::copy_if(_contenders.begin(), _contenders.end(), std::back_inserter(result), [side](const auto &contenderPtr) {
+            return contenderPtr->getHexagonSideOrient() == side;
         });
         return result;
     }

@@ -29,6 +29,8 @@
 
 namespace fys::arena::data
 {
+    static constexpr bool CONTENDER = true;
+    static constexpr bool PARTY_MEMBER = false;
 
     struct PriorityElem { // Improve with strong typing on ID/SPEED
         PriorityElem() = default;
@@ -70,7 +72,7 @@ namespace fys::arena::data
     struct Status {
         Life life;
         MagicPoint magicPoint;
-        uint speed;
+        uint initialSpeed;
         std::vector<AlterationId> alterations;
     };
 

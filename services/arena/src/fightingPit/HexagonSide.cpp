@@ -248,9 +248,7 @@ namespace
 namespace fys::arena {
     
     bool HexagonSide::move(HexagonSide::Orientation destinationSide, bool forceMovement) {
-        if (destinationSide != HexagonSide::Orientation::NONE &&
-            (forceMovement || canMove(destinationSide)))
-        {
+        if (forceMovement || (destinationSide != HexagonSide::Orientation::NONE && canMove(destinationSide))) {
             changeSide(destinationSide);
             return true;
         }

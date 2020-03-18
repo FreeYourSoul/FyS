@@ -38,6 +38,8 @@ namespace fys::arena {
             C
         };
 
+        static constexpr unsigned SIDE_NUMBER = 6 * 3; // sidesByHexagon * hexagonNumber
+
         enum class Orientation : int {
             A_N = 0,
             A_NE,
@@ -57,7 +59,7 @@ namespace fys::arena {
             C_S ,
             C_SW,
             C_NW,
-            NONE
+            NONE // 18
         };
 
         explicit HexagonSide(Hexagon hexagon = Hexagon::A, Orientation orientation = Orientation::NONE) :

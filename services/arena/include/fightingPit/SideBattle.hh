@@ -46,7 +46,8 @@ namespace fys::arena {
         SideBattle(PitContenders &pitContenders, AllyPartyTeams &allyPartyTeams, HexagonSide::Orientation side) :
                 _contenders(pitContenders),
                 _partyTeams(allyPartyTeams),
-                _side(side) 
+                _side(side),
+                _started(false)
         {}
 
         /**
@@ -81,6 +82,7 @@ namespace fys::arena {
         PriorityOrderList        _priorityOrderList;
         HexagonSide::Orientation _side;
 
+        bool _started;
         std::chrono::system_clock::time_point  _endCurrentTurn;
 
     };

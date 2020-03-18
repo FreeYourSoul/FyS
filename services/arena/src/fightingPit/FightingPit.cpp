@@ -72,8 +72,8 @@ namespace fys::arena {
     void FightingPit::continueBattle(const std::chrono::system_clock::time_point & now) {
         if (checkEndStatusFightingPit())
             return;
-        for (auto &side : _sideBattles) {
-            auto currentParticipant = side->getCurrentParticipantTurn(now, _timeInterlude);
+        for (auto & side : _sideBattles) {
+            auto currentParticipant = side.getCurrentParticipantTurn(now, _timeInterlude);
 
             if (currentParticipant.isContender) {
                 // non-playable character (enemy NPC)
@@ -85,15 +85,6 @@ namespace fys::arena {
         }
     }
 
-    void FightingPit::addAuthenticatedUser(std::string userName, std::string userToken) {
-        _authenticatedPlayers.push_back({ std::move(userName), std::move(userToken) });
-    }
-
-    bool FightingPit::isPlayerParticipant(const std::string &name, const std::string &token) const {
-        return std::any_of(_authenticatedPlayers.begin(), _authenticatedPlayers.end(),
-                           [&name, &token](auto & authPlayer) { return authPlayer.name == name && authPlayer.token == token; } );
-    }
-
     void FightingPit::forwardMessageToTeamMember(unsigned idMember) {
         auto member = _partyTeams.selectMemberById(idMember);
         if (!member) {
@@ -103,25 +94,63 @@ namespace fys::arena {
         // todo add in pending action list
     }
 
+    void FightingPit::addAuthenticatedUser(std::string userName, std::string userToken) {
+        _authenticatedPlayers.push_back({ std::move(userName), std::move(userToken) });
+    }
+
+    bool FightingPit::isPlayerParticipant(const std::string &name, const std::string &token) const {
+        return std::any_of(_authenticatedPlayers.begin(), _authenticatedPlayers.end(),
+                           [&name, &token](auto & authPlayer) { return authPlayer.name == name && authPlayer.token == token; } );
+    }
+
     void FightingPit::addPartyTeam(std::unique_ptr<PartyTeam> pt) {
         _partyTeams.addPartyTeam(std::move(pt));
         std::sort(_sideBattles.begin(), _sideBattles.end(),
                 [this](auto & lhs, auto & rhs) {
-                    return _layoutMapping.activeCharactersOnSide(lhs->getSide()) < _layoutMapping.activeCharactersOnSide(rhs->getSide());
+                    return _layoutMapping.activeCharactersOnSide(lhs.getSide()) < _layoutMapping.activeCharactersOnSide(rhs.getSide());
                 }
         );
     }
 
-    void FightingPit::initializePriorityList() {
+    // Initialization methods used by FightingPitAnnouncer
+
+    void FightingPit::initializeSideBattles() {
+        _sideBattles.reserve(HexagonSide::SIDE_NUMBER);
+
+        _sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::A_N);
+        _sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::A_NE);
+        _sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::A_NW);
+        _sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::A_S);
+        _sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::A_SE);
+        _sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::A_SW);
+
+        _sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::B_N);
+        _sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::B_NE);
+        _sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::B_NW);
+        _sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::B_S);
+        _sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::B_SE);
+        _sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::B_SW);
+
+        _sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::C_N);
+        _sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::C_NE);
+        _sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::C_NW);
+        _sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::C_S);
+        _sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::C_SE);
+        _sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::C_SW);
+
+        initializePriorityListInSidesBattle();
+    }
+
+    void FightingPit::initializePriorityListInSidesBattle() {
         for (auto & sb : _sideBattles) {
-            const auto & memberBySide = _partyTeams.getMembersBySide(sb->getSide());
-            const auto & contenderBySide = _contenders.getContenderOnSide(sb->getSide());
+            const auto & memberBySide = _partyTeams.getMembersBySide(sb.getSide());
+            const auto & contenderBySide = _contenders.getContenderOnSide(sb.getSide());
 
             for (const TeamMemberSPtr & member : memberBySide) {
-                sb->addParticipantInList(member->getId(), member->getStatus().speed, false);
+                sb.addParticipantInList(member->getId(), member->getStatus().initialSpeed, false);
             }
             for (unsigned i = 0; i < contenderBySide.size(); ++i) {
-                sb->addParticipantInList(i, contenderBySide.at(i)->getStatus().speed, true);
+                sb.addParticipantInList(i, contenderBySide.at(i)->getStatus().initialSpeed, true);
             }
         };
     }

@@ -96,6 +96,7 @@ class Sampy {
         var &thisContender = pitContenders.getFightingContender(this.id);
         var &thisStatus = thisContender.accessStatus();
         var addLifePerLevel = 150 * 0.02; // +2% life per level
+        thisStatus.speed = 8;
         thisStatus.life.total   = 150 + (addLifePerLevel * this.level);
         thisStatus.life.current = thisStatus.life.total;
         thisStatus.magicPoint.total = 100;

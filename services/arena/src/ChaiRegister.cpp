@@ -126,8 +126,9 @@ void ChaiRegister::registerCommon(chaiscript::ModulePtr m) {
         chaiscript::utility::add_class<fys::arena::data::Status>(
                 *m, "Status", {},
                 {
-                        {fun(&data::Status::life),       "life"},
-                        {fun(&data::Status::magicPoint), "magicPoint"},
+                        {fun(&data::Status::life),         "life"},
+                        {fun(&data::Status::magicPoint),   "magicPoint"},
+                        {fun(&data::Status::initialSpeed), "speed"},
                 }
         );
 

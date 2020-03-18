@@ -43,7 +43,7 @@ namespace {
     }
 }
 
-TEST_CASE("CmlCopy", "[cml_test]") {
+TEST_CASE("CmlCopy", "[common][cml_test]") {
     fys::cache::CmlCopy ccpy(getLocalPathStorage(), getCopyPathStorage());
     std::filesystem::path baseCache = getLocalPathStorage() + "/copy_folder";
     std::filesystem::remove_all(baseCache);

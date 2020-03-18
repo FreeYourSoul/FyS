@@ -70,8 +70,7 @@ namespace fys::arena {
         fp->addAuthenticatedUser(std::move(_creatorUserName), std::move(_creatorUserToken));
         generateContenders(*fp, ctx, wsId);
         fp->initializePartyTeam(generateAllyPartyTeam());
-        fp->initializePriorityList();
-
+        fp->initializeSideBattles();
         return fp;
     }
 
@@ -89,8 +88,11 @@ namespace fys::arena {
             std::string name = getNameFromKey(desc.key);
             contenderScript->setContenderId(i);
             contenderScript->setContenderName(name);
-            contenderScript->loadContenderScript(getScriptString(std::move(name), desc));
-            fp.addContender(std::make_shared<FightingContender>(std::move(contenderScript)));
+            contenderScript->loadContenderScript(getScriptContentString(std::move(name), desc));
+            auto contender = std::make_shared<FightingContender>(std::move(contenderScript));
+            // todo make positioning of contender depending on ambush
+            contender->moveContender(HexagonSide::Orientation::B_S, true);
+            fp.addContender(contender);
         }
     }
 
@@ -105,33 +107,41 @@ namespace fys::arena {
         auto tm4 = std::make_shared<TeamMember>();
 
         tm1->setName("Elvo");
+        tm1->setId(0);
+        tm1->moveTeamMember(HexagonSide::Orientation::B_S, true);
         auto &s1 = tm1->accessStatus();
         s1.life.total = 100;
         s1.life.current = 100;
         s1.magicPoint.total = 20;
         s1.magicPoint.current = 20;
-        s1.speed = 10;
+        s1.initialSpeed = 3;
         tm2->setName("Mirael");
+        tm2->setId(1);
+        tm2->moveTeamMember(HexagonSide::Orientation::B_S, true);
         auto &s2 = tm2->accessStatus();
         s2.life.total = 200;
         s2.life.current = 200;
         s2.magicPoint.total = 0;
         s2.magicPoint.current = 0;
-        s2.speed = 15;
+        s2.initialSpeed = 5;
         tm3->setName("FySton");
+        tm3->setId(2);
+        tm3->moveTeamMember(HexagonSide::Orientation::B_S, true);
         auto &s3 = tm3->accessStatus();
         s3.life.total = 550;
         s3.life.current = 550;
         s3.magicPoint.total = 10;
         s3.magicPoint.current = 10;
-        s3.speed = 20;
+        s3.initialSpeed = 10;
         tm4->setName("Simon");
+        tm4->setId(3);
+        tm4->moveTeamMember(HexagonSide::Orientation::B_S, true);
         auto &s4 = tm4->accessStatus();
         s4.life.total = 140;
         s4.life.current = 140;
         s4.magicPoint.total = 10;
         s4.magicPoint.current = 10;
-        s4.speed = 25;
+        s4.initialSpeed = 20;
 
         team->addPartyTeam(tm1);
         team->addPartyTeam(tm2);
@@ -143,11 +153,22 @@ namespace fys::arena {
         return apt;
     }
 
-    std::string FightingPitAnnouncer::getScriptString(std::string name, const EncounterContext::EncounterDesc &desc) {
+    std::string FightingPitAnnouncer::getScriptContentString(std::string name, const EncounterContext::EncounterDesc &desc) {
         if (std::any_of(_loadedScript.cbegin(), _loadedScript.cend(), [&name](const auto &s){ return s == name; } ))
             return "";
         _loadedScript.emplace_back(std::move(name));
         return _cache.findInCache(desc.key).data();
+    }
+
+    SideBattle &FightingPitAnnouncer::getSideBattleForSide(const std::unique_ptr<FightingPit> &fp, HexagonSide::Orientation side)  {
+        auto it = std::find_if(fp->_sideBattles.begin(), fp->_sideBattles.end(),
+                [side](const auto & sb) { return sb.getSide() == side; });
+
+        if (it == fp->_sideBattles.end()) {
+            SPDLOG_ERROR("Side not found");
+            return fp->_sideBattles.front();
+        }
+        return *it;
     }
 
 } // namespace fys::arena

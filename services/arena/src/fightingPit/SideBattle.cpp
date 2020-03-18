@@ -29,11 +29,14 @@ namespace fys::arena {
                                 const std::chrono::system_clock::time_point &now, 
                                 const std::chrono::milliseconds &timerInterlude)
     {
-        auto end = now + timerInterlude;
-        if (_endCurrentTurn < end) {
+        if (!_started) {
+            _endCurrentTurn = now + timerInterlude;
+            _started = true;
+        }
+        if (now < _endCurrentTurn) {
             return _priorityOrderList.getCurrent();
         } 
-        _endCurrentTurn = end;
+        _endCurrentTurn = now + timerInterlude;
         return _priorityOrderList.getNext();
     }
 

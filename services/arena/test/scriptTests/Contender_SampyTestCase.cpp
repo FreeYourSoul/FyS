@@ -46,10 +46,10 @@ std::string getPathSampyChaiScript() {
  * @brief Sampy is a script representing a sample monster and also contains standalone scripts.
  *        It is used in order to test the implementation of ChaiScript int FyS Online.
  */
-TEST_CASE("Test Sampy", "[script_test]") {
+TEST_CASE("Test Sampy", "[arena][script_test]") {
 
     fys::arena::PitContenders pc;
-    fys::arena::AllyPartyTeams apt("owner");
+    fys::arena::AllyPartyTeams apt;
     auto chai = fys::arena::ChaiRegister::createChaiInstance(pc, apt);
 
     fys::arena::ContenderScriptingUPtr sampy = std::make_unique<fys::arena::ContenderScripting>(*chai, 1);
@@ -75,6 +75,7 @@ TEST_CASE("Test Sampy", "[script_test]") {
 
     SECTION("Test initialization") {
         REQUIRE(153 == fpc->accessStatus().life.current);
+        REQUIRE(8 == pc.getFightingContender(0)->accessStatus().initialSpeed);
         REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.current);
         REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.total);
         REQUIRE(100 == pc.getFightingContender(0)->accessStatus().magicPoint.total);

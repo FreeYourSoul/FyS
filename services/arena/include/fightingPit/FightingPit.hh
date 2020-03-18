@@ -120,11 +120,7 @@ namespace fys::arena {
          */
         void addPartyTeam(std::unique_ptr<PartyTeam> pt);
 
-        const PitContenders &getPitContenders() const { return _contenders; }
         const std::unique_ptr<chaiscript::ChaiScript> &getChaiPtr() const { return _chaiPtr; }
-        const std::string &getCreatorUserName() const { return _creatorUserName; }
-        unsigned getArenaId() const { return _arenaId; }
-
         void setArenaId(unsigned arenaId) { _arenaId = arenaId; }
 
     private:
@@ -136,11 +132,12 @@ namespace fys::arena {
          */
         bool checkEndStatusFightingPit();
 
-        // initialize methods used by FightingPitAnnouncer
-
-        void initializePartyTeam(AllyPartyTeams && allyPartyTeams) { _partyTeams = std::move(allyPartyTeams); }
-        void initializePriorityList();
         void addContender(const std::shared_ptr<FightingContender> & fc) { _contenders.addContender(fc); }
+
+        // todo move to FightingPitAnnouncer ?
+        void initializePartyTeam(AllyPartyTeams && allyPartyTeams) { _partyTeams = std::move(allyPartyTeams); }
+        void initializeSideBattles();
+        void initializePriorityListInSidesBattle();
 
     private:
         Ending                      _end = ON_HOLD;
@@ -158,7 +155,7 @@ namespace fys::arena {
         std::vector<AuthenticatedPlayer> _authenticatedPlayers;
 
         std::unique_ptr<chaiscript::ChaiScript>     _chaiPtr;
-        std::vector<std::unique_ptr<SideBattle>>    _sideBattles;
+        std::vector<SideBattle>                     _sideBattles;
 
     };
 

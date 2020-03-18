@@ -34,7 +34,9 @@ namespace fys::arena {
     }
 
     void PriorityOrderList::addParticipantInList(uint id, int speed, bool isContender) {
-        if (std::any_of(_baseSpeed.begin(), _baseSpeed.end(), [id, isContender](const auto& prioElem) { return prioElem.id == id && prioElem.isContender == isContender; })) {
+        if (std::any_of(_baseSpeed.begin(), _baseSpeed.end(),
+                [id, isContender](const auto& prioElem) { return prioElem.id == id && prioElem.isContender == isContender; }))
+        {
             SPDLOG_WARN("Cannot add participant in order list : Participant of id {} already existing", id);
             return;
         }
