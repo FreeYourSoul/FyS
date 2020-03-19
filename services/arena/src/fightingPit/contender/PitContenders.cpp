@@ -95,7 +95,7 @@ namespace fys::arena {
     }
 
     void PitContenders::executeContenderAction(const data::PriorityElem & contender) {
-        if (!contender.isContender && contender.id < _contenders.size()) {
+        if (!contender.isContender || contender.id < _contenders.size()) {
             return;
         }
         _contenders.at(contender.id)->executeAction();

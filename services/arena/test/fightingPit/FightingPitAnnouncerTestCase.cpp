@@ -32,29 +32,9 @@
 #include <fightingPit/team/TeamMember.hh>
 #include <fightingPit/contender/FightingContender.hh>
 #include <fightingPit/contender/ContenderScripting.hh>
-#include <RandomGenerator.hh>
-#include <CmlKey.hh>
-#include <Cml.hh>
+#include "TestType.hh"
 
 using namespace fys::arena;
-
-class CmlBase : public fys::cache::Cml {
-public:
-    explicit CmlBase(std::string v) : fys::cache::Cml(std::filesystem::path(std::move(v))) {}
-
-    void createFileInLocalStorage(const fys::cache::CmlKey &cmlKey) override {
-    }
-};
-
-namespace {
-    std::string getLocalPathStorage() {
-        std::string file_path = __FILE__;
-        std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
-        if (dir_path.size() == file_path.size())
-            dir_path = file_path.substr(0, file_path.rfind('/'));
-        return dir_path + "/../../scriptTests/scripts_lnk";
-    }
-}
 
 TEST_CASE("FightingPitAnnouncer test", "[service][arena]") {
     auto fseamMock = FSeam::getDefault<fys::util::RandomGenerator>();

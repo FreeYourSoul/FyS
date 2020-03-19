@@ -82,7 +82,8 @@ namespace fys::arena {
         enum Level : uint {
             EASY    = 0,
             MEDIUM  = 1,
-            HARD    = 2
+            HARD    = 2,
+            NONE
         };
 
         explicit FightingPit(std::string creatorUserName, Level levelFightingPit);

@@ -37,7 +37,8 @@ namespace {
             case fys::arena::FightingPit::Level::HARD :
                 return std::chrono::milliseconds {5000};
             default:
-                return std::chrono::milliseconds {10000};
+                SPDLOG_ERROR("Incorrect level");
+                return std::chrono::milliseconds {0};
         }
     }
 }
@@ -80,7 +81,7 @@ namespace fys::arena {
                 _contenders.executeContenderAction(currentParticipant);
             } else {
                 // character of a player
-                _partyTeams.executeAllyAction(currentParticipant);
+                _partyTeams.executeAllyAction(currentParticipant, _contenders, _chaiPtr);
             }
         }
     }
@@ -117,6 +118,7 @@ namespace fys::arena {
     void FightingPit::initializeSideBattles() {
         _sideBattles.reserve(HexagonSide::SIDE_NUMBER);
 
+        // Hexagon A creation
         _sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::A_N);
         _sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::A_NE);
         _sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::A_NW);
@@ -124,6 +126,7 @@ namespace fys::arena {
         _sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::A_SE);
         _sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::A_SW);
 
+        // Hexagon B creation
         _sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::B_N);
         _sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::B_NE);
         _sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::B_NW);
@@ -131,6 +134,7 @@ namespace fys::arena {
         _sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::B_SE);
         _sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::B_SW);
 
+        // Hexagon C creation
         _sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::C_N);
         _sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::C_NE);
         _sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::C_NW);

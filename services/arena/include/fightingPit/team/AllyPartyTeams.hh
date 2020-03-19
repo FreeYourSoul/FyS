@@ -29,13 +29,18 @@
 #include <memory>
 #include <fightingPit/team/PartyTeam.hh>
 
+// forward declarations
+namespace chaiscript {
+    class ChaiScript;
+}
+namespace fys::arena {
+    class PitContenders;
+}
+
 namespace fys::arena {
 
     template <typename T>
     using ComparatorSelection = std::function<bool(std::shared_ptr<T>, std::shared_ptr<T>)>;
-
-    // forward declarations
-    class TeamMember;
 
     class AllyPartyTeams {
 
@@ -57,7 +62,7 @@ namespace fys::arena {
 
         unsigned allyNumberOnSide(HexagonSide::Orientation side) const;
 
-        void executeAllyAction(const data::PriorityElem & contender);
+        void executeAllyAction(const data::PriorityElem & ally, PitContenders & pc, std::unique_ptr<chaiscript::ChaiScript> & chaiPtr);
 
     private:
         std::vector<std::unique_ptr<PartyTeam>> _partyTeams;

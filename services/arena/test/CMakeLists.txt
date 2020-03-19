@@ -60,10 +60,12 @@ addFSeamTests(
 
         TST_SRC #test files
         ${CMAKE_CURRENT_LIST_DIR}/catchMain.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/fightingPit/TestType.hh
         ${CMAKE_CURRENT_LIST_DIR}/fightingPit/WorkerServiceTestCase.cpp
         ${CMAKE_CURRENT_LIST_DIR}/fightingPit/HexagonSideTestCase.cpp
         ${CMAKE_CURRENT_LIST_DIR}/fightingPit/PriorityOrderListTestCase.cpp
         ${CMAKE_CURRENT_LIST_DIR}/fightingPit/FightingPitAnnouncerTestCase.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/fightingPit/FightingPitTestCase.cpp
 
         TO_MOCK
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/ConnectionHandler.hh

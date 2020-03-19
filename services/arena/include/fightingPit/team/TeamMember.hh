@@ -25,16 +25,50 @@
 #ifndef FYS_TEAMMEMBER_HH
 #define FYS_TEAMMEMBER_HH
 
+#include <variant>
 #include <memory>
 #include <fightingPit/HexagonSide.hh>
 #include <fightingPit/data/CommonTypes.hh>
 #include <SizedQueue.hh>
 
+// forward declarations
+namespace chaiscript {
+    class ChaiScript;
+}
+namespace fys::arena {
+    class AllyPartyTeams;
+    class PitContenders;
+}
+
 namespace fys::arena {
 
+    struct ContenderTargetId {
+        uint v;
+    };
+
+    struct AllyTargetId {
+        uint v;
+    };
+
+    /**
+     * Pending actions of a team member are defined by
+     * - the id of the action (mapped as index to the vector TeamMember::_actionDoable)
+     * - the target, optional as every action doesn't require target.
+     *   Can be a specific id (of an ally or a contender depending on the action)
+     *   Can be a side (as some action can target a whole side)
+     */
+    struct PendingAction {
+        uint idAction;
+        std::optional<std::variant<ContenderTargetId, AllyTargetId, HexagonSide::Orientation> > target;
+    };
+
+    /**
+     *
+     */
     class TeamMember {
 
     public:
+        void executeAction(AllyPartyTeams & apt, PitContenders & pc, std::unique_ptr<chaiscript::ChaiScript> & chaiPtr);
         void moveTeamMember(HexagonSide::Orientation destination, bool bypassCheck = false);
         void moveTeamMember(data::MoveDirection rightOrLeft);
 
@@ -54,7 +88,8 @@ namespace fys::arena {
         unsigned _id;
         data::Status _status;
 
-        // fys::common::SizedQueue<PendingAction> _pendingActions; Todo
+        std::vector<std::string> _actionsDoable;
+         fys::common::SizedQueue<PendingAction> _pendingActions;
 
     };
 

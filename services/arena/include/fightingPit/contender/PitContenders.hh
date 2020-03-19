@@ -59,8 +59,8 @@ namespace fys::arena {
             selectSuitableContenderOnSideAlive(HexagonSide::Orientation side, ComparatorSelection<FightingContender> comp) const;
         [[nodiscard]]std::shared_ptr<FightingContender>
             getFightingContender(std::size_t pos) const { return _contenders.at(pos); }
-        [[nodiscard]]
-            std::size_t getNumberContender() const { return _contenders.size(); }
+        [[nodiscard]] std::size_t
+            getNumberContender() const { return _contenders.size(); }
         [[nodiscard]]
             const std::vector<std::shared_ptr<FightingContender> > &getContenders() const { return _contenders; }
 

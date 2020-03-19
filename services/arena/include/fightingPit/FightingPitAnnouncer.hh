@@ -98,13 +98,6 @@ namespace fys::arena {
         void enforceAmbush(bool ambushEnforced) noexcept { _isAmbushEnforced = ambushEnforced; }
         void setDifficulty(FightingPit::Level level) noexcept { _difficulty = level; }
 
-//        [[nodiscard]] EncounterType getEncounterType() const noexcept { return _encounterType; }
-//        [[nodiscard]] FightingPit::Level getDifficulty() const noexcept { return _difficulty; }
-//        [[nodiscard]] uint getIdEncounter() const noexcept { return _idEncounter; }
-//        [[nodiscard]] const std::string &getCreatorUserName() const noexcept { return _creatorUserName; }
-//        [[nodiscard]] const std::string &getCreatorUserToken() const noexcept { return _creatorUserToken; }
-//        [[nodiscard]] bool isAmbushEnforced() const noexcept { return _isAmbushEnforced && *_isAmbushEnforced; }
-
         // for testing validation purpose
         static const AllyPartyTeams &getPartyTeams(const std::unique_ptr<FightingPit> & fp)   { return fp->_partyTeams; }
         static const PitContenders &getPitContenders(const std::unique_ptr<FightingPit> & fp) { return fp->_contenders; }

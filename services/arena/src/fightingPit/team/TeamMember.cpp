@@ -23,7 +23,16 @@
 
 #include <fmt/ostream.h>
 #include <spdlog/spdlog.h>
+#include <chaiscript/chaiscript.hpp>
+#include <fightingPit/data/CommonTypes.hh>
+#include <fightingPit/contender/PitContenders.hh>
+#include <fightingPit/contender/FightingContender.hh>
 #include <fightingPit/team/TeamMember.hh>
+#include <fightingPit/team/AllyPartyTeams.hh>
+
+// overloaded trick
+template<class... Ts> struct overloaded : Ts... { using Ts::operator()...; };
+template<class... Ts> overloaded(Ts...) -> overloaded<Ts...>;
 
 namespace fys::arena {
 
@@ -49,6 +58,53 @@ namespace fys::arena {
             if (!_side.moveBack()) {
                 SPDLOG_ERROR("Impossible move from {} to backside", _side);
             }
+        }
+    }
+
+    void TeamMember::executeAction(
+            AllyPartyTeams & apt,
+            PitContenders & pc,
+            std::unique_ptr<chaiscript::ChaiScript> &chaiPtr)
+    {
+        auto pa = _pendingActions.pop();
+
+        if (!pa) {
+            SPDLOG_DEBUG("No action to execute in the pipeline for team member {}:{}", _name, _id);
+            return;
+        }
+        if (pa->idAction >= _actionsDoable.size()) {
+            SPDLOG_ERROR("TeamMember {}:{} tried to execute a non existing action of id {}", _name, _id, pa->idAction);
+            return;
+        }
+
+        auto funcActionOnSide = chaiPtr->eval<std::function<int()>> (fmt::format(
+                "fun(){{ return ally_actions[{}][{}].requireAllyTarget() || ally_actions[{}][{}].requireEnemyTarget();}}",
+                _id, _actionsDoable.at(pa->idAction)));
+        auto funcAction = chaiPtr->eval<std::function<int(data::Status)>> (fmt::format(
+                "fun(allyStatus){{ return ally_actions[{}][{}].execute(allyStatus);}}",
+                _id, _actionsDoable.at(pa->idAction)));
+
+        try {
+            const auto &targetStatus = _status;
+            if (pa->target) {
+                std::visit(overloaded {
+                        [&apt, &pc, &funcAction](AllyTargetId target)
+                            { funcAction(apt.selectMemberById(target.v)->getStatus()); },
+
+                        [&apt, &pc, &funcAction](ContenderTargetId target)
+                            { funcAction(pc.getFightingContender(target.v)->getStatus()); },
+
+                        [&apt, &pc, &funcAction](HexagonSide::Orientation side)
+                            {  },
+                }, *pa->target);
+            }
+            else if (funcAction(_status)) {
+                SPDLOG_DEBUG("Ally {}:{} executed action {}", _name, _id, pa->idAction);
+            }
+        }
+        catch (std::exception &ex) {
+            SPDLOG_ERROR("Error caught on script execution {} while executing {} with target required ",
+                    ex.what(), pa->idAction, static_cast<bool>(pa->target));
         }
     }
 

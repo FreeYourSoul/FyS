@@ -33,15 +33,15 @@ class Attack {
     }
 
     def requireAllyTarget() {
-        return 0;
+        0;
     }
 
     def requireEnemyTarget() {
-        return 1;
+        1;
     }
 
     def rangeAnySide() {
-        return 0;
+        0;
     }
 
     def execute(targetStatus) {
@@ -51,11 +51,11 @@ class Attack {
         else {
             targetStatus.life.current = 0;
         }
-        return 1;
+        1;
     }
 
     def getId() {
-        return 1;
+        1;
     }
 
 };

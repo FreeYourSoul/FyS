@@ -69,7 +69,6 @@ namespace fys::arena {
         std::string action = fmt::format("fun(contenderId){{ return {}.runScriptedAction(contenderId);}}", getChaiContenderId());
         auto funcAction = _chai.get().eval<std::function<int (unsigned int)>> (action);
         try {
-            auto o = _chai.get().get_locals();
             if (funcAction(_contenderId))
                 SPDLOG_DEBUG("Contender {}_{} executed action", _contenderName, _contenderId);
         }

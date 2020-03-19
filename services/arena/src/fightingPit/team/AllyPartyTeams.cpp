@@ -21,18 +21,33 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include <spdlog/spdlog.h>
 #include <algorithm>
 #include <numeric>
 
+#include <fmt/format.h>
+#include <chaiscript/chaiscript.hpp>
 #include <algorithm/algorithm.hh>
+
 #include <fightingPit/team/TeamMember.hh>
 #include <fightingPit/team/PartyTeam.hh>
 #include <fightingPit/team/AllyPartyTeams.hh>
-#include <type_traits>
+#include <fightingPit/contender/PitContenders.hh>
 
 namespace fys::arena {
 
-    void AllyPartyTeams::executeAllyAction(const data::PriorityElem &contender) {
+    void AllyPartyTeams::executeAllyAction(
+            const data::PriorityElem &ally,
+            PitContenders &pc,
+            std::unique_ptr<chaiscript::ChaiScript> & chaiPtr)
+    {
+        if (ally.isContender) return;
+        if (auto member = selectMemberById(ally.id); !member) {
+            SPDLOG_ERROR("Member with id {} isn't found, action cannot be executed");
+        }
+        else {
+            member->executeAction(*this, pc, chaiPtr);
+        }
     }
 
     void AllyPartyTeams::addPartyTeam(std::unique_ptr<PartyTeam> && team)  {
