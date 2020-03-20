@@ -115,6 +115,10 @@ namespace fys::arena {
 
     // Initialization methods used by FightingPitAnnouncer
 
+    void FightingPit::initializePartyTeam(AllyPartyTeams &&allyPartyTeams) {
+        _partyTeams = std::move(allyPartyTeams);
+    }
+
     void FightingPit::initializeSideBattles() {
         _sideBattles.reserve(HexagonSide::SIDE_NUMBER);
 

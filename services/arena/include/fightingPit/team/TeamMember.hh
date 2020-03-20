@@ -68,24 +68,30 @@ namespace fys::arena {
     class TeamMember {
 
     public:
+        TeamMember(std::string userName, std::string teamMemberName) :
+                _userName(std::move(userName)), _name(std::move(teamMemberName)) {}
+
         void executeAction(AllyPartyTeams & apt, PitContenders & pc, std::unique_ptr<chaiscript::ChaiScript> & chaiPtr);
         void moveTeamMember(HexagonSide::Orientation destination, bool bypassCheck = false);
         void moveTeamMember(data::MoveDirection rightOrLeft);
 
-        void setName(const std::string & name) { _name = name; }
         void setId(unsigned id) { _id = id; }
+        void addDoableAction(std::string doable) { _actionsDoable.emplace_back(std::move(doable)); }
 
         [[nodiscard]] std::pair<HexagonSide::Hexagon, HexagonSide::Orientation> getHexagonSide() const { return *_side; }
         [[nodiscard]] HexagonSide::Orientation getHexagonSideOrient() const { return (*_side).second; }
         [[nodiscard]] data::Status &accessStatus() { return _status; }
         [[nodiscard]] const data::Status &getStatus() const { return _status; }
+        [[nodiscard]] const std::string &getUserName() const { return _userName; }
         [[nodiscard]] const std::string &getName() const { return _name; }
+        [[nodiscard]] const std::vector<std::string> &getActionsDoable() const { return _actionsDoable; }
         [[nodiscard]] unsigned getId() const { return _id; }
 
     private:
-        HexagonSide _side;
+        std::string _userName;
         std::string _name;
-        unsigned _id;
+        HexagonSide _side;
+        unsigned _id {};
         data::Status _status;
 
         std::vector<std::string> _actionsDoable;

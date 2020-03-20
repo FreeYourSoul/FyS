@@ -46,7 +46,7 @@ std::string getPathSampyChaiScript() {
  * @brief Sampy is a script representing a sample monster and also contains standalone scripts.
  *        It is used in order to test the implementation of ChaiScript int FyS Online.
  */
-TEST_CASE("Test Sampy", "[arena][script_test]") {
+TEST_CASE("Test Sampy", "[service][arena][script_test]") {
 
     fys::arena::PitContenders pc;
     fys::arena::AllyPartyTeams apt;
@@ -60,12 +60,13 @@ TEST_CASE("Test Sampy", "[arena][script_test]") {
     auto fpc = std::make_shared<fys::arena::FightingContender>(std::move(sampy));
     pc.addContender(fpc);
 
-    fys::arena::PartyTeamUPtr pt = std::make_unique<fys::arena::PartyTeam>("");
-    fys::arena::TeamMemberSPtr teamMember1 = std::make_shared<fys::arena::TeamMember>();
-    fys::arena::TeamMemberSPtr teamMember2 = std::make_shared<fys::arena::TeamMember>();
+    std::string userName = "FyS";
+    fys::arena::PartyTeamUPtr pt = std::make_unique<fys::arena::PartyTeam>(userName);
+    fys::arena::TeamMemberSPtr teamMember1 = std::make_shared<fys::arena::TeamMember>(userName, "fyston1");
+    fys::arena::TeamMemberSPtr teamMember2 = std::make_shared<fys::arena::TeamMember>(userName, "fyston2");
 
-    pt->addPartyTeam(teamMember1);
-    pt->addPartyTeam(teamMember2);
+    pt->addTeamMember(teamMember1);
+    pt->addTeamMember(teamMember2);
 
     fpc->moveContender(fys::arena::HexagonSide::Orientation::A_N, true);
     teamMember1->moveTeamMember(fys::arena::HexagonSide::Orientation::A_N, true);

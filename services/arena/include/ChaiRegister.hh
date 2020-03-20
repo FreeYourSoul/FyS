@@ -32,10 +32,16 @@ namespace chaiscript {
     class Module;
     using ModulePtr = std::shared_ptr<chaiscript::Module>;
 } 
-namespace fys::arena {
-    class ConnectionHandler;
-    class PitContenders;
-    class AllyPartyTeams;
+namespace fys {
+    namespace cache {
+        class Cml;
+    }
+    namespace arena {
+        class ConnectionHandler;
+        class PitContenders;
+        class AllyPartyTeams;
+        class PartyTeam;
+    }
 }
 
 namespace fys::arena {
@@ -44,6 +50,7 @@ namespace fys::arena {
     public:
         static std::unique_ptr<chaiscript::ChaiScript> createChaiInstance(PitContenders &pc, AllyPartyTeams &apt);
         static void registerUtility(chaiscript::ChaiScript &chai, fys::arena::ConnectionHandler &connectionHandler);
+        static bool loadAndRegisterAction(chaiscript::ChaiScript &chai, cache::Cml & cache, const fys::arena::PartyTeam & pt);
 
     private:
         static void registerChai(chaiscript::ChaiScript &chai, fys::arena::PitContenders& pc, fys::arena::AllyPartyTeams &apt);

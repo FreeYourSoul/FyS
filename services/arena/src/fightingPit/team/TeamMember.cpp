@@ -77,12 +77,12 @@ namespace fys::arena {
             return;
         }
 
-        auto funcActionOnSide = chaiPtr->eval<std::function<int()>> (fmt::format(
-                "fun(){{ return ally_actions[{}][{}].requireAllyTarget() || ally_actions[{}][{}].requireEnemyTarget();}}",
-                _id, _actionsDoable.at(pa->idAction)));
+//        auto funcActionOnSide = chaiPtr->eval<std::function<int()>> (fmt::format(
+//                R"(fun(){{ return ally_actions["{}"]["{}"].requireAllyTarget() || ally_actions["{}"]["{}"].requireEnemyTarget();}})",
+//                _id, _actionsDoable.at(pa->idAction)));
         auto funcAction = chaiPtr->eval<std::function<int(data::Status)>> (fmt::format(
-                "fun(allyStatus){{ return ally_actions[{}][{}].execute(allyStatus);}}",
-                _id, _actionsDoable.at(pa->idAction)));
+                R"(fun(allyStatus){{ return ally_actions["{}_{}"]["{}"].execute(allyStatus);}})",
+                _userName, _name, _actionsDoable.at(pa->idAction)));
 
         try {
             const auto &targetStatus = _status;

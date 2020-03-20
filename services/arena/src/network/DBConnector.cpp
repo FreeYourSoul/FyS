@@ -35,7 +35,7 @@ namespace fys::network {
     }
 
     std::vector<fys::arena::TeamMember> DBConnector::retrieveTeamCharacters(const std::string &user) {
-        auto res = std::vector<fys::arena::TeamMember>();
+//        auto res = std::vector<fys::arena::TeamMember>();
 //        mariadb::connection_ref con = mariadb::connection::create(_refDb);
 //        mariadb::statement_ref stmt = con->create_statement("SELECT * FROM team_character WHERE id_user=?");
 //        stmt->set_string(0, user);

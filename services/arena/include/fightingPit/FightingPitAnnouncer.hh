@@ -114,14 +114,14 @@ namespace fys::arena {
          */
         inline fys::arena::AllyPartyTeams generateAllyPartyTeam();
 
-        inline std::string getScriptContentString(std::string name, const EncounterContext::EncounterDesc &desc);
+        inline const std::string &getScriptContentString(std::string name, const EncounterContext::EncounterDesc &desc);
         void generateContenders(FightingPit &fp, const EncounterContext &ctx, const std::string &wsId);
 
         [[nodiscard]] bool isScriptedEncounter() const { return _encounterType != EncounterType::RANDOM; }
         [[nodiscard]] bool isRandomEncounter() const { return _encounterType == EncounterType::RANDOM; }
 
     private:
-        cache::Cml &_cache;
+        cache::Cml & _cache;
 
         /**
          *   range           desc

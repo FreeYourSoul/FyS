@@ -100,6 +100,7 @@ addFSeamTests(
         TST_SRC #test files
         ${CMAKE_CURRENT_SOURCE_DIR}/catchMain.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/scriptTests/Contender_SampyTestCase.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/scriptTests/ChaiRegisterTestCase.cpp
 
         TO_MOCK
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/ConnectionHandler.hh

@@ -23,6 +23,8 @@
 
 
 #include <spdlog/spdlog.h>
+#include <iterator>
+#include <fmt/ostream.h>
 #include <functional>
 #include <random>
 
@@ -34,195 +36,234 @@
 #include <fightingPit/contender/PitContenders.hh>
 #include <fightingPit/team/TeamMember.hh>
 #include <fightingPit/team/AllyPartyTeams.hh>
+#include <fightingPit/team/PartyTeam.hh>
 
 #include <ConnectionHandler.hh>
 #include <ChaiRegister.hh>
+#include <Cml.hh>
 
 using chaiscript::fun;
 
+namespace {
+    std::string getActionNameFromKey(const std::string &key) {
+        auto startSeparator = key.find_last_of(':');
+        return key.substr(startSeparator + 1, key.find_last_of('.') - startSeparator - 1);
+    }
+}
+
 namespace fys::arena {
 
-void ChaiRegister::registerChai(chaiscript::ChaiScript &chai, PitContenders& pc, AllyPartyTeams &apt) {
+    void ChaiRegister::registerChai(chaiscript::ChaiScript &chai, PitContenders& pc, AllyPartyTeams &apt) {
 
-    try {
-        chaiscript::ModulePtr m = std::make_shared<chaiscript::Module>();
-        registerCommon(m);
-        registerFightingPitContender(chai, m);
-        registerTeamAllies(chai, m);
+        try {
+            chaiscript::ModulePtr m = std::make_shared<chaiscript::Module>();
+            registerCommon(m);
+            registerFightingPitContender(chai, m);
+            registerTeamAllies(chai, m);
 
-        chai.add(m);
-        chai.set_global(chaiscript::var(std::ref(pc)),  "pitContenders");
-        chai.set_global(chaiscript::var(std::ref(apt)), "allyPartyTeams");
+            chai.add(m);
+            chai.set_global(chaiscript::var(std::ref(pc)),  "pitContenders");
+            chai.set_global(chaiscript::var(std::ref(apt)), "allyPartyTeams");
+        }
+        catch (std::exception &ex) {
+            SPDLOG_ERROR("Error caught on script execution {}", ex.what());
+        }
     }
-    catch (std::exception &ex) {
-        SPDLOG_ERROR("Error caught on script execution {}", ex.what());
-    }
 
-}
 
-void ChaiRegister::registerUtility(chaiscript::ChaiScript &chai, ConnectionHandler &connectionHandler) {
+    bool ChaiRegister::loadAndRegisterAction(chaiscript::ChaiScript & chai, cache::Cml & cache, const fys::arena::PartyTeam & pt) {
+        try {
+            for (const auto & tm : pt.getTeamMembers()) {
+                const auto & actionsDoable = tm->getActionsDoable();
 
-        chai.add(fun<std::function<void(uint, uint, std::string)> >(
-                [&connectionHandler](
-                        uint contenderId,                     // [Mandatory] id of the contender
-                        uint spellId,                         // [Mandatory] Spell/Action id
-                        const std::string &descriptionString  // [Mandatory] Description String (Heal of 15, Damage of 17, Critical Damage of 55, Buff intelligence....)
-                ) {
-                    // instantiate a message to send
-                    // continue setting values
-                    // send the data to connectionHandler
-
-                }
-        ), "sendContenderAction"); // No target
-
-        chai.add(chaiscript::fun<std::function<void(std::string, uint, uint, std::string)> >(
-                [&connectionHandler](
-                        std::string targetId,                 // [Optional]  Target (if any) TODO : Should be a pair of <bool, uint>
-                        uint contenderId,                     // [Mandatory] id of the contender
-                        uint spellId,                         // [Mandatory] Spell/Action id
-                        const std::string &descriptionString  // [Mandatory] Description String (Heal of 15, Damage of 17, Critical Damage of 55, Buff intelligence....)
-                ) {
-                    // instantiate a message to send
-                    if (!targetId.empty() && targetId.size() > 1) {
-                        bool isFriendlyTarget = (targetId.at(0) == 'F');
-                        uint idTargetInteger = std::stoi(targetId.substr(1));
-                        // set the id value of the message to send
+                for (const std::string & action : actionsDoable) {
+                    try {
+                        chai.eval(cache.findInCache(action));
+                    } catch (...) {
+                        SPDLOG_INFO("Action {} already loaded", action);
                     }
-                    // continue setting values
-                    // send the data to connectionHandler
-
+                    // instantiate the action variable for given team member in chai engine
+                    const std::string keyPlayer = std::string(pt.getUserName()).append("_").append(tm->getName());
+                    const std::string actionName = getActionNameFromKey(action);
+                    std::string createVar = fmt::format(
+                            R"(ally_actions.insert( ["{}":[ "{}":{}(1) ] ] );)", keyPlayer, actionName, actionName);
+                    chai.eval(createVar);
                 }
-        ), "sendContenderAction");
-
-//    chai.add(chaiscript::fun<std::function<double (double, double)> >(
-//            [](double rangeA, double rangeB) {
-//                return util::RandomGenerator::generateInRange(rangeA, rangeB);
-//            }), "generateRandomNumber");
-//    chai.add(chaiscript::fun<std::function<unsigned(unsigned, unsigned)> >(
-//            [](unsigned rangeA, unsigned rangeB) {
-//                return util::RandomGenerator::generateInRange(rangeA, rangeB);
-//            }), "generateRandomNumber");
-}
-
-void ChaiRegister::registerCommon(chaiscript::ModulePtr m) {
-
-        chaiscript::utility::add_class<fys::arena::data::Life>(
-                *m, "Life", {},
-                {
-                        {fun(&data::Life::current), "current"},
-                        {fun(&data::Life::total),   "total"},
-                        {fun(&data::Life::isDead),  "isDead"}
-                }
-        );
-
-        chaiscript::utility::add_class<fys::arena::data::MagicPoint>(
-                *m, "MagicPoint", {},
-                {
-                        {fun(&data::MagicPoint::current), "current"},
-                        {fun(&data::MagicPoint::total),   "total"}
-                }
-        );
-
-        chaiscript::utility::add_class<fys::arena::data::Status>(
-                *m, "Status", {},
-                {
-                        {fun(&data::Status::life),         "life"},
-                        {fun(&data::Status::magicPoint),   "magicPoint"},
-                        {fun(&data::Status::initialSpeed), "speed"},
-                }
-        );
-
-        chaiscript::utility::add_class<fys::arena::HexagonSide::Orientation>(
-                *m,
-                "Orientation",
-                {
-                        {fys::arena::HexagonSide::Orientation::A_N,  "A_N"},
-                        {fys::arena::HexagonSide::Orientation::A_NE, "A_NE"},
-                        {fys::arena::HexagonSide::Orientation::A_NW, "A_NW"},
-                        {fys::arena::HexagonSide::Orientation::A_S,  "A_S"},
-                        {fys::arena::HexagonSide::Orientation::A_SE, "A_SE"},
-                        {fys::arena::HexagonSide::Orientation::A_SW, "A_SW"},
-                        {fys::arena::HexagonSide::Orientation::B_N,  "B_N"},
-                        {fys::arena::HexagonSide::Orientation::B_NE, "B_NE"},
-                        {fys::arena::HexagonSide::Orientation::B_NW, "B_NW"},
-                        {fys::arena::HexagonSide::Orientation::B_S,  "B_S"},
-                        {fys::arena::HexagonSide::Orientation::B_SE, "B_SE"},
-                        {fys::arena::HexagonSide::Orientation::B_SW, "B_SW"},
-                        {fys::arena::HexagonSide::Orientation::C_N,  "C_N"},
-                        {fys::arena::HexagonSide::Orientation::C_NE, "C_NE"},
-                        {fys::arena::HexagonSide::Orientation::C_NW, "C_NW"},
-                        {fys::arena::HexagonSide::Orientation::C_S,  "C_S"},
-                        {fys::arena::HexagonSide::Orientation::C_SE, "C_SE"},
-                        {fys::arena::HexagonSide::Orientation::C_SW, "C_SW"},
-                        {fys::arena::HexagonSide::Orientation ::NONE,"NONE"}
-                }
-        );
-
-        chaiscript::utility::add_class<fys::arena::HexagonSide::Hexagon>(
-                *m,
-                "Hexagon",
-                {
-                        {fys::arena::HexagonSide::Hexagon::A, "A"},
-                        {fys::arena::HexagonSide::Hexagon::B, "B"},
-                        {fys::arena::HexagonSide::Hexagon::C, "C"}
-                }
-        );
-}
-
-void ChaiRegister::registerFightingPitContender(chaiscript::ChaiScript &chai, chaiscript::ModulePtr m) {
-    chaiscript::utility::add_class<fys::arena::FightingContender>(
-            *m,
-            "FightingContender",
-            {},
-            {
-                    {fun(&FightingContender::getHexagonSideOrient), "getHexagonSideOrient"},
-                    {fun(&FightingContender::accessStatus), "accessStatus"}
             }
-    );
+        } catch (std::exception &e) {
+            SPDLOG_ERROR("Error caught on scripting action loading {}", e.what());
+            return false;
+        }
+        return true;
+    }
 
-    chaiscript::bootstrap::standard_library::vector_type<std::vector<std::shared_ptr<FightingContender>>>("VectorFightingContender", *m);
-    chai.add(chaiscript::vector_conversion<std::vector<std::shared_ptr<FightingContender>>>());
+    void ChaiRegister::registerUtility(chaiscript::ChaiScript &chai, ConnectionHandler &connectionHandler) {
 
-    chaiscript::utility::add_class<fys::arena::PitContenders>(
-            *m, "PitContenders", {},
-            {
-                    {fun(&PitContenders::selectSuitableContenderOnSide), "selectSuitableContenderOnSide"},
-                    {fun(&PitContenders::selectSuitableContender), "selectSuitableContender"},
-                    {fun(&PitContenders::selectSuitableContenderOnSideAlive), "selectSuitableContenderOnSideAlive"},
-                    {fun(&PitContenders::selectSuitableContenderAlive), "selectSuitableContenderAlive"},
-                    {fun(&PitContenders::getFightingContender), "getFightingContender"},
-                    {fun(&PitContenders::getContenderOnSide),   "getContenderOnSide"}
-            }
-    );
-}
+            chai.add(fun<std::function<void(uint, uint, std::string)> >(
+                    [&connectionHandler](
+                            uint contenderId,                     // [Mandatory] id of the contender
+                            uint spellId,                         // [Mandatory] Spell/Action id
+                            const std::string &descriptionString  // [Mandatory] Description String (Heal of 15, Damage of 17,
+                                                                  //             Critical Damage of 55, Buff intelligence....)
+                    ) {
+                        // instantiate a message to send
+                        // continue setting values
+                        // send the data to connectionHandler
 
-void ChaiRegister::registerTeamAllies(chaiscript::ChaiScript &chai, chaiscript::ModulePtr m) {
+                    }
+            ), "sendContenderAction"); // No target
 
-        chaiscript::utility::add_class<fys::arena::TeamMember>(
+            chai.add(chaiscript::fun<std::function<void(std::string, uint, uint, std::string)> >(
+                    [&connectionHandler](
+                            std::string targetId,                 // [Optional]  Target (if any) TODO : Should be a pair of <bool, uint>
+                            uint contenderId,                     // [Mandatory] id of the contender
+                            uint spellId,                         // [Mandatory] Spell/Action id
+                            const std::string &descriptionString  // [Mandatory] Description String (Heal of 15, Damage of 17, Critical Damage of 55, Buff intelligence....)
+                    ) {
+                        // instantiate a message to send
+                        if (!targetId.empty() && targetId.size() > 1) {
+                            bool isFriendlyTarget = (targetId.at(0) == 'F');
+                            uint idTargetInteger = std::stoi(targetId.substr(1));
+                            // set the id value of the message to send
+                        }
+                        // continue setting values
+                        // send the data to connectionHandler
+
+                    }
+            ), "sendContenderAction");
+
+    //    chai.add(chaiscript::fun<std::function<double (double, double)> >(
+    //            [](double rangeA, double rangeB) {
+    //                return util::RandomGenerator::generateInRange(rangeA, rangeB);
+    //            }), "generateRandomNumber");
+    //    chai.add(chaiscript::fun<std::function<unsigned(unsigned, unsigned)> >(
+    //            [](unsigned rangeA, unsigned rangeB) {
+    //                return util::RandomGenerator::generateInRange(rangeA, rangeB);
+    //            }), "generateRandomNumber");
+    }
+
+    void ChaiRegister::registerCommon(chaiscript::ModulePtr m) {
+
+            chaiscript::utility::add_class<fys::arena::data::Life>(
+                    *m, "Life", {},
+                    {
+                            {fun(&data::Life::current), "current"},
+                            {fun(&data::Life::total),   "total"},
+                            {fun(&data::Life::isDead),  "isDead"}
+                    }
+            );
+
+            chaiscript::utility::add_class<fys::arena::data::MagicPoint>(
+                    *m, "MagicPoint", {},
+                    {
+                            {fun(&data::MagicPoint::current), "current"},
+                            {fun(&data::MagicPoint::total),   "total"}
+                    }
+            );
+
+            chaiscript::utility::add_class<fys::arena::data::Status>(
+                    *m, "Status", {},
+                    {
+                            {fun(&data::Status::life),         "life"},
+                            {fun(&data::Status::magicPoint),   "magicPoint"},
+                            {fun(&data::Status::initialSpeed), "speed"},
+                    }
+            );
+
+            chaiscript::utility::add_class<fys::arena::HexagonSide::Orientation>(
+                    *m,
+                    "Orientation",
+                    {
+                            {fys::arena::HexagonSide::Orientation::A_N,  "A_N"},
+                            {fys::arena::HexagonSide::Orientation::A_NE, "A_NE"},
+                            {fys::arena::HexagonSide::Orientation::A_NW, "A_NW"},
+                            {fys::arena::HexagonSide::Orientation::A_S,  "A_S"},
+                            {fys::arena::HexagonSide::Orientation::A_SE, "A_SE"},
+                            {fys::arena::HexagonSide::Orientation::A_SW, "A_SW"},
+                            {fys::arena::HexagonSide::Orientation::B_N,  "B_N"},
+                            {fys::arena::HexagonSide::Orientation::B_NE, "B_NE"},
+                            {fys::arena::HexagonSide::Orientation::B_NW, "B_NW"},
+                            {fys::arena::HexagonSide::Orientation::B_S,  "B_S"},
+                            {fys::arena::HexagonSide::Orientation::B_SE, "B_SE"},
+                            {fys::arena::HexagonSide::Orientation::B_SW, "B_SW"},
+                            {fys::arena::HexagonSide::Orientation::C_N,  "C_N"},
+                            {fys::arena::HexagonSide::Orientation::C_NE, "C_NE"},
+                            {fys::arena::HexagonSide::Orientation::C_NW, "C_NW"},
+                            {fys::arena::HexagonSide::Orientation::C_S,  "C_S"},
+                            {fys::arena::HexagonSide::Orientation::C_SE, "C_SE"},
+                            {fys::arena::HexagonSide::Orientation::C_SW, "C_SW"},
+                            {fys::arena::HexagonSide::Orientation ::NONE,"NONE"}
+                    }
+            );
+
+            chaiscript::utility::add_class<fys::arena::HexagonSide::Hexagon>(
+                    *m,
+                    "Hexagon",
+                    {
+                            {fys::arena::HexagonSide::Hexagon::A, "A"},
+                            {fys::arena::HexagonSide::Hexagon::B, "B"},
+                            {fys::arena::HexagonSide::Hexagon::C, "C"}
+                    }
+            );
+    }
+
+    void ChaiRegister::registerFightingPitContender(chaiscript::ChaiScript &chai, chaiscript::ModulePtr m) {
+        chaiscript::utility::add_class<fys::arena::FightingContender>(
                 *m,
-                "TeamMember",
+                "FightingContender",
                 {},
                 {
-                        {fun(&TeamMember::accessStatus), "accessStatus"}
+                        {fun(&FightingContender::getHexagonSideOrient), "getHexagonSideOrient"},
+                        {fun(&FightingContender::accessStatus), "accessStatus"}
                 }
         );
 
-        chaiscript::bootstrap::standard_library::vector_type<std::vector<std::shared_ptr<TeamMember>>>("VectorTeamMember", *m);
-        chai.add(chaiscript::vector_conversion<std::vector<std::shared_ptr<TeamMember>>>());
+        chaiscript::bootstrap::standard_library::vector_type<std::vector<std::shared_ptr<FightingContender>>>("VectorFightingContender", *m);
+        chai.add(chaiscript::vector_conversion<std::vector<std::shared_ptr<FightingContender>>>());
 
-        chaiscript::utility::add_class<fys::arena::AllyPartyTeams>(
-                *m,
-                "AllyPartyTeams",
-                {},
+        chaiscript::utility::add_class<fys::arena::PitContenders>(
+                *m, "PitContenders", {},
                 {
-                        {fun(&AllyPartyTeams::selectSuitableMemberOnSide), "selectSuitableMemberOnSide"},
-                        {fun(&AllyPartyTeams::selectSuitableMember), "selectSuitableMember"},
-                        {fun(&AllyPartyTeams::selectSuitableMemberOnSideAlive), "selectSuitableMemberOnSideAlive"},
-                        {fun(&AllyPartyTeams::selectSuitableMemberAlive), "selectSuitableMemberAlive"}
+                        {fun(&PitContenders::selectSuitableContenderOnSide), "selectSuitableContenderOnSide"},
+                        {fun(&PitContenders::selectSuitableContender), "selectSuitableContender"},
+                        {fun(&PitContenders::selectSuitableContenderOnSideAlive), "selectSuitableContenderOnSideAlive"},
+                        {fun(&PitContenders::selectSuitableContenderAlive), "selectSuitableContenderAlive"},
+                        {fun(&PitContenders::getFightingContender), "getFightingContender"},
+                        {fun(&PitContenders::getContenderOnSide),   "getContenderOnSide"}
                 }
         );
+    }
 
-}
+    void ChaiRegister::registerTeamAllies(chaiscript::ChaiScript &chai, chaiscript::ModulePtr m) {
+
+            chaiscript::utility::add_class<fys::arena::TeamMember>(
+                    *m,
+                    "TeamMember",
+                    {},
+                    {
+                            {fun(&TeamMember::accessStatus), "accessStatus"}
+                    }
+            );
+
+            chaiscript::bootstrap::standard_library::vector_type<std::vector<std::shared_ptr<TeamMember>>>("VectorTeamMember", *m);
+            chai.add(chaiscript::vector_conversion<std::vector<std::shared_ptr<TeamMember>>>());
+
+            chaiscript::utility::add_class<fys::arena::AllyPartyTeams>(
+                    *m,
+                    "AllyPartyTeams",
+                    {},
+                    {
+                            {fun(&AllyPartyTeams::selectSuitableMemberOnSide), "selectSuitableMemberOnSide"},
+                            {fun(&AllyPartyTeams::selectSuitableMember), "selectSuitableMember"},
+                            {fun(&AllyPartyTeams::selectSuitableMemberOnSideAlive), "selectSuitableMemberOnSideAlive"},
+                            {fun(&AllyPartyTeams::selectSuitableMemberAlive), "selectSuitableMemberAlive"}
+                    }
+            );
+
+            // instantiate global map that contains the action for each given player's ally the doable actions
+            chai.eval(R"(global ally_actions = [ "":"" ];)");
+
+    }
 
     std::unique_ptr<chaiscript::ChaiScript> ChaiRegister::createChaiInstance(PitContenders &pc, AllyPartyTeams &apt) {
         auto chai = std::make_unique<chaiscript::ChaiScript>();

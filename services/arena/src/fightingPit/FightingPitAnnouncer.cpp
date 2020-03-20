@@ -101,12 +101,11 @@ namespace fys::arena {
         auto team = std::make_unique<PartyTeam>(_creatorUserName);
 
         // Temporary hard coded party team
-        auto tm1 = std::make_shared<TeamMember>();
-        auto tm2 = std::make_shared<TeamMember>();
-        auto tm3 = std::make_shared<TeamMember>();
-        auto tm4 = std::make_shared<TeamMember>();
+        auto tm1 = std::make_shared<TeamMember>(_creatorUserName, "Elvo");
+        auto tm2 = std::make_shared<TeamMember>(_creatorUserName, "Mirael");
+        auto tm3 = std::make_shared<TeamMember>(_creatorUserName, "Fyston");
+        auto tm4 = std::make_shared<TeamMember>(_creatorUserName, "Simon");
 
-        tm1->setName("Elvo");
         tm1->setId(0);
         tm1->moveTeamMember(HexagonSide::Orientation::B_S, true);
         auto &s1 = tm1->accessStatus();
@@ -115,7 +114,6 @@ namespace fys::arena {
         s1.magicPoint.total = 20;
         s1.magicPoint.current = 20;
         s1.initialSpeed = 3;
-        tm2->setName("Mirael");
         tm2->setId(1);
         tm2->moveTeamMember(HexagonSide::Orientation::B_S, true);
         auto &s2 = tm2->accessStatus();
@@ -124,7 +122,6 @@ namespace fys::arena {
         s2.magicPoint.total = 0;
         s2.magicPoint.current = 0;
         s2.initialSpeed = 5;
-        tm3->setName("FySton");
         tm3->setId(2);
         tm3->moveTeamMember(HexagonSide::Orientation::B_S, true);
         auto &s3 = tm3->accessStatus();
@@ -133,7 +130,6 @@ namespace fys::arena {
         s3.magicPoint.total = 10;
         s3.magicPoint.current = 10;
         s3.initialSpeed = 10;
-        tm4->setName("Simon");
         tm4->setId(3);
         tm4->moveTeamMember(HexagonSide::Orientation::B_S, true);
         auto &s4 = tm4->accessStatus();
@@ -143,21 +139,22 @@ namespace fys::arena {
         s4.magicPoint.current = 10;
         s4.initialSpeed = 20;
 
-        team->addPartyTeam(tm1);
-        team->addPartyTeam(tm2);
-        team->addPartyTeam(tm3);
-        team->addPartyTeam(tm4);
+        team->addTeamMember(tm1);
+        team->addTeamMember(tm2);
+        team->addTeamMember(tm3);
+        team->addTeamMember(tm4);
         // TODO get data from DB to initialize party team
 
         apt.addPartyTeam(std::move(team));
         return apt;
     }
 
-    std::string FightingPitAnnouncer::getScriptContentString(std::string name, const EncounterContext::EncounterDesc &desc) {
+    const std::string &FightingPitAnnouncer::getScriptContentString(std::string name, const EncounterContext::EncounterDesc &desc) {
+        static const std::string empty{};
         if (std::any_of(_loadedScript.cbegin(), _loadedScript.cend(), [&name](const auto &s){ return s == name; } ))
-            return "";
+            return empty;
         _loadedScript.emplace_back(std::move(name));
-        return _cache.findInCache(desc.key).data();
+        return _cache.findInCache(desc.key);
     }
 
     SideBattle &FightingPitAnnouncer::getSideBattleForSide(const std::unique_ptr<FightingPit> &fp, HexagonSide::Orientation side)  {

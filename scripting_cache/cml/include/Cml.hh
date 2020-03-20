@@ -44,7 +44,7 @@ namespace fys::cache {
         virtual ~Cml() = default;
         explicit Cml(std::filesystem::path pathLocalStorage);
 
-        std::string_view findInCache(const std::string &key, bool first = true);
+        const std::string &findInCache(const std::string &key, bool first = true);
 
         virtual void createFileInLocalStorage(const CmlKey &cmlKey) = 0;
         void createFile(const std::filesystem::path &pathToFile, const std::string &content) const;

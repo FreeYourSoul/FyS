@@ -135,8 +135,7 @@ namespace fys::arena {
 
         void addContender(const std::shared_ptr<FightingContender> & fc) { _contenders.addContender(fc); }
 
-        // todo move to FightingPitAnnouncer ?
-        void initializePartyTeam(AllyPartyTeams && allyPartyTeams) { _partyTeams = std::move(allyPartyTeams); }
+        void initializePartyTeam(AllyPartyTeams && allyPartyTeams);
         void initializeSideBattles();
         void initializePriorityListInSidesBattle();
 

@@ -74,8 +74,8 @@ namespace fys::cache {
         return false;
     }
 
-    std::string_view Cml::findInCache(const std::string &key, bool first)  {
-        auto str = _localPathStorage.string();
+    const std::string &Cml::findInCache(const std::string &key, bool first)  {
+        static const std::string empty {};
         CmlKey cmlKey(_localPathStorage, key);
 
         // Check in-memory (and check if file has been updated)
@@ -90,8 +90,7 @@ namespace fys::cache {
                                                readFile(cmlKey.getPath()) };
             return _inMemCache[key].content;
         }
-        if (!first)
-            return "";
+        if (!first) return empty;
         createFileInLocalStorage(cmlKey);
         return findInCache(key, false);
     }

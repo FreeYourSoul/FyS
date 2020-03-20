@@ -43,11 +43,11 @@ namespace fys::arena {
         [[nodiscard]] std::vector<std::shared_ptr<TeamMember>> getTeamMemberOnSide(HexagonSide::Orientation side) const;
         [[nodiscard]] std::vector<std::shared_ptr<TeamMember>> getChangingSideTeamMember() const;
 
-        [[nodiscard]] const std::string &getuserName() const { return _userName; }
+        [[nodiscard]] const std::string &getUserName() const { return _userName; }
         [[nodiscard]] const std::vector<std::shared_ptr<TeamMember>> &getTeamMembers() const { return _members; }
         [[nodiscard]] std::vector<std::shared_ptr<TeamMember>> &accessTeamMembers() { return _members; }
 
-        void addPartyTeam(std::shared_ptr<TeamMember> member);
+        void addTeamMember(std::shared_ptr<TeamMember> member);
 
         void addPendingActionToTeamMember(unsigned id);
 
