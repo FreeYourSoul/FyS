@@ -25,7 +25,6 @@
 #include <algorithm>
 #include <numeric>
 
-#include <fmt/format.h>
 #include <chaiscript/chaiscript.hpp>
 #include <algorithm/algorithm.hh>
 
@@ -51,6 +50,9 @@ namespace fys::arena {
     }
 
     void AllyPartyTeams::addPartyTeam(std::unique_ptr<PartyTeam> && team)  {
+        for (auto & tm : team->accessTeamMembers()) {
+            tm->setId(++_currentTeamMemberId);
+        }
         _partyTeams.emplace_back(std::move(team));
     }
 

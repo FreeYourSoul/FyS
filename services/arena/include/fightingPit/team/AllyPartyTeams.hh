@@ -67,6 +67,9 @@ namespace fys::arena {
     private:
         std::vector<std::unique_ptr<PartyTeam>> _partyTeams;
 
+        // automatically incremented for each TeamMember when adding a PartyTeam
+        unsigned _currentTeamMemberId { 0 };
+
     };
 
 }

@@ -75,8 +75,11 @@ namespace fys::arena {
         void moveTeamMember(HexagonSide::Orientation destination, bool bypassCheck = false);
         void moveTeamMember(data::MoveDirection rightOrLeft);
 
+        /**
+         * @brief called by #fys::arena::AllyPartyTeam to set the id of the team member
+         */
         void setId(unsigned id) { _id = id; }
-        void addDoableAction(std::string doable) { _actionsDoable.emplace_back(std::move(doable)); }
+        void addDoableAction(std::string doable, uint level) { _actionsDoable.emplace_back(std::move(doable), level); }
 
         [[nodiscard]] std::pair<HexagonSide::Hexagon, HexagonSide::Orientation> getHexagonSide() const { return *_side; }
         [[nodiscard]] HexagonSide::Orientation getHexagonSideOrient() const { return (*_side).second; }
@@ -84,7 +87,7 @@ namespace fys::arena {
         [[nodiscard]] const data::Status &getStatus() const { return _status; }
         [[nodiscard]] const std::string &getUserName() const { return _userName; }
         [[nodiscard]] const std::string &getName() const { return _name; }
-        [[nodiscard]] const std::vector<std::string> &getActionsDoable() const { return _actionsDoable; }
+        [[nodiscard]] const std::vector<std::pair<std::string, uint>> &getActionsDoable() const { return _actionsDoable; }
         [[nodiscard]] unsigned getId() const { return _id; }
 
     private:
@@ -94,7 +97,8 @@ namespace fys::arena {
         unsigned _id {};
         data::Status _status;
 
-        std::vector<std::string> _actionsDoable;
+        // action name with level of action
+        std::vector<std::pair<std::string, uint>> _actionsDoable;
          fys::common::SizedQueue<PendingAction> _pendingActions;
 
     };

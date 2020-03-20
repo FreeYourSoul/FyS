@@ -215,13 +215,13 @@ TEST_CASE("FightingPitAnnouncer test", "[service][arena]") {
 
                 const auto members = FightingPitAnnouncer::getPartyTeams(fp).getMembersBySide(HexagonSide::Orientation::B_S);
                 REQUIRE(4 == members.size());
-                REQUIRE(0 == members.at(0)->getId());
+                REQUIRE(1 == members.at(0)->getId());
                 REQUIRE(3 == members.at(0)->getStatus().initialSpeed);
-                REQUIRE(1 == members.at(1)->getId());
+                REQUIRE(2 == members.at(1)->getId());
                 REQUIRE(5 == members.at(1)->getStatus().initialSpeed);
-                REQUIRE(2 == members.at(2)->getId());
+                REQUIRE(3 == members.at(2)->getId());
                 REQUIRE(10 == members.at(2)->getStatus().initialSpeed);
-                REQUIRE(3 == members.at(3)->getId());
+                REQUIRE(4 == members.at(3)->getId());
                 REQUIRE(20 == members.at(3)->getStatus().initialSpeed);
 
                 SECTION("test ordering") {
@@ -231,12 +231,12 @@ TEST_CASE("FightingPitAnnouncer test", "[service][arena]") {
                     REQUIRE(HexagonSide::Orientation::B_S == order.getSide());
 
                     const auto elem1 = order.getCurrentParticipantTurn(std::chrono::system_clock::now(), 0ms);
-                    REQUIRE(data::PriorityElem{3, 20, data::PARTY_MEMBER} == elem1);
+                    REQUIRE(data::PriorityElem{4, 20, data::PARTY_MEMBER} == elem1);
                     REQUIRE(20 == elem1.speed);
                     std::this_thread::sleep_for(10ms);
 
                     const auto elem2 = order.getCurrentParticipantTurn(std::chrono::system_clock::now(), 0ms);
-                    REQUIRE(data::PriorityElem{2, 10, data::PARTY_MEMBER} == elem2);
+                    REQUIRE(data::PriorityElem{3, 10, data::PARTY_MEMBER} == elem2);
                     REQUIRE(10 == elem2.speed);
                     std::this_thread::sleep_for(10ms);
 
@@ -251,12 +251,12 @@ TEST_CASE("FightingPitAnnouncer test", "[service][arena]") {
                     std::this_thread::sleep_for(10ms);
 
                     const auto elem5 = order.getCurrentParticipantTurn(std::chrono::system_clock::now(), 0ms);
-                    REQUIRE(data::PriorityElem{1, 5, data::PARTY_MEMBER} == elem5);
+                    REQUIRE(data::PriorityElem{2, 5, data::PARTY_MEMBER} == elem5);
                     REQUIRE(5 == elem5.speed);
                     std::this_thread::sleep_for(10ms);
 
                     const auto & elem = order.getCurrentParticipantTurn(std::chrono::system_clock::now(), 0ms);
-                    REQUIRE(data::PriorityElem{0, 4, data::PARTY_MEMBER} == elem);
+                    REQUIRE(data::PriorityElem{1, 4, data::PARTY_MEMBER} == elem);
                     REQUIRE(3 == elem.speed);
                     std::this_thread::sleep_for(10ms);
 

@@ -79,10 +79,10 @@ namespace fys::arena {
 
 //        auto funcActionOnSide = chaiPtr->eval<std::function<int()>> (fmt::format(
 //                R"(fun(){{ return ally_actions["{}"]["{}"].requireAllyTarget() || ally_actions["{}"]["{}"].requireEnemyTarget();}})",
-//                _id, _actionsDoable.at(pa->idAction)));
+//                _id, _actionsDoable.at(pa->idAction).first));
         auto funcAction = chaiPtr->eval<std::function<int(data::Status)>> (fmt::format(
                 R"(fun(allyStatus){{ return ally_actions["{}_{}"]["{}"].execute(allyStatus);}})",
-                _userName, _name, _actionsDoable.at(pa->idAction)));
+                _userName, _name, _actionsDoable.at(pa->idAction).first));
 
         try {
             const auto &targetStatus = _status;

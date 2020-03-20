@@ -76,17 +76,15 @@ namespace fys::arena {
             for (const auto & tm : pt.getTeamMembers()) {
                 const auto & actionsDoable = tm->getActionsDoable();
 
-                for (const std::string & action : actionsDoable) {
+                for (const auto & [action, lvl] : actionsDoable) {
                     try {
                         chai.eval(cache.findInCache(action));
-                    } catch (...) {
-                        SPDLOG_INFO("Action {} already loaded", action);
-                    }
+                    } catch (...) { SPDLOG_DEBUG("Action {} already loaded", action); }
                     // instantiate the action variable for given team member in chai engine
                     const std::string keyPlayer = std::string(pt.getUserName()).append("_").append(tm->getName());
                     const std::string actionName = getActionNameFromKey(action);
                     std::string createVar = fmt::format(
-                            R"(ally_actions.insert( ["{}":[ "{}":{}(1) ] ] );)", keyPlayer, actionName, actionName);
+                            R"(ally_actions.insert( ["{}":[ "{}":{}({}) ] ] );)", keyPlayer, actionName, actionName, lvl);
                     chai.eval(createVar);
                 }
             }

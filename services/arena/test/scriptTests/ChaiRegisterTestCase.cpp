@@ -89,7 +89,7 @@ TEST_CASE("Test register/load player", "[service][arena][script_test]") {
         fys::arena::PartyTeam partyTeam("FyS");
         fys::arena::TeamMemberSPtr tm1 = std::make_shared<fys::arena::TeamMember>(partyTeam.getUserName(), "fyston1");
         tm1->setId(0);
-        tm1->addDoableAction("arena:actions:damage:damage.chai");
+        tm1->addDoableAction("arena:actions:damage:damage.chai", 1);
         partyTeam.addTeamMember(std::move(tm1));
 
         fys::arena::ChaiRegister::loadAndRegisterAction(*chai, ccpy, partyTeam);
@@ -103,11 +103,11 @@ TEST_CASE("Test register/load player", "[service][arena][script_test]") {
             FAIL("Shouldn't fail here");
         }
 
-        SECTION("simple est register loaded action") {
+        SECTION("simple test register same partyteam with loaded action") {
 
             fys::arena::TeamMemberSPtr tm2 = std::make_shared<fys::arena::TeamMember>(partyTeam.getUserName(), "fyston2");
             tm2->setId(1);
-            tm2->addDoableAction("arena:actions:damage:damage.chai");
+            tm2->addDoableAction("arena:actions:damage:damage.chai", 1);
             partyTeam.addTeamMember(std::move(tm2));
 
             fys::arena::ChaiRegister::loadAndRegisterAction(*chai, ccpy, partyTeam);
@@ -125,6 +125,34 @@ TEST_CASE("Test register/load player", "[service][arena][script_test]") {
             }
 
         } // End section : Test register loaded action
+
+        SECTION("simple test register new partyteam with loaded action") {
+
+            fys::arena::PartyTeam partyTeam2("Free");
+            fys::arena::TeamMemberSPtr tm21 = std::make_shared<fys::arena::TeamMember>(partyTeam2.getUserName(), "fyston1");
+            tm21->setId(2);
+            tm21->addDoableAction("arena:actions:damage:damage.chai", 1);
+            partyTeam2.addTeamMember(std::move(tm21));
+            fys::arena::TeamMemberSPtr tm22 = std::make_shared<fys::arena::TeamMember>(partyTeam2.getUserName(), "fyston2");
+            tm22->setId(3);
+            tm22->addDoableAction("arena:actions:damage:damage.chai", 1);
+            partyTeam2.addTeamMember(std::move(tm22));
+
+            fys::arena::ChaiRegister::loadAndRegisterAction(*chai, ccpy, partyTeam2);
+
+            try {
+                REQUIRE(chai->eval<bool>(R"(1 == ally_actions.count("Free_fyston1");)"));
+                REQUIRE(chai->eval<bool>(R"(1 == ally_actions["Free_fyston1"].count("damage");)"));
+
+                REQUIRE(chai->eval<bool>(R"(1 == ally_actions.count("Free_fyston2");)"));
+                REQUIRE(chai->eval<bool>(R"(1 == ally_actions["Free_fyston2"].count("damage");)"));
+            }
+            catch (std::exception &ex) {
+                SPDLOG_ERROR("{}", ex.what());
+                FAIL("Shouldn't fail here");
+            }
+
+        } // End section : simple test register new partyteam with loaded action
 
     } // End section : Test load player actions
     

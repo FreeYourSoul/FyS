@@ -106,7 +106,6 @@ namespace fys::arena {
         auto tm3 = std::make_shared<TeamMember>(_creatorUserName, "Fyston");
         auto tm4 = std::make_shared<TeamMember>(_creatorUserName, "Simon");
 
-        tm1->setId(0);
         tm1->moveTeamMember(HexagonSide::Orientation::B_S, true);
         auto &s1 = tm1->accessStatus();
         s1.life.total = 100;
@@ -114,7 +113,6 @@ namespace fys::arena {
         s1.magicPoint.total = 20;
         s1.magicPoint.current = 20;
         s1.initialSpeed = 3;
-        tm2->setId(1);
         tm2->moveTeamMember(HexagonSide::Orientation::B_S, true);
         auto &s2 = tm2->accessStatus();
         s2.life.total = 200;
@@ -122,7 +120,6 @@ namespace fys::arena {
         s2.magicPoint.total = 0;
         s2.magicPoint.current = 0;
         s2.initialSpeed = 5;
-        tm3->setId(2);
         tm3->moveTeamMember(HexagonSide::Orientation::B_S, true);
         auto &s3 = tm3->accessStatus();
         s3.life.total = 550;
@@ -130,7 +127,6 @@ namespace fys::arena {
         s3.magicPoint.total = 10;
         s3.magicPoint.current = 10;
         s3.initialSpeed = 10;
-        tm4->setId(3);
         tm4->moveTeamMember(HexagonSide::Orientation::B_S, true);
         auto &s4 = tm4->accessStatus();
         s4.life.total = 140;
@@ -139,10 +135,11 @@ namespace fys::arena {
         s4.magicPoint.current = 10;
         s4.initialSpeed = 20;
 
-        team->addTeamMember(tm1);
-        team->addTeamMember(tm2);
-        team->addTeamMember(tm3);
-        team->addTeamMember(tm4);
+        team->addTeamMember(std::move(tm1));
+        team->addTeamMember(std::move(tm2));
+        team->addTeamMember(std::move(tm3));
+        team->addTeamMember(std::move(tm4));
+
         // TODO get data from DB to initialize party team
 
         apt.addPartyTeam(std::move(team));
