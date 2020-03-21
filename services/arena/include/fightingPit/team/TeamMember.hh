@@ -81,9 +81,9 @@ namespace fys::arena {
         void setId(unsigned id) { _id = id; }
         void addDoableAction(std::string doable, uint level) { _actionsDoable.emplace_back(std::move(doable), level); }
 
-        [[nodiscard]] std::pair<HexagonSide::Hexagon, HexagonSide::Orientation> getHexagonSide() const { return *_side; }
         [[nodiscard]] HexagonSide::Orientation getHexagonSideOrient() const { return (*_side).second; }
         [[nodiscard]] data::Status &accessStatus() { return _status; }
+        [[nodiscard]] const HexagonSide &getHexagonSide() const { return _side; }
         [[nodiscard]] const data::Status &getStatus() const { return _status; }
         [[nodiscard]] const std::string &getUserName() const { return _userName; }
         [[nodiscard]] const std::string &getName() const { return _name; }

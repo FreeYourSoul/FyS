@@ -62,6 +62,10 @@ namespace fys::arena {
             NONE // 18
         };
 
+        explicit HexagonSide(Orientation orientation) {
+            move(orientation, true);
+        }
+
         explicit HexagonSide(Hexagon hexagon = Hexagon::A, Orientation orientation = Orientation::NONE) :
             _hexagon(hexagon), _side(orientation) {}
 
@@ -73,17 +77,17 @@ namespace fys::arena {
         bool moveBack();
 
         [[nodiscard]] bool isAmbushSide() const;
+        [[nodiscard]] bool canMove(HexagonSide::Orientation destinationSide) const;
 
     private:
         void changeSide(HexagonSide::Orientation);
         [[nodiscard]] Orientation findLeft() const;
         [[nodiscard]] Orientation findRight() const;
         [[nodiscard]] Orientation findBack() const;
-        [[nodiscard]] bool canMove(HexagonSide::Orientation destinationSide) const;
 
     private:
-        Hexagon     _hexagon;
-        Orientation _side;
+        Hexagon     _hexagon    = Hexagon::A;
+        Orientation _side       = Orientation::NONE;
     };
 
 } // namespace fys::arena

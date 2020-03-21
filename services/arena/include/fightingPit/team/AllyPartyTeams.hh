@@ -60,6 +60,7 @@ namespace fys::arena {
         [[nodiscard]] std::vector<std::shared_ptr<TeamMember>>
             getMembersBySide(HexagonSide::Orientation side) const;
 
+        unsigned getNumberAlly() const { return _currentTeamMemberId; }
         unsigned allyNumberOnSide(HexagonSide::Orientation side) const;
 
         void executeAllyAction(const data::PriorityElem & ally, PitContenders & pc, std::unique_ptr<chaiscript::ChaiScript> & chaiPtr);

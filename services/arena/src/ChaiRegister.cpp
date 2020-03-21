@@ -60,10 +60,12 @@ namespace fys::arena {
             registerCommon(m);
             registerFightingPitContender(chai, m);
             registerTeamAllies(chai, m);
+            registerUtility(chai, pc, apt);
 
             chai.add(m);
             chai.set_global(chaiscript::var(std::ref(pc)),  "pitContenders");
             chai.set_global(chaiscript::var(std::ref(apt)), "allyPartyTeams");
+
         }
         catch (std::exception &ex) {
             SPDLOG_ERROR("Error caught on script execution {}", ex.what());
@@ -95,50 +97,75 @@ namespace fys::arena {
         return true;
     }
 
-    void ChaiRegister::registerUtility(chaiscript::ChaiScript &chai, ConnectionHandler &connectionHandler) {
+    void ChaiRegister::registerUtility(chaiscript::ChaiScript &chai, PitContenders& pc, AllyPartyTeams &apt) {
 
-            chai.add(fun<std::function<void(uint, uint, std::string)> >(
-                    [&connectionHandler](
-                            uint contenderId,                     // [Mandatory] id of the contender
-                            uint spellId,                         // [Mandatory] Spell/Action id
-                            const std::string &descriptionString  // [Mandatory] Description String (Heal of 15, Damage of 17,
-                                                                  //             Critical Damage of 55, Buff intelligence....)
-                    ) {
-                        // instantiate a message to send
-                        // continue setting values
-                        // send the data to connectionHandler
+        chai.add(chaiscript::fun<std::function<double (double, double)> >(
+                [](double rangeA, double rangeB) {
+                    return util::RandomGenerator::generateInRange(rangeA, rangeB);
+                }), "generateRandomNumber");
+        chai.add(chaiscript::fun<std::function<unsigned(unsigned, unsigned)> >(
+                [](unsigned rangeA, unsigned rangeB) {
+                    return util::RandomGenerator::generateInRange(rangeA, rangeB);
+                }), "generateRandomNumber");
 
+        chai.add(chaiscript::fun<std::function<bool(bool, unsigned, HexagonSide::Orientation)> >(
+                [&pc, &apt](bool isContender, unsigned id, HexagonSide::Orientation side) {
+                    if (isContender && id < pc.getNumberContender()) {
+                        return side == pc.getFightingContender(id)->getHexagonSideOrient();
                     }
-            ), "sendContenderAction"); // No target
-
-            chai.add(chaiscript::fun<std::function<void(std::string, uint, uint, std::string)> >(
-                    [&connectionHandler](
-                            std::string targetId,                 // [Optional]  Target (if any) TODO : Should be a pair of <bool, uint>
-                            uint contenderId,                     // [Mandatory] id of the contender
-                            uint spellId,                         // [Mandatory] Spell/Action id
-                            const std::string &descriptionString  // [Mandatory] Description String (Heal of 15, Damage of 17, Critical Damage of 55, Buff intelligence....)
-                    ) {
-                        // instantiate a message to send
-                        if (!targetId.empty() && targetId.size() > 1) {
-                            bool isFriendlyTarget = (targetId.at(0) == 'F');
-                            uint idTargetInteger = std::stoi(targetId.substr(1));
-                            // set the id value of the message to send
-                        }
-                        // continue setting values
-                        // send the data to connectionHandler
-
+                    else if (!isContender && id < apt.getNumberAlly()) {
+                        return side == apt.selectMemberById(id)->getHexagonSideOrient();
                     }
-            ), "sendContenderAction");
-
-    //    chai.add(chaiscript::fun<std::function<double (double, double)> >(
-    //            [](double rangeA, double rangeB) {
-    //                return util::RandomGenerator::generateInRange(rangeA, rangeB);
-    //            }), "generateRandomNumber");
-    //    chai.add(chaiscript::fun<std::function<unsigned(unsigned, unsigned)> >(
-    //            [](unsigned rangeA, unsigned rangeB) {
-    //                return util::RandomGenerator::generateInRange(rangeA, rangeB);
-    //            }), "generateRandomNumber");
+                    return false;
+                }), "isCharacterOnSide");
+        chai.add(chaiscript::fun<std::function<bool(bool, unsigned, HexagonSide::Orientation)> >(
+                [&pc, &apt](bool isContender, unsigned id, HexagonSide::Orientation side) {
+                    if (isContender && id < pc.getNumberContender()) {
+                        return  pc.getFightingContender(id)->getHexagonSide().canMove(side);
+                    }
+                    else if (!isContender && id < apt.getNumberAlly()) {
+                        return apt.selectMemberById(id)->getHexagonSide().canMove(side);
+                    }
+                    return false;
+                }), "isCharacterOnAdjacentSide");
+        chai.add(chaiscript::fun<std::function<bool(HexagonSide::Orientation, HexagonSide::Orientation)> >(
+                [&pc, &apt](HexagonSide::Orientation lhs, HexagonSide::Orientation rhs) {
+                    return HexagonSide{lhs}.canMove(rhs);
+                }), "isSideAdjacentSide");
     }
+
+    //            chai.add(fun<std::function<void(uint, uint, std::string)> >(
+//                    [&connectionHandler](
+//                            uint contenderId,                     // [Mandatory] id of the contender
+//                            uint spellId,                         // [Mandatory] Spell/Action id
+//                            const std::string &descriptionString  // [Mandatory] Description String (Heal of 15, Damage of 17,
+//                                                                  //             Critical Damage of 55, Buff intelligence....)
+//                    ) {
+//                        // instantiate a message to send
+//                        // continue setting values
+//                        // send the data to connectionHandler
+//
+//                    }
+//            ), "sendContenderAction"); // No target
+
+//            chai.add(chaiscript::fun<std::function<void(std::string, uint, uint, std::string)> >(
+//                    [&connectionHandler](
+//                            std::string targetId,                 // [Optional]  Target (if any) TODO : Should be a pair of <bool, uint>
+//                            uint contenderId,                     // [Mandatory] id of the contender
+//                            uint spellId,                         // [Mandatory] Spell/Action id
+//                            const std::string &descriptionString  // [Mandatory] Description String (Heal of 15, Damage of 17, Critical Damage of 55, Buff intelligence....)
+//                    ) {
+//                        // instantiate a message to send
+//                        if (!targetId.empty() && targetId.size() > 1) {
+//                            bool isFriendlyTarget = (targetId.at(0) == 'F');
+//                            uint idTargetInteger = std::stoi(targetId.substr(1));
+//                            // set the id value of the message to send
+//                        }
+//                        // continue setting values
+//                        // send the data to connectionHandler
+//
+//                    }
+//            ), "sendContenderAction");
 
     void ChaiRegister::registerCommon(chaiscript::ModulePtr m) {
 

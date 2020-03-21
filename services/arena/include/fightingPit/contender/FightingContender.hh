@@ -48,8 +48,8 @@ namespace fys::arena {
         void moveContender(data::MoveDirection rightOrLeft);
 
         [[nodiscard]] const data::Status &getStatus() const { return _status; }
+        [[nodiscard]] const HexagonSide &getHexagonSide() const { return _side; }
         [[nodiscard]] data::Status &accessStatus() { return _status; }
-        [[nodiscard]] std::pair<HexagonSide::Hexagon, HexagonSide::Orientation> getHexagonSide() const { return *_side; }
         [[nodiscard]] HexagonSide::Orientation getHexagonSideOrient() const { return (*_side).second; }
 
         const std::unique_ptr<ContenderScripting> &getContenderScripting() { return _contenderScripting; }

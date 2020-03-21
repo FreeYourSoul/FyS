@@ -332,9 +332,9 @@ namespace fys::arena {
     bool HexagonSide::canMove(HexagonSide::Orientation destinationSide) const {
         if (_hexagon == Hexagon::A)
             return HexaSide<HexaA>::isMoveable(_side, destinationSide);
-         else if (_hexagon == Hexagon::B)
+         if (_hexagon == Hexagon::B)
              return HexaSide<HexaB>::isMoveable(_side, destinationSide);
-         else if (_hexagon == Hexagon::C)
+         if (_hexagon == Hexagon::C)
              return HexaSide<HexaC>::isMoveable(_side, destinationSide);
         return false;
     }
