@@ -72,6 +72,29 @@ namespace fys::arena {
         }
     }
 
+    void ChaiRegister::registerBaseActions(chaiscript::ChaiScript &chai, cache::Cml &cml) {
+        static const std::vector<std::string> baseActions = {
+                "arena:actions:damage:damage.chai",
+                "arena:actions:heal:heal.chai",
+                "arena:actions:zone_damage:zone_damage.chai",
+                "arena:actions:zone_heal:zone_heal.chai"
+        };
+
+        for (const auto & actionKey : baseActions) {
+            try {
+                const std::string actionScript = cml.findInCache(actionKey);
+                if (!actionScript.empty()) {
+                    chai.eval(actionScript);
+                }
+                else {
+                    SPDLOG_WARN("The base action {} couldn't be registered; empty script found", actionKey);
+                }
+            }
+            catch (std::exception & e) {
+                SPDLOG_ERROR("Error while loading key {} : {}", actionKey, e.what());
+            }
+        }
+    }
 
     bool ChaiRegister::loadAndRegisterAction(chaiscript::ChaiScript & chai, cache::Cml & cache, const fys::arena::PartyTeam & pt) {
         try {
@@ -169,67 +192,81 @@ namespace fys::arena {
 
     void ChaiRegister::registerCommon(chaiscript::ModulePtr m) {
 
-            chaiscript::utility::add_class<fys::arena::data::Life>(
-                    *m, "Life", {},
-                    {
-                            {fun(&data::Life::current), "current"},
-                            {fun(&data::Life::total),   "total"},
-                            {fun(&data::Life::isDead),  "isDead"}
-                    }
-            );
+        chaiscript::utility::add_class<fys::arena::data::Targeting>(
+                *m,
+                "Targeting",
+                {
+                    { fys::arena::data::SELF, "SELF" },
+                    { fys::arena::data::ALLY, "ALLY" },
+                    { fys::arena::data::ALLIES, "ALLIES" },
+                    { fys::arena::data::ENNEMIES, "ENNEMIES" },
+                    { fys::arena::data::ENNEMY, "ENNEMY" },
+                    { fys::arena::data::SIDE, "SIDE" },
+                    { fys::arena::data::ALLY_AND_ENNEMY, "ALLY_AND_ENNEMY" }
+                }
+        );
 
-            chaiscript::utility::add_class<fys::arena::data::MagicPoint>(
-                    *m, "MagicPoint", {},
-                    {
-                            {fun(&data::MagicPoint::current), "current"},
-                            {fun(&data::MagicPoint::total),   "total"}
-                    }
-            );
+        chaiscript::utility::add_class<fys::arena::data::Life>(
+                *m, "Life", {},
+                {
+                        {fun(&data::Life::current), "current"},
+                        {fun(&data::Life::total),   "total"},
+                        {fun(&data::Life::isDead),  "isDead"}
+                }
+        );
 
-            chaiscript::utility::add_class<fys::arena::data::Status>(
-                    *m, "Status", {},
-                    {
-                            {fun(&data::Status::life),         "life"},
-                            {fun(&data::Status::magicPoint),   "magicPoint"},
-                            {fun(&data::Status::initialSpeed), "speed"},
-                    }
-            );
+        chaiscript::utility::add_class<fys::arena::data::MagicPoint>(
+                *m, "MagicPoint", {},
+                {
+                        {fun(&data::MagicPoint::current), "current"},
+                        {fun(&data::MagicPoint::total),   "total"}
+                }
+        );
 
-            chaiscript::utility::add_class<fys::arena::HexagonSide::Orientation>(
-                    *m,
-                    "Orientation",
-                    {
-                            {fys::arena::HexagonSide::Orientation::A_N,  "A_N"},
-                            {fys::arena::HexagonSide::Orientation::A_NE, "A_NE"},
-                            {fys::arena::HexagonSide::Orientation::A_NW, "A_NW"},
-                            {fys::arena::HexagonSide::Orientation::A_S,  "A_S"},
-                            {fys::arena::HexagonSide::Orientation::A_SE, "A_SE"},
-                            {fys::arena::HexagonSide::Orientation::A_SW, "A_SW"},
-                            {fys::arena::HexagonSide::Orientation::B_N,  "B_N"},
-                            {fys::arena::HexagonSide::Orientation::B_NE, "B_NE"},
-                            {fys::arena::HexagonSide::Orientation::B_NW, "B_NW"},
-                            {fys::arena::HexagonSide::Orientation::B_S,  "B_S"},
-                            {fys::arena::HexagonSide::Orientation::B_SE, "B_SE"},
-                            {fys::arena::HexagonSide::Orientation::B_SW, "B_SW"},
-                            {fys::arena::HexagonSide::Orientation::C_N,  "C_N"},
-                            {fys::arena::HexagonSide::Orientation::C_NE, "C_NE"},
-                            {fys::arena::HexagonSide::Orientation::C_NW, "C_NW"},
-                            {fys::arena::HexagonSide::Orientation::C_S,  "C_S"},
-                            {fys::arena::HexagonSide::Orientation::C_SE, "C_SE"},
-                            {fys::arena::HexagonSide::Orientation::C_SW, "C_SW"},
-                            {fys::arena::HexagonSide::Orientation ::NONE,"NONE"}
-                    }
-            );
+        chaiscript::utility::add_class<fys::arena::data::Status>(
+                *m, "Status", {},
+                {
+                        {fun(&data::Status::life),         "life"},
+                        {fun(&data::Status::magicPoint),   "magicPoint"},
+                        {fun(&data::Status::initialSpeed), "speed"},
+                }
+        );
 
-            chaiscript::utility::add_class<fys::arena::HexagonSide::Hexagon>(
-                    *m,
-                    "Hexagon",
-                    {
-                            {fys::arena::HexagonSide::Hexagon::A, "A"},
-                            {fys::arena::HexagonSide::Hexagon::B, "B"},
-                            {fys::arena::HexagonSide::Hexagon::C, "C"}
-                    }
-            );
+        chaiscript::utility::add_class<fys::arena::HexagonSide::Orientation>(
+                *m,
+                "Orientation",
+                {
+                        {fys::arena::HexagonSide::Orientation::A_N,  "A_N"},
+                        {fys::arena::HexagonSide::Orientation::A_NE, "A_NE"},
+                        {fys::arena::HexagonSide::Orientation::A_NW, "A_NW"},
+                        {fys::arena::HexagonSide::Orientation::A_S,  "A_S"},
+                        {fys::arena::HexagonSide::Orientation::A_SE, "A_SE"},
+                        {fys::arena::HexagonSide::Orientation::A_SW, "A_SW"},
+                        {fys::arena::HexagonSide::Orientation::B_N,  "B_N"},
+                        {fys::arena::HexagonSide::Orientation::B_NE, "B_NE"},
+                        {fys::arena::HexagonSide::Orientation::B_NW, "B_NW"},
+                        {fys::arena::HexagonSide::Orientation::B_S,  "B_S"},
+                        {fys::arena::HexagonSide::Orientation::B_SE, "B_SE"},
+                        {fys::arena::HexagonSide::Orientation::B_SW, "B_SW"},
+                        {fys::arena::HexagonSide::Orientation::C_N,  "C_N"},
+                        {fys::arena::HexagonSide::Orientation::C_NE, "C_NE"},
+                        {fys::arena::HexagonSide::Orientation::C_NW, "C_NW"},
+                        {fys::arena::HexagonSide::Orientation::C_S,  "C_S"},
+                        {fys::arena::HexagonSide::Orientation::C_SE, "C_SE"},
+                        {fys::arena::HexagonSide::Orientation::C_SW, "C_SW"},
+                        {fys::arena::HexagonSide::Orientation ::NONE,"NONE"}
+                }
+        );
+
+        chaiscript::utility::add_class<fys::arena::HexagonSide::Hexagon>(
+                *m,
+                "Hexagon",
+                {
+                        {fys::arena::HexagonSide::Hexagon::A, "A"},
+                        {fys::arena::HexagonSide::Hexagon::B, "B"},
+                        {fys::arena::HexagonSide::Hexagon::C, "C"}
+                }
+        );
     }
 
     void ChaiRegister::registerFightingPitContender(chaiscript::ChaiScript &chai, chaiscript::ModulePtr m) {

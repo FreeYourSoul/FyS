@@ -101,6 +101,7 @@ addFSeamTests(
         ${CMAKE_CURRENT_SOURCE_DIR}/catchMain.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/scriptTests/Contender_SampyTestCase.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/scriptTests/ChaiRegisterTestCase.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/scriptTests/Action_SlashTestCase.cpp
 
         TO_MOCK
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/ConnectionHandler.hh

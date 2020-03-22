@@ -1,20 +1,12 @@
 class damage {
-    var power;
+    attr power;
 
-    def damage(level) {
-        this.power = 10 * (level * 0.20);
+    def damage(power) {
+        this.power = power;
     }
 
-    def requireAllyTarget() {
-        0;
-    }
-
-    def requireEnemyTarget() {
-        1;
-    }
-
-    def rangeAnySide() {
-        0;
+    def requireTarget() {
+        ENNEMY;
     }
 
     def execute(targetStatus) {
@@ -24,10 +16,6 @@ class damage {
         else {
             targetStatus.life.current = 0;
         }
-        1;
-    }
-
-    def getId() {
         1;
     }
 

@@ -91,7 +91,7 @@ TEST_CASE("Test Sampy", "[service][arena][script_test]") {
         teamMember2->accessStatus().life.current = 90;
         teamMember2->accessStatus().life.total = 110;
 
-        fys::arena::data::PriorityElem e{0,1, true};
+        fys::arena::data::PriorityElem e { 0, 1, true };
 
         SECTION("Test Action selection") {
             fpc->accessStatus().life.current = 100;

@@ -81,6 +81,16 @@ namespace fys::arena::data
         RIGHT,
         LEFT
     };
+
+    enum Targeting {
+        SELF,
+        ENNEMY,
+        ALLY,
+        ENNEMIES,
+        ALLIES,
+        ALLY_AND_ENNEMY,
+        SIDE
+    };
     
 } // namespace fys::arena::data
 
