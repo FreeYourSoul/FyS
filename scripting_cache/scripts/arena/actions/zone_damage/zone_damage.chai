@@ -1,0 +1,33 @@
+class zone_damage {
+    attr dmg;
+
+    def zone_damage(dmg_power) {
+        this.dmg = damage(dmg_power);
+    }
+
+    def execute(side, isContender) {
+        if (isContender == 1) {
+            var contenders = allyPartyTeams.getContenderOnSide(side);
+            for (contender : contenders) {
+                this.damage.execute(contender);
+            }
+        }
+        else {
+            var members = pitContenders.getMembersBySide(side);
+            for (member : members) {
+                this.damage.execute(member.accessStatus());
+            }
+        }
+        1;
+    }
+
+    def execute_multiple(multiple_side, numberMax) {
+        if (numberMax == 0) {
+            numberMax = targetsStatus.size();
+        }
+        for (auto i = 0 ; i < numberMax ; ++i) {
+            this.execute(status);
+        }
+    }
+
+};

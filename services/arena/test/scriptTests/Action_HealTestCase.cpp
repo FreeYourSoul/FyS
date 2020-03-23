@@ -61,7 +61,7 @@ namespace {
     }
 }
 
-TEST_CASE("test Slash chaiscript", "[service][arena][script_test]") {
+TEST_CASE("test heal chaiscript", "[service][arena][script_test]") {
 
     fys::cache::CmlCopy ccpy(getLocalPathStorage(), getCopyPathStorage());
     std::filesystem::path baseCache = getLocalPathStorage();
@@ -93,30 +93,55 @@ TEST_CASE("test Slash chaiscript", "[service][arena][script_test]") {
     st.initialSpeed = 100;
     st.magicPoint = { 1337, 1337 };
     st.life = { 42, 42 };
-    tm1->addDoableAction("arena:actions:damage:slash.chai", 1);
-    partyTeam.addTeamMember(std::move(tm1));
 
-    SPDLOG_INFO("okok1");
-    fys::arena::ChaiRegister::loadAndRegisterAction(*chai, ccpy, partyTeam);
-    fys::arena::ChaiRegister::registerBaseActions(*chai, ccpy);
-    SPDLOG_INFO("okok2");
+    SECTION("test light_heal chaiscript") {
 
-    SECTION("test damage") {
+        tm1->addDoableAction("arena:actions:heal:light_heal.chai", 1);
+        partyTeam.addTeamMember(std::move(tm1));
 
-        try {
-        chai->eval(R"(
-var &ally = pitContenders.getFightingContender(0);
-var s = slash(1);
-s.execute(ally.accessStatus());
+        fys::arena::ChaiRegister::registerBaseActions(*chai, ccpy);
+        fys::arena::ChaiRegister::loadAndRegisterAction(*chai, ccpy, partyTeam);
+
+        SECTION("test heal") {
+
+            pc.getFightingContender(0)->accessStatus().life.current = 100;
+
+            try {
+                chai->eval(R"(
+var &contender = pitContenders.getFightingContender(0);
+var s = light_heal(1);
+s.execute(contender.accessStatus());
 )");
-        }
-        catch (std::exception &ex) {
-            SPDLOG_ERROR("{}", ex.what());
-            FAIL("Chaiscript : Shouldn't fail here");
-        }
-        REQUIRE(120 == pc.getFightingContender(0)->accessStatus().life.current); // -33 life
-        REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.total);
+            }
+            catch (std::exception &ex) {
+                SPDLOG_ERROR("{}", ex.what());
+                FAIL("Chaiscript : Shouldn't fail here");
+            }
+            REQUIRE(133 == pc.getFightingContender(0)->accessStatus().life.current); // +33 life
+            REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.total);
 
-    } // End section : test damage
+        } // End section : test heal
+
+        SECTION("test over healing ") {
+
+            pc.getFightingContender(0)->accessStatus().life.current = 140;
+
+            try {
+                chai->eval(R"(
+var &contender = pitContenders.getFightingContender(0);
+var s = light_heal(1);
+s.execute(contender.accessStatus());
+)");
+            }
+            catch (std::exception &ex) {
+                SPDLOG_ERROR("{}", ex.what());
+                FAIL("Chaiscript : Shouldn't fail here");
+            }
+            REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.current); // +33 life > go to max
+            REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.total);
+
+        } // End section : test over healing
+
+    } // End section : test light_heal chaiscript
 
 } // End TestCase : test Slash chaiscript

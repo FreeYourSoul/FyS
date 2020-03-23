@@ -1,0 +1,34 @@
+// A multiple target attack,
+// inflict 30 damages on 2 target (+1 every 3 level of the attack)
+class multi_shash {
+    attr dmg;
+    attr number;
+
+    def multi_shash(levelOrStatus) {
+        var lvl;
+
+        if ("int" == levelOrStatus.type_name()) {
+            lvl = levelOrStatus;
+
+        }
+        else if ("Status" == levelOrStatus.type_name()) {
+            lvl = 15;
+        }
+        this.dmg = damage(30);
+        this.number = 2 + lvl / 3;
+    }
+
+    def requireTarget() {
+        ENNEMIES;
+    }
+
+    def numberTarget() {
+        return this.number;
+    }
+
+    def execute(targetsStatus) {
+        this.dmg.execute_multiple(targetsStatus, this.number);
+        1;
+    }
+
+};

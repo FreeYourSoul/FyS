@@ -1,0 +1,27 @@
+class heal {
+    attr heal;
+
+    def heal(heal) {
+        this.heal = heal;
+    }
+
+    def execute(targetStatus) {
+        if (targetStatus.life.current + this.heal >= targetStatus.life.total) {
+            targetStatus.life.current = targetStatus.life.total;
+        }
+        else {
+            targetStatus.life.current = targetStatus.life.current + this.heal;
+        }
+        1;
+    }
+
+    def execute_multiple(targetsStatus, numberMax) {
+        if (numberMax == 0) {
+            numberMax = targetsStatus.size();
+        }
+        for (auto i = 0 ; i < numberMax ; ++i) {
+            this.execute(status);
+        }
+    }
+
+};

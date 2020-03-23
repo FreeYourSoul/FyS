@@ -1,0 +1,28 @@
+// A mono target attack,
+// inflict 30 damages, +10% for each level
+class light_heal {
+    attr heal;
+
+    def light_heal(levelOrStatus) {
+        var lvl;
+
+        if ("int" == levelOrStatus.type_name()) {
+            lvl = levelOrStatus;
+
+        }
+        else if ("Status" == levelOrStatus.type_name()) {
+            lvl = 15;
+        }
+        this.heal = heal(30 + 30 * (0.1 * lvl));
+    }
+
+    def requireTarget() {
+        ALLY;
+    }
+
+    def execute(targetStatus) {
+        this.heal.execute(targetStatus);
+        1;
+    }
+
+};
