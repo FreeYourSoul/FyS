@@ -63,6 +63,7 @@ namespace fys::arena {
             registerUtility(chai, pc, apt);
 
             chai.add(m);
+
             chai.set_global(chaiscript::var(std::ref(pc)),  "pitContenders");
             chai.set_global(chaiscript::var(std::ref(apt)), "allyPartyTeams");
 
@@ -74,10 +75,12 @@ namespace fys::arena {
 
     void ChaiRegister::registerBaseActions(chaiscript::ChaiScript &chai, cache::Cml &cml) {
         static const std::vector<std::string> baseActions = {
+                "arena:actions:action.chai",
                 "arena:actions:damage:damage.chai",
                 "arena:actions:heal:heal.chai",
                 "arena:actions:zone_damage:zone_damage.chai",
-                "arena:actions:zone_heal:zone_heal.chai"
+                "arena:actions:zone_heal:zone_heal.chai",
+                "arena:contenders:contender_functions.chai"
         };
 
         for (const auto & actionKey : baseActions) {

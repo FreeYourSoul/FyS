@@ -69,6 +69,7 @@ TEST_CASE("test heal chaiscript", "[service][arena][script_test]") {
     fys::arena::PitContenders pc;
     fys::arena::AllyPartyTeams apt;
     auto chai = fys::arena::ChaiRegister::createChaiInstance(pc, apt);
+    fys::arena::ChaiRegister::registerBaseActions(*chai, ccpy);
 
     fys::arena::ContenderScriptingUPtr sampy = std::make_unique<fys::arena::ContenderScripting>(*chai, 1);
     sampy->setContenderId(0u);
@@ -79,7 +80,6 @@ TEST_CASE("test heal chaiscript", "[service][arena][script_test]") {
     pc.addContender(fpc);
 
     SECTION("Test initialization contender") {
-        REQUIRE(153 == fpc->accessStatus().life.current);
         REQUIRE(8 == pc.getFightingContender(0)->accessStatus().initialSpeed);
         REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.current);
         REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.total);
@@ -99,7 +99,6 @@ TEST_CASE("test heal chaiscript", "[service][arena][script_test]") {
         tm1->addDoableAction("arena:actions:heal:light_heal.chai", 1);
         partyTeam.addTeamMember(std::move(tm1));
 
-        fys::arena::ChaiRegister::registerBaseActions(*chai, ccpy);
         fys::arena::ChaiRegister::loadAndRegisterAction(*chai, ccpy, partyTeam);
 
         SECTION("test heal") {

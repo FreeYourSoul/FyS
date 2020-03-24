@@ -1,0 +1,12 @@
+// store an action and a decision strategy:
+// - Can be a list of action with a decision strategy representing how it decides to select which actions to do
+// - Can be a specific action with a decision strategy representing how it decides its target
+class action {
+    attr act;
+    attr decisionStrategy;
+
+    def action(a, decisionStrategy) {
+        this.act = a;
+        this.decisionStrategy = decisionStrategy;
+    }
+}

@@ -34,12 +34,33 @@
 
 #include <FSeamMockData.hpp>
 
-std::string getPathSampyChaiScript() {
-    std::string file_path = __FILE__;
-    std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
-    if (dir_path.size() == file_path.size())
-        dir_path = file_path.substr(0, file_path.rfind('/'));
-    return dir_path + "/scripts_lnk/arena/contenders/Sampy.chai";
+#include <ChaiRegister.hh>
+#include <CmlCopy.hh>
+
+namespace {
+    std::string getPathSampyChaiScript() {
+        std::string file_path = __FILE__;
+        std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
+        if (dir_path.size() == file_path.size())
+            dir_path = file_path.substr(0, file_path.rfind('/'));
+        return dir_path + "/scripts_lnk/arena/contenders/Sampy.chai";
+    }
+
+    std::string getLocalPathStorage() {
+        std::string file_path = __FILE__;
+        std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
+        if (dir_path.size() == file_path.size())
+            dir_path = file_path.substr(0, file_path.rfind('/'));
+        return dir_path + "/testCopyTo";
+    }
+
+    std::string getCopyPathStorage() {
+        std::string file_path = __FILE__;
+        std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
+        if (dir_path.size() == file_path.size())
+            dir_path = file_path.substr(0, file_path.rfind('/'));
+        return dir_path + "/scripts_lnk";
+    }
 }
 
 /**
@@ -48,9 +69,15 @@ std::string getPathSampyChaiScript() {
  */
 TEST_CASE("Test Sampy", "[service][arena][script_test]") {
 
+    fys::cache::CmlCopy ccpy(getLocalPathStorage(), getCopyPathStorage());
+    std::filesystem::path baseCache = getLocalPathStorage();
+
     fys::arena::PitContenders pc;
     fys::arena::AllyPartyTeams apt;
+
     auto chai = fys::arena::ChaiRegister::createChaiInstance(pc, apt);
+
+    fys::arena::ChaiRegister::registerBaseActions(*chai, ccpy);
 
     fys::arena::ContenderScriptingUPtr sampy = std::make_unique<fys::arena::ContenderScripting>(*chai, 1);
     sampy->setContenderId(0u);
@@ -143,6 +170,7 @@ TEST_CASE("Test Sampy", "[service][arena][script_test]") {
         // REQUIRE(fseamMock->verify(FSeam::ConnectionHandler::sendMessageToDispatcher::NAME, 1));
 
         FSeam::MockVerifier::cleanUp();
+        std::filesystem::remove_all(baseCache);
 
     } // End of Section : Test network message
 

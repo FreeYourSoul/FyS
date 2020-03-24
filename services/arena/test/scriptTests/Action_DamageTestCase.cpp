@@ -70,6 +70,8 @@ TEST_CASE("test damage chaiscript", "[service][arena][script_test]") {
     fys::arena::AllyPartyTeams apt;
     auto chai = fys::arena::ChaiRegister::createChaiInstance(pc, apt);
 
+    fys::arena::ChaiRegister::registerBaseActions(*chai, ccpy);
+
     fys::arena::ContenderScriptingUPtr sampy = std::make_unique<fys::arena::ContenderScripting>(*chai, 1);
     sampy->setContenderId(0u);
     sampy->setContenderName("Sampy");
@@ -99,7 +101,6 @@ TEST_CASE("test damage chaiscript", "[service][arena][script_test]") {
         tm1->addDoableAction("arena:actions:damage:slash.chai", 1);
         partyTeam.addTeamMember(std::move(tm1));
 
-        fys::arena::ChaiRegister::registerBaseActions(*chai, ccpy);
         fys::arena::ChaiRegister::loadAndRegisterAction(*chai, ccpy, partyTeam);
 
         SECTION("test damage") {

@@ -68,8 +68,8 @@ namespace fys::arena {
         }
         std::unique_ptr<FightingPit> fp = std::make_unique<FightingPit>(_creatorUserName, _difficulty);
         fp->addAuthenticatedUser(std::move(_creatorUserName), std::move(_creatorUserToken));
-        generateContenders(*fp, ctx, wsId);
         ChaiRegister::registerBaseActions(*fp->getChaiPtr(), _cache);
+        generateContenders(*fp, ctx, wsId);
         fp->initializePartyTeam(generateAllyPartyTeam());
         fp->initializeSideBattles();
         return fp;
