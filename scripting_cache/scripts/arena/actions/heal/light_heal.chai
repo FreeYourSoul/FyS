@@ -8,7 +8,6 @@ class light_heal {
 
         if ("int" == levelOrStatus.type_name()) {
             lvl = levelOrStatus;
-
         }
         else if ("Status" == levelOrStatus.type_name()) {
             lvl = 15;

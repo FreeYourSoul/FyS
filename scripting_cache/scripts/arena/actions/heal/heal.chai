@@ -20,7 +20,7 @@ class heal {
             numberMax = targetsStatus.size();
         }
         for (auto i = 0 ; i < numberMax ; ++i) {
-            this.execute(status);
+            this.execute(targetStatus[i]);
         }
     }
 

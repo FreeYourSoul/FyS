@@ -16,11 +16,13 @@ class damage {
     }
 
     def execute_multiple(targetsStatus, numberMax) {
-        if (numberMax == 0) {
-            numberMax = targetsStatus.size();
-        }
-        for (auto i = 0 ; i < numberMax ; ++i) {
-            this.execute(status);
+        if ("Vector" == targetsStatus.type_name()) {
+            if (numberMax == 0) {
+                numberMax = targetsStatus.size();
+            }
+            for (auto i = 0 ; i < numberMax ; ++i) {
+                this.execute(targetsStatus[i]);
+            }
         }
     }
 
