@@ -126,13 +126,6 @@ namespace fys::arena {
         [[nodiscard]] std::optional<std::reference_wrapper<FightingPit>>
             getAuthenticatedPlayerFightingPit(const std::string & name, const std::string & token, unsigned fightingArenaId);
 
-        /**
-         * Forward the message to the given fighting pit
-         *
-         * @param fightingArenaId id of the arena to forward the message to
-         * @param fightingMsg message to forward
-         */
-        void forwardMessageToFightingPit(unsigned fightingArenaId/* , const FightingMessage & fightingMsg*/);
 
         const std::unique_ptr<FightingPit> &getFightingPitInstance(unsigned arenaId) const { return _arenaInstances.at(arenaId); }
 

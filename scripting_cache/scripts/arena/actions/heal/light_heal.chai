@@ -4,6 +4,7 @@ class light_heal {
     attr heal;
 
     def light_heal(levelOrStatus) {
+        this.set_explicit(true);
         var lvl;
 
         if ("int" == levelOrStatus.type_name()) {

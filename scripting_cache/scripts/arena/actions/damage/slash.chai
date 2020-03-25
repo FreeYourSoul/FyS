@@ -4,6 +4,7 @@ class slash {
     attr dmg;
 
     def slash(levelOrStatus) {
+        this.set_explicit(true);
         var lvl;
 
         if ("int" == levelOrStatus.type_name()) {

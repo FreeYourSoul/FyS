@@ -45,21 +45,37 @@ namespace fys::arena {
     struct ContenderTargetId {
         uint v;
     };
+    struct ContendersTargetsIds {
+        std::vector<uint> v;
+    };
 
     struct AllyTargetId {
         uint v;
     };
+    struct AlliesTargetsIds {
+        std::vector<uint> v;
+    };
 
     /**
-     * Pending actions of a team member are defined by
-     * - the id of the action (mapped as index to the vector TeamMember::_actionDoable)
+     *
      * - the target, optional as every action doesn't require target.
      *   Can be a specific id (of an ally or a contender depending on the action)
      *   Can be a side (as some action can target a whole side)
      */
+    using TargetType = std::variant<
+            ContenderTargetId,
+            ContendersTargetsIds,
+            AllyTargetId,
+            AlliesTargetsIds,
+            HexagonSide::Orientation>;
+    /**
+     * Pending actions of a team member are defined by
+     * - the id of the action (mapped as index to the vector TeamMember::_actionDoable)
+     * - a target type defined in the alias fys::arena::TargetType
+     */
     struct PendingAction {
-        uint idAction;
-        std::optional<std::variant<ContenderTargetId, AllyTargetId, HexagonSide::Orientation> > target;
+        uint idAction {};
+        std::optional<TargetType> target;
     };
 
     /**
@@ -72,6 +88,8 @@ namespace fys::arena {
                 _userName(std::move(userName)), _name(std::move(teamMemberName)) {}
 
         void executeAction(AllyPartyTeams & apt, PitContenders & pc, std::unique_ptr<chaiscript::ChaiScript> & chaiPtr);
+        void addPendingAction(const std::string & actionName);
+
         void moveTeamMember(HexagonSide::Orientation destination, bool bypassCheck = false);
         void moveTeamMember(data::MoveDirection rightOrLeft);
 
@@ -99,7 +117,7 @@ namespace fys::arena {
 
         // action name with level of action
         std::vector<std::pair<std::string, uint>> _actionsDoable;
-         fys::common::SizedQueue<PendingAction> _pendingActions;
+        fys::common::SizedQueue<PendingAction> _pendingActions;
 
     };
 

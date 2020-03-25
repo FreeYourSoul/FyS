@@ -6,6 +6,8 @@ class action {
     attr decisionStrategy;
 
     def action(a, decisionStrategy) {
+        this.set_explicit(true);
+        this.set_explicit(true);
         this.act = a;
         this.decisionStrategy = decisionStrategy;
     }

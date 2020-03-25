@@ -2,6 +2,7 @@ class damage {
     attr power;
 
     def damage(power) {
+        this.set_explicit(true);
         this.power = power;
     }
 

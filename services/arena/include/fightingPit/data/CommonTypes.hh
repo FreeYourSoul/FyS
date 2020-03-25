@@ -89,6 +89,7 @@ namespace fys::arena::data
         ENNEMIES,
         ALLIES,
         ALLY_AND_ENNEMY,
+        ALLY_OR_ENNEMY,
         SIDE
     };
     

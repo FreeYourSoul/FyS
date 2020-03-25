@@ -24,10 +24,11 @@
 #include <spdlog/spdlog.h>
 #include <functional>
 
+#include <RandomGenerator.hh>
 #include <algorithm/algorithm.hh>
+
 #include <fightingPit/contender/FightingContender.hh>
 #include <fightingPit/contender/PitContenders.hh>
-#include <fightingPit/team/TeamMember.hh>
 #include <fightingPit/team/AllyPartyTeams.hh>
 
 namespace fys::arena {
@@ -61,6 +62,13 @@ namespace fys::arena {
         if (it == _contenders.end())
             return nullptr;
         return *it;
+    }
+
+    std::shared_ptr<FightingContender>
+    PitContenders::selectRandomContenderOnSideAlive(HexagonSide::Orientation side, ComparatorSelection<FightingContender> comp) const {
+        auto contenderOnSide = getContenderOnSide(side);
+        uint randomIndex = fys::util::RandomGenerator::generateInRange(1ul, contenderOnSide.size());
+        return contenderOnSide.at(randomIndex - 1);
     }
 
     std::shared_ptr<FightingContender>
@@ -114,4 +122,5 @@ namespace fys::arena {
                 }
         );
     }
+
 }

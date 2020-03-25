@@ -2,6 +2,7 @@ class zone_damage {
     attr dmg;
 
     def zone_damage(dmg_power) {
+        this.set_explicit(true);
         this.dmg = damage(dmg_power);
     }
 

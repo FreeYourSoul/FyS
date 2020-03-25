@@ -96,9 +96,10 @@ namespace fys::arena {
 
         /**
          *
-         * @param idMember
+         * @param userName
+         * @param nameMember
          */
-        void forwardMessageToTeamMember(unsigned idMember);
+        void forwardMessageToTeamMember(const std::string & userName, const std::string & nameMember);
 
         /**
          * Add an authenticated player in the fighting pit, the player authentication is not verified an thus must be

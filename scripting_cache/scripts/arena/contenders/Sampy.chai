@@ -12,16 +12,13 @@ class Sleep_SAMPY {
         1;
     }
 
-    def rangeAnySide() {
-        0;
-    }
-
 };
 
 class Attack_SAMPY {
     var power;
 
     def Attack_SAMPY(v) {
+        this.set_explicit(true);
         this.power = v;
     }
 
@@ -53,6 +50,7 @@ class Sampy {
     attr actions;
 
     def Sampy(contenderId, level) {
+        this.set_explicit(true);
         this.level = level;
         this.id = contenderId;
 
@@ -61,15 +59,15 @@ class Sampy {
             // possibles actions/decide target vector
             [
                 action(Attack_SAMPY(50), fun(action, thisContender) {
-                    decide_target.one_lower_life(action.requireTarget(), thisContender.getHexagonSideOrient());
+                    decide_target.lower_life(action.requireTarget(), thisContender.getHexagonSideOrient()).accessStatus();
                 }),
 
                 action(Attack_SAMPY(80), fun(action, thisContender) {
-                    decide_target.one_lower_life(action.requireTarget(), thisContender.getHexagonSideOrient());
+                    decide_target.lower_life(action.requireTarget(), thisContender.getHexagonSideOrient().accessStatus());
                 }),
 
                 action(Sleep_SAMPY(), fun(action, thisContender) {
-                    thisContender;
+                    thisContender.accessStatus();
                 })
             ],
 
@@ -94,7 +92,7 @@ class Sampy {
         var &thisStatus = thisContender.accessStatus();
         var addLifePerLevel = 150 * 0.02; // +2% life per level
         thisStatus.speed = 8;
-        thisStatus.life.total   = 150 + (addLifePerLevel * this.level);
+        thisStatus.life.total = 150 + (addLifePerLevel * this.level);
         thisStatus.life.current = thisStatus.life.total;
         thisStatus.magicPoint.total = 100;
         thisStatus.magicPoint.current = thisStatus.magicPoint.total;
@@ -105,8 +103,7 @@ class Sampy {
         var &thisStatus = thisContender.accessStatus();
         var actionId = this.actions.decisionStrategy(thisStatus);
         var &action = this.actions.act[actionId];
-        var &target = action.decisionStrategy(action.act, thisContender);
-        return action.act.execute(target.accessStatus());
+        return action.act.execute(action.decisionStrategy(action.act, thisContender));
     }
 
 };

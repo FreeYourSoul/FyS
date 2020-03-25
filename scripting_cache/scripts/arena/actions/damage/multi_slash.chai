@@ -5,6 +5,7 @@ class multi_slash {
     attr number;
 
     def multi_slash(levelOrStatus) {
+        this.set_explicit(true);
         var lvl;
 
         if ("int" == levelOrStatus.type_name()) {

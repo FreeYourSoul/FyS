@@ -118,7 +118,7 @@ namespace fys::arena {
                     },
 
                     // InGame handler
-                    [this](zmq::message_t && identityPlayer, const zmq::message_t & intermediate, zmq::message_t && playerMessage) {
+                    [this](zmq::message_t && identityPlayer, const zmq::message_t & intermediate, zmq::message_t && playerMsg) {
                         zmq::multipart_t response;
                         response.add(std::move(identityPlayer));
                         const auto authFrame = fys::fb::GetArenaServerValidateAuth(intermediate.data());
@@ -128,10 +128,8 @@ namespace fys::arena {
                                 authFrame->fighting_pit_id());
 
                         if (fp) {
-                            unsigned idTeamMember = 0;
-                            fp->get().forwardMessageToTeamMember(idTeamMember);
                             // todo create an action message to forward
-                            // _workerService.forwardMessageToFightingPit(authFrame->fighting_pit_id(), );
+                            fp->get().forwardMessageToTeamMember(authFrame->user_name()->str(), "name");
                         }
                     }
             );

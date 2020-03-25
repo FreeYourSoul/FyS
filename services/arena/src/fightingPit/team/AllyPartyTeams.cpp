@@ -28,6 +28,8 @@
 #include <chaiscript/chaiscript.hpp>
 #include <algorithm/algorithm.hh>
 
+#include <RandomGenerator.hh>
+
 #include <fightingPit/team/TeamMember.hh>
 #include <fightingPit/team/PartyTeam.hh>
 #include <fightingPit/team/AllyPartyTeams.hh>
@@ -71,6 +73,13 @@ namespace fys::arena {
         return *suitable;
     }
 
+    std::shared_ptr<TeamMember> AllyPartyTeams::selectRandomMemberOnSideAlive(HexagonSide::Orientation side) {
+        auto membersOnSide = getMembersBySide(side);
+        uint randomIndex = fys::util::RandomGenerator::generateInRange(1ul, membersOnSide.size());
+        return membersOnSide.at(randomIndex - 1);
+    }
+
+
     std::shared_ptr<TeamMember>
     AllyPartyTeams::selectSuitableMemberAlive(ComparatorSelection<TeamMember> comp) {
         return selectSuitableMember([&comp](auto current, auto next) -> bool {
@@ -91,6 +100,26 @@ namespace fys::arena {
             return (!current->accessStatus().life.isDead()) && current->getHexagonSideOrient() == side && comp(current, next);
         });
     }
+
+    std::shared_ptr<TeamMember>
+    AllyPartyTeams::getSpecificTeamMemberByName(const std::string &userName, const std::string &memberName) const {
+        auto itTeam = std::find_if(_partyTeams.cbegin(), _partyTeams.cend(),
+                [&userName](const auto & team) {
+                    return team->getUserName() == userName;
+                });
+
+        if (itTeam != _partyTeams.cend()) {
+            auto itMember = std::find_if((*itTeam)->getTeamMembers().cbegin(), (*itTeam)->getTeamMembers().cend(),
+                    [&memberName](const auto & member) {
+                       return member->getName() == memberName;
+                    });
+
+            if (itMember != (*itTeam)->getTeamMembers().cend())
+                return *itMember;
+        }
+        return nullptr;
+    }
+
 
     std::shared_ptr<TeamMember> AllyPartyTeams::selectMemberById(unsigned idMember) {
         if (_partyTeams.empty() || _partyTeams.front()->accessTeamMembers().empty())
@@ -115,7 +144,8 @@ namespace fys::arena {
         );
     }
 
-    std::vector<std::shared_ptr<TeamMember>> AllyPartyTeams::getMembersBySide(HexagonSide::Orientation side) const {
+    std::vector<std::shared_ptr<TeamMember>>
+    AllyPartyTeams::getMembersBySide(HexagonSide::Orientation side) const {
         std::vector<std::shared_ptr<TeamMember>> ret;
         if (_partyTeams.empty() || _partyTeams.front()->getTeamMembers().empty())
             return ret;

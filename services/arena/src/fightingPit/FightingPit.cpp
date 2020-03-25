@@ -86,10 +86,10 @@ namespace fys::arena {
         }
     }
 
-    void FightingPit::forwardMessageToTeamMember(unsigned idMember) {
-        auto member = _partyTeams.selectMemberById(idMember);
+    void FightingPit::forwardMessageToTeamMember(const std::string & userName, const std::string & nameMember) {
+        auto member = _partyTeams.getSpecificTeamMemberByName(userName, nameMember);
         if (!member) {
-            SPDLOG_ERROR("Trying to forward a message to team member {} whom doesn't exist", idMember);
+            SPDLOG_ERROR("Trying to forward a message to team member {} owned by {} whom doesn't exist", nameMember, userName);
             return;
         }
         // todo add in pending action list

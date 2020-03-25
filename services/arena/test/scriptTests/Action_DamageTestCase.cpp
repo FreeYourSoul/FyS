@@ -156,7 +156,6 @@ s.execute(contender.accessStatus());
         auto fpc2 = std::make_shared<fys::arena::FightingContender>(std::move(sampy2));
         pc.addContender(fpc2);
 
-        fys::arena::ChaiRegister::registerBaseActions(*chai, ccpy);
         fys::arena::ChaiRegister::loadAndRegisterAction(*chai, ccpy, partyTeam);
 
         pc.getFightingContender(1)->accessStatus().life.current = 100;

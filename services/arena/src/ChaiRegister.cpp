@@ -53,7 +53,7 @@ namespace {
 
 namespace fys::arena {
 
-    void ChaiRegister::registerChai(chaiscript::ChaiScript &chai, PitContenders& pc, AllyPartyTeams &apt) {
+    void ChaiRegister::registerChai(chaiscript::ChaiScript &chai, PitContenders &pc, AllyPartyTeams &apt) {
 
         try {
             chaiscript::ModulePtr m = std::make_shared<chaiscript::Module>();
@@ -64,12 +64,12 @@ namespace fys::arena {
 
             chai.add(m);
 
-            chai.set_global(chaiscript::var(std::ref(pc)),  "pitContenders");
+            chai.set_global(chaiscript::var(std::ref(pc)), "pitContenders");
             chai.set_global(chaiscript::var(std::ref(apt)), "allyPartyTeams");
 
         }
-        catch (std::exception &ex) {
-            SPDLOG_ERROR("Error caught on script execution {}", ex.what());
+        catch (const chaiscript::exception::eval_error &ex) {
+            SPDLOG_ERROR("Error caught on script execution:\n{}", ex.what());
         }
     }
 
@@ -83,28 +83,27 @@ namespace fys::arena {
                 "arena:contenders:contender_functions.chai"
         };
 
-        for (const auto & actionKey : baseActions) {
+        for (const auto &actionKey : baseActions) {
             try {
                 const std::string actionScript = cml.findInCache(actionKey);
                 if (!actionScript.empty()) {
                     chai.eval(actionScript);
-                }
-                else {
+                } else {
                     SPDLOG_WARN("The base action {} couldn't be registered; empty script found", actionKey);
                 }
             }
-            catch (std::exception & e) {
-                SPDLOG_ERROR("Error while loading key {} : {}", actionKey, e.what());
+            catch (const chaiscript::exception::eval_error &ee) {
+                SPDLOG_ERROR("Error while loading key {} :\n{}", actionKey, ee.what());
             }
         }
     }
 
-    bool ChaiRegister::loadAndRegisterAction(chaiscript::ChaiScript & chai, cache::Cml & cache, const fys::arena::PartyTeam & pt) {
+    bool ChaiRegister::loadAndRegisterAction(chaiscript::ChaiScript &chai, cache::Cml &cache, const fys::arena::PartyTeam &pt) {
         try {
-            for (const auto & tm : pt.getTeamMembers()) {
-                const auto & actionsDoable = tm->getActionsDoable();
+            for (const auto &tm : pt.getTeamMembers()) {
+                const auto &actionsDoable = tm->getActionsDoable();
 
-                for (const auto & [action, lvl] : actionsDoable) {
+                for (const auto &[action, lvl] : actionsDoable) {
                     try {
                         chai.eval(cache.findInCache(action));
                     } catch (...) { SPDLOG_DEBUG("Action {} already loaded", action); }
@@ -116,16 +115,16 @@ namespace fys::arena {
                     chai.eval(createVar);
                 }
             }
-        } catch (std::exception &e) {
-            SPDLOG_ERROR("Error caught on scripting action loading {}", e.what());
+        } catch (const chaiscript::exception::eval_error &ee) {
+            SPDLOG_ERROR("Error caught on scripting action loading :\n{}", ee.what());
             return false;
         }
         return true;
     }
 
-    void ChaiRegister::registerUtility(chaiscript::ChaiScript &chai, PitContenders& pc, AllyPartyTeams &apt) {
+    void ChaiRegister::registerUtility(chaiscript::ChaiScript &chai, PitContenders &pc, AllyPartyTeams &apt) {
 
-        chai.add(chaiscript::fun<std::function<double (double, double)> >(
+        chai.add(chaiscript::fun<std::function<double(double, double)> >(
                 [](double rangeA, double rangeB) {
                     return util::RandomGenerator::generateInRange(rangeA, rangeB);
                 }), "generateRandomNumber");
@@ -138,8 +137,7 @@ namespace fys::arena {
                 [&pc, &apt](bool isContender, unsigned id, HexagonSide::Orientation side) {
                     if (isContender && id < pc.getNumberContender()) {
                         return side == pc.getFightingContender(id)->getHexagonSideOrient();
-                    }
-                    else if (!isContender && id < apt.getNumberAlly()) {
+                    } else if (!isContender && id < apt.getNumberAlly()) {
                         return side == apt.selectMemberById(id)->getHexagonSideOrient();
                     }
                     return false;
@@ -147,9 +145,8 @@ namespace fys::arena {
         chai.add(chaiscript::fun<std::function<bool(bool, unsigned, HexagonSide::Orientation)> >(
                 [&pc, &apt](bool isContender, unsigned id, HexagonSide::Orientation side) {
                     if (isContender && id < pc.getNumberContender()) {
-                        return  pc.getFightingContender(id)->getHexagonSide().canMove(side);
-                    }
-                    else if (!isContender && id < apt.getNumberAlly()) {
+                        return pc.getFightingContender(id)->getHexagonSide().canMove(side);
+                    } else if (!isContender && id < apt.getNumberAlly()) {
                         return apt.selectMemberById(id)->getHexagonSide().canMove(side);
                     }
                     return false;
@@ -199,13 +196,14 @@ namespace fys::arena {
                 *m,
                 "Targeting",
                 {
-                    { fys::arena::data::SELF, "SELF" },
-                    { fys::arena::data::ALLY, "ALLY" },
-                    { fys::arena::data::ALLIES, "ALLIES" },
-                    { fys::arena::data::ENNEMIES, "ENNEMIES" },
-                    { fys::arena::data::ENNEMY, "ENNEMY" },
-                    { fys::arena::data::SIDE, "SIDE" },
-                    { fys::arena::data::ALLY_AND_ENNEMY, "ALLY_AND_ENNEMY" }
+                        {fys::arena::data::SELF,            "SELF"},
+                        {fys::arena::data::ALLY,            "ALLY"},
+                        {fys::arena::data::ALLIES,          "ALLIES"},
+                        {fys::arena::data::ENNEMIES,        "ENNEMIES"},
+                        {fys::arena::data::ENNEMY,          "ENNEMY"},
+                        {fys::arena::data::SIDE,            "SIDE"},
+                        {fys::arena::data::ALLY_OR_ENNEMY,  "ALLY_OR_ENNEMY"},
+                        {fys::arena::data::ALLY_AND_ENNEMY, "ALLY_AND_ENNEMY"}
                 }
         );
 
@@ -257,7 +255,7 @@ namespace fys::arena {
                         {fys::arena::HexagonSide::Orientation::C_S,  "C_S"},
                         {fys::arena::HexagonSide::Orientation::C_SE, "C_SE"},
                         {fys::arena::HexagonSide::Orientation::C_SW, "C_SW"},
-                        {fys::arena::HexagonSide::Orientation ::NONE,"NONE"}
+                        {fys::arena::HexagonSide::Orientation::NONE, "NONE"}
                 }
         );
 
@@ -279,7 +277,7 @@ namespace fys::arena {
                 {},
                 {
                         {fun(&FightingContender::getHexagonSideOrient), "getHexagonSideOrient"},
-                        {fun(&FightingContender::accessStatus), "accessStatus"}
+                        {fun(&FightingContender::accessStatus),         "accessStatus"}
                 }
         );
 
@@ -289,44 +287,46 @@ namespace fys::arena {
         chaiscript::utility::add_class<fys::arena::PitContenders>(
                 *m, "PitContenders", {},
                 {
-                        {fun(&PitContenders::selectSuitableContenderOnSide), "selectSuitableContenderOnSide"},
-                        {fun(&PitContenders::selectSuitableContender), "selectSuitableContender"},
+                        {fun(&PitContenders::selectSuitableContenderOnSide),      "selectSuitableContenderOnSide"},
+                        {fun(&PitContenders::selectSuitableContender),            "selectSuitableContender"},
                         {fun(&PitContenders::selectSuitableContenderOnSideAlive), "selectSuitableContenderOnSideAlive"},
-                        {fun(&PitContenders::selectSuitableContenderAlive), "selectSuitableContenderAlive"},
-                        {fun(&PitContenders::getFightingContender), "getFightingContender"},
-                        {fun(&PitContenders::getContenderOnSide),   "getContenderOnSide"}
+                        {fun(&PitContenders::selectSuitableContenderAlive),       "selectSuitableContenderAlive"},
+                        {fun(&PitContenders::selectRandomContenderOnSideAlive),   "selectRandomContenderAliveOnSide"},
+                        {fun(&PitContenders::getFightingContender),               "getFightingContender"},
+                        {fun(&PitContenders::getContenderOnSide),                 "getContenderOnSide"}
                 }
         );
     }
 
     void ChaiRegister::registerTeamAllies(chaiscript::ChaiScript &chai, chaiscript::ModulePtr m) {
 
-            chaiscript::utility::add_class<fys::arena::TeamMember>(
-                    *m,
-                    "TeamMember",
-                    {},
-                    {
-                            {fun(&TeamMember::accessStatus), "accessStatus"}
-                    }
-            );
+        chaiscript::utility::add_class<fys::arena::TeamMember>(
+                *m,
+                "TeamMember",
+                {},
+                {
+                        {fun(&TeamMember::accessStatus), "accessStatus"}
+                }
+        );
 
-            chaiscript::bootstrap::standard_library::vector_type<std::vector<std::shared_ptr<TeamMember>>>("VectorTeamMember", *m);
-            chai.add(chaiscript::vector_conversion<std::vector<std::shared_ptr<TeamMember>>>());
+        chaiscript::bootstrap::standard_library::vector_type<std::vector<std::shared_ptr<TeamMember>>>("VectorTeamMember", *m);
+        chai.add(chaiscript::vector_conversion<std::vector<std::shared_ptr<TeamMember>>>());
 
-            chaiscript::utility::add_class<fys::arena::AllyPartyTeams>(
-                    *m,
-                    "AllyPartyTeams",
-                    {},
-                    {
-                            {fun(&AllyPartyTeams::selectSuitableMemberOnSide), "selectSuitableMemberOnSide"},
-                            {fun(&AllyPartyTeams::selectSuitableMember), "selectSuitableMember"},
-                            {fun(&AllyPartyTeams::selectSuitableMemberOnSideAlive), "selectSuitableMemberOnSideAlive"},
-                            {fun(&AllyPartyTeams::selectSuitableMemberAlive), "selectSuitableMemberAlive"}
-                    }
-            );
+        chaiscript::utility::add_class<fys::arena::AllyPartyTeams>(
+                *m,
+                "AllyPartyTeams",
+                {},
+                {
+                        {fun(&AllyPartyTeams::selectSuitableMemberOnSide),      "selectSuitableMemberOnSide"},
+                        {fun(&AllyPartyTeams::selectSuitableMember),            "selectSuitableMember"},
+                        {fun(&AllyPartyTeams::selectSuitableMemberOnSideAlive), "selectSuitableMemberOnSideAlive"},
+                        {fun(&AllyPartyTeams::selectSuitableMemberAlive),       "selectSuitableMemberAlive"},
+                        {fun(&AllyPartyTeams::selectRandomMemberOnSideAlive),   "selectRandomMemberOnSideAlive"}
+                }
+        );
 
-            // instantiate global map that contains the action for each given player's ally the doable actions
-            chai.eval(R"(global ally_actions = [ "":"" ];)");
+        // instantiate global map that contains the action for each given player's ally the doable actions
+        chai.eval(R"(global ally_actions = [ "":"" ];)");
 
     }
 

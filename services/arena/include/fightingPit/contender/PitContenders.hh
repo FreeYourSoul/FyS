@@ -54,6 +54,8 @@ namespace fys::arena {
         [[nodiscard]] std::shared_ptr<FightingContender>
             selectSuitableContenderOnSide(HexagonSide::Orientation side, ComparatorSelection<FightingContender> comp) const;
         [[nodiscard]] std::shared_ptr<FightingContender>
+            selectRandomContenderOnSideAlive(HexagonSide::Orientation side, ComparatorSelection<FightingContender> comp) const;
+        [[nodiscard]] std::shared_ptr<FightingContender>
             selectSuitableContenderAlive(ComparatorSelection<FightingContender> comp) const;
         [[nodiscard]] std::shared_ptr<FightingContender>
             selectSuitableContenderOnSideAlive(HexagonSide::Orientation side, ComparatorSelection<FightingContender> comp) const;

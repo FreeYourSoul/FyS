@@ -1,10 +1,36 @@
 namespace("decide_target")
 
-decide_target.contenderTarget = 1;
-decide_target.allyTarget = 0;
+decide_target.one_random_target = fun(targetType, side) {
+    if (ALLY_OR_ENNEMY == targetType) {
+        var chooseAlly = generateRandomNumber(0, 1);
+        if (1 == chooseAlly) {
+            targetType = ALLY;
+        }
+        else {
+            targetType = ENNEMY;
+        }
+    }
 
-decide_target.one_lower_life = fun(targetType, side) {
-    var comparator = fun(current, next) { (current.accessStatus().life.current > next.accessStatus().life.current) ? 1 : 0; };
+    if (ENNEMY == targetType) {
+        allyPartyTeams.selectRandomMemberOnSideAlive(side);
+    }
+    else if (ALLY == targetType) {
+        pitContenders.selectRandomContenderOnSideAlive(side);
+    }
+}
+
+decide_target.lower_life_than = fun(targetType, side, thanValue) {
+    var comparator;
+
+    if (-1 == thanValue) {
+        comparator = fun(current, next) { (current.accessStatus().life.current >= next.accessStatus().life.current) ? 1 : 0; };
+    }
+    else {
+        comparator = fun(current, next) {
+            ((current.accessStatus().life.current >= next.accessStatus().life.current) &&
+             (next.accessStatus().life.current < thanValue)) ? 1 : 0; };
+    }
+
     if (ENNEMY == targetType) {
         allyPartyTeams.selectSuitableMemberOnSideAlive(side, comparator);
     }
@@ -15,6 +41,77 @@ decide_target.one_lower_life = fun(targetType, side) {
         0; // should not arrive here, as this helper has to be called for a one target action
     }
 };
+decide_target.lower_life = fun(targetType, side) { decide_target.lower_life_than(targetType, side, -1); };
+
+decide_target.higher_life_than = fun(targetType, side, thanValue) {
+    var comparator;
+
+    if (-1 == thanValue) {
+        comparator  = fun(current, next) { (current.accessStatus().life.current <= next.accessStatus().life.current) ? 1 : 0; };
+    }
+    else {
+        comparator = fun(current, next) {
+            ((current.accessStatus().life.current <= next.accessStatus().life.current) &&
+             (next.accessStatus().life.current > thanValue)) ? 1 : 0; };
+    }
+
+    if (ENNEMY == targetType) {
+        allyPartyTeams.selectSuitableMemberOnSideAlive(side, comparator);
+    }
+    else if (ALLY == targetType) {
+        pitContenders.selectSuitableContenderOnSideAlive(side, comparator);
+    }
+    else {
+        0; // should not arrive here, as this helper has to be called for a one target action
+    }
+};
+decide_target.higher_life = fun(targetType, side) { decide_target.higher_life_than(targetType, side, -1); };
+
+decide_target.lower_mana_than = fun(targetType, side, thanValue) {
+    var comparator;
+
+    if (-1 == thanValue) {
+        comparator = fun(current, next) { (current.accessStatus().magicPoint.current >= next.accessStatus().magicPoint.current) ? 1 : 0; };
+    } else {
+        comparator = fun[thanValue](current, next) {
+            ((current.accessStatus().magicPoint.current >= next.accessStatus().magicPoint.current) &&
+             (next.accessStatus().magicPoint.current < thanValue)) ? 1 : 0; };
+    }
+
+    if (ENNEMY == targetType) {
+        allyPartyTeams.selectSuitableMemberOnSideAlive(side, comparator);
+    }
+    else if (ALLY == targetType) {
+        pitContenders.selectSuitableContenderOnSideAlive(side, comparator);
+    }
+    else {
+        0; // should not arrive here, as this helper has to be called for a one target action
+    }
+};
+decide_target.lower_mana = fun(targetType, side) { decide_target.lower_mana_than(targetType, side, -1); };
+
+decide_target.higher_mana_than = fun(targetType, side) {
+    var comparator;
+
+    if (-1 == thanValue) {
+        comparator = fun(current, next) { (current.accessStatus().magicPoint.current <= next.accessStatus().magicPoint.current) ? 1 : 0; };
+    } else {
+        comparator = fun[thanValue](current, next) {
+            ((current.accessStatus().magicPoint.current <= next.accessStatus().magicPoint.current) &&
+             (next.accessStatus().magicPoint.current > thanValue)) ? 1 : 0; };
+    }
+
+    if (ENNEMY == targetType) {
+        allyPartyTeams.selectSuitableMemberOnSideAlive(side, comparator);
+    }
+    else if (ALLY == targetType) {
+        pitContenders.selectSuitableContenderOnSideAlive(side, comparator);
+    }
+    else {
+        0; // should not arrive here, as this helper has to be called for a one target action
+    }
+};
+decide_target.higher_mana = fun(targetType, side) { decide_target.higher_mana_than(targetType, side, -1); };
 
 
 //namespace("decide_actions")
