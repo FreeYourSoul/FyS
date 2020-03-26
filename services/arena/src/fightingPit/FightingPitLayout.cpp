@@ -27,16 +27,22 @@
 
 namespace fys::arena {
 
-    unsigned FightingPitLayout::activeCharactersOnSide(HexagonSide::Orientation side) const {
-        return _contenders.get().contenderOnSide(side) + _partyTeams.get().allyNumberOnSide(side);
-    }
+unsigned
+FightingPitLayout::activeCharactersOnSide(HexagonSide::Orientation side) const
+{
+	return _contenders.get().contenderOnSide(side) + _partyTeams.get().allyNumberOnSide(side);
+}
 
-    void FightingPitLayout::characterMove() {
+void
+FightingPitLayout::characterMove()
+{
 
-    }
+}
 
-    void FightingPitLayout::contenderMove() {
+void
+FightingPitLayout::contenderMove()
+{
 
-    }
+}
 
 }

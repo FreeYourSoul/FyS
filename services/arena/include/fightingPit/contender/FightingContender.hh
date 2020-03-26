@@ -31,36 +31,44 @@
 
 namespace fys::arena {
 
-    // forward declarations
-    class PitContenders;
-    class ContenderScripting;
-    class AllyPartyTeams;
+// forward declarations
+class PitContenders;
+class ContenderScripting;
+class AllyPartyTeams;
 
-    class FightingContender {
-    public:
-        explicit FightingContender(std::unique_ptr<ContenderScripting> contenderScripting);
-        FightingContender(const FightingContender &other) = delete;
-        FightingContender(FightingContender &&other) noexcept = default;
+class FightingContender {
+public:
+	explicit FightingContender(std::unique_ptr<ContenderScripting> contenderScripting);
+	FightingContender(const FightingContender& other) = delete;
+	FightingContender(FightingContender&& other) noexcept = default;
 
-        void executeAction();
-        void setupContender();
-        void moveContender(HexagonSide::Orientation destination, bool bypassCheck = false);
-        void moveContender(data::MoveDirection rightOrLeft);
+	void executeAction();
+	void setupContender();
+	void moveContender(HexagonSide::Orientation destination, bool bypassCheck = false);
+	void moveContender(data::MoveDirection rightOrLeft);
 
-        [[nodiscard]] const data::Status &getStatus() const { return _status; }
-        [[nodiscard]] const HexagonSide &getHexagonSide() const { return _side; }
-        [[nodiscard]] data::Status &accessStatus() { return _status; }
-        [[nodiscard]] HexagonSide::Orientation getHexagonSideOrient() const { return (*_side).second; }
+	[[nodiscard]] const data::Status&
+	getStatus() const { return _status; }
 
-        const std::unique_ptr<ContenderScripting> &getContenderScripting() { return _contenderScripting; }
+	[[nodiscard]] const HexagonSide&
+	getHexagonSide() const { return _side; }
 
-    private:
-        std::unique_ptr<ContenderScripting> _contenderScripting;
-        HexagonSide _side;
-        data::Status _status;
-    };
+	[[nodiscard]] data::Status&
+	accessStatus() { return _status; }
 
-    using FightingContenderSPtr = std::shared_ptr<FightingContender>;
+	[[nodiscard]] HexagonSide::Orientation
+	getHexagonSideOrient() const { return (*_side).second; }
+
+	[[nodiscard]] const std::unique_ptr<ContenderScripting>&
+	getContenderScripting() { return _contenderScripting; }
+
+private:
+	std::unique_ptr<ContenderScripting> _contenderScripting;
+	HexagonSide _side;
+	data::Status _status;
+};
+
+using FightingContenderSPtr = std::shared_ptr<FightingContender>;
 
 }
 

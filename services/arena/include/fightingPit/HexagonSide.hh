@@ -30,70 +30,89 @@
 
 namespace fys::arena {
 
-    class HexagonSide {
-    public:
-        enum class Hexagon {
-            A,
-            B,
-            C
-        };
+class HexagonSide {
+public:
+	enum class Hexagon {
+		A,
+		B,
+		C
+	};
 
-        static constexpr unsigned SIDE_NUMBER = 6 * 3; // sidesByHexagon * hexagonNumber
+	static constexpr unsigned SIDE_NUMBER = 6 * 3; // sidesByHexagon * hexagonNumber
 
-        enum class Orientation : int {
-            A_N = 0,
-            A_NE,
-            A_SE,
-            A_S,
-            A_SW,
-            A_NW,
-            B_N ,
-            B_NE,
-            B_SE,
-            B_S ,
-            B_SW,
-            B_NW,
-            C_N ,
-            C_NE,
-            C_SE,
-            C_S ,
-            C_SW,
-            C_NW,
-            NONE // 18
-        };
+	enum class Orientation : int {
+		A_N = 0,
+		A_NE,
+		A_SE,
+		A_S,
+		A_SW,
+		A_NW,
+		B_N,
+		B_NE,
+		B_SE,
+		B_S,
+		B_SW,
+		B_NW,
+		C_N,
+		C_NE,
+		C_SE,
+		C_S,
+		C_SW,
+		C_NW,
+		NONE // 18
+	};
 
-        explicit HexagonSide(Orientation orientation) {
-            move(orientation, true);
-        }
+	explicit HexagonSide(Orientation orientation)
+	{
+		move(orientation, true);
+	}
 
-        explicit HexagonSide(Hexagon hexagon = Hexagon::A, Orientation orientation = Orientation::NONE) :
-            _hexagon(hexagon), _side(orientation) {}
+	explicit HexagonSide(Hexagon hexagon = Hexagon::A, Orientation orientation = Orientation::NONE)
+			:
+			_hexagon(hexagon), _side(orientation) { }
 
-        std::pair<Hexagon, Orientation> operator*() const { return std::make_pair(_hexagon, _side); }
+	[[nodiscard]] std::pair<Hexagon, Orientation>
+	operator*() const { return std::make_pair(_hexagon, _side); }
 
-        bool move(HexagonSide::Orientation destinationSide, bool forceMovement = false);
-        bool moveRight();
-        bool moveLeft();
-        bool moveBack();
+	bool
+	move(HexagonSide::Orientation destinationSide, bool forceMovement = false);
 
-        [[nodiscard]] bool isAmbushSide() const;
-        [[nodiscard]] bool canMove(HexagonSide::Orientation destinationSide) const;
+	bool
+	moveRight();
 
-    private:
-        void changeSide(HexagonSide::Orientation);
-        [[nodiscard]] Orientation findLeft() const;
-        [[nodiscard]] Orientation findRight() const;
-        [[nodiscard]] Orientation findBack() const;
+	bool
+	moveLeft();
 
-    private:
-        Hexagon     _hexagon    = Hexagon::A;
-        Orientation _side       = Orientation::NONE;
-    };
+	bool
+	moveBack();
+
+	[[nodiscard]] bool
+	isAmbushSide() const;
+	[[nodiscard]] bool
+	canMove(HexagonSide::Orientation destinationSide) const;
+
+private:
+	void
+	changeSide(HexagonSide::Orientation);
+	[[nodiscard]] Orientation
+	findLeft() const;
+	[[nodiscard]] Orientation
+	findRight() const;
+	[[nodiscard]] Orientation
+	findBack() const;
+
+private:
+	Hexagon _hexagon = Hexagon::A;
+	Orientation _side = Orientation::NONE;
+};
 
 } // namespace fys::arena
 
-std::ostream &operator<<(std::ostream &os, fys::arena::HexagonSide::Orientation orientation);
-std::ostream &operator<<(std::ostream &os, fys::arena::HexagonSide::Hexagon hexagon);
-std::ostream &operator<<(std::ostream &os, fys::arena::HexagonSide hexagonSide);
+std::ostream&
+operator<<(std::ostream& os, fys::arena::HexagonSide::Orientation orientation);
+std::ostream&
+operator<<(std::ostream& os, fys::arena::HexagonSide::Hexagon hexagon);
+std::ostream&
+operator<<(std::ostream& os, fys::arena::HexagonSide hexagonSide);
 
 #endif // !FYS_HEXAGONSIDE_HH

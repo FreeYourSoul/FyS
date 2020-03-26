@@ -23,6 +23,5 @@
 
 #include <network/WorkerConnection.hh>
 
-namespace fys::arena
-{
+namespace fys::arena {
 }

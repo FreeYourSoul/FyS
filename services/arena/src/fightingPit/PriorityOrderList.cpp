@@ -26,55 +26,63 @@
 #include <fightingPit/PriorityOrderList.hh>
 
 namespace fys::arena {
-    
-    PriorityOrderList::PriorityOrderList(std::vector<data::PriorityElem> baseSpeed) : 
-                        _baseSpeed(std::move(baseSpeed)), _priorityList(_baseSpeed.size() * 4) 
-    {
+
+PriorityOrderList::PriorityOrderList(std::vector<data::PriorityElem> baseSpeed)
+        :
+        _baseSpeed(std::move(baseSpeed)), _priorityList(_baseSpeed.size() * 4)
+{
+    sortBaseAndCalculatePriority();
+}
+
+void
+PriorityOrderList::addParticipantInList(uint id, int speed, bool isContender)
+{
+    if (std::any_of(_baseSpeed.begin(), _baseSpeed.end(),
+            [id, isContender](const auto& prioElem) { return prioElem.id == id && prioElem.isContender == isContender; })) {
+        SPDLOG_WARN("Cannot add participant in order list : Participant of id {} already existing", id);
+        return;
+    }
+    _baseSpeed.emplace_back(id, speed, isContender);
+    if (_currentTurn > 0)
+        speed += getFastestBaseSpeed();
+    _analyzedList.emplace_back(id, speed, isContender);
+    _priorityList.clear();
+    uint turn = _currentTurn;
+    sortBaseAndCalculatePriority();
+    _currentTurn = turn;
+}
+
+void
+PriorityOrderList::removeParticipantFromList(uint idParticipant)
+{
+    auto findParticipantPredicate = [idParticipant](const data::PriorityElem& elem) { return elem.id == idParticipant; };
+    _baseSpeed.erase(std::remove_if(_baseSpeed.begin(), _baseSpeed.end(), findParticipantPredicate), _baseSpeed.end());
+    _priorityList.erase(std::remove_if(_priorityList.begin(), _priorityList.end(), findParticipantPredicate), _priorityList.end());
+    _analyzedList.erase(std::remove_if(_analyzedList.begin(), _analyzedList.end(), findParticipantPredicate), _analyzedList.end());
+}
+
+data::PriorityElem
+PriorityOrderList::getNext()
+{
+    if (_baseSpeed.empty()) {
+        return {0, 0, false};
+    }
+    if (_priorityList.empty()) {
         sortBaseAndCalculatePriority();
+        return getNext();
     }
+    _currentPrio = _priorityList.back();
+    _priorityList.pop_back();
+    return _currentPrio;
+}
 
-    void PriorityOrderList::addParticipantInList(uint id, int speed, bool isContender) {
-        if (std::any_of(_baseSpeed.begin(), _baseSpeed.end(),
-                [id, isContender](const auto& prioElem) { return prioElem.id == id && prioElem.isContender == isContender; }))
-        {
-            SPDLOG_WARN("Cannot add participant in order list : Participant of id {} already existing", id);
-            return;
-        }
-        _baseSpeed.emplace_back(id, speed, isContender);
-        if (_currentTurn > 0)
-            speed += getFastestBaseSpeed();
-        _analyzedList.emplace_back(id, speed, isContender);
-        _priorityList.clear();
-        uint turn = _currentTurn;
-        sortBaseAndCalculatePriority();
-        _currentTurn = turn;
-    }
+void
+PriorityOrderList::customSort()
+{
+    std::sort(_analyzedList.begin(), _analyzedList.end());
 
-    void PriorityOrderList::removeParticipantFromList(uint idParticipant) {
-        auto findParticipantPredicate = [idParticipant](const data::PriorityElem& elem) { return elem.id == idParticipant; };
-        _baseSpeed.erase(std::remove_if(_baseSpeed.begin(), _baseSpeed.end(), findParticipantPredicate), _baseSpeed.end());
-        _priorityList.erase(std::remove_if(_priorityList.begin(), _priorityList.end(), findParticipantPredicate), _priorityList.end());
-        _analyzedList.erase(std::remove_if(_analyzedList.begin(), _analyzedList.end(), findParticipantPredicate), _analyzedList.end());
-    }
-
-    data::PriorityElem PriorityOrderList::getNext() {
-        if (_baseSpeed.empty()) {
-            return {0, 0, false};
-        }
-        if (_priorityList.empty()) {
-            sortBaseAndCalculatePriority();
-            return getNext();
-        }
-        _currentPrio = _priorityList.back();
-        _priorityList.pop_back();
-        return _currentPrio;
-    }
-
-    void PriorityOrderList::customSort() {
-        std::sort(_analyzedList.begin(), _analyzedList.end());
-
-        // reorder equal speeds
-        if (auto found = std::adjacent_find(_analyzedList.begin(), _analyzedList.end(),
+    // reorder equal speeds
+    if (auto found = std::adjacent_find(_analyzedList.begin(), _analyzedList.end(),
                 [this](const auto& e, const auto& e2) {
                     if (e.speed == e2.speed) {
                         uint baseSpeedE = 0;
@@ -88,82 +96,87 @@ namespace fys::arena {
                         return baseSpeedE > baseSpeedE2;
                     }
                     return false;
-                }); 
-            found != _analyzedList.end())
-        {
-            if (auto toSwap = std::adjacent_find(_analyzedList.begin(),_analyzedList.end(),
+                });
+            found != _analyzedList.end()) {
+        if (auto toSwap = std::adjacent_find(_analyzedList.begin(), _analyzedList.end(),
                     [](const auto& e, const auto& e2) { return e.speed != e2.speed; });
-                toSwap != _analyzedList.end())
-            {
-                std::reverse(found, toSwap + 1);
-            }
+                toSwap != _analyzedList.end()) {
+            std::reverse(found, toSwap + 1);
         }
     }
+}
 
-    void PriorityOrderList::sortBaseAndCalculatePriority() {
-        if (_baseSpeed.empty())
-            return;
-        std::sort(_baseSpeed.begin(), _baseSpeed.end());
-        if (_currentTurn == 0) {
-            _analyzedList = _baseSpeed;
-            _priorityList = _baseSpeed;
-            ++_currentTurn;
-            return;
-        }
-        calculatePriority(_currentTurn);
-    }
-
-    int PriorityOrderList::getComputedSpeed(const data::PriorityElem &elemToCompute) const {
-        for (std::size_t i = 0; i < _baseSpeed.size(); ++i) {
-            if (_baseSpeed.at(i).id == elemToCompute.id) {
-                uint idNextInLine = (i == 0) ? _baseSpeed.back().id : _baseSpeed.at(i - 1).id;
-                if (auto it = std::find_if(_analyzedList.begin(), _analyzedList.end(),
-                       [idNextInLine](const auto &analistElem) {
-                           return analistElem.id == idNextInLine;
-                       }); it != _analyzedList.end()) {
-                    return it->speed ? it->speed : 1;
-                }
-            }
-        }
-        // TODO : Log warning about strange stuff happening around here
-        return 1;
-    }
-
-
-    void PriorityOrderList::endTurnRoutine() {
+void
+PriorityOrderList::sortBaseAndCalculatePriority()
+{
+    if (_baseSpeed.empty())
+        return;
+    std::sort(_baseSpeed.begin(), _baseSpeed.end());
+    if (_currentTurn == 0) {
+        _analyzedList = _baseSpeed;
+        _priorityList = _baseSpeed;
         ++_currentTurn;
-        if (_baseSpeed.size() <= 1)
-            return;
+        return;
+    }
+    calculatePriority(_currentTurn);
+}
 
-        for (const auto &baseSpeedElem : _baseSpeed) {
+int
+PriorityOrderList::getComputedSpeed(const data::PriorityElem& elemToCompute) const
+{
+    for (std::size_t i = 0; i < _baseSpeed.size(); ++i) {
+        if (_baseSpeed.at(i).id == elemToCompute.id) {
+            uint idNextInLine = (i == 0) ? _baseSpeed.back().id : _baseSpeed.at(i - 1).id;
             if (auto it = std::find_if(_analyzedList.begin(), _analyzedList.end(),
-                                       [baseId = baseSpeedElem.id](const auto &analyzedElem) {
-                                           return analyzedElem.id == baseId;
-                                       });
-                    it != _analyzedList.end()) {
-                it->speed += baseSpeedElem.speed + getFastestBaseSpeed();
+                        [idNextInLine](const auto& analistElem) {
+                            return analistElem.id == idNextInLine;
+                        }); it != _analyzedList.end()) {
+                return it->speed ? it->speed : 1;
             }
         }
-        // reverse in order to have faster at the end (to use pop_back)
-        customSort();
-        std::reverse(_priorityList.begin(), _priorityList.end());
     }
+    // TODO : Log warning about strange stuff happening around here
+    return 1;
+}
 
-    void PriorityOrderList::calculatePriority(uint turn) {
-        if (_currentTurn != turn) {
-            // log recalculation of priority ?
-            return;
+void
+PriorityOrderList::endTurnRoutine()
+{
+    ++_currentTurn;
+    if (_baseSpeed.size() <= 1)
+        return;
+
+    for (const auto& baseSpeedElem : _baseSpeed) {
+        if (auto it = std::find_if(_analyzedList.begin(), _analyzedList.end(),
+                    [baseId = baseSpeedElem.id](const auto& analyzedElem) {
+                        return analyzedElem.id == baseId;
+                    });
+                it != _analyzedList.end()) {
+            it->speed += baseSpeedElem.speed + getFastestBaseSpeed();
         }
-        customSort();
-
-        auto &fastest = _analyzedList.back();
-
-        if (_analyzedList.size() > 1)
-            fastest.speed -= getComputedSpeed(fastest);
-        _priorityList.emplace_back(fastest);
-        if (isPlayerSlowest(fastest.id))
-            endTurnRoutine();
-        calculatePriority(turn);
     }
+    // reverse in order to have faster at the end (to use pop_back)
+    customSort();
+    std::reverse(_priorityList.begin(), _priorityList.end());
+}
+
+void
+PriorityOrderList::calculatePriority(uint turn)
+{
+    if (_currentTurn != turn) {
+        // log recalculation of priority ?
+        return;
+    }
+    customSort();
+
+    auto& fastest = _analyzedList.back();
+
+    if (_analyzedList.size() > 1)
+        fastest.speed -= getComputedSpeed(fastest);
+    _priorityList.emplace_back(fastest);
+    if (isPlayerSlowest(fastest.id))
+        endTurnRoutine();
+    calculatePriority(turn);
+}
 
 }

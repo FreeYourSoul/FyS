@@ -25,30 +25,31 @@
 
 #include <network/WorkerService.hh>
 
-TEST_CASE("WorkerService test", "[service][arena]") {
+TEST_CASE("WorkerService test", "[service][arena]")
+{
 
-    fys::arena::WorkerService ws;
+	fys::arena::WorkerService ws;
 
-    REQUIRE(fys::arena::FightingPit::CREATION_ERROR == ws.addFightingPit(nullptr));
+	REQUIRE(fys::arena::FightingPit::CREATION_ERROR == ws.addFightingPit(nullptr));
 
-    SECTION("Test addFightingPit") {
+	SECTION("Test addFightingPit") {
 
-        unsigned id1 = ws.addFightingPit(std::make_unique<fys::arena::FightingPit>("1", fys::arena::FightingPit::EASY));
-        REQUIRE(1 == id1);
-        REQUIRE("1" == fys::arena::FightingPitAnnouncer::getCreatorUserName(ws.getFightingPitInstance(id1)));
+		unsigned id1 = ws.addFightingPit(std::make_unique<fys::arena::FightingPit>("1", fys::arena::FightingPit::EASY));
+		REQUIRE(1 == id1);
+		REQUIRE("1" == fys::arena::FightingPitAnnouncer::getCreatorUserName(ws.getFightingPitInstance(id1)));
 
-        unsigned id2 = ws.addFightingPit(std::make_unique<fys::arena::FightingPit>("2", fys::arena::FightingPit::EASY));
-        REQUIRE(2 == id2);
-        REQUIRE("2" == fys::arena::FightingPitAnnouncer::getCreatorUserName(ws.getFightingPitInstance(id2)));
+		unsigned id2 = ws.addFightingPit(std::make_unique<fys::arena::FightingPit>("2", fys::arena::FightingPit::EASY));
+		REQUIRE(2 == id2);
+		REQUIRE("2" == fys::arena::FightingPitAnnouncer::getCreatorUserName(ws.getFightingPitInstance(id2)));
 
-        unsigned id3 = ws.addFightingPit(std::make_unique<fys::arena::FightingPit>("3", fys::arena::FightingPit::EASY));
-        REQUIRE(3 == id3);
-        fys::arena::FightingPitAnnouncer::getCreatorUserName(ws.getFightingPitInstance(id3));
+		unsigned id3 = ws.addFightingPit(std::make_unique<fys::arena::FightingPit>("3", fys::arena::FightingPit::EASY));
+		REQUIRE(3 == id3);
+		fys::arena::FightingPitAnnouncer::getCreatorUserName(ws.getFightingPitInstance(id3));
 
-        unsigned id4 = ws.addFightingPit(std::make_unique<fys::arena::FightingPit>("4", fys::arena::FightingPit::EASY));
-        REQUIRE(4 == id4);
-        fys::arena::FightingPitAnnouncer::getCreatorUserName(ws.getFightingPitInstance(id4));
+		unsigned id4 = ws.addFightingPit(std::make_unique<fys::arena::FightingPit>("4", fys::arena::FightingPit::EASY));
+		REQUIRE(4 == id4);
+		fys::arena::FightingPitAnnouncer::getCreatorUserName(ws.getFightingPitInstance(id4));
 
-    } // End section : Test addFightingPit
+	} // End section : Test addFightingPit
 
 } // End TestCase : WorkerService test

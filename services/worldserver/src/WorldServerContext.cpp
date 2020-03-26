@@ -31,98 +31,118 @@ using json = nlohmann::json;
 
 namespace fys::ws {
 
-    WorldServerContext::WorldServerContext(int ac, const char *const *av) :
-        common::ServiceContextBase(ac, av) {
-        std::ifstream i(_configFile);
-        json jsonConfig;
-        i >> jsonConfig;
-        initWsContextWithJson(jsonConfig);
-    }
+WorldServerContext::WorldServerContext(int ac, const char* const* av)
+		:
+		common::ServiceContextBase(ac, av)
+{
+	std::ifstream i(_configFile);
+	json jsonConfig;
+	i >> jsonConfig;
+	initWsContextWithJson(jsonConfig);
+}
 
-    void WorldServerContext::initWsContextWithJson(json &json) {
-        auto wsJson = json["worldServer"];
-        auto confJson = wsJson["conf"];
-        auto overlapsJson = confJson["overlapServer"];
+void
+WorldServerContext::initWsContextWithJson(json& json)
+{
+	auto wsJson = json["worldServer"];
+	auto confJson = wsJson["conf"];
+	auto overlapsJson = confJson["overlapServer"];
 
-        wsJson["code"].get_to(_serverCode);
-        wsJson["TMX_Map"].get_to(_tmxMapPath);
-        _serverXBoundaries = std::make_pair(confJson["begin_x"].get<double>(), confJson["end_x"].get<double>());
-        _serverYBoundaries = std::make_pair(confJson["begin_y"].get<double>(), confJson["end_y"].get<double>());
-        for (auto &[key, value] : overlapsJson.items()) {
-            ProximityServer proximityServer;
-            proximityServer.code = value["code"].get<std::string>();
+	wsJson["code"].get_to(_serverCode);
+	wsJson["TMX_Map"].get_to(_tmxMapPath);
+	_serverXBoundaries = std::make_pair(confJson["begin_x"].get<double>(), confJson["end_x"].get<double>());
+	_serverYBoundaries = std::make_pair(confJson["begin_y"].get<double>(), confJson["end_y"].get<double>());
+	for (auto &[key, value] : overlapsJson.items()) {
+		ProximityServer proximityServer;
+		proximityServer.code = value["code"].get<std::string>();
 
-            if (auto proxiXJson = value["overlap_x"]; !proxiXJson.is_null()) {
-                proximityServer.xAxisRequirement = {
-                        proxiXJson["value"].get<double>(),
-                        proxiXJson["condition"].get<std::string>().find(">") != std::string::npos
-                };
-            }
-            if (auto proxiYJson = value["overlap_y"]; !proxiYJson.is_null()) {
-                proximityServer.yAxisRequirement = {
-                        proxiYJson["value"].get<double>(),
-                        proxiYJson["condition"].get<std::string>().find(">") != std::string::npos
-                };
-            }
-            _serverProximity.emplace_back(std::move(proximityServer));
-        }
-    }
+		if (auto proxiXJson = value["overlap_x"]; !proxiXJson.is_null()) {
+			proximityServer.xAxisRequirement = {
+					proxiXJson["value"].get<double>(),
+					proxiXJson["condition"].get<std::string>().find(">") != std::string::npos
+			};
+		}
+		if (auto proxiYJson = value["overlap_y"]; !proxiYJson.is_null()) {
+			proximityServer.yAxisRequirement = {
+					proxiYJson["value"].get<double>(),
+					proxiYJson["condition"].get<std::string>().find(">") != std::string::npos
+			};
+		}
+		_serverProximity.emplace_back(std::move(proximityServer));
+	}
+}
 
-    std::string WorldServerContext::toString() const noexcept {
-        std::string str;
-        str = "\n*************************\n";
-        str+= "[INFO] Service " + _name + " context VERSION: " + _version + "\n";
-        str+= "[INFO] Config file used: " + _configFile + "\n\n";
-        str+= "[INFO] World Server code: " + _serverCode + "\n";
-        str+= "[INFO] TMX Map path: " + _tmxMapPath + "\n";
-        str+= "[INFO] Dispatcher subscribing port: " + std::to_string(_dispatcherData.subscriberPort) + "\n";
-        str+= "[INFO] Dispatcher connected port: " + std::to_string(_dispatcherData.port) + "\n";
-        str+= "[INFO] Dispatcher connected host: " + _dispatcherData.address + "\n";
-        str+= "[INFO] Dispatcher Subscriber connection string: " + getDispatcherSubConnectionString() + "\n";
-        str+= "[INFO] Dispatcher connection string: " + getDispatcherConnectionString() + "\n";
+std::string
+WorldServerContext::toString() const noexcept
+{
+	std::string str;
+	str = "\n*************************\n";
+	str += "[INFO] Service " + _name + " context VERSION: " + _version + "\n";
+	str += "[INFO] Config file used: " + _configFile + "\n\n";
+	str += "[INFO] World Server code: " + _serverCode + "\n";
+	str += "[INFO] TMX Map path: " + _tmxMapPath + "\n";
+	str += "[INFO] Dispatcher subscribing port: " + std::to_string(_dispatcherData.subscriberPort) + "\n";
+	str += "[INFO] Dispatcher connected port: " + std::to_string(_dispatcherData.port) + "\n";
+	str += "[INFO] Dispatcher connected host: " + _dispatcherData.address + "\n";
+	str += "[INFO] Dispatcher Subscriber connection string: " + getDispatcherSubConnectionString() + "\n";
+	str += "[INFO] Dispatcher connection string: " + getDispatcherConnectionString() + "\n";
 
-        for (const auto &prox : _serverProximity) {
-            str+= "[INFO] element:\n       ";
-            str+= "code: " + prox.code + "\n";
-            if (prox.xAxisRequirement) {
-                str+= "       Xvalue: " + std::to_string(prox.xAxisRequirement->value) + "\n";
-                str+= "       XisSup: " + std::to_string(prox.xAxisRequirement->superiorTo) + "\n";
-            }
-            if (prox.yAxisRequirement) {
-                str+= "       Yvalue: " + std::to_string(prox.yAxisRequirement->value) + "\n";
-                str+= "       YisSup: " + std::to_string(prox.yAxisRequirement->superiorTo) + "\n";
-            }
-        }
-        str+= "\n*************************";
-        return str;
-    }
+	for (const auto& prox : _serverProximity) {
+		str += "[INFO] element:\n       ";
+		str += "code: " + prox.code + "\n";
+		if (prox.xAxisRequirement) {
+			str += "       Xvalue: " + std::to_string(prox.xAxisRequirement->value) + "\n";
+			str += "       XisSup: " + std::to_string(prox.xAxisRequirement->superiorTo) + "\n";
+		}
+		if (prox.yAxisRequirement) {
+			str += "       Yvalue: " + std::to_string(prox.yAxisRequirement->value) + "\n";
+			str += "       YisSup: " + std::to_string(prox.yAxisRequirement->superiorTo) + "\n";
+		}
+	}
+	str += "\n*************************";
+	return str;
+}
 
-    const std::string& WorldServerContext::getServerCode() const noexcept {
-        return _serverCode;
-    }
+const std::string&
+WorldServerContext::getServerCode() const noexcept
+{
+	return _serverCode;
+}
 
-    const std::string &WorldServerContext::getTMXMapPath() const noexcept {
-        return _tmxMapPath;
-    }
+const std::string&
+WorldServerContext::getTMXMapPath() const noexcept
+{
+	return _tmxMapPath;
+}
 
-    const std::vector<ProximityServer> &WorldServerContext::getServerProximity() const noexcept {
-        return _serverProximity;
-    }
+const std::vector<ProximityServer>&
+WorldServerContext::getServerProximity() const noexcept
+{
+	return _serverProximity;
+}
 
-    const std::pair<double, double> &WorldServerContext::getServerXBoundaries() const noexcept {
-        return _serverXBoundaries;
-    }
+const std::pair<double, double>&
+WorldServerContext::getServerXBoundaries() const noexcept
+{
+	return _serverXBoundaries;
+}
 
-    const std::pair<double, double> &WorldServerContext::getServerYBoundaries() const noexcept {
-        return _serverYBoundaries;
-    }
+const std::pair<double, double>&
+WorldServerContext::getServerYBoundaries() const noexcept
+{
+	return _serverYBoundaries;
+}
 
-    std::string WorldServerContext::getDispatcherConnectionString() const noexcept {
-        return std::string("tcp://").append(_dispatcherData.address).append(":").append(std::to_string(_dispatcherData.port));
-    }
+std::string
+WorldServerContext::getDispatcherConnectionString() const noexcept
+{
+	return std::string("tcp://").append(_dispatcherData.address).append(":").append(std::to_string(_dispatcherData.port));
+}
 
-    std::string WorldServerContext::getDispatcherSubConnectionString() const noexcept {
-        return std::string("tcp://").append(_dispatcherData.address).append(":").append(std::to_string(_dispatcherData.subscriberPort));
-    }
+std::string
+WorldServerContext::getDispatcherSubConnectionString() const noexcept
+{
+	return std::string("tcp://").append(_dispatcherData.address).append(":").append(std::to_string(_dispatcherData.subscriberPort));
+}
 
 }

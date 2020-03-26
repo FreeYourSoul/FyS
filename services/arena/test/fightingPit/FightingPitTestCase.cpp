@@ -32,34 +32,34 @@ using namespace fys::arena;
 
 // Test of the game loop
 
-TEST_CASE("FightingPit test", "[service][arena]") {
-    auto fseamMock = FSeam::getDefault<fys::util::RandomGenerator>();
-    ConnectionHandler handler {};
-    auto fseamConnectionHandlerMock = FSeam::get(&handler);
-    auto cml = CmlBase(getLocalPathStorage());
-    EncounterContext ctx;
-    ctx._rangeEncounterPerZone["WS00"] = {
-            std::make_pair(0, 0), // ez
-            std::make_pair(0, 0), // medium
-            std::make_pair(0, 0)  // hard
-    };
-    ctx._contendersPerZone["WS00"] = {
-            EncounterContext::EncounterDesc{
-                    "arena:contenders:Sampy.chai", 3,
-                    {60, 60, 60}
-            },
-            EncounterContext::EncounterDesc {
-                    "arena:contenders:Slime.chai", 3,
-                    {40, 40, 40}
-            }
-    };
+TEST_CASE("FightingPit test", "[service][arena]")
+{
+	auto fseamMock = FSeam::getDefault<fys::util::RandomGenerator>();
+	ConnectionHandler handler{};
+	auto fseamConnectionHandlerMock = FSeam::get(&handler);
+	auto cml = CmlBase(getLocalPathStorage());
+	EncounterContext ctx;
+	ctx._rangeEncounterPerZone["WS00"] = {
+			std::make_pair(0, 0), // ez
+			std::make_pair(0, 0), // medium
+			std::make_pair(0, 0)  // hard
+	};
+	ctx._contendersPerZone["WS00"] = {
+			EncounterContext::EncounterDesc{
+					"arena:contenders:Sampy.chai", 3,
+					{60, 60, 60}
+			},
+			EncounterContext::EncounterDesc{
+					"arena:contenders:Slime.chai", 3,
+					{40, 40, 40}
+			}
+	};
 
-    // seed used 42
-    std::shared_ptr<std::mt19937> mt = std::make_shared<std::mt19937>(42);
-    fseamMock->dupeReturn<FSeam::RandomGenerator::get>(mt);
+	// seed used 42
+	std::shared_ptr<std::mt19937> mt = std::make_shared<std::mt19937>(42);
+	fseamMock->dupeReturn<FSeam::RandomGenerator::get>(mt);
 
-    REQUIRE(0 == fys::util::RandomGenerator::generateInRange(0, 0));
-
+	REQUIRE(0 == fys::util::RandomGenerator::generateInRange(0, 0));
 
 } // End TestCase : FightingPit test
 

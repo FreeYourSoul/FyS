@@ -29,48 +29,58 @@
 
 namespace fys::arena {
 
-    std::vector<std::shared_ptr<TeamMember>> PartyTeam::getChangingSideTeamMember() const {
-        std::vector<std::shared_ptr<TeamMember>> result;
-        result.reserve(_changeSideFlags.size());
-        for (std::size_t i = 0; i < _changeSideFlags.size(); ++i) {
-            if (_changeSideFlags.at(i)) {
-                result.emplace_back(_members.at(i));
-            }
-        }
-        result.shrink_to_fit();
-        return result;
-    }
+std::vector<std::shared_ptr<TeamMember>>
+PartyTeam::getChangingSideTeamMember() const
+{
+	std::vector<std::shared_ptr<TeamMember>> result;
+	result.reserve(_changeSideFlags.size());
+	for (std::size_t i = 0; i < _changeSideFlags.size(); ++i) {
+		if (_changeSideFlags.at(i)) {
+			result.emplace_back(_members.at(i));
+		}
+	}
+	result.shrink_to_fit();
+	return result;
+}
 
-    std::vector<std::shared_ptr<TeamMember>> PartyTeam::getTeamMemberOnSide(fys::arena::HexagonSide::Orientation side) const {
-        std::vector<std::shared_ptr<TeamMember>> result;
-        std::copy_if(_members.begin(), _members.end(), std::back_inserter(result), [side](const auto &contenderPtr){
-            return contenderPtr->getHexagonSideOrient() == side;
-        });
-        return result;
-    }
+std::vector<std::shared_ptr<TeamMember>>
+PartyTeam::getTeamMemberOnSide(fys::arena::HexagonSide::Orientation side) const
+{
+	std::vector<std::shared_ptr<TeamMember>> result;
+	std::copy_if(_members.begin(), _members.end(), std::back_inserter(result), [side](const auto& contenderPtr) {
+		return contenderPtr->getHexagonSideOrient() == side;
+	});
+	return result;
+}
 
-    void PartyTeam::addTeamMember(std::shared_ptr<TeamMember> member) {
-        _members.emplace_back(std::move(member));
-    }
+void
+PartyTeam::addTeamMember(std::shared_ptr<TeamMember> member)
+{
+	_members.emplace_back(std::move(member));
+}
 
-    void PartyTeam::addPendingActionToTeamMember(unsigned id) {
-        auto it = std::find_if(_members.begin(), _members.end(), [id](const auto & teamMember) {
-            return id == teamMember->getId();
-        });
-        if (it != _members.end()) {
+void
+PartyTeam::addPendingActionToTeamMember(unsigned id)
+{
+	auto it = std::find_if(_members.begin(), _members.end(), [id](const auto& teamMember) {
+		return id == teamMember->getId();
+	});
+	if (it != _members.end()) {
 //            it->get()->
-        }
-        else {
-            SPDLOG_ERROR("Adding pending action to a non existing team member of id {}", id);
-        }
-    }
+	}
+	else {
+		SPDLOG_ERROR("Adding pending action to a non existing team member of id {}", id);
+	}
+}
 
-    unsigned PartyTeam::allyNumberOnSide(HexagonSide::Orientation side) const {
-        return std::count_if(_members.cbegin(), _members.cend(),
-                 [side](const TeamMemberSPtr & ally) {
-                     return side == ally->getHexagonSideOrient();
-                 }
-        );
-    }
+unsigned
+PartyTeam::allyNumberOnSide(HexagonSide::Orientation side) const
+{
+	return std::count_if(_members.cbegin(), _members.cend(),
+			[side](const TeamMemberSPtr& ally) {
+				return side == ally->getHexagonSideOrient();
+			}
+	);
+}
 
 }

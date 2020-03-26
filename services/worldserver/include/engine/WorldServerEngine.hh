@@ -32,36 +32,39 @@
 #include <WSAction_generated.h>
 
 namespace fys::fb {
-    class WSAction;
+class WSAction;
 }
 
 namespace fys::ws {
 
-    // forward declaration
-    class WorldServerContext;
-    class CollisionMap;
+// forward declaration
+class WorldServerContext;
+class CollisionMap;
 
-    class WorldServerEngine {
+class WorldServerEngine {
 
-    public:
-        explicit WorldServerEngine(const WorldServerContext& ctx);
+public:
+	explicit WorldServerEngine(const WorldServerContext& ctx);
 
-        void processPlayerInputMessage(std::string &&idt, std::string &&token,
-                const fys::fb::WSAction *actionMsg, ConnectionHandler &handler);
+	void
+	processPlayerInputMessage(std::string&& idt, std::string&& token,
+							  const fys::fb::WSAction* actionMsg, ConnectionHandler& handler);
 
-        void executePendingActions(ws::ConnectionHandler &conn);
+	void
+	executePendingActions(ws::ConnectionHandler& conn);
 
-    private:
-        inline void movePlayerAction(const std::string &idt, uint indexPlayer, PlayerInfo &pi, ws::ConnectionHandler &conn);
-        inline void notifyClientsOfMove(const std::vector<std::string_view> &ids, ws::ConnectionHandler &conn) const;
+private:
+	inline void
+	movePlayerAction(const std::string& idt, uint indexPlayer, PlayerInfo& pi, ws::ConnectionHandler& conn);
+	inline void
+	notifyClientsOfMove(const std::vector<std::string_view>& ids, ws::ConnectionHandler& conn) const;
 
-    private:
-        CollisionMap _map;
-        PlayersData _data;
+private:
+	CollisionMap _map;
+	PlayersData _data;
 
-    };
+};
 
 }
-
 
 #endif //FYS_WORLDSERVERENGINE_HH

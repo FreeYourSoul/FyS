@@ -35,114 +35,135 @@
 
 // forward declarations
 namespace fys::cache {
-    class Cml;
+class Cml;
 }
 
 namespace fys::arena {
 
-    /**
-     * @brief Builder class to create the FightingPit. 
-     *   - It generate the position of the Pit participants (contenders and team)
-     *   - Define if the fight is an ambush or not.
-     *   - Download the required scripts for the contenders (if not in the cache).
-     *   - Download the required scripts for the team (if not in the cache)
-     *   - Set the level of the fighting pit 
-     *
-     */
-    class FightingPitAnnouncer {
+/**
+ * @brief Builder class to create the FightingPit.
+ *   - It generate the position of the Pit participants (contenders and team)
+ *   - Define if the fight is an ambush or not.
+ *   - Download the required scripts for the contenders (if not in the cache).
+ *   - Download the required scripts for the team (if not in the cache)
+ *   - Set the level of the fighting pit
+ *
+ */
+class FightingPitAnnouncer {
 
-    public:
-        enum EncounterType {
-            RANDOM,
-            SCRIPTED
-        };
+public:
+	enum EncounterType {
+		RANDOM,
+		SCRIPTED
+	};
 
-    public:
-        explicit FightingPitAnnouncer(cache::Cml &cml) : _cache(cml) {}
+public:
+	explicit FightingPitAnnouncer(cache::Cml& cml)
+			:_cache(cml) { }
 
-        /**
-         * Build a fighting pit thanks to the information given
-         * @param ctx encounter context supplied at the startup of the application (contains informations about the type
-         * of encounter a player can find depending on zones
-         * todo : zones are not only defined by world server id, position may be something that should come back in the communication protocol
-         * @param wsId world server id on which the generation of the fighting pit takes place
-         * @return a newly generated fighting pit
-         */
-        [[nodiscard]] std::unique_ptr<FightingPit>
-            buildFightingPit(const EncounterContext &ctx, const std::string &wsId);
+	/**
+	 * Build a fighting pit thanks to the information given
+	 * @param ctx encounter context supplied at the startup of the application (contains informations about the type
+	 * of encounter a player can find depending on zones
+	 * todo : zones are not only defined by world server id, position may be something that should come back in the communication protocol
+	 * @param wsId world server id on which the generation of the fighting pit takes place
+	 * @return a newly generated fighting pit
+	 */
+	[[nodiscard]] std::unique_ptr<FightingPit>
+	buildFightingPit(const EncounterContext& ctx, const std::string& wsId);
 
-        void setEncounterType(EncounterType encounterType) {
-            if (encounterType == RANDOM)
-                _idEncounter = 0;
-            _encounterType = encounterType;
-        }
+	void
+	setEncounterType(EncounterType encounterType)
+	{
+		if (encounterType == RANDOM)
+			_idEncounter = 0;
+		_encounterType = encounterType;
+	}
 
-        void setEncounterId(uint idEncounter) {
-            if (_encounterType == RANDOM && !idEncounter)
-                _encounterType = SCRIPTED;
-            _idEncounter = idEncounter;
-        }
+	void setEncounterId(uint idEncounter)
+	{
+		if (_encounterType == RANDOM && !idEncounter)
+			_encounterType = SCRIPTED;
+		_idEncounter = idEncounter;
+	}
 
-        /**
-         * It is assumed that the player defined by the username/token is already correctly authenticated before
-         * calling this method (call this method only if the username/token is valid).
-         * @param creatorUserName name of the authenticated player generating a fighting pit
-         */
-        void setCreatorUserName(std::string creatorUserName) { _creatorUserName = std::move(creatorUserName); }
-        /**
-         * It is assumed that the player defined by the username/token is already correctly authenticated before
-         * calling this method (call this method only if the username/token is valid).
-         * @param creatorUserToken token of the authenticated player generating a fighting pit
-         */
-        void setCreatorUserToken(std::string creatorUserToken) { _creatorUserToken = std::move(creatorUserToken); }
-        void enforceAmbush(bool ambushEnforced) noexcept { _isAmbushEnforced = ambushEnforced; }
-        void setDifficulty(FightingPit::Level level) noexcept { _difficulty = level; }
+	/**
+	 * It is assumed that the player defined by the username/token is already correctly authenticated before
+	 * calling this method (call this method only if the username/token is valid).
+	 * @param creatorUserName name of the authenticated player generating a fighting pit
+	 */
+	void setCreatorUserName(std::string creatorUserName) { _creatorUserName = std::move(creatorUserName); }
 
-        // for testing validation purpose
-        static const AllyPartyTeams &getPartyTeams(const std::unique_ptr<FightingPit> & fp)   { return fp->_partyTeams; }
-        static const PitContenders &getPitContenders(const std::unique_ptr<FightingPit> & fp) { return fp->_contenders; }
-        static const std::string &getCreatorUserName(const std::unique_ptr<FightingPit> & fp) { return fp->_creatorUserName;}
-        static SideBattle &getSideBattleForSide(const std::unique_ptr<FightingPit> & fp, HexagonSide::Orientation side);
-        static unsigned getArenaId(const std::unique_ptr<FightingPit> & fp) { return fp->_arenaId; }
+	/**
+	 * It is assumed that the player defined by the username/token is already correctly authenticated before
+	 * calling this method (call this method only if the username/token is valid).
+	 * @param creatorUserToken token of the authenticated player generating a fighting pit
+	 */
+	void setCreatorUserToken(std::string creatorUserToken) { _creatorUserToken = std::move(creatorUserToken); }
 
-    private:
-        /**
-         * Generate the party team skeleton and register the first players characters in the fighting pit
-         * next incoming fighters in the fighting pit will directly use the method see also FightingPit::addPartyTeam()
-         *
-         * @return newly generated AllyPartyTeams teams with the creator already registered
-         */
-        inline fys::arena::AllyPartyTeams generateAllyPartyTeam();
+	void enforceAmbush(bool ambushEnforced) noexcept { _isAmbushEnforced = ambushEnforced; }
+	void setDifficulty(FightingPit::Level level) noexcept { _difficulty = level; }
 
-        inline const std::string &getScriptContentString(std::string name, const EncounterContext::EncounterDesc &desc);
-        void generateContenders(FightingPit &fp, const EncounterContext &ctx, const std::string &wsId);
+	// for testing validation purpose
+	[[nodiscard]] static const AllyPartyTeams&
+	getPartyTeams(const std::unique_ptr<FightingPit>& fp) { return fp->_partyTeams; }
 
-        [[nodiscard]] bool isScriptedEncounter() const { return _encounterType != EncounterType::RANDOM; }
-        [[nodiscard]] bool isRandomEncounter() const { return _encounterType == EncounterType::RANDOM; }
+	[[nodiscard]] static const PitContenders&
+	getPitContenders(const std::unique_ptr<FightingPit>& fp) { return fp->_contenders; }
 
-    private:
-        cache::Cml & _cache;
+	[[nodiscard]] static const std::string&
+	getCreatorUserName(const std::unique_ptr<FightingPit>& fp) { return fp->_creatorUserName; }
 
-        /**
-         *   range           desc
-         *     0    : random encounter generation
-         * [1001-*] : globally defined encounters
-         * [1-1000] : zone defined encounters
-         */
-        uint _idEncounter = 0;
-        FightingPit::Level _difficulty = FightingPit::Level::MEDIUM;
-        EncounterType _encounterType = EncounterType::RANDOM;
+	[[nodiscard]] static SideBattle&
+	getSideBattleForSide(const std::unique_ptr<FightingPit>& fp, HexagonSide::Orientation side);
 
-        std::optional<bool> _isAmbushEnforced;
+	[[nodiscard]] static unsigned
+	getArenaId(const std::unique_ptr<FightingPit>& fp) { return fp->_arenaId; }
 
-        std::vector<std::string> _loadedScript;
+private:
+	/**
+	 * Generate the party team skeleton and register the first players characters in the fighting pit
+	 * next incoming fighters in the fighting pit will directly use the method see also FightingPit::addPartyTeam()
+	 *
+	 * @return newly generated AllyPartyTeams teams with the creator already registered
+	 */
+	[[nodiscard]] inline fys::arena::AllyPartyTeams
+	generateAllyPartyTeam();
 
-        std::string _creatorUserName;
-        std::string _creatorUserToken;
+	[[nodiscard]] inline const std::string&
+	getScriptContentString(std::string name, const EncounterContext::EncounterDesc& desc);
 
-        //TODO add the common cache retriever
+	void generateContenders(FightingPit& fp, const EncounterContext& ctx, const std::string& wsId);
 
-    };
+	[[nodiscard]] bool
+	isScriptedEncounter() const { return _encounterType != EncounterType::RANDOM; }
+
+	[[nodiscard]] bool
+	isRandomEncounter() const { return _encounterType == EncounterType::RANDOM; }
+
+private:
+	cache::Cml& _cache;
+
+	/**
+	 *   range           desc
+	 *     0    : random encounter generation
+	 * [1001-*] : globally defined encounters
+	 * [1-1000] : zone defined encounters
+	 */
+	uint _idEncounter = 0;
+	FightingPit::Level _difficulty = FightingPit::Level::MEDIUM;
+	EncounterType _encounterType = EncounterType::RANDOM;
+
+	std::optional<bool> _isAmbushEnforced;
+
+	std::vector<std::string> _loadedScript;
+
+	std::string _creatorUserName;
+	std::string _creatorUserToken;
+
+	//TODO add the common cache retriever
+
+};
 
 }
 

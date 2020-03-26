@@ -25,58 +25,64 @@
 #include <chrono>
 #include <network/WorkerService.hh>
 
-namespace fys::arena
+namespace fys::arena {
+
+void
+WorkerService::setupConnectionManager(const fys::arena::ArenaServerContext& ctx) noexcept
+{
+	_workerRouter.bind(ctx.getPlayerBindingString());
+}
+
+void
+WorkerService::startFightingPitsThread()
+{
+	SPDLOG_INFO("WorkerService FightingPit game loops started");
+
+	std::thread t([this]() {
+		using namespace std::chrono_literals;
+		while (true) {
+			auto now = std::chrono::system_clock::now();
+			for (auto &[id, fp] : _arenaInstances) {
+				fp->continueBattle(now);
+			}
+			std::this_thread::sleep_for(1000ms); // todo sleep something smart
+		}
+	});
+}
+
+unsigned
+WorkerService::addFightingPit(std::unique_ptr<FightingPit> fp)
+{
+	if (!fp) {
+		SPDLOG_ERROR("Cannot add fighting pit in WorkerService");
+		return FightingPit::CREATION_ERROR;
+	}
+	if (_arenaInstances.size() >= std::numeric_limits<decltype(_currentArenaId)>::max()) {
+		SPDLOG_ERROR("Cannot add fighting pit in WorkerService (worker full)");
+		return FightingPit::CREATION_ERROR;
+	}
+	while (++_currentArenaId != 0 && _arenaInstances.find(_currentArenaId) != _arenaInstances.end());
+
+	fp->setArenaId(_currentArenaId);
+	_arenaInstances[_currentArenaId] = std::move(fp);
+	return _currentArenaId;
+}
+
+void
+WorkerService::playerJoinFightingPit(std::string userName, unsigned fightingPitId)
 {
 
-    void WorkerService::setupConnectionManager(const fys::arena::ArenaServerContext &ctx) noexcept {
-        _workerRouter.bind(ctx.getPlayerBindingString());
-    }
+}
 
-    void WorkerService::startFightingPitsThread() {
-        SPDLOG_INFO("WorkerService FightingPit game loops started");
-
-        std::thread t([this](){
-            using namespace std::chrono_literals;
-            while (true) {
-                auto now = std::chrono::system_clock::now();
-                for (auto & [id, fp] : _arenaInstances) {
-                    fp->continueBattle(now);
-                }
-                std::this_thread::sleep_for(1000ms); // todo sleep something smart
-            }
-        });
-    }
-
-    unsigned WorkerService::addFightingPit(std::unique_ptr<FightingPit> fp) {
-        if (!fp) {
-            SPDLOG_ERROR("Cannot add fighting pit in WorkerService");
-            return FightingPit::CREATION_ERROR;
-        }
-        if (_arenaInstances.size() >= std::numeric_limits<decltype(_currentArenaId)>::max()) {
-            SPDLOG_ERROR("Cannot add fighting pit in WorkerService (worker full)");
-            return FightingPit::CREATION_ERROR;
-        }
-        while (++_currentArenaId != 0 && _arenaInstances.find(_currentArenaId) != _arenaInstances.end());
-
-        fp->setArenaId(_currentArenaId);
-        _arenaInstances[_currentArenaId] = std::move(fp);
-        return _currentArenaId;
-    }
-
-    void WorkerService::playerJoinFightingPit(std::string userName, unsigned fightingPitId) {
-
-    }
-
-    std::optional<std::reference_wrapper<FightingPit>>
-    WorkerService::getAuthenticatedPlayerFightingPit(const std::string &name, const std::string &token, unsigned fightingArenaId) {
-        if (auto it = _arenaInstances.find(fightingArenaId);
-           (it != _arenaInstances.end() && it->second->isPlayerParticipant(name, token)))
-        {
-            return *it->second;
-        }
-        SPDLOG_WARN("Request received from {}:{} for arena id {}, but arena isn't defined", name, token, fightingArenaId);
-        return std::nullopt;
-    }
-
+std::optional<std::reference_wrapper<FightingPit>>
+WorkerService::getAuthenticatedPlayerFightingPit(const std::string& name, const std::string& token, unsigned fightingArenaId)
+{
+	if (auto it = _arenaInstances.find(fightingArenaId);
+			(it != _arenaInstances.end() && it->second->isPlayerParticipant(name, token))) {
+		return *it->second;
+	}
+	SPDLOG_WARN("Request received from {}:{} for arena id {}, but arena isn't defined", name, token, fightingArenaId);
+	return std::nullopt;
+}
 
 } // namespace fys::arena

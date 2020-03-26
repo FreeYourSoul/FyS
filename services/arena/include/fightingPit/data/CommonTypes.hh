@@ -27,72 +27,79 @@
 
 #include <vector>
 
-namespace fys::arena::data
-{
-    static constexpr bool CONTENDER = true;
-    static constexpr bool PARTY_MEMBER = false;
+namespace fys::arena::data {
+static constexpr bool CONTENDER = true;
+static constexpr bool PARTY_MEMBER = false;
 
-    struct PriorityElem { // Improve with strong typing on ID/SPEED
-        PriorityElem() = default;
-        PriorityElem(uint aid, int aspeed, bool aisContender) : id(aid), speed(aspeed), isContender(aisContender) {}
+struct PriorityElem { // Improve with strong typing on ID/SPEED
+	PriorityElem() = default;
+	PriorityElem(uint aid, int aspeed, bool aisContender)
+			:id(aid), speed(aspeed), isContender(aisContender) { }
 
-        uint id;
-        int  speed;
-        bool isContender;
+	uint id;
+	int speed;
+	bool isContender;
 
-        PriorityElem &operator-(const PriorityElem &other) {
-            speed -= other.speed;
-            return *this;
-        }
+	[[nodiscard]] PriorityElem&
+	operator-(const PriorityElem& other)
+	{
+		speed -= other.speed;
+		return *this;
+	}
 
-        bool operator<(const PriorityElem &other) const {
-            return speed < other.speed;
-        }
+	[[nodiscard]] bool
+	operator<(const PriorityElem& other) const
+	{
+		return speed < other.speed;
+	}
 
-        bool operator==(const PriorityElem &other) const {
-            return id == other.id && isContender == other.isContender;
-        }
+	[[nodiscard]] bool
+	operator==(const PriorityElem& other) const
+	{
+		return id == other.id && isContender == other.isContender;
+	}
 
-    };
+};
 
-    struct Life {
-        uint current = 0;
-        uint total   = 0;
+struct Life {
+	uint current = 0;
+	uint total = 0;
 
-        [[nodiscard]] bool isDead() const { return current == 0; }
-    };
+	[[nodiscard]] bool
+	isDead() const { return current == 0; }
+};
 
-    struct MagicPoint {
-        uint current = 0;
-        uint total   = 0;
-    };
+struct MagicPoint {
+	uint current = 0;
+	uint total = 0;
+};
 
-    using AlterationId = uint;
+using AlterationId = uint;
 
-    struct Status {
-        Life life;
-        MagicPoint magicPoint;
-        uint initialSpeed;
-        std::vector<AlterationId> alterations;
-    };
+struct Status {
+	Life life;
+	MagicPoint magicPoint;
+	uint initialSpeed;
+	std::vector<AlterationId> alterations;
+};
 
-    enum MoveDirection {
-        BACK,
-        RIGHT,
-        LEFT
-    };
+enum MoveDirection {
+	BACK,
+	RIGHT,
+	LEFT
+};
 
-    enum Targeting {
-        SELF,
-        ENNEMY,
-        ALLY,
-        ENNEMIES,
-        ALLIES,
-        ALLY_AND_ENNEMY,
-        ALLY_OR_ENNEMY,
-        SIDE
-    };
-    
+enum Targeting {
+	SELF,
+	ENNEMY,
+	ALLY,
+	ENNEMIES,
+	ALLIES,
+	ALLY_AND_ENNEMY,
+	ALLY_OR_ENNEMY,
+	SIDE
+};
+
 } // namespace fys::arena::data
 
 #endif // !FYS_COMMONDATA_HH

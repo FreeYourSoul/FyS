@@ -1,12 +1,14 @@
 class damage {
     attr power;
 
-    def damage(power) {
+    def damage(power)
+    {
         this.set_explicit(true);
         this.power = power;
     }
 
-    def execute(targetStatus) {
+    def execute(targetStatus)
+    {
         if (targetStatus.life.current > this.power) {
             targetStatus.life.current = targetStatus.life.current - this.power;
         }
@@ -16,7 +18,8 @@ class damage {
         1;
     }
 
-    def execute_multiple(targetsStatus, numberMax) {
+    def execute_multiple(targetsStatus, numberMax)
+    {
         if ("Vector" == targetsStatus.type_name()) {
             if (numberMax == 0) {
                 numberMax = targetsStatus.size();

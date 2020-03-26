@@ -32,96 +32,107 @@
 #include <array>
 
 namespace fys::util {
-    class Key;
+class Key;
 }
 
 namespace fys::ws {
-    // unit of distance being a tile
-    constexpr static double DEFAULT_DISTANCE = 30;
-    constexpr static unsigned LIMIT_NOTIFICATIONS_MOVE = 50;
+// unit of distance being a tile
+constexpr static double DEFAULT_DISTANCE = 30;
+constexpr static unsigned LIMIT_NOTIFICATIONS_MOVE = 50;
 
-    struct PlayerInfo {
-        double x = 0.0;
-        double y = 0.0;
-        double angle = 0.0;
-    };
+struct PlayerInfo {
+	double x = 0.0;
+	double y = 0.0;
+	double angle = 0.0;
+};
 
-    enum class PlayerStatus : uint {
-        FIGHTING,
-        MOVING,
-        STANDING
-    };
+enum class PlayerStatus : uint {
+	FIGHTING,
+	MOVING,
+	STANDING
+};
 
-    class PlayersData {
+class PlayersData {
 
-    public:
-        explicit PlayersData(uint maxConnection = 1000) noexcept;
+public:
+	explicit PlayersData(uint maxConnection = 1000) noexcept;
 
-        PlayerInfo &accessPlayerPosition(uint indexPlayer);
-        
-        template<typename Action>
-        void executeOnPlayers(Action && actionToExecute) {
-            for (uint i = 0; i < _status.size(); ++i) {
-                std::forward<Action>(actionToExecute)(i, _status.at(i), _positions.at(i), _identities.at(i));
-            }
-        }
+	PlayerInfo&
+	accessPlayerPosition(uint indexPlayer);
 
-        void setPlayerMoveAction(uint index, double direction) {
-            _positions.at(index).angle = direction;
-            _status.at(index) = PlayerStatus::MOVING;
-        }
+	template<typename Action>
+	void
+	executeOnPlayers(Action&& actionToExecute)
+	{
+		for (uint i = 0; i < _status.size(); ++i) {
+			std::forward<Action>(actionToExecute)(i, _status.at(i), _positions.at(i), _identities.at(i));
+		}
+	}
 
-        void stopPlayerMove(uint index) {
-            _status.at(index) = PlayerStatus::STANDING;
-        }
+	void
+	setPlayerMoveAction(uint index, double direction)
+	{
+		_positions.at(index).angle = direction;
+		_status.at(index) = PlayerStatus::MOVING;
+	}
 
-        void setPlayerArena(uint index, const std::string &arenaId) {
-            _status.at(index) = PlayerStatus::FIGHTING;
-        }
+	void
+	stopPlayerMove(uint index)
+	{
+		_status.at(index) = PlayerStatus::STANDING;
+	}
 
-        /**
-         * Retrieve the index corresponding to the given token
-         *
-         * @param token
-         * @param idt
-         * @return index corresponding to the given token, 
-         *         std::numeric_limits<uint>::max() is returned if no corresponding token
-         */
-        uint getIndexAndUpdatePlayerConnection(const std::string &token, std::string idt);
+	void
+	setPlayerArena(uint index, const std::string& arenaId)
+	{
+		_status.at(index) = PlayerStatus::FIGHTING;
+	}
 
-        /**
-         * @brief Get the Players Identities Arround the given player except himself
-         * 
-         * @param indexPlayer player
-         * @param position 
-         * @param distance 
-         * @return std::vector<std::string_view> 
-         */
-        inline std::vector<std::string_view> getPlayerIdtsArroundPlayer(uint indexPlayer,
-                std::optional<std::reference_wrapper<PlayerInfo>> position,
-                double distance = DEFAULT_DISTANCE) const noexcept;
-                
-        /**
-         * @brief Get the Players Identities Arround the given position
-         * 
-         * @param position to check arround
-         * @param distance radius arround the given point to search
-         * @return std::vector<std::string_view> vector of view on the identities of the players arround the given point
-         * @note identities are zmq code to reply to a specific client via a router socket
-         */
-        std::vector<std::string_view> getPlayerIdtsArroundPos(const PlayerInfo &position,
-                double distance = DEFAULT_DISTANCE,
-                uint ignoreIndex = LIMIT_NOTIFICATIONS_MOVE) const noexcept;
+	/**
+	 * Retrieve the index corresponding to the given token
+	 *
+	 * @param token
+	 * @param idt
+	 * @return index corresponding to the given token,
+	 *         std::numeric_limits<uint>::max() is returned if no corresponding token
+	 */
+	uint
+	getIndexAndUpdatePlayerConnection(const std::string& token, std::string idt);
 
-    private:
-        std::vector<PlayerInfo> _positions;
-        std::vector<PlayerStatus> _status;
-        std::vector<std::string> _identities;
-        std::unordered_map<std::string, uint> _tokenToIndex;
+	/**
+	 * @brief Get the Players Identities Arround the given player except himself
+	 *
+	 * @param indexPlayer player
+	 * @param position
+	 * @param distance
+	 * @return std::vector<std::string_view>
+	 */
+	inline std::vector<std::string_view>
+	getPlayerIdtsArroundPlayer(uint indexPlayer,
+							   std::optional<std::reference_wrapper<PlayerInfo>> position,
+							   double distance = DEFAULT_DISTANCE) const noexcept;
 
-    };
+	/**
+	 * @brief Get the Players Identities Arround the given position
+	 *
+	 * @param position to check arround
+	 * @param distance radius arround the given point to search
+	 * @return std::vector<std::string_view> vector of view on the identities of the players arround the given point
+	 * @note identities are zmq code to reply to a specific client via a router socket
+	 */
+	std::vector<std::string_view>
+	getPlayerIdtsArroundPos(const PlayerInfo& position,
+							double distance = DEFAULT_DISTANCE,
+							uint ignoreIndex = LIMIT_NOTIFICATIONS_MOVE) const noexcept;
+
+private:
+	std::vector<PlayerInfo> _positions;
+	std::vector<PlayerStatus> _status;
+	std::vector<std::string> _identities;
+	std::unordered_map<std::string, uint> _tokenToIndex;
+
+};
 
 }
-
 
 #endif //FYS_PLAYERSDATA_HH

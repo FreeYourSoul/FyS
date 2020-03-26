@@ -28,39 +28,53 @@
 
 // forward declarations
 namespace chaiscript {
-    class ChaiScript;
-    class Module;
-    using ModulePtr = std::shared_ptr<chaiscript::Module>;
-} 
-namespace fys {
-    namespace cache {
-        class Cml;
-    }
-    namespace arena {
-        class ConnectionHandler;
-        class PitContenders;
-        class AllyPartyTeams;
-        class PartyTeam;
-    }
+class ChaiScript;
+class Module;
+using ModulePtr = std::shared_ptr<chaiscript::Module>;
 }
+namespace fys {
+namespace cache {
+class Cml;
+}
+namespace arena {
+class ConnectionHandler;
+class PitContenders;
+class AllyPartyTeams;
+class PartyTeam;
+}
+} // !forward declarations
 
 namespace fys::arena {
 
-    class ChaiRegister {
-    public:
-        static std::unique_ptr<chaiscript::ChaiScript> createChaiInstance(PitContenders &pc, AllyPartyTeams &apt);
-        static void registerUtility(chaiscript::ChaiScript &chai, PitContenders& pc, AllyPartyTeams &apt);
-        static bool loadAndRegisterAction(chaiscript::ChaiScript &chai, cache::Cml & cache, const fys::arena::PartyTeam & pt);
-        static void registerBaseActions(chaiscript::ChaiScript &chai, cache::Cml &cml);
+class ChaiRegister {
+public:
+	[[nodiscard]] static std::unique_ptr<chaiscript::ChaiScript>
+	createChaiInstance(PitContenders& pc, AllyPartyTeams& apt);
 
-    private:
-        static void registerChai(chaiscript::ChaiScript &chai, fys::arena::PitContenders& pc, fys::arena::AllyPartyTeams &apt);
-        static void registerCommon(chaiscript::ModulePtr m);
-        static void registerFightingPitContender(chaiscript::ChaiScript &chai, chaiscript::ModulePtr m);
-        static void registerTeamAllies(chaiscript::ChaiScript &chai, chaiscript::ModulePtr m);
+	static void
+	registerUtility(chaiscript::ChaiScript& chai, PitContenders& pc, AllyPartyTeams& apt);
 
-    };
+	static bool
+	loadAndRegisterAction(chaiscript::ChaiScript& chai, cache::Cml& cache, const fys::arena::PartyTeam& pt);
 
-}
+	static void
+	registerBaseActions(chaiscript::ChaiScript& chai, cache::Cml& cml);
+
+private:
+	static void
+	registerChai(chaiscript::ChaiScript& chai, fys::arena::PitContenders& pc, fys::arena::AllyPartyTeams& apt);
+
+	static void
+	registerCommon(chaiscript::ModulePtr m);
+
+	static void
+	registerFightingPitContender(chaiscript::ChaiScript& chai, chaiscript::ModulePtr m);
+
+	static void
+	registerTeamAllies(chaiscript::ChaiScript& chai, chaiscript::ModulePtr m);
+
+};
+
+} // !fys::arena
 
 #endif // !FYS_ARENA_CHAIREGISTER_HH

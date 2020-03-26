@@ -30,52 +30,59 @@
 
 // forward declarations
 namespace chaiscript {
-    class ChaiScript;
+class ChaiScript;
 }
 namespace fys::arena {
-    class ConnectionHandler;
-    class PitContenders;
-    class AllyPartyTeams;
+class ConnectionHandler;
+class PitContenders;
+class AllyPartyTeams;
 }
 
 namespace fys::arena {
 
-    class ContenderScripting {
+class ContenderScripting {
 
-    public:
-        explicit ContenderScripting(chaiscript::ChaiScript &chai, uint level) : _chai(chai), _level(level)
-        {}
+public:
+	explicit ContenderScripting(chaiscript::ChaiScript& chai, uint level)
+			:_chai(chai), _level(level) { }
 
-        void executeAction();
+	void executeAction();
 
-        /**
-         * Method called after the contender has been added in the fighting pit, in order to initialize its stats
-         */
-        void setupContender();
+	/**
+	 * Method called after the contender has been added in the fighting pit, in order to initialize its stats
+	 */
+	void setupContender();
 
-        void loadContenderScript(const std::string& script = "");
-        void loadContenderScriptFromFile(const std::string& scriptFile);
+	void loadContenderScript(const std::string& script = "");
+	void loadContenderScriptFromFile(const std::string& scriptFile);
 
-        void setContenderName(std::string contenderName) { _contenderName = std::move(contenderName); }
-        void setContenderId(uint contenderId) { _contenderId = contenderId; }
+	void setContenderName(std::string contenderName) { _contenderName = std::move(contenderName); }
+	void setContenderId(uint contenderId) { _contenderId = contenderId; }
 
-        const std::string &getContenderName() const { return _contenderName; }
-        uint getContenderId() const { return _contenderId; }
-        uint getLevel() const { return _level; }
+	[[nodiscard]] const std::string&
+	getContenderName() const { return _contenderName; }
 
-    private:
-        [[nodiscard]] std::string getChaiMethodName(std::string && methodName) const { return _contenderName + "_" + std::move(methodName); }
-        [[nodiscard]] std::string getChaiContenderId() const { return std::string("contender_").append(_contenderName).append(std::to_string(_contenderId)); }
+	[[nodiscard]] uint
+	getContenderId() const { return _contenderId; }
 
-    private:
-        std::reference_wrapper<chaiscript::ChaiScript> _chai;
-        std::string _contenderName;
-        uint _level;
-        uint _contenderId{};
+	[[nodiscard]] uint
+	getLevel() const { return _level; }
 
-    };
+private:
+	[[nodiscard]] std::string
+	getChaiMethodName(std::string&& methodName) const { return _contenderName + "_" + std::move(methodName); }
+	[[nodiscard]] std::string
+	getChaiContenderId() const { return std::string("contender_").append(_contenderName).append(std::to_string(_contenderId)); }
 
-    using ContenderScriptingUPtr = std::unique_ptr<ContenderScripting>;
+private:
+	std::reference_wrapper<chaiscript::ChaiScript> _chai;
+	std::string _contenderName;
+	uint _level;
+	uint _contenderId{};
+
+};
+
+using ContenderScriptingUPtr = std::unique_ptr<ContenderScripting>;
 
 }
 

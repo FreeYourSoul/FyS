@@ -31,7 +31,10 @@
 #include <fightingPit/team/AllyPartyTeams.hh>
 
 // overloaded trick
-template<class... Ts> struct overloaded : Ts... { using Ts::operator()...; };
+template<class... Ts>
+struct overloaded : Ts ... {
+    using Ts::operator()...;
+};
 template<class... Ts> overloaded(Ts...) -> overloaded<Ts...>;
 
 namespace fys::arena {
@@ -48,13 +51,11 @@ namespace fys::arena {
             if (!_side.moveRight()) {
                 SPDLOG_ERROR("TeamMember {}::{} Impossible move from {} to right", _userName, _name, _side);
             }
-        }
-        else if (directionToMove == data::MoveDirection::LEFT) {
+        } else if (directionToMove == data::MoveDirection::LEFT) {
             if (!_side.moveLeft()) {
                 SPDLOG_ERROR("TeamMember {}::{} Impossible move from {} to left", _userName, _name, _side);
             }
-        }
-        else if (directionToMove == data::MoveDirection::BACK) {
+        } else if (directionToMove == data::MoveDirection::BACK) {
             if (!_side.moveBack()) {
                 SPDLOG_ERROR("TeamMember {}::{} Impossible move from {} to backside", _userName, _name, _side);
             }
@@ -62,10 +63,9 @@ namespace fys::arena {
     }
 
     void TeamMember::executeAction(
-            AllyPartyTeams & apt,
-            PitContenders & pc,
-            std::unique_ptr<chaiscript::ChaiScript> &chaiPtr)
-    {
+            AllyPartyTeams &apt,
+            PitContenders &pc,
+            std::unique_ptr<chaiscript::ChaiScript> &chaiPtr) {
         auto pa = _pendingActions.pop();
 
         if (!pa) {
@@ -74,20 +74,20 @@ namespace fys::arena {
         }
         if (pa->idAction >= _actionsDoable.size()) {
             SPDLOG_ERROR("TeamMember {}::{} id {} tried to execute a non existing action of id {}",
-                    _userName, _name, _id, pa->idAction);
+                         _userName, _name, _id, pa->idAction);
             return;
         }
 
         const std::string allyAction = fmt::format(R"(ally_actions["{}_{}"]["{}"])",
-                _userName, _name,  _actionsDoable.at(pa->idAction).first);
-        auto funcAction = chaiPtr->eval<std::function<int(data::Status)>> (fmt::format(
+                                                   _userName, _name, _actionsDoable.at(pa->idAction).first);
+        auto funcAction = chaiPtr->eval<std::function<int(data::Status)>>(fmt::format(
                 R"(fun(allyStatus){{ return {}.execute(allyStatus);}})", allyAction));
         auto targetType = chaiPtr->eval<data::Targeting>(allyAction + ".requireTarget();");
 
         try {
             const auto &targetStatus = _status;
             if (pa->target) {
-                std::visit(overloaded {
+                std::visit(overloaded{
                         [&apt, &pc, &targetType, &funcAction](AllyTargetId target) {
                             if (targetType == data::ALLY || targetType == data::ALLY_OR_ENNEMY)
                                 funcAction(apt.selectMemberById(target.v)->getStatus());
@@ -99,18 +99,17 @@ namespace fys::arena {
                         },
 
                         [&apt, &pc, &funcAction](auto o) {
-                                // NOT SUPPORTED YET
+                            // NOT SUPPORTED YET
                         },
                 }, *pa->target);
-            }
-            else if (funcAction(_status)) {
+            } else if (funcAction(_status)) {
                 SPDLOG_DEBUG("Ally {}::{} id {} executed action {}", _userName, _name, _id, pa->idAction);
             }
         }
         catch (const chaiscript::exception::eval_error &ee) {
             SPDLOG_ERROR("Error caught on script execution while executing {} with target required.\n"
                          "Team owned by {} TeamMember {}\n{}",
-                    pa->idAction, static_cast<bool>(pa->target), _userName, _name, ee.what());
+                         pa->idAction, static_cast<bool>(pa->target), _userName, _name, ee.what());
         }
     }
 

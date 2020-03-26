@@ -37,8 +37,8 @@ FreeYourSoul Online is using an original battle system inspired by Final Fantasy
 
 ## External Dependency
 
-* [ZeroMQ](https://github.com/zeromq/libzmq)  
-    Network library
+* [ZeroMQ](https://github.com/zeromq/libzmq) And [cppzmq](https://github.com/zeromq/cppzmq)  
+    Network library & C++ binding library
 * [spdlog](https://github.com/gabime/spdlog)  
     Logging framework, usage of fmt library for logging
 * [FSeam](https://github.com/FreeYourSoul/FSeam)  

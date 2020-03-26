@@ -25,50 +25,51 @@
 
 namespace fys::ws {
 
-    PlayersData::PlayersData(uint maxConnection) noexcept :
-         _positions(maxConnection), _status(maxConnection), _identities(maxConnection), _tokenToIndex(maxConnection)
-    {}
+PlayersData::PlayersData(uint maxConnection) noexcept
+		:
+		_positions(maxConnection), _status(maxConnection), _identities(maxConnection), _tokenToIndex(maxConnection) { }
 
-    uint PlayersData::getIndexAndUpdatePlayerConnection(const std::string &token, std::string idt) {
-        if (auto it = _tokenToIndex.find(token); it != _tokenToIndex.end()) {
-            _identities.at(it->second) = std::move(idt);
-            return it->second;
-        }
-        return std::numeric_limits<uint>::max();
-    }
+uint
+PlayersData::getIndexAndUpdatePlayerConnection(const std::string& token, std::string idt)
+{
+	if (auto it = _tokenToIndex.find(token); it != _tokenToIndex.end()) {
+		_identities.at(it->second) = std::move(idt);
+		return it->second;
+	}
+	return std::numeric_limits<uint>::max();
+}
 
-    std::vector<std::string_view> 
-    PlayersData::getPlayerIdtsArroundPlayer(uint indexPlayer,
-                                            std::optional<std::reference_wrapper<PlayerInfo>> position,
-                                            double distance) const noexcept 
-    {
-        if (position && indexPlayer < _positions.size())
-            return getPlayerIdtsArroundPos(*position, distance, indexPlayer);
-        return getPlayerIdtsArroundPos(_positions.at(indexPlayer), distance, indexPlayer);
-    }
+std::vector<std::string_view>
+PlayersData::getPlayerIdtsArroundPlayer(uint indexPlayer,
+										std::optional<std::reference_wrapper<PlayerInfo>> position,
+										double distance) const noexcept
+{
+	if (position && indexPlayer < _positions.size())
+		return getPlayerIdtsArroundPos(*position, distance, indexPlayer);
+	return getPlayerIdtsArroundPos(_positions.at(indexPlayer), distance, indexPlayer);
+}
 
-    std::vector<std::string_view> 
-    PlayersData::getPlayerIdtsArroundPos(const fys::ws::PlayerInfo &position, 
-                                            double distance,
-                                            uint ignoreIndex) const noexcept 
-    {
-        std::vector<std::string_view> playerIdts;
-        playerIdts.reserve(LIMIT_NOTIFICATIONS_MOVE);
-        for (std::size_t i = 0; i < _positions.size(); ++i) {
-            if (playerIdts.size() >= LIMIT_NOTIFICATIONS_MOVE)
-                break;
-            if (i == ignoreIndex)
-                continue;
-            PlayerInfo minimumPos = { _positions.at(i).x - distance, _positions.at(i).y - distance};
-            PlayerInfo maximumPos = { _positions.at(i).x + distance, _positions.at(i).y + distance};
-            
-            if ((position.x > minimumPos.x && position.x < maximumPos.x) &&
-                (position.y > minimumPos.y && position.x < maximumPos.y)) 
-            {
-                playerIdts.emplace_back(_identities.at(i));
-            }
-        }
-        return playerIdts;
-    }
+std::vector<std::string_view>
+PlayersData::getPlayerIdtsArroundPos(const fys::ws::PlayerInfo& position,
+									 double distance,
+									 uint ignoreIndex) const noexcept
+{
+	std::vector<std::string_view> playerIdts;
+	playerIdts.reserve(LIMIT_NOTIFICATIONS_MOVE);
+	for (std::size_t i = 0; i < _positions.size(); ++i) {
+		if (playerIdts.size() >= LIMIT_NOTIFICATIONS_MOVE)
+			break;
+		if (i == ignoreIndex)
+			continue;
+		PlayerInfo minimumPos = {_positions.at(i).x - distance, _positions.at(i).y - distance};
+		PlayerInfo maximumPos = {_positions.at(i).x + distance, _positions.at(i).y + distance};
+
+		if ((position.x > minimumPos.x && position.x < maximumPos.x) &&
+				(position.y > minimumPos.y && position.x < maximumPos.y)) {
+			playerIdts.emplace_back(_identities.at(i));
+		}
+	}
+	return playerIdts;
+}
 
 }

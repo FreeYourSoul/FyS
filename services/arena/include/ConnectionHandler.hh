@@ -30,61 +30,61 @@
 
 namespace fys::arena {
 
-    class ArenaServerContext;
+class ArenaServerContext;
 
-    class ConnectionHandler {
+class ConnectionHandler {
 
-    public:
-        explicit ConnectionHandler(int threadNumber = 1) noexcept :
-                _zmqContext(threadNumber),
-                _dealerConnectionToDispatcher(_zmqContext, zmq::socket_type::dealer)
-        { }
+public:
+    explicit ConnectionHandler(int threadNumber = 1) noexcept
+            :
+            _zmqContext(threadNumber),
+            _dealerConnectionToDispatcher(_zmqContext, zmq::socket_type::dealer) { }
 
-        /**
-         * @brief Connect to the Arena dispatcher in order to receive request from the WS to create new fightingPit
-         */
-        void setupConnectionManager(const fys::arena::ArenaServerContext &ctx) noexcept;
-        /**
-         * @brief Reply to the dispatcher using the dealer (direct connection) socket
-         */
-        void sendMessageToDispatcher(zmq::multipart_t && msg) noexcept;
+    /**
+     * @brief Connect to the Arena dispatcher in order to receive request from the WS to create new fightingPit
+     */
+    void setupConnectionManager(const fys::arena::ArenaServerContext& ctx) noexcept;
+    /**
+     * @brief Reply to the dispatcher using the dealer (direct connection) socket
+     */
+    void sendMessageToDispatcher(zmq::multipart_t&& msg) noexcept;
 
-        /**
-         * Read on the dealer socket (connection with the dispatcher) and reply to dispatcher to this socket connection
-         * (which will forward the message the the proper WorldServer)
-         * @tparam Lambda type following the signature => void (string, zmq::message_t)
-         * @param handler Handler handler to call when receiving a message
-         */
-        template <typename Handler>
-        void pollAndProcessMessageFromDispatcher(Handler && handler) noexcept {
-            //  Initialize poll set
-            zmq::pollitem_t items[] = {
-                    { _dealerConnectionToDispatcher, 0, ZMQ_POLLIN, 0 }
-            };
-            zmq::poll(&items[0], 1, 100);
-            if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
-                zmq::multipart_t msg;
-                if (!msg.recv(_dealerConnectionToDispatcher, ZMQ_NOBLOCK) || msg.size() != 2) {
-                    SPDLOG_ERROR("Error while reading on the listener socket");
-                }
-                else {
-                    // first element is the identity frame for the router of the dispatcher (connected to WS)
-                    auto identity = msg.pop();
-                    // second element is the message frame
-                    std::forward<Handler>(handler)(std::move(identity), msg.pop());
-                }
+    /**
+     * Read on the dealer socket (connection with the dispatcher) and reply to dispatcher to this socket connection
+     * (which will forward the message the the proper WorldServer)
+     * @tparam Lambda type following the signature => void (string, zmq::message_t)
+     * @param handler Handler handler to call when receiving a message
+     */
+    template<typename Handler>
+    void pollAndProcessMessageFromDispatcher(Handler&& handler) noexcept
+    {
+        //  Initialize poll set
+        zmq::pollitem_t items[] = {
+                {_dealerConnectionToDispatcher, 0, ZMQ_POLLIN, 0}
+        };
+        zmq::poll(&items[0], 1, 100);
+        if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
+            zmq::multipart_t msg;
+            if (!msg.recv(_dealerConnectionToDispatcher, ZMQ_NOBLOCK) || msg.size() != 2) {
+                SPDLOG_ERROR("Error while reading on the listener socket");
+            }
+            else {
+                // first element is the identity frame for the router of the dispatcher (connected to WS)
+                auto identity = msg.pop();
+                // second element is the message frame
+                std::forward<Handler>(handler)(std::move(identity), msg.pop());
             }
         }
+    }
 
-    private:
-        zmq::context_t _zmqContext;
+private:
+    zmq::context_t _zmqContext;
 
-        // write to reply (forwarded to the world server)
-        zmq::socket_t _dealerConnectionToDispatcher;
+    // write to reply (forwarded to the world server)
+    zmq::socket_t _dealerConnectionToDispatcher;
 
-    };
+};
 
 }
-
 
 #endif //FYS_ARENA_CONNECTIONHANDLER_HH

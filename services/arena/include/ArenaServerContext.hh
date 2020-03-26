@@ -31,49 +31,70 @@
 
 namespace fys::arena {
 
-    struct EncounterContext {
-        struct EncounterDesc {
-            bool operator!=(const EncounterDesc &other) const {
-                return std::make_tuple(key, maxEncountering, chance) != std::make_tuple(other.key, other.maxEncountering, other.chance);
-            }
+struct EncounterContext {
+	struct EncounterDesc {
+		[[nodiscard]] bool
+		operator!=(const EncounterDesc& other) const
+		{
+			return std::make_tuple(key, maxEncountering, chance) != std::make_tuple(other.key, other.maxEncountering, other.chance);
+		}
 
-            std::string key;
-            uint maxEncountering;
-            std::array<uint, 3> chance;
-        };
+		std::string key;
+		uint maxEncountering;
+		std::array<uint, 3> chance;
+	};
 
-        std::map<std::string, std::array<std::pair<uint, uint>, 3>> _rangeEncounterPerZone;
-        std::map<std::string, std::vector<EncounterDesc>> _contendersPerZone;
-    };
+	std::map<std::string, std::array<std::pair<uint, uint>, 3>> _rangeEncounterPerZone;
+	std::map<std::string, std::vector<EncounterDesc>> _contendersPerZone;
+};
 
-    class ArenaServerContext : public fys::common::ServiceContextBase {
+class ArenaServerContext : public fys::common::ServiceContextBase {
 public:
-        ArenaServerContext(int ac, const char *const *av);
+	ArenaServerContext(int ac, const char* const* av);
 
-        [[nodiscard]] std::string toString() const noexcept;
-        [[nodiscard]] std::string getDispatcherConnectionString() const noexcept;
-        [[nodiscard]] std::string getPlayerBindingString() const noexcept;
-        [[nodiscard]] const std::string &getServerCode() const noexcept { return _code; }
-        [[nodiscard]] const EncounterContext &getEncounterContext() const noexcept { return _encounterContext; }
-        [[nodiscard]] const std::string &getPathLocalStorageCache() const noexcept { return _pathLocalStorageCache; }
-        [[nodiscard]] const std::string &getPathSourceCache() const noexcept { return _pathSourceCache; }
-        [[nodiscard]] const std::string &getDbHost() const noexcept { return _dbHost; }
-        [[nodiscard]] uint getDbPort() const noexcept { return _dbPort; }
+	[[nodiscard]] std::string
+	toString() const noexcept;
 
-    private:
-        void parseArenaConfigFile(const nlohmann::json &configContent);
-        bool validateEncounterContext() const;
+	[[nodiscard]] std::string
+	getDispatcherConnectionString() const noexcept;
 
-    private:
-        std::string _code;
-        std::string _pathLocalStorageCache;
-        std::string _pathSourceCache;
-        std::string _dbHost;
-        uint _dbPort = 3306;
-        uint _playerConnectionPort;
+	[[nodiscard]] std::string
+	getPlayerBindingString() const noexcept;
 
-        EncounterContext _encounterContext;
-    };
+	[[nodiscard]] const std::string&
+	getServerCode() const noexcept { return _code; }
+
+	[[nodiscard]] const EncounterContext&
+	getEncounterContext() const noexcept { return _encounterContext; }
+
+	[[nodiscard]] const std::string&
+	getPathLocalStorageCache() const noexcept { return _pathLocalStorageCache; }
+
+	[[nodiscard]] const std::string&
+	getPathSourceCache() const noexcept { return _pathSourceCache; }
+
+	[[nodiscard]] const std::string&
+	getDbHost() const noexcept { return _dbHost; }
+
+	[[nodiscard]] uint
+	getDbPort() const noexcept { return _dbPort; }
+
+private:
+	[[nodiscard]] bool
+	validateEncounterContext() const;
+
+	void parseArenaConfigFile(const nlohmann::json& configContent);
+
+private:
+	std::string _code;
+	std::string _pathLocalStorageCache;
+	std::string _pathSourceCache;
+	std::string _dbHost;
+	uint _dbPort = 3306;
+	uint _playerConnectionPort;
+
+	EncounterContext _encounterContext;
+};
 
 }
 

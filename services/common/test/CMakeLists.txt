@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 project(common_test CXX)
 
-set (CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 20)
 
 find_package(cppzmq REQUIRED)
 find_package(Catch2 REQUIRED)
@@ -16,7 +16,7 @@ add_executable(common_test
         ${CMAKE_CURRENT_LIST_DIR}/SizedQueueTestCase.cpp
         ${CMAKE_CURRENT_LIST_DIR}/AlgorithmTestCase.cpp
         ${CMAKE_CURRENT_LIST_DIR}/BoundaryMapTestCase.cpp
-)
+        )
 
 include_directories(../flatbuffer/includes)
 include_directories(../include)

@@ -32,17 +32,20 @@
 
 class CmlBase : public fys::cache::Cml {
 public:
-    explicit CmlBase(std::string v) : fys::cache::Cml(std::filesystem::path(std::move(v))) {}
+	explicit CmlBase(std::string v)
+			:fys::cache::Cml(std::filesystem::path(std::move(v))) { }
 
-    void createFileInLocalStorage(const fys::cache::CmlKey &cmlKey) override { }
+	void createFileInLocalStorage(const fys::cache::CmlKey& cmlKey) override { }
 };
 
-static std::string getLocalPathStorage() {
-    std::string file_path = __FILE__;
-    std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
-    if (dir_path.size() == file_path.size())
-        dir_path = file_path.substr(0, file_path.rfind('/'));
-    return dir_path + "/../../scriptTests/scripts_lnk";
+[[nodiscard]] static std::string
+getLocalPathStorage()
+{
+	std::string file_path = __FILE__;
+	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
+	if (dir_path.size() == file_path.size())
+		dir_path = file_path.substr(0, file_path.rfind('/'));
+	return dir_path + "/../../scriptTests/scripts_lnk";
 }
 
 #endif //FYS_ONLINE_TESTTYPE_HH

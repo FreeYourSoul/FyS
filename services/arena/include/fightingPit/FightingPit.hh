@@ -40,6 +40,7 @@
 // forward declarations
 namespace fys::arena {
     class FightingContender;
+
     class PartyTeam;
 }
 
@@ -80,9 +81,9 @@ namespace fys::arena {
         static constexpr unsigned CREATION_ERROR = 0;
 
         enum Level : uint {
-            EASY    = 0,
-            MEDIUM  = 1,
-            HARD    = 2,
+            EASY = 0,
+            MEDIUM = 1,
+            HARD = 2,
             NONE
         };
 
@@ -92,14 +93,14 @@ namespace fys::arena {
          *
          * @param now
          */
-        void continueBattle(const std::chrono::system_clock::time_point & now);
+        void continueBattle(const std::chrono::system_clock::time_point &now);
 
         /**
          *
          * @param userName
-         * @param nameMember
+         * @param idMember
          */
-        void forwardMessageToTeamMember(const std::string & userName, const std::string & nameMember);
+        void forwardMessageToTeamMember(const std::string &userName, unsigned int idMember);
 
         /**
          * Add an authenticated player in the fighting pit, the player authentication is not verified an thus must be
@@ -108,13 +109,6 @@ namespace fys::arena {
          * @param userToken token of the player to add
          */
         void addAuthenticatedUser(std::string userName, std::string userToken);
-        /**
-         * Check if given player (defined by name/token) is authenticated
-         * @param name unique name of the player to check
-         * @param token token of the player to check
-         * @return true if the player is authenticated, false otherwise
-         */
-        bool isPlayerParticipant(const std::string & name, const std::string & token) const;
 
         /**
          * Used to add a new party team (incoming player in the fighting pit)
@@ -122,7 +116,18 @@ namespace fys::arena {
          */
         void addPartyTeam(std::unique_ptr<PartyTeam> pt);
 
-        const std::unique_ptr<chaiscript::ChaiScript> &getChaiPtr() const { return _chaiPtr; }
+        /**
+         * Check if given player (defined by name/token) is authenticated
+         * @param name unique name of the player to check
+         * @param token token of the player to check
+         * @return true if the player is authenticated, false otherwise
+         */
+        [[nodiscard]] bool
+        isPlayerParticipant(const std::string &name, const std::string &token) const;
+
+        [[nodiscard]] const std::unique_ptr<chaiscript::ChaiScript> &
+        getChaiPtr() const { return _chaiPtr; }
+
         void setArenaId(unsigned arenaId) { _arenaId = arenaId; }
 
     private:
@@ -132,31 +137,34 @@ namespace fys::arena {
          * If enemy wins, a notification is sent to players
          * @return true if the fight has been terminated, false otherwise
          */
-        bool checkEndStatusFightingPit();
+        [[nodiscard]] bool
+        checkEndStatusFightingPit();
 
-        void addContender(const std::shared_ptr<FightingContender> & fc) { _contenders.addContender(fc); }
+        void addContender(const std::shared_ptr<FightingContender> &fc) { _contenders.addContender(fc); }
 
-        void initializePartyTeam(AllyPartyTeams && allyPartyTeams);
+        void initializePartyTeam(AllyPartyTeams &&allyPartyTeams);
+
         void initializeSideBattles();
+
         void initializePriorityListInSidesBattle();
 
     private:
-        Ending                      _end = ON_HOLD;
-        Level                       _levelFightingPit;
-        std::chrono::milliseconds   _timeInterlude;
-        PitContenders               _contenders;
-        AllyPartyTeams              _partyTeams;
+        Ending _end = ON_HOLD;
+        Level _levelFightingPit;
+        std::chrono::milliseconds _timeInterlude;
+        PitContenders _contenders;
+        AllyPartyTeams _partyTeams;
 
         // mapping of the contenders/NPC with the layout of the FightingPit
-        FightingPitLayout   _layoutMapping;
+        FightingPitLayout _layoutMapping;
 
-        std::string         _creatorUserName; // useless ?
-        unsigned            _arenaId;         // useless ?
+        std::string _creatorUserName; // useless ?
+        unsigned _arenaId;         // useless ?
 
         std::vector<AuthenticatedPlayer> _authenticatedPlayers;
 
-        std::unique_ptr<chaiscript::ChaiScript>     _chaiPtr;
-        std::vector<SideBattle>                     _sideBattles;
+        std::unique_ptr<chaiscript::ChaiScript> _chaiPtr;
+        std::vector<SideBattle> _sideBattles;
 
     };
 

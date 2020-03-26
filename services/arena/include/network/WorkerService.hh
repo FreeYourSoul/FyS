@@ -30,115 +30,121 @@
 
 // forward declarations
 namespace fys::arena {
-    class FightingPit;
+class FightingPit;
 }
 
 namespace fys::arena {
- 
-     /**
-      * @brief Manage the fighting pits : 
-      *   - generate a fighting pit
-      *   - assign an ID to it
-      *   - assign a dedicated thread to it
-      * Pascal obispo
-      * Fighting pit are created by the WorkerService using the FightingPitAnnouncer as builder in order to 
-      * ensure that the fightingpit is ready to host a battle, and then start the fighting pit in a dedicated
-      * thread.
-      * 
-      * Each fighting pit will contains a DEALER socket that will be used to communicate with the WorkerService.
-      * A custom zmq identifier will be provided by the WorkerService in order to be able to target a specific
-      * FightingPit for specific players (the map _idOnArenaId being used to register which player is in which
-      * FightingPit.
-      * 
-      * @see FightingPitAnnouncer
-      * @see FightingPit
-      */
-    class WorkerService {
-    public:
-        explicit WorkerService() :
-            _ctx(1), _workerRouter(_ctx, zmq::socket_type::router), _currentArenaId(0)
-        { }
 
-        void startFightingPitsThread();
+/**
+ * @brief Manage the fighting pits :
+ *   - generate a fighting pit
+ *   - assign an ID to it
+ *   - assign a dedicated thread to it
+ *
+ * Fighting pit are created by the WorkerService using the FightingPitAnnouncer as builder in order to
+ * ensure that the fightingpit is ready to host a battle, and then start the fighting pit in a dedicated
+ * thread.
+ *
+ * Each fighting pit will contains a DEALER socket that will be used to communicate with the WorkerService.
+ * A custom zmq identifier will be provided by the WorkerService in order to be able to target a specific
+ * FightingPit for specific players (the map _idOnArenaId being used to register which player is in which
+ * FightingPit).
+ *
+ * @see FightingPitAnnouncer
+ * @see FightingPit
+ */
+class WorkerService {
+public:
+    explicit WorkerService()
+            :
+            _ctx(1), _workerRouter(_ctx, zmq::socket_type::router), _currentArenaId(0) { }
 
-        /**
-         * @brief Bind the ArenaService for the player to connect directly to the Arena
-         */
-        void setupConnectionManager(const fys::arena::ArenaServerContext &ctx) noexcept;
+    void startFightingPitsThread();
 
-        /**
-         * @brief Add a fighting pit to the worker service, adding this instance to the on-going/accessible fighting pit
-         * of the arena server. Create an id for the newly created arena and set it to the fighting pit.
-         *
-         * @param fp FightingPit to add in the current WorkerService
-         * @return newly added fighting pit id, or 0 (FightingPit::CREATION_ERROR) if an error occured
-         */
-        unsigned addFightingPit(std::unique_ptr<FightingPit> fp);
+    /**
+     * @brief Bind the ArenaService for the player to connect directly to the Arena
+     */
+    void setupConnectionManager(const fys::arena::ArenaServerContext& ctx) noexcept;
 
-        /**
-         *
-         * @param userName player name to join the fightingpit
-         * @param fightingPitId
-         */
-        void playerJoinFightingPit(std::string userName, unsigned fightingPitId);
+    /**
+     * @brief Add a fighting pit to the worker service, adding this instance to the on-going/accessible fighting pit
+     * of the arena server. Create an id for the newly created arena and set it to the fighting pit.
+     *
+     * @param fp FightingPit to add in the current WorkerService
+     * @return newly added fighting pit id, or 0 (FightingPit::CREATION_ERROR) if an error occured
+     */
+    [[nodiscard]] unsigned
+    addFightingPit(std::unique_ptr<FightingPit> fp);
 
-        /**
-         * Read on the router socket (connection with the players) and reply to them thanks to the zmq::router protocol
-         * @tparam Lambda type following the signature => void (string, zmq::message_t)
-         * @param HandlerAuth   Handler handler to call when receiving a message to authenticate an awaited player
-         * @param HandlerInGame Handler handler to call when receiving a message to do a player action on a fightingPit
-         */
-        template <typename HandlerAuth, typename HandlerInGame>
-        void pollAndProcessMessageFromPlayer(HandlerAuth && handlerAuth, HandlerInGame && handlerInGame) noexcept {
-            //  Initialize poll set
-            zmq::pollitem_t items[] = {
-                    { _workerRouter, 0, ZMQ_POLLIN, 0 }
-            };
-            zmq::poll(&items[0], 1, 100);
-            if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
-                zmq::multipart_t msg;
-                if (!msg.recv(_workerRouter, ZMQ_NOBLOCK)) {
-                    SPDLOG_ERROR("Error while reading on the arena worker listener socket");
-                }
-                else if (auto s = msg.size(); s != 3) {
-                    SPDLOG_WARN("An incoming message with {} instead of 3 has been read", s);
-                }
-                else {
-                    auto identity = msg.pop();
-                    auto intermediate = msg.pop();
-                    if ("auth" == intermediate.str())
-                        std::forward<HandlerAuth>(handlerAuth)(std::move(identity), msg.pop());
-                    else
-                        std::forward<HandlerInGame>(handlerInGame)(std::move(identity), intermediate, msg.pop());
-                }
+    /**
+     *
+     * @param userName player name to join the fightingpit
+     * @param fightingPitId
+     */
+    void
+    playerJoinFightingPit(std::string userName, unsigned fightingPitId);
+
+    /**
+     * Read on the router socket (connection with the players) and reply to them thanks to the zmq::router protocol
+     * @tparam Lambda type following the signature => void (string, zmq::message_t)
+     * @param HandlerAuth   Handler handler to call when receiving a message to authenticate an awaited player
+     * @param HandlerInGame Handler handler to call when receiving a message to do a player action on a fightingPit
+     */
+    template<typename HandlerAuth, typename HandlerInGame>
+    void pollAndProcessMessageFromPlayer(HandlerAuth&& handlerAuth, HandlerInGame&& handlerInGame) noexcept
+    {
+        //  Initialize poll set
+        zmq::pollitem_t items[] = {
+                {_workerRouter, 0, ZMQ_POLLIN, 0}
+        };
+        zmq::poll(&items[0], 1, 100);
+        if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
+            zmq::multipart_t msg;
+            if (!msg.recv(_workerRouter, ZMQ_NOBLOCK)) {
+                SPDLOG_ERROR("Error while reading on the arena worker listener socket");
+            }
+            else if (auto s = msg.size(); s != 3) {
+                SPDLOG_WARN("An incoming message with {} instead of 3 has been read", s);
+            }
+            else {
+                auto identity = msg.pop();
+                auto intermediate = msg.pop();
+                if ("auth" == intermediate.str())
+                    std::forward<HandlerAuth>(handlerAuth)(std::move(identity), msg.pop());
+                else
+                    std::forward<HandlerInGame>(handlerInGame)(std::move(identity), intermediate, msg.pop());
             }
         }
+    }
 
-        /**
-         * Check if the player defined by an unique name/token is authenticated on the given fightingArenaId
-         * And return the given fightingpit if it's the case
-         *
-         * @param name player name
-         * @param token authentication token
-         * @param fightingArenaId arena to check if the player is authenticated on
-         * @return A reference to the fighting pit if the player is authenticated on the given fightingPit, return nullopt otherwise
-         */
-        [[nodiscard]] std::optional<std::reference_wrapper<FightingPit>>
-            getAuthenticatedPlayerFightingPit(const std::string & name, const std::string & token, unsigned fightingArenaId);
+    /**
+     * Check if the player defined by an unique name/token is authenticated on the given fightingArenaId
+     * And return the given fightingpit if it's the case
+     *
+     * @param name player name
+     * @param token authentication token
+     * @param fightingArenaId arena to check if the player is authenticated on
+     * @return A reference to the fighting pit if the player is authenticated on the given fightingPit, return nullopt otherwise
+     */
+    [[nodiscard]] std::optional<std::reference_wrapper<FightingPit>>
+    getAuthenticatedPlayerFightingPit(const std::string& name, const std::string& token, unsigned fightingArenaId);
 
+    [[nodiscard]] const std::unique_ptr<FightingPit>&
+    getFightingPitInstance(unsigned arenaId) const
+    {
+        return _arenaInstances.at(arenaId);
+    }
 
-        const std::unique_ptr<FightingPit> &getFightingPitInstance(unsigned arenaId) const { return _arenaInstances.at(arenaId); }
+private:
+    zmq::context_t _ctx;
+    zmq::socket_t _workerRouter;
+    unsigned _currentArenaId;
 
-    private:
-        zmq::context_t      _ctx;
-        zmq::socket_t       _workerRouter;
-        unsigned            _currentArenaId;
+    // map of client identifier to FightingArenaId
+    std::unordered_map<std::string, unsigned> _idOnArenaId;
+    std::unordered_map<unsigned, std::unique_ptr<FightingPit>> _arenaInstances;
 
-        // map of client identifier to FightingArenaId
-        std::unordered_map<std::string, unsigned> _idOnArenaId;
-        std::unordered_map<unsigned, std::unique_ptr<FightingPit>> _arenaInstances;
-
-    };
+};
 
 }
 

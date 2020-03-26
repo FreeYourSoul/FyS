@@ -31,50 +31,56 @@
 
 namespace fys::util {
 
-    class RandomGenerator
-    {
-    public:
-        static fys::util::RandomGenerator& getInstance() {
-            static fys::util::RandomGenerator s{};
-            return s;
-        }
+class RandomGenerator {
+public:
+	static fys::util::RandomGenerator&
+	getInstance()
+	{
+		static fys::util::RandomGenerator s{};
+		return s;
+	}
 
-        template <typename Type>
-        static Type generateInRange(Type rA, Type rB) {
-            static_assert(std::is_integral_v<Type> || std::is_floating_point_v<Type>);
-            if constexpr (std::is_integral_v<Type>) {
-                std::uniform_int_distribution<Type> distribution(rA, rB);
-                return distribution(*getInstance().get());
-            }
-            else if constexpr (std::is_floating_point_v<Type>) {
-                std::uniform_real_distribution<Type> distribution(rA, rB);
-                return distribution(*getInstance().get());
-            }
-        }
+	template<typename Type>
+	static Type
+	generateInRange(Type rA, Type rB)
+	{
+		static_assert(std::is_integral_v<Type> || std::is_floating_point_v<Type>);
+		if constexpr (std::is_integral_v<Type>) {
+			std::uniform_int_distribution<Type> distribution(rA, rB);
+			return distribution(*getInstance().get());
+		}
+		else if constexpr (std::is_floating_point_v<Type>) {
+			std::uniform_real_distribution<Type> distribution(rA, rB);
+			return distribution(*getInstance().get());
+		}
+	}
 
-        RandomGenerator(RandomGenerator const&) = delete;
-        RandomGenerator& operator=(RandomGenerator const&) = delete;
+	RandomGenerator(RandomGenerator const&) = delete;
+	RandomGenerator&
+	operator=(RandomGenerator const&) = delete;
 
+	std::shared_ptr<std::mt19937>
+	get();
 
-        std::shared_ptr<std::mt19937> get();
+private:
+	RandomGenerator()
+			:mt(std::make_shared<std::mt19937>())
+	{
+		std::random_device rd;
 
-    private:
-        RandomGenerator() : mt(std::make_shared<std::mt19937>()) {
-            std::random_device rd;
+		if (rd.entropy() != 0) {
+			mt->seed(rd());
+		}
+		else {
+			auto seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
+			mt->seed(seed);
+		}
+	}
 
-            if (rd.entropy() != 0) {
-                mt->seed(rd());
-            }
-            else {
-                auto seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
-                mt->seed(seed);
-            }
-        }
+	~RandomGenerator() = default;
 
-        ~RandomGenerator() = default;
-
-        std::shared_ptr<std::mt19937> mt;
-    };
+	std::shared_ptr<std::mt19937> mt;
+};
 
 }
 

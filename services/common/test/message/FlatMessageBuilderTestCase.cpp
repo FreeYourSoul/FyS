@@ -23,22 +23,25 @@
 
 #include <catch2/catch.hpp>
 
-TEST_CASE("FlatMessageBuilder : Create WSActionNotification", "[common]") {
+TEST_CASE("FlatMessageBuilder : Create WSActionNotification", "[common]")
+{
 
 }
 
-TEST_CASE("FlatMessageBuilder : Create WSAction") {
+TEST_CASE("FlatMessageBuilder : Create WSAction")
+{
 
-    SECTION ("Move") {
+	SECTION ("Move") {
 
-    }
+	}
 
-    SECTION("PnjInterract") {
+	SECTION("PnjInterract") {
 
-    }
+	}
 
 }
 
-TEST_CASE("FlatMessageBuilder : Create Communication") {
+TEST_CASE("FlatMessageBuilder : Create Communication")
+{
 
 }

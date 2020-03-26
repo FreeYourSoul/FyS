@@ -29,22 +29,21 @@
 
 namespace fys::ws {
 
-    class WorldServerService {
+class WorldServerService {
 
-    public:
-        explicit WorldServerService(const WorldServerContext &ctx);
-        void runServerLoop() noexcept;
+public:
+	explicit WorldServerService(const WorldServerContext& ctx);
+	void runServerLoop() noexcept;
 
-    private:
-        inline void processMessage(std::string &&idt, std::string &&token, const zmq::message_t &content,
-                const std::optional<std::string>& internalMagic);
+private:
+	inline void processMessage(std::string&& idt, std::string&& token, const zmq::message_t& content,
+							   const std::optional<std::string>& internalMagic);
 
-    private:
-        fys::ws::WorldServerEngine _worldServer;
-        fys::ws::ConnectionHandler _connectionHandler;
-    };
+private:
+	fys::ws::WorldServerEngine _worldServer;
+	fys::ws::ConnectionHandler _connectionHandler;
+};
 
 }
-
 
 #endif //FYS_WORLDSERVERSERVICE_HH

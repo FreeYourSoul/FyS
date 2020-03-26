@@ -33,94 +33,106 @@ using namespace nlohmann;
 
 namespace fys::arena {
 
-    ArenaServerContext::ArenaServerContext(int ac, const char *const *av) : common::ServiceContextBase(ac, av) {
-        std::ifstream i(_configFile);
-        SPDLOG_INFO("start parsing file {}", _configFile);
-        json jsonConfig;
-        i >> jsonConfig;
-        parseArenaConfigFile(jsonConfig);
-    }
+ArenaServerContext::ArenaServerContext(int ac, const char* const* av)
+		:common::ServiceContextBase(ac, av)
+{
+	std::ifstream i(_configFile);
+	SPDLOG_INFO("start parsing file {}", _configFile);
+	json jsonConfig;
+	i >> jsonConfig;
+	parseArenaConfigFile(jsonConfig);
+}
 
-    void ArenaServerContext::parseArenaConfigFile(const json &configContent) {
+void
+ArenaServerContext::parseArenaConfigFile(const json& configContent)
+{
 
-        auto &arena = configContent["Arena"];
-        arena["code"].get_to(_code);
-        arena["player_connection_port"].get_to(_playerConnectionPort);
-        arena["script_cache_source"].get_to(_pathSourceCache);
-        arena["script_storage_cache"].get_to(_pathLocalStorageCache);
-        arena["db_hostname"].get_to(_dbHost);
-        arena["db_port"].get_to(_dbPort);
+	auto& arena = configContent["Arena"];
+	arena["code"].get_to(_code);
+	arena["player_connection_port"].get_to(_playerConnectionPort);
+	arena["script_cache_source"].get_to(_pathSourceCache);
+	arena["script_storage_cache"].get_to(_pathLocalStorageCache);
+	arena["db_hostname"].get_to(_dbHost);
+	arena["db_port"].get_to(_dbPort);
 
-        std::ifstream i(arena["zone_configuration"].get<std::string>());
-        json jsonConfig;
-        i >> jsonConfig;
-        auto &encounter = jsonConfig["encounter"];
-        const std::string &zone = encounter["range"]["zone"].get<std::string>();
-        _encounterContext._rangeEncounterPerZone[zone][0] = std::make_pair(encounter["range"]["easy"][0].get<uint>(), encounter["range"]["easy"][1].get<uint>());
-        _encounterContext._rangeEncounterPerZone[zone][1] = std::make_pair(encounter["range"]["medium"][0].get<uint>(), encounter["range"]["medium"][1].get<uint>());
-        _encounterContext._rangeEncounterPerZone[zone][2] = std::make_pair(encounter["range"]["hard"][0].get<uint>(), encounter["range"]["hard"][1].get<uint>());
+	std::ifstream i(arena["zone_configuration"].get<std::string>());
+	json jsonConfig;
+	i >> jsonConfig;
+	auto& encounter = jsonConfig["encounter"];
+	const std::string& zone = encounter["range"]["zone"].get<std::string>();
+	_encounterContext._rangeEncounterPerZone[zone][0] = std::make_pair(encounter["range"]["easy"][0].get<uint>(), encounter["range"]["easy"][1].get<uint>());
+	_encounterContext._rangeEncounterPerZone[zone][1] = std::make_pair(encounter["range"]["medium"][0].get<uint>(), encounter["range"]["medium"][1].get<uint>());
+	_encounterContext._rangeEncounterPerZone[zone][2] = std::make_pair(encounter["range"]["hard"][0].get<uint>(), encounter["range"]["hard"][1].get<uint>());
 
-        auto &contenders = encounter["contenders"];
-        for (auto &contender : contenders) {
-            EncounterContext::EncounterDesc desc = {
-                    contender["key"].get<std::string>(),
-                    contender.value("max_encountering", 99u),
-                    {
-                            contender["chance"]["easy"].get<uint>(),
-                            contender["chance"]["medium"].get<uint>(),
-                            contender["chance"]["hard"].get<uint>()
-                    }
-            };
-            _encounterContext._contendersPerZone[contender["zone"].get<std::string>()].emplace_back(std::move(desc));
-        }
-        if (!validateEncounterContext())
-            throw std::runtime_error("Encounter Context invalid");
-    }
+	auto& contenders = encounter["contenders"];
+	for (auto& contender : contenders) {
+		EncounterContext::EncounterDesc desc = {
+				contender["key"].get<std::string>(),
+				contender.value("max_encountering", 99u),
+				{
+						contender["chance"]["easy"].get<uint>(),
+						contender["chance"]["medium"].get<uint>(),
+						contender["chance"]["hard"].get<uint>()
+				}
+		};
+		_encounterContext._contendersPerZone[contender["zone"].get<std::string>()].emplace_back(std::move(desc));
+	}
+	if (!validateEncounterContext())
+		throw std::runtime_error("Encounter Context invalid");
+}
 
-    bool ArenaServerContext::validateEncounterContext() const {
-        for (const auto &[k, v] : _encounterContext._rangeEncounterPerZone) {
-            for (int i = 0; i < 3; ++i) {
-                if (v.at(i).first <= 0) {
-                    SPDLOG_ERROR("Encounter Context invalid because of range for {} : "
-                                 "difficulty {} minimum is 0 or less while it should be at least 1", k, i);
-                    return false;
-                }
-            }
-        }
-        for (const auto &[k, v] : _encounterContext._contendersPerZone) {
-            for (int i = 0; i < 3; ++i) {
-                uint total = 0;
-                total = std::accumulate(v.cbegin(), v.cend(), 0,
-                                        [i](const uint val, const auto &rhs) -> uint { return val + rhs.chance[i]; });
-                if (total != 100) {
-                    SPDLOG_ERROR("Encounter Context invalid because of % chance for zone {} : "
-                                 "difficulty {} is {} while it should be equal 100", k, i, total);
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
+bool
+ArenaServerContext::validateEncounterContext() const
+{
+	for (const auto &[k, v] : _encounterContext._rangeEncounterPerZone) {
+		for (int i = 0; i < 3; ++i) {
+			if (v.at(i).first <= 0) {
+				SPDLOG_ERROR("Encounter Context invalid because of range for {} : "
+							 "difficulty {} minimum is 0 or less while it should be at least 1", k, i);
+				return false;
+			}
+		}
+	}
+	for (const auto &[k, v] : _encounterContext._contendersPerZone) {
+		for (int i = 0; i < 3; ++i) {
+			uint total = 0;
+			total = std::accumulate(v.cbegin(), v.cend(), 0,
+					[i](const uint val, const auto& rhs) -> uint { return val + rhs.chance[i]; });
+			if (total != 100) {
+				SPDLOG_ERROR("Encounter Context invalid because of % chance for zone {} : "
+							 "difficulty {} is {} while it should be equal 100", k, i, total);
+				return false;
+			}
+		}
+	}
+	return true;
+}
 
-    std::string ArenaServerContext::toString() const noexcept {
-        std::string str;
-        str = "dump context\n*************************\n";
-        str+= "[INFO] Service " + _name + " context VERSION: " + _version + "\n";
-        str+= "[INFO] Config file used: " + _configFile + "\n\n";
-        str+= "[INFO] Dispatcher connected port: " + std::to_string(_dispatcherData.port) + "\n";
-        str+= "[INFO] Dispatcher connected host: " + _dispatcherData.address + "\n";
-        str+= "[INFO] Dispatcher connection string: " + getDispatcherConnectionString() + "\n";
-        str+= "[INFO] Player binding string: " + getPlayerBindingString() + "\n";
-        str+= "\n*************************\n";
-        return str;
-    }
+std::string
+ArenaServerContext::toString() const noexcept
+{
+	std::string str;
+	str = "dump context\n*************************\n";
+	str += "[INFO] Service " + _name + " context VERSION: " + _version + "\n";
+	str += "[INFO] Config file used: " + _configFile + "\n\n";
+	str += "[INFO] Dispatcher connected port: " + std::to_string(_dispatcherData.port) + "\n";
+	str += "[INFO] Dispatcher connected host: " + _dispatcherData.address + "\n";
+	str += "[INFO] Dispatcher connection string: " + getDispatcherConnectionString() + "\n";
+	str += "[INFO] Player binding string: " + getPlayerBindingString() + "\n";
+	str += "\n*************************\n";
+	return str;
+}
 
-    std::string ArenaServerContext::getDispatcherConnectionString() const noexcept {
-        return std::string("tcp://").append(_dispatcherData.address).append(":").append(std::to_string(_dispatcherData.port));
-    }
+std::string
+ArenaServerContext::getDispatcherConnectionString() const noexcept
+{
+	return std::string("tcp://").append(_dispatcherData.address).append(":").append(std::to_string(_dispatcherData.port));
+}
 
-    std::string ArenaServerContext::getPlayerBindingString() const noexcept {
-        return std::string("tcp://*:").append(std::to_string(_playerConnectionPort));
-    }
+std::string
+ArenaServerContext::getPlayerBindingString() const noexcept
+{
+	return std::string("tcp://*:").append(std::to_string(_playerConnectionPort));
+}
 
 }

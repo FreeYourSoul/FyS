@@ -1,4 +1,4 @@
-cmake_minimum_required( VERSION 3.6 )
+cmake_minimum_required(VERSION 3.6)
 
 project(common)
 
@@ -19,16 +19,16 @@ set(FLAT_BUFFER_SCHEMAS
         ${FLATBUFFER_SCHEMA_DIR}/WSAction.fbs)
 
 if (TARGET generateFbs)
-else()
+else ()
     message("Flatbuffer generation ${FLATBUFFER_INCLUDE_DIR}")
     build_flatbuffers("${FLAT_BUFFER_SCHEMAS}"
-        "${FLATBUFFER_SCHEMA_DIR}"
-        generateFbs
-        ""
-        "${FLATBUFFER_INCLUDE_DIR}"
-        ""
-        "")
-endif()
+            "${FLATBUFFER_SCHEMA_DIR}"
+            generateFbs
+            ""
+            "${FLATBUFFER_INCLUDE_DIR}"
+            ""
+            "")
+endif ()
 
 set(COMMON_SRCS
         ${CMAKE_CURRENT_LIST_DIR}/flatbuffer/includes/FightingPitEncounter_generated.h

@@ -30,11 +30,14 @@
 
 namespace fys::network {
 
-    DBConnector::DBConnector(const arena::ArenaServerContext &ctx) {
+DBConnector::DBConnector(const arena::ArenaServerContext& ctx)
+{
 //        _refDb = mariadb::account::create(ctx.getDbHost(), "Arena", "ArenaPWD", "fys", ctx.getDbPort());
-    }
+}
 
-    std::vector<fys::arena::TeamMember> DBConnector::retrieveTeamCharacters(const std::string &user) {
+std::vector<fys::arena::TeamMember>
+DBConnector::retrieveTeamCharacters(const std::string& user)
+{
 //        auto res = std::vector<fys::arena::TeamMember>();
 //        mariadb::connection_ref con = mariadb::connection::create(_refDb);
 //        mariadb::statement_ref stmt = con->create_statement("SELECT * FROM team_character WHERE id_user=?");
@@ -48,13 +51,14 @@ namespace fys::network {
 //            tm.setName(result->get_string("name"));
 //            res.emplace_back(std::move(tm));
 //        }
-        return res;
-    }
+	return res;
+}
 
-    std::vector<std::string> DBConnector::retrieveAttacksKeys() {
-        auto res = std::vector<std::string>();
-        return res;
-    }
-
+std::vector<std::string>
+DBConnector::retrieveAttacksKeys()
+{
+	auto res = std::vector<std::string>();
+	return res;
+}
 
 }

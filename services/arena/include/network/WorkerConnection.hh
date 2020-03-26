@@ -26,21 +26,21 @@
 
 #include <zmq_addon.hpp>
 
- namespace fys::arena {
- 
-    class WorkerConnection {
+namespace fys::arena {
 
-    public:
-        WorkerConnection() noexcept :
-        _ctx(1), _workerServiceConnection(_ctx, zmq::socket_type::dealer)
-        { }
+class WorkerConnection {
 
-    private:
-        zmq::context_t _ctx;
-        zmq::socket_t _workerServiceConnection;
+public:
+    WorkerConnection() noexcept
+            :
+            _ctx(1), _workerServiceConnection(_ctx, zmq::socket_type::dealer) { }
 
-    };
+private:
+    zmq::context_t _ctx;
+    zmq::socket_t _workerServiceConnection;
 
- }
+};
+
+}
 
 #endif // !FYS_WORKERCONNECTION_HH

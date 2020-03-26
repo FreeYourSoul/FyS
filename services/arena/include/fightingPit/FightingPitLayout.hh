@@ -31,60 +31,61 @@
 
 namespace fys::arena {
 
-    // forward declaration
-    class AllyPartyTeams;
-    class PitContenders;
+// forward declaration
+class AllyPartyTeams;
+class PitContenders;
 
-    /**
-     * @brief Layout of the fighting pit. Manage the positions of monsters and the players/monsters movements
-     *
-     * This class is mapping the characters (contenders or NPC) with the layout of the fightingpit.
-     * The layout of the fighting pit can be taken as a draughtboard composed of 3 hexagons as shown as below
-     *                        _____         
-     *                       /     \        
-     *                 _____/  B    \        18 possible playable sides
-     *                /     \       /        6  possible ambush sides [A_NE, B_SW, A_SE, C_NW, C_N, B_S]
-     *               /  A    \_____/         
-     *               \       /     \
-     *                \_____/  C    \
-     *                      \       / 
-     *                       \_____/ 
-     *   
-     * Each hexagon represent the monster position. The Player can have character of its team spread on the lines representing 
-     * the sides of the hexagons.
-     * Here is the hexagon at coordinate A, with its sides (where the characters can stands to attack the monster).
-     *  
-     *           A_N
-     *           _____                N  = North
-     * A_NW     /     \    A_NE       NE = North-East
-     *         /  A    \              NW = North-West
-     *         \       /              S  = South
-     * A_SW     \_____/    A_SE       SE = South-East
-     *                                SW = South-West
-     *           A_S
-     * 
-     */
-    class FightingPitLayout {
+/**
+ * @brief Layout of the fighting pit. Manage the positions of monsters and the players/monsters movements
+ *
+ * This class is mapping the characters (contenders or NPC) with the layout of the fightingpit.
+ * The layout of the fighting pit can be taken as a draughtboard composed of 3 hexagons as shown as below
+ *                        _____
+ *                       /     \
+ *                 _____/  B    \        18 possible playable sides
+ *                /     \       /        6  possible ambush sides [A_NE, B_SW, A_SE, C_NW, C_N, B_S]
+ *               /  A    \_____/
+ *               \       /     \
+ *                \_____/  C    \
+ *                      \       /
+ *                       \_____/
+ *
+ * Each hexagon represent the monster position. The Player can have character of its team spread on the lines representing
+ * the sides of the hexagons.
+ * Here is the hexagon at coordinate A, with its sides (where the characters can stands to attack the monster).
+ *
+ *           A_N
+ *           _____                N  = North
+ * A_NW     /     \    A_NE       NE = North-East
+ *         /  A    \              NW = North-West
+ *         \       /              S  = South
+ * A_SW     \_____/    A_SE       SE = South-East
+ *                                SW = South-West
+ *           A_S
+ *
+ */
+class FightingPitLayout {
 
-    public:
-        FightingPitLayout(PitContenders &contenders, AllyPartyTeams &partyTeams) : _contenders(contenders), _partyTeams(partyTeams)
-        {}
+public:
+	FightingPitLayout(PitContenders& contenders, AllyPartyTeams& partyTeams)
+			:_contenders(contenders), _partyTeams(partyTeams) { }
 
-        /**
-         * Retrieve the number of active characters (contenders or players) on the given side
-         * @param side to check the contender and/or players
-         * @return number of active player on the side
-         */
-        unsigned activeCharactersOnSide(HexagonSide::Orientation side) const;
+	/**
+	 * Retrieve the number of active characters (contenders or players) on the given side
+	 * @param side to check the contender and/or players
+	 * @return number of active player on the side
+	 */
+	[[nodiscard]] unsigned
+	activeCharactersOnSide(HexagonSide::Orientation side) const;
 
-        void contenderMove();
-        void characterMove();
+	void contenderMove();
+	void characterMove();
 
-    private:
-        std::reference_wrapper<PitContenders>       _contenders;
-        std::reference_wrapper<AllyPartyTeams>      _partyTeams;
+private:
+	std::reference_wrapper<PitContenders> _contenders;
+	std::reference_wrapper<AllyPartyTeams> _partyTeams;
 
-    };
+};
 
 }
 

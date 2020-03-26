@@ -32,35 +32,44 @@
 
 namespace fys::arena {
 
-    //forward declarations
-    class TeamMember;
+//forward declarations
+class TeamMember;
 
-    class PartyTeam {
+class PartyTeam {
 
-    public:
-        explicit PartyTeam(std::string userName) : _userName(std::move(userName)) {}
+public:
+	explicit PartyTeam(std::string userName)
+			:_userName(std::move(userName)) { }
 
-        [[nodiscard]] std::vector<std::shared_ptr<TeamMember>> getTeamMemberOnSide(HexagonSide::Orientation side) const;
-        [[nodiscard]] std::vector<std::shared_ptr<TeamMember>> getChangingSideTeamMember() const;
+	[[nodiscard]] std::vector<std::shared_ptr<TeamMember>>
+	getTeamMemberOnSide(HexagonSide::Orientation side) const;
+	[[nodiscard]] std::vector<std::shared_ptr<TeamMember>>
+	getChangingSideTeamMember() const;
 
-        [[nodiscard]] const std::string &getUserName() const { return _userName; }
-        [[nodiscard]] const std::vector<std::shared_ptr<TeamMember>> &getTeamMembers() const { return _members; }
-        [[nodiscard]] std::vector<std::shared_ptr<TeamMember>> &accessTeamMembers() { return _members; }
+	[[nodiscard]] const std::string&
+	getUserName() const { return _userName; }
+	[[nodiscard]] const std::vector<std::shared_ptr<TeamMember>>&
+	getTeamMembers() const { return _members; }
+	[[nodiscard]] std::vector<std::shared_ptr<TeamMember>>&
+	accessTeamMembers() { return _members; }
 
-        void addTeamMember(std::shared_ptr<TeamMember> member);
+	void
+	addTeamMember(std::shared_ptr<TeamMember> member);
 
-        void addPendingActionToTeamMember(unsigned id);
+	void
+	addPendingActionToTeamMember(unsigned id);
 
-        unsigned allyNumberOnSide(HexagonSide::Orientation side) const;
+	unsigned
+	allyNumberOnSide(HexagonSide::Orientation side) const;
 
-    private:
-        std::string _userName;
-        std::vector<std::shared_ptr<TeamMember> > _members;
-        std::vector<bool> _changeSideFlags;
+private:
+	std::string _userName;
+	std::vector<std::shared_ptr<TeamMember> > _members;
+	std::vector<bool> _changeSideFlags;
 
-    };
+};
 
-    using PartyTeamUPtr = std::unique_ptr<PartyTeam>;
+using PartyTeamUPtr = std::unique_ptr<PartyTeam>;
 
 }
 

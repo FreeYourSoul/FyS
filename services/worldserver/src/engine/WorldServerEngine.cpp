@@ -31,57 +31,65 @@
 
 namespace fys::ws {
 
-    WorldServerEngine::WorldServerEngine(const fys::ws::WorldServerContext &ctx) : _map(ctx) {
-    }
+WorldServerEngine::WorldServerEngine(const fys::ws::WorldServerContext& ctx)
+		:_map(ctx)
+{
+}
 
-    void WorldServerEngine::executePendingActions(ws::ConnectionHandler &conn) {
-        _data.executeOnPlayers([this, &conn](uint indexPlayer, PlayerStatus statusPlayer, PlayerInfo& pi, const std::string &identityPlayer){
-            if (statusPlayer == PlayerStatus::MOVING) {
-                movePlayerAction(identityPlayer, indexPlayer, pi, conn);
-            }
-        });
-    }
+void
+WorldServerEngine::executePendingActions(ws::ConnectionHandler& conn)
+{
+	_data.executeOnPlayers([this, &conn](uint indexPlayer, PlayerStatus statusPlayer, PlayerInfo& pi, const std::string& identityPlayer) {
+		if (statusPlayer == PlayerStatus::MOVING) {
+			movePlayerAction(identityPlayer, indexPlayer, pi, conn);
+		}
+	});
+}
 
-    void WorldServerEngine::processPlayerInputMessage(std::string &&idt, std::string &&token,
-            const fb::WSAction *actionMsg, ConnectionHandler &handler)
-    {
-        if (const uint index = _data.getIndexAndUpdatePlayerConnection(token, std::move(idt)); index < std::numeric_limits<uint>::max()) {
-            if (actionMsg->action_type() == fb::Action::Action_Move) {
-                _data.setPlayerMoveAction(index, actionMsg->action_as_Move()->direction());
-            }
-            else if (actionMsg->action_type() == fb::Action::Action_Interruption) {
+void
+WorldServerEngine::processPlayerInputMessage(std::string&& idt, std::string&& token,
+											 const fb::WSAction* actionMsg, ConnectionHandler& handler)
+{
+	if (const uint index = _data.getIndexAndUpdatePlayerConnection(token, std::move(idt)); index < std::numeric_limits<uint>::max()) {
+		if (actionMsg->action_type() == fb::Action::Action_Move) {
+			_data.setPlayerMoveAction(index, actionMsg->action_as_Move()->direction());
+		}
+		else if (actionMsg->action_type() == fb::Action::Action_Interruption) {
 //                if (auto moveAction = actionMsg->action_as_Move(); moveAction->enterArena())
 //                    _data.setPlayerArena(index, moveAction->arenaId());
 //                else
-                    _data.stopPlayerMove(index);
-            }
-        } else {
-            SPDLOG_ERROR("Player of token {} has not been registered before sending messages", token);
-        }
-    }
+			_data.stopPlayerMove(index);
+		}
+	}
+	else {
+		SPDLOG_ERROR("Player of token {} has not been registered before sending messages", token);
+	}
+}
 
-    void WorldServerEngine::movePlayerAction(const std::string &idt, uint indexPlayer, PlayerInfo &pi, ws::ConnectionHandler &conn)
-    {
-        double velocity = 1;
-        PlayerInfo futurePos = {
-                pi.x * (velocity * std::cos(pi.angle)),
-                pi.y * (velocity * std::sin(pi.angle))
-        };
+void
+WorldServerEngine::movePlayerAction(const std::string& idt, uint indexPlayer, PlayerInfo& pi, ws::ConnectionHandler& conn)
+{
+	double velocity = 1;
+	PlayerInfo futurePos = {
+			pi.x * (velocity * std::cos(pi.angle)),
+			pi.y * (velocity * std::sin(pi.angle))
+	};
 
-        if (_map.canMoveTo(futurePos.x, futurePos.y, 0)) {
-            pi.x = futurePos.x;
-            pi.y = futurePos.y;
-            _map.executePotentialTrigger(indexPlayer, pi, conn);
-            if (auto clientsToNotify = _data.getPlayerIdtsArroundPos(pi); !clientsToNotify.empty())
-                notifyClientsOfMove(clientsToNotify, conn);
-        }
-    }
+	if (_map.canMoveTo(futurePos.x, futurePos.y, 0)) {
+		pi.x = futurePos.x;
+		pi.y = futurePos.y;
+		_map.executePotentialTrigger(indexPlayer, pi, conn);
+		if (auto clientsToNotify = _data.getPlayerIdtsArroundPos(pi); !clientsToNotify.empty())
+			notifyClientsOfMove(clientsToNotify, conn);
+	}
+}
 
-    void WorldServerEngine::notifyClientsOfMove(const std::vector<std::string_view> &ids, ws::ConnectionHandler &conn) const
-    {
-        for (const auto &id : ids) {
-            // TODO: notify
-        }
-    }
+void
+WorldServerEngine::notifyClientsOfMove(const std::vector<std::string_view>& ids, ws::ConnectionHandler& conn) const
+{
+	for (const auto& id : ids) {
+		// TODO: notify
+	}
+}
 
 }

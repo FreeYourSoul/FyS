@@ -36,111 +36,118 @@
 #include <CmlCopy.hh>
 
 namespace {
-    std::string getPathSampyChaiScript() {
-        std::string file_path = __FILE__;
-        std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
-        if (dir_path.size() == file_path.size())
-            dir_path = file_path.substr(0, file_path.rfind('/'));
-        return dir_path + "/scripts_lnk/arena/contenders/Sampy.chai";
-    }
-
-    std::string getLocalPathStorage() {
-        std::string file_path = __FILE__;
-        std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
-        if (dir_path.size() == file_path.size())
-            dir_path = file_path.substr(0, file_path.rfind('/'));
-        return dir_path + "/testCopyTo";
-    }
-
-    std::string getCopyPathStorage() {
-        std::string file_path = __FILE__;
-        std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
-        if (dir_path.size() == file_path.size())
-            dir_path = file_path.substr(0, file_path.rfind('/'));
-        return dir_path + "/scripts_lnk";
-    }
+std::string
+getPathSampyChaiScript()
+{
+	std::string file_path = __FILE__;
+	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
+	if (dir_path.size() == file_path.size())
+		dir_path = file_path.substr(0, file_path.rfind('/'));
+	return dir_path + "/scripts_lnk/arena/contenders/Sampy.chai";
 }
 
-TEST_CASE("test heal chaiscript", "[service][arena][script_test]") {
+std::string
+getLocalPathStorage()
+{
+	std::string file_path = __FILE__;
+	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
+	if (dir_path.size() == file_path.size())
+		dir_path = file_path.substr(0, file_path.rfind('/'));
+	return dir_path + "/testCopyTo";
+}
 
-    fys::cache::CmlCopy ccpy(getLocalPathStorage(), getCopyPathStorage());
-    std::filesystem::path baseCache = getLocalPathStorage();
+std::string
+getCopyPathStorage()
+{
+	std::string file_path = __FILE__;
+	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
+	if (dir_path.size() == file_path.size())
+		dir_path = file_path.substr(0, file_path.rfind('/'));
+	return dir_path + "/scripts_lnk";
+}
+}
 
-    fys::arena::PitContenders pc;
-    fys::arena::AllyPartyTeams apt;
-    auto chai = fys::arena::ChaiRegister::createChaiInstance(pc, apt);
-    fys::arena::ChaiRegister::registerBaseActions(*chai, ccpy);
+TEST_CASE("test heal chaiscript", "[service][arena][script_test]")
+{
 
-    fys::arena::ContenderScriptingUPtr sampy = std::make_unique<fys::arena::ContenderScripting>(*chai, 1);
-    sampy->setContenderId(0u);
-    sampy->setContenderName("Sampy");
-    sampy->loadContenderScriptFromFile(getPathSampyChaiScript());
+	fys::cache::CmlCopy ccpy(getLocalPathStorage(), getCopyPathStorage());
+	std::filesystem::path baseCache = getLocalPathStorage();
 
-    auto fpc = std::make_shared<fys::arena::FightingContender>(std::move(sampy));
-    pc.addContender(fpc);
+	fys::arena::PitContenders pc;
+	fys::arena::AllyPartyTeams apt;
+	auto chai = fys::arena::ChaiRegister::createChaiInstance(pc, apt);
+	fys::arena::ChaiRegister::registerBaseActions(*chai, ccpy);
 
-    SECTION("Test initialization contender") {
-        REQUIRE(8 == pc.getFightingContender(0)->accessStatus().initialSpeed);
-        REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.current);
-        REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.total);
-        REQUIRE(100 == pc.getFightingContender(0)->accessStatus().magicPoint.total);
-        REQUIRE(100 == pc.getFightingContender(0)->accessStatus().magicPoint.total);
-    }
+	fys::arena::ContenderScriptingUPtr sampy = std::make_unique<fys::arena::ContenderScripting>(*chai, 1);
+	sampy->setContenderId(0u);
+	sampy->setContenderName("Sampy");
+	sampy->loadContenderScriptFromFile(getPathSampyChaiScript());
 
-    fys::arena::PartyTeam partyTeam("FyS");
-    fys::arena::TeamMemberSPtr tm1 = std::make_shared<fys::arena::TeamMember>(partyTeam.getUserName(), "fyston1");
-    auto & st = tm1->accessStatus();
-    st.initialSpeed = 100;
-    st.magicPoint = { 1337, 1337 };
-    st.life = { 42, 42 };
+	auto fpc = std::make_shared<fys::arena::FightingContender>(std::move(sampy));
+	pc.addContender(fpc);
 
-    SECTION("test light_heal chaiscript") {
+	SECTION("Test initialization contender") {
+		REQUIRE(8 == pc.getFightingContender(0)->accessStatus().initialSpeed);
+		REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.current);
+		REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.total);
+		REQUIRE(100 == pc.getFightingContender(0)->accessStatus().magicPoint.total);
+		REQUIRE(100 == pc.getFightingContender(0)->accessStatus().magicPoint.total);
+	}
 
-        tm1->addDoableAction("arena:actions:heal:light_heal.chai", 1);
-        partyTeam.addTeamMember(std::move(tm1));
+	fys::arena::PartyTeam partyTeam("FyS");
+	fys::arena::TeamMemberSPtr tm1 = std::make_shared<fys::arena::TeamMember>(partyTeam.getUserName(), "fyston1");
+	auto& st = tm1->accessStatus();
+	st.initialSpeed = 100;
+	st.magicPoint = {1337, 1337};
+	st.life = {42, 42};
 
-        fys::arena::ChaiRegister::loadAndRegisterAction(*chai, ccpy, partyTeam);
+	SECTION("test light_heal chaiscript") {
 
-        SECTION("test heal") {
+		tm1->addDoableAction("arena:actions:heal:light_heal.chai", 1);
+		partyTeam.addTeamMember(std::move(tm1));
 
-            pc.getFightingContender(0)->accessStatus().life.current = 100;
+		fys::arena::ChaiRegister::loadAndRegisterAction(*chai, ccpy, partyTeam);
 
-            try {
-                chai->eval(R"(
+		SECTION("test heal") {
+
+			pc.getFightingContender(0)->accessStatus().life.current = 100;
+
+			try {
+				chai->eval(R"(
 var &contender = pitContenders.getFightingContender(0);
 var s = light_heal(1);
 s.execute(contender.accessStatus());
 )");
-            }
-            catch (std::exception &ex) {
-                SPDLOG_ERROR("{}", ex.what());
-                FAIL("Chaiscript : Shouldn't fail here");
-            }
-            REQUIRE(133 == pc.getFightingContender(0)->accessStatus().life.current); // +33 life
-            REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.total);
+			}
+			catch (std::exception& ex) {
+				SPDLOG_ERROR("{}", ex.what());
+				FAIL("Chaiscript : Shouldn't fail here");
+			}
+			REQUIRE(133 == pc.getFightingContender(0)->accessStatus().life.current); // +33 life
+			REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.total);
 
-        } // End section : test heal
+		} // End section : test heal
 
-        SECTION("test over healing ") {
+		SECTION("test over healing ") {
 
-            pc.getFightingContender(0)->accessStatus().life.current = 140;
+			pc.getFightingContender(0)->accessStatus().life.current = 140;
 
-            try {
-                chai->eval(R"(
+			try {
+				chai->eval(R"(
 var &contender = pitContenders.getFightingContender(0);
 var s = light_heal(1);
 s.execute(contender.accessStatus());
 )");
-            }
-            catch (std::exception &ex) {
-                SPDLOG_ERROR("{}", ex.what());
-                FAIL("Chaiscript : Shouldn't fail here");
-            }
-            REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.current); // +33 life > go to max
-            REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.total);
+			}
+			catch (std::exception& ex) {
+				SPDLOG_ERROR("{}", ex.what());
+				FAIL("Chaiscript : Shouldn't fail here");
+			}
+			REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.current); // +33 life > go to max
+			REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.total);
 
-        } // End section : test over healing
+		} // End section : test over healing
 
-    } // End section : test light_heal chaiscript
+	} // End section : test light_heal chaiscript
 
 } // End TestCase : test Slash chaiscript

@@ -1,10 +1,12 @@
 // A multiple target attack,
 // inflict 30 damages on 2 target (+1 every 3 level of the attack)
-class multi_slash {
+class multi_slash
+{
     attr dmg;
     attr number;
 
-    def multi_slash(levelOrStatus) {
+    def multi_slash(levelOrStatus)
+    {
         this.set_explicit(true);
         var lvl;
 

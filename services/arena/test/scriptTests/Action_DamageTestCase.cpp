@@ -36,32 +36,39 @@
 #include <CmlCopy.hh>
 
 namespace {
-    std::string getPathSampyChaiScript() {
-        std::string file_path = __FILE__;
-        std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
-        if (dir_path.size() == file_path.size())
-            dir_path = file_path.substr(0, file_path.rfind('/'));
-        return dir_path + "/scripts_lnk/arena/contenders/Sampy.chai";
-    }
-
-    std::string getLocalPathStorage() {
-        std::string file_path = __FILE__;
-        std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
-        if (dir_path.size() == file_path.size())
-            dir_path = file_path.substr(0, file_path.rfind('/'));
-        return dir_path + "/testCopyTo";
-    }
-
-    std::string getCopyPathStorage() {
-        std::string file_path = __FILE__;
-        std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
-        if (dir_path.size() == file_path.size())
-            dir_path = file_path.substr(0, file_path.rfind('/'));
-        return dir_path + "/scripts_lnk";
-    }
+std::string
+getPathSampyChaiScript()
+{
+    std::string file_path = __FILE__;
+    std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
+    if (dir_path.size() == file_path.size())
+        dir_path = file_path.substr(0, file_path.rfind('/'));
+    return dir_path + "/scripts_lnk/arena/contenders/Sampy.chai";
 }
 
-TEST_CASE("test damage chaiscript", "[service][arena][script_test]") {
+std::string
+getLocalPathStorage()
+{
+    std::string file_path = __FILE__;
+    std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
+    if (dir_path.size() == file_path.size())
+        dir_path = file_path.substr(0, file_path.rfind('/'));
+    return dir_path + "/testCopyTo";
+}
+
+std::string
+getCopyPathStorage()
+{
+    std::string file_path = __FILE__;
+    std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
+    if (dir_path.size() == file_path.size())
+        dir_path = file_path.substr(0, file_path.rfind('/'));
+    return dir_path + "/scripts_lnk";
+}
+}
+
+TEST_CASE("test damage chaiscript", "[service][arena][script_test]")
+{
 
     fys::cache::CmlCopy ccpy(getLocalPathStorage(), getCopyPathStorage());
     std::filesystem::path baseCache = getLocalPathStorage();
@@ -91,10 +98,10 @@ TEST_CASE("test damage chaiscript", "[service][arena][script_test]") {
 
     fys::arena::PartyTeam partyTeam("FyS");
     fys::arena::TeamMemberSPtr tm1 = std::make_shared<fys::arena::TeamMember>(partyTeam.getUserName(), "fyston1");
-    auto & st = tm1->accessStatus();
+    auto& st = tm1->accessStatus();
     st.initialSpeed = 100;
-    st.magicPoint = { 1337, 1337 };
-    st.life = { 42, 42 };
+    st.magicPoint = {1337, 1337};
+    st.life = {42, 42};
 
     SECTION("test Slash chaiscript") {
 
@@ -112,7 +119,7 @@ var s = slash(1);
 s.execute(contender.accessStatus());
 )");
             }
-            catch (std::exception &ex) {
+            catch (std::exception& ex) {
                 SPDLOG_ERROR("{}", ex.what());
                 FAIL("Chaiscript : Shouldn't fail here");
             }
@@ -132,11 +139,11 @@ var s = slash(1);
 s.execute(contender.accessStatus());
 )");
             }
-            catch (std::exception &ex) {
+            catch (std::exception& ex) {
                 SPDLOG_ERROR("{}", ex.what());
                 FAIL("Chaiscript : Shouldn't fail here");
             }
-            REQUIRE(0   == pc.getFightingContender(0)->accessStatus().life.current); // -33 life > 0
+            REQUIRE(0 == pc.getFightingContender(0)->accessStatus().life.current); // -33 life > 0
             REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.total);
 
         } // End section : test over damage
@@ -173,14 +180,14 @@ d.push_back_ref(contender2Status);
 s.execute(d);
 )");
             }
-            catch (std::exception &ex) {
+            catch (std::exception& ex) {
                 SPDLOG_ERROR("{}", ex.what());
                 FAIL("Chaiscript : Shouldn't fail here");
             }
             REQUIRE(123 == pc.getFightingContender(0)->accessStatus().life.current); // -33 life
             REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.total);
 
-            REQUIRE(70  == pc.getFightingContender(1)->accessStatus().life.current); // -33 life
+            REQUIRE(70 == pc.getFightingContender(1)->accessStatus().life.current); // -33 life
             REQUIRE(153 == pc.getFightingContender(1)->accessStatus().life.total);
 
         } // End section : test damage
@@ -200,15 +207,15 @@ d.push_back_ref(contender2Status);
 s.execute(d);
 )");
             }
-            catch (std::exception &ex) {
+            catch (std::exception& ex) {
                 SPDLOG_ERROR("{}", ex.what());
                 FAIL("Chaiscript : Shouldn't fail here");
             }
 
-            REQUIRE(0   == pc.getFightingContender(0)->accessStatus().life.current); // -33 life > 0
+            REQUIRE(0 == pc.getFightingContender(0)->accessStatus().life.current); // -33 life > 0
             REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.total);
 
-            REQUIRE(70   == pc.getFightingContender(1)->accessStatus().life.current); // -33 life
+            REQUIRE(70 == pc.getFightingContender(1)->accessStatus().life.current); // -33 life
             REQUIRE(153 == pc.getFightingContender(1)->accessStatus().life.total);
 
         } // End section : test over damage

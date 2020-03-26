@@ -28,28 +28,30 @@
 #include <memory>
 
 namespace mariadb {
-    class account;
-    using account_ref = std::shared_ptr<account>;
+class account;
+using account_ref = std::shared_ptr<account>;
 }
 
 namespace fys::arena {
-    class ArenaServerContext;
-    class TeamMember;
+class ArenaServerContext;
+class TeamMember;
 }
 
 namespace fys::network {
 
-    class DBConnector {
+class DBConnector {
 
-    public:
-        explicit DBConnector(const arena::ArenaServerContext &ctx);
+public:
+	explicit DBConnector(const arena::ArenaServerContext& ctx);
 
-        std::vector<fys::arena::TeamMember> retrieveTeamCharacters(const std::string &user);
-        std::vector<std::string> retrieveAttacksKeys();
+	std::vector<fys::arena::TeamMember>
+	retrieveTeamCharacters(const std::string& user);
+	std::vector<std::string>
+	retrieveAttacksKeys();
 
-    private:
-        mariadb::account_ref _refDb;
-    };
+private:
+	mariadb::account_ref _refDb;
+};
 
 }
 

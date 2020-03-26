@@ -31,31 +31,39 @@
 
 namespace fys::ws {
 
-    class WorldServerContext : fys::common::ServiceContextBase {
+class WorldServerContext : fys::common::ServiceContextBase {
 
-    public:
-        WorldServerContext(int ac, const char *const *av);
+public:
+	WorldServerContext(int ac, const char* const* av);
 
-        [[nodiscard]] std::string toString() const noexcept;
-        [[nodiscard]] std::string getDispatcherSubConnectionString() const noexcept;
-        [[nodiscard]] std::string getDispatcherConnectionString() const noexcept;
-        [[nodiscard]] const std::string &getServerCode() const noexcept;
-        [[nodiscard]] const std::string &getTMXMapPath() const noexcept;
-        [[nodiscard]] const std::pair<double, double> &getServerXBoundaries() const noexcept;
-        [[nodiscard]] const std::pair<double, double> &getServerYBoundaries() const noexcept;
-        [[nodiscard]] const std::vector<ProximityServer> &getServerProximity() const noexcept;
+	[[nodiscard]] std::string
+	toString() const noexcept;
+	[[nodiscard]] std::string
+	getDispatcherSubConnectionString() const noexcept;
+	[[nodiscard]] std::string
+	getDispatcherConnectionString() const noexcept;
+	[[nodiscard]] const std::string&
+	getServerCode() const noexcept;
+	[[nodiscard]] const std::string&
+	getTMXMapPath() const noexcept;
+	[[nodiscard]] const std::pair<double, double>&
+	getServerXBoundaries() const noexcept;
+	[[nodiscard]] const std::pair<double, double>&
+	getServerYBoundaries() const noexcept;
+	[[nodiscard]] const std::vector<ProximityServer>&
+	getServerProximity() const noexcept;
 
-    private:
-        void initWsContextWithJson(nlohmann::json &json);
+private:
+	void initWsContextWithJson(nlohmann::json& json);
 
-    private:
-        std::string _serverCode;
-        std::string _tmxMapPath;
-        std::pair<double, double> _serverXBoundaries;
-        std::pair<double, double> _serverYBoundaries;
-        std::vector<ProximityServer> _serverProximity;
+private:
+	std::string _serverCode;
+	std::string _tmxMapPath;
+	std::pair<double, double> _serverXBoundaries;
+	std::pair<double, double> _serverYBoundaries;
+	std::vector<ProximityServer> _serverProximity;
 
-    };
+};
 
 }
 

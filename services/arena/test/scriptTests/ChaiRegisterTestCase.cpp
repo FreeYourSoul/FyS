@@ -34,128 +34,133 @@
 #include <ChaiRegister.hh>
 
 namespace {
-    std::string getLocalPathStorage() {
-        std::string file_path = __FILE__;
-        std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
-        if (dir_path.size() == file_path.size())
-            dir_path = file_path.substr(0, file_path.rfind('/'));
-        return dir_path + "/testCopyTo";
-    }
-
-    std::string getCopyPathStorage() {
-        std::string file_path = __FILE__;
-        std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
-        if (dir_path.size() == file_path.size())
-            dir_path = file_path.substr(0, file_path.rfind('/'));
-        return dir_path + "/scripts_lnk";
-    }
+std::string
+getLocalPathStorage()
+{
+	std::string file_path = __FILE__;
+	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
+	if (dir_path.size() == file_path.size())
+		dir_path = file_path.substr(0, file_path.rfind('/'));
+	return dir_path + "/testCopyTo";
 }
 
-TEST_CASE("Test register/load player", "[service][arena][script_test]") {
+std::string
+getCopyPathStorage()
+{
+	std::string file_path = __FILE__;
+	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
+	if (dir_path.size() == file_path.size())
+		dir_path = file_path.substr(0, file_path.rfind('/'));
+	return dir_path + "/scripts_lnk";
+}
+}
 
-    fys::cache::CmlCopy ccpy(getLocalPathStorage(), getCopyPathStorage());
-    std::filesystem::path baseCache = getLocalPathStorage();
+TEST_CASE("Test register/load player", "[service][arena][script_test]")
+{
 
-    fys::arena::PitContenders pc;
-    fys::arena::AllyPartyTeams apt;
-    auto chai = fys::arena::ChaiRegister::createChaiInstance(pc, apt);
+	fys::cache::CmlCopy ccpy(getLocalPathStorage(), getCopyPathStorage());
+	std::filesystem::path baseCache = getLocalPathStorage();
 
-    try {
-        REQUIRE(chai->eval<bool>(R"(
+	fys::arena::PitContenders pc;
+	fys::arena::AllyPartyTeams apt;
+	auto chai = fys::arena::ChaiRegister::createChaiInstance(pc, apt);
+
+	try {
+		REQUIRE(chai->eval<bool>(R"(
         var objs = get_objects();
         objs.count("ally_actions") == 1
         )"));
-    }
-    catch (std::exception &ex) {
-        SPDLOG_ERROR("{}", ex.what());
-        FAIL("Shouldn't fail here");
-    }
+	}
+	catch (std::exception& ex) {
+		SPDLOG_ERROR("{}", ex.what());
+		FAIL("Shouldn't fail here");
+	}
 
-    SECTION("Test copy cml") {
+	SECTION("Test copy cml") {
 
-        auto content = ccpy.findInCache("arena:actions:damage:damage.chai");
+		auto content = ccpy.findInCache("arena:actions:damage:damage.chai");
 
-        REQUIRE(std::filesystem::exists(baseCache));
-        REQUIRE(std::filesystem::exists(baseCache / "arena"));
-        REQUIRE(std::filesystem::exists(baseCache / "arena" / "actions"));
-        REQUIRE(std::filesystem::exists(baseCache / "arena" / "actions" / "damage"));
-        REQUIRE(std::filesystem::exists(baseCache / "arena" / "actions" / "damage" / "damage.chai"));
-        REQUIRE_FALSE(content.empty());
+		REQUIRE(std::filesystem::exists(baseCache));
+		REQUIRE(std::filesystem::exists(baseCache / "arena"));
+		REQUIRE(std::filesystem::exists(baseCache / "arena" / "actions"));
+		REQUIRE(std::filesystem::exists(baseCache / "arena" / "actions" / "damage"));
+		REQUIRE(std::filesystem::exists(baseCache / "arena" / "actions" / "damage" / "damage.chai"));
+		REQUIRE_FALSE(content.empty());
 
-    } // End section : Test copy cml
+	} // End section : Test copy cml
 
-    SECTION("simple test load player actions") {
+	SECTION("simple test load player actions") {
 
-        fys::arena::PartyTeam partyTeam("FyS");
-        fys::arena::TeamMemberSPtr tm1 = std::make_shared<fys::arena::TeamMember>(partyTeam.getUserName(), "fyston1");
-        tm1->setId(0);
-        tm1->addDoableAction("arena:actions:damage:damage.chai", 1);
-        partyTeam.addTeamMember(std::move(tm1));
+		fys::arena::PartyTeam partyTeam("FyS");
+		fys::arena::TeamMemberSPtr tm1 = std::make_shared<fys::arena::TeamMember>(partyTeam.getUserName(), "fyston1");
+		tm1->setId(0);
+		tm1->addDoableAction("arena:actions:damage:damage.chai", 1);
+		partyTeam.addTeamMember(std::move(tm1));
 
-        fys::arena::ChaiRegister::loadAndRegisterAction(*chai, ccpy, partyTeam);
+		fys::arena::ChaiRegister::loadAndRegisterAction(*chai, ccpy, partyTeam);
 
-        try {
-            REQUIRE(chai->eval<bool>(R"(1 == ally_actions.count("FyS_fyston1");)"));
-            REQUIRE(chai->eval<bool>(R"(1 == ally_actions["FyS_fyston1"].count("damage");)"));
-        }
-        catch (std::exception &ex) {
-            SPDLOG_ERROR("{}", ex.what());
-            FAIL("Shouldn't fail here");
-        }
+		try {
+			REQUIRE(chai->eval<bool>(R"(1 == ally_actions.count("FyS_fyston1");)"));
+			REQUIRE(chai->eval<bool>(R"(1 == ally_actions["FyS_fyston1"].count("damage");)"));
+		}
+		catch (std::exception& ex) {
+			SPDLOG_ERROR("{}", ex.what());
+			FAIL("Shouldn't fail here");
+		}
 
-        SECTION("simple test register same partyteam with loaded action") {
+		SECTION("simple test register same partyteam with loaded action") {
 
-            fys::arena::TeamMemberSPtr tm2 = std::make_shared<fys::arena::TeamMember>(partyTeam.getUserName(), "fyston2");
-            tm2->setId(1);
-            tm2->addDoableAction("arena:actions:damage:damage.chai", 1);
-            partyTeam.addTeamMember(std::move(tm2));
+			fys::arena::TeamMemberSPtr tm2 = std::make_shared<fys::arena::TeamMember>(partyTeam.getUserName(), "fyston2");
+			tm2->setId(1);
+			tm2->addDoableAction("arena:actions:damage:damage.chai", 1);
+			partyTeam.addTeamMember(std::move(tm2));
 
-            fys::arena::ChaiRegister::loadAndRegisterAction(*chai, ccpy, partyTeam);
+			fys::arena::ChaiRegister::loadAndRegisterAction(*chai, ccpy, partyTeam);
 
-            try {
-                REQUIRE(chai->eval<bool>(R"(1 == ally_actions.count("FyS_fyston1");)"));
-                REQUIRE(chai->eval<bool>(R"(1 == ally_actions["FyS_fyston1"].count("damage");)"));
+			try {
+				REQUIRE(chai->eval<bool>(R"(1 == ally_actions.count("FyS_fyston1");)"));
+				REQUIRE(chai->eval<bool>(R"(1 == ally_actions["FyS_fyston1"].count("damage");)"));
 
-                REQUIRE(chai->eval<bool>(R"(1 == ally_actions.count("FyS_fyston2");)"));
-                REQUIRE(chai->eval<bool>(R"(1 == ally_actions["FyS_fyston2"].count("damage");)"));
-            }
-            catch (std::exception &ex) {
-                SPDLOG_ERROR("{}", ex.what());
-                FAIL("Shouldn't fail here");
-            }
+				REQUIRE(chai->eval<bool>(R"(1 == ally_actions.count("FyS_fyston2");)"));
+				REQUIRE(chai->eval<bool>(R"(1 == ally_actions["FyS_fyston2"].count("damage");)"));
+			}
+			catch (std::exception& ex) {
+				SPDLOG_ERROR("{}", ex.what());
+				FAIL("Shouldn't fail here");
+			}
 
-        } // End section : Test register loaded action
+		} // End section : Test register loaded action
 
-        SECTION("simple test register new partyteam with loaded action") {
+		SECTION("simple test register new partyteam with loaded action") {
 
-            fys::arena::PartyTeam partyTeam2("Free");
-            fys::arena::TeamMemberSPtr tm21 = std::make_shared<fys::arena::TeamMember>(partyTeam2.getUserName(), "fyston1");
-            tm21->setId(2);
-            tm21->addDoableAction("arena:actions:damage:damage.chai", 1);
-            partyTeam2.addTeamMember(std::move(tm21));
-            fys::arena::TeamMemberSPtr tm22 = std::make_shared<fys::arena::TeamMember>(partyTeam2.getUserName(), "fyston2");
-            tm22->setId(3);
-            tm22->addDoableAction("arena:actions:damage:damage.chai", 1);
-            partyTeam2.addTeamMember(std::move(tm22));
+			fys::arena::PartyTeam partyTeam2("Free");
+			fys::arena::TeamMemberSPtr tm21 = std::make_shared<fys::arena::TeamMember>(partyTeam2.getUserName(), "fyston1");
+			tm21->setId(2);
+			tm21->addDoableAction("arena:actions:damage:damage.chai", 1);
+			partyTeam2.addTeamMember(std::move(tm21));
+			fys::arena::TeamMemberSPtr tm22 = std::make_shared<fys::arena::TeamMember>(partyTeam2.getUserName(), "fyston2");
+			tm22->setId(3);
+			tm22->addDoableAction("arena:actions:damage:damage.chai", 1);
+			partyTeam2.addTeamMember(std::move(tm22));
 
-            fys::arena::ChaiRegister::loadAndRegisterAction(*chai, ccpy, partyTeam2);
+			fys::arena::ChaiRegister::loadAndRegisterAction(*chai, ccpy, partyTeam2);
 
-            try {
-                REQUIRE(chai->eval<bool>(R"(1 == ally_actions.count("Free_fyston1");)"));
-                REQUIRE(chai->eval<bool>(R"(1 == ally_actions["Free_fyston1"].count("damage");)"));
+			try {
+				REQUIRE(chai->eval<bool>(R"(1 == ally_actions.count("Free_fyston1");)"));
+				REQUIRE(chai->eval<bool>(R"(1 == ally_actions["Free_fyston1"].count("damage");)"));
 
-                REQUIRE(chai->eval<bool>(R"(1 == ally_actions.count("Free_fyston2");)"));
-                REQUIRE(chai->eval<bool>(R"(1 == ally_actions["Free_fyston2"].count("damage");)"));
-            }
-            catch (std::exception &ex) {
-                SPDLOG_ERROR("{}", ex.what());
-                FAIL("Shouldn't fail here");
-            }
+				REQUIRE(chai->eval<bool>(R"(1 == ally_actions.count("Free_fyston2");)"));
+				REQUIRE(chai->eval<bool>(R"(1 == ally_actions["Free_fyston2"].count("damage");)"));
+			}
+			catch (std::exception& ex) {
+				SPDLOG_ERROR("{}", ex.what());
+				FAIL("Shouldn't fail here");
+			}
 
-        } // End section : simple test register new partyteam with loaded action
+		} // End section : simple test register new partyteam with loaded action
 
-    } // End section : Test load player actions
-    
-    std::filesystem::remove_all(baseCache);
+	} // End section : Test load player actions
+
+	std::filesystem::remove_all(baseCache);
 
 } // End TestCase : Test register/load player

@@ -30,64 +30,71 @@
 
 namespace fys::common {
 
-    /**
-     * A Queue (aligned in memory, implemented through an array) with a fixed max.
-     * If the queue is fulled, value are not override (do not work like a ringbuffer)
-     *
-     * @note Not thread safe (for thread safe usage, a LockFreeQueue should be used)
-     * @tparam TypeContainer type the queue contains
-     * @tparam SIZE_QUEUE maximum size of the queue, defaulted to 100
-     */
-    template <typename TypeContainer, unsigned int SIZE_QUEUE = 100>
-    class SizedQueue {
+/**
+ * A Queue (aligned in memory, implemented through an array) with a fixed max.
+ * If the queue is fulled, value are not override (do not work like a ringbuffer)
+ *
+ * @note Not thread safe (for thread safe usage, a LockFreeQueue should be used)
+ * @tparam TypeContainer type the queue contains
+ * @tparam SIZE_QUEUE maximum size of the queue, defaulted to 100
+ */
+template<typename TypeContainer, unsigned int SIZE_QUEUE = 100>
+class SizedQueue {
 
     static_assert(SIZE_QUEUE < std::numeric_limits<unsigned int>::max());
 
-    public:
-        /**
-         * Pop the next element of the queue
-         * @return the next element of the queue, if no such element exist, return an empty optional (nullopt)
-         */
-        std::optional<TypeContainer> pop() {
-            if (_head < _tail) {
-                return _queue[getIndex(_head++)];
-            }
-            _head = 0;
-            _tail = 0;
-            return std::nullopt;
+public:
+    /**
+     * Pop the next element of the queue
+     * @return the next element of the queue, if no such element exist, return an empty optional (nullopt)
+     */
+    std::optional<TypeContainer>
+    pop()
+    {
+        if (_head < _tail) {
+            return _queue[getIndex(_head++)];
         }
+        _head = 0;
+        _tail = 0;
+        return std::nullopt;
+    }
 
-        /**
-         * Push an element into the queue
-         *
-         * @param elem element to insert into the queue
-         * @return true if the element has been pushed correctly, false otherwise
-         */
-        bool push(TypeContainer && elem) {
-            if (size() >= SIZE_QUEUE)
-                return false;
-            _queue[getIndex(_tail)] = std::forward<TypeContainer>(elem);
-            ++_tail;
-            return true;
-        }
+    /**
+     * Push an element into the queue
+     *
+     * @param elem element to insert into the queue
+     * @return true if the element has been pushed correctly, false otherwise
+     */
+    bool
+    push(TypeContainer&& elem)
+    {
+        if (size() >= SIZE_QUEUE)
+            return false;
+        _queue[getIndex(_tail)] = std::forward<TypeContainer>(elem);
+        ++_tail;
+        return true;
+    }
 
-        /**
-         * Get the number of element in the queue to be popped
-         * @return number of element that can be popped out of the queue
-         */
-        uint size() const { return _tail - _head; }
+    /**
+     * Get the number of element in the queue to be popped
+     * @return number of element that can be popped out of the queue
+     */
+    uint
+    size() const { return _tail - _head; }
 
-    private:
-        inline uint getIndex(const uint index) const {
-            return index % SIZE_QUEUE;
-        }
+private:
+    inline uint
+    getIndex(const uint index) const
+    {
+        return index % SIZE_QUEUE;
+    }
 
-    private:
-        uint _tail = 0;
-        uint _head = 0;
+private:
+    uint _tail = 0;
+    uint _head = 0;
 
-        std::array<TypeContainer, SIZE_QUEUE> _queue;
-    };
+    std::array<TypeContainer, SIZE_QUEUE> _queue;
+};
 
 }
 

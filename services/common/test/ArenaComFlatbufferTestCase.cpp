@@ -27,93 +27,96 @@
 #include <ArenaServerValidateAuth_generated.h>
 #include <FightingPitEncounter_generated.h>
 
-TEST_CASE("FlatBuffer ArenaCom FightingPitEncounter", "[common][fb]") {
-    flatbuffers::FlatBufferBuilder fbb;
-    auto fp = fys::fb::CreateFightingPitEncounter(
-            fbb,
-            fbb.CreateString("name"),
-            fbb.CreateString("token_authentication"),
-            1337,
-            fbb.CreateString("WS001"),
-            fys::fb::Level::Level_EASY,
-            4242,
-            false,
-            0.0,
-            0.0);
-    fys::fb::FinishFightingPitEncounterBuffer(fbb, fp);
+TEST_CASE("FlatBuffer ArenaCom FightingPitEncounter", "[common][fb]")
+{
+	flatbuffers::FlatBufferBuilder fbb;
+	auto fp = fys::fb::CreateFightingPitEncounter(
+			fbb,
+			fbb.CreateString("name"),
+			fbb.CreateString("token_authentication"),
+			1337,
+			fbb.CreateString("WS001"),
+			fys::fb::Level::Level_EASY,
+			4242,
+			false,
+			0.0,
+			0.0);
+	fys::fb::FinishFightingPitEncounterBuffer(fbb, fp);
 
-    SECTION("Verifier") {
-        auto ok = flatbuffers::Verifier(fbb.GetBufferPointer(), fbb.GetSize());
-        CHECK(fys::fb::VerifyFightingPitEncounterBuffer(ok));
-    }
-    uint8_t *binary = fbb.GetBufferPointer();
+	SECTION("Verifier") {
+		auto ok = flatbuffers::Verifier(fbb.GetBufferPointer(), fbb.GetSize());
+		CHECK(fys::fb::VerifyFightingPitEncounterBuffer(ok));
+	}
+	uint8_t* binary = fbb.GetBufferPointer();
 
-    SECTION("Binary to FlatBuffer") {
-        const fys::fb::FightingPitEncounter *fromBinary = fys::fb::GetFightingPitEncounter(binary);
-        REQUIRE("name" == fromBinary->user_name()->str());
-        REQUIRE("token_authentication" == fromBinary->token_auth()->str());
-        REQUIRE(4242 == fromBinary->id_encounter());
-        REQUIRE_FALSE(fromBinary->is_ambush());
-        REQUIRE(1337 == fromBinary->fighting_pit_id());
+	SECTION("Binary to FlatBuffer") {
+		const fys::fb::FightingPitEncounter* fromBinary = fys::fb::GetFightingPitEncounter(binary);
+		REQUIRE("name" == fromBinary->user_name()->str());
+		REQUIRE("token_authentication" == fromBinary->token_auth()->str());
+		REQUIRE(4242 == fromBinary->id_encounter());
+		REQUIRE_FALSE(fromBinary->is_ambush());
+		REQUIRE(1337 == fromBinary->fighting_pit_id());
 
-    } // End section : Binary to Flatbuffer
+	} // End section : Binary to Flatbuffer
 
 } // // End Test Case : FlatBuffer ArenaCom FightingPitEncounter
 
-TEST_CASE("FlatBuffer ArenaCom ArenaServerAuth", "[common][fb]") {
+TEST_CASE("FlatBuffer ArenaCom ArenaServerAuth", "[common][fb]")
+{
 
-    flatbuffers::FlatBufferBuilder fbb;
-    auto asa = fys::fb::CreateArenaServerAuth(
-            fbb,
-            fbb.CreateString("name"),
-            fbb.CreateString("token_authentication"),
-            fbb.CreateString("localhost"),
-            fbb.CreateString("tcp://localhost:4242"),
-            42,
-            fbb.CreateString("WS001"));
-    fys::fb::FinishArenaServerAuthBuffer(fbb, asa);
+	flatbuffers::FlatBufferBuilder fbb;
+	auto asa = fys::fb::CreateArenaServerAuth(
+			fbb,
+			fbb.CreateString("name"),
+			fbb.CreateString("token_authentication"),
+			fbb.CreateString("localhost"),
+			fbb.CreateString("tcp://localhost:4242"),
+			42,
+			fbb.CreateString("WS001"));
+	fys::fb::FinishArenaServerAuthBuffer(fbb, asa);
 
-    SECTION("Verifier") {
-        auto ok = flatbuffers::Verifier(fbb.GetBufferPointer(), fbb.GetSize());
-        CHECK(fys::fb::VerifyArenaServerAuthBuffer(ok));
-    }
-    uint8_t *binary = fbb.GetBufferPointer();
+	SECTION("Verifier") {
+		auto ok = flatbuffers::Verifier(fbb.GetBufferPointer(), fbb.GetSize());
+		CHECK(fys::fb::VerifyArenaServerAuthBuffer(ok));
+	}
+	uint8_t* binary = fbb.GetBufferPointer();
 
-    SECTION("Binary to FlatBuffer") {
-        const fys::fb::ArenaServerAuth *fromBinary = fys::fb::GetArenaServerAuth(binary);
-        REQUIRE("name" == fromBinary->user_name()->str());
-        REQUIRE("token_authentication" == fromBinary->token_auth()->str());
-        REQUIRE("localhost" == fromBinary->ip()->str());
-        REQUIRE("tcp://localhost:4242" == fromBinary->connection_str()->str());
-        REQUIRE("WS001" == fromBinary->arena_server_code()->str());
-        REQUIRE(42 == fromBinary->id_fightingpit());
+	SECTION("Binary to FlatBuffer") {
+		const fys::fb::ArenaServerAuth* fromBinary = fys::fb::GetArenaServerAuth(binary);
+		REQUIRE("name" == fromBinary->user_name()->str());
+		REQUIRE("token_authentication" == fromBinary->token_auth()->str());
+		REQUIRE("localhost" == fromBinary->ip()->str());
+		REQUIRE("tcp://localhost:4242" == fromBinary->connection_str()->str());
+		REQUIRE("WS001" == fromBinary->arena_server_code()->str());
+		REQUIRE(42 == fromBinary->id_fightingpit());
 
-    } // End section : Binary to Flatbuffer
+	} // End section : Binary to Flatbuffer
 
 } // End Test Case : FlatBuffer ArenaCom ArenaServerAuth
 
-TEST_CASE("FlatBuffer ArenaCom ArenaServerValidateAuth", "[common][fb]") {
+TEST_CASE("FlatBuffer ArenaCom ArenaServerValidateAuth", "[common][fb]")
+{
 
-    flatbuffers::FlatBufferBuilder fbb;
-    auto asva = fys::fb::CreateArenaServerValidateAuth(
-            fbb,
-            fbb.CreateString("name"),
-            fbb.CreateString("token_authentication"),
-            42);
-    fys::fb::FinishArenaServerValidateAuthBuffer(fbb, asva);
+	flatbuffers::FlatBufferBuilder fbb;
+	auto asva = fys::fb::CreateArenaServerValidateAuth(
+			fbb,
+			fbb.CreateString("name"),
+			fbb.CreateString("token_authentication"),
+			42);
+	fys::fb::FinishArenaServerValidateAuthBuffer(fbb, asva);
 
-    SECTION("Verifier") {
-        auto ok = flatbuffers::Verifier(fbb.GetBufferPointer(), fbb.GetSize());
-        CHECK(fys::fb::VerifyArenaServerValidateAuthBuffer(ok));
-    }
-    uint8_t *binary = fbb.GetBufferPointer();
+	SECTION("Verifier") {
+		auto ok = flatbuffers::Verifier(fbb.GetBufferPointer(), fbb.GetSize());
+		CHECK(fys::fb::VerifyArenaServerValidateAuthBuffer(ok));
+	}
+	uint8_t* binary = fbb.GetBufferPointer();
 
-    SECTION("Binary to FlatBuffer") {
-        const fys::fb::ArenaServerValidateAuth *fromBinary = fys::fb::GetArenaServerValidateAuth(binary);
-        REQUIRE("name" == fromBinary->user_name()->str());
-        REQUIRE("token_authentication" == fromBinary->token_auth()->str());
-        REQUIRE(42 == fromBinary->fighting_pit_id());
+	SECTION("Binary to FlatBuffer") {
+		const fys::fb::ArenaServerValidateAuth* fromBinary = fys::fb::GetArenaServerValidateAuth(binary);
+		REQUIRE("name" == fromBinary->user_name()->str());
+		REQUIRE("token_authentication" == fromBinary->token_auth()->str());
+		REQUIRE(42 == fromBinary->fighting_pit_id());
 
-    } // End section : Binary to Flatbuffer
+	} // End section : Binary to Flatbuffer
 
 } // End Test Case : FlatBuffer ArenaCom ArenaServerValidateAuth

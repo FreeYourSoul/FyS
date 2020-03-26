@@ -38,140 +38,147 @@
 #include <CmlCopy.hh>
 
 namespace {
-    std::string getPathSampyChaiScript() {
-        std::string file_path = __FILE__;
-        std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
-        if (dir_path.size() == file_path.size())
-            dir_path = file_path.substr(0, file_path.rfind('/'));
-        return dir_path + "/scripts_lnk/arena/contenders/Sampy.chai";
-    }
+std::string
+getPathSampyChaiScript()
+{
+	std::string file_path = __FILE__;
+	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
+	if (dir_path.size() == file_path.size())
+		dir_path = file_path.substr(0, file_path.rfind('/'));
+	return dir_path + "/scripts_lnk/arena/contenders/Sampy.chai";
+}
 
-    std::string getLocalPathStorage() {
-        std::string file_path = __FILE__;
-        std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
-        if (dir_path.size() == file_path.size())
-            dir_path = file_path.substr(0, file_path.rfind('/'));
-        return dir_path + "/testCopyTo";
-    }
+std::string
+getLocalPathStorage()
+{
+	std::string file_path = __FILE__;
+	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
+	if (dir_path.size() == file_path.size())
+		dir_path = file_path.substr(0, file_path.rfind('/'));
+	return dir_path + "/testCopyTo";
+}
 
-    std::string getCopyPathStorage() {
-        std::string file_path = __FILE__;
-        std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
-        if (dir_path.size() == file_path.size())
-            dir_path = file_path.substr(0, file_path.rfind('/'));
-        return dir_path + "/scripts_lnk";
-    }
+std::string
+getCopyPathStorage()
+{
+	std::string file_path = __FILE__;
+	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
+	if (dir_path.size() == file_path.size())
+		dir_path = file_path.substr(0, file_path.rfind('/'));
+	return dir_path + "/scripts_lnk";
+}
 }
 
 /**
  * @brief Sampy is a script representing a sample monster and also contains standalone scripts.
  *        It is used in order to test the implementation of ChaiScript int FyS Online.
  */
-TEST_CASE("Test Sampy", "[service][arena][script_test]") {
+TEST_CASE("Test Sampy", "[service][arena][script_test]")
+{
 
-    fys::cache::CmlCopy ccpy(getLocalPathStorage(), getCopyPathStorage());
-    std::filesystem::path baseCache = getLocalPathStorage();
+	fys::cache::CmlCopy ccpy(getLocalPathStorage(), getCopyPathStorage());
+	std::filesystem::path baseCache = getLocalPathStorage();
 
-    fys::arena::PitContenders pc;
-    fys::arena::AllyPartyTeams apt;
+	fys::arena::PitContenders pc;
+	fys::arena::AllyPartyTeams apt;
 
-    auto chai = fys::arena::ChaiRegister::createChaiInstance(pc, apt);
+	auto chai = fys::arena::ChaiRegister::createChaiInstance(pc, apt);
 
-    fys::arena::ChaiRegister::registerBaseActions(*chai, ccpy);
+	fys::arena::ChaiRegister::registerBaseActions(*chai, ccpy);
 
-    fys::arena::ContenderScriptingUPtr sampy = std::make_unique<fys::arena::ContenderScripting>(*chai, 1);
-    sampy->setContenderId(0u);
-    sampy->setContenderName("Sampy");
-    sampy->loadContenderScriptFromFile(getPathSampyChaiScript());
+	fys::arena::ContenderScriptingUPtr sampy = std::make_unique<fys::arena::ContenderScripting>(*chai, 1);
+	sampy->setContenderId(0u);
+	sampy->setContenderName("Sampy");
+	sampy->loadContenderScriptFromFile(getPathSampyChaiScript());
 
-    auto fpc = std::make_shared<fys::arena::FightingContender>(std::move(sampy));
-    pc.addContender(fpc);
+	auto fpc = std::make_shared<fys::arena::FightingContender>(std::move(sampy));
+	pc.addContender(fpc);
 
-    std::string userName = "FyS";
-    fys::arena::PartyTeamUPtr pt = std::make_unique<fys::arena::PartyTeam>(userName);
-    fys::arena::TeamMemberSPtr teamMember1 = std::make_shared<fys::arena::TeamMember>(userName, "fyston1");
-    fys::arena::TeamMemberSPtr teamMember2 = std::make_shared<fys::arena::TeamMember>(userName, "fyston2");
+	std::string userName = "FyS";
+	fys::arena::PartyTeamUPtr pt = std::make_unique<fys::arena::PartyTeam>(userName);
+	fys::arena::TeamMemberSPtr teamMember1 = std::make_shared<fys::arena::TeamMember>(userName, "fyston1");
+	fys::arena::TeamMemberSPtr teamMember2 = std::make_shared<fys::arena::TeamMember>(userName, "fyston2");
 
-    pt->addTeamMember(teamMember1);
-    pt->addTeamMember(teamMember2);
+	pt->addTeamMember(teamMember1);
+	pt->addTeamMember(teamMember2);
 
-    fpc->moveContender(fys::arena::HexagonSide::Orientation::A_N, true);
-    teamMember1->moveTeamMember(fys::arena::HexagonSide::Orientation::A_N, true);
-    teamMember2->moveTeamMember(fys::arena::HexagonSide::Orientation::A_N, true);
+	fpc->moveContender(fys::arena::HexagonSide::Orientation::A_N, true);
+	teamMember1->moveTeamMember(fys::arena::HexagonSide::Orientation::A_N, true);
+	teamMember2->moveTeamMember(fys::arena::HexagonSide::Orientation::A_N, true);
 
-    apt.addPartyTeam(std::move(pt));
+	apt.addPartyTeam(std::move(pt));
 
-    SECTION("Test initialization") {
-        REQUIRE(153 == fpc->accessStatus().life.current);
-        REQUIRE(8 == pc.getFightingContender(0)->accessStatus().initialSpeed);
-        REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.current);
-        REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.total);
-        REQUIRE(100 == pc.getFightingContender(0)->accessStatus().magicPoint.total);
-        REQUIRE(100 == pc.getFightingContender(0)->accessStatus().magicPoint.total);
-    }
+	SECTION("Test initialization") {
+		REQUIRE(153 == fpc->accessStatus().life.current);
+		REQUIRE(8 == pc.getFightingContender(0)->accessStatus().initialSpeed);
+		REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.current);
+		REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.total);
+		REQUIRE(100 == pc.getFightingContender(0)->accessStatus().magicPoint.total);
+		REQUIRE(100 == pc.getFightingContender(0)->accessStatus().magicPoint.total);
+	}
 
-    SECTION("Test Enemy&Attack selection") {
-        fpc->accessStatus().life.current = 16;
-        fpc->accessStatus().life.total = 100;
-        teamMember1->accessStatus().life.current = 10;
-        teamMember1->accessStatus().life.total = 100;
-        teamMember2->accessStatus().life.current = 90;
-        teamMember2->accessStatus().life.total = 110;
+	SECTION("Test Enemy&Attack selection") {
+		fpc->accessStatus().life.current = 16;
+		fpc->accessStatus().life.total = 100;
+		teamMember1->accessStatus().life.current = 10;
+		teamMember1->accessStatus().life.total = 100;
+		teamMember2->accessStatus().life.current = 90;
+		teamMember2->accessStatus().life.total = 110;
 
-        fys::arena::data::PriorityElem e { 0, 1, true };
+		fys::arena::data::PriorityElem e{0, 1, true};
 
-        SECTION("Test Action selection") {
-            fpc->accessStatus().life.current = 100;
-            fpc->accessStatus().life.total = 100;
-            fpc->accessStatus().magicPoint.total = 0;
+		SECTION("Test Action selection") {
+			fpc->accessStatus().life.current = 100;
+			fpc->accessStatus().life.total = 100;
+			fpc->accessStatus().magicPoint.total = 0;
 
-            REQUIRE(100 == fpc->accessStatus().life.current);
-            REQUIRE(100 == fpc->accessStatus().magicPoint.current);
-            pc.executeContenderAction(e);
+			REQUIRE(100 == fpc->accessStatus().life.current);
+			REQUIRE(100 == fpc->accessStatus().magicPoint.current);
+			pc.executeContenderAction(e);
 
-            REQUIRE(42 == fpc->accessStatus().magicPoint.current);          // Sleeping set the magicPoint to 42
+			REQUIRE(42 == fpc->accessStatus().magicPoint.current);          // Sleeping set the magicPoint to 42
 
 
-        } // End section : Test baseAttack selection
+		} // End section : Test baseAttack selection
 
-        SECTION("Test Action Selection BaseAttack") {
-            teamMember1->accessStatus().life.current = 10;
-            teamMember1->accessStatus().life.total = 100;
+		SECTION("Test Action Selection BaseAttack") {
+			teamMember1->accessStatus().life.current = 10;
+			teamMember1->accessStatus().life.total = 100;
 
-            REQUIRE(16 == fpc->accessStatus().life.current);    // 16 < ( 50% of 100hp) so baseAttack is decided (50 damage)
-            pc.executeContenderAction(e);
+			REQUIRE(16 == fpc->accessStatus().life.current);    // 16 < ( 50% of 100hp) so baseAttack is decided (50 damage)
+			pc.executeContenderAction(e);
 
-            REQUIRE(0 == teamMember1->accessStatus().life.current); // lower life opponent selected (teamMember1 with 10 life point)
-            REQUIRE(teamMember1->accessStatus().life.isDead());
+			REQUIRE(0 == teamMember1->accessStatus().life.current); // lower life opponent selected (teamMember1 with 10 life point)
+			REQUIRE(teamMember1->accessStatus().life.isDead());
 
-        } // Test Action Selection BaseAttack
+		} // Test Action Selection BaseAttack
 
-        SECTION("Test Selection Change of enemy") {
-            teamMember2->accessStatus().life.current = 9;       // teamMember2.life.current < teamMember1.life.current
+		SECTION("Test Selection Change of enemy") {
+			teamMember2->accessStatus().life.current = 9;       // teamMember2.life.current < teamMember1.life.current
 
-            REQUIRE(16 == fpc->accessStatus().life.current);    // 16 < ( 50% of 100hp) so baseAttack is decided (50 damage)
-            pc.executeContenderAction(e);
+			REQUIRE(16 == fpc->accessStatus().life.current);    // 16 < ( 50% of 100hp) so baseAttack is decided (50 damage)
+			pc.executeContenderAction(e);
 
-            REQUIRE(0 == teamMember2->accessStatus().life.current); // lower life opponent selected (teamMember1 with 10 life point)
-            REQUIRE(teamMember2->accessStatus().life.isDead());
+			REQUIRE(0 == teamMember2->accessStatus().life.current); // lower life opponent selected (teamMember1 with 10 life point)
+			REQUIRE(teamMember2->accessStatus().life.isDead());
 
-        } // Test Action Selection BaseAttack
+		} // Test Action Selection BaseAttack
 
-    } // End section : Test Enemy selection
+	} // End section : Test Enemy selection
 
-    SECTION("Test network message") {
-        auto fseamMock = FSeam::getDefault<fys::arena::ConnectionHandler>();
+	SECTION("Test network message") {
+		auto fseamMock = FSeam::getDefault<fys::arena::ConnectionHandler>();
 
 //         fseamMock->expectArg<FSeam::ConnectionHandler::sendMessageToDispatcher>(
 //             FSeam::CustomComparator<zmq::multipart_t &>([](auto && test) {
 //                 // verify multipart message contains the selection of the weakest enemy (teamMember1)
 //                 return true;
 //             }), FSeam::VerifyCompare{1});
-        // REQUIRE(fseamMock->verify(FSeam::ConnectionHandler::sendMessageToDispatcher::NAME, 1));
+		// REQUIRE(fseamMock->verify(FSeam::ConnectionHandler::sendMessageToDispatcher::NAME, 1));
 
-        FSeam::MockVerifier::cleanUp();
-        std::filesystem::remove_all(baseCache);
+		FSeam::MockVerifier::cleanUp();
+		std::filesystem::remove_all(baseCache);
 
-    } // End of Section : Test network message
+	} // End of Section : Test network message
 
 } // End TestCase : Test Sampy

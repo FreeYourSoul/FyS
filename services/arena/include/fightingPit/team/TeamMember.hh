@@ -33,95 +33,105 @@
 
 // forward declarations
 namespace chaiscript {
-    class ChaiScript;
+class ChaiScript;
 }
 namespace fys::arena {
-    class AllyPartyTeams;
-    class PitContenders;
+class AllyPartyTeams;
+class PitContenders;
 }
 
 namespace fys::arena {
 
-    struct ContenderTargetId {
-        uint v;
-    };
-    struct ContendersTargetsIds {
-        std::vector<uint> v;
-    };
+struct ContenderTargetId {
+    uint v;
+};
+struct ContendersTargetsIds {
+    std::vector<uint> v;
+};
+struct AllyTargetId {
+    uint v;
+};
+struct AlliesTargetsIds {
+    std::vector<uint> v;
+};
 
-    struct AllyTargetId {
-        uint v;
-    };
-    struct AlliesTargetsIds {
-        std::vector<uint> v;
-    };
+/**
+ *
+ * - the target, optional as every action doesn't require target.
+ *   Can be a specific id (of an ally or a contender depending on the action)
+ *   Can be a side (as some action can target a whole side)
+ */
+using TargetType = std::variant<
+        ContenderTargetId,
+        ContendersTargetsIds,
+        AllyTargetId,
+        AlliesTargetsIds,
+        HexagonSide::Orientation>;
+/**
+ * Pending actions of a team member are defined by
+ * - the id of the action (mapped as index to the vector TeamMember::_actionDoable)
+ * - a target type defined in the alias fys::arena::TargetType
+ */
+struct PendingAction {
+    uint idAction{};
+    std::optional<TargetType> target;
+};
+
+/**
+ *
+ */
+class TeamMember {
+
+public:
+    TeamMember(std::string userName, std::string teamMemberName)
+            :
+            _userName(std::move(userName)), _name(std::move(teamMemberName)) { }
+
+    void executeAction(AllyPartyTeams& apt, PitContenders& pc, std::unique_ptr<chaiscript::ChaiScript>& chaiPtr);
+    void addPendingAction(const std::string& actionName);
+
+    void moveTeamMember(HexagonSide::Orientation destination, bool bypassCheck = false);
+    void moveTeamMember(data::MoveDirection rightOrLeft);
 
     /**
-     *
-     * - the target, optional as every action doesn't require target.
-     *   Can be a specific id (of an ally or a contender depending on the action)
-     *   Can be a side (as some action can target a whole side)
+     * @brief called by #fys::arena::AllyPartyTeam to set the id of the team member
      */
-    using TargetType = std::variant<
-            ContenderTargetId,
-            ContendersTargetsIds,
-            AllyTargetId,
-            AlliesTargetsIds,
-            HexagonSide::Orientation>;
-    /**
-     * Pending actions of a team member are defined by
-     * - the id of the action (mapped as index to the vector TeamMember::_actionDoable)
-     * - a target type defined in the alias fys::arena::TargetType
-     */
-    struct PendingAction {
-        uint idAction {};
-        std::optional<TargetType> target;
-    };
+    void
+    setId(unsigned id) { _id = id; }
+    void
+    addDoableAction(std::string doable, uint level) { _actionsDoable.emplace_back(std::move(doable), level); }
 
-    /**
-     *
-     */
-    class TeamMember {
+    [[nodiscard]] HexagonSide::Orientation
+    getHexagonSideOrient() const { return (*_side).second; }
+    [[nodiscard]] data::Status&
+    accessStatus() { return _status; }
+    [[nodiscard]] const HexagonSide&
+    getHexagonSide() const { return _side; }
+    [[nodiscard]] const data::Status&
+    getStatus() const { return _status; }
+    [[nodiscard]] const std::string&
+    getUserName() const { return _userName; }
+    [[nodiscard]] const std::string&
+    getName() const { return _name; }
+    [[nodiscard]] const std::vector<std::pair<std::string, uint>>&
+    getActionsDoable() const { return _actionsDoable; }
+    [[nodiscard]] unsigned
+    getId() const { return _id; }
 
-    public:
-        TeamMember(std::string userName, std::string teamMemberName) :
-                _userName(std::move(userName)), _name(std::move(teamMemberName)) {}
+private:
+    std::string _userName;
+    std::string _name;
+    HexagonSide _side;
+    unsigned _id{};
+    data::Status _status;
 
-        void executeAction(AllyPartyTeams & apt, PitContenders & pc, std::unique_ptr<chaiscript::ChaiScript> & chaiPtr);
-        void addPendingAction(const std::string & actionName);
+    // action name with level of action
+    std::vector<std::pair<std::string, uint>> _actionsDoable;
+    fys::common::SizedQueue<PendingAction> _pendingActions;
 
-        void moveTeamMember(HexagonSide::Orientation destination, bool bypassCheck = false);
-        void moveTeamMember(data::MoveDirection rightOrLeft);
+};
 
-        /**
-         * @brief called by #fys::arena::AllyPartyTeam to set the id of the team member
-         */
-        void setId(unsigned id) { _id = id; }
-        void addDoableAction(std::string doable, uint level) { _actionsDoable.emplace_back(std::move(doable), level); }
-
-        [[nodiscard]] HexagonSide::Orientation getHexagonSideOrient() const { return (*_side).second; }
-        [[nodiscard]] data::Status &accessStatus() { return _status; }
-        [[nodiscard]] const HexagonSide &getHexagonSide() const { return _side; }
-        [[nodiscard]] const data::Status &getStatus() const { return _status; }
-        [[nodiscard]] const std::string &getUserName() const { return _userName; }
-        [[nodiscard]] const std::string &getName() const { return _name; }
-        [[nodiscard]] const std::vector<std::pair<std::string, uint>> &getActionsDoable() const { return _actionsDoable; }
-        [[nodiscard]] unsigned getId() const { return _id; }
-
-    private:
-        std::string _userName;
-        std::string _name;
-        HexagonSide _side;
-        unsigned _id {};
-        data::Status _status;
-
-        // action name with level of action
-        std::vector<std::pair<std::string, uint>> _actionsDoable;
-        fys::common::SizedQueue<PendingAction> _pendingActions;
-
-    };
-
-    using TeamMemberSPtr = std::shared_ptr<TeamMember>;
+using TeamMemberSPtr = std::shared_ptr<TeamMember>;
 
 }
 
