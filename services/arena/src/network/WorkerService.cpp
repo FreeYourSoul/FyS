@@ -69,19 +69,23 @@ WorkerService::addFightingPit(std::unique_ptr<FightingPit> fp)
 }
 
 void
-WorkerService::playerJoinFightingPit(std::string userName, unsigned fightingPitId)
+WorkerService::playerJoinFightingPit(std::string userName, unsigned fightingPitId, std::unique_ptr<PartyTeam> pt)
 {
-
+	if (auto it = _arenaInstances.find(fightingPitId);
+			(it != _arenaInstances.end())) {
+		it->second->addPartyTeam(std::move(pt));
+		// todo get party team of the player and add it
+	}
 }
 
 std::optional<std::reference_wrapper<FightingPit>>
-WorkerService::getAuthenticatedPlayerFightingPit(const std::string& name, const std::string& token, unsigned fightingArenaId)
+WorkerService::getAuthenticatedPlayerFightingPit(const std::string& name, const std::string& token, unsigned fightingPitId)
 {
-	if (auto it = _arenaInstances.find(fightingArenaId);
+	if (auto it = _arenaInstances.find(fightingPitId);
 			(it != _arenaInstances.end() && it->second->isPlayerParticipant(name, token))) {
 		return *it->second;
 	}
-	SPDLOG_WARN("Request received from {}:{} for arena id {}, but arena isn't defined", name, token, fightingArenaId);
+	SPDLOG_WARN("Request received from {}:{} for arena id {}, but arena isn't defined", name, token, fightingPitId);
 	return std::nullopt;
 }
 

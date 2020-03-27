@@ -36,10 +36,10 @@ class FightingPit;
 namespace fys::arena {
 
 /**
- * @brief Manage the fighting pits :
- *   - generate a fighting pit
- *   - assign an ID to it
- *   - assign a dedicated thread to it
+ * Manage the fighting pits :
+ *   - Generate a fighting pit
+ *   - Assign an ID to it
+ *   - Assign a dedicated thread to it
  *
  * Fighting pit are created by the WorkerService using the FightingPitAnnouncer as builder in order to
  * ensure that the fightingpit is ready to host a battle, and then start the fighting pit in a dedicated
@@ -50,8 +50,8 @@ namespace fys::arena {
  * FightingPit for specific players (the map _idOnArenaId being used to register which player is in which
  * FightingPit).
  *
- * @see FightingPitAnnouncer
- * @see FightingPit
+ * @see fys::arena::FightingPitAnnouncer
+ * @see fys::arena::FightingPit
  */
 class WorkerService {
 public:
@@ -62,6 +62,7 @@ public:
     void startFightingPitsThread();
 
     /**
+     * @memberof
      * @brief Bind the ArenaService for the player to connect directly to the Arena
      */
     void setupConnectionManager(const fys::arena::ArenaServerContext& ctx) noexcept;
@@ -81,8 +82,7 @@ public:
      * @param userName player name to join the fightingpit
      * @param fightingPitId
      */
-    void
-    playerJoinFightingPit(std::string userName, unsigned fightingPitId);
+    void playerJoinFightingPit(std::string userName, unsigned fightingPitId, std::unique_ptr<PartyTeam> pt);
 
     /**
      * Read on the router socket (connection with the players) and reply to them thanks to the zmq::router protocol
@@ -123,11 +123,11 @@ public:
      *
      * @param name player name
      * @param token authentication token
-     * @param fightingArenaId arena to check if the player is authenticated on
+     * @param fightingPitId arena to check if the player is authenticated on
      * @return A reference to the fighting pit if the player is authenticated on the given fightingPit, return nullopt otherwise
      */
     [[nodiscard]] std::optional<std::reference_wrapper<FightingPit>>
-    getAuthenticatedPlayerFightingPit(const std::string& name, const std::string& token, unsigned fightingArenaId);
+    getAuthenticatedPlayerFightingPit(const std::string& name, const std::string& token, unsigned fightingPitId);
 
     [[nodiscard]] const std::unique_ptr<FightingPit>&
     getFightingPitInstance(unsigned arenaId) const

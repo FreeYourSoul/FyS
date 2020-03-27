@@ -34,7 +34,7 @@ using account_ref = std::shared_ptr<account>;
 
 namespace fys::arena {
 class ArenaServerContext;
-class TeamMember;
+class PartyTeam;
 }
 
 namespace fys::network {
@@ -44,10 +44,12 @@ class DBConnector {
 public:
 	explicit DBConnector(const arena::ArenaServerContext& ctx);
 
-	std::vector<fys::arena::TeamMember>
-	retrieveTeamCharacters(const std::string& user);
-	std::vector<std::string>
-	retrieveAttacksKeys();
+	[[nodiscard]] std::unique_ptr<fys::arena::PartyTeam>
+	retrievePartyTeam(const std::string& user);
+
+private:
+	[[nodiscard]] std::vector<std::string>
+	retrieveAttacksKeys(const std::string& userName);
 
 private:
 	mariadb::account_ref _refDb;

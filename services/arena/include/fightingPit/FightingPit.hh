@@ -39,134 +39,137 @@
 
 // forward declarations
 namespace fys::arena {
-    class FightingContender;
+class FightingContender;
 
-    class PartyTeam;
+class PartyTeam;
 }
 
 namespace fys::arena {
-    class FightingPitAnnouncer;
+class FightingPitAnnouncer;
 
-    /**
-     * @brief A fighting pit represent a specific instance of a battle.
-     *
-     * A fightingpit is composed of:
-     *  - a layout (mapping of how the monsters/players are spread on the board)
-     *  - a PitContenders object managing all the monsters and their behaviours (scripting)
-     *  - a AllyPartyTeams object managing the players, each client has a PartyTeam (multiple party teams possible for
-     *    one AllyPartyTeams) and the PartyTeam is composed of TeamMember that are the actual characters spread on the
-     *    gaming board.
-     *  - The 18 instances of SideBattle
-     * 
-     * @see SideBattle
-     */
-    class FightingPit {
+/**
+ * @brief A fighting pit represent a specific instance of a battle.
+ *
+ * A fightingpit is composed of:
+ *  - a layout (mapping of how the monsters/players are spread on the board)
+ *  - a PitContenders object managing all the monsters and their behaviours (scripting)
+ *  - a AllyPartyTeams object managing the players, each client has a PartyTeam (multiple party teams possible for
+ *    one AllyPartyTeams) and the PartyTeam is composed of TeamMember that are the actual characters spread on the
+ *    gaming board.
+ *  - The 18 instances of SideBattle
+ *
+ * @see SideBattle
+ */
+class FightingPit {
 
-        friend class FightingPitAnnouncer;
+	friend class FightingPitAnnouncer;
 
-        enum Ending {
-            ON_HOLD,        // on hold mechanism for joining raid
-            NOT_FINISHED,    // on going
-            CONTENDER_WIN,
-            ALLY_WIN
-        };
+	enum Ending {
+		ON_HOLD,        // on hold mechanism for joining raid
+		NOT_FINISHED,    // on going
+		CONTENDER_WIN,
+		ALLY_WIN
+	};
 
-        struct AuthenticatedPlayer {
-            std::string name;
-            std::string token;
-        };
+	struct AuthenticatedPlayer {
+		std::string name;
+		std::string token;
+	};
 
-    public:
-        // used as a wrong id when a fighting pit is wrongly generated
-        static constexpr unsigned CREATION_ERROR = 0;
+public:
+	// used as a wrong id when a fighting pit is wrongly generated
+	static constexpr unsigned CREATION_ERROR = 0;
 
-        enum Level : uint {
-            EASY = 0,
-            MEDIUM = 1,
-            HARD = 2,
-            NONE
-        };
+	enum Level : uint {
+		EASY = 0,
+		MEDIUM = 1,
+		HARD = 2,
+		NONE
+	};
 
-        explicit FightingPit(std::string creatorUserName, Level levelFightingPit);
+	explicit FightingPit(std::string creatorUserName, Level levelFightingPit);
 
-        /**
-         *
-         * @param now
-         */
-        void continueBattle(const std::chrono::system_clock::time_point &now);
+	/**
+	 *
+	 * @param now
+	 */
+	void continueBattle(const std::chrono::system_clock::time_point& now);
 
-        /**
-         *
-         * @param userName
-         * @param idMember
-         */
-        void forwardMessageToTeamMember(const std::string &userName, unsigned int idMember);
+	/**
+	 *
+	 * @param userName
+	 * @param idMember
+	 */
+	void forwardMessageToTeamMember(const std::string& userName, unsigned int idMember);
 
-        /**
-         * Add an authenticated player in the fighting pit, the player authentication is not verified an thus must be
-         * verified beforehand.
-         * @param userName unique name of the player to add
-         * @param userToken token of the player to add
-         */
-        void addAuthenticatedUser(std::string userName, std::string userToken);
+	/**
+	 * Add an authenticated player in the fighting pit, the player authentication is not verified an thus must be
+	 * verified beforehand.
+	 * @param userName unique name of the player to add
+	 * @param userToken token of the player to add
+	 */
+	void addAuthenticatedUser(std::string userName, std::string userToken);
 
-        /**
-         * Used to add a new party team (incoming player in the fighting pit)
-         * @param pt party team to add
-         */
-        void addPartyTeam(std::unique_ptr<PartyTeam> pt);
+	/**
+	 * Used to add a new party team (incoming player in the fighting pit)
+	 * @param pt party team to add
+	 */
+	void addPartyTeam(std::unique_ptr<PartyTeam> pt);
 
-        /**
-         * Check if given player (defined by name/token) is authenticated
-         * @param name unique name of the player to check
-         * @param token token of the player to check
-         * @return true if the player is authenticated, false otherwise
-         */
-        [[nodiscard]] bool
-        isPlayerParticipant(const std::string &name, const std::string &token) const;
+	/**
+	 * Check if given player (defined by name/token) is authenticated
+	 * @param name unique name of the player to check
+	 * @param token token of the player to check
+	 * @return true if the player is authenticated, false otherwise
+	 */
+	[[nodiscard]] bool
+	isPlayerParticipant(const std::string& name, const std::string& token) const;
 
-        [[nodiscard]] const std::unique_ptr<chaiscript::ChaiScript> &
-        getChaiPtr() const { return _chaiPtr; }
+	[[nodiscard]] const std::unique_ptr<chaiscript::ChaiScript>&
+	getChaiPtr() const { return _chaiPtr; }
 
-        void setArenaId(unsigned arenaId) { _arenaId = arenaId; }
+	[[nodiscard]] unsigned
+	getId() const { return _arenaId; }
 
-    private:
-        /**
-         * Check if the fight has started, if it has check if the fight is finished (winner determined)
-         * If ally wins, a generation of the loot is made and returned to the clients
-         * If enemy wins, a notification is sent to players
-         * @return true if the fight has been terminated, false otherwise
-         */
-        [[nodiscard]] bool
-        checkEndStatusFightingPit();
+	void setArenaId(unsigned arenaId) { _arenaId = arenaId; }
 
-        void addContender(const std::shared_ptr<FightingContender> &fc) { _contenders.addContender(fc); }
+private:
+	/**
+	 * Check if the fight has started, if it has check if the fight is finished (winner determined)
+	 * If ally wins, a generation of the loot is made and returned to the clients
+	 * If enemy wins, a notification is sent to players
+	 * @return true if the fight has been terminated, false otherwise
+	 */
+	[[nodiscard]] bool
+	checkEndStatusFightingPit();
 
-        void initializePartyTeam(AllyPartyTeams &&allyPartyTeams);
+	void addContender(const std::shared_ptr<FightingContender>& fc) { _contenders.addContender(fc); }
 
-        void initializeSideBattles();
+	void initializePartyTeam(AllyPartyTeams&& allyPartyTeams);
 
-        void initializePriorityListInSidesBattle();
+	void initializeSideBattles();
 
-    private:
-        Ending _end = ON_HOLD;
-        Level _levelFightingPit;
-        std::chrono::milliseconds _timeInterlude;
-        PitContenders _contenders;
-        AllyPartyTeams _partyTeams;
+	void initializePriorityListInSidesBattle();
 
-        // mapping of the contenders/NPC with the layout of the FightingPit
-        FightingPitLayout _layoutMapping;
+private:
+	Ending _end = ON_HOLD;
+	Level _levelFightingPit;
+	std::chrono::milliseconds _timeInterlude;
+	PitContenders _contenders;
+	AllyPartyTeams _partyTeams;
 
-        std::string _creatorUserName; // useless ?
-        unsigned _arenaId;         // useless ?
+	// mapping of the contenders/NPC with the layout of the FightingPit
+	FightingPitLayout _layoutMapping;
 
-        std::vector<AuthenticatedPlayer> _authenticatedPlayers;
+	std::string _creatorUserName; // useless ?
+	unsigned _arenaId;
 
-        std::unique_ptr<chaiscript::ChaiScript> _chaiPtr;
-        std::vector<SideBattle> _sideBattles;
+	std::vector<AuthenticatedPlayer> _authenticatedPlayers;
 
-    };
+	std::unique_ptr<chaiscript::ChaiScript> _chaiPtr;
+	std::vector<SideBattle> _sideBattles;
+
+};
 
 }
 

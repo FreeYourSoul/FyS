@@ -30,6 +30,10 @@
 #include <ConnectionHandler.hh>
 #include <CmlCopy.hh>
 
+namespace fys::network {
+class DBConnector;
+}
+
 namespace fys::arena {
 
 class ArenaServerContext;
@@ -59,7 +63,7 @@ struct AwaitingPlayerArena {
     // in case of generation, data of the fighting pit to generate
     std::optional<AwaitingArena> gen;
 
-    bool
+    [[nodiscard]] bool
     hasToBeGenerated() const
     {
         return fightingPitId == 0 && static_cast<bool>(gen);
@@ -126,7 +130,12 @@ private:
 private:
     std::reference_wrapper<const ArenaServerContext> _ctx;
     cache::CmlCopy _cache;
+
+    // Manage connections
+	std::unique_ptr<network::DBConnector> _dbConnector;
     ConnectionHandler _connectionHandler;
+
+    // Manage fighting pits
     WorkerService _workerService;
 
     // map of token on awaiting arena

@@ -103,6 +103,7 @@ public:
 
 	void enforceAmbush(bool ambushEnforced) noexcept { _isAmbushEnforced = ambushEnforced; }
 	void setDifficulty(FightingPit::Level level) noexcept { _difficulty = level; }
+	void setCreatorTeamParty(std::unique_ptr<PartyTeam> pt) { _creatorPartyTeam = std::move(pt); }
 
 	// for testing validation purpose
 	[[nodiscard]] static const AllyPartyTeams&
@@ -121,25 +122,16 @@ public:
 	getArenaId(const std::unique_ptr<FightingPit>& fp) { return fp->_arenaId; }
 
 private:
-	/**
-	 * Generate the party team skeleton and register the first players characters in the fighting pit
-	 * next incoming fighters in the fighting pit will directly use the method see also FightingPit::addPartyTeam()
-	 *
-	 * @return newly generated AllyPartyTeams teams with the creator already registered
-	 */
-	[[nodiscard]] inline fys::arena::AllyPartyTeams
-	generateAllyPartyTeam();
-
 	[[nodiscard]] inline const std::string&
 	getScriptContentString(std::string name, const EncounterContext::EncounterDesc& desc);
-
-	void generateContenders(FightingPit& fp, const EncounterContext& ctx, const std::string& wsId);
 
 	[[nodiscard]] bool
 	isScriptedEncounter() const { return _encounterType != EncounterType::RANDOM; }
 
 	[[nodiscard]] bool
 	isRandomEncounter() const { return _encounterType == EncounterType::RANDOM; }
+
+	void generateContenders(FightingPit& fp, const EncounterContext& ctx, const std::string& wsId);
 
 private:
 	cache::Cml& _cache;
@@ -160,6 +152,7 @@ private:
 
 	std::string _creatorUserName;
 	std::string _creatorUserToken;
+	std::unique_ptr<PartyTeam> _creatorPartyTeam;
 
 	//TODO add the common cache retriever
 

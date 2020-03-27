@@ -46,7 +46,7 @@ public:
     [[nodiscard]] const data::PriorityElem&
     getCurrent() const { return _currentPrio; }
 
-    [[nodiscard]] data::PriorityElem
+    data::PriorityElem
     getNext();
 
 private:

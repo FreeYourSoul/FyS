@@ -106,6 +106,7 @@ TEST_CASE("FightingPitAnnouncer test", "[service][arena]")
 			FightingPitAnnouncer fpa(cml);
 			fpa.setCreatorUserName(" ");
 			fpa.setCreatorUserToken(" ");
+			fpa.setCreatorTeamParty(getPartyTeam(" "));
 			fpa.setDifficulty(FightingPit::EASY);
 			fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
 			auto fp = fpa.buildFightingPit(ctx, "WS00");
@@ -126,6 +127,7 @@ TEST_CASE("FightingPitAnnouncer test", "[service][arena]")
 			FightingPitAnnouncer fpa(cml);
 			fpa.setCreatorUserToken(" ");
 			fpa.setCreatorUserName(" ");
+			fpa.setCreatorTeamParty(getPartyTeam(" "));
 			fpa.setDifficulty(FightingPit::MEDIUM);
 			fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
 			auto fp = fpa.buildFightingPit(ctx, "WS00");
@@ -150,6 +152,7 @@ TEST_CASE("FightingPitAnnouncer test", "[service][arena]")
 			FightingPitAnnouncer fpa(cml);
 			fpa.setCreatorUserToken(" ");
 			fpa.setCreatorUserName(" ");
+			fpa.setCreatorTeamParty(getPartyTeam(" "));
 			fpa.setDifficulty(FightingPit::HARD);
 			fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
 			auto fp = fpa.buildFightingPit(ctx, "WS00");
@@ -194,6 +197,7 @@ TEST_CASE("FightingPitAnnouncer test", "[service][arena]")
 			FightingPitAnnouncer fpa(cml);
 			fpa.setCreatorUserToken(" ");
 			fpa.setCreatorUserName(" ");
+			fpa.setCreatorTeamParty(getPartyTeam(" "));
 			fpa.setDifficulty(FightingPit::EASY);
 			fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
 			auto fp = fpa.buildFightingPit(ctx, "WS00");
