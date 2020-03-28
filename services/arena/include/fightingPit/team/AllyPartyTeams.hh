@@ -45,9 +45,6 @@ using ComparatorSelection = std::function<bool(std::shared_ptr<T>, std::shared_p
 class AllyPartyTeams {
 
 public:
-    void
-    addPartyTeam(std::unique_ptr<PartyTeam>&& team);
-
     [[nodiscard]] std::shared_ptr<TeamMember>
     selectSuitableMember(ComparatorSelection<TeamMember> comp);
 
@@ -78,7 +75,11 @@ public:
     [[nodiscard]] unsigned
     allyNumberOnSide(HexagonSide::Orientation side) const;
 
+    [[nodiscard]] const PartyTeam&
+    getPartyTeamOfPlayer(const std::string& userName) const;
+
     void executeAllyAction(const data::PriorityElem& ally, PitContenders& pc, std::unique_ptr<chaiscript::ChaiScript>& chaiPtr);
+	void addPartyTeam(std::unique_ptr<PartyTeam>&& team);
 
 private:
     std::vector<std::unique_ptr<PartyTeam>> _partyTeams;

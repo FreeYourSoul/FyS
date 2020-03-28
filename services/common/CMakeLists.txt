@@ -14,6 +14,7 @@ set(FLAT_BUFFER_SCHEMAS
         ${FLATBUFFER_SCHEMA_DIR}/arena/ArenaServerValidateAuth.fbs
         ${FLATBUFFER_SCHEMA_DIR}/arena/ArenaServerAuth.fbs
         ${FLATBUFFER_SCHEMA_DIR}/arena/FightingPitEncounter.fbs
+        ${FLATBUFFER_SCHEMA_DIR}/arena/PartyTeamStatus.fbs
         ${FLATBUFFER_SCHEMA_DIR}/ClientCom.fbs
         ${FLATBUFFER_SCHEMA_DIR}/Notifications.fbs
         ${FLATBUFFER_SCHEMA_DIR}/WSAction.fbs)
@@ -32,6 +33,7 @@ endif ()
 
 set(COMMON_SRCS
         ${CMAKE_CURRENT_LIST_DIR}/flatbuffer/includes/FightingPitEncounter_generated.h
+        ${CMAKE_CURRENT_LIST_DIR}/flatbuffer/includes/PartyTeamStatus_generated.h
         ${CMAKE_CURRENT_LIST_DIR}/flatbuffer/includes/ArenaFightAction_generated.h
         ${CMAKE_CURRENT_LIST_DIR}/flatbuffer/includes/ArenaServerValidateAuth_generated.h
         ${CMAKE_CURRENT_LIST_DIR}/flatbuffer/includes/ArenaServerAuth_generated.h

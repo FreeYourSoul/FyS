@@ -1,0 +1,42 @@
+namespace fys.fb;
+
+enum SideOrient : byte {
+    A_N = 0,
+    A_NE,
+    A_SE,
+    A_S,
+    A_SW,
+    A_NW,
+    B_N,
+    B_NE,
+    B_SE,
+    B_S,
+    B_SW,
+    B_NW,
+    C_N,
+    C_NE,
+    C_SE,
+    C_S,
+    C_SW,
+    C_NW
+}
+
+table MemberStatus {
+    memberName:string;
+
+    current_life:uint;
+    total_life:uint;
+    current_mp:uint;
+    total_mp:uint;
+
+    side:SideOrient;
+
+    attacks:[string];
+}
+
+table PartyTeamStatus {
+    user_name:string;
+    members:[MemberStatus];
+}
+
+root_type PartyTeamStatus;

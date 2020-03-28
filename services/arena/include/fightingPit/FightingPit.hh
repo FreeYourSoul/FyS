@@ -125,6 +125,9 @@ public:
 	[[nodiscard]] bool
 	isPlayerParticipant(const std::string& name, const std::string& token) const;
 
+	[[nodiscard]] const PartyTeam&
+	getPartyTeamOfPlayer(const std::string& userName) const { return _partyTeams.getPartyTeamOfPlayer(userName); }
+
 	[[nodiscard]] const std::unique_ptr<chaiscript::ChaiScript>&
 	getChaiPtr() const { return _chaiPtr; }
 

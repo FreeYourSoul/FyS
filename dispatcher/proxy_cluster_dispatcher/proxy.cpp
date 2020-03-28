@@ -57,7 +57,7 @@ int main (int argc, char *argv[])
         }
     });
 
-    zmq::proxy(frontend, backend, listener);
+    zmq::proxy(zmq::socket_ref(frontend), zmq::socket_ref(backend), zmq::socket_ref(listener));
     t.join();
     return 0;
 }

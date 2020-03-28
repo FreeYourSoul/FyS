@@ -169,4 +169,16 @@ AllyPartyTeams::getMembersBySide(HexagonSide::Orientation side) const
     return ret;
 }
 
+const PartyTeam&
+AllyPartyTeams::getPartyTeamOfPlayer(const std::string& userName) const
+{
+	auto it = std::find_if(_partyTeams.begin(), _partyTeams.end(), [&userName](const auto& partyTeam){
+		return userName == partyTeam->getUserName();
+	});
+	if (it == _partyTeams.end()) {
+		throw std::runtime_error(fmt::format("GetPartyTeamOfPlayer called on a non-existing player of name {}", userName));
+	}
+	return **it;
+}
+
 }

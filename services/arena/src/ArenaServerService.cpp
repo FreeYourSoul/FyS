@@ -109,25 +109,25 @@ ArenaServerService::runServerLoop() noexcept
 				// Authentication handler
 				[this](zmq::message_t&& identityPlayer, zmq::message_t&& authMessage) {
 					const auto* binary = fys::fb::GetArenaServerValidateAuth(authMessage.data());
-					std::string userName = binary->user_name()->str();
 					const std::string tokenAuth = binary->token_auth()->str();
+					const std::string userName = binary->user_name()->str();
 					const auto &[isAwaited, playerAwaitedIt] = isPlayerAwaited(userName, tokenAuth, binary->fighting_pit_id());
-					unsigned fightingPitId = playerAwaitedIt->second.fightingPitId;
-					zmq::multipart_t response;
 
-					response.add(std::move(identityPlayer));
 					if (!isAwaited) {
 						spdlog::warn("Player {} tried to authenticate on Arena server {} without being awaited.",
 								userName, _ctx.get().getServerCode());
 						return;
 					}
+					unsigned fightingPitId = playerAwaitedIt->second.fightingPitId;
+
 					if (playerAwaitedIt->second.hasToBeGenerated())
 						fightingPitId = createNewFightingPit(playerAwaitedIt);
 					else {
 						auto pt = _dbConnector->retrievePartyTeam(userName);
-						_workerService.playerJoinFightingPit(std::move(userName), fightingPitId, std::move(pt));
+						_workerService.playerJoinFightingPit(fightingPitId, std::move(pt));
 					}
-//                    _workerService.broadCastNewArrivingTeam(fightingPitId);
+					_workerService.addPlayerIdentifier(fightingPitId, userName, identityPlayer.str());
+					_workerService.broadCastNewArrivingTeam(fightingPitId, userName);
 				},
 
 				// InGame handler
@@ -140,11 +140,13 @@ ArenaServerService::runServerLoop() noexcept
 							authFrame->token_auth()->str(),
 							authFrame->fighting_pit_id());
 
-					if (fp) {
-						unsigned idMember = 0;
-						// todo create an action message to forward
-						fp->get().forwardMessageToTeamMember(authFrame->user_name()->str(), idMember);
+					if (!fp) {
+						spdlog::warn("Player {}:{} is not authenticated.", authFrame->user_name()->str(), authFrame->token_auth()->str());
+						return;
 					}
+					unsigned idMember = 0;
+					// todo create an action message to forward
+					fp->get().forwardMessageToTeamMember(authFrame->user_name()->str(), idMember);
 				}
 		);
 	}
@@ -191,8 +193,7 @@ ArenaServerService::createNewFightingPit(AwaitingPlayerArenaIt it)
 	fpa.setCreatorTeamParty(_dbConnector->retrievePartyTeam(it->second.namePlayer));
 	unsigned id = _workerService.addFightingPit(
 			fpa.buildFightingPit(_ctx.get().getEncounterContext(), it->second.gen->serverCode));
-	// remove player from awaited player
-	_awaitingArena.erase(it);
+	_awaitingArena.erase(it); // remove player from awaited player
 	return id;
 }
 
