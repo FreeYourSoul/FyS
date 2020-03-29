@@ -26,13 +26,10 @@
 
 #include <unordered_map>
 #include <optional>
+#include <network/DBConnector.hh>
 #include <network/WorkerService.hh>
 #include <ConnectionHandler.hh>
 #include <CmlCopy.hh>
-
-namespace fys::network {
-class DBConnector;
-}
 
 namespace fys::arena {
 

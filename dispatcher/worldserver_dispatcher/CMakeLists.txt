@@ -1,7 +1,14 @@
-cmake_minimum_required( VERSION 3.6 )
-project(worldserver_dispatcher CXX)
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_COMPILER /usr/bin/g++)
+cmake_minimum_required( VERSION 3.6...3.15 )
+if(${CMAKE_VERSION} VERSION_LESS 3.15)
+    cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
+else()
+    cmake_policy(VERSION 3.15)
+endif()
+
+project(worldserver_dispatcher
+        VERSION 1.0
+        DESCRIPTION "WorldServer Dispatcher"
+        LANGUAGES CXX)
 
 find_package(nlohmann_json REQUIRED)
 
@@ -29,5 +36,9 @@ target_compile_options(worldserver_dispatcher PRIVATE -Wall -Wpedantic -Wextra -
 
 target_link_libraries(worldserver_dispatcher
         PRIVATE common_dispatcher nlohmann_json::nlohmann_json)
+
+set_target_properties(worldserver_dispatcher PROPERTIES
+        CXX_STANDARD 20
+        CMAKE_CXX_COMPILER /usr/bin/g++)
 
 message( STATUS Set Warnings flag : ${CMAKE_CXX_FLAGS})

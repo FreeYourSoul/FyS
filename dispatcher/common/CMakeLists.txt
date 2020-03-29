@@ -1,6 +1,9 @@
-cmake_minimum_required( VERSION 3.6 )
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_COMPILER /usr/bin/g++)
+cmake_minimum_required( VERSION 3.6...3.15 )
+if(${CMAKE_VERSION} VERSION_LESS 3.15)
+    cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
+else()
+    cmake_policy(VERSION 3.15)
+endif()
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
@@ -43,6 +46,11 @@ if (NOT TARGET common_dispatcher)
             ${COMMON_DIR}/src/core/SimpleProxy.cpp
             ${COMMON_DIR}/src/core/Dispatcher.cpp
             ${COMMON_DIR}/src/core/DispatcherConnectionManager.cpp)
+
+    set_target_properties(common_dispatcher PROPERTIES
+            CXX_STANDARD 20
+            CMAKE_CXX_COMPILER /usr/bin/g++)
+
     target_link_libraries(common_dispatcher
             PUBLIC cppzmq)
 endif ()

@@ -1,7 +1,14 @@
-cmake_minimum_required(VERSION 3.6)
-project(arena_service CXX)
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_COMPILER /usr/bin/g++)
+cmake_minimum_required( VERSION 3.6...3.15 )
+if(${CMAKE_VERSION} VERSION_LESS 3.15)
+    cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
+else()
+    cmake_policy(VERSION 3.15)
+endif()
+
+project(arena_service
+        VERSION 1.0
+        DESCRIPTION "Arena Service Server"
+        LANGUAGES CXX)
 
 include(${CMAKE_CURRENT_LIST_DIR}/../common/CMakeLists.txt)
 
@@ -15,15 +22,7 @@ if (CCACHE_FOUND)
     set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
 endif (CCACHE_FOUND)
 
-include_directories(
-        ${CMAKE_CURRENT_LIST_DIR}/include
-        ${CMAKE_CURRENT_LIST_DIR}/../../scripting_cache/cml/include
-        ${fmt_INCLUDE_DIRS}
-        ${COMMON_INCLUDE_DIR}
-        ${FLATBUFFER_INCLUDE_DIR}
-)
-
-add_executable(arena_service ${COMMON_SRCS}
+add_executable(arena_service
         ${CMAKE_CURRENT_LIST_DIR}/src/main.cpp
         ${CMAKE_CURRENT_LIST_DIR}/src/fightingPit/FightingPit.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/fightingPit/FightingPit.hh
@@ -65,7 +64,28 @@ add_executable(arena_service ${COMMON_SRCS}
         ${CMAKE_CURRENT_LIST_DIR}/include/ArenaServerService.hh)
 
 target_compile_definitions(arena_service PUBLIC -DCHAISCRIPT_NO_THREADS)
-target_link_libraries(arena_service cppzmq nlohmann_json::nlohmann_json fmt::fmt dl cml ${Flatbuffers_LIBRARIES})
+target_link_libraries(arena_service PRIVATE
+        common_service
+        cppzmq
+        nlohmann_json::nlohmann_json
+        fmt::fmt dl cml
+        ${Flatbuffers_LIBRARIES})
+
+set_target_properties(arena_service PROPERTIES
+        CXX_STANDARD 20
+        CMAKE_CXX_COMPILER /usr/bin/g++)
+
+set_property(TARGET arena_service PROPERTY INCLUDE_DIRECTORIES
+        ${CMAKE_CURRENT_LIST_DIR}/include
+        ${CMAKE_CURRENT_LIST_DIR}/../../scripting_cache/cml/include
+        ${fmt_INCLUDE_DIRS}
+        ${FLATBUFFER_INCLUDE_DIR})
+
+include(CheckIPOSupported)
+check_ipo_supported(RESULT result)
+if(result)
+    set_target_properties(arena_service PROPERTIES INTERPROCEDURAL_OPTIMIZATION TRUE)
+endif()
 
 target_compile_options(arena_service PRIVATE -O2 -fstack-protector-all -g -lfmt)
 target_compile_options(arena_service PRIVATE -Wall -Wpedantic -Wextra -Wno-deprecated-declarations)

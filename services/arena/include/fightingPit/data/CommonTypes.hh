@@ -90,14 +90,14 @@ enum MoveDirection {
 };
 
 enum Targeting {
-	SELF,
-	ENNEMY,
-	ALLY,
-	ENNEMIES,
-	ALLIES,
-	ALLY_AND_ENNEMY,
-	ALLY_OR_ENNEMY,
-	SIDE
+	SELF = 0,
+	ENNEMY = 1,
+	ALLY = 2,
+	ENNEMIES = 3,
+	ALLIES = 4,
+	ALLY_AND_ENNEMY = 5,
+	ALLY_OR_ENNEMY = 6,
+	SIDE = 7
 };
 
 } // namespace fys::arena::data

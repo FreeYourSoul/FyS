@@ -42,12 +42,15 @@ WorkerService::startFightingPitsThread()
 		using namespace std::chrono_literals;
 		while (true) {
 			auto now = std::chrono::system_clock::now();
-			for (auto &[id, fp] : _arenaInstances) {
-				fp->continueBattle(now);
+			if (!_arenaInstances.empty()) {
+				for (auto &[id, fp] : _arenaInstances) {
+					fp->continueBattle(now);
+				}
 			}
 			std::this_thread::sleep_for(1000ms); // todo sleep something smart
 		}
 	});
+	t.join();
 }
 
 unsigned
@@ -72,10 +75,10 @@ void
 WorkerService::playerJoinFightingPit(unsigned fightingPitId, std::unique_ptr<PartyTeam> pt)
 {
 	auto it = _arenaInstances.find(fightingPitId);
-	if (it != _arenaInstances.end()) [[likely]] {
+	if (it != _arenaInstances.end()) {
 		it->second->addPartyTeam(std::move(pt));
 	}
-	else [[unlikly]] {
+	else {
 		SPDLOG_ERROR("PartyTeam of user {} can't join fighting pit of id {}", pt->getUserName(), fightingPitId);
 	}
 }

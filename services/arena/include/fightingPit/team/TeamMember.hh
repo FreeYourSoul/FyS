@@ -43,16 +43,16 @@ class PitContenders;
 namespace fys::arena {
 
 struct ContenderTargetId {
-    uint v;
+	uint v;
 };
 struct ContendersTargetsIds {
-    std::vector<uint> v;
+	std::vector<uint> v;
 };
 struct AllyTargetId {
-    uint v;
+	uint v;
 };
 struct AlliesTargetsIds {
-    std::vector<uint> v;
+	std::vector<uint> v;
 };
 
 /**
@@ -62,19 +62,19 @@ struct AlliesTargetsIds {
  *   Can be a side (as some action can target a whole side)
  */
 using TargetType = std::variant<
-        ContenderTargetId,
-        ContendersTargetsIds,
-        AllyTargetId,
-        AlliesTargetsIds,
-        HexagonSide::Orientation>;
+		ContenderTargetId,
+		ContendersTargetsIds,
+		AllyTargetId,
+		AlliesTargetsIds,
+		HexagonSide::Orientation>;
 /**
  * Pending actions of a team member are defined by
  * - the id of the action (mapped as index to the vector TeamMember::_actionDoable)
  * - a target type defined in the alias fys::arena::TargetType
  */
 struct PendingAction {
-    uint idAction{};
-    std::optional<TargetType> target;
+	uint idAction{};
+	std::optional<TargetType> target;
 };
 
 /**
@@ -83,51 +83,56 @@ struct PendingAction {
 class TeamMember {
 
 public:
-    TeamMember(std::string userName, std::string teamMemberName)
-            :
-            _userName(std::move(userName)), _name(std::move(teamMemberName)) { }
+	TeamMember(std::string userName, std::string teamMemberName)
+			:
+			_userName(std::move(userName)), _name(std::move(teamMemberName)) { }
 
-    void executeAction(AllyPartyTeams& apt, PitContenders& pc, std::unique_ptr<chaiscript::ChaiScript>& chaiPtr);
-    void addPendingAction(const std::string& actionName);
+	void executeAction(AllyPartyTeams& apt, PitContenders& pc, std::unique_ptr<chaiscript::ChaiScript>& chaiPtr);
+	void addPendingAction(const std::string& actionName, TargetType target);
 
-    void moveTeamMember(HexagonSide::Orientation destination, bool bypassCheck = false);
-    void moveTeamMember(data::MoveDirection rightOrLeft);
+	void moveTeamMember(HexagonSide::Orientation destination, bool bypassCheck = false);
+	void moveTeamMember(data::MoveDirection rightOrLeft);
 
-    /**
-     * @brief called by #fys::arena::AllyPartyTeam to set the id of the team member
-     */
-    void
-    setId(unsigned id) { _id = id; }
-    void
-    addDoableAction(std::string doable, uint level) { _actionsDoable.emplace_back(std::move(doable), level); }
+	/**
+	 * @brief called by #fys::arena::AllyPartyTeam to set the id of the team member
+	 */
+	void setId(unsigned id) { _id = id; }
+	void addDoableAction(std::string doable, uint level) { _actionsDoable.emplace_back(std::move(doable), level); }
 
-    [[nodiscard]] HexagonSide::Orientation
-    getHexagonSideOrient() const { return (*_side).second; }
-    [[nodiscard]] data::Status&
-    accessStatus() { return _status; }
-    [[nodiscard]] const HexagonSide&
-    getHexagonSide() const { return _side; }
-    [[nodiscard]] const data::Status&
-    getStatus() const { return _status; }
-    [[nodiscard]] const std::string&
-    getUserName() const { return _userName; }
-    [[nodiscard]] const std::string&
-    getName() const { return _name; }
-    [[nodiscard]] const std::vector<std::pair<std::string, uint>>&
-    getActionsDoable() const { return _actionsDoable; }
-    [[nodiscard]] unsigned
-    getId() const { return _id; }
+	[[nodiscard]] HexagonSide::Orientation
+	getHexagonSideOrient() const { return (*_side).second; }
+
+	[[nodiscard]] data::Status&
+	accessStatus() { return _status; }
+
+	[[nodiscard]] const HexagonSide&
+	getHexagonSide() const { return _side; }
+
+	[[nodiscard]] const data::Status&
+	getStatus() const { return _status; }
+
+	[[nodiscard]] const std::string&
+	getUserName() const { return _userName; }
+
+	[[nodiscard]] const std::string&
+	getName() const { return _name; }
+
+	[[nodiscard]] const std::vector<std::pair<std::string, uint>>&
+	getActionsDoable() const { return _actionsDoable; }
+
+	[[nodiscard]] unsigned
+	getId() const { return _id; }
 
 private:
-    std::string _userName;
-    std::string _name;
-    HexagonSide _side;
-    unsigned _id{};
-    data::Status _status;
+	std::string _userName;
+	std::string _name;
+	HexagonSide _side;
+	unsigned _id{};
+	data::Status _status;
 
-    // action name with level of action
-    std::vector<std::pair<std::string, uint>> _actionsDoable;
-    fys::common::SizedQueue<PendingAction> _pendingActions;
+	// action name with level of action
+	std::vector<std::pair<std::string, uint>> _actionsDoable;
+	fys::common::SizedQueue<PendingAction> _pendingActions;
 
 };
 
