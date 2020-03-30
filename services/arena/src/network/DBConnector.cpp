@@ -92,7 +92,7 @@ DBConnector::retrievePartyTeam(const std::string& user)
 //            tm.setName(result->get_string("name"));
 //            res.emplace_back(std::move(tm));
 //        }
-	return nullptr;
+	return team;
 }
 
 std::vector<std::string>

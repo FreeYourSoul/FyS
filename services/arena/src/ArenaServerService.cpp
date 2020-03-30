@@ -88,6 +88,7 @@ ArenaServerService::ArenaServerService(const ArenaServerContext& ctx)
 void
 ArenaServerService::runServerLoop() noexcept
 {
+
 	SPDLOG_INFO("ArenaServer loop started");
 
 	_workerService.startFightingPitsThread();
@@ -96,12 +97,22 @@ ArenaServerService::runServerLoop() noexcept
 				[this](zmq::message_t&& identityWs, zmq::message_t&& worldServerMessage) {
 					const auto* binary = fys::fb::GetFightingPitEncounter(worldServerMessage.data());
 
+					AwaitingPlayerArena apa = createAwaitingPlayer(binary);
+
+					if (!apa.hasToBeGenerated() && !_workerService.doesFightingPitExist(apa.fightingPitId)) {
+						spdlog::error("Player {} can't be awaited to register on non-existing fighting pit {}",
+								apa.namePlayer, apa.fightingPitId);
+						return;
+					}
+
 					// register player incoming into arena instance with token given by worldserver used as key
 					const auto &[elem, playerHasBeenCorrectlyRegistered] = _awaitingArena.insert(
-							{binary->token_auth()->str(), createAwaitingPlayer(binary)}
+							{binary->token_auth()->str(), std::move(apa)}
 					);
-					if (playerHasBeenCorrectlyRegistered)
+					if (playerHasBeenCorrectlyRegistered) {
 						forwardReplyToDispatcherClient(std::move(identityWs), elem->second);
+						spdlog::info("A new awaited player is incoming {}", binary->token_auth()->str());
+					}
 				}
 		);
 
@@ -111,20 +122,31 @@ ArenaServerService::runServerLoop() noexcept
 					const auto* binary = fys::fb::GetArenaServerValidateAuth(authMessage.data());
 					const std::string tokenAuth = binary->token_auth()->str();
 					const std::string userName = binary->user_name()->str();
-					const auto &[isAwaited, playerAwaitedIt] = isPlayerAwaited(userName, tokenAuth, binary->fighting_pit_id());
 
-					if (!isAwaited) {
-						spdlog::warn("Player {} tried to authenticate on Arena server {} without being awaited.",
-								userName, _ctx.get().getServerCode());
-						return;
-					}
+					const auto &[isAwaited, playerAwaitedIt] = isPlayerAwaited(userName, tokenAuth, binary->fighting_pit_id());
 					unsigned fightingPitId = playerAwaitedIt->second.fightingPitId;
 
-					if (playerAwaitedIt->second.hasToBeGenerated())
-						fightingPitId = createNewFightingPit(playerAwaitedIt);
+					if (!isAwaited) {
+						spdlog::warn("Player {} tried to authenticate on Arena server {} fighting pit {} without being awaited.",
+								userName, _ctx.get().getServerCode(), fightingPitId);
+						return;
+					}
+
+					if (playerAwaitedIt->second.hasToBeGenerated()) {
+						fightingPitId = createNewFightingPit(playerAwaitedIt->second);
+						_awaitingArena.erase(playerAwaitedIt); // remove player from awaited player
+						if (fightingPitId == FightingPit::CREATION_ERROR) return;
+						spdlog::info("Awaited player {} has logged in and created fighting pit of id:{}", userName, fightingPitId);
+					}
 					else {
+						if (!_workerService.doesFightingPitExist(binary->fighting_pit_id())) {
+							spdlog::error("Player {} tried to join fighting pit of id {} which doesn't exist", userName, binary->fighting_pit_id());
+							return;
+						}
 						auto pt = _dbConnector->retrievePartyTeam(userName);
 						_workerService.playerJoinFightingPit(fightingPitId, std::move(pt));
+						_awaitingArena.erase(playerAwaitedIt); // remove player from awaited player
+						spdlog::info("Awaited player {} has logged in and joined fighting pit {}", userName, fightingPitId);
 					}
 					_workerService.addPlayerIdentifier(fightingPitId, userName, identityPlayer.str());
 					_workerService.broadCastNewArrivingTeam(fightingPitId, userName);
@@ -146,6 +168,7 @@ ArenaServerService::runServerLoop() noexcept
 					}
 					unsigned idMember = 0;
 					// todo create an action message to forward
+					spdlog::info("InGame Message received");
 					fp->get().forwardMessageToTeamMember(authFrame->user_name()->str(), idMember);
 				}
 		);
@@ -181,19 +204,25 @@ ArenaServerService::forwardReplyToDispatcherClient(zmq::message_t&& identityWs, 
 }
 
 unsigned
-ArenaServerService::createNewFightingPit(AwaitingPlayerArenaIt it)
+ArenaServerService::createNewFightingPit(const AwaitingPlayerArena& awaited)
 {
 	FightingPitAnnouncer fpa(_cache);
 
-	fpa.setDifficulty(it->second.gen->levelFightingPit);
-	fpa.setEncounterId(it->second.gen->encounterId);
-	fpa.enforceAmbush(it->second.gen->isAmbush);
-	fpa.setCreatorUserName(it->second.namePlayer);
-	fpa.setCreatorUserToken(it->second.token);
-	fpa.setCreatorTeamParty(_dbConnector->retrievePartyTeam(it->second.namePlayer));
+	fpa.setDifficulty(awaited.gen->levelFightingPit);
+	fpa.setEncounterId(awaited.gen->encounterId);
+	fpa.enforceAmbush(awaited.gen->isAmbush);
+	fpa.setCreatorUserName(awaited.namePlayer);
+	fpa.setCreatorUserToken(awaited.token);
+	fpa.setCreatorTeamParty(_dbConnector->retrievePartyTeam(awaited.namePlayer));
+	SPDLOG_INFO("New fighting pit to be created lvl {} encounterid {} isAmbush {} name {} token {} wsCode {}",
+			awaited.gen->levelFightingPit,
+			awaited.gen->encounterId,
+			awaited.gen->isAmbush,
+			awaited.namePlayer,
+			awaited.token,
+			awaited.gen->serverCode);
 	unsigned id = _workerService.addFightingPit(
-			fpa.buildFightingPit(_ctx.get().getEncounterContext(), it->second.gen->serverCode));
-	_awaitingArena.erase(it); // remove player from awaited player
+			fpa.buildFightingPit(_ctx.get().getEncounterContext(), awaited.gen->serverCode));
 	return id;
 }
 

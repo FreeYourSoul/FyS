@@ -70,6 +70,10 @@ FightingPitAnnouncer::buildFightingPit(const EncounterContext& ctx, const std::s
 		SPDLOG_WARN("FightingPit built invalid (no creator of the pit registered, a call to generateAllyPartyTeam function is required)");
 		return nullptr;
 	}
+	if (!ctx.zoneRegistered(wsId)) {
+		SPDLOG_WARN("FightingPit built invalid the zone of world server {} isn't registered", wsId);
+		return nullptr;
+	}
 	std::unique_ptr <FightingPit> fp = std::make_unique<FightingPit>(_creatorUserName, _difficulty);
 	fp->addAuthenticatedUser(std::move(_creatorUserName), std::move(_creatorUserToken));
 	ChaiRegister::registerBaseActions(*fp->getChaiPtr(), _cache);

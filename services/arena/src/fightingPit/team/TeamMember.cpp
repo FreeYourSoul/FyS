@@ -29,7 +29,6 @@
 #include <fightingPit/contender/FightingContender.hh>
 #include <fightingPit/team/TeamMember.hh>
 #include <fightingPit/team/AllyPartyTeams.hh>
-#include <
 
 // overloaded trick
 template<class... Ts>
@@ -114,7 +113,7 @@ TeamMember::executeAction(
 						}
 					},
 
-					[](auto o) {
+					[]([[maybe_unused]] auto o) {
 						spdlog::error("NOT IMPLEMENTED YET");
 					},
 			}, *pa->target);

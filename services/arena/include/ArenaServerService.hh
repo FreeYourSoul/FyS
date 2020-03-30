@@ -119,7 +119,7 @@ private:
     void forwardReplyToDispatcherClient(zmq::message_t&& wsIdentity, const fys::arena::AwaitingPlayerArena& awaitingArena);
 
     [[nodiscard]] unsigned
-    createNewFightingPit(AwaitingPlayerArenaIt awaitedIt);
+    createNewFightingPit(const AwaitingPlayerArena& awaited);
 
     [[nodiscard]] std::pair<bool, AwaitingPlayerArenaIt>
     isPlayerAwaited(const std::string& name, const std::string& token, unsigned idFightingPit) const;

@@ -38,19 +38,20 @@ WorkerService::startFightingPitsThread()
 {
 	SPDLOG_INFO("WorkerService FightingPit game loops started");
 
-	std::thread t([this]() {
-		using namespace std::chrono_literals;
-		while (true) {
-			auto now = std::chrono::system_clock::now();
-			if (!_arenaInstances.empty()) {
-				for (auto &[id, fp] : _arenaInstances) {
-					fp->continueBattle(now);
-				}
-			}
-			std::this_thread::sleep_for(1000ms); // todo sleep something smart
-		}
-	});
-	t.join();
+//	std::thread t([this]() {
+//		using namespace std::chrono_literals;
+//		while (true) {
+//			auto now = std::chrono::system_clock::now();
+//			if (!_arenaInstances.empty()) {
+//				for (auto &[id, fp] : _arenaInstances) {
+//					spdlog::info("ARENA INSTANCE ID {} IS INVOKED", id);
+//					//					fp->continueBattle(now);
+//				}
+//			}
+//			std::this_thread::sleep_for(1000ms); // todo sleep something smart
+//		}
+//	});
+//	t.join();
 }
 
 unsigned

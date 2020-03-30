@@ -44,7 +44,7 @@ class PitContenders {
 
 public:
 	PitContenders() = default;
-	PitContenders(const PitContenders& other) { }
+	PitContenders(const PitContenders& other) = delete;
 
 	[[nodiscard]] std::vector<std::shared_ptr<FightingContender>>
 	getContenderOnSide(HexagonSide::Orientation side) const;

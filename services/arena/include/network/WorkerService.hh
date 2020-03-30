@@ -128,10 +128,13 @@ public:
 			else {
 				auto identity = msg.pop();
 				auto intermediate = msg.pop();
-				if ("auth" == intermediate.str())
-					std::forward<HandlerAuth>(handlerAuth)(std::move(identity), msg.pop());
-				else
-					std::forward<HandlerInGame>(handlerInGame)(std::move(identity), intermediate, msg.pop());
+				auto content = msg.pop();
+				if ("auth" == intermediate.to_string_view()) {
+					std::forward<HandlerAuth>(handlerAuth)(std::move(identity), std::move(content));
+				}
+				else {
+					std::forward<HandlerInGame>(handlerInGame)(std::move(identity), intermediate, std::move(content));
+				}
 			}
 		}
 	}
@@ -150,6 +153,9 @@ public:
 
 	[[nodiscard]] const std::unique_ptr<FightingPit>&
 	getFightingPitInstance(unsigned arenaId) const { return _arenaInstances.at(arenaId); }
+
+	[[nodiscard]] bool
+	doesFightingPitExist(unsigned fightingPitId) const noexcept { return _arenaInstances.find(fightingPitId) != _arenaInstances.cend(); }
 
 	void addPlayerIdentifier(unsigned int fightingPitId, std::string userName, std::string identityPlayer);
 

@@ -44,6 +44,9 @@ struct EncounterContext {
 		std::array<uint, 3> chance;
 	};
 
+	[[nodiscard]] bool
+	zoneRegistered(const std::string& wsId) const noexcept { return _contendersPerZone.find(wsId) != _contendersPerZone.cend(); }
+
 	std::map<std::string, std::array<std::pair<uint, uint>, 3>> _rangeEncounterPerZone;
 	std::map<std::string, std::vector<EncounterDesc>> _contendersPerZone;
 };
