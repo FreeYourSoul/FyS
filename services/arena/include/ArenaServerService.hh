@@ -42,7 +42,7 @@ struct AwaitingArena {
     std::string serverCode;
     bool isAmbush;
     unsigned encounterId;
-    FightingPit::Level levelFightingPit;
+	FightingPit::Level levelFightingPit;
 };
 
 /**
@@ -116,13 +116,13 @@ public:
     void runServerLoop() noexcept;
 
 private:
-    void forwardReplyToDispatcherClient(zmq::message_t&& wsIdentity, const fys::arena::AwaitingPlayerArena& awaitingArena);
+    void forwardReplyToDispatcherClient(zmq::message_t&& wsIdentity, const fys::arena::AwaitingPlayerArena& awaitingArena) noexcept;
 
     [[nodiscard]] unsigned
-    createNewFightingPit(const AwaitingPlayerArena& awaited);
+    createNewFightingPit(const AwaitingPlayerArena& awaited) noexcept;
 
     [[nodiscard]] std::pair<bool, AwaitingPlayerArenaIt>
-    isPlayerAwaited(const std::string& name, const std::string& token, unsigned idFightingPit) const;
+    isPlayerAwaited(const std::string& name, const std::string& token, unsigned idFightingPit) const noexcept;
 
 private:
     std::reference_wrapper<const ArenaServerContext> _ctx;

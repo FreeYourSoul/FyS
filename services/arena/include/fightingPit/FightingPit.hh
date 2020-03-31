@@ -111,10 +111,11 @@ public:
 	void addAuthenticatedUser(std::string userName, std::string userToken);
 
 	/**
-	 * Used to add a new party team (incoming player in the fighting pit)
+	 * Used to add a new party team (incoming player in the fighting pit) and register its action to chai
 	 * @param pt party team to add
+	 * @param cache retrieving object to find the actions
 	 */
-	void addPartyTeam(std::unique_ptr<PartyTeam> pt);
+	void addPartyTeamAndRegisterActions(std::unique_ptr<PartyTeam> pt, cache::Cml& cache);
 
 	/**
 	 * Check if given player (defined by name/token) is authenticated
@@ -146,7 +147,8 @@ private:
 	[[nodiscard]] bool
 	checkEndStatusFightingPit();
 
-	void addContender(const std::shared_ptr<FightingContender>& fc) { _contenders.addContender(fc); }
+	[[nodiscard]] bool
+	addContender(const std::shared_ptr<FightingContender>& fc) { return _contenders.addContender(fc); }
 
 	void initializePartyTeam(AllyPartyTeams&& allyPartyTeams);
 

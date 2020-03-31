@@ -45,7 +45,7 @@ AllyPartyTeams::executeAllyAction(
 {
     if (ally.isContender) return;
     if (auto member = selectMemberById(ally.id); !member) {
-        SPDLOG_ERROR("Member with id {} isn't found, action cannot be executed");
+        SPDLOG_ERROR("Member with id {} isn't found, action cannot be executed", ally.id);
     }
     else {
         member->executeAction(*this, pc, chaiPtr);

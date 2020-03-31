@@ -66,24 +66,25 @@ using json = nlohmann::json;
 std::unique_ptr<FightingPit>
 FightingPitAnnouncer::buildFightingPit(const EncounterContext& ctx, const std::string& wsId)
 {
-	if (_creatorUserName.empty() || _creatorUserToken.empty()) {
-		SPDLOG_WARN("FightingPit built invalid (no creator of the pit registered, a call to generateAllyPartyTeam function is required)");
+	if (_creatorUserName.empty() || _creatorUserToken.empty() || _creatorPartyTeam == nullptr) {
+		SPDLOG_WARN("FightingPit built invalid (no creator of the pit registered and/or party team not set"
+					", a call to generateAllyPartyTeam function is required)");
 		return nullptr;
 	}
 	if (!ctx.zoneRegistered(wsId)) {
 		SPDLOG_WARN("FightingPit built invalid the zone of world server {} isn't registered", wsId);
 		return nullptr;
 	}
-	std::unique_ptr <FightingPit> fp = std::make_unique<FightingPit>(_creatorUserName, _difficulty);
+	std::unique_ptr<FightingPit> fp = std::make_unique<FightingPit>(_creatorUserName, _difficulty);
 	fp->addAuthenticatedUser(std::move(_creatorUserName), std::move(_creatorUserToken));
 	ChaiRegister::registerBaseActions(*fp->getChaiPtr(), _cache);
-	fp->_partyTeams.addPartyTeam(std::move(_creatorPartyTeam));
-	generateContenders(*fp, ctx, wsId);
+	fp->addPartyTeamAndRegisterActions(std::move(_creatorPartyTeam), _cache);
+	if (!generateContenders(*fp, ctx, wsId)) return nullptr;
 	fp->initializeSideBattles();
 	return fp;
 }
 
-void
+bool
 FightingPitAnnouncer::generateContenders(FightingPit& fp, const EncounterContext& ctx,
 										 const std::string& wsId)
 {
@@ -102,9 +103,13 @@ FightingPitAnnouncer::generateContenders(FightingPit& fp, const EncounterContext
 		contenderScript->loadContenderScript(getScriptContentString(std::move(name), desc));
 		auto contender = std::make_shared<FightingContender>(std::move(contenderScript));
 		// todo make positioning of contender depending on ambush
-		contender->moveContender(HexagonSide::Orientation::B_S, true);
-		fp.addContender(contender);
+		if (!fp.addContender(contender)) {
+			SPDLOG_WARN("FightingPit built invalid, generation of contender {} failure", contender->getContenderScripting()->getContenderName());
+			return false;
+		}
+		fys::arena::FightingPitLayout::setContenderInitiatePosition(*contender, HexagonSide::Orientation::B_S);
 	}
+	return true;
 }
 
 const std::string&
@@ -128,6 +133,12 @@ FightingPitAnnouncer::getSideBattleForSide(const std::unique_ptr<FightingPit>& f
 		return fp->_sideBattles.front();
 	}
 	return *it;
+}
+
+void
+FightingPitAnnouncer::addActionToOneMember(uint index, const std::string& actionName, uint level)
+{
+	_creatorPartyTeam->accessTeamMembers()[index]->addDoableAction(actionName, level);
 }
 
 } // namespace fys::arena

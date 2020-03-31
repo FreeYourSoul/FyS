@@ -29,7 +29,7 @@
 #include <Cml.hh>
 
 namespace fys::cache {
-    class CmlCopy : public Cml {
+    class CmlCopy final : public Cml {
     public:
         ~CmlCopy() override {}
         CmlCopy(const std::string &pathLocalStorage,

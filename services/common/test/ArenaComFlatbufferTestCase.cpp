@@ -27,8 +27,9 @@
 #include <ArenaServerValidateAuth_generated.h>
 #include <PartyTeamStatus_generated.h>
 #include <FightingPitEncounter_generated.h>
+#include <ArenaFightAction_generated.h>
 
-TEST_CASE("FlatBuffer ArenaCom FightingPitEncounter", "[common][fb]")
+TEST_CASE("FlatBuffer ArenaCom FightingPitEncounter", "[service][arena][common][fb]")
 {
 	flatbuffers::FlatBufferBuilder fbb;
 	auto fp = fys::fb::CreateFightingPitEncounter(
@@ -62,7 +63,7 @@ TEST_CASE("FlatBuffer ArenaCom FightingPitEncounter", "[common][fb]")
 
 } // // End Test Case : FlatBuffer ArenaCom FightingPitEncounter
 
-TEST_CASE("FlatBuffer ArenaCom ArenaServerAuth", "[common][fb]")
+TEST_CASE("FlatBuffer ArenaCom ArenaServerAuth", "[service][arena][common][fb]")
 {
 
 	flatbuffers::FlatBufferBuilder fbb;
@@ -95,7 +96,7 @@ TEST_CASE("FlatBuffer ArenaCom ArenaServerAuth", "[common][fb]")
 
 } // End Test Case : FlatBuffer ArenaCom ArenaServerAuth
 
-TEST_CASE("FlatBuffer ArenaCom ArenaServerValidateAuth", "[common][fb]")
+TEST_CASE("FlatBuffer ArenaCom ArenaServerValidateAuth", "[service][arena][common][fb]")
 {
 
 	flatbuffers::FlatBufferBuilder fbb;
@@ -122,7 +123,39 @@ TEST_CASE("FlatBuffer ArenaCom ArenaServerValidateAuth", "[common][fb]")
 
 } // End Test Case : FlatBuffer ArenaCom ArenaServerValidateAuth
 
-TEST_CASE("FlatBuffer ArenaCom PartyTeamStatus", "[common][fb]")
+TEST_CASE("FlatBuffer ArenaCom ArenaFightAction", "[service][arena][common][fb]")
+{
+
+	flatbuffers::FlatBufferBuilder fbb;
+	auto afa = fys::fb::CreateArenaFightAction(
+			fbb,
+			1337,
+			fbb.CreateString("idAction"),
+			fys::fb::Targeting_ENNEMIES,
+			fbb.CreateVector(std::vector<uint> {1, 4, 5, 6}));
+	fys::fb::FinishArenaFightActionBuffer(fbb, afa);
+
+	SECTION("Verifier") {
+		auto ok = flatbuffers::Verifier(fbb.GetBufferPointer(), fbb.GetSize());
+		CHECK(fys::fb::VerifyArenaFightActionBuffer(ok));
+	}
+
+	SECTION("Binary to FlatBuffer") {
+		uint8_t* binary = fbb.GetBufferPointer();
+		const fys::fb::ArenaFightAction* fromBinary = fys::fb::GetArenaFightAction(binary);
+		REQUIRE("idAction" == fromBinary->actionId()->str());
+		REQUIRE(1337 == fromBinary->memberId());
+		REQUIRE(fys::fb::Targeting_ENNEMIES == fromBinary->targetType());
+		REQUIRE(1 == fromBinary->targetId()->Get(0));
+		REQUIRE(4 == fromBinary->targetId()->Get(1));
+		REQUIRE(5 == fromBinary->targetId()->Get(2));
+		REQUIRE(6 == fromBinary->targetId()->Get(3));
+
+	} // End section : Binary to Flatbuffer
+
+} // End Test Case : FlatBuffer ArenaCom ArenaFightAction
+
+TEST_CASE("FlatBuffer ArenaCom PartyTeamStatus", "[service][arena][common][fb]")
 {
 	// test MemberStatus
 	flatbuffers::FlatBufferBuilder fbb;

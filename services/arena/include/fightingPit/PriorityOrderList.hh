@@ -37,11 +37,11 @@ public:
     PriorityOrderList() = default;
     explicit PriorityOrderList(std::vector<data::PriorityElem> baseSpeed);
 
-    void
-    addParticipantInList(uint id, int speed, bool isContender);
+    void addParticipantInList(uint id, int speed, bool isContender);
+    void removeParticipantFromList(uint idParticipant);
 
-    void
-    removeParticipantFromList(uint idParticipant);
+    [[nodiscard]] bool
+    empty() const { return _baseSpeed.empty(); }
 
     [[nodiscard]] const data::PriorityElem&
     getCurrent() const { return _currentPrio; }

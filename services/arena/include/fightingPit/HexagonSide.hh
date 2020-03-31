@@ -74,30 +74,26 @@ public:
 	[[nodiscard]] std::pair<Hexagon, Orientation>
 	operator*() const { return std::make_pair(_hexagon, _side); }
 
-	bool
-	move(HexagonSide::Orientation destinationSide, bool forceMovement = false);
-
-	bool
-	moveRight();
-
-	bool
-	moveLeft();
-
-	bool
-	moveBack();
+	bool move(HexagonSide::Orientation destinationSide, bool forceMovement = false);
+	bool moveRight();
+	bool moveLeft();
+	bool moveBack();
 
 	[[nodiscard]] bool
 	isAmbushSide() const;
+
 	[[nodiscard]] bool
 	canMove(HexagonSide::Orientation destinationSide) const;
 
 private:
-	void
-	changeSide(HexagonSide::Orientation);
+	void changeSide(HexagonSide::Orientation);
+
 	[[nodiscard]] Orientation
 	findLeft() const;
+
 	[[nodiscard]] Orientation
 	findRight() const;
+
 	[[nodiscard]] Orientation
 	findBack() const;
 
@@ -110,8 +106,10 @@ private:
 
 std::ostream&
 operator<<(std::ostream& os, fys::arena::HexagonSide::Orientation orientation);
+
 std::ostream&
 operator<<(std::ostream& os, fys::arena::HexagonSide::Hexagon hexagon);
+
 std::ostream&
 operator<<(std::ostream& os, fys::arena::HexagonSide hexagonSide);
 

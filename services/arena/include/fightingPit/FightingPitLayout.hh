@@ -34,6 +34,8 @@ namespace fys::arena {
 // forward declaration
 class AllyPartyTeams;
 class PitContenders;
+class TeamMember;
+class FightingContender;
 
 /**
  * @brief Layout of the fighting pit. Manage the positions of monsters and the players/monsters movements
@@ -78,12 +80,23 @@ public:
 	[[nodiscard]] unsigned
 	activeCharactersOnSide(HexagonSide::Orientation side) const;
 
-	void contenderMove();
-	void characterMove();
+	void executeMovements();
+
+	static void setContenderInitiatePosition(FightingContender& contender, HexagonSide::Orientation side);
+	static void setAllyMoveInitiatePosition(TeamMember& teamMember, HexagonSide::Orientation side);
+
+private:
+	[[nodiscard]] static bool
+	move(HexagonSide& side, data::MoveDirection direction);
+
+	[[nodiscard]] std::vector<std::shared_ptr<TeamMember>>
+	getChangingSideTeamMember() const;
 
 private:
 	std::reference_wrapper<PitContenders> _contenders;
 	std::reference_wrapper<AllyPartyTeams> _partyTeams;
+
+	std::vector<bool> _movingFlagContender;
 
 };
 

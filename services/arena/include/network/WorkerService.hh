@@ -26,11 +26,12 @@
 
 #include <spdlog/spdlog.h>
 #include <zmq_addon.hpp>
-#include <fightingPit/FightingPitAnnouncer.hh>
+#include <fightingPit/FightingPit.hh>
 
 // forward declarations
 namespace fys::arena {
 class FightingPit;
+class ArenaServerContext;
 }
 
 namespace fys::arena {
@@ -65,7 +66,7 @@ public:
 			:
 			_ctx(1), _workerRouter(_ctx, zmq::socket_type::router), _currentArenaId(0) { }
 
-	void startFightingPitsThread();
+	void startFightingPitsLoop();
 
 	/**
 	 * @memberof
@@ -85,10 +86,11 @@ public:
 
 	/**
 	 *
-	 * @param userName player name to join the fightingpit
 	 * @param fightingPitId
+	 * @param pt
+	 * @param cml
 	 */
-	void playerJoinFightingPit(unsigned fightingPitId, std::unique_ptr<PartyTeam> pt);
+	void playerJoinFightingPit(unsigned fightingPitId, std::unique_ptr<PartyTeam> pt, cache::Cml& cml);
 
 	/**
 	 * Broadcast a message containing all the information about the incoming players data

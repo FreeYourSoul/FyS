@@ -72,8 +72,8 @@ public:
 	[[nodiscard]] std::unique_ptr<FightingPit>
 	buildFightingPit(const EncounterContext& ctx, const std::string& wsId);
 
-	void
-	setEncounterType(EncounterType encounterType)
+
+	void setEncounterType(EncounterType encounterType)
 	{
 		if (encounterType == RANDOM)
 			_idEncounter = 0;
@@ -121,6 +121,9 @@ public:
 	[[nodiscard]] static unsigned
 	getArenaId(const std::unique_ptr<FightingPit>& fp) { return fp->_arenaId; }
 
+	// just for testing purpose
+	void addActionToOneMember(uint index, const std::string& actionName, uint level);
+
 private:
 	[[nodiscard]] inline const std::string&
 	getScriptContentString(std::string name, const EncounterContext::EncounterDesc& desc);
@@ -131,7 +134,8 @@ private:
 	[[nodiscard]] bool
 	isRandomEncounter() const { return _encounterType == EncounterType::RANDOM; }
 
-	void generateContenders(FightingPit& fp, const EncounterContext& ctx, const std::string& wsId);
+	[[nodiscard]] bool
+	generateContenders(FightingPit& fp, const EncounterContext& ctx, const std::string& wsId);
 
 private:
 	cache::Cml& _cache;

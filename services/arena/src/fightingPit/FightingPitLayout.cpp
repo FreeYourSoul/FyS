@@ -21,9 +21,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include <fmt/ostream.h>
+#include <spdlog/spdlog.h>
 #include <fightingPit/contender/PitContenders.hh>
 #include <fightingPit/team/AllyPartyTeams.hh>
 #include <fightingPit/FightingPitLayout.hh>
+#include <fightingPit/team/TeamMember.hh>
+#include <fightingPit/contender/ContenderScripting.hh>
+#include <fightingPit/contender/FightingContender.hh>
 
 namespace fys::arena {
 
@@ -34,15 +39,61 @@ FightingPitLayout::activeCharactersOnSide(HexagonSide::Orientation side) const
 }
 
 void
-FightingPitLayout::characterMove()
+FightingPitLayout::executeMovements()
 {
 
 }
 
-void
-FightingPitLayout::contenderMove()
+std::vector<std::shared_ptr<TeamMember>>
+FightingPitLayout::getChangingSideTeamMember() const
 {
+	std::vector<std::shared_ptr<TeamMember>> result;
 
+	return result;
+}
+
+bool
+FightingPitLayout::move(HexagonSide& side, data::MoveDirection directionToMove)
+{
+	if (directionToMove == data::MoveDirection::RIGHT) {
+		if (!side.moveRight()) {
+			SPDLOG_ERROR("Impossible move from {} to right", side);
+			return false;
+		}
+	}
+	else if (directionToMove == data::MoveDirection::LEFT) {
+		if (!side.moveLeft()) {
+			SPDLOG_ERROR("Impossible move from {} to left", side);
+			return false;
+		}
+	}
+	else if (directionToMove == data::MoveDirection::BACK) {
+		if (!side.moveBack()) {
+			SPDLOG_ERROR("Impossible move from {} to backside", side);
+			return false;
+		}
+	}
+	return true;
+}
+
+void
+FightingPitLayout::setContenderInitiatePosition(FightingContender& contender, HexagonSide::Orientation side)
+{
+	if ((*contender._side).second != HexagonSide::Orientation::NONE) {
+		SPDLOG_ERROR("Can't set initial position for contender {} as position is not NONE", contender.getContenderScripting()->getContenderName());
+		return;
+	}
+	contender._side.move(side, true);
+}
+
+void
+FightingPitLayout::setAllyMoveInitiatePosition(TeamMember& teamMember, HexagonSide::Orientation side)
+{
+	if ((*teamMember._side).second != HexagonSide::Orientation::NONE) {
+		SPDLOG_ERROR("Can't set initial position for ally {}.{} as position is not NONE", teamMember.getUserName(), teamMember.getName());
+		return;
+	}
+	teamMember._side.move(side, true);
 }
 
 }

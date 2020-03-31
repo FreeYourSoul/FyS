@@ -40,35 +40,6 @@ template<class... Ts> overloaded(Ts...) -> overloaded<Ts...>;
 namespace fys::arena {
 
 void
-TeamMember::moveTeamMember(HexagonSide::Orientation destination, bool bypassCheck)
-{
-	if (!_side.move(destination, bypassCheck)) {
-		SPDLOG_ERROR("Impossible move from {} to {}", _side, destination);
-		return;
-	}
-}
-
-void
-TeamMember::moveTeamMember(data::MoveDirection directionToMove)
-{
-	if (directionToMove == data::MoveDirection::RIGHT) {
-		if (!_side.moveRight()) {
-			SPDLOG_ERROR("TeamMember {}::{} Impossible move from {} to right", _userName, _name, _side);
-		}
-	}
-	else if (directionToMove == data::MoveDirection::LEFT) {
-		if (!_side.moveLeft()) {
-			SPDLOG_ERROR("TeamMember {}::{} Impossible move from {} to left", _userName, _name, _side);
-		}
-	}
-	else if (directionToMove == data::MoveDirection::BACK) {
-		if (!_side.moveBack()) {
-			SPDLOG_ERROR("TeamMember {}::{} Impossible move from {} to backside", _userName, _name, _side);
-		}
-	}
-}
-
-void
 TeamMember::executeAction(
 		AllyPartyTeams& apt,
 		PitContenders& pc,

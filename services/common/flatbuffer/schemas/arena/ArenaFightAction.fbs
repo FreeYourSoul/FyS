@@ -1,8 +1,22 @@
 namespace fys.fb;
 
-// Used by the client to join an existing FightingPit (id_fightingpit set)
+enum Targeting : byte {
+	SELF = 0,
+	ENNEMY = 1,
+	ALLY = 2,
+	ENNEMIES = 3,
+	ALLIES = 4,
+	ALLY_AND_ENNEMY = 5,
+	ALLY_OR_ENNEMY = 6,
+	SIDE = 7
+}
+
+// Used by the client to do an action
 table ArenaFightAction {
-    ok:uint;
+    memberId:uint;
+    actionId:string;
+    targetType:Targeting;
+    targetId:[uint];
 }
 
 root_type ArenaFightAction;

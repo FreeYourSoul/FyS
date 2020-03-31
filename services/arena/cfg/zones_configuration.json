@@ -15,7 +15,7 @@
         "contenders": [
             {
                 "zone": "WS00",
-                "key": "arena::contenders::Sampy.chai",
+                "key": "arena:contenders:Sampy.chai",
                 "max_encountering": 2,
                 "chance": {
                     "easy": 10,
@@ -24,7 +24,7 @@
                 }
             }, {
                 "zone": "WS00",
-                "key": "arena::contenders::Ogre.chai",
+                "key": "arena:contenders:Ogre.chai",
                 "min_to_encounter": 1,
                 "max_encountering": 2,
                 "chance": {
@@ -34,7 +34,7 @@
                 }
             }, {
                 "zone": "WS00",
-                "key": "arena::contenders::Slime.chai",
+                "key": "arena:contenders:Slime.chai",
                 "chance": {
                     "easy": 50,
                     "medium": 50,
@@ -42,7 +42,7 @@
                 }
             }, {
                 "zone": "WS00",
-                "key": "arena::contenders::Sampy.chai",
+                "key": "arena:contenders:Sampy.chai",
                 "chance": {
                     "easy": 30,
                     "medium": 30,

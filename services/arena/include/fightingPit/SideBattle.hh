@@ -70,6 +70,9 @@ public:
 	HexagonSide::Orientation
 	getSide() const { return _side; }
 
+	[[nodiscard]] bool
+	empty() const { return _priorityOrderList.empty(); }
+
 private:
 	void endParticipantTurn(const std::chrono::milliseconds& timerInterlude)
 	{

@@ -324,11 +324,13 @@ TEST_CASE("PriorityOrderList test", "[service][arena]")
 			REQUIRE(polEmpty._priorityList.empty());
 			REQUIRE(polEmpty._analyzedList.empty());
 			REQUIRE(polEmpty._baseSpeed.empty());
+			REQUIRE(polEmpty.empty());
 
 			polEmpty.sortBaseAndCalculatePriority();
 			REQUIRE(polEmpty._priorityList.empty());
 			REQUIRE(polEmpty._analyzedList.empty());
 			REQUIRE(polEmpty._baseSpeed.empty());
+			REQUIRE(polEmpty.empty());
 
 			REQUIRE(fys::arena::data::PriorityElem(0, 0, fys::arena::data::PARTY_MEMBER) == polEmpty.getNext());
 
@@ -338,6 +340,7 @@ TEST_CASE("PriorityOrderList test", "[service][arena]")
 			REQUIRE(polEmpty._priorityList.empty());
 			REQUIRE(polEmpty._analyzedList.empty());
 			REQUIRE(polEmpty._baseSpeed.empty());
+			REQUIRE(polEmpty.empty());
 		}
 
 		SECTION("One in side") {

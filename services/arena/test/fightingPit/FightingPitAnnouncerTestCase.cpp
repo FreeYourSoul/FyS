@@ -29,9 +29,9 @@
 #include <ArenaServerContext.hh>
 #include <fightingPit/data/CommonTypes.hh>
 #include <fightingPit/FightingPitAnnouncer.hh>
-#include <fightingPit/team/TeamMember.hh>
 #include <fightingPit/contender/FightingContender.hh>
 #include <fightingPit/contender/ContenderScripting.hh>
+#include <RandomGenerator.hh>
 #include "TestType.hh"
 
 using namespace fys::arena;
@@ -58,6 +58,36 @@ TEST_CASE("FightingPitAnnouncer test", "[service][arena]")
 					{40, 40, 40}
 			}
 	};
+
+	SECTION("test wrong range encounter") {
+		FightingPitAnnouncer fpa(cml);
+		fpa.setCreatorUserToken(" ");
+		fpa.setCreatorUserName(" ");
+		fpa.setCreatorTeamParty(getPartyTeam(" "));
+		fpa.setDifficulty(FightingPit::MEDIUM);
+		fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
+		REQUIRE(nullptr == fpa.buildFightingPit(ctx, "WS42"));
+	} // End section : test wrong range encounter
+
+	SECTION("test no creator userName") {
+		FightingPitAnnouncer fpa(cml);
+		fpa.setCreatorUserToken(" ");
+		// fpa.setCreatorUserName(); !!NOT SET
+		fpa.setCreatorTeamParty(getPartyTeam(" "));
+		fpa.setDifficulty(FightingPit::MEDIUM);
+		fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
+		REQUIRE(nullptr == fpa.buildFightingPit(ctx, "WS00"));
+	} // End section : test no creator userName
+
+	SECTION("test no creator userToken") {
+		FightingPitAnnouncer fpa(cml);
+		fpa.setCreatorUserName(" ");
+		// fpa.setCreatorUserToken(); !!NOT SET
+		fpa.setCreatorTeamParty(getPartyTeam(" "));
+		fpa.setDifficulty(FightingPit::MEDIUM);
+		fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
+		REQUIRE(nullptr == fpa.buildFightingPit(ctx, "WS00"));
+	} // End section : test no creator userName
 
 	SECTION("test seed 42") {
 		std::shared_ptr<std::mt19937> mt = std::make_shared<std::mt19937>(42);
@@ -109,6 +139,7 @@ TEST_CASE("FightingPitAnnouncer test", "[service][arena]")
 			fpa.setCreatorTeamParty(getPartyTeam(" "));
 			fpa.setDifficulty(FightingPit::EASY);
 			fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
+			fpa.addActionToOneMember(0, "arena:actions:damage:slash.chai", 5);
 			auto fp = fpa.buildFightingPit(ctx, "WS00");
 
 			REQUIRE(2 == FightingPitAnnouncer::getPitContenders(fp).getNumberContender());
@@ -130,6 +161,7 @@ TEST_CASE("FightingPitAnnouncer test", "[service][arena]")
 			fpa.setCreatorTeamParty(getPartyTeam(" "));
 			fpa.setDifficulty(FightingPit::MEDIUM);
 			fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
+			fpa.addActionToOneMember(0, "arena:actions:damage:slash.chai", 5);
 			auto fp = fpa.buildFightingPit(ctx, "WS00");
 
 			REQUIRE(3 == FightingPitAnnouncer::getPitContenders(fp).getNumberContender());
@@ -155,6 +187,7 @@ TEST_CASE("FightingPitAnnouncer test", "[service][arena]")
 			fpa.setCreatorTeamParty(getPartyTeam(" "));
 			fpa.setDifficulty(FightingPit::HARD);
 			fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
+			fpa.addActionToOneMember(0, "arena:actions:damage:slash.chai", 5);
 			auto fp = fpa.buildFightingPit(ctx, "WS00");
 
 			REQUIRE(4 == FightingPitAnnouncer::getPitContenders(fp).getNumberContender());
@@ -200,6 +233,7 @@ TEST_CASE("FightingPitAnnouncer test", "[service][arena]")
 			fpa.setCreatorTeamParty(getPartyTeam(" "));
 			fpa.setDifficulty(FightingPit::EASY);
 			fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
+			fpa.addActionToOneMember(0, "arena:actions:damage:slash.chai", 5);
 			auto fp = fpa.buildFightingPit(ctx, "WS00");
 
 			REQUIRE(2 == FightingPitAnnouncer::getPitContenders(fp).getNumberContender());

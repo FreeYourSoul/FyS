@@ -24,6 +24,7 @@
 #include <spdlog/spdlog.h>
 #include <chrono>
 #include <network/WorkerService.hh>
+#include <ArenaServerContext.hh>
 
 namespace fys::arena {
 
@@ -34,24 +35,21 @@ WorkerService::setupConnectionManager(const fys::arena::ArenaServerContext& ctx)
 }
 
 void
-WorkerService::startFightingPitsThread()
+WorkerService::startFightingPitsLoop()
 {
 	SPDLOG_INFO("WorkerService FightingPit game loops started");
 
-//	std::thread t([this]() {
-//		using namespace std::chrono_literals;
-//		while (true) {
-//			auto now = std::chrono::system_clock::now();
-//			if (!_arenaInstances.empty()) {
-//				for (auto &[id, fp] : _arenaInstances) {
-//					spdlog::info("ARENA INSTANCE ID {} IS INVOKED", id);
-//					//					fp->continueBattle(now);
-//				}
-//			}
-//			std::this_thread::sleep_for(1000ms); // todo sleep something smart
-//		}
-//	});
-//	t.join();
+	using namespace std::chrono_literals;
+	while (true) {
+		auto now = std::chrono::system_clock::now();
+
+		if (!_arenaInstances.empty()) {
+			for (auto &[id, fp] : _arenaInstances) {
+				fp->continueBattle(now);
+			}
+		}
+		std::this_thread::sleep_for(1000ms); // todo sleep something smart
+	}
 }
 
 unsigned
@@ -73,11 +71,11 @@ WorkerService::addFightingPit(std::unique_ptr<FightingPit> fp)
 }
 
 void
-WorkerService::playerJoinFightingPit(unsigned fightingPitId, std::unique_ptr<PartyTeam> pt)
+WorkerService::playerJoinFightingPit(unsigned fightingPitId, std::unique_ptr<PartyTeam> pt, cache::Cml& cml)
 {
 	auto it = _arenaInstances.find(fightingPitId);
 	if (it != _arenaInstances.end()) {
-		it->second->addPartyTeam(std::move(pt));
+		it->second->addPartyTeamAndRegisterActions(std::move(pt), cml);
 	}
 	else {
 		SPDLOG_ERROR("PartyTeam of user {} can't join fighting pit of id {}", pt->getUserName(), fightingPitId);
@@ -99,18 +97,19 @@ void
 WorkerService::addPlayerIdentifier(unsigned fightingPitId, std::string userName, std::string identityPlayer)
 {
 	auto& identifiers = _arenaIdOnIdentifier[fightingPitId];
-	if (auto it = std::find_if(identifiers.begin(), identifiers.end(), [&userName](const auto & ident){
+	if (auto it = std::find_if(identifiers.begin(), identifiers.end(), [&userName](const auto& ident) {
 			return ident.userName == userName;
 		}); it != identifiers.end()) {
 		it->identifier = std::move(identityPlayer);
 	}
 	else {
-		identifiers.emplace_back(PlayerIdentifier{ std::move(userName), std::move(identityPlayer) });
+		identifiers.emplace_back(PlayerIdentifier{std::move(userName), std::move(identityPlayer)});
 	}
 }
 
 void
-WorkerService::broadCastNewArrivingTeam(unsigned fightingPitId, const std::string& userName) noexcept {
+WorkerService::broadCastNewArrivingTeam(unsigned fightingPitId, const std::string& userName) noexcept
+{
 	zmq::multipart_t msg;
 	const PartyTeam& pt = _arenaInstances.at(fightingPitId)->getPartyTeamOfPlayer(userName);
 
@@ -124,7 +123,7 @@ WorkerService::retrievePlayerIdentifier(unsigned fightingPitId, const std::strin
 	if (identifiersIt == _arenaIdOnIdentifier.end())
 		return userName;
 
-	auto it = std::find_if(identifiersIt->second.begin(), identifiersIt->second.end(), [&userName](const auto & ident){
+	auto it = std::find_if(identifiersIt->second.begin(), identifiersIt->second.end(), [&userName](const auto& ident) {
 		return ident.userName == userName;
 	});
 
@@ -135,14 +134,15 @@ WorkerService::retrievePlayerIdentifier(unsigned fightingPitId, const std::strin
 }
 
 void
-WorkerService::broadcastMsg(unsigned fightingPitId, zmq::multipart_t& msg) {
+WorkerService::broadcastMsg(unsigned fightingPitId, zmq::multipart_t& msg)
+{
 	auto identifiersIt = _arenaIdOnIdentifier.find(fightingPitId);
 	if (identifiersIt == _arenaIdOnIdentifier.end())
 		return;
 	unsigned identifierIndex = msg.size();
 
 	msg.add({});
-	for (const auto& [userName, identifier] : identifiersIt->second) {
+	for (const auto&[userName, identifier] : identifiersIt->second) {
 		msg.at(identifierIndex).rebuild(identifier.data(), identifier.size());
 		if (!msg.send(_workerRouter))
 			SPDLOG_ERROR("fightingPit of id {} : Message has not been correctly sent to {}, {}", fightingPitId, userName, identifier);

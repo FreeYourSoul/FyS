@@ -1,0 +1,47 @@
+class Ogre {
+
+    attr id;
+    attr level;
+    attr actions;
+
+    def Ogre(contenderId, level) {
+        this.set_explicit(true);
+        this.level = level;
+        this.id = contenderId;
+
+        this.actions = action(
+
+            // possibles actions/decide target vector
+            [
+                action(slash(this.level), fun(action, thisContender) {
+                    decide_target.lower_life(action.requireTarget(), thisContender.getHexagonSideOrient()).accessStatus();
+                })
+            ],
+
+            // decide target function
+            fun(currentContenderStatus) {
+                0; // slash
+            }
+        );
+    }
+
+    def setupContender() {
+        var &thisContender = pitContenders.getFightingContender(this.id);
+        var &thisStatus = thisContender.accessStatus();
+        var addLifePerLevel = 150 * 0.10; // +10% life per level
+        thisStatus.speed = 4;
+        thisStatus.life.total = 150 + (addLifePerLevel * this.level);
+        thisStatus.life.current = thisStatus.life.total;
+        thisStatus.magicPoint.total = 0;
+        thisStatus.magicPoint.current = thisStatus.magicPoint.total;
+     }
+
+    def runScriptedAction(id) {
+        var &thisContender = pitContenders.getFightingContender(id);
+        var &thisStatus = thisContender.accessStatus();
+        var actionId = this.actions.decisionStrategy(thisStatus);
+        var &action = this.actions.act[actionId];
+        return action.act.execute(action.decisionStrategy(action.act, thisContender));
+    }
+
+};

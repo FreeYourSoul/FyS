@@ -27,7 +27,7 @@
 
 #include <memory>
 #include <fightingPit/data/CommonTypes.hh>
-#include <fightingPit/HexagonSide.hh>
+#include <fightingPit/FightingPitLayout.hh>
 
 namespace fys::arena {
 
@@ -37,15 +37,15 @@ class ContenderScripting;
 class AllyPartyTeams;
 
 class FightingContender {
+	friend class FightingPitLayout;
+
 public:
 	explicit FightingContender(std::unique_ptr<ContenderScripting> contenderScripting);
 	FightingContender(const FightingContender& other) = delete;
 	FightingContender(FightingContender&& other) noexcept = default;
 
 	void executeAction();
-	void setupContender();
-	void moveContender(HexagonSide::Orientation destination, bool bypassCheck = false);
-	void moveContender(data::MoveDirection rightOrLeft);
+	[[nodiscard]] bool setupContender();
 
 	[[nodiscard]] const data::Status&
 	getStatus() const { return _status; }
@@ -60,7 +60,7 @@ public:
 	getHexagonSideOrient() const { return (*_side).second; }
 
 	[[nodiscard]] const std::unique_ptr<ContenderScripting>&
-	getContenderScripting() { return _contenderScripting; }
+	getContenderScripting() const { return _contenderScripting; }
 
 private:
 	std::unique_ptr<ContenderScripting> _contenderScripting;

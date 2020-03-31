@@ -31,6 +31,7 @@
 #include <ArenaServerValidateAuth_generated.h>
 
 #include <network/DBConnector.hh>
+#include <fightingPit/FightingPitAnnouncer.hh>
 
 #include <ArenaServerContext.hh>
 #include "ArenaServerService.hh"
@@ -91,7 +92,7 @@ ArenaServerService::runServerLoop() noexcept
 
 	SPDLOG_INFO("ArenaServer loop started");
 
-	_workerService.startFightingPitsThread();
+	auto t = std::thread([this] { _workerService.startFightingPitsLoop(); });
 	while (true) {
 		_connectionHandler.pollAndProcessMessageFromDispatcher(
 				[this](zmq::message_t&& identityWs, zmq::message_t&& worldServerMessage) {
@@ -106,15 +107,13 @@ ArenaServerService::runServerLoop() noexcept
 					}
 
 					// register player incoming into arena instance with token given by worldserver used as key
-					const auto &[elem, playerHasBeenCorrectlyRegistered] = _awaitingArena.insert(
-							{binary->token_auth()->str(), std::move(apa)}
-					);
+					const auto &[elem, playerHasBeenCorrectlyRegistered] = _awaitingArena.insert({binary->token_auth()->str(), std::move(apa)});
+
 					if (playerHasBeenCorrectlyRegistered) {
 						forwardReplyToDispatcherClient(std::move(identityWs), elem->second);
 						spdlog::info("A new awaited player is incoming {}", binary->token_auth()->str());
 					}
-				}
-		);
+				});
 
 		_workerService.pollAndProcessMessageFromPlayer(
 				// Authentication handler
@@ -122,7 +121,6 @@ ArenaServerService::runServerLoop() noexcept
 					const auto* binary = fys::fb::GetArenaServerValidateAuth(authMessage.data());
 					const std::string tokenAuth = binary->token_auth()->str();
 					const std::string userName = binary->user_name()->str();
-
 					const auto &[isAwaited, playerAwaitedIt] = isPlayerAwaited(userName, tokenAuth, binary->fighting_pit_id());
 					unsigned fightingPitId = playerAwaitedIt->second.fightingPitId;
 
@@ -136,7 +134,6 @@ ArenaServerService::runServerLoop() noexcept
 						fightingPitId = createNewFightingPit(playerAwaitedIt->second);
 						_awaitingArena.erase(playerAwaitedIt); // remove player from awaited player
 						if (fightingPitId == FightingPit::CREATION_ERROR) return;
-						spdlog::info("Awaited player {} has logged in and created fighting pit of id:{}", userName, fightingPitId);
 					}
 					else {
 						if (!_workerService.doesFightingPitExist(binary->fighting_pit_id())) {
@@ -144,10 +141,10 @@ ArenaServerService::runServerLoop() noexcept
 							return;
 						}
 						auto pt = _dbConnector->retrievePartyTeam(userName);
-						_workerService.playerJoinFightingPit(fightingPitId, std::move(pt));
+						_workerService.playerJoinFightingPit(fightingPitId, std::move(pt), _cache);
 						_awaitingArena.erase(playerAwaitedIt); // remove player from awaited player
-						spdlog::info("Awaited player {} has logged in and joined fighting pit {}", userName, fightingPitId);
 					}
+					spdlog::info("Awaited player {} has logged in fighting pit of id:{}", userName, fightingPitId);
 					_workerService.addPlayerIdentifier(fightingPitId, userName, identityPlayer.str());
 					_workerService.broadCastNewArrivingTeam(fightingPitId, userName);
 				},
@@ -157,8 +154,7 @@ ArenaServerService::runServerLoop() noexcept
 					zmq::multipart_t response;
 					response.add(std::move(identityPlayer));
 					const auto authFrame = fys::fb::GetArenaServerValidateAuth(intermediate.data());
-					auto fp = _workerService.getAuthenticatedPlayerFightingPit(
-							authFrame->user_name()->str(),
+					auto fp = _workerService.getAuthenticatedPlayerFightingPit(authFrame->user_name()->str(),
 							authFrame->token_auth()->str(),
 							authFrame->fighting_pit_id());
 
@@ -170,13 +166,13 @@ ArenaServerService::runServerLoop() noexcept
 					// todo create an action message to forward
 					spdlog::info("InGame Message received");
 					fp->get().forwardMessageToTeamMember(authFrame->user_name()->str(), idMember);
-				}
-		);
+				});
 	}
+	t.join();
 }
 
 std::pair<bool, const std::unordered_map<std::string, AwaitingPlayerArena>::const_iterator>
-ArenaServerService::isPlayerAwaited(const std::string& name, const std::string& token, unsigned idFightingPit) const
+ArenaServerService::isPlayerAwaited(const std::string& name, const std::string& token, unsigned idFightingPit) const noexcept
 {
 	if (const auto it = _awaitingArena.find(token);
 			it != _awaitingArena.end() && it->second.namePlayer == name && it->second.fightingPitId == idFightingPit)
@@ -185,7 +181,7 @@ ArenaServerService::isPlayerAwaited(const std::string& name, const std::string& 
 }
 
 void
-ArenaServerService::forwardReplyToDispatcherClient(zmq::message_t&& identityWs, const fys::arena::AwaitingPlayerArena& awaitingArena)
+ArenaServerService::forwardReplyToDispatcherClient(zmq::message_t&& identityWs, const fys::arena::AwaitingPlayerArena& awaitingArena) noexcept
 {
 	flatbuffers::FlatBufferBuilder fbb;
 	auto asaFb = fys::fb::CreateArenaServerAuth(
@@ -204,7 +200,7 @@ ArenaServerService::forwardReplyToDispatcherClient(zmq::message_t&& identityWs, 
 }
 
 unsigned
-ArenaServerService::createNewFightingPit(const AwaitingPlayerArena& awaited)
+ArenaServerService::createNewFightingPit(const AwaitingPlayerArena& awaited) noexcept
 {
 	FightingPitAnnouncer fpa(_cache);
 
@@ -214,13 +210,12 @@ ArenaServerService::createNewFightingPit(const AwaitingPlayerArena& awaited)
 	fpa.setCreatorUserName(awaited.namePlayer);
 	fpa.setCreatorUserToken(awaited.token);
 	fpa.setCreatorTeamParty(_dbConnector->retrievePartyTeam(awaited.namePlayer));
-	SPDLOG_INFO("New fighting pit to be created lvl {} encounterid {} isAmbush {} name {} token {} wsCode {}",
-			awaited.gen->levelFightingPit,
-			awaited.gen->encounterId,
-			awaited.gen->isAmbush,
-			awaited.namePlayer,
-			awaited.token,
-			awaited.gen->serverCode);
+
+	SPDLOG_INFO("New fighting pit to be created lvl name {} token {} {} encounterid {} isAmbush {} wsCode {}",
+			awaited.namePlayer, awaited.token,
+			awaited.gen->levelFightingPit, awaited.gen->encounterId,
+			awaited.gen->isAmbush, awaited.gen->serverCode);
+
 	unsigned id = _workerService.addFightingPit(
 			fpa.buildFightingPit(_ctx.get().getEncounterContext(), awaited.gen->serverCode));
 	return id;

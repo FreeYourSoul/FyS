@@ -26,6 +26,7 @@
 #include <ArenaServerContext.hh>
 #include <ChaiRegister.hh>
 #include <fightingPit/contender/ContenderScripting.hh>
+#include <fightingPit/FightingPitAnnouncer.hh>
 #include <fightingPit/contender/FightingContender.hh>
 #include <fightingPit/contender/PitContenders.hh>
 #include <fightingPit/team/AllyPartyTeams.hh>
@@ -92,7 +93,7 @@ TEST_CASE("Test Sampy", "[service][arena][script_test]")
 	sampy->loadContenderScriptFromFile(getPathSampyChaiScript());
 
 	auto fpc = std::make_shared<fys::arena::FightingContender>(std::move(sampy));
-	pc.addContender(fpc);
+	REQUIRE(pc.addContender(fpc));
 
 	std::string userName = "FyS";
 	fys::arena::PartyTeamUPtr pt = std::make_unique<fys::arena::PartyTeam>(userName);
@@ -102,9 +103,9 @@ TEST_CASE("Test Sampy", "[service][arena][script_test]")
 	pt->addTeamMember(teamMember1);
 	pt->addTeamMember(teamMember2);
 
-	fpc->moveContender(fys::arena::HexagonSide::Orientation::A_N, true);
-	teamMember1->moveTeamMember(fys::arena::HexagonSide::Orientation::A_N, true);
-	teamMember2->moveTeamMember(fys::arena::HexagonSide::Orientation::A_N, true);
+	fys::arena::FightingPitLayout::setContenderInitiatePosition(*fpc, fys::arena::HexagonSide::Orientation::A_N);
+	fys::arena::FightingPitLayout::setAllyMoveInitiatePosition(*teamMember1, fys::arena::HexagonSide::Orientation::A_N);
+	fys::arena::FightingPitLayout::setAllyMoveInitiatePosition(*teamMember2, fys::arena::HexagonSide::Orientation::A_N);
 
 	apt.addPartyTeam(std::move(pt));
 

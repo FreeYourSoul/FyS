@@ -21,7 +21,7 @@ include(${CMAKE_CURRENT_LIST_DIR}/../../common/CMakeLists.txt)
 enable_testing()
 
 include_directories(
-        ${COMMON_INCLUDE_DIR}
+        ${COMMON_INCLUDES_DIR}
         ${CMAKE_CURRENT_LIST_DIR}/../../../scripting_cache/cml/include
         ${CMAKE_CURRENT_LIST_DIR}/../include)
 

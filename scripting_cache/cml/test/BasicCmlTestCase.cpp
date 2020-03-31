@@ -26,7 +26,7 @@
 #define private protected
 #include <Cml.hh>
 
-class CmlBaseTest : public fys::cache::Cml {
+class CmlBaseTest final : public fys::cache::Cml {
 public:
     explicit CmlBaseTest(std::string v) : fys::cache::Cml(std::filesystem::path(std::move(v))) {}
     using fys::cache::Cml::isInLocalStorageAndUpToDate;

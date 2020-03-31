@@ -27,8 +27,8 @@
 
 #include <variant>
 #include <memory>
-#include <fightingPit/HexagonSide.hh>
 #include <fightingPit/data/CommonTypes.hh>
+#include <fightingPit/FightingPitLayout.hh>
 #include <SizedQueue.hh>
 
 // forward declarations
@@ -81,6 +81,7 @@ struct PendingAction {
  *
  */
 class TeamMember {
+	friend class FightingPitLayout;
 
 public:
 	TeamMember(std::string userName, std::string teamMemberName)
@@ -89,9 +90,6 @@ public:
 
 	void executeAction(AllyPartyTeams& apt, PitContenders& pc, std::unique_ptr<chaiscript::ChaiScript>& chaiPtr);
 	void addPendingAction(const std::string& actionName, TargetType target);
-
-	void moveTeamMember(HexagonSide::Orientation destination, bool bypassCheck = false);
-	void moveTeamMember(data::MoveDirection rightOrLeft);
 
 	/**
 	 * @brief called by #fys::arena::AllyPartyTeam to set the id of the team member

@@ -21,8 +21,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <fmt/ostream.h>
-#include <spdlog/spdlog.h>
 #include <fightingPit/contender/ContenderScripting.hh>
 #include <fightingPit/contender/FightingContender.hh>
 
@@ -34,37 +32,15 @@ FightingContender::FightingContender(std::unique_ptr<ContenderScripting> contend
 }
 
 void
-FightingContender::executeAction() { _contenderScripting->executeAction(); }
-void
-FightingContender::setupContender() { _contenderScripting->setupContender(); }
-
-void
-FightingContender::moveContender(HexagonSide::Orientation destination, bool bypassCheck)
+FightingContender::executeAction()
 {
-	if (!_side.move(destination, bypassCheck)) {
-		SPDLOG_ERROR("Impossible move from {} to {}", _side, destination);
-		return;
-	}
+	_contenderScripting->executeAction();
 }
 
-void
-FightingContender::moveContender(data::MoveDirection directionToMove)
+bool
+FightingContender::setupContender()
 {
-	if (directionToMove == data::MoveDirection::RIGHT) {
-		if (!_side.moveRight()) {
-			SPDLOG_ERROR("Impossible move from {} to right", _side);
-		}
-	}
-	else if (directionToMove == data::MoveDirection::LEFT) {
-		if (!_side.moveLeft()) {
-			SPDLOG_ERROR("Impossible move from {} to left", _side);
-		}
-	}
-	else if (directionToMove == data::MoveDirection::BACK) {
-		if (!_side.moveBack()) {
-			SPDLOG_ERROR("Impossible move from {} to backside", _side);
-		}
-	}
+	return _contenderScripting->setupContender();
 }
 
 }

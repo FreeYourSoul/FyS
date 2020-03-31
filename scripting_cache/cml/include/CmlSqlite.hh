@@ -29,7 +29,7 @@
 
 namespace fys::cache {
 
-    class CmlSqlite : Cml {
+    class CmlSqlite final : public Cml {
     protected:
         void createFileInLocalStorage(const CmlKey &cmlKey) override;
 

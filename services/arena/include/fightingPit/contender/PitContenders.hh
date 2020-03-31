@@ -60,7 +60,7 @@ public:
 	selectSuitableContenderOnSide(HexagonSide::Orientation side, ComparatorSelection<FightingContender> comp) const;
 
 	[[nodiscard]] std::shared_ptr<FightingContender>
-	selectRandomContenderOnSideAlive(HexagonSide::Orientation side, ComparatorSelection<FightingContender> comp) const;
+	selectRandomContenderOnSideAlive(HexagonSide::Orientation side) const;
 
 	[[nodiscard]] std::shared_ptr<FightingContender>
 	selectSuitableContenderAlive(ComparatorSelection<FightingContender> comp) const;
@@ -80,8 +80,10 @@ public:
 	[[nodiscard]] unsigned
 	contenderOnSide(HexagonSide::Orientation side) const;
 
+	[[nodiscard]] bool
+	addContender(const std::shared_ptr<FightingContender>& contender);
+
 	void executeContenderAction(const data::PriorityElem& contender);
-	void addContender(const std::shared_ptr<FightingContender>& contender);
 
 private:
 	std::vector<std::shared_ptr<FightingContender> > _contenders;

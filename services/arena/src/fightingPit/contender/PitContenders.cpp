@@ -69,9 +69,11 @@ PitContenders::selectSuitableContenderOnSide(HexagonSide::Orientation side, Comp
 }
 
 std::shared_ptr<FightingContender>
-PitContenders::selectRandomContenderOnSideAlive(HexagonSide::Orientation side, ComparatorSelection<FightingContender> comp) const
+PitContenders::selectRandomContenderOnSideAlive(HexagonSide::Orientation side) const
 {
 	auto contenderOnSide = getContenderOnSide(side);
+	if (contenderOnSide.empty())
+		return nullptr;
 	uint randomIndex = fys::util::RandomGenerator::generateInRange(1ul, contenderOnSide.size());
 	return contenderOnSide.at(randomIndex - 1);
 }
@@ -119,12 +121,12 @@ PitContenders::executeContenderAction(const data::PriorityElem& contender)
 	_contenders.at(contender.id)->executeAction();
 }
 
-void
+bool
 PitContenders::addContender(const std::shared_ptr<FightingContender>& contender)
 {
 	_contenders.emplace_back(contender);
 	_changeSideFlags.emplace_back(false);
-	contender->setupContender();
+	return contender->setupContender();
 }
 
 unsigned

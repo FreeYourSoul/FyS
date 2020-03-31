@@ -51,7 +51,8 @@ public:
 	/**
 	 * Method called after the contender has been added in the fighting pit, in order to initialize its stats
 	 */
-	void setupContender();
+	[[nodiscard]] bool
+	setupContender();
 
 	void loadContenderScript(const std::string& script = "");
 	void loadContenderScriptFromFile(const std::string& scriptFile);

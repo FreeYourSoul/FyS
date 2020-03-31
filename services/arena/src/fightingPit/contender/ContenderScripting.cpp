@@ -39,16 +39,15 @@ ContenderScripting::loadContenderScript(const std::string& script)
         if (!script.empty()) {
             _chai.get().eval(script);
         }
-
-        // instantiate the contender in chai engine
-        std::string createVar =
-                fmt::format("global {}={}({},{});",
-                        getChaiContenderId(), _contenderName, _contenderId, _level);
-        _chai.get().eval(createVar);
     }
     catch (const chaiscript::exception::eval_error& ee) {
         SPDLOG_ERROR("Error caught on scripting loading {}", ee.what());
     }
+	// instantiate the contender in chai engine
+	std::string createVar =
+			fmt::format("global {}={}({},{});",
+					getChaiContenderId(), _contenderName, _contenderId, _level);
+	_chai.get().eval(createVar);
 }
 
 void
@@ -64,7 +63,7 @@ ContenderScripting::loadContenderScriptFromFile(const std::string& filePath)
     loadContenderScript();
 }
 
-void
+bool
 ContenderScripting::setupContender()
 {
     try {
@@ -72,7 +71,9 @@ ContenderScripting::setupContender()
     }
     catch (const chaiscript::exception::eval_error& ee) {
         SPDLOG_ERROR("setupContender failed for {} :\n{}", getChaiContenderId(), ee.what());
+        return false;
     }
+	return true;
 }
 
 void

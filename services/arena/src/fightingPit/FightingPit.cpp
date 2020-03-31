@@ -26,6 +26,7 @@
 #include <fightingPit/contender/FightingContender.hh>
 #include <fightingPit/FightingPit.hh>
 #include <fightingPit/team/TeamMember.hh>
+#include <ChaiRegister.hh>
 
 namespace {
 std::chrono::milliseconds
@@ -57,7 +58,7 @@ FightingPit::checkEndStatusFightingPit()
 {
 	switch (_end) {
 	case Ending::NOT_FINISHED:return true;
-	case Ending::ON_HOLD:return false;
+	case Ending::ON_HOLD: return false;
 	case Ending::ALLY_WIN:
 		// todo Send failure of the fight, close the fight properly (release resource if any)
 		return false;
@@ -71,10 +72,13 @@ FightingPit::checkEndStatusFightingPit()
 void
 FightingPit::continueBattle(const std::chrono::system_clock::time_point& now)
 {
-	if (checkEndStatusFightingPit())
-		return;
-	for (auto& side : _sideBattles) {
-		auto currentParticipant = side.getCurrentParticipantTurn(now, _timeInterlude);
+	if (!checkEndStatusFightingPit()) return; // Start/End of fighting pit management
+
+	for (auto& battle : _sideBattles) {
+		if (battle.empty()) { // if battle side is empty, ignore it
+			continue;
+		}
+		auto currentParticipant = battle.getCurrentParticipantTurn(now, _timeInterlude);
 
 		if (currentParticipant.isContender) {
 			// non-playable character (enemy NPC)
@@ -112,14 +116,14 @@ FightingPit::isPlayerParticipant(const std::string& name, const std::string& tok
 }
 
 void
-FightingPit::addPartyTeam(std::unique_ptr<PartyTeam> pt)
+FightingPit::addPartyTeamAndRegisterActions(std::unique_ptr<PartyTeam> pt, cache::Cml& cml)
 {
+	ChaiRegister::loadAndRegisterAction(*_chaiPtr, cml, *pt);
 	_partyTeams.addPartyTeam(std::move(pt));
 	std::sort(_sideBattles.begin(), _sideBattles.end(),
 			[this](auto& lhs, auto& rhs) {
 				return _layoutMapping.activeCharactersOnSide(lhs.getSide()) < _layoutMapping.activeCharactersOnSide(rhs.getSide());
-			}
-	);
+			});
 }
 
 // Initialization methods used by FightingPitAnnouncer
