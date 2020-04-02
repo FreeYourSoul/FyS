@@ -39,9 +39,9 @@ class ArenaServerContext;
  * @brief contains the information related to the arena that has to be generated
  */
 struct AwaitingArena {
-    std::string serverCode;
-    bool isAmbush;
-    unsigned encounterId;
+	std::string serverCode;
+	bool isAmbush;
+	unsigned encounterId;
 	FightingPit::Level levelFightingPit;
 };
 
@@ -51,20 +51,20 @@ struct AwaitingArena {
  * one, it contains the information related to the arena that has to be generated (none required when joining).
  */
 struct AwaitingPlayerArena {
-    std::string namePlayer;
-    std::string token;
+	std::string namePlayer;
+	std::string token;
 
-    // if set, a new arena is generated at the client authentication, otherwise the player just join the fightingpit
-    unsigned fightingPitId = 0;
+	// if set, a new arena is generated at the client authentication, otherwise the player just join the fightingpit
+	unsigned fightingPitId = 0;
 
-    // in case of generation, data of the fighting pit to generate
-    std::optional<AwaitingArena> gen;
+	// in case of generation, data of the fighting pit to generate
+	std::optional<AwaitingArena> gen;
 
-    [[nodiscard]] bool
-    hasToBeGenerated() const
-    {
-        return fightingPitId == 0 && static_cast<bool>(gen);
-    }
+	[[nodiscard]] bool
+	hasToBeGenerated() const
+	{
+		return fightingPitId == 0 && static_cast<bool>(gen);
+	}
 
 };
 
@@ -75,26 +75,29 @@ struct AwaitingPlayerArena {
  * In order to properly works, it need to work with an ArenaDispatcher, which is a proxy for the WorldServer to
  * communicate with Arena.
  *
- * @createNewFightingPit In case of a new encounter for a player, the following workflow apply:
- * 1 - Player is moving / doing an action on the WorldMap (managed by a WorldServer) that is triggering a new
+ * fys::arena::ArenaServerService::createNewFightingPit In case of a new encounter for a player, the following workflow apply:
+ * - Player is moving / doing an action on the WorldMap (managed by a WorldServer) that is triggering a new
  *     encounter. [publisher socket send notification]
  *     <br/><br/>
- * 2 - WorldServer send a message to a ArenaDispatcher containing configuration data to generate a fighting pit and
+ *
+ * - WorldServer send a message to a ArenaDispatcher containing configuration data to generate a fighting pit and
  *     authentication information, those are the following:<br/>
- *          2.a - a generated token (used as authentication key)<br/>
- *          2.b - the difficulty of the fight (configuration of the player)<br/>
- *          2.c - the id of encounter; if equal to 0, it is a random encounter. scripted id otherwise.<br/>
- * 3 - The Dispatcher forward the message to an ArenaServer that is going to register the incoming player that will
- *     initiate the creation of the fighting pit.
- *     <br/><br/>
- * 4 - The Arena server reply to the dispatcher (that will reply to the WorldServer), the message will return to the
- *     player, message containing the ip (connection string) of the ArenaServer that will create the fighting pit.
- *     <br/><br/>
- * 5 - The Player can then directly connect to the ArenaServer using the token to validate the authentication, The
- *     Arena service validate the connection, and use the data (difficulty ect..) in order to generate the
- *     fighting pit (with an id unique). When the fight is setup, the initial handshake with the client contains the
- *     id of the fighting pit in order to enable other player to join.
- *     <br/>
+ *          * a generated token (used as authentication key)<br/>
+ *          * the difficulty of the fight (configuration of the player)<br/>
+ *          * the id of encounter; if equal to 0, it is a random encounter. scripted id otherwise.<br/>
+ * - The Dispatcher forward the message to an ArenaServer that is going to register the incoming player that will
+ *   initiate the creation of the fighting pit.
+ *   <br/><br/>
+ *
+ * - The Arena server reply to the dispatcher (that will reply to the WorldServer), the message will return to the
+ *   player, message containing the ip (connection string) of the ArenaServer that will create the fighting pit.
+ *   <br/><br/>
+ *
+ * - The Player can then directly connect to the ArenaServer using the token to validate the authentication, The
+ *   Arena service validate the connection, and use the data (difficulty ect..) in order to generate the
+ *   fighting pit (with an id unique). When the fight is setup, the initial handshake with the client contains the
+ *   id of the fighting pit in order to enable other player to join.
+ *   <br/>
  *
  * @joinFightingPit Another player than the creator can join an existing arena by specifying its fighting pit id to
  * the WorldServer, which will check if the position of the joining player is close enough of the creator of the
@@ -103,40 +106,40 @@ struct AwaitingPlayerArena {
  *
  */
 class ArenaServerService {
-    using AwaitingPlayerArenaIt = const std::unordered_map<std::string, AwaitingPlayerArena>::const_iterator;
+	using AwaitingPlayerArenaIt = const std::unordered_map<std::string, AwaitingPlayerArena>::const_iterator;
 
 public:
-    explicit ArenaServerService(const ArenaServerContext& ctx);
+	explicit ArenaServerService(const ArenaServerContext& ctx);
 
-    /**
-     * @brief Run infinite loop that poll on the connections of the dispatcher, then of the players.
-     * @note This method contains the code of the deserialization of flatbuffer message (ioc with lambda) and then
-     *       check if the incoming message is coming from an authorized user.
-     */
-    void runServerLoop() noexcept;
-
-private:
-    void forwardReplyToDispatcherClient(zmq::message_t&& wsIdentity, const fys::arena::AwaitingPlayerArena& awaitingArena) noexcept;
-
-    [[nodiscard]] unsigned
-    createNewFightingPit(const AwaitingPlayerArena& awaited) noexcept;
-
-    [[nodiscard]] std::pair<bool, AwaitingPlayerArenaIt>
-    isPlayerAwaited(const std::string& name, const std::string& token, unsigned idFightingPit) const noexcept;
+	/**
+	 * @brief Run infinite loop that poll on the connections of the dispatcher, then of the players.
+	 * @note This method contains the code of the deserialization of flatbuffer message (ioc with lambda) and then
+	 *       check if the incoming message is coming from an authorized user.
+	 */
+	void runServerLoop() noexcept;
 
 private:
-    std::reference_wrapper<const ArenaServerContext> _ctx;
-    cache::CmlCopy _cache;
+	void forwardReplyToDispatcherClient(zmq::message_t&& wsIdentity, const fys::arena::AwaitingPlayerArena& awaitingArena) noexcept;
 
-    // Manage connections
+	[[nodiscard]] unsigned
+	createNewFightingPit(const AwaitingPlayerArena& awaited) noexcept;
+
+	[[nodiscard]] std::pair<bool, AwaitingPlayerArenaIt>
+	isPlayerAwaited(const std::string& name, const std::string& token, unsigned idFightingPit) const noexcept;
+
+private:
+	std::reference_wrapper<const ArenaServerContext> _ctx;
+	cache::CmlCopy _cache;
+
+	// Manage connections
 	std::unique_ptr<network::DBConnector> _dbConnector;
-    ConnectionHandler _connectionHandler;
+	ConnectionHandler _connectionHandler;
 
-    // Manage fighting pits
-    WorkerService _workerService;
+	// Manage fighting pits
+	WorkerService _workerService;
 
-    // map of token on awaiting arena
-    std::unordered_map<std::string, AwaitingPlayerArena> _awaitingArena;
+	// map of token on awaiting arena
+	std::unordered_map<std::string, AwaitingPlayerArena> _awaitingArena;
 };
 
 }

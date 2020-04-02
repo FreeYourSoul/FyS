@@ -6,18 +6,3 @@
 Welcome to FreeYourSoul Online's documentation!
 ===============================================
 
-.. toctree::
-   :maxdepth: 1
-   :name: index
-
-   services/Arena_BattleSystem
-   services/Arena_Integrate_Chaiscripts
-   services/Arena_TurnPriorityList
-   CML
-
-
-
-Indices and tables
-==================
-
-* :ref:`search`

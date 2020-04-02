@@ -7,14 +7,17 @@ Welcome to FreeYourSoul Online's documentation!
 ===============================================
 
 .. toctree::
-   :maxdepth: 1
-   :name: index
+   :maxdepth: 2
 
-   services/Arena_BattleSystem
-   services/Arena_Integrate_Chaiscripts
-   services/Arena_TurnPriorityList
-   CML
+   Code Documentation <code/code.rst>
+   Arena Service <services/arena/arena.rst>
+   Cache Manager Library <CML.md>
 
+What is a service?
+########################
+
+What are the dispatchers?
+################################
 
 
 Indices and tables
