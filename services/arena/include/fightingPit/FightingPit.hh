@@ -151,9 +151,7 @@ private:
 	addContender(const std::shared_ptr<FightingContender>& fc) { return _contenders.addContender(fc); }
 
 	void initializePartyTeam(AllyPartyTeams&& allyPartyTeams);
-
 	void initializeSideBattles();
-
 	void initializePriorityListInSidesBattle();
 
 private:
