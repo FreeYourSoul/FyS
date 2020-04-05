@@ -100,7 +100,6 @@ public:
 	 * @param creatorUserToken token of the authenticated player generating a fighting pit
 	 */
 	void setCreatorUserToken(std::string creatorUserToken) { _creatorUserToken = std::move(creatorUserToken); }
-
 	void enforceAmbush(bool ambushEnforced) noexcept { _isAmbushEnforced = ambushEnforced; }
 	void setDifficulty(FightingPit::Level level) noexcept { _difficulty = level; }
 	void setCreatorTeamParty(std::unique_ptr<PartyTeam> pt) { _creatorPartyTeam = std::move(pt); }
