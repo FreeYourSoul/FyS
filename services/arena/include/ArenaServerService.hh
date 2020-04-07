@@ -119,7 +119,7 @@ public:
 	void runServerLoop() noexcept;
 
 private:
-	void forwardReplyToDispatcherClient(zmq::message_t&& wsIdentity, const fys::arena::AwaitingPlayerArena& awaitingArena) noexcept;
+	void forwardReplyToDispatcher(zmq::message_t&& identityWs, const fys::arena::AwaitingPlayerArena& awaitingArena) noexcept;
 
 	[[nodiscard]] unsigned
 	createNewFightingPit(const AwaitingPlayerArena& awaited) noexcept;

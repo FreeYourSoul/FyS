@@ -72,7 +72,6 @@ public:
 	[[nodiscard]] std::unique_ptr<FightingPit>
 	buildFightingPit(const EncounterContext& ctx, const std::string& wsId);
 
-
 	void setEncounterType(EncounterType encounterType)
 	{
 		if (encounterType == RANDOM)

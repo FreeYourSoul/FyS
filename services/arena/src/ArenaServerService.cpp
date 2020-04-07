@@ -110,7 +110,7 @@ ArenaServerService::runServerLoop() noexcept
 					const auto &[elem, playerHasBeenCorrectlyRegistered] = _awaitingArena.insert({binary->token_auth()->str(), std::move(apa)});
 
 					if (playerHasBeenCorrectlyRegistered) {
-						forwardReplyToDispatcherClient(std::move(identityWs), elem->second);
+						forwardReplyToDispatcher(std::move(identityWs), elem->second);
 						spdlog::info("A new awaited player is incoming {}", binary->token_auth()->str());
 					}
 				});
@@ -181,7 +181,7 @@ ArenaServerService::isPlayerAwaited(const std::string& name, const std::string& 
 }
 
 void
-ArenaServerService::forwardReplyToDispatcherClient(zmq::message_t&& identityWs, const fys::arena::AwaitingPlayerArena& awaitingArena) noexcept
+ArenaServerService::forwardReplyToDispatcher(zmq::message_t&& identityWs, const fys::arena::AwaitingPlayerArena& awaitingArena) noexcept
 {
 	flatbuffers::FlatBufferBuilder fbb;
 	auto asaFb = fys::fb::CreateArenaServerAuth(
