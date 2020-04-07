@@ -4,12 +4,26 @@
 class action {
     attr act;
     attr decisionStrategy;
+    attr actionKey;
 
-    def action(a, decisionStrategy)
+    def action(a, decisionStrategy, actionKey)
     {
-        this.set_explicit(true);
         this.set_explicit(true);
         this.act = a;
         this.decisionStrategy = decisionStrategy;
+        this.actionKey = actionKey;
     }
+
+}
+
+// utility function in order to retrieve the actions of a Contender,
+// takes the vector of actions of the contender script as parameter
+def retrieveDoableActions(Vector actions) {
+    var actionsToReturn = [];
+    for (actElem : actions) {
+        if (actElem.actionKey.size() > 0) {
+            actionsToReturn.push_back(actElem.actionKey);
+        }
+    }
+    actionsToReturn;
 }

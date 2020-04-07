@@ -60,15 +60,15 @@ class Sampy {
             [
                 action(Attack_SAMPY(50), fun(action, thisContender) {
                     decide_target.lower_life(action.requireTarget(), thisContender.getHexagonSideOrient()).accessStatus();
-                }),
+                }, "test:key:1"),
 
                 action(Attack_SAMPY(80), fun(action, thisContender) {
                     decide_target.lower_life(action.requireTarget(), thisContender.getHexagonSideOrient().accessStatus());
-                }),
+                }, "test:key:2"),
 
                 action(Sleep_SAMPY(), fun(action, thisContender) {
                     thisContender.accessStatus();
-                })
+                }, "test:key:3")
             ],
 
             // decide target function
@@ -83,7 +83,7 @@ class Sampy {
                     else {
                         1; // attack 50
                     }
-            }
+            }, ""
         );
     }
 

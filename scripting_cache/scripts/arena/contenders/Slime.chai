@@ -15,13 +15,13 @@ class Slime {
             [
                 action(slash(this.level), fun(action, thisContender) {
                     decide_target.lower_life(action.requireTarget(), thisContender.getHexagonSideOrient()).accessStatus();
-                })
+                }, "arena:actions:damage:slash.chai")
             ],
 
             // decide target function
             fun(currentContenderStatus) {
                 0; // slash
-            }
+            }, ""
         );
     }
 

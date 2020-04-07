@@ -57,11 +57,11 @@ TeamMember::executeAction(
 		return;
 	}
 
-	const std::string allyAction =
-			fmt::format(R"(ally_actions["{}_{}"]["{}"])", _userName, _name, _actionsDoable.at(pa->idAction).first);
-	auto funcAction = chaiPtr->eval<std::function<int(data::Status)>>(fmt::format(
+	const std::string allyAction = fmt::format(
+			R"(ally_actions["{}_{}"]["{}"])", _userName, _name, _actionsDoable.at(pa->idAction).first);
+	const auto funcAction = chaiPtr->eval<std::function<int(data::Status)>>(fmt::format(
 			R"(fun(allyStatus){{ return {}.execute(allyStatus);}})", allyAction));
-	auto targetType = chaiPtr->eval<data::Targeting>(allyAction + ".requireTarget();");
+	const auto targetType = chaiPtr->eval<data::Targeting>(allyAction + ".requireTarget();");
 
 	try {
 		if (pa->target) {

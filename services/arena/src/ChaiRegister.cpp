@@ -301,7 +301,8 @@ ChaiRegister::registerFightingPitContender(chaiscript::ChaiScript& chai, chaiscr
     );
 
     chaiscript::bootstrap::standard_library::vector_type<std::vector<std::shared_ptr<FightingContender>>>("VectorFightingContender", *m);
-    chai.add(chaiscript::vector_conversion<std::vector<std::shared_ptr<FightingContender>>>());
+	chai.add(chaiscript::vector_conversion<std::vector<std::shared_ptr<FightingContender>>>());
+	chai.add(chaiscript::vector_conversion<std::vector<std::string>>());
 
     chaiscript::utility::add_class<fys::arena::PitContenders>(
             *m, "PitContenders", {},

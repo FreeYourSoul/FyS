@@ -116,6 +116,24 @@ TEST_CASE("Test Sampy", "[service][arena][script_test]")
 		REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.total);
 		REQUIRE(100 == pc.getFightingContender(0)->accessStatus().magicPoint.total);
 		REQUIRE(100 == pc.getFightingContender(0)->accessStatus().magicPoint.total);
+
+		// test doable actions
+		std::vector<std::string> actionsDoable;
+		try {
+			actionsDoable = chai->eval<std::vector<std::string>>(R"(
+var actions = contender_Sampy0.actions;
+retrieveDoableActions(actions.act);)");
+		}
+		catch (const std::exception &ee) {
+			SPDLOG_ERROR("Error when eval {}", ee.what());
+			FAIL("Shouldn't arrive there");
+		}
+
+		REQUIRE(3 == actionsDoable.size());
+		REQUIRE("test:key:1" == actionsDoable.at(0));
+		REQUIRE("test:key:2" == actionsDoable.at(1));
+		REQUIRE("test:key:3" == actionsDoable.at(2));
+
 	}
 
 	SECTION("Test Enemy&Attack selection") {

@@ -91,6 +91,8 @@ addFSeamTests(
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/team/TeamMember.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/HexagonSide.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/ChaiRegister.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/FightingPitLayout.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/FightingPitLayout.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/ChaiRegister.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/contender/ContenderScripting.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/contender/FightingContender.hh
