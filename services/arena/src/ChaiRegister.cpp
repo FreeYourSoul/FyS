@@ -112,11 +112,17 @@ ChaiRegister::loadAndRegisterActionPartyTeam(chaiscript::ChaiScript& chai, cache
 		for (const auto& tm : pt.getTeamMembers()) {
 			const auto& actionsDoable = tm->getActionsDoable();
 
-			for (const auto &[action, lvl] : actionsDoable) {
+			for (const auto &[key, lvl] : actionsDoable) {
+				const std::string& action = cache.findInCache(key);
+				if (action.empty()) {
+					SPDLOG_ERROR("Action with key {} not found (key may be wrong)", key);
+					continue;
+				}
 				try {
 					chai.eval(cache.findInCache(action));
 				}
-				catch (...) { SPDLOG_DEBUG("Action {} already loaded", action); }
+				catch (...) { SPDLOG_ERROR("Action with key {} not found (key may be wrong)", key); }
+
 				// instantiate the action variable for given team member in chai engine
 				const std::string keyPlayer = std::string(pt.getUserName()).append("_").append(tm->getName());
 				const std::string actionName = getActionNameFromKey(action);
@@ -138,17 +144,14 @@ ChaiRegister::loadActionScripts(chaiscript::ChaiScript& chai, cache::Cml& cache,
 {
 	for (const auto& key : scriptsKeys) {
 		const std::string& action = cache.findInCache(key);
+		if (action.empty()) {
+			SPDLOG_ERROR("Action with key {} not found (key may be wrong)", key);
+			continue;
+		}
 		try {
 			chai.eval(cache.findInCache(action));
 		}
-		catch (...) {
-			if (action.empty()) {
-				SPDLOG_ERROR("Action with key {} not found (key may be wrong)", key);
-			}
-			else {
-				SPDLOG_DEBUG("Action with key {} already loaded", key);
-			}
-		}
+		catch (...) { SPDLOG_DEBUG("Action with key {} already loaded", key); }
 	}
 }
 

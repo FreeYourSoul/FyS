@@ -61,6 +61,12 @@ TEST_CASE("FightingPit test", "[service][arena]")
 
 	REQUIRE(0 == fys::util::RandomGenerator::generateInRange(0, 0));
 
+	SECTION("InGame fighting") {
+
+
+
+	} // End section : InGame fighting
+
 } // End TestCase : FightingPit test
 
 #pragma clang diagnostic pop
