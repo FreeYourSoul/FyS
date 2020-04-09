@@ -101,6 +101,7 @@ FightingPitAnnouncer::generateContenders(FightingPit& fp, const EncounterContext
 		contenderScript->setContenderId(i);
 		contenderScript->setContenderName(name);
 		contenderScript->loadContenderScript(getScriptContentString(std::move(name), desc));
+		contenderScript->registerContenderDoableActions(_cache);
 		auto contender = std::make_shared<FightingContender>(std::move(contenderScript));
 		// todo make positioning of contender depending on ambush
 		if (!fp.addContender(contender)) {

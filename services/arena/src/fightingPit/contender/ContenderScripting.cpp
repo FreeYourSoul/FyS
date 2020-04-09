@@ -27,6 +27,7 @@
 #include <chaiscript/utility/utility.hpp>
 
 #include <fightingPit/contender/ContenderScripting.hh>
+#include <ChaiRegister.hh>
 
 using namespace chaiscript;
 
@@ -35,19 +36,19 @@ namespace fys::arena {
 void
 ContenderScripting::loadContenderScript(const std::string& script)
 {
-    try {
-        if (!script.empty()) {
-            _chai.get().eval(script);
-        }
-    }
-    catch (const chaiscript::exception::eval_error& ee) {
-        SPDLOG_ERROR("Error caught on scripting loading {}", ee.what());
-    }
+	try {
+		if (!script.empty()) {
+			_chai.get().eval(script);
+		}
+	}
+	catch (const chaiscript::exception::eval_error& ee) {
+		SPDLOG_ERROR("Error caught on scripting loading {}", ee.what());
+	}
 	// instantiate the contender in chai engine
 	std::string createVar =
 			fmt::format("global {}={}({},{});",
 					getChaiContenderId(), _contenderName, _contenderId, _level);
-    try {
+	try {
 		_chai.get().eval(createVar);
 	}
 	catch (const chaiscript::exception::eval_error& ee) {
@@ -58,40 +59,53 @@ ContenderScripting::loadContenderScript(const std::string& script)
 void
 ContenderScripting::loadContenderScriptFromFile(const std::string& filePath)
 {
-    // load script content (containing the class)
-    try {
-        _chai.get().eval_file(filePath);
-    }
-    catch (const chaiscript::exception::eval_error& ee) {
-        SPDLOG_WARN("Error caught on scripting loading\n{}\n{}", ee.what(), ee.detail);
-    }
-    loadContenderScript();
+	// load script content (containing the class)
+	try {
+		_chai.get().eval_file(filePath);
+	}
+	catch (const chaiscript::exception::eval_error& ee) {
+		SPDLOG_WARN("Error caught on scripting loading\n{}\n{}", ee.what(), ee.detail);
+	}
+	loadContenderScript();
+}
+
+void
+ContenderScripting::registerContenderDoableActions(cache::Cml& cml)
+{
+	try {
+		auto doableActions = _chai.get().eval<std::vector<std::string>>(fmt::format(
+				"retrieveDoableActions({}.actions.act);", getChaiContenderId()));
+		ChaiRegister::loadActionScripts(_chai, cml, doableActions);
+	}
+	catch (const chaiscript::exception::eval_error& ee) {
+		SPDLOG_WARN("Error caught on scripting loading\n{}\n{}", ee.what(), ee.detail);
+	}
 }
 
 bool
 ContenderScripting::setupContender()
 {
-    try {
-        _chai.get().eval(getChaiContenderId() + ".setupContender();");
-    }
-    catch (const chaiscript::exception::eval_error& ee) {
-        SPDLOG_ERROR("setupContender failed for {} :\n{}", getChaiContenderId(), ee.what());
-        return false;
-    }
+	try {
+		_chai.get().eval(getChaiContenderId() + ".setupContender();");
+	}
+	catch (const chaiscript::exception::eval_error& ee) {
+		SPDLOG_ERROR("setupContender failed for {} :\n{}", getChaiContenderId(), ee.what());
+		return false;
+	}
 	return true;
 }
 
 void
 ContenderScripting::executeAction()
 {
-    try {
-        std::string action = fmt::format("fun(contenderId){{ return {}.runScriptedAction(contenderId);}}", getChaiContenderId());
-        auto funcAction = _chai.get().eval<std::function<int(unsigned int)>>(action);
-        if (funcAction(_contenderId))
-            SPDLOG_DEBUG("Contender {}_{} executed action", _contenderName, _contenderId);
-    }
-    catch (const chaiscript::exception::eval_error& ee) {
-        SPDLOG_ERROR("Error caught on script execution while executing action of contender.\n{}", ee.what());
-    }
+	try {
+		std::string action = fmt::format("fun(contenderId){{ return {}.runScriptedAction(contenderId);}}", getChaiContenderId());
+		auto funcAction = _chai.get().eval<std::function<int(unsigned int)>>(action);
+		if (funcAction(_contenderId))
+			SPDLOG_DEBUG("Contender {}_{} executed action", _contenderName, _contenderId);
+	}
+	catch (const chaiscript::exception::eval_error& ee) {
+		SPDLOG_ERROR("Error caught on script execution while executing action of contender.\n{}", ee.what());
+	}
 }
 }

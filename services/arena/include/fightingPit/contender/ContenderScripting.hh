@@ -32,6 +32,9 @@
 namespace chaiscript {
 class ChaiScript;
 }
+namespace fys::cache {
+class Cml;
+}
 namespace fys::arena {
 class ConnectionHandler;
 class PitContenders;
@@ -56,6 +59,7 @@ public:
 
 	void loadContenderScript(const std::string& script = "");
 	void loadContenderScriptFromFile(const std::string& scriptFile);
+	void registerContenderDoableActions(cache::Cml& cml);
 
 	void setContenderName(std::string contenderName) { _contenderName = std::move(contenderName); }
 	void setContenderId(uint contenderId) { _contenderId = contenderId; }
@@ -70,8 +74,10 @@ public:
 	getLevel() const { return _level; }
 
 private:
+
 	[[nodiscard]] std::string
 	getChaiMethodName(std::string&& methodName) const { return _contenderName + "_" + std::move(methodName); }
+
 	[[nodiscard]] std::string
 	getChaiContenderId() const { return std::string("contender_").append(_contenderName).append(std::to_string(_contenderId)); }
 

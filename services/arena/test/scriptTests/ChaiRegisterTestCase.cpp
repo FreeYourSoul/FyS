@@ -97,7 +97,7 @@ TEST_CASE("Test register/load player", "[service][arena][script_test]")
 		tm1->addDoableAction("arena:actions:damage:damage.chai", 1);
 		partyTeam.addTeamMember(std::move(tm1));
 
-		fys::arena::ChaiRegister::loadAndRegisterAction(*chai, ccpy, partyTeam);
+		fys::arena::ChaiRegister::loadAndRegisterActionPartyTeam(*chai, ccpy, partyTeam);
 
 		try {
 			REQUIRE(chai->eval<bool>(R"(1 == ally_actions.count("FyS_fyston1");)"));
@@ -115,7 +115,7 @@ TEST_CASE("Test register/load player", "[service][arena][script_test]")
 			tm2->addDoableAction("arena:actions:damage:damage.chai", 1);
 			partyTeam.addTeamMember(std::move(tm2));
 
-			fys::arena::ChaiRegister::loadAndRegisterAction(*chai, ccpy, partyTeam);
+			fys::arena::ChaiRegister::loadAndRegisterActionPartyTeam(*chai, ccpy, partyTeam);
 
 			try {
 				REQUIRE(chai->eval<bool>(R"(1 == ally_actions.count("FyS_fyston1");)"));
@@ -143,7 +143,7 @@ TEST_CASE("Test register/load player", "[service][arena][script_test]")
 			tm22->addDoableAction("arena:actions:damage:damage.chai", 1);
 			partyTeam2.addTeamMember(std::move(tm22));
 
-			fys::arena::ChaiRegister::loadAndRegisterAction(*chai, ccpy, partyTeam2);
+			fys::arena::ChaiRegister::loadAndRegisterActionPartyTeam(*chai, ccpy, partyTeam2);
 
 			try {
 				REQUIRE(chai->eval<bool>(R"(1 == ally_actions.count("Free_fyston1");)"));

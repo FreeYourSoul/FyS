@@ -106,7 +106,7 @@ TEST_CASE("test heal chaiscript", "[service][arena][script_test]")
 		tm1->addDoableAction("arena:actions:heal:light_heal.chai", 1);
 		partyTeam.addTeamMember(std::move(tm1));
 
-		fys::arena::ChaiRegister::loadAndRegisterAction(*chai, ccpy, partyTeam);
+		fys::arena::ChaiRegister::loadAndRegisterActionPartyTeam(*chai, ccpy, partyTeam);
 
 		SECTION("test heal") {
 

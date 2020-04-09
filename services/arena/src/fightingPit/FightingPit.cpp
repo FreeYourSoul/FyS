@@ -118,7 +118,7 @@ FightingPit::isPlayerParticipant(const std::string& name, const std::string& tok
 void
 FightingPit::addPartyTeamAndRegisterActions(std::unique_ptr<PartyTeam> pt, cache::Cml& cml)
 {
-	ChaiRegister::loadAndRegisterAction(*_chaiPtr, cml, *pt);
+	ChaiRegister::loadAndRegisterActionPartyTeam(*_chaiPtr, cml, *pt);
 	_partyTeams.addPartyTeam(std::move(pt));
 	std::sort(_sideBattles.begin(), _sideBattles.end(),
 			[this](auto& lhs, auto& rhs) {

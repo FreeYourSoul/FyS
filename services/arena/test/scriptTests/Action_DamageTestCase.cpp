@@ -108,7 +108,7 @@ TEST_CASE("test damage chaiscript", "[service][arena][script_test]")
         tm1->addDoableAction("arena:actions:damage:slash.chai", 1);
         partyTeam.addTeamMember(std::move(tm1));
 
-        fys::arena::ChaiRegister::loadAndRegisterAction(*chai, ccpy, partyTeam);
+		fys::arena::ChaiRegister::loadAndRegisterActionPartyTeam(*chai, ccpy, partyTeam);
 
         SECTION("test damage") {
 
@@ -163,7 +163,7 @@ s.execute(contender.accessStatus());
         auto fpc2 = std::make_shared<fys::arena::FightingContender>(std::move(sampy2));
         pc.addContender(fpc2);
 
-        fys::arena::ChaiRegister::loadAndRegisterAction(*chai, ccpy, partyTeam);
+		fys::arena::ChaiRegister::loadAndRegisterActionPartyTeam(*chai, ccpy, partyTeam);
 
         pc.getFightingContender(1)->accessStatus().life.current = 100;
 
