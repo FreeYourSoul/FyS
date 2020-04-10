@@ -31,27 +31,206 @@
 #include <fightingPit/team/TeamMember.hh>
 #include <CmlKey.hh>
 #include <Cml.hh>
+#include <CmlCopy.hh>
+
+// sleep & attack
+static const std::string actionTestSleepScript = R"(
+class Sleep_TEST {
+    def Sleep_TEST() {}
+
+    def requireTarget() {
+        NONE;
+    }
+
+    def execute(targetStatus) {
+        1;
+    }
+
+};
+)";
+
+static const std::string actionTestAttackScript = R"(
+class Attack_TEST {
+    var power;
+
+    def Attack_TEST(v) {
+        this.set_explicit(true);
+        this.power = v;
+    }
+
+    def requireTarget() {
+        ENNEMY;
+    }
+
+    def execute(targetStatus) {
+        if (targetStatus.life.current > this.power) {
+            targetStatus.life.current = targetStatus.life.current - this.power;
+        }
+        else {
+            targetStatus.life.current = 0;
+        }
+        1;
+    }
+
+};
+)";
+
+// monster 100 life, 8 speed, only attack (90 damages)
+static const std::string MonsterTestScriptAttack = actionTestAttackScript + R"(
+class TestMonsterAttack {
+
+    attr id;
+    attr level;
+    attr actions;
+
+    def TestMonsterAttack(contenderId, level) {
+        this.set_explicit(true);
+        this.level = level;
+        this.id = contenderId;
+
+        this.actions = action(
+
+            // possibles actions/decide target vector
+            [
+                action(Attack_TEST(90), fun(action, thisContender) {
+                    decide_target.lower_life(action.requireTarget(), thisContender.getHexagonSideOrient()).accessStatus();
+                }, "test:key:1")
+            ],
+
+            // decide target function
+            fun(currentContenderStatus) {
+				0;
+            }, ""
+        );
+    }
+
+    def setupContender() {
+        var &thisContender = pitContenders.getFightingContender(this.id);
+        var &thisStatus = thisContender.accessStatus();
+        thisStatus.speed = 8;
+        thisStatus.life.total = 100;
+        thisStatus.life.current = thisStatus.life.total;
+        thisStatus.magicPoint.total = 100;
+        thisStatus.magicPoint.current = thisStatus.magicPoint.total;
+     }
+
+    def runScriptedAction(id) {
+        var &thisContender = pitContenders.getFightingContender(id);
+        var &thisStatus = thisContender.accessStatus();
+        var actionId = this.actions.decisionStrategy(thisStatus);
+        var &action = this.actions.act[actionId];
+        return action.act.execute(action.decisionStrategy(action.act, thisContender));
+    }
+
+};
+)";
+
+// monster 100 life, 8 speed, only sleep
+static const std::string MonsterTestScriptSleep = actionTestSleepScript + R"(
+
+class TestMonsterSleep {
+
+    attr id;
+    attr level;
+    attr actions;
+
+    def TestMonsterSleep(contenderId, level) {
+        this.set_explicit(true);
+        this.level = level;
+        this.id = contenderId;
+
+        this.actions = action(
+
+            // possibles actions/decide target vector
+            [
+                action(Sleep_TEST(), fun(action, thisContender) {
+					thisContender.accessStatus();
+                }, "test:key:1")
+            ],
+
+            // decide target function
+            fun(currentContenderStatus) {
+				0;
+            }, ""
+        );
+    }
+
+    def setupContender() {
+        var &thisContender = pitContenders.getFightingContender(this.id);
+        var &thisStatus = thisContender.accessStatus();
+        thisStatus.speed = 8;
+        thisStatus.life.total = 100;
+        thisStatus.life.current = thisStatus.life.total;
+        thisStatus.magicPoint.total = 100;
+        thisStatus.magicPoint.current = thisStatus.magicPoint.total;
+     }
+
+    def runScriptedAction(id) {
+        var &thisContender = pitContenders.getFightingContender(id);
+        var &thisStatus = thisContender.accessStatus();
+        var actionId = this.actions.decisionStrategy(thisStatus);
+        var &action = this.actions.act[actionId];
+        return action.act.execute(action.decisionStrategy(action.act, thisContender));
+    }
+
+};
+)";
 
 class CmlBase final : public fys::cache::Cml {
 public:
 	explicit CmlBase(std::string v)
 			:fys::cache::Cml(std::filesystem::path(std::move(v))) { }
 
-	void createFileInLocalStorage(const fys::cache::CmlKey& cmlKey) override { }
+	void createFileInLocalStorage(const fys::cache::CmlKey& cmlKey) override
+	{
+
+	}
+
 };
 
-[[nodiscard]] static std::string
-getLocalPathStorage()
-{
-	std::string file_path = __FILE__;
-	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
-	if (dir_path.size() == file_path.size())
-		dir_path = file_path.substr(0, file_path.rfind('/'));
-	return dir_path + "/../../scriptTests/scripts_lnk";
-}
+class DeleteFolderWhenDone {
+public:
+	explicit DeleteFolderWhenDone(const std::string& v) : _path(v) { }
+
+	~DeleteFolderWhenDone() {
+		std::filesystem::remove_all(_path);
+	}
+
+private:
+	std::filesystem::path _path;
+
+};
+
+class CmlBaseCopy final : public fys::cache::CmlCopy {
+public:
+	explicit CmlBaseCopy(const std::string& v, const std::string& w)
+			:
+			fys::cache::CmlCopy(v, w) { }
+
+protected:
+	void createFileInLocalStorage(const fys::cache::CmlKey& cmlKey) override
+	{
+		std::error_code e;
+		std::filesystem::create_directories(cmlKey.getPath().parent_path(), e);
+
+		if ("testing:TestMonsterSleep.chai" == cmlKey.getKey()) {
+			std::ofstream ofs(cmlKey.getPath());
+			ofs << MonsterTestScriptSleep;
+		}
+		else if ("testing:TestMonsterSleep.chai" == cmlKey.getKey()) {
+			std::ofstream ofs(cmlKey.getPath());
+			ofs << MonsterTestScriptAttack;
+		}
+		else {
+			fys::cache::CmlKey k(_copyPathStorage, cmlKey.getKey());
+			std::filesystem::copy(k.getPath(), cmlKey.getPath(), e);
+		}
+	}
+};
 
 [[nodiscard]] static std::unique_ptr<fys::arena::PartyTeam>
-getPartyTeam(const std::string& user) {
+getPartyTeam(const std::string& user)
+{
 	auto team = std::make_unique<fys::arena::PartyTeam>(user);
 
 	// Temporary hard coded party team

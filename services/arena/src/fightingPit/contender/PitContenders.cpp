@@ -129,6 +129,13 @@ PitContenders::addContender(const std::shared_ptr<FightingContender>& contender)
 	return contender->setupContender();
 }
 
+bool
+PitContenders::allDead() const {
+	return std::all_of(_contenders.begin(), _contenders.end(), [](const auto& contender) {
+		return contender->getStatus().life.isDead();
+	});
+}
+
 unsigned
 PitContenders::contenderOnSide(HexagonSide::Orientation side) const
 {

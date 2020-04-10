@@ -154,18 +154,23 @@ ArenaServerService::runServerLoop() noexcept
 					zmq::multipart_t response;
 					response.add(std::move(identityPlayer));
 					const auto authFrame = fys::fb::GetArenaServerValidateAuth(intermediate.data());
-					auto fp = _workerService.getAuthenticatedPlayerFightingPit(authFrame->user_name()->str(),
+					const std::string userName = authFrame->user_name()->str();
+					auto fp = _workerService.getAuthenticatedPlayerFightingPit(userName,
 							authFrame->token_auth()->str(),
 							authFrame->fighting_pit_id());
 
 					if (!fp) {
-						spdlog::warn("Player {}:{} is not authenticated.", authFrame->user_name()->str(), authFrame->token_auth()->str());
+						spdlog::warn("Player {}:{} is not authenticated.", userName, authFrame->token_auth()->str());
 						return;
 					}
 					unsigned idMember = 0;
 					// todo create an action message to forward
+					// todo store into action: action id, target
 					spdlog::info("InGame Message received");
-					fp->get().forwardMessageToTeamMember(authFrame->user_name()->str(), idMember);
+					// if action is set to "IAMREADY", target id 1337
+					fp->get().setPlayerReadiness(userName);
+
+					fp->get().forwardMessageToTeamMember(userName, idMember, "");
 				});
 	}
 	t.join();

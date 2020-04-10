@@ -33,9 +33,9 @@ std::chrono::milliseconds
 retrieveTimeInterludeFromLevelDegree(fys::arena::FightingPit::Level level)
 {
 	switch (level) {
-	case fys::arena::FightingPit::Level::EASY:return std::chrono::milliseconds{20000};
-	case fys::arena::FightingPit::Level::MEDIUM :return std::chrono::milliseconds{10000};
-	case fys::arena::FightingPit::Level::HARD :return std::chrono::milliseconds{5000};
+	case fys::arena::FightingPit::Level::EASY:return fys::arena::FightingPit::EASY_INTERVAL;
+	case fys::arena::FightingPit::Level::MEDIUM :return fys::arena::FightingPit::MEDIUM_INTERVAL;
+	case fys::arena::FightingPit::Level::HARD :return fys::arena::FightingPit::HARD_INTERVAL;
 	default:SPDLOG_ERROR("Incorrect level");
 		return std::chrono::milliseconds{0};
 	}
@@ -46,7 +46,7 @@ namespace fys::arena {
 
 FightingPit::FightingPit(std::string creatorUserName, fys::arena::FightingPit::Level levelFightingPit)
 		:
-		_end(Ending::ON_HOLD),
+		_progress(Progress::ON_HOLD),
 		_levelFightingPit(levelFightingPit),
 		_timeInterlude(retrieveTimeInterludeFromLevelDegree(_levelFightingPit)),
 		_layoutMapping(_contenders, _partyTeams),
@@ -56,17 +56,17 @@ FightingPit::FightingPit(std::string creatorUserName, fys::arena::FightingPit::L
 bool
 FightingPit::checkEndStatusFightingPit()
 {
-	switch (_end) {
-	case Ending::NOT_FINISHED:return true;
-	case Ending::ON_HOLD: return false;
-	case Ending::ALLY_WIN:
-		// todo Send failure of the fight, close the fight properly (release resource if any)
+	switch (_progress) {
+	case Progress::ON_GOING:return true;
+	case Progress::ON_HOLD: return false;
+	case Progress::ALLY_WIN:
+		// todo Send success of the fight, close the fight properly (release resource if any)
 		return false;
-	case Ending::CONTENDER_WIN:
+	case Progress::CONTENDER_WIN:
 		// todo Send failure of the fight, close the fight properly (release resource if any)
 		return false;
 	}
-	return _end == Ending::ON_HOLD;
+	return _progress == Progress::ON_HOLD;
 }
 
 void
@@ -89,17 +89,29 @@ FightingPit::continueBattle(const std::chrono::system_clock::time_point& now)
 			_partyTeams.executeAllyAction(currentParticipant, _contenders, _chaiPtr);
 		}
 	}
+	_progress = updateProgressStatus();
+}
+
+FightingPit::Progress
+FightingPit::updateProgressStatus() {
+	if (_partyTeams.allDead()) {
+		return Progress::CONTENDER_WIN;
+	}
+	else if (_contenders.allDead()) {
+		return Progress::ALLY_WIN;
+	}
+	return Progress::ON_GOING;
 }
 
 void
-FightingPit::forwardMessageToTeamMember(const std::string& userName, unsigned int idMember)
+FightingPit::forwardMessageToTeamMember(const std::string& userName, unsigned int idMember, const std::string& action)
 {
 	auto member = _partyTeams.getSpecificTeamMemberById(userName, idMember);
 	if (!member) {
 		SPDLOG_ERROR("Trying to forward a message to team member {} owned by {} whom doesn't exist", idMember, userName);
 		return;
 	}
-	member->addPendingAction("", ContenderTargetId{1});
+	member->addPendingAction(action, ContenderTargetId{0});
 }
 
 void
@@ -127,12 +139,6 @@ FightingPit::addPartyTeamAndRegisterActions(std::unique_ptr<PartyTeam> pt, cache
 }
 
 // Initialization methods used by FightingPitAnnouncer
-
-void
-FightingPit::initializePartyTeam(AllyPartyTeams&& allyPartyTeams)
-{
-	_partyTeams = std::move(allyPartyTeams);
-}
 
 void
 FightingPit::initializeSideBattles()
@@ -181,4 +187,12 @@ FightingPit::initializePriorityListInSidesBattle()
 		}
 	};
 }
+void
+FightingPit::setPlayerReadiness(const std::string& userName)
+{
+	if (_partyTeams.setPartyReadiness(userName)) {
+		_progress = Progress::ON_GOING;
+	}
+}
+
 }

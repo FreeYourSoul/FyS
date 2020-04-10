@@ -67,18 +67,13 @@ public:
 		_priorityOrderList.addParticipantInList(id, speed, isContender);
 	}
 
-	HexagonSide::Orientation
+	[[nodiscard]] HexagonSide::Orientation
 	getSide() const { return _side; }
 
 	[[nodiscard]] bool
 	empty() const { return _priorityOrderList.empty(); }
 
-private:
-	void endParticipantTurn(const std::chrono::milliseconds& timerInterlude)
-	{
-		_endCurrentTurn = std::chrono::system_clock::now() + timerInterlude;
-		_priorityOrderList.getNext();
-	}
+
 
 private:
 	std::reference_wrapper<PitContenders> _contenders; // possibly useless

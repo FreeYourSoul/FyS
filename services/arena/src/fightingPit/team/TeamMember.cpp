@@ -105,6 +105,12 @@ TeamMember::addPendingAction(const std::string& actionName, TargetType target)
 	auto it = std::find_if(_actionsDoable.begin(), _actionsDoable.end(), [&actionName](const auto& action) {
 		return actionName == action.first;
 	});
+	if (it == _actionsDoable.end()) {
+		SPDLOG_WARN("Player {}::{} tried unrecognized action called {}", _userName, _name, actionName);
+		return;
+	}
+
+	//TODO: add a check on whether the target is correct or not (contender or ally target)
 	_pendingActions.push(PendingAction{static_cast<uint>(std::distance(_actionsDoable.begin(), it)), target});
 }
 

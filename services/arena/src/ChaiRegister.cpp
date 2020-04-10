@@ -119,13 +119,13 @@ ChaiRegister::loadAndRegisterActionPartyTeam(chaiscript::ChaiScript& chai, cache
 					continue;
 				}
 				try {
-					chai.eval(cache.findInCache(action));
+					chai.eval(action);
 				}
-				catch (...) { SPDLOG_ERROR("Action with key {} not found (key may be wrong)", key); }
+				catch (...) { SPDLOG_INFO("Action with key {} already loaded", key); }
 
 				// instantiate the action variable for given team member in chai engine
 				const std::string keyPlayer = std::string(pt.getUserName()).append("_").append(tm->getName());
-				const std::string actionName = getActionNameFromKey(action);
+				const std::string actionName = getActionNameFromKey(key);
 				std::string createVar = fmt::format(
 						R"(ally_actions.insert( ["{}":[ "{}":{}({}) ] ] );)", keyPlayer, actionName, actionName, lvl);
 				chai.eval(createVar);

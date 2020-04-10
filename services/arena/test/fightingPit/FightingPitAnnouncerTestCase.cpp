@@ -36,6 +36,18 @@
 
 using namespace fys::arena;
 
+namespace {
+[[nodiscard]] static std::string
+getLocalPathStorage()
+{
+	std::string file_path = __FILE__;
+	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
+	if (dir_path.size() == file_path.size())
+		dir_path = file_path.substr(0, file_path.rfind('/'));
+	return dir_path + "/../../scriptTests/scripts_lnk";
+}
+}
+
 TEST_CASE("FightingPitAnnouncer test", "[service][arena]")
 {
 	auto fseamMock = FSeam::getDefault<fys::util::RandomGenerator>();

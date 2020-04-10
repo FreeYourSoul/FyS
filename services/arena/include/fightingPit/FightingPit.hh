@@ -37,6 +37,8 @@
 #include <fightingPit/team/AllyPartyTeams.hh>
 #include <ChaiRegister.hh>
 
+using namespace std::chrono_literals;
+
 // forward declarations
 namespace fys::arena {
 class FightingContender;
@@ -64,9 +66,9 @@ class FightingPit {
 
 	friend class FightingPitAnnouncer;
 
-	enum Ending {
-		ON_HOLD,        // on hold mechanism for joining raid
-		NOT_FINISHED,    // on going
+	enum class Progress {
+		ON_HOLD,     // joining fight
+		ON_GOING,
 		CONTENDER_WIN,
 		ALLY_WIN
 	};
@@ -77,6 +79,10 @@ class FightingPit {
 	};
 
 public:
+	constexpr static auto EASY_INTERVAL = 20000ms;
+	constexpr static auto MEDIUM_INTERVAL = 15000ms;
+	constexpr static auto HARD_INTERVAL = 8000ms;
+
 	// used as a wrong id when a fighting pit is wrongly generated
 	static constexpr unsigned CREATION_ERROR = 0;
 
@@ -99,8 +105,9 @@ public:
 	 *
 	 * @param userName
 	 * @param idMember
+	 * @param action string representing the action to do (has to be a registered action in chaiscript engine)
 	 */
-	void forwardMessageToTeamMember(const std::string& userName, unsigned int idMember);
+	void forwardMessageToTeamMember(const std::string& userName, unsigned int idMember, const std::string& action);
 
 	/**
 	 * Add an authenticated player in the fighting pit, the player authentication is not verified an thus must be
@@ -135,6 +142,7 @@ public:
 	[[nodiscard]] unsigned
 	getId() const { return _arenaId; }
 
+	void setPlayerReadiness(const std::string& userName);
 	void setArenaId(unsigned arenaId) { _arenaId = arenaId; }
 
 private:
@@ -150,12 +158,14 @@ private:
 	[[nodiscard]] bool
 	addContender(const std::shared_ptr<FightingContender>& fc) { return _contenders.addContender(fc); }
 
-	void initializePartyTeam(AllyPartyTeams&& allyPartyTeams);
+	[[nodiscard]] Progress
+	updateProgressStatus();
+
 	void initializeSideBattles();
 	void initializePriorityListInSidesBattle();
 
 private:
-	Ending _end = ON_HOLD;
+	Progress _progress = Progress::ON_HOLD;
 	Level _levelFightingPit;
 	std::chrono::milliseconds _timeInterlude;
 	PitContenders _contenders;

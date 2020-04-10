@@ -45,47 +45,58 @@ using ComparatorSelection = std::function<bool(std::shared_ptr<T>, std::shared_p
 class AllyPartyTeams {
 
 public:
-    [[nodiscard]] std::shared_ptr<TeamMember>
-    selectSuitableMember(ComparatorSelection<TeamMember> comp);
+	[[nodiscard]] std::shared_ptr<TeamMember>
+	selectSuitableMember(ComparatorSelection<TeamMember> comp);
 
-    [[nodiscard]] std::shared_ptr<TeamMember>
-    selectSuitableMemberOnSide(HexagonSide::Orientation side, ComparatorSelection<TeamMember> comp);
+	[[nodiscard]] std::shared_ptr<TeamMember>
+	selectSuitableMemberOnSide(HexagonSide::Orientation side, ComparatorSelection<TeamMember> comp);
 
-    [[nodiscard]] std::shared_ptr<TeamMember>
-    selectSuitableMemberAlive(ComparatorSelection<TeamMember> comp);
+	[[nodiscard]] std::shared_ptr<TeamMember>
+	selectSuitableMemberAlive(ComparatorSelection<TeamMember> comp);
 
-    [[nodiscard]] std::shared_ptr<TeamMember>
-    selectSuitableMemberOnSideAlive(HexagonSide::Orientation side, ComparatorSelection<TeamMember> comp);
+	[[nodiscard]] std::shared_ptr<TeamMember>
+	selectSuitableMemberOnSideAlive(HexagonSide::Orientation side, ComparatorSelection<TeamMember> comp);
 
-    [[nodiscard]] std::shared_ptr<TeamMember>
-    selectRandomMemberOnSideAlive(HexagonSide::Orientation side);
+	[[nodiscard]] std::shared_ptr<TeamMember>
+	selectRandomMemberOnSideAlive(HexagonSide::Orientation side);
 
-    [[nodiscard]] std::shared_ptr<TeamMember>
-    selectMemberById(unsigned idMember);
+	[[nodiscard]] std::shared_ptr<TeamMember>
+	selectMemberById(unsigned idMember);
 
-    [[nodiscard]] std::vector<std::shared_ptr<TeamMember>>
-    getMembersBySide(HexagonSide::Orientation side) const;
+	[[nodiscard]] std::vector<std::shared_ptr<TeamMember>>
+	getMembersBySide(HexagonSide::Orientation side) const;
 
-    [[nodiscard]] std::shared_ptr<TeamMember>
-    getSpecificTeamMemberById(const std::string& userName, unsigned idMember) const;
+	[[nodiscard]] std::shared_ptr<TeamMember>
+	getSpecificTeamMemberById(const std::string& userName, unsigned idMember) const;
 
-    [[nodiscard]] unsigned
-    getNumberAlly() const { return _currentTeamMemberId; }
+	[[nodiscard]] unsigned
+	getNumberAlly() const { return _currentTeamMemberId; }
 
-    [[nodiscard]] unsigned
-    allyNumberOnSide(HexagonSide::Orientation side) const;
+	[[nodiscard]] unsigned
+	allyNumberOnSide(HexagonSide::Orientation side) const;
 
-    [[nodiscard]] const PartyTeam&
-    getPartyTeamOfPlayer(const std::string& userName) const;
+	[[nodiscard]] const PartyTeam&
+	getPartyTeamOfPlayer(const std::string& userName) const;
 
-    void executeAllyAction(const data::PriorityElem& ally, PitContenders& pc, std::unique_ptr<chaiscript::ChaiScript>& chaiPtr);
+	[[nodiscard]] bool
+	allDead() const;
+
+	/**
+	 * Validate the readiness of a player to start the battle
+	 * @param userName name of the player validating its readiness
+	 * @return true if all players are ready, false otherwise
+	 */
+	[[nodiscard]] bool
+	setPartyReadiness(const std::string& userName);
+
+	void executeAllyAction(const data::PriorityElem& ally, PitContenders& pc, std::unique_ptr<chaiscript::ChaiScript>& chaiPtr);
 	void addPartyTeam(std::unique_ptr<PartyTeam>&& team);
 
 private:
-    std::vector<std::unique_ptr<PartyTeam>> _partyTeams;
+	std::vector<std::unique_ptr<PartyTeam>> _partyTeams;
 
-    // automatically incremented for each TeamMember when adding a PartyTeam
-    unsigned _currentTeamMemberId{0};
+	// automatically incremented for each TeamMember when adding a PartyTeam
+	unsigned _currentTeamMemberId{0};
 
 };
 

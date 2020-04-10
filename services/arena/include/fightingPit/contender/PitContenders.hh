@@ -83,6 +83,9 @@ public:
 	[[nodiscard]] bool
 	addContender(const std::shared_ptr<FightingContender>& contender);
 
+	[[nodiscard]] bool
+	allDead() const;
+
 	void executeContenderAction(const data::PriorityElem& contender);
 
 private:

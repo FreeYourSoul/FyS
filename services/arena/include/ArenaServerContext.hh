@@ -39,15 +39,25 @@ struct EncounterContext {
 			return std::make_tuple(key, maxEncountering, chance) != std::make_tuple(other.key, other.maxEncountering, other.chance);
 		}
 
+		//! key of the encounter to find it back via the cache
 		std::string key;
+		//! Max number of this type of monster you can encounter at once
 		uint maxEncountering;
+		//! percentage of chance to encounter this monster out of the 3 different difficulties
 		std::array<uint, 3> chance;
 	};
 
+	/**
+	 * Verify if the given zone is registered in the context
+	 * @param wsId zone to check
+	 * @return true if the zone is registered, false otherwise
+	 */
 	[[nodiscard]] bool
 	zoneRegistered(const std::string& wsId) const noexcept { return _contendersPerZone.find(wsId) != _contendersPerZone.cend(); }
 
+	//! range of number of monster findable per zone
 	std::map<std::string, std::array<std::pair<uint, uint>, 3>> _rangeEncounterPerZone;
+	//! contender findable per zone
 	std::map<std::string, std::vector<EncounterDesc>> _contendersPerZone;
 };
 

@@ -181,4 +181,35 @@ AllyPartyTeams::getPartyTeamOfPlayer(const std::string& userName) const
 	return **it;
 }
 
+bool
+AllyPartyTeams::setPartyReadiness(const std::string &userName)
+{
+	auto it = std::find_if(_partyTeams.begin(), _partyTeams.end(), [&userName](const auto& partyTeam){
+		return userName == partyTeam->getUserName();
+	});
+	if (it == _partyTeams.end()) {
+		throw std::runtime_error(fmt::format("GetPartyTeamOfPlayer called on a non-existing player of name {}", userName));
+	}
+
+	// do not process if the team has been already set to ready
+	if ((*it)->isTeamReady()) {
+		SPDLOG_WARN("Player {} is setting himself ready twice", userName);
+		return false;
+	}
+
+	(*it)->setTeamReady(true);
+	return std::all_of(_partyTeams.begin(), _partyTeams.end(), [](const auto& partyTeam){
+		return partyTeam->isTeamReady();
+	});
+}
+bool
+AllyPartyTeams::allDead() const
+{
+	return std::all_of(_partyTeams.begin(), _partyTeams.end(), [](const auto& pt) {
+		return std::all_of(pt->getTeamMembers().begin(), pt->getTeamMembers().end(), [](const auto& member) {
+			return member->getStatus().life.isDead();
+		});
+	});
+}
+
 }

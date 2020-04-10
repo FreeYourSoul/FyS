@@ -29,19 +29,20 @@
 #include <Cml.hh>
 
 namespace fys::cache {
-    class CmlCopy final : public Cml {
+    class CmlCopy : public Cml {
     public:
         ~CmlCopy() override {}
         CmlCopy(const std::string &pathLocalStorage,
                 const std::string &pathCopy) : Cml(pathLocalStorage), _copyPathStorage(pathCopy) {
-            if (!std::filesystem::exists(_copyPathStorage))
+            if (!std::filesystem::exists(_copyPathStorage)) {
                 SPDLOG_ERROR("Path copy does not exist {}", pathCopy);
+			}
         }
 
     protected:
         void createFileInLocalStorage(const CmlKey &cmlKey) override;
 
-    private:
+    protected:
         std::filesystem::path _copyPathStorage;
 
     };
