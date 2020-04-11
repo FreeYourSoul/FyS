@@ -47,8 +47,9 @@ using chaiscript::fun;
 namespace {
 std::string
 getActionNameFromKey(const std::string& key)
-{
+{ // todo, put this code in a common zone + fix
 	auto startSeparator = key.find_last_of(':');
+	if (startSeparator == std::string::npos) return "";
 	return key.substr(startSeparator + 1, key.find_last_of('.') - startSeparator - 1);
 }
 }
@@ -121,7 +122,7 @@ ChaiRegister::loadAndRegisterActionPartyTeam(chaiscript::ChaiScript& chai, cache
 				try {
 					chai.eval(action);
 				}
-				catch (...) { SPDLOG_INFO("Action with key {} already loaded", key); }
+				catch (...) { SPDLOG_DEBUG("Action with key {} already loaded", key); }
 
 				// instantiate the action variable for given team member in chai engine
 				const std::string keyPlayer = std::string(pt.getUserName()).append("_").append(tm->getName());

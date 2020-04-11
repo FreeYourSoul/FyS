@@ -37,6 +37,16 @@ struct overloaded : Ts ... {
 };
 template<class... Ts> overloaded(Ts...) -> overloaded<Ts...>;
 
+namespace {
+std::string
+getActionNameFromKey(const std::string& key)
+{ // todo, put this code in a common zone + fix
+	auto startSeparator = key.find_last_of(':');
+	if (startSeparator == std::string::npos) return "";
+	return key.substr(startSeparator + 1, key.find_last_of('.') - startSeparator - 1);
+}
+}
+
 namespace fys::arena {
 
 void
@@ -58,10 +68,18 @@ TeamMember::executeAction(
 	}
 
 	const std::string allyAction = fmt::format(
-			R"(ally_actions["{}_{}"]["{}"])", _userName, _name, _actionsDoable.at(pa->idAction).first);
+			R"(ally_actions["{}_{}"]["{}"])", _userName, _name, getActionNameFromKey(_actionsDoable.at(pa->idAction).first));
 	const auto funcAction = chaiPtr->eval<std::function<int(data::Status)>>(fmt::format(
 			R"(fun(allyStatus){{ return {}.execute(allyStatus);}})", allyAction));
-	const auto targetType = chaiPtr->eval<data::Targeting>(allyAction + ".requireTarget();");
+	data::Targeting targetType;
+
+	try {
+		targetType = chaiPtr->eval<data::Targeting>(allyAction + ".requireTarget();");
+	}
+	catch (const std::exception& e) {
+		SPDLOG_ERROR("action retrieved by {} doesn't have requireTarget method {}", allyAction, e.what());
+		return;
+	}
 
 	try {
 		if (pa->target) {
@@ -94,7 +112,7 @@ TeamMember::executeAction(
 		}
 	}
 	catch (const chaiscript::exception::eval_error& ee) {
-		SPDLOG_ERROR("Error caught on script execution while executing {} with target required.\nTeam owned by {} TeamMember {}\n{}",
+		SPDLOG_ERROR("Error caught on script execution while executing {} with target required {}. Team owned by {} TeamMember {} --> {}",
 				pa->idAction, static_cast<bool>(pa->target), _userName, _name, ee.what());
 	}
 }
@@ -103,7 +121,7 @@ void
 TeamMember::addPendingAction(const std::string& actionName, TargetType target)
 {
 	auto it = std::find_if(_actionsDoable.begin(), _actionsDoable.end(), [&actionName](const auto& action) {
-		return actionName == action.first;
+		return actionName == getActionNameFromKey(action.first);
 	});
 	if (it == _actionsDoable.end()) {
 		SPDLOG_WARN("Player {}::{} tried unrecognized action called {}", _userName, _name, actionName);

@@ -91,7 +91,12 @@ TEST_CASE("FightingPit test", "[service][arena]")
 		fpa.setCreatorTeamParty(getPartyTeam("Winner"));
 		fpa.setDifficulty(FightingPit::EASY);
 		fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
-		fpa.addActionToOneMember(0, "arena:actions:damage:slash.chai", 5);
+
+		fpa.addActionToOneMember(0u, "arena:actions:damage:slash.chai", 1u); // slash level 1 do 33 damage
+		fpa.addActionToOneMember(1u, "arena:actions:damage:slash.chai", 2u); // slash level 2 do 36 damage
+		fpa.addActionToOneMember(2u, "arena:actions:damage:slash.chai", 3u); // slash level 3 do 39 damage
+		fpa.addActionToOneMember(3u, "arena:actions:damage:slash.chai", 4u); // slash level 4 do 42 damage
+
 		auto fp = fpa.buildFightingPit(ctx, "WS00");
 
 		const auto& contender = FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0);
@@ -102,11 +107,6 @@ TEST_CASE("FightingPit test", "[service][arena]")
 
 		const auto& c = FightingPitAnnouncer::getPitContenders(fp).getContenderOnSide(HexagonSide::Orientation::B_S);
 		const auto& p = FightingPitAnnouncer::getPartyTeams(fp).getMembersBySide(HexagonSide::Orientation::B_S);
-
-		p.at(0)->addDoableAction("slash", 1u); // slash level 1 do 33 damage
-		p.at(1)->addDoableAction("slash", 2u); // slash level 2 do 36 damage
-		p.at(2)->addDoableAction("slash", 3u); // slash level 3 do 39 damage
-		p.at(3)->addDoableAction("slash", 4u); // slash level 3 do 42 damage
 
 		SECTION("Battle Order") {
 
@@ -158,19 +158,22 @@ TEST_CASE("FightingPit test", "[service][arena]")
 		SECTION("Battle Turn 1 test") {
 
 			p.at(0)->addPendingAction("slash", ContenderTargetId{0});
+			p.at(1)->addPendingAction("slash", ContenderTargetId{0});
+			p.at(2)->addPendingAction("slash", ContenderTargetId{0});
+			p.at(3)->addPendingAction("slash", ContenderTargetId{0});
 			auto now = std::chrono::system_clock::now();
 			fp->continueBattle(now);
 
-			now += fys::arena::FightingPit::EASY_INTERVAL - 1ms;
+			now += fys::arena::FightingPit::EASY_INTERVAL + 1ms;
 			fp->continueBattle(now);
 
-//			now += fys::arena::FightingPit::EASY_INTERVAL;
+			now += fys::arena::FightingPit::EASY_INTERVAL + 1ms;
 //			fp->continueBattle(now);
 //
-//			now += fys::arena::FightingPit::EASY_INTERVAL;
+			now += fys::arena::FightingPit::EASY_INTERVAL + 1ms;
 //			fp->continueBattle(now);
 //
-//			now += fys::arena::FightingPit::EASY_INTERVAL;
+			now += fys::arena::FightingPit::EASY_INTERVAL + 1ms;
 //			fp->continueBattle(now);
 
 		} // End section : Battle Turn 1 test

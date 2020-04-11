@@ -78,6 +78,9 @@ addFSeamTests(
         ${CMAKE_CURRENT_SOURCE_DIR}/../../common/include/RandomGenerator.hh
 )
 
+
+target_compile_definitions(arena_test PUBLIC -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)
+
 addFSeamTests(
         DESTINATION_TARGET sampy_test
 
