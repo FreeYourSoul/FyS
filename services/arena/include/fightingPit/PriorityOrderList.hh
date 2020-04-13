@@ -44,7 +44,10 @@ public:
     empty() const { return _baseSpeed.empty(); }
 
     [[nodiscard]] const data::PriorityElem&
-    getCurrent() const { return _currentPrio; }
+    getCurrent() const noexcept { return _currentPrio; }
+
+    [[nodiscard]] unsigned
+    getTurnNumber() const noexcept { return !_currentTurn ? 1 : _currentTurn; }
 
     data::PriorityElem
     getNext();

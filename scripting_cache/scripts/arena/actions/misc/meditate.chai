@@ -1,0 +1,27 @@
+class meditate {
+    attr power;
+
+    def meditate(level)
+    {
+        this.set_explicit(true);
+        this.power = level * 10;
+    }
+
+    def requireTarget() {
+        SELF;
+    }
+
+    def execute(targetStatus)
+    {
+        print("Meditate is called");
+        var new_amount = targetStatus.magicPoint.current + this.power;
+        if (targetStatus.magicPoint.total < new_amount) {
+            targetStatus.magicPoint.current = targetStatus.magicPoint.total;
+        }
+        else {
+            targetStatus.magicPoint.current = new_amount;
+        }
+        1;
+    }
+
+};

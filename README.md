@@ -5,9 +5,8 @@
 ![Last commit](https://img.shields.io/github/last-commit/FreeYourSoul/FyS.svg)
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/FreeYourSoul/FyS/master/LICENSE)
-[![](https://tokei.rs/b1/github/FreeYourSoul/FyS?category=files)](https://github.com/FreeYourSoul/FyS)
-[![](https://tokei.rs/b1/github/FreeYourSoul/FyS?category=lines)](https://github.com/FreeYourSoul/FyS)
-[![](https://tokei.rs/b1/github/FreeYourSoul/FyS?category=code)](https://github.com/FreeYourSoul/FyS)
+[![Scc Count Badge](https://sloc.xyz/github/FreeYourSoul/FyS/)](https://github.com/boyter/scc/)
+[![Scc Count Badge](https://sloc.xyz/github/FreeYourSoul/FyS?category=code)](https://github.com/boyter/scc)
 # FyS Online
 
 FreeYourSoul Online, a scalable mmorpg game

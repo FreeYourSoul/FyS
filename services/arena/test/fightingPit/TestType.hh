@@ -197,9 +197,11 @@ public:
 
 class DeleteFolderWhenDone {
 public:
-	explicit DeleteFolderWhenDone(const std::string& v) : _path(v) { }
+	explicit DeleteFolderWhenDone(const std::string& v)
+			:_path(v) { }
 
-	~DeleteFolderWhenDone() {
+	~DeleteFolderWhenDone()
+	{
 		std::filesystem::remove_all(_path);
 	}
 
@@ -224,7 +226,7 @@ protected:
 			std::ofstream ofs(cmlKey.getPath());
 			ofs << MonsterTestScriptSleep;
 		}
-		else if ("testing:TestMonsterSleep.chai" == cmlKey.getKey()) {
+		else if ("testing:TestMonsterAttack.chai" == cmlKey.getKey()) {
 			std::ofstream ofs(cmlKey.getPath());
 			ofs << MonsterTestScriptAttack;
 		}

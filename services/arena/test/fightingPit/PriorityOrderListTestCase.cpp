@@ -25,7 +25,9 @@
 
 #define private protected
 #include <fightingPit/PriorityOrderList.hh>
+#undef private
 
+// some data are not checked during the comparison and thus ignored (0 set instead of an explicit value that won't be checked anyway)
 constexpr static uint DONT_CARE = 0;
 
 class PriorityOrderListPassThrough : public fys::arena::PriorityOrderList {
@@ -78,7 +80,7 @@ TEST_CASE("PriorityOrderList test", "[service][arena]")
 		// 2:19
 		// 1:10
 		// 3:3
-		// 4:1
+		// 4:2
 		REQUIRE(fys::arena::data::PriorityElem(5, 30, fys::arena::data::CONTENDER) == pol._analyzedList.at(4));
 		REQUIRE(fys::arena::data::PriorityElem(2, 19, fys::arena::data::PARTY_MEMBER) == pol._analyzedList.at(3));
 		REQUIRE(fys::arena::data::PriorityElem(1, 10, fys::arena::data::CONTENDER) == pol._analyzedList.at(2));
@@ -492,6 +494,136 @@ TEST_CASE("PriorityOrderList test", "[service][arena]")
 	} // End section : Public API test
 
 }
+
+TEST_CASE("Test for FightingPit testcase", "[service][arena]")
+{
+
+	PriorityOrderListPassThrough priorityList;
+
+	REQUIRE(priorityList.empty());
+
+	priorityList.addParticipantInList(1, 3, fys::arena::data::PARTY_MEMBER);
+	priorityList.addParticipantInList(2, 5, fys::arena::data::PARTY_MEMBER);
+	priorityList.addParticipantInList(0, 8, fys::arena::data::CONTENDER);
+	priorityList.addParticipantInList(3, 10, fys::arena::data::PARTY_MEMBER);
+	priorityList.addParticipantInList(4, 20, fys::arena::data::PARTY_MEMBER);
+
+	REQUIRE_FALSE(priorityList.empty());
+	REQUIRE(fys::arena::data::PriorityElem(4, 20, fys::arena::data::PARTY_MEMBER) == priorityList._baseSpeed.at(4));
+	REQUIRE(fys::arena::data::PriorityElem(3, 10, fys::arena::data::PARTY_MEMBER) == priorityList._baseSpeed.at(3));
+	REQUIRE(fys::arena::data::PriorityElem(0, 8, fys::arena::data::CONTENDER)     == priorityList._baseSpeed.at(2));
+	REQUIRE(fys::arena::data::PriorityElem(2, 5, fys::arena::data::PARTY_MEMBER)  == priorityList._baseSpeed.at(1));
+	REQUIRE(fys::arena::data::PriorityElem(1, 3, fys::arena::data::PARTY_MEMBER)  == priorityList._baseSpeed.at(0));
+
+	// TURN 1
+
+	/**
+	 * a4:20
+	 * a3:10
+	 * c0:8
+	 * a2:5
+	 * a1:3
+	 */
+ 	REQUIRE(1 == priorityList.getTurnNumber());
+	REQUIRE(fys::arena::data::PriorityElem(4, DONT_CARE, fys::arena::data::PARTY_MEMBER) == priorityList.getNext());
+	REQUIRE(fys::arena::data::PriorityElem(3, DONT_CARE, fys::arena::data::PARTY_MEMBER) == priorityList.getNext());
+	REQUIRE(fys::arena::data::PriorityElem(0, DONT_CARE, fys::arena::data::CONTENDER)    == priorityList.getNext());
+	REQUIRE(fys::arena::data::PriorityElem(2, DONT_CARE, fys::arena::data::PARTY_MEMBER) == priorityList.getNext());
+	REQUIRE(fys::arena::data::PriorityElem(1, DONT_CARE, fys::arena::data::PARTY_MEMBER) == priorityList.getNext());
+
+	/**
+	 * a4:20 -->  20 - 10  -->  a4:10     a4 Added
+	 * a3:10 -----------------
+	 * c0:8  -----------------
+	 * a2:5  -----------------
+	 * a1:3  -----------------
+	 *
+	 * a4:10 -->  10 - 10  -->  a4:0      a4 Added
+	 * a3:10 -----------------
+	 * c0:8  -----------------
+	 * a2:5  -----------------
+	 * a1:3  -----------------
+	 *
+	 * a3:10 -->  10 - 8  -->  a3:2      a3 Added
+	 * c0:8  -----------------
+	 * a2:5  -----------------
+	 * a1:3  -----------------
+	 * a4:0  -----------------
+	 *
+	 * c0:8  -->   8 - 5   -->  c0:3      c0 Added
+	 * a2:5  -----------------
+	 * a1:3  -----------------
+	 * a3:2  -----------------
+	 * a4:0  -----------------
+	 *
+	 * a2:5  -->   5 - 3   -->  a2:2      a2 Added
+	 * c0:3  -----------------
+	 * a1:3  -----------------
+	 * a3:2  -----------------
+	 * a4:0  -----------------
+	 *
+	 * c0:3  -->   3 - 3   -->  c0:1      c0 Added
+	 * a1:3  -----------------
+	 * a3:2  -----------------
+	 * a2:2  -----------------
+	 * a4:0  -----------------
+	 *
+	 * a1:3  -->   3 - 2   -->  a1:1      a1 Added
+	 * a3:2  -----------------
+	 * a2:2  -----------------
+	 * a4:0  -----------------
+	 * c0:0  -----------------
+	 */
+
+	REQUIRE(fys::arena::data::PriorityElem(4, DONT_CARE, fys::arena::data::PARTY_MEMBER) == priorityList.getNext());
+	REQUIRE(2 == priorityList.getTurnNumber());
+	REQUIRE(fys::arena::data::PriorityElem(4, DONT_CARE, fys::arena::data::PARTY_MEMBER) == priorityList.getNext());
+	REQUIRE(fys::arena::data::PriorityElem(3, DONT_CARE, fys::arena::data::PARTY_MEMBER) == priorityList.getNext());
+	REQUIRE(fys::arena::data::PriorityElem(0, DONT_CARE, fys::arena::data::CONTENDER) == priorityList.getNext());
+	REQUIRE(fys::arena::data::PriorityElem(2, DONT_CARE, fys::arena::data::PARTY_MEMBER) == priorityList.getNext());
+	REQUIRE(fys::arena::data::PriorityElem(0, DONT_CARE, fys::arena::data::CONTENDER) == priorityList.getNext());
+	REQUIRE(fys::arena::data::PriorityElem(1, DONT_CARE, fys::arena::data::PARTY_MEMBER) == priorityList.getNext());
+
+	/**
+	 * a4:40  -->  40 - 32  -->  a4:8      a4 Added
+	 * a3:32  -----------------
+	 * c0:29  -----------------
+	 * a2:27  -----------------
+	 * a1:25  -----------------
+	 *
+	 * a3:32  -->  32 - 29  -->  a3:4      a3 Added
+	 * c0:29  -----------------
+	 * a2:27  -----------------
+	 * a1:25  -----------------
+	 * a4:8   -----------------
+	 *
+	 * c0:29  -->  29 - 27  -->  c0:2      c0 Added
+	 * a2:27  -----------------
+	 * a1:25  -----------------
+	 * a4:8   -----------------
+	 * a3:4   -----------------
+	 *
+	 * a2:27  -->  25 - 25  -->  a2:2      a2 Added
+	 * a1:25  -----------------
+	 * a4:8   -----------------
+	 * a3:4   -----------------
+	 * c0:2   -----------------
+	 *
+	 * a1:25  -->  25 - 8  -->  a1:17      a1 Added
+	 * a4:8   -----------------
+	 * a3:4   -----------------
+	 * c0:2   -----------------
+	 * a2:2   -----------------
+	 *
+	 */
+	REQUIRE(fys::arena::data::PriorityElem(4, DONT_CARE, fys::arena::data::PARTY_MEMBER) == priorityList.getNext());
+	REQUIRE(3 == priorityList.getTurnNumber());
+	REQUIRE(fys::arena::data::PriorityElem(3, DONT_CARE, fys::arena::data::PARTY_MEMBER) == priorityList.getNext());
+	REQUIRE(fys::arena::data::PriorityElem(0, DONT_CARE, fys::arena::data::CONTENDER)    == priorityList.getNext());
+	REQUIRE(fys::arena::data::PriorityElem(2, DONT_CARE, fys::arena::data::PARTY_MEMBER) == priorityList.getNext());
+	REQUIRE(fys::arena::data::PriorityElem(1, DONT_CARE, fys::arena::data::PARTY_MEMBER) == priorityList.getNext());
+
+} // End test case : Test for FightingPit testcase
 
 #undef private
 

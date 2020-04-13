@@ -118,14 +118,22 @@ public:
 	 */
 	void runServerLoop() noexcept;
 
+
 private:
-	void forwardReplyToDispatcher(zmq::message_t&& identityWs, const fys::arena::AwaitingPlayerArena& awaitingArena) noexcept;
+	/**
+	 * Verify if the server is saturated (too many battle at the same time running on this ArenaService)
+	 * @return true if the server is saturated, false otherwise
+	 */
+	[[nodiscard]] bool
+	isSaturated() const noexcept;
 
 	[[nodiscard]] unsigned
 	createNewFightingPit(const AwaitingPlayerArena& awaited) noexcept;
 
 	[[nodiscard]] std::pair<bool, AwaitingPlayerArenaIt>
 	isPlayerAwaited(const std::string& name, const std::string& token, unsigned idFightingPit) const noexcept;
+
+	void forwardReplyToDispatcher(zmq::message_t&& identityWs, const fys::arena::AwaitingPlayerArena& awaitingArena) noexcept;
 
 private:
 	std::reference_wrapper<const ArenaServerContext> _ctx;

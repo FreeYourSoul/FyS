@@ -109,8 +109,8 @@ TEST_CASE("FightingPitAnnouncer test", "[service][arena]")
 		fpa.setCreatorTeamParty(getPartyTeam(" "));
 		fpa.setDifficulty(FightingPit::HARD);
 		fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
-		fpa.addActionToOneMember(0, "arena", 5);
-		auto fp = fpa.buildFightingPit(ctx, "WS00"); // todo to fix
+		fpa.addActionToOneMember(0, "arena", 5); // todo to fix
+		auto fp = fpa.buildFightingPit(ctx, "WS00");
 
 	} // End section : test invalid action name registered
 
@@ -166,6 +166,10 @@ TEST_CASE("FightingPitAnnouncer test", "[service][arena]")
 			fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
 			fpa.addActionToOneMember(0, "arena:actions:damage:slash.chai", 5);
 			auto fp = fpa.buildFightingPit(ctx, "WS00");
+
+			REQUIRE_FALSE(fp->isBattleOver());
+			REQUIRE(fp->isJoinable());
+			REQUIRE_THROWS(fp->setPlayerReadiness("NotExisting")); // test if the fp throws in this case
 
 			REQUIRE(2 == FightingPitAnnouncer::getPitContenders(fp).getNumberContender());
 

@@ -70,7 +70,7 @@ TeamMember::executeAction(
 	const std::string allyAction = fmt::format(
 			R"(ally_actions["{}_{}"]["{}"])", _userName, _name, getActionNameFromKey(_actionsDoable.at(pa->idAction).first));
 	const auto funcAction = chaiPtr->eval<std::function<int(data::Status&)>>(fmt::format(
-			R"(fun(allyStatus){{ return {}.execute(allyStatus);}})", allyAction));
+			R"(fun(targetStatus){{ return {}.execute(targetStatus);}})", allyAction));
 	data::Targeting targetType;
 
 	try {
@@ -82,7 +82,8 @@ TeamMember::executeAction(
 	}
 
 	try {
-		if (pa->target) {
+		// If a specific target is required, otherwise self is used
+		if (pa->target.has_value()) {
 			std::visit(overloaded{
 					[&apt, &targetType, &funcAction](AllyTargetId target) {
 						if (targetType == data::ALLY || targetType == data::ALLY_OR_ENNEMY) {
@@ -108,7 +109,7 @@ TeamMember::executeAction(
 			}, *pa->target);
 		}
 		else if (funcAction(_status)) {
-			SPDLOG_DEBUG("Ally {}::{} id {} executed action {}", _userName, _name, _id, pa->idAction);
+			SPDLOG_DEBUG("Ally {}::{} id {} executed action {} on himself", _userName, _name, _id, pa->idAction);
 		}
 	}
 	catch (const chaiscript::exception::eval_error& ee) {
@@ -118,7 +119,7 @@ TeamMember::executeAction(
 }
 
 void
-TeamMember::addPendingAction(const std::string& actionName, TargetType target)
+TeamMember::addPendingAction(const std::string& actionName, std::optional<TargetType> target)
 {
 	auto it = std::find_if(_actionsDoable.begin(), _actionsDoable.end(), [&actionName](const auto& action) {
 		return actionName == getActionNameFromKey(action.first);
@@ -129,7 +130,7 @@ TeamMember::addPendingAction(const std::string& actionName, TargetType target)
 	}
 
 	//TODO: add a check on whether the target is correct or not (contender or ally target)
-	_pendingActions.push(PendingAction{static_cast<uint>(std::distance(_actionsDoable.begin(), it)), target});
+	_pendingActions.push(PendingAction{static_cast<uint>(std::distance(_actionsDoable.begin(), it)), std::move(target)});
 }
 
 }

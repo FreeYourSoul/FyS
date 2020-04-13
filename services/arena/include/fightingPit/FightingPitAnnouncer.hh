@@ -103,6 +103,7 @@ public:
 	void setDifficulty(FightingPit::Level level) noexcept { _difficulty = level; }
 	void setCreatorTeamParty(std::unique_ptr<PartyTeam> pt) { _creatorPartyTeam = std::move(pt); }
 
+	// ============================================================================================================================
 	// for testing validation purpose
 	[[nodiscard]] static const AllyPartyTeams&
 	getPartyTeams(const std::unique_ptr<FightingPit>& fp) { return fp->_partyTeams; }
@@ -119,8 +120,6 @@ public:
 	[[nodiscard]] static unsigned
 	getArenaId(const std::unique_ptr<FightingPit>& fp) { return fp->_arenaId; }
 
-	[[nodiscard]] static bool
-	isOnHold(const std::unique_ptr<FightingPit>& fp) { return fp->_progress == FightingPit::Progress::ON_HOLD; }
 	[[nodiscard]] static bool
 	isOnGoing(const std::unique_ptr<FightingPit>& fp) { return fp->_progress == FightingPit::Progress::ON_GOING; }
 	[[nodiscard]] static bool

@@ -96,6 +96,12 @@ ArenaServerService::runServerLoop() noexcept
 	while (true) {
 		_connectionHandler.pollAndProcessMessageFromDispatcher(
 				[this](zmq::message_t&& identityWs, zmq::message_t&& worldServerMessage) {
+					// In case of a saturation of the server, return an error to the dispatcher
+					if (_workerService.isSaturated()) {
+						// todo return an error to the dispatcher containing all the incoming message for it to be forwarded to another server
+						return;
+					}
+
 					const auto* binary = fys::fb::GetFightingPitEncounter(worldServerMessage.data());
 
 					AwaitingPlayerArena apa = createAwaitingPlayer(binary);
@@ -174,6 +180,12 @@ ArenaServerService::runServerLoop() noexcept
 				});
 	}
 	t.join();
+}
+
+bool
+ArenaServerService::isSaturated() const noexcept {
+	const unsigned awaitedInstance = _awaitingArena.size();
+	return (awaitedInstance + _workerService.getNumberBattleRunning()) > _ctx.get().getBattleThreshold();
 }
 
 std::pair<bool, const std::unordered_map<std::string, AwaitingPlayerArena>::const_iterator>

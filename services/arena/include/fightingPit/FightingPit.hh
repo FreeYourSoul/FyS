@@ -131,6 +131,10 @@ public:
 
 	/**
 	 * Used to add a new party team (incoming player in the fighting pit) and register its action to chai
+	 *
+	 * @note The verification if the fighting pit is in ON_HOLD mode is not done in this function and thus should be done before the
+	 * PartyTeam object is created.
+	 *
 	 * @param pt party team to add
 	 * @param cache retrieving object to find the actions
 	 */
@@ -149,20 +153,23 @@ public:
 	getPartyTeamOfPlayer(const std::string& userName) const { return _partyTeams.getPartyTeamOfPlayer(userName); }
 
 	[[nodiscard]] const std::unique_ptr<chaiscript::ChaiScript>&
-	getChaiPtr() const { return _chaiPtr; }
+	getChaiPtr() const noexcept { return _chaiPtr; }
 
 	[[nodiscard]] unsigned
-	getId() const { return _arenaId; }
+	getId() const noexcept { return _arenaId; }
+
+	[[nodiscard]] bool
+	isJoinable() const noexcept { return _progress == Progress::ON_HOLD; }
 
 	/**
 	 * Check if the battle is done, the winner doesn't matter, this is a status to cleanup the fighting pit when its done
 	 * @return true if the battle is over, false otherwise
 	 */
 	[[nodiscard]] bool
-	isBattleOver() const { return _progress == Progress::CLEANUP; }
+	isBattleOver() const noexcept { return _progress == Progress::CLEANUP; }
 
 	void setPlayerReadiness(const std::string& userName);
-	void setArenaId(unsigned arenaId) { _arenaId = arenaId; }
+	void setArenaId(unsigned arenaId) noexcept { _arenaId = arenaId; }
 
 private:
 	/**

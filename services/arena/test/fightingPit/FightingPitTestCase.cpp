@@ -83,7 +83,7 @@ TEST_CASE("FightingPit test", "[service][arena]")
 	std::shared_ptr<std::mt19937> mt = std::make_shared<std::mt19937>(42);
 	fseamMock->dupeReturn<FSeam::RandomGenerator::get>(mt);
 
-	SECTION("InGame fighting Ally Team Win") {
+	SECTION("InGame fighting Ally Team Win (One Contender)") {
 
 		FightingPitAnnouncer fpa(cml);
 		fpa.setCreatorUserName("Winner");
@@ -153,8 +153,9 @@ TEST_CASE("FightingPit test", "[service][arena]")
 
 		} // End section : Battle Order
 
-		REQUIRE(FightingPitAnnouncer::isOnHold(fp));
+		REQUIRE(fp->isJoinable());
 		fp->setPlayerReadiness("Winner");
+		REQUIRE_FALSE(fp->isJoinable());
 		REQUIRE(FightingPitAnnouncer::isOnGoing(fp));
 
 		SECTION("Battle Turn 1 test") {
@@ -223,9 +224,321 @@ TEST_CASE("FightingPit test", "[service][arena]")
 
 	} // End section : InGame fighting
 
+	SECTION("InGame fighting Contender Team Win (One Contender)") {
+
+		ctx._contendersPerZone["WS00"] = {
+				EncounterContext::EncounterDesc{"testing:TestMonsterAttack.chai", 3, {100, 100, 100}},
+		};
+
+		FightingPitAnnouncer fpa(cml);
+		fpa.setCreatorUserName("Loser");
+		fpa.setCreatorUserToken("LoserToken");
+		auto partyTeam = getPartyTeam("Loser");
+		partyTeam->accessTeamMembers().at(0)->accessStatus().magicPoint.current = 0;
+		partyTeam->accessTeamMembers().at(1)->accessStatus().magicPoint.current = 0;
+		partyTeam->accessTeamMembers().at(2)->accessStatus().magicPoint.current = 0;
+		partyTeam->accessTeamMembers().at(3)->accessStatus().magicPoint.current = 0;
+		fpa.setCreatorTeamParty(std::move(partyTeam));
+		fpa.setDifficulty(FightingPit::EASY);
+		fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
+
+		fpa.addActionToOneMember(0u, "arena:actions:misc:meditate.chai", 1u); // meditate level 1 restore 10 mp
+		fpa.addActionToOneMember(1u, "arena:actions:misc:meditate.chai", 2u); // meditate level 2 restore 20 mp
+		fpa.addActionToOneMember(2u, "arena:actions:misc:meditate.chai", 3u); // meditate level 3 restore 30 mp
+		fpa.addActionToOneMember(3u, "arena:actions:misc:meditate.chai", 4u); // meditate level 4 restore 40 mp
+
+		auto fp = fpa.buildFightingPit(ctx, "WS00");
+
+		auto& chai = fp->getChaiPtr();
+
+		REQUIRE(1 == FightingPitAnnouncer::getPitContenders(fp).getNumberContender());
+		const auto& contender = FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0);
+		const auto& c = FightingPitAnnouncer::getPitContenders(fp).getContenderOnSide(HexagonSide::Orientation::B_S);
+		const auto& p = FightingPitAnnouncer::getPartyTeams(fp).getMembersBySide(HexagonSide::Orientation::B_S);
+
+		SECTION("Initial setup") {
+			REQUIRE("TestMonsterAttack" == contender->getContenderScripting()->getContenderName());
+			REQUIRE(4 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers().size());
+			REQUIRE(100 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().life.current);
+			REQUIRE(100 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().life.total);
+			REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().magicPoint.current);
+			REQUIRE(200 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().life.current);
+			REQUIRE(200 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().life.total);
+			REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().magicPoint.current);
+			REQUIRE(550 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.current);
+			REQUIRE(550 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.total);
+			REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().magicPoint.current);
+			REQUIRE(140 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().life.current);
+			REQUIRE(140 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().life.total);
+			REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().magicPoint.current);
+
+			REQUIRE(1 == FightingPitAnnouncer::getPitContenders(fp).getNumberContender());
+			REQUIRE(1 == FightingPitAnnouncer::getPitContenders(fp).contenderOnSide(HexagonSide::Orientation::B_S));
+			REQUIRE(4 == FightingPitAnnouncer::getPartyTeams(fp).getNumberAlly());
+
+			REQUIRE(8 == c.at(0)->getStatus().initialSpeed);
+			REQUIRE(3 == p.at(0)->getStatus().initialSpeed);
+			REQUIRE(5 == p.at(1)->getStatus().initialSpeed);
+			REQUIRE(10 == p.at(2)->getStatus().initialSpeed);
+			REQUIRE(20 == p.at(3)->getStatus().initialSpeed);
+		} // End section : Initial setup
+
+		REQUIRE(fp->isJoinable());
+		fp->setPlayerReadiness("Loser");
+		REQUIRE_FALSE(fp->isJoinable());
+		REQUIRE(FightingPitAnnouncer::isOnGoing(fp));
+
+		SECTION("Battle Order turn 1") { // a4, a3, c0, a2, a1
+
+			auto& side = FightingPitAnnouncer::getSideBattleForSide(fp, HexagonSide::Orientation::B_S);
+			auto now = std::chrono::system_clock::now();
+
+			REQUIRE_FALSE(side.empty());
+
+			fys::arena::data::PriorityElem pe = side.getCurrentParticipantTurn(now, 0ms);
+			REQUIRE_FALSE(pe.isContender);
+			REQUIRE(20 == pe.speed);
+			REQUIRE(4 == pe.id);
+
+			pe = side.getCurrentParticipantTurn(now + 1ms, 0ms);
+			REQUIRE_FALSE(pe.isContender);
+			REQUIRE(10 == pe.speed);
+			REQUIRE(3 == pe.id);
+
+			pe = side.getCurrentParticipantTurn(now + 1ms, 0ms);
+			REQUIRE(pe.isContender);
+			REQUIRE(8 == pe.speed);
+			REQUIRE(0 == pe.id);
+
+			pe = side.getCurrentParticipantTurn(now + 1ms, 0ms);
+			REQUIRE_FALSE(pe.isContender);
+			REQUIRE(5 == pe.speed);
+			REQUIRE(2 == pe.id);
+
+			pe = side.getCurrentParticipantTurn(now + 1ms, 0ms);
+			REQUIRE_FALSE(pe.isContender);
+			REQUIRE(3 == pe.speed);
+			REQUIRE(1 == pe.id);
+
+			SECTION("Battle Order turn 2 ") {
+
+				pe = side.getCurrentParticipantTurn(now + 1ms, 0ms);
+				REQUIRE_FALSE(pe.isContender);
+				REQUIRE(20 == pe.speed);
+				REQUIRE(4 == pe.id);
+
+				pe = side.getCurrentParticipantTurn(now + 1ms, 0ms);
+				REQUIRE_FALSE(pe.isContender);
+				REQUIRE(10 == pe.speed);
+				REQUIRE(3 == pe.id);
+
+				pe = side.getCurrentParticipantTurn(now + 1ms, 0ms);
+				REQUIRE(pe.isContender);
+				REQUIRE(8 == pe.speed);
+				REQUIRE(0 == pe.id);
+
+				pe = side.getCurrentParticipantTurn(now + 1ms, 0ms);
+				REQUIRE_FALSE(pe.isContender);
+				REQUIRE(5 == pe.speed);
+				REQUIRE(2 == pe.id);
+
+				pe = side.getCurrentParticipantTurn(now + 1ms, 0ms);
+				REQUIRE_FALSE(pe.isContender);
+				REQUIRE(3 == pe.speed);
+				REQUIRE(1 == pe.id);
+
+			} // End section : Battle Order turn 2
+
+		} // End section : Battle Order turn 1
+
+		SECTION("Battle Turn 1 test") {
+
+			p.at(0)->addPendingAction("meditate", std::nullopt);
+			p.at(1)->addPendingAction("meditate", std::nullopt);
+			p.at(2)->addPendingAction("meditate", std::nullopt);
+			p.at(3)->addPendingAction("meditate", std::nullopt);
+
+			auto now = std::chrono::system_clock::now();
+
+			try {
+				// Player id 4 (at index 3) is going to meditate, restore 40 mp, from 0 mp to 10 (max mp 10)
+				fp->continueBattle(now);
+				REQUIRE(10 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().magicPoint.current);
+				REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().magicPoint.current);
+				REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().magicPoint.current);
+				REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().magicPoint.current);
+
+				// Player id 3 (at index 2) is going to meditate, restore 30 mp, from 0 mp to 10 (max mp 10)
+				now += fys::arena::interval::EASY + 1ms;
+				fp->continueBattle(now);
+				REQUIRE(10 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().magicPoint.current);
+				REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().magicPoint.current);
+				REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().magicPoint.current);
+
+				// Contender turn : Target lowest life opponent:
+				// ally id 1  =  100 << Target -> damage done by attack 90 damage << 10 life left
+				// ally id 2  =  200
+				// ally id 3  =  550
+				// ally id 4  =  140
+				now += fys::arena::interval::EASY + 1ms;
+				fp->continueBattle(now);
+				REQUIRE(10 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().life.current); // damage inflicted
+				// Stay same
+				REQUIRE(100 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().life.total);
+				REQUIRE(200 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().life.current);
+				REQUIRE(200 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().life.total);
+				REQUIRE(550 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.current);
+				REQUIRE(550 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.total);
+				REQUIRE(140 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().life.current);
+				REQUIRE(140 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().life.total);
+
+				// Player id 2 (at index 1) is going to meditate, restore 20 mp, from 0 mp to 0 (max mp 0)
+				now += fys::arena::interval::EASY + 1ms;
+				fp->continueBattle(now);
+				REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().magicPoint.current);
+				REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().magicPoint.current);
+
+				// Player id 1 (at index 0) is going to meditate, restore 10 mp, from 0 mp to 10 (max mp 20)
+				now += fys::arena::interval::EASY + 1ms;
+				REQUIRE(FightingPitAnnouncer::isOnGoing(fp));
+				fp->continueBattle(now);
+				REQUIRE(10 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().magicPoint.current);
+
+				SECTION("Battle Turn 2 test") {
+					p.at(0)->addPendingAction("meditate", std::nullopt);
+					p.at(2)->addPendingAction("meditate", std::nullopt);
+					p.at(3)->addPendingAction("meditate", std::nullopt);
+
+					// Player id 4 (at index 3) is going to meditate, restore 20 mp, from 10 mp to 10 (max mp 10)
+					now += fys::arena::interval::EASY + 1ms;
+					fp->continueBattle(now);
+					REQUIRE(10 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().magicPoint.current);
+					REQUIRE(10 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().magicPoint.current);
+					REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().magicPoint.current);
+					REQUIRE(10 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().magicPoint.current);
+
+					// Player id 4 (at index 3) is going to meditate, restore 20 mp, from 10 mp to 10 (max mp 10)
+					now += fys::arena::interval::EASY + 1ms;
+					fp->continueBattle(now);
+					REQUIRE(10 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().magicPoint.current);
+					REQUIRE(10 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().magicPoint.current);
+					REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().magicPoint.current);
+					REQUIRE(10 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().magicPoint.current);
+
+					// Player id 3 (at index 2) is going to meditate, restore 30 mp, from 10 mp to 10 (max mp 10)
+					now += fys::arena::interval::EASY + 1ms;
+					fp->continueBattle(now);
+					REQUIRE(10 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().magicPoint.current);
+					REQUIRE(10 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().magicPoint.current);
+					REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().magicPoint.current);
+					REQUIRE(10 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().magicPoint.current);
+
+					// Contender turn : Target lowest life opponent:
+					// ally id 1  =  10 << Target -> damage done by attack 90 damage << 0 life left DEAD
+					// ally id 2  =  200
+					// ally id 3  =  550
+					// ally id 4  =  140
+					now += fys::arena::interval::EASY + 1ms;
+					fp->continueBattle(now);
+					REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().life.current); // damage inflicted
+					REQUIRE(fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().life.isDead());
+					// Stay same
+					REQUIRE(100 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().life.total);
+					REQUIRE(200 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().life.current);
+					REQUIRE(200 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().life.total);
+					REQUIRE(550 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.current);
+					REQUIRE(550 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.total);
+					REQUIRE(140 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().life.current);
+					REQUIRE(140 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().life.total);
+
+					// Player id 3 (at index 2) is going to meditate, restore 10 mp, from 10 mp to 10 (max mp 10)
+					now += fys::arena::interval::EASY + 1ms;
+					fp->continueBattle(now);
+					REQUIRE(10 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().magicPoint.current);
+					REQUIRE(10 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().magicPoint.current);
+					REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().magicPoint.current);
+					REQUIRE(10 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().magicPoint.current);
+
+					// Contender turn : Target lowest life opponent:
+					// ally id 1  =  0
+					// ally id 2  =  200
+					// ally id 3  =  550
+					// ally id 4  =  140 << target from 50 to 0
+					now += fys::arena::interval::EASY + 1ms;
+					fp->continueBattle(now);
+					REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().life.current); // damage inflicted
+					REQUIRE(fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().life.isDead());
+					REQUIRE(50  == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().life.current);
+					REQUIRE(140 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().life.total);
+					// Stay same
+					REQUIRE(100 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().life.total);
+					REQUIRE(200 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().life.current);
+					REQUIRE(200 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().life.total);
+					REQUIRE(550 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.current);
+					REQUIRE(550 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.total);
+
+					// Player id 1 (at index 0) is going to meditate, restore 10 mp, from 10 mp to 20 (max mp 20)
+					now += fys::arena::interval::EASY + 1ms; // SHOULDNT HAPPEN, TODO MAKE IT NOT HAPPEN AS THE CHARACTER DIED
+					fp->continueBattle(now);
+					REQUIRE(10 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().magicPoint.current);
+					REQUIRE(10 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().magicPoint.current);
+					REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().magicPoint.current);
+					REQUIRE(20 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().magicPoint.current);
+
+					SECTION("Battle turn 3 test") {
+//						p.at(0)->addPendingAction("meditate", std::nullopt);
+//						p.at(2)->addPendingAction("meditate", std::nullopt);
+//						p.at(3)->addPendingAction("meditate", std::nullopt);
+//
+//						// Player id 4 (at index 3) is going to meditate, restore 10 mp, from 10 mp to 10 (max mp 10)
+//						now += fys::arena::interval::EASY + 1ms;
+//						fp->continueBattle(now);
+//
+//						// Player id 3 (at index 2) is going to meditate, restore 10 mp, from 10 mp to 10 (max mp 10)
+//						now += fys::arena::interval::EASY + 1ms;
+//						fp->continueBattle(now);
+//
+//						now += fys::arena::interval::EASY + 1ms;
+//						fp->continueBattle(now);
+//
+//						// Player id 2 (at index 1) is going to meditate, restore 10 mp, from 0 mp to 0 (max mp 0)
+//						now += fys::arena::interval::EASY + 1ms;
+//						fp->continueBattle(now);
+//
+//						// Player id 1 (at index 0) is going to meditate, restore 10 mp, from 20 mp to 20 (max mp 20)
+//						now += fys::arena::interval::EASY + 1ms;
+//						fp->continueBattle(now);
+
+					} // End section : Battle turn 3 test
+
+				} // End section : Battle Turn 2 test
+
+
+//				// Battle ended checks
+//				REQUIRE_FALSE(FightingPitAnnouncer::isOnGoing(fp));
+//				REQUIRE(FightingPitAnnouncer::isContenderWin(fp));
+//
+//				// Battle is ended and so nothing happens
+//				// todo check the call to connection manager with the reply latter on
+//				now += fys::arena::interval::EASY + 1ms;
+//				fp->continueBattle(now);
+//
+//				// Battle is now ready to be cleaned up
+//				REQUIRE(fp->isBattleOver());
+			}
+			catch (const std::exception& e) {
+				SPDLOG_ERROR("Exception during Battle turn 1 test {} ", e.what());
+				FAIL("Should not arrive here");
+			}
+
+		} // End section : Battle Turn 1 test
+
+	} // End section : InGame fighting
+
 	// cleanup
 	FSeam::MockVerifier::cleanUp();
 
 } // End TestCase : FightingPit test
+
 
 #pragma clang diagnostic pop

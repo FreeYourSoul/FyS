@@ -49,6 +49,7 @@ ArenaServerContext::parseArenaConfigFile(const json& configContent)
 
 	auto& arena = configContent["Arena"];
 	arena["code"].get_to(_code);
+	arena["battle_threshold"].get_to(_battleThreshold);
 	arena["player_connection_port"].get_to(_playerConnectionPort);
 	arena["script_cache_source"].get_to(_pathSourceCache);
 	arena["script_storage_cache"].get_to(_pathLocalStorageCache);

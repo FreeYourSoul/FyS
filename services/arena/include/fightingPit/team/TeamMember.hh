@@ -89,7 +89,7 @@ public:
 			_userName(std::move(userName)), _name(std::move(teamMemberName)) { }
 
 	void executeAction(AllyPartyTeams& apt, PitContenders& pc, std::unique_ptr<chaiscript::ChaiScript>& chaiPtr);
-	void addPendingAction(const std::string& actionName, TargetType target);
+	void addPendingAction(const std::string& actionName, std::optional<TargetType> target);
 
 	/**
 	 * @brief called by #fys::arena::AllyPartyTeam to set the id of the team member

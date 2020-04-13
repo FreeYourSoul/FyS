@@ -159,6 +159,9 @@ public:
 	[[nodiscard]] bool
 	doesFightingPitExist(unsigned fightingPitId) const noexcept { return _arenaInstances.find(fightingPitId) != _arenaInstances.cend(); }
 
+	[[nodiscard]] unsigned
+	getNumberBattleRunning() const noexcept { return _arenaInstances.size(); }
+
 	void addPlayerIdentifier(unsigned int fightingPitId, std::string userName, std::string identityPlayer);
 
 private:
@@ -166,6 +169,7 @@ private:
 	retrievePlayerIdentifier(unsigned fightingPitId, const std::string& userName);
 
 	void broadcastMsg(unsigned fightingPitId, zmq::multipart_t& msg);
+	void cleanUpFinishedBattles();
 
 private:
 	zmq::context_t _ctx;

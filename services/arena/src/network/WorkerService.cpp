@@ -47,6 +47,7 @@ WorkerService::startFightingPitsLoop()
 			for (auto &[id, fp] : _arenaInstances) {
 				fp->continueBattle(now);
 			}
+			cleanUpFinishedBattles();
 		}
 		std::this_thread::sleep_for(1000ms); // todo sleep something smart
 	}
@@ -71,11 +72,33 @@ WorkerService::addFightingPit(std::unique_ptr<FightingPit> fp)
 }
 
 void
+WorkerService::cleanUpFinishedBattles()
+{
+	std::vector<unsigned> idToRemove;
+	idToRemove.reserve(_arenaInstances.size());
+	for (auto &[id, fp] : _arenaInstances) {
+		if (fp->isBattleOver()) {
+			idToRemove.emplace_back(id);
+		}
+	}
+	for (unsigned id : idToRemove) {
+		_arenaInstances.erase(id);
+		_arenaIdOnIdentifier.erase(id);
+	}
+
+}
+
+void
 WorkerService::playerJoinFightingPit(unsigned fightingPitId, std::unique_ptr<PartyTeam> pt, cache::Cml& cml)
 {
 	auto it = _arenaInstances.find(fightingPitId);
 	if (it != _arenaInstances.end()) {
-		it->second->addPartyTeamAndRegisterActions(std::move(pt), cml);
+		if (it->second->isJoinable()) {
+			it->second->addPartyTeamAndRegisterActions(std::move(pt), cml);
+		}
+		else {
+			SPDLOG_INFO("User {} can't join fighting pit of id {} as the battle already started.", pt->getUserName(), fightingPitId);
+		}
 	}
 	else {
 		SPDLOG_ERROR("PartyTeam of user {} can't join fighting pit of id {}", pt->getUserName(), fightingPitId);

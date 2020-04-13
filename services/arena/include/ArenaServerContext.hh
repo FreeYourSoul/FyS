@@ -32,6 +32,7 @@
 namespace fys::arena {
 
 struct EncounterContext {
+
 	struct EncounterDesc {
 		[[nodiscard]] bool
 		operator!=(const EncounterDesc& other) const
@@ -62,6 +63,10 @@ struct EncounterContext {
 };
 
 class ArenaServerContext : public fys::common::ServiceContextBase {
+
+	//! Minimum of number of battle in parralele that can be processed by the Arena Server
+	static constexpr unsigned MINIMUM_BATTLE_THRESHOLD = 3;
+
 public:
 	ArenaServerContext(int ac, const char* const* av);
 
@@ -92,6 +97,9 @@ public:
 	[[nodiscard]] uint
 	getDbPort() const noexcept { return _dbPort; }
 
+	[[nodiscard]] uint
+	getBattleThreshold() const noexcept { return _battleThreshold; }
+
 private:
 	[[nodiscard]] bool
 	validateEncounterContext() const;
@@ -99,13 +107,27 @@ private:
 	void parseArenaConfigFile(const nlohmann::json& configContent);
 
 private:
+
+	//! Code of the current ArenaServerService
 	std::string _code;
+
+	//! Path representing the local temporary storage created and maintained by Cml
 	std::string _pathLocalStorageCache;
+	//! Path of the reference data for CmlCopy
 	std::string _pathSourceCache;
+
+	//! Database hostname
 	std::string _dbHost;
+	//! Database port number
 	uint _dbPort = 3306;
+
+	//! Database hostname
 	uint _playerConnectionPort;
 
+	//! Maximum number of concurrent battle handled by the arena service
+	uint _battleThreshold = MINIMUM_BATTLE_THRESHOLD;
+
+	//! Context part specific to encounter handled by this arena server
 	EncounterContext _encounterContext;
 };
 
