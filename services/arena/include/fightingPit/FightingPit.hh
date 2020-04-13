@@ -47,6 +47,14 @@ class PartyTeam;
 }
 
 namespace fys::arena {
+
+//! interval of time between 2 turn for a player depending on the difficulty
+namespace interval {
+constexpr static auto EASY = 20000ms;
+constexpr static auto MEDIUM = 15000ms;
+constexpr static auto HARD = 8000ms;
+}
+
 class FightingPitAnnouncer;
 
 /**
@@ -66,24 +74,28 @@ class FightingPit {
 
 	friend class FightingPitAnnouncer;
 
+	//! Progress Status Enum: represent the status of the battle
 	enum class Progress {
-		ON_HOLD,     // joining fight
+		//! joining fight status
+		ON_HOLD,
+		//! battle is over, fighting pit has to be cleaned out
+		CLEANUP,
+		//! On going battle
 		ON_GOING,
+		//! Contender win, process the loss (if any) of the ally
 		CONTENDER_WIN,
+		//! Allies win, process the earning (if any) to the allies
 		ALLY_WIN
 	};
 
+	//! Simple structure representing an authenticated player (pair name/token)
 	struct AuthenticatedPlayer {
 		std::string name;
 		std::string token;
 	};
 
 public:
-	constexpr static auto EASY_INTERVAL = 20000ms;
-	constexpr static auto MEDIUM_INTERVAL = 15000ms;
-	constexpr static auto HARD_INTERVAL = 8000ms;
-
-	// used as a wrong id when a fighting pit is wrongly generated
+	//! used as a wrong id when a fighting pit is wrongly generated
 	static constexpr unsigned CREATION_ERROR = 0;
 
 	enum Level : uint {
@@ -142,6 +154,13 @@ public:
 	[[nodiscard]] unsigned
 	getId() const { return _arenaId; }
 
+	/**
+	 * Check if the battle is done, the winner doesn't matter, this is a status to cleanup the fighting pit when its done
+	 * @return true if the battle is over, false otherwise
+	 */
+	[[nodiscard]] bool
+	isBattleOver() const { return _progress == Progress::CLEANUP; }
+
 	void setPlayerReadiness(const std::string& userName);
 	void setArenaId(unsigned arenaId) { _arenaId = arenaId; }
 
@@ -155,11 +174,15 @@ private:
 	[[nodiscard]] bool
 	checkEndStatusFightingPit();
 
-	[[nodiscard]] bool
-	addContender(const std::shared_ptr<FightingContender>& fc) { return _contenders.addContender(fc); }
-
+	/**
+	 * Verify if the fight has been won by a team (contender or ally) and return an appropriate Progress
+	 * @return Progress::ALLY_WIN if the ally win, Progress::CONTENDER_WIN if the contender win, Progress::ON_GOING otherwise
+	 */
 	[[nodiscard]] Progress
 	updateProgressStatus();
+
+	[[nodiscard]] bool
+	addContender(const std::shared_ptr<FightingContender>& fc) { return _contenders.addContender(fc); }
 
 	void initializeSideBattles();
 	void initializePriorityListInSidesBattle();

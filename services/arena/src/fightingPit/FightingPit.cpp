@@ -33,9 +33,9 @@ std::chrono::milliseconds
 retrieveTimeInterludeFromLevelDegree(fys::arena::FightingPit::Level level)
 {
 	switch (level) {
-	case fys::arena::FightingPit::Level::EASY:return fys::arena::FightingPit::EASY_INTERVAL;
-	case fys::arena::FightingPit::Level::MEDIUM :return fys::arena::FightingPit::MEDIUM_INTERVAL;
-	case fys::arena::FightingPit::Level::HARD :return fys::arena::FightingPit::HARD_INTERVAL;
+	case fys::arena::FightingPit::Level::EASY:return fys::arena::interval::EASY;
+	case fys::arena::FightingPit::Level::MEDIUM :return fys::arena::interval::MEDIUM;
+	case fys::arena::FightingPit::Level::HARD :return fys::arena::interval::HARD;
 	default:SPDLOG_ERROR("Incorrect level");
 		return std::chrono::milliseconds{0};
 	}
@@ -57,13 +57,24 @@ bool
 FightingPit::checkEndStatusFightingPit()
 {
 	switch (_progress) {
+	// Battle is still on going and so has to continue
 	case Progress::ON_GOING:return true;
+
+	// Battle is over and require cleanup
+	case Progress::CLEANUP:
+	// Battle is on hold and may incoming player
 	case Progress::ON_HOLD: return false;
+
+	// Battle is won by allies
 	case Progress::ALLY_WIN:
-		// todo Send success of the fight, close the fight properly (release resource if any)
+		// todo Send success of the fight
+		_progress = Progress::CLEANUP;
 		return false;
+
+	// Battle is won by contenders
 	case Progress::CONTENDER_WIN:
-		// todo Send failure of the fight, close the fight properly (release resource if any)
+		// todo Send failure of the fight
+		_progress = Progress::CLEANUP;
 		return false;
 	}
 	return _progress == Progress::ON_HOLD;
@@ -93,7 +104,8 @@ FightingPit::continueBattle(const std::chrono::system_clock::time_point& now)
 }
 
 FightingPit::Progress
-FightingPit::updateProgressStatus() {
+FightingPit::updateProgressStatus()
+{
 	if (_partyTeams.allDead()) {
 		return Progress::CONTENDER_WIN;
 	}

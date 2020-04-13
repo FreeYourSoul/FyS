@@ -43,6 +43,13 @@ class Sleep_TEST {
     }
 
     def execute(targetStatus) {
+		var new_total = targetStatus.life.current + 40;
+		if (new_total > targetStatus.life.total) {
+			targetStatus.life.current = targetStatus.life.total;
+		}
+		else {
+			targetStatus.life.current = targetStatus.life.current + 40;
+		}
         1;
     }
 

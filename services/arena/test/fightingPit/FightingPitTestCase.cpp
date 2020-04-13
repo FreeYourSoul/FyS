@@ -99,6 +99,8 @@ TEST_CASE("FightingPit test", "[service][arena]")
 
 		auto fp = fpa.buildFightingPit(ctx, "WS00");
 
+		auto& chai = fp->getChaiPtr();
+
 		const auto& contender = FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0);
 		REQUIRE(1 == FightingPitAnnouncer::getPitContenders(fp).getNumberContender());
 		REQUIRE("TestMonsterSleep" == contender->getContenderScripting()->getContenderName());
@@ -161,20 +163,61 @@ TEST_CASE("FightingPit test", "[service][arena]")
 			p.at(1)->addPendingAction("slash", ContenderTargetId{0});
 			p.at(2)->addPendingAction("slash", ContenderTargetId{0});
 			p.at(3)->addPendingAction("slash", ContenderTargetId{0});
+
 			auto now = std::chrono::system_clock::now();
-			fp->continueBattle(now);
 
-			now += fys::arena::FightingPit::EASY_INTERVAL + 1ms;
-			fp->continueBattle(now);
+			try {
+				// Player id 4 (at index 3) is going to slash the only opponent it has inflicting 42 damage
+				// The ennemy total life is 100, goes to 58
+				fp->continueBattle(now);
+				REQUIRE(58  == FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->getStatus().life.current);
+				REQUIRE(100 == FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->getStatus().life.total);
 
-			now += fys::arena::FightingPit::EASY_INTERVAL + 1ms;
-//			fp->continueBattle(now);
-//
-			now += fys::arena::FightingPit::EASY_INTERVAL + 1ms;
-//			fp->continueBattle(now);
-//
-			now += fys::arena::FightingPit::EASY_INTERVAL + 1ms;
-//			fp->continueBattle(now);
+				// Player id 3 (at index 2) is going to slash the only opponent it has inflicting 39 damage
+				// The ennemy total life is 100, current from 58 goes to 19
+				now += fys::arena::interval::EASY + 1ms;
+				fp->continueBattle(now);
+				REQUIRE(19  == FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->getStatus().life.current);
+				REQUIRE(100 == FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->getStatus().life.total);
+
+				// Contender id 0 is going to Sleep and so restore 40 hp
+				// The ennemy total life is 100, current from 19 goes to 59
+				now += fys::arena::interval::EASY + 1ms;
+				fp->continueBattle(now);
+				REQUIRE(59  == FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->getStatus().life.current);
+				REQUIRE(100 == FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->getStatus().life.total);
+
+				// Player id 2 (at index 1) is going to slash the only opponent it has inflicting 36 damage
+				// The ennemy total life is 100, current from 59 goes to 23
+				now += fys::arena::interval::EASY + 1ms;
+				fp->continueBattle(now);
+				REQUIRE(23  == FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->getStatus().life.current);
+				REQUIRE(100 == FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->getStatus().life.total);
+
+				// Player id 2 (at index 1) is going to slash the only opponent it has inflicting 33 damage
+				// The ennemy total life is 100, current from 23 goes to 0 (overkill)
+				now += fys::arena::interval::EASY + 1ms;
+				REQUIRE(FightingPitAnnouncer::isOnGoing(fp));
+				fp->continueBattle(now);
+				REQUIRE(0  == FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->getStatus().life.current);
+				REQUIRE(100 == FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->getStatus().life.total);
+
+				// Battle ended checks
+				REQUIRE_FALSE(FightingPitAnnouncer::isOnGoing(fp));
+				REQUIRE(FightingPitAnnouncer::isAllyWin(fp));
+
+				// Battle is ended and so nothing happens
+				// todo check the call to connection manager with the reply latter on
+				now += fys::arena::interval::EASY + 1ms;
+				fp->continueBattle(now);
+
+				// Battle is now ready to be cleaned up
+				REQUIRE(fp->isBattleOver());
+			}
+			catch (const std::exception& e) {
+				SPDLOG_ERROR("Exception during Battle turn 1 test {} ", e.what());
+				FAIL("Should not arrive here");
+			}
 
 		} // End section : Battle Turn 1 test
 

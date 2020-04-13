@@ -69,7 +69,7 @@ TeamMember::executeAction(
 
 	const std::string allyAction = fmt::format(
 			R"(ally_actions["{}_{}"]["{}"])", _userName, _name, getActionNameFromKey(_actionsDoable.at(pa->idAction).first));
-	const auto funcAction = chaiPtr->eval<std::function<int(data::Status)>>(fmt::format(
+	const auto funcAction = chaiPtr->eval<std::function<int(data::Status&)>>(fmt::format(
 			R"(fun(allyStatus){{ return {}.execute(allyStatus);}})", allyAction));
 	data::Targeting targetType;
 
@@ -86,7 +86,7 @@ TeamMember::executeAction(
 			std::visit(overloaded{
 					[&apt, &targetType, &funcAction](AllyTargetId target) {
 						if (targetType == data::ALLY || targetType == data::ALLY_OR_ENNEMY) {
-							funcAction(apt.selectMemberById(target.v)->getStatus());
+							funcAction(apt.selectMemberById(target.v)->accessStatus());
 						}
 						else {
 							spdlog::error("Action of type {}, couldn't target an AllyTarget of id {}", targetType, target.v);
@@ -95,7 +95,7 @@ TeamMember::executeAction(
 
 					[&pc, &targetType, &funcAction](ContenderTargetId target) {
 						if (targetType == data::ENNEMY || targetType == data::ALLY_OR_ENNEMY) {
-							funcAction(pc.getFightingContender(target.v)->getStatus());
+							funcAction(pc.getFightingContender(target.v)->accessStatus());
 						}
 						else {
 							spdlog::error("Action of type {}, couldn't target a ContenderTarget of id {}", targetType, target.v);

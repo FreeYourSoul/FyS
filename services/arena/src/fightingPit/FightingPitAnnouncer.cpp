@@ -79,7 +79,11 @@ FightingPitAnnouncer::buildFightingPit(const EncounterContext& ctx, const std::s
 	fp->addAuthenticatedUser(std::move(_creatorUserName), std::move(_creatorUserToken));
 	ChaiRegister::registerBaseActions(*fp->getChaiPtr(), _cache);
 	fp->addPartyTeamAndRegisterActions(std::move(_creatorPartyTeam), _cache);
-	if (!generateContenders(*fp, ctx, wsId)) return nullptr;
+
+	if (!generateContenders(*fp, ctx, wsId)) {
+		return nullptr;
+	}
+
 	fp->initializeSideBattles();
 	return fp;
 }
