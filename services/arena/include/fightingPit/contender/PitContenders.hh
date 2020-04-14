@@ -74,6 +74,9 @@ public:
 	[[nodiscard]] std::size_t
 	getNumberContender() const { return _contenders.size(); }
 
+	[[nodiscard]] std::vector<std::shared_ptr<FightingContender>>
+	getDeadContenderOnSide(HexagonSide::Orientation side) const;
+
 	[[nodiscard]] const std::vector<std::shared_ptr<FightingContender> >&
 	getContenders() const { return _contenders; }
 

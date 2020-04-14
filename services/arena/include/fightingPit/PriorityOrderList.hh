@@ -38,7 +38,7 @@ public:
     explicit PriorityOrderList(std::vector<data::PriorityElem> baseSpeed);
 
     void addParticipantInList(uint id, int speed, bool isContender);
-    void removeParticipantFromList(uint idParticipant);
+    void removeParticipantFromList(uint idParticipant, bool isContender);
 
     [[nodiscard]] bool
     empty() const { return _baseSpeed.empty(); }

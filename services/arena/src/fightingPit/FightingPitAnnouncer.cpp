@@ -67,7 +67,7 @@ std::unique_ptr<FightingPit>
 FightingPitAnnouncer::buildFightingPit(const EncounterContext& ctx, const std::string& wsId)
 {
 	if (_creatorUserName.empty() || _creatorUserToken.empty() || _creatorPartyTeam == nullptr) {
-		SPDLOG_WARN("FightingPit built invalid (no creator of the pit registered and/or party team not set"
+		SPDLOG_WARN("FightingPit built invalid (no creator/token of the pit registered and/or party team not set"
 					", a call to generateAllyPartyTeam function is required)");
 		return nullptr;
 	}

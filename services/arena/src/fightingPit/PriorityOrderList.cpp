@@ -57,9 +57,11 @@ PriorityOrderList::addParticipantInList(uint id, int speed, bool isContender)
 }
 
 void
-PriorityOrderList::removeParticipantFromList(uint idParticipant)
+PriorityOrderList::removeParticipantFromList(uint idParticipant, bool isContender)
 {
-	auto findParticipantPredicate = [idParticipant](const data::PriorityElem& elem) { return elem.id == idParticipant; };
+	auto findParticipantPredicate = [idParticipant, isContender](const data::PriorityElem& elem) {
+		return elem.id == idParticipant && elem.isContender == isContender;
+	};
 	_baseSpeed.erase(std::remove_if(_baseSpeed.begin(), _baseSpeed.end(), findParticipantPredicate), _baseSpeed.end());
 	_priorityList.erase(std::remove_if(_priorityList.begin(), _priorityList.end(), findParticipantPredicate), _priorityList.end());
 	_analyzedList.erase(std::remove_if(_analyzedList.begin(), _analyzedList.end(), findParticipantPredicate), _analyzedList.end());

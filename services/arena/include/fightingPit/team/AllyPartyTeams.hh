@@ -66,6 +66,9 @@ public:
 	[[nodiscard]] std::vector<std::shared_ptr<TeamMember>>
 	getMembersBySide(HexagonSide::Orientation side) const;
 
+	[[nodiscard]] std::vector<std::shared_ptr<TeamMember>>
+	getDeadMembersBySide(HexagonSide::Orientation side) const;
+
 	[[nodiscard]] std::shared_ptr<TeamMember>
 	getSpecificTeamMemberById(const std::string& userName, unsigned idMember) const;
 

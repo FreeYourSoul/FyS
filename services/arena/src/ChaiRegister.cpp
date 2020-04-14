@@ -195,39 +195,6 @@ ChaiRegister::registerUtility(chaiscript::ChaiScript& chai, PitContenders& pc, A
 			}), "isSideAdjacentSide");
 }
 
-//            chai.add(fun<std::function<void(uint, uint, std::string)> >(
-//                    [&connectionHandler](
-//                            uint contenderId,                     // [Mandatory] id of the contender
-//                            uint spellId,                         // [Mandatory] Spell/Action id
-//                            const std::string &descriptionString  // [Mandatory] Description String (Heal of 15, Damage of 17,
-//                                                                  //             Critical Damage of 55, Buff intelligence....)
-//                    ) {
-//                        // instantiate a message to send
-//                        // continue setting values
-//                        // send the data to connectionHandler
-//
-//                    }
-//            ), "sendContenderAction"); // No target
-
-//            chai.add(chaiscript::fun<std::function<void(std::string, uint, uint, std::string)> >(
-//                    [&connectionHandler](
-//                            std::string targetId,                 // [Optional]  Target (if any) TODO : Should be a pair of <bool, uint>
-//                            uint contenderId,                     // [Mandatory] id of the contender
-//                            uint spellId,                         // [Mandatory] Spell/Action id
-//                            const std::string &descriptionString  // [Mandatory] Description String (Heal of 15, Damage of 17, Critical Damage of 55, Buff intelligence....)
-//                    ) {
-//                        // instantiate a message to send
-//                        if (!targetId.empty() && targetId.size() > 1) {
-//                            bool isFriendlyTarget = (targetId.at(0) == 'F');
-//                            uint idTargetInteger = std::stoi(targetId.substr(1));
-//                            // set the id value of the message to send
-//                        }
-//                        // continue setting values
-//                        // send the data to connectionHandler
-//
-//                    }
-//            ), "sendContenderAction");
-
 void
 ChaiRegister::registerCommon(chaiscript::ModulePtr m)
 {

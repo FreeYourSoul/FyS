@@ -39,24 +39,20 @@ PartyTeam::getTeamMemberOnSide(fys::arena::HexagonSide::Orientation side) const
 	return result;
 }
 
+std::vector<std::shared_ptr<TeamMember>>
+PartyTeam::getDeadTeamMembersOnSide(fys::arena::HexagonSide::Orientation side) const
+{
+	std::vector<std::shared_ptr<TeamMember>> result;
+	std::copy_if(_members.begin(), _members.end(), std::back_inserter(result), [side](const auto& contenderPtr) {
+		return contenderPtr->getHexagonSideOrient() == side && contenderPtr->getStatus().life.isDead();
+	});
+	return result;
+}
+
 void
 PartyTeam::addTeamMember(std::shared_ptr<TeamMember> member)
 {
 	_members.emplace_back(std::move(member));
-}
-
-void
-PartyTeam::addPendingActionToTeamMember(unsigned id)
-{
-	auto it = std::find_if(_members.begin(), _members.end(), [id](const auto& teamMember) {
-		return id == teamMember->getId();
-	});
-	if (it != _members.end()) {
-//            it->get()->
-	}
-	else {
-		SPDLOG_ERROR("Adding pending action to a non existing team member of id {}", id);
-	}
 }
 
 unsigned
@@ -66,7 +62,7 @@ PartyTeam::allyNumberOnSide(HexagonSide::Orientation side) const
 			[side](const TeamMemberSPtr& ally) {
 				return side == ally->getHexagonSideOrient();
 			}
-	);
+						);
 }
 
 }

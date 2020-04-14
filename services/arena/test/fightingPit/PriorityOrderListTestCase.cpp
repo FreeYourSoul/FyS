@@ -81,6 +81,8 @@ TEST_CASE("PriorityOrderList test", "[service][arena]")
 		// 1:10
 		// 3:3
 		// 4:2
+		pol.sortBaseAndCalculatePriority(); // first turn is following base speed order
+
 		REQUIRE(fys::arena::data::PriorityElem(5, 30, fys::arena::data::CONTENDER) == pol._analyzedList.at(4));
 		REQUIRE(fys::arena::data::PriorityElem(2, 19, fys::arena::data::PARTY_MEMBER) == pol._analyzedList.at(3));
 		REQUIRE(fys::arena::data::PriorityElem(1, 10, fys::arena::data::CONTENDER) == pol._analyzedList.at(2));
@@ -161,7 +163,6 @@ TEST_CASE("PriorityOrderList test", "[service][arena]")
 			*/
 
 			REQUIRE(11 == pol._priorityList.size());
-
 			REQUIRE(5 == pol._priorityList.at(10).id);
 			REQUIRE(2 == pol._priorityList.at(9).id);
 			REQUIRE(5 == pol._priorityList.at(8).id);
@@ -336,9 +337,9 @@ TEST_CASE("PriorityOrderList test", "[service][arena]")
 
 			REQUIRE(fys::arena::data::PriorityElem(0, 0, fys::arena::data::PARTY_MEMBER) == polEmpty.getNext());
 
-			polEmpty.removeParticipantFromList(1);
-			polEmpty.removeParticipantFromList(2);
-			polEmpty.removeParticipantFromList(3);
+			polEmpty.removeParticipantFromList(1, false);
+			polEmpty.removeParticipantFromList(2, true);
+			polEmpty.removeParticipantFromList(3, false);
 			REQUIRE(polEmpty._priorityList.empty());
 			REQUIRE(polEmpty._analyzedList.empty());
 			REQUIRE(polEmpty._baseSpeed.empty());
@@ -360,9 +361,9 @@ TEST_CASE("PriorityOrderList test", "[service][arena]")
 			REQUIRE(1 == polOne._analyzedList.size());
 			REQUIRE(1 == polOne._baseSpeed.size());
 
-			polOne.removeParticipantFromList(1);
-			polOne.removeParticipantFromList(2);
-			polOne.removeParticipantFromList(3);
+			polOne.removeParticipantFromList(1, fys::arena::data::PARTY_MEMBER);
+			polOne.removeParticipantFromList(2, fys::arena::data::PARTY_MEMBER);
+			polOne.removeParticipantFromList(3, fys::arena::data::PARTY_MEMBER);
 			REQUIRE(1 == polOne._priorityList.size());
 			REQUIRE(1 == polOne._analyzedList.size());
 			REQUIRE(1 == polOne._baseSpeed.size());
@@ -473,18 +474,22 @@ TEST_CASE("PriorityOrderList test", "[service][arena]")
 			REQUIRE(fys::arena::data::PriorityElem(3, 3, fys::arena::data::PARTY_MEMBER) == pol._baseSpeed.at(1));
 			REQUIRE(fys::arena::data::PriorityElem(4, 2, fys::arena::data::CONTENDER) == pol._baseSpeed.at(0));
 
-			pol.removeParticipantFromList(19);// not exist
+			pol.removeParticipantFromList(19, fys::arena::data::CONTENDER);// not exist
 			REQUIRE(5 == pol._priorityList.size());
 
-			pol.removeParticipantFromList(1);
+			pol.removeParticipantFromList(1, fys::arena::data::PARTY_MEMBER); // no party member with id 1, not exist
+			REQUIRE(5 == pol._priorityList.size());
+
+
+			pol.removeParticipantFromList(1, fys::arena::data::CONTENDER);
 			REQUIRE(4 == pol._priorityList.size());
 			REQUIRE(fys::arena::data::PriorityElem{5, 30, fys::arena::data::CONTENDER} == pol._baseSpeed.at(3));
 			REQUIRE(fys::arena::data::PriorityElem(2, 19, fys::arena::data::PARTY_MEMBER) == pol._baseSpeed.at(2));
 			REQUIRE(fys::arena::data::PriorityElem(3, 3, fys::arena::data::PARTY_MEMBER) == pol._baseSpeed.at(1));
 			REQUIRE(fys::arena::data::PriorityElem(4, 2, fys::arena::data::CONTENDER) == pol._baseSpeed.at(0));
 
-			pol.removeParticipantFromList(2);
-			pol.removeParticipantFromList(3);
+			pol.removeParticipantFromList(2, fys::arena::data::PARTY_MEMBER);
+			pol.removeParticipantFromList(3, fys::arena::data::PARTY_MEMBER);
 			REQUIRE(2 == pol._priorityList.size());
 			REQUIRE(fys::arena::data::PriorityElem{5, 30, fys::arena::data::CONTENDER} == pol._baseSpeed.at(1));
 			REQUIRE(fys::arena::data::PriorityElem(4, 2, fys::arena::data::CONTENDER) == pol._baseSpeed.at(0));
@@ -573,6 +578,8 @@ TEST_CASE("Test for FightingPit testcase", "[service][arena]")
 	 * a2:2  -----------------
 	 * a4:0  -----------------
 	 * c0:0  -----------------
+	 *
+	 * resume a4, a4, a3, c0, a2, c0, a1
 	 */
 
 	REQUIRE(fys::arena::data::PriorityElem(4, DONT_CARE, fys::arena::data::PARTY_MEMBER) == priorityList.getNext());

@@ -50,6 +50,7 @@ public:
 			_side(side),
 			_started(false) { }
 
+
 	/**
 	 * Get the next participant in the fighting pit turn (can be either an NPC, or a contender) depending on their
 	 * speed. This Calculation is made in the fys::arena::PriorityOrderList.
@@ -62,6 +63,11 @@ public:
 	getCurrentParticipantTurn(const std::chrono::system_clock::time_point& now,
 							  const std::chrono::milliseconds& timerInterlude);
 
+	/**
+	 * Erase characters (contender or ally) from the PriorityOrderList that are dead.
+	 */
+	void eraseDeadCharactersFromTurnList();
+
 	void addParticipantInList(uint id, int speed, bool isContender)
 	{
 		_priorityOrderList.addParticipantInList(id, speed, isContender);
@@ -73,11 +79,10 @@ public:
 	[[nodiscard]] bool
 	empty() const { return _priorityOrderList.empty(); }
 
-
-
 private:
-	std::reference_wrapper<PitContenders> _contenders; // possibly useless
-	std::reference_wrapper<AllyPartyTeams> _partyTeams; // possibly useless
+	std::reference_wrapper<PitContenders> _contenders;
+	std::reference_wrapper<AllyPartyTeams> _partyTeams;
+
 	PriorityOrderList _priorityOrderList;
 	HexagonSide::Orientation _side;
 

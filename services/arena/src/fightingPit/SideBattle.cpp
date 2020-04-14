@@ -22,6 +22,12 @@
 // SOFTWARE.
 
 #include <fightingPit/SideBattle.hh>
+#include <fightingPit/contender/PitContenders.hh>
+#include <fightingPit/contender/FightingContender.hh>
+#include <fightingPit/contender/ContenderScripting.hh>
+#include <fightingPit/team/AllyPartyTeams.hh>
+#include <fightingPit/team/PartyTeam.hh>
+#include <fightingPit/team/TeamMember.hh>
 
 namespace fys::arena {
 
@@ -38,6 +44,17 @@ SideBattle::getCurrentParticipantTurn(
 	}
 	_endCurrentTurn = now + timerInterlude;
 	return _priorityOrderList.getNext();
+}
+
+void
+SideBattle::eraseDeadCharactersFromTurnList()
+{
+	for (auto deadContenders = _contenders.get().getDeadContenderOnSide(_side); const auto& contender : deadContenders) {
+		_priorityOrderList.removeParticipantFromList(contender->getContenderScripting()->getContenderId(), data::CONTENDER);
+	}
+	for (auto deadAllies = _partyTeams.get().getDeadMembersBySide(_side); const auto& member : deadAllies) {
+		_priorityOrderList.removeParticipantFromList(member->getId(), data::PARTY_MEMBER);
+	}
 }
 
 }

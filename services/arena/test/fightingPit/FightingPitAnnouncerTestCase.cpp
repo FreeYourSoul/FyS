@@ -337,8 +337,7 @@ TEST_CASE("FightingPitAnnouncer test", "[service][arena]")
 	} // End section : RNG test 1337
 
 	FSeam::MockVerifier::cleanUp();
+
 } // End TestCase : FightingPitAnnouncer test
-
-
 
 #pragma clang diagnostic pop

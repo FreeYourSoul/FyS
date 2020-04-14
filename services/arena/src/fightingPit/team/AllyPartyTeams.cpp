@@ -39,140 +39,159 @@ namespace fys::arena {
 
 void
 AllyPartyTeams::executeAllyAction(
-        const data::PriorityElem& ally,
-        PitContenders& pc,
-        std::unique_ptr<chaiscript::ChaiScript>& chaiPtr)
+		const data::PriorityElem& ally,
+		PitContenders& pc,
+		std::unique_ptr<chaiscript::ChaiScript>& chaiPtr)
 {
-    if (ally.isContender) return;
-    if (auto member = selectMemberById(ally.id); !member) {
-        SPDLOG_ERROR("Member with id {} isn't found, action cannot be executed", ally.id);
-    }
-    else {
-        member->executeAction(*this, pc, chaiPtr);
-    }
+	if (ally.isContender) return;
+	if (auto member = selectMemberById(ally.id); !member) {
+		SPDLOG_ERROR("Member with id {} isn't found, action cannot be executed", ally.id);
+	}
+	else {
+		member->executeAction(*this, pc, chaiPtr);
+	}
 }
 
 void
 AllyPartyTeams::addPartyTeam(std::unique_ptr<PartyTeam>&& team)
 {
-    for (auto& tm : team->accessTeamMembers()) {
-        tm->setId(++_currentTeamMemberId);
-    }
-    _partyTeams.emplace_back(std::move(team));
+	for (auto& tm : team->accessTeamMembers()) {
+		tm->setId(++_currentTeamMemberId);
+	}
+	_partyTeams.emplace_back(std::move(team));
 }
 
 std::shared_ptr<TeamMember>
 AllyPartyTeams::selectSuitableMember(ComparatorSelection<TeamMember> comp)
 {
-    if (_partyTeams.empty() || _partyTeams.front()->accessTeamMembers().empty())
-        return nullptr;
-    auto suitable = _partyTeams.front()->accessTeamMembers().begin();
-    for (auto& partyTeam : _partyTeams) {
-        auto& teamMembers = partyTeam->accessTeamMembers();
-        auto suitableTmp = fys::find_most_suitable(teamMembers.begin(), teamMembers.end(), comp, suitable);
+	bool found = false;
+	if (_partyTeams.empty() || _partyTeams.front()->getTeamMembers().empty())
+		return nullptr;
+	auto suitable = _partyTeams.front()->getTeamMembers().begin();
+	for (auto& partyTeam : _partyTeams) {
+		auto& teamMembers = partyTeam->getTeamMembers();
+		auto suitableTmp = fys::find_most_suitable(teamMembers.begin(), teamMembers.end(), comp, suitable);
 
-        if (suitableTmp != teamMembers.end())
-            suitable = suitableTmp;
-    }
-    return *suitable;
+		if (suitableTmp != teamMembers.end()) {
+			found = true;
+			suitable = suitableTmp;
+		}
+	}
+	return (found) ? *suitable : nullptr;
 }
 
 std::shared_ptr<TeamMember>
 AllyPartyTeams::selectRandomMemberOnSideAlive(HexagonSide::Orientation side)
 {
-    auto membersOnSide = getMembersBySide(side);
-    uint randomIndex = fys::util::RandomGenerator::generateInRange(1ul, membersOnSide.size());
-    return membersOnSide.at(randomIndex - 1);
+	auto membersOnSide = getMembersBySide(side);
+	uint randomIndex = fys::util::RandomGenerator::generateInRange(1ul, membersOnSide.size());
+	return membersOnSide.at(randomIndex - 1);
 }
 
 std::shared_ptr<TeamMember>
 AllyPartyTeams::selectSuitableMemberAlive(ComparatorSelection<TeamMember> comp)
 {
-    return selectSuitableMember([&comp](auto current, auto next) -> bool {
-        return (!current->accessStatus().life.isDead()) && comp(current, next);
-    });
+	return selectSuitableMember([&comp](auto current, auto next) -> bool {
+		return !current->accessStatus().life.isDead() && !next->accessStatus().life.isDead() && comp(current, next);
+	});
 }
 
 std::shared_ptr<TeamMember>
 AllyPartyTeams::selectSuitableMemberOnSide(HexagonSide::Orientation side, ComparatorSelection<TeamMember> comp)
 {
-    return selectSuitableMember([side, &comp](auto current, auto next) -> bool {
-        return current->getHexagonSideOrient() == side && comp(current, next);
-    });
+	return selectSuitableMember([side, &comp](auto current, auto next) -> bool {
+		return current->getHexagonSideOrient() == side && next->getHexagonSideOrient() == side &&
+				comp(current, next);
+	});
 }
 
 std::shared_ptr<TeamMember>
 AllyPartyTeams::selectSuitableMemberOnSideAlive(HexagonSide::Orientation side, ComparatorSelection<TeamMember> comp)
 {
-    return selectSuitableMember([side, &comp](auto current, auto next) -> bool {
-        return (!current->accessStatus().life.isDead()) && current->getHexagonSideOrient() == side && comp(current, next);
-    });
+	return selectSuitableMember([side, &comp](auto current, auto next) -> bool {
+		return (!next->getStatus().life.isDead() && !current->getStatus().life.isDead() &&
+				current->getHexagonSideOrient() == side && next->getHexagonSideOrient() == side) &&
+				comp(current, next);
+	});
 }
 
 std::shared_ptr<TeamMember>
 AllyPartyTeams::getSpecificTeamMemberById(const std::string& userName, unsigned idMember) const
 {
-    auto itTeam = std::find_if(_partyTeams.cbegin(), _partyTeams.cend(),
-            [&userName](const auto& team) {
-                return team->getUserName() == userName;
-            });
+	auto itTeam = std::find_if(_partyTeams.cbegin(), _partyTeams.cend(),
+			[&userName](const auto& team) {
+				return team->getUserName() == userName;
+			});
 
-    if (itTeam != _partyTeams.cend()) {
-        auto itMember = std::find_if((*itTeam)->getTeamMembers().cbegin(), (*itTeam)->getTeamMembers().cend(),
-                [idMember](const auto& member) {
-                    return member->getId() == idMember;
-                });
+	if (itTeam != _partyTeams.cend()) {
+		auto itMember = std::find_if((*itTeam)->getTeamMembers().cbegin(), (*itTeam)->getTeamMembers().cend(),
+				[idMember](const auto& member) {
+					return member->getId() == idMember;
+				});
 
-        if (itMember != (*itTeam)->getTeamMembers().cend())
-            return *itMember;
-    }
-    return nullptr;
+		if (itMember != (*itTeam)->getTeamMembers().cend())
+			return *itMember;
+	}
+	return nullptr;
 }
 
 std::shared_ptr<TeamMember>
 AllyPartyTeams::selectMemberById(unsigned idMember)
 {
-    if (_partyTeams.empty() || _partyTeams.front()->accessTeamMembers().empty())
-        return nullptr;
-    for (auto& partyTeam : _partyTeams) {
-        const auto& teamMembers = partyTeam->accessTeamMembers();
-        auto teamMember = std::find_if(teamMembers.begin(), teamMembers.end(), [idMember](const auto& tm) {
-            return idMember == tm->getId();
-        });
+	if (_partyTeams.empty() || _partyTeams.front()->accessTeamMembers().empty())
+		return nullptr;
+	for (auto& partyTeam : _partyTeams) {
+		const auto& teamMembers = partyTeam->accessTeamMembers();
+		auto teamMember = std::find_if(teamMembers.begin(), teamMembers.end(), [idMember](const auto& tm) {
+			return idMember == tm->getId();
+		});
 
-        if (teamMember != teamMembers.end())
-            return *teamMember;
-    }
-    return nullptr;
+		if (teamMember != teamMembers.end())
+			return *teamMember;
+	}
+	return nullptr;
 }
 
 unsigned
 AllyPartyTeams::allyNumberOnSide(HexagonSide::Orientation side) const
 {
-    return std::accumulate(_partyTeams.cbegin(), _partyTeams.cend(), 0u,
-            [side](unsigned count, const PartyTeamUPtr& party) {
-                return count + party->allyNumberOnSide(side);
-            }
-    );
+	return std::accumulate(_partyTeams.cbegin(), _partyTeams.cend(), 0u,
+			[side](unsigned count, const PartyTeamUPtr& party) {
+				return count + party->allyNumberOnSide(side);
+			}
+						  );
 }
 
 std::vector<std::shared_ptr<TeamMember>>
 AllyPartyTeams::getMembersBySide(HexagonSide::Orientation side) const
 {
-    std::vector<std::shared_ptr<TeamMember>> ret;
-    if (_partyTeams.empty() || _partyTeams.front()->getTeamMembers().empty())
-        return ret;
-    for (const auto& partyTeam : _partyTeams) {
-        const auto& membersOnSide = partyTeam->getTeamMemberOnSide(side);
-        std::copy(membersOnSide.begin(), membersOnSide.end(), std::back_inserter(ret));
-    }
-    return ret;
+	std::vector<std::shared_ptr<TeamMember>> ret;
+	if (_partyTeams.empty() || _partyTeams.front()->getTeamMembers().empty())
+		return ret;
+	for (const auto& partyTeam : _partyTeams) {
+		const auto& membersOnSide = partyTeam->getTeamMemberOnSide(side);
+		std::copy(membersOnSide.begin(), membersOnSide.end(), std::back_inserter(ret));
+	}
+	return ret;
+}
+
+std::vector<std::shared_ptr<TeamMember>>
+AllyPartyTeams::getDeadMembersBySide(HexagonSide::Orientation side) const
+{
+	std::vector<std::shared_ptr<TeamMember>> ret;
+	if (_partyTeams.empty() || _partyTeams.front()->getTeamMembers().empty())
+		return ret;
+	for (const auto& partyTeam : _partyTeams) {
+		const auto& membersOnSide = partyTeam->getDeadTeamMembersOnSide(side);
+		std::copy(membersOnSide.begin(), membersOnSide.end(), std::back_inserter(ret));
+	}
+	return ret;
 }
 
 const PartyTeam&
 AllyPartyTeams::getPartyTeamOfPlayer(const std::string& userName) const
 {
-	auto it = std::find_if(_partyTeams.begin(), _partyTeams.end(), [&userName](const auto& partyTeam){
+	auto it = std::find_if(_partyTeams.begin(), _partyTeams.end(), [&userName](const auto& partyTeam) {
 		return userName == partyTeam->getUserName();
 	});
 	if (it == _partyTeams.end()) {
@@ -182,9 +201,9 @@ AllyPartyTeams::getPartyTeamOfPlayer(const std::string& userName) const
 }
 
 bool
-AllyPartyTeams::setPartyReadiness(const std::string &userName)
+AllyPartyTeams::setPartyReadiness(const std::string& userName)
 {
-	auto it = std::find_if(_partyTeams.begin(), _partyTeams.end(), [&userName](const auto& partyTeam){
+	auto it = std::find_if(_partyTeams.begin(), _partyTeams.end(), [&userName](const auto& partyTeam) {
 		return userName == partyTeam->getUserName();
 	});
 	if (it == _partyTeams.end()) {
@@ -198,7 +217,7 @@ AllyPartyTeams::setPartyReadiness(const std::string &userName)
 	}
 
 	(*it)->setTeamReady(true);
-	return std::all_of(_partyTeams.begin(), _partyTeams.end(), [](const auto& partyTeam){
+	return std::all_of(_partyTeams.begin(), _partyTeams.end(), [](const auto& partyTeam) {
 		return partyTeam->isTeamReady();
 	});
 }

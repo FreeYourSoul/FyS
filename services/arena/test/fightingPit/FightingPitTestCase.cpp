@@ -110,49 +110,6 @@ TEST_CASE("FightingPit test", "[service][arena]")
 		const auto& c = FightingPitAnnouncer::getPitContenders(fp).getContenderOnSide(HexagonSide::Orientation::B_S);
 		const auto& p = FightingPitAnnouncer::getPartyTeams(fp).getMembersBySide(HexagonSide::Orientation::B_S);
 
-		SECTION("Battle Order") {
-
-			auto& side = FightingPitAnnouncer::getSideBattleForSide(fp, HexagonSide::Orientation::B_S);
-			auto now = std::chrono::system_clock::now();
-
-			REQUIRE_FALSE(side.empty());
-			REQUIRE(1 == FightingPitAnnouncer::getPitContenders(fp).getNumberContender());
-			REQUIRE(1 == FightingPitAnnouncer::getPitContenders(fp).contenderOnSide(HexagonSide::Orientation::B_S));
-			REQUIRE(4 == FightingPitAnnouncer::getPartyTeams(fp).getNumberAlly());
-
-			REQUIRE(8 == c.at(0)->getStatus().initialSpeed);
-			REQUIRE(3 == p.at(0)->getStatus().initialSpeed);
-			REQUIRE(5 == p.at(1)->getStatus().initialSpeed);
-			REQUIRE(10 == p.at(2)->getStatus().initialSpeed);
-			REQUIRE(20 == p.at(3)->getStatus().initialSpeed);
-
-			fys::arena::data::PriorityElem pe = side.getCurrentParticipantTurn(now, 0ms);
-			REQUIRE_FALSE(pe.isContender);
-			REQUIRE(20 == pe.speed);
-			REQUIRE(4 == pe.id);
-
-			pe = side.getCurrentParticipantTurn(now, 0ms);
-			REQUIRE_FALSE(pe.isContender);
-			REQUIRE(10 == pe.speed);
-			REQUIRE(3 == pe.id);
-
-			pe = side.getCurrentParticipantTurn(now, 0ms);
-			REQUIRE(pe.isContender);
-			REQUIRE(8 == pe.speed);
-			REQUIRE(0 == pe.id);
-
-			pe = side.getCurrentParticipantTurn(now, 0ms);
-			REQUIRE_FALSE(pe.isContender);
-			REQUIRE(5 == pe.speed);
-			REQUIRE(2 == pe.id);
-
-			pe = side.getCurrentParticipantTurn(now, 0ms);
-			REQUIRE_FALSE(pe.isContender);
-			REQUIRE(3 == pe.speed);
-			REQUIRE(1 == pe.id);
-
-		} // End section : Battle Order
-
 		REQUIRE(fp->isJoinable());
 		fp->setPlayerReadiness("Winner");
 		REQUIRE_FALSE(fp->isJoinable());
@@ -237,6 +194,7 @@ TEST_CASE("FightingPit test", "[service][arena]")
 		partyTeam->accessTeamMembers().at(0)->accessStatus().magicPoint.current = 0;
 		partyTeam->accessTeamMembers().at(1)->accessStatus().magicPoint.current = 0;
 		partyTeam->accessTeamMembers().at(2)->accessStatus().magicPoint.current = 0;
+		partyTeam->accessTeamMembers().at(2)->accessStatus().life.current = 99; // set to the lowest life in order to ensure as target
 		partyTeam->accessTeamMembers().at(3)->accessStatus().magicPoint.current = 0;
 		fpa.setCreatorTeamParty(std::move(partyTeam));
 		fpa.setDifficulty(FightingPit::EASY);
@@ -265,7 +223,7 @@ TEST_CASE("FightingPit test", "[service][arena]")
 			REQUIRE(200 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().life.current);
 			REQUIRE(200 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().life.total);
 			REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().magicPoint.current);
-			REQUIRE(550 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.current);
+			REQUIRE(99 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.current); // <<< LOWEST LIFE TARGET
 			REQUIRE(550 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.total);
 			REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().magicPoint.current);
 			REQUIRE(140 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().life.current);
@@ -288,68 +246,7 @@ TEST_CASE("FightingPit test", "[service][arena]")
 		REQUIRE_FALSE(fp->isJoinable());
 		REQUIRE(FightingPitAnnouncer::isOnGoing(fp));
 
-		SECTION("Battle Order turn 1") { // a4, a3, c0, a2, a1
-
-			auto& side = FightingPitAnnouncer::getSideBattleForSide(fp, HexagonSide::Orientation::B_S);
-			auto now = std::chrono::system_clock::now();
-
-			REQUIRE_FALSE(side.empty());
-
-			fys::arena::data::PriorityElem pe = side.getCurrentParticipantTurn(now, 0ms);
-			REQUIRE_FALSE(pe.isContender);
-			REQUIRE(20 == pe.speed);
-			REQUIRE(4 == pe.id);
-
-			pe = side.getCurrentParticipantTurn(now + 1ms, 0ms);
-			REQUIRE_FALSE(pe.isContender);
-			REQUIRE(10 == pe.speed);
-			REQUIRE(3 == pe.id);
-
-			pe = side.getCurrentParticipantTurn(now + 1ms, 0ms);
-			REQUIRE(pe.isContender);
-			REQUIRE(8 == pe.speed);
-			REQUIRE(0 == pe.id);
-
-			pe = side.getCurrentParticipantTurn(now + 1ms, 0ms);
-			REQUIRE_FALSE(pe.isContender);
-			REQUIRE(5 == pe.speed);
-			REQUIRE(2 == pe.id);
-
-			pe = side.getCurrentParticipantTurn(now + 1ms, 0ms);
-			REQUIRE_FALSE(pe.isContender);
-			REQUIRE(3 == pe.speed);
-			REQUIRE(1 == pe.id);
-
-			SECTION("Battle Order turn 2 ") {
-
-				pe = side.getCurrentParticipantTurn(now + 1ms, 0ms);
-				REQUIRE_FALSE(pe.isContender);
-				REQUIRE(20 == pe.speed);
-				REQUIRE(4 == pe.id);
-
-				pe = side.getCurrentParticipantTurn(now + 1ms, 0ms);
-				REQUIRE_FALSE(pe.isContender);
-				REQUIRE(10 == pe.speed);
-				REQUIRE(3 == pe.id);
-
-				pe = side.getCurrentParticipantTurn(now + 1ms, 0ms);
-				REQUIRE(pe.isContender);
-				REQUIRE(8 == pe.speed);
-				REQUIRE(0 == pe.id);
-
-				pe = side.getCurrentParticipantTurn(now + 1ms, 0ms);
-				REQUIRE_FALSE(pe.isContender);
-				REQUIRE(5 == pe.speed);
-				REQUIRE(2 == pe.id);
-
-				pe = side.getCurrentParticipantTurn(now + 1ms, 0ms);
-				REQUIRE_FALSE(pe.isContender);
-				REQUIRE(3 == pe.speed);
-				REQUIRE(1 == pe.id);
-
-			} // End section : Battle Order turn 2
-
-		} // End section : Battle Order turn 1
+		// other turns are tested in the test  Test for FightingPit testcase in file PriorityOrderListTestCase.cpp
 
 		SECTION("Battle Turn 1 test") {
 
@@ -376,19 +273,20 @@ TEST_CASE("FightingPit test", "[service][arena]")
 				REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().magicPoint.current);
 
 				// Contender turn : Target lowest life opponent:
-				// ally id 1  =  100 << Target -> damage done by attack 90 damage << 10 life left
+				// ally id 1  =  100
 				// ally id 2  =  200
-				// ally id 3  =  550
+				// ally id 3  =  99  << Target -> damage done by attack 90 damage << 9 life left
 				// ally id 4  =  140
 				now += fys::arena::interval::EASY + 1ms;
 				fp->continueBattle(now);
-				REQUIRE(10 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().life.current); // damage inflicted
+				REQUIRE(9   == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.current); // damage inflicted
+				REQUIRE(550 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.total);
+
 				// Stay same
+				REQUIRE(100 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().life.current);
 				REQUIRE(100 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().life.total);
 				REQUIRE(200 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().life.current);
 				REQUIRE(200 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().life.total);
-				REQUIRE(550 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.current);
-				REQUIRE(550 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.total);
 				REQUIRE(140 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().life.current);
 				REQUIRE(140 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().life.total);
 
@@ -404,8 +302,8 @@ TEST_CASE("FightingPit test", "[service][arena]")
 				fp->continueBattle(now);
 				REQUIRE(10 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().magicPoint.current);
 
-				SECTION("Battle Turn 2 test") {
-					p.at(0)->addPendingAction("meditate", std::nullopt);
+				SECTION("Battle Turn 2 test") { // a4, a4, a3, c0, a2, c0, a1
+					p.at(1)->addPendingAction("meditate", std::nullopt);
 					p.at(2)->addPendingAction("meditate", std::nullopt);
 					p.at(3)->addPendingAction("meditate", std::nullopt);
 
@@ -434,24 +332,25 @@ TEST_CASE("FightingPit test", "[service][arena]")
 					REQUIRE(10 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().magicPoint.current);
 
 					// Contender turn : Target lowest life opponent:
-					// ally id 1  =  10 << Target -> damage done by attack 90 damage << 0 life left DEAD
+					// ally id 1  =  100
 					// ally id 2  =  200
-					// ally id 3  =  550
+					// ally id 3  =  9   << Target -> damage done by attack 90 damage << 0 life left (DEAD)
 					// ally id 4  =  140
 					now += fys::arena::interval::EASY + 1ms;
 					fp->continueBattle(now);
-					REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().life.current); // damage inflicted
-					REQUIRE(fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().life.isDead());
+					REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.current);
+					REQUIRE(fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.isDead());
 					// Stay same
+					REQUIRE(100 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().life.current); // damage inflicted
 					REQUIRE(100 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().life.total);
 					REQUIRE(200 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().life.current);
 					REQUIRE(200 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().life.total);
-					REQUIRE(550 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.current);
 					REQUIRE(550 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.total);
 					REQUIRE(140 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().life.current);
 					REQUIRE(140 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().life.total);
+					// Player died and is not in game anymore, he won't play next turn
 
-					// Player id 3 (at index 2) is going to meditate, restore 10 mp, from 10 mp to 10 (max mp 10)
+					// Player id 2 (at index 1) is going to meditate, restore 10 mp, from 0 mp to 0 (max mp 0)
 					now += fys::arena::interval::EASY + 1ms;
 					fp->continueBattle(now);
 					REQUIRE(10 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().magicPoint.current);
@@ -460,54 +359,66 @@ TEST_CASE("FightingPit test", "[service][arena]")
 					REQUIRE(10 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().magicPoint.current);
 
 					// Contender turn : Target lowest life opponent:
-					// ally id 1  =  0
+					// ally id 1  =  100 << target from 100 to 10
 					// ally id 2  =  200
-					// ally id 3  =  550
-					// ally id 4  =  140 << target from 50 to 0
+					// ally id 3  =  0 (DEAD)
+					// ally id 4  =  140
 					now += fys::arena::interval::EASY + 1ms;
 					fp->continueBattle(now);
-					REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().life.current); // damage inflicted
-					REQUIRE(fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().life.isDead());
-					REQUIRE(50  == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().life.current);
-					REQUIRE(140 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().life.total);
-					// Stay same
+					REQUIRE(10 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().life.current); // damage inflicted
 					REQUIRE(100 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().life.total);
+					// Stay same
+					REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.current);
+					REQUIRE(fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.isDead());
 					REQUIRE(200 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().life.current);
 					REQUIRE(200 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().life.total);
-					REQUIRE(550 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.current);
 					REQUIRE(550 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.total);
+					REQUIRE(140  == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().life.current);
+					REQUIRE(140 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().life.total);
 
-					// Player id 1 (at index 0) is going to meditate, restore 10 mp, from 10 mp to 20 (max mp 20)
-					now += fys::arena::interval::EASY + 1ms; // SHOULDNT HAPPEN, TODO MAKE IT NOT HAPPEN AS THE CHARACTER DIED
+					// Player id 1 (at index 0) is going to meditate, restore 10 mp, from 10 mp to 10 (max mp 10)
+					now += fys::arena::interval::EASY + 1ms;
 					fp->continueBattle(now);
 					REQUIRE(10 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().magicPoint.current);
 					REQUIRE(10 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().magicPoint.current);
 					REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().magicPoint.current);
-					REQUIRE(20 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().magicPoint.current);
+					REQUIRE(10 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().magicPoint.current);
 
 					SECTION("Battle turn 3 test") {
-//						p.at(0)->addPendingAction("meditate", std::nullopt);
-//						p.at(2)->addPendingAction("meditate", std::nullopt);
-//						p.at(3)->addPendingAction("meditate", std::nullopt);
-//
-//						// Player id 4 (at index 3) is going to meditate, restore 10 mp, from 10 mp to 10 (max mp 10)
-//						now += fys::arena::interval::EASY + 1ms;
-//						fp->continueBattle(now);
-//
-//						// Player id 3 (at index 2) is going to meditate, restore 10 mp, from 10 mp to 10 (max mp 10)
-//						now += fys::arena::interval::EASY + 1ms;
-//						fp->continueBattle(now);
-//
-//						now += fys::arena::interval::EASY + 1ms;
-//						fp->continueBattle(now);
-//
-//						// Player id 2 (at index 1) is going to meditate, restore 10 mp, from 0 mp to 0 (max mp 0)
-//						now += fys::arena::interval::EASY + 1ms;
-//						fp->continueBattle(now);
-//
-//						// Player id 1 (at index 0) is going to meditate, restore 10 mp, from 20 mp to 20 (max mp 20)
-//						now += fys::arena::interval::EASY + 1ms;
-//						fp->continueBattle(now);
+						p.at(0)->addPendingAction("meditate", std::nullopt);
+						p.at(2)->addPendingAction("meditate", std::nullopt);
+						p.at(3)->addPendingAction("meditate", std::nullopt);
+
+						// Player id 4 (at index 3)
+						now += fys::arena::interval::EASY + 1ms;
+						fp->continueBattle(now);
+
+						// Contender
+						now += fys::arena::interval::EASY + 1ms;
+						fp->continueBattle(now);
+						REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().life.current); // damage inflicted
+						REQUIRE(fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().life.isDead());
+						REQUIRE(100 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().life.total);
+						// Stay same
+						REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.current);
+						REQUIRE(fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.isDead());
+						REQUIRE(200 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().life.current);
+						REQUIRE(200 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().life.total);
+						REQUIRE(550 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.total);
+						REQUIRE(140  == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().life.current);
+						REQUIRE(140 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().life.total);
+
+						// Player id 2 (at index 1)
+						now += fys::arena::interval::EASY + 1ms;
+						fp->continueBattle(now);
+
+						// Player id 4 (at index 1) is going to meditate, restore 10 mp, from 0 mp to 0 (max mp 0)
+						now += fys::arena::interval::EASY + 1ms;
+						fp->continueBattle(now);
+
+						// Player id 1 (at index 0) is going to meditate, restore 10 mp, from 20 mp to 20 (max mp 20)
+						now += fys::arena::interval::EASY + 1ms;
+						fp->continueBattle(now);
 
 					} // End section : Battle turn 3 test
 

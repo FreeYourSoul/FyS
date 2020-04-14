@@ -56,6 +56,16 @@ PitContenders::getContenderOnSide(HexagonSide::Orientation side) const
 	return result;
 }
 
+std::vector<std::shared_ptr<FightingContender>>
+PitContenders::getDeadContenderOnSide(HexagonSide::Orientation side) const
+{
+	std::vector<std::shared_ptr<FightingContender>> result;
+	std::copy_if(_contenders.begin(), _contenders.end(), std::back_inserter(result), [side](const auto& contenderPtr) {
+		return contenderPtr->getHexagonSideOrient() == side && contenderPtr->getStatus().life.isDead();
+	});
+	return result;
+}
+
 std::shared_ptr<FightingContender>
 PitContenders::selectSuitableContenderOnSide(HexagonSide::Orientation side, ComparatorSelection<FightingContender> comp) const
 {
@@ -83,7 +93,8 @@ PitContenders::selectSuitableContenderOnSideAlive(HexagonSide::Orientation side,
 {
 	std::vector<std::shared_ptr<FightingContender>> result;
 	auto it = fys::find_most_suitable(_contenders.begin(), _contenders.end(), [side, &comp](auto& current, auto& next) {
-		return !current->accessStatus().life.isDead() && current->getHexagonSideOrient() == side && comp(current, next);
+		return !current->accessStatus().life.isDead() && !next->accessStatus().life.isDead() &&
+				current->getHexagonSideOrient() == side && comp(current, next);
 	});
 	if (it == _contenders.end())
 		return nullptr;
@@ -130,7 +141,8 @@ PitContenders::addContender(const std::shared_ptr<FightingContender>& contender)
 }
 
 bool
-PitContenders::allDead() const {
+PitContenders::allDead() const
+{
 	return std::all_of(_contenders.begin(), _contenders.end(), [](const auto& contender) {
 		return contender->getStatus().life.isDead();
 	});
@@ -143,7 +155,7 @@ PitContenders::contenderOnSide(HexagonSide::Orientation side) const
 			[side](const auto& contender) {
 				return side == contender->getHexagonSideOrient();
 			}
-	);
+						);
 }
 
 }

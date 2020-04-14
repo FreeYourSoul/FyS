@@ -128,6 +128,10 @@ TeamMember::addPendingAction(const std::string& actionName, std::optional<Target
 		SPDLOG_WARN("Player {}::{} tried unrecognized action called {}", _userName, _name, actionName);
 		return;
 	}
+	if (_status.life.isDead()) {
+		SPDLOG_WARN("Player {}::{} tried to add an action while dead", _userName, _name);
+		return;
+	}
 
 	//TODO: add a check on whether the target is correct or not (contender or ally target)
 	_pendingActions.push(PendingAction{static_cast<uint>(std::distance(_actionsDoable.begin(), it)), std::move(target)});

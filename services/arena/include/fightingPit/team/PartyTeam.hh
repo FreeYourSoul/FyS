@@ -44,9 +44,6 @@ public:
 	[[nodiscard]] std::vector<std::shared_ptr<TeamMember>>
 	getTeamMemberOnSide(HexagonSide::Orientation side) const;
 
-//	[[nodiscard]] std::vector<std::shared_ptr<TeamMember>>
-//	getChangingSideTeamMember() const;
-
 	[[nodiscard]] const std::string&
 	getUserName() const { return _userName; }
 
@@ -59,17 +56,18 @@ public:
 	[[nodiscard]] unsigned
 	allyNumberOnSide(HexagonSide::Orientation side) const;
 
+	[[nodiscard]] std::vector<std::shared_ptr<TeamMember>>
+	getDeadTeamMembersOnSide(fys::arena::HexagonSide::Orientation side) const;
+
 	[[nodiscard]] bool
 	isTeamReady() const { return _ready; }
 
 	void setTeamReady(bool isReady) { _ready = true; }
 	void addTeamMember(std::shared_ptr<TeamMember> member);
-	void addPendingActionToTeamMember(unsigned id);
 
 private:
 	std::string _userName;
 	std::vector<std::shared_ptr<TeamMember> > _members;
-	std::vector<bool> _changeSideFlags;
 	bool _ready = false;
 
 };
