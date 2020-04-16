@@ -43,8 +43,8 @@ addFSeamTests(
         ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/team/TeamMember.cpp
         ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/team/PartyTeam.cpp
         ${CMAKE_CURRENT_LIST_DIR}/../src/network/WorkerService.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/ChaiRegister.cpp
         ${CMAKE_CURRENT_LIST_DIR}/../src/ArenaServerContext.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/ChaiRegister.cpp
         ${CMAKE_CURRENT_LIST_DIR}/../include/ChaiRegister.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/team/PartyTeam.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/team/TeamMember.hh
@@ -79,9 +79,6 @@ addFSeamTests(
         ${CMAKE_CURRENT_SOURCE_DIR}/../../common/include/RandomGenerator.hh
 )
 
-
-target_compile_definitions(arena_test PUBLIC -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)
-
 addFSeamTests(
         DESTINATION_TARGET sampy_test
 
@@ -94,10 +91,10 @@ addFSeamTests(
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/team/PartyTeam.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/team/TeamMember.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/HexagonSide.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/../src/ChaiRegister.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/FightingPitLayout.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/FightingPitLayout.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/ChaiRegister.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/ChaiRegister.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/FightingPitLayout.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/contender/ContenderScripting.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/contender/FightingContender.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/contender/PitContenders.hh
@@ -119,8 +116,8 @@ addFSeamTests(
         TO_MOCK
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/ConnectionHandler.hh
 )
-target_compile_definitions(sampy_test PUBLIC CHAISCRIPT_NO_THREADS)
+target_compile_definitions(sampy_test PUBLIC CHAISCRIPT_NO_THREADS -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)
 target_link_libraries(sampy_test cppzmq fmt::fmt dl cml)
-target_compile_definitions(arena_test PUBLIC -DCHAISCRIPT_NO_THREADS)
+target_compile_definitions(arena_test PUBLIC -DCHAISCRIPT_NO_THREADS -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)
 target_link_libraries(arena_test cppzmq Catch2::Catch2 fmt::fmt dl cml)
 catch_discover_tests(arena_test)

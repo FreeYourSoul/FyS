@@ -36,6 +36,7 @@
 #include <fightingPit/team/TeamMember.hh>
 #include <fightingPit/team/AllyPartyTeams.hh>
 #include <fightingPit/team/PartyTeam.hh>
+#include <fightingPit/data/CommonTypes.hh>
 
 #include <ConnectionHandler.hh>
 #include <ChaiRegister.hh>
@@ -95,10 +96,11 @@ ChaiRegister::registerBaseActions(chaiscript::ChaiScript& chai, cache::Cml& cml)
 }
 
 bool
-ChaiRegister::loadAndRegisterActionPartyTeam(chaiscript::ChaiScript& chai, cache::Cml& cache, const fys::arena::PartyTeam& pt)
+ChaiRegister::loadAndRegisterActionPartyTeam(chaiscript::ChaiScript& chai, cache::Cml& cache, PartyTeam& pt)
 {
 	try {
-		for (const auto& tm : pt.getTeamMembers()) {
+		// Load actions and register Members
+		for (auto& tm : pt.getTeamMembers()) {
 			const auto& actionsDoable = tm->getActionsDoable();
 
 			for (const auto &[key, lvl] : actionsDoable) {
@@ -110,7 +112,11 @@ ChaiRegister::loadAndRegisterActionPartyTeam(chaiscript::ChaiScript& chai, cache
 				try {
 					chai.eval(action);
 				}
-				catch (...) { SPDLOG_DEBUG("Action with key {} already loaded", key); }
+				catch (const std::exception& e) {
+					SPDLOG_DEBUG("Action with key {} may be already loaded: {}", key, e.what());
+				}
+
+				loadActionsAlterationsScript(chai, cache, {key});
 
 				// instantiate the action variable for given team member in chai engine
 				const std::string keyPlayer = std::string(pt.getUserName()).append("_").append(tm->getName());
@@ -129,25 +135,59 @@ ChaiRegister::loadAndRegisterActionPartyTeam(chaiscript::ChaiScript& chai, cache
 }
 
 void
-ChaiRegister::loadActionScripts(chaiscript::ChaiScript& chai, cache::Cml& cache, const std::vector<std::string>& scriptsKeys)
+ChaiRegister::loadActionsAlterationsScript(chaiscript::ChaiScript& chai, cache::Cml& cache, const std::vector<std::string>& keys)
 {
-	for (const auto& key : scriptsKeys) {
+	std::vector<std::string> alterationKeys;
+
+	for (const auto& key : keys) {
+		std::string actionAlterationsRetrieve = data::getActionNameFromKey(key).append("_retrieve_alterations()");
+		try {
+			std::vector actionAlteration = chai.eval<std::vector<std::string>>(actionAlterationsRetrieve);
+			std::copy(actionAlteration.begin(), actionAlteration.end(), std::back_inserter(alterationKeys));
+		}
+		catch (const std::exception& e) {
+			SPDLOG_DEBUG("couldn't retrieve alterations of the action {}, by calling {}: {}",
+					key, actionAlterationsRetrieve, e.what());
+		}
+
+	}
+	if (!alterationKeys.empty()) {
+		std::sort(alterationKeys.begin(), alterationKeys.end());
+		std::unique(alterationKeys.begin(), alterationKeys.end());
+		loadScripts(chai, cache, alterationKeys);
+	}
+}
+void
+ChaiRegister::loadActionScripts(chaiscript::ChaiScript& chai, cache::Cml& cache, const std::vector<std::string>& keys)
+{
+	// load actions
+	loadScripts(chai, cache, keys);
+
+	// load actions alterations
+	loadActionsAlterationsScript(chai, cache, keys);
+}
+
+void
+ChaiRegister::loadScripts(chaiscript::ChaiScript& chai, cache::Cml& cache, const std::vector<std::string>& keys)
+{
+	for (const auto& key : keys) {
 		const std::string& action = cache.findInCache(key);
 		if (action.empty()) {
 			SPDLOG_ERROR("Action with key {} not found (key may be wrong)", key);
 			continue;
 		}
 		try {
-			chai.eval(cache.findInCache(action));
+			chai.eval(action);
 		}
-		catch (...) { SPDLOG_DEBUG("Action with key {} already loaded", key); }
+		catch (const std::exception& e) {
+			SPDLOG_DEBUG("Action with key {} already loaded: {}", key, e.what());
+		}
 	}
 }
 
 void
 ChaiRegister::registerUtility(chaiscript::ChaiScript& chai, PitContenders& pc, AllyPartyTeams& apt)
 {
-
 	chai.add(chaiscript::fun<std::function<double(double, double)> >(
 			[](double rangeA, double rangeB) {
 				return util::RandomGenerator::generateInRange(rangeA, rangeB);
@@ -187,6 +227,19 @@ void
 ChaiRegister::registerCommon(chaiscript::ModulePtr m)
 {
 
+	m->add(chaiscript::fun<std::function<void(fys::arena::data::Status&, std::vector<data::Alteration>)>>(
+			[](fys::arena::data::Status& status, std::vector<data::Alteration> alterations) {
+				std::copy(alterations.begin(), alterations.end(), std::back_inserter(status.alterations));
+			}), "addOnTurnAlterations");
+	m->add(chaiscript::fun<std::function<void(fys::arena::data::Status&, std::vector<data::Alteration>)>>(
+			[](fys::arena::data::Status& status, std::vector<data::Alteration> alterations) {
+				std::copy(alterations.begin(), alterations.end(), std::back_inserter(status.alteration_before));
+			}), "addBeforeTurnAlterations");
+	m->add(chaiscript::fun<std::function<void(fys::arena::data::Status&, std::vector<data::Alteration>)>>(
+			[](fys::arena::data::Status& status, std::vector<data::Alteration> alterations) {
+				std::copy(alterations.begin(), alterations.end(), std::back_inserter(status.alteration_after));
+			}), "addAfterTurnAlterations");
+
 	chaiscript::utility::add_class<fys::arena::data::Targeting>(
 			*m,
 			"Targeting",
@@ -200,6 +253,23 @@ ChaiRegister::registerCommon(chaiscript::ModulePtr m)
 					{fys::arena::data::ALLY_OR_ENNEMY, "ALLY_OR_ENNEMY"},
 					{fys::arena::data::ALLY_AND_ENNEMY, "ALLY_AND_ENNEMY"}
 			});
+
+	chaiscript::utility::add_class<fys::arena::data::Alteration>(
+			*m,
+			"Alteration",
+			{
+					{chaiscript::constructor<
+							fys::arena::data::Alteration(
+									std::string alterationKey,
+									uint lvl,
+									uint turn,
+									std::function<int(data::Status&, uint, uint)>)>()
+					}
+			},
+			{
+					{fun(&fys::arena::data::Alteration::processAlteration), "processAlteration"}
+			}
+	);
 
 	chaiscript::utility::add_class<fys::arena::data::Life>(
 			*m, "Life", {},
@@ -275,6 +345,7 @@ ChaiRegister::registerFightingPitContender(chaiscript::ChaiScript& chai, chaiscr
 	chaiscript::bootstrap::standard_library::vector_type<std::vector<std::shared_ptr<FightingContender>>>("VectorFightingContender", *m);
 	chai.add(chaiscript::vector_conversion<std::vector<std::shared_ptr<FightingContender>>>());
 	chai.add(chaiscript::vector_conversion<std::vector<std::string>>());
+	chai.add(chaiscript::vector_conversion<std::vector<data::Alteration>>());
 
 	chaiscript::utility::add_class<fys::arena::PitContenders>(
 			*m, "PitContenders", {},

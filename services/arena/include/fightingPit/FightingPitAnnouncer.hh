@@ -64,8 +64,8 @@ public:
 	/**
 	 * Build a fighting pit thanks to the information given
 	 * @param ctx encounter context supplied at the startup of the application (contains informations about the type
-	 * of encounter a player can find depending on zones
-	 * todo : zones are not only defined by world server id, position may be something that should come back in the communication protocol
+	 * of encounter a player can find depending on zones.
+	 *
 	 * @param wsId world server id on which the generation of the fighting pit takes place
 	 * @return a newly generated fighting pit
 	 */

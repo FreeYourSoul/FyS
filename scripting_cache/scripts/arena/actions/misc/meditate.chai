@@ -1,3 +1,6 @@
+// no alteration
+def meditate_retrieve_alterations() { []; }
+
 class meditate {
     attr power;
 

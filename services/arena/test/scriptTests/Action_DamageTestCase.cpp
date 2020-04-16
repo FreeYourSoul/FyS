@@ -34,6 +34,7 @@
 
 #include <ChaiRegister.hh>
 #include <CmlCopy.hh>
+#include <fightingPit/FightingPitAnnouncer.hh>
 
 namespace {
 std::string
@@ -119,13 +120,18 @@ var s = slash(1);
 s.execute(contender.accessStatus());
 )");
 			}
-			catch (std::exception& ex) {
-				SPDLOG_ERROR("{}", ex.what());
+			catch (const chaiscript::exception::eval_error & ex) {
+				SPDLOG_ERROR("{}", ex.pretty_print());
 				FAIL("Chaiscript : Shouldn't fail here");
 			}
 			REQUIRE(120 == pc.getFightingContender(0)->accessStatus().life.current); // -33 life
 			REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.total);
-
+			REQUIRE(1 == pc.getFightingContender(0)->getStatus().alteration_after.size());
+			auto& stat = pc.getFightingContender(0)->accessStatus();
+			auto alt = stat.alteration_after.at(0);
+			REQUIRE(2 == alt.getTurn());
+			alt.processAlteration(stat);
+			REQUIRE(1 == alt.getTurn());
 		} // End section : test damage
 
 		SECTION("test over damage") {

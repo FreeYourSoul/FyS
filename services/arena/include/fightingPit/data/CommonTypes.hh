@@ -29,6 +29,7 @@
 #include <set>
 #include <functional>
 
+//! Types and functions linking C++ world with ChaiScript
 namespace fys::arena::data {
 static constexpr bool CONTENDER = true;
 static constexpr bool PARTY_MEMBER = false;
@@ -52,6 +53,13 @@ getActionNameFromKey(const std::string& key)
 		return key.substr(startSeparator + 1);
 	}
 	return key;
+}
+
+[[nodiscard]] inline std::string
+getAlterationNameFromKey(const std::string& key)
+{
+	std::string prefix = "alteration_";
+	return prefix.append(getActionNameFromKey(key));
 }
 
 struct PriorityElem { // Improve with strong typing on ID/SPEED
@@ -97,6 +105,8 @@ struct MagicPoint {
 	uint total = 0;
 };
 
+struct Status;
+
 /**
  * Representation of a status alteration of a character
  */
@@ -109,17 +119,22 @@ public:
 		}
 	};
 
-	Alteration(std::string alterationKey, uint lvl, uint turn) noexcept
-			:_alterationKey(std::move(alterationKey)), _lvl(lvl), _turn(turn) { }
+	Alteration(std::string alterationKey, uint lvl, uint turn, std::function<int(data::Status&, uint, uint)> a) noexcept
+			:
+			_alterationKey(std::move(alterationKey)),
+			_lvl(lvl),
+			_turn(turn),
+			_action(std::move(a)) { }
 
 	/**
 	 * Process an alteration action, return if it has an impact on the turn of the player
 	 * @return false if the player turn is skipped, true otherwise
 	 */
-	bool processAlteration()
+	bool processAlteration(Status& status)
 	{
-		if (_action && _turn-- > 0) {
-			return _action(_lvl, _turn);
+		if (_action && _turn > 0) {
+			--_turn;
+			return _action(status, _lvl, _turn);
 		}
 		return true;
 	}
@@ -131,16 +146,17 @@ private:
 	std::string _alterationKey;
 	uint _lvl;
 	uint _turn;
-	std::function<bool(uint, uint)> _action;
+	std::function<int(Status&, uint, uint)> _action;
 };
 
 struct Status {
 	Life life;
 	MagicPoint magicPoint;
 	uint initialSpeed;
-	std::set<Alteration, Alteration::CompAlteration> alteration_before;
-	std::set<Alteration, Alteration::CompAlteration> alterations;
-	std::set<Alteration, Alteration::CompAlteration> alteration_after;
+
+	std::vector<Alteration> alteration_before;
+	std::vector<Alteration> alterations;
+	std::vector<Alteration> alteration_after;
 };
 
 enum MoveDirection {

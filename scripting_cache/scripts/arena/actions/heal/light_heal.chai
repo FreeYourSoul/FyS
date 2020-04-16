@@ -1,3 +1,6 @@
+// no alteration
+def light_heal_retrieve_alterations() { []; }
+
 // A mono target attack,
 // inflict 30 damages, +10% for each level
 class light_heal {
@@ -24,5 +27,4 @@ class light_heal {
         this.heal.execute(targetStatus);
         1;
     }
-
 };

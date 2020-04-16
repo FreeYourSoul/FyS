@@ -56,7 +56,7 @@ namespace fys::cache {
 
     Cml::Cml(std::filesystem::path pathLocalStorage) : _localPathStorage(std::move(pathLocalStorage)) {
         try {
-            bool ec = std::filesystem::create_directories(_localPathStorage);
+            std::filesystem::create_directories(_localPathStorage);
         } catch (...) { }
     }
 

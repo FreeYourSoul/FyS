@@ -33,18 +33,27 @@ TEST_CASE("getActionNameFromKey test", "[service][arena]")
 
 } // End TestCase : getActionNameFromKey test
 
+TEST_CASE("getAlternateNameFromKey test", "[service][arena]")
+{
+	REQUIRE("alternate_popo" == fys::arena::data::getAlterationNameFromKey("tete:tete:www:oo:popo.chai"));
+	REQUIRE("alternate_popo" == fys::arena::data::getAlterationNameFromKey("tete:tete:www:oo:popo"));
+	REQUIRE("alternate_popo" == fys::arena::data::getAlterationNameFromKey("popo.chai"));
+	REQUIRE("alternate_popo" == fys::arena::data::getAlterationNameFromKey("popo"));
+
+} // End TestCase : getAlternateNameFromKey test
+
 TEST_CASE("CommonTypes test", "[service][arena]")
 {
 	std::set<fys::arena::data::Alteration, fys::arena::data::Alteration::CompAlteration> alterations = {
-			fys::arena::data::Alteration("burned", 1, 5),
-			fys::arena::data::Alteration("burned", 1, 5),
-			fys::arena::data::Alteration("burned", 1, 5),
-			fys::arena::data::Alteration("frozen", 1, 5),
-			fys::arena::data::Alteration("frozen", 1, 5),
-			fys::arena::data::Alteration("frozen", 1, 5),
-			fys::arena::data::Alteration("paralyzed", 1, 5),
-			fys::arena::data::Alteration("paralyzed", 1, 5),
-			fys::arena::data::Alteration("paralyzed", 1, 5)
+			fys::arena::data::Alteration("burned", 1, 5, [](fys::arena::data::Status&, uint, uint) { return true; }),
+			fys::arena::data::Alteration("burned", 1, 5, [](fys::arena::data::Status&, uint, uint) { return true; }),
+			fys::arena::data::Alteration("burned", 1, 5, [](fys::arena::data::Status&, uint, uint) { return true; }),
+			fys::arena::data::Alteration("frozen", 1, 5, [](fys::arena::data::Status&, uint, uint) { return true; }),
+			fys::arena::data::Alteration("frozen", 1, 5, [](fys::arena::data::Status&, uint, uint) { return true; }),
+			fys::arena::data::Alteration("frozen", 1, 5, [](fys::arena::data::Status&, uint, uint) { return true; }),
+			fys::arena::data::Alteration("paralyzed", 1, 5, [](fys::arena::data::Status&, uint, uint) { return true; }),
+			fys::arena::data::Alteration("paralyzed", 1, 5, [](fys::arena::data::Status&, uint, uint) { return true; }),
+			fys::arena::data::Alteration("paralyzed", 1, 5, [](fys::arena::data::Status&, uint, uint) { return true; })
 	};
 
 	REQUIRE(3 == alterations.size());

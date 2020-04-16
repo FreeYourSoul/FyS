@@ -1,3 +1,5 @@
+def heal_retrieve_alterations() { []; }
+
 class heal {
     attr heal;
 

@@ -1,3 +1,5 @@
+def zone_heal_retrieve_alterations() { []; }
+
 class zone_heal {
     attr heal;
 

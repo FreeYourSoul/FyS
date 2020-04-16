@@ -1,7 +1,14 @@
+def slash_retrieve_alterations() {
+    [
+        "arena:actions:buff:after_turn:bleeding.chai"
+    ];
+}
+
 // A mono target attack,
 // inflict 30 damages, +10% for each level
 class slash {
     attr dmg;
+    attr after_turn_alterations;
 
     def slash(levelOrStatus) {
         this.set_explicit(true);
@@ -14,6 +21,11 @@ class slash {
             lvl = 15;
         }
         this.dmg = damage(30 + 30 * (0.1 * lvl));
+
+        var alts = slash_retrieve_alterations();
+        this.after_turn_alterations = [
+            Alteration(alts[0], lvl, 2, alteration_bleeding)
+        ];
     }
 
     def requireTarget() {
@@ -22,6 +34,7 @@ class slash {
 
     def execute(targetStatus) {
         this.dmg.execute(targetStatus);
+        addAfterTurnAlterations(targetStatus, this.after_turn_alterations);
         1;
     }
 

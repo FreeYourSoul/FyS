@@ -1,3 +1,5 @@
+def damage_retrieve_alterations() { []; }
+
 class damage {
     attr power;
 

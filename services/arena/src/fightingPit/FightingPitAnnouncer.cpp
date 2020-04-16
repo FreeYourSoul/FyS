@@ -107,11 +107,11 @@ FightingPitAnnouncer::generateContenders(FightingPit& fp, const EncounterContext
 		contenderScript->loadContenderScript(getScriptContentString(std::move(name), desc));
 		contenderScript->registerContenderDoableActions(_cache);
 		auto contender = std::make_shared<FightingContender>(std::move(contenderScript));
-		// todo make positioning of contender depending on ambush
 		if (!fp.addContender(contender)) {
 			SPDLOG_WARN("FightingPit built invalid, generation of contender {} failure", contender->getContenderScripting()->getContenderName());
 			return false;
 		}
+		// todo make positioning of contender depending on ambush / or normal one
 		fys::arena::FightingPitLayout::setContenderInitiatePosition(*contender, HexagonSide::Orientation::B_S);
 	}
 	return true;

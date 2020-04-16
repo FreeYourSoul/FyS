@@ -84,7 +84,7 @@ TEST_CASE("test heal chaiscript", "[service][arena][script_test]")
 	sampy->loadContenderScriptFromFile(getPathSampyChaiScript());
 
 	auto fpc = std::make_shared<fys::arena::FightingContender>(std::move(sampy));
-	pc.addContender(fpc);
+	REQUIRE(pc.addContender(fpc));
 
 	SECTION("Test initialization contender") {
 		REQUIRE(8 == pc.getFightingContender(0)->accessStatus().initialSpeed);
