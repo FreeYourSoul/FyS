@@ -155,7 +155,7 @@ PitContenders::contenderOnSide(HexagonSide::Orientation side) const
 			[side](const auto& contender) {
 				return side == contender->getHexagonSideOrient();
 			}
-						);
+	);
 }
 
 }

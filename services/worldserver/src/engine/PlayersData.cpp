@@ -41,8 +41,8 @@ PlayersData::getIndexAndUpdatePlayerConnection(const std::string& token, std::st
 
 std::vector<std::string_view>
 PlayersData::getPlayerIdtsArroundPlayer(uint indexPlayer,
-										std::optional<std::reference_wrapper<PlayerInfo>> position,
-										double distance) const noexcept
+		std::optional<std::reference_wrapper<PlayerInfo>> position,
+		double distance) const noexcept
 {
 	if (position && indexPlayer < _positions.size())
 		return getPlayerIdtsArroundPos(*position, distance, indexPlayer);
@@ -51,8 +51,8 @@ PlayersData::getPlayerIdtsArroundPlayer(uint indexPlayer,
 
 std::vector<std::string_view>
 PlayersData::getPlayerIdtsArroundPos(const fys::ws::PlayerInfo& position,
-									 double distance,
-									 uint ignoreIndex) const noexcept
+		double distance,
+		uint ignoreIndex) const noexcept
 {
 	std::vector<std::string_view> playerIdts;
 	playerIdts.reserve(LIMIT_NOTIFICATIONS_MOVE);

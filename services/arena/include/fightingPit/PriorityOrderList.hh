@@ -34,70 +34,70 @@ namespace fys::arena {
 class PriorityOrderList {
 
 public:
-    PriorityOrderList() = default;
-    explicit PriorityOrderList(std::vector<data::PriorityElem> baseSpeed);
+	PriorityOrderList() = default;
+	explicit PriorityOrderList(std::vector<data::PriorityElem> baseSpeed);
 
-    void addParticipantInList(uint id, int speed, bool isContender);
-    void removeParticipantFromList(uint idParticipant, bool isContender);
+	void addParticipantInList(uint id, int speed, bool isContender);
+	void removeParticipantFromList(uint idParticipant, bool isContender);
 
-    [[nodiscard]] bool
-    empty() const { return _baseSpeed.empty(); }
+	[[nodiscard]] bool
+	empty() const { return _baseSpeed.empty(); }
 
-    [[nodiscard]] const data::PriorityElem&
-    getCurrent() const noexcept { return _currentPrio; }
+	[[nodiscard]] const data::PriorityElem&
+	getCurrent() const noexcept { return _currentPrio; }
 
-    [[nodiscard]] unsigned
-    getTurnNumber() const noexcept { return !_currentTurn ? 1 : _currentTurn; }
+	[[nodiscard]] unsigned
+	getTurnNumber() const noexcept { return !_currentTurn ? 1 : _currentTurn; }
 
-    data::PriorityElem
-    getNext();
-
-private:
-    void
-    sortBaseAndCalculatePriority();
-
-    void
-    calculatePriority(uint turn);
-
-    void
-    endTurnRoutine();
-
-    [[nodiscard]] int
-    getComputedSpeed(const data::PriorityElem& elemToCompute) const;
-
-    /**
-     * Sort in a specific manner
-     */
-    void
-    customSort();
-
-    [[nodiscard]] bool
-    isPlayerSlowest(uint id) const
-    {
-        return _baseSpeed.front().id == id;
-    }
-
-    [[nodiscard]] int
-    getFastestBaseSpeed() const
-    {
-        return _baseSpeed.back().speed;
-    }
-
-    [[nodiscard]] int
-    getSlowestSpeed() const
-    {
-        return _baseSpeed.front().speed;
-    }
+	data::PriorityElem
+	getNext();
 
 private:
-    std::vector<data::PriorityElem> _baseSpeed;
-    std::vector<data::PriorityElem> _priorityList;
-    // List used as temporary for the calculate priority
-    std::vector<data::PriorityElem> _analyzedList;
+	void
+	sortBaseAndCalculatePriority();
 
-    data::PriorityElem _currentPrio{};
+	void
+	calculatePriority(uint turn);
 
-    uint _currentTurn = 0;
+	void
+	endTurnRoutine();
+
+	[[nodiscard]] int
+	getComputedSpeed(const data::PriorityElem& elemToCompute) const;
+
+	/**
+	 * Sort in a specific manner
+	 */
+	void
+	customSort();
+
+	[[nodiscard]] bool
+	isPlayerSlowest(uint id) const
+	{
+		return _baseSpeed.front().id == id;
+	}
+
+	[[nodiscard]] int
+	getFastestBaseSpeed() const
+	{
+		return _baseSpeed.back().speed;
+	}
+
+	[[nodiscard]] int
+	getSlowestSpeed() const
+	{
+		return _baseSpeed.front().speed;
+	}
+
+private:
+	std::vector<data::PriorityElem> _baseSpeed;
+	std::vector<data::PriorityElem> _priorityList;
+	// List used as temporary for the calculate priority
+	std::vector<data::PriorityElem> _analyzedList;
+
+	data::PriorityElem _currentPrio{};
+
+	uint _currentTurn = 0;
 
 };
 

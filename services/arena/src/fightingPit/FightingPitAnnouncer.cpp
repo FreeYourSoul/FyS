@@ -41,7 +41,7 @@ using BoundaryMapEncounter = fys::BoundaryMap<fys::arena::EncounterContext::Enco
 
 BoundaryMapEncounter
 makeContenderRngBoundaryMap(const std::vector<fys::arena::EncounterContext::EncounterDesc>& zoneContenders,
-							fys::arena::FightingPit::Level difficulty)
+		fys::arena::FightingPit::Level difficulty)
 {
 	BoundaryMapEncounter bm;
 	int val = 0;
@@ -90,7 +90,7 @@ FightingPitAnnouncer::buildFightingPit(const EncounterContext& ctx, const std::s
 
 bool
 FightingPitAnnouncer::generateContenders(FightingPit& fp, const EncounterContext& ctx,
-										 const std::string& wsId)
+		const std::string& wsId)
 {
 	const auto& range = ctx._rangeEncounterPerZone.at(wsId).at(static_cast<std::size_t>(_difficulty));
 	const unsigned numberContenders = fys::util::RandomGenerator::generateInRange(range.first, range.second);

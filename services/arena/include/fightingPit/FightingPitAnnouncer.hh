@@ -165,8 +165,6 @@ private:
 	std::string _creatorUserToken;
 	std::unique_ptr<PartyTeam> _creatorPartyTeam;
 
-	//TODO add the common cache retriever
-
 };
 
 }

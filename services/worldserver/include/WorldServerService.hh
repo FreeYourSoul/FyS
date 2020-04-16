@@ -37,7 +37,7 @@ public:
 
 private:
 	inline void processMessage(std::string&& idt, std::string&& token, const zmq::message_t& content,
-							   const std::optional<std::string>& internalMagic);
+			const std::optional<std::string>& internalMagic);
 
 private:
 	fys::ws::WorldServerEngine _worldServer;

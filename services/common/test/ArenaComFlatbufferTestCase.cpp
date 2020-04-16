@@ -132,7 +132,7 @@ TEST_CASE("FlatBuffer ArenaCom ArenaFightAction", "[service][arena][common][fb]"
 			1337,
 			fbb.CreateString("idAction"),
 			fys::fb::Targeting_ENNEMIES,
-			fbb.CreateVector(std::vector<uint> {1, 4, 5, 6}));
+			fbb.CreateVector(std::vector<uint>{1, 4, 5, 6}));
 	fys::fb::FinishArenaFightActionBuffer(fbb, afa);
 
 	SECTION("Verifier") {

@@ -37,16 +37,6 @@ struct overloaded : Ts ... {
 };
 template<class... Ts> overloaded(Ts...) -> overloaded<Ts...>;
 
-namespace {
-std::string
-getActionNameFromKey(const std::string& key)
-{ // todo, put this code in a common zone + fix
-	auto startSeparator = key.find_last_of(':');
-	if (startSeparator == std::string::npos) return "";
-	return key.substr(startSeparator + 1, key.find_last_of('.') - startSeparator - 1);
-}
-}
-
 namespace fys::arena {
 
 void
@@ -68,9 +58,11 @@ TeamMember::executeAction(
 	}
 
 	const std::string allyAction = fmt::format(
-			R"(ally_actions["{}_{}"]["{}"])", _userName, _name, getActionNameFromKey(_actionsDoable.at(pa->idAction).first));
+			R"(ally_actions["{}_{}"]["{}"])",
+			_userName, _name, data::getActionNameFromKey(_actionsDoable.at(pa->idAction).first));
 	const auto funcAction = chaiPtr->eval<std::function<int(data::Status&)>>(fmt::format(
-			R"(fun(targetStatus){{ return {}.execute(targetStatus);}})", allyAction));
+			R"(fun(targetStatus){{ return {}.execute(targetStatus);}})",
+			allyAction));
 	data::Targeting targetType;
 
 	try {
@@ -122,7 +114,7 @@ void
 TeamMember::addPendingAction(const std::string& actionName, std::optional<TargetType> target)
 {
 	auto it = std::find_if(_actionsDoable.begin(), _actionsDoable.end(), [&actionName](const auto& action) {
-		return actionName == getActionNameFromKey(action.first);
+		return actionName == data::getActionNameFromKey(action.first);
 	});
 	if (it == _actionsDoable.end()) {
 		SPDLOG_WARN("Player {}::{} tried unrecognized action called {}", _userName, _name, actionName);

@@ -109,8 +109,8 @@ public:
 	 */
 	inline std::vector<std::string_view>
 	getPlayerIdtsArroundPlayer(uint indexPlayer,
-							   std::optional<std::reference_wrapper<PlayerInfo>> position,
-							   double distance = DEFAULT_DISTANCE) const noexcept;
+			std::optional<std::reference_wrapper<PlayerInfo>> position,
+			double distance = DEFAULT_DISTANCE) const noexcept;
 
 	/**
 	 * @brief Get the Players Identities Arround the given position
@@ -122,8 +122,8 @@ public:
 	 */
 	std::vector<std::string_view>
 	getPlayerIdtsArroundPos(const PlayerInfo& position,
-							double distance = DEFAULT_DISTANCE,
-							uint ignoreIndex = LIMIT_NOTIFICATIONS_MOVE) const noexcept;
+			double distance = DEFAULT_DISTANCE,
+			uint ignoreIndex = LIMIT_NOTIFICATIONS_MOVE) const noexcept;
 
 private:
 	std::vector<PlayerInfo> _positions;

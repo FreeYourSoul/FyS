@@ -48,7 +48,7 @@ public:
 
 	void
 	processPlayerInputMessage(std::string&& idt, std::string&& token,
-							  const fys::fb::WSAction* actionMsg, ConnectionHandler& handler);
+			const fys::fb::WSAction* actionMsg, ConnectionHandler& handler);
 
 	void
 	executePendingActions(ws::ConnectionHandler& conn);

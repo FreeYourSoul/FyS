@@ -21,10 +21,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#pragma once
+#include <catch2/catch.hpp>
+#include <fightingPit/data/CommonTypes.hh>
 
-namespace fys::common {
+TEST_CASE("getActionNameFromKey test", "[service][arena]")
+{
+	REQUIRE("popo" == fys::arena::data::getActionNameFromKey("tete:tete:www:oo:popo.chai"));
+	REQUIRE("popo" == fys::arena::data::getActionNameFromKey("tete:tete:www:oo:popo"));
+	REQUIRE("popo" == fys::arena::data::getActionNameFromKey("popo.chai"));
+	REQUIRE("popo" == fys::arena::data::getActionNameFromKey("popo"));
 
-// TODO create flat buffer message builder (and test them)
+} // End TestCase : getActionNameFromKey test
 
-}
+TEST_CASE("CommonTypes test", "[service][arena]")
+{
+	std::set<fys::arena::data::Alteration, fys::arena::data::Alteration::CompAlteration> alterations = {
+			fys::arena::data::Alteration("burned", 1, 5),
+			fys::arena::data::Alteration("burned", 1, 5),
+			fys::arena::data::Alteration("burned", 1, 5),
+			fys::arena::data::Alteration("frozen", 1, 5),
+			fys::arena::data::Alteration("frozen", 1, 5),
+			fys::arena::data::Alteration("frozen", 1, 5),
+			fys::arena::data::Alteration("paralyzed", 1, 5),
+			fys::arena::data::Alteration("paralyzed", 1, 5),
+			fys::arena::data::Alteration("paralyzed", 1, 5)
+	};
+
+	REQUIRE(3 == alterations.size());
+
+} // End TestCase : WorkerService test

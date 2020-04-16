@@ -97,7 +97,7 @@ ArenaServerService::runServerLoop() noexcept
 		_connectionHandler.pollAndProcessMessageFromDispatcher(
 				[this](zmq::message_t&& identityWs, zmq::message_t&& worldServerMessage) {
 					// In case of a saturation of the server, return an error to the dispatcher
-					if (_workerService.isSaturated()) {
+					if (isSaturated()) {
 						// todo return an error to the dispatcher containing all the incoming message for it to be forwarded to another server
 						return;
 					}
@@ -183,7 +183,8 @@ ArenaServerService::runServerLoop() noexcept
 }
 
 bool
-ArenaServerService::isSaturated() const noexcept {
+ArenaServerService::isSaturated() const noexcept
+{
 	const unsigned awaitedInstance = _awaitingArena.size();
 	return (awaitedInstance + _workerService.getNumberBattleRunning()) > _ctx.get().getBattleThreshold();
 }

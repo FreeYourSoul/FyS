@@ -1,9 +1,9 @@
-cmake_minimum_required( VERSION 3.6...3.15 )
-if(${CMAKE_VERSION} VERSION_LESS 3.15)
+cmake_minimum_required(VERSION 3.6...3.15)
+if (${CMAKE_VERSION} VERSION_LESS 3.15)
     cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
-else()
+else ()
     cmake_policy(VERSION 3.15)
-endif()
+endif ()
 
 project(arena_service
         VERSION 1.0
@@ -83,9 +83,9 @@ set_property(TARGET arena_service PROPERTY INCLUDE_DIRECTORIES
 
 include(CheckIPOSupported)
 check_ipo_supported(RESULT result)
-if(result)
+if (result)
     set_target_properties(arena_service PROPERTIES INTERPROCEDURAL_OPTIMIZATION TRUE)
-endif()
+endif ()
 
 target_compile_options(arena_service PRIVATE -O2 -fstack-protector-all -g -lfmt)
 target_compile_options(arena_service PRIVATE -Wall -Wpedantic -Wextra -Wno-deprecated-declarations)

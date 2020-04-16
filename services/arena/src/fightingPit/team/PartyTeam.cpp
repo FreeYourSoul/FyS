@@ -62,7 +62,7 @@ PartyTeam::allyNumberOnSide(HexagonSide::Orientation side) const
 			[side](const TeamMemberSPtr& ally) {
 				return side == ally->getHexagonSideOrient();
 			}
-						);
+	);
 }
 
 }

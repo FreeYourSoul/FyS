@@ -64,7 +64,7 @@ namespace fys::cache {
      * @return true if the key represent a cached data in the local storage (filesystem)
      */
     bool Cml::isInLocalStorage(const CmlKey &cmlKey) const {
-        return std::filesystem::exists(cmlKey.getPath());
+        return std::filesystem::is_regular_file(cmlKey.getPath());
     }
 
     bool Cml::isInLocalStorageAndUpToDate(const CmlKey &cmlKey, long timestamp) const {

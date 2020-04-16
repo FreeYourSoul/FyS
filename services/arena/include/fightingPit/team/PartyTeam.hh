@@ -50,7 +50,7 @@ public:
 	[[nodiscard]] const std::vector<std::shared_ptr<TeamMember>>&
 	getTeamMembers() const { return _members; }
 
-	[[nodiscard]] std::vector<std::shared_ptr<TeamMember>> &
+	[[nodiscard]] std::vector<std::shared_ptr<TeamMember>>&
 	accessTeamMembers() { return _members; }
 
 	[[nodiscard]] unsigned

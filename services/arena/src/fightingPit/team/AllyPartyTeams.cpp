@@ -159,7 +159,7 @@ AllyPartyTeams::allyNumberOnSide(HexagonSide::Orientation side) const
 			[side](unsigned count, const PartyTeamUPtr& party) {
 				return count + party->allyNumberOnSide(side);
 			}
-						  );
+	);
 }
 
 std::vector<std::shared_ptr<TeamMember>>

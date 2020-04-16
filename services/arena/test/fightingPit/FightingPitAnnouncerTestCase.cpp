@@ -103,13 +103,16 @@ TEST_CASE("FightingPitAnnouncer test", "[service][arena]")
 
 	SECTION("test invalid action name registered") {
 
+		std::shared_ptr<std::mt19937> mt = std::make_shared<std::mt19937>(42);
+		fseamMock->dupeReturn<FSeam::RandomGenerator::get>(mt);
+
 		FightingPitAnnouncer fpa(cml);
 		fpa.setCreatorUserToken(" ");
 		fpa.setCreatorUserName(" ");
 		fpa.setCreatorTeamParty(getPartyTeam(" "));
 		fpa.setDifficulty(FightingPit::HARD);
 		fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
-		fpa.addActionToOneMember(0, "arena", 5); // todo to fix
+		fpa.addActionToOneMember(0, "arena", 5);
 		auto fp = fpa.buildFightingPit(ctx, "WS00");
 
 	} // End section : test invalid action name registered

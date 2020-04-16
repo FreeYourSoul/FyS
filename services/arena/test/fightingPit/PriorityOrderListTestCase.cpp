@@ -480,7 +480,6 @@ TEST_CASE("PriorityOrderList test", "[service][arena]")
 			pol.removeParticipantFromList(1, fys::arena::data::PARTY_MEMBER); // no party member with id 1, not exist
 			REQUIRE(5 == pol._priorityList.size());
 
-
 			pol.removeParticipantFromList(1, fys::arena::data::CONTENDER);
 			REQUIRE(4 == pol._priorityList.size());
 			REQUIRE(fys::arena::data::PriorityElem{5, 30, fys::arena::data::CONTENDER} == pol._baseSpeed.at(3));
@@ -516,9 +515,9 @@ TEST_CASE("Test for FightingPit testcase", "[service][arena]")
 	REQUIRE_FALSE(priorityList.empty());
 	REQUIRE(fys::arena::data::PriorityElem(4, 20, fys::arena::data::PARTY_MEMBER) == priorityList._baseSpeed.at(4));
 	REQUIRE(fys::arena::data::PriorityElem(3, 10, fys::arena::data::PARTY_MEMBER) == priorityList._baseSpeed.at(3));
-	REQUIRE(fys::arena::data::PriorityElem(0, 8, fys::arena::data::CONTENDER)     == priorityList._baseSpeed.at(2));
-	REQUIRE(fys::arena::data::PriorityElem(2, 5, fys::arena::data::PARTY_MEMBER)  == priorityList._baseSpeed.at(1));
-	REQUIRE(fys::arena::data::PriorityElem(1, 3, fys::arena::data::PARTY_MEMBER)  == priorityList._baseSpeed.at(0));
+	REQUIRE(fys::arena::data::PriorityElem(0, 8, fys::arena::data::CONTENDER) == priorityList._baseSpeed.at(2));
+	REQUIRE(fys::arena::data::PriorityElem(2, 5, fys::arena::data::PARTY_MEMBER) == priorityList._baseSpeed.at(1));
+	REQUIRE(fys::arena::data::PriorityElem(1, 3, fys::arena::data::PARTY_MEMBER) == priorityList._baseSpeed.at(0));
 
 	// TURN 1
 
@@ -529,10 +528,10 @@ TEST_CASE("Test for FightingPit testcase", "[service][arena]")
 	 * a2:5
 	 * a1:3
 	 */
- 	REQUIRE(1 == priorityList.getTurnNumber());
+	REQUIRE(1 == priorityList.getTurnNumber());
 	REQUIRE(fys::arena::data::PriorityElem(4, DONT_CARE, fys::arena::data::PARTY_MEMBER) == priorityList.getNext());
 	REQUIRE(fys::arena::data::PriorityElem(3, DONT_CARE, fys::arena::data::PARTY_MEMBER) == priorityList.getNext());
-	REQUIRE(fys::arena::data::PriorityElem(0, DONT_CARE, fys::arena::data::CONTENDER)    == priorityList.getNext());
+	REQUIRE(fys::arena::data::PriorityElem(0, DONT_CARE, fys::arena::data::CONTENDER) == priorityList.getNext());
 	REQUIRE(fys::arena::data::PriorityElem(2, DONT_CARE, fys::arena::data::PARTY_MEMBER) == priorityList.getNext());
 	REQUIRE(fys::arena::data::PriorityElem(1, DONT_CARE, fys::arena::data::PARTY_MEMBER) == priorityList.getNext());
 
@@ -626,7 +625,7 @@ TEST_CASE("Test for FightingPit testcase", "[service][arena]")
 	REQUIRE(fys::arena::data::PriorityElem(4, DONT_CARE, fys::arena::data::PARTY_MEMBER) == priorityList.getNext());
 	REQUIRE(3 == priorityList.getTurnNumber());
 	REQUIRE(fys::arena::data::PriorityElem(3, DONT_CARE, fys::arena::data::PARTY_MEMBER) == priorityList.getNext());
-	REQUIRE(fys::arena::data::PriorityElem(0, DONT_CARE, fys::arena::data::CONTENDER)    == priorityList.getNext());
+	REQUIRE(fys::arena::data::PriorityElem(0, DONT_CARE, fys::arena::data::CONTENDER) == priorityList.getNext());
 	REQUIRE(fys::arena::data::PriorityElem(2, DONT_CARE, fys::arena::data::PARTY_MEMBER) == priorityList.getNext());
 	REQUIRE(fys::arena::data::PriorityElem(1, DONT_CARE, fys::arena::data::PARTY_MEMBER) == priorityList.getNext());
 

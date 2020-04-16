@@ -27,3 +27,18 @@ def retrieveDoableActions(Vector actions) {
     }
     actionsToReturn;
 }
+
+// Apply damage taking into alterations account
+def applyDamage(dmg, Vector alterationsId) {
+
+}
+
+// Apply restoration of life taking alterations into account
+def applyRestorationLife(restoreLife, Vector alterationsId) {
+
+}
+
+// Apply restoration of mp taking alterations into account
+def applyRestorationMp(restoreMp, Vector alterationsId) {
+
+}

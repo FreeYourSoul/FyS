@@ -1,9 +1,9 @@
-cmake_minimum_required( VERSION 3.6...3.15 )
-if(${CMAKE_VERSION} VERSION_LESS 3.15)
+cmake_minimum_required(VERSION 3.6...3.15)
+if (${CMAKE_VERSION} VERSION_LESS 3.15)
     cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
-else()
+else ()
     cmake_policy(VERSION 3.15)
-endif()
+endif ()
 
 project(arena_test CXX)
 
@@ -71,6 +71,7 @@ addFSeamTests(
         ${CMAKE_CURRENT_LIST_DIR}/fightingPit/HexagonSideTestCase.cpp
         ${CMAKE_CURRENT_LIST_DIR}/fightingPit/PriorityOrderListTestCase.cpp
         ${CMAKE_CURRENT_LIST_DIR}/fightingPit/FightingPitAnnouncerTestCase.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/fightingPit/CommonTypesTestCase.cpp
         ${CMAKE_CURRENT_LIST_DIR}/fightingPit/FightingPitTestCase.cpp
 
         TO_MOCK

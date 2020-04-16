@@ -21,7 +21,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
 #include <spdlog/spdlog.h>
 #include <iterator>
 #include <fmt/ostream.h>
@@ -44,22 +43,11 @@
 
 using chaiscript::fun;
 
-namespace {
-std::string
-getActionNameFromKey(const std::string& key)
-{ // todo, put this code in a common zone + fix
-	auto startSeparator = key.find_last_of(':');
-	if (startSeparator == std::string::npos) return "";
-	return key.substr(startSeparator + 1, key.find_last_of('.') - startSeparator - 1);
-}
-}
-
 namespace fys::arena {
 
 void
 ChaiRegister::registerChai(chaiscript::ChaiScript& chai, PitContenders& pc, AllyPartyTeams& apt)
 {
-
 	try {
 		chaiscript::ModulePtr m = std::make_shared<chaiscript::Module>();
 		registerCommon(m);
@@ -126,7 +114,7 @@ ChaiRegister::loadAndRegisterActionPartyTeam(chaiscript::ChaiScript& chai, cache
 
 				// instantiate the action variable for given team member in chai engine
 				const std::string keyPlayer = std::string(pt.getUserName()).append("_").append(tm->getName());
-				const std::string actionName = getActionNameFromKey(key);
+				const std::string actionName = data::getActionNameFromKey(key);
 				std::string createVar = fmt::format(
 						R"(ally_actions.insert( ["{}":[ "{}":{}({}) ] ] );)", keyPlayer, actionName, actionName, lvl);
 				chai.eval(createVar);
@@ -211,8 +199,7 @@ ChaiRegister::registerCommon(chaiscript::ModulePtr m)
 					{fys::arena::data::SIDE, "SIDE"},
 					{fys::arena::data::ALLY_OR_ENNEMY, "ALLY_OR_ENNEMY"},
 					{fys::arena::data::ALLY_AND_ENNEMY, "ALLY_AND_ENNEMY"}
-			}
-															   );
+			});
 
 	chaiscript::utility::add_class<fys::arena::data::Life>(
 			*m, "Life", {},
@@ -220,16 +207,14 @@ ChaiRegister::registerCommon(chaiscript::ModulePtr m)
 					{fun(&data::Life::current), "current"},
 					{fun(&data::Life::total), "total"},
 					{fun(&data::Life::isDead), "isDead"}
-			}
-														  );
+			});
 
 	chaiscript::utility::add_class<fys::arena::data::MagicPoint>(
 			*m, "MagicPoint", {},
 			{
 					{fun(&data::MagicPoint::current), "current"},
 					{fun(&data::MagicPoint::total), "total"}
-			}
-																);
+			});
 
 	chaiscript::utility::add_class<fys::arena::data::Status>(
 			*m, "Status", {},
@@ -237,8 +222,7 @@ ChaiRegister::registerCommon(chaiscript::ModulePtr m)
 					{fun(&data::Status::life), "life"},
 					{fun(&data::Status::magicPoint), "magicPoint"},
 					{fun(&data::Status::initialSpeed), "speed"},
-			}
-															);
+			});
 
 	chaiscript::utility::add_class<fys::arena::HexagonSide::Orientation>(
 			*m,
@@ -263,8 +247,7 @@ ChaiRegister::registerCommon(chaiscript::ModulePtr m)
 					{fys::arena::HexagonSide::Orientation::C_SE, "C_SE"},
 					{fys::arena::HexagonSide::Orientation::C_SW, "C_SW"},
 					{fys::arena::HexagonSide::Orientation::NONE, "NONE"}
-			}
-																		);
+			});
 
 	chaiscript::utility::add_class<fys::arena::HexagonSide::Hexagon>(
 			*m,
@@ -273,8 +256,7 @@ ChaiRegister::registerCommon(chaiscript::ModulePtr m)
 					{fys::arena::HexagonSide::Hexagon::A, "A"},
 					{fys::arena::HexagonSide::Hexagon::B, "B"},
 					{fys::arena::HexagonSide::Hexagon::C, "C"}
-			}
-																	);
+			});
 }
 
 void
@@ -288,7 +270,7 @@ ChaiRegister::registerFightingPitContender(chaiscript::ChaiScript& chai, chaiscr
 					{fun(&FightingContender::getHexagonSideOrient), "getHexagonSideOrient"},
 					{fun(&FightingContender::accessStatus), "accessStatus"}
 			}
-																 );
+	);
 
 	chaiscript::bootstrap::standard_library::vector_type<std::vector<std::shared_ptr<FightingContender>>>("VectorFightingContender", *m);
 	chai.add(chaiscript::vector_conversion<std::vector<std::shared_ptr<FightingContender>>>());
@@ -305,7 +287,7 @@ ChaiRegister::registerFightingPitContender(chaiscript::ChaiScript& chai, chaiscr
 					{fun(&PitContenders::getFightingContender), "getFightingContender"},
 					{fun(&PitContenders::getContenderOnSide), "getContenderOnSide"}
 			}
-															 );
+	);
 }
 
 void
@@ -319,7 +301,7 @@ ChaiRegister::registerTeamAllies(chaiscript::ChaiScript& chai, chaiscript::Modul
 			{
 					{fun(&TeamMember::accessStatus), "accessStatus"}
 			}
-														  );
+	);
 
 	chaiscript::bootstrap::standard_library::vector_type<std::vector<std::shared_ptr<TeamMember>>>("VectorTeamMember", *m);
 	chai.add(chaiscript::vector_conversion<std::vector<std::shared_ptr<TeamMember>>>());
@@ -335,7 +317,7 @@ ChaiRegister::registerTeamAllies(chaiscript::ChaiScript& chai, chaiscript::Modul
 					{fun(&AllyPartyTeams::selectSuitableMemberAlive), "selectSuitableMemberAlive"},
 					{fun(&AllyPartyTeams::selectRandomMemberOnSideAlive), "selectRandomMemberOnSideAlive"}
 			}
-															  );
+	);
 
 	// instantiate global map that contains the action for each given player's ally the doable actions
 	chai.eval(R"(global ally_actions = [ "":"" ];)");

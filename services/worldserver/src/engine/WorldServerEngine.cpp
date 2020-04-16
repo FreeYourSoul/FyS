@@ -48,7 +48,7 @@ WorldServerEngine::executePendingActions(ws::ConnectionHandler& conn)
 
 void
 WorldServerEngine::processPlayerInputMessage(std::string&& idt, std::string&& token,
-											 const fb::WSAction* actionMsg, ConnectionHandler& handler)
+		const fb::WSAction* actionMsg, ConnectionHandler& handler)
 {
 	if (const uint index = _data.getIndexAndUpdatePlayerConnection(token, std::move(idt)); index < std::numeric_limits<uint>::max()) {
 		if (actionMsg->action_type() == fb::Action::Action_Move) {

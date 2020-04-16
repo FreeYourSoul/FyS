@@ -58,7 +58,7 @@ public:
 	loadAndRegisterActionPartyTeam(chaiscript::ChaiScript& chai, cache::Cml& cache, const fys::arena::PartyTeam& pt);
 
 	static void
-	loadActionScripts(chaiscript::ChaiScript& chai, cache::Cml& cache, const std::vector<std::string> &scriptsKeys);
+	loadActionScripts(chaiscript::ChaiScript& chai, cache::Cml& cache, const std::vector<std::string>& scriptsKeys);
 
 	static void
 	registerBaseActions(chaiscript::ChaiScript& chai, cache::Cml& cml);

@@ -26,10 +26,33 @@
 #define FYS_COMMONDATA_HH
 
 #include <vector>
+#include <set>
+#include <functional>
 
 namespace fys::arena::data {
 static constexpr bool CONTENDER = true;
 static constexpr bool PARTY_MEMBER = false;
+
+[[nodiscard]] inline std::string
+getActionNameFromKey(const std::string& key)
+{
+	auto startSeparator = key.find_last_of(':');
+	auto endSeparator = key.find_last_of('.');
+
+	if (startSeparator != std::string::npos && endSeparator != std::string::npos) {
+		// if a ':' and a '.' are found
+		return key.substr(startSeparator + 1, endSeparator - startSeparator - 1);
+	}
+	else if (startSeparator == std::string::npos && endSeparator != std::string::npos) {
+		// if a ':' is not found but not a '.' is found
+		return key.substr(0, endSeparator);
+	}
+	else if (startSeparator != std::string::npos && endSeparator == std::string::npos) {
+		// if a ':' is found but not a '.' is not found
+		return key.substr(startSeparator + 1);
+	}
+	return key;
+}
 
 struct PriorityElem { // Improve with strong typing on ID/SPEED
 	PriorityElem() = default;
@@ -74,13 +97,50 @@ struct MagicPoint {
 	uint total = 0;
 };
 
-using AlterationId = uint;
+/**
+ * Representation of a status alteration of a character
+ */
+class Alteration {
+public:
+	struct CompAlteration {
+		bool operator()(const Alteration& lhs, const Alteration& rhs) const
+		{
+			return lhs._alterationKey == rhs._alterationKey && lhs._lvl == rhs._lvl;
+		}
+	};
+
+	Alteration(std::string alterationKey, uint lvl, uint turn) noexcept
+			:_alterationKey(std::move(alterationKey)), _lvl(lvl), _turn(turn) { }
+
+	/**
+	 * Process an alteration action, return if it has an impact on the turn of the player
+	 * @return false if the player turn is skipped, true otherwise
+	 */
+	bool processAlteration()
+	{
+		if (_action && _turn-- > 0) {
+			return _action(_lvl, _turn);
+		}
+		return true;
+	}
+
+	const std::string& getAlterationKey() const { return _alterationKey; }
+	uint getTurn() const { return _turn; }
+
+private:
+	std::string _alterationKey;
+	uint _lvl;
+	uint _turn;
+	std::function<bool(uint, uint)> _action;
+};
 
 struct Status {
 	Life life;
 	MagicPoint magicPoint;
 	uint initialSpeed;
-	std::vector<AlterationId> alterations;
+	std::set<Alteration, Alteration::CompAlteration> alteration_before;
+	std::set<Alteration, Alteration::CompAlteration> alterations;
+	std::set<Alteration, Alteration::CompAlteration> alteration_after;
 };
 
 enum MoveDirection {
@@ -101,5 +161,6 @@ enum Targeting {
 };
 
 } // namespace fys::arena::data
+
 
 #endif // !FYS_COMMONDATA_HH

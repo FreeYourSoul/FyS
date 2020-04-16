@@ -128,28 +128,28 @@ TEST_CASE("FightingPit test", "[service][arena]")
 				// Player id 4 (at index 3) is going to slash the only opponent it has inflicting 42 damage
 				// The ennemy total life is 100, goes to 58
 				fp->continueBattle(now);
-				REQUIRE(58  == FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->getStatus().life.current);
+				REQUIRE(58 == FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->getStatus().life.current);
 				REQUIRE(100 == FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->getStatus().life.total);
 
 				// Player id 3 (at index 2) is going to slash the only opponent it has inflicting 39 damage
 				// The ennemy total life is 100, current from 58 goes to 19
 				now += fys::arena::interval::EASY + 1ms;
 				fp->continueBattle(now);
-				REQUIRE(19  == FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->getStatus().life.current);
+				REQUIRE(19 == FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->getStatus().life.current);
 				REQUIRE(100 == FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->getStatus().life.total);
 
 				// Contender id 0 is going to Sleep and so restore 40 hp
 				// The ennemy total life is 100, current from 19 goes to 59
 				now += fys::arena::interval::EASY + 1ms;
 				fp->continueBattle(now);
-				REQUIRE(59  == FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->getStatus().life.current);
+				REQUIRE(59 == FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->getStatus().life.current);
 				REQUIRE(100 == FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->getStatus().life.total);
 
 				// Player id 2 (at index 1) is going to slash the only opponent it has inflicting 36 damage
 				// The ennemy total life is 100, current from 59 goes to 23
 				now += fys::arena::interval::EASY + 1ms;
 				fp->continueBattle(now);
-				REQUIRE(23  == FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->getStatus().life.current);
+				REQUIRE(23 == FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->getStatus().life.current);
 				REQUIRE(100 == FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->getStatus().life.total);
 
 				// Player id 2 (at index 1) is going to slash the only opponent it has inflicting 33 damage
@@ -157,7 +157,7 @@ TEST_CASE("FightingPit test", "[service][arena]")
 				now += fys::arena::interval::EASY + 1ms;
 				REQUIRE(FightingPitAnnouncer::isOnGoing(fp));
 				fp->continueBattle(now);
-				REQUIRE(0  == FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->getStatus().life.current);
+				REQUIRE(0 == FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->getStatus().life.current);
 				REQUIRE(100 == FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->getStatus().life.total);
 
 				// Battle ended checks
@@ -279,7 +279,7 @@ TEST_CASE("FightingPit test", "[service][arena]")
 				// ally id 4  =  140
 				now += fys::arena::interval::EASY + 1ms;
 				fp->continueBattle(now);
-				REQUIRE(9   == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.current); // damage inflicted
+				REQUIRE(9 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.current); // damage inflicted
 				REQUIRE(550 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.total);
 
 				// Stay same
@@ -373,7 +373,7 @@ TEST_CASE("FightingPit test", "[service][arena]")
 					REQUIRE(200 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().life.current);
 					REQUIRE(200 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().life.total);
 					REQUIRE(550 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.total);
-					REQUIRE(140  == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().life.current);
+					REQUIRE(140 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().life.current);
 					REQUIRE(140 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().life.total);
 
 					// Player id 1 (at index 0) is going to meditate, restore 10 mp, from 10 mp to 10 (max mp 10)
@@ -405,7 +405,7 @@ TEST_CASE("FightingPit test", "[service][arena]")
 						REQUIRE(200 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().life.current);
 						REQUIRE(200 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().life.total);
 						REQUIRE(550 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.total);
-						REQUIRE(140  == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().life.current);
+						REQUIRE(140 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().life.current);
 						REQUIRE(140 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().life.total);
 
 						// Player id 2 (at index 1)

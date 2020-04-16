@@ -29,7 +29,6 @@ namespace fys::arena {
 void
 ConnectionHandler::setupConnectionManager(const fys::arena::ArenaServerContext& ctx) noexcept
 {
-	// todo add a heartbeat to re-connect to dispatcher if no message after some time?
 	// connect to dispatcher with the dispatcher
 	_dealerConnectionToDispatcher.connect(ctx.getDispatcherConnectionString());
 }

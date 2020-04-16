@@ -118,7 +118,6 @@ public:
 	 */
 	void runServerLoop() noexcept;
 
-
 private:
 	/**
 	 * Verify if the server is saturated (too many battle at the same time running on this ArenaService)

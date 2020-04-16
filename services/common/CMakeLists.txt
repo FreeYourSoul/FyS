@@ -1,9 +1,9 @@
-cmake_minimum_required( VERSION 3.6...3.15 )
-if(${CMAKE_VERSION} VERSION_LESS 3.15)
+cmake_minimum_required(VERSION 3.6...3.15)
+if (${CMAKE_VERSION} VERSION_LESS 3.15)
     cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
-else()
+else ()
     cmake_policy(VERSION 3.15)
-endif()
+endif ()
 
 project(common)
 
@@ -48,7 +48,7 @@ set(COMMON_SRCS
 set(COMMON_INCLUDES_DIR ${CMAKE_CURRENT_LIST_DIR}/include)
 
 if (TARGET common_service)
-else()
+else ()
     add_library(common_service INTERFACE)
     target_include_directories(common_service INTERFACE ${COMMON_INCLUDES_DIR})
     target_sources(common_service INTERFACE ${COMMON_SRCS})

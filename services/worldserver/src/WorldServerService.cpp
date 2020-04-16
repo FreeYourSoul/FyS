@@ -74,7 +74,7 @@ WorldServerService::runServerLoop() noexcept
 
 void
 WorldServerService::processMessage(std::string&& idt,
-								   std::string&& token, const zmq::message_t& content, const std::optional<std::string>& internalMagic)
+		std::string&& token, const zmq::message_t& content, const std::optional<std::string>& internalMagic)
 {
 	if (internalMagic) {
 		// check internal magic to validate that the message is coming from internal server
