@@ -1,6 +1,6 @@
 def slash_retrieve_alterations() {
     [
-        "arena:actions:buff:after_turn:bleeding.chai"
+        "arena:actions:alteration:bleeding.chai"
     ];
 }
 
@@ -12,20 +12,22 @@ class slash {
 
     def slash(levelOrStatus) {
         this.set_explicit(true);
-        var lvl;
-
-        if ("int" == levelOrStatus.type_name()) {
-            lvl = levelOrStatus;
-        }
-        else if ("Status" == levelOrStatus.type_name()) {
-            lvl = 15;
-        }
-        this.dmg = damage(30 + 30 * (0.1 * lvl));
-
+        var lvl = this.getStrikeLevel(levelOrStatus);
         var alts = slash_retrieve_alterations();
+
+        this.dmg = damage(30 + 30 * (0.1 * lvl));
         this.after_turn_alterations = [
             Alteration(alts[0], lvl, 2, alteration_bleeding)
         ];
+    }
+
+    def getStrikeLevel(levelOrStatus) {
+        if ("int" == levelOrStatus.type_name()) {
+            levelOrStatus;
+        }
+        else if ("Status" == levelOrStatus.type_name()) {
+            15;
+        }
     }
 
     def requireTarget() {

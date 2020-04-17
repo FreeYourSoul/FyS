@@ -11,10 +11,17 @@ enum Targeting : byte {
 	SIDE = 7
 }
 
-// Used by the client to do an action
+enum TypeAction : byte {
+    READINESS = 0,
+    FIGHT = 1,
+    INFO = 2
+}
+
+/// Used by the client to do an action
 table ArenaFightAction {
+    ac
     memberId:uint;
-    actionId:string;
+    actionId:string(required);
     targetType:Targeting;
     targetId:[uint];
 }

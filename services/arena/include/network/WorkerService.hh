@@ -29,8 +29,11 @@
 #include <fightingPit/FightingPit.hh>
 
 // forward declarations
+namespace fys::cache {
+class Cml;
+}
 namespace fys::arena {
-class FightingPit;
+class PartyTeam;
 class ArenaServerContext;
 }
 
@@ -62,9 +65,7 @@ class WorkerService {
 	};
 
 public:
-	explicit WorkerService()
-			:
-			_ctx(1), _workerRouter(_ctx, zmq::socket_type::router), _currentArenaId(0) { }
+	explicit WorkerService();
 
 	void startFightingPitsLoop();
 
@@ -85,10 +86,10 @@ public:
 	addFightingPit(std::unique_ptr<FightingPit> fp);
 
 	/**
-	 *
-	 * @param fightingPitId
-	 * @param pt
-	 * @param cml
+	 * Player join a given fighting pit
+	 * @param fightingPitId id of the fighting pit to join
+	 * @param pt party team retrieved to add
+	 * @param cml cache manager used to register chaiscript scripts
 	 */
 	void playerJoinFightingPit(unsigned fightingPitId, std::unique_ptr<PartyTeam> pt, cache::Cml& cml);
 
@@ -148,7 +149,8 @@ public:
 	 * @param name player name
 	 * @param token authentication token
 	 * @param fightingPitId arena to check if the player is authenticated on
-	 * @return A reference to the fighting pit if the player is authenticated on the given fightingPit, return nullopt otherwise
+	 * @return A reference to the fighting pit if the player is authenticated on the given fightingPit,
+	 * 		   return std::nullopt otherwise.
 	 */
 	[[nodiscard]] std::optional<std::reference_wrapper<FightingPit>>
 	getAuthenticatedPlayerFightingPit(const std::string& name, const std::string& token, unsigned fightingPitId);
@@ -156,13 +158,19 @@ public:
 	[[nodiscard]] const std::unique_ptr<FightingPit>&
 	getFightingPitInstance(unsigned arenaId) const { return _arenaInstances.at(arenaId); }
 
-	[[nodiscard]] bool
-	doesFightingPitExist(unsigned fightingPitId) const noexcept { return _arenaInstances.find(fightingPitId) != _arenaInstances.cend(); }
+	[[nodiscard]] std::pair<bool, bool>
+	fightingPitExistAndJoinable(unsigned fightingPitId) const noexcept;
 
 	[[nodiscard]] unsigned
 	getNumberBattleRunning() const noexcept { return _arenaInstances.size(); }
 
-	void addPlayerIdentifier(unsigned int fightingPitId, std::string userName, std::string identityPlayer);
+	/**
+	 * Update or add (if player not register yet) the player identifier mapping with fightingPit
+	 * @param fightingPitId key of the mapping, multiple players are linked with a fightingpit
+	 * @param userName unique name of the player
+	 * @param idtPlayer network identity of the player
+	 */
+	void upsertPlayerIdentifier(unsigned fightingPitId, std::string userName, std::string idtPlayer);
 
 private:
 	[[nodiscard]] const std::string&

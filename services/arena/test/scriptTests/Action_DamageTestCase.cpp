@@ -86,7 +86,7 @@ TEST_CASE("test damage chaiscript", "[service][arena][script_test]")
 	sampy->loadContenderScriptFromFile(getPathSampyChaiScript());
 
 	auto fpc = std::make_shared<fys::arena::FightingContender>(std::move(sampy));
-	pc.addContender(fpc);
+	REQUIRE(pc.addContender(fpc));
 
 	SECTION("Test initialization contender") {
 		REQUIRE(153 == fpc->accessStatus().life.current);
@@ -167,7 +167,7 @@ s.execute(contender.accessStatus());
 		sampy2->loadContenderScriptFromFile(getPathSampyChaiScript());
 
 		auto fpc2 = std::make_shared<fys::arena::FightingContender>(std::move(sampy2));
-		pc.addContender(fpc2);
+		REQUIRE(pc.addContender(fpc2));
 
 		fys::arena::ChaiRegister::loadAndRegisterActionPartyTeam(*chai, ccpy, partyTeam);
 

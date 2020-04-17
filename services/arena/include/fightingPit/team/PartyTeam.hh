@@ -62,7 +62,7 @@ public:
 	[[nodiscard]] bool
 	isTeamReady() const { return _ready; }
 
-	void setTeamReady(bool isReady) { _ready = true; }
+	void setTeamReady(bool isReady) { _ready = isReady; }
 	void addTeamMember(std::shared_ptr<TeamMember> member);
 
 private:

@@ -23,9 +23,13 @@
 
 #include <spdlog/spdlog.h>
 #include <algorithm>
+
+#include <chaiscript/chaiscript.hpp>
+
 #include <fightingPit/contender/FightingContender.hh>
 #include <fightingPit/FightingPit.hh>
 #include <fightingPit/team/TeamMember.hh>
+
 #include <ChaiRegister.hh>
 
 namespace {
@@ -62,7 +66,9 @@ FightingPit::checkEndStatusFightingPit()
 
 		// Battle is over and require cleanup
 	case Progress::CLEANUP:
-		// Battle is on hold and may incoming player
+		// Battle is on hold and can't receive incoming player
+	case Progress::ON_HOLD_NOT_REACHABLE:
+		// Battle is on hold and may have incoming player
 	case Progress::ON_HOLD: return false;
 
 		// Battle is won by allies

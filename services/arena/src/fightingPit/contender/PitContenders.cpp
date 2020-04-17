@@ -129,7 +129,11 @@ PitContenders::executeContenderAction(const data::PriorityElem& contender)
 	if (!contender.isContender || contender.id >= _contenders.size()) {
 		return;
 	}
-	_contenders.at(contender.id)->executeAction();
+	auto& c = _contenders.at(contender.id);
+	if (c->accessStatus().processAlterationBeforeTurn() > 0) {
+		c->executeAction();
+	}
+	c->accessStatus().processAlterationAfterTurn();
 }
 
 bool

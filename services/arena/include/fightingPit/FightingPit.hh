@@ -78,6 +78,9 @@ class FightingPit {
 	enum class Progress {
 		//! joining fight status
 		ON_HOLD,
+		//! waiting creator readiness
+		ON_HOLD_NOT_REACHABLE,
+
 		//! battle is over, fighting pit has to be cleaned out
 		CLEANUP,
 		//! On going battle
@@ -98,6 +101,7 @@ public:
 	//! used as a wrong id when a fighting pit is wrongly generated
 	static constexpr unsigned CREATION_ERROR = 0;
 
+	//! Complexity of the FightingPit
 	enum Level : uint {
 		EASY = 0,
 		MEDIUM = 1,
@@ -168,6 +172,10 @@ public:
 	[[nodiscard]] bool
 	isBattleOver() const noexcept { return _progress == Progress::CLEANUP; }
 
+	/**
+	 * Disable the ability to join the battle if the fighting pit is currently reachable
+	 */
+	void disableJoin() noexcept { if (isJoinable()) _progress = Progress::ON_HOLD_NOT_REACHABLE; }
 	void setPlayerReadiness(const std::string& userName);
 	void setArenaId(unsigned arenaId) noexcept { _arenaId = arenaId; }
 
@@ -204,7 +212,7 @@ private:
 	// mapping of the contenders/NPC with the layout of the FightingPit
 	FightingPitLayout _layoutMapping;
 
-	std::string _creatorUserName; // useless ?
+	std::string _creatorUserName;
 	unsigned _arenaId;
 
 	std::vector<AuthenticatedPlayer> _authenticatedPlayers;

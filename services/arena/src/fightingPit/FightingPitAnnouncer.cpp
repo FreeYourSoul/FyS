@@ -21,20 +21,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include <chaiscript/chaiscript.hpp>
 #include <nlohmann/json.hpp>
-
 #include <algorithm/algorithm.hh>
-#include <Cml.hh>
-#include <ArenaServerContext.hh>
-#include <ConnectionHandler.hh>
-#include <RandomGenerator.hh>
+
 #include <fightingPit/contender/ContenderScripting.hh>
 #include <fightingPit/contender/FightingContender.hh>
 #include <fightingPit/team/PartyTeam.hh>
 #include <fightingPit/team/TeamMember.hh>
-#include <fightingPit/FightingPitAnnouncer.hh>
 #include <fightingPit/FightingPit.hh>
+
+#include <Cml.hh>
+#include <ArenaServerContext.hh>
+#include <ConnectionHandler.hh>
+#include <RandomGenerator.hh>
 #include <BoundaryMap.hh>
+
+#include <fightingPit/FightingPitAnnouncer.hh>
 
 namespace {
 using BoundaryMapEncounter = fys::BoundaryMap<fys::arena::EncounterContext::EncounterDesc>;
@@ -77,6 +80,9 @@ FightingPitAnnouncer::buildFightingPit(const EncounterContext& ctx, const std::s
 	}
 	std::unique_ptr<FightingPit> fp = std::make_unique<FightingPit>(_creatorUserName, _difficulty);
 	fp->addAuthenticatedUser(std::move(_creatorUserName), std::move(_creatorUserToken));
+	if (_isJoinDisabled) {
+		fp->disableJoin();
+	}
 	ChaiRegister::registerBaseActions(*fp->getChaiPtr(), _cache);
 	fp->addPartyTeamAndRegisterActions(std::move(_creatorPartyTeam), _cache);
 

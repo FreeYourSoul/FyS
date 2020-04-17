@@ -112,13 +112,6 @@ struct Status;
  */
 class Alteration {
 public:
-	struct CompAlteration {
-		bool operator()(const Alteration& lhs, const Alteration& rhs) const
-		{
-			return lhs._alterationKey == rhs._alterationKey && lhs._lvl == rhs._lvl;
-		}
-	};
-
 	Alteration(std::string alterationKey, uint lvl, uint turn, std::function<int(data::Status&, uint, uint)> a) noexcept
 			:
 			_alterationKey(std::move(alterationKey)),
@@ -155,9 +148,51 @@ struct Status {
 	uint initialSpeed;
 
 	std::vector<Alteration> alteration_before;
-	std::vector<Alteration> alterations;
 	std::vector<Alteration> alteration_after;
+
+	//! Alteration executed on the turn (usually stat modification impacting the damages/heal)
+	std::vector<Alteration> alterations;
+
+	/**
+	 * Process all alteration before turn stored
+	 * @return superior to 0 if the turn is executed, 0 if it is cancelled
+	 */
+	int processAlterationBeforeTurn()
+	{
+		int processTurn = 1;
+		for (auto& alteration : alteration_before) {
+			processTurn += alteration.processAlteration(*this);
+		}
+		return processTurn;
+	}
+
+	void processAlterationAfterTurn()
+	{
+		for (auto& alteration : alteration_after) {
+			alteration.processAlteration(*this);
+		}
+	}
+
 };
+
+/**
+ * Merge the alterations, remove doubles, but keep the alteration that would last the longest.
+ * @param toModify reference on the alterations vector to modify
+ * @param toMerge additional alternations
+ */
+static void
+mergeAlterations(std::vector<Alteration>& toModify, std::vector<Alteration> toMerge)
+{
+	(void)mergeAlterations; // suppress unused warning (as it is used, but by ChaiScript)
+
+	std::move(toMerge.begin(), toMerge.end(), std::back_inserter(toModify));
+	std::sort(toModify.begin(), toModify.end(), [](const auto& lhs, const auto& rhs) {
+		return lhs.getAlterationKey() == rhs.getAlterationKey() && lhs.getTurn() > rhs.getTurn();
+	});
+	toModify.erase(std::unique(toModify.begin(), toModify.end(), [](const auto& lhs, const auto& rhs) {
+		return lhs.getAlterationKey() == rhs.getAlterationKey();
+	}), toModify.end());
+}
 
 enum MoveDirection {
 	BACK,

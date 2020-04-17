@@ -191,10 +191,14 @@ TEST_CASE("FightingPitAnnouncer test", "[service][arena]")
 			fpa.setCreatorUserToken(" ");
 			fpa.setCreatorUserName(" ");
 			fpa.setCreatorTeamParty(getPartyTeam(" "));
+			fpa.setJoinDisabled(true);
 			fpa.setDifficulty(FightingPit::MEDIUM);
 			fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
 			fpa.addActionToOneMember(0, "arena:actions:damage:slash.chai", 5);
 			auto fp = fpa.buildFightingPit(ctx, "WS00");
+
+			REQUIRE(4 == FightingPitAnnouncer::getPartyTeams(fp).getPartyTeamOfPlayer(" ").getTeamMembers().size());
+			REQUIRE_FALSE(fp->isJoinable());
 
 			REQUIRE(3 == FightingPitAnnouncer::getPitContenders(fp).getNumberContender());
 
@@ -223,6 +227,7 @@ TEST_CASE("FightingPitAnnouncer test", "[service][arena]")
 			auto fp = fpa.buildFightingPit(ctx, "WS00");
 
 			REQUIRE(4 == FightingPitAnnouncer::getPitContenders(fp).getNumberContender());
+			REQUIRE(fp->isJoinable());
 
 			REQUIRE("Slime" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getContenderScripting()->getContenderName());
 			REQUIRE(0 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getContenderScripting()->getContenderId());

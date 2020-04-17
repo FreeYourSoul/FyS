@@ -1,11 +1,12 @@
 namespace fys.fb;
 
-// Used by the client to join an existing FightingPit (id_fightingpit set)
-// ALSO Used by the client as an authentication frame for messages
+/// Used by the client to join an existing FightingPit (id_fightingpit set)
+/// ALSO Used by the client as an authentication frame for messages
 table ArenaServerValidateAuth {
-    user_name:string;
-    token_auth:string;
-    fighting_pit_id:uint; // id of the fighting pit to join, set to 0 if it is a new encounter
+    user_name:string(required);
+    token_auth:string(required);
+    /// id of the fighting pit to join, set to 0 if it is a new encounter
+    fighting_pit_id:uint;
 }
 
 root_type ArenaServerValidateAuth;

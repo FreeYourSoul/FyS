@@ -23,10 +23,18 @@
 
 #include <spdlog/spdlog.h>
 #include <chrono>
+
+#include <chaiscript/chaiscript.hpp>
+
+#include <fightingPit/FightingPit.hh>
 #include <network/WorkerService.hh>
 #include <ArenaServerContext.hh>
 
 namespace fys::arena {
+
+WorkerService::WorkerService()
+		:
+		_ctx(1), _workerRouter(_ctx, zmq::socket_type::router), _currentArenaId(0) { }
 
 void
 WorkerService::setupConnectionManager(const fys::arena::ArenaServerContext& ctx) noexcept
@@ -117,16 +125,16 @@ WorkerService::getAuthenticatedPlayerFightingPit(const std::string& name, const 
 }
 
 void
-WorkerService::addPlayerIdentifier(unsigned fightingPitId, std::string userName, std::string identityPlayer)
+WorkerService::upsertPlayerIdentifier(unsigned fightingPitId, std::string userName, std::string idtPlayer)
 {
 	auto& identifiers = _arenaIdOnIdentifier[fightingPitId];
-	if (auto it = std::find_if(identifiers.begin(), identifiers.end(), [&userName](const auto& ident) {
-			return ident.userName == userName;
+	if (auto it = std::find_if(identifiers.begin(), identifiers.end(), [&userName](const auto& idt) {
+			return idt.userName == userName;
 		}); it != identifiers.end()) {
-		it->identifier = std::move(identityPlayer);
+		it->identifier = std::move(idtPlayer);
 	}
 	else {
-		identifiers.emplace_back(PlayerIdentifier{std::move(userName), std::move(identityPlayer)});
+		identifiers.emplace_back(PlayerIdentifier{std::move(userName), std::move(idtPlayer)});
 	}
 }
 
@@ -171,5 +179,13 @@ WorkerService::broadcastMsg(unsigned fightingPitId, zmq::multipart_t& msg)
 			SPDLOG_ERROR("fightingPit of id {} : Message has not been correctly sent to {}, {}", fightingPitId, userName, identifier);
 	}
 }
+
+std::pair<bool, bool>
+WorkerService::fightingPitExistAndJoinable(unsigned int fightingPitId) const noexcept
+{
+	auto it = _arenaInstances.find(fightingPitId);
+	return std::pair(it != _arenaInstances.cend(), it != _arenaInstances.cend() && it->second->isJoinable());
+}
+
 
 } // namespace fys::arena

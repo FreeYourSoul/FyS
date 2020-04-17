@@ -1,4 +1,3 @@
 def alteration_bleeding(status, level, turn) {
-    print("bleeding IS EXECuteD");
     1;
 }

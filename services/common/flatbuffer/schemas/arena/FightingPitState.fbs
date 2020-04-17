@@ -1,0 +1,25 @@
+include "CharacterStatus.fbs";
+
+namespace fys.fb;
+
+table MemberStatus {
+    characterName:string(required);
+    status:CharacterStatus(required);
+}
+
+table PartyTeamStatus {
+    user_name:string(required);
+    members:[MemberStatus](required);
+
+    // Only for full status
+    cosmetic:[Cosmetic];
+    attacks:[string];
+}
+
+table FightingPitState {
+    idFightingPit:uint;
+    partyTeams:[PartyTeamStatus];
+    monstersStatus:[CharacterStatus];
+}
+
+root_type FightingPitState;

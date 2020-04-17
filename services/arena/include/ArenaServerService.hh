@@ -31,6 +31,10 @@
 #include <ConnectionHandler.hh>
 #include <CmlCopy.hh>
 
+namespace fys::fb {
+struct ArenaServerValidateAuth;
+}
+
 namespace fys::arena {
 
 class ArenaServerContext;
@@ -40,6 +44,7 @@ class ArenaServerContext;
  */
 struct AwaitingArena {
 	std::string serverCode;
+	bool isJoinDisabled;
 	bool isAmbush;
 	unsigned encounterId;
 	FightingPit::Level levelFightingPit;
@@ -132,7 +137,7 @@ private:
 	[[nodiscard]] std::pair<bool, AwaitingPlayerArenaIt>
 	isPlayerAwaited(const std::string& name, const std::string& token, unsigned idFightingPit) const noexcept;
 
-	void forwardReplyToDispatcher(zmq::message_t&& identityWs, const fys::arena::AwaitingPlayerArena& awaitingArena) noexcept;
+	void forwardReplyToDispatcher(zmq::message_t&& idtWs, const fys::arena::AwaitingPlayerArena& awaitArena) noexcept;
 
 private:
 	std::reference_wrapper<const ArenaServerContext> _ctx;

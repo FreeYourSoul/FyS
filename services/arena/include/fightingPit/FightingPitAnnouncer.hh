@@ -101,7 +101,8 @@ public:
 	void setCreatorUserToken(std::string creatorUserToken) { _creatorUserToken = std::move(creatorUserToken); }
 	void enforceAmbush(bool ambushEnforced) noexcept { _isAmbushEnforced = ambushEnforced; }
 	void setDifficulty(FightingPit::Level level) noexcept { _difficulty = level; }
-	void setCreatorTeamParty(std::unique_ptr<PartyTeam> pt) { _creatorPartyTeam = std::move(pt); }
+	void setCreatorTeamParty(std::unique_ptr<PartyTeam> pt) noexcept { _creatorPartyTeam = std::move(pt); }
+	void setJoinDisabled(bool isJoinDisabled) noexcept { _isJoinDisabled = isJoinDisabled; }
 
 	// ============================================================================================================================
 	// for testing validation purpose
@@ -163,6 +164,7 @@ private:
 
 	std::string _creatorUserName;
 	std::string _creatorUserToken;
+	bool _isJoinDisabled = false;
 	std::unique_ptr<PartyTeam> _creatorPartyTeam;
 
 };

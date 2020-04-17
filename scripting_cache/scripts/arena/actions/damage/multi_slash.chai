@@ -11,16 +11,19 @@ class multi_slash
     def multi_slash(levelOrStatus)
     {
         this.set_explicit(true);
-        var lvl;
+        var lvl = this.getStrikeLevel(levelOrStatus);
 
-        if ("int" == levelOrStatus.type_name()) {
-            lvl = levelOrStatus;
-        }
-        else if ("Status" == levelOrStatus.type_name()) {
-            lvl = 15;
-        }
         this.dmg = damage(30);
         this.number = 2 + lvl / 3;
+    }
+
+    def getStrikeLevel(levelOrStatus) {
+        if ("int" == levelOrStatus.type_name()) {
+            levelOrStatus;
+        }
+        else if ("Status" == levelOrStatus.type_name()) {
+            15;
+        }
     }
 
     def requireTarget() {

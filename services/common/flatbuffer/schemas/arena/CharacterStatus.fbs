@@ -1,4 +1,5 @@
 namespace fys.fb;
+// Contains the CharacterStatus and common tables
 
 enum SideOrient : byte {
     A_N = 0,
@@ -21,8 +22,9 @@ enum SideOrient : byte {
     C_NW
 }
 
-table MemberStatus {
-    memberName:string;
+struct CharacterStatus {
+    character_id:uint;
+    isContender:bool;
 
     current_life:uint;
     total_life:uint;
@@ -30,13 +32,16 @@ table MemberStatus {
     total_mp:uint;
 
     side:SideOrient;
-
-    attacks:[string];
 }
 
-table PartyTeamStatus {
-    user_name:string;
-    members:[MemberStatus];
+enum CosmeticType : byte {
+    WEAPON = 0,
+    CHARACTER,
+    EQUIPMENT
 }
 
-root_type PartyTeamStatus;
+struct Cosmetic {
+    character_id:uint;
+    cosmeticId:uint;
+    cosmeticType:CosmeticType;
+}

@@ -35,27 +35,32 @@ TEST_CASE("getActionNameFromKey test", "[service][arena]")
 
 TEST_CASE("getAlternateNameFromKey test", "[service][arena]")
 {
-	REQUIRE("alternate_popo" == fys::arena::data::getAlterationNameFromKey("tete:tete:www:oo:popo.chai"));
-	REQUIRE("alternate_popo" == fys::arena::data::getAlterationNameFromKey("tete:tete:www:oo:popo"));
-	REQUIRE("alternate_popo" == fys::arena::data::getAlterationNameFromKey("popo.chai"));
-	REQUIRE("alternate_popo" == fys::arena::data::getAlterationNameFromKey("popo"));
+	REQUIRE("alteration_popo" == fys::arena::data::getAlterationNameFromKey("tete:tete:www:oo:popo.chai"));
+	REQUIRE("alteration_popo" == fys::arena::data::getAlterationNameFromKey("tete:tete:www:oo:popo"));
+	REQUIRE("alteration_popo" == fys::arena::data::getAlterationNameFromKey("popo.chai"));
+	REQUIRE("alteration_popo" == fys::arena::data::getAlterationNameFromKey("popo"));
 
 } // End TestCase : getAlternateNameFromKey test
 
 TEST_CASE("CommonTypes test", "[service][arena]")
 {
-	std::set<fys::arena::data::Alteration, fys::arena::data::Alteration::CompAlteration> alterations = {
+	std::vector<fys::arena::data::Alteration> alterations;
+
+	fys::arena::data::mergeAlterations(alterations, {
 			fys::arena::data::Alteration("burned", 1, 5, [](fys::arena::data::Status&, uint, uint) { return true; }),
-			fys::arena::data::Alteration("burned", 1, 5, [](fys::arena::data::Status&, uint, uint) { return true; }),
-			fys::arena::data::Alteration("burned", 1, 5, [](fys::arena::data::Status&, uint, uint) { return true; }),
-			fys::arena::data::Alteration("frozen", 1, 5, [](fys::arena::data::Status&, uint, uint) { return true; }),
-			fys::arena::data::Alteration("frozen", 1, 5, [](fys::arena::data::Status&, uint, uint) { return true; }),
-			fys::arena::data::Alteration("frozen", 1, 5, [](fys::arena::data::Status&, uint, uint) { return true; }),
-			fys::arena::data::Alteration("paralyzed", 1, 5, [](fys::arena::data::Status&, uint, uint) { return true; }),
-			fys::arena::data::Alteration("paralyzed", 1, 5, [](fys::arena::data::Status&, uint, uint) { return true; }),
-			fys::arena::data::Alteration("paralyzed", 1, 5, [](fys::arena::data::Status&, uint, uint) { return true; })
-	};
+			fys::arena::data::Alteration("burned", 1, 2, [](fys::arena::data::Status&, uint, uint) { return true; }),
+			fys::arena::data::Alteration("burned", 1, 3, [](fys::arena::data::Status&, uint, uint) { return true; }),
+			fys::arena::data::Alteration("frozen", 1, 1, [](fys::arena::data::Status&, uint, uint) { return true; }),
+			fys::arena::data::Alteration("frozen", 1, 9, [](fys::arena::data::Status&, uint, uint) { return true; }),
+			fys::arena::data::Alteration("frozen", 1, 8, [](fys::arena::data::Status&, uint, uint) { return true; }),
+			fys::arena::data::Alteration("paralyzed", 1, 2, [](fys::arena::data::Status&, uint, uint) { return true; }),
+			fys::arena::data::Alteration("paralyzed", 1, 42, [](fys::arena::data::Status&, uint, uint) { return true; }),
+			fys::arena::data::Alteration("paralyzed", 1, 1, [](fys::arena::data::Status&, uint, uint) { return true; })
+	});
 
 	REQUIRE(3 == alterations.size());
+	REQUIRE(5 == alterations.at(0).getTurn());
+	REQUIRE(9 == alterations.at(1).getTurn());
+	REQUIRE(42 == alterations.at(2).getTurn());
 
 } // End TestCase : WorkerService test

@@ -24,6 +24,7 @@ endif (CCACHE_FOUND)
 
 add_executable(arena_service
         ${CMAKE_CURRENT_LIST_DIR}/src/main.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/src/ChaiRegister.cpp
         ${CMAKE_CURRENT_LIST_DIR}/src/fightingPit/FightingPit.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/fightingPit/FightingPit.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/fightingPit/FightingPitLayout.cpp
@@ -50,7 +51,6 @@ add_executable(arena_service
         ${CMAKE_CURRENT_LIST_DIR}/include/ArenaServerContext.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/ConnectionHandler.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/ConnectionHandler.hh
-        ${CMAKE_CURRENT_LIST_DIR}/src/ChaiRegister.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/ChaiRegister.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/network/DBConnector.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/network/DBConnector.hh

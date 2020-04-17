@@ -89,7 +89,7 @@ TEST_CASE("FightingPit test", "[service][arena]")
 		fpa.setCreatorUserName("Winner");
 		fpa.setCreatorUserToken("WinnerToken");
 		fpa.setCreatorTeamParty(getPartyTeam("Winner"));
-		fpa.setDifficulty(FightingPit::EASY);
+		fpa.setDifficulty(FightingPit::Level::EASY);
 		fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
 
 		fpa.addActionToOneMember(0u, "arena:actions:damage:slash.chai", 1u); // slash level 1 do 33 damage
@@ -197,7 +197,7 @@ TEST_CASE("FightingPit test", "[service][arena]")
 		partyTeam->accessTeamMembers().at(2)->accessStatus().life.current = 99; // set to the lowest life in order to ensure as target
 		partyTeam->accessTeamMembers().at(3)->accessStatus().magicPoint.current = 0;
 		fpa.setCreatorTeamParty(std::move(partyTeam));
-		fpa.setDifficulty(FightingPit::EASY);
+		fpa.setDifficulty(FightingPit::Level::EASY);
 		fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
 
 		fpa.addActionToOneMember(0u, "arena:actions:misc:meditate.chai", 1u); // meditate level 1 restore 10 mp

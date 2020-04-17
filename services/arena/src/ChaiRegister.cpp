@@ -229,15 +229,15 @@ ChaiRegister::registerCommon(chaiscript::ModulePtr m)
 
 	m->add(chaiscript::fun<std::function<void(fys::arena::data::Status&, std::vector<data::Alteration>)>>(
 			[](fys::arena::data::Status& status, std::vector<data::Alteration> alterations) {
-				std::copy(alterations.begin(), alterations.end(), std::back_inserter(status.alterations));
+				data::mergeAlterations(status.alterations, std::move(alterations));
 			}), "addOnTurnAlterations");
 	m->add(chaiscript::fun<std::function<void(fys::arena::data::Status&, std::vector<data::Alteration>)>>(
 			[](fys::arena::data::Status& status, std::vector<data::Alteration> alterations) {
-				std::copy(alterations.begin(), alterations.end(), std::back_inserter(status.alteration_before));
+				data::mergeAlterations(status.alteration_before, std::move(alterations));
 			}), "addBeforeTurnAlterations");
 	m->add(chaiscript::fun<std::function<void(fys::arena::data::Status&, std::vector<data::Alteration>)>>(
 			[](fys::arena::data::Status& status, std::vector<data::Alteration> alterations) {
-				std::copy(alterations.begin(), alterations.end(), std::back_inserter(status.alteration_after));
+				data::mergeAlterations(status.alteration_after, std::move(alterations));
 			}), "addAfterTurnAlterations");
 
 	chaiscript::utility::add_class<fys::arena::data::Targeting>(
