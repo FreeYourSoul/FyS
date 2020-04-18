@@ -50,7 +50,7 @@ public:
 	void sendMessageToDispatcher(zmq::multipart_t&& msg) noexcept;
 
 	/**
-	 * Read on the dealer socket (connection with the dispatcher) and reply to dispatcher to this socket connection
+	 * Read on the dealer socket (connection with the dispatcher/WS) and reply to dispatcher via this socket connection
 	 * (which will forward the message the the proper WorldServer)
 	 * @tparam Lambda type following the signature => void (string, zmq::message_t)
 	 * @param handler Handler handler to call when receiving a message
@@ -69,9 +69,9 @@ public:
 				SPDLOG_ERROR("Error while reading on the listener socket");
 			}
 			else {
-				// first element is the identity frame for the router of the dispatcher (connected to WS)
+				// first frame is the identity frame for the router of the dispatcher (connected to WS)
 				auto identity = msg.pop();
-				// second element is the message frame
+				// second frame is the message content
 				std::forward<Handler>(handler)(std::move(identity), msg.pop());
 			}
 		}

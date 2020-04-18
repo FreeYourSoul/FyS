@@ -36,7 +36,7 @@ class slash {
 
     def execute(targetStatus) {
         this.dmg.execute(targetStatus);
-        addAfterTurnAlterations(targetStatus, this.after_turn_alterations);
+        addAfterTurnAlterations(targetStatus, this.after_turn_alterations, true);
         1;
     }
 

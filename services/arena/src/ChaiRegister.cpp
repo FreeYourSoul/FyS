@@ -227,17 +227,17 @@ void
 ChaiRegister::registerCommon(chaiscript::ModulePtr m)
 {
 
-	m->add(chaiscript::fun<std::function<void(fys::arena::data::Status&, std::vector<data::Alteration>)>>(
-			[](fys::arena::data::Status& status, std::vector<data::Alteration> alterations) {
-				data::mergeAlterations(status.alterations, std::move(alterations));
+	m->add(chaiscript::fun<std::function<void(fys::arena::data::Status&, std::vector<data::Alteration>, bool)>>(
+			[](fys::arena::data::Status& status, std::vector<data::Alteration> alterations, bool replaceIfExist) {
+				data::mergeAlterations(status.alterations, std::move(alterations), replaceIfExist);
 			}), "addOnTurnAlterations");
-	m->add(chaiscript::fun<std::function<void(fys::arena::data::Status&, std::vector<data::Alteration>)>>(
-			[](fys::arena::data::Status& status, std::vector<data::Alteration> alterations) {
-				data::mergeAlterations(status.alteration_before, std::move(alterations));
+	m->add(chaiscript::fun<std::function<void(fys::arena::data::Status&, std::vector<data::Alteration>, bool)>>(
+			[](fys::arena::data::Status& status, std::vector<data::Alteration> alterations, bool replaceIfExist) {
+				data::mergeAlterations(status.alteration_before, std::move(alterations), replaceIfExist);
 			}), "addBeforeTurnAlterations");
-	m->add(chaiscript::fun<std::function<void(fys::arena::data::Status&, std::vector<data::Alteration>)>>(
-			[](fys::arena::data::Status& status, std::vector<data::Alteration> alterations) {
-				data::mergeAlterations(status.alteration_after, std::move(alterations));
+	m->add(chaiscript::fun<std::function<void(fys::arena::data::Status&, std::vector<data::Alteration>, bool)>>(
+			[](fys::arena::data::Status& status, std::vector<data::Alteration> alterations, bool replaceIfExist) {
+				data::mergeAlterations(status.alteration_after, std::move(alterations), replaceIfExist);
 			}), "addAfterTurnAlterations");
 
 	chaiscript::utility::add_class<fys::arena::data::Targeting>(

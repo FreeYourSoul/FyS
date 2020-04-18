@@ -155,13 +155,13 @@ struct Status {
 
 	/**
 	 * Process all alteration before turn stored
-	 * @return superior to 0 if the turn is executed, 0 if it is cancelled
+	 * @return true if the turn is executed, false if it is cancelled
 	 */
-	int processAlterationBeforeTurn()
+	bool processAlterationBeforeTurn()
 	{
-		int processTurn = 1;
+		bool processTurn = true;
 		for (auto& alteration : alteration_before) {
-			processTurn += alteration.processAlteration(*this);
+			processTurn &= alteration.processAlteration(*this);
 		}
 		return processTurn;
 	}
@@ -173,23 +173,36 @@ struct Status {
 		}
 	}
 
+	void cleanupFinishedAlteration()
+	{
+		alterations.erase(std::remove_if(alterations.begin(), alterations.end(),
+				[](const auto& alt) { return alt.getTurn() <= 0; }), alterations.end());
+		alteration_before.erase(std::remove_if(alteration_before.begin(), alteration_before.end(),
+				[](const auto& alt) { return alt.getTurn() <= 0; }), alteration_before.end());
+		alteration_after.erase(std::remove_if(alteration_after.begin(), alteration_after.end(),
+				[](const auto& alt) { return alt.getTurn() <= 0; }), alteration_after.end());
+	}
+
 };
 
 /**
  * Merge the alterations, remove doubles, but keep the alteration that would last the longest.
  * @param toModify reference on the alterations vector to modify
  * @param toMerge additional alternations
+ * @param replaceIfExist replace the alteration if it is already existing if set at true,
+ * do not add the alteration otherwise
  */
 static void
-mergeAlterations(std::vector<Alteration>& toModify, std::vector<Alteration> toMerge)
+mergeAlterations(std::vector<Alteration>& toModify, std::vector<Alteration> toMerge, bool replaceIfExist = false)
 {
 	(void)mergeAlterations; // suppress unused warning (as it is used, but by ChaiScript)
 
 	std::move(toMerge.begin(), toMerge.end(), std::back_inserter(toModify));
-	std::sort(toModify.begin(), toModify.end(), [](const auto& lhs, const auto& rhs) {
-		return lhs.getAlterationKey() == rhs.getAlterationKey() && lhs.getTurn() > rhs.getTurn();
+	std::sort(toModify.begin(), toModify.end(), [replaceIfExist](const Alteration& lhs, const Alteration& rhs) {
+		return lhs.getAlterationKey() == rhs.getAlterationKey() &&
+				((replaceIfExist && lhs.getTurn() > rhs.getTurn()) || (!replaceIfExist && lhs.getTurn() < rhs.getTurn()));
 	});
-	toModify.erase(std::unique(toModify.begin(), toModify.end(), [](const auto& lhs, const auto& rhs) {
+	toModify.erase(std::unique(toModify.begin(), toModify.end(), [](const Alteration& lhs, const Alteration& rhs) {
 		return lhs.getAlterationKey() == rhs.getAlterationKey();
 	}), toModify.end());
 }

@@ -105,7 +105,7 @@ FightingPit::continueBattle(const std::chrono::system_clock::time_point& now)
 			// character of a player
 			_partyTeams.executeAllyAction(currentParticipant, _contenders, _chaiPtr);
 		}
-		battle.eraseDeadCharactersFromTurnList();
+		battle.eraseFinishedAlterationAndDeadCharactersFromTurnList();
 	}
 	_progress = updateProgressStatus();
 }

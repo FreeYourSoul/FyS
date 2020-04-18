@@ -33,7 +33,7 @@
 #include <Cml.hh>
 #include <CmlCopy.hh>
 
-// sleep & attack
+// sleep action, is actually skipping turn and retrieving MP
 static const std::string actionTestSleepScript = R"(
 class Sleep_TEST {
     def Sleep_TEST() {}
@@ -56,6 +56,7 @@ class Sleep_TEST {
 };
 )";
 
+// attack action, doing fixed damage
 static const std::string actionTestAttackScript = R"(
 class Attack_TEST {
     var power;
@@ -100,6 +101,95 @@ class TestMonsterAttack {
             // possibles actions/decide target vector
             [
                 action(Attack_TEST(90), fun(action, thisContender) {
+                    decide_target.lower_life(action.requireTarget(), thisContender.getHexagonSideOrient()).accessStatus();
+                }, "test:key:1")
+            ],
+
+            // decide target function
+            fun(currentContenderStatus) {
+				0;
+            }, ""
+        );
+    }
+
+    def setupContender() {
+        var &thisContender = pitContenders.getFightingContender(this.id);
+        var &thisStatus = thisContender.accessStatus();
+        thisStatus.speed = 8;
+        thisStatus.life.total = 100;
+        thisStatus.life.current = thisStatus.life.total;
+        thisStatus.magicPoint.total = 100;
+        thisStatus.magicPoint.current = thisStatus.magicPoint.total;
+     }
+
+    def runScriptedAction(id) {
+        var &thisContender = pitContenders.getFightingContender(id);
+        var &thisStatus = thisContender.accessStatus();
+        var actionId = this.actions.decisionStrategy(thisStatus);
+        var &action = this.actions.act[actionId];
+        action.act.execute(action.decisionStrategy(action.act, thisContender));
+    }
+
+};
+)";
+
+// attack making a one-shot poison
+static const std::string actionTestPoisonScript = R"(
+def alteration_InstantDeathPoison(status, lvl, turn) {
+	if (turn == 0) {
+		print("Poison killed");
+		status.life.current = 0;
+	}
+	1;
+}
+
+def PoisonousAttackRetrieveAlterations() {
+	[
+ 		"test:alterations:MortalPoison"
+	]
+}
+
+class PoisonousAttack {
+    attr turnToKill;
+	attr poison;
+
+    def PoisonousAttack(v) {
+        this.set_explicit(true);
+        this.turnToKill = v;
+		this.poison = [
+			Alteration("test:alterations:MortalPoison", 2, 2, alteration_InstantDeathPoison)
+		];
+    }
+
+    def requireTarget() {
+        ENNEMY;
+    }
+
+    def execute(targetStatus) {
+		print("PoisonousAttack execute called");
+        addBeforeTurnAlterations(targetStatus, this.poison, false);
+		1;
+    }
+
+};)";
+
+// monster 100 life, 8 speed, only send a one turn Mortal Poison
+static const std::string MonsterTestScriptPoison = actionTestPoisonScript + R"(
+class TestMonsterPoison {
+    attr id;
+    attr level;
+    attr actions;
+
+    def TestMonsterPoison(contenderId, level) {
+        this.set_explicit(true);
+        this.level = level;
+        this.id = contenderId;
+
+        this.actions = action(
+
+            // possibles actions/decide target vector
+            [
+                action(PoisonousAttack(this.level), fun(action, thisContender) {
                     decide_target.lower_life(action.requireTarget(), thisContender.getHexagonSideOrient()).accessStatus();
                 }, "test:key:1")
             ],
@@ -198,10 +288,12 @@ public:
 class DeleteFolderWhenDone {
 public:
 	explicit DeleteFolderWhenDone(const std::string& v)
-			:_path(v) { }
+			:
+			_path(v) { }
 
 	~DeleteFolderWhenDone()
 	{
+		SPDLOG_INFO("Delete folder {}", _path.string());
 		std::filesystem::remove_all(_path);
 	}
 
@@ -229,6 +321,10 @@ protected:
 		else if ("testing:TestMonsterAttack.chai" == cmlKey.getKey()) {
 			std::ofstream ofs(cmlKey.getPath());
 			ofs << MonsterTestScriptAttack;
+		}
+		else if ("testing:TestMonsterPoison.chai" == cmlKey.getKey()) {
+			std::ofstream ofs(cmlKey.getPath());
+			ofs << MonsterTestScriptPoison;
 		}
 		else {
 			fys::cache::CmlKey k(_copyPathStorage, cmlKey.getKey());

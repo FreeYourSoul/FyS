@@ -65,7 +65,7 @@ public:
 	/**
 	 * Erase characters (contender or ally) from the PriorityOrderList that are dead.
 	 */
-	void eraseDeadCharactersFromTurnList();
+	void eraseFinishedAlterationAndDeadCharactersFromTurnList();
 
 	void addParticipantInList(uint id, int speed, bool isContender)
 	{

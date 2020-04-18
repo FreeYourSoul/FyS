@@ -48,7 +48,7 @@ AllyPartyTeams::executeAllyAction(
 		SPDLOG_ERROR("Member with id {} isn't found, action cannot be executed", ally.id);
 	}
 	else {
-		if (member->accessStatus().processAlterationBeforeTurn() > 0) {
+		if (member->accessStatus().processAlterationBeforeTurn()) {
 			member->executeAction(*this, pc, chaiPtr);
 		}
 		member->accessStatus().processAlterationAfterTurn();

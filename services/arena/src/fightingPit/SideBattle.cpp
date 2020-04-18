@@ -47,12 +47,14 @@ SideBattle::getCurrentParticipantTurn(
 }
 
 void
-SideBattle::eraseDeadCharactersFromTurnList()
+SideBattle::eraseFinishedAlterationAndDeadCharactersFromTurnList()
 {
-	for (auto deadContenders = _contenders.get().getDeadContenderOnSide(_side); const auto& contender : deadContenders) {
+	for (auto deadContenders = _contenders.get().getDeadContenderOnSide(_side); auto& contender : deadContenders) {
+		contender->accessStatus().cleanupFinishedAlteration();
 		_priorityOrderList.removeParticipantFromList(contender->getContenderScripting()->getContenderId(), data::CONTENDER);
 	}
-	for (auto deadAllies = _partyTeams.get().getDeadMembersBySide(_side); const auto& member : deadAllies) {
+	for (auto deadAllies = _partyTeams.get().getDeadMembersBySide(_side); auto& member : deadAllies) {
+		member->accessStatus().cleanupFinishedAlteration();
 		_priorityOrderList.removeParticipantFromList(member->getId(), data::PARTY_MEMBER);
 	}
 }
