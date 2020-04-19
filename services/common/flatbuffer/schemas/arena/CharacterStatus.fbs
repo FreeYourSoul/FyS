@@ -45,3 +45,7 @@ struct Cosmetic {
     cosmeticId:uint;
     cosmeticType:CosmeticType;
 }
+
+table Cosmetics {
+    cosmetic:[Cosmetic];
+}

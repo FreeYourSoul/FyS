@@ -27,8 +27,12 @@
 #include <chaiscript/chaiscript.hpp>
 
 #include <fightingPit/FightingPit.hh>
+
+#include <FightingPitState_generated.h>
+
 #include <network/WorkerService.hh>
 #include <ArenaServerContext.hh>
+#include <FlatbufferGenerator.hh>
 
 namespace fys::arena {
 
@@ -105,11 +109,13 @@ WorkerService::playerJoinFightingPit(unsigned fightingPitId, std::unique_ptr<Par
 			it->second->addPartyTeamAndRegisterActions(std::move(pt), cml);
 		}
 		else {
-			SPDLOG_INFO("User {} can't join fighting pit of id {} as the battle already started.", pt->getUserName(), fightingPitId);
+			SPDLOG_INFO("User {} can't join fighting pit of id {} as the battle already started.",
+					pt->getUserName(), fightingPitId);
 		}
 	}
 	else {
-		SPDLOG_ERROR("PartyTeam of user {} can't join fighting pit of id {}", pt->getUserName(), fightingPitId);
+		SPDLOG_ERROR("PartyTeam of user {} can't join fighting pit of id {}",
+				pt->getUserName(), fightingPitId);
 	}
 }
 
@@ -138,48 +144,6 @@ WorkerService::upsertPlayerIdentifier(unsigned fightingPitId, std::string userNa
 	}
 }
 
-void
-WorkerService::broadCastNewArrivingTeam(unsigned fightingPitId, const std::string& userName) noexcept
-{
-	zmq::multipart_t msg;
-	const PartyTeam& pt = _arenaInstances.at(fightingPitId)->getPartyTeamOfPlayer(userName);
-
-	broadcastMsg(fightingPitId, msg);
-}
-
-const std::string&
-WorkerService::retrievePlayerIdentifier(unsigned fightingPitId, const std::string& userName)
-{
-	auto identifiersIt = _arenaIdOnIdentifier.find(fightingPitId);
-	if (identifiersIt == _arenaIdOnIdentifier.end())
-		return userName;
-
-	auto it = std::find_if(identifiersIt->second.begin(), identifiersIt->second.end(), [&userName](const auto& ident) {
-		return ident.userName == userName;
-	});
-
-	if (it != identifiersIt->second.end()) {
-		return it->identifier;
-	}
-	return userName;
-}
-
-void
-WorkerService::broadcastMsg(unsigned fightingPitId, zmq::multipart_t& msg)
-{
-	auto identifiersIt = _arenaIdOnIdentifier.find(fightingPitId);
-	if (identifiersIt == _arenaIdOnIdentifier.end())
-		return;
-	unsigned identifierIndex = msg.size();
-
-	msg.add({});
-	for (const auto&[userName, identifier] : identifiersIt->second) {
-		msg.at(identifierIndex).rebuild(identifier.data(), identifier.size());
-		if (!msg.send(_workerRouter))
-			SPDLOG_ERROR("fightingPit of id {} : Message has not been correctly sent to {}, {}", fightingPitId, userName, identifier);
-	}
-}
-
 std::pair<bool, bool>
 WorkerService::fightingPitExistAndJoinable(unsigned int fightingPitId) const noexcept
 {
@@ -187,5 +151,78 @@ WorkerService::fightingPitExistAndJoinable(unsigned int fightingPitId) const noe
 	return std::pair(it != _arenaInstances.cend(), it != _arenaInstances.cend() && it->second->isJoinable());
 }
 
+void
+WorkerService::sendMsgNewArrivingTeam(unsigned fpId, const std::string& userName) noexcept
+{
+	FlatbufferGenerator fg;
+
+	{
+		auto[fbMsg, size] = fg.generatePartyTeamStatus(_arenaInstances.at(fpId)->getPartyTeamOfPlayer(userName));
+		zmq::multipart_t msg(fbMsg, size);
+		sendMessageToPlayer(fpId, userName, msg);
+	}
+	{
+		auto[fbMsg, size] = fg.generatePartyTeamStatus(_arenaInstances.at(fpId)->getPartyTeamOfPlayer(userName));
+		zmq::multipart_t msgTeamToBroadCast(fbMsg, size);
+		broadcastMsg(fpId, msgTeamToBroadCast);
+	}
+}
+
+bool
+WorkerService::sendMessageToPlayer(unsigned fpId, const std::string& userName, zmq::multipart_t& msg)
+{
+	const std::string& identifier = retrievePlayerIdentifier(fpId, userName);
+	if (identifier == userName) {
+		SPDLOG_ERROR("Cannot send a message {}, in fightingPit {} to player {}.", msg.str(), fpId, userName);
+		return false;
+	}
+
+	const unsigned identifierIndex = msg.size();
+	msg.add(zmq::message_t(identifier.data(), identifier.size()));
+	if (!msg.send(_workerRouter)) {
+		SPDLOG_ERROR("Failure to send message to player {} in fightingPit {}.", userName, fpId);
+		return false;
+	}
+	return true;
+}
+
+bool
+WorkerService::broadcastMsg(unsigned fpId, zmq::multipart_t& msg)
+{
+	const auto identifiersIt = _arenaIdOnIdentifier.find(fpId);
+	if (identifiersIt == _arenaIdOnIdentifier.end())
+		return false;
+
+	const unsigned identifierIndex = msg.size();
+	msg.add({}); // add empty frame (identifier frame at index msg.size() before insertion)
+
+	for (const auto&[userName, identifier] : identifiersIt->second) {
+		msg.at(identifierIndex).rebuild(identifier.data(), identifier.size());
+		if (!msg.send(_workerRouter)) {
+			SPDLOG_ERROR("fightingPit of id {} : Message has not been correctly sent to {}, {}", fpId, userName, identifier);
+			return false;
+		}
+	}
+	return true;
+}
+
+const std::string&
+WorkerService::retrievePlayerIdentifier(unsigned fpId, const std::string& userName)
+{
+	auto identifiersIt = _arenaIdOnIdentifier.find(fpId);
+	if (identifiersIt == _arenaIdOnIdentifier.end()) {
+		SPDLOG_WARN("Trying to retrieve player identifier on non-existing fighting pit of id {}", fpId);
+		return userName;
+	}
+
+	auto it = std::find_if(identifiersIt->second.begin(), identifiersIt->second.end(), [&userName](const auto& ident) {
+		return ident.userName == userName;
+	});
+	if (it == identifiersIt->second.end()) {
+		SPDLOG_WARN("Trying to retrieve non-existing player identifier {} in fighting pit of id {}", userName, fpId);
+		return userName;
+	}
+	return it->identifier;
+}
 
 } // namespace fys::arena

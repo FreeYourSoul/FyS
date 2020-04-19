@@ -26,6 +26,7 @@
 #define FYS_CONTENDERSCRIPTING_HH
 
 #include <memory>
+#include <vector>
 #include <string>
 
 // forward declarations
@@ -73,6 +74,9 @@ public:
 	[[nodiscard]] uint
 	getLevel() const { return _level; }
 
+	[[nodiscard]] const std::vector<std::string>&
+	getDoableActions() const { return _doableActions; }
+
 private:
 
 	[[nodiscard]] std::string
@@ -86,6 +90,7 @@ private:
 	std::string _contenderName;
 	uint _level;
 	uint _contenderId{};
+	std::vector<std::string> _doableActions;
 
 };
 

@@ -45,7 +45,9 @@ public:
 	FightingContender(FightingContender&& other) noexcept = default;
 
 	void executeAction();
-	[[nodiscard]] bool setupContender();
+
+	[[nodiscard]] bool
+	setupContender();
 
 	[[nodiscard]] const data::Status&
 	getStatus() const { return _status; }

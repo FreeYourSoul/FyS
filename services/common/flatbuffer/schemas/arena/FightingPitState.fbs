@@ -12,14 +12,14 @@ table PartyTeamStatus {
     members:[MemberStatus](required);
 
     // Only for full status
-    cosmetic:[Cosmetic];
     attacks:[string];
+    cosmetics:Cosmetics;
 }
 
 table FightingPitState {
     idFightingPit:uint;
     partyTeams:[PartyTeamStatus];
-    monstersStatus:[CharacterStatus];
+    monstersStatus:[MemberStatus];
 }
 
 root_type FightingPitState;

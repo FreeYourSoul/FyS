@@ -150,4 +150,6 @@ s.execute(contender.accessStatus());
 
 	} // End section : test light_heal chaiscript
 
+	std::filesystem::remove_all(baseCache);
+
 } // End TestCase : test Slash chaiscript

@@ -44,10 +44,10 @@ fys::arena::FightingPit::Level
 translateLevelFromFlatbuffer(const fys::fb::Level& level)
 {
 	switch (level) {
-	case fys::fb::Level_EASY:return fys::arena::FightingPit::Level::EASY;
-	case fys::fb::Level_MEDIUM:return fys::arena::FightingPit::Level::MEDIUM;
-	case fys::fb::Level_HARD:return fys::arena::FightingPit::Level::HARD;
-	default:return fys::arena::FightingPit::Level::EASY;
+		case fys::fb::Level_EASY:return fys::arena::FightingPit::Level::EASY;
+		case fys::fb::Level_MEDIUM:return fys::arena::FightingPit::Level::MEDIUM;
+		case fys::fb::Level_HARD:return fys::arena::FightingPit::Level::HARD;
+		default:return fys::arena::FightingPit::Level::EASY;
 	}
 }
 
@@ -112,8 +112,8 @@ ArenaServerService::runServerLoop() noexcept
 
 					if (auto[exist, joinable] = _workerService.fightingPitExistAndJoinable(apa.fightingPitId);
 							!apa.hasToBeGenerated() && !exist && !joinable) {
-						spdlog::error("Player {} can't be awaited to register on non-existing({})/joinable({}) fighting pit {}",
-								exist, joinable, apa.namePlayer, apa.fightingPitId);
+						spdlog::error("Player {} can't be awaited to register on non-existing({})/joinable({})"
+									  " fighting pit {}", exist, joinable, apa.namePlayer, apa.fightingPitId);
 						return;
 					}
 
@@ -127,7 +127,7 @@ ArenaServerService::runServerLoop() noexcept
 				});
 
 		_workerService.pollAndProcessMessageFromPlayer(
-				// Authentication handler : Player try to create/join a fighting pit. The player has to be awaited to do so
+				// Authentication handler : Player try to create/join a fighting pit. The player has to be awaited
 				[this](zmq::message_t&& idtPlayer, zmq::message_t&& authMessage) {
 					const auto* binary = fys::fb::GetArenaServerValidateAuth(authMessage.data());
 					const std::string tokenAuth = binary->token_auth()->str();
@@ -136,8 +136,8 @@ ArenaServerService::runServerLoop() noexcept
 					unsigned fightingPitId = playerAwaitedIt->second.fightingPitId;
 
 					if (!isAwaited) {
-						spdlog::warn("Player {} tried to authenticate on Arena server {} fighting pit {} without being awaited.",
-								userName, _ctx.get().getServerCode(), fightingPitId);
+						spdlog::warn("Player {} tried to authenticate on Arena server {} fighting pit {} "
+									 "without being awaited.", userName, _ctx.get().getServerCode(), fightingPitId);
 						return;
 					}
 
@@ -160,7 +160,7 @@ ArenaServerService::runServerLoop() noexcept
 					}
 					spdlog::info("Awaited player {} has logged in fighting pit of id:{}", userName, fightingPitId);
 					_workerService.upsertPlayerIdentifier(fightingPitId, std::string(), userName);
-					_workerService.broadCastNewArrivingTeam(fightingPitId, userName);
+					_workerService.sendMsgNewArrivingTeam(fightingPitId, userName);
 				},
 
 				// InGame handler: Player is sending actions to feed pendingActions queue of their characters

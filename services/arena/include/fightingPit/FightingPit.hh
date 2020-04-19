@@ -165,6 +165,12 @@ public:
 	[[nodiscard]] bool
 	isJoinable() const noexcept { return _progress == Progress::ON_HOLD; }
 
+	[[nodiscard]] const AllyPartyTeams&
+	getPartyTeams() const { return _partyTeams; }
+
+	[[nodiscard]] const PitContenders&
+	getPitContenders() const { return _contenders; }
+
 	/**
 	 * Check if the battle is done, the winner doesn't matter, this is a status to cleanup the fighting pit when its done
 	 * @return true if the battle is over, false otherwise

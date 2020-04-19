@@ -73,9 +73,9 @@ void
 ContenderScripting::registerContenderDoableActions(cache::Cml& cml)
 {
 	try {
-		auto doableActions = _chai.get().eval<std::vector<std::string>>(fmt::format(
+		_doableActions = _chai.get().eval<std::vector<std::string>>(fmt::format(
 				"retrieveDoableActions({}.actions.act);", getChaiContenderId()));
-		ChaiRegister::loadActionScripts(_chai, cml, doableActions);
+		ChaiRegister::loadActionScripts(_chai, cml, _doableActions);
 	}
 	catch (const chaiscript::exception::eval_error& ee) {
 		SPDLOG_WARN("Error caught on scripting loading\n{}\n{}", ee.what(), ee.detail);

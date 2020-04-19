@@ -61,9 +61,9 @@ ArenaServerContext::parseArenaConfigFile(const json& configContent)
 	i >> jsonConfig;
 	auto& encounter = jsonConfig["encounter"];
 	const std::string& zone = encounter["range"]["zone"].get<std::string>();
-	_encounterContext._rangeEncounterPerZone[zone][0] = std::make_pair(encounter["range"]["easy"][0].get<uint>(), encounter["range"]["easy"][1].get<uint>());
-	_encounterContext._rangeEncounterPerZone[zone][1] = std::make_pair(encounter["range"]["medium"][0].get<uint>(), encounter["range"]["medium"][1].get<uint>());
-	_encounterContext._rangeEncounterPerZone[zone][2] = std::make_pair(encounter["range"]["hard"][0].get<uint>(), encounter["range"]["hard"][1].get<uint>());
+	_encounterContext._rangeEncounterPerZone[zone][0] = std::pair(encounter["range"]["easy"][0].get<uint>(), encounter["range"]["easy"][1].get<uint>());
+	_encounterContext._rangeEncounterPerZone[zone][1] = std::pair(encounter["range"]["medium"][0].get<uint>(), encounter["range"]["medium"][1].get<uint>());
+	_encounterContext._rangeEncounterPerZone[zone][2] = std::pair(encounter["range"]["hard"][0].get<uint>(), encounter["range"]["hard"][1].get<uint>());
 
 	auto& contenders = encounter["contenders"];
 	for (auto& contender : contenders) {

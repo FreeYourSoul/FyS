@@ -92,6 +92,9 @@ public:
 	[[nodiscard]] bool
 	setPartyReadiness(const std::string& userName);
 
+	[[nodiscard]] const std::vector<std::unique_ptr<PartyTeam>>&
+	getPartyTeams() const { return _partyTeams; }
+
 	void executeAllyAction(const data::PriorityElem& ally, PitContenders& pc, std::unique_ptr<chaiscript::ChaiScript>& chaiPtr);
 	void addPartyTeam(std::unique_ptr<PartyTeam>&& team);
 

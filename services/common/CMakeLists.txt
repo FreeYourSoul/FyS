@@ -46,7 +46,9 @@ set(COMMON_SRCS
         ${CMAKE_CURRENT_LIST_DIR}/include/ServiceContextBase.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/algorithm/algorithm.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/Key.hh)
-set(COMMON_INCLUDES_DIR ${CMAKE_CURRENT_LIST_DIR}/include)
+set(COMMON_INCLUDES_DIR
+        ${CMAKE_CURRENT_LIST_DIR}/include
+        ${CMAKE_CURRENT_LIST_DIR}/flatbuffer/includes)
 
 if (TARGET common_service)
 else ()

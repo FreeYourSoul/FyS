@@ -101,10 +101,10 @@ public:
 	 *
 	 * @note Checks about the validity of the userName and the fightingPitId given as parameter have to be done beforehand
 	 *
-	 * @param fightingPitId id of the fighting pit, HAS TO BE ACCURATE
+	 * @param fpId id of the fighting pit, HAS TO BE ACCURATE
 	 * @param userName user whom is going to
 	 */
-	void broadCastNewArrivingTeam(unsigned fightingPitId, const std::string& userName) noexcept;
+	void sendMsgNewArrivingTeam(unsigned fpId, const std::string& userName) noexcept;
 
 	/**
 	 * Read on the router socket (connection with the players) and reply to them thanks to the zmq::router protocol
@@ -173,10 +173,15 @@ public:
 	void upsertPlayerIdentifier(unsigned fightingPitId, std::string userName, std::string idtPlayer);
 
 private:
-	[[nodiscard]] const std::string&
-	retrievePlayerIdentifier(unsigned fightingPitId, const std::string& userName);
+	bool
+	broadcastMsg(unsigned fpId, zmq::multipart_t& msg);
 
-	void broadcastMsg(unsigned fightingPitId, zmq::multipart_t& msg);
+	bool
+	sendMessageToPlayer(unsigned fpId, const std::string& userName, zmq::multipart_t& msg);
+
+	[[nodiscard]] const std::string&
+	retrievePlayerIdentifier(unsigned fpId, const std::string& userName);
+
 	void cleanUpFinishedBattles();
 
 private:

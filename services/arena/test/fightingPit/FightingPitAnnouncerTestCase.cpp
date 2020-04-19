@@ -56,9 +56,9 @@ TEST_CASE("FightingPitAnnouncer test", "[service][arena]")
 	auto cml = CmlBase(getLocalPathStorage());
 	EncounterContext ctx;
 	ctx._rangeEncounterPerZone["WS00"] = {
-			std::make_pair(1, 4), // ez
-			std::make_pair(2, 4), // medium
-			std::make_pair(3, 5)  // hard
+			std::pair(1, 4), // ez
+			std::pair(2, 4), // medium
+			std::pair(3, 5)  // hard
 	};
 	ctx._contendersPerZone["WS00"] = {
 			EncounterContext::EncounterDesc{

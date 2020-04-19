@@ -71,9 +71,9 @@ TEST_CASE("FightingPit Simple Fight test", "[service][arena]")
 
 	EncounterContext ctx;
 	ctx._rangeEncounterPerZone["WS00"] = {
-			std::make_pair(1, 1), // ez
-			std::make_pair(3, 3), // medium
-			std::make_pair(1, 1)  // hard
+			std::pair(1, 1), // ez
+			std::pair(3, 3), // medium
+			std::pair(1, 1)  // hard
 	};
 	ctx._contendersPerZone["WS00"] = {
 			EncounterContext::EncounterDesc{"testing:TestMonsterSleep.chai", 3, {100, 100, 100}},
@@ -461,9 +461,9 @@ TEST_CASE("FightingPit Simple Alteration test", "[service][arena]")
 
 	EncounterContext ctx;
 	ctx._rangeEncounterPerZone["WS00"] = {
-			std::make_pair(1, 1), // ez
-			std::make_pair(3, 3), // medium
-			std::make_pair(1, 1)  // hard
+			std::pair(1, 1), // ez
+			std::pair(3, 3), // medium
+			std::pair(1, 1)  // hard
 	};
 	ctx._contendersPerZone["WS00"] = {
 			EncounterContext::EncounterDesc{"testing:TestMonsterPoison.chai", 2, {100, 100, 100}},
@@ -521,6 +521,12 @@ TEST_CASE("FightingPit Simple Alteration test", "[service][arena]")
 			REQUIRE(1 == FightingPitAnnouncer::getPitContenders(fp).getNumberContender());
 			REQUIRE(1 == FightingPitAnnouncer::getPitContenders(fp).contenderOnSide(HexagonSide::Orientation::B_S));
 			REQUIRE(4 == FightingPitAnnouncer::getPartyTeams(fp).getNumberAlly());
+
+			const auto& doableActions =
+					FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->
+							getContenderScripting()->getDoableActions();
+			REQUIRE(1 == doableActions.size());
+			REQUIRE("test:key:1" == doableActions.at(0));
 
 			REQUIRE(8 == c.at(0)->getStatus().initialSpeed);
 			REQUIRE(3 == p.at(0)->getStatus().initialSpeed);

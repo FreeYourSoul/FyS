@@ -72,7 +72,7 @@ public:
 			_hexagon(hexagon), _side(orientation) { }
 
 	[[nodiscard]] std::pair<Hexagon, Orientation>
-	operator*() const { return std::make_pair(_hexagon, _side); }
+	operator*() const { return std::pair(_hexagon, _side); }
 
 	bool move(HexagonSide::Orientation destinationSide, bool forceMovement = false);
 	bool moveRight();

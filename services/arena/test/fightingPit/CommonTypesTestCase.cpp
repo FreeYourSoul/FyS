@@ -56,7 +56,7 @@ TEST_CASE("CommonTypes test", "[service][arena]")
 			fys::arena::data::Alteration("paralyzed", 1, 2, [](fys::arena::data::Status&, uint, uint) { return true; }),
 			fys::arena::data::Alteration("paralyzed", 1, 42, [](fys::arena::data::Status&, uint, uint) { return true; }),
 			fys::arena::data::Alteration("paralyzed", 1, 1, [](fys::arena::data::Status&, uint, uint) { return true; })
-	}, false);
+	}, true);
 
 	REQUIRE(3 == alterations.size());
 	REQUIRE(5 == alterations.at(0).getTurn());

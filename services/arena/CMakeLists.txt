@@ -49,6 +49,9 @@ add_executable(arena_service
         ${CMAKE_CURRENT_LIST_DIR}/include/fightingPit/team/TeamMember.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/ArenaServerContext.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/ArenaServerContext.hh
+        ${CMAKE_CURRENT_LIST_DIR}/include/FbUtility.hh
+        ${CMAKE_CURRENT_LIST_DIR}/src/FlatbufferGenerator.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/FlatbufferGenerator.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/ConnectionHandler.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/ConnectionHandler.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/ChaiRegister.hh

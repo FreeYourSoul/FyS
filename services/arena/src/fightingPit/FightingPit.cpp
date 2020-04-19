@@ -37,11 +37,11 @@ std::chrono::milliseconds
 retrieveTimeInterludeFromLevelDegree(fys::arena::FightingPit::Level level)
 {
 	switch (level) {
-	case fys::arena::FightingPit::Level::EASY:return fys::arena::interval::EASY;
-	case fys::arena::FightingPit::Level::MEDIUM :return fys::arena::interval::MEDIUM;
-	case fys::arena::FightingPit::Level::HARD :return fys::arena::interval::HARD;
-	default:SPDLOG_ERROR("Incorrect level");
-		return std::chrono::milliseconds{0};
+		case fys::arena::FightingPit::Level::EASY:return fys::arena::interval::EASY;
+		case fys::arena::FightingPit::Level::MEDIUM :return fys::arena::interval::MEDIUM;
+		case fys::arena::FightingPit::Level::HARD :return fys::arena::interval::HARD;
+		default:SPDLOG_ERROR("Incorrect level");
+			return std::chrono::milliseconds{0};
 	}
 }
 }
@@ -62,26 +62,26 @@ FightingPit::checkEndStatusFightingPit()
 {
 	switch (_progress) {
 		// Battle is still on going and so has to continue
-	case Progress::ON_GOING:return true;
+		case Progress::ON_GOING:return true;
 
-		// Battle is over and require cleanup
-	case Progress::CLEANUP:
-		// Battle is on hold and can't receive incoming player
-	case Progress::ON_HOLD_NOT_REACHABLE:
-		// Battle is on hold and may have incoming player
-	case Progress::ON_HOLD: return false;
+			// Battle is over and require cleanup
+		case Progress::CLEANUP:
+			// Battle is on hold and can't receive incoming player
+		case Progress::ON_HOLD_NOT_REACHABLE:
+			// Battle is on hold and may have incoming player
+		case Progress::ON_HOLD: return false;
 
-		// Battle is won by allies
-	case Progress::ALLY_WIN:
-		// todo Send success of the fight
-		_progress = Progress::CLEANUP;
-		return false;
+			// Battle is won by allies
+		case Progress::ALLY_WIN:
+			// todo Send success of the fight
+			_progress = Progress::CLEANUP;
+			return false;
 
-		// Battle is won by contenders
-	case Progress::CONTENDER_WIN:
-		// todo Send failure of the fight
-		_progress = Progress::CLEANUP;
-		return false;
+			// Battle is won by contenders
+		case Progress::CONTENDER_WIN:
+			// todo Send failure of the fight
+			_progress = Progress::CLEANUP;
+			return false;
 	}
 	return _progress == Progress::ON_HOLD;
 }

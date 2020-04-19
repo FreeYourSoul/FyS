@@ -50,8 +50,8 @@ WorldServerContext::initWsContextWithJson(json& json)
 
 	wsJson["code"].get_to(_serverCode);
 	wsJson["TMX_Map"].get_to(_tmxMapPath);
-	_serverXBoundaries = std::make_pair(confJson["begin_x"].get<double>(), confJson["end_x"].get<double>());
-	_serverYBoundaries = std::make_pair(confJson["begin_y"].get<double>(), confJson["end_y"].get<double>());
+	_serverXBoundaries = std::pair(confJson["begin_x"].get<double>(), confJson["end_x"].get<double>());
+	_serverYBoundaries = std::pair(confJson["begin_y"].get<double>(), confJson["end_y"].get<double>());
 	for (auto &[key, value] : overlapsJson.items()) {
 		ProximityServer proximityServer;
 		proximityServer.code = value["code"].get<std::string>();

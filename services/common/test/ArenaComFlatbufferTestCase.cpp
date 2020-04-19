@@ -25,7 +25,7 @@
 #include <flatbuffers/flatbuffers.h>
 #include <ArenaServerAuth_generated.h>
 #include <ArenaServerValidateAuth_generated.h>
-#include <PartyTeamStatus_generated.h>
+#include <FightingPitState_generated.h>
 #include <FightingPitEncounter_generated.h>
 #include <ArenaFightAction_generated.h>
 
@@ -38,6 +38,7 @@ TEST_CASE("FlatBuffer ArenaCom FightingPitEncounter", "[service][arena][common][
 			fbb.CreateString("token_authentication"),
 			1337,
 			fbb.CreateString("WS001"),
+			false,
 			fys::fb::Level::Level_EASY,
 			4242,
 			false,
@@ -57,6 +58,7 @@ TEST_CASE("FlatBuffer ArenaCom FightingPitEncounter", "[service][arena][common][
 		REQUIRE("token_authentication" == fromBinary->token_auth()->str());
 		REQUIRE(4242 == fromBinary->id_encounter());
 		REQUIRE_FALSE(fromBinary->is_ambush());
+		REQUIRE_FALSE(fromBinary->disable_join());
 		REQUIRE(1337 == fromBinary->fighting_pit_id());
 
 	} // End section : Binary to Flatbuffer
@@ -160,83 +162,89 @@ TEST_CASE("FlatBuffer ArenaCom PartyTeamStatus", "[service][arena][common][fb]")
 	// test MemberStatus
 	flatbuffers::FlatBufferBuilder fbb;
 
-	auto mso = fys::fb::CreateMemberStatus(fbb, fbb.CreateString("memberName1"),
+	const fys::fb::CharacterStatus cs = fys::fb::CharacterStatus{
+			0,
+			false,
 			90,
 			100,
 			190,
 			200,
 			fys::fb::SideOrient_A_N,
-			fbb.CreateVectorOfStrings({"attack1", "attack2", "attack3"}));
+	};
+	auto mso = fys::fb::CreateMemberStatus(fbb, fbb.CreateString("memberName1"), &cs);
 	fbb.Finish(mso);
 	uint8_t* b = fbb.GetBufferPointer();
 
 	SECTION("TeamMember Binary to FlatBuffer") {
 		const auto* fromBinary = flatbuffers::GetRoot<fys::fb::MemberStatus>(b);
 
-		REQUIRE("memberName1" == fromBinary->memberName()->str());
-		REQUIRE(90 == fromBinary->current_life());
-		REQUIRE(100 == fromBinary->total_life());
-		REQUIRE(190 == fromBinary->current_mp());
-		REQUIRE(200 == fromBinary->total_mp());
-		REQUIRE(fys::fb::SideOrient_A_N == fromBinary->side());
-		REQUIRE(3 == fromBinary->attacks()->size());
-		REQUIRE("attack1" == fromBinary->attacks()->Get(0)->str());
-		REQUIRE("attack2" == fromBinary->attacks()->Get(1)->str());
-		REQUIRE("attack3" == fromBinary->attacks()->Get(2)->str());
+		REQUIRE("memberName1" == fromBinary->characterName()->str());
+		REQUIRE(90 == fromBinary->status()->current_life());
+		REQUIRE(100 == fromBinary->status()->total_life());
+		REQUIRE(190 == fromBinary->status()->current_mp());
+		REQUIRE(200 == fromBinary->status()->total_mp());
+		REQUIRE(fys::fb::SideOrient_A_N == fromBinary->status()->side());
 	} // End section : Binary to Flatbuffer
 
 
 	SECTION("Test PartyTeamStatus flatbuffer") {
-		auto mso2 = fys::fb::CreateMemberStatus(fbb, fbb.CreateString("memberName2"),
+		const fys::fb::CharacterStatus cs2 = fys::fb::CharacterStatus{
+				1,
+				false,
 				1190,
 				11100,
 				11190,
 				11200,
-				fys::fb::SideOrient_A_S,
-				fbb.CreateVectorOfStrings({"Aattack1", "Aattack2", "Aattack3"}));
+				fys::fb::SideOrient_A_S
+		};
+		auto mso2 = fys::fb::CreateMemberStatus(fbb, fbb.CreateString("memberName2"), &cs2);
 		fbb.Finish(mso2);
 		std::vector<flatbuffers::Offset<fys::fb::MemberStatus>> vec = {mso, mso2};
 
 		auto pts = fys::fb::CreatePartyTeamStatus(
 				fbb,
 				fbb.CreateString("userName"),
-				fbb.CreateVector(vec.data(), 2));
-		fys::fb::FinishPartyTeamStatusBuffer(fbb, pts);
+				fbb.CreateVector(vec.data(), 2),
+				fbb.CreateVectorOfStrings({
+						"attack1",
+						"attack2",
+						"attack3",
+						"Aattack1",
+						"Aattack2",
+						"Aattack3"
+				}));
+		fbb.Finish(pts);
 
-		SECTION("Verifier") {
-			auto ok = flatbuffers::Verifier(fbb.GetBufferPointer(), fbb.GetSize());
-			CHECK(fys::fb::VerifyPartyTeamStatusBuffer(ok));
-		}
 		uint8_t* binary = fbb.GetBufferPointer();
 
 		SECTION("Binary to FlatBuffer") {
-			const fys::fb::PartyTeamStatus* fromBinary = fys::fb::GetPartyTeamStatus(binary);
+			const fys::fb::PartyTeamStatus* fromBinary = flatbuffers::GetRoot<fys::fb::PartyTeamStatus>(binary);
 			REQUIRE("userName" == fromBinary->user_name()->str());
 			REQUIRE(2 == fromBinary->members()->size());
 
 			auto memberStatusRetrieved1 = fromBinary->members()->Get(0);
-			REQUIRE("memberName1" == memberStatusRetrieved1->memberName()->str());
-			REQUIRE(90 == memberStatusRetrieved1->current_life());
-			REQUIRE(100 == memberStatusRetrieved1->total_life());
-			REQUIRE(190 == memberStatusRetrieved1->current_mp());
-			REQUIRE(200 == memberStatusRetrieved1->total_mp());
-			REQUIRE(fys::fb::SideOrient_A_N == memberStatusRetrieved1->side());
-			REQUIRE(3 == memberStatusRetrieved1->attacks()->size());
-			REQUIRE("attack1" == memberStatusRetrieved1->attacks()->Get(0)->str());
-			REQUIRE("attack2" == memberStatusRetrieved1->attacks()->Get(1)->str());
-			REQUIRE("attack3" == memberStatusRetrieved1->attacks()->Get(2)->str());
+			REQUIRE("memberName1" == memberStatusRetrieved1->characterName()->str());
+			REQUIRE(90 == memberStatusRetrieved1->status()->current_life());
+			REQUIRE(100 == memberStatusRetrieved1->status()->total_life());
+			REQUIRE(190 == memberStatusRetrieved1->status()->current_mp());
+			REQUIRE(200 == memberStatusRetrieved1->status()->total_mp());
+			REQUIRE(fys::fb::SideOrient_A_N == memberStatusRetrieved1->status()->side());
 
 			auto memberStatusRetrieved2 = fromBinary->members()->Get(1);
-			REQUIRE("memberName2" == memberStatusRetrieved2->memberName()->str());
-			REQUIRE(1190 == memberStatusRetrieved2->current_life());
-			REQUIRE(11100 == memberStatusRetrieved2->total_life());
-			REQUIRE(11190 == memberStatusRetrieved2->current_mp());
-			REQUIRE(11200 == memberStatusRetrieved2->total_mp());
-			REQUIRE(fys::fb::SideOrient_A_S == memberStatusRetrieved2->side());
-			REQUIRE(3 == memberStatusRetrieved2->attacks()->size());
-			REQUIRE("Aattack1" == memberStatusRetrieved2->attacks()->Get(0)->str());
-			REQUIRE("Aattack2" == memberStatusRetrieved2->attacks()->Get(1)->str());
-			REQUIRE("Aattack3" == memberStatusRetrieved2->attacks()->Get(2)->str());
+			REQUIRE("memberName2" == memberStatusRetrieved2->characterName()->str());
+			REQUIRE(1190 == memberStatusRetrieved2->status()->current_life());
+			REQUIRE(11100 == memberStatusRetrieved2->status()->total_life());
+			REQUIRE(11190 == memberStatusRetrieved2->status()->current_mp());
+			REQUIRE(11200 == memberStatusRetrieved2->status()->total_mp());
+			REQUIRE(fys::fb::SideOrient_A_S == memberStatusRetrieved2->status()->side());
+
+			REQUIRE(6 == fromBinary->attacks()->size());
+			REQUIRE("attack1" == fromBinary-> attacks()->Get(0)->str());
+			REQUIRE("attack2" == fromBinary->attacks()->Get(1)->str());
+			REQUIRE("attack3" == fromBinary->attacks()->Get(2)->str());
+			REQUIRE("Aattack1" == fromBinary->attacks()->Get(3)->str());
+			REQUIRE("Aattack2" == fromBinary->attacks()->Get(4)->str());
+			REQUIRE("Aattack3" == fromBinary->attacks()->Get(5)->str());
 
 		} // End section : Binary to Flatbuffer
 	} // End section : Test PartyTeamStatus flatbuffer

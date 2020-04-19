@@ -19,7 +19,6 @@ enum TypeAction : byte {
 
 /// Used by the client to do an action
 table ArenaFightAction {
-    ac
     memberId:uint;
     actionId:string(required);
     targetType:Targeting;
