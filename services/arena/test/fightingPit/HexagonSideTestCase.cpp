@@ -24,9 +24,8 @@
 #include <catch2/catch.hpp>
 #include <fightingPit/HexagonSide.hh>
 
-TEST_CASE("HexagonSide test", "[service][arena]")
+TEST_CASE("HexagonSideTestCase", "[service][arena]")
 {
-
 	SECTION("test ambush side") {
 
 		SECTION("Not Ambush : A_N") {

@@ -27,7 +27,7 @@
 namespace fys::util {
 
 std::shared_ptr<std::mt19937>
-RandomGenerator::get()
+RandomGenerator::get() const
 {
 	return mt;
 }

@@ -61,7 +61,7 @@ getTmpPath()
 
 // Test of the game loop
 
-TEST_CASE("FightingPit Simple Fight test", "[service][arena]")
+TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]")
 {
 	auto fseamMock = FSeam::getDefault<fys::util::RandomGenerator>();
 	ConnectionHandler handler{};
@@ -451,7 +451,7 @@ TEST_CASE("FightingPit Simple Fight test", "[service][arena]")
 
 } // End TestCase : FightingPit Simple Fight test
 
-TEST_CASE("FightingPit Simple Alteration test", "[service][arena]")
+TEST_CASE("FightingPitTestCase Simple Alteration test", "[service][arena]")
 {
 	auto fseamMock = FSeam::getDefault<fys::util::RandomGenerator>();
 	ConnectionHandler handler{};

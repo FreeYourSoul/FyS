@@ -43,7 +43,7 @@ retrieveStringVector(const std::vector<std::pair<std::string, uint>> doableAttac
 {
 	std::vector<std::string> stringVec;
 	stringVec.reserve(doableAttacks.size());
-	for (const auto& [atkString, atkLvl]: doableAttacks) {
+	for (const auto&[atkString, atkLvl]: doableAttacks) {
 		stringVec.emplace_back(atkString);
 	}
 	return stringVec;
@@ -57,11 +57,13 @@ std::pair<void*, uint>
 FlatbufferGenerator::generateFightingPitState(const fys::arena::FightingPit& fp)
 {
 	_fbb.Clear();
+	auto fbPartyTeamVec = _fbb.CreateVector(generatePartyTeamVecStatusOffset(fp.getPartyTeams()));
+	auto fbContenderVec = _fbb.CreateVector(generateContenderVecStatusOffset(fp.getPitContenders()));
 	auto fps = fb::CreateFightingPitState(
 			_fbb,
 			fp.getId(),
-			_fbb.CreateVector(generatePartyTeamVecStatusOffset(fp.getPartyTeams())),
-			_fbb.CreateVector(generateContenderVecStatusOffset(fp.getPitContenders()))
+			fbPartyTeamVec,
+			fbContenderVec
 	);
 	fb::FinishFightingPitStateBuffer(_fbb, fps);
 	return std::pair(_fbb.GetBufferPointer(), _fbb.GetSize());
@@ -71,13 +73,23 @@ std::pair<void*, uint>
 FlatbufferGenerator::generatePartyTeamStatus(const PartyTeam& partyTeam)
 {
 	_fbb.Clear();
+	auto fbName = _fbb.CreateString(partyTeam.getUserName());
+	auto fbMemberVec = _fbb.CreateVector(generateTeamMemberVecStatusOffset(partyTeam));
+	auto fbVecAttacks = [this](const PartyTeam& partyTeam) {
+		std::vector<std::string> vecString;
+		for (const auto& tm : partyTeam.getTeamMembers()) {
+			auto vec = retrieveStringVector(tm->getActionsDoable());
+			std::move(vec.begin(), vec.end(), std::back_inserter(vecString));
+		}
+		return _fbb.CreateVectorOfStrings(vecString);
+	}(partyTeam);
+
 	fb::PartyTeamStatusBuilder builder(_fbb);
-	builder.add_user_name(_fbb.CreateString(partyTeam.getUserName()));
-	builder.add_members(_fbb.CreateVector(generateTeamMemberVecStatusOffset(partyTeam)));
-	for (const auto& tm : partyTeam.getTeamMembers()) {
-		builder.add_attacks(_fbb.CreateVectorOfStrings(retrieveStringVector(tm->getActionsDoable())));
-	}
+	builder.add_user_name(fbName);
+	builder.add_members(fbMemberVec);
+	builder.add_attacks(fbVecAttacks);
 	_fbb.Finish(builder.Finish());
+
 	return std::pair(_fbb.GetBufferPointer(), _fbb.GetSize());
 }
 
@@ -105,12 +117,21 @@ FlatbufferGenerator::generatePartyTeamVecStatusOffset(const AllyPartyTeams& apt)
 
 	fbPartyTeamsStatus.reserve(partyTeams.size());
 	for (const auto& pt : partyTeams) {
+		auto fbUserName = _fbb.CreateString(pt->getUserName());
+		auto fbMembers = _fbb.CreateVector(generateTeamMemberVecStatusOffset(*pt));
+		auto fbAttacks = [this](const auto& pt) {
+			std::vector<std::string> attacks;
+			for (const auto& tm : pt->getTeamMembers()) {
+				auto vec = retrieveStringVector(tm->getActionsDoable());
+				std::move(vec.begin(), vec.end(), std::back_inserter(attacks));
+			}
+			return _fbb.CreateVectorOfStrings(attacks);
+		}(pt);
+
 		fb::PartyTeamStatusBuilder builder(_fbb);
-		builder.add_user_name(_fbb.CreateString(pt->getUserName()));
-		builder.add_members(_fbb.CreateVector(generateTeamMemberVecStatusOffset(*pt)));
-		for (const auto& tm : pt->getTeamMembers()) {
-			builder.add_attacks(_fbb.CreateVectorOfStrings(retrieveStringVector(tm->getActionsDoable())));
-		}
+		builder.add_user_name(fbUserName);
+		builder.add_members(fbMembers);
+		builder.add_attacks(fbAttacks);
 		fbPartyTeamsStatus.emplace_back(builder.Finish());
 	}
 	return fbPartyTeamsStatus;

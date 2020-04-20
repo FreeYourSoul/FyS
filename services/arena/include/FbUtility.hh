@@ -25,6 +25,8 @@
 #ifndef FYS_ONLINE_FBUTILITY_HH
 #define FYS_ONLINE_FBUTILITY_HH
 
+#include <spdlog/spdlog.h>
+
 namespace fys::util {
 
 using namespace fys::arena;
@@ -55,10 +57,10 @@ convertArenaOrientToFb(HexagonSide::Orientation orient)
 		case HexagonSide::Orientation::C_SE: return SideOrient_C_SE;
 		case HexagonSide::Orientation::C_SW: return SideOrient_C_SW;
 
-		case HexagonSide::Orientation::NONE: SPDLOG_ERROR("Trying to convert Orientation::NONE, "
-														  "value replaced by {}", SideOrient_MIN);
-			return SideOrient_MIN;
+		case HexagonSide::Orientation::NONE: break;
 	}
+	SPDLOG_ERROR("Trying to convert Orientation::NONE, value replaced by {}", SideOrient_MIN);
+	return SideOrient_MIN;
 }
 
 [[nodiscard]] static HexagonSide::Orientation
@@ -86,6 +88,7 @@ convertFbOrientToArena(SideOrient orient)
 		case SideOrient_C_SE: return HexagonSide::Orientation::C_SE;
 		case SideOrient_C_SW: return HexagonSide::Orientation::C_SW;
 	}
+	return HexagonSide::Orientation::NONE;
 }
 
 }

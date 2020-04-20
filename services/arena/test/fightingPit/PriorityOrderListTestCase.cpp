@@ -45,7 +45,7 @@ public:
 	using PriorityOrderList::_baseSpeed;
 };
 
-TEST_CASE("PriorityOrderList test", "[service][arena]")
+TEST_CASE("PriorityOrderListTestCase priorityList test", "[service][arena]")
 {
 	std::vector<fys::arena::data::PriorityElem> baseSpeed = {
 			// id, speed, isContender
@@ -499,7 +499,7 @@ TEST_CASE("PriorityOrderList test", "[service][arena]")
 
 }
 
-TEST_CASE("Test for FightingPit testcase", "[service][arena]")
+TEST_CASE("PriorityOrderListTestCase full turn test", "[service][arena]")
 {
 
 	PriorityOrderListPassThrough priorityList;

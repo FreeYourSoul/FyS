@@ -140,7 +140,7 @@ ChaiRegister::loadActionsAlterationsScript(chaiscript::ChaiScript& chai, cache::
 	std::vector<std::string> alterationKeys;
 
 	for (const auto& key : keys) {
-		std::string actionAlterationsRetrieve = data::getActionNameFromKey(key).append("_retrieve_alterations()");
+		std::string actionAlterationsRetrieve = data::getActionNameFromKey(key).append("_retrieve_alterations();");
 		try {
 			std::vector actionAlteration = chai.eval<std::vector<std::string>>(actionAlterationsRetrieve);
 			std::copy(actionAlteration.begin(), actionAlteration.end(), std::back_inserter(alterationKeys));

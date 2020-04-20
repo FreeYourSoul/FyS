@@ -45,6 +45,8 @@ addFSeamTests(
         ${CMAKE_CURRENT_LIST_DIR}/../src/network/WorkerService.cpp
         ${CMAKE_CURRENT_LIST_DIR}/../src/ArenaServerContext.cpp
         ${CMAKE_CURRENT_LIST_DIR}/../src/ChaiRegister.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/FlatbufferGenerator.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../include/FlatbufferGenerator.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/ChaiRegister.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/team/PartyTeam.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/team/TeamMember.hh
@@ -68,6 +70,7 @@ addFSeamTests(
         ${CMAKE_CURRENT_LIST_DIR}/catchMain.cpp
         ${CMAKE_CURRENT_LIST_DIR}/fightingPit/TestType.hh
         ${CMAKE_CURRENT_LIST_DIR}/fightingPit/WorkerServiceTestCase.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/fightingPit/FlatbufferGeneratorTestCase.cpp
         ${CMAKE_CURRENT_LIST_DIR}/fightingPit/HexagonSideTestCase.cpp
         ${CMAKE_CURRENT_LIST_DIR}/fightingPit/PriorityOrderListTestCase.cpp
         ${CMAKE_CURRENT_LIST_DIR}/fightingPit/FightingPitAnnouncerTestCase.cpp

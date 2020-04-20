@@ -219,7 +219,7 @@ private:
 	FightingPitLayout _layoutMapping;
 
 	std::string _creatorUserName;
-	unsigned _arenaId;
+	unsigned _arenaId = 0;
 
 	std::vector<AuthenticatedPlayer> _authenticatedPlayers;
 

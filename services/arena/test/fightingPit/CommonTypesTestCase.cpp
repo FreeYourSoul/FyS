@@ -24,7 +24,7 @@
 #include <catch2/catch.hpp>
 #include <fightingPit/data/CommonTypes.hh>
 
-TEST_CASE("getActionNameFromKey test", "[service][arena]")
+TEST_CASE("CommonTypesTestCase getActionNameFromKey test", "[service][arena]")
 {
 	REQUIRE("popo" == fys::arena::data::getActionNameFromKey("tete:tete:www:oo:popo.chai"));
 	REQUIRE("popo" == fys::arena::data::getActionNameFromKey("tete:tete:www:oo:popo"));
@@ -33,7 +33,7 @@ TEST_CASE("getActionNameFromKey test", "[service][arena]")
 
 } // End TestCase : getActionNameFromKey test
 
-TEST_CASE("getAlternateNameFromKey test", "[service][arena]")
+TEST_CASE("CommonTypesTestCase getAlternateNameFromKey test", "[service][arena]")
 {
 	REQUIRE("alteration_popo" == fys::arena::data::getAlterationNameFromKey("tete:tete:www:oo:popo.chai"));
 	REQUIRE("alteration_popo" == fys::arena::data::getAlterationNameFromKey("tete:tete:www:oo:popo"));
@@ -42,7 +42,7 @@ TEST_CASE("getAlternateNameFromKey test", "[service][arena]")
 
 } // End TestCase : getAlternateNameFromKey test
 
-TEST_CASE("CommonTypes test", "[service][arena]")
+TEST_CASE("CommonTypesTestCase", "[service][arena]")
 {
 	std::vector<fys::arena::data::Alteration> alterations;
 

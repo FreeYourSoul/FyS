@@ -26,7 +26,7 @@
 #include <fightingPit/FightingPitAnnouncer.hh>
 #include <network/WorkerService.hh>
 
-TEST_CASE("WorkerService test", "[service][arena]")
+TEST_CASE("WorkerServiceTestCase", "[service][arena]")
 {
 
 	fys::arena::WorkerService ws;

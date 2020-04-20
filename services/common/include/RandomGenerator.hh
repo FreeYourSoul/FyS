@@ -33,7 +33,7 @@ namespace fys::util {
 
 class RandomGenerator {
 public:
-	static fys::util::RandomGenerator&
+	[[nodiscard]] static fys::util::RandomGenerator&
 	getInstance()
 	{
 		static fys::util::RandomGenerator s{};
@@ -41,7 +41,7 @@ public:
 	}
 
 	template<typename Type>
-	static Type
+	[[nodiscard]] static Type
 	generateInRange(Type rA, Type rB)
 	{
 		static_assert(std::is_integral_v<Type> || std::is_floating_point_v<Type>);
@@ -56,11 +56,11 @@ public:
 	}
 
 	RandomGenerator(RandomGenerator const&) = delete;
-	RandomGenerator&
-	operator=(RandomGenerator const&) = delete;
+	RandomGenerator& operator=(RandomGenerator const&) = delete;
 
-	std::shared_ptr<std::mt19937>
-	get();
+	std::shared_ptr<std::mt19937> get() const;
+
+	unsigned getCurrentSeedUsed() const { return _seed; }
 
 private:
 	RandomGenerator()
@@ -69,17 +69,18 @@ private:
 		std::random_device rd;
 
 		if (rd.entropy() != 0) {
-			mt->seed(rd());
+			_seed = rd();
 		}
 		else {
-			auto seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
-			mt->seed(seed);
+			_seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
 		}
+		mt->seed(_seed);
 	}
 
 	~RandomGenerator() = default;
 
 	std::shared_ptr<std::mt19937> mt;
+	unsigned _seed;
 };
 
 }

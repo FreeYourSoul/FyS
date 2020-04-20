@@ -48,7 +48,7 @@ getLocalPathStorage()
 }
 }
 
-TEST_CASE("FightingPitAnnouncer test", "[service][arena]")
+TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]")
 {
 	auto fseamMock = FSeam::getDefault<fys::util::RandomGenerator>();
 	ConnectionHandler handler{};
