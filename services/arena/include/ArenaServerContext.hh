@@ -37,7 +37,8 @@ struct EncounterContext {
 		[[nodiscard]] bool
 		operator!=(const EncounterDesc& other) const
 		{
-			return std::make_tuple(key, maxEncountering, chance) != std::make_tuple(other.key, other.maxEncountering, other.chance);
+			return std::make_tuple(key, maxEncountering, chance, levelRange) !=
+					std::make_tuple(other.key, other.maxEncountering, other.chance, other.levelRange);
 		}
 
 		//! key of the encounter to find it back via the cache
@@ -46,6 +47,8 @@ struct EncounterContext {
 		uint maxEncountering;
 		//! percentage of chance to encounter this monster out of the 3 different difficulties
 		std::array<uint, 3> chance;
+		//! Range of level the monster is when encountered
+		std::pair<uint, uint> levelRange;
 	};
 
 	/**

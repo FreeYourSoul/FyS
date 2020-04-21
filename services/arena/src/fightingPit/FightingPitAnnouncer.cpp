@@ -104,8 +104,8 @@ FightingPitAnnouncer::generateContenders(FightingPit& fp, const EncounterContext
 
 	for (unsigned i = 0; i < numberContenders; ++i) {
 		int rngMonster = fys::util::RandomGenerator::generateInRange(0, 100);
-		auto desc = boundaryMap.get(rngMonster)->second; // TODO add security at context creation to enforce that
-		int levelMonster = fys::util::RandomGenerator::generateInRange(1, 10); // TODO, add this range in the configuration
+		auto desc = boundaryMap.get(rngMonster)->second;
+		uint levelMonster = fys::util::RandomGenerator::generateInRange(desc.levelRange.first, desc.levelRange.second);
 		auto contenderScript = std::make_unique<ContenderScripting>(*fp.getChaiPtr(), levelMonster);
 		std::string name = getNameFromKey(desc.key);
 		contenderScript->setContenderId(i);

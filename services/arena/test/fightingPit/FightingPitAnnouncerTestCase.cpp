@@ -63,11 +63,11 @@ TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]")
 	ctx._contendersPerZone["WS00"] = {
 			EncounterContext::EncounterDesc{
 					"arena:contenders:Sampy.chai", 3,
-					{60, 60, 60}
+					{60, 60, 60}, std::pair(1u, 10u)
 			},
 			EncounterContext::EncounterDesc{
 					"arena:contenders:Slime.chai", 3,
-					{40, 40, 40}
+					{40, 40, 40}, std::pair(1u, 10u)
 			}
 	};
 

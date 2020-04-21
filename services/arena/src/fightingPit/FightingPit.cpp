@@ -123,14 +123,71 @@ FightingPit::updateProgressStatus()
 }
 
 void
-FightingPit::forwardMessageToTeamMember(const std::string& userName, unsigned int idMember, const std::string& action)
+FightingPit::forwardMessageToTeamMember(const std::string& userName, PlayerAction action)
 {
-	auto member = _partyTeams.getSpecificTeamMemberById(userName, idMember);
+	auto member = _partyTeams.getSpecificTeamMemberById(userName, action.idMember);
 	if (!member) {
-		SPDLOG_ERROR("Trying to forward a message to team member {} owned by {} whom doesn't exist", idMember, userName);
+		SPDLOG_ERROR("Trying to forward a message to team member {} owned by {} whom doesn't exist",
+				action.idMember, userName);
 		return;
 	}
-	member->addPendingAction(action, ContenderTargetId{0});
+	try {
+		// Check if the target action is defined
+		if (!_chaiPtr->eval<bool>("")) {
+			return;
+		}
+
+		auto targetType = _chaiPtr->eval<data::Targeting>("");
+		std::optional<TargetType> target;
+
+		// Check if the target is appropriate
+		if (targetType == data::Targeting::SELF) {
+			if (!action.allyTarget.empty() || !action.contenderTarget.empty()) {
+				SPDLOG_WARN("");
+				return;
+			}
+			target = std::nullopt;
+		}
+		else if (targetType == data::Targeting::ENNEMY) {
+			if (!action.allyTarget.empty() && action.contenderTarget.empty()) {
+				SPDLOG_WARN("");
+				return;
+			}
+			target = ContenderTargetId{action.allyTarget.at(0)};
+		}
+		else if (targetType == data::Targeting::ENNEMIES) {
+			if (!action.allyTarget.empty() && action.contenderTarget.empty()) {
+				SPDLOG_WARN("");
+				return;
+			}
+			target = ContendersTargetsIds{std::move(action.contenderTarget)};
+		}
+		else if (targetType == data::Targeting::ALLY) {
+			if (action.allyTarget.empty() && !action.contenderTarget.empty()) {
+				SPDLOG_WARN("");
+				return;
+			}
+			target = AllyTargetId{action.allyTarget.at(0)};
+		}
+		else if (targetType == data::Targeting::ALLIES) {
+			if (action.allyTarget.empty() && !action.contenderTarget.empty()) {
+				SPDLOG_WARN("");
+				return;
+			}
+			target = AlliesTargetsIds{std::move(action.allyTarget)};
+		}
+		else {
+			SPDLOG_WARN("NOT IMPLEMENTED YET");
+			return;
+		}
+
+
+
+		member->addPendingAction(std::move(action.actionName), std::move(target));
+	}
+	catch (const std::exception& e) {
+		SPDLOG_ERROR("An error occurred when checking if an action was doable from user {}: {}", userName, e.what());
+	}
 }
 
 void

@@ -70,7 +70,10 @@ TEST_CASE("FlatbufferGeneratorTestCase", "[service][arena][util]")
 			std::pair(1, 1)  // hard
 	};
 	ctx._contendersPerZone["WS00"] = {
-			EncounterContext::EncounterDesc{"arena:contenders:Sampy.chai", 3, {100, 100, 100}},
+			EncounterContext::EncounterDesc{
+					"arena:contenders:Sampy.chai",
+					3, {100, 100, 100}, std::pair(1u, 10u)
+			},
 	};
 
 	// seed used 42
@@ -152,7 +155,7 @@ TEST_CASE("FlatbufferGeneratorTestCase", "[service][arena][util]")
 		REQUIRE(nullptr != data);
 		REQUIRE(0 < size);
 
-		const fys::fb::FightingPitState *fps = flatbuffers::GetRoot<fys::fb::FightingPitState>(data);
+		const fys::fb::FightingPitState* fps = flatbuffers::GetRoot<fys::fb::FightingPitState>(data);
 
 		REQUIRE(nullptr != fps);
 		REQUIRE(0 == fps->idFightingPit());
@@ -229,14 +232,14 @@ TEST_CASE("FlatbufferGeneratorTestCase", "[service][arena][util]")
 		REQUIRE(100 == fps->monstersStatus()->Get(3)->status()->total_mp());
 
 	} // End section : Test generateFightingPitState
-	
+
 	SECTION("Test generatePartyTeamStatus") {
 		auto[data, size] = fg.generatePartyTeamStatus(*fp->getPartyTeams().getPartyTeams().at(0));
 
 		REQUIRE(nullptr != data);
 		REQUIRE(0 < size);
 
-		const fys::fb::PartyTeamStatus *pts = flatbuffers::GetRoot<fys::fb::PartyTeamStatus>(data);
+		const fys::fb::PartyTeamStatus* pts = flatbuffers::GetRoot<fys::fb::PartyTeamStatus>(data);
 
 		REQUIRE(nullptr != pts);
 
@@ -278,5 +281,5 @@ TEST_CASE("FlatbufferGeneratorTestCase", "[service][arena][util]")
 //	SECTION("Test Generate Cosmetic") {
 //
 //	} // End section : Test Generate Cosmetic
-	
+
 } // End TestCase : Flatbuffer Generator Test

@@ -91,7 +91,6 @@ ArenaServerService::ArenaServerService(const ArenaServerContext& ctx)
 void
 ArenaServerService::runServerLoop() noexcept
 {
-
 	SPDLOG_INFO("ArenaServer loop started");
 
 	auto t = std::thread([this] { _workerService.startFightingPitsLoop(); });
@@ -159,7 +158,7 @@ ArenaServerService::runServerLoop() noexcept
 						_awaitingArena.erase(playerAwaitedIt); // remove player from awaited player
 					}
 					spdlog::info("Awaited player {} has logged in fighting pit of id:{}", userName, fightingPitId);
-					_workerService.upsertPlayerIdentifier(fightingPitId, std::string(), userName);
+					_workerService.upsertPlayerIdentifier(fightingPitId, idtPlayer.str(), userName);
 					_workerService.sendMsgNewArrivingTeam(fightingPitId, userName);
 				},
 
@@ -175,9 +174,8 @@ ArenaServerService::runServerLoop() noexcept
 						spdlog::warn("Player {}:{} is not authenticated.", userName, authFrame->token_auth()->str());
 						return;
 					}
-					else {
-						_workerService.upsertPlayerIdentifier(authFrame->fighting_pit_id(), userName, idtPlayer.str());
-					}
+					_workerService.upsertPlayerIdentifier(authFrame->fighting_pit_id(), userName, idtPlayer.str());
+
 					unsigned idMember = 0;
 					// todo create an action message to forward
 					// todo store into action: action id, target
@@ -185,7 +183,7 @@ ArenaServerService::runServerLoop() noexcept
 					// if action is set to "IAMREADY", target id 1337
 					fp->get().setPlayerReadiness(userName);
 
-					fp->get().forwardMessageToTeamMember(userName, idMember, "");
+					fp->get().forwardMessageToTeamMember(userName, PlayerAction{});
 				});
 	}
 	t.join();

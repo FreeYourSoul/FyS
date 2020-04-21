@@ -74,7 +74,8 @@ ArenaServerContext::parseArenaConfigFile(const json& configContent)
 						contender["chance"]["easy"].get<uint>(),
 						contender["chance"]["medium"].get<uint>(),
 						contender["chance"]["hard"].get<uint>()
-				}
+				},
+				std::pair(contender["level_range"][0].get<uint>(), contender["level_range"][1].get<uint>())
 		};
 		_encounterContext._contendersPerZone[contender["zone"].get<std::string>()].emplace_back(std::move(desc));
 	}

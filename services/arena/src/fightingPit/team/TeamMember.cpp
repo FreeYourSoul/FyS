@@ -97,7 +97,7 @@ TeamMember::executeAction(
 
 					[]([[maybe_unused]] auto o) {
 						spdlog::error("NOT IMPLEMENTED YET");
-					},
+					}
 			}, *pa->target);
 		}
 		else if (funcAction(_status)) {
@@ -125,7 +125,6 @@ TeamMember::addPendingAction(const std::string& actionName, std::optional<Target
 		return;
 	}
 
-	//TODO: add a check on whether the target is correct or not (contender or ally target)
 	_pendingActions.push(PendingAction{static_cast<uint>(std::distance(_actionsDoable.begin(), it)), std::move(target)});
 }
 

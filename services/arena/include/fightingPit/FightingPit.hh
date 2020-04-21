@@ -55,6 +55,14 @@ constexpr static auto MEDIUM = 15000ms;
 constexpr static auto HARD = 8000ms;
 }
 
+//! Actions struct containing all the information to forward to the member's pending action Queue
+struct PlayerAction {
+	uint idMember;
+	std::string actionName;
+	std::vector<uint> contenderTarget;
+	std::vector<uint> allyTarget;
+};
+
 class FightingPitAnnouncer;
 
 /**
@@ -120,10 +128,8 @@ public:
 	/**
 	 *
 	 * @param userName
-	 * @param idMember
-	 * @param action string representing the action to do (has to be a registered action in chaiscript engine)
 	 */
-	void forwardMessageToTeamMember(const std::string& userName, unsigned int idMember, const std::string& action);
+	void forwardMessageToTeamMember(const std::string& userName, PlayerAction action);
 
 	/**
 	 * Add an authenticated player in the fighting pit, the player authentication is not verified an thus must be

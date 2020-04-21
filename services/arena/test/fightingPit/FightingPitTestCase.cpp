@@ -76,7 +76,9 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]")
 			std::pair(1, 1)  // hard
 	};
 	ctx._contendersPerZone["WS00"] = {
-			EncounterContext::EncounterDesc{"testing:TestMonsterSleep.chai", 3, {100, 100, 100}},
+			EncounterContext::EncounterDesc{
+					"testing:TestMonsterSleep.chai",
+					3, {100, 100, 100}, std::pair(1u, 10u)},
 	};
 
 	// seed used 42
@@ -184,7 +186,10 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]")
 	SECTION("InGame fighting Contender Team Win (One Contender)") {
 
 		ctx._contendersPerZone["WS00"] = {
-				EncounterContext::EncounterDesc{"testing:TestMonsterAttack.chai", 3, {100, 100, 100}},
+				EncounterContext::EncounterDesc{
+						"testing:TestMonsterAttack.chai",
+						3, {100, 100, 100}, std::pair(1u, 10u)
+				},
 		};
 
 		FightingPitAnnouncer fpa(cml);
@@ -466,7 +471,10 @@ TEST_CASE("FightingPitTestCase Simple Alteration test", "[service][arena]")
 			std::pair(1, 1)  // hard
 	};
 	ctx._contendersPerZone["WS00"] = {
-			EncounterContext::EncounterDesc{"testing:TestMonsterPoison.chai", 2, {100, 100, 100}},
+			EncounterContext::EncounterDesc{
+					"testing:TestMonsterPoison.chai",
+					2, {100, 100, 100}, std::pair(1u, 10u)
+			},
 	};
 
 	// seed used 42

@@ -21,7 +21,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
 #ifndef FYS_ONLINE_FIGHTINGHISTORYMANAGER_HH
 #define FYS_ONLINE_FIGHTINGHISTORYMANAGER_HH
 
@@ -61,7 +60,7 @@ class FightingHistoryManager {
 	/**
 	 * R.A.I.I History fight instance containing the list of actions that occurred during a fight
 	 * This struct is filled via the static method provided by FightingHistoryManager.
-	 * When destroyed, if the seed is set (superior to 0) and if the
+	 * When destroyed, if the seed is set (superior to 0) and if the hasToBeSaved variable has been set to true
 	 */
 	struct HistoryFight {
 		HistoryFight(const FightingPit& pt, unsigned seed = 0) noexcept;
@@ -69,11 +68,12 @@ class FightingHistoryManager {
 
 		//! Reference to the fighting pit
 		std::reference_wrapper<const FightingPit> ref;
-		//! Vector containing all the actions that occured
+		//! Vector containing all the actions that occurred in the arena
 		std::vector<HistoryAction> hist;
 
-		//!Set at true in case an issue occurred in the fighting pit (will save the fighting pit in file format)
+		//! Set at true in case an issue occurred in the fighting pit (will save the fighting pit in file format)
 		bool hasToBeSaved = false;
+		//! Seed on which the fight occurred
 		unsigned seed = 0;
 	};
 
