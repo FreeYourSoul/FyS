@@ -64,6 +64,12 @@ public:
 	[[nodiscard]] const std::unique_ptr<ContenderScripting>&
 	getContenderScripting() const { return _contenderScripting; }
 
+	[[nodiscard]] const std::string&
+	getName() const;
+
+	[[nodiscard]] unsigned
+	getId() const;
+
 private:
 	std::unique_ptr<ContenderScripting> _contenderScripting;
 	HexagonSide _side;

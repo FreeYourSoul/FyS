@@ -24,13 +24,14 @@
 #include <spdlog/spdlog.h>
 #include <algorithm>
 
-#include <chaiscript/chaiscript.hpp>
+#include <util/ChaiUtility.hh>
+#include <ChaiRegister.hh>
+
+#include <algorithm/algorithm.hh>
 
 #include <fightingPit/contender/FightingContender.hh>
 #include <fightingPit/FightingPit.hh>
 #include <fightingPit/team/TeamMember.hh>
-
-#include <ChaiRegister.hh>
 
 namespace {
 std::chrono::milliseconds
@@ -123,70 +124,27 @@ FightingPit::updateProgressStatus()
 }
 
 void
-FightingPit::forwardMessageToTeamMember(const std::string& userName, PlayerAction action)
+FightingPit::forwardMessageToTeamMember(const std::string& user, PlayerAction action)
 {
-	auto member = _partyTeams.getSpecificTeamMemberById(userName, action.idMember);
+	auto member = _partyTeams.getSpecificTeamMemberById(user, action.idMember);
 	if (!member) {
 		SPDLOG_ERROR("Trying to forward a message to team member {} owned by {} whom doesn't exist",
-				action.idMember, userName);
+				action.idMember, user);
 		return;
 	}
 	try {
-		// Check if the target action is defined
-		if (!_chaiPtr->eval<bool>("")) {
+		if (chai::util::memberHasActionRegistered(*_chaiPtr, user, member->getName(), action.actionName)) {
+			SPDLOG_WARN("Player {} tried to register Action {} which isn't registered for member {}",
+					user, action.actionName, member->getName());
 			return;
 		}
-
-		auto targetType = _chaiPtr->eval<data::Targeting>("");
-		std::optional<TargetType> target;
-
-		// Check if the target is appropriate
-		if (targetType == data::Targeting::SELF) {
-			if (!action.allyTarget.empty() || !action.contenderTarget.empty()) {
-				SPDLOG_WARN("");
-				return;
-			}
-			target = std::nullopt;
+		auto[success, target] = this->checkAndRetrieveTarget(user, member, action);
+		if (success) {
+			member->addPendingAction(std::move(action.actionName), std::move(target));
 		}
-		else if (targetType == data::Targeting::ENNEMY) {
-			if (!action.allyTarget.empty() && action.contenderTarget.empty()) {
-				SPDLOG_WARN("");
-				return;
-			}
-			target = ContenderTargetId{action.allyTarget.at(0)};
-		}
-		else if (targetType == data::Targeting::ENNEMIES) {
-			if (!action.allyTarget.empty() && action.contenderTarget.empty()) {
-				SPDLOG_WARN("");
-				return;
-			}
-			target = ContendersTargetsIds{std::move(action.contenderTarget)};
-		}
-		else if (targetType == data::Targeting::ALLY) {
-			if (action.allyTarget.empty() && !action.contenderTarget.empty()) {
-				SPDLOG_WARN("");
-				return;
-			}
-			target = AllyTargetId{action.allyTarget.at(0)};
-		}
-		else if (targetType == data::Targeting::ALLIES) {
-			if (action.allyTarget.empty() && !action.contenderTarget.empty()) {
-				SPDLOG_WARN("");
-				return;
-			}
-			target = AlliesTargetsIds{std::move(action.allyTarget)};
-		}
-		else {
-			SPDLOG_WARN("NOT IMPLEMENTED YET");
-			return;
-		}
-
-
-
-		member->addPendingAction(std::move(action.actionName), std::move(target));
 	}
 	catch (const std::exception& e) {
-		SPDLOG_ERROR("An error occurred when checking if an action was doable from user {}: {}", userName, e.what());
+		SPDLOG_ERROR("An error occurred when checking if an action was doable from user {}: {}", user, e.what());
 	}
 }
 
@@ -269,6 +227,76 @@ FightingPit::setPlayerReadiness(const std::string& userName)
 	if (_partyTeams.setPartyReadiness(userName)) {
 		_progress = Progress::ON_GOING;
 	}
+}
+std::pair<bool, std::optional<TargetType>>
+FightingPit::checkAndRetrieveTarget(const std::string& user, const TeamMemberSPtr& member, const PlayerAction& action)
+{
+	auto targetType = _chaiPtr->eval<data::Targeting>(
+			chai::util::getAccessAllyAction(user, member->getName(), action.actionName)
+					.append(".requireTarget();"));
+	std::optional<TargetType> target;
+
+	// Check if the target is appropriate
+	if (targetType == data::Targeting::SELF) {
+		if (!action.allyTarget.empty() || !action.contenderTarget.empty()) {
+			SPDLOG_WARN("Action {} target type is SELF, but Player {} tried to execute it with targets set",
+					action.actionName, user);
+			return std::pair(false, target);
+		}
+		target = std::nullopt;
+	}
+	else if (targetType == data::Targeting::ENNEMY) {
+		if (!action.allyTarget.empty() && action.contenderTarget.empty()) {
+			SPDLOG_WARN("Action {} target type is ENNEMY, but Player {} tried to execute it with ally targets set",
+					action.actionName, user);
+			return std::pair(false, target);
+		}
+		target = ContenderTargetId{action.allyTarget.at(0)};
+	}
+	else if (targetType == data::Targeting::ENNEMIES) {
+		if (!action.allyTarget.empty() && action.contenderTarget.empty()) {
+			SPDLOG_WARN("Action {} target type is ENNEMIES, but Player {} tried to execute it with ally targets set",
+					action.actionName, user);
+			return std::pair(false, target);
+		}
+		target = ContendersTargetsIds{std::move(action.contenderTarget)};
+	}
+	else if (targetType == data::Targeting::ALLY) {
+		if (action.allyTarget.empty() && !action.contenderTarget.empty()) {
+			SPDLOG_WARN("Action {} target type is ALLY, but Player {} tried to execute it with contender targets set",
+					action.actionName, user);
+			return std::pair(false, target);
+		}
+		target = AllyTargetId{action.allyTarget.at(0)};
+	}
+	else if (targetType == data::Targeting::ALLIES) {
+		if (action.allyTarget.empty() && !action.contenderTarget.empty()) {
+			SPDLOG_WARN("Action {} target type is ALLIES, but Player {} tried to execute it with contender targets set",
+					action.actionName, user);
+			return std::pair(false, target);
+		}
+		target = AlliesTargetsIds{std::move(action.allyTarget)};
+	}
+//	else if (targetType == data::Targeting::ALLY_AND_ENNEMY) {}
+//	else if (targetType == data::Targeting::ALLY_OR_ENNEMY) {}
+	else {
+		SPDLOG_WARN("NOT IMPLEMENTED YET");
+		return std::pair(false, target);
+	}
+
+	if (!all_in(action.allyTarget, _partyTeams.getPartyTeamOfPlayer(user).getTeamMembers(),
+			[](const TeamMemberSPtr& tm) { return tm->getId(); })) {
+		SPDLOG_WARN("Player {} tried to target a non-existing Ally", user);
+		return std::pair(false, target);
+	}
+
+	if (!all_in(action.contenderTarget, _contenders.getContenders(),
+			[](const FightingContenderSPtr& c) { return c->getId(); })) {
+		SPDLOG_WARN("Player {} tried to target a non-existing Contender", user);
+		return std::pair(false, target);
+	}
+
+	return std::pair(true, target);
 }
 
 }

@@ -30,6 +30,7 @@ addFSeamTests(
 
         FILES_AS_SOURCE #source tested
         ${COMMON_SRCS}
+        ${CMAKE_CURRENT_LIST_DIR}/../include/util/ChaiUtility.hh
         ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/PriorityOrderList.cpp
         ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/HexagonSide.cpp
         ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/FightingPitAnnouncer.cpp
@@ -46,6 +47,7 @@ addFSeamTests(
         ${CMAKE_CURRENT_LIST_DIR}/../src/ArenaServerContext.cpp
         ${CMAKE_CURRENT_LIST_DIR}/../src/ChaiRegister.cpp
         ${CMAKE_CURRENT_LIST_DIR}/../src/FlatbufferGenerator.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../include/util/FbUtility.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/FlatbufferGenerator.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/ChaiRegister.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/team/PartyTeam.hh
@@ -87,6 +89,7 @@ addFSeamTests(
 
         FILES_AS_SOURCE #source tested
         ${COMMON_SRCS}
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/util/ChaiUtility.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/contender/ContenderScripting.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/contender/FightingContender.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/contender/PitContenders.cpp
@@ -96,6 +99,7 @@ addFSeamTests(
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/HexagonSide.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/FightingPitLayout.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/ChaiRegister.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/util/FbUtility.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/ChaiRegister.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/FightingPitLayout.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/contender/ContenderScripting.hh

@@ -32,7 +32,7 @@
 #include <fightingPit/team/PartyTeam.hh>
 #include <fightingPit/team/TeamMember.hh>
 
-#include <FbUtility.hh>
+#include <util/FbUtility.hh>
 
 #include "FlatbufferGenerator.hh"
 
@@ -147,7 +147,7 @@ FlatbufferGenerator::generateContenderVecStatusOffset(const PitContenders& pitCo
 	for (const auto& contender : contenders) {
 		const auto& status = contender->getStatus();
 		const auto fbStatus = fb::CharacterStatus{
-				contender->getContenderScripting()->getContenderId(),
+				contender->getId(),
 				true, // is_contender
 				status.life.current,
 				status.life.total,
@@ -157,7 +157,7 @@ FlatbufferGenerator::generateContenderVecStatusOffset(const PitContenders& pitCo
 		};
 		fbCharacterStatus.emplace_back(
 				fb::CreateMemberStatus(_fbb,
-						_fbb.CreateString(contender->getContenderScripting()->getContenderName()), &fbStatus));
+						_fbb.CreateString(contender->getName()), &fbStatus));
 	}
 	return fbCharacterStatus;
 }

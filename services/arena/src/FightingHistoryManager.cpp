@@ -60,7 +60,7 @@ FightingHistoryManager::createHistoric(const FightingPit& fp, unsigned seed)
 {
 	auto& instance = getInstance();
 	if (instance._isManagerOn) {
-		instance._history[fp.getId()] = HistoryFight(std::ref(fp), seed);
+		instance._history.insert(std::pair(fp.getId(), HistoryFight(std::ref(fp), seed)));
 	}
 }
 

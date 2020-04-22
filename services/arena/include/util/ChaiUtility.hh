@@ -21,38 +21,33 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <fightingPit/contender/ContenderScripting.hh>
-#include <fightingPit/contender/FightingContender.hh>
 
-namespace fys::arena {
+#ifndef FYS_ONLINE_CHAIUTILITY_HH
+#define FYS_ONLINE_CHAIUTILITY_HH
 
-FightingContender::FightingContender(std::unique_ptr<ContenderScripting> contenderScripting)
-		:_contenderScripting(std::move(contenderScripting))
+#include <string>
+#include <chaiscript/chaiscript.hpp>
+
+namespace chaiscript {
+class ChaiScript;
+}
+
+namespace fys::arena::chai::util {
+
+[[nodiscard]] static std::string
+getAccessAllyAction(const std::string& user, const std::string& member, const std::string& action)
 {
+	return fmt::format(R"(ally_actions["{}_{}"]["{}"])", user, member, action);
 }
 
-void
-FightingContender::executeAction()
+[[nodiscard]] static bool
+memberHasActionRegistered(chaiscript::ChaiScript& chai,
+		const std::string& userName, const std::string& memberName, const std::string& actionName)
 {
-	_contenderScripting->executeAction();
-}
-
-bool
-FightingContender::setupContender()
-{
-	return _contenderScripting->setupContender();
-}
-
-const std::string&
-FightingContender::getName() const
-{
-	return _contenderScripting->getContenderName();
-}
-
-unsigned
-FightingContender::getId() const
-{
-	return _contenderScripting->getContenderId();
+	return chai.eval<bool>(fmt::format(R"(ally_actions["{}_{}"].count("{}") != 0;)",
+			userName, memberName, actionName));
 }
 
 }
+
+#endif //FYS_ONLINE_CHAIUTILITY_HH

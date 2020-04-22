@@ -51,8 +51,6 @@ getLocalPathStorage()
 TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]")
 {
 	auto fseamMock = FSeam::getDefault<fys::util::RandomGenerator>();
-	ConnectionHandler handler{};
-	auto fseamConnectionHandlerMock = FSeam::get(&handler);
 	auto cml = CmlBase(getLocalPathStorage());
 	EncounterContext ctx;
 	ctx._rangeEncounterPerZone["WS00"] = {
@@ -176,11 +174,11 @@ TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]")
 
 			REQUIRE(2 == FightingPitAnnouncer::getPitContenders(fp).getNumberContender());
 
-			REQUIRE("Slime" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getContenderScripting()->getContenderName());
-			REQUIRE(0 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getContenderScripting()->getContenderId());
+			REQUIRE("Slime" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getName());
+			REQUIRE(0 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getId());
 			REQUIRE(10 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getContenderScripting()->getLevel());
 
-			REQUIRE("Sampy" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(1)->getContenderScripting()->getContenderName());
+			REQUIRE("Sampy" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(1)->getName());
 			REQUIRE(1 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(1)->getContenderScripting()->getContenderId());
 			REQUIRE(8 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(1)->getContenderScripting()->getLevel());
 
@@ -202,15 +200,15 @@ TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]")
 
 			REQUIRE(3 == FightingPitAnnouncer::getPitContenders(fp).getNumberContender());
 
-			REQUIRE("Slime" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getContenderScripting()->getContenderName());
+			REQUIRE("Slime" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getName());
 			REQUIRE(0 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getContenderScripting()->getContenderId());
 			REQUIRE(10 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getContenderScripting()->getLevel());
 
-			REQUIRE("Sampy" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(1)->getContenderScripting()->getContenderName());
+			REQUIRE("Sampy" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(1)->getName());
 			REQUIRE(1 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(1)->getContenderScripting()->getContenderId());
 			REQUIRE(8 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(1)->getContenderScripting()->getLevel());
 
-			REQUIRE("Slime" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(2)->getContenderScripting()->getContenderName());
+			REQUIRE("Slime" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(2)->getName());
 			REQUIRE(2 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(2)->getContenderScripting()->getContenderId());
 			REQUIRE(6 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(2)->getContenderScripting()->getLevel());
 
@@ -229,19 +227,19 @@ TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]")
 			REQUIRE(4 == FightingPitAnnouncer::getPitContenders(fp).getNumberContender());
 			REQUIRE(fp->isJoinable());
 
-			REQUIRE("Slime" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getContenderScripting()->getContenderName());
+			REQUIRE("Slime" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getName());
 			REQUIRE(0 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getContenderScripting()->getContenderId());
 			REQUIRE(10 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getContenderScripting()->getLevel());
 
-			REQUIRE("Sampy" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(1)->getContenderScripting()->getContenderName());
+			REQUIRE("Sampy" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(1)->getName());
 			REQUIRE(1 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(1)->getContenderScripting()->getContenderId());
 			REQUIRE(8 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(1)->getContenderScripting()->getLevel());
 
-			REQUIRE("Slime" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(2)->getContenderScripting()->getContenderName());
+			REQUIRE("Slime" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(2)->getName());
 			REQUIRE(2 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(2)->getContenderScripting()->getContenderId());
 			REQUIRE(6 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(2)->getContenderScripting()->getLevel());
 
-			REQUIRE("Sampy" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(3)->getContenderScripting()->getContenderName());
+			REQUIRE("Sampy" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(3)->getName());
 			REQUIRE(3 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(3)->getContenderScripting()->getContenderId());
 			REQUIRE(2 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(3)->getContenderScripting()->getLevel());
 
@@ -275,11 +273,11 @@ TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]")
 
 			REQUIRE(2 == FightingPitAnnouncer::getPitContenders(fp).getNumberContender());
 
-			REQUIRE("Sampy" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getContenderScripting()->getContenderName());
+			REQUIRE("Sampy" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getName());
 			REQUIRE(0 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getContenderScripting()->getContenderId());
 			REQUIRE(2 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getContenderScripting()->getLevel());
 
-			REQUIRE("Sampy" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(1)->getContenderScripting()->getContenderName());
+			REQUIRE("Sampy" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(1)->getName());
 			REQUIRE(1 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(1)->getContenderScripting()->getContenderId());
 			REQUIRE(3 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(1)->getContenderScripting()->getLevel());
 

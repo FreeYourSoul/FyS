@@ -25,10 +25,12 @@
 #ifndef FYS_SERVICE_ALGORITHM_HH
 #define FYS_SERVICE_ALGORITHM_HH
 
+#include <utility>
 #include <type_traits>
 
 namespace fys {
 
+namespace {
 template<typename T, typename = void>
 struct is_iterator {
 	static constexpr bool value = false;
@@ -39,6 +41,7 @@ struct is_iterator<T, std::enable_if_t<!std::is_same<typename std::iterator_trai
 	static constexpr bool value = true;
 };
 
+}
 /**
  * @brief Get the most suitable (suitable being defined by a comparator) of a given container.
  * The most suitable follow the comparator.
@@ -52,7 +55,7 @@ struct is_iterator<T, std::enable_if_t<!std::is_same<typename std::iterator_trai
  * @return iterator pointing on the maximum value described by the predicate, if container is empty, last is returned
  */
 template<typename InputIt, typename ComparePredicate>
-InputIt
+[[nodiscard]] InputIt
 find_most_suitable(InputIt first, InputIt last, ComparePredicate&& comp, InputIt start)
 {
 	static_assert(is_iterator<InputIt>::value);
@@ -67,7 +70,7 @@ find_most_suitable(InputIt first, InputIt last, ComparePredicate&& comp, InputIt
 	return suitable;
 }
 template<typename InputIt, typename ComparePredicate>
-InputIt
+[[nodiscard]] InputIt
 find_most_suitable(InputIt first, InputIt last, ComparePredicate&& comp)
 {
 	return find_most_suitable(first, last, std::forward<ComparePredicate>(comp), first);
@@ -83,7 +86,7 @@ find_most_suitable(InputIt first, InputIt last, ComparePredicate&& comp)
  * @return
  */
 template<typename InputIt, typename RetrieverLower, typename AlgorithmPredicate>
-InputIt
+[[nodiscard]] InputIt
 compose_most_suitable(InputIt first, InputIt last, RetrieverLower&& retriever, AlgorithmPredicate&& algo)
 {
 	static_assert(is_iterator<InputIt>::value);
@@ -101,6 +104,38 @@ compose_most_suitable(InputIt first, InputIt last, RetrieverLower&& retriever, A
 		++first;
 	}
 	return suitable;
+}
+
+/**
+ * Check if all element of a vector are present in another one
+ *
+ * @tparam T type of the first vector (to check type)
+ * @tparam R type of the second vector (type checked)
+ * @tparam Accessor accessor function used in order to retrieve a type R of the container from a type to check T
+ * This function has to take a to check type as parameter (type T) and return a type checked type (R)
+ *
+ * @param toCheck vector to check if the content is contained in another vector
+ * @param container vector to check against
+ * @param accessor take the accessor function
+ * @return true if all the element from toCheck are in container following the accessor, false otherwise
+ */
+template<typename T, typename R, typename Accessor>
+[[nodiscard]] bool
+all_in(const std::vector<T>& toCheck, const std::vector<R>& container, Accessor&& accessor)
+{
+	return std::all_of(toCheck.cbegin(), toCheck.cend(), [container, &accessor](const T& lhs) {
+		return std::find_if(container.cbegin(), container.cend(),
+				[&lhs, &accessor](const auto& v) { return lhs == accessor(v); }) != container.cend();
+	});
+}
+
+template<typename T>
+[[nodiscard]] bool
+all_in(const std::vector<T>& toCheck, const std::vector<T>& container)
+{
+	return std::all_of(toCheck.cbegin(), toCheck.cend(), [container](const T& elem) {
+		return std::find(container.cbegin(), container.cent(), elem) != container.cend();
+	});
 }
 
 }

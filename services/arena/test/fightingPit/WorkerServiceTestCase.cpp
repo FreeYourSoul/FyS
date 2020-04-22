@@ -26,22 +26,33 @@
 #include <fightingPit/FightingPitAnnouncer.hh>
 #include <network/WorkerService.hh>
 
+#include <FSeamMockData.hpp>
+#include "TestType.hh"
+
+namespace {
+[[nodiscard]] static std::string
+getLocalPathStorage()
+{
+	std::string file_path = __FILE__;
+	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
+	if (dir_path.size() == file_path.size())
+		dir_path = file_path.substr(0, file_path.rfind('/'));
+	return dir_path + "/../../scriptTests/scripts_lnk";
+}
+}
+
+using namespace fys::arena;
+
 TEST_CASE("WorkerServiceTestCase", "[service][arena]")
 {
-
 	fys::arena::WorkerService ws;
+	auto cml = CmlBase(getLocalPathStorage());
+	EncounterContext ctx;
 
 	SECTION("Failures") {
 
 		REQUIRE(fys::arena::FightingPit::CREATION_ERROR == ws.addFightingPit(nullptr));
 
-//		for (int i = 0 ; i < std::numeric_limits<unsigned>::max(); ++i) {
-//			unsigned id = ws.addFightingPit(std::make_unique<fys::arena::FightingPit>("1", fys::arena::FightingPit::EASY));
-//			REQUIRE((i + 1) == id);
-//			REQUIRE("1" == fys::arena::FightingPitAnnouncer::getCreatorUserName(ws.getFightingPitInstance(id)));
-//		}
-//
-//		REQUIRE(fys::arena::FightingPit::CREATION_ERROR == ws.addFightingPit(std::make_unique<fys::arena::FightingPit>("1", fys::arena::FightingPit::EASY)));
 	} // End section : Failures
 
 	SECTION("Test addFightingPit") {
@@ -63,5 +74,36 @@ TEST_CASE("WorkerServiceTestCase", "[service][arena]")
 		REQUIRE("4" == fys::arena::FightingPitAnnouncer::getCreatorUserName(ws.getFightingPitInstance(id4)));
 
 	} // End section : Test addFightingPit
+
+	SECTION("Test Player join FightingPit") {
+		unsigned id = ws.addFightingPit(std::make_unique<fys::arena::FightingPit>("4", fys::arena::FightingPit::EASY));
+		REQUIRE(1 == id);
+		REQUIRE("4" == fys::arena::FightingPitAnnouncer::getCreatorUserName(ws.getFightingPitInstance(id)));
+
+		auto& pt = ws.getFightingPitInstance(1u);
+		REQUIRE(nullptr != pt);
+
+		ws.playerJoinFightingPit(1u, getPartyTeam("TestUser"), cml);
+		REQUIRE(1 == pt->getPartyTeams().getPartyTeams().size());
+		REQUIRE(4 == pt->getPartyTeamOfPlayer("TestUser").getTeamMembers().size());
+
+		ws.playerJoinFightingPit(1u, getPartyTeam("TestUser2"), cml);
+		REQUIRE(2 == pt->getPartyTeams().getPartyTeams().size());
+		REQUIRE(4 == pt->getPartyTeamOfPlayer("TestUser2").getTeamMembers().size());
+
+		pt->setPlayerReadiness("TestUser");
+		REQUIRE(pt->isJoinable());
+		pt->setPlayerReadiness("TestUser2");
+		REQUIRE_FALSE(pt->isJoinable());
+
+		ws.playerJoinFightingPit(41u, getPartyTeam("NOT_GOOD_FP_ID"), cml); // Not existing fighting pit, partyTeam can't join
+		REQUIRE(2 == pt->getPartyTeams().getPartyTeams().size());
+		REQUIRE_THROWS(pt->getPartyTeamOfPlayer("NOT_GOOD_FP_ID")); // Not joinable isn't present in the pit and this has not been added
+
+		ws.playerJoinFightingPit(1u, getPartyTeam("NOT_JOINABLE"), cml);
+		REQUIRE(2 == pt->getPartyTeams().getPartyTeams().size());
+		REQUIRE_THROWS(pt->getPartyTeamOfPlayer("NOT_JOINABLE")); // Not joinable isn't present in the pit and this has not been added
+
+	} // End section : Test Player join FightingPit
 
 } // End TestCase : WorkerService test

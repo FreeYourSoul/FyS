@@ -79,7 +79,7 @@ WorkerService::addFightingPit(std::unique_ptr<FightingPit> fp)
 	while (++_currentArenaId != 0 && _arenaInstances.find(_currentArenaId) != _arenaInstances.end());
 
 	fp->setArenaId(_currentArenaId);
-	_arenaInstances[_currentArenaId] = std::move(fp);
+	_arenaInstances.insert(std::pair(_currentArenaId, std::move(fp)));
 	return _currentArenaId;
 }
 
@@ -133,7 +133,11 @@ WorkerService::getAuthenticatedPlayerFightingPit(const std::string& name, const 
 void
 WorkerService::upsertPlayerIdentifier(unsigned fightingPitId, std::string userName, std::string idtPlayer)
 {
-	auto& identifiers = _arenaIdOnIdentifier[fightingPitId];
+	auto itIdt = _arenaIdOnIdentifier.find(fightingPitId);
+	if (itIdt == _arenaIdOnIdentifier.end())
+		return;
+
+	auto& identifiers = itIdt->second;
 	if (auto it = std::find_if(identifiers.begin(), identifiers.end(), [&userName](const auto& idt) {
 			return idt.userName == userName;
 		}); it != identifiers.end()) {
@@ -176,8 +180,6 @@ WorkerService::sendMessageToPlayer(unsigned fpId, const std::string& userName, z
 		SPDLOG_ERROR("Cannot send a message {}, in fightingPit {} to player {}.", msg.str(), fpId, userName);
 		return false;
 	}
-
-	const unsigned identifierIndex = msg.size();
 	msg.add(zmq::message_t(identifier.data(), identifier.size()));
 	if (!msg.send(_workerRouter)) {
 		SPDLOG_ERROR("Failure to send message to player {} in fightingPit {}.", userName, fpId);

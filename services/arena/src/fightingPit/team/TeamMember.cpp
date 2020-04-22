@@ -23,7 +23,10 @@
 
 #include <fmt/ostream.h>
 #include <spdlog/spdlog.h>
+
 #include <chaiscript/chaiscript.hpp>
+#include <util/ChaiUtility.hh>
+
 #include <fightingPit/data/CommonTypes.hh>
 #include <fightingPit/contender/PitContenders.hh>
 #include <fightingPit/contender/FightingContender.hh>
@@ -57,9 +60,8 @@ TeamMember::executeAction(
 		return;
 	}
 
-	const std::string allyAction = fmt::format(
-			R"(ally_actions["{}_{}"]["{}"])",
-			_userName, _name, data::getActionNameFromKey(_actionsDoable.at(pa->idAction).first));
+	const std::string allyAction = chai::util::getAccessAllyAction(_userName, _name,
+			data::getActionNameFromKey(_actionsDoable.at(pa->idAction).first));
 	const auto funcAction = chaiPtr->eval<std::function<int(data::Status&)>>(fmt::format(
 			R"(fun(targetStatus){{ return {}.execute(targetStatus);}})",
 			allyAction));

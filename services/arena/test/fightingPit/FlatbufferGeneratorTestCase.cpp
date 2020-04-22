@@ -34,7 +34,7 @@
 #include <FightingPitState_generated.h>
 
 #include <ArenaServerContext.hh>
-#include <FbUtility.hh>
+#include <util/FbUtility.hh>
 #include "TestType.hh"
 
 #include <FlatbufferGenerator.hh>
@@ -100,7 +100,7 @@ TEST_CASE("FlatbufferGeneratorTestCase", "[service][arena][util]")
 	SECTION("Initial setup test") {
 		REQUIRE(4 == FightingPitAnnouncer::getPitContenders(fp).getNumberContender());
 		auto contender1 = FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0);
-		REQUIRE("Sampy" == contender1->getContenderScripting()->getContenderName());
+		REQUIRE("Sampy" == contender1->getName());
 		REQUIRE(0 == contender1->getContenderScripting()->getContenderId());
 		REQUIRE(10 == contender1->getContenderScripting()->getLevel());
 		REQUIRE(180 == contender1->getStatus().life.current);
@@ -109,7 +109,7 @@ TEST_CASE("FlatbufferGeneratorTestCase", "[service][arena][util]")
 		REQUIRE(100 == contender1->getStatus().magicPoint.total);
 
 		auto contender2 = FightingPitAnnouncer::getPitContenders(fp).getContenders().at(1);
-		REQUIRE("Sampy" == contender2->getContenderScripting()->getContenderName());
+		REQUIRE("Sampy" == contender2->getName());
 		REQUIRE(1 == contender2->getContenderScripting()->getContenderId());
 		REQUIRE(8 == contender2->getContenderScripting()->getLevel());
 		REQUIRE(174 == contender2->getStatus().life.current);
@@ -118,7 +118,7 @@ TEST_CASE("FlatbufferGeneratorTestCase", "[service][arena][util]")
 		REQUIRE(100 == contender2->getStatus().magicPoint.total);
 
 		auto contender3 = FightingPitAnnouncer::getPitContenders(fp).getContenders().at(2);
-		REQUIRE("Sampy" == contender3->getContenderScripting()->getContenderName());
+		REQUIRE("Sampy" == contender3->getName());
 		REQUIRE(2 == contender3->getContenderScripting()->getContenderId());
 		REQUIRE(6 == contender3->getContenderScripting()->getLevel());
 		REQUIRE(168 == contender3->getStatus().life.current);
@@ -128,7 +128,7 @@ TEST_CASE("FlatbufferGeneratorTestCase", "[service][arena][util]")
 
 		auto contender4 = FightingPitAnnouncer::getPitContenders(fp).getContenders().at(3);
 		REQUIRE(3 == contender4->getContenderScripting()->getContenderId());
-		REQUIRE("Sampy" == contender4->getContenderScripting()->getContenderName());
+		REQUIRE("Sampy" == contender4->getName());
 		REQUIRE(2 == contender4->getContenderScripting()->getLevel());
 		REQUIRE(156 == contender4->getStatus().life.current);
 		REQUIRE(156 == contender4->getStatus().life.total);

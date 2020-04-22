@@ -80,7 +80,7 @@ void
 FightingPitLayout::setContenderInitiatePosition(FightingContender& contender, HexagonSide::Orientation side)
 {
 	if ((*contender._side).second != HexagonSide::Orientation::NONE) {
-		SPDLOG_ERROR("Can't set initial position for contender {} as position is not NONE", contender.getContenderScripting()->getContenderName());
+		SPDLOG_ERROR("Can't set initial position for contender {} as position is not NONE", contender.getName());
 		return;
 	}
 	contender._side.move(side, true);

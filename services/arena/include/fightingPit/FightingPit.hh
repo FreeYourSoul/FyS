@@ -27,6 +27,7 @@
 
 #include <vector>
 #include <optional>
+#include <optional>
 #include <chrono>
 
 #include <chaiscript/chaiscript.hpp>
@@ -36,6 +37,7 @@
 #include <fightingPit/SideBattle.hh>
 #include <fightingPit/team/AllyPartyTeams.hh>
 #include <ChaiRegister.hh>
+#include <fightingPit/team/TeamMember.hh>
 
 using namespace std::chrono_literals;
 
@@ -127,9 +129,9 @@ public:
 
 	/**
 	 *
-	 * @param userName
+	 * @param user
 	 */
-	void forwardMessageToTeamMember(const std::string& userName, PlayerAction action);
+	void forwardMessageToTeamMember(const std::string& user, PlayerAction action);
 
 	/**
 	 * Add an authenticated player in the fighting pit, the player authentication is not verified an thus must be
@@ -200,6 +202,20 @@ private:
 	 */
 	[[nodiscard]] bool
 	checkEndStatusFightingPit();
+
+	/**
+	 * Check if the target is registered in the ChaiScript engine, if it is, check if the action requested
+	 * by the player match the type of target required by the registered action.
+	 * Finally check if the target exist in the fightingPit
+	 * @param user Player name that is executing the action
+	 * @param member name that is doing an action
+	 * @param action information about the action to execute (contains target)
+	 * @return a pair (success, target)
+	 * @return_success : false if description doesn't match the requirement and/or target doesn't exist, true otherwise
+	 * @return_target  : a TargetType (Variant) set with the proper type
+	 */
+	[[nodiscard]] std::pair<bool, std::optional<TargetType>>
+	checkAndRetrieveTarget(const std::string& user, const TeamMemberSPtr& member, const PlayerAction& action);
 
 	/**
 	 * Verify if the fight has been won by a team (contender or ally) and return an appropriate Progress

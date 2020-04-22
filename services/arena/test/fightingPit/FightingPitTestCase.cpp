@@ -105,7 +105,7 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]")
 
 		const auto& contender = FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0);
 		REQUIRE(1 == FightingPitAnnouncer::getPitContenders(fp).getNumberContender());
-		REQUIRE("TestMonsterSleep" == contender->getContenderScripting()->getContenderName());
+		REQUIRE("TestMonsterSleep" == contender->getName());
 		REQUIRE(100 == contender->getStatus().life.current);
 		REQUIRE(100 == contender->getStatus().life.total);
 
@@ -220,7 +220,7 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]")
 		const auto& p = FightingPitAnnouncer::getPartyTeams(fp).getMembersBySide(HexagonSide::Orientation::B_S);
 
 		SECTION("Initial setup") {
-			REQUIRE("TestMonsterAttack" == contender->getContenderScripting()->getContenderName());
+			REQUIRE("TestMonsterAttack" == contender->getName());
 			REQUIRE(4 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers().size());
 			REQUIRE(100 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().life.current);
 			REQUIRE(100 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().life.total);
@@ -511,7 +511,7 @@ TEST_CASE("FightingPitTestCase Simple Alteration test", "[service][arena]")
 		const auto& p = FightingPitAnnouncer::getPartyTeams(fp).getMembersBySide(HexagonSide::Orientation::B_S);
 
 		SECTION("Initial setup") {
-			REQUIRE("TestMonsterPoison" == contender->getContenderScripting()->getContenderName());
+			REQUIRE("TestMonsterPoison" == contender->getName());
 			REQUIRE(4 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers().size());
 			REQUIRE(100 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().life.current);
 			REQUIRE(100 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().life.total);
