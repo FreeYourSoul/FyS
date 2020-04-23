@@ -54,18 +54,20 @@ TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]")
 	auto cml = CmlBase(getLocalPathStorage());
 	EncounterContext ctx;
 	ctx._rangeEncounterPerZone["WS00"] = {
-			std::pair(1, 4), // ez
-			std::pair(2, 4), // medium
-			std::pair(3, 5)  // hard
+			EncounterContext::RngRange(1, 4), // ez
+			EncounterContext::RngRange(2, 4), // medium
+			EncounterContext::RngRange(3, 5)  // hard
 	};
 	ctx._contendersPerZone["WS00"] = {
 			EncounterContext::EncounterDesc{
 					"arena:contenders:Sampy.chai", 3,
-					{60, 60, 60}, std::pair(1u, 10u)
+					EncounterContext::ChanceArray{60, 60, 60},
+					EncounterContext::RngRange(1u, 10u)
 			},
 			EncounterContext::EncounterDesc{
 					"arena:contenders:Slime.chai", 3,
-					{40, 40, 40}, std::pair(1u, 10u)
+					EncounterContext::ChanceArray{40, 40, 40},
+					EncounterContext::RngRange(1u, 10u)
 			}
 	};
 
@@ -345,5 +347,154 @@ TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]")
 	FSeam::MockVerifier::cleanUp();
 
 } // End TestCase : FightingPitAnnouncer test
+
+TEST_CASE("FightingPitAnnouncerTestCase test reward", "[service][arena]")
+{
+	auto fseamMock = FSeam::getDefault<fys::util::RandomGenerator>();
+	auto cml = CmlBase(getLocalPathStorage());
+	EncounterContext ctx;
+	ctx._rangeEncounterPerZone["WS00"] = {
+			EncounterContext::RngRange(1, 4), // ez
+			EncounterContext::RngRange(1, 4), // medium
+			EncounterContext::RngRange(1, 4)  // hard
+	};
+	ctx._contendersPerZone["WS00"] = {
+			EncounterContext::EncounterDesc{
+					"arena:contenders:Sampy.chai", 3,
+					EncounterContext::ChanceArray{60, 60, 60},
+					EncounterContext::RngRange(1u, 10u)
+			},
+			EncounterContext::EncounterDesc{
+					"arena:contenders:Slime.chai", 3,
+					EncounterContext::ChanceArray{40, 40, 40},
+					EncounterContext::RngRange(1u, 10u)
+			}
+	};
+	ctx._rewardDescPerContender["Sampy"] = EncounterContext::RewardEncounterDesc{
+			std::array<EncounterContext::RngRange, 3>{
+					EncounterContext::RngRange(3, 3),
+					EncounterContext::RngRange(2, 2),
+					EncounterContext::RngRange(6, 6)
+			},
+			{
+					{"DrPepper", EncounterContext::ChanceArray{50, 50, 50}},
+					{"EsCaliBur", EncounterContext::ChanceArray{50, 50, 50}},
+			}
+	};
+	std::shared_ptr<std::mt19937> mt = std::make_shared<std::mt19937>(42);
+	fseamMock->dupeReturn<FSeam::RandomGenerator::get>(mt);
+
+	SECTION("test seed") {
+		REQUIRE(2 == fys::util::RandomGenerator::generateInRange(1, 4));
+		// encounter 1
+		REQUIRE(80 == fys::util::RandomGenerator::generateInRange(0, 100));
+		REQUIRE(10 == fys::util::RandomGenerator::generateInRange(1, 10));
+		// encounter 2
+		REQUIRE(18 == fys::util::RandomGenerator::generateInRange(0, 100));
+		REQUIRE(8 == fys::util::RandomGenerator::generateInRange(1, 10));
+		// Reward
+		REQUIRE(3 == fys::util::RandomGenerator::generateInRange(3, 3));     // number of reward
+		REQUIRE(60 == fys::util::RandomGenerator::generateInRange(0, 100));  // first  reward is EsCaliBur
+		REQUIRE(60 == fys::util::RandomGenerator::generateInRange(0, 100));  // second reward is EsCaliBur
+		REQUIRE(15 == fys::util::RandomGenerator::generateInRange(0, 100));  // third  reward is DrPepper
+
+	} // End section : test seed ez
+
+	SECTION("Test one type reward generation") {
+		FightingPitAnnouncer fpa(cml);
+		fpa.setCreatorUserName(" ");
+		fpa.setCreatorUserToken(" ");
+		fpa.setCreatorTeamParty(getPartyTeam(" "));
+		fpa.setDifficulty(FightingPit::MEDIUM);
+		fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
+		fpa.addActionToOneMember(0, "arena:actions:damage:slash.chai", 5);
+		auto fp = fpa.buildFightingPit(ctx, "WS00");
+
+		REQUIRE(1 == FightingPitAnnouncer::getReward(fp).keys.size());
+		REQUIRE(1 == FightingPitAnnouncer::getReward(fp).quantity.size());
+		REQUIRE("EsCaliBur" == FightingPitAnnouncer::getReward(fp).keys.at(0));
+		REQUIRE(2 == FightingPitAnnouncer::getReward(fp).quantity.at(0));
+
+	} // End section : Test one type reward generation
+
+	SECTION("Test different reward generation") {
+		FightingPitAnnouncer fpa(cml);
+		fpa.setCreatorUserName(" ");
+		fpa.setCreatorUserToken(" ");
+		fpa.setCreatorTeamParty(getPartyTeam(" "));
+		fpa.setDifficulty(FightingPit::EASY);
+		fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
+		fpa.addActionToOneMember(0, "arena:actions:damage:slash.chai", 5);
+		auto fp = fpa.buildFightingPit(ctx, "WS00");
+
+		REQUIRE(2 == FightingPitAnnouncer::getReward(fp).keys.size()); // 2 different reward
+		REQUIRE(2 == FightingPitAnnouncer::getReward(fp).quantity.size());
+		REQUIRE("DrPepper" == FightingPitAnnouncer::getReward(fp).keys.at(0));
+		REQUIRE(1 == FightingPitAnnouncer::getReward(fp).quantity.at(0));
+		REQUIRE("EsCaliBur" == FightingPitAnnouncer::getReward(fp).keys.at(1));
+		REQUIRE(2 == FightingPitAnnouncer::getReward(fp).quantity.at(1));
+	} // End section : Test different reward generation
+
+	SECTION("test seed for 'Multiple Monster of same type add up'") {
+		REQUIRE(2 == fys::util::RandomGenerator::generateInRange(1, 4));
+		// encounter 1
+		REQUIRE(80 == fys::util::RandomGenerator::generateInRange(0, 100)); // Slime is selected
+		REQUIRE(10 == fys::util::RandomGenerator::generateInRange(1, 10));  // level Slime is 10
+		// encounter 2
+		REQUIRE(18 == fys::util::RandomGenerator::generateInRange(0, 100)); // Sampy is selected
+		REQUIRE(8 == fys::util::RandomGenerator::generateInRange(1, 10));   // level Sampy is 8
+
+		// Reward Slime
+		REQUIRE(3 == fys::util::RandomGenerator::generateInRange(3, 3));     // number of reward for Slime
+		REQUIRE(60 == fys::util::RandomGenerator::generateInRange(0, 100));  // first  reward is TriForce
+		REQUIRE(60 == fys::util::RandomGenerator::generateInRange(0, 100));  // second reward is TriForce
+		REQUIRE(15 == fys::util::RandomGenerator::generateInRange(0, 100));  // third  reward is TriForce
+		// Reward Sampy
+		REQUIRE(6 == fys::util::RandomGenerator::generateInRange(6, 6));     // number of reward for Sampy
+		REQUIRE(15 == fys::util::RandomGenerator::generateInRange(0, 100));  // first  reward is DrPepper
+		REQUIRE(10 == fys::util::RandomGenerator::generateInRange(0, 100));  // second reward is DrPepper
+		REQUIRE(5 == fys::util::RandomGenerator::generateInRange(0, 100));   // third  reward is DrPepper
+		REQUIRE(46 == fys::util::RandomGenerator::generateInRange(0, 100));  // fourth reward is DrPepper
+		REQUIRE(87 == fys::util::RandomGenerator::generateInRange(0, 100));  // fith   reward is EsCaliBur
+		REQUIRE(33 == fys::util::RandomGenerator::generateInRange(0, 100));  // sixth  reward is DrPepper
+
+	} // End section : test seed ez
+
+	SECTION("Multiple Monster of same type add up") {
+
+		ctx._rewardDescPerContender["Slime"] = EncounterContext::RewardEncounterDesc{
+				std::array<EncounterContext::RngRange, 3>{
+						EncounterContext::RngRange(3, 3),
+						EncounterContext::RngRange(2, 2),
+						EncounterContext::RngRange(3, 3)
+				},
+				{
+						{"TriForce", EncounterContext::ChanceArray{100, 100, 100}}
+				}
+		};
+		FightingPitAnnouncer fpa(cml);
+		fpa.setCreatorUserName(" ");
+		fpa.setCreatorUserToken(" ");
+		fpa.setCreatorTeamParty(getPartyTeam(" "));
+		fpa.setDifficulty(FightingPit::HARD);
+		fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
+		fpa.addActionToOneMember(0, "arena:actions:damage:slash.chai", 5);
+		auto fp = fpa.buildFightingPit(ctx, "WS00");
+
+		// 3 different rewards
+		REQUIRE(3 == FightingPitAnnouncer::getReward(fp).keys.size());
+		REQUIRE(3 == FightingPitAnnouncer::getReward(fp).quantity.size());
+
+		REQUIRE("DrPepper" == FightingPitAnnouncer::getReward(fp).keys.at(0));
+		REQUIRE(5 == FightingPitAnnouncer::getReward(fp).quantity.at(0));
+		REQUIRE("EsCaliBur" == FightingPitAnnouncer::getReward(fp).keys.at(1));
+		REQUIRE(1 == FightingPitAnnouncer::getReward(fp).quantity.at(1));
+		REQUIRE("TriForce" == FightingPitAnnouncer::getReward(fp).keys.at(2));
+		REQUIRE(3 == FightingPitAnnouncer::getReward(fp).quantity.at(2));
+
+	} // End section : Multiple Monster of same type add up
+
+} // End TestCase :  FightingPitAnnouncer test reward
+
 
 #pragma clang diagnostic pop

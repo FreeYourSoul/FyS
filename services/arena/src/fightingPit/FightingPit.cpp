@@ -56,7 +56,8 @@ FightingPit::FightingPit(std::string creatorUserName, fys::arena::FightingPit::L
 		_timeInterlude(retrieveTimeInterludeFromLevelDegree(_levelFightingPit)),
 		_layoutMapping(_contenders, _partyTeams),
 		_creatorUserName(std::move(creatorUserName)),
-		_chaiPtr(ChaiRegister::createChaiInstance(_contenders, _partyTeams)) { }
+		_chaiPtr(ChaiRegister::createChaiInstance(_contenders, _partyTeams)),
+		_rewards(std::make_unique<Rewards>()) { }
 
 bool
 FightingPit::checkEndStatusFightingPit()
@@ -124,7 +125,7 @@ FightingPit::updateProgressStatus()
 }
 
 void
-FightingPit::forwardMessageToTeamMember(const std::string& user, PlayerAction action)
+FightingPit::forwardActionToTeamMember(const std::string& user, PlayerAction action)
 {
 	auto member = _partyTeams.getSpecificTeamMemberById(user, action.idMember);
 	if (!member) {

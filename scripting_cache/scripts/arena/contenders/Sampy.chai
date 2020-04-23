@@ -45,7 +45,7 @@ class Attack_SAMPY {
 //Sample Monster Used For testing Purpose :-D
 class Sampy {
 
-    attr id; // todo remove id?
+    attr id;
     attr level;
     attr actions;
 

@@ -35,6 +35,7 @@
 #include <fightingPit/contender/PitContenders.hh>
 #include <fightingPit/FightingPitLayout.hh>
 #include <fightingPit/SideBattle.hh>
+#include <fightingPit/Rewards.hh>
 #include <fightingPit/team/AllyPartyTeams.hh>
 #include <ChaiRegister.hh>
 #include <fightingPit/team/TeamMember.hh>
@@ -131,7 +132,7 @@ public:
 	 *
 	 * @param user
 	 */
-	void forwardMessageToTeamMember(const std::string& user, PlayerAction action);
+	void forwardActionToTeamMember(const std::string& user, PlayerAction action);
 
 	/**
 	 * Add an authenticated player in the fighting pit, the player authentication is not verified an thus must be
@@ -190,6 +191,10 @@ public:
 	 * Disable the ability to join the battle if the fighting pit is currently reachable
 	 */
 	void disableJoin() noexcept { if (isJoinable()) _progress = Progress::ON_HOLD_NOT_REACHABLE; }
+	void addReward(std::string action, uint quantity) noexcept {
+		_rewards->keys.emplace_back(std::move(action));
+		_rewards->quantity.emplace_back(quantity);
+	};
 	void setPlayerReadiness(const std::string& userName);
 	void setArenaId(unsigned arenaId) noexcept { _arenaId = arenaId; }
 
@@ -246,6 +251,7 @@ private:
 	std::vector<AuthenticatedPlayer> _authenticatedPlayers;
 
 	std::unique_ptr<chaiscript::ChaiScript> _chaiPtr;
+	std::unique_ptr<Rewards> _rewards;
 	std::vector<SideBattle> _sideBattles;
 
 };

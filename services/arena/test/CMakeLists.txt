@@ -52,6 +52,7 @@ addFSeamTests(
         ${CMAKE_CURRENT_LIST_DIR}/../include/ChaiRegister.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/team/PartyTeam.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/team/TeamMember.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/Rewards.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/team/AllyPartyTeams.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/contender/ContenderScripting.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/contender/PitContenders.hh
@@ -101,6 +102,7 @@ addFSeamTests(
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/ChaiRegister.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/util/FbUtility.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/ChaiRegister.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/Rewards.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/FightingPitLayout.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/contender/ContenderScripting.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/contender/FightingContender.hh

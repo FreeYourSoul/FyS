@@ -31,9 +31,12 @@
 #include <ConnectionHandler.hh>
 #include <CmlCopy.hh>
 
+// forward declarations
 namespace fys::fb {
 struct ArenaServerValidateAuth;
+struct ArenaFightAction;
 }
+// !end forward declarations
 
 namespace fys::arena {
 
@@ -113,6 +116,11 @@ struct AwaitingPlayerArena {
 class ArenaServerService {
 	using AwaitingPlayerArenaIt = const std::unordered_map<std::string, AwaitingPlayerArena>::const_iterator;
 
+	//! action name to set readiness
+	static inline const std::string READY_ACTION = "READY";
+	//! magic id to set readiness
+	static inline const uint READY_ACTION_ID = 1337;
+
 public:
 	explicit ArenaServerService(const ArenaServerContext& ctx);
 
@@ -130,6 +138,9 @@ private:
 	 */
 	[[nodiscard]] bool
 	isSaturated() const noexcept;
+
+	[[nodiscard]] PlayerAction
+	createPlayerAction(std::string&& action, const fb::ArenaFightAction* frame) const;
 
 	[[nodiscard]] unsigned
 	createNewFightingPit(const AwaitingPlayerArena& awaited) noexcept;

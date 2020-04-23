@@ -145,7 +145,6 @@ PriorityOrderList::getComputedSpeed(const data::PriorityElem& elemToCompute) con
 			}
 		}
 	}
-	// TODO : Log warning about strange stuff happening around here
 	return 1;
 }
 

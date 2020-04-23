@@ -32,6 +32,8 @@
 namespace fys::arena {
 
 struct EncounterContext {
+	using RngRange = std::pair<uint, uint>;
+	using ChanceArray = std::array<uint, 3>;
 
 	struct EncounterDesc {
 		[[nodiscard]] bool
@@ -46,9 +48,17 @@ struct EncounterContext {
 		//! Max number of this type of monster you can encounter at once
 		uint maxEncountering;
 		//! percentage of chance to encounter this monster out of the 3 different difficulties
-		std::array<uint, 3> chance;
+		ChanceArray chance;
 		//! Range of level the monster is when encountered
-		std::pair<uint, uint> levelRange;
+		RngRange levelRange;
+
+	};
+
+	struct RewardEncounterDesc {
+		//! range of items than can be dropped for an encounter out of the 3 different difficulties
+		std::array<RngRange, 3> rangeDrop;
+		//! map of items key over the chance of drop out of the 3 different difficulties
+		std::map<std::string, ChanceArray> itemOnChanceRange;
 	};
 
 	/**
@@ -60,9 +70,11 @@ struct EncounterContext {
 	zoneRegistered(const std::string& wsId) const noexcept { return _contendersPerZone.find(wsId) != _contendersPerZone.cend(); }
 
 	//! range of number of monster findable per zone
-	std::map<std::string, std::array<std::pair<uint, uint>, 3>> _rangeEncounterPerZone;
+	std::map<std::string, std::array<RngRange, 3>> _rangeEncounterPerZone;
 	//! contender findable per zone
 	std::map<std::string, std::vector<EncounterDesc>> _contendersPerZone;
+	//! reward description per contender
+	std::map<std::string, RewardEncounterDesc> _rewardDescPerContender;
 };
 
 class ArenaServerContext : public fys::common::ServiceContextBase {
@@ -107,7 +119,14 @@ private:
 	[[nodiscard]] bool
 	validateEncounterContext() const;
 
+	[[nodiscard]] bool
+	validateRewardContext() const;
+
+	[[nodiscard]] EncounterContext::RewardEncounterDesc
+	getRewardDescriptionFromJson(const nlohmann::json& rewardDesc) const;
+
 	void parseArenaConfigFile(const nlohmann::json& configContent);
+	void parseZoneConfigFile(const nlohmann::json& configContent);
 
 private:
 

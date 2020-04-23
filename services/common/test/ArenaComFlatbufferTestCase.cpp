@@ -134,7 +134,8 @@ TEST_CASE("FlatBuffer ArenaCom ArenaFightAction", "[service][arena][common][fb]"
 			1337,
 			fbb.CreateString("idAction"),
 			fys::fb::Targeting_ENNEMIES,
-			fbb.CreateVector(std::vector<uint>{1, 4, 5, 6}));
+			fbb.CreateVector(std::vector<uint>{1, 4, 5, 6}),
+			fbb.CreateVector(std::vector<uint>{}));
 	fys::fb::FinishArenaFightActionBuffer(fbb, afa);
 
 	SECTION("Verifier") {
@@ -148,10 +149,10 @@ TEST_CASE("FlatBuffer ArenaCom ArenaFightAction", "[service][arena][common][fb]"
 		REQUIRE("idAction" == fromBinary->actionId()->str());
 		REQUIRE(1337 == fromBinary->memberId());
 		REQUIRE(fys::fb::Targeting_ENNEMIES == fromBinary->targetType());
-		REQUIRE(1 == fromBinary->targetId()->Get(0));
-		REQUIRE(4 == fromBinary->targetId()->Get(1));
-		REQUIRE(5 == fromBinary->targetId()->Get(2));
-		REQUIRE(6 == fromBinary->targetId()->Get(3));
+		REQUIRE(1 == fromBinary->targetId_contender()->Get(0));
+		REQUIRE(4 == fromBinary->targetId_contender()->Get(1));
+		REQUIRE(5 == fromBinary->targetId_contender()->Get(2));
+		REQUIRE(6 == fromBinary->targetId_contender()->Get(3));
 
 	} // End section : Binary to Flatbuffer
 

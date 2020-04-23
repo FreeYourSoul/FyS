@@ -12,6 +12,9 @@
         "db_hostname": "Host-001",
         "db_port": 3306,
 
-        "zone_configuration": "/home/FyS/Project/FyS/services/arena/cfg/zones_configuration.json"
+        "zone_configuration": [
+            "/home/FyS/Project/FyS/services/arena/cfg/zone/zone_ws00_config.json",
+            "/home/FyS/Project/FyS/services/arena/cfg/zone/zone_ws01_config.json"
+        ]
     }
 }

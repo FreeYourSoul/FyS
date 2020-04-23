@@ -22,7 +22,8 @@ table ArenaFightAction {
     memberId:uint;
     actionId:string(required);
     targetType:Targeting;
-    targetId:[uint];
+    targetId_contender:[uint];
+    targetId_ally:[uint];
 }
 
 root_type ArenaFightAction;

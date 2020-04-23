@@ -41,21 +41,35 @@
 
 namespace {
 using BoundaryMapEncounter = fys::BoundaryMap<fys::arena::EncounterContext::EncounterDesc>;
+using BoundaryMapReward = fys::BoundaryMap<std::string>;
 
-BoundaryMapEncounter
+[[nodiscard]] BoundaryMapEncounter
 makeContenderRngBoundaryMap(const std::vector<fys::arena::EncounterContext::EncounterDesc>& zoneContenders,
 		fys::arena::FightingPit::Level difficulty)
 {
 	BoundaryMapEncounter bm;
-	int val = 0;
+	unsigned val = 0;
 	for (const auto& zc : zoneContenders) {
-		val += zc.chance.at(static_cast<int>(difficulty));
+		val += zc.chance.at(static_cast<uint>(difficulty));
 		bm.insert(val, zc);
 	}
 	return bm;
 }
 
-std::string
+[[nodiscard]] BoundaryMapReward
+makeRewardRngBoundaryMap(const fys::arena::EncounterContext::RewardEncounterDesc& red,
+		fys::arena::FightingPit::Level difficulty)
+{
+	BoundaryMapReward bm;
+	unsigned val = 0;
+	for (const auto&[itemKey, chance] : red.itemOnChanceRange) {
+		val += chance.at(static_cast<uint>(difficulty));
+		bm.insert(val, itemKey);
+	}
+	return bm;
+}
+
+[[nodiscard]] std::string
 getNameFromKey(const std::string& key)
 {
 	return key.substr(key.find_last_of(':') + 1, key.find_last_of('.') - key.find_last_of(':') - 1);
@@ -90,6 +104,8 @@ FightingPitAnnouncer::buildFightingPit(const EncounterContext& ctx, const std::s
 		return nullptr;
 	}
 
+	generateRewardForContender(*fp, ctx, fp->getPitContenders().getContenders());
+
 	fp->initializeSideBattles();
 	return fp;
 }
@@ -103,9 +119,9 @@ FightingPitAnnouncer::generateContenders(FightingPit& fp, const EncounterContext
 	const auto boundaryMap = makeContenderRngBoundaryMap(ctx._contendersPerZone.at(wsId), _difficulty);
 
 	for (unsigned i = 0; i < numberContenders; ++i) {
-		int rngMonster = fys::util::RandomGenerator::generateInRange(0, 100);
+		int rngMonster = util::RandomGenerator::generateInRange(0, 100);
 		auto desc = boundaryMap.get(rngMonster)->second;
-		uint levelMonster = fys::util::RandomGenerator::generateInRange(desc.levelRange.first, desc.levelRange.second);
+		uint levelMonster = util::RandomGenerator::generateInRange(desc.levelRange.first, desc.levelRange.second);
 		auto contenderScript = std::make_unique<ContenderScripting>(*fp.getChaiPtr(), levelMonster);
 		std::string name = getNameFromKey(desc.key);
 		contenderScript->setContenderId(i);
@@ -121,6 +137,32 @@ FightingPitAnnouncer::generateContenders(FightingPit& fp, const EncounterContext
 		fys::arena::FightingPitLayout::setContenderInitiatePosition(*contender, HexagonSide::Orientation::B_S);
 	}
 	return true;
+}
+
+void
+FightingPitAnnouncer::generateRewardForContender(FightingPit& fp,
+		const EncounterContext& ctx, const std::vector<FightingContenderSPtr>& contenders)
+{
+	std::map<std::string, uint> rewardOnQuantity;
+	for (const auto& contender : contenders) {
+		const auto& rwdIt = ctx._rewardDescPerContender.find(contender->getName());
+		// Check if the contender has a reward description
+		if (rwdIt == ctx._rewardDescPerContender.end())
+			continue;
+
+		BoundaryMapReward boundaryMap = makeRewardRngBoundaryMap(rwdIt->second, _difficulty);
+		const auto& rangeRwdNumber = rwdIt->second.rangeDrop.at(static_cast<std::size_t>(_difficulty));
+		const uint numberReward = util::RandomGenerator::generateInRange(rangeRwdNumber.first, rangeRwdNumber.second);
+
+		for (uint i = 0; i < numberReward; ++i) {
+			const uint rewardRng = util::RandomGenerator::generateInRange(0u, 100u);
+			++rewardOnQuantity[boundaryMap.get(rewardRng)->second];
+		}
+	}
+
+	for (auto&[keyReward, quantity] : rewardOnQuantity) {
+		fp.addReward(std::move(keyReward), quantity);
+	}
 }
 
 const std::string&

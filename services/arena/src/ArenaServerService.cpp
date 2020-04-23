@@ -30,6 +30,7 @@
 #include <FightingPitEncounter_generated.h>
 #include <ArenaServerAuth_generated.h>
 #include <ArenaServerValidateAuth_generated.h>
+#include <ArenaFightAction_generated.h>
 
 #include <network/DBConnector.hh>
 #include <fightingPit/FightingPitAnnouncer.hh>
@@ -101,7 +102,8 @@ ArenaServerService::runServerLoop() noexcept
 
 					// In case of a saturation of the server, return an error to the dispatcher
 					if (isSaturated()) {
-						// todo return an error to the dispatcher containing all the incoming message for it to be forwarded to another server
+						// todo return an error to the dispatcher containing all
+						//  the incoming message for it to be forwarded to another server
 						return;
 					}
 
@@ -117,9 +119,9 @@ ArenaServerService::runServerLoop() noexcept
 					}
 
 					// register player incoming into arena instance with token given by worldserver used as key
-					const auto &[elem, playerHasBeenCorrectlyRegistered] = _awaitingArena.insert({binary->token_auth()->str(), std::move(apa)});
+					const auto &[elem, isRegistered] = _awaitingArena.insert({binary->token_auth()->str(), std::move(apa)});
 
-					if (playerHasBeenCorrectlyRegistered) {
+					if (isRegistered) {
 						forwardReplyToDispatcher(std::move(identityWs), elem->second);
 						spdlog::info("A new awaited player is incoming {}", binary->token_auth()->str());
 					}
@@ -164,7 +166,7 @@ ArenaServerService::runServerLoop() noexcept
 
 				// InGame handler: Player is sending actions to feed pendingActions queue of their characters
 				[this](zmq::message_t&& idtPlayer, const zmq::message_t& intermediate, zmq::message_t&& playerMsg) {
-					const auto authFrame = fys::fb::GetArenaServerValidateAuth(intermediate.data());
+					const auto* authFrame = fys::fb::GetArenaServerValidateAuth(intermediate.data());
 					const std::string userName = authFrame->user_name()->str();
 					auto fp = _workerService.getAuthenticatedPlayerFightingPit(userName,
 							authFrame->token_auth()->str(),
@@ -176,17 +178,35 @@ ArenaServerService::runServerLoop() noexcept
 					}
 					_workerService.upsertPlayerIdentifier(authFrame->fighting_pit_id(), userName, idtPlayer.str());
 
-					unsigned idMember = 0;
-					// todo create an action message to forward
-					// todo store into action: action id, target
-					spdlog::debug("InGame Message received : {}", playerMsg.to_string());
-					// if action is set to "IAMREADY", target id 1337
-					fp->get().setPlayerReadiness(userName);
+					const auto* frame = fys::fb::GetArenaFightAction(playerMsg.data());
+					std::string action = frame->actionId()->str();
 
-					fp->get().forwardMessageToTeamMember(userName, PlayerAction{});
+					if (frame->memberId() == READY_ACTION_ID && action == READY_ACTION) {
+						fp->get().setPlayerReadiness(userName);
+					}
+					else {
+						fp->get().forwardActionToTeamMember(userName, createPlayerAction(std::move(action), frame));
+					}
 				});
 	}
 	t.join();
+}
+
+PlayerAction
+ArenaServerService::createPlayerAction(std::string&& action, const fb::ArenaFightAction* frame) const
+{
+	std::vector<uint> contenders;
+	std::vector<uint> allies;
+
+	contenders.reserve(frame->targetId_contender()->size());
+	allies.reserve(frame->targetId_ally()->size());
+	std::move(frame->targetId_contender()->begin(), frame->targetId_contender()->end(), std::back_inserter(contenders));
+	std::move(frame->targetId_ally()->begin(), frame->targetId_ally()->end(), std::back_inserter(allies));
+	return PlayerAction{
+			frame->memberId(),
+			std::move(action),
+			std::move(contenders),
+			std::move(allies)};
 }
 
 bool

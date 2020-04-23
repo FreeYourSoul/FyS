@@ -1,0 +1,27 @@
+{
+    "zone":             "WS01",
+
+    "encounter_chance": {
+        "number_encounter_range":      { "easy": [1, 3], "medium": [1, 4], "hard": [2, 6] },
+        "arena:contenders:Sampy.chai": { "easy": 100, "medium": 100, "hard": 100 }
+    },
+
+    "encounter_desc":   [
+
+        {
+            "key":              "arena:contenders:Sampy.chai",
+            "max_encountering": 2,
+            "level_range":      [1, 10],
+            "reward":           {
+                "range": { "easy": [0, 2], "medium": [1, 2], "hard": [2, 3] },
+                "items": [
+                    { "chance": { "easy": 40, "medium": 30, "hard": 20 }, "key": "none" },
+                    { "chance": { "easy": 40, "medium": 50, "hard": 60 }, "key": "samp_soul" },
+                    { "chance": { "easy": 19, "medium": 18, "hard": 15 }, "key": "health_potion" },
+                    { "chance": { "easy": 1, "medium": 2, "hard": 5 }, "key": "samp_rec_card" }
+                ]
+            }
+        }
+
+    ]
+}
