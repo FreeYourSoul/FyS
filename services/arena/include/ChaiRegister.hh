@@ -25,6 +25,7 @@
 #define FYS_ARENA_CHAIREGISTER_HH
 
 #include <memory>
+#include <set>
 
 // forward declarations
 namespace chaiscript {
@@ -71,41 +72,40 @@ public:
 	static bool
 	loadAndRegisterActionPartyTeam(chaiscript::ChaiScript& chai, cache::Cml& cache, PartyTeam& pt);
 
-	/**
-	 * Get given action scripts from Cml and load it into the ChaiScript engine.
-	 * Only load the script in the chai engine and do not instantiate any element in it.
-	 * Then load eventual alteration scripts.
-	 *
-	 * @param chai engine to load into
-	 * @param cache Cml instance to retrieve from
-	 * @param keys keys to find the scripts
-	 */
 	static void
-	loadActionScripts(chaiscript::ChaiScript& chai, cache::Cml& cache, const std::vector<std::string>& keys);
+	loadContenderScript(chaiscript::ChaiScript& chai, cache::Cml& cml, const std::string& contenderKey);
 
 	static void
 	registerBaseActions(chaiscript::ChaiScript& chai, cache::Cml& cml);
 
 private:
 	/**
-	 * Get a script (actions, alterations etc..) from Cml and load it into the ChaiScript engine.
-	 * Only load the script in the chai engine and do not instantiate any element in it.
+	 * Retrieve a script and its includes (if any) of a script and load it into the ChaiScript engine
+	 * Go recursively through all the includes to include.
+	 *
+	 * @note Only load scripts, doesn't instantiate
+	 *
+	 * @param chai engine to load into
+	 * @param cache Cml instance to retrieve from
+	 * @param keys script's keys to find the includes from
+	 */
+	static void loadWithIncludes(chaiscript::ChaiScript& chai, cache::Cml& cache, const std::set<std::string>& keys);
+	static void loadWithIncludes(chaiscript::ChaiScript& chai, cache::Cml& cache,
+			const std::vector<std::string>& keys, std::set<std::string> incursion);
+
+	/**
+	 * Get a script from Cml and load it into the ChaiScript engine.
+	 * Only do a plain load of the scripts in the chai engine and do not instantiate any element in it.
 	 *
 	 * @param chai engine to load into
 	 * @param cache Cml instance to retrieve from
 	 * @param keys keys to find the scripts
 	 */
-	static void
+	static inline void
 	loadScripts(chaiscript::ChaiScript& chai, cache::Cml& cache, const std::vector<std::string>& keys);
 
-	/**
-	 * Retrieve the alterations (if any) of an action and load it into the ChaiScript engine
-	 * @param chai engine to load into
-	 * @param cache Cml instance to retrieve from
-	 * @param keys actions keys to find the action on which alternate could be
-	 */
-	static void
-	loadActionsAlterationsScript(chaiscript::ChaiScript& chai, cache::Cml& cache, const std::vector<std::string>& keys);
+	static inline bool
+	loadScript(chaiscript::ChaiScript& chai, cache::Cml& cache, const std::string& keys);
 
 	static void
 	registerChai(chaiscript::ChaiScript& chai, fys::arena::PitContenders& pc, fys::arena::AllyPartyTeams& apt);

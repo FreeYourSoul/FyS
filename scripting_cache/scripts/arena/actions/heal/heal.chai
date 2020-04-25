@@ -1,4 +1,4 @@
-def heal_retrieve_alterations() { []; }
+def heal_includes() { []; }
 
 class heal {
     attr heal;

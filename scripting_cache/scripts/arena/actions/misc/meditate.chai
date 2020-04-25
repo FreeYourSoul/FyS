@@ -1,5 +1,5 @@
 // no alteration
-def meditate_retrieve_alterations() { []; }
+def meditate_includes() { []; }
 
 class meditate {
     attr power;

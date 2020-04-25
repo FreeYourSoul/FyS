@@ -1,5 +1,5 @@
 // no alteration
-def light_heal_retrieve_alterations() { []; }
+def light_heal_includes() { []; }
 
 // A mono target attack,
 // inflict 30 damages, +10% for each level

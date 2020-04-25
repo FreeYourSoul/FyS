@@ -1,3 +1,9 @@
+def Slime_includes() {
+    [
+        "arena:actions:damage:slash.chai"
+    ];
+}
+
 class Slime {
 
     attr id;

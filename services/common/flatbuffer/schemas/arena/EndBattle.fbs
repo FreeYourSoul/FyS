@@ -1,0 +1,15 @@
+namespace fys.fb;
+
+enum StatusBattle : byte { WON, LOST }
+
+table Reward {
+    rewardKey:string;
+    quantity:uint;
+}
+
+table EndBattle {
+    status:StatusBattle;
+    rewards:[Reward];
+}
+
+root_type EndBattle;

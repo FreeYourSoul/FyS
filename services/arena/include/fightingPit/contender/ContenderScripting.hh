@@ -58,10 +58,9 @@ public:
 	[[nodiscard]] bool
 	setupContender();
 
-	void loadContenderScript(const std::string& script = "");
-	void loadContenderScriptFromFile(const std::string& scriptFile);
-	void registerContenderDoableActions(cache::Cml& cml);
-
+	//! instantiate the contender in chai engine
+	void registerContenderScript();
+	void loadContenderScriptFromFile(const std::string& filePath);
 	void setContenderName(std::string contenderName) { _contenderName = std::move(contenderName); }
 	void setContenderId(uint contenderId) { _contenderId = contenderId; }
 

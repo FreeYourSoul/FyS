@@ -1,4 +1,4 @@
-def zone_heal_retrieve_alterations() { []; }
+def zone_heal_includes() { []; }
 
 class zone_heal {
     attr heal;

@@ -1,5 +1,5 @@
 // no alteration
-def multi_slash_retrieve_alterations() { []; }
+def multi_slash_includes() { []; }
 
 // A multiple target attack,
 // inflict 30 damages on 2 target (+1 every 3 level of the attack)

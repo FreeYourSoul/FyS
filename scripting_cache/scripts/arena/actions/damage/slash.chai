@@ -1,4 +1,4 @@
-def slash_retrieve_alterations() {
+def slash_includes() {
     [
         "arena:actions:alteration:bleeding.chai"
     ];
@@ -13,7 +13,7 @@ class slash {
     def slash(levelOrStatus) {
         this.set_explicit(true);
         var lvl = this.getStrikeLevel(levelOrStatus);
-        var alts = slash_retrieve_alterations();
+        var alts = slash_includes();
 
         this.dmg = damage(30 + 30 * (0.1 * lvl));
         this.after_turn_alterations = [

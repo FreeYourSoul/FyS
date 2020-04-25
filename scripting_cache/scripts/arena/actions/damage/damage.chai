@@ -1,4 +1,4 @@
-def damage_retrieve_alterations() { []; }
+def damage_includes() { []; }
 
 class damage {
     attr power;

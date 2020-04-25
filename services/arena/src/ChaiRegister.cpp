@@ -104,19 +104,9 @@ ChaiRegister::loadAndRegisterActionPartyTeam(chaiscript::ChaiScript& chai, cache
 			const auto& actionsDoable = tm->getActionsDoable();
 
 			for (const auto &[key, lvl] : actionsDoable) {
-				const std::string& action = cache.findInCache(key);
-				if (action.empty()) {
-					SPDLOG_ERROR("Action with key {} not found (key may be wrong)", key);
-					continue;
-				}
-				try {
-					chai.eval(action);
-				}
-				catch (const std::exception& e) {
-					SPDLOG_DEBUG("Action with key {} may be already loaded: {}", key, e.what());
-				}
 
-				loadActionsAlterationsScript(chai, cache, {key});
+				// load the script with its includes
+				loadWithIncludes(chai, cache, std::set{key});
 
 				// instantiate the action variable for given team member in chai engine
 				const std::string keyPlayer = std::string(pt.getUserName()).append("_").append(tm->getName());
@@ -135,54 +125,59 @@ ChaiRegister::loadAndRegisterActionPartyTeam(chaiscript::ChaiScript& chai, cache
 }
 
 void
-ChaiRegister::loadActionsAlterationsScript(chaiscript::ChaiScript& chai, cache::Cml& cache, const std::vector<std::string>& keys)
+ChaiRegister::loadContenderScript(chaiscript::ChaiScript& chai, cache::Cml& cml, const std::string& contenderKey)
 {
-	std::vector<std::string> alterationKeys;
+	loadWithIncludes(chai, cml, std::set<std::string>{contenderKey});
+}
 
+void
+ChaiRegister::loadWithIncludes(chaiscript::ChaiScript& chai, cache::Cml& cache,
+		const std::vector<std::string>& keys, std::set<std::string> incursion)
+{
 	for (const auto& key : keys) {
-		std::string actionAlterationsRetrieve = data::getActionNameFromKey(key).append("_retrieve_alterations();");
+		loadScript(chai, cache, key);
+		std::string includeRetrieve = data::getActionNameFromKey(key).append("_includes();");
+		SPDLOG_DEBUG("Retrieve includes of scripts with key {}, eval {}", key, includeRetrieve);
 		try {
-			std::vector actionAlteration = chai.eval<std::vector<std::string>>(actionAlterationsRetrieve);
-			std::copy(actionAlteration.begin(), actionAlteration.end(), std::back_inserter(alterationKeys));
+			std::vector currentIncludes = chai.eval<std::vector<std::string>>(includeRetrieve);
+			if (!currentIncludes.empty() && incursion.insert(key).second) {
+				loadWithIncludes(chai, cache, currentIncludes, incursion);
+			}
 		}
 		catch (const std::exception& e) {
-			SPDLOG_DEBUG("couldn't retrieve alterations of the action {}, by calling {}: {}",
-					key, actionAlterationsRetrieve, e.what());
+			SPDLOG_DEBUG("No include for {}, by evaluating {}: {}", key, includeRetrieve, e.what());
 		}
-
-	}
-	if (!alterationKeys.empty()) {
-		std::sort(alterationKeys.begin(), alterationKeys.end());
-		std::unique(alterationKeys.begin(), alterationKeys.end());
-		loadScripts(chai, cache, alterationKeys);
 	}
 }
-void
-ChaiRegister::loadActionScripts(chaiscript::ChaiScript& chai, cache::Cml& cache, const std::vector<std::string>& keys)
-{
-	// load actions
-	loadScripts(chai, cache, keys);
 
-	// load actions alterations
-	loadActionsAlterationsScript(chai, cache, keys);
+void
+ChaiRegister::loadWithIncludes(chaiscript::ChaiScript& chai, cache::Cml& cache, const std::set<std::string>& keys)
+{
+	loadWithIncludes(chai, cache, std::vector(keys.begin(), keys.end()), std::set<std::string>{});
 }
 
 void
 ChaiRegister::loadScripts(chaiscript::ChaiScript& chai, cache::Cml& cache, const std::vector<std::string>& keys)
 {
 	for (const auto& key : keys) {
-		const std::string& action = cache.findInCache(key);
-		if (action.empty()) {
-			SPDLOG_ERROR("Action with key {} not found (key may be wrong)", key);
-			continue;
-		}
-		try {
-			chai.eval(action);
-		}
-		catch (const std::exception& e) {
-			SPDLOG_DEBUG("Action with key {} already loaded: {}", key, e.what());
-		}
+		loadScript(chai, cache, key);
 	}
+}
+
+bool ChaiRegister::loadScript(chaiscript::ChaiScript& chai, cache::Cml& cache, const std::string& key) {
+	const std::string& action = cache.findInCache(key);
+	if (action.empty()) {
+		SPDLOG_ERROR("Action with key {} not found (key may be wrong)", key);
+		return false;
+	}
+	try {
+		chai.eval(action);
+	}
+	catch (const std::exception& e) {
+		SPDLOG_DEBUG("Action with key {} may be already loaded: {}", key, e.what());
+		return false;
+	}
+	return true;
 }
 
 void

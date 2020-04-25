@@ -1,4 +1,4 @@
-def zone_damage_retrieve_alterations() { []; }
+def zone_damage_includes() { []; }
 
 class zone_damage {
     attr dmg;

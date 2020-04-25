@@ -104,7 +104,6 @@ public:
 	void setDifficulty(FightingPit::Level level) noexcept { _difficulty = level; }
 	void setCreatorTeamParty(std::unique_ptr<PartyTeam> pt) noexcept { _creatorPartyTeam = std::move(pt); }
 	void setJoinDisabled(bool isJoinDisabled) noexcept { _isJoinDisabled = isJoinDisabled; }
-	void setReward(std::unique_ptr<Rewards> rewards) noexcept { _fightRewards = std::move(rewards); };
 
 	// ============================================================================================================================
 	// for testing validation purpose
@@ -174,7 +173,6 @@ private:
 	std::string _creatorUserToken;
 	bool _isJoinDisabled = false;
 
-	std::unique_ptr<Rewards> _fightRewards;
 	std::unique_ptr<PartyTeam> _creatorPartyTeam;
 
 };

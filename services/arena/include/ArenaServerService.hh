@@ -150,6 +150,7 @@ private:
 
 	void forwardReplyToDispatcher(zmq::message_t&& idtWs, const fys::arena::AwaitingPlayerArena& awaitArena) noexcept;
 
+
 private:
 	std::reference_wrapper<const ArenaServerContext> _ctx;
 	cache::CmlCopy _cache;

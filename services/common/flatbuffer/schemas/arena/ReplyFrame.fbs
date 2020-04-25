@@ -1,0 +1,49 @@
+include "FightingPitState.fbs";
+include "EndBattle.fbs";
+
+namespace fys.fb;
+
+enum TypeReply : byte {
+    /// send the full status of the fighting pit
+    FIGHTINGPIT_STATE = 0,
+    /// send the team status of a player
+    PARTY_TEAM_STATUS = 1,
+    /// sent when the battle end, contains the rewards if won
+    END_BATTLE = 2,
+    /// sent when a player set his readiness (get a full list of player ready and not)
+    PLAYER_READY = 3,
+    /// sent when a new contender join the battle (adds)
+    INCOMING_CONTENDER = 4,
+    /// sent when the server is saturated (no Content linked)
+    ARENA_SERVICE_SATURATED = 5,
+
+    /// sent when something wrong occurred
+    ERROR,
+}
+
+union Content {
+
+/// content for TypeReply.FIGHTINGPIT_STATE
+FightingPitState : fys.fb.FightingPitState,
+
+/// content for TypeReply.PARTY_TEAM_STATUS
+PartyTeamStatus : fys.fb.PartyTeamStatus,
+
+/// content for TypeReply.END_BATTLE
+EndBattle : fys.fb.EndBattle,
+
+/// content for TypeReply.INCOMING_CONTENDER
+ContenderStatus : fys.fb.MemberStatus,
+
+/// content for TypeReply.ERROR: Error message
+ErrorMessage : string
+
+}
+
+/// Reply frame sent to the player
+table ReplyFrame {
+    typeReply:TypeReply;
+    content:Content;
+}
+
+root_type ReplyFrame;

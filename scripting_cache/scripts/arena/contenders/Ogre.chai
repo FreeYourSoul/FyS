@@ -1,3 +1,9 @@
+def Ogre_includes() {
+    [
+        "arena:actions:damage:slash.chai"
+    ]
+}
+
 class Ogre {
 
     attr id;
@@ -8,7 +14,9 @@ class Ogre {
         this.set_explicit(true);
         this.level = level;
         this.id = contenderId;
+    }
 
+    def setupContender() {
         this.actions = action(
 
             // possibles actions/decide target vector
@@ -23,9 +31,6 @@ class Ogre {
                 0; // slash
             }, ""
         );
-    }
-
-    def setupContender() {
         var &thisContender = pitContenders.getFightingContender(this.id);
         var &thisStatus = thisContender.accessStatus();
         var addLifePerLevel = 150 * 0.10; // +10% life per level

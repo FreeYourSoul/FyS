@@ -1,3 +1,5 @@
+def bleeding_includes() { []; }
+
 def alteration_bleeding(status, level, turn) {
     1;
 }

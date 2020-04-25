@@ -69,12 +69,6 @@ makeRewardRngBoundaryMap(const fys::arena::EncounterContext::RewardEncounterDesc
 	return bm;
 }
 
-[[nodiscard]] std::string
-getNameFromKey(const std::string& key)
-{
-	return key.substr(key.find_last_of(':') + 1, key.find_last_of('.') - key.find_last_of(':') - 1);
-}
-
 }
 
 namespace fys::arena {
@@ -107,6 +101,7 @@ FightingPitAnnouncer::buildFightingPit(const EncounterContext& ctx, const std::s
 	generateRewardForContender(*fp, ctx, fp->getPitContenders().getContenders());
 
 	fp->initializeSideBattles();
+
 	return fp;
 }
 
@@ -123,11 +118,11 @@ FightingPitAnnouncer::generateContenders(FightingPit& fp, const EncounterContext
 		auto desc = boundaryMap.get(rngMonster)->second;
 		uint levelMonster = util::RandomGenerator::generateInRange(desc.levelRange.first, desc.levelRange.second);
 		auto contenderScript = std::make_unique<ContenderScripting>(*fp.getChaiPtr(), levelMonster);
-		std::string name = getNameFromKey(desc.key);
+		std::string name = data::getActionNameFromKey(desc.key);
 		contenderScript->setContenderId(i);
 		contenderScript->setContenderName(name);
-		contenderScript->loadContenderScript(getScriptContentString(std::move(name), desc));
-		contenderScript->registerContenderDoableActions(_cache);
+		ChaiRegister::loadContenderScript(*fp.getChaiPtr(), _cache, desc.key);
+		contenderScript->registerContenderScript();
 		auto contender = std::make_shared<FightingContender>(std::move(contenderScript));
 		if (!fp.addContender(contender)) {
 			SPDLOG_WARN("FightingPit built invalid, generation of contender {} failure", contender->getName());
@@ -171,6 +166,7 @@ FightingPitAnnouncer::getScriptContentString(std::string name, const EncounterCo
 	static const std::string empty{};
 	if (std::any_of(_loadedScript.cbegin(), _loadedScript.cend(), [&name](const auto& s) { return s == name; }))
 		return empty;
+
 	_loadedScript.emplace_back(std::move(name));
 	return _cache.findInCache(desc.key);
 }

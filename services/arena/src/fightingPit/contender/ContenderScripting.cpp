@@ -34,25 +34,15 @@ using namespace chaiscript;
 namespace fys::arena {
 
 void
-ContenderScripting::loadContenderScript(const std::string& script)
+ContenderScripting::registerContenderScript()
 {
-	try {
-		if (!script.empty()) {
-			_chai.get().eval(script);
-		}
-	}
-	catch (const chaiscript::exception::eval_error& ee) {
-		SPDLOG_ERROR("Error caught on scripting loading {}", ee.what());
-	}
-	// instantiate the contender in chai engine
 	std::string createVar =
-			fmt::format("global {}={}({},{});",
-					getChaiContenderId(), _contenderName, _contenderId, _level);
+			fmt::format("global {}={}({},{});", getChaiContenderId(), _contenderName, _contenderId, _level);
 	try {
 		_chai.get().eval(createVar);
 	}
 	catch (const chaiscript::exception::eval_error& ee) {
-		SPDLOG_ERROR("Error caught when instantiating variable {}", ee.what());
+		SPDLOG_ERROR("Error caught when instantiating variable (script : ''{}'') {}", createVar, ee.what());
 	}
 }
 
@@ -66,20 +56,7 @@ ContenderScripting::loadContenderScriptFromFile(const std::string& filePath)
 	catch (const chaiscript::exception::eval_error& ee) {
 		SPDLOG_WARN("Error caught on scripting loading\n{}\n{}", ee.what(), ee.detail);
 	}
-	loadContenderScript();
-}
-
-void
-ContenderScripting::registerContenderDoableActions(cache::Cml& cml)
-{
-	try {
-		_doableActions = _chai.get().eval<std::vector<std::string>>(fmt::format(
-				"retrieveDoableActions({}.actions.act);", getChaiContenderId()));
-		ChaiRegister::loadActionScripts(_chai, cml, _doableActions);
-	}
-	catch (const chaiscript::exception::eval_error& ee) {
-		SPDLOG_WARN("Error caught on scripting loading\n{}\n{}", ee.what(), ee.detail);
-	}
+	registerContenderScript();
 }
 
 bool

@@ -41,7 +41,15 @@
 // anonymous namespace used for utility function to extract data from flatbuffer
 namespace {
 
-fys::arena::FightingPit::Level
+template<typename T>
+[[nodiscard]] bool
+verifyBuffer(const void* fbBuffer, uint size)
+{
+	auto v = flatbuffers::Verifier(static_cast<const uint8_t*>(fbBuffer), size);
+	return v.VerifyBuffer<T>();
+}
+
+[[nodiscard]] fys::arena::FightingPit::Level
 translateLevelFromFlatbuffer(const fys::fb::Level& level)
 {
 	switch (level) {
@@ -52,7 +60,7 @@ translateLevelFromFlatbuffer(const fys::fb::Level& level)
 	}
 }
 
-fys::arena::AwaitingPlayerArena
+[[nodiscard]] fys::arena::AwaitingPlayerArena
 createAwaitingPlayer(const fys::fb::FightingPitEncounter* binary)
 {
 	std::optional<fys::arena::AwaitingArena> awaitingArena = std::nullopt;
@@ -107,6 +115,10 @@ ArenaServerService::runServerLoop() noexcept
 						return;
 					}
 
+					if (!verifyBuffer<fb::FightingPitEncounter>(worldServerMessage.data(), worldServerMessage.size())) {
+						spdlog::error("Wrongly formatted FightingPitEncounter buffer");
+						return;
+					}
 					const auto* binary = fys::fb::GetFightingPitEncounter(worldServerMessage.data());
 
 					AwaitingPlayerArena apa = createAwaitingPlayer(binary);
@@ -123,13 +135,18 @@ ArenaServerService::runServerLoop() noexcept
 
 					if (isRegistered) {
 						forwardReplyToDispatcher(std::move(identityWs), elem->second);
-						spdlog::info("A new awaited player is incoming {}", binary->token_auth()->str());
+						spdlog::info("A new awaited player is added {}", binary->token_auth()->str());
 					}
 				});
 
 		_workerService.pollAndProcessMessageFromPlayer(
 				// Authentication handler : Player try to create/join a fighting pit. The player has to be awaited
 				[this](zmq::message_t&& idtPlayer, zmq::message_t&& authMessage) {
+					if (!verifyBuffer<fb::ArenaServerValidateAuth>(authMessage.data(), authMessage.size())) {
+						spdlog::error("Wrongly formatted ArenaServerValidateAuth buffer");
+						return;
+					}
+
 					const auto* binary = fys::fb::GetArenaServerValidateAuth(authMessage.data());
 					const std::string tokenAuth = binary->token_auth()->str();
 					const std::string userName = binary->user_name()->str();
@@ -141,6 +158,7 @@ ArenaServerService::runServerLoop() noexcept
 									 "without being awaited.", userName, _ctx.get().getServerCode(), fightingPitId);
 						return;
 					}
+					spdlog::info("Awaited Player {} login", userName);
 
 					if (playerAwaitedIt->second.hasToBeGenerated()) {
 						fightingPitId = createNewFightingPit(playerAwaitedIt->second);
@@ -160,12 +178,21 @@ ArenaServerService::runServerLoop() noexcept
 						_awaitingArena.erase(playerAwaitedIt); // remove player from awaited player
 					}
 					spdlog::info("Awaited player {} has logged in fighting pit of id:{}", userName, fightingPitId);
-					_workerService.upsertPlayerIdentifier(fightingPitId, idtPlayer.str(), userName);
+					_workerService.upsertPlayerIdentifier(fightingPitId, userName, idtPlayer.str());
 					_workerService.sendMsgNewArrivingTeam(fightingPitId, userName);
 				},
 
 				// InGame handler: Player is sending actions to feed pendingActions queue of their characters
 				[this](zmq::message_t&& idtPlayer, const zmq::message_t& intermediate, zmq::message_t&& playerMsg) {
+					if (!verifyBuffer<fb::ArenaServerValidateAuth>(intermediate.data(), intermediate.size())) {
+						spdlog::error("Wrongly formatted ArenaServerValidateAuth (auth frame) buffer");
+						return;
+					}
+					if (!verifyBuffer<fb::ArenaFightAction>(playerMsg.data(), playerMsg.size())) {
+						spdlog::error("Wrongly formatted ArenaFightAction buffer");
+						return;
+					}
+
 					const auto* authFrame = fys::fb::GetArenaServerValidateAuth(intermediate.data());
 					const std::string userName = authFrame->user_name()->str();
 					auto fp = _workerService.getAuthenticatedPlayerFightingPit(userName,
@@ -260,11 +287,12 @@ ArenaServerService::createNewFightingPit(const AwaitingPlayerArena& awaited) noe
 	unsigned id = _workerService.addFightingPit(
 			fpa.buildFightingPit(_ctx.get().getEncounterContext(), awaited.gen->serverCode));
 
-	SPDLOG_INFO("New fighting pit is created name {}, token {} lvl {} "
-				"encounter_id {} isAmbush {} wsCode {} isJoinDisabled {}",
-			awaited.namePlayer, awaited.token, awaited.gen->levelFightingPit, awaited.gen->encounterId,
-			awaited.gen->isAmbush, awaited.gen->serverCode, awaited.gen->isJoinDisabled);
-
+	if (id != FightingPit::CREATION_ERROR) {
+		SPDLOG_INFO("New fighting pit of id {} is created name {}, token {} lvl {} "
+					"encounter_id {} isAmbush {} wsCode {} isJoinDisabled {}",
+				id, awaited.namePlayer, awaited.token, awaited.gen->levelFightingPit, awaited.gen->encounterId,
+				awaited.gen->isAmbush, awaited.gen->serverCode, awaited.gen->isJoinDisabled);
+	}
 	return id;
 }
 
