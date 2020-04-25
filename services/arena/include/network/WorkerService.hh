@@ -174,10 +174,10 @@ public:
 
 private:
 	bool
-	broadcastMsg(unsigned fpId, zmq::multipart_t& msg);
+	broadcastMsg(unsigned fpId, zmq::message_t&& msg, const std::string& except = "");
 
 	bool
-	sendMessageToPlayer(unsigned fpId, const std::string& userName, zmq::multipart_t& msg);
+	sendMessageToPlayer(unsigned fpId, const std::string& userName, zmq::message_t&& msg);
 
 	[[nodiscard]] const std::string&
 	retrievePlayerIdentifier(unsigned fpId, const std::string& userName);

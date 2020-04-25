@@ -57,7 +57,7 @@ def configureDoxyfile(input_dir, output_dir):
 read_the_docs_build = os.environ.get('READTHEDOCS', None) == 'True'
 
 if read_the_docs_build:
-    input_dir = '../modules'
+    input_dir = '../'
     output_dir = 'build'
     configureDoxyfile(input_dir, output_dir)
     subprocess.call('doxygen', shell=True)
@@ -67,7 +67,7 @@ if read_the_docs_build:
 templates_path = ['_templates']
 
 # The master toctree document.
-master_doc = 'index2'
+master_doc = 'index'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.

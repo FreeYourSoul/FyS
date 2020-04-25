@@ -1,7 +1,7 @@
 namespace fys.fb;
 
 /// Used as reply from the ArenaServer to the client
-/// connection_str is used by the client as authentication on the ArenaServer
+/// connection_str is used by the client as to connect on the ArenaServer
 table ArenaServerAuth {
     user_name:string(required);
     token_auth:string(required);

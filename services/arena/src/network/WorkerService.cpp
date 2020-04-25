@@ -162,27 +162,28 @@ WorkerService::sendMsgNewArrivingTeam(unsigned fpId, const std::string& userName
 	FlatbufferGenerator fg;
 
 	{
-		auto[fbMsg, size] = fg.generatePartyTeamStatus(_arenaInstances.at(fpId)->getPartyTeamOfPlayer(userName));
-		zmq::multipart_t msg(fbMsg, size);
-		sendMessageToPlayer(fpId, userName, msg);
+		auto[fbMsg, size] = fg.generateFightingPitState(*_arenaInstances.at(fpId));
+		sendMessageToPlayer(fpId, userName, zmq::message_t(fbMsg, size));
 	}
 	{
 		auto[fbMsg, size] = fg.generatePartyTeamStatus(_arenaInstances.at(fpId)->getPartyTeamOfPlayer(userName));
-		zmq::multipart_t msgTeamToBroadCast(fbMsg, size);
-		broadcastMsg(fpId, msgTeamToBroadCast);
+		broadcastMsg(fpId, zmq::message_t(fbMsg, size), userName);
 	}
 }
 
 bool
-WorkerService::sendMessageToPlayer(unsigned fpId, const std::string& userName, zmq::multipart_t& msg)
+WorkerService::sendMessageToPlayer(unsigned fpId, const std::string& userName, zmq::message_t&& msg)
 {
 	const std::string& identifier = retrievePlayerIdentifier(fpId, userName);
 	if (identifier == userName) {
 		SPDLOG_ERROR("Cannot send a message in fightingPit {} to player {}. {}", fpId, userName, msg.str());
 		return false;
 	}
-	msg.add(zmq::message_t(identifier.data(), identifier.size()));
-	if (!msg.send(_workerRouter)) {
+	zmq::multipart_t toSend;
+	toSend.addstr(identifier);
+	toSend.add(std::move(msg));
+	SPDLOG_DEBUG("Send message to player {} with identifier {}", userName, identifier);
+	if (!toSend.send(_workerRouter)) {
 		SPDLOG_ERROR("Failure to send message to player {} in fightingPit {}.", userName, fpId);
 		return false;
 	}
@@ -190,18 +191,22 @@ WorkerService::sendMessageToPlayer(unsigned fpId, const std::string& userName, z
 }
 
 bool
-WorkerService::broadcastMsg(unsigned fpId, zmq::multipart_t& msg)
+WorkerService::broadcastMsg(unsigned fpId, zmq::message_t&& msg, const std::string& except)
 {
 	const auto identifiersIt = _arenaIdOnIdentifier.find(fpId);
 	if (identifiersIt == _arenaIdOnIdentifier.end())
 		return false;
+	zmq::multipart_t toSend;
 
-	const unsigned identifierIndex = msg.size();
-	msg.add({}); // add empty frame (identifier frame at index msg.size() before insertion)
+	toSend.add({}); // add empty frame (identifier frame at index 0)
+	toSend.add(std::move(msg)); // add content
 
 	for (const auto&[userName, identifier] : identifiersIt->second) {
-		msg.at(identifierIndex).rebuild(identifier.data(), identifier.size());
-		if (!msg.send(_workerRouter)) {
+		if (userName == except)
+			continue;
+		toSend.at(0).rebuild(identifier.data(), identifier.size());
+		SPDLOG_DEBUG("Send message to player {} with identifier {}", userName, identifier);
+		if (!toSend.send(_workerRouter)) {
 			SPDLOG_ERROR("fightingPit of id {} : Message has not been correctly sent to {}, {}", fpId, userName, identifier);
 			return false;
 		}

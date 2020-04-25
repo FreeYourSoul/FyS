@@ -40,8 +40,6 @@
 #include <ChaiRegister.hh>
 #include <fightingPit/team/TeamMember.hh>
 
-using namespace std::chrono_literals;
-
 // forward declarations
 namespace fys::arena {
 class FightingContender;
@@ -51,11 +49,11 @@ class PartyTeam;
 
 namespace fys::arena {
 
-//! interval of time between 2 turn for a player depending on the difficulty
+// interval of time between 2 turn for a player depending on the difficulty
 namespace interval {
-constexpr static auto EASY = 20000ms;
-constexpr static auto MEDIUM = 15000ms;
-constexpr static auto HARD = 8000ms;
+constexpr static auto EASY = std::chrono::milliseconds(20000);
+constexpr static auto MEDIUM = std::chrono::milliseconds(15000);
+constexpr static auto HARD = std::chrono::milliseconds(10000);
 }
 
 //! Actions struct containing all the information to forward to the member's pending action Queue

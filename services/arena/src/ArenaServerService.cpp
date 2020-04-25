@@ -178,7 +178,7 @@ ArenaServerService::runServerLoop() noexcept
 						_awaitingArena.erase(playerAwaitedIt); // remove player from awaited player
 					}
 					spdlog::info("Awaited player {} has logged in fighting pit of id:{}", userName, fightingPitId);
-					_workerService.upsertPlayerIdentifier(fightingPitId, userName, idtPlayer.str());
+					_workerService.upsertPlayerIdentifier(fightingPitId, userName, idtPlayer.to_string());
 					_workerService.sendMsgNewArrivingTeam(fightingPitId, userName);
 				},
 

@@ -37,7 +37,6 @@ void
 ConnectionHandler::sendMessageToDispatcher(zmq::multipart_t&& msg) noexcept
 {
 	if (_dealerConnectionToDispatcher.connected()) {
-		SPDLOG_DEBUG("Message send to dispatcher {}", msg.str());
 		msg.send(_dealerConnectionToDispatcher);
 	}
 }
