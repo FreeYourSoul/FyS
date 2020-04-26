@@ -55,9 +55,6 @@ class Sampy {
         this.set_explicit(true);
         this.level = level;
         this.id = contenderId;
-    }
-
-    def setupContender() {
         this.actions = action(
 
             // possibles actions/decide target vector
@@ -89,7 +86,9 @@ class Sampy {
                     }
             }, ""
         );
+    }
 
+    def setupContender() {
         var &thisContender = pitContenders.getFightingContender(this.id);
         var &thisStatus = thisContender.accessStatus();
         var addLifePerLevel = 150 * 0.02; // +2% life per level

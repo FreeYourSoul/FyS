@@ -51,7 +51,7 @@ ContenderScripting::loadContenderScriptFromFile(const std::string& filePath)
 {
 	// load script content (containing the class)
 	try {
-		_chai.get().eval_file(filePath);
+		_chai.get().use(filePath);
 	}
 	catch (const chaiscript::exception::eval_error& ee) {
 		SPDLOG_WARN("Error caught on scripting loading\n{}\n{}", ee.what(), ee.detail);
