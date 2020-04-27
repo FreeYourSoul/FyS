@@ -42,7 +42,6 @@ ErrorMessage : string
 
 /// Reply frame sent to the player
 table ReplyFrame {
-    typeReply:TypeReply;
     content:Content;
 }
 

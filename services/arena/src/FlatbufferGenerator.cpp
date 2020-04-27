@@ -24,6 +24,7 @@
 #include <spdlog/spdlog.h>
 
 #include <FightingPitState_generated.h>
+#include <ReplyFrame_generated.h>
 
 #include <fightingPit/FightingPit.hh>
 #include <fightingPit/contender/FightingContender.hh>
@@ -54,6 +55,19 @@ retrieveStringVector(const std::vector<std::pair<std::string, uint>> doableAttac
 namespace fys::arena {
 
 std::pair<void*, uint>
+FlatbufferGenerator::generateErrorSaturated(const std::string& arenaCode)
+{
+	_fbb.Clear();
+	auto errorFb = fb::CreateReplyFrame(
+			_fbb,
+			fys::fb::Content_ErrorMessage,
+			_fbb.CreateString(std::string("Arena server is staturated: Code:") + arenaCode).Union()
+	);
+	fb::FinishReplyFrameBuffer(_fbb, errorFb);
+	return std::pair(_fbb.GetBufferPointer(), _fbb.GetSize());
+}
+
+std::pair<void*, uint>
 FlatbufferGenerator::generateFightingPitState(const fys::arena::FightingPit& fp)
 {
 	_fbb.Clear();
@@ -65,7 +79,12 @@ FlatbufferGenerator::generateFightingPitState(const fys::arena::FightingPit& fp)
 			fbPartyTeamVec,
 			fbContenderVec
 	);
-	fb::FinishFightingPitStateBuffer(_fbb, fps);
+	auto message = fb::CreateReplyFrame(
+			_fbb,
+			fys::fb::Content_FightingPitState,
+			fps.Union()
+	);
+	fb::FinishReplyFrameBuffer(_fbb, message);
 	return std::pair(_fbb.GetBufferPointer(), _fbb.GetSize());
 }
 
@@ -88,8 +107,13 @@ FlatbufferGenerator::generatePartyTeamStatus(const PartyTeam& partyTeam)
 	builder.add_user_name(fbName);
 	builder.add_members(fbMemberVec);
 	builder.add_attacks(fbVecAttacks);
-	_fbb.Finish(builder.Finish());
 
+	auto message = fb::CreateReplyFrame(
+			_fbb,
+			fys::fb::Content_PartyTeamStatus,
+			builder.Finish().Union()
+	);
+	fb::FinishReplyFrameBuffer(_fbb, message);
 	return std::pair(_fbb.GetBufferPointer(), _fbb.GetSize());
 }
 

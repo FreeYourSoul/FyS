@@ -148,6 +148,7 @@ private:
 	[[nodiscard]] std::pair<bool, AwaitingPlayerArenaIt>
 	isPlayerAwaited(const std::string& name, const std::string& token, unsigned idFightingPit) const noexcept;
 
+	void sendSaturatedErrorMsg(zmq::message_t&& identity);
 	void forwardReplyToDispatcher(zmq::message_t&& idtWs, const fys::arena::AwaitingPlayerArena& awaitArena) noexcept;
 
 

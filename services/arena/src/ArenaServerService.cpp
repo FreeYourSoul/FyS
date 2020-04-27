@@ -36,6 +36,7 @@
 #include <fightingPit/FightingPitAnnouncer.hh>
 
 #include <ArenaServerContext.hh>
+#include <FlatbufferGenerator.hh>
 #include "ArenaServerService.hh"
 
 // anonymous namespace used for utility function to extract data from flatbuffer
@@ -110,8 +111,7 @@ ArenaServerService::runServerLoop() noexcept
 
 					// In case of a saturation of the server, return an error to the dispatcher
 					if (isSaturated()) {
-						// todo return an error to the dispatcher containing all
-						//  the incoming message for it to be forwarded to another server
+						sendSaturatedErrorMsg(std::move(identityWs));
 						return;
 					}
 
@@ -294,6 +294,13 @@ ArenaServerService::createNewFightingPit(const AwaitingPlayerArena& awaited) noe
 				awaited.gen->isAmbush, awaited.gen->serverCode, awaited.gen->isJoinDisabled);
 	}
 	return id;
+}
+
+void
+ArenaServerService::sendSaturatedErrorMsg(zmq::message_t&& identity)
+{
+	auto[error, size] = fys::arena::FlatbufferGenerator().generateErrorSaturated(_ctx.get().getServerCode());
+	_workerService.directSendMessageToPlayer(std::move(identity), zmq::message_t(error, size));
 }
 
 } // namespace fys::arena

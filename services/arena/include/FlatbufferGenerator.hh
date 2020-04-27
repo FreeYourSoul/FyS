@@ -66,6 +66,9 @@ class FlatbufferGenerator {
 
 public:
 	[[nodiscard]] std::pair<void*, uint>
+	generateErrorSaturated(const std::string& arenaCode);
+
+	[[nodiscard]] std::pair<void*, uint>
 	generateFightingPitState(const fys::arena::FightingPit& fp);
 
 	[[nodiscard]] std::pair<void*, uint>

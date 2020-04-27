@@ -171,6 +171,16 @@ WorkerService::sendMsgNewArrivingTeam(unsigned fpId, const std::string& userName
 	}
 }
 
+void
+WorkerService::directSendMessageToPlayer(zmq::message_t&& identity, zmq::message_t&& msg) {
+	zmq::multipart_t toSend;
+	toSend.add(std::move(identity));
+	toSend.add(std::move(msg));
+	if (!toSend.send(_workerRouter)) {
+		SPDLOG_ERROR("Failure to send directly the message: {}", toSend.str());
+	}
+}
+
 bool
 WorkerService::sendMessageToPlayer(unsigned fpId, const std::string& userName, zmq::message_t&& msg)
 {

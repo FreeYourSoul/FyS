@@ -172,6 +172,8 @@ public:
 	 */
 	void upsertPlayerIdentifier(unsigned fightingPitId, std::string userName, std::string idtPlayer);
 
+	void directSendMessageToPlayer(zmq::message_t&& identity, zmq::message_t&& msg);
+
 private:
 	bool
 	broadcastMsg(unsigned fpId, zmq::message_t&& msg, const std::string& except = "");
