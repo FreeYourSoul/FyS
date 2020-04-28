@@ -38,6 +38,7 @@
 #include "TestType.hh"
 
 #include <FlatbufferGenerator.hh>
+#include <ReplyFrame_generated.h>
 
 using namespace fys::arena;
 
@@ -155,7 +156,9 @@ TEST_CASE("FlatbufferGeneratorTestCase", "[service][arena][util]")
 		REQUIRE(nullptr != data);
 		REQUIRE(0 < size);
 
-		const fys::fb::FightingPitState* fps = flatbuffers::GetRoot<fys::fb::FightingPitState>(data);
+		const fys::fb::ReplyFrame* rp = fys::fb::GetReplyFrame(data);
+		REQUIRE(fys::fb::Content_FightingPitState == rp->content_type());
+		const fys::fb::FightingPitState* fps = rp->content_as_FightingPitState();
 
 		REQUIRE(nullptr != fps);
 		REQUIRE(0 == fps->idFightingPit());
@@ -239,7 +242,9 @@ TEST_CASE("FlatbufferGeneratorTestCase", "[service][arena][util]")
 		REQUIRE(nullptr != data);
 		REQUIRE(0 < size);
 
-		const fys::fb::PartyTeamStatus* pts = flatbuffers::GetRoot<fys::fb::PartyTeamStatus>(data);
+		const fys::fb::ReplyFrame* rp = fys::fb::GetReplyFrame(data);
+		REQUIRE(fys::fb::Content_PartyTeamStatus == rp->content_type());
+		const fys::fb::PartyTeamStatus* pts = rp->content_as_PartyTeamStatus();
 
 		REQUIRE(nullptr != pts);
 

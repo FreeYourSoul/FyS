@@ -179,6 +179,15 @@ public:
 	getPitContenders() const { return _contenders; }
 
 	/**
+	 * Check if the fight has started, if it has check if the fight is finished (winner determined)
+	 * If ally wins, a generation of the loot is made and returned to the clients
+	 * If enemy wins, a notification is sent to players
+	 * @return true if the fight has been terminated, false otherwise
+	 */
+	[[nodiscard]] bool
+	checkEndStatusFightingPit();
+
+	/**
 	 * Check if the battle is done, the winner doesn't matter, this is a status to cleanup the fighting pit when its done
 	 * @return true if the battle is over, false otherwise
 	 */
@@ -197,14 +206,6 @@ public:
 	void setArenaId(unsigned arenaId) noexcept { _arenaId = arenaId; }
 
 private:
-	/**
-	 * Check if the fight has started, if it has check if the fight is finished (winner determined)
-	 * If ally wins, a generation of the loot is made and returned to the clients
-	 * If enemy wins, a notification is sent to players
-	 * @return true if the fight has been terminated, false otherwise
-	 */
-	[[nodiscard]] bool
-	checkEndStatusFightingPit();
 
 	/**
 	 * Check if the target is registered in the ChaiScript engine, if it is, check if the action requested

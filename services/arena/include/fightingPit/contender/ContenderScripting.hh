@@ -58,7 +58,7 @@ public:
 	[[nodiscard]] bool
 	setupContender();
 
-	//! instantiate the contender in chai engine
+	//! fill _doableActions and instantiate the contender in chai engine
 	void registerContenderScript();
 	void loadContenderScriptFromFile(const std::string& filePath);
 	void setContenderName(std::string contenderName) { _contenderName = std::move(contenderName); }

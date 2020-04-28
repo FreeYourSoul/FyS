@@ -39,7 +39,12 @@ ContenderScripting::registerContenderScript()
 	std::string createVar =
 			fmt::format("global {}={}({},{});", getChaiContenderId(), _contenderName, _contenderId, _level);
 	try {
+		// register instance in ChaiScript
 		_chai.get().eval(createVar);
+
+		// load doable actions
+		_doableActions = _chai.get().eval<std::vector<std::string>>(fmt::format(
+				"retrieveDoableActions({}.actions.act);", getChaiContenderId()));
 	}
 	catch (const chaiscript::exception::eval_error& ee) {
 		SPDLOG_ERROR("Error caught when instantiating variable (script : ''{}'') {}", createVar, ee.what());

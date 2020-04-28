@@ -172,7 +172,8 @@ WorkerService::sendMsgNewArrivingTeam(unsigned fpId, const std::string& userName
 }
 
 void
-WorkerService::directSendMessageToPlayer(zmq::message_t&& identity, zmq::message_t&& msg) {
+WorkerService::directSendMessageToPlayer(zmq::message_t&& identity, zmq::message_t&& msg)
+{
 	zmq::multipart_t toSend;
 	toSend.add(std::move(identity));
 	toSend.add(std::move(msg));
