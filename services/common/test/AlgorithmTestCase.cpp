@@ -25,7 +25,7 @@
 #include <tuple>
 #include <algorithm/algorithm.hh>
 
-TEST_CASE("Test_find_more_suitable", "[common][algorithm]")
+TEST_CASE("AlgorithmTestCase Test_find_more_suitable", "[common][algorithm]")
 {
 
 	SECTION("Empty") {

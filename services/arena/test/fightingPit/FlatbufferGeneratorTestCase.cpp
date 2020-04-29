@@ -281,7 +281,23 @@ TEST_CASE("FlatbufferGeneratorTestCase", "[service][arena][util]")
 		REQUIRE("arena:actions:damage:slash_super.chai" == pts->attacks()->Get(3)->str());
 		REQUIRE("arena:actions:damage:slash_didi.chai" == pts->attacks()->Get(4)->str());
 
+
 	} // End section : Test generatePartyTeamStatus
+
+	SECTION("Test generateErrorSaturated") {
+		auto[data, size] = fg.generateErrorSaturated("WS0X0");
+
+		REQUIRE(nullptr != data);
+		REQUIRE(0 < size);
+
+		const fys::fb::ReplyFrame* rp = fys::fb::GetReplyFrame(data);
+		REQUIRE(fys::fb::Content_ErrorMessage == rp->content_type());
+		const auto* pts = rp->content_as_ErrorMessage();
+
+		REQUIRE(nullptr != pts);
+		REQUIRE("Arena server is saturated: Code:WS0X0" == rp->content_as_ErrorMessage()->str());
+
+	} // End section : Test generateErrorSaturated
 
 //	SECTION("Test Generate Cosmetic") {
 //

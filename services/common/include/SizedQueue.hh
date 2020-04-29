@@ -36,9 +36,9 @@ namespace fys::common {
  *
  * @note Not thread safe (for thread safe usage, a LockFreeQueue should be used)
  * @tparam TypeContainer type the queue contains
- * @tparam SIZE_QUEUE maximum size of the queue, defaulted to 100
+ * @tparam SIZE_QUEUE maximum size of the queue, defaulted to 32
  */
-template<typename TypeContainer, unsigned int SIZE_QUEUE = 100>
+template<typename TypeContainer, unsigned int SIZE_QUEUE = 32>
 class SizedQueue {
 
 	static_assert(SIZE_QUEUE < std::numeric_limits<unsigned int>::max());
@@ -48,7 +48,7 @@ public:
 	 * Pop the next element of the queue
 	 * @return the next element of the queue, if no such element exist, return an empty optional (nullopt)
 	 */
-	std::optional<TypeContainer>
+	[[nodiscard]] std::optional<TypeContainer>
 	pop()
 	{
 		if (_head < _tail) {
@@ -79,7 +79,7 @@ public:
 	 * Get the number of element in the queue to be popped
 	 * @return number of element that can be popped out of the queue
 	 */
-	uint
+	[[nodiscard]] uint
 	size() const { return _tail - _head; }
 
 private:

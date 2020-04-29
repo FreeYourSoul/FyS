@@ -25,7 +25,7 @@
 #include <string>
 #include <BoundaryMap.hh>
 
-TEST_CASE ("BoundaryMap test case", "[common][util]")
+TEST_CASE ("BoundaryMapTestCase", "[common][util]")
 {
 
 	fys::BoundaryMap<std::string> bmap;

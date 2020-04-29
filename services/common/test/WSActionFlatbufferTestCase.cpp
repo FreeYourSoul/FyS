@@ -26,7 +26,7 @@
 #include <flatbuffers/flatbuffers.h>
 #include <WSAction_generated.h>
 
-TEST_CASE("FlatBuffer WSAction Move", "[common][fb]")
+TEST_CASE("WSActionFlatbufferTestCase WSAction Move", "[common][fb]")
 {
 	flatbuffers::FlatBufferBuilder fbb;
 	auto move = fys::fb::CreateMove(fbb, 42.42);
@@ -57,7 +57,7 @@ TEST_CASE("FlatBuffer WSAction Move", "[common][fb]")
 
 }
 
-TEST_CASE("FlatBuffer WSAction PnjInteract")
+TEST_CASE("WSActionFlatbufferTestCase PnjInteract")
 {
 	flatbuffers::FlatBufferBuilder fbb;
 	auto pnjInterract = fys::fb::CreatePnjInteract(fbb, fbb.CreateString("idPnj"));

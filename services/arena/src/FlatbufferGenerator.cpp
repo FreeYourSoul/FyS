@@ -61,7 +61,7 @@ FlatbufferGenerator::generateErrorSaturated(const std::string& arenaCode)
 	auto errorFb = fb::CreateReplyFrame(
 			_fbb,
 			fys::fb::Content_ErrorMessage,
-			_fbb.CreateString(std::string("Arena server is staturated: Code:") + arenaCode).Union()
+			_fbb.CreateString(std::string("Arena server is saturated: Code:") + arenaCode).Union()
 	);
 	fb::FinishReplyFrameBuffer(_fbb, errorFb);
 	return std::pair(_fbb.GetBufferPointer(), _fbb.GetSize());

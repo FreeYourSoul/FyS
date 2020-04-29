@@ -24,7 +24,7 @@
 #include <catch2/catch.hpp>
 #include <SizedQueue.hh>
 
-TEST_CASE("SizedQueue testing", "[common]")
+TEST_CASE("AlgorithmTestCase SizedQueue testing", "[common]")
 {
 
 	fys::common::SizedQueue<std::string, 7> strQueue;
