@@ -56,7 +56,7 @@ FightingPit::FightingPit(std::string creatorUserName, fys::arena::FightingPit::L
 		_timeInterlude(retrieveTimeInterludeFromLevelDegree(_levelFightingPit)),
 		_layoutMapping(_contenders, _partyTeams),
 		_creatorUserName(std::move(creatorUserName)),
-		_chaiPtr(ChaiRegister::createChaiInstance(_contenders, _partyTeams)),
+		_chaiPtr(ChaiRegister::createChaiInstance(_contenders, _partyTeams, _layoutMapping)),
 		_rewards(std::make_unique<Rewards>()) { }
 
 bool

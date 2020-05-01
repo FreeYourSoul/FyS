@@ -30,7 +30,7 @@ int
 main(int ac, char** av)
 {
 	try {
-		spdlog::set_pattern("[%D %H:%M:%S][ %=30s ][%L]: %v");
+		spdlog::set_pattern("[%D %H:%M:%S][ %22s:%-4# ][%L]: %v");
 		fys::arena::ArenaServerContext ctx(ac, av);
 		int major, minor, patch;
 		zmq_version(&major, &minor, &patch);

@@ -63,7 +63,8 @@ TEST_CASE("Test register/load player", "[service][arena][script_test]")
 
 	fys::arena::PitContenders pc;
 	fys::arena::AllyPartyTeams apt;
-	auto chai = fys::arena::ChaiRegister::createChaiInstance(pc, apt);
+	fys::arena::FightingPitLayout layout(pc, apt);
+	auto chai = fys::arena::ChaiRegister::createChaiInstance(pc, apt, layout);
 
 	try {
 		REQUIRE(chai->eval<bool>(R"(

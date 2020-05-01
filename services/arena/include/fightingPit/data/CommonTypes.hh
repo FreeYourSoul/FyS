@@ -28,6 +28,7 @@
 #include <vector>
 #include <set>
 #include <functional>
+#include <fightingPit/HexagonSide.hh>
 
 //! Types and functions linking C++ world with ChaiScript
 namespace fys::arena::data {
@@ -146,6 +147,12 @@ struct Status {
 	Life life;
 	MagicPoint magicPoint;
 	uint initialSpeed;
+
+	/**
+	 * When moving the appropriate flag is set in FightingPitLayout which use
+	 * this member to set the new position of the character
+	 */
+	HexagonSide::Orientation moving = HexagonSide::Orientation::NONE;
 
 	std::vector<Alteration> alteration_before;
 	std::vector<Alteration> alteration_after;

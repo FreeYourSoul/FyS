@@ -231,6 +231,7 @@ private:
 	[[nodiscard]] bool
 	addContender(const std::shared_ptr<FightingContender>& fc);
 
+	//! Initialize the sideBattles vector in the same order as the enum in order to easily access a specific side
 	void initializeSideBattles();
 	void initializePriorityListInSidesBattle();
 

@@ -75,19 +75,12 @@ public:
 	operator*() const { return std::pair(_hexagon, _side); }
 
 	bool move(HexagonSide::Orientation destinationSide, bool forceMovement = false);
-	bool moveRight();
-	bool moveLeft();
-	bool moveBack();
 
 	[[nodiscard]] bool
 	isAmbushSide() const;
 
 	[[nodiscard]] bool
 	canMove(HexagonSide::Orientation destinationSide) const;
-
-private:
-	[[nodiscard]] bool
-	changeSide(HexagonSide::Orientation destination);
 
 	[[nodiscard]] Orientation
 	findLeft() const;
@@ -97,6 +90,11 @@ private:
 
 	[[nodiscard]] Orientation
 	findBack() const;
+
+private:
+	[[nodiscard]] bool
+	changeSide(HexagonSide::Orientation destination);
+
 
 private:
 	Hexagon _hexagon = Hexagon::A;

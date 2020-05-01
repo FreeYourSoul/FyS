@@ -33,6 +33,32 @@
 #include <Cml.hh>
 #include <CmlCopy.hh>
 
+// moving action
+static const std::string actionTestMoveScript = R"(
+class Move_TEST {
+	attr moveTo;
+
+    def Move_TEST() {
+		this.moveTo = 0;
+	}
+
+    def requireTarget() {
+        NONE;
+    }
+
+    def execute(target) {
+		if (this.moveTo == 0) {
+			this.moveTo = this.moveTo + 1;
+			initiateContenderMove(target, A_NE);
+		}
+		else if (this.moveTo == 1) {
+			this.moveTo = this.moveTo + 1;
+			initiateContenderMove(target, C_NE);
+		}
+    }
+};
+)";
+
 // sleep action, is actually skipping turn and retrieving MP
 static const std::string actionTestSleepScript = R"(
 class Sleep_TEST {
@@ -52,7 +78,6 @@ class Sleep_TEST {
 		}
         1;
     }
-
 };
 )";
 
@@ -78,6 +103,56 @@ class Attack_TEST {
             targetStatus.life.current = 0;
         }
         1;
+    }
+
+};
+)";
+
+// monster just move arround
+static const std::string MonsterTestMoveAttack = actionTestMoveScript + R"(
+class TestMonsterMove {
+
+    attr id;
+    attr level;
+    attr actions;
+
+    def TestMonsterMove(contenderId, level) {
+        this.set_explicit(true);
+        this.level = level;
+        this.id = contenderId;
+
+        this.actions = action(
+
+            // possibles actions/decide target vector
+            [
+                action(Move_TEST(), fun(action, thisContender) {
+					thisContender;
+				}, "test:key:1")
+            ],
+
+            // decide target function
+            fun(currentContenderStatus) {
+				0;
+            }, ""
+        );
+    }
+
+    def setupContender() {
+        var &thisContender = pitContenders.getFightingContender(this.id);
+        var &thisStatus = thisContender.accessStatus();
+        thisStatus.speed = 8;
+        thisStatus.life.total = 100;
+        thisStatus.life.current = thisStatus.life.total;
+        thisStatus.magicPoint.total = 100;
+        thisStatus.magicPoint.current = thisStatus.magicPoint.total;
+     }
+
+    def runScriptedAction(id) {
+        var &thisContender = pitContenders.getFightingContender(id);
+        var &thisStatus = thisContender.accessStatus();
+        var actionId = this.actions.decisionStrategy(thisStatus);
+        var &action = this.actions.act[actionId];
+        action.act.execute(action.decisionStrategy(action.act, thisContender));
     }
 
 };

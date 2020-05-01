@@ -1060,63 +1060,63 @@ TEST_CASE("HexagonSideTestCase", "[service][arena]")
 			fys::arena::HexagonSide hexagon(fys::arena::HexagonSide::Hexagon::A, fys::arena::HexagonSide::Orientation::A_SE);
 
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::A, fys::arena::HexagonSide::Orientation::A_SE) == *hexagon);
-			REQUIRE(hexagon.moveLeft());
+			REQUIRE(hexagon.move(hexagon.findLeft()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::A, fys::arena::HexagonSide::Orientation::A_NE) == *hexagon);
-			REQUIRE(hexagon.moveLeft());
+			REQUIRE(hexagon.move(hexagon.findLeft()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::A, fys::arena::HexagonSide::Orientation::A_N) == *hexagon);
-			REQUIRE(hexagon.moveLeft());
+			REQUIRE(hexagon.move(hexagon.findLeft()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::A, fys::arena::HexagonSide::Orientation::A_NW) == *hexagon);
-			REQUIRE(hexagon.moveLeft());
+			REQUIRE(hexagon.move(hexagon.findLeft()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::A, fys::arena::HexagonSide::Orientation::A_SW) == *hexagon);
-			REQUIRE(hexagon.moveLeft());
+			REQUIRE(hexagon.move(hexagon.findLeft()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::A, fys::arena::HexagonSide::Orientation::A_S) == *hexagon);
-			REQUIRE(hexagon.moveLeft());
+			REQUIRE(hexagon.move(hexagon.findLeft()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::A, fys::arena::HexagonSide::Orientation::A_SE) == *hexagon);
-			REQUIRE(hexagon.moveLeft());
+			REQUIRE(hexagon.move(hexagon.findLeft()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::A, fys::arena::HexagonSide::Orientation::A_NE) == *hexagon);
-			REQUIRE(hexagon.moveLeft());
+			REQUIRE(hexagon.move(hexagon.findLeft()));
 		} // End section : Hexagone A full circle by left
 
 		SECTION("Hexagone B full circle by left") {
 			fys::arena::HexagonSide hexagon(fys::arena::HexagonSide::Hexagon::B, fys::arena::HexagonSide::Orientation::B_SE);
 
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::B, fys::arena::HexagonSide::Orientation::B_SE) == *hexagon);
-			REQUIRE(hexagon.moveLeft());
+			REQUIRE(hexagon.move(hexagon.findLeft()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::B, fys::arena::HexagonSide::Orientation::B_NE) == *hexagon);
-			REQUIRE(hexagon.moveLeft());
+			REQUIRE(hexagon.move(hexagon.findLeft()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::B, fys::arena::HexagonSide::Orientation::B_N) == *hexagon);
-			REQUIRE(hexagon.moveLeft());
+			REQUIRE(hexagon.move(hexagon.findLeft()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::B, fys::arena::HexagonSide::Orientation::B_NW) == *hexagon);
-			REQUIRE(hexagon.moveLeft());
+			REQUIRE(hexagon.move(hexagon.findLeft()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::B, fys::arena::HexagonSide::Orientation::B_SW) == *hexagon);
-			REQUIRE(hexagon.moveLeft());
+			REQUIRE(hexagon.move(hexagon.findLeft()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::B, fys::arena::HexagonSide::Orientation::B_S) == *hexagon);
-			REQUIRE(hexagon.moveLeft());
+			REQUIRE(hexagon.move(hexagon.findLeft()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::B, fys::arena::HexagonSide::Orientation::B_SE) == *hexagon);
-			REQUIRE(hexagon.moveLeft());
+			REQUIRE(hexagon.move(hexagon.findLeft()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::B, fys::arena::HexagonSide::Orientation::B_NE) == *hexagon);
-			REQUIRE(hexagon.moveLeft());
+			REQUIRE(hexagon.move(hexagon.findLeft()));
 		} // End section : Hexagone B full circle by left
 
 		SECTION("Hexagone C full circle by left") {
 			fys::arena::HexagonSide hexagon(fys::arena::HexagonSide::Hexagon::C, fys::arena::HexagonSide::Orientation::C_SE);
 
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::C, fys::arena::HexagonSide::Orientation::C_SE) == *hexagon);
-			REQUIRE(hexagon.moveLeft());
+			REQUIRE(hexagon.move(hexagon.findLeft()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::C, fys::arena::HexagonSide::Orientation::C_NE) == *hexagon);
-			REQUIRE(hexagon.moveLeft());
+			REQUIRE(hexagon.move(hexagon.findLeft()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::C, fys::arena::HexagonSide::Orientation::C_N) == *hexagon);
-			REQUIRE(hexagon.moveLeft());
+			REQUIRE(hexagon.move(hexagon.findLeft()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::C, fys::arena::HexagonSide::Orientation::C_NW) == *hexagon);
-			REQUIRE(hexagon.moveLeft());
+			REQUIRE(hexagon.move(hexagon.findLeft()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::C, fys::arena::HexagonSide::Orientation::C_SW) == *hexagon);
-			REQUIRE(hexagon.moveLeft());
+			REQUIRE(hexagon.move(hexagon.findLeft()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::C, fys::arena::HexagonSide::Orientation::C_S) == *hexagon);
-			REQUIRE(hexagon.moveLeft());
+			REQUIRE(hexagon.move(hexagon.findLeft()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::C, fys::arena::HexagonSide::Orientation::C_SE) == *hexagon);
-			REQUIRE(hexagon.moveLeft());
+			REQUIRE(hexagon.move(hexagon.findLeft()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::C, fys::arena::HexagonSide::Orientation::C_NE) == *hexagon);
-			REQUIRE(hexagon.moveLeft());
+			REQUIRE(hexagon.move(hexagon.findLeft()));
 		} // End section : Hexagone C full circle by left
 
 	} // End section : MoveLeft
@@ -1127,19 +1127,19 @@ TEST_CASE("HexagonSideTestCase", "[service][arena]")
 			fys::arena::HexagonSide hexagon(fys::arena::HexagonSide::Hexagon::A, fys::arena::HexagonSide::Orientation::A_SE);
 
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::A, fys::arena::HexagonSide::Orientation::A_SE) == *hexagon);
-			REQUIRE(hexagon.moveRight());
+			REQUIRE(hexagon.move(hexagon.findRight()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::A, fys::arena::HexagonSide::Orientation::A_S) == *hexagon);
-			REQUIRE(hexagon.moveRight());
+			REQUIRE(hexagon.move(hexagon.findRight()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::A, fys::arena::HexagonSide::Orientation::A_SW) == *hexagon);
-			REQUIRE(hexagon.moveRight());
+			REQUIRE(hexagon.move(hexagon.findRight()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::A, fys::arena::HexagonSide::Orientation::A_NW) == *hexagon);
-			REQUIRE(hexagon.moveRight());
+			REQUIRE(hexagon.move(hexagon.findRight()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::A, fys::arena::HexagonSide::Orientation::A_N) == *hexagon);
-			REQUIRE(hexagon.moveRight());
+			REQUIRE(hexagon.move(hexagon.findRight()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::A, fys::arena::HexagonSide::Orientation::A_NE) == *hexagon);
-			REQUIRE(hexagon.moveRight());
+			REQUIRE(hexagon.move(hexagon.findRight()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::A, fys::arena::HexagonSide::Orientation::A_SE) == *hexagon);
-			REQUIRE(hexagon.moveRight());
+			REQUIRE(hexagon.move(hexagon.findRight()));
 
 		} // End section : Hexagone A full circle by right
 
@@ -1147,19 +1147,19 @@ TEST_CASE("HexagonSideTestCase", "[service][arena]")
 			fys::arena::HexagonSide hexagon(fys::arena::HexagonSide::Hexagon::B, fys::arena::HexagonSide::Orientation::B_SE);
 
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::B, fys::arena::HexagonSide::Orientation::B_SE) == *hexagon);
-			REQUIRE(hexagon.moveRight());
+			REQUIRE(hexagon.move(hexagon.findRight()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::B, fys::arena::HexagonSide::Orientation::B_S) == *hexagon);
-			REQUIRE(hexagon.moveRight());
+			REQUIRE(hexagon.move(hexagon.findRight()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::B, fys::arena::HexagonSide::Orientation::B_SW) == *hexagon);
-			REQUIRE(hexagon.moveRight());
+			REQUIRE(hexagon.move(hexagon.findRight()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::B, fys::arena::HexagonSide::Orientation::B_NW) == *hexagon);
-			REQUIRE(hexagon.moveRight());
+			REQUIRE(hexagon.move(hexagon.findRight()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::B, fys::arena::HexagonSide::Orientation::B_N) == *hexagon);
-			REQUIRE(hexagon.moveRight());
+			REQUIRE(hexagon.move(hexagon.findRight()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::B, fys::arena::HexagonSide::Orientation::B_NE) == *hexagon);
-			REQUIRE(hexagon.moveRight());
+			REQUIRE(hexagon.move(hexagon.findRight()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::B, fys::arena::HexagonSide::Orientation::B_SE) == *hexagon);
-			REQUIRE(hexagon.moveRight());
+			REQUIRE(hexagon.move(hexagon.findRight()));
 
 		} // End section : Hexagone B full circle by right
 
@@ -1167,19 +1167,19 @@ TEST_CASE("HexagonSideTestCase", "[service][arena]")
 			fys::arena::HexagonSide hexagon(fys::arena::HexagonSide::Hexagon::C, fys::arena::HexagonSide::Orientation::C_SE);
 
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::C, fys::arena::HexagonSide::Orientation::C_SE) == *hexagon);
-			REQUIRE(hexagon.moveRight());
+			REQUIRE(hexagon.move(hexagon.findRight()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::C, fys::arena::HexagonSide::Orientation::C_S) == *hexagon);
-			REQUIRE(hexagon.moveRight());
+			REQUIRE(hexagon.move(hexagon.findRight()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::C, fys::arena::HexagonSide::Orientation::C_SW) == *hexagon);
-			REQUIRE(hexagon.moveRight());
+			REQUIRE(hexagon.move(hexagon.findRight()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::C, fys::arena::HexagonSide::Orientation::C_NW) == *hexagon);
-			REQUIRE(hexagon.moveRight());
+			REQUIRE(hexagon.move(hexagon.findRight()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::C, fys::arena::HexagonSide::Orientation::C_N) == *hexagon);
-			REQUIRE(hexagon.moveRight());
+			REQUIRE(hexagon.move(hexagon.findRight()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::C, fys::arena::HexagonSide::Orientation::C_NE) == *hexagon);
-			REQUIRE(hexagon.moveRight());
+			REQUIRE(hexagon.move(hexagon.findRight()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::C, fys::arena::HexagonSide::Orientation::C_SE) == *hexagon);
-			REQUIRE(hexagon.moveRight());
+			REQUIRE(hexagon.move(hexagon.findRight()));
 		} // End section : Hexagone C full circle by right
 
 	} // End section : MoveRight
@@ -1207,41 +1207,41 @@ TEST_CASE("HexagonSideTestCase", "[service][arena]")
 		fys::arena::HexagonSide hexagonC_NW(fys::arena::HexagonSide::Hexagon::C, fys::arena::HexagonSide::Orientation::C_NW);
 
 		SECTION("All working back") {
-			REQUIRE(hexagonA_SE.moveBack());
+			REQUIRE(hexagonA_SE.move(hexagonA_SE.findBack()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::C, fys::arena::HexagonSide::Orientation::C_NW) == *hexagonA_SE);
 
-			REQUIRE(hexagonA_NE.moveBack());
+			REQUIRE(hexagonA_NE.move(hexagonA_NE.findBack()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::B, fys::arena::HexagonSide::Orientation::B_SW) == *hexagonA_NE);
 
-			REQUIRE(hexagonB_SW.moveBack());
+			REQUIRE(hexagonB_SW.move(hexagonB_SW.findBack()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::A, fys::arena::HexagonSide::Orientation::A_NE) == *hexagonB_SW);
 
-			REQUIRE(hexagonB_S.moveBack());
+			REQUIRE(hexagonB_S.move(hexagonB_S.findBack()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::C, fys::arena::HexagonSide::Orientation::C_N) == *hexagonB_S);
 
-			REQUIRE(hexagonC_N.moveBack());
+			REQUIRE(hexagonC_N.move(hexagonC_N.findBack()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::B, fys::arena::HexagonSide::Orientation::B_S) == *hexagonC_N);
 
-			REQUIRE(hexagonC_NW.moveBack());
+			REQUIRE(hexagonC_NW.move(hexagonC_NW.findBack()));
 			REQUIRE(std::pair(fys::arena::HexagonSide::Hexagon::A, fys::arena::HexagonSide::Orientation::A_SE) == *hexagonC_NW);
 
 		} // End section : All working back
 
 		SECTION("All non working back") {
-			REQUIRE_FALSE(hexagonA_S.moveBack());
-			REQUIRE_FALSE(hexagonA_N.moveBack());
-			REQUIRE_FALSE(hexagonA_SW.moveBack());
-			REQUIRE_FALSE(hexagonA_NW.moveBack());
+			REQUIRE_FALSE(hexagonA_S.move(hexagonA_S.findBack()));
+			REQUIRE_FALSE(hexagonA_N.move(hexagonA_N.findBack()));
+			REQUIRE_FALSE(hexagonA_SW.move(hexagonA_SW.findBack()));
+			REQUIRE_FALSE(hexagonA_NW.move(hexagonA_NW.findBack()));
 
-			REQUIRE_FALSE(hexagonB_N.moveBack());
-			REQUIRE_FALSE(hexagonB_NW.moveBack());
-			REQUIRE_FALSE(hexagonB_NE.moveBack());
-			REQUIRE_FALSE(hexagonB_SE.moveBack());
+			REQUIRE_FALSE(hexagonB_N.move(hexagonB_N.findBack()));
+			REQUIRE_FALSE(hexagonB_NW.move(hexagonB_NW.findBack()));
+			REQUIRE_FALSE(hexagonB_NE.move(hexagonB_NE.findBack()));
+			REQUIRE_FALSE(hexagonB_SE.move(hexagonB_SE.findBack()));
 
-			REQUIRE_FALSE(hexagonC_S.moveBack());
-			REQUIRE_FALSE(hexagonC_SW.moveBack());
-			REQUIRE_FALSE(hexagonC_SE.moveBack());
-			REQUIRE_FALSE(hexagonC_NE.moveBack());
+			REQUIRE_FALSE(hexagonC_S.move(hexagonC_S.findBack()));
+			REQUIRE_FALSE(hexagonC_SW.move(hexagonC_SW.findBack()));
+			REQUIRE_FALSE(hexagonC_SE.move(hexagonC_SE.findBack()));
+			REQUIRE_FALSE(hexagonC_NE.move(hexagonC_NE.findBack()));
 		} // End section : All non working back
 
 	} // End section : test *

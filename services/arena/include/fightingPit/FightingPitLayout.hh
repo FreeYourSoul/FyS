@@ -89,20 +89,30 @@ public:
 	[[nodiscard]] unsigned
 	activeCharactersOnSide(HexagonSide::Orientation side) const;
 
+	[[nodiscard]] bool
+	initiateContenderMove(std::shared_ptr<FightingContender> contender, HexagonSide::Orientation moveTo);
+	[[nodiscard]] bool
+	initiateMemberMove(std::shared_ptr<TeamMember> member, HexagonSide::Orientation moveTo);
+	[[nodiscard]] bool
+	initiateForceContenderMove(std::shared_ptr<FightingContender> contender, HexagonSide::Orientation moveTo);
+	[[nodiscard]] bool
+	initiateForceMemberMove(std::shared_ptr<TeamMember> member, HexagonSide::Orientation moveTo);
+	[[nodiscard]] bool
+	initiateContenderMoveDir(std::shared_ptr<FightingContender> contender, data::MoveDirection moveDir);
+	[[nodiscard]] bool
+	initiateMemberMoveDir(std::shared_ptr<TeamMember> member, data::MoveDirection moveDir);
+
 	void executeMovements(std::vector<SideBattle>& sides);
 
 	static void setContenderInitiatePosition(FightingContender& contender, HexagonSide::Orientation side);
-	static void setAllyMoveInitiatePosition(TeamMember& teamMember, HexagonSide::Orientation side);
+	static void setAllyMoveInitiatePosition(TeamMember& tm, HexagonSide::Orientation side);
 
 private:
-	[[nodiscard]] static bool
-	move(HexagonSide& side, data::MoveDirection direction);
-
 	[[nodiscard]] std::vector<std::shared_ptr<TeamMember>>
-	getChangingSideTeamMembers() const;
+	getChangingSideTeamMembers();
 
 	[[nodiscard]] std::vector<std::shared_ptr<FightingContender>>
-	getChangingSideContenders() const;
+	getChangingSideContenders();
 
 private:
 	std::reference_wrapper<PitContenders> _contenders;

@@ -5,7 +5,7 @@
 
 int main(int ac, char **av) {
     try {
-        spdlog::set_pattern("[%D %H:%M:%S][ %=30s ][%L]: %v");
+        spdlog::set_pattern("[%D %H:%M:%S][ %=30s:%# ][%L]: %v");
         fys::ws::WorldServerCtx ctx(ac, av);
         SPDLOG_INFO(ctx.toString());
         fys::Dispatcher dispatcher(std::move(ctx));

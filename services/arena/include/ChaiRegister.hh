@@ -42,9 +42,10 @@ class ConnectionHandler;
 class PitContenders;
 class AllyPartyTeams;
 class PartyTeam;
+class FightingPitLayout;
 
 namespace data {
-class Status;
+struct Status;
 }
 
 }
@@ -55,7 +56,7 @@ namespace fys::arena {
 class ChaiRegister {
 public:
 	[[nodiscard]] static std::unique_ptr<chaiscript::ChaiScript>
-	createChaiInstance(PitContenders& pc, AllyPartyTeams& apt);
+	createChaiInstance(PitContenders& pc, AllyPartyTeams& apt, FightingPitLayout& layout);
 
 	static void
 	registerUtility(chaiscript::ChaiScript& chai, PitContenders& pc, AllyPartyTeams& apt);
@@ -108,10 +109,10 @@ private:
 	loadScript(chaiscript::ChaiScript& chai, cache::Cml& cache, const std::string& keys);
 
 	static void
-	registerChai(chaiscript::ChaiScript& chai, fys::arena::PitContenders& pc, fys::arena::AllyPartyTeams& apt);
+	registerChai(chaiscript::ChaiScript& chai, PitContenders& pc, AllyPartyTeams& apt, FightingPitLayout& layout);
 
 	static void
-	registerCommon(chaiscript::ModulePtr m);
+	registerCommon(chaiscript::ModulePtr m, FightingPitLayout& layout);
 
 	static void
 	registerFightingPitContender(chaiscript::ChaiScript& chai, chaiscript::ModulePtr m);

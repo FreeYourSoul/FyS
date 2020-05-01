@@ -47,11 +47,11 @@ using chaiscript::fun;
 namespace fys::arena {
 
 void
-ChaiRegister::registerChai(chaiscript::ChaiScript& chai, PitContenders& pc, AllyPartyTeams& apt)
+ChaiRegister::registerChai(chaiscript::ChaiScript& chai, PitContenders& pc, AllyPartyTeams& apt, FightingPitLayout& layout)
 {
 	try {
 		chaiscript::ModulePtr m = std::make_shared<chaiscript::Module>();
-		registerCommon(m);
+		registerCommon(m, layout);
 		registerFightingPitContender(chai, m);
 		registerTeamAllies(chai, m);
 		registerUtility(chai, pc, apt);
@@ -60,6 +60,7 @@ ChaiRegister::registerChai(chaiscript::ChaiScript& chai, PitContenders& pc, Ally
 
 		chai.set_global(chaiscript::var(std::ref(pc)), "pitContenders");
 		chai.set_global(chaiscript::var(std::ref(apt)), "allyPartyTeams");
+		chai.set_global(chaiscript::var(std::ref(layout)), "pitLayout");
 
 	}
 	catch (const chaiscript::exception::eval_error& ex) {
@@ -164,7 +165,9 @@ ChaiRegister::loadScripts(chaiscript::ChaiScript& chai, cache::Cml& cache, const
 	}
 }
 
-bool ChaiRegister::loadScript(chaiscript::ChaiScript& chai, cache::Cml& cache, const std::string& key) {
+bool
+ChaiRegister::loadScript(chaiscript::ChaiScript& chai, cache::Cml& cache, const std::string& key)
+{
 	const std::string& action = cache.findInCache(key);
 	if (action.empty()) {
 		SPDLOG_ERROR("Action with key {} not found (key may be wrong)", key);
@@ -219,7 +222,7 @@ ChaiRegister::registerUtility(chaiscript::ChaiScript& chai, PitContenders& pc, A
 }
 
 void
-ChaiRegister::registerCommon(chaiscript::ModulePtr m)
+ChaiRegister::registerCommon(chaiscript::ModulePtr m, FightingPitLayout& layout)
 {
 
 	m->add(chaiscript::fun<std::function<void(fys::arena::data::Status&, std::vector<data::Alteration>, bool)>>(
@@ -234,6 +237,19 @@ ChaiRegister::registerCommon(chaiscript::ModulePtr m)
 			[](fys::arena::data::Status& status, std::vector<data::Alteration> alterations, bool replaceIfExist) {
 				data::mergeAlterations(status.alteration_after, std::move(alterations), replaceIfExist);
 			}), "addAfterTurnAlterations");
+
+	chaiscript::utility::add_class<fys::arena::FightingPitLayout>(
+			*m,
+			"FightingPitLayout",
+			{},
+			{
+					{fun(&fys::arena::FightingPitLayout::initiateContenderMove), "initiateContenderMove"},
+					{fun(&fys::arena::FightingPitLayout::initiateMemberMove), "initiateMemberMove"},
+					{fun(&fys::arena::FightingPitLayout::initiateForceContenderMove), "initiateForceContenderMove"},
+					{fun(&fys::arena::FightingPitLayout::initiateForceMemberMove), "initiateForceMemberMove"},
+					{fun(&fys::arena::FightingPitLayout::initiateContenderMoveDir), "initiateContenderMoveDir"},
+					{fun(&fys::arena::FightingPitLayout::initiateMemberMoveDir), "initiateMemberMoveDir"}
+			});
 
 	chaiscript::utility::add_class<fys::arena::data::Targeting>(
 			*m,
@@ -322,6 +338,7 @@ ChaiRegister::registerCommon(chaiscript::ModulePtr m)
 					{fys::arena::HexagonSide::Hexagon::B, "B"},
 					{fys::arena::HexagonSide::Hexagon::C, "C"}
 			});
+
 }
 
 void
@@ -391,10 +408,10 @@ ChaiRegister::registerTeamAllies(chaiscript::ChaiScript& chai, chaiscript::Modul
 }
 
 std::unique_ptr<chaiscript::ChaiScript>
-ChaiRegister::createChaiInstance(PitContenders& pc, AllyPartyTeams& apt)
+ChaiRegister::createChaiInstance(PitContenders& pc, AllyPartyTeams& apt, FightingPitLayout& layout)
 {
 	auto chai = std::make_unique<chaiscript::ChaiScript>();
-	registerChai(*chai, pc, apt);
+	registerChai(*chai, pc, apt, layout);
 	return chai;
 }
 

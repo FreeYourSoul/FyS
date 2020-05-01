@@ -82,8 +82,8 @@ TEST_CASE("Test Sampy", "[service][arena][script_test]")
 
 	fys::arena::PitContenders pc;
 	fys::arena::AllyPartyTeams apt;
-
-	auto chai = fys::arena::ChaiRegister::createChaiInstance(pc, apt);
+	fys::arena::FightingPitLayout layout(pc, apt);
+	auto chai = fys::arena::ChaiRegister::createChaiInstance(pc, apt, layout);
 
 	fys::arena::ChaiRegister::registerBaseActions(*chai, ccpy);
 

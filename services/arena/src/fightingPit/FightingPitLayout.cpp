@@ -44,7 +44,6 @@ FightingPitLayout::FightingPitLayout(PitContenders& contenders, AllyPartyTeams& 
 	addActiveContender(contenders.getNumberContender());
 }
 
-
 void
 FightingPitLayout::addActiveContender(uint numberContenderToAdd)
 {
@@ -84,7 +83,7 @@ FightingPitLayout::executeMovements(std::vector<SideBattle>& sides)
 }
 
 std::vector<std::shared_ptr<TeamMember>>
-FightingPitLayout::getChangingSideTeamMembers() const
+FightingPitLayout::getChangingSideTeamMembers()
 {
 	std::vector<std::shared_ptr<TeamMember>> result;
 
@@ -93,12 +92,13 @@ FightingPitLayout::getChangingSideTeamMembers() const
 			auto&[userName, id] = userNameId;
 			result.emplace_back(_partyTeams.get().getSpecificTeamMemberById(userName, id));
 		}
+		isMoving = false;
 	}
 	return result;
 }
 
 std::vector<std::shared_ptr<FightingContender>>
-FightingPitLayout::getChangingSideContenders() const
+FightingPitLayout::getChangingSideContenders()
 {
 	std::vector<std::shared_ptr<FightingContender>> result;
 
@@ -106,32 +106,9 @@ FightingPitLayout::getChangingSideContenders() const
 		if (_movingFlagContender.at(i)) {
 			result.emplace_back(_contenders.get().getFightingContender(i));
 		}
+		_movingFlagContender[i] = false;
 	}
 	return result;
-}
-
-bool
-FightingPitLayout::move(HexagonSide& side, data::MoveDirection directionToMove)
-{
-	if (directionToMove == data::MoveDirection::RIGHT) {
-		if (!side.moveRight()) {
-			SPDLOG_ERROR("Impossible move from {} to right", side);
-			return false;
-		}
-	}
-	else if (directionToMove == data::MoveDirection::LEFT) {
-		if (!side.moveLeft()) {
-			SPDLOG_ERROR("Impossible move from {} to left", side);
-			return false;
-		}
-	}
-	else if (directionToMove == data::MoveDirection::BACK) {
-		if (!side.moveBack()) {
-			SPDLOG_ERROR("Impossible move from {} to backside", side);
-			return false;
-		}
-	}
-	return true;
 }
 
 void
@@ -145,13 +122,79 @@ FightingPitLayout::setContenderInitiatePosition(FightingContender& contender, He
 }
 
 void
-FightingPitLayout::setAllyMoveInitiatePosition(TeamMember& teamMember, HexagonSide::Orientation side)
+FightingPitLayout::setAllyMoveInitiatePosition(TeamMember& tm, HexagonSide::Orientation side)
 {
-	if ((*teamMember._side).second != HexagonSide::Orientation::NONE) {
-		SPDLOG_ERROR("Can't set initial position for ally {}.{} as position is not NONE", teamMember.getUserName(), teamMember.getName());
+	if ((*tm._side).second != HexagonSide::Orientation::NONE) {
+		SPDLOG_ERROR("Can't set initial position for ally {}.{} as position is not NONE", tm.getUserName(), tm.getName());
 		return;
 	}
-	teamMember._side.move(side, true);
+	tm._side.move(side, true);
+}
+
+bool
+FightingPitLayout::initiateContenderMove(std::shared_ptr<FightingContender> contender, HexagonSide::Orientation moveTo)
+{
+	if (contender->getHexagonSide().canMove(moveTo)) {
+		contender->_moving = moveTo;
+		_movingFlagContender[contender->getId()] = true;
+		return true;
+	}
+	return false;
+}
+
+bool
+FightingPitLayout::initiateForceContenderMove(std::shared_ptr<FightingContender> contender, HexagonSide::Orientation moveTo)
+{
+	contender->_moving = moveTo;
+	_movingFlagContender[contender->getId()] = true;
+	return true;
+}
+
+bool
+FightingPitLayout::initiateContenderMoveDir(std::shared_ptr<FightingContender> contender, data::MoveDirection moveDir)
+{
+	switch (moveDir) {
+		case data::MoveDirection::BACK:
+			return initiateContenderMove(contender, contender->getHexagonSide().findBack());
+		case data::MoveDirection::RIGHT:
+			return initiateContenderMove(contender, contender->getHexagonSide().findRight());
+		case data::MoveDirection::LEFT:
+			return initiateContenderMove(contender, contender->getHexagonSide().findLeft());
+	}
+	return false;
+}
+
+bool
+FightingPitLayout::initiateMemberMove(std::shared_ptr<TeamMember> member, HexagonSide::Orientation moveTo)
+{
+	if (member->getHexagonSide().canMove(moveTo)) {
+		member->_status.moving = moveTo;
+		_movingFlagContender[member->getId()] = true;
+		return true;
+	}
+	return false;
+}
+
+bool
+FightingPitLayout::initiateForceMemberMove(std::shared_ptr<TeamMember> member, HexagonSide::Orientation moveTo)
+{
+	member->_status.moving = moveTo;
+	_movingFlagContender[member->getId()] = true;
+	return true;
+}
+
+bool
+FightingPitLayout::initiateMemberMoveDir(std::shared_ptr<TeamMember> member, data::MoveDirection moveDir)
+{
+	switch (moveDir) {
+		case data::MoveDirection::BACK:
+			return initiateMemberMove(member, member->getHexagonSide().findBack());
+		case data::MoveDirection::RIGHT:
+			return initiateMemberMove(member, member->getHexagonSide().findRight());
+		case data::MoveDirection::LEFT:
+			return initiateMemberMove(member, member->getHexagonSide().findLeft());
+	}
+	return false;
 }
 
 }

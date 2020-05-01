@@ -292,26 +292,6 @@ HexagonSide::move(HexagonSide::Orientation destinationSide, bool forceMovement)
 }
 
 bool
-HexagonSide::moveLeft()
-{
-	return move(findLeft());
-}
-
-bool
-HexagonSide::moveRight()
-{
-	return move(findRight());
-}
-
-bool
-HexagonSide::moveBack()
-{
-	return move(findBack());
-}
-
-// private API
-
-bool
 HexagonSide::changeSide(HexagonSide::Orientation destination)
 {
 	switch (destination) {
