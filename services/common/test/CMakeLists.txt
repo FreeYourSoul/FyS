@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 project(common_test CXX)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 17)
 
 find_package(cppzmq REQUIRED)
 find_package(Catch2 REQUIRED)

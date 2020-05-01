@@ -131,6 +131,8 @@ public:
 	isAllyWin(const std::unique_ptr<FightingPit>& fp) { return fp->_progress == FightingPit::Progress::ALLY_WIN; }
 	[[nodiscard]] static bool
 	isContenderWin(const std::unique_ptr<FightingPit>& fp) { return fp->_progress == FightingPit::Progress::CONTENDER_WIN; }
+	[[nodiscard]] static const std::vector<SideBattle>&
+	getSideVector(const std::unique_ptr<FightingPit>& fp) { return fp->_sideBattles; }
 
 	// just for testing purpose
 	void addActionToOneMember(uint index, const std::string& actionName, uint level);

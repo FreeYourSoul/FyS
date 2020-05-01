@@ -117,6 +117,43 @@ TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]")
 
 	} // End section : test invalid action name registered
 
+	SECTION("Test Side Setup") {
+		std::shared_ptr<std::mt19937> mt = std::make_shared<std::mt19937>(42);
+		fseamMock->dupeReturn<FSeam::RandomGenerator::get>(mt);
+		FightingPitAnnouncer fpa(cml);
+		fpa.setCreatorUserName(" ");
+		fpa.setCreatorUserToken(" ");
+		fpa.setCreatorTeamParty(getPartyTeam(" "));
+		fpa.setDifficulty(FightingPit::EASY);
+		fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
+		fpa.addActionToOneMember(0, "arena:actions:damage:slash.chai", 5);
+		auto fp = fpa.buildFightingPit(ctx, "WS00");
+
+		const auto &sides = FightingPitAnnouncer::getSideVector(fp);
+		REQUIRE(18 == sides.size());
+
+		REQUIRE(HexagonSide::Orientation::A_N == sides[static_cast<uint>(HexagonSide::Orientation::A_N)].getSide());
+		REQUIRE(HexagonSide::Orientation::A_NE == sides[static_cast<uint>(HexagonSide::Orientation::A_NE)].getSide());
+		REQUIRE(HexagonSide::Orientation::A_NW == sides[static_cast<uint>(HexagonSide::Orientation::A_NW)].getSide());
+		REQUIRE(HexagonSide::Orientation::A_S == sides[static_cast<uint>(HexagonSide::Orientation::A_S)].getSide());
+		REQUIRE(HexagonSide::Orientation::A_SE == sides[static_cast<uint>(HexagonSide::Orientation::A_SE)].getSide());
+		REQUIRE(HexagonSide::Orientation::A_SW == sides[static_cast<uint>(HexagonSide::Orientation::A_SW)].getSide());
+
+		REQUIRE(HexagonSide::Orientation::B_N == sides[static_cast<uint>(HexagonSide::Orientation::B_N)].getSide());
+		REQUIRE(HexagonSide::Orientation::B_NE == sides[static_cast<uint>(HexagonSide::Orientation::B_NE)].getSide());
+		REQUIRE(HexagonSide::Orientation::B_NW == sides[static_cast<uint>(HexagonSide::Orientation::B_NW)].getSide());
+		REQUIRE(HexagonSide::Orientation::B_S == sides[static_cast<uint>(HexagonSide::Orientation::B_S)].getSide());
+		REQUIRE(HexagonSide::Orientation::B_SE == sides[static_cast<uint>(HexagonSide::Orientation::B_SE)].getSide());
+		REQUIRE(HexagonSide::Orientation::B_SW == sides[static_cast<uint>(HexagonSide::Orientation::B_SW)].getSide());
+
+		REQUIRE(HexagonSide::Orientation::C_N == sides[static_cast<uint>(HexagonSide::Orientation::C_N)].getSide());
+		REQUIRE(HexagonSide::Orientation::C_NE == sides[static_cast<uint>(HexagonSide::Orientation::C_NE)].getSide());
+		REQUIRE(HexagonSide::Orientation::C_NW == sides[static_cast<uint>(HexagonSide::Orientation::C_NW)].getSide());
+		REQUIRE(HexagonSide::Orientation::C_S == sides[static_cast<uint>(HexagonSide::Orientation::C_S)].getSide());
+		REQUIRE(HexagonSide::Orientation::C_SE == sides[static_cast<uint>(HexagonSide::Orientation::C_SE)].getSide());
+		REQUIRE(HexagonSide::Orientation::C_SW == sides[static_cast<uint>(HexagonSide::Orientation::C_SW)].getSide());
+	} // End section : Test Side Setup
+
 	SECTION("test seed 42") {
 		std::shared_ptr<std::mt19937> mt = std::make_shared<std::mt19937>(42);
 		fseamMock->dupeReturn<FSeam::RandomGenerator::get>(mt);

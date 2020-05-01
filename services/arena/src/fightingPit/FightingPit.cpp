@@ -93,6 +93,9 @@ FightingPit::continueBattle(const std::chrono::system_clock::time_point& now)
 {
 	if (!checkEndStatusFightingPit()) return; // Start/End of fighting pit management
 
+	// execute awaited movements
+	_layoutMapping.executeMovements(_sideBattles);
+
 	for (auto& battle : _sideBattles) {
 		if (battle.empty()) { // if battle side is empty, ignore it
 			continue;
@@ -166,6 +169,7 @@ void
 FightingPit::addPartyTeamAndRegisterActions(std::unique_ptr<PartyTeam> pt, cache::Cml& cml)
 {
 	ChaiRegister::loadAndRegisterActionPartyTeam(*_chaiPtr, cml, *pt);
+	_layoutMapping.addActivePartyTeam(*pt);
 	_partyTeams.addPartyTeam(std::move(pt));
 	std::sort(_sideBattles.begin(), _sideBattles.end(),
 			[this](auto& lhs, auto& rhs) {
@@ -183,26 +187,26 @@ FightingPit::initializeSideBattles()
 	// Hexagon A creation
 	_sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::A_N);
 	_sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::A_NE);
-	_sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::A_NW);
-	_sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::A_S);
 	_sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::A_SE);
+	_sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::A_S);
 	_sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::A_SW);
+	_sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::A_NW);
 
 	// Hexagon B creation
 	_sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::B_N);
 	_sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::B_NE);
-	_sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::B_NW);
-	_sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::B_S);
 	_sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::B_SE);
+	_sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::B_S);
 	_sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::B_SW);
+	_sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::B_NW);
 
 	// Hexagon C creation
 	_sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::C_N);
 	_sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::C_NE);
-	_sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::C_NW);
-	_sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::C_S);
 	_sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::C_SE);
+	_sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::C_S);
 	_sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::C_SW);
+	_sideBattles.emplace_back(_contenders, _partyTeams, HexagonSide::Orientation::C_NW);
 
 	initializePriorityListInSidesBattle();
 }
@@ -298,6 +302,15 @@ FightingPit::checkAndRetrieveTarget(const std::string& user, const TeamMemberSPt
 	}
 
 	return std::pair(true, target);
+}
+bool
+FightingPit::addContender(const std::shared_ptr<FightingContender>& fc)
+{
+	if (_contenders.addContender(fc)) {
+		_layoutMapping.addActiveContender();
+		return true;
+	}
+	return false;
 }
 
 }

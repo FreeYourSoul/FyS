@@ -286,8 +286,7 @@ bool
 HexagonSide::move(HexagonSide::Orientation destinationSide, bool forceMovement)
 {
 	if (forceMovement || (destinationSide != HexagonSide::Orientation::NONE && canMove(destinationSide))) {
-		changeSide(destinationSide);
-		return true;
+		return changeSide(destinationSide);
 	}
 	return false;
 }
@@ -312,19 +311,40 @@ HexagonSide::moveBack()
 
 // private API
 
-void
+bool
 HexagonSide::changeSide(HexagonSide::Orientation destination)
 {
-	if (destination == HexagonSide::Orientation::A_N || destination == HexagonSide::Orientation::A_NE || destination == HexagonSide::Orientation::A_NW ||
-			destination == HexagonSide::Orientation::A_S || destination == HexagonSide::Orientation::A_SE || destination == HexagonSide::Orientation::A_SW)
-		_hexagon = HexagonSide::Hexagon::A;
-	else if (destination == HexagonSide::Orientation::B_N || destination == HexagonSide::Orientation::B_NE || destination == HexagonSide::Orientation::B_NW ||
-			destination == HexagonSide::Orientation::B_S || destination == HexagonSide::Orientation::B_SE || destination == HexagonSide::Orientation::B_SW)
-		_hexagon = HexagonSide::Hexagon::B;
-	else if (destination == HexagonSide::Orientation::C_N || destination == HexagonSide::Orientation::C_NE || destination == HexagonSide::Orientation::C_NW ||
-			destination == HexagonSide::Orientation::C_S || destination == HexagonSide::Orientation::C_SE || destination == HexagonSide::Orientation::C_SW)
-		_hexagon = HexagonSide::Hexagon::C;
-	_side = destination;
+	switch (destination) {
+		case HexagonSide::Orientation::A_N:
+		case HexagonSide::Orientation::A_NE:
+		case HexagonSide::Orientation::A_NW:
+		case HexagonSide::Orientation::A_S:
+		case HexagonSide::Orientation::A_SE:
+		case HexagonSide::Orientation::A_SW:
+			_hexagon = HexagonSide::Hexagon::A;
+			_side = destination;
+			return true;
+		case HexagonSide::Orientation::B_N:
+		case HexagonSide::Orientation::B_NE:
+		case HexagonSide::Orientation::B_NW:
+		case HexagonSide::Orientation::B_S:
+		case HexagonSide::Orientation::B_SE:
+		case HexagonSide::Orientation::B_SW:
+			_hexagon = HexagonSide::Hexagon::B;
+			_side = destination;
+			return true;
+		case HexagonSide::Orientation::C_N:
+		case HexagonSide::Orientation::C_NE:
+		case HexagonSide::Orientation::C_NW:
+		case HexagonSide::Orientation::C_S:
+		case HexagonSide::Orientation::C_SE:
+		case HexagonSide::Orientation::C_SW:
+			_hexagon = HexagonSide::Hexagon::C;
+			_side = destination;
+			return true;
+		default: return false;
+	}
+	return false;
 }
 
 HexagonSide::Orientation

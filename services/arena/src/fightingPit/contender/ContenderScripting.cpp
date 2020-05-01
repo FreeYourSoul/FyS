@@ -21,8 +21,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <fmt/format.h>
 #include <spdlog/spdlog.h>
+
 #include <chaiscript/chaiscript.hpp>
 #include <chaiscript/utility/utility.hpp>
 

@@ -80,7 +80,7 @@ target_link_libraries(arena_service PRIVATE
         ${Flatbuffers_LIBRARIES})
 
 set_target_properties(arena_service PROPERTIES
-        CXX_STANDARD 20
+        CXX_STANDARD 17
         CMAKE_CXX_COMPILER /usr/bin/g++)
 
 set_property(TARGET arena_service PROPERTY INCLUDE_DIRECTORIES

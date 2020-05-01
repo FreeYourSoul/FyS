@@ -9,7 +9,9 @@
 [![Scc Count Badge](https://sloc.xyz/github/FreeYourSoul/FyS?category=code)](https://github.com/boyter/scc)
 # FyS Online
 
-FreeYourSoul Online, a scalable mmorpg game
+FreeYourSoul project called Soul's Tale, a scalable MMORPG game
+
+The todo list is available [here](https://trello.com/b/lMR8LAve/fysgithubtodo)
 
 ## Dispatchers
 

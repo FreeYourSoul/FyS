@@ -23,14 +23,41 @@
 
 #include <fmt/ostream.h>
 #include <spdlog/spdlog.h>
+#include <utility>
+
 #include <fightingPit/contender/PitContenders.hh>
 #include <fightingPit/team/AllyPartyTeams.hh>
 #include <fightingPit/FightingPitLayout.hh>
 #include <fightingPit/team/TeamMember.hh>
 #include <fightingPit/contender/ContenderScripting.hh>
 #include <fightingPit/contender/FightingContender.hh>
+#include <fightingPit/SideBattle.hh>
 
 namespace fys::arena {
+
+FightingPitLayout::FightingPitLayout(PitContenders& contenders, AllyPartyTeams& partyTeams)
+		:_contenders(contenders), _partyTeams(partyTeams)
+{
+	for (auto& pt : partyTeams.getPartyTeams()) {
+		addActivePartyTeam(*pt);
+	}
+	addActiveContender(contenders.getNumberContender());
+}
+
+
+void
+FightingPitLayout::addActiveContender(uint numberContenderToAdd)
+{
+	_movingFlagContender.resize(_movingFlagContender.size() + numberContenderToAdd, false);
+}
+
+void
+FightingPitLayout::addActivePartyTeam(const PartyTeam& pt)
+{
+	for (auto& tm : pt.getTeamMembers()) {
+		_movingFlagAlly[std::pair(tm->getUserName(), tm->getId())] = false;
+	}
+}
 
 unsigned
 FightingPitLayout::activeCharactersOnSide(HexagonSide::Orientation side) const
@@ -39,16 +66,47 @@ FightingPitLayout::activeCharactersOnSide(HexagonSide::Orientation side) const
 }
 
 void
-FightingPitLayout::executeMovements()
+FightingPitLayout::executeMovements(std::vector<SideBattle>& sides)
 {
+	auto changingSideContenders = getChangingSideContenders();
+	auto changingSideAlly = getChangingSideTeamMembers();
+	auto movementExecution = [&sides](auto& characterToMove) {
+		HexagonSide::Orientation sideBeforeMove = (*characterToMove->_side).second;
+		HexagonSide::Orientation sideAfterMove = characterToMove->_moving;
+		if (characterToMove->_side.move(sideAfterMove, true)) {
+			sides[static_cast<uint>(sideBeforeMove)].removeParticipantFromList(*characterToMove);
+			sides[static_cast<uint>(sideAfterMove)].addParticipantInList(*characterToMove);
+		}
+	};
 
+	std::for_each(changingSideAlly.begin(), changingSideAlly.end(), movementExecution);
+	std::for_each(changingSideContenders.begin(), changingSideContenders.end(), movementExecution);
 }
 
 std::vector<std::shared_ptr<TeamMember>>
-FightingPitLayout::getChangingSideTeamMember() const
+FightingPitLayout::getChangingSideTeamMembers() const
 {
 	std::vector<std::shared_ptr<TeamMember>> result;
 
+	for (auto&[userNameId, isMoving] : _movingFlagAlly) {
+		if (isMoving) {
+			auto&[userName, id] = userNameId;
+			result.emplace_back(_partyTeams.get().getSpecificTeamMemberById(userName, id));
+		}
+	}
+	return result;
+}
+
+std::vector<std::shared_ptr<FightingContender>>
+FightingPitLayout::getChangingSideContenders() const
+{
+	std::vector<std::shared_ptr<FightingContender>> result;
+
+	for (uint i = 0; i < _movingFlagContender.size(); ++i) {
+		if (_movingFlagContender.at(i)) {
+			result.emplace_back(_contenders.get().getFightingContender(i));
+		}
+	}
 	return result;
 }
 

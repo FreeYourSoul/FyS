@@ -74,6 +74,12 @@ private:
 	std::unique_ptr<ContenderScripting> _contenderScripting;
 	HexagonSide _side;
 	data::Status _status;
+
+	/**
+	 * When moving the appropriate flag is set in FightingPitLayout which use
+	 * this member to set the new position of the character
+	 */
+	HexagonSide::Orientation _moving = HexagonSide::Orientation::NONE;
 };
 
 using FightingContenderSPtr = std::shared_ptr<FightingContender>;

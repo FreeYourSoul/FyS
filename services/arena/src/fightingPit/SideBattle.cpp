@@ -59,4 +59,28 @@ SideBattle::eraseFinishedAlterationAndDeadCharactersFromTurnList()
 	}
 }
 
+void
+SideBattle::addParticipantInList(const TeamMember& tm)
+{
+	_priorityOrderList.addParticipantInList(tm.getId(), tm.getStatus().initialSpeed, false);
+}
+
+void
+SideBattle::addParticipantInList(const FightingContender& contender)
+{
+	_priorityOrderList.addParticipantInList(contender.getId(), contender.getStatus().initialSpeed, true);
+}
+
+void
+SideBattle::removeParticipantFromList(const TeamMember& tm)
+{
+	_priorityOrderList.removeParticipantFromList(tm.getId(), false);
+}
+
+void
+SideBattle::removeParticipantFromList(const FightingContender& contender)
+{
+	_priorityOrderList.removeParticipantFromList(contender.getId(), true);
+}
+
 }

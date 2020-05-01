@@ -29,6 +29,7 @@
 #include <memory>
 #include <fightingPit/data/CommonTypes.hh>
 #include <fightingPit/FightingPitLayout.hh>
+#include <fightingPit/HexagonSide.hh>
 #include <SizedQueue.hh>
 
 // forward declarations
@@ -128,7 +129,13 @@ private:
 	unsigned _id{};
 	data::Status _status;
 
-	// action name with level of action
+	/**
+	 * When moving the appropriate flag is set in FightingPitLayout which use
+	 * this member to set the new position of the character
+	 */
+	HexagonSide::Orientation _moving = HexagonSide::Orientation::NONE;
+
+	//! action name with level of action
 	std::vector<std::pair<std::string, uint>> _actionsDoable;
 	fys::common::SizedQueue<PendingAction> _pendingActions;
 

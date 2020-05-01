@@ -26,16 +26,23 @@
 #define FYS_FIGHTINGPITLAYOUT_HH
 
 #include <functional>
+#include <map>
 
 #include <fightingPit/HexagonSide.hh>
 
-namespace fys::arena {
-
 // forward declaration
+namespace fys::arena {
+class SideBattle;
 class AllyPartyTeams;
 class PitContenders;
+class PartyTeam;
 class TeamMember;
 class FightingContender;
+}
+// end forward declaration
+
+
+namespace fys::arena {
 
 /**
  * @brief Layout of the fighting pit. Manage the positions of monsters and the players/monsters movements
@@ -69,8 +76,10 @@ class FightingContender;
 class FightingPitLayout {
 
 public:
-	FightingPitLayout(PitContenders& contenders, AllyPartyTeams& partyTeams)
-			:_contenders(contenders), _partyTeams(partyTeams) { }
+	FightingPitLayout(PitContenders& contenders, AllyPartyTeams& partyTeams);
+
+	void addActivePartyTeam(const PartyTeam& pt);
+	void addActiveContender(uint numberContenderToAdd = 1u);
 
 	/**
 	 * Retrieve the number of active characters (contenders or players) on the given side
@@ -80,7 +89,7 @@ public:
 	[[nodiscard]] unsigned
 	activeCharactersOnSide(HexagonSide::Orientation side) const;
 
-	void executeMovements();
+	void executeMovements(std::vector<SideBattle>& sides);
 
 	static void setContenderInitiatePosition(FightingContender& contender, HexagonSide::Orientation side);
 	static void setAllyMoveInitiatePosition(TeamMember& teamMember, HexagonSide::Orientation side);
@@ -90,12 +99,21 @@ private:
 	move(HexagonSide& side, data::MoveDirection direction);
 
 	[[nodiscard]] std::vector<std::shared_ptr<TeamMember>>
-	getChangingSideTeamMember() const;
+	getChangingSideTeamMembers() const;
+
+	[[nodiscard]] std::vector<std::shared_ptr<FightingContender>>
+	getChangingSideContenders() const;
 
 private:
 	std::reference_wrapper<PitContenders> _contenders;
 	std::reference_wrapper<AllyPartyTeams> _partyTeams;
 
+	//! map of <userName with memberId> on isMoving
+	std::map<std::pair<std::string, uint>, bool> _movingFlagAlly;
+
+	// vector of bool react differently from other vectors (memory optimization)
+	// but it doesn't matter in this case as we are not in a multi-threaded context
+	//! vector of isMoving for contenders (index of the vector is the id of the contender)
 	std::vector<bool> _movingFlagContender;
 
 };

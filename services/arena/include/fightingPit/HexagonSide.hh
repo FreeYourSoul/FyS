@@ -86,7 +86,8 @@ public:
 	canMove(HexagonSide::Orientation destinationSide) const;
 
 private:
-	void changeSide(HexagonSide::Orientation);
+	[[nodiscard]] bool
+	changeSide(HexagonSide::Orientation destination);
 
 	[[nodiscard]] Orientation
 	findLeft() const;

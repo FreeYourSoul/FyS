@@ -30,11 +30,16 @@
 #include <fightingPit/HexagonSide.hh>
 #include <fightingPit/PriorityOrderList.hh>
 
-namespace fys::arena {
-
 //forward declaration
+namespace fys::arena {
 class PitContenders;
 class AllyPartyTeams;
+class TeamMember;
+class FightingContender;
+}
+// end forward declaration
+
+namespace fys::arena {
 
 /**
  * @brief Represent a battle on a specific side of one of the 3 hexagons
@@ -67,6 +72,10 @@ public:
 	 */
 	void eraseFinishedAlterationAndDeadCharactersFromTurnList();
 
+	void removeParticipantFromList(const TeamMember& tm);
+	void removeParticipantFromList(const FightingContender& contender);
+	void addParticipantInList(const TeamMember& tm);
+	void addParticipantInList(const FightingContender& contender);
 	void addParticipantInList(uint id, int speed, bool isContender)
 	{
 		_priorityOrderList.addParticipantInList(id, speed, isContender);

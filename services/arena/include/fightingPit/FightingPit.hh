@@ -229,7 +229,7 @@ private:
 	updateProgressStatus();
 
 	[[nodiscard]] bool
-	addContender(const std::shared_ptr<FightingContender>& fc) { return _contenders.addContender(fc); }
+	addContender(const std::shared_ptr<FightingContender>& fc);
 
 	void initializeSideBattles();
 	void initializePriorityListInSidesBattle();
