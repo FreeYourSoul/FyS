@@ -83,8 +83,9 @@ ContenderScripting::executeAction()
 	try {
 		std::string action = fmt::format("fun(contenderId){{ return {}.runScriptedAction(contenderId);}}", getChaiContenderId());
 		auto funcAction = _chai.get().eval<std::function<int(unsigned int)>>(action);
-		if (funcAction(_contenderId))
+		if (funcAction(_contenderId)) {
 			SPDLOG_DEBUG("Contender {}_{} executed action", _contenderName, _contenderId);
+		}
 	}
 	catch (const chaiscript::exception::eval_error& ee) {
 		SPDLOG_ERROR("Error caught on script execution while executing action of contender.\n{}", ee.what());

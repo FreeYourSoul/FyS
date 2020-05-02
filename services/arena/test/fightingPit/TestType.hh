@@ -49,12 +49,13 @@ class Move_TEST {
     def execute(target) {
 		if (this.moveTo == 0) {
 			this.moveTo = this.moveTo + 1;
-			initiateContenderMove(target, A_NE);
+			pitLayout.initiateForceContenderMove(target, A_NE);
 		}
 		else if (this.moveTo == 1) {
 			this.moveTo = this.moveTo + 1;
-			initiateContenderMove(target, C_NE);
+			pitLayout.initiateForceContenderMove(target, C_NE);
 		}
+		1;
     }
 };
 )";
@@ -400,6 +401,10 @@ protected:
 		else if ("testing:TestMonsterPoison.chai" == cmlKey.getKey()) {
 			std::ofstream ofs(cmlKey.getPath());
 			ofs << MonsterTestScriptPoison;
+		}
+		else if ("testing:TestMonsterMove.chai" == cmlKey.getKey()) {
+			std::ofstream ofs(cmlKey.getPath());
+			ofs << MonsterTestMoveAttack;
 		}
 		else {
 			fys::cache::CmlKey k(_copyPathStorage, cmlKey.getKey());

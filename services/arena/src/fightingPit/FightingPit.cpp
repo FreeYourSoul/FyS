@@ -93,9 +93,6 @@ FightingPit::continueBattle(const std::chrono::system_clock::time_point& now)
 {
 	if (!checkEndStatusFightingPit()) return; // Start/End of fighting pit management
 
-	// execute awaited movements
-	_layoutMapping.executeMovements(_sideBattles);
-
 	for (auto& battle : _sideBattles) {
 		if (battle.empty()) { // if battle side is empty, ignore it
 			continue;
@@ -112,6 +109,9 @@ FightingPit::continueBattle(const std::chrono::system_clock::time_point& now)
 		}
 		battle.eraseFinishedAlterationAndDeadCharactersFromTurnList();
 	}
+	// execute awaited movements
+	_layoutMapping.executeMovements(_sideBattles);
+
 	_progress = updateProgressStatus();
 }
 

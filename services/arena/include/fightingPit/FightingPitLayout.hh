@@ -93,14 +93,11 @@ public:
 	initiateContenderMove(std::shared_ptr<FightingContender> contender, HexagonSide::Orientation moveTo);
 	[[nodiscard]] bool
 	initiateMemberMove(std::shared_ptr<TeamMember> member, HexagonSide::Orientation moveTo);
-	[[nodiscard]] bool
-	initiateForceContenderMove(std::shared_ptr<FightingContender> contender, HexagonSide::Orientation moveTo);
-	[[nodiscard]] bool
-	initiateForceMemberMove(std::shared_ptr<TeamMember> member, HexagonSide::Orientation moveTo);
-	[[nodiscard]] bool
-	initiateContenderMoveDir(std::shared_ptr<FightingContender> contender, data::MoveDirection moveDir);
-	[[nodiscard]] bool
-	initiateMemberMoveDir(std::shared_ptr<TeamMember> member, data::MoveDirection moveDir);
+
+	void initiateForceContenderMove(std::shared_ptr<FightingContender> contender, HexagonSide::Orientation moveTo);
+	void initiateForceMemberMove(std::shared_ptr<TeamMember> member, HexagonSide::Orientation moveTo);
+	void initiateContenderMoveDir(std::shared_ptr<FightingContender> contender, data::MoveDirection moveDir);
+	void initiateMemberMoveDir(std::shared_ptr<TeamMember> member, data::MoveDirection moveDir);
 
 	void executeMovements(std::vector<SideBattle>& sides);
 

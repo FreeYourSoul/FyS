@@ -103,7 +103,7 @@ FightingPitLayout::getChangingSideContenders()
 	std::vector<std::shared_ptr<FightingContender>> result;
 
 	for (uint i = 0; i < _movingFlagContender.size(); ++i) {
-		if (_movingFlagContender.at(i)) {
+		if (_movingFlagContender.at(i) == true) {
 			result.emplace_back(_contenders.get().getFightingContender(i));
 		}
 		_movingFlagContender[i] = false;
@@ -142,26 +142,27 @@ FightingPitLayout::initiateContenderMove(std::shared_ptr<FightingContender> cont
 	return false;
 }
 
-bool
+void
 FightingPitLayout::initiateForceContenderMove(std::shared_ptr<FightingContender> contender, HexagonSide::Orientation moveTo)
 {
 	contender->_moving = moveTo;
 	_movingFlagContender[contender->getId()] = true;
-	return true;
 }
 
-bool
+void
 FightingPitLayout::initiateContenderMoveDir(std::shared_ptr<FightingContender> contender, data::MoveDirection moveDir)
 {
 	switch (moveDir) {
 		case data::MoveDirection::BACK:
-			return initiateContenderMove(contender, contender->getHexagonSide().findBack());
+			initiateContenderMove(contender, contender->getHexagonSide().findBack());
+			break;
 		case data::MoveDirection::RIGHT:
-			return initiateContenderMove(contender, contender->getHexagonSide().findRight());
+			initiateContenderMove(contender, contender->getHexagonSide().findRight());
+			break;
 		case data::MoveDirection::LEFT:
-			return initiateContenderMove(contender, contender->getHexagonSide().findLeft());
+			initiateContenderMove(contender, contender->getHexagonSide().findLeft());
+			break;
 	}
-	return false;
 }
 
 bool
@@ -175,26 +176,27 @@ FightingPitLayout::initiateMemberMove(std::shared_ptr<TeamMember> member, Hexago
 	return false;
 }
 
-bool
+void
 FightingPitLayout::initiateForceMemberMove(std::shared_ptr<TeamMember> member, HexagonSide::Orientation moveTo)
 {
 	member->_status.moving = moveTo;
 	_movingFlagContender[member->getId()] = true;
-	return true;
 }
 
-bool
+void
 FightingPitLayout::initiateMemberMoveDir(std::shared_ptr<TeamMember> member, data::MoveDirection moveDir)
 {
 	switch (moveDir) {
 		case data::MoveDirection::BACK:
-			return initiateMemberMove(member, member->getHexagonSide().findBack());
+			initiateMemberMove(member, member->getHexagonSide().findBack());
+			break;
 		case data::MoveDirection::RIGHT:
-			return initiateMemberMove(member, member->getHexagonSide().findRight());
+			initiateMemberMove(member, member->getHexagonSide().findRight());
+			break;
 		case data::MoveDirection::LEFT:
-			return initiateMemberMove(member, member->getHexagonSide().findLeft());
+			initiateMemberMove(member, member->getHexagonSide().findLeft());
+			break;
 	}
-	return false;
 }
 
 }

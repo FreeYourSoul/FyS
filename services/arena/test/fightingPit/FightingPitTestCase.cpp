@@ -456,6 +456,141 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]")
 
 } // End TestCase : FightingPit Simple Fight test
 
+
+TEST_CASE("FightingPitTestCase Move test", "[service][arena]")
+{
+	auto fseamMock = FSeam::getDefault<fys::util::RandomGenerator>();
+	ConnectionHandler handler{};
+	auto fseamConnectionHandlerMock = FSeam::get(&handler);
+	auto cml = CmlBaseCopy(getTmpPath(), getLocalPathStorage());
+	DeleteFolderWhenDone raii_delete_folder(getTmpPath());
+
+	EncounterContext ctx;
+	ctx._rangeEncounterPerZone["WS00"] = {
+			std::pair(1, 1), // ez
+			std::pair(3, 3), // medium
+			std::pair(1, 1)  // hard
+	};
+	ctx._contendersPerZone["WS00"] = {
+			EncounterContext::EncounterDesc{
+					"testing:TestMonsterMove.chai",
+					2, {100, 100, 100}, std::pair(1u, 10u)
+			},
+	};
+
+	// seed used 42
+	std::shared_ptr<std::mt19937> mt = std::make_shared<std::mt19937>(42);
+	fseamMock->dupeReturn<FSeam::RandomGenerator::get>(mt);
+
+	SECTION("InGame MoveTestCase") {
+
+		FightingPitAnnouncer fpa(cml);
+		fpa.setCreatorUserName("Loser");
+		fpa.setCreatorUserToken("LoserToken");
+		auto partyTeam = getPartyTeam("Loser");
+		partyTeam->accessTeamMembers().at(0)->accessStatus().magicPoint.current = 0;
+		partyTeam->accessTeamMembers().at(1)->accessStatus().magicPoint.current = 0;
+		partyTeam->accessTeamMembers().at(2)->accessStatus().magicPoint.current = 0;
+		partyTeam->accessTeamMembers().at(2)->accessStatus().life.current = 99; // set to the lowest life in order to ensure as target
+		partyTeam->accessTeamMembers().at(3)->accessStatus().magicPoint.current = 0;
+		fpa.setCreatorTeamParty(std::move(partyTeam));
+		fpa.setDifficulty(FightingPit::Level::EASY);
+		fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
+
+		auto fp = fpa.buildFightingPit(ctx, "WS00");
+
+		auto& chai = fp->getChaiPtr();
+
+		REQUIRE(1 == FightingPitAnnouncer::getPitContenders(fp).getNumberContender());
+		const auto& contender = FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0);
+		const auto& c = FightingPitAnnouncer::getPitContenders(fp).getContenderOnSide(HexagonSide::Orientation::B_S);
+		const auto& p = FightingPitAnnouncer::getPartyTeams(fp).getMembersBySide(HexagonSide::Orientation::B_S);
+
+		SECTION("Initial setup") {
+			REQUIRE("TestMonsterMove" == contender->getName());
+			REQUIRE(4 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers().size());
+			REQUIRE(100 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().life.current);
+			REQUIRE(100 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().life.total);
+			REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().magicPoint.current);
+			REQUIRE(200 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().life.current);
+			REQUIRE(200 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[1]->getStatus().life.total);
+			REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().magicPoint.current);
+			REQUIRE(99 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.current); // <<< LOWEST LIFE TARGET
+			REQUIRE(550 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[2]->getStatus().life.total);
+			REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().magicPoint.current);
+			REQUIRE(140 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().life.current);
+			REQUIRE(140 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[3]->getStatus().life.total);
+			REQUIRE(0 == fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0]->getStatus().magicPoint.current);
+
+			REQUIRE(1 == FightingPitAnnouncer::getPitContenders(fp).getNumberContender());
+			REQUIRE(1 == FightingPitAnnouncer::getPitContenders(fp).contenderOnSide(HexagonSide::Orientation::B_S));
+			REQUIRE(4 == FightingPitAnnouncer::getPartyTeams(fp).getNumberAlly());
+
+			const auto& doableActions =
+					FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->
+							getContenderScripting()->getDoableActions();
+			REQUIRE(1 == doableActions.size());
+			REQUIRE("test:key:1" == doableActions.at(0));
+
+			REQUIRE(8 == c.at(0)->getStatus().initialSpeed);
+			REQUIRE(3 == p.at(0)->getStatus().initialSpeed);
+			REQUIRE(5 == p.at(1)->getStatus().initialSpeed);
+			REQUIRE(10 == p.at(2)->getStatus().initialSpeed);
+			REQUIRE(20 == p.at(3)->getStatus().initialSpeed);
+		} // End section : Initial setup
+
+		REQUIRE(fp->isJoinable());
+		fp->setPlayerReadiness("Loser");
+		REQUIRE_FALSE(fp->isJoinable());
+		REQUIRE(FightingPitAnnouncer::isOnGoing(fp));
+
+		// other turns are tested in the test  Test for FightingPit testcase in file PriorityOrderListTestCase.cpp
+
+		SECTION("Battle Turn 1 test") {
+
+			auto now = std::chrono::system_clock::now();
+
+			try {
+				// Player id 4 (at index 3)
+				fp->continueBattle(now);
+
+				// Player id 3 (at index 2)
+				now += fys::arena::interval::EASY + 1ms;
+				fp->continueBattle(now);
+
+				// Contender turn : Move from B_S to A_NE
+				now += fys::arena::interval::EASY + 1ms;
+				REQUIRE(HexagonSide::Orientation::B_S == FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->getHexagonSideOrient());
+				fp->continueBattle(now);
+				REQUIRE(HexagonSide::Orientation::A_NE == FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->getHexagonSideOrient());
+
+				// second move occurs as the contender is now on a new side where no other player are.
+				// And so alone, so he takes his turn
+
+				now += fys::arena::interval::EASY + 1ms;
+				fp->continueBattle(now);
+				REQUIRE(HexagonSide::Orientation::C_NE == FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->getHexagonSideOrient());
+
+//				now += fys::arena::interval::EASY + 1ms;
+//				fp->continueBattle(now);
+//				REQUIRE(HexagonSide::Orientation::A_NE == FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->getHexagonSideOrient());
+
+			}
+			catch (const std::exception& e) {
+				SPDLOG_ERROR("Exception during Battle turn 1 test {} ", e.what());
+				FAIL("Should not arrive here");
+			}
+
+		} // End section : Battle Turn 1 test
+
+	} // End section : InGame fighting
+
+	// cleanup
+	FSeam::MockVerifier::cleanUp();
+
+} // End TestCase : FightingPit Move test
+
+
 TEST_CASE("FightingPitTestCase Simple Alteration test", "[service][arena]")
 {
 	auto fseamMock = FSeam::getDefault<fys::util::RandomGenerator>();
