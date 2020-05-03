@@ -136,7 +136,7 @@ private:
 	 * Verify if the server is saturated (too many battle at the same time running on this ArenaService)
 	 * @return true if the server is saturated, false otherwise
 	 */
-	[[nodiscard]] bool
+	[[nodiscard]] inline bool
 	isSaturated() const noexcept;
 
 	[[nodiscard]] PlayerAction
@@ -148,8 +148,8 @@ private:
 	[[nodiscard]] std::pair<bool, AwaitingPlayerArenaIt>
 	isPlayerAwaited(const std::string& name, const std::string& token, unsigned idFightingPit) const noexcept;
 
-	void sendSaturatedErrorMsg(zmq::message_t&& identity);
-	void forwardReplyToDispatcher(zmq::message_t&& idtWs, const fys::arena::AwaitingPlayerArena& awaitArena) noexcept;
+	inline void sendSaturatedErrorMsg(zmq::message_t&& identity);
+	inline void forwardReplyToDispatcher(zmq::message_t&& idtWs, const fys::arena::AwaitingPlayerArena& awaitArena) noexcept;
 
 
 private:

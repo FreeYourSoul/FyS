@@ -28,6 +28,7 @@
 #include <ChaiRegister.hh>
 
 #include <algorithm/algorithm.hh>
+#include <network/WorkerService.hh>
 
 #include <fightingPit/contender/FightingContender.hh>
 #include <fightingPit/FightingPit.hh>
@@ -59,40 +60,9 @@ FightingPit::FightingPit(std::string creatorUserName, fys::arena::FightingPit::L
 		_chaiPtr(ChaiRegister::createChaiInstance(_contenders, _partyTeams, _layoutMapping)),
 		_rewards(std::make_unique<Rewards>()) { }
 
-bool
-FightingPit::checkEndStatusFightingPit()
-{
-	switch (_progress) {
-		// Battle is still on going and so has to continue
-		case Progress::ON_GOING:return true;
-
-			// Battle is over and require cleanup
-		case Progress::CLEANUP:
-			// Battle is on hold and can't receive incoming player
-		case Progress::ON_HOLD_NOT_REACHABLE:
-			// Battle is on hold and may have incoming player
-		case Progress::ON_HOLD: return false;
-
-			// Battle is won by allies
-		case Progress::ALLY_WIN:
-			// todo Send success of the fight
-			_progress = Progress::CLEANUP;
-			return false;
-
-			// Battle is won by contenders
-		case Progress::CONTENDER_WIN:
-			// todo Send failure of the fight
-			_progress = Progress::CLEANUP;
-			return false;
-	}
-	return _progress == Progress::ON_HOLD;
-}
-
 void
 FightingPit::continueBattle(const std::chrono::system_clock::time_point& now)
 {
-	if (!checkEndStatusFightingPit()) return; // Start/End of fighting pit management
-
 	for (auto& battle : _sideBattles) {
 		if (battle.empty()) { // if battle side is empty, ignore it
 			continue;

@@ -43,7 +43,7 @@
 // forward declarations
 namespace fys::arena {
 class FightingContender;
-
+class WorkerService;
 class PartyTeam;
 }
 
@@ -179,15 +179,6 @@ public:
 	getPitContenders() const { return _contenders; }
 
 	/**
-	 * Check if the fight has started, if it has check if the fight is finished (winner determined)
-	 * If ally wins, a generation of the loot is made and returned to the clients
-	 * If enemy wins, a notification is sent to players
-	 * @return true if the fight has been terminated, false otherwise
-	 */
-	[[nodiscard]] bool
-	checkEndStatusFightingPit();
-
-	/**
 	 * Check if the battle is done, the winner doesn't matter, this is a status to cleanup the fighting pit when its done
 	 * @return true if the battle is over, false otherwise
 	 */
@@ -195,10 +186,38 @@ public:
 	isBattleOver() const noexcept { return _progress == Progress::CLEANUP; }
 
 	/**
+	 * Check if the fight has started
+	 *
+	 * @return true if the fight is in on-going status, false otherwise
+	 */
+	[[nodiscard]] bool
+	isBattleOnGoing() const { return _progress == Progress::ON_GOING; }
+
+
+	/**
+	 * Notify the clients if they won or lose,
+	 * If a clients win, the rewards are broadcast to the players
+	 * @param broadcastHandler handler to broadcast message to the players
+	 */
+	template <typename BroadcastHandler>
+	void notifyEndStatus(BroadcastHandler&& broadcastHandler) {
+		if (_progress == Progress::ALLY_WIN) {
+
+			_progress = Progress::CLEANUP;
+		}
+		else if (_progress == Progress::CONTENDER_WIN) {
+
+			_progress = Progress::CLEANUP;
+		}
+	}
+
+
+	/**
 	 * Disable the ability to join the battle if the fighting pit is currently reachable
 	 */
 	void disableJoin() noexcept { if (isJoinable()) _progress = Progress::ON_HOLD_NOT_REACHABLE; }
-	void addReward(std::string action, uint quantity) noexcept {
+	void addReward(std::string action, uint quantity) noexcept
+	{
 		_rewards->keys.emplace_back(std::move(action));
 		_rewards->quantity.emplace_back(quantity);
 	};

@@ -239,8 +239,8 @@ ArenaServerService::createPlayerAction(std::string&& action, const fb::ArenaFigh
 bool
 ArenaServerService::isSaturated() const noexcept
 {
-	const unsigned awaitedInstance = _awaitingArena.size();
-	return (awaitedInstance + _workerService.getNumberBattleRunning()) > _ctx.get().getBattleThreshold();
+	const unsigned numberArenaManagedByServer = _awaitingArena.size() + _workerService.getNumberBattleRunning();
+	return numberArenaManagedByServer > _ctx.get().getBattleThreshold();
 }
 
 std::pair<bool, const std::unordered_map<std::string, AwaitingPlayerArena>::const_iterator>
@@ -299,6 +299,7 @@ ArenaServerService::createNewFightingPit(const AwaitingPlayerArena& awaited) noe
 void
 ArenaServerService::sendSaturatedErrorMsg(zmq::message_t&& identity)
 {
+	SPDLOG_WARN("Arena Server Service is saturated and thus can't process new incoming fighting pit");
 	auto[error, size] = fys::arena::FlatbufferGenerator().generateErrorSaturated(_ctx.get().getServerCode());
 	_workerService.directSendMessageToPlayer(std::move(identity), zmq::message_t(error, size));
 }

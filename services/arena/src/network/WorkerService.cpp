@@ -57,11 +57,16 @@ WorkerService::startFightingPitsLoop()
 
 		if (!_arenaInstances.empty()) {
 			for (auto &[id, fp] : _arenaInstances) {
-				fp->continueBattle(now);
+				if (fp->isBattleOnGoing()) {
+					fp->continueBattle(now);
+				}
+				else {
+					fp->notifyEndStatus(broadcastMsgHandler(id));
+				}
 			}
 			cleanUpFinishedBattles();
 		}
-		std::this_thread::sleep_for(1000ms); // todo sleep something smart
+		std::this_thread::sleep_for(10ms); // todo sleep something smart
 	}
 }
 
@@ -98,7 +103,6 @@ WorkerService::cleanUpFinishedBattles()
 		_arenaInstances.erase(id);
 		_arenaIdOnIdentifier.erase(id);
 	}
-
 }
 
 void

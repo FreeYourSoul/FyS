@@ -25,6 +25,7 @@
 #define FYS_WORKERSERVICE_HH
 
 #include <spdlog/spdlog.h>
+#include <utility>
 #include <zmq_addon.hpp>
 #include <fightingPit/FightingPit.hh>
 
@@ -180,6 +181,11 @@ private:
 
 	bool
 	sendMessageToPlayer(unsigned fpId, const std::string& userName, zmq::message_t&& msg);
+
+	[[nodiscard]] auto
+	broadcastMsgHandler(unsigned fpId) {
+		return [this, fpId](zmq::message_t&& toSend) { this->broadcastMsg(fpId, std::move(toSend)); };
+	}
 
 	[[nodiscard]] const std::string&
 	retrievePlayerIdentifier(unsigned fpId, const std::string& userName);

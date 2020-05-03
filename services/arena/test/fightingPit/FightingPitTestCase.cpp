@@ -171,8 +171,6 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]")
 				now += fys::arena::interval::EASY + 1ms;
 				fp->continueBattle(now);
 
-				// Battle is now ready to be cleaned up
-				REQUIRE(fp->isBattleOver());
 			}
 			catch (const std::exception& e) {
 				SPDLOG_ERROR("Exception during Battle turn 1 test {} ", e.what());
@@ -439,8 +437,6 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]")
 //				now += fys::arena::interval::EASY + 1ms;
 //				fp->continueBattle(now);
 //
-//				// Battle is now ready to be cleaned up
-//				REQUIRE(fp->isBattleOver());
 			}
 			catch (const std::exception& e) {
 				SPDLOG_ERROR("Exception during Battle turn 1 test {} ", e.what());
