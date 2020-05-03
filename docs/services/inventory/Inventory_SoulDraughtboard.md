@@ -38,7 +38,7 @@ Skills can be cast in battle, but skills could also be alterations on your chara
 
 __note__: Those are examples that are still under work and may very well be changed in the future :
 
-![Example](../assets/Soul%20Draughtboard.png)
+![Example](https://raw.githubusercontent.com/FreeYourSoul/FyS/master/docs/assets/SoulDraughtboard.png)
 
 As visible in this simplified diagram, like in FFX, slots are linked with between each other, forcing the player to fill a path before attaining specific slots that the user may want to use.
 
