@@ -4,31 +4,24 @@ class zone_heal {
     attr heal;
 
     def zone_heal(heal_power) {
-        this.heal = damage(heal_power);
+        this.heal = heal(heal_power);
     }
 
-    def execute(side, isContender) {
+    def execute(side, isContender, numberMax) {
         if (isContender == 1) {
-            var contenders = allyPartyTeams.getContenderOnSide(side);
-            for (contender : contenders) {
-                this.heal.execute(contender.accessStatus());
-            }
+            var contenders = pitContenders.getContenderOnSide(side);
+            this.heal.execute_multiple(contenders, numberMax);
         }
         else {
-            var members = pitContenders.getMembersBySide(side);
-            for (member : members) {
-                this.heal.execute(member.accessStatus());
-            }
+            var members = allyPartyTeams.getMembersBySide(side);
+            this.heal.execute_multiple(members, numberMax);
         }
         1;
     }
 
-    def execute_multiple(multiple_side, numberMax) {
-        if (numberMax == 0) {
-            numberMax = targetsStatus.size();
-        }
+    def execute_multiple(multiple_side, isContender, numberMax) {
         for (auto i = 0 ; i < numberMax ; ++i) {
-            this.execute(targetStatus[i]);
+            this.execute(multiple_side[i], isContender, numberMax);
         }
     }
 

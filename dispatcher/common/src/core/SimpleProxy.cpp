@@ -36,7 +36,7 @@ namespace fys {
     }
 
     void SimpleProxy::startProxy() {
-        zmq::proxy(static_cast<void *>(_frontend), static_cast<void *>(_backend), nullptr);
+        zmq::proxy(zmq::socket_ref(_frontend), zmq::socket_ref(_backend));
     }
 
 }

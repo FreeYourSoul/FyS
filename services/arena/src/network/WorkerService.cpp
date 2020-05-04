@@ -82,7 +82,7 @@ WorkerService::addFightingPit(std::unique_ptr<FightingPit> fp)
 		return FightingPit::CREATION_ERROR;
 	}
 	while (++_currentArenaId != 0 && _arenaInstances.find(_currentArenaId) != _arenaInstances.end());
-
+	ChaiRegister::registerNetworkCommands(*fp->getChaiPtr(), broadcastMsgHandler(fp->getId()));
 	fp->setArenaId(_currentArenaId);
 	_arenaInstances.insert(std::pair(_currentArenaId, std::move(fp)));
 	_arenaIdOnIdentifier.insert(std::pair(_currentArenaId, std::vector<PlayerIdentifier>{}));

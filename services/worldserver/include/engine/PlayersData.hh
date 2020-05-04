@@ -26,6 +26,8 @@
 #define FYS_PLAYERSDATA_HH
 
 #include <functional>
+#include <string>
+#include <string_view>
 #include <unordered_map>
 #include <utility>
 #include <vector>

@@ -89,9 +89,9 @@ public:
 	[[nodiscard]] unsigned
 	activeCharactersOnSide(HexagonSide::Orientation side) const;
 
-	[[nodiscard]] bool
+	bool
 	initiateContenderMove(std::shared_ptr<FightingContender> contender, HexagonSide::Orientation moveTo);
-	[[nodiscard]] bool
+	bool
 	initiateMemberMove(std::shared_ptr<TeamMember> member, HexagonSide::Orientation moveTo);
 
 	void initiateForceContenderMove(std::shared_ptr<FightingContender> contender, HexagonSide::Orientation moveTo);

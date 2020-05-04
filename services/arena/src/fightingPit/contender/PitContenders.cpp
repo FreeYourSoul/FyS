@@ -130,7 +130,8 @@ PitContenders::executeContenderAction(const data::PriorityElem& contender)
 		return;
 	}
 	auto& c = _contenders.at(contender.id);
-	if (c->accessStatus().processAlterationBeforeTurn()) {
+	const bool isTurnExecuted = c->accessStatus().processAlterationBeforeTurn();
+	if (isTurnExecuted) {
 		c->executeAction();
 	}
 	c->accessStatus().processAlterationAfterTurn();

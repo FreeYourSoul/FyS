@@ -8,22 +8,26 @@ class heal {
         this.heal = heal;
     }
 
-    def execute(targetStatus) {
+    def execute_impl(targetStatus) {
         if (targetStatus.life.current + this.heal >= targetStatus.life.total) {
             targetStatus.life.current = targetStatus.life.total;
         }
         else {
             targetStatus.life.current = targetStatus.life.current + this.heal;
         }
+    }
+
+    def execute(target) {
+        this.execute_impl(target.accessStatus());
         1;
     }
 
-    def execute_multiple(targetsStatus, numberMax) {
+    def execute_multiple(targets, numberMax) {
         if (numberMax == 0) {
-            numberMax = targetsStatus.size();
+            numberMax = targets.size();
         }
         for (auto i = 0 ; i < numberMax ; ++i) {
-            this.execute(targetStatus[i]);
+            this.execute_impl(targets[i].accessStatus());
         }
     }
 

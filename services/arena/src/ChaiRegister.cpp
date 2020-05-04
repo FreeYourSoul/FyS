@@ -41,6 +41,7 @@
 #include <ConnectionHandler.hh>
 #include <ChaiRegister.hh>
 #include <Cml.hh>
+#include <FlatbufferGenerator.hh>
 
 using chaiscript::fun;
 
@@ -51,7 +52,7 @@ ChaiRegister::registerChai(chaiscript::ChaiScript& chai, PitContenders& pc, Ally
 {
 	try {
 		chaiscript::ModulePtr m = std::make_shared<chaiscript::Module>();
-		registerCommon(m, layout);
+		registerCommon(m);
 		registerFightingPitContender(chai, m);
 		registerTeamAllies(chai, m);
 		registerUtility(chai, pc, apt);
@@ -216,13 +217,13 @@ ChaiRegister::registerUtility(chaiscript::ChaiScript& chai, PitContenders& pc, A
 				return false;
 			}), "isCharacterOnAdjacentSide");
 	chai.add(chaiscript::fun<std::function<bool(HexagonSide::Orientation, HexagonSide::Orientation)> >(
-			[&pc, &apt](HexagonSide::Orientation lhs, HexagonSide::Orientation rhs) {
+			[](HexagonSide::Orientation lhs, HexagonSide::Orientation rhs) {
 				return HexagonSide{lhs}.canMove(rhs);
 			}), "isSideAdjacentSide");
 }
 
 void
-ChaiRegister::registerCommon(chaiscript::ModulePtr m, FightingPitLayout& layout)
+ChaiRegister::registerCommon(chaiscript::ModulePtr m)
 {
 
 	m->add(chaiscript::fun<std::function<void(fys::arena::data::Status&, std::vector<data::Alteration>, bool)>>(
@@ -394,6 +395,7 @@ ChaiRegister::registerTeamAllies(chaiscript::ChaiScript& chai, chaiscript::Modul
 			"AllyPartyTeams",
 			{},
 			{
+					{fun(&AllyPartyTeams::getMembersBySide), "getMembersBySide"},
 					{fun(&AllyPartyTeams::selectSuitableMemberOnSide), "selectSuitableMemberOnSide"},
 					{fun(&AllyPartyTeams::selectSuitableMember), "selectSuitableMember"},
 					{fun(&AllyPartyTeams::selectSuitableMemberOnSideAlive), "selectSuitableMemberOnSideAlive"},
@@ -413,6 +415,21 @@ ChaiRegister::createChaiInstance(PitContenders& pc, AllyPartyTeams& apt, Fightin
 	auto chai = std::make_unique<chaiscript::ChaiScript>();
 	registerChai(*chai, pc, apt, layout);
 	return chai;
+}
+
+void
+ChaiRegister::registerNetworkCommands(chaiscript::ChaiScript& chai, std::function<void(zmq::message_t&&)> networkHandler)
+{
+	chai.add(fun<BroadcastActionExecHandler>(
+			[networkHandler = std::move(networkHandler)](
+					const std::string& actionKey,
+					const std::vector<FightingContenderSPtr> contenderTargets,
+					const std::vector<TeamMemberSPtr>& allyTargets) {
+				FlatbufferGenerator fg;
+				auto[data, size] = fg.generateActionNotification(actionKey, contenderTargets, allyTargets);
+				networkHandler(zmq::message_t(data, size));
+			}
+	), "broadcastActionExecuted");
 }
 
 }

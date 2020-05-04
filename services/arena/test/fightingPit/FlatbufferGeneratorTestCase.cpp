@@ -299,6 +299,40 @@ TEST_CASE("FlatbufferGeneratorTestCase", "[service][arena][util]")
 
 	} // End section : Test generateErrorSaturated
 
+	SECTION("Test generateActionNotification") {
+		auto[data, size] = fg.generateActionNotification("ActionKey:Test",
+				FightingPitAnnouncer::getPitContenders(fp).getContenders(),
+				fp->getPartyTeams().getPartyTeams().at(0)->getTeamMembers());
+
+		REQUIRE(nullptr != data);
+		REQUIRE(0 < size);
+
+		const fys::fb::ReplyFrame* rp = fys::fb::GetReplyFrame(data);
+		REQUIRE(fys::fb::Content_ActionExecuted == rp->content_type());
+		const auto* ae = rp->content_as_ActionExecuted();
+
+		REQUIRE(nullptr != ae);
+
+		REQUIRE("ActionKey:Test" == ae->action()->str());
+
+		REQUIRE(4 == ae->partyTargets()->size());
+		REQUIRE("Elvo" == ae->partyTargets()->Get(0)->characterName()->str());
+		REQUIRE("Mirael" == ae->partyTargets()->Get(1)->characterName()->str());
+		REQUIRE("Fyston" == ae->partyTargets()->Get(2)->characterName()->str());
+		REQUIRE("Simon" == ae->partyTargets()->Get(3)->characterName()->str());
+
+		REQUIRE(4 == ae->monstersTargets()->size());
+		REQUIRE(0 == ae->monstersTargets()->Get(0)->status()->character_id());
+		REQUIRE("Sampy" == ae->monstersTargets()->Get(0)->characterName()->str());
+		REQUIRE(1 == ae->monstersTargets()->Get(1)->status()->character_id());
+		REQUIRE("Sampy" == ae->monstersTargets()->Get(1)->characterName()->str());
+		REQUIRE(2 == ae->monstersTargets()->Get(2)->status()->character_id());
+		REQUIRE("Sampy" == ae->monstersTargets()->Get(2)->characterName()->str());
+		REQUIRE(3 == ae->monstersTargets()->Get(3)->status()->character_id());
+		REQUIRE("Sampy" == ae->monstersTargets()->Get(3)->characterName()->str());
+
+	} // End section : Test generateActionNotification
+
 //	SECTION("Test Generate Cosmetic") {
 //
 //	} // End section : Test Generate Cosmetic

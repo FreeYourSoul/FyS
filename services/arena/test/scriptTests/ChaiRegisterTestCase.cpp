@@ -65,6 +65,7 @@ TEST_CASE("Test register/load player", "[service][arena][script_test]")
 	fys::arena::AllyPartyTeams apt;
 	fys::arena::FightingPitLayout layout(pc, apt);
 	auto chai = fys::arena::ChaiRegister::createChaiInstance(pc, apt, layout);
+	fys::arena::ChaiRegister::registerBaseActions(*chai, ccpy);
 
 	try {
 		REQUIRE(chai->eval<bool>(R"(
@@ -79,13 +80,13 @@ TEST_CASE("Test register/load player", "[service][arena][script_test]")
 
 	SECTION("Test copy cml") {
 
-		auto content = ccpy.findInCache("arena:actions:damage:damage.chai");
+		auto content = ccpy.findInCache("arena:actions:damage:slash.chai");
 
 		REQUIRE(std::filesystem::exists(baseCache));
 		REQUIRE(std::filesystem::exists(baseCache / "arena"));
 		REQUIRE(std::filesystem::exists(baseCache / "arena" / "actions"));
 		REQUIRE(std::filesystem::exists(baseCache / "arena" / "actions" / "damage"));
-		REQUIRE(std::filesystem::exists(baseCache / "arena" / "actions" / "damage" / "damage.chai"));
+		REQUIRE(std::filesystem::exists(baseCache / "arena" / "actions" / "damage" / "slash.chai"));
 		REQUIRE_FALSE(content.empty());
 
 	} // End section : Test copy cml
@@ -95,14 +96,14 @@ TEST_CASE("Test register/load player", "[service][arena][script_test]")
 		fys::arena::PartyTeam partyTeam("FyS");
 		fys::arena::TeamMemberSPtr tm1 = std::make_shared<fys::arena::TeamMember>(partyTeam.getUserName(), "fyston1");
 		tm1->setId(0);
-		tm1->addDoableAction("arena:actions:damage:damage.chai", 1);
+		tm1->addDoableAction("arena:actions:damage:slash.chai", 1);
 		partyTeam.addTeamMember(std::move(tm1));
 
 		fys::arena::ChaiRegister::loadAndRegisterActionPartyTeam(*chai, ccpy, partyTeam);
 
 		try {
 			REQUIRE(chai->eval<bool>(R"(1 == ally_actions.count("FyS_fyston1");)"));
-			REQUIRE(chai->eval<bool>(R"(1 == ally_actions["FyS_fyston1"].count("damage");)"));
+			REQUIRE(chai->eval<bool>(R"(1 == ally_actions["FyS_fyston1"].count("slash");)"));
 		}
 		catch (std::exception& ex) {
 			SPDLOG_ERROR("{}", ex.what());
@@ -113,17 +114,17 @@ TEST_CASE("Test register/load player", "[service][arena][script_test]")
 
 			fys::arena::TeamMemberSPtr tm2 = std::make_shared<fys::arena::TeamMember>(partyTeam.getUserName(), "fyston2");
 			tm2->setId(1);
-			tm2->addDoableAction("arena:actions:damage:damage.chai", 1);
+			tm2->addDoableAction("arena:actions:damage:slash.chai", 1);
 			partyTeam.addTeamMember(std::move(tm2));
 
 			fys::arena::ChaiRegister::loadAndRegisterActionPartyTeam(*chai, ccpy, partyTeam);
 
 			try {
 				REQUIRE(chai->eval<bool>(R"(1 == ally_actions.count("FyS_fyston1");)"));
-				REQUIRE(chai->eval<bool>(R"(1 == ally_actions["FyS_fyston1"].count("damage");)"));
+				REQUIRE(chai->eval<bool>(R"(1 == ally_actions["FyS_fyston1"].count("slash");)"));
 
 				REQUIRE(chai->eval<bool>(R"(1 == ally_actions.count("FyS_fyston2");)"));
-				REQUIRE(chai->eval<bool>(R"(1 == ally_actions["FyS_fyston2"].count("damage");)"));
+				REQUIRE(chai->eval<bool>(R"(1 == ally_actions["FyS_fyston2"].count("slash");)"));
 			}
 			catch (std::exception& ex) {
 				SPDLOG_ERROR("{}", ex.what());
@@ -137,21 +138,21 @@ TEST_CASE("Test register/load player", "[service][arena][script_test]")
 			fys::arena::PartyTeam partyTeam2("Free");
 			fys::arena::TeamMemberSPtr tm21 = std::make_shared<fys::arena::TeamMember>(partyTeam2.getUserName(), "fyston1");
 			tm21->setId(2);
-			tm21->addDoableAction("arena:actions:damage:damage.chai", 1);
+			tm21->addDoableAction("arena:actions:damage:slash.chai", 1);
 			partyTeam2.addTeamMember(std::move(tm21));
 			fys::arena::TeamMemberSPtr tm22 = std::make_shared<fys::arena::TeamMember>(partyTeam2.getUserName(), "fyston2");
 			tm22->setId(3);
-			tm22->addDoableAction("arena:actions:damage:damage.chai", 1);
+			tm22->addDoableAction("arena:actions:damage:slash.chai", 1);
 			partyTeam2.addTeamMember(std::move(tm22));
 
 			fys::arena::ChaiRegister::loadAndRegisterActionPartyTeam(*chai, ccpy, partyTeam2);
 
 			try {
 				REQUIRE(chai->eval<bool>(R"(1 == ally_actions.count("Free_fyston1");)"));
-				REQUIRE(chai->eval<bool>(R"(1 == ally_actions["Free_fyston1"].count("damage");)"));
+				REQUIRE(chai->eval<bool>(R"(1 == ally_actions["Free_fyston1"].count("slash");)"));
 
 				REQUIRE(chai->eval<bool>(R"(1 == ally_actions.count("Free_fyston2");)"));
-				REQUIRE(chai->eval<bool>(R"(1 == ally_actions["Free_fyston2"].count("damage");)"));
+				REQUIRE(chai->eval<bool>(R"(1 == ally_actions["Free_fyston2"].count("slash");)"));
 			}
 			catch (std::exception& ex) {
 				SPDLOG_ERROR("{}", ex.what());

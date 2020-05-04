@@ -13,7 +13,7 @@ class multi_slash
         this.set_explicit(true);
         var lvl = this.getStrikeLevel(levelOrStatus);
 
-        this.dmg = damage(30);
+        this.dmg = damage("arena:action:damage:multi_slash", 30, 0);
         this.number = 2 + lvl / 3;
     }
 
@@ -34,8 +34,8 @@ class multi_slash
         return this.number;
     }
 
-    def execute(targetsStatus) {
-        this.dmg.execute_multiple(targetsStatus, this.number);
+    def execute(targets) {
+        this.dmg.execute_multiple(targets, this.number);
         1;
     }
 

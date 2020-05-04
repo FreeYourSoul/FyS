@@ -1,5 +1,6 @@
 include "FightingPitState.fbs";
 include "EndBattle.fbs";
+include "ActionExecuted.fbs";
 
 namespace fys.fb;
 
@@ -16,6 +17,8 @@ enum TypeReply : byte {
     INCOMING_CONTENDER = 4,
     /// sent when the server is saturated (no Content linked)
     ARENA_SERVICE_SATURATED = 5,
+    /// sent when an action has been executed
+    ACTION_EXECUTED = 6,
 
     /// sent when something wrong occurred
     ERROR,
@@ -34,6 +37,9 @@ EndBattle : fys.fb.EndBattle,
 
 /// content for TypeReply.INCOMING_CONTENDER
 ContenderStatus : fys.fb.MemberStatus,
+
+/// content for TypeReply.INCOMING_CONTENDER
+ActionExecuted : fys.fb.ActionExecuted,
 
 /// content for TypeReply.ERROR: Error message
 ErrorMessage : string

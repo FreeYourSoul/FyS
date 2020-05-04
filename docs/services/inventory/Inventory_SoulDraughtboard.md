@@ -1,6 +1,6 @@
 # Soul Draughtboard
 
-One of the particularity of Soul Tales (FyS Online MMORPG) is the draughtboard system. It is greatly inspired with the Final Fantasy mecanism. Character in the game doesn't have level in the classical way of the term. The level of a character will determine how many Primordial Souls a character can use. But has a soul draughtboard, in which they can embed souls that are going to unlock skills and improve your characters in general.
+One of the particularity of Soul Tales (FyS Online MMORPG) is the draughtboard system. It is greatly inspired with the Final Fantasy mechanism. Character in the game doesn't have level in the classical way of the term. The level of a character will determine how many Primordial Souls a character can use. But has a soul draughtboard, in which they can embed souls that are going to unlock skills and improve your characters in general.
 
 ## Souls Type
 

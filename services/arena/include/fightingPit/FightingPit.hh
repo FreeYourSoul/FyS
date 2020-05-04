@@ -41,6 +41,9 @@
 #include <fightingPit/team/TeamMember.hh>
 
 // forward declarations
+namespace zmq {
+struct message_t;
+}
 namespace fys::arena {
 class FightingContender;
 class WorkerService;
@@ -195,18 +198,18 @@ public:
 
 
 	/**
-	 * Notify the clients if they won or lose,
+	 * Notify the clients if they won or lose, then set the fighting pit as ready for cleanup
 	 * If a clients win, the rewards are broadcast to the players
 	 * @param broadcastHandler handler to broadcast message to the players
 	 */
 	template <typename BroadcastHandler>
 	void notifyEndStatus(BroadcastHandler&& broadcastHandler) {
 		if (_progress == Progress::ALLY_WIN) {
-
+			std::forward<BroadcastHandler>(broadcastHandler)(makeWinnerNotification());
 			_progress = Progress::CLEANUP;
 		}
 		else if (_progress == Progress::CONTENDER_WIN) {
-
+			std::forward<BroadcastHandler>(broadcastHandler)(makeLooserNotification());
 			_progress = Progress::CLEANUP;
 		}
 	}
@@ -249,6 +252,12 @@ private:
 
 	[[nodiscard]] bool
 	addContender(const std::shared_ptr<FightingContender>& fc);
+
+	[[nodiscard]] zmq::message_t
+	makeWinnerNotification() const;
+
+	[[nodiscard]] zmq::message_t
+	makeLooserNotification() const;
 
 	//! Initialize the sideBattles vector in the same order as the enum in order to easily access a specific side
 	void initializeSideBattles();

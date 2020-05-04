@@ -39,8 +39,8 @@ TEST_CASE("AlgorithmTestCase SizedQueue testing", "[common]")
 		REQUIRE(5 == strQueue.size());
 		strQueue.push("6");
 		REQUIRE(6 == strQueue.size());
-		strQueue.pop();
-		strQueue.pop();
+		REQUIRE(strQueue.pop().has_value());
+		REQUIRE(strQueue.pop().has_value());
 		REQUIRE(4 == strQueue.size());
 
 	} // End section : Test size

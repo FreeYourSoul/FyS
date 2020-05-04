@@ -23,8 +23,8 @@ class light_heal {
         ALLY;
     }
 
-    def execute(targetStatus) {
-        this.heal.execute(targetStatus);
+    def execute(target) {
+        this.heal.execute(target);
         1;
     }
 };

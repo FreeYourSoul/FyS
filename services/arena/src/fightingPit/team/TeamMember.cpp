@@ -62,9 +62,7 @@ TeamMember::executeAction(
 
 	const std::string allyAction = chai::util::getAccessAllyAction(_userName, _name,
 			data::getActionNameFromKey(_actionsDoable.at(pa->idAction).first));
-	const auto funcAction = chaiPtr->eval<std::function<int(data::Status&)>>(fmt::format(
-			R"(fun(targetStatus){{ return {}.execute(targetStatus);}})",
-			allyAction));
+	const std::string funActionStr = fmt::format(R"(fun(target){{ return {}.execute(target);}})", allyAction);
 	data::Targeting targetType;
 
 	try {
@@ -79,18 +77,20 @@ TeamMember::executeAction(
 		// If a specific target is required, otherwise self is used
 		if (pa->target.has_value()) {
 			std::visit(overloaded{
-					[&apt, &targetType, &funcAction](AllyTargetId target) {
+					[&apt, &targetType, &funActionStr, &chaiPtr](AllyTargetId target) {
 						if (targetType == data::ALLY || targetType == data::ALLY_OR_ENNEMY) {
-							funcAction(apt.selectMemberById(target.v)->accessStatus());
+							const auto funcAction = chaiPtr->eval<std::function<int(TeamMember&)>>(funActionStr);
+							funcAction(*apt.selectMemberById(target.v));
 						}
 						else {
 							spdlog::error("Action of type {}, couldn't target an AllyTarget of id {}", targetType, target.v);
 						}
 					},
 
-					[&pc, &targetType, &funcAction](ContenderTargetId target) {
+					[&pc, &targetType, &funActionStr, &chaiPtr](ContenderTargetId target) {
 						if (targetType == data::ENNEMY || targetType == data::ALLY_OR_ENNEMY) {
-							funcAction(pc.getFightingContender(target.v)->accessStatus());
+							const auto funcAction = chaiPtr->eval<std::function<int(FightingContender&)>>(funActionStr);
+							funcAction(*pc.getFightingContender(target.v));
 						}
 						else {
 							spdlog::error("Action of type {}, couldn't target a ContenderTarget of id {}", targetType, target.v);
@@ -102,8 +102,9 @@ TeamMember::executeAction(
 					}
 			}, *pa->target);
 		}
-		else if (funcAction(_status)) {
-			SPDLOG_DEBUG("Ally {}::{} id {} executed action {} on himself", _userName, _name, _id, pa->idAction);
+		else {
+			const auto funcAction = chaiPtr->eval<std::function<int(TeamMember&)>>(funActionStr);
+			funcAction(*this);
 		}
 	}
 	catch (const chaiscript::exception::eval_error& ee) {

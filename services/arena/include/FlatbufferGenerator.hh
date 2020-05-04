@@ -29,10 +29,11 @@
 #include <flatbuffers/flatbuffers.h>
 
 namespace fys::fb {
-class FightingPitState;
-class PartyTeamStatus;
-class MemberStatus;
-class Cosmetics;
+struct FightingPitState;
+struct PartyTeamStatus;
+struct MemberStatus;
+struct Cosmetics;
+struct Reward;
 }
 namespace fys::arena {
 class AllyPartyTeams;
@@ -40,6 +41,11 @@ class PartyTeam;
 class TeamMember;
 class FightingContender;
 class FightingPit;
+struct Rewards;
+
+using FightingContenderSPtr = std::shared_ptr<FightingContender>;
+using TeamMemberSPtr = std::shared_ptr<TeamMember>;
+
 }
 
 namespace fys::arena {
@@ -74,6 +80,14 @@ public:
 	[[nodiscard]] std::pair<void*, uint>
 	generatePartyTeamStatus(const fys::arena::PartyTeam& partyTeam);
 
+	[[nodiscard]] std::pair<void*, uint>
+	generateEndBattle(bool win, const Rewards& rewards);
+
+	[[nodiscard]] std::pair<void*, uint>
+	generateActionNotification(const std::string& actionKey,
+			const std::vector<FightingContenderSPtr>& contenderTargets,
+			const std::vector<TeamMemberSPtr>& allyTargets);
+
 //	[[nodiscard]] std::pair<void*, uint>
 //	generateCosmetics(const fys::arena::PartyTeam& partyTeam);
 //
@@ -85,10 +99,13 @@ private:
 	generatePartyTeamVecStatusOffset(const AllyPartyTeams& apt);
 
 	[[nodiscard]] inline std::vector<flatbuffers::Offset<fb::MemberStatus>>
-	generateTeamMemberVecStatusOffset(const PartyTeam& partyTeam);
+	generateTeamMemberVecStatusOffset(const std::vector<TeamMemberSPtr>& members);
 
 	[[nodiscard]] inline std::vector<flatbuffers::Offset<fys::fb::MemberStatus>>
-	generateContenderVecStatusOffset(const PitContenders& pitContender);
+	generateContenderVecStatusOffset(const std::vector<FightingContenderSPtr>& contenders);
+
+	[[nodiscard]] inline std::vector<flatbuffers::Offset<fb::Reward>>
+	generateRewardsOffset(const Rewards& rewards);
 
 //	[[nodiscard]] inline flatbuffers::Offset<fys::fb::Cosmetics>
 //	generateCosmeticsOffset(const fys::arena::PartyTeam&);

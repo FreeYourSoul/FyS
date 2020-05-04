@@ -14,15 +14,16 @@ class meditate {
         SELF;
     }
 
-    def execute(targetStatus)
+    def execute(target)
     {
         print("Meditate is called");
-        var new_amount = targetStatus.magicPoint.current + this.power;
-        if (targetStatus.magicPoint.total < new_amount) {
-            targetStatus.magicPoint.current = targetStatus.magicPoint.total;
+        var &status = target.accessStatus();
+        var new_amount = status.magicPoint.current + this.power;
+        if (status.magicPoint.total < new_amount) {
+            status.magicPoint.current = status.magicPoint.total;
         }
         else {
-            targetStatus.magicPoint.current = new_amount;
+            status.magicPoint.current = new_amount;
         }
         1;
     }

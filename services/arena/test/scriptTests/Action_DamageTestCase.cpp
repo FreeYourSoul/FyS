@@ -118,7 +118,7 @@ TEST_CASE("test damage chaiscript", "[service][arena][script_test]")
 				chai->eval(R"(
 var &contender = pitContenders.getFightingContender(0);
 var s = slash(1);
-s.execute(contender.accessStatus());
+s.execute(contender);
 )");
 			}
 			catch (const chaiscript::exception::eval_error & ex) {
@@ -143,7 +143,7 @@ s.execute(contender.accessStatus());
 				chai->eval(R"(
 var &contender = pitContenders.getFightingContender(0);
 var s = slash(1);
-s.execute(contender.accessStatus());
+s.execute(contender);
 )");
 			}
 			catch (std::exception& ex) {
@@ -178,8 +178,8 @@ s.execute(contender.accessStatus());
 
 			try {
 				chai->eval(R"(
-var &contenderStatus = pitContenders.getFightingContender(0).accessStatus();
-var &contender2Status = pitContenders.getFightingContender(1).accessStatus();
+var &contenderStatus = pitContenders.getFightingContender(0);
+var &contender2Status = pitContenders.getFightingContender(1);
 var s = multi_slash(1);
 var d = [];
 d.push_back_ref(contenderStatus);
@@ -205,8 +205,8 @@ s.execute(d);
 
 			try {
 				chai->eval(R"(
-var &contenderStatus = pitContenders.getFightingContender(0).accessStatus();
-var &contender2Status = pitContenders.getFightingContender(1).accessStatus();
+var &contenderStatus = pitContenders.getFightingContender(0);
+var &contender2Status = pitContenders.getFightingContender(1);
 var s = multi_slash(1);
 var d = [];
 d.push_back_ref(contenderStatus);

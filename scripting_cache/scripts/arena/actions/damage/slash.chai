@@ -15,7 +15,7 @@ class slash {
         var lvl = this.getStrikeLevel(levelOrStatus);
         var alts = slash_includes();
 
-        this.dmg = damage(30 + 30 * (0.1 * lvl));
+        this.dmg = damage("arena:action:damage:slash", 30 + 30 * (0.1 * lvl), 0);
         this.after_turn_alterations = [
             Alteration(alts[0], lvl, 2, alteration_bleeding)
         ];
@@ -34,9 +34,9 @@ class slash {
         ENNEMY;
     }
 
-    def execute(targetStatus) {
-        this.dmg.execute(targetStatus);
-        addAfterTurnAlterations(targetStatus, this.after_turn_alterations, true);
+    def execute(target) {
+        addAfterTurnAlterations(target.accessStatus(), this.after_turn_alterations, true);
+        this.dmg.execute(target);
         1;
     }
 

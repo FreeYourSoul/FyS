@@ -2,34 +2,46 @@ def damage_includes() { []; }
 
 class damage {
     attr power;
+    attr actionKey;
 
-    def damage(power)
+    def damage(actionKey, powerRangeA, powerRangeB)
     {
         this.set_explicit(true);
-        this.power = power;
+        this.actionKey = actionKey;
+        if (powerRangeA >= powerRangeB) {
+            this.power = powerRangeA;
+        }
+        else {
+            this.power = generateRandomNumber(powerRangeA, powerRangeB);
+        }
     }
 
-    def execute(targetStatus)
-    {
+    def impl_execute(targetStatus) {
         if (targetStatus.life.current > this.power) {
             targetStatus.life.current = targetStatus.life.current - this.power;
         }
         else {
             targetStatus.life.current = 0;
         }
+    }
+
+    def execute(target)
+    {
+        this.impl_execute(target.accessStatus());
         1;
     }
 
-    def execute_multiple(targetsStatus, numberMax)
+    def execute_multiple(targets, numberMax)
     {
-        if ("Vector" == targetsStatus.type_name()) {
+        if ("Vector" == targets.type_name()) {
             if (numberMax == 0) {
-                numberMax = targetsStatus.size();
+                numberMax = targets.size();
             }
             for (auto i = 0 ; i < numberMax ; ++i) {
-                this.execute(targetsStatus[i]);
+                this.impl_execute(targets[i].accessStatus());
             }
         }
+        1;
     }
 
 };

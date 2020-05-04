@@ -33,6 +33,7 @@
 #include <fightingPit/contender/FightingContender.hh>
 #include <fightingPit/FightingPit.hh>
 #include <fightingPit/team/TeamMember.hh>
+#include <FlatbufferGenerator.hh>
 
 namespace {
 std::chrono::milliseconds
@@ -112,8 +113,8 @@ FightingPit::forwardActionToTeamMember(const std::string& user, PlayerAction act
 					user, action.actionName, member->getName());
 			return;
 		}
-		auto[success, target] = this->checkAndRetrieveTarget(user, member, action);
-		if (success) {
+		auto[targetIsCorrect, target] = this->checkAndRetrieveTarget(user, member, action);
+		if (targetIsCorrect) {
 			member->addPendingAction(std::move(action.actionName), std::move(target));
 		}
 	}
@@ -281,6 +282,22 @@ FightingPit::addContender(const std::shared_ptr<FightingContender>& fc)
 		return true;
 	}
 	return false;
+}
+
+zmq::message_t
+FightingPit::makeWinnerNotification() const
+{
+	FlatbufferGenerator fb;
+	auto[data, size] = fb.generateEndBattle(true, *_rewards);
+	return zmq::message_t(data, size);
+}
+
+zmq::message_t
+FightingPit::makeLooserNotification() const
+{
+	FlatbufferGenerator fb;
+	auto[data, size] = fb.generateEndBattle(false, {});
+	return zmq::message_t(data, size);
 }
 
 }

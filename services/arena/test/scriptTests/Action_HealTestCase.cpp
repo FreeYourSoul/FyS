@@ -117,7 +117,7 @@ TEST_CASE("test heal chaiscript", "[service][arena][script_test]")
 				chai->eval(R"(
 var &contender = pitContenders.getFightingContender(0);
 var s = light_heal(1);
-s.execute(contender.accessStatus());
+s.execute(contender);
 )");
 			}
 			catch (std::exception& ex) {
@@ -137,7 +137,7 @@ s.execute(contender.accessStatus());
 				chai->eval(R"(
 var &contender = pitContenders.getFightingContender(0);
 var s = light_heal(1);
-s.execute(contender.accessStatus());
+s.execute(contender);
 )");
 			}
 			catch (std::exception& ex) {

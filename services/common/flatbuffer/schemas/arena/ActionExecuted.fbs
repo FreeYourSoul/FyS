@@ -1,0 +1,11 @@
+include "FightingPitState.fbs";
+
+namespace fys.fb;
+
+table ActionExecuted {
+    action:string;
+    partyTargets:[MemberStatus];
+    monstersTargets:[MemberStatus];
+}
+
+root_type ActionExecuted;

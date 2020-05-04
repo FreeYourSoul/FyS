@@ -25,6 +25,7 @@ else ()
             ${FLATBUFFER_SCHEMA_DIR}/arena/FightingPitState.fbs
             ${FLATBUFFER_SCHEMA_DIR}/arena/ReplyFrame.fbs
             ${FLATBUFFER_SCHEMA_DIR}/arena/EndBattle.fbs
+            ${FLATBUFFER_SCHEMA_DIR}/arena/ActionExecuted.fbs
             ${FLATBUFFER_SCHEMA_DIR}/ClientCom.fbs
             ${FLATBUFFER_SCHEMA_DIR}/Notifications.fbs
             ${FLATBUFFER_SCHEMA_DIR}/WSAction.fbs)

@@ -3,33 +3,26 @@ def zone_damage_includes() { []; }
 class zone_damage {
     attr dmg;
 
-    def zone_damage(dmg_power) {
+    def zone_damage(actionKey, dmg_power) {
         this.set_explicit(true);
-        this.dmg = damage(dmg_power);
+        this.dmg = damage(actionKey, dmg_power, 0);
     }
 
-    def execute(side, isContender) {
+    def execute(side, isContender, numberMax) {
         if (isContender == 1) {
-            var contenders = allyPartyTeams.getContenderOnSide(side);
-            for (contender : contenders) {
-                this.damage.execute(contender);
-            }
+            var contenders = pitContenders.getContenderOnSide(side);
+            this.damage.execute_multiple(contenders, numberMax);
         }
         else {
-            var members = pitContenders.getMembersBySide(side);
-            for (member : members) {
-                this.damage.execute(member.accessStatus());
-            }
+            var members = allyPartyTeams.getMembersBySide(side);
+            this.damage.execute_multiple(members, numberMax);
         }
         1;
     }
 
-    def execute_multiple(multiple_side, numberMax) {
-        if (numberMax == 0) {
-            numberMax = targetsStatus.size();
-        }
+    def execute_multiple(multiple_side, isContender, numberMax) {
         for (auto i = 0 ; i < numberMax ; ++i) {
-            this.execute(targetStatus[i]);
+            this.execute(multiple_side[i], isContender, numberMax);
         }
     }
 
