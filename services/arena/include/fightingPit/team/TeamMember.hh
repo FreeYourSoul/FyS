@@ -135,7 +135,7 @@ private:
 	 */
 	HexagonSide::Orientation _moving = HexagonSide::Orientation::NONE;
 
-	//! action name with level of action
+	//! action key with level of action
 	std::vector<std::pair<std::string, uint>> _actionsDoable;
 	fys::common::SizedQueue<PendingAction> _pendingActions;
 

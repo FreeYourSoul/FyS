@@ -420,13 +420,22 @@ ChaiRegister::createChaiInstance(PitContenders& pc, AllyPartyTeams& apt, Fightin
 void
 ChaiRegister::registerNetworkCommands(chaiscript::ChaiScript& chai, std::function<void(zmq::message_t&&)> networkHandler)
 {
-	chai.add(fun<BroadcastActionExecHandler>(
+	chai.add(fun<std::function<void(const std::string&, const std::vector<TeamMemberSPtr>&)>>(
 			[networkHandler = std::move(networkHandler)](
 					const std::string& actionKey,
-					const std::vector<FightingContenderSPtr> contenderTargets,
 					const std::vector<TeamMemberSPtr>& allyTargets) {
 				FlatbufferGenerator fg;
-				auto[data, size] = fg.generateActionNotification(actionKey, contenderTargets, allyTargets);
+				auto[data, size] = fg.generateActionNotification(actionKey, {}, allyTargets);
+				networkHandler(zmq::message_t(data, size));
+			}
+	), "broadcastActionExecuted");
+
+	chai.add(fun<std::function<void(const std::string&, const std::vector<FightingContenderSPtr>&)>>(
+			[networkHandler = std::move(networkHandler)](
+					const std::string& actionKey,
+					const std::vector<FightingContenderSPtr>& contenderTargets) {
+				FlatbufferGenerator fg;
+				auto[data, size] = fg.generateActionNotification(actionKey, contenderTargets, {});
 				networkHandler(zmq::message_t(data, size));
 			}
 	), "broadcastActionExecuted");

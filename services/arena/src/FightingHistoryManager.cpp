@@ -21,17 +21,40 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include <spdlog/spdlog.h>
 #include <fightingPit/FightingPit.hh>
 #include "FightingHistoryManager.hh"
+
+namespace {
+
+[[nodiscard]] std::string
+targetStr(const std::vector<uint>& targets)
+{
+	std::string ret;
+	for (uint t : targets) {
+		ret.append(std::to_string(t) + " ");
+	}
+	return ret;
+}
+
+}
 
 namespace fys::arena {
 
 void
-FightingHistoryManager::addHistoric(unsigned int fightingPitId, HistoryAction&& ha)
+FightingHistoryManager::addHistoric(unsigned fightingPitId, HistoryAction&& ha)
 {
 	if (getInstance()._isManagerOn) {
 		auto it = getInstance()._history.find(fightingPitId);
 		if (it != getInstance()._history.end()) {
+
+			SPDLOG_DEBUG("[fp:{}] <HistoryAction> : {} of id {} named '{}' is executing action '{}' "
+						 "with contender target [ {}] and ally target [ {}]", fightingPitId,
+					ha.isContender ? "Contender" : "Ally",
+					ha.idCharacter, ha.name, ha.actionKey,
+					targetStr(ha.idContenderTarget),
+					targetStr(ha.idAllyTarget));
+
 			it->second.hist.emplace_back(std::move(ha));
 		}
 	}
@@ -64,14 +87,23 @@ FightingHistoryManager::createHistoric(const FightingPit& fp, unsigned seed)
 	}
 }
 
-FightingHistoryManager::HistoryFight::HistoryFight(const FightingPit& pt, unsigned seed) noexcept
-		:ref(pt), seed(seed) { }
-
-FightingHistoryManager::HistoryFight::~HistoryFight()
+void
+FightingHistoryManager::save(unsigned int fightingPitId)
 {
-	if (hasToBeSaved && seed > 0) {
-// Todo Create a history file containing the logs of the fight (how it happened)
+	auto& instance = getInstance();
+	if (!instance._isManagerOn) return;
+
+	auto historyIt = instance._history.find(fightingPitId);
+	if (historyIt == instance._history.end()) return;
+
+	if (historyIt->second.hasToBeSaved && historyIt->second.seed > 0) {
+		// Todo Create a history file containing the logs of the fight (how it happened)
+	}
+	getInstance()._history.erase(historyIt);
 	}
 }
+
+
+
 
 }

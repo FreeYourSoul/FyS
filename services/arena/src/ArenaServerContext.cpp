@@ -187,6 +187,7 @@ ArenaServerContext::toString() const noexcept
 	str += "[INFO] Dispatcher connected host: " + _dispatcherData.address + "\n";
 	str += "[INFO] Dispatcher connection string: " + getDispatcherConnectionString() + "\n";
 	str += "[INFO] Player binding string: " + getPlayerBindingString() + "\n";
+	str += "[INFO] Local cache folder: " + getPathLocalStorageCache() + "\n";
 	str += "\n*************************\n";
 	return str;
 }

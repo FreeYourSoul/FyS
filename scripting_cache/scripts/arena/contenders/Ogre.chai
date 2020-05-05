@@ -1,7 +1,7 @@
 def Ogre_includes() {
     [
         "arena:actions:damage:slash.chai"
-    ]
+    ];
 }
 
 class Ogre {
@@ -14,15 +14,13 @@ class Ogre {
         this.set_explicit(true);
         this.level = level;
         this.id = contenderId;
-    }
 
-    def setupContender() {
         this.actions = action(
 
             // possibles actions/decide target vector
             [
                 action(slash(this.level), fun(action, thisContender) {
-                    decide_target.lower_life(action.requireTarget(), thisContender.getHexagonSideOrient()).accessStatus();
+                    decide_target.lower_life(action.requireTarget(), thisContender.getHexagonSideOrient());
                 }, "arena:actions:damage:slash.chai")
             ],
 
@@ -31,6 +29,9 @@ class Ogre {
                 0; // slash
             }, ""
         );
+    }
+
+    def setupContender() {
         var &thisContender = pitContenders.getFightingContender(this.id);
         var &thisStatus = thisContender.accessStatus();
         var addLifePerLevel = 150 * 0.10; // +10% life per level

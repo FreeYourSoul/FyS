@@ -70,7 +70,7 @@ struct PriorityElem { // Improve with strong typing on ID/SPEED
 
 	uint id;
 	int speed;
-	bool isContender;
+	bool isContender = false;
 
 	[[nodiscard]] PriorityElem&
 	operator-(const PriorityElem& other)

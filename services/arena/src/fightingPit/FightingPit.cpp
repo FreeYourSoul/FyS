@@ -103,23 +103,25 @@ FightingPit::forwardActionToTeamMember(const std::string& user, PlayerAction act
 {
 	auto member = _partyTeams.getSpecificTeamMemberById(user, action.idMember);
 	if (!member) {
-		SPDLOG_ERROR("Trying to forward a message to team member {} owned by {} whom doesn't exist",
-				action.idMember, user);
+		SPDLOG_ERROR("[fp:{}] : Trying to forward a message to team member '{}' owned by '{}' whom doesn't exist",
+				_arenaId, action.idMember, user);
 		return;
 	}
 	try {
-		if (chai::util::memberHasActionRegistered(*_chaiPtr, user, member->getName(), action.actionName)) {
-			SPDLOG_WARN("Player {} tried to register Action {} which isn't registered for member {}",
-					user, action.actionName, member->getName());
+		if (!chai::util::memberHasActionRegistered(*_chaiPtr, user, member->getName(), action.actionName)) {
+			SPDLOG_WARN("[fp:{}] : Player '{}' tried to execute Action '{}' which isn't registered for member '{}'",
+					_arenaId, user, action.actionName, member->getName());
 			return;
 		}
 		auto[targetIsCorrect, target] = this->checkAndRetrieveTarget(user, member, action);
+		SPDLOG_INFO("We arrive here at least with targetIsCorrect {}", targetIsCorrect);
 		if (targetIsCorrect) {
 			member->addPendingAction(std::move(action.actionName), std::move(target));
 		}
 	}
 	catch (const std::exception& e) {
-		SPDLOG_ERROR("An error occurred when checking if an action was doable from user {}: {}", user, e.what());
+		SPDLOG_ERROR("[fp:{}] : An error occurred when checking if an action was doable from user '{}': {}",
+				_arenaId, user, e.what());
 	}
 }
 
@@ -200,6 +202,7 @@ FightingPit::initializePriorityListInSidesBattle()
 void
 FightingPit::setPlayerReadiness(const std::string& userName)
 {
+	SPDLOG_INFO("[fp:{}] : Player '{}' is setting readiness", _arenaId, userName);
 	if (_partyTeams.setPartyReadiness(userName)) {
 		_progress = Progress::ON_GOING;
 	}
@@ -208,47 +211,46 @@ std::pair<bool, std::optional<TargetType>>
 FightingPit::checkAndRetrieveTarget(const std::string& user, const TeamMemberSPtr& member, const PlayerAction& action)
 {
 	auto targetType = _chaiPtr->eval<data::Targeting>(
-			chai::util::getAccessAllyAction(user, member->getName(), action.actionName)
-					.append(".requireTarget();"));
+			chai::util::getAccessAllyAction(user, member->getName(), action.actionName).append(".requireTarget();"));
 	std::optional<TargetType> target;
 
 	// Check if the target is appropriate
 	if (targetType == data::Targeting::SELF) {
 		if (!action.allyTarget.empty() || !action.contenderTarget.empty()) {
-			SPDLOG_WARN("Action {} target type is SELF, but Player {} tried to execute it with targets set",
+			SPDLOG_WARN("[fp:{}] : Action {} target type is SELF, but Player {} tried to execute it with targets set",
 					action.actionName, user);
 			return std::pair(false, target);
 		}
 		target = std::nullopt;
 	}
 	else if (targetType == data::Targeting::ENNEMY) {
-		if (!action.allyTarget.empty() && action.contenderTarget.empty()) {
-			SPDLOG_WARN("Action {} target type is ENNEMY, but Player {} tried to execute it with ally targets set",
-					action.actionName, user);
+		if (!action.allyTarget.empty() || action.contenderTarget.empty()) {
+			SPDLOG_WARN("[fp:{}] Action {} target type is ENNEMY, but Player {} tried to execute it with ally targets set",
+					_arenaId, action.actionName, user);
 			return std::pair(false, target);
 		}
-		target = ContenderTargetId{action.allyTarget.at(0)};
+		target = ContenderTargetId{action.contenderTarget.at(0)};
 	}
 	else if (targetType == data::Targeting::ENNEMIES) {
-		if (!action.allyTarget.empty() && action.contenderTarget.empty()) {
-			SPDLOG_WARN("Action {} target type is ENNEMIES, but Player {} tried to execute it with ally targets set",
-					action.actionName, user);
+		if (!action.allyTarget.empty() || action.contenderTarget.empty()) {
+			SPDLOG_WARN("[fp:{}] : Action {} target type is ENNEMIES, but Player {} tried to execute it with ally targets set",
+					_arenaId, action.actionName, user);
 			return std::pair(false, target);
 		}
 		target = ContendersTargetsIds{std::move(action.contenderTarget)};
 	}
 	else if (targetType == data::Targeting::ALLY) {
-		if (action.allyTarget.empty() && !action.contenderTarget.empty()) {
-			SPDLOG_WARN("Action {} target type is ALLY, but Player {} tried to execute it with contender targets set",
-					action.actionName, user);
+		if (action.allyTarget.empty() || !action.contenderTarget.empty()) {
+			SPDLOG_WARN("[fp:{}] : Action {} target type is ALLY, but Player {} tried to execute it with contender targets set",
+					_arenaId, action.actionName, user);
 			return std::pair(false, target);
 		}
 		target = AllyTargetId{action.allyTarget.at(0)};
 	}
 	else if (targetType == data::Targeting::ALLIES) {
-		if (action.allyTarget.empty() && !action.contenderTarget.empty()) {
-			SPDLOG_WARN("Action {} target type is ALLIES, but Player {} tried to execute it with contender targets set",
-					action.actionName, user);
+		if (action.allyTarget.empty() || !action.contenderTarget.empty()) {
+			SPDLOG_WARN("[fp:{}] : Action {} target type is ALLIES, but Player {} tried to execute it with contender targets set",
+					_arenaId, action.actionName, user);
 			return std::pair(false, target);
 		}
 		target = AlliesTargetsIds{std::move(action.allyTarget)};
@@ -259,19 +261,16 @@ FightingPit::checkAndRetrieveTarget(const std::string& user, const TeamMemberSPt
 		SPDLOG_WARN("NOT IMPLEMENTED YET");
 		return std::pair(false, target);
 	}
-
 	if (!all_in(action.allyTarget, _partyTeams.getPartyTeamOfPlayer(user).getTeamMembers(),
 			[](const TeamMemberSPtr& tm) { return tm->getId(); })) {
-		SPDLOG_WARN("Player {} tried to target a non-existing Ally", user);
+		SPDLOG_WARN("[fp:{}] : Player {} tried to target a non-existing Ally", _arenaId, user);
 		return std::pair(false, target);
 	}
-
 	if (!all_in(action.contenderTarget, _contenders.getContenders(),
 			[](const FightingContenderSPtr& c) { return c->getId(); })) {
-		SPDLOG_WARN("Player {} tried to target a non-existing Contender", user);
+		SPDLOG_WARN("[fp:{}] : Player {} tried to target a non-existing Contender, Targets are : ", _arenaId, user);
 		return std::pair(false, target);
 	}
-
 	return std::pair(true, target);
 }
 bool

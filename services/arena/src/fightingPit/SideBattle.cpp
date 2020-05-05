@@ -39,7 +39,7 @@ SideBattle::getCurrentParticipantTurn(
 	if (!_started) {
 		_started = true;
 	}
-	else if (now < _endCurrentTurn) {
+	else if (now < _endCurrentTurn && !_priorityOrderList.getCurrent().isContender) {
 		return _priorityOrderList.getCurrent();
 	}
 	_endCurrentTurn = now + timerInterlude;

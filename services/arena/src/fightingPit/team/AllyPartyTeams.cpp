@@ -216,7 +216,7 @@ AllyPartyTeams::setPartyReadiness(const std::string& userName)
 
 	// do not process if the team has been already set to ready
 	if ((*it)->isTeamReady()) {
-		SPDLOG_WARN("Player {} is setting himself ready twice", userName);
+		SPDLOG_WARN("Player '{}' is setting himself ready twice", userName);
 		return false;
 	}
 

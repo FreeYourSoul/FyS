@@ -40,6 +40,18 @@ struct overloaded : Ts ... {
 };
 template<class... Ts> overloaded(Ts...) -> overloaded<Ts...>;
 
+namespace {
+
+[[nodiscard]] auto
+actionMatchKey(const std::string& actionName)
+{
+	return [&actionName](const auto& action) {
+		return actionName == fys::arena::data::getActionNameFromKey(action.first);
+	};
+}
+
+}
+
 namespace fys::arena {
 
 void
@@ -116,18 +128,16 @@ TeamMember::executeAction(
 void
 TeamMember::addPendingAction(const std::string& actionName, std::optional<TargetType> target)
 {
-	auto it = std::find_if(_actionsDoable.begin(), _actionsDoable.end(), [&actionName](const auto& action) {
-		return actionName == data::getActionNameFromKey(action.first);
-	});
-	if (it == _actionsDoable.end()) {
-		SPDLOG_WARN("Player {}::{} tried unrecognized action called {}", _userName, _name, actionName);
-		return;
-	}
 	if (_status.life.isDead()) {
 		SPDLOG_WARN("Player {}::{} tried to add an action while dead", _userName, _name);
 		return;
 	}
-
+	auto it = std::find_if(_actionsDoable.begin(), _actionsDoable.end(), actionMatchKey(actionName));
+	if (it == _actionsDoable.end()) {
+		SPDLOG_WARN("Player {}::{} tried unrecognized action called {}", _userName, _name, actionName);
+		return;
+	}
+	SPDLOG_DEBUG("Player {}::{} has registered a new action {}", _userName, _name, actionName);
 	_pendingActions.push(PendingAction{static_cast<uint>(std::distance(_actionsDoable.begin(), it)), std::move(target)});
 }
 

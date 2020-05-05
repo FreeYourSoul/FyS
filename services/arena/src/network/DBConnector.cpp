@@ -76,10 +76,23 @@ DBConnector::retrievePartyTeam(const std::string& user)
 	s4.magicPoint.current = 10;
 	s4.initialSpeed = 20;
 
+	tm1->addDoableAction("arena:actions:damage:slash.chai", 2);
+	tm1->addDoableAction("arena:actions:misc:meditate.chai", 2);
+
+	tm2->addDoableAction("arena:actions:damage:slash.chai", 2);
+	tm2->addDoableAction("arena:actions:misc:meditate.chai", 2);
+
+	tm3->addDoableAction("arena:actions:damage:slash.chai", 2);
+	tm3->addDoableAction("arena:actions:misc:meditate.chai", 2);
+
+	tm4->addDoableAction("arena:actions:damage:slash.chai", 2);
+	tm4->addDoableAction("arena:actions:misc:meditate.chai", 2);
+
 	team->addTeamMember(std::move(tm1));
 	team->addTeamMember(std::move(tm2));
 	team->addTeamMember(std::move(tm3));
 	team->addTeamMember(std::move(tm4));
+
 //        mariadb::connection_ref con = mariadb::connection::create(_refDb);
 //        mariadb::statement_ref stmt = con->create_statement("SELECT * FROM team_character WHERE id_user=?");
 //        stmt->set_string(0, user);

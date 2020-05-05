@@ -36,18 +36,23 @@ namespace fys::arena {
 void
 ContenderScripting::registerContenderScript()
 {
-	std::string createVar =
-			fmt::format("global {}={}({},{});", getChaiContenderId(), _contenderName, _contenderId, _level);
-	try {
-		// register instance in ChaiScript
-		_chai.get().eval(createVar);
+	const std::string createVar = fmt::format("global {}={}({},{});", getChaiContenderId(), _contenderName, _contenderId, _level);
+	const std::string retrieveDoableActions = fmt::format("retrieveDoableActions({}.actions.act);", getChaiContenderId());
 
-		// load doable actions
-		_doableActions = _chai.get().eval<std::vector<std::string>>(fmt::format(
-				"retrieveDoableActions({}.actions.act);", getChaiContenderId()));
+	// register instance in ChaiScript
+	try {
+		_chai.get().eval(createVar);
 	}
 	catch (const chaiscript::exception::eval_error& ee) {
-		SPDLOG_ERROR("Error caught when instantiating variable (script : ''{}'') {}", createVar, ee.what());
+		SPDLOG_ERROR("Error caught when instantiating variable (script : '{}')\n{}", createVar, ee.what());
+	}
+
+	// load doable actions
+	try {
+		_doableActions = _chai.get().eval<std::vector<std::string>>(retrieveDoableActions);
+	}
+	catch (const chaiscript::exception::eval_error& ee) {
+		SPDLOG_ERROR("Error caught when retrieving doable actions (script : '{}')\n{}", retrieveDoableActions, ee.what());
 	}
 }
 
@@ -80,15 +85,16 @@ ContenderScripting::setupContender()
 void
 ContenderScripting::executeAction()
 {
+	std::string action = fmt::format("fun(contenderId){{ return {}.runScriptedAction(contenderId);}}", getChaiContenderId());
 	try {
-		std::string action = fmt::format("fun(contenderId){{ return {}.runScriptedAction(contenderId);}}", getChaiContenderId());
 		auto funcAction = _chai.get().eval<std::function<int(unsigned int)>>(action);
 		if (funcAction(_contenderId)) {
 			SPDLOG_DEBUG("Contender {}_{} executed action", _contenderName, _contenderId);
 		}
 	}
 	catch (const chaiscript::exception::eval_error& ee) {
-		SPDLOG_ERROR("Error caught on script execution while executing action of contender.\n{}", ee.what());
+		SPDLOG_ERROR("Error caught on script execution while executing action ('{}') of contender.\n{}",
+				action, ee.what());
 	}
 }
 }

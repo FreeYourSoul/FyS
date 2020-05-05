@@ -63,13 +63,16 @@ namespace fys::cache {
     /**
      * @return true if the key represent a cached data in the local storage (filesystem)
      */
-    bool Cml::isInLocalStorage(const CmlKey &cmlKey) const {
-        return std::filesystem::is_regular_file(cmlKey.getPath());
+	std::pair<bool, std::filesystem::file_time_type>
+	Cml::localStorageInfo(const CmlKey &cmlKey) const {
+		std::error_code ec;
+        return std::pair(std::filesystem::is_regular_file(cmlKey.getPath()), std::filesystem::last_write_time(cmlKey.getPath(), ec));
     }
 
-    bool Cml::isInLocalStorageAndUpToDate(const CmlKey &cmlKey, long timestamp) const {
-        if (isInLocalStorage(cmlKey)) {
-            return std::filesystem::last_write_time(cmlKey.getPath()).time_since_epoch().count() <= timestamp;
+    bool Cml::isInLocalStorageAndUpToDate(const CmlKey &cmlKey, std::filesystem::file_time_type cacheLastUpdate) const {
+		auto [exist, lastWriteTime] = localStorageInfo(cmlKey);
+        if (exist) {
+            return lastWriteTime <= cacheLastUpdate;
         }
         return false;
     }
@@ -80,14 +83,14 @@ namespace fys::cache {
 
         // Check in-memory (and check if file has been updated)
         if (auto it = _inMemCache.find(key); it != _inMemCache.end()) {
-            if (isInLocalStorageAndUpToDate(cmlKey, it->second.timestamp)) {
+            if (isInLocalStorageAndUpToDate(cmlKey, it->second.lastWriteTime)) {
                 return it->second.content;
             }
         }
         // Check in filesystem cache
-        if (isInLocalStorage(cmlKey)) {
-            _inMemCache[key] = InMemoryCached{ std::chrono::system_clock::now().time_since_epoch().count(),
-                                               readFile(cmlKey.getPath()) };
+		auto [exist, lastWriteTime] = localStorageInfo(cmlKey);
+		if (exist) {
+            _inMemCache[key] = InMemoryCached{ lastWriteTime, readFile(cmlKey.getPath()) };
             return _inMemCache[key].content;
         }
         if (!first) return empty;

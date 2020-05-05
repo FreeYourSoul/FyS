@@ -25,6 +25,7 @@
 #ifndef FYS_ONLINE_CHAIUTILITY_HH
 #define FYS_ONLINE_CHAIUTILITY_HH
 
+#include <fmt/format.h>
 #include <string>
 #include <chaiscript/chaiscript.hpp>
 
@@ -44,8 +45,9 @@ getAccessAllyAction(const std::string& user, const std::string& member, const st
 memberHasActionRegistered(chaiscript::ChaiScript& chai,
 		const std::string& userName, const std::string& memberName, const std::string& actionName)
 {
-	return chai.eval<bool>(fmt::format(R"(ally_actions["{}_{}"].count("{}") != 0;)",
-			userName, memberName, actionName));
+	return chai.eval<bool>(
+			fmt::format(R"(ally_actions.count("{}_{}") > 0 && ally_actions["{}_{}"].count("{}") > 0;)",
+					userName, memberName, userName, memberName, actionName));
 }
 
 }

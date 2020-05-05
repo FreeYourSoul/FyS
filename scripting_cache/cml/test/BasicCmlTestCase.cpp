@@ -49,6 +49,8 @@ namespace {
     }
 }
 
+using namespace std::chrono_literals;
+
 TEST_CASE("findInCache for Basic CML", "[cml_test]") {
     CmlBaseTest cbt(getLocalPathStorage());
 
@@ -119,14 +121,14 @@ TEST_CASE("isInLocalStorageAndUpToDate for Basic CML", "[cml_test]") {
         cbt.findInCache(key1.getKey());
 
         if (auto it = cbt._inMemCache.find(key1.getKey()); it != cbt._inMemCache.end()) {
-            REQUIRE(cbt.isInLocalStorageAndUpToDate(key1, it->second.timestamp));
+            REQUIRE(cbt.isInLocalStorageAndUpToDate(key1, it->second.lastWriteTime));
             REQUIRE("test1 content" == it->second.content);
         }
         else
             FAIL("test1 has not been found in memcache");
 
         if (auto it = cbt._inMemCache.find(key2.getKey()); it != cbt._inMemCache.end()) {
-            REQUIRE(cbt.isInLocalStorageAndUpToDate(key2, it->second.timestamp));
+            REQUIRE(cbt.isInLocalStorageAndUpToDate(key2, it->second.lastWriteTime));
             REQUIRE("test2 content" == it->second.content);
         }
         else
@@ -141,7 +143,7 @@ TEST_CASE("isInLocalStorageAndUpToDate for Basic CML", "[cml_test]") {
         auto content = cbt.findInCache("inner_folder:inner_folder_1:test3");
         REQUIRE("test3 content" == content);
         if (auto it = cbt._inMemCache.find(key3.getKey()); it != cbt._inMemCache.end()) {
-            REQUIRE(cbt.isInLocalStorageAndUpToDate(key3, it->second.timestamp));
+            REQUIRE(cbt.isInLocalStorageAndUpToDate(key3, it->second.lastWriteTime));
             REQUIRE("test3 content" == it->second.content);
         }
         else
@@ -157,7 +159,7 @@ TEST_CASE("isInLocalStorageAndUpToDate for Basic CML", "[cml_test]") {
         REQUIRE("test3 content" == content);
         if (auto it = cbt._inMemCache.find(key3.getKey()); it != cbt._inMemCache.end()) {
             // Add 90seconds on the timestamp to represent a file update
-            REQUIRE(cbt.isInLocalStorageAndUpToDate(key3, it->second.timestamp + 90)); 
+            REQUIRE(cbt.isInLocalStorageAndUpToDate(key3, it->second.lastWriteTime + 90s));
             REQUIRE("test3 content" == it->second.content);
         }
         else

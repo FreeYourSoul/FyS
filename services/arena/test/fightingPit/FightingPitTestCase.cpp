@@ -27,6 +27,7 @@
 #include <catch2/catch.hpp>
 #include <ArenaServerContext.hh>
 #include <fightingPit/FightingPitAnnouncer.hh>
+#include <util/ChaiUtility.hh>
 #include "TestType.hh"
 
 #include <fightingPit/contender/FightingContender.hh>
@@ -243,6 +244,21 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]")
 			REQUIRE(10 == p.at(2)->getStatus().initialSpeed);
 			REQUIRE(20 == p.at(3)->getStatus().initialSpeed);
 		} // End section : Initial setup
+
+		SECTION("Test ChaiUtility memberHasActionRegistered") {
+			try {
+				auto& memberId1 = fp->getPartyTeamOfPlayer("Loser").getTeamMembers()[0];
+				REQUIRE(chai::util::memberHasActionRegistered(*fp->getChaiPtr(),
+						memberId1->getUserName(), memberId1->getName(), "meditate"));
+				REQUIRE_FALSE(chai::util::memberHasActionRegistered(*fp->getChaiPtr(),
+						memberId1->getUserName(), memberId1->getName(), "DONOTEXIST"));
+				REQUIRE_FALSE(chai::util::memberHasActionRegistered(*fp->getChaiPtr(),
+						"unknown", "meh", "DONOTEXIST"));
+			}
+			catch (const std::exception& ee) {
+				FAIL(ee.what());
+			}
+		} // End section : Test ChaiUtility memberHasActionRegistered
 
 		REQUIRE(fp->isJoinable());
 		fp->setPlayerReadiness("Loser");

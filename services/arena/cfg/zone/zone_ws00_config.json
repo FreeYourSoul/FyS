@@ -3,8 +3,8 @@
 
     "encounter_chance": {
         "number_encounter_range":      { "easy": [1, 3], "medium": [1, 4], "hard": [2, 6] },
-        "arena:contenders:Sampy.chai": { "easy": 40, "medium": 40, "hard": 40 },
-        "arena:contenders:Ogre.chai":  { "easy": 10, "medium": 10, "hard": 10 },
+        "arena:contenders:Sampy.chai": { "easy": 0, "medium": 0, "hard": 0 },
+        "arena:contenders:Ogre.chai":  { "easy": 50, "medium": 50, "hard": 50 },
         "arena:contenders:Slime.chai": { "easy": 50, "medium": 50, "hard": 50 }
     },
 

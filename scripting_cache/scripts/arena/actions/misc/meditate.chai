@@ -16,7 +16,6 @@ class meditate {
 
     def execute(target)
     {
-        print("Meditate is called");
         var &status = target.accessStatus();
         var new_amount = status.magicPoint.current + this.power;
         if (status.magicPoint.total < new_amount) {

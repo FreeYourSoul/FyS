@@ -26,10 +26,11 @@
 
 #include <chaiscript/chaiscript.hpp>
 
-#include <fightingPit/FightingPit.hh>
-
 #include <FightingPitState_generated.h>
 
+#include <fightingPit/FightingPit.hh>
+
+#include <FightingHistoryManager.hh>
 #include <network/WorkerService.hh>
 #include <ArenaServerContext.hh>
 #include <FlatbufferGenerator.hh>
@@ -60,13 +61,13 @@ WorkerService::startFightingPitsLoop()
 				if (fp->isBattleOnGoing()) {
 					fp->continueBattle(now);
 				}
-				else {
+				else if (!fp->isJoinable()) {
 					fp->notifyEndStatus(broadcastMsgHandler(id));
 				}
 			}
 			cleanUpFinishedBattles();
 		}
-		std::this_thread::sleep_for(10ms); // todo sleep something smart
+		std::this_thread::sleep_for(100ms); // todo sleep something smart
 	}
 }
 
@@ -86,20 +87,22 @@ WorkerService::addFightingPit(std::unique_ptr<FightingPit> fp)
 	fp->setArenaId(_currentArenaId);
 	_arenaInstances.insert(std::pair(_currentArenaId, std::move(fp)));
 	_arenaIdOnIdentifier.insert(std::pair(_currentArenaId, std::vector<PlayerIdentifier>{}));
+	FightingHistoryManager::createHistoric(*fp, 1);
 	return _currentArenaId;
 }
 
 void
 WorkerService::cleanUpFinishedBattles()
 {
-	std::vector<unsigned> idToRemove;
-	idToRemove.reserve(_arenaInstances.size());
+	std::vector<unsigned> idsToRemove;
+	idsToRemove.reserve(_arenaInstances.size());
 	for (auto &[id, fp] : _arenaInstances) {
 		if (fp->isBattleOver()) {
-			idToRemove.emplace_back(id);
+			idsToRemove.emplace_back(id);
 		}
 	}
-	for (unsigned id : idToRemove) {
+	for (unsigned id : idsToRemove) {
+		FightingHistoryManager::save(id);
 		_arenaInstances.erase(id);
 		_arenaIdOnIdentifier.erase(id);
 	}

@@ -40,16 +40,19 @@ namespace fys::arena {
  * the fighting pit instance is still alive until the end of the History process.
  */
 struct HistoryAction {
-	//! in-game id of the target
+	//! in-game id of the player doing an action
 	uint idCharacter;
-	//! name of the character
-	std::string_view name;
 	//! is the character an ally or a contender
 	bool isContender;
+	//! name of the character
+	std::string_view name;
+
 	//! key of the action executed
 	std::string_view actionKey;
-	//! in-game id of the target
-	uint idTarget;
+	//! in-game id of the contender targets
+	std::vector<uint> idContenderTarget;
+	//! in-game id of the allies targets
+	std::vector<uint> idAllyTarget;
 };
 
 /**
@@ -58,13 +61,13 @@ struct HistoryAction {
 class FightingHistoryManager {
 
 	/**
-	 * R.A.I.I History fight instance containing the list of actions that occurred during a fight
+	 * History fight instance containing the list of actions that occurred during a fight
 	 * This struct is filled via the static method provided by FightingHistoryManager.
-	 * When destroyed, if the seed is set (superior to 0) and if the hasToBeSaved variable has been set to true
+	 * if the seed is set (superior to 0) and if the hasToBeSaved variable has been set to true
 	 */
 	struct HistoryFight {
-		HistoryFight(const FightingPit& pt, unsigned seed = 0) noexcept;
-		~HistoryFight();
+		HistoryFight(const FightingPit& pt, unsigned seed) noexcept
+				:ref(pt), seed(seed) { }
 
 		//! Reference to the fighting pit
 		std::reference_wrapper<const FightingPit> ref;
@@ -84,6 +87,7 @@ public:
 	static void createHistoric(const FightingPit& fp, unsigned seed);
 	static void addHistoric(unsigned fightingPitId, HistoryAction&& ha);
 	static void setToBeSaved(unsigned fightingPitId, bool toBeSaved);
+	static void save(unsigned fightingPitId);
 
 private:
 	explicit FightingHistoryManager() noexcept = default;

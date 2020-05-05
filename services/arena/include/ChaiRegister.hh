@@ -48,22 +48,11 @@ class PitContenders;
 class AllyPartyTeams;
 class PartyTeam;
 class FightingPitLayout;
-class FightingContender;
-class TeamMember;
-
-using FightingContenderSPtr = std::shared_ptr<FightingContender>;
-using TeamMemberSPtr = std::shared_ptr<TeamMember>;
-
 }// !forward declarations
 
 namespace fys::arena {
 
 class ChaiRegister {
-	using BroadcastActionExecHandler = std::function<
-			void(const std::string&,
-					const std::vector<FightingContenderSPtr>&,
-					const std::vector<TeamMemberSPtr>&)>;
-
 public:
 	[[nodiscard]] static std::unique_ptr<chaiscript::ChaiScript>
 	createChaiInstance(PitContenders& pc, AllyPartyTeams& apt, FightingPitLayout& layout);
