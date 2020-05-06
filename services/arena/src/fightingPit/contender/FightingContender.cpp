@@ -23,6 +23,7 @@
 
 #include <fightingPit/contender/ContenderScripting.hh>
 #include <fightingPit/contender/FightingContender.hh>
+#include <HistoryManager.hh>
 
 namespace fys::arena {
 

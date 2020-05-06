@@ -34,25 +34,32 @@
 #include <fightingPit/team/PartyTeam.hh>
 #include <fightingPit/team/AllyPartyTeams.hh>
 #include <fightingPit/contender/PitContenders.hh>
+#include <HistoryManager.hh>
 
 namespace fys::arena {
 
-void
+bool
 AllyPartyTeams::executeAllyAction(
 		const data::PriorityElem& ally,
 		PitContenders& pc,
 		std::unique_ptr<chaiscript::ChaiScript>& chaiPtr)
 {
-	if (ally.isContender) return;
+	if (ally.isContender) {
+		return false;
+	}
 	if (auto member = selectMemberById(ally.id); !member) {
 		SPDLOG_ERROR("Member with id {} isn't found, action cannot be executed", ally.id);
+		return false;
 	}
 	else {
-		const bool isTurnExecuted = member->accessStatus().processAlterationBeforeTurn();
-		if (isTurnExecuted) {
-			member->executeAction(*this, pc, chaiPtr);
+		bool turnExecuted = true;
+		const bool isTurnProcessed = member->accessStatus().processAlterationBeforeTurn();
+
+		if (isTurnProcessed) {
+			turnExecuted = member->executeAction(*this, pc, chaiPtr);
 		}
 		member->accessStatus().processAlterationAfterTurn();
+		return turnExecuted;
 	}
 }
 

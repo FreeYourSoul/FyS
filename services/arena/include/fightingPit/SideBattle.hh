@@ -53,7 +53,7 @@ public:
 			_contenders(pitContenders),
 			_partyTeams(allyPartyTeams),
 			_side(side),
-			_started(false) { }
+			_turnDone(true) { }
 
 	/**
 	 * Get the next participant in the fighting pit turn (can be either an NPC, or a contender) depending on their
@@ -76,6 +76,7 @@ public:
 	void removeParticipantFromList(const FightingContender& contender);
 	void addParticipantInList(const TeamMember& tm);
 	void addParticipantInList(const FightingContender& contender);
+	void turnDone(bool turnDone) { _turnDone = turnDone; };
 	void addParticipantInList(uint id, int speed, bool isContender)
 	{
 		_priorityOrderList.addParticipantInList(id, speed, isContender);
@@ -94,7 +95,7 @@ private:
 	PriorityOrderList _priorityOrderList;
 	HexagonSide::Orientation _side;
 
-	bool _started;
+	bool _turnDone;
 	std::chrono::system_clock::time_point _endCurrentTurn;
 
 };

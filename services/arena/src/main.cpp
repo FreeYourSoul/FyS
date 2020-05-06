@@ -23,7 +23,7 @@
 
 #include <spdlog/spdlog.h>
 #include <random>
-#include <FightingHistoryManager.hh>
+#include <HistoryManager.hh>
 #include <ArenaServerContext.hh>
 #include <ArenaServerService.hh>
 
@@ -38,7 +38,7 @@ main(int ac, char** av)
 		SPDLOG_INFO("Version ZMQ : {}.{}.{}\n{}", major, minor, patch, ctx.toString());
 
 		fys::arena::ArenaServerService serverService(ctx);
-		fys::arena::FightingHistoryManager::setHistoricManagerOn(true);
+		fys::arena::HistoryManager::setHistoricManagerOn(true);
 
 		serverService.runServerLoop();
 	}

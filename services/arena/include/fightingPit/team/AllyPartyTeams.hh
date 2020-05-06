@@ -95,14 +95,28 @@ public:
 	[[nodiscard]] const std::vector<std::unique_ptr<PartyTeam>>&
 	getPartyTeams() const { return _partyTeams; }
 
-	void executeAllyAction(const data::PriorityElem& ally, PitContenders& pc, std::unique_ptr<chaiscript::ChaiScript>& chaiPtr);
+	[[nodiscard]] uint
+	getFightingPitId() const { return _fightingPitId; }
+
+	/**
+	 * Get the next registered action of the given ally, and execute it
+	 * @param ally member to execute an action from (if the action queue is filled)
+	 * @param pc PitContender used to check if the target of the action is correct
+	 * @param chaiPtr chai engine pointer to execute the action
+	 * @return true if an action has been executed, false otherwise
+	 */
+	[[nodiscard]] bool
+	executeAllyAction(const data::PriorityElem& ally, PitContenders& pc, std::unique_ptr<chaiscript::ChaiScript>& chaiPtr);
+
 	void addPartyTeam(std::unique_ptr<PartyTeam>&& team);
+	void setFightingPitId(uint fightingPitId) { _fightingPitId = fightingPitId; }
 
 private:
 	std::vector<std::unique_ptr<PartyTeam>> _partyTeams;
 
 	// automatically incremented for each TeamMember when adding a PartyTeam
 	unsigned _currentTeamMemberId{0};
+	unsigned _fightingPitId;
 
 };
 

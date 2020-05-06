@@ -21,12 +21,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef FYS_ONLINE_FIGHTINGHISTORYMANAGER_HH
-#define FYS_ONLINE_FIGHTINGHISTORYMANAGER_HH
+#ifndef FYS_ONLINE_HISTORYMANAGER_HH
+#define FYS_ONLINE_HISTORYMANAGER_HH
 
 #include <unordered_map>
 #include <memory>
 #include <vector>
+
+#include <fightingPit/team/TeamMember.hh>
 
 namespace fys::arena {
 class FightingPit;
@@ -42,45 +44,40 @@ namespace fys::arena {
 struct HistoryAction {
 	//! in-game id of the player doing an action
 	uint idCharacter;
-	//! is the character an ally or a contender
-	bool isContender;
 	//! name of the character
 	std::string_view name;
 
 	//! key of the action executed
 	std::string_view actionKey;
-	//! in-game id of the contender targets
-	std::vector<uint> idContenderTarget;
-	//! in-game id of the allies targets
-	std::vector<uint> idAllyTarget;
+	//! in-game targets
+	std::optional<TargetType> targets;
 };
 
 /**
  * History manager, handle a single instance of the object via static method
  */
-class FightingHistoryManager {
+class HistoryManager {
 
 	/**
-	 * History fight instance containing the list of actions that occurred during a fight
+	 * History fight instance containing the list of actions that a player triggered during a fight.
+	 * The rest of the fight can be reproduced as the seed and the initial setup of the pit is provided.
 	 * This struct is filled via the static method provided by FightingHistoryManager.
-	 * if the seed is set (superior to 0) and if the hasToBeSaved variable has been set to true
 	 */
 	struct HistoryFight {
-		HistoryFight(const FightingPit& pt, unsigned seed) noexcept
-				:ref(pt), seed(seed) { }
+		HistoryFight() = default;
+		HistoryFight(unsigned seed)
+				:seed(seed) { }
 
 		//! Reference to the fighting pit
-		std::reference_wrapper<const FightingPit> ref;
+//		std::reference_wrapper<const FightingPit> ref;
 		//! Vector containing all the actions that occurred in the arena
-		std::vector<HistoryAction> hist;
+		std::vector<HistoryAction> playerActions{};
 
 		//! Set at true in case an issue occurred in the fighting pit (will save the fighting pit in file format)
-		bool hasToBeSaved = false;
+		bool hasToBeSaved = true;
 		//! Seed on which the fight occurred
-		unsigned seed = 0;
+		unsigned seed = 0; // TODO make the random generator use a given seed, on instance of generator by pit will be needed
 	};
-
-	inline static std::unique_ptr<FightingHistoryManager> _instance = nullptr;
 
 public:
 	static void setHistoricManagerOn(bool on);
@@ -90,23 +87,21 @@ public:
 	static void save(unsigned fightingPitId);
 
 private:
-	explicit FightingHistoryManager() noexcept = default;
+	HistoryManager() = default;
 
-	[[nodiscard]] static FightingHistoryManager&
+	[[nodiscard]] static HistoryManager&
 	getInstance()
 	{
-		if (!_instance) {
-			_instance = std::unique_ptr<FightingHistoryManager>(new FightingHistoryManager());
-		}
-		return *_instance;
+		static HistoryManager instance;
+		return instance;
 	}
 
 private:
-	std::unordered_map<unsigned, HistoryFight> _history;
+	std::map<unsigned, HistoryFight> _history;
 	bool _isManagerOn = true;
 
 };
 
 }
 
-#endif //FYS_ONLINE_FIGHTINGHISTORYMANAGER_HH
+#endif //FYS_ONLINE_HISTORYMANAGER_HH

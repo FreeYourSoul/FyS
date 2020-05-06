@@ -88,8 +88,10 @@ public:
 	TeamMember(std::string userName, std::string teamMemberName)
 			:
 			_userName(std::move(userName)), _name(std::move(teamMemberName)) { }
+			
+	[[nodiscard]] bool
+	executeAction(AllyPartyTeams& apt, PitContenders& pc, std::unique_ptr<chaiscript::ChaiScript>& chaiPtr);
 
-	void executeAction(AllyPartyTeams& apt, PitContenders& pc, std::unique_ptr<chaiscript::ChaiScript>& chaiPtr);
 	void addPendingAction(const std::string& actionName, std::optional<TargetType> target);
 
 	/**

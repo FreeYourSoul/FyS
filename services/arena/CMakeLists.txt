@@ -55,8 +55,8 @@ add_executable(arena_service
         ${CMAKE_CURRENT_LIST_DIR}/include/util/ChaiUtility.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/FlatbufferGenerator.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/FlatbufferGenerator.hh
-        ${CMAKE_CURRENT_LIST_DIR}/src/FightingHistoryManager.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/include/FightingHistoryManager.hh
+        ${CMAKE_CURRENT_LIST_DIR}/src/HistoryManager.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/HistoryManager.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/ConnectionHandler.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/ConnectionHandler.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/ChaiRegister.hh

@@ -32,6 +32,7 @@
 #include <fightingPit/contender/FightingContender.hh>
 #include <fightingPit/team/TeamMember.hh>
 #include <fightingPit/team/AllyPartyTeams.hh>
+#include <HistoryManager.hh>
 
 // overloaded trick
 template<class... Ts>
@@ -54,7 +55,7 @@ actionMatchKey(const std::string& actionName)
 
 namespace fys::arena {
 
-void
+bool
 TeamMember::executeAction(
 		AllyPartyTeams& apt,
 		PitContenders& pc,
@@ -63,17 +64,17 @@ TeamMember::executeAction(
 	auto pa = _pendingActions.pop();
 
 	if (!pa) {
-		SPDLOG_DEBUG("No action to execute in the pipeline for team member {}::{} id {}", _userName, _name, _id);
-		return;
+		// No action to execute in the pipeline for the team member
+		return false;
 	}
 	if (pa->idAction >= _actionsDoable.size()) {
 		SPDLOG_ERROR("TeamMember {}::{} id {} tried to execute a non existing action of id {}",
 				_userName, _name, _id, pa->idAction);
-		return;
+		return false;
 	}
-
+	const std::string actionKey = _actionsDoable.at(pa->idAction).first;
 	const std::string allyAction = chai::util::getAccessAllyAction(_userName, _name,
-			data::getActionNameFromKey(_actionsDoable.at(pa->idAction).first));
+			data::getActionNameFromKey(actionKey));
 	const std::string funActionStr = fmt::format(R"(fun(target){{ return {}.execute(target);}})", allyAction);
 	data::Targeting targetType;
 
@@ -82,8 +83,10 @@ TeamMember::executeAction(
 	}
 	catch (const std::exception& e) {
 		SPDLOG_ERROR("action retrieved by {} doesn't have requireTarget method {}", allyAction, e.what());
-		return;
+		return false;
 	}
+
+	HistoryManager::addHistoric(apt.getFightingPitId(), HistoryAction{_id, _name, actionKey, pa->target});
 
 	try {
 		// If a specific target is required, otherwise self is used
@@ -122,7 +125,9 @@ TeamMember::executeAction(
 	catch (const chaiscript::exception::eval_error& ee) {
 		SPDLOG_ERROR("Error caught on script execution while executing {} with target required {}. Team owned by {} TeamMember {} --> {}",
 				pa->idAction, static_cast<bool>(pa->target), _userName, _name, ee.what());
+		return false;
 	}
+	return true;
 }
 
 void
@@ -137,7 +142,6 @@ TeamMember::addPendingAction(const std::string& actionName, std::optional<Target
 		SPDLOG_WARN("Player {}::{} tried unrecognized action called {}", _userName, _name, actionName);
 		return;
 	}
-	SPDLOG_DEBUG("Player {}::{} has registered a new action {}", _userName, _name, actionName);
 	_pendingActions.push(PendingAction{static_cast<uint>(std::distance(_actionsDoable.begin(), it)), std::move(target)});
 }
 

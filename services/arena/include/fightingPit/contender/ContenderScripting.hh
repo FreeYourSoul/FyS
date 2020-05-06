@@ -79,9 +79,6 @@ public:
 private:
 
 	[[nodiscard]] std::string
-	getChaiMethodName(std::string&& methodName) const { return _contenderName + "_" + std::move(methodName); }
-
-	[[nodiscard]] std::string
 	getChaiContenderId() const { return std::string("contender_").append(_contenderName).append(std::to_string(_contenderId)); }
 
 private:

@@ -30,7 +30,7 @@
 
 #include <fightingPit/FightingPit.hh>
 
-#include <FightingHistoryManager.hh>
+#include <HistoryManager.hh>
 #include <network/WorkerService.hh>
 #include <ArenaServerContext.hh>
 #include <FlatbufferGenerator.hh>
@@ -67,7 +67,7 @@ WorkerService::startFightingPitsLoop()
 			}
 			cleanUpFinishedBattles();
 		}
-		std::this_thread::sleep_for(100ms); // todo sleep something smart
+		std::this_thread::sleep_for(100ms);
 	}
 }
 
@@ -85,9 +85,9 @@ WorkerService::addFightingPit(std::unique_ptr<FightingPit> fp)
 	while (++_currentArenaId != 0 && _arenaInstances.find(_currentArenaId) != _arenaInstances.end());
 	ChaiRegister::registerNetworkCommands(*fp->getChaiPtr(), broadcastMsgHandler(fp->getId()));
 	fp->setArenaId(_currentArenaId);
+	HistoryManager::createHistoric(*fp, 1); // seed is to be changed
 	_arenaInstances.insert(std::pair(_currentArenaId, std::move(fp)));
 	_arenaIdOnIdentifier.insert(std::pair(_currentArenaId, std::vector<PlayerIdentifier>{}));
-	FightingHistoryManager::createHistoric(*fp, 1);
 	return _currentArenaId;
 }
 
@@ -102,7 +102,7 @@ WorkerService::cleanUpFinishedBattles()
 		}
 	}
 	for (unsigned id : idsToRemove) {
-		FightingHistoryManager::save(id);
+		HistoryManager::save(id);
 		_arenaInstances.erase(id);
 		_arenaIdOnIdentifier.erase(id);
 	}

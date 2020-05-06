@@ -28,6 +28,7 @@
 #include <ChaiRegister.hh>
 
 #include <algorithm/algorithm.hh>
+#include <HistoryManager.hh>
 #include <network/WorkerService.hh>
 
 #include <fightingPit/contender/FightingContender.hh>
@@ -69,15 +70,18 @@ FightingPit::continueBattle(const std::chrono::system_clock::time_point& now)
 			continue;
 		}
 		auto currentParticipant = battle.getCurrentParticipantTurn(now, _timeInterlude);
+		bool turnExecuted = false;
 
 		if (currentParticipant.isContender) {
 			// non-playable character (enemy NPC)
 			_contenders.executeContenderAction(currentParticipant);
+			turnExecuted = true;
 		}
 		else {
 			// character of a player
-			_partyTeams.executeAllyAction(currentParticipant, _contenders, _chaiPtr);
+			turnExecuted = _partyTeams.executeAllyAction(currentParticipant, _contenders, _chaiPtr);
 		}
+		battle.turnDone(turnExecuted);
 		battle.eraseFinishedAlterationAndDeadCharactersFromTurnList();
 	}
 	// execute awaited movements
@@ -93,6 +97,7 @@ FightingPit::updateProgressStatus()
 		return Progress::CONTENDER_WIN;
 	}
 	else if (_contenders.allDead()) {
+		HistoryManager::setToBeSaved(_arenaId, false);
 		return Progress::ALLY_WIN;
 	}
 	return Progress::ON_GOING;
@@ -103,24 +108,24 @@ FightingPit::forwardActionToTeamMember(const std::string& user, PlayerAction act
 {
 	auto member = _partyTeams.getSpecificTeamMemberById(user, action.idMember);
 	if (!member) {
-		SPDLOG_ERROR("[fp:{}] : Trying to forward a message to team member '{}' owned by '{}' whom doesn't exist",
-				_arenaId, action.idMember, user);
+		SPDLOG_ERROR("[fp:{}] : Player '{}' try to forward a message to not existing member member of id {}",
+				_arenaId, user, action.idMember);
 		return;
 	}
 	try {
 		if (!chai::util::memberHasActionRegistered(*_chaiPtr, user, member->getName(), action.actionName)) {
-			SPDLOG_WARN("[fp:{}] : Player '{}' tried to execute Action '{}' which isn't registered for member '{}'",
-					_arenaId, user, action.actionName, member->getName());
+			SPDLOG_WARN("[fp:{}] : Member {}.{}.{} tried to execute Action '{}' which isn't registered for member '{}'",
+					_arenaId, user, member->getId(), member->getName(), action.actionName, member->getName());
 			return;
 		}
 		auto[targetIsCorrect, target] = this->checkAndRetrieveTarget(user, member, action);
-		SPDLOG_INFO("We arrive here at least with targetIsCorrect {}", targetIsCorrect);
 		if (targetIsCorrect) {
+			SPDLOG_INFO("[fp:{}] : Member {}.{}.{} register a new action {}", _arenaId, user, member->getId(), member->getName(), action.actionName);
 			member->addPendingAction(std::move(action.actionName), std::move(target));
 		}
 	}
 	catch (const std::exception& e) {
-		SPDLOG_ERROR("[fp:{}] : An error occurred when checking if an action was doable from user '{}': {}",
+		SPDLOG_ERROR("[fp:{}] : An error occurred when checking if an action was doable from user '{}':\n{}",
 				_arenaId, user, e.what());
 	}
 }

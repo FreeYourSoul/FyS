@@ -37,7 +37,7 @@
 
 #include <ArenaServerContext.hh>
 #include <FlatbufferGenerator.hh>
-#include <FightingHistoryManager.hh>
+#include <HistoryManager.hh>
 #include "ArenaServerService.hh"
 
 // anonymous namespace used for utility function to extract data from flatbuffer
@@ -136,7 +136,7 @@ ArenaServerService::runServerLoop() noexcept
 
 					if (isRegistered) {
 						forwardReplyToDispatcher(std::move(identityWs), elem->second);
-						SPDLOG_INFO("A new awaited player is added '{}'", binary->token_auth()->str());
+						SPDLOG_INFO("New awaited player is added");
 					}
 				});
 
@@ -155,11 +155,11 @@ ArenaServerService::runServerLoop() noexcept
 					unsigned fightingPitId = playerAwaitedIt->second.fightingPitId;
 
 					if (!isAwaited) {
-						SPDLOG_WARN("Player {} tried to authenticate on Arena server {} fighting pit {} "
+						SPDLOG_WARN("Player '{}' tried to authenticate on Arena server '{}' fighting pit {} "
 									"without being awaited.", userName, _ctx.get().getServerCode(), fightingPitId);
 						return;
 					}
-					SPDLOG_INFO("Awaited Player {} login", userName);
+					SPDLOG_INFO("Awaited Player '{}' login", userName);
 
 					if (playerAwaitedIt->second.hasToBeGenerated()) {
 						fightingPitId = createNewFightingPit(playerAwaitedIt->second);
@@ -178,7 +178,7 @@ ArenaServerService::runServerLoop() noexcept
 						_workerService.playerJoinFightingPit(fightingPitId, std::move(pt), _cache);
 						_awaitingArena.erase(playerAwaitedIt); // remove player from awaited player
 					}
-					SPDLOG_INFO("Awaited player '{}' has logged in fighting pit of id: '{}'", userName, fightingPitId);
+					SPDLOG_INFO("[fp:{}] : Player '{}' has logged in", fightingPitId, userName);
 					_workerService.upsertPlayerIdentifier(fightingPitId, userName, idtPlayer.to_string());
 					_workerService.sendMsgNewArrivingTeam(fightingPitId, userName);
 				},
@@ -297,8 +297,8 @@ ArenaServerService::createNewFightingPit(const AwaitingPlayerArena& awaited) noe
 			fpa.buildFightingPit(_ctx.get().getEncounterContext(), awaited.gen->serverCode));
 
 	if (id != FightingPit::CREATION_ERROR) {
-		SPDLOG_INFO("New fighting pit of id '{}' is created name '{}', token '{}' lvl '{}' "
-					"encounter_id '{}' isAmbush '{}' wsCode '{}' isJoinDisabled '{}'",
+		SPDLOG_INFO("[fp:{}] : Player '{}' create new FightingPit : token '{}', lvl '{}', encounter_id '{}', isAmbush '{}', "
+					"wsCode '{}', isJoinDisabled '{}'",
 				id, awaited.namePlayer, awaited.token, awaited.gen->levelFightingPit, awaited.gen->encounterId,
 				awaited.gen->isAmbush, awaited.gen->serverCode, awaited.gen->isJoinDisabled);
 	}

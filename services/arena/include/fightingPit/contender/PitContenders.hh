@@ -46,6 +46,9 @@ public:
 	PitContenders() = default;
 	PitContenders(const PitContenders& other) = delete;
 
+	void executeContenderAction(const data::PriorityElem& contender);
+
+
 	[[nodiscard]] std::vector<std::shared_ptr<FightingContender>>
 	getContenderOnSide(HexagonSide::Orientation side) const;
 
@@ -88,8 +91,6 @@ public:
 
 	[[nodiscard]] bool
 	allDead() const;
-
-	void executeContenderAction(const data::PriorityElem& contender);
 
 private:
 	std::vector<std::shared_ptr<FightingContender> > _contenders;

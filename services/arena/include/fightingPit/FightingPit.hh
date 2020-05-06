@@ -54,9 +54,9 @@ namespace fys::arena {
 
 // interval of time between 2 turn for a player depending on the difficulty
 namespace interval {
-constexpr static auto EASY = std::chrono::milliseconds(20000);
-constexpr static auto MEDIUM = std::chrono::milliseconds(15000);
-constexpr static auto HARD = std::chrono::milliseconds(10000);
+constexpr static auto EASY = std::chrono::milliseconds(std::chrono::seconds(20));
+constexpr static auto MEDIUM = std::chrono::milliseconds(std::chrono::seconds(15));
+constexpr static auto HARD = std::chrono::milliseconds(std::chrono::seconds(10));
 }
 
 //! Actions struct containing all the information to forward to the member's pending action Queue
@@ -225,7 +225,17 @@ public:
 		_rewards->quantity.emplace_back(quantity);
 	};
 	void setPlayerReadiness(const std::string& userName);
-	void setArenaId(unsigned arenaId) noexcept { _arenaId = arenaId; }
+
+	/**
+	 * ArenaId (also called fightingPitId) is not set directly at construction time as it needs to be stored in the
+	 * WorkerService to generate the id.
+	 *
+	 * @param arenaId id to set for the fightingPit
+	 */
+	void setArenaId(unsigned arenaId) noexcept {
+		_partyTeams.setFightingPitId(arenaId);
+		_arenaId = arenaId;
+	}
 
 private:
 

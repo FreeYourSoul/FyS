@@ -36,8 +36,8 @@ SideBattle::getCurrentParticipantTurn(
 		const std::chrono::system_clock::time_point& now,
 		const std::chrono::milliseconds& timerInterlude)
 {
-	if (!_started) {
-		_started = true;
+	if (_turnDone) {
+		_turnDone = false;
 	}
 	else if (now < _endCurrentTurn && !_priorityOrderList.getCurrent().isContender) {
 		return _priorityOrderList.getCurrent();
