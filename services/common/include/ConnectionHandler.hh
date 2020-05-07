@@ -28,7 +28,7 @@
 #include <spdlog/spdlog.h>
 #include <zmq_addon.hpp>
 
-namespace fys::arena {
+namespace fys::common {
 
 class ArenaServerContext;
 
@@ -41,9 +41,9 @@ public:
 			_dealerConnectionToDispatcher(_zmqContext, zmq::socket_type::dealer) { }
 
 	/**
-	 * @brief Connect to the Arena dispatcher in order to receive request from the WS to create new fightingPit
+	 * @brief Connect to dispatcher in order to receive requests
 	 */
-	void setupConnectionManager(const fys::arena::ArenaServerContext& ctx) noexcept;
+	void setupConnectionManager(const std::string& dispatcherConnectionStr) noexcept;
 	/**
 	 * @brief Reply to the dispatcher using the dealer (direct connection) socket
 	 */

@@ -21,63 +21,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
-#ifndef FYS_SERVICECONTEXTBASE_HH
-#define FYS_SERVICECONTEXTBASE_HH
-
-#include <string>
+#include "ConnectionHandler.hh"
 
 namespace fys::common {
 
-namespace init_beacon {
-constexpr static auto SERVICE_NAME = "service.name";
-constexpr static auto HOSTNAME = "service.hostname";
-constexpr static auto PORT = "service.port";
-
-constexpr static auto DISPATCHER_PORT = "dispatcher.port";
-constexpr static auto DISPATCHER_SUBPORT = "dispatcher.subport";
-constexpr static auto DISPATCHER_ADDR = "dispatcher.address";
+void
+ConnectionHandler::setupConnectionManager(const std::string& dispatcherConnectionStr) noexcept
+{
+	_dealerConnectionToDispatcher.connect(dispatcherConnectionStr);
 }
 
-struct DispatcherData {
-	std::string address;
-	ushort subscriberPort;
-	ushort port;
-};
-
-class ServiceContextBase {
-public:
-	ServiceContextBase(int ac, const char* const* av);
-
-	/**
-	 * @return the connection string required to connect to the current server
-	 */
-	[[nodiscard]] std::string
-	getConnectionString() const;
-
-	[[nodiscard]] ushort
-	getPort() const { return _port; }
-
-	[[nodiscard]] const std::string&
-	getHostname() const { return _hostname; }
-
-	[[nodiscard]] std::string
-	getDispatcherConnectionString() const noexcept;
-
-private:
-	void initializeFromIni(const std::string& configFilePath);
-
-protected:
-	std::string _version;
-	std::string _name;
-	std::string _configFile;
-
-	std::string _hostname;
-	ushort _port;
-
-	DispatcherData _dispatcherData;
-};
-
+void
+ConnectionHandler::sendMessageToDispatcher(zmq::multipart_t&& msg) noexcept
+{
+	if (_dealerConnectionToDispatcher.connected()) {
+		msg.send(_dealerConnectionToDispatcher);
+	}
 }
 
-#endif //FYS_SERVICECONTEXTBASE_HH
+}

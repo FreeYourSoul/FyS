@@ -193,12 +193,6 @@ ArenaServerContext::toString() const noexcept
 }
 
 std::string
-ArenaServerContext::getDispatcherConnectionString() const noexcept
-{
-	return std::string("tcp://").append(_dispatcherData.address).append(":").append(std::to_string(_dispatcherData.port));
-}
-
-std::string
 ArenaServerContext::getPlayerBindingString() const noexcept
 {
 	return std::string("tcp://*:").append(std::to_string(_playerConnectionPort));

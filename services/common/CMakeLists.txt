@@ -26,6 +26,11 @@ else ()
             ${FLATBUFFER_SCHEMA_DIR}/arena/ReplyFrame.fbs
             ${FLATBUFFER_SCHEMA_DIR}/arena/EndBattle.fbs
             ${FLATBUFFER_SCHEMA_DIR}/arena/ActionExecuted.fbs
+            ${FLATBUFFER_SCHEMA_DIR}/inventory/InventoryRequest.fbs
+            ${FLATBUFFER_SCHEMA_DIR}/inventory/UpdatePlayerSoulDraughtboard.fbs
+            ${FLATBUFFER_SCHEMA_DIR}/inventory/RetrievePlayerSoulDraughtboard.fbs
+            ${FLATBUFFER_SCHEMA_DIR}/inventory/RetrievePlayerInventory.fbs
+            ${FLATBUFFER_SCHEMA_DIR}/inventory/ExchangeInventory.fbs
             ${FLATBUFFER_SCHEMA_DIR}/ClientCom.fbs
             ${FLATBUFFER_SCHEMA_DIR}/Notifications.fbs
             ${FLATBUFFER_SCHEMA_DIR}/WSAction.fbs)
@@ -43,6 +48,8 @@ endif ()
 set(COMMON_SRCS
         ${CMAKE_CURRENT_LIST_DIR}/src/RandomGenerator.cpp
         ${CMAKE_CURRENT_LIST_DIR}/src/ServiceContextBase.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/src/ConnectionHandler.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/ConnectionHandler.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/RandomGenerator.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/SizedQueue.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/BoundaryMap.hh

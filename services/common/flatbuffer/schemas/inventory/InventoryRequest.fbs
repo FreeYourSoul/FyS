@@ -1,0 +1,20 @@
+include "ExchangeInventory.fbs";
+include "RetrievePlayerInventory.fbs";
+include "RetrievePlayerSoulDraughtboard.fbs";
+include "UpdatePlayerSoulDraughtboard.fbs";
+
+namespace fys.fb;
+
+union InventoryRequestContent {
+    UpdatePlayerSoulDraughtboard : fys.fb.UpdatePlayerSoulDraughtboard,
+    RetrievePlayerSoulDraughtboard : fys.fb.UpdatePlayerSoulDraughtboard,
+    RetrievePlayerInventory : fys.fb.RetrievePlayerInventory,
+    ExchangeInventory : fys.fb.ExchangeInventory
+}
+
+table InventoryRequest {
+    id_requester: uint;
+    content: InventoryRequestContent(required);
+}
+
+root_type InventoryRequest;

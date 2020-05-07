@@ -89,9 +89,6 @@ public:
 	toString() const noexcept;
 
 	[[nodiscard]] std::string
-	getDispatcherConnectionString() const noexcept;
-
-	[[nodiscard]] std::string
 	getPlayerBindingString() const noexcept;
 
 	[[nodiscard]] const std::string&

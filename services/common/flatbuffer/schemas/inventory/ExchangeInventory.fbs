@@ -1,0 +1,7 @@
+namespace fys.fb;
+
+table ExchangeInventory {
+
+}
+
+root_type ExchangeInventory;

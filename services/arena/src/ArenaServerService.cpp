@@ -95,7 +95,7 @@ ArenaServerService::ArenaServerService(const ArenaServerContext& ctx)
 		_cache(ctx.getPathLocalStorageCache(), ctx.getPathSourceCache()),
 		_dbConnector(std::make_unique<network::DBConnector>(ctx))
 {
-	_connectionHandler.setupConnectionManager(ctx);
+	_connectionHandler.setupConnectionManager(ctx.getDispatcherConnectionString());
 	_workerService.setupConnectionManager(ctx);
 }
 

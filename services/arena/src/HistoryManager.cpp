@@ -23,6 +23,7 @@
 
 #include <spdlog/spdlog.h>
 #include <fightingPit/FightingPit.hh>
+#include <nlohmann/json.hpp>
 #include "HistoryManager.hh"
 
 namespace {
@@ -31,6 +32,19 @@ namespace {
 targetStr(std::optional<fys::arena::TargetType> target)
 {
 	return "";
+}
+
+[[nodiscard]] nlohmann::json
+generateJsonTarget(fys::arena::HistoryAction historyAction)
+{
+	const std::optional<fys::arena::TargetType> &target = historyAction.targets;
+	if (target.has_value()) {
+
+	}
+	return {
+			{"id", historyAction.idCharacter},
+			{"isContender", false}
+	};
 }
 
 }
@@ -89,8 +103,24 @@ HistoryManager::save(unsigned int fightingPitId)
 
 	if (historyIt->second.hasToBeSaved && historyIt->second.seed > 0) {
 		SPDLOG_INFO("[fp:] HistoryAction : Save history file");
+		auto date = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+		nlohmann::json actions;
 
-		// Todo Create a history file containing the logs of the fight (how it happened)
+		for (const auto& playerAction : historyIt->second.playerActions) {
+			actions["actions"].push_back(nlohmann::json
+					{
+							{"id", playerAction.idCharacter},
+							{"isContender", false},
+							{"actionKey", playerAction.actionKey},
+							generateJsonTarget(playerAction)
+					}
+			);
+		}
+
+		nlohmann::json json = {
+				{"date", std::ctime(&date)},
+				actions
+		};
 	}
 	getInstance()._history.erase(historyIt);
 }

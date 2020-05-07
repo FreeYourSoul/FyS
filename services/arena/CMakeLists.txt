@@ -57,8 +57,6 @@ add_executable(arena_service
         ${CMAKE_CURRENT_LIST_DIR}/include/FlatbufferGenerator.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/HistoryManager.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/HistoryManager.hh
-        ${CMAKE_CURRENT_LIST_DIR}/src/ConnectionHandler.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/include/ConnectionHandler.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/ChaiRegister.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/network/DBConnector.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/network/DBConnector.hh

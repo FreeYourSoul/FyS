@@ -1,0 +1,7 @@
+namespace fys.fb;
+
+table RetrievePlayerInventory {
+
+}
+
+root_type RetrievePlayerInventory;

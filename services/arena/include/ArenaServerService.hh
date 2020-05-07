@@ -158,7 +158,7 @@ private:
 
 	// Manage connections
 	std::unique_ptr<network::DBConnector> _dbConnector;
-	ConnectionHandler _connectionHandler;
+	common::ConnectionHandler _connectionHandler;
 
 	// Manage fighting pits
 	WorkerService _workerService;

@@ -21,24 +21,30 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <ArenaServerContext.hh>
-#include "ConnectionHandler.hh"
 
-namespace fys::arena {
+#ifndef FYS_ONLINE_INVENTORYSERVERCONTEXT_HH
+#define FYS_ONLINE_INVENTORYSERVERCONTEXT_HH
 
-void
-ConnectionHandler::setupConnectionManager(const fys::arena::ArenaServerContext& ctx) noexcept
-{
-	// connect to dispatcher with the dispatcher
-	_dealerConnectionToDispatcher.connect(ctx.getDispatcherConnectionString());
+#include <ServiceContextBase.hh>
+
+namespace fys::inv {
+
+class InventoryServerContext : public common::ServiceContextBase {
+
+public:
+	explicit InventoryServerContext(int argc, char** argv);
+
+	[[nodiscard]] const std::string&
+	getConnectionStringCacheDB() const { return _connectionStringCacheDB; }
+
+	[[nodiscard]] std::string
+	toString() const;
+
+private:
+	std::string _connectionStringCacheDB;
+
+};
+
 }
 
-void
-ConnectionHandler::sendMessageToDispatcher(zmq::multipart_t&& msg) noexcept
-{
-	if (_dealerConnectionToDispatcher.connected()) {
-		msg.send(_dealerConnectionToDispatcher);
-	}
-}
-
-}
+#endif //FYS_ONLINE_INVENTORYSERVERCONTEXT_HH
