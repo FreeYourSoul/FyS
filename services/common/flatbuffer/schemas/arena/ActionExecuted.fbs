@@ -1,6 +1,6 @@
 include "FightingPitState.fbs";
 
-namespace fys.fb;
+namespace fys.fb.arn;
 
 table ActionExecuted {
     action:string;

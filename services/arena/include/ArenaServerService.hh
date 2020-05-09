@@ -140,7 +140,7 @@ private:
 	isSaturated() const noexcept;
 
 	[[nodiscard]] PlayerAction
-	createPlayerAction(std::string&& action, const fb::ArenaFightAction* frame) const;
+	createPlayerAction(std::string&& action, const fb::arn::ArenaFightAction* frame) const;
 
 	[[nodiscard]] unsigned
 	createNewFightingPit(const AwaitingPlayerArena& awaited) noexcept;

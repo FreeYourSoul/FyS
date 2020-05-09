@@ -1,4 +1,4 @@
-namespace fys.fb;
+namespace fys.fb.arn;
 
 /// Used by the client to join an existing FightingPit (id_fightingpit set)
 /// ALSO Used by the client as an authentication frame for messages

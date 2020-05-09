@@ -1,0 +1,12 @@
+namespace fys.fb.auth;
+
+table IncomingPlayerOnWs {
+    userName:string(required);
+    token:string(required);
+    posX:double;
+    posY:double;
+    angle:double;
+    velocity:double;
+}
+
+root_type IncomingPlayerOnWs;

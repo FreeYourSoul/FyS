@@ -1,6 +1,6 @@
 include "CharacterStatus.fbs";
 
-namespace fys.fb;
+namespace fys.fb.arn;
 
 table MemberStatus {
     characterName:string(required);

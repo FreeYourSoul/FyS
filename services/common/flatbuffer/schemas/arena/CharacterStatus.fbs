@@ -1,4 +1,4 @@
-namespace fys.fb;
+namespace fys.fb.arn;
 // Contains the CharacterStatus and common tables
 
 enum SideOrient : byte {

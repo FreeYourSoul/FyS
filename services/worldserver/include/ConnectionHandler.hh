@@ -42,8 +42,8 @@ public:
 	void setupConnectionManager(const fys::ws::WorldServerContext& ctx) noexcept;
 	void sendMessageToDispatcher(zmq::multipart_t&& msg) noexcept;
 
-	template<typename HandlerInterServer, typename HandlerPlayer>
-	void pollAndProcessSubMessage(HandlerInterServer&& handlerServer, HandlerPlayer&& handlerPlayer) noexcept
+	template<typename HandlerIncoming, typename HandlerInterServer>
+	void pollAndProcessSubMessage(HandlerIncoming&& handlerIncoming, HandlerInterServer&& handlerServer) noexcept
 	{
 		//  Initialize poll set
 		zmq::pollitem_t items[] = {
@@ -64,15 +64,16 @@ public:
 				auto identity = msg.pop();
 				if (SERVER_SUB_CHANNEL_KEY == subKey) {
 					// third frame is content for inter server messaging
-					std::forward<HandlerPlayer>(handlerPlayer)(std::move(identity), msg.pop());
+					std::forward<HandlerIncoming>(handlerIncoming)(std::move(identity), msg.pop());
 					return;
 				}
 				// third frame is auth frame for incoming player messaging
 				auto authFrame = msg.pop();
-				std::forward<HandlerPlayer>(handlerPlayer)(std::move(identity), std::move(authFrame), msg.pop());
+				std::forward<HandlerIncoming>(handlerIncoming)(std::move(identity), std::move(authFrame), msg.pop());
 			}
 		}
 	}
+
 
 private:
 	zmq::context_t _zmqContext;

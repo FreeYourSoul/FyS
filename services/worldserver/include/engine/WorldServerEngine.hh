@@ -43,28 +43,68 @@ class CollisionMap;
 
 namespace fys::ws {
 
-using PlayerUserToken = std::pair<std::string, std::string>;
+constexpr static uint NOT_AUTHENTICATED = std::numeric_limits<uint>::max();
+
+struct AuthPlayer {
+	std::string userName;
+	std::string token;
+
+	bool operator==(const AuthPlayer&) const = default;
+};
 
 class WorldServerEngine {
 
 public:
 	explicit WorldServerEngine(const WorldServerContext& ctx);
 
-	void processPlayerInputMessage(std::string&& idt, std::string&& token,
-			const fys::fb::WSAction* actionMsg, ConnectionHandler& handler);
+	void executePendingMoves();
+	void setPlayerMoveDirection(uint index, double direction);
+	void stopPlayerMove(uint index);
 
-	void executePendingActions(ws::ConnectionHandler& conn);
+	[[nodiscard]] uint
+	retrieveDataIndex(const AuthPlayer& player);
+
+	[[nodiscard]] uint
+	authenticatePlayer(AuthPlayer auth, PlayerInfo info, std::string identifier);
+
+	template<typename HandlerPlayer>
+	void pollAndProcessPlayerMessage(HandlerPlayer&& handlerPlayer)
+	{
+		//  Initialize poll set
+		zmq::pollitem_t items[] = {
+				{_routerPlayerConnection, 0, ZMQ_POLLIN, 0}
+		};
+		zmq::poll(&items[0], 1, 10);
+		if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
+			zmq::multipart_t msg;
+			if (!msg.recv(_routerPlayerConnection, ZMQ_NOBLOCK) || (msg.size() != 3)) {
+				SPDLOG_ERROR("Error while reading on the listener socket.");
+				SPDLOG_ERROR("Received message may be ill formatted, contains '{}' part, message is : {}",
+						msg.size(), msg.str());
+			}
+			else {
+				// first frame is the identity
+				auto identity = msg.pop();
+				// second frame is auth frame of the player
+				auto authFrame = msg.pop();
+				std::forward<handlerPlayer>(handlerPlayer)(std::move(identity), std::move(authFrame), msg.pop());
+			}
+		}
+	}
 
 private:
-	inline void notifyClientsOfMove(const std::vector<std::string_view>& ids, ws::ConnectionHandler& conn) const;
-	inline void movePlayerAction(const std::string& idt, uint indexPlayer, PlayerInfo& pi, ws::ConnectionHandler& conn);
+	inline void notifyClientsOfMove(const std::vector<std::string_view>& ids) const;
+	inline void movePlayerAction(const std::string& idt, uint indexPlayer, PlayerInfo& pi);
 
 private:
 	CollisionMap _map;
 	PlayersData _data;
 
+	zmq::context_t _zmqCtx;
+	zmq::socket_t _routerPlayerConnection;
+
 	// Authenticated user token to index in PlayersData
-	std::map<PlayerUserToken, uint> _tokenToIndex;
+	std::map<AuthPlayer, uint> _authPlayerOnDataIndex;
 
 };
 

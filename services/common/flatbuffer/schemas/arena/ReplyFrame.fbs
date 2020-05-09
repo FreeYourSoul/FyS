@@ -2,24 +2,24 @@ include "FightingPitState.fbs";
 include "EndBattle.fbs";
 include "ActionExecuted.fbs";
 
-namespace fys.fb;
+namespace fys.fb.arn;
 
 union Content {
 
 /// content for TypeReply.FIGHTINGPIT_STATE
-FightingPitState : fys.fb.FightingPitState,
+FightingPitState : fys.fb.arn.FightingPitState,
 
 /// content for TypeReply.PARTY_TEAM_STATUS
-PartyTeamStatus : fys.fb.PartyTeamStatus,
+PartyTeamStatus : fys.fb.arn.PartyTeamStatus,
 
 /// content for TypeReply.END_BATTLE
-EndBattle : fys.fb.EndBattle,
+EndBattle : fys.fb.arn.EndBattle,
 
 /// content for TypeReply.INCOMING_CONTENDER
-ContenderStatus : fys.fb.MemberStatus,
+ContenderStatus : fys.fb.arn.MemberStatus,
 
 /// content for TypeReply.INCOMING_CONTENDER
-ActionExecuted : fys.fb.ActionExecuted,
+ActionExecuted : fys.fb.arn.ActionExecuted,
 
 /// content for TypeReply.ERROR: Error message
 ErrorMessage : string

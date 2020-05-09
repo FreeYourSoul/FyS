@@ -1,10 +1,11 @@
 include "AuthFrame.fbs";
 
-namespace fys.fb;
+namespace fys.fb.world;
+
+table emptyAction {}
 
 table JoinArena {
-    enterArena:bool;
-    arenaId:string;
+    playerNameToJoin:string(required);
 }
 
 table Move {
@@ -12,10 +13,16 @@ table Move {
 }
 
 table PnjInteract {
-    idPnj:string;
+    idPnj:string(required);
 }
 
-union Action { Move, JoinArena, PnjInteract }
+union Action {
+    JoinArena,
+    PnjInteract,
+    Move,
+    StopMove : emptyAction,
+    ValidateAuth : emptyAction
+}
 
 table WSAction {
     action:Action(required);

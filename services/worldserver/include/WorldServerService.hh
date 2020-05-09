@@ -27,17 +27,43 @@
 #include <engine/WorldServerEngine.hh>
 #include <ConnectionHandler.hh>
 
+// forward declarations
+namespace fys::ws {
+class WorldServerContext;
+}
+// end forward declarations
+
 namespace fys::ws {
 
 class WorldServerService {
+
+	struct AwaitedPlayer {
+		AuthPlayer auth{};
+		Pos initialPosition{};
+		double initialAngle = 0.0;
+		double initialVelocity = 0.0;
+	};
+	using AwaitingPlayerWorldServerIt = std::vector<AwaitedPlayer>::const_iterator;
+
 
 public:
 	explicit WorldServerService(const WorldServerContext& ctx);
 	void runServerLoop() noexcept;
 
 private:
+	inline void registerAwaitedPlayer(const std::string& user, const std::string& token, std::string identity);
+
+	[[nodiscard]] inline std::pair<bool, AwaitingPlayerWorldServerIt>
+	isPlayerAwaited(const std::string& userName,const std::string& token) const;
+
+private:
+	std::reference_wrapper<const WorldServerContext> _ctx;
+
+	std::vector<AwaitedPlayer> _awaitedIncomingPlayer;
+
 	WorldServerEngine _worldServer;
 	ws::ConnectionHandler _connectionHandler;
+
 };
 
 }

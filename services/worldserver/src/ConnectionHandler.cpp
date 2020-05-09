@@ -31,7 +31,6 @@ ConnectionHandler::ConnectionHandler(int threadNumber) noexcept
 		_subSocketOnDispatcher(_zmqContext, zmq::socket_type::sub),
 		_dealSocketOnDispatcher(_zmqContext, zmq::socket_type::dealer)
 {
-
 }
 
 void
@@ -46,8 +45,9 @@ ConnectionHandler::setupConnectionManager(const fys::ws::WorldServerContext& ctx
 void
 ConnectionHandler::sendMessageToDispatcher(zmq::multipart_t&& msg) noexcept
 {
-	if (_dealSocketOnDispatcher.connected())
+	if (_dealSocketOnDispatcher.connected()) {
 		msg.send(_dealSocketOnDispatcher);
+	}
 }
 
 }

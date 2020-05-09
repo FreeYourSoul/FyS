@@ -1,4 +1,4 @@
-namespace fys.fb;
+namespace fys.fb.arn;
 
 /// Used as reply from the ArenaServer to the client (passing by the WorldServer)
 /// connection_str is used by the client as to connect on the ArenaServer

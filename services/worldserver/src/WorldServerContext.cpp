@@ -80,12 +80,13 @@ WorldServerContext::toString() const noexcept
 	str += "[INFO] Service " + _name + " context VERSION: " + _version + "\n";
 	str += "[INFO] Config file used: " + _configFile + "\n\n";
 	str += "[INFO] World Server code: " + _serverCode + "\n";
-	str += "[INFO] TMX Map path: " + _tmxMapPath + "\n";
-	str += "[INFO] Dispatcher subscribing port: " + std::to_string(_dispatcherData.subscriberPort) + "\n";
-	str += "[INFO] Dispatcher connected port: " + std::to_string(_dispatcherData.port) + "\n";
-	str += "[INFO] Dispatcher connected host: " + _dispatcherData.address + "\n";
-	str += "[INFO] Dispatcher Subscriber connection string: " + getDispatcherSubConnectionString() + "\n";
-	str += "[INFO] Dispatcher connection string: " + getDispatcherConnectionString() + "\n";
+	str += "[INFO] TMX Map path: " + _tmxMapPath + "\n"; // Will be changed with the new formatting file homemade
+	str += "[INFO] Player connection string: " + getPlayerConnectionString() + "\n";
+	str += "[INFO] Dispatcher(AuthServer) subscribing port: " + std::to_string(_dispatcherData.subscriberPort) + "\n";
+	str += "[INFO] Dispatcher(AuthServer) connected port: " + std::to_string(_dispatcherData.port) + "\n";
+	str += "[INFO] Dispatcher(AuthServer) connected host: " + _dispatcherData.address + "\n";
+	str += "[INFO] Dispatcher(AuthServer) Subscriber connection string: " + getDispatcherSubConnectionString() + "\n";
+	str += "[INFO] Dispatcher(AuthServer) connection string: " + getDispatcherConnectionString() + "\n";
 
 	for (const auto& prox : _serverProximity) {
 		str += "[INFO] element:\n       ";
@@ -143,6 +144,12 @@ std::string
 WorldServerContext::getDispatcherSubConnectionString() const noexcept
 {
 	return std::string("tcp://").append(_dispatcherData.address).append(":").append(std::to_string(_dispatcherData.subscriberPort));
+}
+
+std::string
+WorldServerContext::getPlayerConnectionString() const noexcept
+{
+	return std::string("tcp://*:").append(std::to_string(_portPlayerConnection));
 }
 
 }

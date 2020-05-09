@@ -10,7 +10,6 @@ if (NOT RELATIVE_TO_COMMON)
     list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}${RELATIVE_TO_COMMON}cmake)
 endif ()
 
-add_subdirectory(quest_dispatcher)
 add_subdirectory(auth_dispatcher)
 add_subdirectory(chat_dispatcher)
 add_subdirectory(worldserver_dispatcher)

@@ -52,18 +52,18 @@ verifyBuffer(const void* fbBuffer, uint size)
 }
 
 [[nodiscard]] fys::arena::FightingPit::Level
-translateLevelFromFlatbuffer(const fys::fb::Level& level)
+translateLevelFromFlatbuffer(const fys::fb::arn::Level& level)
 {
 	switch (level) {
-		case fys::fb::Level_EASY:return fys::arena::FightingPit::Level::EASY;
-		case fys::fb::Level_MEDIUM:return fys::arena::FightingPit::Level::MEDIUM;
-		case fys::fb::Level_HARD:return fys::arena::FightingPit::Level::HARD;
+		case fys::fb::arn::Level_EASY:return fys::arena::FightingPit::Level::EASY;
+		case fys::fb::arn::Level_MEDIUM:return fys::arena::FightingPit::Level::MEDIUM;
+		case fys::fb::arn::Level_HARD:return fys::arena::FightingPit::Level::HARD;
 		default:return fys::arena::FightingPit::Level::EASY;
 	}
 }
 
 [[nodiscard]] fys::arena::AwaitingPlayerArena
-createAwaitingPlayer(const fys::fb::FightingPitEncounter* binary)
+createAwaitingPlayer(const fys::fb::arn::FightingPitEncounter* binary)
 {
 	std::optional<fys::arena::AwaitingArena> awaitingArena = std::nullopt;
 
@@ -116,11 +116,11 @@ ArenaServerService::runServerLoop() noexcept
 						return;
 					}
 
-					if (!verifyBuffer<fb::FightingPitEncounter>(worldServerMessage.data(), worldServerMessage.size())) {
+					if (!verifyBuffer<fb::arn::FightingPitEncounter>(worldServerMessage.data(), worldServerMessage.size())) {
 						SPDLOG_ERROR("Wrongly formatted FightingPitEncounter buffer");
 						return;
 					}
-					const auto* binary = fys::fb::GetFightingPitEncounter(worldServerMessage.data());
+					const auto* binary = fb::arn::GetFightingPitEncounter(worldServerMessage.data());
 
 					AwaitingPlayerArena apa = createAwaitingPlayer(binary);
 
@@ -148,7 +148,7 @@ ArenaServerService::runServerLoop() noexcept
 						return;
 					}
 
-					const auto* binary = fys::fb::GetArenaServerValidateAuth(authMessage.data());
+					const auto* binary = fb::arn::GetArenaServerValidateAuth(authMessage.data());
 					const std::string tokenAuth = binary->token_auth()->str();
 					const std::string userName = binary->user_name()->str();
 					const auto &[isAwaited, playerAwaitedIt] = isPlayerAwaited(userName, tokenAuth, binary->fighting_pit_id());
@@ -194,7 +194,7 @@ ArenaServerService::runServerLoop() noexcept
 						return;
 					}
 
-					const auto* authFrame = fys::fb::GetArenaServerValidateAuth(intermediate.data());
+					const auto* authFrame = fb::arn::GetArenaServerValidateAuth(intermediate.data());
 					const std::string userName = authFrame->user_name()->str();
 					auto fp = _workerService.getAuthenticatedPlayerFightingPit(userName,
 							authFrame->token_auth()->str(),
@@ -206,7 +206,7 @@ ArenaServerService::runServerLoop() noexcept
 					}
 					_workerService.upsertPlayerIdentifier(authFrame->fighting_pit_id(), userName, idtPlayer.str());
 
-					const auto* frame = fys::fb::GetArenaFightAction(playerMsg.data());
+					const auto* frame = fb::arn::GetArenaFightAction(playerMsg.data());
 					std::string action = frame->actionId()->str();
 
 					if (frame->memberId() == READY_ACTION_ID && action == READY_ACTION) {
@@ -225,7 +225,7 @@ ArenaServerService::runServerLoop() noexcept
 }
 
 PlayerAction
-ArenaServerService::createPlayerAction(std::string&& action, const fb::ArenaFightAction* frame) const
+ArenaServerService::createPlayerAction(std::string&& action, const fb::arn::ArenaFightAction* frame) const
 {
 	std::vector<uint> contenders;
 	std::vector<uint> allies;
@@ -265,7 +265,7 @@ void
 ArenaServerService::forwardReplyToDispatcher(zmq::message_t&& idtWs, const fys::arena::AwaitingPlayerArena& awaitArena) noexcept
 {
 	flatbuffers::FlatBufferBuilder fbb;
-	auto asaFb = fys::fb::CreateArenaServerAuth(
+	auto asaFb = fb::arn::CreateArenaServerAuth(
 			fbb,
 			fbb.CreateString(awaitArena.namePlayer),
 			fbb.CreateString(awaitArena.token),
@@ -273,7 +273,7 @@ ArenaServerService::forwardReplyToDispatcher(zmq::message_t&& idtWs, const fys::
 			fbb.CreateString(_ctx.get().getConnectionString()),
 			_ctx.get().getPort(),
 			awaitArena.gen ? fbb.CreateString(awaitArena.gen->serverCode) : fbb.CreateString(""));
-	fys::fb::FinishArenaServerAuthBuffer(fbb, asaFb);
+	fb::arn::FinishArenaServerAuthBuffer(fbb, asaFb);
 	zmq::multipart_t msg;
 	msg.add(std::move(idtWs));
 	msg.addmem(fbb.GetBufferPointer(), fbb.GetSize());

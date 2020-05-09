@@ -21,36 +21,28 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include <spdlog/spdlog.h>
 #include "engine/PlayersData.hh"
 
 namespace fys::ws {
 
 PlayersData::PlayersData(uint maxConnection) noexcept
 		:
-		_positions(maxConnection), _status(maxConnection), _identities(maxConnection){ }
+		_positions(maxConnection), _status(maxConnection), _identities(maxConnection) { }
 
-uint
-PlayersData::getIndexAndUpdatePlayerConnection(const std::string& token, std::string idt)
-{
-	if (auto it = _tokenToIndex.find(token); it != _tokenToIndex.end()) {
-		_identities.at(it->second) = std::move(idt);
-		return it->second;
-	}
-	return std::numeric_limits<uint>::max();
-}
 
 std::vector<std::string_view>
-PlayersData::getPlayerIdtsArroundPlayer(uint indexPlayer,
+PlayersData::getPlayerIdtsAroundPlayer(uint indexPlayer,
 		std::optional<std::reference_wrapper<PlayerInfo>> position,
 		double distance) const noexcept
 {
 	if (position && indexPlayer < _positions.size())
-		return getPlayerIdtsArroundPos(*position, distance, indexPlayer);
-	return getPlayerIdtsArroundPos(_positions.at(indexPlayer), distance, indexPlayer);
+		return getPlayerIdtsAroundPos(*position, distance, indexPlayer);
+	return getPlayerIdtsAroundPos(_positions.at(indexPlayer), distance, indexPlayer);
 }
 
 std::vector<std::string_view>
-PlayersData::getPlayerIdtsArroundPos(const fys::ws::PlayerInfo& position,
+PlayersData::getPlayerIdtsAroundPos(const fys::ws::PlayerInfo& position,
 		double distance,
 		uint ignoreIndex) const noexcept
 {
@@ -76,6 +68,21 @@ PlayerInfo&
 PlayersData::accessPlayerInfo(uint indexPlayer)
 {
 	return _positions.front();
+}
+
+uint
+PlayersData::addNewPlayerData(PlayerInfo info, std::string identity)
+{
+	if (!(_identities.size() == _status.size() == _positions.size())) {
+		SPDLOG_CRITICAL("MISMATCH, all vectors require to be equal idt:'{}' status:'{}' position:'{}'",
+				_identities.size(), _status.size(), _positions.size());
+		return 0;
+	}
+	uint index = _identities.size();
+	_identities.emplace_back(std::move(identity));
+	_positions.emplace_back(std::move(info));
+	_status.emplace_back(PlayerStatus::STANDING);
+	return index;
 }
 
 }

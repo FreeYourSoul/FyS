@@ -32,45 +32,47 @@
 namespace fys::ws {
 
 WorldServerEngine::WorldServerEngine(const fys::ws::WorldServerContext& ctx)
-		:_map(ctx)
+		:
+		_map(ctx),
+		_zmqCtx(1),
+		_routerPlayerConnection(_zmqCtx, zmq::socket_type::router)
 {
+	_routerPlayerConnection.bind(ctx.getPlayerConnectionString());
 }
 
 void
-WorldServerEngine::executePendingActions(ws::ConnectionHandler& conn)
+WorldServerEngine::executePendingMoves()
 {
-	_data.executeOnPlayers([this, &conn](uint indexPlayer, PlayerStatus statusPlayer, PlayerInfo& pi, const std::string& identityPlayer) {
-		if (statusPlayer == PlayerStatus::MOVING) {
-			movePlayerAction(identityPlayer, indexPlayer, pi, conn);
+	_data.executeOnPlayers([this](uint index, PlayerStatus status, PlayerInfo& pi, const std::string& identity) {
+		if (status == PlayerStatus::MOVING) {
+			movePlayerAction(identity, index, pi);
 		}
 	});
 }
 
-void
-WorldServerEngine::processPlayerInputMessage(std::string&& idt, std::string&& token,
-		const fb::WSAction* actionMsg, ConnectionHandler& handler)
-{
-	if (const uint index = _data.getIndexAndUpdatePlayerConnection(token, std::move(idt));
-			index < std::numeric_limits<uint>::max()) {
-		if (actionMsg->action_type() == fb::Action::Action_Move) {
-			_data.setPlayerMoveAction(index, actionMsg->action_as_Move()->direction());
-		}
-		else if (actionMsg->action_type() == fb::Action::Action_Interruption) {
-//                if (auto moveAction = actionMsg->action_as_Move(); moveAction->enterArena())
-//                    _data.setPlayerArena(index, moveAction->arenaId());
-//                else
-			_data.stopPlayerMove(index);
-		}
-	}
-	else {
-		SPDLOG_ERROR("Player of token {} has not been registered before sending messages", token);
-	}
+uint
+WorldServerEngine::authenticatePlayer(AuthPlayer auth, PlayerInfo info, std::string identifier) {
+	uint index = _data.addNewPlayerData(std::move(info), std::move(identifier));
+	_authPlayerOnDataIndex.insert(std::pair(std::move(auth), index));
+	return index;
 }
 
 void
-WorldServerEngine::movePlayerAction(const std::string& idt, uint indexPlayer, PlayerInfo& pi, ws::ConnectionHandler& conn)
+WorldServerEngine::setPlayerMoveDirection(uint index, double direction)
 {
-	double velocity = 1;
+	_data.setPlayerMoveAction(index, direction);
+}
+
+void
+WorldServerEngine::stopPlayerMove(uint index)
+{
+	_data.stopPlayerMove(index);
+}
+
+void
+WorldServerEngine::movePlayerAction(const std::string& idt, uint indexPlayer, PlayerInfo& pi)
+{
+	double velocity = pi.velocity;
 	Pos futurePos = Pos{
 			pi.pos.x * (velocity * std::cos(pi.angle)),
 			pi.pos.y * (velocity * std::sin(pi.angle))
@@ -78,19 +80,29 @@ WorldServerEngine::movePlayerAction(const std::string& idt, uint indexPlayer, Pl
 
 	if (_map.canMoveTo(futurePos, 0)) {
 		pi.pos = futurePos;
-		_map.executePotentialTrigger(indexPlayer, pi, conn);
-		if (const auto clientsToNotify = _data.getPlayerIdtsArroundPos(pi); !clientsToNotify.empty()) {
-			notifyClientsOfMove(clientsToNotify, conn);
+		_map.executePotentialTrigger(indexPlayer, pi);
+		if (const auto clientsToNotify = _data.getPlayerIdtsAroundPos(pi); !clientsToNotify.empty()) {
+			notifyClientsOfMove(clientsToNotify);
 		}
 	}
 }
 
 void
-WorldServerEngine::notifyClientsOfMove(const std::vector<std::string_view>& ids, ws::ConnectionHandler& conn) const
+WorldServerEngine::notifyClientsOfMove(const std::vector<std::string_view>& ids) const
 {
 	for (const auto& id : ids) {
 		// TODO: notify
 	}
+}
+
+uint
+WorldServerEngine::retrieveDataIndex(const AuthPlayer& player)
+{
+	auto it = _authPlayerOnDataIndex.find(player);
+	if (it == _authPlayerOnDataIndex.end()) {
+		return NOT_AUTHENTICATED;
+	}
+	return _authPlayerOnDataIndex.at(player);
 }
 
 }

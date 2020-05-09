@@ -1,6 +1,6 @@
 include "../arena/ArenaServerAuth.fbs";
 
-namespace fys.fb;
+namespace fys.fb.world;
 
 table MovePing {
     dir:double;
@@ -10,7 +10,10 @@ table MovePing {
 }
 
 union Response {
-    ArenaServerAuth,
+    /// forward arena reply
+    arn.ArenaServerAuth,
+
+    /// inform about current position to players in order to adjust if mismatch with local
     MovePing
 }
 

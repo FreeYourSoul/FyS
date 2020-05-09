@@ -38,7 +38,7 @@ target_link_libraries(worldserver_dispatcher
         PRIVATE common_dispatcher nlohmann_json::nlohmann_json)
 
 set_target_properties(worldserver_dispatcher PROPERTIES
-        CXX_STANDARD 20
+        CXX_STANDARD 17
         CMAKE_CXX_COMPILER /usr/bin/g++)
 
 message( STATUS Set Warnings flag : ${CMAKE_CXX_FLAGS})

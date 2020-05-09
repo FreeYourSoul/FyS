@@ -26,12 +26,14 @@ else ()
             ${FLATBUFFER_SCHEMA_DIR}/arena/ReplyFrame.fbs
             ${FLATBUFFER_SCHEMA_DIR}/arena/EndBattle.fbs
             ${FLATBUFFER_SCHEMA_DIR}/arena/ActionExecuted.fbs
+            ${FLATBUFFER_SCHEMA_DIR}/auth/IncomingPlayerOnWs.fbs
             ${FLATBUFFER_SCHEMA_DIR}/inventory/InventoryRequest.fbs
             ${FLATBUFFER_SCHEMA_DIR}/inventory/UpdatePlayerSoulDraughtboard.fbs
             ${FLATBUFFER_SCHEMA_DIR}/inventory/RetrievePlayerSoulDraughtboard.fbs
             ${FLATBUFFER_SCHEMA_DIR}/inventory/RetrievePlayerInventory.fbs
             ${FLATBUFFER_SCHEMA_DIR}/inventory/ExchangeInventory.fbs
             ${FLATBUFFER_SCHEMA_DIR}/world/WSResponse.fbs
+            ${FLATBUFFER_SCHEMA_DIR}/world/InterServerCom.fbs
             ${FLATBUFFER_SCHEMA_DIR}/world/AuthFrame.fbs
             ${FLATBUFFER_SCHEMA_DIR}/world/WSAction.fbs
             ${FLATBUFFER_SCHEMA_DIR}/Notifications.fbs)

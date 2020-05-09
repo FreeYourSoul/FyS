@@ -109,8 +109,7 @@ CollisionMap::addTriggerInMap(const tmx::ObjectGroup& triggerLayer)
 }
 
 void
-CollisionMap::executePotentialTrigger(uint indexPlayer, const fys::ws::PlayerInfo& posOnMap,
-		ws::ConnectionHandler& conn)
+CollisionMap::executePotentialTrigger(uint index, const PlayerInfo& positionOnMap)
 {
 }
 

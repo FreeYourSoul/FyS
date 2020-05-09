@@ -60,11 +60,14 @@ struct Rectangle final
 using HitBoxd = Rectangle<double>;
 using HitBoxu = Rectangle<uint>;
 using Vec2u = Vector2<uint>;
+
+//! Position in 2D space (X, Y)
 using Pos = Vector2<double>;
 
 
 struct PlayerInfo {
 	Pos pos;
+	double velocity = 1.0;
 	double angle = 0.0;
 };
 
@@ -79,7 +82,7 @@ class PlayersData {
 public:
 	explicit PlayersData(uint maxConnection = 1000) noexcept;
 
-	PlayerInfo&
+	[[nodiscard]] PlayerInfo&
 	accessPlayerInfo(uint indexPlayer);
 
 	template<typename Action>
@@ -105,45 +108,38 @@ public:
 	}
 
 	void
-	setPlayerArena(uint index, const std::string& arenaId)
+	setPlayerStatusInArena(uint index, const std::string& arenaId)
 	{
 		_status.at(index) = PlayerStatus::FIGHTING;
 	}
 
-	/**
-	 * Retrieve the index corresponding to the given token
-	 *
-	 * @param token
-	 * @param idt
-	 * @return index corresponding to the given token,
-	 *         std::numeric_limits<uint>::max() is returned if no corresponding token
-	 */
-	uint
-	getIndexAndUpdatePlayerConnection(const std::string& token, std::string idt);
+	[[nodiscard]] uint
+	addNewPlayerData(PlayerInfo info, std::string identity);
+
 
 	/**
-	 * @brief Get the Players Identities Arround the given player except himself
+	 * @brief Get the Players Identities Around the given player except himself
 	 *
 	 * @param indexPlayer player
 	 * @param position
 	 * @param distance
 	 * @return std::vector<std::string_view>
 	 */
-	inline std::vector<std::string_view>
-	getPlayerIdtsArroundPlayer(uint indexPlayer,
+	[[nodiscard]] inline std::vector<std::string_view>
+	getPlayerIdtsAroundPlayer(uint indexPlayer,
 			std::optional<std::reference_wrapper<PlayerInfo>> position,
 			double distance = DEFAULT_DISTANCE) const noexcept;
 
 	/**
-	 * @brief Get the Players Identities Arround the given position
+	 * @brief Get the Players Identities Around the given position
 	 *
-	 * @param position to check arround
-	 * @param distance radius arround the given point to search
-	 * @return std::vector<std::string_view> vector of view on the identities of the players arround the given point
+	 * @param position to check around
+	 * @param distance radius around the given point to search
+	 * @return std::vector<std::string_view> vector of view on the identities of the players around the given point
 	 * @note identities are zmq code to reply to a specific client via a router socket
 	 */
-	std::vector<std::string_view>
-	getPlayerIdtsArroundPos(const PlayerInfo& position,
+	[[nodiscard]] std::vector<std::string_view>
+	getPlayerIdtsAroundPos(const PlayerInfo& position,
 			double distance = DEFAULT_DISTANCE,
 			uint ignoreIndex = LIMIT_NOTIFICATIONS_MOVE) const noexcept;
 

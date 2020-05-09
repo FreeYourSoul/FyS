@@ -1,4 +1,4 @@
-namespace fys.fb;
+namespace fys.fb.world;
 
 table AuthFrame {
     userName:string(required);
