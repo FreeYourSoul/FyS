@@ -31,9 +31,10 @@ else ()
             ${FLATBUFFER_SCHEMA_DIR}/inventory/RetrievePlayerSoulDraughtboard.fbs
             ${FLATBUFFER_SCHEMA_DIR}/inventory/RetrievePlayerInventory.fbs
             ${FLATBUFFER_SCHEMA_DIR}/inventory/ExchangeInventory.fbs
-            ${FLATBUFFER_SCHEMA_DIR}/ClientCom.fbs
-            ${FLATBUFFER_SCHEMA_DIR}/Notifications.fbs
-            ${FLATBUFFER_SCHEMA_DIR}/WSAction.fbs)
+            ${FLATBUFFER_SCHEMA_DIR}/world/WSResponse.fbs
+            ${FLATBUFFER_SCHEMA_DIR}/world/AuthFrame.fbs
+            ${FLATBUFFER_SCHEMA_DIR}/world/WSAction.fbs
+            ${FLATBUFFER_SCHEMA_DIR}/Notifications.fbs)
 
     message("Flatbuffer generation ${FLATBUFFER_INCLUDE_DIR}")
     build_flatbuffers("${FLAT_BUFFER_SCHEMAS}"

@@ -1,6 +1,6 @@
 namespace fys.fb;
 
-/// Used as reply from the ArenaServer to the client
+/// Used as reply from the ArenaServer to the client (passing by the WorldServer)
 /// connection_str is used by the client as to connect on the ArenaServer
 table ArenaServerAuth {
     user_name:string(required);
@@ -11,5 +11,5 @@ table ArenaServerAuth {
     /// dispatcher has to store the arena code to do a mapping
     arena_server_code:string(required);
 }
-// add error code ?
+
 root_type ArenaServerAuth;

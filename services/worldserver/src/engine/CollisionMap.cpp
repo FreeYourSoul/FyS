@@ -32,14 +32,15 @@
 namespace fys::ws {
 
 namespace {
-unsigned
+
+[[nodiscard]]unsigned
 getX(double x, unsigned tileSizeX)
 {
 	static const unsigned gTileSizeX = tileSizeX;
 	return static_cast<unsigned>(x) / gTileSizeX;
 }
 
-unsigned
+[[nodiscard]] unsigned
 getY(double y, unsigned tileSizeY)
 {
 	static const unsigned gTileSizeY = tileSizeY;
@@ -76,7 +77,7 @@ CollisionMap::buildMapFromTmx(const std::string& tmxMapPath)
 			const auto& objectLayer = layer->getLayerAs<tmx::ObjectGroup>();
 
 			if (map::algo::isCollisionLayer(objectLayer)) {
-				addCollisionInMap(map.getTileSize(), objectLayer);
+				addCollisionInMap({map.getTileSize().x, map.getTileSize().y}, objectLayer);
 			}
 			else if (map::algo::isTriggerLayer(objectLayer)) {
 				addTriggerInMap(objectLayer);
@@ -86,7 +87,7 @@ CollisionMap::buildMapFromTmx(const std::string& tmxMapPath)
 }
 
 void
-CollisionMap::addCollisionInMap(const tmx::Vector2u& tileMapSize, const tmx::ObjectGroup& collisionLayer)
+CollisionMap::addCollisionInMap(const Vec2u& tileMapSize, const tmx::ObjectGroup& collisionLayer)
 {
 	const auto& objects = collisionLayer.getObjects();
 	for (const auto& object : objects) {
@@ -114,15 +115,15 @@ CollisionMap::executePotentialTrigger(uint indexPlayer, const fys::ws::PlayerInf
 }
 
 bool
-CollisionMap::canMoveTo(double x, double y, std::size_t level) const noexcept
+CollisionMap::canMoveTo(Pos pos, std::size_t level) const noexcept
 {
-	if (x < _boundaryX.first || x > _boundaryX.second || y < _boundaryY.first || y > _boundaryY.second)
+	if (pos.x < _boundaryX.in || pos.x > _boundaryX.out || pos.y < _boundaryY.in || pos.y > _boundaryY.out)
 		return false;
-	return _mapElems[static_cast<unsigned long>(x)][static_cast<unsigned long>(y)].canGoThrough(x, y, level);
+	return _mapElems[static_cast<unsigned long>(pos.x)][static_cast<unsigned long>(pos.y)].canGoThrough(pos, level);
 }
 
 // CollisionMap Element
-constexpr void
+void
 MapElement::executePotentialTrigger(uint indexPlayer) const
 {
 	if (_type == eElementType::TRIGGER) {
@@ -134,13 +135,13 @@ MapElement::executePotentialTrigger(uint indexPlayer) const
 }
 
 bool
-MapElement::canGoThrough(double x, double y, std::size_t level) const noexcept
+MapElement::canGoThrough(Pos position, std::size_t level) const noexcept
 {
 	bool canGoThrough = canGoToLevel(level);
 	if (canGoThrough && _type == eElementType::BLOCK) {
-		return std::none_of(_collisions.begin(), _collisions.end(), [x, y](const auto& aabb) {
-			return (x >= aabb.left && x <= aabb.left + aabb.width &&
-					y >= aabb.top && y <= aabb.top + aabb.height);
+		return std::none_of(_collisions.begin(), _collisions.end(), [&position](const auto& aabb) {
+			return (position.x >= aabb.left && position.x <= aabb.left + aabb.width &&
+					position.y >= aabb.top && position.y <= aabb.top + aabb.height);
 		});
 	}
 	return canGoThrough;

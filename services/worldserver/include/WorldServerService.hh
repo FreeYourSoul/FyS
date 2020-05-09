@@ -36,12 +36,8 @@ public:
 	void runServerLoop() noexcept;
 
 private:
-	inline void processMessage(std::string&& idt, std::string&& token, const zmq::message_t& content,
-			const std::optional<std::string>& internalMagic);
-
-private:
-	fys::ws::WorldServerEngine _worldServer;
-	fys::ws::ConnectionHandler _connectionHandler;
+	WorldServerEngine _worldServer;
+	ws::ConnectionHandler _connectionHandler;
 };
 
 }

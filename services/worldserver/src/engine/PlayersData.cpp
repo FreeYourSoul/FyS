@@ -27,7 +27,7 @@ namespace fys::ws {
 
 PlayersData::PlayersData(uint maxConnection) noexcept
 		:
-		_positions(maxConnection), _status(maxConnection), _identities(maxConnection), _tokenToIndex(maxConnection) { }
+		_positions(maxConnection), _status(maxConnection), _identities(maxConnection){ }
 
 uint
 PlayersData::getIndexAndUpdatePlayerConnection(const std::string& token, std::string idt)
@@ -70,6 +70,12 @@ PlayersData::getPlayerIdtsArroundPos(const fys::ws::PlayerInfo& position,
 		}
 	}
 	return playerIdts;
+}
+
+PlayerInfo&
+PlayersData::accessPlayerInfo(uint indexPlayer)
+{
+	return _positions.front();
 }
 
 }

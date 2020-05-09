@@ -28,8 +28,8 @@ namespace fys::ws {
 ConnectionHandler::ConnectionHandler(int threadNumber) noexcept
 		:
 		_zmqContext(threadNumber),
-		_subSocket(_zmqContext, zmq::socket_type::sub),
-		_dispatcherConnection(_zmqContext, zmq::socket_type::dealer)
+		_subSocketOnDispatcher(_zmqContext, zmq::socket_type::sub),
+		_dealSocketOnDispatcher(_zmqContext, zmq::socket_type::dealer)
 {
 
 }
@@ -37,16 +37,17 @@ ConnectionHandler::ConnectionHandler(int threadNumber) noexcept
 void
 ConnectionHandler::setupConnectionManager(const fys::ws::WorldServerContext& ctx) noexcept
 {
-	_subSocket.set(zmq::sockopt::subscribe, ctx.getServerCode());
-	_subSocket.connect(ctx.getDispatcherSubConnectionString());
-	_dispatcherConnection.connect(ctx.getDispatcherConnectionString());
+	_subSocketOnDispatcher.set(zmq::sockopt::subscribe, ctx.getServerCode());
+	_subSocketOnDispatcher.set(zmq::sockopt::subscribe, SERVER_SUB_CHANNEL_KEY);
+	_subSocketOnDispatcher.connect(ctx.getDispatcherSubConnectionString());
+	_dealSocketOnDispatcher.connect(ctx.getDispatcherConnectionString());
 }
 
 void
 ConnectionHandler::sendMessageToDispatcher(zmq::multipart_t&& msg) noexcept
 {
-	if (_dispatcherConnection.connected())
-		msg.send(_dispatcherConnection);
+	if (_dealSocketOnDispatcher.connected())
+		msg.send(_dealSocketOnDispatcher);
 }
 
 }

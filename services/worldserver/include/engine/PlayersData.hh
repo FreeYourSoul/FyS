@@ -42,13 +42,33 @@ namespace fys::ws {
 constexpr static double DEFAULT_DISTANCE = 30;
 constexpr static unsigned LIMIT_NOTIFICATIONS_MOVE = 50;
 
+template <typename T>
+struct Vector2 {
+	T x = 0;
+	T y = 0;
+};
+
+template <typename T>
+struct Rectangle final
+{
+	Rectangle() : left(0), top(0), width(0), height(0) {}
+	Rectangle(T l, T t, T w, T h) : left(l), top(t), width(w), height(h) {}
+	Rectangle(Vector2<T> position, Vector2<T> size) : left(position.x), top(position.y), width(size.x), height(size.y) {}
+	T left, top, width, height;
+};
+
+using HitBoxd = Rectangle<double>;
+using HitBoxu = Rectangle<uint>;
+using Vec2u = Vector2<uint>;
+using Pos = Vector2<double>;
+
+
 struct PlayerInfo {
-	double x = 0.0;
-	double y = 0.0;
+	Pos pos;
 	double angle = 0.0;
 };
 
-enum class PlayerStatus : uint {
+enum class PlayerStatus {
 	FIGHTING,
 	MOVING,
 	STANDING
@@ -60,7 +80,7 @@ public:
 	explicit PlayersData(uint maxConnection = 1000) noexcept;
 
 	PlayerInfo&
-	accessPlayerPosition(uint indexPlayer);
+	accessPlayerInfo(uint indexPlayer);
 
 	template<typename Action>
 	void
@@ -131,7 +151,6 @@ private:
 	std::vector<PlayerInfo> _positions;
 	std::vector<PlayerStatus> _status;
 	std::vector<std::string> _identities;
-	std::unordered_map<std::string, uint> _tokenToIndex;
 
 };
 

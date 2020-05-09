@@ -33,35 +33,51 @@ namespace fys::ws {
 
 class ConnectionHandler {
 
+	//! Subscriber channel used by server to communicate via the dispatcher
+	inline static const std::string SERVER_SUB_CHANNEL_KEY = "Server_Inter_Com";
+
 public:
 	explicit ConnectionHandler(int threadNumber = 1) noexcept;
 
 	void setupConnectionManager(const fys::ws::WorldServerContext& ctx) noexcept;
 	void sendMessageToDispatcher(zmq::multipart_t&& msg) noexcept;
 
-	template<typename Handler>
-	void pollAndProcessSubMessage(Handler&& handler) noexcept
+	template<typename HandlerInterServer, typename HandlerPlayer>
+	void pollAndProcessSubMessage(HandlerInterServer&& handlerServer, HandlerPlayer&& handlerPlayer) noexcept
 	{
 		//  Initialize poll set
 		zmq::pollitem_t items[] = {
-				{_subSocket, 0, ZMQ_POLLIN, 0}
+				{_subSocketOnDispatcher, 0, ZMQ_POLLIN, 0}
 		};
 		zmq::poll(&items[0], 1, 10);
 		if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
 			zmq::multipart_t msg;
-			if (!msg.recv(_subSocket, ZMQ_NOBLOCK)) {
-				SPDLOG_ERROR("Error while reading on the listener socket");
+			if (!msg.recv(_subSocketOnDispatcher, ZMQ_NOBLOCK) || (msg.size() != 3 && msg.size() != 4)) {
+				SPDLOG_ERROR("Error while reading on the listener socket.");
+				SPDLOG_ERROR("Received message may be ill formatted, contains '{}' part, message is : {}",
+						msg.size(), msg.str());
 			}
 			else {
-				std::forward<Handler>(handler)(std::move(msg));
+				// first  frame is subscription channel
+				const std::string subKey = msg.popstr();
+				// second frame is identity
+				auto identity = msg.pop();
+				if (SERVER_SUB_CHANNEL_KEY == subKey) {
+					// third frame is content for inter server messaging
+					std::forward<HandlerPlayer>(handlerPlayer)(std::move(identity), msg.pop());
+					return;
+				}
+				// third frame is auth frame for incoming player messaging
+				auto authFrame = msg.pop();
+				std::forward<HandlerPlayer>(handlerPlayer)(std::move(identity), std::move(authFrame), msg.pop());
 			}
 		}
 	}
 
 private:
 	zmq::context_t _zmqContext;
-	zmq::socket_t _subSocket; // todo rename _subConnectionOnDispatcher
-	zmq::socket_t _dispatcherConnection; // todo rename _connectionToDispatcher
+	zmq::socket_t _subSocketOnDispatcher;
+	zmq::socket_t _dealSocketOnDispatcher;
 
 };
 

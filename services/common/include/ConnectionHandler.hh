@@ -35,10 +35,13 @@ class ArenaServerContext;
 class ConnectionHandler {
 
 public:
-	explicit ConnectionHandler(int threadNumber = 1) noexcept
+	explicit ConnectionHandler(
+			zmq::socket_type typeSocket = zmq::socket_type::dealer,
+			int threadNumber = 1) noexcept
 			:
+			_numberMessage(typeSocket == zmq::socket_type::dealer ? 2 : 3),
 			_zmqContext(threadNumber),
-			_dealerConnectionToDispatcher(_zmqContext, zmq::socket_type::dealer) { }
+			_dealerConnectionToDispatcher(_zmqContext, typeSocket) { }
 
 	/**
 	 * @brief Connect to dispatcher in order to receive requests
@@ -65,19 +68,20 @@ public:
 		zmq::poll(&items[0], 1, 100);
 		if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
 			zmq::multipart_t msg;
-			if (!msg.recv(_dealerConnectionToDispatcher, ZMQ_NOBLOCK) || msg.size() != 2) {
+			if (!msg.recv(_dealerConnectionToDispatcher, ZMQ_NOBLOCK) || msg.size() != _numberMessage) {
 				SPDLOG_ERROR("Error while reading on the listener socket");
 			}
 			else {
-				// first frame is the identity frame for the router of the dispatcher (connected to WS)
-				auto identity = msg.pop();
-				// second frame is the message content
-				std::forward<Handler>(handler)(std::move(identity), msg.pop());
+				// first frame is idt of the router of the dispatcher
+				auto identityForDispatcher = msg.pop();
+				// second frame is content
+				std::forward<Handler>(handler)(std::move(identityForDispatcher), msg.pop());
 			}
 		}
 	}
 
 private:
+	const uint _numberMessage;
 	zmq::context_t _zmqContext;
 
 	// write to reply (forwarded to the world server)

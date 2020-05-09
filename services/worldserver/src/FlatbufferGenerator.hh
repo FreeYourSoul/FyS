@@ -22,46 +22,22 @@
 // SOFTWARE.
 
 
-#ifndef FYS_ONLINE_INVENTORYSERVERSERVICE_HH
-#define FYS_ONLINE_INVENTORYSERVERSERVICE_HH
+#ifndef FYS_ONLINE_FLATBUFFERGENERATOR_HH
+#define FYS_ONLINE_FLATBUFFERGENERATOR_HH
 
-#include <ConnectionHandler.hh>
-#include "InventoryServerContext.hh"
+#include <flatbuffers/flatbuffers.h>
 
-// forward declarations
-namespace fys::fb {
-struct UpdatePlayerSoulDraughtboard;
-struct RetrievePlayerSoulDraughtboard;
-struct RetrievePlayerInventory;
-}
-// end forward declarations
+namespace fys::ws {
 
-namespace fys::inv {
-
-class InventoryServerService {
+class FlatbufferGenerator {
 
 public:
-	InventoryServerService(const InventoryServerContext& ctx);
-
-	void runServerLoop();
 
 private:
-	[[nodiscard]] zmq::message_t
-	exchangeInventory(const fb::ExchangeInventory* exchangeRq);
-
-	[[nodiscard]] zmq::message_t
-	updatePlayerSoulDraughtboard(const fb::UpdatePlayerSoulDraughtboard* updateRq);
-
-	[[nodiscard]] zmq::message_t
-	retrievePlayerSoulDraughtboard(const fb::UpdatePlayerSoulDraughtboard* updateRq);
-
-	[[nodiscard]] zmq::message_t
-	retrievePlayerInventory(const fb::RetrievePlayerInventory* retrieveRq);
-
-private:
-	common::ConnectionHandler _connectionHandler;
+	flatbuffers::FlatBufferBuilder _fbb;
 
 };
 
 }
-#endif //FYS_ONLINE_INVENTORYSERVERSERVICE_HH
+
+#endif //FYS_ONLINE_FLATBUFFERGENERATOR_HH

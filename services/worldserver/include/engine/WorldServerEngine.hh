@@ -31,37 +31,40 @@
 #include <engine/CollisionMap.hh>
 #include <WSAction_generated.h>
 
+// forward declaration
 namespace fys::fb {
-class WSAction;
+struct WSAction;
 }
+namespace fys::ws {
+class WorldServerContext;
+class CollisionMap;
+}
+// end forward declarations
 
 namespace fys::ws {
 
-// forward declaration
-class WorldServerContext;
-class CollisionMap;
+using PlayerUserToken = std::pair<std::string, std::string>;
 
 class WorldServerEngine {
 
 public:
 	explicit WorldServerEngine(const WorldServerContext& ctx);
 
-	void
-	processPlayerInputMessage(std::string&& idt, std::string&& token,
+	void processPlayerInputMessage(std::string&& idt, std::string&& token,
 			const fys::fb::WSAction* actionMsg, ConnectionHandler& handler);
 
-	void
-	executePendingActions(ws::ConnectionHandler& conn);
+	void executePendingActions(ws::ConnectionHandler& conn);
 
 private:
-	inline void
-	movePlayerAction(const std::string& idt, uint indexPlayer, PlayerInfo& pi, ws::ConnectionHandler& conn);
-	inline void
-	notifyClientsOfMove(const std::vector<std::string_view>& ids, ws::ConnectionHandler& conn) const;
+	inline void notifyClientsOfMove(const std::vector<std::string_view>& ids, ws::ConnectionHandler& conn) const;
+	inline void movePlayerAction(const std::string& idt, uint indexPlayer, PlayerInfo& pi, ws::ConnectionHandler& conn);
 
 private:
 	CollisionMap _map;
 	PlayersData _data;
+
+	// Authenticated user token to index in PlayersData
+	std::map<PlayerUserToken, uint> _tokenToIndex;
 
 };
 

@@ -1,0 +1,8 @@
+namespace fys.fb;
+
+table AuthFrame {
+    userName:string(required);
+    token:string(required);
+}
+
+root_type AuthFrame;

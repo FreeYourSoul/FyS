@@ -25,8 +25,19 @@
 #include <zmq_addon.hpp>
 #include <flatbuffers/flatbuffers.h>
 #include <WSAction_generated.h>
+#include <AuthFrame_generated.h>
 #include <Notifications_generated.h>
 #include "WorldServerService.hh"
+
+namespace {
+template<typename T>
+[[nodiscard]] bool
+verifyBuffer(const void* fbBuffer, uint size)
+{
+	auto v = flatbuffers::Verifier(static_cast<const uint8_t*>(fbBuffer), size);
+	return v.VerifyBuffer<T>();
+}
+}
 
 namespace fys::ws {
 
@@ -44,44 +55,25 @@ WorldServerService::runServerLoop() noexcept
 
 	while (true) {
 		_connectionHandler.pollAndProcessSubMessage(
-				[this](zmq::multipart_t&& msg) {
-					if (msg.size() < 3 || msg.size() > 4) {
-						SPDLOG_ERROR("Received message is ill formatted, should contains 3 to 4 parts but  has {},  "
-									 "message is : {}", msg.size(), msg.str());
+				// Inter-Server communication
+				[this](zmq::message_t&& identity, zmq::message_t&& content) {
+
+				},
+
+				// Auth-Server Incoming player
+				[this](zmq::message_t&& identity, zmq::message_t&& authFrameMsg, zmq::message_t&& content) {
+
+					if (!verifyBuffer<fb::AuthFrame>(authFrameMsg.data(), authFrameMsg.size())) {
+						SPDLOG_ERROR("Ill formatted Authentication frame");
 						return;
 					}
-					// part0 = idt
-					// part1 = token
-					// part2 = content
-					// part3 = magic internal server
-					std::string idt = std::string(static_cast<char*>  (msg.at(0).data()), msg.at(0).size());
-					std::string token = std::string(static_cast<char*>(msg.at(1).data()), msg.at(1).size());
-					std::optional<std::string> internalMagic;
-					if (msg.size() == 4)
-						internalMagic = std::string(static_cast<char*>(msg.at(3).data()), msg.at(3).size());
+					auto* authFrame = fb::GetAuthFrame(authFrameMsg.data());
 
-					if (internalMagic && "testing player" == *internalMagic) {
-						SPDLOG_DEBUG("<><><<><><><><><><><>We went inside the testing<><><<><><><><><><><>");
-					}
-
-					SPDLOG_DEBUG("message received with idt={}, token={},\nmsg={}", idt, token, msg.str());
-					processMessage(std::move(idt), std::move(token), msg.at(2), internalMagic);
-				});
+					SPDLOG_DEBUG("message received with idt='{}', token='{}'", idt, token);
+				}
+		);
 
 		_worldServer.executePendingActions(_connectionHandler);
-	}
-}
-
-void
-WorldServerService::processMessage(std::string&& idt,
-		std::string&& token, const zmq::message_t& content, const std::optional<std::string>& internalMagic)
-{
-	if (internalMagic) {
-		// check internal magic to validate that the message is coming from internal server
-	}
-	else {
-		_worldServer.processPlayerInputMessage(std::move(idt), std::move(token),
-				fb::GetWSAction(content.data()), _connectionHandler);
 	}
 }
 

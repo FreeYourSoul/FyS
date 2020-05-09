@@ -50,7 +50,8 @@ void
 WorldServerEngine::processPlayerInputMessage(std::string&& idt, std::string&& token,
 		const fb::WSAction* actionMsg, ConnectionHandler& handler)
 {
-	if (const uint index = _data.getIndexAndUpdatePlayerConnection(token, std::move(idt)); index < std::numeric_limits<uint>::max()) {
+	if (const uint index = _data.getIndexAndUpdatePlayerConnection(token, std::move(idt));
+			index < std::numeric_limits<uint>::max()) {
 		if (actionMsg->action_type() == fb::Action::Action_Move) {
 			_data.setPlayerMoveAction(index, actionMsg->action_as_Move()->direction());
 		}
@@ -70,17 +71,17 @@ void
 WorldServerEngine::movePlayerAction(const std::string& idt, uint indexPlayer, PlayerInfo& pi, ws::ConnectionHandler& conn)
 {
 	double velocity = 1;
-	PlayerInfo futurePos = {
-			pi.x * (velocity * std::cos(pi.angle)),
-			pi.y * (velocity * std::sin(pi.angle))
+	Pos futurePos = Pos{
+			pi.pos.x * (velocity * std::cos(pi.angle)),
+			pi.pos.y * (velocity * std::sin(pi.angle))
 	};
 
-	if (_map.canMoveTo(futurePos.x, futurePos.y, 0)) {
-		pi.x = futurePos.x;
-		pi.y = futurePos.y;
+	if (_map.canMoveTo(futurePos, 0)) {
+		pi.pos = futurePos;
 		_map.executePotentialTrigger(indexPlayer, pi, conn);
-		if (auto clientsToNotify = _data.getPlayerIdtsArroundPos(pi); !clientsToNotify.empty())
+		if (const auto clientsToNotify = _data.getPlayerIdtsArroundPos(pi); !clientsToNotify.empty()) {
 			notifyClientsOfMove(clientsToNotify, conn);
+		}
 	}
 }
 

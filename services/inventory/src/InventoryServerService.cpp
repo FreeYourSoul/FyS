@@ -60,48 +60,52 @@ InventoryServerService::runServerLoop()
 						return;
 					}
 					const auto* binary = fys::fb::GetInventoryRequest(worldServerMessage.data());
+					zmq::multipart_t response;
 					switch (binary->content_type()) {
 						case fb::InventoryRequestContent_RetrievePlayerInventory:
-							retrievePlayerInventory(binary->content_as_RetrievePlayerInventory());
+							response.add(retrievePlayerInventory(binary->content_as_RetrievePlayerInventory()));
 							break;
 						case fb::InventoryRequestContent_UpdatePlayerSoulDraughtboard:
-							updatePlayerSoulDraughtboard(binary->content_as_UpdatePlayerSoulDraughtboard());
+							response.add(updatePlayerSoulDraughtboard(binary->content_as_UpdatePlayerSoulDraughtboard()));
 							break;
 						case fb::InventoryRequestContent_RetrievePlayerSoulDraughtboard:
-							retrievePlayerSoulDraughtboard(binary->content_as_RetrievePlayerSoulDraughtboard());
+							response.add(retrievePlayerSoulDraughtboard(binary->content_as_RetrievePlayerSoulDraughtboard()));
 							break;
 						case fb::InventoryRequestContent_ExchangeInventory:
-							exchangeInventory(binary->content_as_ExchangeInventory());
+							response.add(exchangeInventory(binary->content_as_ExchangeInventory()));
 							break;
 						default:
 							SPDLOG_ERROR("Request type '{}' not handled by Inventory Server Service", binary->content_type());
 							break;
 					}
+					response.add(std::move(identity));
+					_connectionHandler.sendMessageToDispatcher(std::move(response));
 				});
 	}
 }
 
-void
-InventoryServerService::exchangeInventory(const fb::ExchangeInventory* exchangeRq) {
-
+zmq::message_t
+InventoryServerService::exchangeInventory(const fb::ExchangeInventory* exchangeRq)
+{
+	return {};
 }
 
-void
+zmq::message_t
 InventoryServerService::retrievePlayerInventory(const fb::RetrievePlayerInventory* retrieveRq)
 {
-
+	return {};
 }
 
-void
+zmq::message_t
 InventoryServerService::updatePlayerSoulDraughtboard(const fb::UpdatePlayerSoulDraughtboard* updateRq)
 {
-
+	return {};
 }
 
-void
+zmq::message_t
 InventoryServerService::retrievePlayerSoulDraughtboard(const fb::UpdatePlayerSoulDraughtboard* updateRq)
 {
-
+	return {};
 }
 
 }

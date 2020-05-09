@@ -21,47 +21,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include "FlatbufferGenerator.hh"
 
-#ifndef FYS_ONLINE_INVENTORYSERVERSERVICE_HH
-#define FYS_ONLINE_INVENTORYSERVERSERVICE_HH
-
-#include <ConnectionHandler.hh>
-#include "InventoryServerContext.hh"
-
-// forward declarations
-namespace fys::fb {
-struct UpdatePlayerSoulDraughtboard;
-struct RetrievePlayerSoulDraughtboard;
-struct RetrievePlayerInventory;
-}
-// end forward declarations
-
-namespace fys::inv {
-
-class InventoryServerService {
-
-public:
-	InventoryServerService(const InventoryServerContext& ctx);
-
-	void runServerLoop();
-
-private:
-	[[nodiscard]] zmq::message_t
-	exchangeInventory(const fb::ExchangeInventory* exchangeRq);
-
-	[[nodiscard]] zmq::message_t
-	updatePlayerSoulDraughtboard(const fb::UpdatePlayerSoulDraughtboard* updateRq);
-
-	[[nodiscard]] zmq::message_t
-	retrievePlayerSoulDraughtboard(const fb::UpdatePlayerSoulDraughtboard* updateRq);
-
-	[[nodiscard]] zmq::message_t
-	retrievePlayerInventory(const fb::RetrievePlayerInventory* retrieveRq);
-
-private:
-	common::ConnectionHandler _connectionHandler;
-
-};
+namespace fys::ws {
 
 }
-#endif //FYS_ONLINE_INVENTORYSERVERSERVICE_HH

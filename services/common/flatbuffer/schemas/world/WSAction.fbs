@@ -1,0 +1,24 @@
+include "AuthFrame.fbs";
+
+namespace fys.fb;
+
+table JoinArena {
+    enterArena:bool;
+    arenaId:string;
+}
+
+table Move {
+    direction:double;
+}
+
+table PnjInteract {
+    idPnj:string;
+}
+
+union Action { Move, JoinArena, PnjInteract }
+
+table WSAction {
+    action:Action(required);
+}
+
+root_type WSAction;

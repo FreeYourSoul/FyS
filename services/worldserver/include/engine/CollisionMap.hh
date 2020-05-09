@@ -35,6 +35,14 @@
 #include <tmxlite/Types.hpp>
 #include "PlayersData.hh"
 
+
+// forward declaration
+namespace fys::ws {
+class WorldServerContext;
+class ConnectionHandler;
+}
+// end forward declaration
+
 namespace fys::map::algo {
 
 /**
@@ -71,9 +79,10 @@ isTriggerLayer(TmxLayer&& layer)
 
 namespace fys::ws {
 
-// forward declaration
-class WorldServerContext;
-class ConnectionHandler;
+struct Boundary {
+	double in = 0.0;
+	double out = 0.0;
+};
 
 class ProximityServer {
 	struct ProximityServerAxis {
@@ -109,31 +118,27 @@ enum class eElementType {
 class MapElement {
 
 public:
-	constexpr void
-	executePotentialTrigger(uint indexPlayer) const;
+	void executePotentialTrigger(uint indexPlayer) const;
+
+	void setLevel(std::size_t level) { _level.set(level); }
+	void setChangeLevel(std::size_t level) { _changeLevel.set(level); }
+
+	void setType(eElementType type) { _type = type; }
 
 	/**
 	 * check if the element is of type BLOCK, if it is, check every collision blockers on the mapElement
 	 * to verify if the PlayerInfo collide with them.
 	 */
-	inline bool
-	canGoThrough(double x, double y, std::size_t level) const noexcept;
+	[[nodiscard]] inline bool
+	canGoThrough(Pos position, std::size_t level) const noexcept;
 
-	void
-	setLevel(std::size_t level) { _level.set(level); }
-	void
-	setChangeLevel(std::size_t level) { _changeLevel.set(level); }
-	constexpr void
-	setType(eElementType type) { _type = type; }
-	void
-	addCollision(const tmx::FloatRect& object)
+	void addCollision(const tmx::FloatRect& object)
 	{
 		_collisions.emplace_back(object);
 	}
 
 	template<typename T>
-	constexpr void
-	setTrigger(T&& trigger)
+	void setTrigger(T&& trigger)
 	{
 		_trigger = std::forward(trigger);
 	}
@@ -146,7 +151,7 @@ private:
 	std::bitset<4> _level;
 	std::bitset<4> _changeLevel; // set on stairs to pass from a level to another
 	eElementType _type = eElementType::NONE;
-	std::variant<ConnectionHandler*, void*> _trigger; // TODO: replace it with LUA script reference
+	std::variant<ConnectionHandler*, void*> _trigger; // TODO: change with std::function<void(LUA::Reference&)>
 	std::vector<tmx::FloatRect> _collisions;
 
 };
@@ -158,19 +163,17 @@ public:
 
 	CollisionMap(CollisionMap&&) noexcept = default;
 	CollisionMap(const CollisionMap&) = delete;
-	CollisionMap&
-	operator=(const CollisionMap&) = delete;
+	CollisionMap& operator=(const CollisionMap&) = delete;
 
-	void
-	buildMapFromTmx(const std::string& tmxMapPath);
+	void buildMapFromTmx(const std::string& tmxMapPath);
+	void executePotentialTrigger(uint index, const PlayerInfo& positionOnMap, ws::ConnectionHandler& conn);
+
 	/**
 	 * Check if the position is in the boundary of the map before checking on the map
 	 * @return true if it is possible to move on the given position, false otherwise
 	 */
-	bool
-	canMoveTo(double x, double y, std::size_t level) const noexcept;
-	void
-	executePotentialTrigger(uint index, const PlayerInfo& positionOnMap, ws::ConnectionHandler& conn);
+	[[nodiscard]] bool
+	canMoveTo(Pos pos, std::size_t level) const noexcept;
 
 private:
 	/**
@@ -178,8 +181,8 @@ private:
 	 *
 	 * AABB Objects stands for Axis-Aligned Bounding Box. Basically coordinates to use as hit box for the tiles.
 	 */
-	void
-	addCollisionInMap(const tmx::Vector2u& tileMapSize, const tmx::ObjectGroup& collisionLayer);
+	void addCollisionInMap(const Vec2u& tileMapSize, const tmx::ObjectGroup& collisionLayer);
+
 	/**
 	 * @brief Add the trigger elements into the map, and link the function associated to this trigger
 	 *
@@ -188,12 +191,11 @@ private:
 	 *     teleport the player into another location
 	 *   - The classical one is going to trigger a script retrieved from the DB thanks to the id defining the trigger
 	 */
-	void
-	addTriggerInMap(const tmx::ObjectGroup& triggerLayer);
+	void addTriggerInMap(const tmx::ObjectGroup& triggerLayer);
 
 private:
-	std::pair<double, double> _boundaryX;
-	std::pair<double, double> _boundaryY;
+	Boundary _boundaryX;
+	Boundary _boundaryY;
 	std::vector<ProximityServer> _serverProximity;
 	std::vector<std::vector<MapElement>> _mapElems;
 
