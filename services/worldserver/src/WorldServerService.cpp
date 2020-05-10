@@ -104,44 +104,52 @@ WorldServerService::runServerLoop() noexcept
 
 					if (frame->action_type() == fb::world::Action_ValidateAuth) {
 						registerAwaitedPlayer(authFrame->userName()->str(), authFrame->token()->str(), std::string());
-						return;
 					}
-
-					uint index = _worldServer.retrieveDataIndex({authFrame->userName()->str(), authFrame->token()->str()});
-
-					if (index == NOT_AUTHENTICATED) {
-						SPDLOG_ERROR("Player '{}' isn't authenticated", authFrame->userName()->str());
-						return;
+					else {
+						processPlayerMessage(authFrame->userName()->str(), authFrame->token()->str(), frame);
 					}
-
-					switch (frame->action_type()) {
-						case fb::world::Action_StopMove:
-							_worldServer.stopPlayerMove(index);
-							break;
-						case fb::world::Action_Move:
-							_worldServer.setPlayerMoveDirection(index, frame->action_as_Move()->direction());
-							break;
-						case fb::world::Action_PnjInteract:
-						case fb::world::Action_JoinArena:
-							SPDLOG_INFO("NOT_IMPLEMENTED YET");
-							break;
-						default:
-							SPDLOG_ERROR("This action isn't handled by WorldServer Service '{}'", frame->action_type());
-					}
-
-					SPDLOG_DEBUG("message received with idt='{}', token='{}'", idt, token);
 				}
 		);
 
-		_worldServer.executePendingMoves(_connectionHandler);
+		_worldServer.executePendingMoves();
 	}
+}
+
+void
+WorldServerService::processPlayerMessage(const std::string& userName, const std::string& token, const fb::world::WSAction* action)
+{
+	uint index = _worldServer.retrieveDataIndex({userName, token});
+	if (index == NOT_AUTHENTICATED) {
+		SPDLOG_ERROR("Player '{}' isn't authenticated", userName);
+		return;
+	}
+
+	switch (action->action_type()) {
+		case fb::world::Action_StopMove:
+			_worldServer.stopPlayerMove(index);
+			break;
+		case fb::world::Action_Move:
+			_worldServer.setPlayerMoveDirection(index, action->action_as_Move()->direction());
+			break;
+		case fb::world::Action_PnjInteract:
+		case fb::world::Action_JoinArena:
+			SPDLOG_INFO("NOT_IMPLEMENTED YET");
+			break;
+		default:
+			SPDLOG_ERROR("This action isn't handled by WorldServer Service '{}'", action->action_type());
+	}
+
+	SPDLOG_DEBUG("message received with idt='{}', token='{}'", idt, token);
 }
 
 void
 WorldServerService::registerAwaitedPlayer(const std::string& user, const std::string& token, std::string identity)
 {
-	auto[isAwaited, awaitedIt] = isPlayerAwaited(user, token);
-	if (!isAwaited) {
+	auto awaitedIt = std::find_if(_awaitedIncomingPlayer.begin(), _awaitedIncomingPlayer.end(),
+			[toCheck = AuthPlayer{user, token}](const auto& awaited) {
+				return awaited.auth == toCheck;
+			});
+	if (awaitedIt == _awaitedIncomingPlayer.end()) {
 		SPDLOG_ERROR("Player '{}' isn't awaited with the given token", user, token);
 		return;
 	}
@@ -151,19 +159,7 @@ WorldServerService::registerAwaitedPlayer(const std::string& user, const std::st
 			PlayerInfo{awaitedIt->initialPosition, awaitedIt->initialVelocity, awaitedIt->initialAngle},
 			std::move(identity)
 	);
-}
-
-std::pair<bool, WorldServerService::AwaitingPlayerWorldServerIt>
-WorldServerService::isPlayerAwaited(const std::string& userName, const std::string& token) const
-{
-	auto it = std::find_if(_awaitedIncomingPlayer.begin(), _awaitedIncomingPlayer.end(),
-			[toCheck = AuthPlayer{userName, token}](const auto& awaited) {
-				return awaited.info == toCheck;
-			});
-	if (it == _awaitedIncomingPlayer.end()) {
-		return std::pair(false, _awaitedIncomingPlayer.begin());
-	}
-	return std::pair(true, it);
+	_awaitedIncomingPlayer.erase(awaitedIt);
 }
 
 }

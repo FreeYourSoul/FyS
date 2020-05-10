@@ -40,8 +40,8 @@ namespace fys::cache {
 			}
         }
 
-    protected:
-        void createFileInLocalStorage(const CmlKey &cmlKey) override;
+	private:
+        void createUpToDateFileInLocalStorage(const CmlKey& cmlKey, std::filesystem::file_time_type cacheTime) override;
 
     protected:
         std::filesystem::path _copyPathStorage;

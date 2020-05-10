@@ -31,35 +31,38 @@
 
 namespace fys::cache {
 
-    class CmlKey;
+class CmlKey;
 
-    struct InMemoryCached {
-		std::filesystem::file_time_type lastWriteTime;
-        std::string content;
-    };
+struct InMemoryCached {
+	std::filesystem::file_time_type lastWriteTime;
+	std::string content;
+};
 
-    class Cml {
+class Cml {
 
-    public:
-        virtual ~Cml() = default;
-        explicit Cml(std::filesystem::path pathLocalStorage);
+public:
+	virtual ~Cml() = default;
+	explicit Cml(std::filesystem::path pathLocalStorage);
 
-        const std::string &findInCache(const std::string &key, bool first = true);
+	const std::string& findInCache(const std::string& key, bool first = true);
 
-        virtual void createFileInLocalStorage(const CmlKey &cmlKey) = 0;
-        void createFile(const std::filesystem::path &pathToFile, const std::string &content) const;
+	virtual void createUpToDateFileInLocalStorage(const CmlKey& cmlKey, std::filesystem::file_time_type cacheTime) = 0;
 
-    private:
-        inline std::pair<bool, std::filesystem::file_time_type> localStorageInfo(const CmlKey &cmlKey) const;
-        inline bool isInLocalStorageAndUpToDate(const CmlKey &cmlKey, std::filesystem::file_time_type cacheLastUpdate) const;
+	void createFile(const std::filesystem::path& pathToFile, const std::string& content) const;
 
-    private:
-        std::filesystem::path _localPathStorage;
-        std::unordered_map<std::string, InMemoryCached> _inMemCache;
+private:
+	[[nodiscard]] inline std::pair<bool, std::filesystem::file_time_type>
+	localStorageInfo(const CmlKey& k) const;
 
-    };
+	[[nodiscard]] inline bool
+	isInLocalStorageAndUpToDate(const CmlKey& cmlKey, std::filesystem::file_time_type cacheLastUpdate) const;
+
+private:
+	std::filesystem::path _localPathStorage;
+	std::unordered_map<std::string, InMemoryCached> _inMemCache;
+
+};
 
 }
-
 
 #endif //FYS_SERVICE_CML_HH

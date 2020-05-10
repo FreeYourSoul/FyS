@@ -22,11 +22,8 @@
 // SOFTWARE.
 
 
-#include "CmlSqlite.hh"
+#include <engine/WorldPopulator.hh>
 
-namespace fys::cache {
+namespace fys::ws {
 
-    void CmlSqlite::createFileInLocalStorage(const fys::cache::CmlKey &) {
-
-    }
 }

@@ -25,11 +25,17 @@
 #ifndef FYS_WORLDSERVERENGINE_HH
 #define FYS_WORLDSERVERENGINE_HH
 
-#include <memory>
 #include <utility>
+#include <map>
+
+#include <zmq_addon.hpp>
+
+#include <WSAction_generated.h>
+
 #include <engine/PlayersData.hh>
 #include <engine/CollisionMap.hh>
-#include <WSAction_generated.h>
+#include <engine/ScriptEngine.hh>
+
 
 // forward declaration
 namespace fys::fb {
@@ -38,6 +44,7 @@ struct WSAction;
 namespace fys::ws {
 class WorldServerContext;
 class CollisionMap;
+class WorldPopulator;
 }
 // end forward declarations
 
@@ -49,10 +56,17 @@ struct AuthPlayer {
 	std::string userName;
 	std::string token;
 
-	bool operator==(const AuthPlayer&) const = default;
+	bool operator==(const AuthPlayer& other) const {
+		return userName == other.userName && token == other.token;
+	}
+	bool operator<(const AuthPlayer& other) const {
+		return userName < other.userName && token < other.token;
+	}
 };
 
 class WorldServerEngine {
+
+	friend class WorldPopulator;
 
 public:
 	explicit WorldServerEngine(const WorldServerContext& ctx);
@@ -60,12 +74,10 @@ public:
 	void executePendingMoves();
 	void setPlayerMoveDirection(uint index, double direction);
 	void stopPlayerMove(uint index);
+	void authenticatePlayer(AuthPlayer auth, PlayerInfo info, std::string identifier);
 
 	[[nodiscard]] uint
 	retrieveDataIndex(const AuthPlayer& player);
-
-	[[nodiscard]] uint
-	authenticatePlayer(AuthPlayer auth, PlayerInfo info, std::string identifier);
 
 	template<typename HandlerPlayer>
 	void pollAndProcessPlayerMessage(HandlerPlayer&& handlerPlayer)
@@ -87,7 +99,7 @@ public:
 				auto identity = msg.pop();
 				// second frame is auth frame of the player
 				auto authFrame = msg.pop();
-				std::forward<handlerPlayer>(handlerPlayer)(std::move(identity), std::move(authFrame), msg.pop());
+				std::forward<HandlerPlayer>(handlerPlayer)(std::move(identity), std::move(authFrame), msg.pop());
 			}
 		}
 	}
@@ -103,7 +115,10 @@ private:
 	zmq::context_t _zmqCtx;
 	zmq::socket_t _routerPlayerConnection;
 
-	// Authenticated user token to index in PlayersData
+	//! Engine managing scripts of NPC and map triggers
+	ScriptEngine _scriptEngine;
+
+	//! Authenticated user token to index in PlayersData
 	std::map<AuthPlayer, uint> _authPlayerOnDataIndex;
 
 };

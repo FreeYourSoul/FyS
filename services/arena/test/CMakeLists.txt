@@ -46,6 +46,8 @@ addFSeamTests(
         ${CMAKE_CURRENT_LIST_DIR}/../src/ArenaServerContext.cpp
         ${CMAKE_CURRENT_LIST_DIR}/../src/ChaiRegister.cpp
         ${CMAKE_CURRENT_LIST_DIR}/../src/FlatbufferGenerator.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/HistoryManager.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../include/HistoryManager.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/FlatbufferGenerator.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/util/FbUtility.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/ChaiRegister.hh
@@ -80,7 +82,7 @@ addFSeamTests(
         ${CMAKE_CURRENT_LIST_DIR}/fightingPit/FightingPitTestCase.cpp
 
         TO_MOCK
-        ${CMAKE_CURRENT_SOURCE_DIR}/../include/ConnectionHandler.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../../common/include/ConnectionHandler.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/../../common/include/RandomGenerator.hh
 )
 
@@ -102,6 +104,8 @@ addFSeamTests(
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/PriorityOrderList.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/ChaiRegister.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/FlatbufferGenerator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/HistoryManager.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/HistoryManager.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/FlatbufferGenerator.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/util/FbUtility.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/ChaiRegister.hh
@@ -128,7 +132,7 @@ addFSeamTests(
         ${CMAKE_CURRENT_SOURCE_DIR}/scriptTests/Action_HealTestCase.cpp
 
         TO_MOCK
-        ${CMAKE_CURRENT_SOURCE_DIR}/../include/ConnectionHandler.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../../common/include/ConnectionHandler.hh
 )
 target_compile_definitions(sampy_test PUBLIC CHAISCRIPT_NO_THREADS -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)
 target_link_libraries(sampy_test cppzmq fmt::fmt dl cml)

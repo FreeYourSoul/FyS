@@ -15,6 +15,8 @@ include(${CMAKE_CURRENT_LIST_DIR}/../common/CMakeLists.txt)
 find_package(TMXLITE REQUIRED)
 find_package(nlohmann_json REQUIRED)
 find_package(cppzmq REQUIRED)
+find_package(fmt REQUIRED)
+find_package(Lua REQUIRED)
 
 find_program(CCACHE_FOUND ccache)
 if (CCACHE_FOUND)
@@ -29,6 +31,10 @@ add_executable(worldserver_service
         ${CMAKE_CURRENT_LIST_DIR}/src/engine/WorldServerEngine.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/engine/WorldServerEngine.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/engine/CollisionMap.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/src/engine/WorldPopulator.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/engine/WorldPopulator.hh
+        ${CMAKE_CURRENT_LIST_DIR}/src/engine/ScriptEngine.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/engine/ScriptEngine.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/engine/CollisionMap.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/ConnectionHandler.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/ConnectionHandler.hh
@@ -40,8 +46,10 @@ add_executable(worldserver_service
 target_link_libraries(worldserver_service
         nlohmann_json::nlohmann_json
         cppzmq
+        lua
         common_service
-        ${TMXLITE_LIBRARIES}
+        fmt::fmt dl cml
+        ${TMXLITE_LIBRARIES} # to remove
         ${Flatbuffers_LIBRARIES})
 
 set_target_properties(worldserver_service PROPERTIES
@@ -50,6 +58,7 @@ set_target_properties(worldserver_service PROPERTIES
 
 set_property(TARGET worldserver_service PROPERTY INCLUDE_DIRECTORIES
         ${CMAKE_CURRENT_LIST_DIR}/include
+        ${CMAKE_CURRENT_LIST_DIR}/../../scripting_cache/cml/include
         ${FLATBUFFER_INCLUDE_DIR}
         ${TMXLITE_HEADERS})
 

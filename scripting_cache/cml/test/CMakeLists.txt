@@ -24,8 +24,6 @@ add_executable(cml_test
         ${CMAKE_CURRENT_LIST_DIR}/../include/CmlKey.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/CmlCopy.hh
         ${CMAKE_CURRENT_LIST_DIR}/../src/CmlCopy.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/CmlSqlite.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../include/CmlSqlite.hh
 
         #test files
         ${CMAKE_CURRENT_LIST_DIR}/catchMain.cpp

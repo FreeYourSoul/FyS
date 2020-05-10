@@ -30,7 +30,7 @@
 namespace fys::util {
 
 using namespace fys::arena;
-using namespace fys::fb;
+using namespace fys::fb::arn;
 
 [[nodiscard]] static SideOrient
 convertArenaOrientToFb(HexagonSide::Orientation orient)

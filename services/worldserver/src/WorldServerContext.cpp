@@ -50,8 +50,8 @@ WorldServerContext::initWsContextWithJson(json& json)
 
 	wsJson["code"].get_to(_serverCode);
 	wsJson["TMX_Map"].get_to(_tmxMapPath);
-	_serverXBoundaries = std::pair(confJson["begin_x"].get<double>(), confJson["end_x"].get<double>());
-	_serverYBoundaries = std::pair(confJson["begin_y"].get<double>(), confJson["end_y"].get<double>());
+	_serverXBoundaries = {confJson["begin_x"].get<double>(), confJson["end_x"].get<double>()};
+	_serverYBoundaries = {confJson["begin_y"].get<double>(), confJson["end_y"].get<double>()};
 	for (auto &[key, value] : overlapsJson.items()) {
 		ProximityServer proximityServer;
 		proximityServer.code = value["code"].get<std::string>();
@@ -122,13 +122,13 @@ WorldServerContext::getServerProximity() const noexcept
 	return _serverProximity;
 }
 
-const std::pair<double, double>&
+const Boundary&
 WorldServerContext::getServerXBoundaries() const noexcept
 {
 	return _serverXBoundaries;
 }
 
-const std::pair<double, double>&
+const Boundary&
 WorldServerContext::getServerYBoundaries() const noexcept
 {
 	return _serverYBoundaries;
@@ -150,6 +150,12 @@ std::string
 WorldServerContext::getPlayerConnectionString() const noexcept
 {
 	return std::string("tcp://*:").append(std::to_string(_portPlayerConnection));
+}
+
+const std::string&
+WorldServerContext::getPathToLocalStorage() const noexcept
+{
+	return _pathToLocalStorage;
 }
 
 }

@@ -22,20 +22,31 @@
 // SOFTWARE.
 
 
-#ifndef FYS_SERVICE_DATABASEPOLICY_HH
-#define FYS_SERVICE_DATABASEPOLICY_HH
+#ifndef FYS_ONLINE_CMLSCRIPTDOWNLOADER_HH
+#define FYS_ONLINE_CMLSCRIPTDOWNLOADER_HH
 
+#include <functional>
 #include <Cml.hh>
 
 namespace fys::cache {
 
-    class CmlSqlite final : public Cml {
-    protected:
-        void createFileInLocalStorage(const CmlKey &cmlKey) override;
+class CmlScriptDownloader final : cache::Cml {
 
-    };
+public:
+	virtual ~CmlScriptDownloader() = default;
+
+	template<typename DownloaderFunc>
+	CmlScriptDownloader(std::filesystem::path pathLocalStorage, DownloaderFunc&& downloader)
+			: cache::Cml(std::move(pathLocalStorage)), _downloader(std::forward<DownloaderFunc>(downloader)) { }
+
+private:
+	void createUpToDateFileInLocalStorage(const CmlKey& cmlKey, std::filesystem::file_time_type cacheTime) override;
+
+private:
+	std::function<void(const std::string&, const std::string&)> _downloader;
+
+};
 
 }
 
-
-#endif //FYS_SERVICE_DATABASEPOLICY_HH
+#endif //FYS_ONLINE_CMLSCRIPTDOWNLOADER_HH

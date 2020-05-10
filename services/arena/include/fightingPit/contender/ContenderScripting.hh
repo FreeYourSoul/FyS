@@ -37,7 +37,6 @@ namespace fys::cache {
 class Cml;
 }
 namespace fys::arena {
-class ConnectionHandler;
 class PitContenders;
 class AllyPartyTeams;
 }

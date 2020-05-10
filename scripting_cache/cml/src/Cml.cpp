@@ -29,81 +29,100 @@
 
 namespace fys::cache {
 
-    namespace {
-        std::string readFile(const std::filesystem::path& path) {
-            // Open the stream to 'lock' the file.
-            std::ifstream f{ path };
+namespace {
+[[nodiscard]] std::string
+readFile(const std::filesystem::path& path)
+{
+	// Open the stream to 'lock' the file.
+	std::ifstream f{path};
 
-            // Obtain the size of the file.
-            const auto sz = std::filesystem::file_size(path);
+	// Obtain the size of the file.
+	const auto sz = std::filesystem::file_size(path);
 
-            // Create a buffer.
-            std::string result(sz, ' ');
+	// Create a buffer.
+	std::string result(sz, ' ');
 
-            // Read the whole file into the buffer.
-            f.read(result.data(), sz);
+	// Read the whole file into the buffer.
+	f.read(result.data(), sz);
 
-            return result;
-        }
+	return result;
+}
 
-        void writeFile(const std::filesystem::path& file, const std::string &content) {
-            std::ofstream out(file.string());
-            out << content << std::endl;
-            out.close();
-        }
+void
+writeFile(const std::filesystem::path& file, const std::string& content)
+{
+	std::ofstream out(file.string());
+	out << content << std::endl;
+	out.close();
+}
 
-    }
+}
 
-    Cml::Cml(std::filesystem::path pathLocalStorage) : _localPathStorage(std::move(pathLocalStorage)) {
-        try {
-            std::filesystem::create_directories(_localPathStorage);
-        } catch (...) { }
-    }
+Cml::Cml(std::filesystem::path pathLocalStorage)
+		:_localPathStorage(std::move(pathLocalStorage))
+{
+	try {
+		std::filesystem::create_directories(_localPathStorage);
+	}
+	catch (...) { }
+}
 
-    /**
-     * @return true if the key represent a cached data in the local storage (filesystem)
-     */
-	std::pair<bool, std::filesystem::file_time_type>
-	Cml::localStorageInfo(const CmlKey &cmlKey) const {
-		std::error_code ec;
-        return std::pair(std::filesystem::is_regular_file(cmlKey.getPath()), std::filesystem::last_write_time(cmlKey.getPath(), ec));
-    }
+/**
+ * @return true if the key represent a cached data in the local storage (filesystem)
+ */
+std::pair<bool, std::filesystem::file_time_type>
+Cml::localStorageInfo(const CmlKey& k) const
+{
+	std::error_code ec;
+	return std::pair(std::filesystem::is_regular_file(k.getPath()), std::filesystem::last_write_time(k.getPath(), ec));
+}
 
-    bool Cml::isInLocalStorageAndUpToDate(const CmlKey &cmlKey, std::filesystem::file_time_type cacheLastUpdate) const {
-		auto [exist, lastWriteTime] = localStorageInfo(cmlKey);
-        if (exist) {
-            return lastWriteTime <= cacheLastUpdate;
-        }
-        return false;
-    }
+bool
+Cml::isInLocalStorageAndUpToDate(const CmlKey& cmlKey, std::filesystem::file_time_type cacheLastUpdate) const
+{
+	auto[exist, lastWriteTime] = localStorageInfo(cmlKey);
+	if (exist) {
+		return lastWriteTime <= cacheLastUpdate;
+	}
+	return false;
+}
 
-    const std::string &Cml::findInCache(const std::string &key, bool first)  {
-        static const std::string empty {};
-        CmlKey cmlKey(_localPathStorage, key);
+const std::string&
+Cml::findInCache(const std::string& key, bool first)
+{
+	static const std::string empty{};
+	CmlKey cmlKey(_localPathStorage, key);
 
-        // Check in-memory (and check if file has been updated)
-        if (auto it = _inMemCache.find(key); it != _inMemCache.end()) {
-            if (isInLocalStorageAndUpToDate(cmlKey, it->second.lastWriteTime)) {
-                return it->second.content;
-            }
-        }
-        // Check in filesystem cache
-		auto [exist, lastWriteTime] = localStorageInfo(cmlKey);
-		if (exist) {
-            _inMemCache[key] = InMemoryCached{ lastWriteTime, readFile(cmlKey.getPath()) };
-            return _inMemCache[key].content;
-        }
-        if (!first) return empty;
-        createFileInLocalStorage(cmlKey);
-        return findInCache(key, false);
-    }
+	// Check in-memory (and check if file has been updated)
+	if (auto it = _inMemCache.find(key); it != _inMemCache.end()) {
+		if (isInLocalStorageAndUpToDate(cmlKey, it->second.lastWriteTime)) {
+			return it->second.content;
+		}
+	}
 
-    void Cml::createFile(const std::filesystem::path &pathToFile, const std::string &content) const {
-        if (!std::filesystem::create_directories(pathToFile.parent_path())) {
-            SPDLOG_ERROR("Couldn't create directories for path : {}", _localPathStorage.string());
-            return;
-        }
-        writeFile(pathToFile, content);
-    }
+	// If nothing found in the cache, create a up to date cache file
+	createUpToDateFileInLocalStorage(cmlKey, localStorageInfo(cmlKey).second);
+
+	// Check in filesystem cache
+	auto[exist, lastWriteTime] = localStorageInfo(cmlKey);
+
+	// Read the file and store it in the cache
+	if (exist) {
+		_inMemCache[key] = InMemoryCached{lastWriteTime, readFile(cmlKey.getPath())};
+		return _inMemCache[key].content;
+	}
+	SPDLOG_ERROR("Something wrong occurred in the cache update, no file returned");
+	return empty;
+}
+
+void
+Cml::createFile(const std::filesystem::path& pathToFile, const std::string& content) const
+{
+	if (!std::filesystem::create_directories(pathToFile.parent_path())) {
+		SPDLOG_ERROR("Couldn't create directories for path : {}", _localPathStorage.string());
+		return;
+	}
+	writeFile(pathToFile, content);
+}
 
 }

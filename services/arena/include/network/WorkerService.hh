@@ -60,6 +60,8 @@ namespace fys::arena {
  */
 class WorkerService {
 
+	inline static constexpr unsigned SERVER_FULL_CAPACITY = std::numeric_limits<unsigned>::max();
+
 	struct PlayerIdentifier {
 		std::string userName;
 		std::string identifier;

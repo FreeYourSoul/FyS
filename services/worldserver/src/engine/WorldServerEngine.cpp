@@ -23,11 +23,14 @@
 
 
 #include <spdlog/spdlog.h>
-#include <WorldServerContext.hh>
+
 #include <WSAction_generated.h>
 #include <Notifications_generated.h>
 #include <ConnectionHandler.hh>
-#include "engine/WorldServerEngine.hh"
+
+#include <WorldServerContext.hh>
+
+#include <engine/WorldServerEngine.hh>
 
 namespace fys::ws {
 
@@ -35,7 +38,8 @@ WorldServerEngine::WorldServerEngine(const fys::ws::WorldServerContext& ctx)
 		:
 		_map(ctx),
 		_zmqCtx(1),
-		_routerPlayerConnection(_zmqCtx, zmq::socket_type::router)
+		_routerPlayerConnection(_zmqCtx, zmq::socket_type::router),
+		_scriptEngine(ctx)
 {
 	_routerPlayerConnection.bind(ctx.getPlayerConnectionString());
 }
@@ -50,11 +54,10 @@ WorldServerEngine::executePendingMoves()
 	});
 }
 
-uint
+void
 WorldServerEngine::authenticatePlayer(AuthPlayer auth, PlayerInfo info, std::string identifier) {
 	uint index = _data.addNewPlayerData(std::move(info), std::move(identifier));
 	_authPlayerOnDataIndex.insert(std::pair(std::move(auth), index));
-	return index;
 }
 
 void
@@ -81,7 +84,7 @@ WorldServerEngine::movePlayerAction(const std::string& idt, uint indexPlayer, Pl
 	if (_map.canMoveTo(futurePos, 0)) {
 		pi.pos = futurePos;
 		_map.executePotentialTrigger(indexPlayer, pi);
-		if (const auto clientsToNotify = _data.getPlayerIdtsAroundPos(pi); !clientsToNotify.empty()) {
+		if (const auto clientsToNotify = _data.getPlayerIdtsAroundPos(pi.pos); !clientsToNotify.empty()) {
 			notifyClientsOfMove(clientsToNotify);
 		}
 	}

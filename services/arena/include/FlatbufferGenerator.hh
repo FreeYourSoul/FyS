@@ -28,7 +28,7 @@
 #include <utility>
 #include <flatbuffers/flatbuffers.h>
 
-namespace fys::fb {
+namespace fys::fb::arn {
 struct FightingPitState;
 struct PartyTeamStatus;
 struct MemberStatus;
@@ -95,22 +95,22 @@ public:
 //	generateCosmetics(const std::vector<PitContenders>& contenders);
 
 private:
-	[[nodiscard]] inline std::vector<flatbuffers::Offset<fb::PartyTeamStatus>>
+	[[nodiscard]] inline std::vector<flatbuffers::Offset<fb::arn::PartyTeamStatus>>
 	generatePartyTeamVecStatusOffset(const AllyPartyTeams& apt);
 
-	[[nodiscard]] inline std::vector<flatbuffers::Offset<fb::MemberStatus>>
+	[[nodiscard]] inline std::vector<flatbuffers::Offset<fb::arn::MemberStatus>>
 	generateTeamMemberVecStatusOffset(const std::vector<TeamMemberSPtr>& members);
 
-	[[nodiscard]] inline std::vector<flatbuffers::Offset<fys::fb::MemberStatus>>
+	[[nodiscard]] inline std::vector<flatbuffers::Offset<fys::fb::arn::MemberStatus>>
 	generateContenderVecStatusOffset(const std::vector<FightingContenderSPtr>& contenders);
 
-	[[nodiscard]] inline std::vector<flatbuffers::Offset<fb::Reward>>
+	[[nodiscard]] inline std::vector<flatbuffers::Offset<fb::arn::Reward>>
 	generateRewardsOffset(const Rewards& rewards);
 
-//	[[nodiscard]] inline flatbuffers::Offset<fys::fb::Cosmetics>
+//	[[nodiscard]] inline flatbuffers::Offset<fys::fb::arn::Cosmetics>
 //	generateCosmeticsOffset(const fys::arena::PartyTeam&);
 //
-//	[[nodiscard]] inline flatbuffers::Offset<fys::fb::Cosmetics>
+//	[[nodiscard]] inline flatbuffers::Offset<fys::fb::arn::Cosmetics>
 //	generateCosmeticsOffset(const std::vector<fys::arena::FightingContender>& contenders);
 
 private:

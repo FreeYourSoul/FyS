@@ -60,7 +60,7 @@ TEST_CASE("FlatbufferGeneratorTestCase", "[service][arena][util]")
 {
 	// Instantiate FightingPit
 	auto fseamMock = FSeam::getDefault<fys::util::RandomGenerator>();
-	ConnectionHandler handler{};
+	fys::common::ConnectionHandler handler{};
 	auto fseamConnectionHandlerMock = FSeam::get(&handler);
 	auto cml = CmlBase(getLocalPathStorage());
 	EncounterContext ctx;
@@ -156,9 +156,9 @@ TEST_CASE("FlatbufferGeneratorTestCase", "[service][arena][util]")
 		REQUIRE(nullptr != data);
 		REQUIRE(0 < size);
 
-		const fys::fb::ReplyFrame* rp = fys::fb::GetReplyFrame(data);
-		REQUIRE(fys::fb::Content_FightingPitState == rp->content_type());
-		const fys::fb::FightingPitState* fps = rp->content_as_FightingPitState();
+		const fys::fb::arn::ReplyFrame* rp = fys::fb::arn::GetReplyFrame(data);
+		REQUIRE(fys::fb::arn::Content_FightingPitState == rp->content_type());
+		const fys::fb::arn::FightingPitState* fps = rp->content_as_FightingPitState();
 
 		REQUIRE(nullptr != fps);
 		REQUIRE(0 == fps->idFightingPit());
@@ -242,9 +242,9 @@ TEST_CASE("FlatbufferGeneratorTestCase", "[service][arena][util]")
 		REQUIRE(nullptr != data);
 		REQUIRE(0 < size);
 
-		const fys::fb::ReplyFrame* rp = fys::fb::GetReplyFrame(data);
-		REQUIRE(fys::fb::Content_PartyTeamStatus == rp->content_type());
-		const fys::fb::PartyTeamStatus* pts = rp->content_as_PartyTeamStatus();
+		const fys::fb::arn::ReplyFrame* rp = fys::fb::arn::GetReplyFrame(data);
+		REQUIRE(fys::fb::arn::Content_PartyTeamStatus == rp->content_type());
+		const fys::fb::arn::PartyTeamStatus* pts = rp->content_as_PartyTeamStatus();
 
 		REQUIRE(nullptr != pts);
 
@@ -290,8 +290,8 @@ TEST_CASE("FlatbufferGeneratorTestCase", "[service][arena][util]")
 		REQUIRE(nullptr != data);
 		REQUIRE(0 < size);
 
-		const fys::fb::ReplyFrame* rp = fys::fb::GetReplyFrame(data);
-		REQUIRE(fys::fb::Content_ErrorMessage == rp->content_type());
+		const fys::fb::arn::ReplyFrame* rp = fys::fb::arn::GetReplyFrame(data);
+		REQUIRE(fys::fb::arn::Content_ErrorMessage == rp->content_type());
 		const auto* pts = rp->content_as_ErrorMessage();
 
 		REQUIRE(nullptr != pts);
@@ -307,8 +307,8 @@ TEST_CASE("FlatbufferGeneratorTestCase", "[service][arena][util]")
 		REQUIRE(nullptr != data);
 		REQUIRE(0 < size);
 
-		const fys::fb::ReplyFrame* rp = fys::fb::GetReplyFrame(data);
-		REQUIRE(fys::fb::Content_ActionExecuted == rp->content_type());
+		const fys::fb::arn::ReplyFrame* rp = fys::fb::arn::GetReplyFrame(data);
+		REQUIRE(fys::fb::arn::Content_ActionExecuted == rp->content_type());
 		const auto* ae = rp->content_as_ActionExecuted();
 
 		REQUIRE(nullptr != ae);

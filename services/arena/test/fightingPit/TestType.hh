@@ -354,7 +354,7 @@ public:
 	explicit CmlBase(std::string v)
 			:fys::cache::Cml(std::filesystem::path(std::move(v))) { }
 
-	void createFileInLocalStorage(const fys::cache::CmlKey& cmlKey) override
+	void createUpToDateFileInLocalStorage(const fys::cache::CmlKey&, std::filesystem::file_time_type) override
 	{
 
 	}
@@ -385,7 +385,7 @@ public:
 			fys::cache::CmlCopy(v, w) { }
 
 protected:
-	void createFileInLocalStorage(const fys::cache::CmlKey& cmlKey) override
+	void createUpToDateFileInLocalStorage(const fys::cache::CmlKey& cmlKey, std::filesystem::file_time_type) override
 	{
 		std::error_code e;
 		std::filesystem::create_directories(cmlKey.getPath().parent_path(), e);

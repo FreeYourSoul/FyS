@@ -30,44 +30,41 @@ PlayersData::PlayersData(uint maxConnection) noexcept
 		:
 		_positions(maxConnection), _status(maxConnection), _identities(maxConnection) { }
 
-
 std::vector<std::string_view>
 PlayersData::getPlayerIdtsAroundPlayer(uint indexPlayer,
 		std::optional<std::reference_wrapper<PlayerInfo>> position,
 		double distance) const noexcept
 {
-	if (position && indexPlayer < _positions.size())
-		return getPlayerIdtsAroundPos(*position, distance, indexPlayer);
-	return getPlayerIdtsAroundPos(_positions.at(indexPlayer), distance, indexPlayer);
+	if (position.has_value() && indexPlayer < _positions.size()) {
+		return getPlayerIdtsAroundPos(position->get().pos, distance, indexPlayer);
+	}
+	return getPlayerIdtsAroundPos(_positions.at(indexPlayer).pos, distance, indexPlayer);
 }
 
 std::vector<std::string_view>
-PlayersData::getPlayerIdtsAroundPos(const fys::ws::PlayerInfo& position,
+PlayersData::getPlayerIdtsAroundPos(const Pos& position,
 		double distance,
 		uint ignoreIndex) const noexcept
 {
 	std::vector<std::string_view> playerIdts;
 	playerIdts.reserve(LIMIT_NOTIFICATIONS_MOVE);
 	for (std::size_t i = 0; i < _positions.size(); ++i) {
-		if (playerIdts.size() >= LIMIT_NOTIFICATIONS_MOVE)
+		if (playerIdts.size() >= LIMIT_NOTIFICATIONS_MOVE) {
 			break;
-		if (i == ignoreIndex)
+		}
+		if (i == ignoreIndex) {
 			continue;
-		PlayerInfo minimumPos = {_positions.at(i).x - distance, _positions.at(i).y - distance};
-		PlayerInfo maximumPos = {_positions.at(i).x + distance, _positions.at(i).y + distance};
+		}
+		Pos minimumPos = _positions.at(i).pos - distance;
+		Pos maximumPos = _positions.at(i).pos + distance;
 
 		if ((position.x > minimumPos.x && position.x < maximumPos.x) &&
 				(position.y > minimumPos.y && position.x < maximumPos.y)) {
 			playerIdts.emplace_back(_identities.at(i));
 		}
 	}
+	playerIdts.shrink_to_fit();
 	return playerIdts;
-}
-
-PlayerInfo&
-PlayersData::accessPlayerInfo(uint indexPlayer)
-{
-	return _positions.front();
 }
 
 uint

@@ -62,14 +62,14 @@ public:
 				const std::string subKey = msg.popstr();
 				// second frame is identity
 				auto identity = msg.pop();
+
+				// third frame is the message content
+
 				if (SERVER_SUB_CHANNEL_KEY == subKey) {
-					// third frame is content for inter server messaging
-					std::forward<HandlerIncoming>(handlerIncoming)(std::move(identity), msg.pop());
+					std::forward<HandlerInterServer>(handlerServer)(std::move(identity), msg.pop());
 					return;
 				}
-				// third frame is auth frame for incoming player messaging
-				auto authFrame = msg.pop();
-				std::forward<HandlerIncoming>(handlerIncoming)(std::move(identity), std::move(authFrame), msg.pop());
+				std::forward<HandlerIncoming>(handlerIncoming)(std::move(identity), msg.pop());
 			}
 		}
 	}

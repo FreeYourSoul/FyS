@@ -49,15 +49,18 @@ public:
 	getPlayerConnectionString() const noexcept;
 
 	[[nodiscard]] const std::string&
+	getPathToLocalStorage() const noexcept;
+
+	[[nodiscard]] const std::string&
 	getServerCode() const noexcept;
 
 	[[nodiscard]] const std::string&
 	getTMXMapPath() const noexcept;
 
-	[[nodiscard]] const std::pair<double, double>&
+	[[nodiscard]] const Boundary&
 	getServerXBoundaries() const noexcept;
 
-	[[nodiscard]] const std::pair<double, double>&
+	[[nodiscard]] const Boundary&
 	getServerYBoundaries() const noexcept;
 
 	[[nodiscard]] const std::vector<ProximityServer>&
@@ -69,9 +72,10 @@ private:
 private:
 	std::string _serverCode;
 	std::string _tmxMapPath;
+	std::string _pathToLocalStorage; // todo set it
 	uint _portPlayerConnection;
-	std::pair<double, double> _serverXBoundaries;
-	std::pair<double, double> _serverYBoundaries;
+	Boundary _serverXBoundaries;
+	Boundary _serverYBoundaries;
 	std::vector<ProximityServer> _serverProximity;
 
 };

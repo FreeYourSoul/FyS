@@ -38,14 +38,33 @@ class Key;
 }
 
 namespace fys::ws {
-// unit of distance being a tile
+
+//! Default distance to check character around a point
 constexpr static double DEFAULT_DISTANCE = 30;
+//! Maximum number of character notified when a character move
 constexpr static unsigned LIMIT_NOTIFICATIONS_MOVE = 50;
 
 template <typename T>
 struct Vector2 {
 	T x = 0;
 	T y = 0;
+
+	Vector2 operator+(const Vector2& other) const {
+		return {x + other.x, y + other.y};
+	}
+
+	Vector2 operator+(T value) const {
+		return {x + value, y + value};
+	}
+
+	Vector2 operator-(const Vector2& other) const {
+		return {x - other.x, y - other.y};
+	}
+
+	Vector2 operator-(T value) const {
+		return {x - value, y - value};
+	}
+
 };
 
 template <typename T>
@@ -59,6 +78,7 @@ struct Rectangle final
 
 using HitBoxd = Rectangle<double>;
 using HitBoxu = Rectangle<uint>;
+using Zone = Rectangle<uint>;
 using Vec2u = Vector2<uint>;
 
 //! Position in 2D space (X, Y)
@@ -81,9 +101,6 @@ class PlayersData {
 
 public:
 	explicit PlayersData(uint maxConnection = 1000) noexcept;
-
-	[[nodiscard]] PlayerInfo&
-	accessPlayerInfo(uint indexPlayer);
 
 	template<typename Action>
 	void
@@ -135,11 +152,12 @@ public:
 	 *
 	 * @param position to check around
 	 * @param distance radius around the given point to search
+	 * @param ignoreIndex index that need to be ignored in the return
 	 * @return std::vector<std::string_view> vector of view on the identities of the players around the given point
 	 * @note identities are zmq code to reply to a specific client via a router socket
 	 */
 	[[nodiscard]] std::vector<std::string_view>
-	getPlayerIdtsAroundPos(const PlayerInfo& position,
+	getPlayerIdtsAroundPos(const Pos& position,
 			double distance = DEFAULT_DISTANCE,
 			uint ignoreIndex = LIMIT_NOTIFICATIONS_MOVE) const noexcept;
 

@@ -21,11 +21,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef FYS_WORLDSERVERSERVICE_HH
-#define FYS_WORLDSERVERSERVICE_HH
 
-#include <engine/WorldServerEngine.hh>
-#include <ConnectionHandler.hh>
+#ifndef FYS_ONLINE_SCRIPTENGINE_HH
+#define FYS_ONLINE_SCRIPTENGINE_HH
+
+#include <memory>
+#include <sol/sol.hpp>
+#include <engine/PlayersData.hh>
+#include <CmlScriptDownloader.hh>
 
 // forward declarations
 namespace fys::ws {
@@ -35,35 +38,51 @@ class WorldServerContext;
 
 namespace fys::ws {
 
-class WorldServerService {
+struct SpawnedEncounter {
+	Pos position;
+};
 
-	struct AwaitedPlayer {
-		AuthPlayer auth{};
-		Pos initialPosition{};
-		double initialAngle = 0.0;
-		double initialVelocity = 0.0;
-	};
-	using AwaitingPlayerWorldServerIt = std::vector<AwaitedPlayer>::const_iterator;
+struct SpawningEncounterArea {
 
+	Zone spawningArea;
+	std::string displayKey;
+
+	unsigned maxSpawned;
+	unsigned spawnCycleInterval;
+	unsigned nextSpawnCycle;
+};
+
+struct NPCMovement {
+	double velocity;
+	uint currentIndex;
+	std::vector<Pos> path;
+};
+
+class ScriptEngine {
 
 public:
-	explicit WorldServerService(const WorldServerContext& ctx);
-	void runServerLoop() noexcept;
+	ScriptEngine(const WorldServerContext& ctx);
+	void setScriptEngineCache(cache::CmlScriptDownloader cache);
+
+	void spawnNewEncounters();
+
+	void registerCommon();
+	void registerNPCMovementScripts(const std::vector<std::string>& movScripts);
+	void registerEncounterSpawnScript(const std::vector<std::string>& spawnScripts);
 
 private:
-	inline void registerAwaitedPlayer(const std::string& user, const std::string& token, std::string identity);
-	inline void processPlayerMessage(const std::string& userName, const std::string& token, const fb::world::WSAction* action);
+	cache::CmlScriptDownloader _cache;
 
-private:
-	std::reference_wrapper<const WorldServerContext> _ctx;
+	std::vector<NPCMovement> _npcMovements;
+	std::vector<SpawnedEncounter> _spawningPoints;
 
-	std::vector<AwaitedPlayer> _awaitedIncomingPlayer;
+	//! vector of Spawned encounter, the index of the vector is the id of the spawning point corresponding
+	std::vector<std::vector<SpawnedEncounter>> _spawnedPerSpawningPoint;
 
-	WorldServerEngine _worldServer;
-	ws::ConnectionHandler _connectionHandler;
+	sol::state _lua;
 
 };
 
 }
 
-#endif //FYS_WORLDSERVERSERVICE_HH
+#endif //FYS_ONLINE_SCRIPTENGINE_HH

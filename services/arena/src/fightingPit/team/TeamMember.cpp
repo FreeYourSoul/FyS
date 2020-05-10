@@ -123,8 +123,8 @@ TeamMember::executeAction(
 		}
 	}
 	catch (const chaiscript::exception::eval_error& ee) {
-		SPDLOG_ERROR("Error caught on script execution while executing {} with target required {}. Team owned by {} TeamMember {} --> {}",
-				pa->idAction, static_cast<bool>(pa->target), _userName, _name, ee.what());
+		SPDLOG_ERROR("Error caught on script execution while executing {} with target required {}. Team owned by "
+					 "{} TeamMember {} --> {}", pa->idAction, static_cast<bool>(pa->target), _userName, _name, ee.what());
 		return false;
 	}
 	return true;

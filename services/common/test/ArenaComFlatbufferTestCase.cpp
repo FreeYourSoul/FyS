@@ -33,28 +33,28 @@
 TEST_CASE("ArenaComFlatBufferTestCase FightingPitEncounter", "[service][arena][common][fb]")
 {
 	flatbuffers::FlatBufferBuilder fbb;
-	auto fp = fys::fb::CreateFightingPitEncounter(
+	auto fp = fys::fb::arn::CreateFightingPitEncounter(
 			fbb,
 			fbb.CreateString("name"),
 			fbb.CreateString("token_authentication"),
 			1337,
 			fbb.CreateString("WS001"),
 			false,
-			fys::fb::Level::Level_EASY,
+			fys::fb::arn::Level::Level_EASY,
 			4242,
 			false,
 			0.0,
 			0.0);
-	fys::fb::FinishFightingPitEncounterBuffer(fbb, fp);
+	fys::fb::arn::FinishFightingPitEncounterBuffer(fbb, fp);
 
 	SECTION("Verifier") {
 		auto ok = flatbuffers::Verifier(fbb.GetBufferPointer(), fbb.GetSize());
-		CHECK(fys::fb::VerifyFightingPitEncounterBuffer(ok));
+		CHECK(fys::fb::arn::VerifyFightingPitEncounterBuffer(ok));
 	}
 	uint8_t* binary = fbb.GetBufferPointer();
 
 	SECTION("Binary to FlatBuffer") {
-		const fys::fb::FightingPitEncounter* fromBinary = fys::fb::GetFightingPitEncounter(binary);
+		const fys::fb::arn::FightingPitEncounter* fromBinary = fys::fb::arn::GetFightingPitEncounter(binary);
 		REQUIRE("name" == fromBinary->user_name()->str());
 		REQUIRE("token_authentication" == fromBinary->token_auth()->str());
 		REQUIRE(4242 == fromBinary->id_encounter());
@@ -70,7 +70,7 @@ TEST_CASE("ArenaComFlatBufferTestCase ArenaServerAuth", "[service][arena][common
 {
 
 	flatbuffers::FlatBufferBuilder fbb;
-	auto asa = fys::fb::CreateArenaServerAuth(
+	auto asa = fys::fb::arn::CreateArenaServerAuth(
 			fbb,
 			fbb.CreateString("name"),
 			fbb.CreateString("token_authentication"),
@@ -78,16 +78,16 @@ TEST_CASE("ArenaComFlatBufferTestCase ArenaServerAuth", "[service][arena][common
 			fbb.CreateString("tcp://localhost:4242"),
 			42,
 			fbb.CreateString("WS001"));
-	fys::fb::FinishArenaServerAuthBuffer(fbb, asa);
+	fys::fb::arn::FinishArenaServerAuthBuffer(fbb, asa);
 
 	SECTION("Verifier") {
 		auto ok = flatbuffers::Verifier(fbb.GetBufferPointer(), fbb.GetSize());
-		CHECK(fys::fb::VerifyArenaServerAuthBuffer(ok));
+		CHECK(fys::fb::arn::VerifyArenaServerAuthBuffer(ok));
 	}
 	uint8_t* binary = fbb.GetBufferPointer();
 
 	SECTION("Binary to FlatBuffer") {
-		const fys::fb::ArenaServerAuth* fromBinary = fys::fb::GetArenaServerAuth(binary);
+		const fys::fb::arn::ArenaServerAuth* fromBinary = fys::fb::arn::GetArenaServerAuth(binary);
 		REQUIRE("name" == fromBinary->user_name()->str());
 		REQUIRE("token_authentication" == fromBinary->token_auth()->str());
 		REQUIRE("localhost" == fromBinary->ip()->str());
@@ -107,21 +107,21 @@ TEST_CASE("ArenaComFlatBufferTestCase ArenaServerValidateAuth", "[service][arena
 {
 
 	flatbuffers::FlatBufferBuilder fbb;
-	auto asva = fys::fb::CreateArenaServerValidateAuth(
+	auto asva = fys::fb::arn::CreateArenaServerValidateAuth(
 			fbb,
 			fbb.CreateString("name"),
 			fbb.CreateString("token_authentication"),
 			42);
-	fys::fb::FinishArenaServerValidateAuthBuffer(fbb, asva);
+	fys::fb::arn::FinishArenaServerValidateAuthBuffer(fbb, asva);
 
 	SECTION("Verifier") {
 		auto ok = flatbuffers::Verifier(fbb.GetBufferPointer(), fbb.GetSize());
-		CHECK(fys::fb::VerifyArenaServerValidateAuthBuffer(ok));
+		CHECK(fys::fb::arn::VerifyArenaServerValidateAuthBuffer(ok));
 	}
 
 	SECTION("Binary to FlatBuffer") {
 		uint8_t* binary = fbb.GetBufferPointer();
-		const fys::fb::ArenaServerValidateAuth* fromBinary = fys::fb::GetArenaServerValidateAuth(binary);
+		const fys::fb::arn::ArenaServerValidateAuth* fromBinary = fys::fb::arn::GetArenaServerValidateAuth(binary);
 		REQUIRE("name" == fromBinary->user_name()->str());
 		REQUIRE("token_authentication" == fromBinary->token_auth()->str());
 		REQUIRE(42 == fromBinary->fighting_pit_id());
@@ -134,26 +134,26 @@ TEST_CASE("ArenaComFlatBufferTestCase ArenaFightAction", "[service][arena][commo
 {
 
 	flatbuffers::FlatBufferBuilder fbb;
-	auto afa = fys::fb::CreateArenaFightAction(
+	auto afa = fys::fb::arn::CreateArenaFightAction(
 			fbb,
 			1337,
 			fbb.CreateString("idAction"),
-			fys::fb::Targeting_ENNEMIES,
+			fys::fb::arn::Targeting_ENNEMIES,
 			fbb.CreateVector(std::vector<uint>{1, 4, 5, 6}),
 			fbb.CreateVector(std::vector<uint>{}));
-	fys::fb::FinishArenaFightActionBuffer(fbb, afa);
+	fys::fb::arn::FinishArenaFightActionBuffer(fbb, afa);
 
 	SECTION("Verifier") {
 		auto ok = flatbuffers::Verifier(fbb.GetBufferPointer(), fbb.GetSize());
-		CHECK(fys::fb::VerifyArenaFightActionBuffer(ok));
+		CHECK(fys::fb::arn::VerifyArenaFightActionBuffer(ok));
 	}
 
 	SECTION("Binary to FlatBuffer") {
 		uint8_t* binary = fbb.GetBufferPointer();
-		const fys::fb::ArenaFightAction* fromBinary = fys::fb::GetArenaFightAction(binary);
+		const fys::fb::arn::ArenaFightAction* fromBinary = fys::fb::arn::GetArenaFightAction(binary);
 		REQUIRE("idAction" == fromBinary->actionId()->str());
 		REQUIRE(1337 == fromBinary->memberId());
-		REQUIRE(fys::fb::Targeting_ENNEMIES == fromBinary->targetType());
+		REQUIRE(fys::fb::arn::Targeting_ENNEMIES == fromBinary->targetType());
 		REQUIRE(1 == fromBinary->targetId_contender()->Get(0));
 		REQUIRE(4 == fromBinary->targetId_contender()->Get(1));
 		REQUIRE(5 == fromBinary->targetId_contender()->Get(2));
@@ -168,52 +168,52 @@ TEST_CASE("ArenaComFlatBufferTestCase PartyTeamStatus", "[service][arena][common
 	// test MemberStatus
 	flatbuffers::FlatBufferBuilder fbb;
 
-	const fys::fb::CharacterStatus cs = fys::fb::CharacterStatus{
+	const fys::fb::arn::CharacterStatus cs = fys::fb::arn::CharacterStatus{
 			0,
 			false,
 			90,
 			100,
 			190,
 			200,
-			fys::fb::SideOrient_A_N,
+			fys::fb::arn::SideOrient_A_N,
 	};
-	auto mso = fys::fb::CreateMemberStatus(fbb, fbb.CreateString("memberName1"), &cs);
+	auto mso = fys::fb::arn::CreateMemberStatus(fbb, fbb.CreateString("memberName1"), &cs);
 	fbb.Finish(mso);
 
 	SECTION("Verifier") {
 		auto ok = flatbuffers::Verifier(fbb.GetBufferPointer(), fbb.GetSize());
-		CHECK(ok.VerifyBuffer<fys::fb::MemberStatus>());
+		CHECK(ok.VerifyBuffer<fys::fb::arn::MemberStatus>());
 	}
 
 	uint8_t* b = fbb.GetBufferPointer();
 
 	SECTION("TeamMember Binary to FlatBuffer") {
-		const auto* fromBinary = flatbuffers::GetRoot<fys::fb::MemberStatus>(b);
+		const auto* fromBinary = flatbuffers::GetRoot<fys::fb::arn::MemberStatus>(b);
 
 		REQUIRE("memberName1" == fromBinary->characterName()->str());
 		REQUIRE(90 == fromBinary->status()->current_life());
 		REQUIRE(100 == fromBinary->status()->total_life());
 		REQUIRE(190 == fromBinary->status()->current_mp());
 		REQUIRE(200 == fromBinary->status()->total_mp());
-		REQUIRE(fys::fb::SideOrient_A_N == fromBinary->status()->side());
+		REQUIRE(fys::fb::arn::SideOrient_A_N == fromBinary->status()->side());
 	} // End section : Binary to Flatbuffer
 
 
 	SECTION("Test PartyTeamStatus flatbuffer") {
-		const fys::fb::CharacterStatus cs2 = fys::fb::CharacterStatus{
+		const fys::fb::arn::CharacterStatus cs2 = fys::fb::arn::CharacterStatus{
 				1,
 				false,
 				1190,
 				11100,
 				11190,
 				11200,
-				fys::fb::SideOrient_A_S
+				fys::fb::arn::SideOrient_A_S
 		};
-		auto mso2 = fys::fb::CreateMemberStatus(fbb, fbb.CreateString("memberName2"), &cs2);
+		auto mso2 = fys::fb::arn::CreateMemberStatus(fbb, fbb.CreateString("memberName2"), &cs2);
 		fbb.Finish(mso2);
-		std::vector<flatbuffers::Offset<fys::fb::MemberStatus>> vec = {mso, mso2};
+		std::vector<flatbuffers::Offset<fys::fb::arn::MemberStatus>> vec = {mso, mso2};
 
-		auto pts = fys::fb::CreatePartyTeamStatus(
+		auto pts = fys::fb::arn::CreatePartyTeamStatus(
 				fbb,
 				fbb.CreateString("userName"),
 				fbb.CreateVector(vec.data(), 2),
@@ -229,13 +229,13 @@ TEST_CASE("ArenaComFlatBufferTestCase PartyTeamStatus", "[service][arena][common
 
 		SECTION("Verifier") {
 			auto ok = flatbuffers::Verifier(fbb.GetBufferPointer(), fbb.GetSize());
-			CHECK(ok.VerifyBuffer<fys::fb::PartyTeamStatus>());
+			CHECK(ok.VerifyBuffer<fys::fb::arn::PartyTeamStatus>());
 		}
 
 		uint8_t* binary = fbb.GetBufferPointer();
 
 		SECTION("Binary to FlatBuffer") {
-			const fys::fb::PartyTeamStatus* fromBinary = flatbuffers::GetRoot<fys::fb::PartyTeamStatus>(binary);
+			const fys::fb::arn::PartyTeamStatus* fromBinary = flatbuffers::GetRoot<fys::fb::arn::PartyTeamStatus>(binary);
 			REQUIRE("userName" == fromBinary->user_name()->str());
 			REQUIRE(2 == fromBinary->members()->size());
 
@@ -245,7 +245,7 @@ TEST_CASE("ArenaComFlatBufferTestCase PartyTeamStatus", "[service][arena][common
 			REQUIRE(100 == memberStatusRetrieved1->status()->total_life());
 			REQUIRE(190 == memberStatusRetrieved1->status()->current_mp());
 			REQUIRE(200 == memberStatusRetrieved1->status()->total_mp());
-			REQUIRE(fys::fb::SideOrient_A_N == memberStatusRetrieved1->status()->side());
+			REQUIRE(fys::fb::arn::SideOrient_A_N == memberStatusRetrieved1->status()->side());
 
 			auto memberStatusRetrieved2 = fromBinary->members()->Get(1);
 			REQUIRE("memberName2" == memberStatusRetrieved2->characterName()->str());
@@ -253,7 +253,7 @@ TEST_CASE("ArenaComFlatBufferTestCase PartyTeamStatus", "[service][arena][common
 			REQUIRE(11100 == memberStatusRetrieved2->status()->total_life());
 			REQUIRE(11190 == memberStatusRetrieved2->status()->current_mp());
 			REQUIRE(11200 == memberStatusRetrieved2->status()->total_mp());
-			REQUIRE(fys::fb::SideOrient_A_S == memberStatusRetrieved2->status()->side());
+			REQUIRE(fys::fb::arn::SideOrient_A_S == memberStatusRetrieved2->status()->side());
 
 			REQUIRE(6 == fromBinary->attacks()->size());
 			REQUIRE("attack1" == fromBinary->attacks()->Get(0)->str());
@@ -274,25 +274,25 @@ TEST_CASE("ArenaComFlatBufferTestCase EndBattle", "[service][arena][common][fb]"
 	// test MemberStatus
 	flatbuffers::FlatBufferBuilder fbb;
 
-	auto mso = fys::fb::CreateEndBattle(fbb, fys::fb::StatusBattle_WON,
-			fbb.CreateVector<flatbuffers::Offset<fys::fb::Reward>>({
-					fys::fb::CreateReward(fbb, fbb.CreateString("reward1"), 42),
-					fys::fb::CreateReward(fbb, fbb.CreateString("reward2"), 1337),
-					fys::fb::CreateReward(fbb, fbb.CreateString("reward3"), 1),
+	auto mso = fys::fb::arn::CreateEndBattle(fbb, fys::fb::arn::StatusBattle_WON,
+			fbb.CreateVector<flatbuffers::Offset<fys::fb::arn::Reward>>({
+					fys::fb::arn::CreateReward(fbb, fbb.CreateString("reward1"), 42),
+					fys::fb::arn::CreateReward(fbb, fbb.CreateString("reward2"), 1337),
+					fys::fb::arn::CreateReward(fbb, fbb.CreateString("reward3"), 1),
 			}));
-	fys::fb::FinishEndBattleBuffer(fbb, mso);
+	fys::fb::arn::FinishEndBattleBuffer(fbb, mso);
 
 	SECTION("Verifier") {
 		auto ok = flatbuffers::Verifier(fbb.GetBufferPointer(), fbb.GetSize());
-		CHECK(fys::fb::VerifyEndBattleBuffer(ok));
+		CHECK(fys::fb::arn::VerifyEndBattleBuffer(ok));
 	}
 
 	uint8_t* b = fbb.GetBufferPointer();
 
 	SECTION("TeamMember Binary to FlatBuffer") {
-		const auto* fromBinary = fys::fb::GetEndBattle(b);
+		const auto* fromBinary = fys::fb::arn::GetEndBattle(b);
 
-		REQUIRE(fys::fb::StatusBattle_WON == fromBinary->status());
+		REQUIRE(fys::fb::arn::StatusBattle_WON == fromBinary->status());
 		REQUIRE(3 == fromBinary->rewards()->size());
 		REQUIRE(42 == fromBinary->rewards()->Get(0)->quantity());
 		REQUIRE("reward1" == fromBinary->rewards()->Get(0)->rewardKey()->str());

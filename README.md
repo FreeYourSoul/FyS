@@ -1,5 +1,3 @@
-[![CodeGrade](https://www.code-inspector.com/project/1982/status/svg)](https://www.code-inspector.com/project/dashboard/1982)
-[![BCH compliance](https://bettercodehub.com/edge/badge/FreeYourSoul/FyS?branch=master)](https://bettercodehub.com/)
 [![Documentation Status](https://readthedocs.org/projects/fys/badge/?version=latest)](https://fys.readthedocs.io/en/latest/?badge=latest)
 [![HitCount](http://hits.dwyl.io/FreeYourSoul/FyS.svg)](http://hits.dwyl.io/FreeYourSoul/FyS)
 ![Last commit](https://img.shields.io/github/last-commit/FreeYourSoul/FyS.svg)

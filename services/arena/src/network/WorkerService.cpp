@@ -78,7 +78,7 @@ WorkerService::addFightingPit(std::unique_ptr<FightingPit> fp)
 		SPDLOG_ERROR("Cannot add fighting pit in WorkerService");
 		return FightingPit::CREATION_ERROR;
 	}
-	if (_arenaInstances.size() >= std::numeric_limits<decltype(_currentArenaId)>::max()) {
+	if (_arenaInstances.size() >= SERVER_FULL_CAPACITY) {
 		SPDLOG_ERROR("Cannot add fighting pit in WorkerService (worker full)");
 		return FightingPit::CREATION_ERROR;
 	}

@@ -21,22 +21,31 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <CmlKey.hh>
-#include "CmlCopy.hh"
 
-namespace fys::cache {
+#ifndef FYS_ONLINE_WORLDPOPULATOR_HH
+#define FYS_ONLINE_WORLDPOPULATOR_HH
 
-void
-CmlCopy::createUpToDateFileInLocalStorage(const CmlKey& cmlKey, std::filesystem::file_time_type cacheTime)
-{
-	CmlKey k(_copyPathStorage, cmlKey.getKey());
-	std::error_code e;
+#include <CmlScriptDownloader.hh>
 
-	// If the file doesn't exist yet, or if it is not up to date then remake it
-	if (!std::filesystem::exists(k.getPath()) || std::filesystem::last_write_time(k.getPath(), e) > cacheTime) {
-		std::filesystem::create_directories(cmlKey.getPath().parent_path(), e);
-		std::filesystem::copy(k.getPath(), cmlKey.getPath(), e);
-	}
+namespace fys::ws {
+
+/**
+ * WorldPopulator is used in order to get the data required to populate the section of the map handled by
+ * the World Server Service. It request a database in order to:
+ * - download NPC scripts, and trigger, to be used by Cml (Cache Manager Library) afterwards
+ * - retrieve the NPC position (with their associated script id)
+ * - retrieve the Monster spawn position (with their associated script id)
+ * - get the trigger points (with their associated script id) of the map and set them in the map
+ */
+class WorldPopulator {
+
+public:
+
+private:
+	cache::CmlScriptDownloader _cache;
+
+};
+
 }
 
-}
+#endif //FYS_ONLINE_WORLDPOPULATOR_HH

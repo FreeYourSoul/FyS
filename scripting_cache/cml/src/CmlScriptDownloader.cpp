@@ -22,21 +22,14 @@
 // SOFTWARE.
 
 #include <CmlKey.hh>
-#include "CmlCopy.hh"
+#include "CmlScriptDownloader.hh"
 
 namespace fys::cache {
 
 void
-CmlCopy::createUpToDateFileInLocalStorage(const CmlKey& cmlKey, std::filesystem::file_time_type cacheTime)
+CmlScriptDownloader::createUpToDateFileInLocalStorage(const CmlKey& cmlKey, std::filesystem::file_time_type cacheTime)
 {
-	CmlKey k(_copyPathStorage, cmlKey.getKey());
-	std::error_code e;
-
-	// If the file doesn't exist yet, or if it is not up to date then remake it
-	if (!std::filesystem::exists(k.getPath()) || std::filesystem::last_write_time(k.getPath(), e) > cacheTime) {
-		std::filesystem::create_directories(cmlKey.getPath().parent_path(), e);
-		std::filesystem::copy(k.getPath(), cmlKey.getPath(), e);
-	}
+	_downloader(cmlKey.getKey(), cmlKey.getPath().string());
 }
 
 }

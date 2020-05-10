@@ -34,7 +34,7 @@ public:
 
     bool _localStorageCalled = false;
 
-    void createFileInLocalStorage(const fys::cache::CmlKey &cmlKey) override {
+    void createUpToDateFileInLocalStorage(const fys::cache::CmlKey& cmlKey, std::filesystem::file_time_type cacheTime) override {
         _localStorageCalled = true;
     }
 };
@@ -64,15 +64,22 @@ TEST_CASE("findInCache for Basic CML", "[cml_test]") {
         REQUIRE(cbt._inMemCache.find("test1") == cbt._inMemCache.end());
         REQUIRE(cbt._inMemCache.find("inner_folder:test2") == cbt._inMemCache.end());
         REQUIRE(cbt._inMemCache.find("inner_folder:inner_folder_1:test3") == cbt._inMemCache.end());
-        
-        SECTION("Test file at root") {
+		REQUIRE_FALSE(cbt._localStorageCalled);
+
+		SECTION("Test file at root") {
             std::string_view cacheContent = cbt.findInCache("test1");
 
             REQUIRE("test1 content" == cacheContent);
-            REQUIRE_FALSE(cbt._localStorageCalled);
+            REQUIRE(cbt._localStorageCalled);
             REQUIRE(cbt._inMemCache.find("test1") != cbt._inMemCache.end());
 
-        } // End Section : Test file at root
+            // Check now that the local storage isn't called as we already have in-memory cache
+            cbt._localStorageCalled = false;
+			std::string_view cacheContent2 = cbt.findInCache("test1");
+			REQUIRE("test1 content" == cacheContent2);
+			REQUIRE_FALSE(cbt._localStorageCalled);
+
+		} // End Section : Test file at root
 
         SECTION("Test file in folder") {
             std::string_view cacheTest2 = cbt.findInCache("inner_folder:test2");
@@ -80,7 +87,7 @@ TEST_CASE("findInCache for Basic CML", "[cml_test]") {
 
             REQUIRE("test2 content" == cacheTest2);
             REQUIRE("test3 content" == cacheTest3);
-            REQUIRE_FALSE(cbt._localStorageCalled);
+            REQUIRE(cbt._localStorageCalled);
             REQUIRE(cbt._inMemCache.find("inner_folder:test2") != cbt._inMemCache.end());
             REQUIRE(cbt._inMemCache.find("inner_folder:inner_folder_1:test3") != cbt._inMemCache.end());
 
@@ -98,7 +105,7 @@ John Keats)d";
             std::string_view cacheTest4 = cbt.findInCache("inner_folder:inner_folder_1:test4");
 
             REQUIRE(contentToFind == cacheTest4);
-            REQUIRE_FALSE(cbt._localStorageCalled);
+            REQUIRE(cbt._localStorageCalled);
             REQUIRE(cbt._inMemCache.find("inner_folder:inner_folder_1:test4") != cbt._inMemCache.end());
 
         }
