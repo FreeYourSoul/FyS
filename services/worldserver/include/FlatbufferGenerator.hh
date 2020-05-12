@@ -27,11 +27,20 @@
 
 #include <flatbuffers/flatbuffers.h>
 
+// forward declarations
+namespace fys::ws {
+	struct PlayerInfo;
+}
+// end forward declarations
+
 namespace fys::ws {
 
 class FlatbufferGenerator {
 
 public:
+
+	[[nodiscard]] std::pair<void*, uint>
+	generateMoveNotification(const std::string& playerName, const fys::ws::PlayerInfo& info);
 
 private:
 	flatbuffers::FlatBufferBuilder _fbb;

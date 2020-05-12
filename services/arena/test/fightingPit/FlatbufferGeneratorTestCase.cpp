@@ -56,7 +56,7 @@ getLocalPathStorage()
 
 }
 
-TEST_CASE("FlatbufferGeneratorTestCase", "[service][arena][util]")
+TEST_CASE("arn::FlatbufferGeneratorTestCase", "[service][arena][util]")
 {
 	// Instantiate FightingPit
 	auto fseamMock = FSeam::getDefault<fys::util::RandomGenerator>();

@@ -2,11 +2,13 @@ include "../arena/ArenaServerAuth.fbs";
 
 namespace fys.fb.world;
 
-table MovePing {
+table MoveNotification {
+    id:string;
+
+    velocity:double;
     dir:double;
     x:double = 0;
     y:double = 0;
-    id:string;
 }
 
 union Response {
@@ -14,7 +16,7 @@ union Response {
     arn.ArenaServerAuth,
 
     /// inform about current position to players in order to adjust if mismatch with local
-    MovePing
+    MoveNotification
 }
 
 table ResponseFrame {

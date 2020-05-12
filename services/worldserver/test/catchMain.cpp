@@ -21,47 +21,5 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
-#ifndef FYS_ONLINE_INVENTORYSERVERSERVICE_HH
-#define FYS_ONLINE_INVENTORYSERVERSERVICE_HH
-
-#include <ConnectionHandler.hh>
-#include "InventoryServerContext.hh"
-
-// forward declarations
-namespace fys::fb::ivt {
-struct UpdatePlayerSoulDraughtboard;
-struct RetrievePlayerSoulDraughtboard;
-struct RetrievePlayerInventory;
-}
-// end forward declarations
-
-namespace fys::inv {
-
-class InventoryServerService {
-
-public:
-	InventoryServerService(const InventoryServerContext& ctx);
-
-	void runServerLoop();
-
-private:
-	[[nodiscard]] zmq::message_t
-	exchangeInventory(const fb::ivt::ExchangeInventory* exchangeRq);
-
-	[[nodiscard]] zmq::message_t
-	updatePlayerSoulDraughtboard(const fb::ivt::UpdatePlayerSoulDraughtboard* updateRq);
-
-	[[nodiscard]] zmq::message_t
-	retrievePlayerSoulDraughtboard(const fb::ivt::UpdatePlayerSoulDraughtboard* updateRq);
-
-	[[nodiscard]] zmq::message_t
-	retrievePlayerInventory(const fb::ivt::RetrievePlayerInventory* retrieveRq);
-
-private:
-	common::ConnectionHandler _connectionHandler;
-
-};
-
-}
-#endif //FYS_ONLINE_INVENTORYSERVERSERVICE_HH
+#define CATCH_CONFIG_MAIN
+#include <catch2/catch.hpp>

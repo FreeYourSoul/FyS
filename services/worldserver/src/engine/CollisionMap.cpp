@@ -146,10 +146,13 @@ MapElement::canGoThrough(Pos position, std::size_t level) const noexcept
 	return canGoThrough;
 }
 
+// todo : This isn't a good way to handle level, It has way to glitch if a player in the middle go to a stair.
+//  We need to set some kind of isInTransition state in order to differentiate a character taking the stairs and
+//  a character trying to pass from an intermediate level directly to the stairs.
 bool
 MapElement::canGoToLevel(std::size_t goLevel) const noexcept
 {
-	return goLevel == 0 || _level.test(goLevel) || _changeLevel.test(goLevel);
+	return _level.test(goLevel) || _changeLevel.test(goLevel);
 }
 
 }

@@ -3,13 +3,13 @@ include "RetrievePlayerInventory.fbs";
 include "RetrievePlayerSoulDraughtboard.fbs";
 include "UpdatePlayerSoulDraughtboard.fbs";
 
-namespace fys.fb.inventory;
+namespace fys.fb.ivt;
 
 union InventoryRequestContent {
-    UpdatePlayerSoulDraughtboard : fys.fb.inventory.UpdatePlayerSoulDraughtboard,
-    RetrievePlayerSoulDraughtboard : fys.fb.inventory.UpdatePlayerSoulDraughtboard,
-    RetrievePlayerInventory : fys.fb.inventory.RetrievePlayerInventory,
-    ExchangeInventory : fys.fb.inventory.ExchangeInventory
+    UpdatePlayerSoulDraughtboard : fys.fb.ivt.UpdatePlayerSoulDraughtboard,
+    RetrievePlayerSoulDraughtboard : fys.fb.ivt.UpdatePlayerSoulDraughtboard,
+    RetrievePlayerInventory : fys.fb.ivt.RetrievePlayerInventory,
+    ExchangeInventory : fys.fb.ivt.ExchangeInventory
 }
 
 table InventoryRequest {

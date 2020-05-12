@@ -33,6 +33,8 @@ add_executable(worldserver_service
         ${CMAKE_CURRENT_LIST_DIR}/src/engine/CollisionMap.cpp
         ${CMAKE_CURRENT_LIST_DIR}/src/engine/WorldPopulator.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/engine/WorldPopulator.hh
+        ${CMAKE_CURRENT_LIST_DIR}/src/FlatbufferGenerator.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/FlatbufferGenerator.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/engine/ScriptEngine.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/engine/ScriptEngine.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/engine/CollisionMap.hh

@@ -131,7 +131,7 @@ public:
 	}
 
 	[[nodiscard]] uint
-	addNewPlayerData(PlayerInfo info, std::string identity);
+	addNewPlayerData(PlayerInfo info, std::string identity, std::string userName);
 
 
 	/**
@@ -165,6 +165,7 @@ private:
 	std::vector<PlayerInfo> _positions;
 	std::vector<PlayerStatus> _status;
 	std::vector<std::string> _identities;
+	std::vector<std::string> _userNames;
 
 };
 

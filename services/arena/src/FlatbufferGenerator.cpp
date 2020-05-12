@@ -36,6 +36,7 @@
 #include <util/FbUtility.hh>
 
 #include "FlatbufferGenerator.hh"
+#include "../../worldserver/include/FlatbufferGenerator.hh"
 
 namespace {
 

@@ -1,4 +1,4 @@
-namespace fys.fb.inventory;
+namespace fys.fb.ivt;
 
 table UpdatePlayerSoulDraughtboard {
 

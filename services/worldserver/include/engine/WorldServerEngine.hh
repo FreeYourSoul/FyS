@@ -56,10 +56,12 @@ struct AuthPlayer {
 	std::string userName;
 	std::string token;
 
-	bool operator==(const AuthPlayer& other) const {
+	bool operator==(const AuthPlayer& other) const
+	{
 		return userName == other.userName && token == other.token;
 	}
-	bool operator<(const AuthPlayer& other) const {
+	bool operator<(const AuthPlayer& other) const
+	{
 		return userName < other.userName && token < other.token;
 	}
 };
@@ -105,7 +107,10 @@ public:
 	}
 
 private:
-	inline void notifyClientsOfMove(const std::vector<std::string_view>& ids) const;
+
+	inline void notifyClientsOfMove(const PlayerInfo& pi, const std::string& userName,
+			const std::vector<std::string_view>& idtsToNotify);
+
 	inline void movePlayerAction(const std::string& idt, uint indexPlayer, PlayerInfo& pi);
 
 private:

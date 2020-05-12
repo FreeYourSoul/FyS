@@ -31,6 +31,7 @@
 #include <WorldServerContext.hh>
 
 #include <engine/WorldServerEngine.hh>
+#include <FlatbufferGenerator.hh>
 
 namespace fys::ws {
 
@@ -47,16 +48,18 @@ WorldServerEngine::WorldServerEngine(const fys::ws::WorldServerContext& ctx)
 void
 WorldServerEngine::executePendingMoves()
 {
-	_data.executeOnPlayers([this](uint index, PlayerStatus status, PlayerInfo& pi, const std::string& identity) {
-		if (status == PlayerStatus::MOVING) {
-			movePlayerAction(identity, index, pi);
-		}
-	});
+	_data.executeOnPlayers(
+			[this](uint index, PlayerStatus status, PlayerInfo& pi, const std::string&, const std::string& userName) {
+				if (status == PlayerStatus::MOVING) {
+					movePlayerAction(userName, index, pi);
+				}
+			});
 }
 
 void
-WorldServerEngine::authenticatePlayer(AuthPlayer auth, PlayerInfo info, std::string identifier) {
-	uint index = _data.addNewPlayerData(std::move(info), std::move(identifier));
+WorldServerEngine::authenticatePlayer(AuthPlayer auth, PlayerInfo info, std::string identifier)
+{
+	uint index = _data.addNewPlayerData(std::move(info), std::move(identifier), auth.userName);
 	_authPlayerOnDataIndex.insert(std::pair(std::move(auth), index));
 }
 
@@ -73,9 +76,11 @@ WorldServerEngine::stopPlayerMove(uint index)
 }
 
 void
-WorldServerEngine::movePlayerAction(const std::string& idt, uint indexPlayer, PlayerInfo& pi)
+WorldServerEngine::movePlayerAction(const std::string& userName, uint indexPlayer, PlayerInfo& pi)
 {
 	double velocity = pi.velocity;
+
+	// calculate future position if the move occurs
 	Pos futurePos = Pos{
 			pi.pos.x * (velocity * std::cos(pi.angle)),
 			pi.pos.y * (velocity * std::sin(pi.angle))
@@ -85,16 +90,27 @@ WorldServerEngine::movePlayerAction(const std::string& idt, uint indexPlayer, Pl
 		pi.pos = futurePos;
 		_map.executePotentialTrigger(indexPlayer, pi);
 		if (const auto clientsToNotify = _data.getPlayerIdtsAroundPos(pi.pos); !clientsToNotify.empty()) {
-			notifyClientsOfMove(clientsToNotify);
+			notifyClientsOfMove(pi, userName, clientsToNotify);
 		}
 	}
 }
 
 void
-WorldServerEngine::notifyClientsOfMove(const std::vector<std::string_view>& ids) const
+WorldServerEngine::notifyClientsOfMove(
+		const PlayerInfo& pi,
+		const std::string& userName,
+		const std::vector<std::string_view>& idtsToNotify)
 {
-	for (const auto& id : ids) {
-		// TODO: notify
+	const unsigned indexIdentity = 0;
+	zmq::multipart_t toSend;
+	FlatbufferGenerator fg;
+
+	auto[binary, size] = fg.generateMoveNotification(userName, pi);
+	toSend.add({});
+	toSend.addmem(binary, size);
+	for (const auto& id : idtsToNotify) {
+		toSend.at(indexIdentity).rebuild(id.data(), id.size());
+		toSend.send(_routerPlayerConnection);
 	}
 }
 
