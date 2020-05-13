@@ -1,7 +1,29 @@
 namespace fys.fb.ivt;
 
-table ExchangeInventory {
+/// Auth server preparing an exchange
+table InitiateExchangeInstance {
+    userExchange1:string;
+    userExchange1Token:string;
 
+    userExchange2:string;
+    userExchange2Token:string;
+}
+
+/// Sent back as response of InitiateExchangeInstance in order to provide information to have a direct connection
+table InventoryAuthenticator {
+    token_exchange:string;
+    ip_inv_server:string;
+    port_inv_server:ushort;
+}
+
+union ExchangeStep {
+
+InitiateExchangeInstance
+
+}
+
+table ExchangeInventory {
+    content:InitiateExchangeInstance;
 }
 
 root_type ExchangeInventory;
