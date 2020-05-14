@@ -12,8 +12,8 @@ set(CMAKE_CXX_COMPILER /usr/bin/g++)
 
 find_package(cppzmq REQUIRED)
 find_package(Catch2 REQUIRED)
-find_package(fmt)
-find_package(FSeam)
+find_package(fmt REQUIRED)
+find_package(FSeam REQUIRED)
 include(Catch)
 
 include(${CMAKE_CURRENT_LIST_DIR}/../../common/CMakeLists.txt)
