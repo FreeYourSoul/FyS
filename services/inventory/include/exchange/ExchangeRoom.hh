@@ -29,12 +29,13 @@
 #include <array>
 #include <vector>
 
+// forward declarations
 namespace fys::inv {
+class ItemManager;
+}
+// end forward declarations
 
-struct ExchangeContent {
-	std::string itemCode;
-	uint quantity;
-};
+namespace fys::inv {
 
 enum class StepExchange {
 	// The exchange is currently on-going and addition, or deletion of item is accepted
@@ -56,20 +57,20 @@ class ExchangeRoom {
 	};
 
 public:
-	explicit ExchangeRoom(std::string tokenExchange)
-			:_tokenExchange(std::move(tokenExchange)) { }
+	explicit ExchangeRoom(uint roomId, std::string tokenExchange, ItemManager& refIm)
+			:_roomId(roomId), _tokenExchange(std::move(tokenExchange)), _manager(refIm) { }
 
 	[[nodiscard]] bool
-	addItemFromExchangeForPlayer(const std::string& player, const std::string& token, ExchangeContent toAdd);
+	addItemFromExchangeForPlayer(const std::string& player, const std::string& token, Item toAdd);
 
 	[[nodiscard]] bool
 	removeItemFromExchangeForPlayer(const std::string& player, const std::string& token, const std::string& toRemove);
 
-	void lockExchange(const std::string& initiatorPlayer, const std::string& token);
-	void terminateExchange(const std::string& receiverPlayer, const std::string& token);
-
 	[[nodiscard]] StepExchange
 	getCurrentStep() const { return _step; }
+
+	void lockExchange(const std::string& initiatorPlayer, const std::string& token);
+	void terminateExchange(const std::string& receiverPlayer, const std::string& token);
 
 private:
 	[[nodiscard]] inline ExchangeRole
@@ -80,13 +81,15 @@ private:
 
 private:
 	uint _roomId;
-	StepExchange _step;
-
 	std::string _tokenExchange;
+	std::reference_wrapper<ItemManager> _manager;
+
+	StepExchange _step = StepExchange::ON_GOING;
+
 	std::string _initiatorUserName;
 	std::string _receiverUserName;
 
-	std::array<std::vector<ExchangeContent>, 2> _content;
+	std::array<std::vector<Item>, 2> _content;
 
 };
 

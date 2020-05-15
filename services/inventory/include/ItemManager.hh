@@ -22,47 +22,35 @@
 // SOFTWARE.
 
 
-#ifndef FYS_ONLINE_INVENTORYSERVERSERVICE_HH
-#define FYS_ONLINE_INVENTORYSERVERSERVICE_HH
+#ifndef FYS_ONLINE_ITEMMANAGER_HH
+#define FYS_ONLINE_ITEMMANAGER_HH
 
-#include <ConnectionHandler.hh>
-#include <utility>
-#include "InventoryServerContext.hh"
-
-// forward declarations
-namespace fys::fb::ivt {
-struct UpdatePlayerSoulDraughtboard;
-struct RetrievePlayerSoulDraughtboard;
-struct RetrievePlayerInventory;
-}
-// end forward declarations
+#include <string>
+#include <vector>
 
 namespace fys::inv {
 
-class InventoryServerService {
+struct Item {
+	std::string itemCode;
+	uint quantity;
+};
+
+/**
+ * Handle items of character:
+ * - Verify if an item is owned by a character
+ * - Add / Remove item of a character
+ */
+class ItemManager {
 
 public:
-	InventoryServerService(const InventoryServerContext& ctx);
+	[[nodiscard]] bool
+	areItemsOwnedByUser(const std::string& userName, const std::vector<Item>& item);
 
-	void runServerLoop();
-
-private:
-	[[nodiscard]] zmq::message_t
-	exchangeInventory(const fb::ivt::ExchangeInventory* exchangeRq);
-
-	[[nodiscard]] zmq::message_t
-	updatePlayerSoulDraughtboard(const fb::ivt::UpdatePlayerSoulDraughtboard* updateRq);
-
-	[[nodiscard]] zmq::message_t
-	retrievePlayerSoulDraughtboard(const fb::ivt::UpdatePlayerSoulDraughtboard* updateRq);
-
-	[[nodiscard]] zmq::message_t
-	retrievePlayerInventory(const fb::ivt::RetrievePlayerInventory* retrieveRq);
 
 private:
-	common::ConnectionHandler _connectionHandler;
+	// DB connector ?
 
 };
 
 }
-#endif //FYS_ONLINE_INVENTORYSERVERSERVICE_HH
+#endif //FYS_ONLINE_ITEMMANAGER_HH

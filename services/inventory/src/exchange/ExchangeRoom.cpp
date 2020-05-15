@@ -23,12 +23,14 @@
 
 #include <spdlog/spdlog.h>
 
+#include <ItemManager.hh>
+
 #include <exchange/ExchangeRoom.hh>
 
 namespace fys::inv {
 
 bool
-ExchangeRoom::addItemFromExchangeForPlayer(const std::string& player, const std::string& token, ExchangeContent toAdd)
+ExchangeRoom::addItemFromExchangeForPlayer(const std::string& player, const std::string& token, Item toAdd)
 {
 	if (!basicCheck(player, token)) return false;
 
@@ -44,13 +46,14 @@ ExchangeRoom::addItemFromExchangeForPlayer(const std::string& player, const std:
 			[&toAdd](const auto& c) { return c.itemCode == toAdd.itemCode; });
 
 	if (itemIt == contentOfPlayer.end()) {
-		toAdd.quantity += itemIt->quantity;
+		uint quantity = toAdd.quantity + itemIt->quantity;
+		if ()
 		// todo verify if the item exist in the given quantity
-		itemIt->quantity = toAdd.quantity;
+		itemIt->quantity = quantity;
 	}
 	else {
 		// todo verify if the item exist in the given quantity
-		contentOfPlayer.emplace_back(std::move(toAdd));
+		contentOfPlayer.emplace_back(toAdd);
 	}
 	return true;
 }

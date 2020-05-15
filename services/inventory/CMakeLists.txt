@@ -27,6 +27,8 @@ add_executable(inventory_service
         ${CMAKE_CURRENT_LIST_DIR}/src/InventoryServerContext.cpp
         ${CMAKE_CURRENT_LIST_DIR}/src/InventoryServerService.cpp
         ${CMAKE_CURRENT_LIST_DIR}/src/exchange/ExchangeRoom.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/src/ItemManager.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/ItemManager.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/exchange/ExchangeRoom.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/InventoryServerService.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/InventoryServerContext.hh)
