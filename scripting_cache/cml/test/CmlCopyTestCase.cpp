@@ -26,34 +26,39 @@
 #include <CmlCopy.hh>
 
 namespace {
-    std::string getLocalPathStorage() {
-        std::string file_path = __FILE__;
-        std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
-        if (dir_path.size() == file_path.size())
-            dir_path = file_path.substr(0, file_path.rfind('/'));
-        return dir_path + "/testCacheDir";
-    }
-
-    std::string getCopyPathStorage() {
-        std::string file_path = __FILE__;
-        std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
-        if (dir_path.size() == file_path.size())
-            dir_path = file_path.substr(0, file_path.rfind('/'));
-        return dir_path + "/testCopyFromCacheDir";
-    }
+std::string
+getLocalPathStorage()
+{
+	std::string file_path = __FILE__;
+	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
+	if (dir_path.size() == file_path.size())
+		dir_path = file_path.substr(0, file_path.rfind('/'));
+	return dir_path + "/testCacheDir";
 }
 
-TEST_CASE("CmlCopy", "[common][cml_test]") {
-    fys::cache::CmlCopy ccpy(getLocalPathStorage(), getCopyPathStorage());
-    std::filesystem::path baseCache = getLocalPathStorage() + "/copy_folder";
-    std::filesystem::remove_all(baseCache);
-    REQUIRE_FALSE(std::filesystem::exists(baseCache));
+std::string
+getCopyPathStorage()
+{
+	std::string file_path = __FILE__;
+	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
+	if (dir_path.size() == file_path.size())
+		dir_path = file_path.substr(0, file_path.rfind('/'));
+	return dir_path + "/testCopyFromCacheDir";
+}
+}
 
-    auto content = ccpy.findInCache("copy_folder:inner_copy_folder:testingCopyFile.txt");
+TEST_CASE("CmlCopy", "[common][cml_test]")
+{
+	fys::cache::CmlCopy ccpy(getLocalPathStorage(), getCopyPathStorage());
+	std::filesystem::path baseCache = getLocalPathStorage() + "/copy_folder";
+	std::filesystem::remove_all(baseCache);
+	REQUIRE_FALSE(std::filesystem::exists(baseCache));
 
-    REQUIRE(std::filesystem::exists(baseCache));
-    REQUIRE(std::filesystem::exists(baseCache / "inner_copy_folder" / "testingCopyFile.txt"));
-    REQUIRE("This is a copied file cache" == content);
+	auto content = ccpy.findInCache("copy_folder:inner_copy_folder:testingCopyFile.txt");
 
-    std::filesystem::remove_all(baseCache);
+	REQUIRE(std::filesystem::exists(baseCache));
+	REQUIRE(std::filesystem::exists(baseCache / "inner_copy_folder" / "testingCopyFile.txt"));
+	REQUIRE("This is a copied file cache" == content);
+
+	std::filesystem::remove_all(baseCache);
 } // End TestCase : CmlCopy

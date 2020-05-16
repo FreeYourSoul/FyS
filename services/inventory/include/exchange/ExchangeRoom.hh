@@ -28,12 +28,7 @@
 #include <string>
 #include <array>
 #include <vector>
-
-// forward declarations
-namespace fys::inv {
-class ItemManager;
-}
-// end forward declarations
+#include <ItemManager.hh>
 
 namespace fys::inv {
 

@@ -21,41 +21,29 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-//
-// Created by FyS on 4/7/19.
-//
+#include <InventoryServerContext.hh>
+#include <exchange/ExchangeManager.hh>
 
-#ifndef FYS_WORLDSERVERCONTEXT_HH
-#define FYS_WORLDSERVERCONTEXT_HH
+namespace fys::inv {
 
-#include <StartupDispatcherCtx.hh>
-#include <tclap/CmdLine.h>
+ExchangeManager::ExchangeManager(const InventoryServerContext& ctx)
+		:
+		common::DirectConnectionManager(1, ctx.getPlayerConnectionString()),
+		_inventoryServerCode(ctx.getServerCode()) { }
 
-namespace fys::ws {
+void
+ExchangeManager::makeExchangeRoom(ItemManager& itemManager, const std::string& tokenBase)
+{
+	_rooms.insert(std::pair(_currentRoomId, ExchangeRoom(_currentRoomId, generateToken(tokenBase), itemManager)));
+	++_currentRoomId;
+}
 
-    struct ProximityServerAxis {
 
-        bool isAtProximity(double axis) const noexcept {
-            return (superiorTo) ? (axis > value) : (axis < value);
-        }
 
-        std::string code;
-        double value;
-        bool superiorTo;
-    };
-
-    class WorldServerCtx : public StartupDispatcherCtx {
-
-    public:
-        WorldServerCtx(int ac, const char *const *av) noexcept;
-
-    private:
-        std::string _serverCode;
-        std::pair<double, double> _serverBoundaries;
-        std::vector<ProximityServerAxis> _xAxisServerProximity;
-        std::vector<ProximityServerAxis> _yAxisServerProximity;
-
-    };
+std::string
+ExchangeManager::generateToken(const std::string& tokenBase) const
+{
+	return std::to_string(_currentRoomId).append(_inventoryServerCode).append(tokenBase);
+}
 
 }
-#endif //FYS_WORLDSERVERCONTEXT_HH

@@ -21,16 +21,40 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-//
-// Created by FyS on 4/7/19.
-//
 
-#include "../include/WorldServerContext.hh"
+#ifndef FYS_ONLINE_EXCHANGEMANAGER_HH
+#define FYS_ONLINE_EXCHANGEMANAGER_HH
 
-namespace fys::ws {
+#include <map>
+#include <DirectConnectionManager.hh>
+#include <exchange/ExchangeRoom.hh>
 
-WorldServerCtx::WorldServerCtx(int ac, const char *const *av) noexcept : StartupDispatcherCtx(ac, av) {
+// forward declarations
+namespace fys::inv {
+class InventoryServerContext;
+class ItemManager;
+}
+// end forward declarations
+
+namespace fys::inv {
+
+class ExchangeManager : public common::DirectConnectionManager {
+
+public:
+	explicit ExchangeManager(const InventoryServerContext& ctx);
+
+	void makeExchangeRoom(ItemManager& itemManager, const std::string& tokenBase);
+
+private:
+	[[nodiscard]] inline std::string
+	generateToken(const std::string& tokenBase) const;
+
+private:
+	std::map<unsigned, ExchangeRoom> _rooms;
+	const std::string_view _inventoryServerCode;
+	unsigned _currentRoomId = 0;
+};
+
 }
 
-
-}
+#endif //FYS_ONLINE_EXCHANGEMANAGER_HH

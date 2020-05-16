@@ -111,6 +111,9 @@ public:
 
 	/**
 	 * Read on the router socket (connection with the players) and reply to them thanks to the zmq::router protocol
+	 *
+	 * @note not using common::DirectConnectionManager as there is an intermediate frame used for authentication
+	 *
 	 * @tparam Lambda type following the signature => void (string, zmq::message_t)
 	 * @param HandlerAuth   Handler handler to call when receiving a message to authenticate an awaited player
 	 * @param HandlerInGame Handler handler to call when receiving a message to do a player action on a fightingPit
@@ -185,7 +188,8 @@ private:
 	sendMessageToPlayer(unsigned fpId, const std::string& userName, zmq::message_t&& msg);
 
 	[[nodiscard]] auto
-	broadcastMsgHandler(unsigned fpId) {
+	broadcastMsgHandler(unsigned fpId)
+	{
 		return [this, fpId](zmq::message_t&& toSend) { this->broadcastMsg(fpId, std::move(toSend)); };
 	}
 

@@ -2,28 +2,47 @@ namespace fys.fb.ivt;
 
 /// Auth server preparing an exchange
 table InitiateExchangeInstance {
-    userExchange1:string;
-    userExchange1Token:string;
+    userExchangeInitiator:string;
+    userExchangeInitiatorToken:string;
 
-    userExchange2:string;
-    userExchange2Token:string;
+    userExchangeReceiver:string;
+    userExchangeReceiverToken:string;
 }
 
 /// Sent back as response of InitiateExchangeInstance in order to provide information to have a direct connection
 table InventoryAuthenticator {
-    token_exchange:string;
-    ip_inv_server:string;
-    port_inv_server:ushort;
+    idExchange:uint;
+    tokenExchange:string;
+    ipInvServer:string;
+    portInvServer:ushort;
+}
+
+table empty {}
+table ItemDescription {
+    itemId:string(required);
+    quantity:uint;
+}
+
+table TerminateExchange {
+    isTransactionCancelled:bool;
 }
 
 union ExchangeStep {
-
-InitiateExchangeInstance
-
+    InitiateTransaction : empty,
+    AddItem : ItemDescription,
+    RemoveItem : ItemDescription,
+    LockExchange : empty,
+    TerminateExchange
 }
 
 table ExchangeInventory {
-    content:InitiateExchangeInstance;
+    // Authentication information for the action to be receivable
+    idExchange:uint;
+    userName:string(required);
+    tokenExchange:string(required);
+
+    /// Content of the ExchangeInventory Action
+    content:ExchangeStep(required);
 }
 
 root_type ExchangeInventory;

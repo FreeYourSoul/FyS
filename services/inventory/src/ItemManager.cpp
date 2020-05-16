@@ -25,6 +25,8 @@
 
 namespace fys::inv {
 
+ItemManager::ItemManager(const InventoryServerContext& ctx) { }
+
 bool
 ItemManager::areItemsOwnedByUser(const std::string& userName, const std::vector<Item>& item)
 {

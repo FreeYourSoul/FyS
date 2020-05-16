@@ -28,6 +28,12 @@
 #include <string>
 #include <vector>
 
+// forward declarations
+namespace fys::inv {
+class InventoryServerContext;
+}
+// end forward declarations
+
 namespace fys::inv {
 
 struct Item {
@@ -43,6 +49,8 @@ struct Item {
 class ItemManager {
 
 public:
+	explicit ItemManager(const InventoryServerContext& ctx);
+
 	[[nodiscard]] bool
 	areItemsOwnedByUser(const std::string& userName, const std::vector<Item>& item);
 

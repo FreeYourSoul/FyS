@@ -44,35 +44,41 @@ constexpr static double DEFAULT_DISTANCE = 30;
 //! Maximum number of character notified when a character move
 constexpr static unsigned LIMIT_NOTIFICATIONS_MOVE = 50;
 
-template <typename T>
+template<typename T>
 struct Vector2 {
 	T x = 0;
 	T y = 0;
 
-	Vector2 operator+(const Vector2& other) const {
+	Vector2 operator+(const Vector2& other) const
+	{
 		return {x + other.x, y + other.y};
 	}
 
-	Vector2 operator+(T value) const {
+	Vector2 operator+(T value) const
+	{
 		return {x + value, y + value};
 	}
 
-	Vector2 operator-(const Vector2& other) const {
+	Vector2 operator-(const Vector2& other) const
+	{
 		return {x - other.x, y - other.y};
 	}
 
-	Vector2 operator-(T value) const {
+	Vector2 operator-(T value) const
+	{
 		return {x - value, y - value};
 	}
 
 };
 
-template <typename T>
-struct Rectangle final
-{
-	Rectangle() : left(0), top(0), width(0), height(0) {}
-	Rectangle(T l, T t, T w, T h) : left(l), top(t), width(w), height(h) {}
-	Rectangle(Vector2<T> position, Vector2<T> size) : left(position.x), top(position.y), width(size.x), height(size.y) {}
+template<typename T>
+struct Rectangle final {
+	Rectangle()
+			:left(0), top(0), width(0), height(0) { }
+	Rectangle(T l, T t, T w, T h)
+			:left(l), top(t), width(w), height(h) { }
+	Rectangle(Vector2<T> position, Vector2<T> size)
+			:left(position.x), top(position.y), width(size.x), height(size.y) { }
 	T left, top, width, height;
 };
 
@@ -99,40 +105,37 @@ enum class PlayerStatus {
 
 class PlayersData {
 
+	static constexpr uint MAXIMUM_PLAYER_CONNECTED_TO_WORLD_SERVER = 1000;
+
 public:
-	explicit PlayersData(uint maxConnection = 1000) noexcept;
+	explicit PlayersData(uint maxConnection = MAXIMUM_PLAYER_CONNECTED_TO_WORLD_SERVER) noexcept;
 
 	template<typename Action>
-	void
-	executeOnPlayers(Action&& actionToExecute)
+	void executeOnPlayers(Action&& actionToExecute)
 	{
 		for (uint i = 0; i < _status.size(); ++i) {
-			std::forward<Action>(actionToExecute)(i, _status.at(i), _positions.at(i), _identities.at(i));
+			std::forward<Action>(actionToExecute)(i, _status.at(i), _positions.at(i), _identities.at(i), _userNames.at(i));
 		}
 	}
 
-	void
-	setPlayerMoveAction(uint index, double direction)
+	void setPlayerMoveAction(uint index, double direction)
 	{
 		_positions.at(index).angle = direction;
 		_status.at(index) = PlayerStatus::MOVING;
 	}
 
-	void
-	stopPlayerMove(uint index)
+	void stopPlayerMove(uint index)
 	{
 		_status.at(index) = PlayerStatus::STANDING;
 	}
 
-	void
-	setPlayerStatusInArena(uint index, const std::string& arenaId)
+	void setPlayerStatusInArena(uint index, const std::string& arenaId)
 	{
 		_status.at(index) = PlayerStatus::FIGHTING;
 	}
 
 	[[nodiscard]] uint
 	addNewPlayerData(PlayerInfo info, std::string identity, std::string userName);
-
 
 	/**
 	 * @brief Get the Players Identities Around the given player except himself

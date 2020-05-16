@@ -27,6 +27,7 @@
 
 #include <ConnectionHandler.hh>
 #include <utility>
+#include <exchange/ExchangeManager.hh>
 #include "InventoryServerContext.hh"
 
 // forward declarations
@@ -34,6 +35,7 @@ namespace fys::fb::ivt {
 struct UpdatePlayerSoulDraughtboard;
 struct RetrievePlayerSoulDraughtboard;
 struct RetrievePlayerInventory;
+struct InitiateExchangeInstance;
 }
 // end forward declarations
 
@@ -48,7 +50,7 @@ public:
 
 private:
 	[[nodiscard]] zmq::message_t
-	exchangeInventory(const fb::ivt::ExchangeInventory* exchangeRq);
+	exchangeInventory(const fb::ivt::InitiateExchangeInstance* exchangeRq);
 
 	[[nodiscard]] zmq::message_t
 	updatePlayerSoulDraughtboard(const fb::ivt::UpdatePlayerSoulDraughtboard* updateRq);
@@ -60,6 +62,8 @@ private:
 	retrievePlayerInventory(const fb::ivt::RetrievePlayerInventory* retrieveRq);
 
 private:
+	ExchangeManager _exchangeManager;
+	ItemManager _itemManager;
 	common::ConnectionHandler _connectionHandler;
 
 };

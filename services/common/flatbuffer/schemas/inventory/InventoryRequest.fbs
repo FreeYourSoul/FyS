@@ -9,7 +9,7 @@ union InventoryRequestContent {
     UpdatePlayerSoulDraughtboard : fys.fb.ivt.UpdatePlayerSoulDraughtboard,
     RetrievePlayerSoulDraughtboard : fys.fb.ivt.UpdatePlayerSoulDraughtboard,
     RetrievePlayerInventory : fys.fb.ivt.RetrievePlayerInventory,
-    ExchangeInventory : fys.fb.ivt.ExchangeInventory
+    InitiateExchange : fys.fb.ivt.InitiateExchangeInstance
 }
 
 table InventoryRequest {

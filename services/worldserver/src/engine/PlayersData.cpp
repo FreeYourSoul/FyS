@@ -26,9 +26,12 @@
 
 namespace fys::ws {
 
-PlayersData::PlayersData(uint maxConnection) noexcept
-		:
-		_positions(maxConnection), _status(maxConnection), _identities(maxConnection) { }
+PlayersData::PlayersData(uint maxConnection) noexcept {
+	_positions.reserve(maxConnection);
+	_status.reserve(maxConnection);
+	_identities.reserve(maxConnection);
+	_userNames.reserve(maxConnection);
+}
 
 std::vector<std::string_view>
 PlayersData::getPlayerIdtsAroundPlayer(uint indexPlayer,

@@ -37,7 +37,7 @@ ExchangeRoom::addItemFromExchangeForPlayer(const std::string& player, const std:
 	ExchangeRole role = getRolePlayerInExchangeRoom(player);
 
 	if (role == ExchangeRole::NONE) {
-		SPDLOG_ERROR("[Exchange : Room {}] : Player {} isn't part of the exchange.", player);
+		SPDLOG_ERROR("[Exchange : Room {}] : Player {} isn't part of the exchange.", _roomId, player);
 		return false;
 	}
 
@@ -46,10 +46,14 @@ ExchangeRoom::addItemFromExchangeForPlayer(const std::string& player, const std:
 			[&toAdd](const auto& c) { return c.itemCode == toAdd.itemCode; });
 
 	if (itemIt == contentOfPlayer.end()) {
-		uint quantity = toAdd.quantity + itemIt->quantity;
-		if ()
-		// todo verify if the item exist in the given quantity
-		itemIt->quantity = quantity;
+		toAdd.quantity += itemIt->quantity;
+		if (_manager.get().areItemsOwnedByUser(player, {toAdd})) {
+			SPDLOG_ERROR("[Exchange : Room {}] : Player {} doesn't have item [code : {}, quantity : {}].",
+					_roomId, player, toAdd.itemCode, toAdd.quantity);
+			return false;
+		}
+		itemIt->quantity = toAdd.quantity;
+
 	}
 	else {
 		// todo verify if the item exist in the given quantity

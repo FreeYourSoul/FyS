@@ -25,6 +25,7 @@
 #ifndef FYS_ONLINE_INVENTORYSERVERCONTEXT_HH
 #define FYS_ONLINE_INVENTORYSERVERCONTEXT_HH
 
+#include <nlohmann/json.hpp>
 #include <ServiceContextBase.hh>
 
 namespace fys::inv {
@@ -37,11 +38,23 @@ public:
 	[[nodiscard]] const std::string&
 	getConnectionStringCacheDB() const { return _connectionStringCacheDB; }
 
+	[[nodiscard]] const std::string&
+	getServerCode() const { return _serverCode; }
+
+	[[nodiscard]] std::string
+	getPlayerConnectionString() const noexcept;
+
 	[[nodiscard]] std::string
 	toString() const;
 
 private:
+	void initInventoryContextWithJson(nlohmann::json& json);
+
+private:
 	std::string _connectionStringCacheDB;
+	std::string _serverCode;
+
+	uint _portPlayerConnection;
 
 };
 

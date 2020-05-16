@@ -1,0 +1,11 @@
+{
+    "inventory": {
+        "code":                   "ARN01",
+
+        "player_connection_port": 20002,
+
+        "db_hostname":            "Host-001",
+        "db_port":                3306
+
+    }
+}

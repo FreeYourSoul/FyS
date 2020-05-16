@@ -37,13 +37,9 @@ namespace fys::ws {
 
 WorldServerEngine::WorldServerEngine(const fys::ws::WorldServerContext& ctx)
 		:
+		common::DirectConnectionManager(1, ctx.getPlayerConnectionString()),
 		_map(ctx),
-		_zmqCtx(1),
-		_routerPlayerConnection(_zmqCtx, zmq::socket_type::router),
-		_scriptEngine(ctx)
-{
-	_routerPlayerConnection.bind(ctx.getPlayerConnectionString());
-}
+		_scriptEngine(ctx) { }
 
 void
 WorldServerEngine::executePendingMoves()

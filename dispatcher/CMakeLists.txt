@@ -12,5 +12,4 @@ endif ()
 
 add_subdirectory(auth_dispatcher)
 add_subdirectory(chat_dispatcher)
-add_subdirectory(worldserver_dispatcher)
 add_subdirectory(arena_dispatcher)

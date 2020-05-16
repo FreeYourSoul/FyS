@@ -35,6 +35,7 @@
 #include <engine/PlayersData.hh>
 #include <engine/CollisionMap.hh>
 #include <engine/ScriptEngine.hh>
+#include <DirectConnectionManager.hh>
 
 
 // forward declaration
@@ -66,7 +67,7 @@ struct AuthPlayer {
 	}
 };
 
-class WorldServerEngine {
+class WorldServerEngine : public common::DirectConnectionManager {
 
 	friend class WorldPopulator;
 
@@ -81,33 +82,7 @@ public:
 	[[nodiscard]] uint
 	retrieveDataIndex(const AuthPlayer& player);
 
-	template<typename HandlerPlayer>
-	void pollAndProcessPlayerMessage(HandlerPlayer&& handlerPlayer)
-	{
-		//  Initialize poll set
-		zmq::pollitem_t items[] = {
-				{_routerPlayerConnection, 0, ZMQ_POLLIN, 0}
-		};
-		zmq::poll(&items[0], 1, 10);
-		if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
-			zmq::multipart_t msg;
-			if (!msg.recv(_routerPlayerConnection, ZMQ_NOBLOCK) || (msg.size() != 3)) {
-				SPDLOG_ERROR("Error while reading on the listener socket.");
-				SPDLOG_ERROR("Received message may be ill formatted, contains '{}' part, message is : {}",
-						msg.size(), msg.str());
-			}
-			else {
-				// first frame is the identity
-				auto identity = msg.pop();
-				// second frame is auth frame of the player
-				auto authFrame = msg.pop();
-				std::forward<HandlerPlayer>(handlerPlayer)(std::move(identity), std::move(authFrame), msg.pop());
-			}
-		}
-	}
-
 private:
-
 	inline void notifyClientsOfMove(const PlayerInfo& pi, const std::string& userName,
 			const std::vector<std::string_view>& idtsToNotify);
 
@@ -116,9 +91,6 @@ private:
 private:
 	CollisionMap _map;
 	PlayersData _data;
-
-	zmq::context_t _zmqCtx;
-	zmq::socket_t _routerPlayerConnection;
 
 	//! Engine managing scripts of NPC and map triggers
 	ScriptEngine _scriptEngine;
