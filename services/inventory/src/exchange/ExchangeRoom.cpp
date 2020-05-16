@@ -56,14 +56,18 @@ ExchangeRoom::addItemFromExchangeForPlayer(const std::string& player, const std:
 
 	}
 	else {
-		// todo verify if the item exist in the given quantity
+		if (_manager.get().areItemsOwnedByUser(player, {toAdd})) {
+			SPDLOG_ERROR("[Exchange : Room {}] : Player {} doesn't have item [code : {}, quantity : {}].",
+					_roomId, player, toAdd.itemCode, toAdd.quantity);
+			return false;
+		}
 		contentOfPlayer.emplace_back(toAdd);
 	}
 	return true;
 }
 
 bool
-ExchangeRoom::removeItemFromExchangeForPlayer(const std::string& player, const std::string& token, const std::string& toRemove)
+ExchangeRoom::removeItemFromExchangeForPlayer(const std::string& player, const std::string& token, const Item& toRemove)
 {
 	if (!basicCheck(player, token)) return false;
 
@@ -76,10 +80,13 @@ ExchangeRoom::removeItemFromExchangeForPlayer(const std::string& player, const s
 
 	auto& contentOfPlayer = _content[static_cast<uint>(role)];
 	auto itemIt = std::find_if(contentOfPlayer.begin(), contentOfPlayer.end(),
-			[&toRemove](const auto& c) { return c.itemCode == toRemove; });
+			[&toRemove](const auto& c) { return c.itemCode == toRemove.itemCode; });
 
 	if (itemIt == contentOfPlayer.end()) {
-		contentOfPlayer.erase(itemIt);
+		itemIt->quantity -= toRemove.quantity;
+		if (itemIt->quantity <= 0) {
+			contentOfPlayer.erase(itemIt);
+		}
 	}
 	else {
 		SPDLOG_WARN("[Exchange : Room {}] : Player {} tried to remove object '{}' which isn't in the sharing room.",
@@ -89,29 +96,65 @@ ExchangeRoom::removeItemFromExchangeForPlayer(const std::string& player, const s
 	return true;
 }
 
-void
+bool
 ExchangeRoom::lockExchange(const std::string& initiatorPlayer, const std::string& token)
 {
-	if (!basicCheck(initiatorPlayer, token)) return;
+	if (!basicCheck(initiatorPlayer, token)) return false;
 	if (_initiatorUserName != initiatorPlayer) {
 		SPDLOG_ERROR("[Exchange : Room {}] : Player '{}' cant't lock exchange, initiator is '{}'.",
 				_roomId, initiatorPlayer, _initiatorUserName);
-		return;
+		return false;
 	}
 	_step = StepExchange::LOCKED_BY_INITIATOR;
+	return true;
 }
 
-void
+bool
 ExchangeRoom::terminateExchange(const std::string& receiverPlayer, const std::string& token)
 {
-	if (!basicCheck(receiverPlayer, token)) return;
+	if (!basicCheck(receiverPlayer, token)) return false;
 	if (_receiverUserName != receiverPlayer) {
 		SPDLOG_ERROR("[Exchange : Room {}] : Player '{}' cant't validate exchange, receiver is '{}'.",
 				_roomId, receiverPlayer, _receiverUserName);
-		return;
+		return false;
 	}
 	// todo : Execute transaction
 	_step = StepExchange::TERMINATED;
+	return true;
+}
+
+bool
+ExchangeRoom::receiverJoin(const std::string& receiver, const std::string& token, std::string identity)
+{
+	if (!basicCheck(receiver, token)) return false;
+	if (_receiverUserName != receiver) {
+		SPDLOG_ERROR("[Exchange : Room {}] : Player '{}' cant't join because isn't the receiver, receiver is '{}'.",
+				_roomId, receiver, _receiverUserName);
+		return false;
+	}
+	_receiverIdentity = std::move(identity);
+	_step = StepExchange::ON_GOING;
+	return true;
+}
+
+bool
+inv::ExchangeRoom::basicCheck(const std::string& player, const std::string& token)
+{
+	if (_step != StepExchange::ON_GOING) {
+		SPDLOG_ERROR("[Exchange : Room {}] : Player '{}' action impossible, exchange room isn't on-going", _roomId, player);
+		return false;
+	}
+	if (token != _tokenExchange) {
+		SPDLOG_ERROR("[Exchange : Room {}] : Player '{}' didn't provide the good exchange token (provided {}).",
+				_roomId, player, token);
+		return false;
+	}
+	if (player != _initiatorUserName || player != _receiverUserName) {
+		SPDLOG_ERROR("[Exchange : Room {}] : Player '{}' isn't the part of the transaction (awaited '{}' or '{}').",
+				_roomId, player, _initiatorUserName, _receiverUserName);
+		return false;
+	}
+	return true;
 }
 
 fys::inv::ExchangeRoom::ExchangeRole
@@ -124,21 +167,6 @@ inv::ExchangeRoom::getRolePlayerInExchangeRoom(const std::string& idPlayer) cons
 		return ExchangeRole::RECEIVER;
 	}
 	return ExchangeRole::NONE;
-}
-
-bool
-inv::ExchangeRoom::basicCheck(const std::string& player, const std::string& token)
-{
-	if (_step != StepExchange::ON_GOING) {
-		SPDLOG_ERROR("[Exchange : Room {}] : Player '{}' action impossible, exchange room isn't on-going", _roomId, player);
-		return false;
-	}
-	if (token != _tokenExchange) {
-		SPDLOG_ERROR("[Exchange : Room {}] : Player {} didn't provide the good exchange token (provided {}).",
-				_roomId, player, token);
-		return false;
-	}
-	return true;
 }
 
 }

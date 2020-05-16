@@ -21,26 +21,33 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <catch2/catch.hpp>
+#include <FlatbufferGenerator.hh>
 
-#include <exchange/ExchangeRoom.hh>
+namespace fys::inv {
 
-static const std::string ACTUAL_TOKEN = "ThisIsTheActualTokenOfTheExchangeRoom";
-static const std::string RECEIVER = "ReceiverName";
-static const std::string INITIATOR = "InitiatorName";
-static constexpr uint EXCHANGE_ID = 42;
+std::pair<void*, uint>
+FlatbufferGenerator::generateInitiateExchangeResponse(const ExchangeRoom& room) {
+	return std::pair<void*,uint>();
+}
 
-TEST_CASE("ExchangeRoomTestCase", "[service][inventory]")
-{
-	fys::inv::ItemManager im;
-	fys::inv::ExchangeRoom exchangeRoom(EXCHANGE_ID, INITIATOR, RECEIVER, ACTUAL_TOKEN, im);
+std::pair<void*, uint>
+FlatbufferGenerator::generateAddItemToRoomResponse(const ExchangeRoom& room) {
+	return std::pair<void*,uint>();
+}
 
-	SECTION("addItemFromExchangeForPlayer test") {
+std::pair<void*, uint>
+FlatbufferGenerator::generateRemoveItemFromRoomResponse(const ExchangeRoom& room) {
+	return std::pair<void*,uint>();
+}
 
-	} // End section : addItemFromExchangeForPlayer test
+std::pair<void*, uint>
+FlatbufferGenerator::generateLockRoomTransactionResponse(const ExchangeRoom& room) {
+	return std::pair<void*,uint>();
+}
 
-	SECTION("removeItemFromExchangeForPlayer test") {
+std::pair<void*, uint>
+FlatbufferGenerator::generateTerminateTransactionResponse(const ExchangeRoom& room) {
+	return std::pair<void*,uint>();
+}
 
-	} // End section : removeItemFromExchangeForPlayer test
-
-} // End TestCase : ExchangeRoomTestCase
+}

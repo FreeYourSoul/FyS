@@ -38,12 +38,25 @@ class ItemManager;
 
 namespace fys::inv {
 
+struct RoomAccessor {
+	uint idExchange;
+	std::string userName;
+	std::string tokenExchange;
+};
+
 class ExchangeManager : public common::DirectConnectionManager {
 
 public:
 	explicit ExchangeManager(const InventoryServerContext& ctx);
 
-	void makeExchangeRoom(ItemManager& itemManager, const std::string& tokenBase);
+	[[nodiscard]] const ExchangeRoom&
+	makeExchangeRoom(ItemManager& itemManager, std::string initiator, std::string receiver, std::string identity);
+
+	void lockRoomTransaction(const RoomAccessor& accessor);
+	void receiverJoinRoomTransaction(const RoomAccessor& accessor, std::string identityReceiver);
+	void terminateRoomTransaction(ItemManager& manager, const RoomAccessor& accessor);
+	void removeItemFromRoom(ItemManager& manager, const RoomAccessor& accessor, const std::string& itemCode, uint quantity);
+	void addItemInRoom(ItemManager& manager, const RoomAccessor& accessor, const std::string& itemCode, uint quantity);
 
 private:
 	[[nodiscard]] inline std::string

@@ -49,7 +49,8 @@ struct Item {
 class ItemManager {
 
 public:
-	explicit ItemManager(const InventoryServerContext& ctx);
+	// shall take in argument required value for connection
+	explicit ItemManager() = default;
 
 	[[nodiscard]] bool
 	areItemsOwnedByUser(const std::string& userName, const std::vector<Item>& item);

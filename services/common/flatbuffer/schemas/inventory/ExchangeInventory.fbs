@@ -2,18 +2,15 @@ namespace fys.fb.ivt;
 
 /// Auth server preparing an exchange
 table InitiateExchangeInstance {
-    userExchangeInitiator:string;
-    userExchangeInitiatorToken:string;
-
-    userExchangeReceiver:string;
-    userExchangeReceiverToken:string;
+    userInitiator:string(required);
+    userReceiver:string(required);
 }
 
 /// Sent back as response of InitiateExchangeInstance in order to provide information to have a direct connection
 table InventoryAuthenticator {
     idExchange:uint;
-    tokenExchange:string;
-    ipInvServer:string;
+    tokenExchange:string(required);
+    ipInvServer:string(required);
     portInvServer:ushort;
 }
 
@@ -29,6 +26,7 @@ table TerminateExchange {
 
 union ExchangeStep {
     InitiateTransaction : empty,
+    JoinTransaction : empty,
     AddItem : ItemDescription,
     RemoveItem : ItemDescription,
     LockExchange : empty,

@@ -29,6 +29,8 @@ add_executable(inventory_service
         ${CMAKE_CURRENT_LIST_DIR}/src/exchange/ExchangeRoom.cpp
         ${CMAKE_CURRENT_LIST_DIR}/src/exchange/ExchangeManager.cpp
         ${CMAKE_CURRENT_LIST_DIR}/src/ItemManager.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/src/FlatbufferGenerator.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/FlatbufferGenerator.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/ItemManager.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/exchange/ExchangeManager.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/exchange/ExchangeRoom.hh

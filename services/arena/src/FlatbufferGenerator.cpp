@@ -37,6 +37,7 @@
 
 #include "FlatbufferGenerator.hh"
 #include "../../worldserver/include/FlatbufferGenerator.hh"
+#include "../../inventory/include/FlatbufferGenerator.hh"
 
 namespace {
 

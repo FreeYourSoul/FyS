@@ -33,6 +33,10 @@
 namespace fys::inv {
 
 enum class StepExchange {
+
+	// Initial state set, the transaction start when the receiver register
+	AWAIT_TO_BE_JOINED_BY_RECEIVER,
+
 	// The exchange is currently on-going and addition, or deletion of item is accepted
 	ON_GOING,
 
@@ -41,6 +45,7 @@ enum class StepExchange {
 
 	// Exchange is finished, the room can be cleaned up
 	TERMINATED
+
 };
 
 class ExchangeRoom {
@@ -52,20 +57,29 @@ class ExchangeRoom {
 	};
 
 public:
-	explicit ExchangeRoom(uint roomId, std::string tokenExchange, ItemManager& refIm)
-			:_roomId(roomId), _tokenExchange(std::move(tokenExchange)), _manager(refIm) { }
+	explicit ExchangeRoom(
+			uint roomId,
+			std::string initiator,
+			std::string receiver,
+			std::string initiatorIdentity,
+			std::string tokenExchange,
+			ItemManager& refIm)
+			:
+			_roomId(roomId),
+			_tokenExchange(std::move(tokenExchange)),
+			_manager(refIm),
+			_initiatorUserName(std::move(initiator)),
+			_receiverUserName(std::move(receiver)),
+			_initiatorIdentity(std::move(initiatorIdentity)) { }
 
-	[[nodiscard]] bool
-	addItemFromExchangeForPlayer(const std::string& player, const std::string& token, Item toAdd);
-
-	[[nodiscard]] bool
-	removeItemFromExchangeForPlayer(const std::string& player, const std::string& token, const std::string& toRemove);
+	bool receiverJoin(const std::string& receiver, const std::string& token, std::string identity);
+	bool addItemFromExchangeForPlayer(const std::string& player, const std::string& token, Item toAdd);
+	bool removeItemFromExchangeForPlayer(const std::string& player, const std::string& token, const Item& toRemove);
+	bool lockExchange(const std::string& initiatorPlayer, const std::string& token);
+	bool terminateExchange(const std::string& receiverPlayer, const std::string& token);
 
 	[[nodiscard]] StepExchange
 	getCurrentStep() const { return _step; }
-
-	void lockExchange(const std::string& initiatorPlayer, const std::string& token);
-	void terminateExchange(const std::string& receiverPlayer, const std::string& token);
 
 private:
 	[[nodiscard]] inline ExchangeRole
@@ -79,10 +93,13 @@ private:
 	std::string _tokenExchange;
 	std::reference_wrapper<ItemManager> _manager;
 
-	StepExchange _step = StepExchange::ON_GOING;
-
 	std::string _initiatorUserName;
 	std::string _receiverUserName;
+
+	std::string _initiatorIdentity;
+	std::string _receiverIdentity;
+
+	StepExchange _step = StepExchange::AWAIT_TO_BE_JOINED_BY_RECEIVER;
 
 	std::array<std::vector<Item>, 2> _content;
 

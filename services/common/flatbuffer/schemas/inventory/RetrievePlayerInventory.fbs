@@ -1,7 +1,8 @@
 namespace fys.fb.ivt;
 
+// May add filtering functionality on the retrieve
 table RetrievePlayerInventory {
-
+    playerToRetrieve:string(required);
 }
 
 root_type RetrievePlayerInventory;
