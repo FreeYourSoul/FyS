@@ -81,6 +81,12 @@ public:
 	[[nodiscard]] StepExchange
 	getCurrentStep() const { return _step; }
 
+	[[nodiscard]] const std::vector<Item>&
+	getInitiatorContent() const { return _content.at(static_cast<uint>(ExchangeRole::INITIATOR)); }
+
+	[[nodiscard]] const std::vector<Item>&
+	getReceiverContent() const { return _content.at(static_cast<uint>(ExchangeRole::RECEIVER)); }
+
 private:
 	[[nodiscard]] inline ExchangeRole
 	getRolePlayerInExchangeRoom(const std::string& idPlayer) const noexcept;

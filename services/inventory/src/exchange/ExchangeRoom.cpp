@@ -32,7 +32,7 @@ namespace fys::inv {
 bool
 ExchangeRoom::addItemFromExchangeForPlayer(const std::string& player, const std::string& token, Item toAdd)
 {
-	if (!basicCheck(player, token)) return false;
+	if (!basicCheck(player, token) || toAdd.quantity == 0) return false;
 
 	ExchangeRole role = getRolePlayerInExchangeRoom(player);
 
@@ -45,7 +45,7 @@ ExchangeRoom::addItemFromExchangeForPlayer(const std::string& player, const std:
 	auto itemIt = std::find_if(contentOfPlayer.begin(), contentOfPlayer.end(),
 			[&toAdd](const auto& c) { return c.itemCode == toAdd.itemCode; });
 
-	if (itemIt == contentOfPlayer.end()) {
+	if (itemIt != contentOfPlayer.end()) {
 		toAdd.quantity += itemIt->quantity;
 		if (_manager.get().areItemsOwnedByUser(player, {toAdd})) {
 			SPDLOG_ERROR("[Exchange : Room {}] : Player {} doesn't have item [code : {}, quantity : {}].",
@@ -82,15 +82,17 @@ ExchangeRoom::removeItemFromExchangeForPlayer(const std::string& player, const s
 	auto itemIt = std::find_if(contentOfPlayer.begin(), contentOfPlayer.end(),
 			[&toRemove](const auto& c) { return c.itemCode == toRemove.itemCode; });
 
-	if (itemIt == contentOfPlayer.end()) {
-		itemIt->quantity -= toRemove.quantity;
-		if (itemIt->quantity <= 0) {
+	if (itemIt != contentOfPlayer.end()) {
+		if (toRemove.quantity >= itemIt->quantity) {
 			contentOfPlayer.erase(itemIt);
+		}
+		else {
+			itemIt->quantity -= toRemove.quantity;
 		}
 	}
 	else {
 		SPDLOG_WARN("[Exchange : Room {}] : Player {} tried to remove object '{}' which isn't in the sharing room.",
-				_roomId, player, toRemove);
+				_roomId, player, toRemove.itemCode);
 		return false;
 	}
 	return true;
@@ -126,7 +128,15 @@ ExchangeRoom::terminateExchange(const std::string& receiverPlayer, const std::st
 bool
 ExchangeRoom::receiverJoin(const std::string& receiver, const std::string& token, std::string identity)
 {
-	if (!basicCheck(receiver, token)) return false;
+	if (_step != StepExchange::AWAIT_TO_BE_JOINED_BY_RECEIVER) {
+		SPDLOG_ERROR("[Exchange : Room {}] : Player '{}' action impossible, exchange room isn't on-going", _roomId, receiver);
+		return false;
+	}
+	if (token != _tokenExchange) {
+		SPDLOG_ERROR("[Exchange : Room {}] : Player '{}' didn't provide the good exchange token (provided {}).",
+				_roomId, receiver, token);
+		return false;
+	}
 	if (_receiverUserName != receiver) {
 		SPDLOG_ERROR("[Exchange : Room {}] : Player '{}' cant't join because isn't the receiver, receiver is '{}'.",
 				_roomId, receiver, _receiverUserName);
@@ -149,7 +159,7 @@ inv::ExchangeRoom::basicCheck(const std::string& player, const std::string& toke
 				_roomId, player, token);
 		return false;
 	}
-	if (player != _initiatorUserName || player != _receiverUserName) {
+	if (player != _initiatorUserName && player != _receiverUserName) {
 		SPDLOG_ERROR("[Exchange : Room {}] : Player '{}' isn't the part of the transaction (awaited '{}' or '{}').",
 				_roomId, player, _initiatorUserName, _receiverUserName);
 		return false;

@@ -23,6 +23,7 @@ if (CCACHE_FOUND)
 endif (CCACHE_FOUND)
 
 add_executable(arena_service
+        ${COMMON_SRCS}
         ${CMAKE_CURRENT_LIST_DIR}/src/main.cpp
         ${CMAKE_CURRENT_LIST_DIR}/src/ChaiRegister.cpp
         ${CMAKE_CURRENT_LIST_DIR}/src/fightingPit/FightingPit.cpp
