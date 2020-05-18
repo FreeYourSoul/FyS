@@ -96,7 +96,6 @@ TEST_CASE("ExchangeRoomTestCase", "[service][inventory]")
 	} // End section : addItemFromExchangeForPlayer test
 
 	SECTION("addItemFromExchangeForPlayer Error testing") {
-
 		REQUIRE(exchangeRoom.receiverJoin(RECEIVER, ACTUAL_TOKEN, RECEIVER_IDENTITY));
 		REQUIRE_FALSE(exchangeRoom.addItemFromExchangeForPlayer(INITIATOR, "NOT_TOKEN", Item{"ItemCode", 2}));
 
