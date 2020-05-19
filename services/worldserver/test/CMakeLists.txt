@@ -26,8 +26,22 @@ include_directories(
 
 add_executable(world_server_test
         ${CMAKE_CURRENT_LIST_DIR}/catchMain.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/FlatbufferGenerator.cpp
+
+        # Test files
+        ${CMAKE_CURRENT_LIST_DIR}/WorldServerEngineTestCase.cpp
         ${CMAKE_CURRENT_LIST_DIR}/FlatbufferGeneratorTestCase.cpp
+
+        # Sources
+        ${CMAKE_CURRENT_LIST_DIR}/../src/FlatbufferGenerator.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/engine/PlayersData.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/engine/WorldServerEngine.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/engine/CollisionMap.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/engine/WorldPopulator.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/FlatbufferGenerator.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/engine/ScriptEngine.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/ConnectionHandler.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/WorldServerService.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/WorldServerContext.cpp
         )
 
 target_link_libraries(world_server_test cppzmq Catch2::Catch2)
