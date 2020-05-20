@@ -156,7 +156,7 @@ WorldServerService::registerAwaitedPlayer(const std::string& user, const std::st
 
 	_worldServer.authenticatePlayer(
 			awaitedIt->auth,
-			PlayerInfo{awaitedIt->initialPosition, awaitedIt->initialVelocity, awaitedIt->initialAngle},
+			CharacterInfo{awaitedIt->initialPosition, awaitedIt->initialVelocity, awaitedIt->initialAngle},
 			std::move(identity)
 	);
 	_awaitedIncomingPlayer.erase(awaitedIt);

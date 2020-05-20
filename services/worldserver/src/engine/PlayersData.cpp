@@ -35,7 +35,7 @@ PlayersData::PlayersData(uint maxConnection) noexcept {
 
 std::vector<std::string_view>
 PlayersData::getPlayerIdtsAroundPlayer(uint indexPlayer,
-		std::optional<std::reference_wrapper<PlayerInfo>> position,
+		std::optional<std::reference_wrapper<CharacterInfo>> position,
 		double distance) const noexcept
 {
 	if (position.has_value() && indexPlayer < _positions.size()) {
@@ -71,7 +71,7 @@ PlayersData::getPlayerIdtsAroundPos(const Pos& position,
 }
 
 uint
-PlayersData::addNewPlayerData(PlayerInfo info, std::string identity, std::string userName)
+PlayersData::addNewPlayerData(CharacterInfo info, std::string identity, std::string userName)
 {
 	if (!(_identities.size() == _status.size() == _positions.size() == _userNames.size())) {
 		SPDLOG_CRITICAL("MISMATCH, all vectors require to be equal idt:'{}' stat:'{}' pos:'{}', names:'{}'",

@@ -109,7 +109,7 @@ CollisionMap::addTriggerInMap(const tmx::ObjectGroup& triggerLayer)
 }
 
 void
-CollisionMap::executePotentialTrigger(uint index, const PlayerInfo& positionOnMap)
+CollisionMap::executePotentialTrigger(uint index, const CharacterInfo& positionOnMap)
 {
 }
 

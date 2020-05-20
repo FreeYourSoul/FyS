@@ -91,7 +91,7 @@ using Vec2u = Vector2<uint>;
 using Pos = Vector2<double>;
 
 
-struct PlayerInfo {
+struct CharacterInfo {
 	Pos pos;
 	double velocity = 1.0;
 	double angle = 0.0;
@@ -135,7 +135,7 @@ public:
 	}
 
 	[[nodiscard]] uint
-	addNewPlayerData(PlayerInfo info, std::string identity, std::string userName);
+	addNewPlayerData(CharacterInfo info, std::string identity, std::string userName);
 
 	/**
 	 * @brief Get the Players Identities Around the given player except himself
@@ -147,7 +147,7 @@ public:
 	 */
 	[[nodiscard]] inline std::vector<std::string_view>
 	getPlayerIdtsAroundPlayer(uint indexPlayer,
-			std::optional<std::reference_wrapper<PlayerInfo>> position,
+			std::optional<std::reference_wrapper<CharacterInfo>> position,
 			double distance = DEFAULT_DISTANCE) const noexcept;
 
 	/**
@@ -165,7 +165,7 @@ public:
 			uint ignoreIndex = LIMIT_NOTIFICATIONS_MOVE) const noexcept;
 
 private:
-	std::vector<PlayerInfo> _positions;
+	std::vector<CharacterInfo> _positions;
 	std::vector<PlayerStatus> _status;
 	std::vector<std::string> _identities;
 	std::vector<std::string> _userNames;

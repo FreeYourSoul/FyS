@@ -21,34 +21,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <engine/PlayersData.hh>
+#ifndef FYS_ONLINE_LUAENCOUNTERSCRIPT_HH
+#define FYS_ONLINE_LUAENCOUNTERSCRIPT_HH
 
-#include <WSResponse_generated.h>
+namespace fys::ws::lua {
 
-#include <FlatbufferGenerator.hh>
+class LuaEncounterScript {
 
-namespace fys::ws {
 
-std::pair<void*, uint>
-fys::ws::FlatbufferGenerator::generateMoveNotification(const std::string& playerName, const fys::ws::CharacterInfo& info)
-{
-	auto moveNotification = fb::world::CreateMoveNotification(
-			_fbb,
-			_fbb.CreateString(playerName),
-			info.velocity,
-			info.angle,
-			info.pos.x,
-			info.pos.y
-	);
 
-	auto message = fb::world::CreateResponseFrame(
-			_fbb,
-			fys::fb::world::Response_MoveNotification,
-			moveNotification.Union()
-	);
-
-	fb::world::FinishResponseFrameBuffer(_fbb, message);
-	return std::pair(_fbb.GetBufferPointer(), _fbb.GetSize());
-}
+};
 
 }
+
+#endif //FYS_ONLINE_LUAENCOUNTERSCRIPT_HH

@@ -77,16 +77,16 @@ public:
 	void executePendingMoves();
 	void setPlayerMoveDirection(uint index, double direction);
 	void stopPlayerMove(uint index);
-	void authenticatePlayer(AuthPlayer auth, PlayerInfo info, std::string identifier);
+	void authenticatePlayer(AuthPlayer auth, CharacterInfo info, std::string identifier);
 
 	[[nodiscard]] uint
 	retrieveDataIndex(const AuthPlayer& player);
 
 private:
-	inline void notifyClientsOfMove(const PlayerInfo& pi, const std::string& userName,
+	inline void notifyClientsOfMove(const CharacterInfo& pi, const std::string& userName,
 			const std::vector<std::string_view>& idtsToNotify);
 
-	inline void movePlayerAction(const std::string& idt, uint indexPlayer, PlayerInfo& pi);
+	inline void movePlayerAction(const std::string& idt, uint indexPlayer, CharacterInfo& pi);
 
 private:
 	CollisionMap _map;

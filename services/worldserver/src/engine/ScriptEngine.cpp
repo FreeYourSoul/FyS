@@ -21,12 +21,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include <fmt/format.h>
 #include <spdlog/spdlog.h>
+
+#define SOL_SAFE_REFERENCES
+#define SOL_SAFE_FUNCTION_CALLS
+#define SOL_SAFE_FUNCTION
 #include <sol/sol.hpp>
 
 #include <WorldServerContext.hh>
 
 #include <engine/ScriptEngine.hh>
+
+namespace {
+
+std::vector<fys::ws::Pos>
+retrievePosVector(std::vector<std::pair<double, double>> vec)
+{
+	std::vector<fys::ws::Pos> ret;
+	ret.reserve(vec.size());
+	for (const auto&[x, y] : vec) {
+		ret.push_back({x, y});
+	}
+	return ret;
+}
+
+}
 
 namespace fys::ws {
 
@@ -41,16 +61,10 @@ ScriptEngine::ScriptEngine(const WorldServerContext& ctx)
 }
 
 void
-ScriptEngine::setScriptEngineCache(cache::CmlScriptDownloader cache)
-{
-	_cache = std::move(cache);
-}
-
-void
 ScriptEngine::registerCommon()
 {
 	SPDLOG_INFO("Register LUA utilities");
-	
+
 	_lua.open_libraries(sol::lib::base, sol::lib::package);
 
 	auto position = _lua.new_usertype<Pos>("Pos");
@@ -63,13 +77,15 @@ ScriptEngine::registerCommon()
 	zone["top"] = &Zone::top;
 	zone["left"] = &Zone::left;
 
-	auto npcMovements = _lua.new_usertype<NPCMovement>("NPCMovement");
-	npcMovements["velocity"] = &NPCMovement::velocity;
-	npcMovements["currentIndex"] = &NPCMovement::currentIndex;
-	npcMovements["path"] = &NPCMovement::path;
+	auto characterInfo = _lua.new_usertype<CharacterInfo>("CharacterInfo");
+	characterInfo["pos"] = &CharacterInfo::pos;
+	characterInfo["velocity"] = &CharacterInfo::velocity;
+	characterInfo["angle"] = &CharacterInfo::angle;
 
-	auto spawnedEncounter = _lua.new_usertype<SpawnedEncounter>("SpawnedEncounter");
-	spawnedEncounter["position"] = &SpawnedEncounter::position;
+	auto npcMovements = _lua.new_usertype<NPCMovement>("NPCMovement");
+	npcMovements["info"] = &NPCMovement::info;
+	npcMovements["currentDestination"] = &NPCMovement::currentDestination;
+	npcMovements["path"] = &NPCMovement::path;
 
 	auto spawningEncounterArea = _lua.new_usertype<SpawningEncounterArea>("SpawningEncounterArea");
 	spawningEncounterArea["nextSpawnCycle"] = &SpawningEncounterArea::nextSpawnCycle;
@@ -80,9 +96,44 @@ ScriptEngine::registerCommon()
 }
 
 void
-ScriptEngine::spawnNewEncounters()
+ScriptEngine::spawnNewEncounters(const std::chrono::system_clock::time_point& currentTime)
 {
+	for (unsigned i = 0; i < _spawningPoints.size(); ++i) {
+		if (currentTime >= _spawningPoints.at(i).nextSpawn) {
+			this->spawnEncounter(i);
+			_spawningPoints.at(i).nextSpawn += _spawningPoints.at(i).spawningInterval;
+		}
+	}
+}
 
+void
+ScriptEngine::spawnEncounter(unsigned indexSpawn)
+{
+	// Do not spawn encounter if the max is already reached
+	if (_spawningPoints.at(indexSpawn).maxSpawned <= _spawnedPerSpawningPoint.at(indexSpawn).size()) {
+		return;
+	}
+
+	const std::string makeEncounterNPCMovement = fmt::format("makeEncounterNPCMovement_{}", indexSpawn);
+	sol::function luaMaker = _lua[makeEncounterNPCMovement];
+
+	if (!luaMaker.valid()) {
+		SPDLOG_ERROR("[LuaEngine] : function {} has not been created properly at init.", makeEncounterNPCMovement);
+		return;
+	}
+	const Zone& spawningZone = _spawningPoints.at(indexSpawn).zone;
+	LuaSpawningReturnType res = luaMaker(spawningZone.width, spawningZone.height, spawningZone.top, spawningZone.left);
+
+	_spawnedPerSpawningPoint[indexSpawn].push_back(
+			NPCMovement{
+					CharacterInfo{
+							Pos{std::get<0>(res), std::get<1>(res)},
+							std::get<2>(res),
+							std::get<3>(res)
+					},
+					::retrievePosVector(std::get<4>(res)),
+					std::get<5>(res)
+			});
 }
 
 void

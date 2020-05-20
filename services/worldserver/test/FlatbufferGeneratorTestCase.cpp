@@ -46,7 +46,7 @@ TEST_CASE("ws::FlatbufferGeneratorTestCase", "[service][world][util]")
 
 	SECTION("generateMoveNotification") {
 
-		auto[data, size] = fg.generateMoveNotification("Naming", PlayerInfo{Pos{11, 22}, 1337.0, 42.42});
+		auto[data, size] = fg.generateMoveNotification("Naming", CharacterInfo{Pos{11, 22}, 1337.0, 42.42});
 
 		REQUIRE(nullptr != data);
 		REQUIRE(0 < size);

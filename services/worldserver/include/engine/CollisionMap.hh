@@ -166,7 +166,7 @@ public:
 	CollisionMap& operator=(const CollisionMap&) = delete;
 
 	void buildMapFromTmx(const std::string& tmxMapPath);
-	void executePotentialTrigger(uint index, const PlayerInfo& positionOnMap);
+	void executePotentialTrigger(uint index, const CharacterInfo& positionOnMap);
 
 	/**
 	 * Check if the position is in the boundary of the map before checking on the map

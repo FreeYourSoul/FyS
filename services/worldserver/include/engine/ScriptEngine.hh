@@ -26,9 +26,12 @@
 #define FYS_ONLINE_SCRIPTENGINE_HH
 
 #include <memory>
+#include <chrono>
 #include <sol/sol.hpp>
 #include <engine/PlayersData.hh>
 #include <CmlScriptDownloader.hh>
+
+using namespace std::chrono_literals;
 
 // forward declarations
 namespace fys::ws {
@@ -38,8 +41,14 @@ class WorldServerContext;
 
 namespace fys::ws {
 
-struct SpawnedEncounter {
-	Pos position;
+//! Spawning interval set by default for a given spawning point
+static constexpr std::chrono::seconds BASE_SPAWNING_INTERVAL = 40s;
+
+struct SpawningPoint {
+	unsigned maxSpawned{};
+	Zone zone{};
+	std::chrono::seconds spawningInterval = BASE_SPAWNING_INTERVAL;
+	std::chrono::system_clock::time_point nextSpawn{};
 };
 
 struct SpawningEncounterArea {
@@ -53,31 +62,40 @@ struct SpawningEncounterArea {
 };
 
 struct NPCMovement {
-	double velocity;
-	uint currentIndex;
+	CharacterInfo info;
+
+	//! List of destination the NPC will have to move to
 	std::vector<Pos> path;
+
+	//! index of the "path" vector we are currently doing
+	unsigned currentDestination{};
 };
 
 class ScriptEngine {
+	using LuaSpawningReturnType =
+	std::tuple<double, double, double, double, std::vector<std::pair<double, double>>, unsigned>;
 
 public:
 	ScriptEngine(const WorldServerContext& ctx);
-	void setScriptEngineCache(cache::CmlScriptDownloader cache);
 
-	void spawnNewEncounters();
+	void spawnNewEncounters(const std::chrono::system_clock::time_point& currentTime);
 
 	void registerCommon();
 	void registerNPCMovementScripts(const std::vector<std::string>& movScripts);
 	void registerEncounterSpawnScript(const std::vector<std::string>& spawnScripts);
 
+	void setScriptEngineCache(cache::CmlScriptDownloader cache) { _cache = std::move(cache); }
+
+private:
+	void spawnEncounter(unsigned indexSpawn);
+
 private:
 	cache::CmlScriptDownloader _cache;
 
-	std::vector<NPCMovement> _npcMovements;
-	std::vector<SpawnedEncounter> _spawningPoints;
+	std::vector<SpawningPoint> _spawningPoints;
 
 	//! vector of Spawned encounter, the index of the vector is the id of the spawning point corresponding
-	std::vector<std::vector<SpawnedEncounter>> _spawnedPerSpawningPoint;
+	std::vector<std::vector<NPCMovement>> _spawnedPerSpawningPoint;
 
 	sol::state _lua;
 

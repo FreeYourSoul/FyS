@@ -45,7 +45,7 @@ void
 WorldServerEngine::executePendingMoves()
 {
 	_data.executeOnPlayers(
-			[this](uint index, PlayerStatus status, PlayerInfo& pi, const std::string&, const std::string& userName) {
+			[this](uint index, PlayerStatus status, CharacterInfo& pi, const std::string&, const std::string& userName) {
 				if (status == PlayerStatus::MOVING) {
 					movePlayerAction(userName, index, pi);
 				}
@@ -53,7 +53,7 @@ WorldServerEngine::executePendingMoves()
 }
 
 void
-WorldServerEngine::authenticatePlayer(AuthPlayer auth, PlayerInfo info, std::string identifier)
+WorldServerEngine::authenticatePlayer(AuthPlayer auth, CharacterInfo info, std::string identifier)
 {
 	uint index = _data.addNewPlayerData(std::move(info), std::move(identifier), auth.userName);
 	_authPlayerOnDataIndex.insert(std::pair(std::move(auth), index));
@@ -72,7 +72,7 @@ WorldServerEngine::stopPlayerMove(uint index)
 }
 
 void
-WorldServerEngine::movePlayerAction(const std::string& userName, uint indexPlayer, PlayerInfo& pi)
+WorldServerEngine::movePlayerAction(const std::string& userName, uint indexPlayer, CharacterInfo& pi)
 {
 	double velocity = pi.velocity;
 
@@ -93,7 +93,7 @@ WorldServerEngine::movePlayerAction(const std::string& userName, uint indexPlaye
 
 void
 WorldServerEngine::notifyClientsOfMove(
-		const PlayerInfo& pi,
+		const CharacterInfo& pi,
 		const std::string& userName,
 		const std::vector<std::string_view>& idtsToNotify)
 {
