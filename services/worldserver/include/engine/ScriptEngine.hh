@@ -61,14 +61,22 @@ struct SpawningEncounterArea {
 	unsigned nextSpawnCycle;
 };
 
+struct NPCAction {
+	//! Idle Time until
+	std::optional<std::chrono::system_clock::time_point> idleTime;
+
+	//! Next destination
+	Pos destination;
+};
+
 struct NPCMovement {
 	CharacterInfo info;
 
 	//! List of destination the NPC will have to move to
-	std::vector<Pos> path;
+	std::vector<NPCAction> actions;
 
 	//! index of the "path" vector we are currently doing
-	unsigned currentDestination{};
+	unsigned currentAction{};
 };
 
 class ScriptEngine {
@@ -79,6 +87,22 @@ public:
 	ScriptEngine(const WorldServerContext& ctx);
 
 	void spawnNewEncounters(const std::chrono::system_clock::time_point& currentTime);
+
+	template<typename Handler>
+	void executeScriptedActions(Handler&& handler)
+	{
+		for (auto& perSpawnedPoint : _spawnedPerSpawningPoint) {
+			for (auto& spawned : perSpawnedPoint) {
+				const unsigned indexAction = spawned.currentAction;
+				if (indexAction >= spawned.actions.size()) {
+					SPDLOG_ERROR("[ScriptEngine] : Index of the current action '{}' isn't pointing an existing actions (size action list '{}')",
+							indexAction, spawned.actions.size());
+					continue;
+				}
+				std::forward<Handler>(handler)(indexAction, spawned.info, spawned.actions.at(indexAction));
+			}
+		}
+	}
 
 	void registerCommon();
 	void registerNPCMovementScripts(const std::vector<std::string>& movScripts);

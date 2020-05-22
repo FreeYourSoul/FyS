@@ -83,10 +83,15 @@ public:
 	retrieveDataIndex(const AuthPlayer& player);
 
 private:
-	inline void notifyClientsOfMove(const CharacterInfo& pi, const std::string& userName,
+	inline void movePlayerAction(const std::string& userName, uint indexCharacter, CharacterInfo& pi);
+	inline void moveNPCAction(uint indexCharacter, CharacterInfo& pi);
+	inline void moveCharacterAction(const std::string& userName, uint indexCharacter, CharacterInfo& pi, bool isNpc);
+
+	inline void notifyClientsOfCharacterMove(const CharacterInfo& pi, const std::string& userName,
 			const std::vector<std::string_view>& idtsToNotify);
 
-	inline void movePlayerAction(const std::string& idt, uint indexPlayer, CharacterInfo& pi);
+	[[nodiscard]] inline double
+	retrieveDirectionAngle(CharacterInfo& info, const NPCAction& action) const;
 
 private:
 	CollisionMap _map;

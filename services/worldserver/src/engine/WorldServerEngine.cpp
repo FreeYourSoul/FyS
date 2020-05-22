@@ -50,6 +50,15 @@ WorldServerEngine::executePendingMoves()
 					movePlayerAction(userName, index, pi);
 				}
 			});
+
+	_scriptEngine.executeScriptedActions(
+			[this](uint index, CharacterInfo& pi, const NPCAction& action) {
+				if (action.idleTime.has_value() && std::chrono::system_clock::now() < *action.idleTime) {
+					return;
+				}
+				pi.angle = retrieveDirectionAngle(pi, action);
+				moveNPCAction(index, pi);
+			});
 }
 
 void
@@ -71,8 +80,25 @@ WorldServerEngine::stopPlayerMove(uint index)
 	_data.stopPlayerMove(index);
 }
 
+double
+WorldServerEngine::retrieveDirectionAngle(CharacterInfo& info, const NPCAction& action) const
+{
+	return std::atan((info.pos.y - action.destination.y) / (info.pos.x - action.destination.x));
+}
+
 void
-WorldServerEngine::movePlayerAction(const std::string& userName, uint indexPlayer, CharacterInfo& pi)
+WorldServerEngine::movePlayerAction(const std::string &userName, uint indexCharacter, CharacterInfo &pi) {
+	moveCharacterAction(userName, indexCharacter, pi, true);
+}
+
+void
+WorldServerEngine::moveNPCAction(uint indexCharacter, CharacterInfo& pi)
+{
+	moveCharacterAction(std::string("NPC_").append(std::to_string(indexCharacter)), indexCharacter, pi, true);
+}
+
+void
+WorldServerEngine::moveCharacterAction(const std::string& userName, uint indexCharacter, CharacterInfo& pi, bool isNpc)
 {
 	double velocity = pi.velocity;
 
@@ -84,15 +110,18 @@ WorldServerEngine::movePlayerAction(const std::string& userName, uint indexPlaye
 
 	if (_map.canMoveTo(futurePos, 0)) {
 		pi.pos = futurePos;
-		_map.executePotentialTrigger(indexPlayer, pi);
+
+		// NPC Character can't trigger map triggers
+		if (!isNpc) _map.executePotentialTrigger(indexCharacter, pi);
+
 		if (const auto clientsToNotify = _data.getPlayerIdtsAroundPos(pi.pos); !clientsToNotify.empty()) {
-			notifyClientsOfMove(pi, userName, clientsToNotify);
+			notifyClientsOfCharacterMove(pi, userName, clientsToNotify);
 		}
 	}
 }
 
 void
-WorldServerEngine::notifyClientsOfMove(
+WorldServerEngine::notifyClientsOfCharacterMove(
 		const CharacterInfo& pi,
 		const std::string& userName,
 		const std::vector<std::string_view>& idtsToNotify)

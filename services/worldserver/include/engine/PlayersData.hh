@@ -94,7 +94,7 @@ using Pos = Vector2<double>;
 struct CharacterInfo {
 	Pos pos;
 	double velocity = 1.0;
-	double angle = 0.0;
+	double angle = 0.0; // in radiant
 };
 
 enum class PlayerStatus {

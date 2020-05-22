@@ -35,13 +35,13 @@
 
 namespace {
 
-std::vector<fys::ws::Pos>
+std::vector<fys::ws::NPCAction>
 retrievePosVector(std::vector<std::pair<double, double>> vec)
 {
-	std::vector<fys::ws::Pos> ret;
+	std::vector<fys::ws::NPCAction> ret;
 	ret.reserve(vec.size());
 	for (const auto&[x, y] : vec) {
-		ret.push_back({x, y});
+//		ret.push_back();
 	}
 	return ret;
 }
@@ -77,6 +77,10 @@ ScriptEngine::registerCommon()
 	zone["top"] = &Zone::top;
 	zone["left"] = &Zone::left;
 
+	auto npcAction = _lua.new_usertype<NPCAction>("NPCAction");
+	npcAction["destination"] = &NPCAction::destination;
+	npcAction["idleTime"] = &NPCAction::idleTime;
+
 	auto characterInfo = _lua.new_usertype<CharacterInfo>("CharacterInfo");
 	characterInfo["pos"] = &CharacterInfo::pos;
 	characterInfo["velocity"] = &CharacterInfo::velocity;
@@ -84,8 +88,8 @@ ScriptEngine::registerCommon()
 
 	auto npcMovements = _lua.new_usertype<NPCMovement>("NPCMovement");
 	npcMovements["info"] = &NPCMovement::info;
-	npcMovements["currentDestination"] = &NPCMovement::currentDestination;
-	npcMovements["path"] = &NPCMovement::path;
+	npcMovements["currentAction"] = &NPCMovement::currentAction;
+	npcMovements["actions"] = &NPCMovement::actions;
 
 	auto spawningEncounterArea = _lua.new_usertype<SpawningEncounterArea>("SpawningEncounterArea");
 	spawningEncounterArea["nextSpawnCycle"] = &SpawningEncounterArea::nextSpawnCycle;
