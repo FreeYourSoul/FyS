@@ -1,0 +1,19 @@
+{
+    "spawning_points": [
+
+        {
+            "display_key":       "DS1",
+            "max_spawned":       10,
+            "spawning_interval": 40,
+            "key_zone":          "ws::sp::testing_area.lua"
+        },
+
+        {
+            "display_key":       "DS2",
+            "max_spawned":       10,
+            "spawning_interval": 40,
+            "key_zone":          ""
+        }
+    ]
+
+}

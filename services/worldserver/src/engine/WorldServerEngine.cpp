@@ -42,26 +42,6 @@ WorldServerEngine::WorldServerEngine(const fys::ws::WorldServerContext& ctx)
 		_scriptEngine(ctx) { }
 
 void
-WorldServerEngine::executePendingMoves()
-{
-	_data.executeOnPlayers(
-			[this](uint index, PlayerStatus status, CharacterInfo& pi, const std::string&, const std::string& userName) {
-				if (status == PlayerStatus::MOVING) {
-					movePlayerAction(userName, index, pi);
-				}
-			});
-
-	_scriptEngine.executeScriptedActions(
-			[this](uint index, CharacterInfo& pi, const NPCAction& action) {
-				if (action.idleTime.has_value() && std::chrono::system_clock::now() < *action.idleTime) {
-					return;
-				}
-				pi.angle = retrieveDirectionAngle(pi, action);
-				moveNPCAction(index, pi);
-			});
-}
-
-void
 WorldServerEngine::authenticatePlayer(AuthPlayer auth, CharacterInfo info, std::string identifier)
 {
 	uint index = _data.addNewPlayerData(std::move(info), std::move(identifier), auth.userName);
@@ -80,6 +60,30 @@ WorldServerEngine::stopPlayerMove(uint index)
 	_data.stopPlayerMove(index);
 }
 
+void
+WorldServerEngine::executePendingMoves()
+{
+	_data.executeOnPlayers(
+			[this](uint index, PlayerStatus status, CharacterInfo& pi, const std::string&, const std::string& userName) {
+				if (status == PlayerStatus::MOVING) {
+					movePlayerAction(userName, index, pi);
+				}
+			});
+
+	_scriptEngine.executeScriptedActions(
+			[this](uint index, CharacterInfo& pi, const NPCAction& action) {
+				if (std::chrono::system_clock::now().time_since_epoch().count() < action.idleTime) {
+					return index;
+				}
+				pi.angle = retrieveDirectionAngle(pi, action);
+				moveNPCAction(index, pi);
+				if (std::round(pi.pos.x) == std::round(action.destination.x) && std::round(pi.pos.y) == std::round(action.destination.y)) {
+					return index + 1;
+				}
+				return index;
+			});
+}
+
 double
 WorldServerEngine::retrieveDirectionAngle(CharacterInfo& info, const NPCAction& action) const
 {
@@ -87,7 +91,8 @@ WorldServerEngine::retrieveDirectionAngle(CharacterInfo& info, const NPCAction& 
 }
 
 void
-WorldServerEngine::movePlayerAction(const std::string &userName, uint indexCharacter, CharacterInfo &pi) {
+WorldServerEngine::movePlayerAction(const std::string& userName, uint indexCharacter, CharacterInfo& pi)
+{
 	moveCharacterAction(userName, indexCharacter, pi, true);
 }
 

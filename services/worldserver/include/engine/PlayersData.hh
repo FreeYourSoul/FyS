@@ -84,7 +84,6 @@ struct Rectangle final {
 
 using HitBoxd = Rectangle<double>;
 using HitBoxu = Rectangle<uint>;
-using Zone = Rectangle<uint>;
 using Vec2u = Vector2<uint>;
 
 //! Position in 2D space (X, Y)

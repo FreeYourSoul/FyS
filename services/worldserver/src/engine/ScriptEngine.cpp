@@ -24,26 +24,25 @@
 #include <fmt/format.h>
 #include <spdlog/spdlog.h>
 
-#define SOL_SAFE_REFERENCES
-#define SOL_SAFE_FUNCTION_CALLS
-#define SOL_SAFE_FUNCTION
+#define SOL_ALL_SAFETIES_ON 1
 #include <sol/sol.hpp>
 
 #include <WorldServerContext.hh>
+#include <CmlKey.hh>
 
 #include <engine/ScriptEngine.hh>
 
 namespace {
 
-std::vector<fys::ws::NPCAction>
-retrievePosVector(std::vector<std::pair<double, double>> vec)
+void
+testingScriptDownload(const std::string& key, const std::string& pathDest)
 {
-	std::vector<fys::ws::NPCAction> ret;
-	ret.reserve(vec.size());
-	for (const auto&[x, y] : vec) {
-//		ret.push_back();
-	}
-	return ret;
+	fys::cache::CmlKey k("", key);
+	auto p = std::filesystem::path(key);
+	std::error_code e;
+
+	std::filesystem::create_directories(p.parent_path(), e);
+	std::filesystem::copy(k.getPath(), p, e);
 }
 
 }
@@ -55,9 +54,10 @@ ScriptEngine::ScriptEngine(const WorldServerContext& ctx)
 
 		// Find and download script handler
 		[](const std::string& keyScript, const std::string& pathDestination) {
+			::testingScriptDownload(keyScript, pathDestination);
 		})
 {
-
+	registerCommon();
 }
 
 void
@@ -71,12 +71,6 @@ ScriptEngine::registerCommon()
 	position["x"] = &Pos::x;
 	position["y"] = &Pos::y;
 
-	auto zone = _lua.new_usertype<Zone>("Pos");
-	zone["height"] = &Zone::height;
-	zone["width"] = &Zone::width;
-	zone["top"] = &Zone::top;
-	zone["left"] = &Zone::left;
-
 	auto npcAction = _lua.new_usertype<NPCAction>("NPCAction");
 	npcAction["destination"] = &NPCAction::destination;
 	npcAction["idleTime"] = &NPCAction::idleTime;
@@ -86,16 +80,10 @@ ScriptEngine::registerCommon()
 	characterInfo["velocity"] = &CharacterInfo::velocity;
 	characterInfo["angle"] = &CharacterInfo::angle;
 
-	auto npcMovements = _lua.new_usertype<NPCMovement>("NPCMovement");
-	npcMovements["info"] = &NPCMovement::info;
-	npcMovements["currentAction"] = &NPCMovement::currentAction;
-	npcMovements["actions"] = &NPCMovement::actions;
-
-	auto spawningEncounterArea = _lua.new_usertype<SpawningEncounterArea>("SpawningEncounterArea");
-	spawningEncounterArea["nextSpawnCycle"] = &SpawningEncounterArea::nextSpawnCycle;
-	spawningEncounterArea["spawningArea"] = &SpawningEncounterArea::spawningArea;
-	spawningEncounterArea["maxSpawned"] = &SpawningEncounterArea::maxSpawned;
-	spawningEncounterArea["displayKey"] = &SpawningEncounterArea::displayKey;
+	auto npcMovements = _lua.new_usertype<NPCInstance>("NPCInstance");
+	npcMovements["info"] = &NPCInstance::info;
+	npcMovements["currentAction"] = &NPCInstance::currentAction;
+	npcMovements["actions"] = &NPCInstance::actions;
 
 }
 
@@ -118,26 +106,20 @@ ScriptEngine::spawnEncounter(unsigned indexSpawn)
 		return;
 	}
 
-	const std::string makeEncounterNPCMovement = fmt::format("makeEncounterNPCMovement_{}", indexSpawn);
-	sol::function luaMaker = _lua[makeEncounterNPCMovement];
+	const std::string makeEncounterNPCMovement = fmt::format("makeEncounterNPCAction_{}", indexSpawn);
+	try {
+		sol::function luaEncounterBuilder = _lua[makeEncounterNPCMovement];
 
-	if (!luaMaker.valid()) {
-		SPDLOG_ERROR("[LuaEngine] : function {} has not been created properly at init.", makeEncounterNPCMovement);
-		return;
+		if (!luaEncounterBuilder.valid()) {
+			SPDLOG_ERROR("[lua] : function '{}' has not been created properly at init.", makeEncounterNPCMovement);
+			return;
+		}
+		NPCInstance res = luaEncounterBuilder();
+		_spawnedPerSpawningPoint[indexSpawn].push_back(std::move(res));
 	}
-	const Zone& spawningZone = _spawningPoints.at(indexSpawn).zone;
-	LuaSpawningReturnType res = luaMaker(spawningZone.width, spawningZone.height, spawningZone.top, spawningZone.left);
-
-	_spawnedPerSpawningPoint[indexSpawn].push_back(
-			NPCMovement{
-					CharacterInfo{
-							Pos{std::get<0>(res), std::get<1>(res)},
-							std::get<2>(res),
-							std::get<3>(res)
-					},
-					::retrievePosVector(std::get<4>(res)),
-					std::get<5>(res)
-			});
+	catch (const std::exception& e) {
+		SPDLOG_ERROR("[lua] : An error occurred while spawning a monster '{}' : {}", makeEncounterNPCMovement, e.what());
+	}
 }
 
 void

@@ -72,7 +72,7 @@ private:
 private:
 	std::string _serverCode;
 	std::string _tmxMapPath;
-	std::string _pathToLocalStorage; // todo set it
+	std::string _pathToLocalStorage;
 	uint _portPlayerConnection;
 	Boundary _serverXBoundaries;
 	Boundary _serverYBoundaries;

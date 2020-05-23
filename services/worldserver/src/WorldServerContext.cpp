@@ -50,6 +50,7 @@ WorldServerContext::initWsContextWithJson(json& json)
 
 	wsJson["code"].get_to(_serverCode);
 	wsJson["TMX_Map"].get_to(_tmxMapPath);
+	wsJson["script_storage_cache"].get_to(_pathToLocalStorage);
 	_serverXBoundaries = {confJson["begin_x"].get<double>(), confJson["end_x"].get<double>()};
 	_serverYBoundaries = {confJson["begin_y"].get<double>(), confJson["end_y"].get<double>()};
 	for (auto &[key, value] : overlapsJson.items()) {
@@ -80,6 +81,7 @@ WorldServerContext::toString() const noexcept
 	str += "[INFO] Service " + _name + " context VERSION: " + _version + "\n";
 	str += "[INFO] Config file used: " + _configFile + "\n\n";
 	str += "[INFO] World Server code: " + _serverCode + "\n";
+	str += "[INFO] Local CML Storage : " + _pathToLocalStorage + "\n";
 	str += "[INFO] TMX Map path: " + _tmxMapPath + "\n"; // Will be changed with the new formatting file homemade
 	str += "[INFO] Player connection string: " + getPlayerConnectionString() + "\n";
 	str += "[INFO] Dispatcher(AuthServer) subscribing port: " + std::to_string(_dispatcherData.subscriberPort) + "\n";
