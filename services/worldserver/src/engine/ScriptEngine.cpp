@@ -101,7 +101,7 @@ ScriptEngine::spawnNewEncounters(const std::chrono::system_clock::time_point& cu
 void
 ScriptEngine::spawnEncounter(unsigned indexSpawn)
 {
-	// Do not spawn encounter if the max is already reached
+	// Do not spawn encounter if the max monster has already been spawned
 	if (_spawningPoints.at(indexSpawn).maxSpawned <= _spawnedPerSpawningPoint.at(indexSpawn).size()) {
 		return;
 	}
