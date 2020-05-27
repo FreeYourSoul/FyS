@@ -90,6 +90,7 @@ ScriptEngine::registerCommon()
 void
 ScriptEngine::spawnNewEncounters(const std::chrono::system_clock::time_point& currentTime)
 {
+	// todo test spawning and movement
 	for (unsigned i = 0; i < _spawningPoints.size(); ++i) {
 		if (currentTime >= _spawningPoints.at(i).nextSpawn) {
 			this->spawnEncounter(i);
