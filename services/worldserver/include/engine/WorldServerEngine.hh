@@ -78,6 +78,7 @@ public:
 	void setPlayerMoveDirection(uint index, double direction);
 	void stopPlayerMove(uint index);
 	void authenticatePlayer(AuthPlayer auth, CharacterInfo info, std::string identifier);
+	void spawnNPC(const std::chrono::system_clock::time_point& currentTime);
 
 	[[nodiscard]] uint
 	retrieveDataIndex(const AuthPlayer& player);

@@ -85,11 +85,12 @@ public:
 			for (auto& spawned : perSpawnedPoint) {
 				const unsigned indexAction = spawned.currentAction;
 				if (indexAction >= spawned.actions.size()) {
-					SPDLOG_ERROR("[ScriptEngine] : Index of the current action '{}' isn't pointing an existing actions (size action list '{}')",
-							indexAction, spawned.actions.size());
+					SPDLOG_ERROR("[ScriptEngine] : Index of the current action '{}' isn't pointing an existing actions "
+								 "(size action list '{}')", indexAction, spawned.actions.size());
 					continue;
 				}
-				spawned.currentAction = std::forward<Handler>(handler)(indexAction, spawned.info, spawned.actions.at(indexAction)) % spawned.actions.size();
+				spawned.currentAction = std::forward<Handler>(handler)
+						(indexAction, spawned.info, spawned.actions.at(indexAction)) % spawned.actions.size();
 			}
 		}
 	}

@@ -77,7 +77,8 @@ WorldServerEngine::executePendingMoves()
 				}
 				pi.angle = retrieveDirectionAngle(pi, action);
 				moveNPCAction(index, pi);
-				if (std::round(pi.pos.x) == std::round(action.destination.x) && std::round(pi.pos.y) == std::round(action.destination.y)) {
+				if (std::round(pi.pos.x) == std::round(action.destination.x) && std::round(pi.pos.y) ==
+						std::round(action.destination.y)) {
 					return index + 1;
 				}
 				return index;
@@ -88,6 +89,12 @@ double
 WorldServerEngine::retrieveDirectionAngle(CharacterInfo& info, const NPCAction& action) const
 {
 	return std::atan((info.pos.y - action.destination.y) / (info.pos.x - action.destination.x));
+}
+
+void
+WorldServerEngine::spawnNPC(const std::chrono::system_clock::time_point& currentTime)
+{
+	_scriptEngine.spawnNewEncounters(currentTime);
 }
 
 void
