@@ -70,25 +70,7 @@ WorldServerEngine::executePendingMoves()
 				}
 			});
 
-	_scriptEngine.executeScriptedActions(
-			[this](uint index, CharacterInfo& pi, const NPCAction& action) {
-				if (std::chrono::system_clock::now().time_since_epoch().count() < action.idleTime) {
-					return index;
-				}
-				pi.angle = retrieveDirectionAngle(pi, action);
-				moveNPCAction(index, pi);
-				if (std::round(pi.pos.x) == std::round(action.destination.x) && std::round(pi.pos.y) ==
-						std::round(action.destination.y)) {
-					return index + 1;
-				}
-				return index;
-			});
-}
-
-double
-WorldServerEngine::retrieveDirectionAngle(CharacterInfo& info, const NPCAction& action) const
-{
-	return std::atan((info.pos.y - action.destination.y) / (info.pos.x - action.destination.x));
+	_scriptEngine.executeScriptedActions();
 }
 
 void

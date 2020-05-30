@@ -71,19 +71,10 @@ ScriptEngine::registerCommon()
 	position["x"] = &Pos::x;
 	position["y"] = &Pos::y;
 
-	auto npcAction = _lua.new_usertype<NPCAction>("NPCAction");
-	npcAction["destination"] = &NPCAction::destination;
-	npcAction["idleTime"] = &NPCAction::idleTime;
-
 	auto characterInfo = _lua.new_usertype<CharacterInfo>("CharacterInfo");
 	characterInfo["pos"] = &CharacterInfo::pos;
 	characterInfo["velocity"] = &CharacterInfo::velocity;
 	characterInfo["angle"] = &CharacterInfo::angle;
-
-	auto npcMovements = _lua.new_usertype<NPCInstance>("NPCInstance");
-	npcMovements["info"] = &NPCInstance::info;
-	npcMovements["currentAction"] = &NPCInstance::currentAction;
-	npcMovements["actions"] = &NPCInstance::actions;
 
 }
 
@@ -106,19 +97,25 @@ ScriptEngine::spawnEncounter(unsigned indexSpawn)
 		return;
 	}
 
-	const std::string makeEncounterNPCMovement = fmt::format("makeEncounterNPCAction_{}", indexSpawn);
+	const std::string spawningAreaGenerator = fmt::format("spawn_point_{}", _spawningPoints.at(indexSpawn).idSpawningPoint);
+	std::string newSpawnedVarName = fmt::format("{}_id_{}", _spawnedPerSpawningPoint.at(indexSpawn).size());
+
 	try {
-		sol::function luaEncounterBuilder = _lua[makeEncounterNPCMovement];
+		sol::function luaEncounterBuilder = _lua[spawningAreaGenerator];
 
 		if (!luaEncounterBuilder.valid()) {
-			SPDLOG_ERROR("[lua] : function '{}' has not been created properly at init.", makeEncounterNPCMovement);
+			SPDLOG_ERROR("[lua] : function '{}' has not been created properly at init.", spawningAreaGenerator);
 			return;
 		}
-		NPCInstance res = luaEncounterBuilder();
-		_spawnedPerSpawningPoint[indexSpawn].push_back(std::move(res));
+		CharacterInfoLuaReturnType res = luaEncounterBuilder();
+		_spawnedPerSpawningPoint[indexSpawn].push_back(
+				NPCLuaInstance{
+						CharacterInfo{Pos{std::get<0>(res), std::get<1>(res)}, std::get<2>(res), std::get<3>(res)},
+						std::move(newSpawnedVarName)
+				});
 	}
 	catch (const std::exception& e) {
-		SPDLOG_ERROR("[lua] : An error occurred while spawning a monster '{}' : {}", makeEncounterNPCMovement, e.what());
+		SPDLOG_ERROR("[lua] : An error occurred while spawning a monster '{}' : {}", newSpawnedVarName, e.what());
 	}
 }
 
@@ -130,6 +127,12 @@ ScriptEngine::registerNPCMovementScripts(const std::vector<std::string>& movScri
 
 void
 ScriptEngine::registerEncounterSpawnScript(const std::vector<std::string>& spawnScripts)
+{
+
+}
+
+void
+ScriptEngine::executeScriptedActions()
 {
 
 }

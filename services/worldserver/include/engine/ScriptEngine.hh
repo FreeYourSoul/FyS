@@ -46,55 +46,26 @@ static constexpr std::chrono::seconds BASE_SPAWNING_INTERVAL = 40s;
 
 struct SpawningPoint {
 	unsigned maxSpawned{};
-	std::string displayCode;
+	std::string idSpawningPoint;
 	std::chrono::seconds spawningInterval = BASE_SPAWNING_INTERVAL;
 	std::chrono::system_clock::time_point nextSpawn{};
 };
 
-struct NPCAction {
-	//! Idle Time timestamp
-	uint idleTime;
-
-	//! Next destination
-	Pos destination;
-};
-
-struct NPCInstance {
+struct NPCLuaInstance {
 	CharacterInfo info;
-
-	//! List of destination the NPC will have to move to
-	std::vector<NPCAction> actions;
-
-	//! index of the "path" vector we are currently doing
-	unsigned currentAction{};
+	std::string npcLuaVariableName;
 };
 
 class ScriptEngine {
-	using LuaSpawningReturnType =
-	std::tuple<double, double, double, double, uint, std::vector<std::pair<double, double>>, unsigned>;
+	//! CharacterInfo : position x, position y, velocity, angle
+	using CharacterInfoLuaReturnType = std::tuple<double, double, double, double>;
 
 public:
 	ScriptEngine(const WorldServerContext& ctx);
 
+	void executeScriptedActions();
+
 	void spawnNewEncounters(const std::chrono::system_clock::time_point& currentTime);
-
-	template<typename Handler>
-	void executeScriptedActions(Handler&& handler)
-	{
-		for (auto& perSpawnedPoint : _spawnedPerSpawningPoint) {
-			for (auto& spawned : perSpawnedPoint) {
-				const unsigned indexAction = spawned.currentAction;
-				if (indexAction >= spawned.actions.size()) {
-					SPDLOG_ERROR("[ScriptEngine] : Index of the current action '{}' isn't pointing an existing actions "
-								 "(size action list '{}')", indexAction, spawned.actions.size());
-					continue;
-				}
-				spawned.currentAction = std::forward<Handler>(handler)
-						(indexAction, spawned.info, spawned.actions.at(indexAction)) % spawned.actions.size();
-			}
-		}
-	}
-
 	void registerNPCMovementScripts(const std::vector<std::string>& movScripts);
 	void registerEncounterSpawnScript(const std::vector<std::string>& spawnScripts);
 
@@ -110,7 +81,7 @@ private:
 	std::vector<SpawningPoint> _spawningPoints;
 
 	//! vector of Spawned encounter, the index of the vector is the id of the spawning point corresponding
-	std::vector<std::vector<NPCInstance>> _spawnedPerSpawningPoint;
+	std::vector<std::vector<NPCLuaInstance>> _spawnedPerSpawningPoint;
 
 	sol::state _lua;
 

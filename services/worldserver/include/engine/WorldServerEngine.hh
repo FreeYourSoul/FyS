@@ -91,9 +91,6 @@ private:
 	inline void notifyClientsOfCharacterMove(const CharacterInfo& pi, const std::string& userName,
 			const std::vector<std::string_view>& idtsToNotify);
 
-	[[nodiscard]] inline double
-	retrieveDirectionAngle(CharacterInfo& info, const NPCAction& action) const;
-
 private:
 	CollisionMap _map;
 	PlayersData _data;
