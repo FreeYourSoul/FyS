@@ -76,6 +76,10 @@ ScriptEngine::registerCommon()
 	characterInfo["velocity"] = &CharacterInfo::velocity;
 	characterInfo["angle"] = &CharacterInfo::angle;
 
+	_lua["retrieveAngle"] = [](double x, double y, double destinationX, double destinationY){
+		return std::atan((y - destinationY) / (x - destinationX));
+	};
+
 }
 
 void
@@ -97,17 +101,17 @@ ScriptEngine::spawnEncounter(unsigned indexSpawn)
 		return;
 	}
 
-	const std::string spawningAreaGenerator = fmt::format("spawn_point_{}", _spawningPoints.at(indexSpawn).idSpawningPoint);
+	const std::string spawningAreaGenerator = fmt::format("SpawningPoint_{}", _spawningPoints.at(indexSpawn).idSpawningPoint);
 	std::string newSpawnedVarName = fmt::format("{}_id_{}", _spawnedPerSpawningPoint.at(indexSpawn).size());
 
 	try {
-		sol::function luaEncounterBuilder = _lua[spawningAreaGenerator];
+		auto result = _lua.safe_script(fmt::format("{} = {}:create{{}}", newSpawnedVarName, spawningAreaGenerator));
 
-		if (!luaEncounterBuilder.valid()) {
+		if (!result.valid()) {
 			SPDLOG_ERROR("[lua] : function '{}' has not been created properly at init.", spawningAreaGenerator);
 			return;
 		}
-		CharacterInfoLuaReturnType res = luaEncounterBuilder();
+		CharacterInfoLuaReturnType res = _lua.safe_script(fmt::format("{}:getCharacterInfo()"));
 		_spawnedPerSpawningPoint[indexSpawn].push_back(
 				NPCLuaInstance{
 						CharacterInfo{Pos{std::get<0>(res), std::get<1>(res)}, std::get<2>(res), std::get<3>(res)},
@@ -120,6 +124,22 @@ ScriptEngine::spawnEncounter(unsigned indexSpawn)
 }
 
 void
+ScriptEngine::executeScriptedActions()
+{
+	for (uint spawningPointId = 0; spawningPointId < _spawningPoints.size(); ++spawningPointId) {
+		for (const auto& spawnedNPC : _spawnedPerSpawningPoint.at(spawningPointId)) {
+			try {
+				_lua.safe_script(fmt::format("{}:exec()", spawnedNPC.npcLuaVariableName));
+			}
+			catch (const std::exception& e) {
+				SPDLOG_ERROR("[lua] : An error occurred while executing script action LuaVarName {} : \n[ERROR] : {}",
+						spawnedNPC.npcLuaVariableName, e.what());
+			}
+		}
+	}
+}
+
+void
 ScriptEngine::registerNPCMovementScripts(const std::vector<std::string>& movScripts)
 {
 
@@ -127,12 +147,6 @@ ScriptEngine::registerNPCMovementScripts(const std::vector<std::string>& movScri
 
 void
 ScriptEngine::registerEncounterSpawnScript(const std::vector<std::string>& spawnScripts)
-{
-
-}
-
-void
-ScriptEngine::executeScriptedActions()
 {
 
 }
