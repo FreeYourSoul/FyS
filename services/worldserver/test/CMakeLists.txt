@@ -12,9 +12,10 @@ set(CMAKE_CXX_COMPILER /usr/bin/g++)
 
 find_package(cppzmq REQUIRED)
 find_package(Catch2 REQUIRED)
-find_package(fmt)
-find_package(FSeam)
-include(Catch)
+find_package(Lua REQUIRED)
+find_package(fmt REQUIRED)
+#find_package(FSeam)
+include(Catch REQUIRED)
 
 include(${CMAKE_CURRENT_LIST_DIR}/../../common/CMakeLists.txt)
 
@@ -44,5 +45,15 @@ add_executable(world_server_test
         ${CMAKE_CURRENT_LIST_DIR}/../src/WorldServerContext.cpp
         )
 
+add_executable(world_server_lua_test
+        #Test files
+        ${CMAKE_CURRENT_LIST_DIR}/catchMain.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/script/SpawningPoint_0_TestCase.cpp
+
+        )
+
 target_link_libraries(world_server_test cppzmq Catch2::Catch2)
 catch_discover_tests(world_server_test)
+
+target_link_libraries(world_server_lua_test cppzmq Catch2::Catch2 fmt lua)
+catch_discover_tests(world_server_lua_test)

@@ -49,13 +49,7 @@ testingScriptDownload(const std::string& key, const std::string& pathDest)
 
 namespace fys::ws {
 
-ScriptEngine::ScriptEngine(const WorldServerContext& ctx)
-		:_cache(std::filesystem::path(ctx.getPathToLocalStorage()),
-
-		// Find and download script handler
-		[](const std::string& keyScript, const std::string& pathDestination) {
-			::testingScriptDownload(keyScript, pathDestination);
-		})
+ScriptEngine::ScriptEngine(const WorldServerContext&)
 {
 	registerCommon();
 }
@@ -67,6 +61,42 @@ ScriptEngine::registerCommon()
 
 	_lua.open_libraries(sol::lib::base, sol::lib::package);
 
+	try {
+		_lua.safe_script(R"(
+			function getCharacterInfo(spawningPoint, luaId)
+				if luaId >= spawningPoint.numbers then return nil end
+			end
+
+			function spawn(spawningPoint)
+				for id, spawn in pairs(spawningPoint.spawned) do
+					if spawn.isAlive == false then
+						spawningPoint.spawned[id].isAlive = true
+						return id
+					end
+				end
+				return nil
+			end
+
+			function print_test()
+				print("This is a print test")
+			end
+
+			function execMovement(spawningPoint)
+
+
+				-- Increment the current step (maybe # can be used instead of numberSteps)
+				spawningPoint.current = current + 1
+				if spawningPoint.current == spawningPoint.numberSteps then
+					spawningPoint.current = 0
+				end
+			end
+			)"
+		);
+	}
+	catch (const std::exception& e) {
+		SPDLOG_ERROR("Error while registering basic content {} ", e.what());
+	}
+
 	auto position = _lua.new_usertype<Pos>("Pos");
 	position["x"] = &Pos::x;
 	position["y"] = &Pos::y;
@@ -76,7 +106,7 @@ ScriptEngine::registerCommon()
 	characterInfo["velocity"] = &CharacterInfo::velocity;
 	characterInfo["angle"] = &CharacterInfo::angle;
 
-	_lua["retrieveAngle"] = [](double x, double y, double destinationX, double destinationY){
+	_lua["retrieveAngle"] = [](double x, double y, double destinationX, double destinationY) {
 		return std::atan((y - destinationY) / (x - destinationX));
 	};
 
@@ -100,26 +130,24 @@ ScriptEngine::spawnEncounter(unsigned indexSpawn)
 	if (_spawningPoints.at(indexSpawn).maxSpawned <= _spawnedPerSpawningPoint.at(indexSpawn).size()) {
 		return;
 	}
-
-	const std::string spawningAreaGenerator = fmt::format("SpawningPoint_{}", _spawningPoints.at(indexSpawn).idSpawningPoint);
-	std::string newSpawnedVarName = fmt::format("{}_id_{}", _spawnedPerSpawningPoint.at(indexSpawn).size());
+	const std::string spNamespace = fmt::format("spawningPoint_{}", _spawningPoints.at(indexSpawn).idSpawningPoint);
 
 	try {
-		auto result = _lua.safe_script(fmt::format("{} = {}:create{{}}", newSpawnedVarName, spawningAreaGenerator));
+		auto result = _lua["spawn"](_lua[spNamespace]);
 
 		if (!result.valid()) {
-			SPDLOG_ERROR("[lua] : function '{}' has not been created properly at init.", spawningAreaGenerator);
+			SPDLOG_ERROR("[lua] : function '{}' has not been created properly at init.", spNamespace);
 			return;
 		}
-		CharacterInfoLuaReturnType res = _lua.safe_script(fmt::format("{}:getCharacterInfo()"));
+		CharacterInfoLuaReturnType res = _lua["getCharacterInfo"](_lua[spNamespace], static_cast<uint>(result));
 		_spawnedPerSpawningPoint[indexSpawn].push_back(
 				NPCLuaInstance{
 						CharacterInfo{Pos{std::get<0>(res), std::get<1>(res)}, std::get<2>(res), std::get<3>(res)},
-						std::move(newSpawnedVarName)
+						static_cast<uint>(result)
 				});
 	}
 	catch (const std::exception& e) {
-		SPDLOG_ERROR("[lua] : An error occurred while spawning a monster '{}' : {}", newSpawnedVarName, e.what());
+		SPDLOG_ERROR("[lua] : An error occurred while spawning with spawning point '{}' : {}", spNamespace, e.what());
 	}
 }
 

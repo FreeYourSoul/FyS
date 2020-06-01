@@ -53,7 +53,7 @@ struct SpawningPoint {
 
 struct NPCLuaInstance {
 	CharacterInfo info;
-	std::string npcLuaVariableName;
+	uint npcLuaId;
 };
 
 class ScriptEngine {
@@ -69,15 +69,11 @@ public:
 	void registerNPCMovementScripts(const std::vector<std::string>& movScripts);
 	void registerEncounterSpawnScript(const std::vector<std::string>& spawnScripts);
 
-	void setScriptEngineCache(cache::CmlScriptDownloader cache) { _cache = std::move(cache); }
-
 private:
 	void registerCommon();
 	void spawnEncounter(unsigned indexSpawn);
 
 private:
-	cache::CmlScriptDownloader _cache;
-
 	std::vector<SpawningPoint> _spawningPoints;
 
 	//! vector of Spawned encounter, the index of the vector is the id of the spawning point corresponding

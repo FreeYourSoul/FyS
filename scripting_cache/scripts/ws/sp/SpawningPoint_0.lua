@@ -1,31 +1,27 @@
-CurrentSpawningPointId_0 = 0;
+spawningPoint_0 = {
+    current = 0,
+    spawned = {
+        [0] = {
+            idSpawningPoint = 0,
+            isAlive = false,
+            info = { x = 10, y = 10, velocity = 1, angle = 0.0 },
+            destinations = {
+                [0] = { x = 10, y = 10 },
+                [1] = { x = 20, y = 20 },
+                [2] = { x = 30, y = 30 },
+                [3] = { x = 40, y = 40 }
+            },
+            backwardLoop = true,
+            numberSteps = 4
+        },
 
-SpawningPoint_0 = { idSpawningPoint = 0, backwardLoop = true, destinations = {}, current = 0, numberSteps = 0 }
+        [1] = { isAlive = false },
 
-function SpawningPoint_0:create(o)
-    o = o or {}
-    o.idSpawningPoint = CurrentSpawningPointId_0
-    o.current = 0
-    if CurrentSpawningPointId_0 == 0 then
-        backwardLoop = true;
-        o.destinations[0] = { x = 10, y = 10 }
-        o.destinations[1] = { x = 20, y = 20 }
-        o.destinations[2] = { x = 30, y = 30 }
-        o.destinations[3] = { x = 40, y = 40 }
-        o.numberSteps = 4
-    end
-    CurrentSpawningPointId_0 = CurrentSpawningPointId_0 + 1
-    setmetatable(o, self)
-    self.__index = self
-    return o
-end
+        [2] = { isAlive = false },
 
-function SpawningPoint_0:exec()
+        [3] = { isAlive = false },
 
-
-    -- Increment the current step
-    self.current = current + 1
-    if self.current == self.numberSteps then
-        self.current = 0
-    end
-end
+        [4] = { isAlive = false }
+    },
+    numbers = 5,
+}

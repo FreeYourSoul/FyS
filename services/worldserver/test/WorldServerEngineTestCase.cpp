@@ -27,7 +27,7 @@
 
 using namespace fys::ws;
 
-TEST_CASE("WorldServerEngineTestCase")
+TEST_CASE("WorldServerEngineTestCase", "[service][world]")
 {
 
 	SECTION("authenticatePlayer test") {
