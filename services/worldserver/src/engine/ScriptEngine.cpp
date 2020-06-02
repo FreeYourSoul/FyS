@@ -90,8 +90,7 @@ ScriptEngine::registerCommon()
 					spawningPoint.current = 0
 				end
 			end
-			)"
-		);
+			)");
 	}
 	catch (const std::exception& e) {
 		SPDLOG_ERROR("Error while registering basic content {} ", e.what());
@@ -143,6 +142,7 @@ ScriptEngine::spawnEncounter(unsigned indexSpawn)
 		_spawnedPerSpawningPoint[indexSpawn].push_back(
 				NPCLuaInstance{
 						CharacterInfo{Pos{std::get<0>(res), std::get<1>(res)}, std::get<2>(res), std::get<3>(res)},
+						spNamespace,
 						static_cast<uint>(result)
 				});
 	}
@@ -155,13 +155,13 @@ void
 ScriptEngine::executeScriptedActions()
 {
 	for (uint spawningPointId = 0; spawningPointId < _spawningPoints.size(); ++spawningPointId) {
-		for (const auto& spawnedNPC : _spawnedPerSpawningPoint.at(spawningPointId)) {
+		for (const auto& npc : _spawnedPerSpawningPoint.at(spawningPointId)) {
 			try {
-				_lua.safe_script(fmt::format("{}:exec()", spawnedNPC.npcLuaVariableName));
+				_lua["execMovement"](_lua[npc.spNamespace], npc.npcLuaId, std::ref(npc.info));
 			}
 			catch (const std::exception& e) {
-				SPDLOG_ERROR("[lua] : An error occurred while executing script action LuaVarName {} : \n[ERROR] : {}",
-						spawnedNPC.npcLuaVariableName, e.what());
+				SPDLOG_ERROR("[lua] : An error occurred while executing script action SpawningPoint {} npc {} : \n[ERROR] : {}",
+						npc.spNamespace, npc.npcLuaId, e.what());
 			}
 		}
 	}

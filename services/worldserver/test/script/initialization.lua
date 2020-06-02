@@ -10,6 +10,7 @@ end
 function spawn(spawningPoint)
     for id, spawn in pairs(spawningPoint.spawned) do
         if spawn.isAlive == false then
+            spawningPoint.spawnAtIndex(id)
             spawningPoint.spawned[id].isAlive = true
             return id
         end
@@ -21,7 +22,7 @@ function print_test()
     print("This is a print test")
 end
 
-function execMovement(spawningPoint)
+function execMovement(spawningPoint, luaId, info)
     -- Increment the current step (maybe # can be used instead of numberSteps)
     spawningPoint.current = current + 1
     if spawningPoint.current == spawningPoint.numberSteps then

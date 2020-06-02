@@ -53,6 +53,7 @@ struct SpawningPoint {
 
 struct NPCLuaInstance {
 	CharacterInfo info;
+	std::string spNamespace;
 	uint npcLuaId;
 };
 
