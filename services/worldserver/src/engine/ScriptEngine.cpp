@@ -45,6 +45,18 @@ testingScriptDownload(const std::string& key, const std::string& pathDest)
 	std::filesystem::copy(k.getPath(), p, e);
 }
 
+[[nodiscard]] bool
+isActionToBeNotified(uint actionId)
+{
+	return actionId > fys::ws::NPCAction::IDLE;
+}
+
+[[nodiscard]] bool
+isActionMovementRelated(uint actionId)
+{
+	return actionId == fys::ws::NPCAction::MOVE || actionId == fys::ws::NPCAction::STOP;
+}
+
 }
 
 namespace fys::ws {
@@ -152,19 +164,38 @@ ScriptEngine::spawnEncounter(unsigned indexSpawn)
 }
 
 void
-ScriptEngine::executeScriptedActions()
+ScriptEngine::executeEncounterScriptedActions()
 {
 	for (uint spawningPointId = 0; spawningPointId < _spawningPoints.size(); ++spawningPointId) {
-		for (const auto& npc : _spawnedPerSpawningPoint.at(spawningPointId)) {
+		std::vector<NPCAction> actionsExecuted;
+
+		actionsExecuted.resize(_spawnedPerSpawningPoint.at(spawningPointId).size());
+		for (uint spawnId = 0; spawnId < _spawnedPerSpawningPoint.at(spawningPointId).size(); ++spawnId) {
+			const auto& npc = _spawnedPerSpawningPoint.at(spawningPointId).at(spawnId);
 			try {
-				_lua["execMovement"](_lua[npc.spNamespace], npc.npcLuaId, std::ref(npc.info));
+				uint luaId, actionId;
+				double x, y, velocity, angle;
+				sol::tie(luaId, actionId, x, y, velocity, angle) =
+						_lua["execMovement"](_lua[npc.spNamespace], npc.npcLuaId, std::ref(npc.info));
+
+				actionsExecuted.emplace_back(NPCAction{luaId, actionId, CharacterInfo{{x, y}, velocity, angle}});
 			}
 			catch (const std::exception& e) {
 				SPDLOG_ERROR("[lua] : An error occurred while executing script action SpawningPoint {} npc {} : \n[ERROR] : {}",
 						npc.spNamespace, npc.npcLuaId, e.what());
 			}
 		}
+
+		sendNotificationToPlayer(std::move(actionsExecuted),
+				_spawningPoints.at(spawningPointId).centerSpawningPoint,
+				_spawningPoints.at(spawningPointId).distanceNotification);
 	}
+}
+
+void
+ScriptEngine::executeNeutralScriptedActions()
+{
+
 }
 
 void
@@ -177,6 +208,16 @@ void
 ScriptEngine::registerEncounterSpawnScript(const std::vector<std::string>& spawnScripts)
 {
 
+}
+
+void
+ScriptEngine::sendNotificationToPlayer(std::vector<NPCAction> actions, Pos centralPositionActions, double distanceNotif)
+{
+	// todo send the notifications
+	// Maybe concentrate all merge all notification related to a specific spawning point and send this
+	// full list to close player of the spawning point. It would save the processing time for each encounter
+	// of who are the closest player to send the message to.
+	// Downside: Maybe too big of a message... But could be split into multiple one if too big ?
 }
 
 }

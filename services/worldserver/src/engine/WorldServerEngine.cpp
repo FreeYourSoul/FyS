@@ -70,7 +70,8 @@ WorldServerEngine::executePendingMoves()
 				}
 			});
 
-	_scriptEngine.executeScriptedActions();
+	_scriptEngine.executeEncounterScriptedActions();
+	_scriptEngine.executeNeutralScriptedActions();
 }
 
 void

@@ -1,7 +1,7 @@
 {
     "worldServer": {
         "code":                         "WS00",
-        "connection_port":              801,
+        "connection_port":              8001,
         "connection_warning_threshold": 1000,
         "script_storage_cache":         "/tmp/ARN_cache/",
         "TMX_Map":                      "/home/FyS/Project/FyS/services/worldserver/cfg/maps/map.tmx",

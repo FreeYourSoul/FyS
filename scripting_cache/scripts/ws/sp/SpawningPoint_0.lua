@@ -1,10 +1,9 @@
 spawningPoint_0 = {
-    current = 0,
     spawned = {
         [0] = {
             idSpawningPoint = 0,
             isAlive = false,
-            info = { x = 10, y = 10, velocity = 1, angle = 0.0 },
+            initial_info = { x = 10, y = 20, velocity = 1.0, angle = 0.5 },
             destinations = {
                 [0] = { x = 10, y = 10 },
                 [1] = { x = 20, y = 20 },
@@ -12,6 +11,7 @@ spawningPoint_0 = {
                 [3] = { x = 40, y = 40 }
             },
             backwardLoop = true,
+            currentDestination = 0,
             numberSteps = 4
         },
 

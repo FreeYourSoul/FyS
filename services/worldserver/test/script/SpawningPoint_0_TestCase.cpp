@@ -71,6 +71,20 @@ TEST_CASE("SpawningPoint_0 TestCase", "[service][world][script]")
 
 			REQUIRE(result0.valid());
 			REQUIRE(0 == static_cast<int>(result0));
+
+			auto numbers = lua["spawningPoint_0"]["numbers"];
+			REQUIRE(numbers.valid());
+			REQUIRE(5 == static_cast<uint>(numbers));
+
+			auto firstEncounter = lua["spawningPoint_0"]["spawned"][0];
+			REQUIRE(firstEncounter.valid());
+			REQUIRE(0 == static_cast<uint>(firstEncounter["idSpawningPoint"]));
+			REQUIRE(4 == static_cast<uint>(firstEncounter["numberSteps"]));
+			REQUIRE(10 == static_cast<uint>(firstEncounter["initial_info"]["x"]));
+			REQUIRE(20 == static_cast<uint>(firstEncounter["initial_info"]["y"]));
+			REQUIRE(1. == static_cast<double>(firstEncounter["initial_info"]["velocity"]));
+			REQUIRE(0.5 == static_cast<double>(firstEncounter["initial_info"]["angle"]));
+
 			REQUIRE(result1.valid());
 			REQUIRE(1 == static_cast<int>(result1));
 

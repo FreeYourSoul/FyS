@@ -49,6 +49,7 @@ WorldServerContext::initWsContextWithJson(json& json)
 	auto overlapsJson = confJson["overlapServer"];
 
 	wsJson["code"].get_to(_serverCode);
+	wsJson["connection_port"].get_to(_portPlayerConnection);
 	wsJson["TMX_Map"].get_to(_tmxMapPath);
 	wsJson["script_storage_cache"].get_to(_pathToLocalStorage);
 	_serverXBoundaries = {confJson["begin_x"].get<double>(), confJson["end_x"].get<double>()};
