@@ -28,10 +28,6 @@ function spawn(spawningPoint)
     return nil
 end
 
-function print_test()
-    print("This is a print test")
-end
-
 function execMovement(spawningPoint, luaId, info)
     tobe_x = round(info.pos.x)
     tobe_y = round(info.pos.y)

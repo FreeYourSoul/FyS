@@ -39,7 +39,8 @@ WorldServerEngine::WorldServerEngine(const fys::ws::WorldServerContext& ctx)
 		:
 		common::DirectConnectionManager(1, ctx.getPlayerConnectionString()),
 		_map(ctx),
-		_scriptEngine(ctx) { }
+		_scriptEngine(ctx),
+		_nextTick(std::chrono::system_clock::now() + TIMING_MOVE_INTERVAL) { }
 
 void
 WorldServerEngine::authenticatePlayer(AuthPlayer auth, CharacterInfo info, std::string identifier)
@@ -61,12 +62,19 @@ WorldServerEngine::stopPlayerMove(uint index)
 }
 
 void
-WorldServerEngine::executePendingMoves()
+WorldServerEngine::executePendingMoves(const std::chrono::system_clock::time_point& now)
 {
+	// Don't process pending moves if it isn't ticking
+	if (now < _nextTick) {
+		return;
+	}
+	// Setup next tick time point
+	_nextTick = _nextTick + TIMING_MOVE_INTERVAL;
+
 	_data.executeOnPlayers(
-			[this](uint index, PlayerStatus status, CharacterInfo& pi, const std::string&, const std::string& userName) {
+			[this](uint playerIndex, PlayerStatus status, CharacterInfo& pi, const std::string&, const std::string& userName) {
 				if (status == PlayerStatus::MOVING) {
-					movePlayerAction(userName, index, pi);
+					movePlayerAction(userName, playerIndex, pi);
 				}
 			});
 

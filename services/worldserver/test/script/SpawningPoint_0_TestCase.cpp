@@ -45,10 +45,14 @@ getInitFilePath()
 	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
 	if (dir_path.size() == file_path.size())
 		dir_path = file_path.substr(0, file_path.rfind('/'));
-	return dir_path + "/initialization.lua";
+	return dir_path + "/../../../../scripting_cache/scripts/ws/initialization.lua";
 }
 
 }
+
+
+#include <chrono>
+#include <thread>
 
 TEST_CASE("SpawningPoint_0 TestCase", "[service][world][script]")
 {
@@ -87,8 +91,6 @@ TEST_CASE("SpawningPoint_0 TestCase", "[service][world][script]")
 
 			REQUIRE(result1.valid());
 			REQUIRE(1 == static_cast<int>(result1));
-
-			lua.safe_script("print_test()");
 
 		}
 		catch (const std::exception& e) {

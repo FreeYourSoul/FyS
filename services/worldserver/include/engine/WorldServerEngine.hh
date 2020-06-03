@@ -27,6 +27,7 @@
 
 #include <utility>
 #include <map>
+#include <chrono>
 
 #include <zmq_addon.hpp>
 
@@ -51,6 +52,7 @@ class WorldPopulator;
 
 namespace fys::ws {
 
+static constexpr std::chrono::milliseconds TIMING_MOVE_INTERVAL(16);
 constexpr static uint NOT_AUTHENTICATED = std::numeric_limits<uint>::max();
 
 struct AuthPlayer {
@@ -74,7 +76,7 @@ class WorldServerEngine : public common::DirectConnectionManager {
 public:
 	explicit WorldServerEngine(const WorldServerContext& ctx);
 
-	void executePendingMoves();
+	void executePendingMoves(const std::chrono::system_clock::time_point& playerIndex);
 	void setPlayerMoveDirection(uint index, double direction);
 	void stopPlayerMove(uint index);
 	void authenticatePlayer(AuthPlayer auth, CharacterInfo info, std::string identifier);
@@ -97,6 +99,9 @@ private:
 
 	//! Engine managing scripts of NPC and map triggers
 	ScriptEngine _scriptEngine;
+
+	//! Next movement tick should take place at this moment
+	std::chrono::system_clock::time_point _nextTick;
 
 	//! Authenticated user token to index in PlayersData
 	std::map<AuthPlayer, uint> _authPlayerOnDataIndex;
