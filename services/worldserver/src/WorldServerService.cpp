@@ -44,8 +44,8 @@ verifyBuffer(const void* fbBuffer, uint size)
 
 namespace fys::ws {
 
-WorldServerService::WorldServerService(const WorldServerContext& ctx)
-		:_ctx(ctx), _worldServer(ctx)
+WorldServerService::WorldServerService(const WorldServerContext& ctx, WorldServerEngine engine)
+		:_ctx(ctx), _worldServer(std::move(engine))
 {
 	_connectionHandler.setupConnectionManager(ctx);
 }

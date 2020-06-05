@@ -47,7 +47,7 @@ class WorldServerService {
 
 
 public:
-	explicit WorldServerService(const WorldServerContext& ctx);
+	explicit WorldServerService(const WorldServerContext& ctx, WorldServerEngine engine);
 	void runServerLoop() noexcept;
 
 private:

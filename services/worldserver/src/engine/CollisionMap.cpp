@@ -49,7 +49,7 @@ getY(double y, unsigned tileSizeY)
 }
 
 // CollisionMap
-CollisionMap::CollisionMap(const fys::ws::WorldServerContext& ctx)
+CollisionMap::CollisionMap(const WorldServerContext& ctx)
 		:
 		_boundaryX(ctx.getServerXBoundaries()),
 		_boundaryY(ctx.getServerYBoundaries()),

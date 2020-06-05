@@ -25,7 +25,8 @@
 #ifndef FYS_ONLINE_WORLDPOPULATOR_HH
 #define FYS_ONLINE_WORLDPOPULATOR_HH
 
-#include <CmlScriptDownloader.hh>
+#include <engine/ScriptEngine.hh>
+#include <engine/WorldServerEngine.hh>
 
 namespace fys::ws {
 
@@ -40,9 +41,18 @@ namespace fys::ws {
 class WorldPopulator {
 
 public:
+	[[nodiscard]] WorldServerEngine
+	buildWorldServerEngine(const WorldServerContext& ctx) const;
+
+
+	const std::vector<SpawningPoint> &getSpawningPoints() const { return _scriptEngine._spawningPoints; }
 
 private:
-	cache::CmlScriptDownloader _cache;
+	void registerCommonLuaEngine();
+	void generateSpawningPoints(const std::string& spawningPointConfigPath);
+
+private:
+	ScriptEngine _scriptEngine;
 
 };
 

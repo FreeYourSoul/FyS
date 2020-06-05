@@ -61,66 +61,9 @@ isActionMovementRelated(uint actionId)
 
 namespace fys::ws {
 
-ScriptEngine::ScriptEngine(const WorldServerContext&)
+ScriptEngine::ScriptEngine()
 {
 	registerCommon();
-}
-
-void
-ScriptEngine::registerCommon()
-{
-	SPDLOG_INFO("Register LUA utilities");
-
-	_lua.open_libraries(sol::lib::base, sol::lib::package);
-
-	try {
-		_lua.safe_script(R"(
-			function getCharacterInfo(spawningPoint, luaId)
-				if luaId >= spawningPoint.numbers then return nil end
-			end
-
-			function spawn(spawningPoint)
-				for id, spawn in pairs(spawningPoint.spawned) do
-					if spawn.isAlive == false then
-						spawningPoint.spawned[id].isAlive = true
-						return id
-					end
-				end
-				return nil
-			end
-
-			function print_test()
-				print("This is a print test")
-			end
-
-			function execMovement(spawningPoint)
-
-
-				-- Increment the current step (maybe # can be used instead of numberSteps)
-				spawningPoint.current = current + 1
-				if spawningPoint.current == spawningPoint.numberSteps then
-					spawningPoint.current = 0
-				end
-			end
-			)");
-	}
-	catch (const std::exception& e) {
-		SPDLOG_ERROR("Error while registering basic content {} ", e.what());
-	}
-
-	auto position = _lua.new_usertype<Pos>("Pos");
-	position["x"] = &Pos::x;
-	position["y"] = &Pos::y;
-
-	auto characterInfo = _lua.new_usertype<CharacterInfo>("CharacterInfo");
-	characterInfo["pos"] = &CharacterInfo::pos;
-	characterInfo["velocity"] = &CharacterInfo::velocity;
-	characterInfo["angle"] = &CharacterInfo::angle;
-
-	_lua["retrieveAngle"] = [](double x, double y, double destinationX, double destinationY) {
-		return std::atan((y - destinationY) / (x - destinationX));
-	};
-
 }
 
 void
@@ -194,18 +137,6 @@ ScriptEngine::executeEncounterScriptedActions()
 
 void
 ScriptEngine::executeNeutralScriptedActions()
-{
-
-}
-
-void
-ScriptEngine::registerNPCMovementScripts(const std::vector<std::string>& movScripts)
-{
-
-}
-
-void
-ScriptEngine::registerEncounterSpawnScript(const std::vector<std::string>& spawnScripts)
 {
 
 }

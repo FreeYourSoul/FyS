@@ -28,6 +28,7 @@
 #include <memory>
 #include <chrono>
 #include <sol/sol.hpp>
+#include <engine/WorldPopulator.hh>
 #include <engine/PlayersData.hh>
 #include <CmlScriptDownloader.hh>
 
@@ -108,17 +109,18 @@ struct NPCAction {
 };
 
 class ScriptEngine {
+
+	friend class WorldPopulator;
+
 	//! CharacterInfo : position x, position y, velocity, angle
 	using CharacterInfoLuaReturnType = std::tuple<double, double, double, double>;
 
 public:
-	ScriptEngine(const WorldServerContext& ctx);
+	ScriptEngine();
 
 	void executeEncounterScriptedActions();
 
 	void spawnNewEncounters(const std::chrono::system_clock::time_point& currentTime);
-	void registerNPCMovementScripts(const std::vector<std::string>& movScripts);
-	void registerEncounterSpawnScript(const std::vector<std::string>& spawnScripts);
 	void executeNeutralScriptedActions();
 
 private:
@@ -127,6 +129,8 @@ private:
 	void sendNotificationToPlayer(std::vector<NPCAction> actions, Pos centralPositionActions, double distanceNotif);
 
 private:
+	sol::state _lua;
+
 	//! vector of encounter spawning points
 	std::vector<SpawningPoint> _spawningPoints;
 
@@ -136,7 +140,6 @@ private:
 
 	std::vector<std::vector<NPCLuaInstance>> _neutralNpcPerZone;
 
-	sol::state _lua;
 };
 
 }

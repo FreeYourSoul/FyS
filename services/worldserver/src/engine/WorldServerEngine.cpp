@@ -39,7 +39,7 @@ WorldServerEngine::WorldServerEngine(const fys::ws::WorldServerContext& ctx)
 		:
 		common::DirectConnectionManager(1, ctx.getPlayerConnectionString()),
 		_map(ctx),
-		_scriptEngine(ctx),
+		_scriptEngine(nullptr),
 		_nextTick(std::chrono::system_clock::now() + TIMING_MOVE_INTERVAL) { }
 
 void

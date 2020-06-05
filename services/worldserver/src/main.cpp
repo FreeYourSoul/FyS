@@ -37,7 +37,7 @@ main(int ac, char** av)
 		zmq_version(&major, &minor, &patch);
 		SPDLOG_INFO("Version ZMQ : {}.{}.{}\n{}", major, minor, patch, ctx.toString());
 
-		fys::ws::WorldServerService serverService(ctx);
+		fys::ws::WorldServerService serverService(ctx, fys::ws::WorldServerEngine(ws::WorldServerContext()));
 		serverService.runServerLoop();
 	}
 	catch (const std::exception& e) {

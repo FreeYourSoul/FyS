@@ -35,7 +35,6 @@
 
 #include <engine/PlayersData.hh>
 #include <engine/CollisionMap.hh>
-#include <engine/ScriptEngine.hh>
 #include <DirectConnectionManager.hh>
 
 
@@ -47,6 +46,7 @@ namespace fys::ws {
 class WorldServerContext;
 class CollisionMap;
 class WorldPopulator;
+class ScriptEngine;
 }
 // end forward declarations
 
@@ -98,7 +98,7 @@ private:
 	PlayersData _data;
 
 	//! Engine managing scripts of NPC and map triggers
-	ScriptEngine _scriptEngine;
+	std::unique_ptr<ScriptEngine> _scriptEngine;
 
 	//! Next movement tick should take place at this moment
 	std::chrono::system_clock::time_point _nextTick;
