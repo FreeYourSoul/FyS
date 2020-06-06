@@ -51,6 +51,7 @@ WorldServerContext::initWsContextWithJson(json& json)
 	wsJson["code"].get_to(_serverCode);
 	wsJson["connection_port"].get_to(_portPlayerConnection);
 	wsJson["TMX_Map"].get_to(_tmxMapPath);
+	wsJson["path_lua_init_engine"].get_to(_pathToLuaInitEngine);
 	wsJson["script_storage_cache"].get_to(_pathToLocalStorage);
 	_serverXBoundaries = {confJson["begin_x"].get<double>(), confJson["end_x"].get<double>()};
 	_serverYBoundaries = {confJson["begin_y"].get<double>(), confJson["end_y"].get<double>()};
@@ -79,20 +80,21 @@ WorldServerContext::toString() const noexcept
 {
 	std::string str;
 	str = "\n*************************\n";
-	str += "[INFO] Service " + _name + " context VERSION: " + _version + "\n";
-	str += "[INFO] Config file used: " + _configFile + "\n\n";
-	str += "[INFO] World Server code: " + _serverCode + "\n";
-	str += "[INFO] Local CML Storage : " + _pathToLocalStorage + "\n";
-	str += "[INFO] TMX Map path: " + _tmxMapPath + "\n"; // Will be changed with the new formatting file homemade
-	str += "[INFO] Player connection string: " + getPlayerConnectionString() + "\n";
-	str += "[INFO] Dispatcher(AuthServer) subscribing port: " + std::to_string(_dispatcherData.subscriberPort) + "\n";
-	str += "[INFO] Dispatcher(AuthServer) connected port: " + std::to_string(_dispatcherData.port) + "\n";
-	str += "[INFO] Dispatcher(AuthServer) connected host: " + _dispatcherData.address + "\n";
-	str += "[INFO] Dispatcher(AuthServer) Subscriber connection string: " + getDispatcherSubConnectionString() + "\n";
-	str += "[INFO] Dispatcher(AuthServer) connection string: " + getDispatcherConnectionString() + "\n";
+	str += "[INIT] Service " + _name + " context VERSION: " + _version + "\n";
+	str += "[INIT] Config file used: " + _configFile + "\n\n";
+	str += "[INIT] World Server code: " + _serverCode + "\n";
+	str += "[INIT] Local CML Storage : " + _pathToLocalStorage + "\n";
+	str += "[INIT] Path to LUA Engine initiator : " + _pathToLuaInitEngine + "\n";
+	str += "[INIT] TMX Map path: " + _tmxMapPath + "\n"; // Will be changed with the new formatting file homemade
+	str += "[INIT] Player connection string: " + getPlayerConnectionString() + "\n";
+	str += "[INIT] Dispatcher(AuthServer) subscribing port: " + std::to_string(_dispatcherData.subscriberPort) + "\n";
+	str += "[INIT] Dispatcher(AuthServer) connected port: " + std::to_string(_dispatcherData.port) + "\n";
+	str += "[INIT] Dispatcher(AuthServer) connected host: " + _dispatcherData.address + "\n";
+	str += "[INIT] Dispatcher(AuthServer) Subscriber connection string: " + getDispatcherSubConnectionString() + "\n";
+	str += "[INIT] Dispatcher(AuthServer) connection string: " + getDispatcherConnectionString() + "\n";
 
 	for (const auto& prox : _serverProximity) {
-		str += "[INFO] element:\n       ";
+		str += "[INIT] element:\n       ";
 		str += "code: " + prox.code + "\n";
 		if (prox.xAxisRequirement) {
 			str += "       Xvalue: " + std::to_string(prox.xAxisRequirement->value) + "\n";
@@ -159,6 +161,12 @@ const std::string&
 WorldServerContext::getPathToLocalStorage() const noexcept
 {
 	return _pathToLocalStorage;
+}
+
+const std::string&
+WorldServerContext::getPathToLuaInitEngine() const noexcept
+{
+	return _pathToLuaInitEngine;
 }
 
 }

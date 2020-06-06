@@ -31,16 +31,20 @@
 #include <WorldServerContext.hh>
 
 #include <engine/WorldServerEngine.hh>
+#include <engine/ScriptEngine.hh>
 #include <FlatbufferGenerator.hh>
 
 namespace fys::ws {
 
-WorldServerEngine::WorldServerEngine(const fys::ws::WorldServerContext& ctx)
+WorldServerEngine::WorldServerEngine(const std::string& playerConnectionStr,
+		CollisionMap&& map,
+		std::unique_ptr<ScriptEngine>&& scriptEngine,
+		std::chrono::system_clock::duration timeInterval)
 		:
-		common::DirectConnectionManager(1, ctx.getPlayerConnectionString()),
-		_map(ctx),
-		_scriptEngine(nullptr),
-		_nextTick(std::chrono::system_clock::now() + TIMING_MOVE_INTERVAL) { }
+		common::DirectConnectionManager(1, playerConnectionStr),
+		_map(std::move(map)),
+		_scriptEngine(std::move(scriptEngine)),
+		_nextTick(std::chrono::system_clock::now() + timeInterval) { }
 
 void
 WorldServerEngine::authenticatePlayer(AuthPlayer auth, CharacterInfo info, std::string identifier)
@@ -78,14 +82,14 @@ WorldServerEngine::executePendingMoves(const std::chrono::system_clock::time_poi
 				}
 			});
 
-	_scriptEngine.executeEncounterScriptedActions();
-	_scriptEngine.executeNeutralScriptedActions();
+	_scriptEngine->executeEncounterScriptedActions();
+	_scriptEngine->executeNeutralScriptedActions();
 }
 
 void
 WorldServerEngine::spawnNPC(const std::chrono::system_clock::time_point& currentTime)
 {
-	_scriptEngine.spawnNewEncounters(currentTime);
+	_scriptEngine->spawnNewEncounters(currentTime);
 }
 
 void

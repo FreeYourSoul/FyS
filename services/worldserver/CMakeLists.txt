@@ -31,8 +31,6 @@ add_executable(worldserver_service
         ${CMAKE_CURRENT_LIST_DIR}/src/engine/WorldServerEngine.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/engine/WorldServerEngine.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/engine/CollisionMap.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/src/engine/WorldPopulator.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/include/engine/WorldPopulator.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/FlatbufferGenerator.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/FlatbufferGenerator.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/engine/ScriptEngine.cpp
@@ -43,7 +41,10 @@ add_executable(worldserver_service
         ${CMAKE_CURRENT_LIST_DIR}/src/WorldServerService.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/WorldServerService.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/WorldServerContext.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/include/WorldServerContext.hh)
+        ${CMAKE_CURRENT_LIST_DIR}/include/WorldServerContext.hh
+        ${CMAKE_CURRENT_LIST_DIR}/src/engine/WorldPopulator.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/engine/WorldPopulator.hh
+        )
 
 target_link_libraries(worldserver_service
         nlohmann_json::nlohmann_json

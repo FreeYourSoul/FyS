@@ -91,8 +91,8 @@ class ProximityServer {
 	};
 
 public:
-	constexpr bool
-	isAtProximity(double axis) const noexcept
+	[[nodiscard]] constexpr bool
+	isCloseBy(double axis) const noexcept
 	{
 		bool xReq = xAxisRequirement.has_value();
 		bool yReq = yAxisRequirement.has_value();
@@ -144,7 +144,7 @@ public:
 	}
 
 private:
-	inline bool
+	[[nodiscard]] inline bool
 	canGoToLevel(std::size_t goLevel) const noexcept;
 
 private:

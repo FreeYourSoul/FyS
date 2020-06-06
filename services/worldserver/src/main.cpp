@@ -23,6 +23,7 @@
 
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
+#include <engine/WorldPopulator.hh>
 #include <WorldServerContext.hh>
 #include <WorldServerService.hh>
 #include <Key.hh>
@@ -37,7 +38,14 @@ main(int ac, char** av)
 		zmq_version(&major, &minor, &patch);
 		SPDLOG_INFO("Version ZMQ : {}.{}.{}\n{}", major, minor, patch, ctx.toString());
 
-		fys::ws::WorldServerService serverService(ctx, fys::ws::WorldServerEngine(ws::WorldServerContext()));
+		fys::ws::WorldServerService serverService(ctx,
+				std::move(*fys::ws::WorldPopulator()
+						.setIntervalMovement(fys::ws::TIMING_MOVE_INTERVAL)
+						.setConnectionString(ctx.getPlayerConnectionString())
+						.populateMap(ctx)
+						.populateScriptEngine(ctx)
+						.buildWorldServerEngine())
+		);
 		serverService.runServerLoop();
 	}
 	catch (const std::exception& e) {

@@ -34,25 +34,19 @@
 #include <WSAction_generated.h>
 
 #include <engine/PlayersData.hh>
+#include <engine/ScriptEngine.hh>
 #include <engine/CollisionMap.hh>
+#include <engine/WorldPopulator.hh>
 #include <DirectConnectionManager.hh>
-
 
 // forward declaration
 namespace fys::fb {
 struct WSAction;
 }
-namespace fys::ws {
-class WorldServerContext;
-class CollisionMap;
-class WorldPopulator;
-class ScriptEngine;
-}
 // end forward declarations
 
 namespace fys::ws {
 
-static constexpr std::chrono::milliseconds TIMING_MOVE_INTERVAL(16);
 constexpr static uint NOT_AUTHENTICATED = std::numeric_limits<uint>::max();
 
 struct AuthPlayer {
@@ -74,7 +68,8 @@ class WorldServerEngine : public common::DirectConnectionManager {
 	friend class WorldPopulator;
 
 public:
-	explicit WorldServerEngine(const WorldServerContext& ctx);
+	explicit WorldServerEngine(const std::string& playerConnectionStr, CollisionMap&& map,
+			std::unique_ptr<ScriptEngine>&& scriptEngine, std::chrono::system_clock::duration timeInterval);
 
 	void executePendingMoves(const std::chrono::system_clock::time_point& playerIndex);
 	void setPlayerMoveDirection(uint index, double direction);

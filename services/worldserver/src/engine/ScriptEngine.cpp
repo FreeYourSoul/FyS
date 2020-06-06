@@ -61,11 +61,6 @@ isActionMovementRelated(uint actionId)
 
 namespace fys::ws {
 
-ScriptEngine::ScriptEngine()
-{
-	registerCommon();
-}
-
 void
 ScriptEngine::spawnNewEncounters(const std::chrono::system_clock::time_point& currentTime)
 {

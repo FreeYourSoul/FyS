@@ -25,10 +25,18 @@
 #ifndef FYS_ONLINE_WORLDPOPULATOR_HH
 #define FYS_ONLINE_WORLDPOPULATOR_HH
 
-#include <engine/ScriptEngine.hh>
-#include <engine/WorldServerEngine.hh>
+namespace fys::ws {
+class WorldServerContext;
+class CollisionMap;
+class ScriptEngine;
+class WorldServerEngine;
+struct SpawningPoint;
+}
 
 namespace fys::ws {
+
+static constexpr std::chrono::milliseconds TIMING_MOVE_INTERVAL(16);
+
 
 /**
  * WorldPopulator is used in order to get the data required to populate the section of the map handled by
@@ -41,18 +49,27 @@ namespace fys::ws {
 class WorldPopulator {
 
 public:
-	[[nodiscard]] WorldServerEngine
-	buildWorldServerEngine(const WorldServerContext& ctx) const;
+	[[nodiscard]] std::unique_ptr<WorldServerEngine>
+	buildWorldServerEngine();
 
+	// Builder methods
+	WorldPopulator& populateMap(const WorldServerContext& ctx);
+	WorldPopulator& populateScriptEngine(const WorldServerContext& ctx);
+	WorldPopulator& setConnectionString(std::string connectionString);
+	WorldPopulator& setIntervalMovement(std::chrono::system_clock::duration intervalMovement);
 
-	const std::vector<SpawningPoint> &getSpawningPoints() const { return _scriptEngine._spawningPoints; }
+	// Getters for testing
+	const std::vector<SpawningPoint> &getSpawningPoints() const;
 
 private:
-	void registerCommonLuaEngine();
+	void registerCommonLuaEngine(const std::string& pathToLuaInitFile);
 	void generateSpawningPoints(const std::string& spawningPointConfigPath);
 
 private:
-	ScriptEngine _scriptEngine;
+	std::string _connectionString;
+	std::chrono::system_clock::duration _intervalMovement = TIMING_MOVE_INTERVAL;
+	std::unique_ptr<CollisionMap> _map;
+	std::unique_ptr<ScriptEngine> _scriptEngine;
 
 };
 

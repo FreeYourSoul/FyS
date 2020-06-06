@@ -66,6 +66,9 @@ public:
 	[[nodiscard]] const std::vector<ProximityServer>&
 	getServerProximity() const noexcept;
 
+	[[nodiscard]] const std::string &
+	getPathToLuaInitEngine() const noexcept;
+
 private:
 	void initWsContextWithJson(nlohmann::json& json);
 
@@ -73,6 +76,8 @@ private:
 	std::string _serverCode;
 	std::string _tmxMapPath;
 	std::string _pathToLocalStorage;
+	std::string _pathToLuaInitEngine;
+
 	uint _portPlayerConnection;
 	Boundary _serverXBoundaries;
 	Boundary _serverYBoundaries;

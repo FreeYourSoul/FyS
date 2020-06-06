@@ -21,15 +21,52 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
+#include <WorldServerContext.hh>
+#include <engine/WorldServerEngine.hh>
 #include <engine/WorldPopulator.hh>
+
+namespace {
+void
+assertEngineError(bool isError, const std::string& errorMsg)
+{
+	if (isError) {
+		std::string err = std::string("Miss constructed WorldServerEngine : ").append(errorMsg);
+		SPDLOG_ERROR(err);
+		throw std::runtime_error(err);
+	}
+}
+}
 
 namespace fys::ws {
 
-WorldServerEngine
-WorldPopulator::buildWorldServerEngine(const WorldServerContext& ctx) const
+std::unique_ptr<WorldServerEngine>
+WorldPopulator::buildWorldServerEngine()
 {
-	return ws::WorldServerEngine(ctx);
+	SPDLOG_INFO("[INIT] Start building ServerEngine...");
+
+	::assertEngineError(_connectionString.empty(), "Connection string is empty");
+	::assertEngineError(static_cast<bool>(_scriptEngine) == false, "Script engine not initialized");
+	::assertEngineError(static_cast<bool>(_map) == false, "Map is not initialized");
+
+	SPDLOG_INFO("[INIT] ServerEngine setup is correct...");
+	auto ret = std::make_unique<WorldServerEngine>
+			(_connectionString, std::move(*_map.get()), std::move(_scriptEngine), _intervalMovement);
+	SPDLOG_INFO("[INIT] ServerEngine building is complete");
+	return ret;
+}
+
+WorldPopulator&
+WorldPopulator::populateScriptEngine(const WorldServerContext& ctx)
+{
+	_scriptEngine = std::make_unique<ScriptEngine>();
+	registerCommonLuaEngine(ctx.getPathToLuaInitEngine());
+	return *this;
+}
+
+WorldPopulator&
+WorldPopulator::populateMap(const WorldServerContext& ctx)
+{
+	return *this;
 }
 
 void
@@ -38,60 +75,50 @@ WorldPopulator::generateSpawningPoints(const std::string& spawningPointConfigPat
 }
 
 void
-WorldPopulator::registerCommonLuaEngine()
+WorldPopulator::registerCommonLuaEngine(const std::string& pathToLuaInitFile)
 {
-	SPDLOG_INFO("Register LUA utilities");
-
-	_scriptEngine._lua.open_libraries(sol::lib::base, sol::lib::package);
+	_scriptEngine->_lua.open_libraries(sol::lib::base, sol::lib::package);
 
 	try {
-		_lua.safe_script(R"(
-			function getCharacterInfo(spawningPoint, luaId)
-				if luaId >= spawningPoint.numbers then return nil end
-			end
-
-			function spawn(spawningPoint)
-				for id, spawn in pairs(spawningPoint.spawned) do
-					if spawn.isAlive == false then
-						spawningPoint.spawned[id].isAlive = true
-						return id
-					end
-				end
-				return nil
-			end
-
-			function print_test()
-				print("This is a print test")
-			end
-
-			function execMovement(spawningPoint)
-
-
-				-- Increment the current step (maybe # can be used instead of numberSteps)
-				spawningPoint.current = current + 1
-				if spawningPoint.current == spawningPoint.numberSteps then
-					spawningPoint.current = 0
-				end
-			end
-			)");
+		_scriptEngine->_lua.safe_script_file(pathToLuaInitFile);
 	}
 	catch (const std::exception& e) {
-		SPDLOG_ERROR("Error while registering basic content {} ", e.what());
+		SPDLOG_ERROR("Error while initiating LUA engine : {} ", e.what());
 	}
 
-	auto position = _scriptEngine._lua.new_usertype<Pos>("Pos");
+	auto position = _scriptEngine->_lua.new_usertype<Pos>("Pos");
 	position["x"] = &Pos::x;
 	position["y"] = &Pos::y;
 
-	auto characterInfo = _scriptEngine._lua.new_usertype<CharacterInfo>("CharacterInfo");
+	auto characterInfo = _scriptEngine->_lua.new_usertype<CharacterInfo>("CharacterInfo");
 	characterInfo["pos"] = &CharacterInfo::pos;
 	characterInfo["velocity"] = &CharacterInfo::velocity;
 	characterInfo["angle"] = &CharacterInfo::angle;
 
-	_lua["retrieveAngle"] = [](double x, double y, double destinationX, double destinationY) {
+	_scriptEngine->_lua["retrieveAngle"] = [](double x, double y, double destinationX, double destinationY) {
 		return std::atan((y - destinationY) / (x - destinationX));
 	};
 
+}
+
+const std::vector<SpawningPoint>&
+WorldPopulator::getSpawningPoints() const
+{
+	return _scriptEngine->_spawningPoints;
+}
+
+WorldPopulator&
+WorldPopulator::setConnectionString(std::string connectionString)
+{
+	_connectionString = std::move(connectionString);
+	return *this;
+}
+
+WorldPopulator&
+WorldPopulator::setIntervalMovement(std::chrono::system_clock::duration intervalMovement)
+{
+	_intervalMovement = intervalMovement;
+	return *this;
 }
 
 }

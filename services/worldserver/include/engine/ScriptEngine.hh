@@ -116,15 +116,12 @@ class ScriptEngine {
 	using CharacterInfoLuaReturnType = std::tuple<double, double, double, double>;
 
 public:
-	ScriptEngine();
+	void spawnNewEncounters(const std::chrono::system_clock::time_point& currentTime);
 
 	void executeEncounterScriptedActions();
-
-	void spawnNewEncounters(const std::chrono::system_clock::time_point& currentTime);
 	void executeNeutralScriptedActions();
 
 private:
-	void registerCommon();
 	void spawnEncounter(unsigned indexSpawn);
 	void sendNotificationToPlayer(std::vector<NPCAction> actions, Pos centralPositionActions, double distanceNotif);
 

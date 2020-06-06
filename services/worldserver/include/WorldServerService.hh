@@ -25,7 +25,7 @@
 #define FYS_WORLDSERVERSERVICE_HH
 
 #include <engine/WorldServerEngine.hh>
-#include <ConnectionHandler.hh>
+#include "ConnectionHandler.hh"
 
 // forward declarations
 namespace fys::ws {
