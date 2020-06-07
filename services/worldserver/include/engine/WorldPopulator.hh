@@ -63,7 +63,7 @@ public:
 
 private:
 	void registerCommonLuaEngine(const std::string& pathToLuaInitFile);
-	void generateSpawningPoints(const std::string& spawningPointConfigPath);
+	void generateSpawningPoints(const std::string& spawningPointConfigPath, const std::string& basePath);
 
 private:
 	std::string _connectionString;

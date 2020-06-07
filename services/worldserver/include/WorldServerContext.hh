@@ -49,25 +49,31 @@ public:
 	getPlayerConnectionString() const noexcept;
 
 	[[nodiscard]] const std::string&
-	getPathToLocalStorage() const noexcept;
+	getPathToLocalStorage() const noexcept { return _pathToLocalStorage; }
 
 	[[nodiscard]] const std::string&
-	getServerCode() const noexcept;
+	getServerCode() const noexcept { return _serverCode; }
 
 	[[nodiscard]] const std::string&
-	getTMXMapPath() const noexcept;
+	getTMXMapPath() const noexcept { return _tmxMapPath; }
 
 	[[nodiscard]] const Boundary&
-	getServerXBoundaries() const noexcept;
+	getServerXBoundaries() const noexcept { return _serverXBoundaries; }
 
 	[[nodiscard]] const Boundary&
-	getServerYBoundaries() const noexcept;
+	getServerYBoundaries() const noexcept { return _serverYBoundaries; }
 
 	[[nodiscard]] const std::vector<ProximityServer>&
-	getServerProximity() const noexcept;
+	getServerProximity() const noexcept { return _serverProximity; }
 
-	[[nodiscard]] const std::string &
-	getPathToLuaInitEngine() const noexcept;
+	[[nodiscard]] const std::string&
+	getPathToLuaInitEngine() const noexcept { return _pathToLuaInitEngine; }
+
+	[[nodiscard]] const std::string&
+	getSpawningConfigPath() const noexcept { return _spawningConfigPath; }
+
+	[[nodiscard]] const std::string&
+	getPathLuaBase() const noexcept { return _pathLuaBase; }
 
 private:
 	void initWsContextWithJson(nlohmann::json& json);
@@ -76,7 +82,9 @@ private:
 	std::string _serverCode;
 	std::string _tmxMapPath;
 	std::string _pathToLocalStorage;
+	std::string _pathLuaBase;
 	std::string _pathToLuaInitEngine;
+	std::string _spawningConfigPath;
 
 	uint _portPlayerConnection;
 	Boundary _serverXBoundaries;

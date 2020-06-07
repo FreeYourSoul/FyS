@@ -51,8 +51,10 @@ WorldServerContext::initWsContextWithJson(json& json)
 	wsJson["code"].get_to(_serverCode);
 	wsJson["connection_port"].get_to(_portPlayerConnection);
 	wsJson["TMX_Map"].get_to(_tmxMapPath);
+	wsJson["spawning_config"].get_to(_spawningConfigPath);
 	wsJson["path_lua_init_engine"].get_to(_pathToLuaInitEngine);
 	wsJson["script_storage_cache"].get_to(_pathToLocalStorage);
+	wsJson["path_lua_base"].get_to(_pathLuaBase);
 	_serverXBoundaries = {confJson["begin_x"].get<double>(), confJson["end_x"].get<double>()};
 	_serverYBoundaries = {confJson["begin_y"].get<double>(), confJson["end_y"].get<double>()};
 	for (auto &[key, value] : overlapsJson.items()) {
@@ -109,36 +111,6 @@ WorldServerContext::toString() const noexcept
 	return str;
 }
 
-const std::string&
-WorldServerContext::getServerCode() const noexcept
-{
-	return _serverCode;
-}
-
-const std::string&
-WorldServerContext::getTMXMapPath() const noexcept
-{
-	return _tmxMapPath;
-}
-
-const std::vector<ProximityServer>&
-WorldServerContext::getServerProximity() const noexcept
-{
-	return _serverProximity;
-}
-
-const Boundary&
-WorldServerContext::getServerXBoundaries() const noexcept
-{
-	return _serverXBoundaries;
-}
-
-const Boundary&
-WorldServerContext::getServerYBoundaries() const noexcept
-{
-	return _serverYBoundaries;
-}
-
 std::string
 WorldServerContext::getDispatcherConnectionString() const noexcept
 {
@@ -157,16 +129,5 @@ WorldServerContext::getPlayerConnectionString() const noexcept
 	return std::string("tcp://*:").append(std::to_string(_portPlayerConnection));
 }
 
-const std::string&
-WorldServerContext::getPathToLocalStorage() const noexcept
-{
-	return _pathToLocalStorage;
-}
-
-const std::string&
-WorldServerContext::getPathToLuaInitEngine() const noexcept
-{
-	return _pathToLuaInitEngine;
-}
 
 }

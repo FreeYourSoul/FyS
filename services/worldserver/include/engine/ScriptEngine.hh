@@ -59,6 +59,7 @@ struct SpawningPoint {
 
 	unsigned maxSpawned = 0;
 	std::string idSpawningPoint;
+	std::string displayKey;
 
 	std::chrono::seconds spawningInterval = BASE_SPAWNING_INTERVAL;
 	std::chrono::system_clock::time_point nextSpawn{};

@@ -25,6 +25,9 @@ spawningPoint_0 = {
     },
     numbers = 5,
 
+    center_point = { x = 25, y = 25},
+    visibility_distance = 50,
+
     -- Inner Function can be used in order to re-arrange the script
     -- By using this function, the script is not static anymore and can change each time we spawn a monster
     spawnAtIndex = function(index) end

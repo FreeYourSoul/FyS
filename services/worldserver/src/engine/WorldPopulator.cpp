@@ -21,7 +21,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include <fstream>
+
+#include <CmlKey.hh>
 #include <WorldServerContext.hh>
+#include <engine/ScriptEngine.hh>
 #include <engine/WorldServerEngine.hh>
 #include <engine/WorldPopulator.hh>
 
@@ -35,6 +39,35 @@ assertEngineError(bool isError, const std::string& errorMsg)
 		throw std::runtime_error(err);
 	}
 }
+
+[[nodiscard]] inline std::string
+getSPNamespaceFromKey(const std::string& key)
+{
+	auto startSeparator = key.find_last_of(':');
+	auto endSeparator = key.find_last_of('.');
+
+	if (startSeparator != std::string::npos && endSeparator != std::string::npos) {
+		// if a ':' and a '.' are found
+		return key.substr(startSeparator + 1, endSeparator - startSeparator - 1);
+	}
+	else if (startSeparator == std::string::npos && endSeparator != std::string::npos) {
+		// if a ':' is not found but not a '.' is found
+		return key.substr(0, endSeparator);
+	}
+	else if (startSeparator != std::string::npos && endSeparator == std::string::npos) {
+		// if a ':' is found but not a '.' is not found
+		return key.substr(startSeparator + 1);
+	}
+	return key;
+}
+
+[[nodiscard]] inline std::string
+getPathFromKey(std::string base, std::string key)
+{
+	std::replace(key.begin(), key.end(), ':', '/');
+	return base.append("/").append(std::move(key));
+}
+
 }
 
 namespace fys::ws {
@@ -60,6 +93,7 @@ WorldPopulator::populateScriptEngine(const WorldServerContext& ctx)
 {
 	_scriptEngine = std::make_unique<ScriptEngine>();
 	registerCommonLuaEngine(ctx.getPathToLuaInitEngine());
+	generateSpawningPoints(ctx.getSpawningConfigPath(), ctx.getPathLuaBase());
 	return *this;
 }
 
@@ -70,8 +104,33 @@ WorldPopulator::populateMap(const WorldServerContext& ctx)
 }
 
 void
-WorldPopulator::generateSpawningPoints(const std::string& spawningPointConfigPath)
+WorldPopulator::generateSpawningPoints(const std::string& spawningPointConfigPath, const std::string& basePath)
 {
+	std::ifstream i(spawningPointConfigPath);
+	nlohmann::json jsonConfig;
+	i >> jsonConfig;
+
+	auto wsJson = jsonConfig["spawning_points"];
+	unsigned index = 0;
+
+	_scriptEngine->_spawningPoints.resize(wsJson.size());
+	for (auto &[key, value] : wsJson.items()) {
+		const std::string keyCml = value["key_zone"].get<std::string>();
+
+		_scriptEngine->_spawningPoints[index].spawningInterval = std::chrono::seconds(value["spawning_interval"].get<uint>());
+		_scriptEngine->_spawningPoints[index].idSpawningPoint = getSPNamespaceFromKey(keyCml);
+		_scriptEngine->_spawningPoints[index].maxSpawned = value["max_spawned"].get<uint>();
+		_scriptEngine->_spawningPoints[index].displayKey = value["display_key"].get<std::string>();
+
+		try {
+			_scriptEngine->_lua.safe_script_file(getPathFromKey(basePath, keyCml));
+		}
+		catch (const std::exception& e) {
+			SPDLOG_ERROR("[INIT] An error occurred while instantiating SpawningPoints '{}' : {}",
+					_scriptEngine->_spawningPoints[index].displayKey, e.what());
+		}
+		++index;
+	}
 }
 
 void
