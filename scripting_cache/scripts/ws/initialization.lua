@@ -29,7 +29,7 @@ function spawn(spawningPoint)
     return nil
 end
 
-function execMovement(spawningPoint, luaId, info)
+function execAction(spawningPoint, luaId, info)
     tobe_x = round(info.pos.x)
     tobe_y = round(info.pos.y)
 

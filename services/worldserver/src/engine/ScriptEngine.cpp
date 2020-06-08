@@ -114,7 +114,7 @@ ScriptEngine::executeEncounterScriptedActions()
 				uint luaId, actionId;
 				double x, y, velocity, angle;
 				sol::tie(luaId, actionId, x, y, velocity, angle) =
-						_lua["execMovement"](_lua[npc.spNamespace], npc.npcLuaId, std::ref(npc.info));
+						_lua["execAction"](_lua[npc.spNamespace], npc.npcLuaId, std::ref(npc.info));
 
 				actionsExecuted.emplace_back(NPCAction{luaId, actionId, CharacterInfo{{x, y}, velocity, angle}});
 			}

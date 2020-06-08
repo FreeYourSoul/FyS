@@ -3,7 +3,6 @@
 
         {
             "display_key":       "DS1",
-            "max_spawned":       10,
             "spawning_interval": 60,
             "key_zone":          "ws:sp:spawningPoint_0.lua"
         }

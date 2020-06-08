@@ -116,14 +116,34 @@ WorldPopulator::generateSpawningPoints(const std::string& spawningPointConfigPat
 	_scriptEngine->_spawningPoints.resize(wsJson.size());
 	for (auto &[key, value] : wsJson.items()) {
 		const std::string keyCml = value["key_zone"].get<std::string>();
+		const std::string spNamespace = getSPNamespaceFromKey(keyCml);
 
 		_scriptEngine->_spawningPoints[index].spawningInterval = std::chrono::seconds(value["spawning_interval"].get<uint>());
-		_scriptEngine->_spawningPoints[index].idSpawningPoint = getSPNamespaceFromKey(keyCml);
-		_scriptEngine->_spawningPoints[index].maxSpawned = value["max_spawned"].get<uint>();
+		_scriptEngine->_spawningPoints[index].idSpawningPoint = spNamespace;
 		_scriptEngine->_spawningPoints[index].displayKey = value["display_key"].get<std::string>();
 
 		try {
 			_scriptEngine->_lua.safe_script_file(getPathFromKey(basePath, keyCml));
+			auto initPos = _scriptEngine->_lua[spNamespace]["initial_info"];
+			auto maxSpawn = _scriptEngine->_lua[spNamespace]["numbers"];
+			auto centerPos_x = _scriptEngine->_lua[spNamespace]["center_point"]["x"];
+			auto centerPos_y = _scriptEngine->_lua[spNamespace]["center_point"]["y"];
+
+			if (!initPos.valid()) {
+				throw std::runtime_error("'initial_info' is not properly set");
+			}
+			if (!maxSpawn.valid()) {
+				throw std::runtime_error("'maxSpawn' is not properly set");
+			}
+			if (!centerPos_x.valid(), !centerPos_y.valid()) {
+				throw std::runtime_error("'center_pos' is not properly set");
+			}
+			_scriptEngine->_spawningPoints[index].centerSpawningPoint = Pos {
+					static_cast<double>(centerPos_x),
+					static_cast<double>(centerPos_y)
+			};
+			_scriptEngine->_spawningPoints[index].maxSpawned = static_cast<uint>(maxSpawn);
+
 		}
 		catch (const std::exception& e) {
 			SPDLOG_ERROR("[INIT] An error occurred while instantiating SpawningPoints '{}' : {}",
