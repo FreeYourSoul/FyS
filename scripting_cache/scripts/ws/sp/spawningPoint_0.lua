@@ -8,7 +8,7 @@ spawningPoint_0 = {
                 [0] = { id = 0, x = 10, y = 10 },
                 [1] = { id = 0, x = 20, y = 20 },
                 [2] = { id = 0, x = 30, y = 30 },
-                [3] = { id = 0, x = 40, y = 40 }
+                [3] = { id = 1, x = 40, y = 40 }
             },
             backwardLoop = true,
             currentDestination = 0,
