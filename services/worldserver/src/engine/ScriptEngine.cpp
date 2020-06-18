@@ -34,28 +34,28 @@
 
 namespace {
 
-void
-testingScriptDownload(const std::string& key, const std::string& pathDest)
-{
-	fys::cache::CmlKey k("", key);
-	auto p = std::filesystem::path(key);
-	std::error_code e;
+//void
+//testingScriptDownload(const std::string& key, const std::string& pathDest)
+//{
+//	fys::cache::CmlKey k("", key);
+//	auto p = std::filesystem::path(key);
+//	std::error_code e;
+//
+//	std::filesystem::create_directories(p.parent_path(), e);
+//	std::filesystem::copy(k.getPath(), p, e);
+//}
 
-	std::filesystem::create_directories(p.parent_path(), e);
-	std::filesystem::copy(k.getPath(), p, e);
-}
-
-[[nodiscard]] bool
-isActionToBeNotified(uint actionId)
-{
-	return actionId > fys::ws::NPCAction::IDLE;
-}
-
-[[nodiscard]] bool
-isActionMovementRelated(uint actionId)
-{
-	return actionId == fys::ws::NPCAction::MOVE || actionId == fys::ws::NPCAction::STOP;
-}
+//[[nodiscard]] bool
+//isActionToBeNotified(uint actionId)
+//{
+//	return actionId > fys::ws::NPCAction::IDLE;
+//}
+//
+//[[nodiscard]] bool
+//isActionMovementRelated(uint actionId)
+//{
+//	return actionId == fys::ws::NPCAction::MOVE || actionId == fys::ws::NPCAction::STOP;
+//}
 
 }
 
@@ -109,14 +109,19 @@ ScriptEngine::executeEncounterScriptedActions()
 
 		actionsExecuted.resize(_spawnedPerSpawningPoint.at(spawningPointId).size());
 		for (uint spawnId = 0; spawnId < _spawnedPerSpawningPoint.at(spawningPointId).size(); ++spawnId) {
-			const auto& npc = _spawnedPerSpawningPoint.at(spawningPointId).at(spawnId);
+			auto& npc = _spawnedPerSpawningPoint.at(spawningPointId).at(spawnId);
 			try {
-				uint luaId, actionId;
+				unsigned actionId;
 				double x, y, velocity, angle;
-				sol::tie(luaId, actionId, x, y, velocity, angle) =
+
+				sol::tie(actionId, x, y, velocity, angle) =
 						_lua["execAction"](_lua[npc.spNamespace], npc.npcLuaId, std::ref(npc.info));
 
-				actionsExecuted.emplace_back(NPCAction{luaId, actionId, CharacterInfo{{x, y}, velocity, angle}});
+				npc.info.pos.x = x;
+				npc.info.pos.y = y;
+				npc.info.velocity = velocity;
+				npc.info.angle = angle;
+				actionsExecuted.emplace_back(NPCAction{npc.npcLuaId, actionId, npc.info});
 			}
 			catch (const std::exception& e) {
 				SPDLOG_ERROR("[lua] : An error occurred while executing script action SpawningPoint {} npc {} : \n[ERROR] : {}",

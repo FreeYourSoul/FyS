@@ -21,33 +21,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include "../include/ConnectionHandler.hh"
+#include <catch2/catch.hpp>
+#include <engine/WorldPopulator.hh>
+#include <WorldServerContext.hh>
 
-namespace fys::ws {
-
-ConnectionHandler::ConnectionHandler(int threadNumber) noexcept
-		:
-		_zmqContext(threadNumber),
-		_subSocketOnDispatcher(_zmqContext, zmq::socket_type::sub),
-		_dealSocketOnDispatcher(_zmqContext, zmq::socket_type::dealer)
+TEST_CASE("WorldPopulator scripted Actions", "[service][world][script]")
 {
-}
+	fys::ws::WorldPopulator wp;
 
-void
-ConnectionHandler::setupConnectionManager(const fys::ws::WorldServerContext& ctx) noexcept
-{
-	_subSocketOnDispatcher.set(zmq::sockopt::subscribe, ctx.getServerCode());
-	_subSocketOnDispatcher.set(zmq::sockopt::subscribe, SERVER_SUB_CHANNEL_KEY);
-	_subSocketOnDispatcher.connect(ctx.getDispatcherSubConnectionString());
-	_dealSocketOnDispatcher.connect(ctx.getDispatcherConnectionString());
-}
+	char* av[] = {"-c", "/home/FyS/Project/FyS/services/worldserver/cfg/service.ini",
+				  "-s", "/home/FyS/Project/FyS/services/worldserver/cfg/worldserver_WS00.json"};
 
-void
-ConnectionHandler::sendMessageToDispatcher(zmq::multipart_t&& msg) noexcept
-{
-	if (_dealSocketOnDispatcher.connected()) {
-		msg.send(_dealSocketOnDispatcher);
-	}
-}
+	auto ctx = fys::ws::WorldServerContext(4, av);
+//	wp.populateScriptEngine();
 
-}
+} // End TestCase : SpawningPoint_0_TestCase scripted Actions

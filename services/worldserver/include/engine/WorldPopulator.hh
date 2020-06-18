@@ -27,10 +27,10 @@
 
 namespace fys::ws {
 class WorldServerContext;
-class CollisionMap;
 class ScriptEngine;
+class CollisionMap;
 class WorldServerEngine;
-struct SpawningPoint;
+class SpawningPoint;
 }
 
 namespace fys::ws {
@@ -49,7 +49,7 @@ static constexpr std::chrono::milliseconds TIMING_MOVE_INTERVAL(16);
 class WorldPopulator {
 
 public:
-	[[nodiscard]] std::unique_ptr<WorldServerEngine>
+	[[nodiscard]] std::shared_ptr<WorldServerEngine>
 	buildWorldServerEngine();
 
 	// Builder methods
@@ -60,6 +60,7 @@ public:
 
 	// Getters for testing
 	const std::vector<SpawningPoint> &getSpawningPoints() const;
+	ScriptEngine &getScriptEngine() const { return *_scriptEngine; }
 
 private:
 	void registerCommonLuaEngine(const std::string& pathToLuaInitFile);
@@ -68,8 +69,8 @@ private:
 private:
 	std::string _connectionString;
 	std::chrono::system_clock::duration _intervalMovement = TIMING_MOVE_INTERVAL;
-	std::unique_ptr<CollisionMap> _map;
-	std::unique_ptr<ScriptEngine> _scriptEngine;
+	std::shared_ptr<CollisionMap> _map;
+	std::shared_ptr<ScriptEngine> _scriptEngine;
 
 };
 

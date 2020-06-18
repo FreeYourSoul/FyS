@@ -35,7 +35,7 @@ getScriptFilePath()
 	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
 	if (dir_path.size() == file_path.size())
 		dir_path = file_path.substr(0, file_path.rfind('/'));
-	return dir_path + "/../../../../scripting_cache/scripts/ws/sp/SpawningPoint_0.lua";
+	return dir_path + "/../../../../scripting_cache/scripts/ws/sp/spawningPoint_0.lua";
 }
 
 [[nodiscard]] std::string
@@ -97,6 +97,5 @@ TEST_CASE("SpawningPoint_0 TestCase", "[service][world][script]")
 			FAIL(e.what());
 		}
 	} // End section : Create Encounter 0
-
 
 } // End TestCase : SpawningPoint_0 TestCase

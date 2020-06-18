@@ -29,18 +29,35 @@ function spawn(spawningPoint)
     return nil
 end
 
+function changeActionsIndex(luaId, backwardLooping)
+    spawningPoint.spawned[luaId].currentActions = spawningPoint.spawned[luaId].currentActions + 1
+    if spawningPoint.spawned[luaId].currentActions == spawningPoint.spawned[luaId].numberSteps then
+        spawningPoint.current = 0
+    end
+end
+
 function execAction(spawningPoint, luaId, info)
-    tobe_x = round(info.pos.x)
-    tobe_y = round(info.pos.y)
+    -- Retrieve current action
+    action = spawningPoint.spawned[luaId].actions.spawningPoint.spawned[luaId].currentActions
 
-    if tobe_x == spawningPoint.spawned[luaId].destination[spawningPoint.spawned[luaId].currentDestination].x and
-            tobe_y == spawningPoint.spawned[luaId].destination[spawningPoint.spawned[luaId].currentDestination].y then
+    if (action.id > 0)
+    then
+        changeActionsIndex(luaId, action.backwardLoop)
+        return action.id, .0, .0, 0, 0
+    end
 
-        -- Increment the current step (maybe # can be used instead of numberSteps)
-        spawningPoint.spawned[luaId].currentDestination = current + 1
-        if spawningPoint.spawned[luaId].currentDestination == spawningPoint.spawned[luaId].numberSteps then
-            spawningPoint.current = 0
-        end
+    -- todo : Check if monster is close to a player, to try to get him, changing the
+
+    tobe_angle = retrieveAngle(info.angle)
+    tobe_velocity = info.velocity
+    tobe_x = info.pos.x * (info.pos.x * math.cos(tobe_angle))
+    tobe_y = info.pos.y * (info.pos.y * math.sin(tobe_angle))
+
+    if round(tobe_x) == spawningPoint.spawned[luaId].destination[spawningPoint.spawned[luaId].currentActions].x and
+            round(tobe_y) == spawningPoint.spawned[luaId].destination[spawningPoint.spawned[luaId].currentActions].y
+    then
+        changeActionsIndex(luaId, action.backwardLoop)
+        return 0, tobe_x, tobe_y, tobe_velocity, tobe_angle
     end
 
 end

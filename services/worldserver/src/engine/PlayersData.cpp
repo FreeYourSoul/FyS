@@ -73,7 +73,7 @@ PlayersData::getPlayerIdtsAroundPos(const Pos& position,
 uint
 PlayersData::addNewPlayerData(CharacterInfo info, std::string identity, std::string userName)
 {
-	if (!(_identities.size() == _status.size() == _positions.size() == _userNames.size())) {
+	if (!((_identities.size() == _status.size()) == (_positions.size() == _userNames.size()))) {
 		SPDLOG_CRITICAL("MISMATCH, all vectors require to be equal idt:'{}' stat:'{}' pos:'{}', names:'{}'",
 				_identities.size(), _status.size(), _positions.size(), _userNames.size());
 		return 0;

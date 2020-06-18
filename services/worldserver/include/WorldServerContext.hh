@@ -34,7 +34,7 @@ namespace fys::ws {
 class WorldServerContext : fys::common::ServiceContextBase {
 
 public:
-	WorldServerContext(int ac, const char* const* av);
+	explicit WorldServerContext(int ac, const char* const* av);
 
 	[[nodiscard]] std::string
 	toString() const noexcept;

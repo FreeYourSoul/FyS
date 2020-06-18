@@ -38,12 +38,12 @@ namespace fys::ws {
 
 WorldServerEngine::WorldServerEngine(const std::string& playerConnectionStr,
 		CollisionMap&& map,
-		std::unique_ptr<ScriptEngine>&& scriptEngine,
+		std::shared_ptr<ScriptEngine> scriptEngine,
 		std::chrono::system_clock::duration timeInterval)
 		:
 		common::DirectConnectionManager(1, playerConnectionStr),
 		_map(std::move(map)),
-		_scriptEngine(std::move(scriptEngine)),
+		_scriptEngine(std::make_unique<ScriptEngine>(std::move(*scriptEngine))), // beurk...
 		_nextTick(std::chrono::system_clock::now() + timeInterval) { }
 
 void

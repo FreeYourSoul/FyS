@@ -72,7 +72,7 @@ getPathFromKey(std::string base, std::string key)
 
 namespace fys::ws {
 
-std::unique_ptr<WorldServerEngine>
+std::shared_ptr<WorldServerEngine>
 WorldPopulator::buildWorldServerEngine()
 {
 	SPDLOG_INFO("[INIT] Start building ServerEngine...");
@@ -82,7 +82,7 @@ WorldPopulator::buildWorldServerEngine()
 	::assertEngineError(static_cast<bool>(_map) == false, "Map is not initialized");
 
 	SPDLOG_INFO("[INIT] ServerEngine setup is correct...");
-	auto ret = std::make_unique<WorldServerEngine>
+	auto ret = std::make_shared<WorldServerEngine>
 			(_connectionString, std::move(*_map.get()), std::move(_scriptEngine), _intervalMovement);
 	SPDLOG_INFO("[INIT] ServerEngine building is complete");
 	return ret;
@@ -124,13 +124,13 @@ WorldPopulator::generateSpawningPoints(const std::string& spawningPointConfigPat
 
 		try {
 			_scriptEngine->_lua.safe_script_file(getPathFromKey(basePath, keyCml));
-			auto initPos = _scriptEngine->_lua[spNamespace]["initial_info"];
 			auto maxSpawn = _scriptEngine->_lua[spNamespace]["numbers"];
-			auto centerPos_x = _scriptEngine->_lua[spNamespace]["center_point"]["x"];
+			auto visibilityDistance = _scriptEngine->_lua[spNamespace]["visibility_distance"];
 			auto centerPos_y = _scriptEngine->_lua[spNamespace]["center_point"]["y"];
+			auto centerPos_x = _scriptEngine->_lua[spNamespace]["center_point"]["x"];
 
-			if (!initPos.valid()) {
-				throw std::runtime_error("'initial_info' is not properly set");
+			if (!visibilityDistance.valid()) {
+				throw std::runtime_error("'visibility_distance' is not properly set'");
 			}
 			if (!maxSpawn.valid()) {
 				throw std::runtime_error("'maxSpawn' is not properly set");
@@ -138,11 +138,12 @@ WorldPopulator::generateSpawningPoints(const std::string& spawningPointConfigPat
 			if (!centerPos_x.valid(), !centerPos_y.valid()) {
 				throw std::runtime_error("'center_pos' is not properly set");
 			}
-			_scriptEngine->_spawningPoints[index].centerSpawningPoint = Pos {
+			_scriptEngine->_spawningPoints[index].centerSpawningPoint = Pos{
 					static_cast<double>(centerPos_x),
 					static_cast<double>(centerPos_y)
 			};
 			_scriptEngine->_spawningPoints[index].maxSpawned = static_cast<uint>(maxSpawn);
+			_scriptEngine->_spawningPoints[index].distanceNotification = static_cast<uint>(visibilityDistance);
 
 		}
 		catch (const std::exception& e) {

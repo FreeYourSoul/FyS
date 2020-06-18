@@ -69,7 +69,7 @@ class WorldServerEngine : public common::DirectConnectionManager {
 
 public:
 	explicit WorldServerEngine(const std::string& playerConnectionStr, CollisionMap&& map,
-			std::unique_ptr<ScriptEngine>&& scriptEngine, std::chrono::system_clock::duration timeInterval);
+			std::shared_ptr<ScriptEngine> scriptEngine, std::chrono::system_clock::duration timeInterval);
 
 	void executePendingMoves(const std::chrono::system_clock::time_point& playerIndex);
 	void setPlayerMoveDirection(uint index, double direction);
