@@ -100,6 +100,7 @@ WorldPopulator::populateScriptEngine(const WorldServerContext& ctx)
 WorldPopulator&
 WorldPopulator::populateMap(const WorldServerContext& ctx)
 {
+	// todo : define map
 	return *this;
 }
 
