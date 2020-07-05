@@ -23,6 +23,8 @@ FreeYourSoul Online is using an original battle system inspired by Final Fantasy
 
 ### World Service
 
+Service handling the movement in the world of the character controlled by the players and of the NPC (handled through LUA).
+
 ### InventoryGrab Service
 
 ### InventoryUse Service
