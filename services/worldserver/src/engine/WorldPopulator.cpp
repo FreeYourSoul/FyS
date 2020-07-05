@@ -179,7 +179,6 @@ WorldPopulator::registerCommonLuaEngine(const std::string& pathToLuaInitFile)
 	_scriptEngine->_lua["retrieveAngle"] = [](double x, double y, double destinationX, double destinationY) {
 		return std::atan((y - destinationY) / (x - destinationX));
 	};
-
 }
 
 const std::vector<SpawningPoint>&
