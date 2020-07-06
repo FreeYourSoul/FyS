@@ -33,7 +33,7 @@
 #include <HistoryManager.hh>
 #include <network/WorkerService.hh>
 #include <ArenaServerContext.hh>
-#include <FlatbufferGenerator.hh>
+#include <flatbuffer_generator.hh>
 
 namespace fys::arena {
 
@@ -166,7 +166,7 @@ WorkerService::fightingPitExistAndJoinable(unsigned int fightingPitId) const noe
 void
 WorkerService::sendMsgNewArrivingTeam(unsigned fpId, const std::string& userName) noexcept
 {
-	FlatbufferGenerator fg;
+	flatbuffer_generator fg;
 
 	{
 		auto[fbMsg, size] = fg.generateFightingPitState(*_arenaInstances.at(fpId));

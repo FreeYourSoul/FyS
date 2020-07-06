@@ -22,31 +22,62 @@
 // SOFTWARE.
 
 
-#ifndef FYS_ONLINE_WS_FLATBUFFERGENERATOR_HH
-#define FYS_ONLINE_WS_FLATBUFFERGENERATOR_HH
+#ifndef FYS_SERVICECONTEXTBASE_HH
+#define FYS_SERVICECONTEXTBASE_HH
 
-#include <flatbuffers/flatbuffers.h>
+#include <string>
 
-// forward declarations
-namespace fys::ws {
-	struct CharacterInfo;
+namespace fys::common {
+
+namespace init_beacon {
+constexpr static auto SERVICE_NAME = "service.name";
+constexpr static auto HOSTNAME = "service.hostname";
+constexpr static auto PORT = "service.port";
+
+constexpr static auto DISPATCHER_PORT = "dispatcher.port";
+constexpr static auto DISPATCHER_SUBPORT = "dispatcher.subport";
+constexpr static auto DISPATCHER_ADDR = "dispatcher.address";
 }
-// end forward declarations
 
-namespace fys::ws {
+struct dispatcher_data {
+	std::string address;
+	ushort subscriber_port;
+	ushort port;
+};
 
-class FlatbufferGenerator {
-
+class service_context_base {
 public:
+	service_context_base(int ac, const char* const* av);
 
-	[[nodiscard]] std::pair<void*, uint>
-	generateMoveNotification(const std::string& playerName, const fys::ws::CharacterInfo& info);
+	/**
+	 * @return the connection string required to connect to the current server
+	 */
+	[[nodiscard]] std::string
+	get_connection_str() const;
+
+	[[nodiscard]] ushort
+	get_port() const { return _port; }
+
+	[[nodiscard]] const std::string&
+	get_hostname() const { return _hostname; }
+
+	[[nodiscard]] std::string
+	get_dispatcher_connection_str() const noexcept;
 
 private:
-	flatbuffers::FlatBufferBuilder _fbb;
+	void initialize_from_ini(const std::string& configFilePath);
 
+protected:
+	std::string _version;
+	std::string _name;
+	std::string _config_file;
+
+	std::string _hostname;
+	ushort _port;
+
+	dispatcher_data _dispatcherData;
 };
 
 }
 
-#endif //FYS_ONLINE_WS_FLATBUFFERGENERATOR_HH
+#endif //FYS_SERVICECONTEXTBASE_HH

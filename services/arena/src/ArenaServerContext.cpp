@@ -34,10 +34,10 @@ using namespace nlohmann;
 namespace fys::arena {
 
 ArenaServerContext::ArenaServerContext(int ac, const char* const* av)
-		:common::ServiceContextBase(ac, av)
+		:common::service_context_base(ac, av)
 {
-	std::ifstream i(_configFile);
-	SPDLOG_INFO("start parsing file {}", _configFile);
+	std::ifstream i(_config_file);
+	SPDLOG_INFO("start parsing file {}", _config_file);
 	json jsonConfig;
 	i >> jsonConfig;
 	parseArenaConfigFile(jsonConfig);
@@ -180,12 +180,12 @@ ArenaServerContext::toString() const noexcept
 	std::string str;
 	str = "dump context\n*************************\n";
 	str += "[INFO] Service " + _name + " context VERSION: " + _version + "\n";
-	str += "[INFO] Config file used: " + _configFile + "\n";
+	str += "[INFO] Config file used: " + _config_file + "\n";
 	str += "[INFO] Handle zones: ";
 	for (auto&[k, v] : _encounterContext._rangeEncounterPerZone) str += k + " ";
 	str += "\n[INFO] Dispatcher connected port: " + std::to_string(_dispatcherData.port) + "\n";
 	str += "[INFO] Dispatcher connected host: " + _dispatcherData.address + "\n";
-	str += "[INFO] Dispatcher connection string: " + getDispatcherConnectionString() + "\n";
+	str += "[INFO] Dispatcher connection string: " + get_dispatcher_connection_str() + "\n";
 	str += "[INFO] Player binding string: " + getPlayerBindingString() + "\n";
 	str += "[INFO] Local cache folder: " + getPathLocalStorageCache() + "\n";
 	str += "\n*************************\n";

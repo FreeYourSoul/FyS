@@ -44,7 +44,7 @@ verifyBuffer(const void* fbBuffer, uint size)
 
 namespace fys::ws {
 
-WorldServerService::WorldServerService(const WorldServerContext& ctx, WorldServerEngine engine)
+WorldServerService::WorldServerService(const world_server_context& ctx, engine engine)
 		:_ctx(ctx), _worldServer(std::move(engine))
 {
 	_connectionHandler.setupConnectionManager(ctx);
@@ -68,8 +68,8 @@ WorldServerService::runServerLoop() noexcept
 
 					_awaitedIncomingPlayer.emplace_back(
 							AwaitedPlayer{
-									AuthPlayer{frame->userName()->str(), frame->token()->str()},
-									Pos{frame->posX(), frame->posY()},
+									auth_player{frame->userName()->str(), frame->token()->str()},
+									pos{frame->posX(), frame->posY()},
 									frame->angle(),
 									frame->velocity()
 							}
@@ -112,14 +112,14 @@ WorldServerService::runServerLoop() noexcept
 		);
 		auto now = std::chrono::system_clock::now();
 		_worldServer.spawnNPC(now);
-		_worldServer.executePendingMoves(now);
+		_worldServer.execute_pending_moves(now);
 	}
 }
 
 void
 WorldServerService::processPlayerMessage(const std::string& userName, const std::string& token, const fb::world::WSAction* action)
 {
-	uint index = _worldServer.retrieveDataIndex({userName, token});
+	uint index = _worldServer.retrieve_data_index({userName, token});
 	if (index == NOT_AUTHENTICATED) {
 		SPDLOG_ERROR("Player '{}' isn't authenticated", userName);
 		return;
@@ -127,10 +127,10 @@ WorldServerService::processPlayerMessage(const std::string& userName, const std:
 
 	switch (action->action_type()) {
 		case fb::world::Action_StopMove:
-			_worldServer.stopPlayerMove(index);
+			_worldServer.stop_player_move(index);
 			break;
 		case fb::world::Action_Move:
-			_worldServer.setPlayerMoveDirection(index, action->action_as_Move()->direction());
+			_worldServer.set_player_move_direction(index, action->action_as_Move()->direction());
 			break;
 		case fb::world::Action_PnjInteract:
 		case fb::world::Action_JoinArena:
@@ -147,7 +147,7 @@ void
 WorldServerService::registerAwaitedPlayer(const std::string& user, const std::string& token, std::string identity)
 {
 	auto awaitedIt = std::find_if(_awaitedIncomingPlayer.begin(), _awaitedIncomingPlayer.end(),
-			[toCheck = AuthPlayer{user, token}](const auto& awaited) {
+			[toCheck = auth_player{user, token}](const auto& awaited) {
 				return awaited.auth == toCheck;
 			});
 	if (awaitedIt == _awaitedIncomingPlayer.end()) {
@@ -155,9 +155,9 @@ WorldServerService::registerAwaitedPlayer(const std::string& user, const std::st
 		return;
 	}
 
-	_worldServer.authenticatePlayer(
+	_worldServer.authenticate_player(
 			awaitedIt->auth,
-			CharacterInfo{awaitedIt->initialPosition, awaitedIt->initialVelocity, awaitedIt->initialAngle},
+			character_info{awaitedIt->initialPosition, awaitedIt->initialVelocity, awaitedIt->initialAngle},
 			std::move(identity)
 	);
 	_awaitedIncomingPlayer.erase(awaitedIt);

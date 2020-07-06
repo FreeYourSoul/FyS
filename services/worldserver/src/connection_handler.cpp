@@ -21,42 +21,33 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef FYS_ONLINE_INV_FLATBUFFERGENERATOR_HH
-#define FYS_ONLINE_INV_FLATBUFFERGENERATOR_HH
+#include "../include/connection_handler.hh"
 
-#include <flatbuffers/flatbuffers.h>
+namespace fys::ws {
 
-// forward declarations
-namespace fys::inv {
-class ExchangeRoom;
-}
-// end forward declarations
-
-namespace fys::inv {
-
-class FlatbufferGenerator {
-
-public:
-	[[nodiscard]] std::pair<void*, uint>
-	generateInitiateExchangeResponse(const ExchangeRoom& room);
-
-	[[nodiscard]] std::pair<void*, uint>
-	generateLockRoomTransactionResponse(const ExchangeRoom& room);
-
-	[[nodiscard]] std::pair<void*, uint>
-	generateRemoveItemFromRoomResponse(const ExchangeRoom& room);
-
-	[[nodiscard]] std::pair<void*, uint>
-	generateAddItemToRoomResponse(const ExchangeRoom& room);
-
-	[[nodiscard]] std::pair<void*, uint>
-	generateTerminateTransactionResponse(const ExchangeRoom& room);
-
-private:
-	flatbuffers::FlatBufferBuilder _fbb;
-
-};
-
+connection_handler::connection_handler(int threadNumber) noexcept
+		:
+		_zmqContext(threadNumber),
+		_subSocketOnDispatcher(_zmqContext, zmq::socket_type::sub),
+		_dealSocketOnDispatcher(_zmqContext, zmq::socket_type::dealer)
+{
 }
 
-#endif //FYS_ONLINE_INV_FLATBUFFERGENERATOR_HH
+void
+connection_handler::setupConnectionManager(const fys::ws::world_server_context& ctx) noexcept
+{
+	_subSocketOnDispatcher.set(zmq::sockopt::subscribe, ctx.getServerCode());
+	_subSocketOnDispatcher.set(zmq::sockopt::subscribe, SERVER_SUB_CHANNEL_KEY);
+	_subSocketOnDispatcher.connect(ctx.get_dispatcher_sub_connection_str());
+	_dealSocketOnDispatcher.connect(ctx.get_dispatcher_connection_str());
+}
+
+void
+connection_handler::sendMessageToDispatcher(zmq::multipart_t&& msg) noexcept
+{
+	if (_dealSocketOnDispatcher.connected()) {
+		msg.send(_dealSocketOnDispatcher);
+	}
+}
+
+}

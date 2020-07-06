@@ -25,25 +25,25 @@
 #ifndef FYS_WORLDSERVERCONTEXT_HH
 #define FYS_WORLDSERVERCONTEXT_HH
 
-#include <ServiceContextBase.hh>
+#include <service_context_base.hh>
 #include <nlohmann/json.hpp>
-#include <engine/CollisionMap.hh>
+#include <engine/collision_map.hh>
 
 namespace fys::ws {
 
-class WorldServerContext : fys::common::ServiceContextBase {
+class world_server_context : fys::common::service_context_base {
 
 public:
-	explicit WorldServerContext(int ac, const char* const* av);
+	explicit world_server_context(int ac, const char* const* av);
 
 	[[nodiscard]] std::string
-	toString() const noexcept;
+	to_string() const noexcept;
 
 	[[nodiscard]] std::string
-	getDispatcherSubConnectionString() const noexcept;
+	get_dispatcher_sub_connection_str() const noexcept;
 
 	[[nodiscard]] std::string
-	getDispatcherConnectionString() const noexcept;
+	get_dispatcher_connection_str() const noexcept;
 
 	[[nodiscard]] std::string
 	getPlayerConnectionString() const noexcept;
@@ -57,13 +57,13 @@ public:
 	[[nodiscard]] const std::string&
 	getTMXMapPath() const noexcept { return _tmxMapPath; }
 
-	[[nodiscard]] const Boundary&
+	[[nodiscard]] const boundary&
 	getServerXBoundaries() const noexcept { return _serverXBoundaries; }
 
-	[[nodiscard]] const Boundary&
+	[[nodiscard]] const boundary&
 	getServerYBoundaries() const noexcept { return _serverYBoundaries; }
 
-	[[nodiscard]] const std::vector<ProximityServer>&
+	[[nodiscard]] const std::vector<proximity_server>&
 	getServerProximity() const noexcept { return _serverProximity; }
 
 	[[nodiscard]] const std::string&
@@ -87,9 +87,9 @@ private:
 	std::string _spawningConfigPath;
 
 	uint _portPlayerConnection;
-	Boundary _serverXBoundaries;
-	Boundary _serverYBoundaries;
-	std::vector<ProximityServer> _serverProximity;
+	boundary _serverXBoundaries;
+	boundary _serverYBoundaries;
+	std::vector<proximity_server> _serverProximity;
 
 };
 

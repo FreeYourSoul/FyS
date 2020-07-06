@@ -36,7 +36,7 @@
 #include <fightingPit/FightingPitAnnouncer.hh>
 
 #include <ArenaServerContext.hh>
-#include <FlatbufferGenerator.hh>
+#include <flatbuffer_generator.hh>
 #include <HistoryManager.hh>
 #include "ArenaServerService.hh"
 
@@ -95,7 +95,7 @@ ArenaServerService::ArenaServerService(const ArenaServerContext& ctx)
 		_cache(ctx.getPathLocalStorageCache(), ctx.getPathSourceCache()),
 		_dbConnector(std::make_unique<network::DBConnector>(ctx))
 {
-	_connectionHandler.setupConnectionManager(ctx.getDispatcherConnectionString());
+	_connectionHandler.setupConnectionManager(ctx.get_dispatcher_connection_str());
 	_workerService.setupConnectionManager(ctx);
 }
 
@@ -269,9 +269,9 @@ ArenaServerService::forwardReplyToDispatcher(zmq::message_t&& idtWs, const fys::
 			fbb,
 			fbb.CreateString(awaitArena.namePlayer),
 			fbb.CreateString(awaitArena.token),
-			fbb.CreateString(_ctx.get().getHostname()),
-			fbb.CreateString(_ctx.get().getConnectionString()),
-			_ctx.get().getPort(),
+			fbb.CreateString(_ctx.get().get_hostname()),
+			fbb.CreateString(_ctx.get().get_connection_str()),
+			_ctx.get().get_port(),
 			awaitArena.gen ? fbb.CreateString(awaitArena.gen->serverCode) : fbb.CreateString(""));
 	fb::arn::FinishArenaServerAuthBuffer(fbb, asaFb);
 	zmq::multipart_t msg;
@@ -309,7 +309,7 @@ void
 ArenaServerService::sendSaturatedErrorMsg(zmq::message_t&& identity)
 {
 	SPDLOG_WARN("Arena Server Service is saturated and thus can't process new incoming fighting pit");
-	auto[error, size] = fys::arena::FlatbufferGenerator().generateErrorSaturated(_ctx.get().getServerCode());
+	auto[error, size] = fys::arena::flatbuffer_generator().generateErrorSaturated(_ctx.get().getServerCode());
 	_workerService.directSendMessageToPlayer(std::move(identity), zmq::message_t(error, size));
 }
 

@@ -27,10 +27,10 @@
 #define SOL_ALL_SAFETIES_ON 1
 #include <sol/sol.hpp>
 
-#include <WorldServerContext.hh>
+#include <world_server_context.hh>
 #include <CmlKey.hh>
 
-#include <engine/ScriptEngine.hh>
+#include <engine/script_engine.hh>
 
 namespace {
 
@@ -62,24 +62,24 @@ namespace {
 namespace fys::ws {
 
 void
-ScriptEngine::spawnNewEncounters(const std::chrono::system_clock::time_point& currentTime)
+script_engine::spawn_new_encounters(const std::chrono::system_clock::time_point& current_time)
 {
 	for (unsigned i = 0; i < _spawningPoints.size(); ++i) {
-		if (currentTime >= _spawningPoints.at(i).nextSpawn) {
-			this->spawnEncounter(i);
-			_spawningPoints.at(i).nextSpawn += _spawningPoints.at(i).spawningInterval;
+		if (current_time >= _spawningPoints.at(i).next_spawn) {
+			this->spawn_encounter(i);
+			_spawningPoints.at(i).next_spawn += _spawningPoints.at(i).spawning_interval;
 		}
 	}
 }
 
 void
-ScriptEngine::spawnEncounter(unsigned indexSpawn)
+script_engine::spawn_encounter(unsigned index_spawn)
 {
 	// Do not spawn encounter if the max monster has already been spawned!
-	if (_spawningPoints.at(indexSpawn).maxSpawned <= _spawnedPerSpawningPoint.at(indexSpawn).size()) {
+	if (_spawningPoints.at(index_spawn).max_spawned <= _spawned_per_spawning_point.at(index_spawn).size()) {
 		return;
 	}
-	const std::string spNamespace = fmt::format("spawningPoint_{}", _spawningPoints.at(indexSpawn).idSpawningPoint);
+	const std::string spNamespace = fmt::format("spawningPoint_{}", _spawningPoints.at(index_spawn).id_spawning_point);
 
 	try {
 		auto result = _lua["spawn"](_lua[spNamespace]);
@@ -88,10 +88,10 @@ ScriptEngine::spawnEncounter(unsigned indexSpawn)
 			SPDLOG_ERROR("[lua] : function '{}' has not been created properly at init.", spNamespace);
 			return;
 		}
-		CharacterInfoLuaReturnType res = _lua["getCharacterInfo"](_lua[spNamespace], static_cast<uint>(result));
-		_spawnedPerSpawningPoint[indexSpawn].push_back(
-				NPCLuaInstance{
-						CharacterInfo{Pos{std::get<0>(res), std::get<1>(res)}, std::get<2>(res), std::get<3>(res)},
+		character_info_ret_type res = _lua["getCharacterInfo"](_lua[spNamespace], static_cast<uint>(result));
+		_spawned_per_spawning_point[index_spawn].push_back(
+				npc_lua_instance{
+						character_info{pos{std::get<0>(res), std::get<1>(res)}, std::get<2>(res), std::get<3>(res)},
 						spNamespace,
 						static_cast<uint>(result)
 				});
@@ -102,14 +102,14 @@ ScriptEngine::spawnEncounter(unsigned indexSpawn)
 }
 
 void
-ScriptEngine::executeEncounterScriptedActions()
+script_engine::execute_encounter_scripted_actions()
 {
 	for (uint spawningPointId = 0; spawningPointId < _spawningPoints.size(); ++spawningPointId) {
-		std::vector<NPCAction> actionsExecuted;
+		std::vector<npc_action> actionsExecuted;
 
-		actionsExecuted.resize(_spawnedPerSpawningPoint.at(spawningPointId).size());
-		for (uint spawnId = 0; spawnId < _spawnedPerSpawningPoint.at(spawningPointId).size(); ++spawnId) {
-			auto& npc = _spawnedPerSpawningPoint.at(spawningPointId).at(spawnId);
+		actionsExecuted.resize(_spawned_per_spawning_point.at(spawningPointId).size());
+		for (uint spawnId = 0; spawnId < _spawned_per_spawning_point.at(spawningPointId).size(); ++spawnId) {
+			auto& npc = _spawned_per_spawning_point.at(spawningPointId).at(spawnId);
 			try {
 				unsigned actionId;
 				double x, y, velocity, angle;
@@ -117,11 +117,11 @@ ScriptEngine::executeEncounterScriptedActions()
 				sol::tie(actionId, x, y, velocity, angle) =
 						_lua["execAction"](_lua[npc.spNamespace], npc.npcLuaId, std::ref(npc.info));
 
-				npc.info.pos.x = x;
-				npc.info.pos.y = y;
+				npc.info.position.x = x;
+				npc.info.position.y = y;
 				npc.info.velocity = velocity;
 				npc.info.angle = angle;
-				actionsExecuted.emplace_back(NPCAction{npc.npcLuaId, actionId, npc.info});
+				actionsExecuted.emplace_back(npc_action{npc.npcLuaId, actionId, npc.info});
 			}
 			catch (const std::exception& e) {
 				SPDLOG_ERROR("[lua] : An error occurred while executing script action SpawningPoint {} npc {} : \n[ERROR] : {}",
@@ -129,20 +129,20 @@ ScriptEngine::executeEncounterScriptedActions()
 			}
 		}
 
-		sendNotificationToPlayer(std::move(actionsExecuted),
-				_spawningPoints.at(spawningPointId).centerSpawningPoint,
-				_spawningPoints.at(spawningPointId).distanceNotification);
+		send_notification_to_player(std::move(actionsExecuted),
+				_spawningPoints.at(spawningPointId).center_spawning_point,
+				_spawningPoints.at(spawningPointId).distance_notification);
 	}
 }
 
 void
-ScriptEngine::executeNeutralScriptedActions()
+script_engine::execute_neutral_scripted_actions()
 {
 
 }
 
 void
-ScriptEngine::sendNotificationToPlayer(std::vector<NPCAction> actions, Pos centralPositionActions, double distanceNotif)
+script_engine::send_notification_to_player(std::vector<npc_action> actions, pos central_position_actions, double distance_notif)
 {
 	// todo send the notifications
 	// Maybe concentrate all merge all notification related to a specific spawning point and send this

@@ -32,10 +32,10 @@ namespace fys::common {
 
 class ArenaServerContext;
 
-class ConnectionHandler {
+class connection_handler {
 
 public:
-	explicit ConnectionHandler(
+	explicit connection_handler(
 			zmq::socket_type typeSocket = zmq::socket_type::dealer,
 			int threadNumber = 1) noexcept
 			:

@@ -35,9 +35,9 @@
 
 #include <util/FbUtility.hh>
 
-#include "FlatbufferGenerator.hh"
-#include "../../worldserver/include/FlatbufferGenerator.hh"
-#include "../../inventory/include/FlatbufferGenerator.hh"
+#include "flatbuffer_generator.hh"
+#include "../../worldserver/include/flatbuffer_generator.hh"
+#include "../../inventory/include/flatbuffer_generator.hh"
 
 namespace {
 
@@ -57,7 +57,7 @@ retrieveStringVector(const std::vector<std::pair<std::string, uint>> doableAttac
 namespace fys::arena {
 
 std::pair<void*, uint>
-FlatbufferGenerator::generateErrorSaturated(const std::string& arenaCode)
+flatbuffer_generator::generateErrorSaturated(const std::string& arenaCode)
 {
 	_fbb.Clear();
 	auto errorFb = fb::arn::CreateReplyFrame(
@@ -70,7 +70,7 @@ FlatbufferGenerator::generateErrorSaturated(const std::string& arenaCode)
 }
 
 std::pair<void*, uint>
-FlatbufferGenerator::generateFightingPitState(const fys::arena::FightingPit& fp)
+flatbuffer_generator::generateFightingPitState(const fys::arena::FightingPit& fp)
 {
 	_fbb.Clear();
 	auto fbPartyTeamVec = _fbb.CreateVector(generatePartyTeamVecStatusOffset(fp.getPartyTeams()));
@@ -91,7 +91,7 @@ FlatbufferGenerator::generateFightingPitState(const fys::arena::FightingPit& fp)
 }
 
 std::pair<void*, uint>
-FlatbufferGenerator::generatePartyTeamStatus(const PartyTeam& partyTeam)
+flatbuffer_generator::generatePartyTeamStatus(const PartyTeam& partyTeam)
 {
 	_fbb.Clear();
 	auto fbName = _fbb.CreateString(partyTeam.getUserName());
@@ -120,7 +120,7 @@ FlatbufferGenerator::generatePartyTeamStatus(const PartyTeam& partyTeam)
 }
 
 std::pair<void*, uint>
-FlatbufferGenerator::generateEndBattle(bool win, const Rewards& rewards)
+flatbuffer_generator::generateEndBattle(bool win, const Rewards& rewards)
 {
 	_fbb.Clear();
 	flatbuffers::Offset<fys::fb::arn::EndBattle> eb;
@@ -148,7 +148,7 @@ FlatbufferGenerator::generateEndBattle(bool win, const Rewards& rewards)
 }
 
 std::pair<void*, uint>
-FlatbufferGenerator::generateActionNotification(
+flatbuffer_generator::generateActionNotification(
 		const std::string& actionKey,
 		const std::vector<FightingContenderSPtr>& contenderTargets,
 		const std::vector<TeamMemberSPtr>& allyTargets)
@@ -185,7 +185,7 @@ FlatbufferGenerator::generateActionNotification(
 // privates
 
 std::vector<flatbuffers::Offset<fb::arn::PartyTeamStatus>>
-FlatbufferGenerator::generatePartyTeamVecStatusOffset(const AllyPartyTeams& apt)
+flatbuffer_generator::generatePartyTeamVecStatusOffset(const AllyPartyTeams& apt)
 {
 	std::vector<flatbuffers::Offset<fb::arn::PartyTeamStatus>> fbPartyTeamsStatus;
 	const auto& partyTeams = apt.getPartyTeams();
@@ -213,7 +213,7 @@ FlatbufferGenerator::generatePartyTeamVecStatusOffset(const AllyPartyTeams& apt)
 }
 
 std::vector<flatbuffers::Offset<fb::arn::MemberStatus>>
-FlatbufferGenerator::generateContenderVecStatusOffset(const std::vector<FightingContenderSPtr>& contenders)
+flatbuffer_generator::generateContenderVecStatusOffset(const std::vector<FightingContenderSPtr>& contenders)
 {
 	std::vector<flatbuffers::Offset<fb::arn::MemberStatus>> fbCharacterStatus;
 
@@ -237,7 +237,7 @@ FlatbufferGenerator::generateContenderVecStatusOffset(const std::vector<Fighting
 }
 
 std::vector<flatbuffers::Offset<fb::arn::MemberStatus>>
-FlatbufferGenerator::generateTeamMemberVecStatusOffset(const std::vector<TeamMemberSPtr>& members)
+flatbuffer_generator::generateTeamMemberVecStatusOffset(const std::vector<TeamMemberSPtr>& members)
 {
 	std::vector<flatbuffers::Offset<fb::arn::MemberStatus>> fbCharacterStatus;
 
@@ -261,7 +261,7 @@ FlatbufferGenerator::generateTeamMemberVecStatusOffset(const std::vector<TeamMem
 }
 
 std::vector<flatbuffers::Offset<fb::arn::Reward>>
-FlatbufferGenerator::generateRewardsOffset(const Rewards& rewards)
+flatbuffer_generator::generateRewardsOffset(const Rewards& rewards)
 {
 	std::vector<flatbuffers::Offset<fb::arn::Reward>> fbRewards;
 	fbRewards.reserve(rewards.keys.size());

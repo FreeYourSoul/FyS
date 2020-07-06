@@ -21,15 +21,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <InventoryServerContext.hh>
-#include <FlatbufferGenerator.hh>
+#include <inventory_server_context.hh>
+#include <flatbuffer_generator.hh>
 #include <exchange/ExchangeManager.hh>
 
 namespace fys::inv {
 
-ExchangeManager::ExchangeManager(const InventoryServerContext& ctx)
+ExchangeManager::ExchangeManager(const inventory_server_context& ctx)
 		:
-		common::DirectConnectionManager(1, ctx.getPlayerConnectionString()),
+		common::direct_connection_manager(1, ctx.getPlayerConnectionString()),
 		_inventoryServerCode(ctx.getServerCode()) { }
 
 const ExchangeRoom&

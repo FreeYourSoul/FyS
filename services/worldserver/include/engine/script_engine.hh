@@ -22,21 +22,21 @@
 // SOFTWARE.
 
 
-#ifndef FYS_ONLINE_SCRIPTENGINE_HH
-#define FYS_ONLINE_SCRIPTENGINE_HH
+#ifndef FYS_ONLINE_SCRIPT_ENGINE_HH
+#define FYS_ONLINE_SCRIPT_ENGINE_HH
 
 #include <memory>
 #include <chrono>
 #include <sol/sol.hpp>
-#include <engine/WorldPopulator.hh>
-#include <engine/PlayersData.hh>
+#include <engine/world_populator.hh>
+#include <engine/player_data.hh>
 #include <CmlScriptDownloader.hh>
 
 using namespace std::chrono_literals;
 
 // forward declarations
 namespace fys::ws {
-class WorldServerContext;
+class world_server_context;
 }
 // end forward declarations
 
@@ -50,26 +50,26 @@ static constexpr std::chrono::seconds BASE_SPAWNING_INTERVAL = 40s;
  * and re-spawn if defeated.
  * The spawning behavior is scripted in the LUA Script, and the encounters script is defined by this Spawning point script
  */
-struct SpawningPoint {
+struct spawning_point {
 
 	//! Approximate Center of the spawning point, used in conjunction with distanceNotification
-	Pos centerSpawningPoint = {0.0, 0.0};
+	pos center_spawning_point = {0.0, 0.0};
 	//! Distance from the centerSpawningPoint at which a player get notified of a monster move
-	double distanceNotification;
+	double distance_notification;
 
-	unsigned maxSpawned = 0;
-	std::string idSpawningPoint;
-	std::string displayKey;
+	unsigned max_spawned = 0;
+	std::string id_spawning_point;
+	std::string display_key;
 
-	std::chrono::seconds spawningInterval = BASE_SPAWNING_INTERVAL;
-	std::chrono::system_clock::time_point nextSpawn{};
+	std::chrono::seconds spawning_interval = BASE_SPAWNING_INTERVAL;
+	std::chrono::system_clock::time_point next_spawn{};
 };
 
 /**
  * A representation of a NPC instance (NPC can be a neutral npc or an encounter)
  */
-struct NPCLuaInstance {
-	CharacterInfo info;
+struct npc_lua_instance {
+	character_info info;
 
 	//! Spawning Point namespace, empty in case of neutral encounter
 	std::string spNamespace;
@@ -87,7 +87,7 @@ struct NPCLuaInstance {
  * If this id is equal to '1' or '2'. A movement has been made or stopped and afterMove is filled.
  * This struct is used in order to generate the notifications to send to the players
  */
-struct NPCAction {
+struct npc_action {
 	//! id defining a idle action
 	static constexpr uint IDLE = 0u;
 	//! id defining a move action
@@ -96,7 +96,7 @@ struct NPCAction {
 	static constexpr uint STOP = 2u;
 
 	//! Id defining the npc in LUA engine
-	uint npcLuaId = 0u;
+	uint npc_lua_id = 0u;
 
 	/**
 	 * Id of the action made by the NPC
@@ -106,40 +106,40 @@ struct NPCAction {
 	 * Another id is a specific action (animation..)
 	 */
 	uint actionId = IDLE;
-	CharacterInfo afterMove {};
+	character_info afterMove {};
 };
 
-class ScriptEngine {
+class script_engine {
 
-	friend class WorldPopulator;
+	friend class world_populator;
 
-	//! CharacterInfo : position x, position y, velocity, angle
-	using CharacterInfoLuaReturnType = std::tuple<double, double, double, double>;
+	//! character_info_ret_type : position x, position y, velocity, angle
+	using character_info_ret_type = std::tuple<double, double, double, double>;
 
 public:
-	void spawnNewEncounters(const std::chrono::system_clock::time_point& currentTime);
+	void spawn_new_encounters(const std::chrono::system_clock::time_point& current_time);
 
-	void executeEncounterScriptedActions();
-	void executeNeutralScriptedActions();
+	void execute_encounter_scripted_actions();
+	void execute_neutral_scripted_actions();
 
 private:
-	void spawnEncounter(unsigned indexSpawn);
-	void sendNotificationToPlayer(std::vector<NPCAction> actions, Pos centralPositionActions, double distanceNotif);
+	void spawn_encounter(unsigned index_spawn);
+	void send_notification_to_player(std::vector<npc_action> actions, pos central_position_actions, double distance_notif);
 
 private:
 	sol::state _lua;
 
 	//! vector of encounter spawning points
-	std::vector<SpawningPoint> _spawningPoints;
+	std::vector<spawning_point> _spawningPoints;
 
 
 	//! vector of Spawned encounter, the index of the vector is the id of the spawning point corresponding
-	std::vector<std::vector<NPCLuaInstance>> _spawnedPerSpawningPoint;
+	std::vector<std::vector<npc_lua_instance>> _spawned_per_spawning_point;
 
-	std::vector<std::vector<NPCLuaInstance>> _neutralNpcPerZone;
+	std::vector<std::vector<npc_lua_instance>> _neutral_npc_per_zone;
 
 };
 
 }
 
-#endif //FYS_ONLINE_SCRIPTENGINE_HH
+#endif //FYS_ONLINE_SCRIPT_ENGINE_HH

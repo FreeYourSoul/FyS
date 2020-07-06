@@ -24,12 +24,12 @@
 #ifndef FYS_WORLDSERVERSERVICE_HH
 #define FYS_WORLDSERVERSERVICE_HH
 
-#include <engine/WorldServerEngine.hh>
-#include "ConnectionHandler.hh"
+#include <engine/engine.hh>
+#include "connection_handler.hh"
 
 // forward declarations
 namespace fys::ws {
-class WorldServerContext;
+class world_server_context;
 }
 // end forward declarations
 
@@ -38,8 +38,8 @@ namespace fys::ws {
 class WorldServerService {
 
 	struct AwaitedPlayer {
-		AuthPlayer auth{};
-		Pos initialPosition{};
+		auth_player auth{};
+		pos initialPosition{};
 		double initialAngle = 0.0;
 		double initialVelocity = 0.0;
 	};
@@ -47,7 +47,7 @@ class WorldServerService {
 
 
 public:
-	explicit WorldServerService(const WorldServerContext& ctx, WorldServerEngine engine);
+	explicit WorldServerService(const world_server_context& ctx, engine engine);
 	void runServerLoop() noexcept;
 
 private:
@@ -55,12 +55,12 @@ private:
 	inline void processPlayerMessage(const std::string& userName, const std::string& token, const fb::world::WSAction* action);
 
 private:
-	std::reference_wrapper<const WorldServerContext> _ctx;
+	std::reference_wrapper<const world_server_context> _ctx;
 
 	std::vector<AwaitedPlayer> _awaitedIncomingPlayer;
 
-	WorldServerEngine _worldServer;
-	ws::ConnectionHandler _connectionHandler;
+	engine _worldServer;
+	ws::connection_handler _connectionHandler;
 
 };
 

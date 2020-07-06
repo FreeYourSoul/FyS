@@ -22,11 +22,11 @@
 // SOFTWARE.
 
 #include <catch2/catch.hpp>
-#include <engine/PlayersData.hh>
+#include <engine/player_data.hh>
 
 #include <WSResponse_generated.h>
 
-#include <FlatbufferGenerator.hh>
+#include <flatbuffer_generator.hh>
 
 using namespace fys::ws;
 
@@ -42,11 +42,11 @@ verifyBuffer(const void* fbBuffer, uint size)
 
 TEST_CASE("ws::FlatbufferGeneratorTestCase", "[service][world][util]")
 {
-	fys::ws::FlatbufferGenerator fg;
+	fys::ws::flatbuffer_generator fg;
 
 	SECTION("generateMoveNotification") {
 
-		auto[data, size] = fg.generateMoveNotification("Naming", CharacterInfo{Pos{11, 22}, 1337.0, 42.42});
+		auto[data, size] = fg.generate_move_notif("Naming", character_info{pos{11, 22}, 1337.0, 42.42});
 
 		REQUIRE(nullptr != data);
 		REQUIRE(0 < size);

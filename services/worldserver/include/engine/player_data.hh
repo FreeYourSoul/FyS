@@ -34,7 +34,7 @@
 #include <array>
 
 namespace fys::util {
-class Key;
+class key;
 }
 
 namespace fys::ws {
@@ -45,26 +45,28 @@ constexpr static double DEFAULT_DISTANCE = 30;
 constexpr static unsigned LIMIT_NOTIFICATIONS_MOVE = 50;
 
 template<typename T>
-struct Vector2 {
-	T x = 0;
-	T y = 0;
+struct vec2 {
+	using unity_type = T;
 
-	Vector2 operator+(const Vector2& other) const
+	unity_type x = 0;
+	unity_type y = 0;
+
+	vec2 operator+(const vec2& other) const
 	{
 		return {x + other.x, y + other.y};
 	}
 
-	Vector2 operator+(T value) const
+	vec2 operator+(unity_type value) const
 	{
 		return {x + value, y + value};
 	}
 
-	Vector2 operator-(const Vector2& other) const
+	vec2 operator-(const vec2& other) const
 	{
 		return {x - other.x, y - other.y};
 	}
 
-	Vector2 operator-(T value) const
+	vec2 operator-(unity_type value) const
 	{
 		return {x - value, y - value};
 	}
@@ -72,81 +74,83 @@ struct Vector2 {
 };
 
 template<typename T>
-struct Rectangle final {
-	Rectangle()
+struct rectangle final {
+	using unity_type = T;
+
+	rectangle()
 			:left(0), top(0), width(0), height(0) { }
-	Rectangle(T l, T t, T w, T h)
+	rectangle(unity_type l, unity_type t, unity_type w, unity_type h)
 			:left(l), top(t), width(w), height(h) { }
-	Rectangle(Vector2<T> position, Vector2<T> size)
+	rectangle(vec2<unity_type> position, vec2<unity_type> size)
 			:left(position.x), top(position.y), width(size.x), height(size.y) { }
-	T left, top, width, height;
+	unity_type left, top, width, height;
 };
 
-using HitBoxd = Rectangle<double>;
-using HitBoxu = Rectangle<uint>;
-using Vec2u = Vector2<uint>;
+using hitbox_d = rectangle<double>;
+using hitbox_u = rectangle<uint>;
+using vec2_u = vec2<uint>;
 
 //! Position in 2D space (X, Y)
-using Pos = Vector2<double>;
+using pos = vec2<double>;
 
 
-struct CharacterInfo {
-	Pos pos;
+struct character_info {
+	pos position;
 	double velocity = 1.0;
 	double angle = 0.0; // in radiant
 };
 
-enum class PlayerStatus {
+enum class player_status {
 	FIGHTING,
 	MOVING,
 	STANDING
 };
 
-class PlayersData {
+class player_data {
 
 	static constexpr uint MAXIMUM_PLAYER_CONNECTED_TO_WORLD_SERVER = 1000;
 
 public:
-	explicit PlayersData(uint maxConnection = MAXIMUM_PLAYER_CONNECTED_TO_WORLD_SERVER) noexcept;
+	explicit player_data(uint max_connection = MAXIMUM_PLAYER_CONNECTED_TO_WORLD_SERVER) noexcept;
 
 	template<typename Action>
-	void executeOnPlayers(Action&& actionToExecute)
+	void execution_on_player(Action&& action_to_execute)
 	{
 		for (uint i = 0; i < _status.size(); ++i) {
-			std::forward<Action>(actionToExecute)(i, _status.at(i), _positions.at(i), _identities.at(i), _userNames.at(i));
+			std::forward<Action>(action_to_execute)(i, _status.at(i), _positions.at(i), _identities.at(i), _userNames.at(i));
 		}
 	}
 
-	void setPlayerMoveAction(uint index, double direction)
+	void set_player_move_action(uint index, double direction)
 	{
 		_positions.at(index).angle = direction;
-		_status.at(index) = PlayerStatus::MOVING;
+		_status.at(index) = player_status::MOVING;
 	}
 
-	void stopPlayerMove(uint index)
+	void stop_player_move(uint index)
 	{
-		_status.at(index) = PlayerStatus::STANDING;
+		_status.at(index) = player_status::STANDING;
 	}
 
-	void setPlayerStatusInArena(uint index, const std::string& arenaId)
+	void set_player_status_in_arena(uint index, const std::string& arena_id)
 	{
-		_status.at(index) = PlayerStatus::FIGHTING;
+		_status.at(index) = player_status::FIGHTING;
 	}
 
 	[[nodiscard]] uint
-	addNewPlayerData(CharacterInfo info, std::string identity, std::string userName);
+	add_new_player_data(character_info info, std::string identity, std::string user_name);
 
 	/**
 	 * @brief Get the Players Identities Around the given player except himself
 	 *
-	 * @param indexPlayer player
+	 * @param index_player player
 	 * @param position
 	 * @param distance
 	 * @return std::vector<std::string_view>
 	 */
 	[[nodiscard]] inline std::vector<std::string_view>
-	getPlayerIdtsAroundPlayer(uint indexPlayer,
-			std::optional<std::reference_wrapper<CharacterInfo>> position,
+	get_player_idts_around_player(uint index_player,
+			std::optional<std::reference_wrapper<character_info>> position,
 			double distance = DEFAULT_DISTANCE) const noexcept;
 
 	/**
@@ -154,18 +158,18 @@ public:
 	 *
 	 * @param position to check around
 	 * @param distance radius around the given point to search
-	 * @param ignoreIndex index that need to be ignored in the return
+	 * @param ignore_index index that need to be ignored in the return
 	 * @return std::vector<std::string_view> vector of view on the identities of the players around the given point
 	 * @note identities are zmq code to reply to a specific client via a router socket
 	 */
 	[[nodiscard]] std::vector<std::string_view>
-	getPlayerIdtsAroundPos(const Pos& position,
+	getPlayerIdtsAroundPos(const pos& position,
 			double distance = DEFAULT_DISTANCE,
-			uint ignoreIndex = LIMIT_NOTIFICATIONS_MOVE) const noexcept;
+			uint ignore_index = LIMIT_NOTIFICATIONS_MOVE) const noexcept;
 
 private:
-	std::vector<CharacterInfo> _positions;
-	std::vector<PlayerStatus> _status;
+	std::vector<character_info> _positions;
+	std::vector<player_status> _status;
 	std::vector<std::string> _identities;
 	std::vector<std::string> _userNames;
 

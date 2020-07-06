@@ -21,33 +21,42 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include "../include/ConnectionHandler.hh"
+#ifndef FYS_ONLINE_INV_FLATBUFFERGENERATOR_HH
+#define FYS_ONLINE_INV_FLATBUFFERGENERATOR_HH
 
-namespace fys::ws {
+#include <flatbuffers/flatbuffers.h>
 
-ConnectionHandler::ConnectionHandler(int threadNumber) noexcept
-		:
-		_zmqContext(threadNumber),
-		_subSocketOnDispatcher(_zmqContext, zmq::socket_type::sub),
-		_dealSocketOnDispatcher(_zmqContext, zmq::socket_type::dealer)
-{
+// forward declarations
+namespace fys::inv {
+class ExchangeRoom;
+}
+// end forward declarations
+
+namespace fys::inv {
+
+class flatbuffer_generator {
+
+public:
+	[[nodiscard]] std::pair<void*, uint>
+	generate_initiate_exchange_response(const ExchangeRoom& room);
+
+	[[nodiscard]] std::pair<void*, uint>
+	generateLockRoomTransactionResponse(const ExchangeRoom& room);
+
+	[[nodiscard]] std::pair<void*, uint>
+	generateRemoveItemFromRoomResponse(const ExchangeRoom& room);
+
+	[[nodiscard]] std::pair<void*, uint>
+	generateAddItemToRoomResponse(const ExchangeRoom& room);
+
+	[[nodiscard]] std::pair<void*, uint>
+	generateTerminateTransactionResponse(const ExchangeRoom& room);
+
+private:
+	flatbuffers::FlatBufferBuilder _fbb;
+
+};
+
 }
 
-void
-ConnectionHandler::setupConnectionManager(const fys::ws::WorldServerContext& ctx) noexcept
-{
-	_subSocketOnDispatcher.set(zmq::sockopt::subscribe, ctx.getServerCode());
-	_subSocketOnDispatcher.set(zmq::sockopt::subscribe, SERVER_SUB_CHANNEL_KEY);
-	_subSocketOnDispatcher.connect(ctx.getDispatcherSubConnectionString());
-	_dealSocketOnDispatcher.connect(ctx.getDispatcherConnectionString());
-}
-
-void
-ConnectionHandler::sendMessageToDispatcher(zmq::multipart_t&& msg) noexcept
-{
-	if (_dealSocketOnDispatcher.connected()) {
-		msg.send(_dealSocketOnDispatcher);
-	}
-}
-
-}
+#endif //FYS_ONLINE_INV_FLATBUFFERGENERATOR_HH

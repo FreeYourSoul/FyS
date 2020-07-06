@@ -27,11 +27,11 @@
 #include <tclap/ValueArg.h>
 #include <tclap/ValueArg.h>
 #include <tclap/CmdLine.h>
-#include "../include/ServiceContextBase.hh"
+#include "../include/service_context_base.hh"
 
 namespace fys::common {
 
-ServiceContextBase::ServiceContextBase(int ac, const char* const* av) try
+service_context_base::service_context_base(int ac, const char* const* av) try
 {
 	_version = "0.0.1";
 	TCLAP::CmdLine cli("FyS::Dispatcher", ' ', _version);
@@ -46,21 +46,21 @@ ServiceContextBase::ServiceContextBase(int ac, const char* const* av) try
 	cli.add(subport);
 	cli.add(dispatcherPort);
 	cli.parse(ac, av);
-	_configFile = configSpecificPath.getValue();
-	this->initializeFromIni(configPath.getValue());
+	_config_file = configSpecificPath.getValue();
+	this->initialize_from_ini(configPath.getValue());
 	if (dispatcherPort.getValue() > 0)
 		_dispatcherData.port = dispatcherPort.getValue();
 	if ("NONE" == dispatcherHost.getValue())
 		_dispatcherData.address = dispatcherHost.getValue();
 	if (subport.getValue() > 0)
-		_dispatcherData.subscriberPort = subport.getValue();
+		_dispatcherData.subscriber_port = subport.getValue();
 }
 catch (std::exception& e) {
 	SPDLOG_ERROR("Context of the service not initialized caused by : {}", e.what());
 }
 
 void
-ServiceContextBase::initializeFromIni(const std::string& configFilePath)
+service_context_base::initialize_from_ini(const std::string& configFilePath)
 {
 	boost::property_tree::ptree pt;
 	boost::property_tree::read_ini(configFilePath, pt);
@@ -68,20 +68,20 @@ ServiceContextBase::initializeFromIni(const std::string& configFilePath)
 	_name = pt.get<std::string>(fys::common::init_beacon::SERVICE_NAME);
 	_hostname = pt.get<std::string>(fys::common::init_beacon::HOSTNAME);
 	_port = pt.get<ushort>(fys::common::init_beacon::PORT);
-	_dispatcherData.subscriberPort = pt.get<ushort>(fys::common::init_beacon::DISPATCHER_SUBPORT);
+	_dispatcherData.subscriber_port = pt.get<ushort>(fys::common::init_beacon::DISPATCHER_SUBPORT);
 	_dispatcherData.port = pt.get<ushort>(fys::common::init_beacon::DISPATCHER_PORT);
 	_dispatcherData.address = pt.get<std::string>(fys::common::init_beacon::DISPATCHER_ADDR);
 
 }
 
 std::string
-ServiceContextBase::getDispatcherConnectionString() const noexcept
+service_context_base::get_dispatcher_connection_str() const noexcept
 {
 	return std::string("tcp://").append(_dispatcherData.address).append(":").append(std::to_string(_dispatcherData.port));
 }
 
 std::string
-ServiceContextBase::getConnectionString() const
+service_context_base::get_connection_str() const
 {
 	return std::string("tcp://").append(_hostname).append(":").append(std::to_string(_port));
 }

@@ -24,10 +24,10 @@
 #include <fstream>
 
 #include <CmlKey.hh>
-#include <WorldServerContext.hh>
-#include <engine/ScriptEngine.hh>
-#include <engine/WorldServerEngine.hh>
-#include <engine/WorldPopulator.hh>
+#include <world_server_context.hh>
+#include <engine/script_engine.hh>
+#include <engine/engine.hh>
+#include <engine/world_populator.hh>
 
 namespace {
 void
@@ -72,8 +72,8 @@ getPathFromKey(std::string base, std::string key)
 
 namespace fys::ws {
 
-std::shared_ptr<WorldServerEngine>
-WorldPopulator::buildWorldServerEngine()
+std::shared_ptr<engine>
+world_populator::buildWorldServerEngine()
 {
 	SPDLOG_INFO("[INIT] Start building ServerEngine...");
 
@@ -82,30 +82,30 @@ WorldPopulator::buildWorldServerEngine()
 	::assertEngineError(static_cast<bool>(_map) == false, "Map is not initialized");
 
 	SPDLOG_INFO("[INIT] ServerEngine setup is correct...");
-	auto ret = std::make_shared<WorldServerEngine>
+	auto ret = std::make_shared<engine>
 			(_connectionString, std::move(*_map.get()), std::move(_scriptEngine), _intervalMovement);
 	SPDLOG_INFO("[INIT] ServerEngine building is complete");
 	return ret;
 }
 
-WorldPopulator&
-WorldPopulator::populateScriptEngine(const WorldServerContext& ctx)
+world_populator&
+world_populator::populateScriptEngine(const world_server_context& ctx)
 {
-	_scriptEngine = std::make_unique<ScriptEngine>();
+	_scriptEngine = std::make_unique<script_engine>();
 	registerCommonLuaEngine(ctx.getPathToLuaInitEngine());
 	generateSpawningPoints(ctx.getSpawningConfigPath(), ctx.getPathLuaBase());
 	return *this;
 }
 
-WorldPopulator&
-WorldPopulator::populateMap(const WorldServerContext& ctx)
+world_populator&
+world_populator::populateMap(const world_server_context& ctx)
 {
 	// todo : define map and implement it
 	return *this;
 }
 
 void
-WorldPopulator::generateSpawningPoints(const std::string& spawningPointConfigPath, const std::string& basePath)
+world_populator::generateSpawningPoints(const std::string& spawningPointConfigPath, const std::string& basePath)
 {
 	std::ifstream i(spawningPointConfigPath);
 	nlohmann::json jsonConfig;
@@ -119,9 +119,9 @@ WorldPopulator::generateSpawningPoints(const std::string& spawningPointConfigPat
 		const std::string keyCml = value["key_zone"].get<std::string>();
 		const std::string spNamespace = getSPNamespaceFromKey(keyCml);
 
-		_scriptEngine->_spawningPoints[index].spawningInterval = std::chrono::seconds(value["spawning_interval"].get<uint>());
-		_scriptEngine->_spawningPoints[index].idSpawningPoint = spNamespace;
-		_scriptEngine->_spawningPoints[index].displayKey = value["display_key"].get<std::string>();
+		_scriptEngine->_spawningPoints[index].spawning_interval = std::chrono::seconds(value["spawning_interval"].get<uint>());
+		_scriptEngine->_spawningPoints[index].id_spawning_point = spNamespace;
+		_scriptEngine->_spawningPoints[index].display_key = value["display_key"].get<std::string>();
 
 		try {
 			_scriptEngine->_lua.safe_script_file(getPathFromKey(basePath, keyCml));
@@ -139,24 +139,24 @@ WorldPopulator::generateSpawningPoints(const std::string& spawningPointConfigPat
 			if (!centerPos_x.valid(), !centerPos_y.valid()) {
 				throw std::runtime_error("'center_pos' is not properly set");
 			}
-			_scriptEngine->_spawningPoints[index].centerSpawningPoint = Pos{
+			_scriptEngine->_spawningPoints[index].center_spawning_point = pos{
 					static_cast<double>(centerPos_x),
 					static_cast<double>(centerPos_y)
 			};
-			_scriptEngine->_spawningPoints[index].maxSpawned = static_cast<uint>(maxSpawn);
-			_scriptEngine->_spawningPoints[index].distanceNotification = static_cast<uint>(visibilityDistance);
+			_scriptEngine->_spawningPoints[index].max_spawned = static_cast<uint>(maxSpawn);
+			_scriptEngine->_spawningPoints[index].distance_notification = static_cast<uint>(visibilityDistance);
 
 		}
 		catch (const std::exception& e) {
 			SPDLOG_ERROR("[INIT] An error occurred while instantiating SpawningPoints '{}' : {}",
-					_scriptEngine->_spawningPoints[index].displayKey, e.what());
+					_scriptEngine->_spawningPoints[index].display_key, e.what());
 		}
 		++index;
 	}
 }
 
 void
-WorldPopulator::registerCommonLuaEngine(const std::string& pathToLuaInitFile)
+world_populator::registerCommonLuaEngine(const std::string& pathToLuaInitFile)
 {
 	_scriptEngine->_lua.open_libraries(sol::lib::base, sol::lib::package);
 
@@ -167,35 +167,35 @@ WorldPopulator::registerCommonLuaEngine(const std::string& pathToLuaInitFile)
 		SPDLOG_ERROR("Error while initiating LUA engine : {} ", e.what());
 	}
 
-	auto position = _scriptEngine->_lua.new_usertype<Pos>("Pos");
-	position["x"] = &Pos::x;
-	position["y"] = &Pos::y;
+	auto position = _scriptEngine->_lua.new_usertype<pos>("Pos");
+	position["x"] = &pos::x;
+	position["y"] = &pos::y;
 
-	auto characterInfo = _scriptEngine->_lua.new_usertype<CharacterInfo>("CharacterInfo");
-	characterInfo["pos"] = &CharacterInfo::pos;
-	characterInfo["velocity"] = &CharacterInfo::velocity;
-	characterInfo["angle"] = &CharacterInfo::angle;
+	auto characterInfo = _scriptEngine->_lua.new_usertype<character_info>("CharacterInfo");
+	characterInfo["pos"] = &character_info::position;
+	characterInfo["velocity"] = &character_info::velocity;
+	characterInfo["angle"] = &character_info::angle;
 
 	_scriptEngine->_lua["retrieveAngle"] = [](double x, double y, double destinationX, double destinationY) {
 		return std::atan((y - destinationY) / (x - destinationX));
 	};
 }
 
-const std::vector<SpawningPoint>&
-WorldPopulator::getSpawningPoints() const
+const std::vector<spawning_point>&
+world_populator::getSpawningPoints() const
 {
 	return _scriptEngine->_spawningPoints;
 }
 
-WorldPopulator&
-WorldPopulator::setConnectionString(std::string connectionString)
+world_populator&
+world_populator::setConnectionString(std::string connectionString)
 {
 	_connectionString = std::move(connectionString);
 	return *this;
 }
 
-WorldPopulator&
-WorldPopulator::setIntervalMovement(std::chrono::system_clock::duration intervalMovement)
+world_populator&
+world_populator::setIntervalMovement(std::chrono::system_clock::duration intervalMovement)
 {
 	_intervalMovement = intervalMovement;
 	return *this;

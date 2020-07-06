@@ -22,15 +22,15 @@
 // SOFTWARE.
 
 
-#ifndef FYS_ONLINE_WORLDPOPULATOR_HH
-#define FYS_ONLINE_WORLDPOPULATOR_HH
+#ifndef FYS_ONLINE_WORLD_POPULATOR_HH
+#define FYS_ONLINE_WORLD_POPULATOR_HH
 
 namespace fys::ws {
-class WorldServerContext;
-class ScriptEngine;
-class CollisionMap;
-class WorldServerEngine;
-class SpawningPoint;
+class world_server_context;
+class script_engine;
+class collision_map;
+class engine;
+class spawning_point;
 }
 
 namespace fys::ws {
@@ -46,21 +46,21 @@ static constexpr std::chrono::milliseconds TIMING_MOVE_INTERVAL(16);
  * - retrieve the Monster spawn position (with their associated script id)
  * - get the trigger points (with their associated script id) of the map and set them in the map
  */
-class WorldPopulator {
+class world_populator {
 
 public:
-	[[nodiscard]] std::shared_ptr<WorldServerEngine>
+	[[nodiscard]] std::shared_ptr<engine>
 	buildWorldServerEngine();
 
 	// Builder methods
-	WorldPopulator& populateMap(const WorldServerContext& ctx);
-	WorldPopulator& populateScriptEngine(const WorldServerContext& ctx);
-	WorldPopulator& setConnectionString(std::string connectionString);
-	WorldPopulator& setIntervalMovement(std::chrono::system_clock::duration intervalMovement);
+	world_populator& populateMap(const world_server_context& ctx);
+	world_populator& populateScriptEngine(const world_server_context& ctx);
+	world_populator& setConnectionString(std::string connectionString);
+	world_populator& setIntervalMovement(std::chrono::system_clock::duration intervalMovement);
 
 	// Getters for testing
-	const std::vector<SpawningPoint> &getSpawningPoints() const;
-	ScriptEngine &getScriptEngine() const { return *_scriptEngine; }
+	const std::vector<spawning_point> &getSpawningPoints() const;
+	script_engine &getScriptEngine() const { return *_scriptEngine; }
 
 private:
 	void registerCommonLuaEngine(const std::string& pathToLuaInitFile);
@@ -69,11 +69,11 @@ private:
 private:
 	std::string _connectionString;
 	std::chrono::system_clock::duration _intervalMovement = TIMING_MOVE_INTERVAL;
-	std::shared_ptr<CollisionMap> _map;
-	std::shared_ptr<ScriptEngine> _scriptEngine;
+	std::shared_ptr<collision_map> _map;
+	std::shared_ptr<script_engine> _scriptEngine;
 
 };
 
 }
 
-#endif //FYS_ONLINE_WORLDPOPULATOR_HH
+#endif //FYS_ONLINE_WORLD_POPULATOR_HH

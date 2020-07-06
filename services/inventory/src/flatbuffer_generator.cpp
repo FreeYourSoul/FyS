@@ -21,32 +21,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <FlatbufferGenerator.hh>
+#include <flatbuffer_generator.hh>
 
 namespace fys::inv {
 
 std::pair<void*, uint>
-FlatbufferGenerator::generateInitiateExchangeResponse(const ExchangeRoom& room) {
+flatbuffer_generator::generate_initiate_exchange_response(const ExchangeRoom& room) {
 	return std::pair<void*,uint>();
 }
 
 std::pair<void*, uint>
-FlatbufferGenerator::generateAddItemToRoomResponse(const ExchangeRoom& room) {
+flatbuffer_generator::generateAddItemToRoomResponse(const ExchangeRoom& room) {
 	return std::pair<void*,uint>();
 }
 
 std::pair<void*, uint>
-FlatbufferGenerator::generateRemoveItemFromRoomResponse(const ExchangeRoom& room) {
+flatbuffer_generator::generateRemoveItemFromRoomResponse(const ExchangeRoom& room) {
 	return std::pair<void*,uint>();
 }
 
 std::pair<void*, uint>
-FlatbufferGenerator::generateLockRoomTransactionResponse(const ExchangeRoom& room) {
+flatbuffer_generator::generateLockRoomTransactionResponse(const ExchangeRoom& room) {
 	return std::pair<void*,uint>();
 }
 
 std::pair<void*, uint>
-FlatbufferGenerator::generateTerminateTransactionResponse(const ExchangeRoom& room) {
+flatbuffer_generator::generateTerminateTransactionResponse(const ExchangeRoom& room) {
 	return std::pair<void*,uint>();
 }
 

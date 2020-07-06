@@ -21,24 +21,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <engine/PlayersData.hh>
+#include <engine/player_data.hh>
 
 #include <WSResponse_generated.h>
 
-#include <FlatbufferGenerator.hh>
+#include <flatbuffer_generator.hh>
 
 namespace fys::ws {
 
 std::pair<void*, uint>
-fys::ws::FlatbufferGenerator::generateMoveNotification(const std::string& playerName, const fys::ws::CharacterInfo& info)
+fys::ws::flatbuffer_generator::generate_move_notif(const std::string& player_name, const fys::ws::character_info& info)
 {
 	auto moveNotification = fb::world::CreateMoveNotification(
 			_fbb,
-			_fbb.CreateString(playerName),
+			_fbb.CreateString(player_name),
 			info.velocity,
 			info.angle,
-			info.pos.x,
-			info.pos.y
+			info.position.x,
+			info.position.y
 	);
 
 	auto message = fb::world::CreateResponseFrame(

@@ -21,67 +21,56 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
-#ifndef FYS_CONNECTIONHANDLER_HH
-#define FYS_CONNECTIONHANDLER_HH
+#ifndef FYS_ONLINE_DIRECT_CONNECTION_MANAGER_HH
+#define FYS_ONLINE_DIRECT_CONNECTION_MANAGER_HH
 
 #include <spdlog/spdlog.h>
 #include <zmq_addon.hpp>
-#include "WorldServerContext.hh"
 
-namespace fys::ws {
+namespace fys::common {
 
-class ConnectionHandler {
-
-	//! Subscriber channel used by server to communicate via the dispatcher
-	inline static const std::string SERVER_SUB_CHANNEL_KEY = "Server_Inter_Com";
+class direct_connection_manager {
 
 public:
-	explicit ConnectionHandler(int threadNumber = 1) noexcept;
+	direct_connection_manager(unsigned threadNumber, const std::string& bindingString)
+			:
+			_ctx(threadNumber), _routerPlayerConnection(_ctx, zmq::socket_type::router)
+	{
+		_routerPlayerConnection.bind(bindingString);
+	}
 
-	void setupConnectionManager(const fys::ws::WorldServerContext& ctx) noexcept;
-	void sendMessageToDispatcher(zmq::multipart_t&& msg) noexcept;
-
-	template<typename HandlerIncoming, typename HandlerInterServer>
-	void pollAndProcessSubMessage(HandlerIncoming&& handlerIncoming, HandlerInterServer&& handlerServer) noexcept
+	template<typename HandlerPlayer>
+	void pollAndProcessPlayerMessage(HandlerPlayer&& handlerPlayer)
 	{
 		//  Initialize poll set
 		zmq::pollitem_t items[] = {
-				{_subSocketOnDispatcher, 0, ZMQ_POLLIN, 0}
+				{_routerPlayerConnection, 0, ZMQ_POLLIN, 0}
 		};
 		zmq::poll(&items[0], 1, 10);
 		if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
 			zmq::multipart_t msg;
-			if (!msg.recv(_subSocketOnDispatcher, ZMQ_NOBLOCK) || (msg.size() != 3 && msg.size() != 4)) {
+			if (!msg.recv(_routerPlayerConnection, ZMQ_NOBLOCK) || (msg.size() != 3)) {
 				SPDLOG_ERROR("Error while reading on the listener socket.");
 				SPDLOG_ERROR("Received message may be ill formatted, contains '{}' part, message is : {}",
 						msg.size(), msg.str());
 			}
 			else {
-				// first  frame is subscription channel
-				const std::string subKey = msg.popstr();
-				// second frame is identity
+				// first frame is the identity
 				auto identity = msg.pop();
-
-				// third frame is the message content
-
-				if (SERVER_SUB_CHANNEL_KEY == subKey) {
-					std::forward<HandlerInterServer>(handlerServer)(std::move(identity), msg.pop());
-					return;
-				}
-				std::forward<HandlerIncoming>(handlerIncoming)(std::move(identity), msg.pop());
+				// second frame is auth frame of the player
+				auto authFrame = msg.pop();
+				std::forward<HandlerPlayer>(handlerPlayer)(std::move(identity), std::move(authFrame), msg.pop());
 			}
 		}
 	}
 
+protected:
+	zmq::context_t _ctx;
 
-private:
-	zmq::context_t _zmqContext;
-	zmq::socket_t _subSocketOnDispatcher;
-	zmq::socket_t _dealSocketOnDispatcher;
-
+	//! Socket direct connection with the player
+	zmq::socket_t _routerPlayerConnection;
 };
 
 }
 
-#endif //FYS_CONNECTIONHANDLER_HH
+#endif //FYS_ONLINE_DIRECT_CONNECTION_MANAGER_HH

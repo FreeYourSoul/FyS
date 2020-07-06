@@ -27,8 +27,8 @@
 #include <InventoryRequest_generated.h>
 #include <ExchangeInventory_generated.h>
 
-#include <InventoryServerContext.hh>
-#include <FlatbufferGenerator.hh>
+#include <inventory_server_context.hh>
+#include <flatbuffer_generator.hh>
 #include <InventoryServerService.hh>
 
 namespace {
@@ -45,10 +45,10 @@ verifyBuffer(const void* fbBuffer, uint size)
 
 namespace fys::inv {
 
-InventoryServerService::InventoryServerService(const InventoryServerContext& ctx)
+InventoryServerService::InventoryServerService(const inventory_server_context& ctx)
 		:_ctx(ctx), _exchangeManager(ctx)
 {
-	_connectionHandler.setupConnectionManager(ctx.getDispatcherConnectionString());
+	_connectionHandler.setupConnectionManager(ctx.get_dispatcher_connection_str());
 }
 
 void
@@ -146,9 +146,9 @@ InventoryServerService::exchangeInventory(const fb::ivt::InitiateExchangeInstanc
 			exchangeRq->userInitiator()->str(),
 			exchangeRq->userReceiver()->str(),
 			identity);
-	FlatbufferGenerator fg;
+	flatbuffer_generator fg;
 
-	auto[data, size] = fg.generateInitiateExchangeResponse(exchangeRoom);
+	auto[data, size] = fg.generate_initiate_exchange_response(exchangeRoom);
 	return zmq::message_t(data, size);
 }
 

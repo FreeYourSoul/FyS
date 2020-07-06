@@ -23,7 +23,7 @@
 
 #include <catch2/catch.hpp>
 
-#include <engine/WorldServerEngine.hh>
+#include <engine/engine.hh>
 
 using namespace fys::ws;
 

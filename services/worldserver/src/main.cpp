@@ -23,8 +23,8 @@
 
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
-#include <engine/WorldPopulator.hh>
-#include <WorldServerContext.hh>
+#include <engine/world_populator.hh>
+#include <world_server_context.hh>
 #include <WorldServerService.hh>
 #include <Key.hh>
 
@@ -33,13 +33,13 @@ main(int ac, char** av)
 {
 	try {
 		spdlog::set_pattern("[%D %H:%M:%S][ %22s:%-4# ][%L]: %v");
-		fys::ws::WorldServerContext ctx(ac, av);
+		fys::ws::world_server_context ctx(ac, av);
 		int major, minor, patch;
 		zmq_version(&major, &minor, &patch);
 		SPDLOG_INFO("Version ZMQ : {}.{}.{}\n{}", major, minor, patch, ctx.toString());
 
 		fys::ws::WorldServerService serverService(ctx,
-				std::move(*fys::ws::WorldPopulator()
+				std::move(*fys::ws::world_populator()
 						.setIntervalMovement(fys::ws::TIMING_MOVE_INTERVAL)
 						.setConnectionString(ctx.getPlayerConnectionString())
 						.populateMap(ctx)

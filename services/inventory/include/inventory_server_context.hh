@@ -22,18 +22,18 @@
 // SOFTWARE.
 
 
-#ifndef FYS_ONLINE_INVENTORYSERVERCONTEXT_HH
-#define FYS_ONLINE_INVENTORYSERVERCONTEXT_HH
+#ifndef FYS_ONLINE_INVENTORY_SERVER_CONTEXT_HH
+#define FYS_ONLINE_INVENTORY_SERVER_CONTEXT_HH
 
 #include <nlohmann/json.hpp>
-#include <ServiceContextBase.hh>
+#include <service_context_base.hh>
 
 namespace fys::inv {
 
-class InventoryServerContext : public common::ServiceContextBase {
+class inventory_server_context : public common::service_context_base {
 
 public:
-	explicit InventoryServerContext(int argc, char** argv);
+	explicit inventory_server_context(int argc, char** argv);
 
 	[[nodiscard]] const std::string&
 	getConnectionStringCacheDB() const { return _connectionStringCacheDB; }
@@ -60,4 +60,4 @@ private:
 
 }
 
-#endif //FYS_ONLINE_INVENTORYSERVERCONTEXT_HH
+#endif //FYS_ONLINE_INVENTORY_SERVER_CONTEXT_HH

@@ -25,12 +25,12 @@
 #define FYS_ONLINE_EXCHANGEMANAGER_HH
 
 #include <map>
-#include <DirectConnectionManager.hh>
+#include <direct_connection_manager.hh>
 #include <exchange/ExchangeRoom.hh>
 
 // forward declarations
 namespace fys::inv {
-class InventoryServerContext;
+class inventory_server_context;
 class ItemManager;
 }
 // end forward declarations
@@ -43,10 +43,10 @@ struct RoomAccessor {
 	std::string tokenExchange;
 };
 
-class ExchangeManager : public common::DirectConnectionManager {
+class ExchangeManager : public common::direct_connection_manager {
 
 public:
-	explicit ExchangeManager(const InventoryServerContext& ctx);
+	explicit ExchangeManager(const inventory_server_context& ctx);
 
 	[[nodiscard]] const ExchangeRoom&
 	makeExchangeRoom(ItemManager& itemManager, std::string initiator, std::string receiver, std::string identity);

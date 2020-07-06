@@ -24,7 +24,7 @@
 #ifndef FYS_ONLINE_INVENTORYSERVERSERVICE_HH
 #define FYS_ONLINE_INVENTORYSERVERSERVICE_HH
 
-#include <ConnectionHandler.hh>
+#include <connection_handler.hh>
 #include <utility>
 #include <exchange/ExchangeManager.hh>
 
@@ -36,7 +36,7 @@ struct RetrievePlayerInventory;
 struct InitiateExchangeInstance;
 }
 namespace fys::inv {
-class InventoryServerContext;
+class inventory_server_context;
 }
 // end forward declarations
 
@@ -45,7 +45,7 @@ namespace fys::inv {
 class InventoryServerService {
 
 public:
-	InventoryServerService(const InventoryServerContext& ctx);
+	InventoryServerService(const inventory_server_context& ctx);
 
 	void runServerLoop();
 
@@ -63,10 +63,10 @@ private:
 	retrievePlayerInventory(const fb::ivt::RetrievePlayerInventory* retrieveRq);
 
 private:
-	std::reference_wrapper<const InventoryServerContext> _ctx;
+	std::reference_wrapper<const inventory_server_context> _ctx;
 	ExchangeManager _exchangeManager;
 	ItemManager _itemManager;
-	common::ConnectionHandler _connectionHandler;
+	common::connection_handler _connectionHandler;
 
 };
 

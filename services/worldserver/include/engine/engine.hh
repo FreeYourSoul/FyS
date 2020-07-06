@@ -33,11 +33,11 @@
 
 #include <WSAction_generated.h>
 
-#include <engine/PlayersData.hh>
-#include <engine/ScriptEngine.hh>
-#include <engine/CollisionMap.hh>
-#include <engine/WorldPopulator.hh>
-#include <DirectConnectionManager.hh>
+#include <engine/player_data.hh>
+#include <engine/script_engine.hh>
+#include <engine/collision_map.hh>
+#include <engine/world_populator.hh>
+#include <direct_connection_manager.hh>
 
 // forward declaration
 namespace fys::fb {
@@ -49,57 +49,57 @@ namespace fys::ws {
 
 constexpr static uint NOT_AUTHENTICATED = std::numeric_limits<uint>::max();
 
-struct AuthPlayer {
-	std::string userName;
+struct auth_player {
+	std::string user_name;
 	std::string token;
 
-	bool operator==(const AuthPlayer& other) const
+	bool operator==(const auth_player& other) const
 	{
-		return userName == other.userName && token == other.token;
+		return user_name == other.user_name && token == other.token;
 	}
-	bool operator<(const AuthPlayer& other) const
+	bool operator<(const auth_player& other) const
 	{
-		return userName < other.userName && token < other.token;
+		return user_name < other.user_name && token < other.token;
 	}
 };
 
-class WorldServerEngine : public common::DirectConnectionManager {
+class engine : public common::direct_connection_manager {
 
-	friend class WorldPopulator;
+	friend class world_populator;
 
 public:
-	explicit WorldServerEngine(const std::string& playerConnectionStr, CollisionMap&& map,
-			std::shared_ptr<ScriptEngine> scriptEngine, std::chrono::system_clock::duration timeInterval);
+	explicit engine(const std::string& player_connect_str, collision_map&& map,
+			std::shared_ptr<script_engine> script_engine, std::chrono::system_clock::duration time_interval);
 
-	void executePendingMoves(const std::chrono::system_clock::time_point& playerIndex);
-	void setPlayerMoveDirection(uint index, double direction);
-	void stopPlayerMove(uint index);
-	void authenticatePlayer(AuthPlayer auth, CharacterInfo info, std::string identifier);
+	void execute_pending_moves(const std::chrono::system_clock::time_point& player_index);
+	void set_player_move_direction(uint index, double direction);
+	void stop_player_move(uint index);
+	void authenticate_player(auth_player auth, character_info info, std::string identifier);
 	void spawnNPC(const std::chrono::system_clock::time_point& currentTime);
 
 	[[nodiscard]] uint
-	retrieveDataIndex(const AuthPlayer& player);
+	retrieve_data_index(const auth_player& player);
 
 private:
-	inline void movePlayerAction(const std::string& userName, uint indexCharacter, CharacterInfo& pi);
-	inline void moveNPCAction(uint indexCharacter, CharacterInfo& pi);
-	inline void moveCharacterAction(const std::string& userName, uint indexCharacter, CharacterInfo& pi, bool isNpc);
+	inline void move_player_action(const std::string& user_name, uint index_character, character_info& pi);
+	inline void move_npc_action(uint index_character, character_info& pi);
+	inline void move_character_action(const std::string& user_name, uint index_character, character_info& pi, bool is_npc);
 
-	inline void notifyClientsOfCharacterMove(const CharacterInfo& pi, const std::string& userName,
-			const std::vector<std::string_view>& idtsToNotify);
+	inline void notifyClientsOfCharacterMove(const character_info& pi, const std::string& user_name,
+			const std::vector<std::string_view>& idts_to_identify);
 
 private:
-	CollisionMap _map;
-	PlayersData _data;
+	collision_map _map;
+	player_data _data;
 
 	//! Engine managing scripts of NPC and map triggers
-	std::unique_ptr<ScriptEngine> _scriptEngine;
+	std::unique_ptr<script_engine> _script_engine;
 
 	//! Next movement tick should take place at this moment
-	std::chrono::system_clock::time_point _nextTick;
+	std::chrono::system_clock::time_point _next_tick;
 
 	//! Authenticated user token to index in PlayersData
-	std::map<AuthPlayer, uint> _authPlayerOnDataIndex;
+	std::map<auth_player, uint> _auth_player_on_data_index;
 
 };
 

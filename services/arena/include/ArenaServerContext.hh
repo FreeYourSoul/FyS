@@ -27,7 +27,7 @@
 
 #include <array>
 #include <nlohmann/json.hpp>
-#include <ServiceContextBase.hh>
+#include <service_context_base.hh>
 
 namespace fys::arena {
 
@@ -77,7 +77,7 @@ struct EncounterContext {
 	std::map<std::string, RewardEncounterDesc> _rewardDescPerContender;
 };
 
-class ArenaServerContext : public fys::common::ServiceContextBase {
+class ArenaServerContext : public fys::common::service_context_base {
 
 	//! Minimum of number of battle in parralele that can be processed by the Arena Server
 	static constexpr unsigned MINIMUM_BATTLE_THRESHOLD = 3;

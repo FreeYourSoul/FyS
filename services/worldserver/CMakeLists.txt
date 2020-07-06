@@ -26,24 +26,24 @@ endif (CCACHE_FOUND)
 
 add_executable(worldserver_service
         ${CMAKE_CURRENT_LIST_DIR}/src/main.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/src/engine/PlayersData.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/include/engine/PlayersData.hh
-        ${CMAKE_CURRENT_LIST_DIR}/src/engine/WorldServerEngine.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/include/engine/WorldServerEngine.hh
-        ${CMAKE_CURRENT_LIST_DIR}/src/engine/CollisionMap.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/src/FlatbufferGenerator.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/include/FlatbufferGenerator.hh
-        ${CMAKE_CURRENT_LIST_DIR}/src/engine/ScriptEngine.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/include/engine/ScriptEngine.hh
-        ${CMAKE_CURRENT_LIST_DIR}/include/engine/CollisionMap.hh
-        ${CMAKE_CURRENT_LIST_DIR}/src/ConnectionHandler.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/include/ConnectionHandler.hh
+        ${CMAKE_CURRENT_LIST_DIR}/src/engine/player_data.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/engine/player_data.hh
+        ${CMAKE_CURRENT_LIST_DIR}/src/engine/engine.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/engine/engine.hh
+        ${CMAKE_CURRENT_LIST_DIR}/src/engine/collision_map.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/src/flatbuffer_generator.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/flatbuffer_generator.hh
+        ${CMAKE_CURRENT_LIST_DIR}/src/engine/script_engine.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/engine/script_engine.hh
+        ${CMAKE_CURRENT_LIST_DIR}/include/engine/collision_map.hh
+        ${CMAKE_CURRENT_LIST_DIR}/src/connection_handler.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/connection_handler.hh
         ${CMAKE_CURRENT_LIST_DIR}/src/WorldServerService.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/WorldServerService.hh
-        ${CMAKE_CURRENT_LIST_DIR}/src/WorldServerContext.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/include/WorldServerContext.hh
-        ${CMAKE_CURRENT_LIST_DIR}/src/engine/WorldPopulator.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/include/engine/WorldPopulator.hh
+        ${CMAKE_CURRENT_LIST_DIR}/src/world_server_context.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/world_server_context.hh
+        ${CMAKE_CURRENT_LIST_DIR}/src/engine/world_populator.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/engine/world_populator.hh
         )
 
 target_link_libraries(worldserver_service

@@ -38,10 +38,10 @@
 #include <fightingPit/team/PartyTeam.hh>
 #include <fightingPit/data/CommonTypes.hh>
 
-#include <ConnectionHandler.hh>
+#include <connection_handler.hh>
 #include <ChaiRegister.hh>
 #include <Cml.hh>
-#include <FlatbufferGenerator.hh>
+#include <flatbuffer_generator.hh>
 
 using chaiscript::fun;
 
@@ -424,7 +424,7 @@ ChaiRegister::registerNetworkCommands(chaiscript::ChaiScript& chai, std::functio
 			[networkHandler = std::move(networkHandler)](
 					const std::string& actionKey,
 					const std::vector<TeamMemberSPtr>& allyTargets) {
-				FlatbufferGenerator fg;
+				flatbuffer_generator fg;
 				auto[data, size] = fg.generateActionNotification(actionKey, {}, allyTargets);
 				networkHandler(zmq::message_t(data, size));
 			}
@@ -434,7 +434,7 @@ ChaiRegister::registerNetworkCommands(chaiscript::ChaiScript& chai, std::functio
 			[networkHandler = std::move(networkHandler)](
 					const std::string& actionKey,
 					const std::vector<FightingContenderSPtr>& contenderTargets) {
-				FlatbufferGenerator fg;
+				flatbuffer_generator fg;
 				auto[data, size] = fg.generateActionNotification(actionKey, contenderTargets, {});
 				networkHandler(zmq::message_t(data, size));
 			}

@@ -43,11 +43,11 @@ namespace fys::util {
  * <offset until index>             <random>                 <index>
  *      one char          KEY_SIZE - (1 + index size)    (KEYSIZE - offset)
  */
-class Key {
+class key {
 	constexpr static unsigned KEY_SIZE = 8;
 
 public:
-	explicit Key(unsigned index)
+	explicit key(unsigned index)
 	{
 		static std::random_device rd;
 		static std::mt19937 g(rd());
@@ -62,7 +62,7 @@ public:
 	}
 
 	bool
-	operator==(const Key& other)
+	operator==(const key& other)
 	{
 		return std::equal(other._key, other._key + KEY_SIZE, _key);
 	}

@@ -34,7 +34,7 @@
 #include <fightingPit/contender/FightingContender.hh>
 #include <fightingPit/FightingPit.hh>
 #include <fightingPit/team/TeamMember.hh>
-#include <FlatbufferGenerator.hh>
+#include <flatbuffer_generator.hh>
 
 namespace {
 std::chrono::milliseconds
@@ -291,7 +291,7 @@ FightingPit::addContender(const std::shared_ptr<FightingContender>& fc)
 zmq::message_t
 FightingPit::makeWinnerNotification() const
 {
-	FlatbufferGenerator fb;
+	flatbuffer_generator fb;
 	auto[data, size] = fb.generateEndBattle(true, *_rewards);
 	return zmq::message_t(data, size);
 }
@@ -299,7 +299,7 @@ FightingPit::makeWinnerNotification() const
 zmq::message_t
 FightingPit::makeLooserNotification() const
 {
-	FlatbufferGenerator fb;
+	flatbuffer_generator fb;
 	auto[data, size] = fb.generateEndBattle(false, {});
 	return zmq::message_t(data, size);
 }

@@ -29,18 +29,18 @@ add_executable(inventory_test
 
         # Sources
         ${COMMON_SRCS}
-        ${CMAKE_CURRENT_LIST_DIR}/../src/InventoryServerContext.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/inventory_server_context.cpp
         ${CMAKE_CURRENT_LIST_DIR}/../src/InventoryServerService.cpp
         ${CMAKE_CURRENT_LIST_DIR}/../src/exchange/ExchangeRoom.cpp
         ${CMAKE_CURRENT_LIST_DIR}/../src/exchange/ExchangeManager.cpp
         ${CMAKE_CURRENT_LIST_DIR}/../src/ItemManager.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/FlatbufferGenerator.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../include/FlatbufferGenerator.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../src/flatbuffer_generator.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../include/flatbuffer_generator.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/ItemManager.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/exchange/ExchangeManager.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/exchange/ExchangeRoom.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/InventoryServerService.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../include/InventoryServerContext.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/inventory_server_context.hh
         )
 
 target_compile_definitions(inventory_test PUBLIC -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)

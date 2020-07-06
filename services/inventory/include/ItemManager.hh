@@ -30,7 +30,7 @@
 
 // forward declarations
 namespace fys::inv {
-class InventoryServerContext;
+class inventory_server_context;
 }
 // end forward declarations
 

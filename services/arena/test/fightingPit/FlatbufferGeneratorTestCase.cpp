@@ -37,7 +37,7 @@
 #include <util/FbUtility.hh>
 #include "TestType.hh"
 
-#include <FlatbufferGenerator.hh>
+#include <flatbuffer_generator.hh>
 #include <ReplyFrame_generated.h>
 
 using namespace fys::arena;
@@ -60,7 +60,7 @@ TEST_CASE("arn::FlatbufferGeneratorTestCase", "[service][arena][util]")
 {
 	// Instantiate FightingPit
 	auto fseamMock = FSeam::getDefault<fys::util::RandomGenerator>();
-	fys::common::ConnectionHandler handler{};
+	fys::common::connection_handler handler{};
 	auto fseamConnectionHandlerMock = FSeam::get(&handler);
 	auto cml = CmlBase(getLocalPathStorage());
 	EncounterContext ctx;
@@ -147,7 +147,7 @@ TEST_CASE("arn::FlatbufferGeneratorTestCase", "[service][arena][util]")
 
 	} // End section : Initial setup test
 
-	fys::arena::FlatbufferGenerator fg;
+	fys::arena::flatbuffer_generator fg;
 
 	SECTION("Test generateFightingPitState") {
 

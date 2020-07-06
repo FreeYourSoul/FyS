@@ -28,7 +28,7 @@
 #include <optional>
 #include <network/DBConnector.hh>
 #include <network/WorkerService.hh>
-#include <ConnectionHandler.hh>
+#include <connection_handler.hh>
 #include <CmlCopy.hh>
 
 // forward declarations
@@ -158,7 +158,7 @@ private:
 
 	// Manage connections
 	std::unique_ptr<network::DBConnector> _dbConnector;
-	common::ConnectionHandler _connectionHandler;
+	common::connection_handler _connectionHandler;
 
 	// Manage fighting pits
 	WorkerService _workerService;

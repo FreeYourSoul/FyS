@@ -28,7 +28,7 @@
 #include <ArenaServerContext.hh>
 #include <fightingPit/FightingPitAnnouncer.hh>
 #include <util/ChaiUtility.hh>
-#include <ConnectionHandler.hh>
+#include <connection_handler.hh>
 #include "TestType.hh"
 
 #include <fightingPit/contender/FightingContender.hh>
@@ -66,7 +66,7 @@ getTmpPath()
 TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]")
 {
 	auto fseamMock = FSeam::getDefault<fys::util::RandomGenerator>();
-	fys::common::ConnectionHandler handler{};
+	fys::common::connection_handler handler{};
 	auto fseamConnectionHandlerMock = FSeam::get(&handler);
 	auto cml = CmlBaseCopy(getTmpPath(), getLocalPathStorage());
 	DeleteFolderWhenDone raii_delete_folder(getTmpPath());
@@ -473,7 +473,7 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]")
 TEST_CASE("FightingPitTestCase Move test", "[service][arena]")
 {
 	auto fseamMock = FSeam::getDefault<fys::util::RandomGenerator>();
-	fys::common::ConnectionHandler handler{};
+	fys::common::connection_handler handler{};
 	auto fseamConnectionHandlerMock = FSeam::get(&handler);
 	auto cml = CmlBaseCopy(getTmpPath(), getLocalPathStorage());
 	DeleteFolderWhenDone raii_delete_folder(getTmpPath());
@@ -607,7 +607,7 @@ TEST_CASE("FightingPitTestCase Move test", "[service][arena]")
 TEST_CASE("FightingPitTestCase Simple Alteration test", "[service][arena]")
 {
 	auto fseamMock = FSeam::getDefault<fys::util::RandomGenerator>();
-	fys::common::ConnectionHandler handler{};
+	fys::common::connection_handler handler{};
 	auto fseamConnectionHandlerMock = FSeam::get(&handler);
 	auto cml = CmlBaseCopy(getTmpPath(), getLocalPathStorage());
 	DeleteFolderWhenDone raii_delete_folder(getTmpPath());

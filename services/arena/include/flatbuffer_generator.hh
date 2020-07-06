@@ -68,7 +68,7 @@ namespace fys::arena {
  * @endcode
  *
  */
-class FlatbufferGenerator {
+class flatbuffer_generator {
 
 public:
 	[[nodiscard]] std::pair<void*, uint>

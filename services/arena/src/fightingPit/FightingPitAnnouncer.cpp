@@ -33,7 +33,7 @@
 
 #include <Cml.hh>
 #include <ArenaServerContext.hh>
-#include <ConnectionHandler.hh>
+#include <connection_handler.hh>
 #include <RandomGenerator.hh>
 #include <BoundaryMap.hh>
 

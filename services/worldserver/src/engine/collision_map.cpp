@@ -25,9 +25,9 @@
 #include <tmxlite/Map.hpp>
 #include <tmxlite/Layer.hpp>
 #include <tmxlite/TileLayer.hpp>
-#include <WorldServerContext.hh>
+#include <world_server_context.hh>
 #include <iostream>
-#include "engine/CollisionMap.hh"
+#include "engine/collision_map.hh"
 
 namespace fys::ws {
 
@@ -49,95 +49,95 @@ getY(double y, unsigned tileSizeY)
 }
 
 // CollisionMap
-CollisionMap::CollisionMap(const WorldServerContext& ctx)
+collision_map::collision_map(const world_server_context& ctx)
 		:
-		_boundaryX(ctx.getServerXBoundaries()),
-		_boundaryY(ctx.getServerYBoundaries()),
-		_serverProximity(ctx.getServerProximity())
+		_boundary_x(ctx.getServerXBoundaries()),
+		_boundary_y(ctx.getServerYBoundaries()),
+		_server_proximity(ctx.getServerProximity())
 {
-	buildMapFromTmx(ctx.getTMXMapPath());
+	build_map_from_tmx(ctx.getTMXMapPath());
 }
 
 void
-CollisionMap::buildMapFromTmx(const std::string& tmxMapPath)
+collision_map::build_map_from_tmx(const std::string& tmx_map_path)
 {
 	tmx::Map map;
-	if (!map.load(tmxMapPath)) {
+	if (!map.load(tmx_map_path)) {
 		SPDLOG_ERROR("TMX CollisionMap couldn't be loaded");
 		return;
 	}
 	const auto& layers = map.getLayers();
 
-	_mapElems.resize(map.getTileCount().y);
-	for (auto& elemOnY : _mapElems)
+	_map_elems.resize(map.getTileCount().y);
+	for (auto& elemOnY : _map_elems)
 		elemOnY.resize(map.getTileCount().x);
 
 	for (const auto& layer : layers) {
 		if (layer->getType() == tmx::Layer::Type::Object) {
 			const auto& objectLayer = layer->getLayerAs<tmx::ObjectGroup>();
 
-			if (map::algo::isCollisionLayer(objectLayer)) {
-				addCollisionInMap({map.getTileSize().x, map.getTileSize().y}, objectLayer);
+			if (map::algo::is_collision_layer(objectLayer)) {
+				add_collision_in_map({map.getTileSize().x, map.getTileSize().y}, objectLayer);
 			}
-			else if (map::algo::isTriggerLayer(objectLayer)) {
-				addTriggerInMap(objectLayer);
+			else if (map::algo::is_trigger_layer(objectLayer)) {
+				add_trigger_in_map(objectLayer);
 			}
 		}
 	}
 }
 
 void
-CollisionMap::addCollisionInMap(const Vec2u& tileMapSize, const tmx::ObjectGroup& collisionLayer)
+collision_map::add_collision_in_map(const vec2_u& tile_map_size, const tmx::ObjectGroup& collision_layer)
 {
-	const auto& objects = collisionLayer.getObjects();
+	const auto& objects = collision_layer.getObjects();
 	for (const auto& object : objects) {
-		for (auto y = getX(object.getAABB().top, tileMapSize.y);
-			 y < getX(object.getAABB().top + object.getAABB().height, tileMapSize.y); ++y) {
-			for (auto x = getY(object.getAABB().left, tileMapSize.x);
-				 x < getY(object.getAABB().left + object.getAABB().width, tileMapSize.x); ++x) {
-				_mapElems[y][x].setType(eElementType::BLOCK);
-				_mapElems[y][x].addCollision(object.getAABB());
+		for (auto y = getX(object.getAABB().top, tile_map_size.y);
+			 y < getX(object.getAABB().top + object.getAABB().height, tile_map_size.y); ++y) {
+			for (auto x = getY(object.getAABB().left, tile_map_size.x);
+				 x < getY(object.getAABB().left + object.getAABB().width, tile_map_size.x); ++x) {
+				_map_elems[y][x].set_type(e_element_type::BLOCK);
+				_map_elems[y][x].add_collision(object.getAABB());
 			}
 		}
 	}
 }
 
 void
-CollisionMap::addTriggerInMap(const tmx::ObjectGroup& triggerLayer)
+collision_map::add_trigger_in_map(const tmx::ObjectGroup& trigger_layer)
 {
 	// TODO : Add triggers on the map
 }
 
 void
-CollisionMap::executePotentialTrigger(uint index, const CharacterInfo& positionOnMap)
+collision_map::execute_potential_trigger(uint index, const character_info& position_on_map)
 {
 }
 
 bool
-CollisionMap::canMoveTo(Pos pos, std::size_t level) const noexcept
+collision_map::can_move_to(pos pos, std::size_t level) const noexcept
 {
-	if (pos.x < _boundaryX.in || pos.x > _boundaryX.out || pos.y < _boundaryY.in || pos.y > _boundaryY.out)
+	if (pos.x < _boundary_x.in || pos.x > _boundary_x.out || pos.y < _boundary_y.in || pos.y > _boundary_y.out)
 		return false;
-	return _mapElems[static_cast<unsigned long>(pos.x)][static_cast<unsigned long>(pos.y)].canGoThrough(pos, level);
+	return _map_elems[static_cast<unsigned long>(pos.x)][static_cast<unsigned long>(pos.y)].can_go_through(pos, level);
 }
 
 // CollisionMap Element
 void
-MapElement::executePotentialTrigger(uint indexPlayer) const
+map_element::execute_potential_trigger(uint indexPlayer) const
 {
-	if (_type == eElementType::TRIGGER) {
+	if (_type == e_element_type::TRIGGER) {
 
 	}
-	else if (_type == eElementType::TP_TRIGGER) {
+	else if (_type == e_element_type::TP_TRIGGER) {
 
 	}
 }
 
 bool
-MapElement::canGoThrough(Pos position, std::size_t level) const noexcept
+map_element::can_go_through(pos position, std::size_t level) const noexcept
 {
-	bool canGoThrough = canGoToLevel(level);
-	if (canGoThrough && _type == eElementType::BLOCK) {
+	bool canGoThrough = can_go_to_level(level);
+	if (canGoThrough && _type == e_element_type::BLOCK) {
 		return std::none_of(_collisions.begin(), _collisions.end(), [&position](const auto& aabb) {
 			return (position.x >= aabb.left && position.x <= aabb.left + aabb.width &&
 					position.y >= aabb.top && position.y <= aabb.top + aabb.height);
@@ -150,9 +150,9 @@ MapElement::canGoThrough(Pos position, std::size_t level) const noexcept
 //  We need to set some kind of isInTransition state in order to differentiate a character taking the stairs and
 //  a character trying to pass from an intermediate level directly to the stairs.
 bool
-MapElement::canGoToLevel(std::size_t goLevel) const noexcept
+map_element::can_go_to_level(std::size_t go_level) const noexcept
 {
-	return _level.test(goLevel) || _changeLevel.test(goLevel);
+	return _level.test(go_level) || _change_level.test(go_level);
 }
 
 }

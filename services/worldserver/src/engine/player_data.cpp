@@ -22,56 +22,56 @@
 // SOFTWARE.
 
 #include <spdlog/spdlog.h>
-#include "engine/PlayersData.hh"
+#include "engine/player_data.hh"
 
 namespace fys::ws {
 
-PlayersData::PlayersData(uint maxConnection) noexcept {
-	_positions.reserve(maxConnection);
-	_status.reserve(maxConnection);
-	_identities.reserve(maxConnection);
-	_userNames.reserve(maxConnection);
+player_data::player_data(uint max_connection) noexcept {
+	_positions.reserve(max_connection);
+	_status.reserve(max_connection);
+	_identities.reserve(max_connection);
+	_userNames.reserve(max_connection);
 }
 
 std::vector<std::string_view>
-PlayersData::getPlayerIdtsAroundPlayer(uint indexPlayer,
-		std::optional<std::reference_wrapper<CharacterInfo>> position,
+player_data::get_player_idts_around_player(uint index_player,
+		std::optional<std::reference_wrapper<character_info>> position,
 		double distance) const noexcept
 {
-	if (position.has_value() && indexPlayer < _positions.size()) {
-		return getPlayerIdtsAroundPos(position->get().pos, distance, indexPlayer);
+	if (position.has_value() && index_player < _positions.size()) {
+		return getPlayerIdtsAroundPos(position->get().position, distance, index_player);
 	}
-	return getPlayerIdtsAroundPos(_positions.at(indexPlayer).pos, distance, indexPlayer);
+	return getPlayerIdtsAroundPos(_positions.at(index_player).position, distance, index_player);
 }
 
 std::vector<std::string_view>
-PlayersData::getPlayerIdtsAroundPos(const Pos& position,
+player_data::getPlayerIdtsAroundPos(const pos& position,
 		double distance,
-		uint ignoreIndex) const noexcept
+		uint ignore_index) const noexcept
 {
-	std::vector<std::string_view> playerIdts;
-	playerIdts.reserve(LIMIT_NOTIFICATIONS_MOVE);
+	std::vector<std::string_view> player_identities;
+	player_identities.reserve(LIMIT_NOTIFICATIONS_MOVE);
 	for (std::size_t i = 0; i < _positions.size(); ++i) {
-		if (playerIdts.size() >= LIMIT_NOTIFICATIONS_MOVE) {
+		if (player_identities.size() >= LIMIT_NOTIFICATIONS_MOVE) {
 			break;
 		}
-		if (i == ignoreIndex) {
+		if (i == ignore_index) {
 			continue;
 		}
-		Pos minimumPos = _positions.at(i).pos - distance;
-		Pos maximumPos = _positions.at(i).pos + distance;
+		pos min_position = _positions.at(i).position - distance;
+		pos max_position = _positions.at(i).position + distance;
 
-		if ((position.x > minimumPos.x && position.x < maximumPos.x) &&
-				(position.y > minimumPos.y && position.x < maximumPos.y)) {
-			playerIdts.emplace_back(_identities.at(i));
+		if ((position.x > min_position.x && position.x < max_position.x) &&
+				(position.y > min_position.y && position.x < max_position.y)) {
+			player_identities.emplace_back(_identities.at(i));
 		}
 	}
-	playerIdts.shrink_to_fit();
-	return playerIdts;
+	player_identities.shrink_to_fit();
+	return player_identities;
 }
 
 uint
-PlayersData::addNewPlayerData(CharacterInfo info, std::string identity, std::string userName)
+player_data::add_new_player_data(character_info info, std::string identity, std::string user_name)
 {
 	if (!((_identities.size() == _status.size()) == (_positions.size() == _userNames.size()))) {
 		SPDLOG_CRITICAL("MISMATCH, all vectors require to be equal idt:'{}' stat:'{}' pos:'{}', names:'{}'",
@@ -80,9 +80,9 @@ PlayersData::addNewPlayerData(CharacterInfo info, std::string identity, std::str
 	}
 	uint index = _identities.size();
 	_positions.emplace_back(std::move(info));
-	_status.emplace_back(PlayerStatus::STANDING);
+	_status.emplace_back(player_status::STANDING);
 	_identities.emplace_back(std::move(identity));
-	_userNames.emplace_back(std::move(userName));
+	_userNames.emplace_back(std::move(user_name));
 	return index;
 }
 

@@ -23,45 +23,45 @@
 
 #include <iostream>
 #include <fstream>
-#include "InventoryServerContext.hh"
+#include "inventory_server_context.hh"
 
 using json = nlohmann::json;
 
 namespace fys::inv {
 
-InventoryServerContext::InventoryServerContext(int argc, char** argv)
+inventory_server_context::inventory_server_context(int argc, char** argv)
 		:
-		common::ServiceContextBase(argc, argv)
+		common::service_context_base(argc, argv)
 {
-	std::ifstream i(_configFile);
+	std::ifstream i(_config_file);
 	json jsonConfig;
 	i >> jsonConfig;
 	initInventoryContextWithJson(jsonConfig);
 }
 
 std::string
-InventoryServerContext::toString() const
+inventory_server_context::toString() const
 {
 	std::string str;
 	str = "dump context\n*************************\n";
 	str += "[INFO] Service " + _name + " context VERSION: " + _version + "\n";
-	str += "[INFO] Config file used: " + _configFile + "\n";
+	str += "[INFO] Config file used: " + _config_file + "\n";
 	str += "\n[INFO] Dispatcher connected port: " + std::to_string(_dispatcherData.port) + "\n";
 	str += "[INFO] Dispatcher connected host: " + _dispatcherData.address + "\n";
-	str += "[INFO] Dispatcher connection string: " + getDispatcherConnectionString() + "\n";
+	str += "[INFO] Dispatcher connection string: " + get_dispatcher_connection_str() + "\n";
 	str += "[INFO] Player connection string: " + getPlayerConnectionString() + "\n";
 	str += "\n*************************\n";
 	return str;
 }
 
 std::string
-InventoryServerContext::getPlayerConnectionString() const noexcept
+inventory_server_context::getPlayerConnectionString() const noexcept
 {
 	return std::string("tcp://*:").append(std::to_string(_portPlayerConnection));
 }
 
 void
-InventoryServerContext::initInventoryContextWithJson(json& json)
+inventory_server_context::initInventoryContextWithJson(json& json)
 {
 	auto invJson = json["inventory"];
 	_portPlayerConnection = invJson["player_connection_port"].get<uint>();

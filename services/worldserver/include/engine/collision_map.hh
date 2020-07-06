@@ -33,13 +33,13 @@
 #include <utility>
 #include <tmxlite/ObjectGroup.hpp>
 #include <tmxlite/Types.hpp>
-#include "PlayersData.hh"
+#include "player_data.hh"
 
 
 // forward declaration
 namespace fys::ws {
-class WorldServerContext;
-class ConnectionHandler;
+class world_server_context;
+class connection_handler;
 }
 // end forward declaration
 
@@ -53,7 +53,7 @@ namespace fys::map::algo {
  */
 template<typename TmxLayer>
 bool
-isCollisionLayer(TmxLayer&& layer)
+is_collision_layer(TmxLayer&& layer)
 {
 	return std::any_of(layer.getProperties().begin(), layer.getProperties().end(), [](const auto& prop) {
 		return prop.getName().find("collision") != std::string::npos;
@@ -68,7 +68,7 @@ isCollisionLayer(TmxLayer&& layer)
  */
 template<typename TmxLayer>
 bool
-isTriggerLayer(TmxLayer&& layer)
+is_trigger_layer(TmxLayer&& layer)
 {
 	return std::any_of(layer.getProperties().begin(), layer.getProperties().end(), [](const auto& prop) {
 		return prop.getName().find("trigger") != std::string::npos;
@@ -79,101 +79,101 @@ isTriggerLayer(TmxLayer&& layer)
 
 namespace fys::ws {
 
-struct Boundary {
+struct boundary {
 	double in = 0.0;
 	double out = 0.0;
 };
 
-class ProximityServer {
-	struct ProximityServerAxis {
+class proximity_server {
+	struct proximity_server_axis {
 		double value;
 		bool superiorTo;
 	};
 
 public:
 	[[nodiscard]] constexpr bool
-	isCloseBy(double axis) const noexcept
+	is_close_by(double axis) const noexcept
 	{
-		bool xReq = xAxisRequirement.has_value();
-		bool yReq = yAxisRequirement.has_value();
-		if (xReq)
-			xReq = (xAxisRequirement->superiorTo) ? (axis > xAxisRequirement->value) : (axis < xAxisRequirement->value);
-		if (yReq)
-			yReq = (yAxisRequirement->superiorTo) ? (axis > yAxisRequirement->value) : (axis < yAxisRequirement->value);
-		return xReq && yReq;
+		bool x_req = x_axis_requirement.has_value();
+		bool y_req = y_axis_requirement.has_value();
+		if (x_req)
+			x_req = (x_axis_requirement->superiorTo) ? (axis > x_axis_requirement->value) : (axis < x_axis_requirement->value);
+		if (y_req)
+			y_req = (y_axis_requirement->superiorTo) ? (axis > y_axis_requirement->value) : (axis < y_axis_requirement->value);
+		return x_req && y_req;
 	}
 
 	std::string code;
-	std::optional<ProximityServerAxis> xAxisRequirement = std::nullopt;
-	std::optional<ProximityServerAxis> yAxisRequirement = std::nullopt;
+	std::optional<proximity_server_axis> x_axis_requirement = std::nullopt;
+	std::optional<proximity_server_axis> y_axis_requirement = std::nullopt;
 };
 
-enum class eElementType {
+enum class e_element_type {
 	BLOCK,
 	TRIGGER,
 	TP_TRIGGER,
 	NONE
 };
 
-class MapElement {
+class map_element {
 
 public:
-	void executePotentialTrigger(uint indexPlayer) const;
+	void execute_potential_trigger(uint indexPlayer) const;
 
-	void setLevel(std::size_t level) { _level.set(level); }
-	void setChangeLevel(std::size_t level) { _changeLevel.set(level); }
+	void set_level(std::size_t level) { _level.set(level); }
+	void set_change_level(std::size_t level) { _change_level.set(level); }
 
-	void setType(eElementType type) { _type = type; }
+	void set_type(e_element_type type) { _type = type; }
 
 	/**
 	 * check if the element is of type BLOCK, if it is, check every collision blockers on the mapElement
 	 * to verify if the PlayerInfo collide with them.
 	 */
 	[[nodiscard]] inline bool
-	canGoThrough(Pos position, std::size_t level) const noexcept;
+	can_go_through(pos position, std::size_t level) const noexcept;
 
-	void addCollision(const tmx::FloatRect& object)
+	void add_collision(const tmx::FloatRect& object)
 	{
 		_collisions.emplace_back(object);
 	}
 
 	template<typename T>
-	void setTrigger(T&& trigger)
+	void set_trigger(T&& trigger)
 	{
 		_trigger = std::forward(trigger);
 	}
 
 private:
 	[[nodiscard]] inline bool
-	canGoToLevel(std::size_t goLevel) const noexcept;
+	can_go_to_level(std::size_t go_level) const noexcept;
 
 private:
 	std::bitset<4> _level;
-	std::bitset<4> _changeLevel; // set on stairs to pass from a level to another
-	eElementType _type = eElementType::NONE;
-	std::variant<ConnectionHandler*, void*> _trigger; // TODO: change with std::function<void(LUA::Reference&)>
+	std::bitset<4> _change_level; // set on stairs to pass from a level to another
+	e_element_type _type = e_element_type::NONE;
+	std::variant<connection_handler*, void*> _trigger; // TODO: change with std::function<void(LUA::Reference&)>
 	std::vector<tmx::FloatRect> _collisions;
 
 };
 
-class CollisionMap {
+class collision_map {
 
 public:
-	explicit CollisionMap(const WorldServerContext& ctx);
+	explicit collision_map(const world_server_context& ctx);
 
-	CollisionMap(CollisionMap&&) noexcept = default;
-	CollisionMap(const CollisionMap&) = delete;
-	CollisionMap& operator=(const CollisionMap&) = delete;
+	collision_map(collision_map&&) noexcept = default;
+	collision_map(const collision_map&) = delete;
+	collision_map& operator=(const collision_map&) = delete;
 
-	void buildMapFromTmx(const std::string& tmxMapPath);
-	void executePotentialTrigger(uint index, const CharacterInfo& positionOnMap);
+	void build_map_from_tmx(const std::string& tmx_map_path);
+	void execute_potential_trigger(uint index, const character_info& position_on_map);
 
 	/**
 	 * Check if the position is in the boundary of the map before checking on the map
 	 * @return true if it is possible to move on the given position, false otherwise
 	 */
 	[[nodiscard]] bool
-	canMoveTo(Pos pos, std::size_t level) const noexcept;
+	can_move_to(pos pos, std::size_t level) const noexcept;
 
 private:
 	/**
@@ -181,7 +181,7 @@ private:
 	 *
 	 * AABB Objects stands for Axis-Aligned Bounding Box. Basically coordinates to use as hit box for the tiles.
 	 */
-	void addCollisionInMap(const Vec2u& tileMapSize, const tmx::ObjectGroup& collisionLayer);
+	void add_collision_in_map(const vec2_u& tile_map_size, const tmx::ObjectGroup& collision_layer);
 
 	/**
 	 * @brief Add the trigger elements into the map, and link the function associated to this trigger
@@ -191,13 +191,13 @@ private:
 	 *     teleport the player into another location
 	 *   - The classical one is going to trigger a script retrieved from the DB thanks to the id defining the trigger
 	 */
-	void addTriggerInMap(const tmx::ObjectGroup& triggerLayer);
+	void add_trigger_in_map(const tmx::ObjectGroup& trigger_layer);
 
 private:
-	Boundary _boundaryX;
-	Boundary _boundaryY;
-	std::vector<ProximityServer> _serverProximity;
-	std::vector<std::vector<MapElement>> _mapElems;
+	boundary _boundary_x;
+	boundary _boundary_y;
+	std::vector<proximity_server> _server_proximity;
+	std::vector<std::vector<map_element>> _map_elems;
 
 };
 

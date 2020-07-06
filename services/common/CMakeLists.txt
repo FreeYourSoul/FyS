@@ -50,13 +50,13 @@ endif ()
 
 set(COMMON_SRCS
         ${CMAKE_CURRENT_LIST_DIR}/src/RandomGenerator.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/src/ServiceContextBase.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/src/ConnectionHandler.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/include/ConnectionHandler.hh
+        ${CMAKE_CURRENT_LIST_DIR}/src/service_context_base.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/src/connection_handler.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/include/connection_handler.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/RandomGenerator.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/SizedQueue.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/BoundaryMap.hh
-        ${CMAKE_CURRENT_LIST_DIR}/include/ServiceContextBase.hh
+        ${CMAKE_CURRENT_LIST_DIR}/include/service_context_base.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/algorithm/algorithm.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/Key.hh)
 set(COMMON_INCLUDES_DIR

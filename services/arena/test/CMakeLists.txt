@@ -45,10 +45,10 @@ addFSeamTests(
         ${CMAKE_CURRENT_LIST_DIR}/../src/network/WorkerService.cpp
         ${CMAKE_CURRENT_LIST_DIR}/../src/ArenaServerContext.cpp
         ${CMAKE_CURRENT_LIST_DIR}/../src/ChaiRegister.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/FlatbufferGenerator.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/flatbuffer_generator.cpp
         ${CMAKE_CURRENT_LIST_DIR}/../src/HistoryManager.cpp
         ${CMAKE_CURRENT_LIST_DIR}/../include/HistoryManager.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../include/FlatbufferGenerator.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/flatbuffer_generator.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/util/FbUtility.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/ChaiRegister.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/team/PartyTeam.hh
@@ -82,7 +82,7 @@ addFSeamTests(
         ${CMAKE_CURRENT_LIST_DIR}/fightingPit/FightingPitTestCase.cpp
 
         TO_MOCK
-        ${CMAKE_CURRENT_SOURCE_DIR}/../../common/include/ConnectionHandler.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../../common/include/connection_handler.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/../../common/include/RandomGenerator.hh
 )
 
@@ -103,10 +103,10 @@ addFSeamTests(
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/FightingPitLayout.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/PriorityOrderList.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/ChaiRegister.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/../src/FlatbufferGenerator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/flatbuffer_generator.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/HistoryManager.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/HistoryManager.hh
-        ${CMAKE_CURRENT_SOURCE_DIR}/../include/FlatbufferGenerator.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/flatbuffer_generator.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/util/FbUtility.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/ChaiRegister.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/Rewards.hh
@@ -132,7 +132,7 @@ addFSeamTests(
         ${CMAKE_CURRENT_SOURCE_DIR}/scriptTests/Action_HealTestCase.cpp
 
         TO_MOCK
-        ${CMAKE_CURRENT_SOURCE_DIR}/../../common/include/ConnectionHandler.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../../common/include/connection_handler.hh
 )
 target_compile_definitions(sampy_test PUBLIC CHAISCRIPT_NO_THREADS -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)
 target_link_libraries(sampy_test cppzmq fmt::fmt dl cml)

@@ -21,18 +21,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include "../include/ConnectionHandler.hh"
+#include "../include/connection_handler.hh"
 
 namespace fys::common {
 
 void
-ConnectionHandler::setupConnectionManager(const std::string& dispatcherConnectionStr) noexcept
+connection_handler::setupConnectionManager(const std::string& dispatcherConnectionStr) noexcept
 {
 	_dealerConnectionToDispatcher.connect(dispatcherConnectionStr);
 }
 
 void
-ConnectionHandler::sendMessageToDispatcher(zmq::multipart_t&& msg) noexcept
+connection_handler::sendMessageToDispatcher(zmq::multipart_t&& msg) noexcept
 {
 	if (_dealerConnectionToDispatcher.connected()) {
 		msg.send(_dealerConnectionToDispatcher);

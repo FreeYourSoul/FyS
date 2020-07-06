@@ -22,17 +22,17 @@
 // SOFTWARE.
 
 #include <catch2/catch.hpp>
-#include <engine/WorldPopulator.hh>
-#include <WorldServerContext.hh>
+#include <engine/world_populator.hh>
+#include <world_server_context.hh>
 
 TEST_CASE("WorldPopulator scripted Actions", "[service][world][script]")
 {
-	fys::ws::WorldPopulator wp;
+	fys::ws::world_populator wp;
 
 	char* av[] = {"-c", "/home/FyS/Project/FyS/services/worldserver/cfg/service.ini",
 				  "-s", "/home/FyS/Project/FyS/services/worldserver/cfg/worldserver_WS00.json"};
 
-	auto ctx = fys::ws::WorldServerContext(4, av);
+	auto ctx = fys::ws::world_server_context(4, av);
 //	wp.populateScriptEngine();
 
 } // End TestCase : SpawningPoint_0_TestCase scripted Actions
