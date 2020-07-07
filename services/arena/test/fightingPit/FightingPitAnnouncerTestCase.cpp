@@ -26,12 +26,12 @@
 
 #include <catch2/catch.hpp>
 #include <FSeamMockData.hpp>
-#include <ArenaServerContext.hh>
-#include <fightingPit/data/CommonTypes.hh>
-#include <fightingPit/FightingPitAnnouncer.hh>
-#include <fightingPit/contender/FightingContender.hh>
-#include <fightingPit/contender/ContenderScripting.hh>
-#include <RandomGenerator.hh>
+#include <arena_server_context.hh>
+#include <fightingPit/data/common_types.hh>
+#include <fightingPit/fighting_pit_announcer.hh>
+#include <fightingPit/contender/fighting_contender.hh>
+#include <fightingPit/contender/contender_scripting.hh>
+#include <random_generator.hh>
 #include "TestType.hh"
 
 using namespace fys::arena;
@@ -50,55 +50,55 @@ getLocalPathStorage()
 
 TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]")
 {
-	auto fseamMock = FSeam::getDefault<fys::util::RandomGenerator>();
+	auto fseamMock = FSeam::getDefault<fys::util::random_generator>();
 	auto cml = CmlBase(getLocalPathStorage());
-	EncounterContext ctx;
+	encounter_context ctx;
 	ctx._rangeEncounterPerZone["WS00"] = {
-			EncounterContext::RngRange(1, 4), // ez
-			EncounterContext::RngRange(2, 4), // medium
-			EncounterContext::RngRange(3, 5)  // hard
+			encounter_context::rng_range(1, 4), // ez
+			encounter_context::rng_range(2, 4), // medium
+			encounter_context::rng_range(3, 5)  // hard
 	};
 	ctx._contendersPerZone["WS00"] = {
-			EncounterContext::EncounterDesc{
+			encounter_context::encounter_desc{
 					"arena:contenders:Sampy.chai", 3,
-					EncounterContext::ChanceArray{60, 60, 60},
-					EncounterContext::RngRange(1u, 10u)
+					encounter_context::chance_array{60, 60, 60},
+					encounter_context::rng_range(1u, 10u)
 			},
-			EncounterContext::EncounterDesc{
+			encounter_context::encounter_desc{
 					"arena:contenders:Slime.chai", 3,
-					EncounterContext::ChanceArray{40, 40, 40},
-					EncounterContext::RngRange(1u, 10u)
+					encounter_context::chance_array{40, 40, 40},
+					encounter_context::rng_range(1u, 10u)
 			}
 	};
 
 	SECTION("test wrong range encounter") {
-		FightingPitAnnouncer fpa(cml);
-		fpa.setCreatorUserToken(" ");
-		fpa.setCreatorUserName(" ");
-		fpa.setCreatorTeamParty(getPartyTeam(" "));
-		fpa.setDifficulty(FightingPit::MEDIUM);
-		fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
-		REQUIRE(nullptr == fpa.buildFightingPit(ctx, "WS42"));
+		fighting_pit_announcer fpa(cml);
+		fpa.set_creator_user_token(" ");
+		fpa.set_creator_user_name(" ");
+		fpa.set_creator_team_party(getPartyTeam(" "));
+		fpa.set_difficulty(fighting_pit::MEDIUM);
+		fpa.set_encounter_type(fighting_pit_announcer::encounter_type::RANDOM);
+		REQUIRE(nullptr == fpa.build_fighting_pit(ctx, "WS42"));
 	} // End section : test wrong range encounter
 
 	SECTION("test no creator userName") {
-		FightingPitAnnouncer fpa(cml);
-		fpa.setCreatorUserToken(" ");
+		fighting_pit_announcer fpa(cml);
+		fpa.set_creator_user_token(" ");
 		// fpa.setCreatorUserName(); !!NOT SET
-		fpa.setCreatorTeamParty(getPartyTeam(" "));
-		fpa.setDifficulty(FightingPit::MEDIUM);
-		fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
-		REQUIRE(nullptr == fpa.buildFightingPit(ctx, "WS00"));
+		fpa.set_creator_team_party(getPartyTeam(" "));
+		fpa.set_difficulty(fighting_pit::MEDIUM);
+		fpa.set_encounter_type(fighting_pit_announcer::encounter_type::RANDOM);
+		REQUIRE(nullptr == fpa.build_fighting_pit(ctx, "WS00"));
 	} // End section : test no creator userName
 
 	SECTION("test no creator userToken") {
-		FightingPitAnnouncer fpa(cml);
-		fpa.setCreatorUserName(" ");
+		fighting_pit_announcer fpa(cml);
+		fpa.set_creator_user_name(" ");
 		// fpa.setCreatorUserToken(); !!NOT SET
-		fpa.setCreatorTeamParty(getPartyTeam(" "));
-		fpa.setDifficulty(FightingPit::MEDIUM);
-		fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
-		REQUIRE(nullptr == fpa.buildFightingPit(ctx, "WS00"));
+		fpa.set_creator_team_party(getPartyTeam(" "));
+		fpa.set_difficulty(fighting_pit::MEDIUM);
+		fpa.set_encounter_type(fighting_pit_announcer::encounter_type::RANDOM);
+		REQUIRE(nullptr == fpa.build_fighting_pit(ctx, "WS00"));
 	} // End section : test no creator userName
 
 	SECTION("test invalid action name registered") {
@@ -106,52 +106,52 @@ TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]")
 		std::shared_ptr<std::mt19937> mt = std::make_shared<std::mt19937>(42);
 		fseamMock->dupeReturn<FSeam::RandomGenerator::get>(mt);
 
-		FightingPitAnnouncer fpa(cml);
-		fpa.setCreatorUserToken(" ");
-		fpa.setCreatorUserName(" ");
-		fpa.setCreatorTeamParty(getPartyTeam(" "));
-		fpa.setDifficulty(FightingPit::HARD);
-		fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
-		fpa.addActionToOneMember(0, "arena", 5);
-		auto fp = fpa.buildFightingPit(ctx, "WS00");
+		fighting_pit_announcer fpa(cml);
+		fpa.set_creator_user_token(" ");
+		fpa.set_creator_user_name(" ");
+		fpa.set_creator_team_party(getPartyTeam(" "));
+		fpa.set_difficulty(fighting_pit::HARD);
+		fpa.set_encounter_type(fighting_pit_announcer::encounter_type::RANDOM);
+		fpa.add_action_to_one_member(0, "arena", 5);
+		auto fp = fpa.build_fighting_pit(ctx, "WS00");
 
 	} // End section : test invalid action name registered
 
 	SECTION("Test Side Setup") {
 		std::shared_ptr<std::mt19937> mt = std::make_shared<std::mt19937>(42);
 		fseamMock->dupeReturn<FSeam::RandomGenerator::get>(mt);
-		FightingPitAnnouncer fpa(cml);
-		fpa.setCreatorUserName(" ");
-		fpa.setCreatorUserToken(" ");
-		fpa.setCreatorTeamParty(getPartyTeam(" "));
-		fpa.setDifficulty(FightingPit::EASY);
-		fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
-		fpa.addActionToOneMember(0, "arena:actions:damage:slash.chai", 5);
-		auto fp = fpa.buildFightingPit(ctx, "WS00");
+		fighting_pit_announcer fpa(cml);
+		fpa.set_creator_user_name(" ");
+		fpa.set_creator_user_token(" ");
+		fpa.set_creator_team_party(getPartyTeam(" "));
+		fpa.set_difficulty(fighting_pit::EASY);
+		fpa.set_encounter_type(fighting_pit_announcer::encounter_type::RANDOM);
+		fpa.add_action_to_one_member(0, "arena:actions:damage:slash.chai", 5);
+		auto fp = fpa.build_fighting_pit(ctx, "WS00");
 
-		const auto &sides = FightingPitAnnouncer::getSideVector(fp);
+		const auto &sides = fighting_pit_announcer::get_side_vector(fp);
 		REQUIRE(18 == sides.size());
 
-		REQUIRE(HexagonSide::Orientation::A_N == sides[static_cast<uint>(HexagonSide::Orientation::A_N)].getSide());
-		REQUIRE(HexagonSide::Orientation::A_NE == sides[static_cast<uint>(HexagonSide::Orientation::A_NE)].getSide());
-		REQUIRE(HexagonSide::Orientation::A_NW == sides[static_cast<uint>(HexagonSide::Orientation::A_NW)].getSide());
-		REQUIRE(HexagonSide::Orientation::A_S == sides[static_cast<uint>(HexagonSide::Orientation::A_S)].getSide());
-		REQUIRE(HexagonSide::Orientation::A_SE == sides[static_cast<uint>(HexagonSide::Orientation::A_SE)].getSide());
-		REQUIRE(HexagonSide::Orientation::A_SW == sides[static_cast<uint>(HexagonSide::Orientation::A_SW)].getSide());
+		REQUIRE(hexagon_side::orientation::A_N == sides[static_cast<uint>(hexagon_side::orientation::A_N)].getSide());
+		REQUIRE(hexagon_side::orientation::A_NE == sides[static_cast<uint>(hexagon_side::orientation::A_NE)].getSide());
+		REQUIRE(hexagon_side::orientation::A_NW == sides[static_cast<uint>(hexagon_side::orientation::A_NW)].getSide());
+		REQUIRE(hexagon_side::orientation::A_S == sides[static_cast<uint>(hexagon_side::orientation::A_S)].getSide());
+		REQUIRE(hexagon_side::orientation::A_SE == sides[static_cast<uint>(hexagon_side::orientation::A_SE)].getSide());
+		REQUIRE(hexagon_side::orientation::A_SW == sides[static_cast<uint>(hexagon_side::orientation::A_SW)].getSide());
 
-		REQUIRE(HexagonSide::Orientation::B_N == sides[static_cast<uint>(HexagonSide::Orientation::B_N)].getSide());
-		REQUIRE(HexagonSide::Orientation::B_NE == sides[static_cast<uint>(HexagonSide::Orientation::B_NE)].getSide());
-		REQUIRE(HexagonSide::Orientation::B_NW == sides[static_cast<uint>(HexagonSide::Orientation::B_NW)].getSide());
-		REQUIRE(HexagonSide::Orientation::B_S == sides[static_cast<uint>(HexagonSide::Orientation::B_S)].getSide());
-		REQUIRE(HexagonSide::Orientation::B_SE == sides[static_cast<uint>(HexagonSide::Orientation::B_SE)].getSide());
-		REQUIRE(HexagonSide::Orientation::B_SW == sides[static_cast<uint>(HexagonSide::Orientation::B_SW)].getSide());
+		REQUIRE(hexagon_side::orientation::B_N == sides[static_cast<uint>(hexagon_side::orientation::B_N)].getSide());
+		REQUIRE(hexagon_side::orientation::B_NE == sides[static_cast<uint>(hexagon_side::orientation::B_NE)].getSide());
+		REQUIRE(hexagon_side::orientation::B_NW == sides[static_cast<uint>(hexagon_side::orientation::B_NW)].getSide());
+		REQUIRE(hexagon_side::orientation::B_S == sides[static_cast<uint>(hexagon_side::orientation::B_S)].getSide());
+		REQUIRE(hexagon_side::orientation::B_SE == sides[static_cast<uint>(hexagon_side::orientation::B_SE)].getSide());
+		REQUIRE(hexagon_side::orientation::B_SW == sides[static_cast<uint>(hexagon_side::orientation::B_SW)].getSide());
 
-		REQUIRE(HexagonSide::Orientation::C_N == sides[static_cast<uint>(HexagonSide::Orientation::C_N)].getSide());
-		REQUIRE(HexagonSide::Orientation::C_NE == sides[static_cast<uint>(HexagonSide::Orientation::C_NE)].getSide());
-		REQUIRE(HexagonSide::Orientation::C_NW == sides[static_cast<uint>(HexagonSide::Orientation::C_NW)].getSide());
-		REQUIRE(HexagonSide::Orientation::C_S == sides[static_cast<uint>(HexagonSide::Orientation::C_S)].getSide());
-		REQUIRE(HexagonSide::Orientation::C_SE == sides[static_cast<uint>(HexagonSide::Orientation::C_SE)].getSide());
-		REQUIRE(HexagonSide::Orientation::C_SW == sides[static_cast<uint>(HexagonSide::Orientation::C_SW)].getSide());
+		REQUIRE(hexagon_side::orientation::C_N == sides[static_cast<uint>(hexagon_side::orientation::C_N)].getSide());
+		REQUIRE(hexagon_side::orientation::C_NE == sides[static_cast<uint>(hexagon_side::orientation::C_NE)].getSide());
+		REQUIRE(hexagon_side::orientation::C_NW == sides[static_cast<uint>(hexagon_side::orientation::C_NW)].getSide());
+		REQUIRE(hexagon_side::orientation::C_S == sides[static_cast<uint>(hexagon_side::orientation::C_S)].getSide());
+		REQUIRE(hexagon_side::orientation::C_SE == sides[static_cast<uint>(hexagon_side::orientation::C_SE)].getSide());
+		REQUIRE(hexagon_side::orientation::C_SW == sides[static_cast<uint>(hexagon_side::orientation::C_SW)].getSide());
 	} // End section : Test Side Setup
 
 	SECTION("test seed 42") {
@@ -159,128 +159,128 @@ TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]")
 		fseamMock->dupeReturn<FSeam::RandomGenerator::get>(mt);
 
 		SECTION("test seed ez") {
-			REQUIRE(2 == fys::util::RandomGenerator::generateInRange(1, 4));
+			REQUIRE(2 == fys::util::random_generator::generate_in_range(1, 4));
 			// encounter 1
-			REQUIRE(80 == fys::util::RandomGenerator::generateInRange(0, 100));
-			REQUIRE(10 == fys::util::RandomGenerator::generateInRange(1, 10));
+			REQUIRE(80 == fys::util::random_generator::generate_in_range(0, 100));
+			REQUIRE(10 == fys::util::random_generator::generate_in_range(1, 10));
 			// encounter 2
-			REQUIRE(18 == fys::util::RandomGenerator::generateInRange(0, 100));
-			REQUIRE(8 == fys::util::RandomGenerator::generateInRange(1, 10));
+			REQUIRE(18 == fys::util::random_generator::generate_in_range(0, 100));
+			REQUIRE(8 == fys::util::random_generator::generate_in_range(1, 10));
 
 		} // End section : test seed ez
 		SECTION("test seed medium") {
-			REQUIRE(3 == fys::util::RandomGenerator::generateInRange(2, 4));
+			REQUIRE(3 == fys::util::random_generator::generate_in_range(2, 4));
 			// encounter 1
-			REQUIRE(80 == fys::util::RandomGenerator::generateInRange(0, 100));
-			REQUIRE(10 == fys::util::RandomGenerator::generateInRange(1, 10));
+			REQUIRE(80 == fys::util::random_generator::generate_in_range(0, 100));
+			REQUIRE(10 == fys::util::random_generator::generate_in_range(1, 10));
 			// encounter 2
-			REQUIRE(18 == fys::util::RandomGenerator::generateInRange(0, 100));
-			REQUIRE(8 == fys::util::RandomGenerator::generateInRange(1, 10));
+			REQUIRE(18 == fys::util::random_generator::generate_in_range(0, 100));
+			REQUIRE(8 == fys::util::random_generator::generate_in_range(1, 10));
 			// encounter 3
-			REQUIRE(78 == fys::util::RandomGenerator::generateInRange(0, 100));
-			REQUIRE(6 == fys::util::RandomGenerator::generateInRange(1, 10));
+			REQUIRE(78 == fys::util::random_generator::generate_in_range(0, 100));
+			REQUIRE(6 == fys::util::random_generator::generate_in_range(1, 10));
 		} // End section : test seed medium
 
 		SECTION("test seed hard") {
-			REQUIRE(4 == fys::util::RandomGenerator::generateInRange(3, 5));
+			REQUIRE(4 == fys::util::random_generator::generate_in_range(3, 5));
 			// encounter 1
-			REQUIRE(80 == fys::util::RandomGenerator::generateInRange(0, 100));
-			REQUIRE(10 == fys::util::RandomGenerator::generateInRange(1, 10));
+			REQUIRE(80 == fys::util::random_generator::generate_in_range(0, 100));
+			REQUIRE(10 == fys::util::random_generator::generate_in_range(1, 10));
 			// encounter 2
-			REQUIRE(18 == fys::util::RandomGenerator::generateInRange(0, 100));
-			REQUIRE(8 == fys::util::RandomGenerator::generateInRange(1, 10));
+			REQUIRE(18 == fys::util::random_generator::generate_in_range(0, 100));
+			REQUIRE(8 == fys::util::random_generator::generate_in_range(1, 10));
 			// encounter 3
-			REQUIRE(78 == fys::util::RandomGenerator::generateInRange(0, 100));
-			REQUIRE(6 == fys::util::RandomGenerator::generateInRange(1, 10));
+			REQUIRE(78 == fys::util::random_generator::generate_in_range(0, 100));
+			REQUIRE(6 == fys::util::random_generator::generate_in_range(1, 10));
 			// encounter 4
-			REQUIRE(60 == fys::util::RandomGenerator::generateInRange(0, 100));
-			REQUIRE(2 == fys::util::RandomGenerator::generateInRange(1, 10));
+			REQUIRE(60 == fys::util::random_generator::generate_in_range(0, 100));
+			REQUIRE(2 == fys::util::random_generator::generate_in_range(1, 10));
 		} // End section : test seed hard
 
 		SECTION("test generate contender Easy") { // seed 2 80 10 28 8
-			FightingPitAnnouncer fpa(cml);
-			fpa.setCreatorUserName(" ");
-			fpa.setCreatorUserToken(" ");
-			fpa.setCreatorTeamParty(getPartyTeam(" "));
-			fpa.setDifficulty(FightingPit::EASY);
-			fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
-			fpa.addActionToOneMember(0, "arena:actions:damage:slash.chai", 5);
-			auto fp = fpa.buildFightingPit(ctx, "WS00");
+			fighting_pit_announcer fpa(cml);
+			fpa.set_creator_user_name(" ");
+			fpa.set_creator_user_token(" ");
+			fpa.set_creator_team_party(getPartyTeam(" "));
+			fpa.set_difficulty(fighting_pit::EASY);
+			fpa.set_encounter_type(fighting_pit_announcer::encounter_type::RANDOM);
+			fpa.add_action_to_one_member(0, "arena:actions:damage:slash.chai", 5);
+			auto fp = fpa.build_fighting_pit(ctx, "WS00");
 
-			REQUIRE_FALSE(fp->isBattleOver());
-			REQUIRE(fp->isJoinable());
-			REQUIRE_THROWS(fp->setPlayerReadiness("NotExisting")); // test if the fp throws in this case
+			REQUIRE_FALSE(fp->is_battle_over());
+			REQUIRE(fp->is_joinable());
+			REQUIRE_THROWS(fp->set_player_readiness("NotExisting")); // test if the fp throws in this case
 
-			REQUIRE(2 == FightingPitAnnouncer::getPitContenders(fp).getNumberContender());
+			REQUIRE(2 == fighting_pit_announcer::get_pit_contenders(fp).getNumberContender());
 
-			REQUIRE("Slime" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getName());
-			REQUIRE(0 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getId());
-			REQUIRE(10 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getContenderScripting()->getLevel());
+			REQUIRE("Slime" == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(0)->get_name());
+			REQUIRE(0 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(0)->get_id());
+			REQUIRE(10 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(0)->get_contender_scripting()->get_level());
 
-			REQUIRE("Sampy" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(1)->getName());
-			REQUIRE(1 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(1)->getContenderScripting()->getContenderId());
-			REQUIRE(8 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(1)->getContenderScripting()->getLevel());
+			REQUIRE("Sampy" == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->get_name());
+			REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->get_contender_scripting()->get_contender_id());
+			REQUIRE(8 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->get_contender_scripting()->get_level());
 
 		} // End section : test generate contender Easy
 
 		SECTION("test generate contender Medium") { // seed 3 80 10 18 8 78 6
-			FightingPitAnnouncer fpa(cml);
-			fpa.setCreatorUserToken(" ");
-			fpa.setCreatorUserName(" ");
-			fpa.setCreatorTeamParty(getPartyTeam(" "));
-			fpa.setJoinDisabled(true);
-			fpa.setDifficulty(FightingPit::MEDIUM);
-			fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
-			fpa.addActionToOneMember(0, "arena:actions:damage:slash.chai", 5);
-			auto fp = fpa.buildFightingPit(ctx, "WS00");
+			fighting_pit_announcer fpa(cml);
+			fpa.set_creator_user_token(" ");
+			fpa.set_creator_user_name(" ");
+			fpa.set_creator_team_party(getPartyTeam(" "));
+			fpa.set_join_disabled(true);
+			fpa.set_difficulty(fighting_pit::MEDIUM);
+			fpa.set_encounter_type(fighting_pit_announcer::encounter_type::RANDOM);
+			fpa.add_action_to_one_member(0, "arena:actions:damage:slash.chai", 5);
+			auto fp = fpa.build_fighting_pit(ctx, "WS00");
 
-			REQUIRE(4 == FightingPitAnnouncer::getPartyTeams(fp).getPartyTeamOfPlayer(" ").getTeamMembers().size());
-			REQUIRE_FALSE(fp->isJoinable());
+			REQUIRE(4 == fighting_pit_announcer::get_party_teams(fp).get_party_team_of_player(" ").get_team_members().size());
+			REQUIRE_FALSE(fp->is_joinable());
 
-			REQUIRE(3 == FightingPitAnnouncer::getPitContenders(fp).getNumberContender());
+			REQUIRE(3 == fighting_pit_announcer::get_pit_contenders(fp).getNumberContender());
 
-			REQUIRE("Slime" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getName());
-			REQUIRE(0 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getContenderScripting()->getContenderId());
-			REQUIRE(10 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getContenderScripting()->getLevel());
+			REQUIRE("Slime" == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(0)->get_name());
+			REQUIRE(0 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(0)->get_contender_scripting()->get_contender_id());
+			REQUIRE(10 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(0)->get_contender_scripting()->get_level());
 
-			REQUIRE("Sampy" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(1)->getName());
-			REQUIRE(1 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(1)->getContenderScripting()->getContenderId());
-			REQUIRE(8 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(1)->getContenderScripting()->getLevel());
+			REQUIRE("Sampy" == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->get_name());
+			REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->get_contender_scripting()->get_contender_id());
+			REQUIRE(8 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->get_contender_scripting()->get_level());
 
-			REQUIRE("Slime" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(2)->getName());
-			REQUIRE(2 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(2)->getContenderScripting()->getContenderId());
-			REQUIRE(6 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(2)->getContenderScripting()->getLevel());
+			REQUIRE("Slime" == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(2)->get_name());
+			REQUIRE(2 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(2)->get_contender_scripting()->get_contender_id());
+			REQUIRE(6 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(2)->get_contender_scripting()->get_level());
 
 		} // End section : test generate contender Medium
 
 		SECTION("test generate contender Hard") { // seed 4 80 10 18 8 78 6 60 2
-			FightingPitAnnouncer fpa(cml);
-			fpa.setCreatorUserToken(" ");
-			fpa.setCreatorUserName(" ");
-			fpa.setCreatorTeamParty(getPartyTeam(" "));
-			fpa.setDifficulty(FightingPit::HARD);
-			fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
-			fpa.addActionToOneMember(0, "arena:actions:damage:slash.chai", 5);
-			auto fp = fpa.buildFightingPit(ctx, "WS00");
+			fighting_pit_announcer fpa(cml);
+			fpa.set_creator_user_token(" ");
+			fpa.set_creator_user_name(" ");
+			fpa.set_creator_team_party(getPartyTeam(" "));
+			fpa.set_difficulty(fighting_pit::HARD);
+			fpa.set_encounter_type(fighting_pit_announcer::encounter_type::RANDOM);
+			fpa.add_action_to_one_member(0, "arena:actions:damage:slash.chai", 5);
+			auto fp = fpa.build_fighting_pit(ctx, "WS00");
 
-			REQUIRE(4 == FightingPitAnnouncer::getPitContenders(fp).getNumberContender());
-			REQUIRE(fp->isJoinable());
+			REQUIRE(4 == fighting_pit_announcer::get_pit_contenders(fp).getNumberContender());
+			REQUIRE(fp->is_joinable());
 
-			REQUIRE("Slime" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getName());
-			REQUIRE(0 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getContenderScripting()->getContenderId());
-			REQUIRE(10 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getContenderScripting()->getLevel());
+			REQUIRE("Slime" == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(0)->get_name());
+			REQUIRE(0 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(0)->get_contender_scripting()->get_contender_id());
+			REQUIRE(10 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(0)->get_contender_scripting()->get_level());
 
-			REQUIRE("Sampy" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(1)->getName());
-			REQUIRE(1 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(1)->getContenderScripting()->getContenderId());
-			REQUIRE(8 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(1)->getContenderScripting()->getLevel());
+			REQUIRE("Sampy" == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->get_name());
+			REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->get_contender_scripting()->get_contender_id());
+			REQUIRE(8 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->get_contender_scripting()->get_level());
 
-			REQUIRE("Slime" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(2)->getName());
-			REQUIRE(2 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(2)->getContenderScripting()->getContenderId());
-			REQUIRE(6 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(2)->getContenderScripting()->getLevel());
+			REQUIRE("Slime" == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(2)->get_name());
+			REQUIRE(2 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(2)->get_contender_scripting()->get_contender_id());
+			REQUIRE(6 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(2)->get_contender_scripting()->get_level());
 
-			REQUIRE("Sampy" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(3)->getName());
-			REQUIRE(3 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(3)->getContenderScripting()->getContenderId());
-			REQUIRE(2 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(3)->getContenderScripting()->getLevel());
+			REQUIRE("Sampy" == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(3)->get_name());
+			REQUIRE(3 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(3)->get_contender_scripting()->get_contender_id());
+			REQUIRE(2 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(3)->get_contender_scripting()->get_level());
 
 		} // End section : test generate contender Hard
 
@@ -291,85 +291,85 @@ TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]")
 		fseamMock->dupeReturn<FSeam::RandomGenerator::get>(mt);
 
 		SECTION("test seed Easy") {
-			REQUIRE(2 == fys::util::RandomGenerator::generateInRange(1, 4));
+			REQUIRE(2 == fys::util::random_generator::generate_in_range(1, 4));
 			// encounter 1
-			REQUIRE(56 == fys::util::RandomGenerator::generateInRange(0, 100));
-			REQUIRE(2 == fys::util::RandomGenerator::generateInRange(1, 10));
+			REQUIRE(56 == fys::util::random_generator::generate_in_range(0, 100));
+			REQUIRE(2 == fys::util::random_generator::generate_in_range(1, 10));
 			// encounter 2
-			REQUIRE(21 == fys::util::RandomGenerator::generateInRange(0, 100));
-			REQUIRE(3 == fys::util::RandomGenerator::generateInRange(1, 10));
+			REQUIRE(21 == fys::util::random_generator::generate_in_range(0, 100));
+			REQUIRE(3 == fys::util::random_generator::generate_in_range(1, 10));
 		} // End section : test seed Easy
 
 		SECTION("test generate contender Easy") { // seed 2 56 2 21 3
-			FightingPitAnnouncer fpa(cml);
-			fpa.setCreatorUserToken(" ");
-			fpa.setCreatorUserName(" ");
-			fpa.setCreatorTeamParty(getPartyTeam(" "));
-			fpa.setDifficulty(FightingPit::EASY);
-			fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
-			fpa.addActionToOneMember(0, "arena:actions:damage:slash.chai", 5);
-			auto fp = fpa.buildFightingPit(ctx, "WS00");
+			fighting_pit_announcer fpa(cml);
+			fpa.set_creator_user_token(" ");
+			fpa.set_creator_user_name(" ");
+			fpa.set_creator_team_party(getPartyTeam(" "));
+			fpa.set_difficulty(fighting_pit::EASY);
+			fpa.set_encounter_type(fighting_pit_announcer::encounter_type::RANDOM);
+			fpa.add_action_to_one_member(0, "arena:actions:damage:slash.chai", 5);
+			auto fp = fpa.build_fighting_pit(ctx, "WS00");
 
-			REQUIRE(2 == FightingPitAnnouncer::getPitContenders(fp).getNumberContender());
+			REQUIRE(2 == fighting_pit_announcer::get_pit_contenders(fp).getNumberContender());
 
-			REQUIRE("Sampy" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getName());
-			REQUIRE(0 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getContenderScripting()->getContenderId());
-			REQUIRE(2 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getContenderScripting()->getLevel());
+			REQUIRE("Sampy" == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(0)->get_name());
+			REQUIRE(0 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(0)->get_contender_scripting()->get_contender_id());
+			REQUIRE(2 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(0)->get_contender_scripting()->get_level());
 
-			REQUIRE("Sampy" == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(1)->getName());
-			REQUIRE(1 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(1)->getContenderScripting()->getContenderId());
-			REQUIRE(3 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(1)->getContenderScripting()->getLevel());
+			REQUIRE("Sampy" == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->get_name());
+			REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->get_contender_scripting()->get_contender_id());
+			REQUIRE(3 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->get_contender_scripting()->get_level());
 
 			SECTION("test ordering turn setup") {
-				REQUIRE(8 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getStatus().initialSpeed);
-				REQUIRE(HexagonSide::Orientation::B_S == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(0)->getHexagonSideOrient());
-				REQUIRE(8 == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(1)->getStatus().initialSpeed);
-				REQUIRE(HexagonSide::Orientation::B_S == FightingPitAnnouncer::getPitContenders(fp).getFightingContender(1)->getHexagonSideOrient());
+				REQUIRE(8 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(0)->getStatus().initial_speed);
+				REQUIRE(hexagon_side::orientation::B_S == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(0)->get_hexagon_side_orient());
+				REQUIRE(8 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->getStatus().initial_speed);
+				REQUIRE(hexagon_side::orientation::B_S == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->get_hexagon_side_orient());
 
-				const auto members = FightingPitAnnouncer::getPartyTeams(fp).getMembersBySide(HexagonSide::Orientation::B_S);
+				const auto members = fighting_pit_announcer::get_party_teams(fp).get_members_by_side(hexagon_side::orientation::B_S);
 				REQUIRE(4 == members.size());
-				REQUIRE(1 == members.at(0)->getId());
-				REQUIRE(3 == members.at(0)->getStatus().initialSpeed);
-				REQUIRE(2 == members.at(1)->getId());
-				REQUIRE(5 == members.at(1)->getStatus().initialSpeed);
-				REQUIRE(3 == members.at(2)->getId());
-				REQUIRE(10 == members.at(2)->getStatus().initialSpeed);
-				REQUIRE(4 == members.at(3)->getId());
-				REQUIRE(20 == members.at(3)->getStatus().initialSpeed);
+				REQUIRE(1 == members.at(0)->get_id());
+				REQUIRE(3 == members.at(0)->get_status().initial_speed);
+				REQUIRE(2 == members.at(1)->get_id());
+				REQUIRE(5 == members.at(1)->get_status().initial_speed);
+				REQUIRE(3 == members.at(2)->get_id());
+				REQUIRE(10 == members.at(2)->get_status().initial_speed);
+				REQUIRE(4 == members.at(3)->get_id());
+				REQUIRE(20 == members.at(3)->get_status().initial_speed);
 
 				SECTION("test ordering") {
 
 					using namespace std::chrono_literals;
-					auto& order = FightingPitAnnouncer::getSideBattleForSide(fp, HexagonSide::Orientation::B_S);
-					REQUIRE(HexagonSide::Orientation::B_S == order.getSide());
+					auto& order = fighting_pit_announcer::get_side_battle_for_side(fp, hexagon_side::orientation::B_S);
+					REQUIRE(hexagon_side::orientation::B_S == order.getSide());
 
 					const auto elem1 = order.getCurrentParticipantTurn(std::chrono::system_clock::now(), 0ms);
-					REQUIRE(data::PriorityElem{4, 20, data::PARTY_MEMBER} == elem1);
+					REQUIRE(data::priority_elem{4, 20, data::PARTY_MEMBER} == elem1);
 					REQUIRE(20 == elem1.speed);
 					std::this_thread::sleep_for(10ms);
 
 					const auto elem2 = order.getCurrentParticipantTurn(std::chrono::system_clock::now(), 0ms);
-					REQUIRE(data::PriorityElem{3, 10, data::PARTY_MEMBER} == elem2);
+					REQUIRE(data::priority_elem{3, 10, data::PARTY_MEMBER} == elem2);
 					REQUIRE(10 == elem2.speed);
 					std::this_thread::sleep_for(10ms);
 
 					const auto elem3 = order.getCurrentParticipantTurn(std::chrono::system_clock::now(), 0ms);
-					REQUIRE(data::PriorityElem{1, 8, data::CONTENDER} == elem3);
+					REQUIRE(data::priority_elem{1, 8, data::CONTENDER} == elem3);
 					REQUIRE(8 == elem3.speed);
 					std::this_thread::sleep_for(10ms);
 
 					const auto elem4 = order.getCurrentParticipantTurn(std::chrono::system_clock::now(), 0ms);
-					REQUIRE(data::PriorityElem{0, 8, data::CONTENDER} == elem4);
+					REQUIRE(data::priority_elem{0, 8, data::CONTENDER} == elem4);
 					REQUIRE(8 == elem4.speed);
 					std::this_thread::sleep_for(10ms);
 
 					const auto elem5 = order.getCurrentParticipantTurn(std::chrono::system_clock::now(), 0ms);
-					REQUIRE(data::PriorityElem{2, 5, data::PARTY_MEMBER} == elem5);
+					REQUIRE(data::priority_elem{2, 5, data::PARTY_MEMBER} == elem5);
 					REQUIRE(5 == elem5.speed);
 					std::this_thread::sleep_for(10ms);
 
 					const auto& elem = order.getCurrentParticipantTurn(std::chrono::system_clock::now(), 0ms);
-					REQUIRE(data::PriorityElem{1, 4, data::PARTY_MEMBER} == elem);
+					REQUIRE(data::priority_elem{1, 4, data::PARTY_MEMBER} == elem);
 					REQUIRE(3 == elem.speed);
 					std::this_thread::sleep_for(10ms);
 
@@ -387,147 +387,147 @@ TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]")
 
 TEST_CASE("FightingPitAnnouncerTestCase test reward", "[service][arena]")
 {
-	auto fseamMock = FSeam::getDefault<fys::util::RandomGenerator>();
+	auto fseamMock = FSeam::getDefault<fys::util::random_generator>();
 	auto cml = CmlBase(getLocalPathStorage());
-	EncounterContext ctx;
+	encounter_context ctx;
 	ctx._rangeEncounterPerZone["WS00"] = {
-			EncounterContext::RngRange(1, 4), // ez
-			EncounterContext::RngRange(1, 4), // medium
-			EncounterContext::RngRange(1, 4)  // hard
+			encounter_context::rng_range(1, 4), // ez
+			encounter_context::rng_range(1, 4), // medium
+			encounter_context::rng_range(1, 4)  // hard
 	};
 	ctx._contendersPerZone["WS00"] = {
-			EncounterContext::EncounterDesc{
+			encounter_context::encounter_desc{
 					"arena:contenders:Sampy.chai", 3,
-					EncounterContext::ChanceArray{60, 60, 60},
-					EncounterContext::RngRange(1u, 10u)
+					encounter_context::chance_array{60, 60, 60},
+					encounter_context::rng_range(1u, 10u)
 			},
-			EncounterContext::EncounterDesc{
+			encounter_context::encounter_desc{
 					"arena:contenders:Slime.chai", 3,
-					EncounterContext::ChanceArray{40, 40, 40},
-					EncounterContext::RngRange(1u, 10u)
+					encounter_context::chance_array{40, 40, 40},
+					encounter_context::rng_range(1u, 10u)
 			}
 	};
-	ctx._rewardDescPerContender["Sampy"] = EncounterContext::RewardEncounterDesc{
-			std::array<EncounterContext::RngRange, 3>{
-					EncounterContext::RngRange(3, 3),
-					EncounterContext::RngRange(2, 2),
-					EncounterContext::RngRange(6, 6)
+	ctx._rewardDescPerContender["Sampy"] = encounter_context::reward_encounter_desc{
+			std::array<encounter_context::rng_range, 3>{
+					encounter_context::rng_range(3, 3),
+					encounter_context::rng_range(2, 2),
+					encounter_context::rng_range(6, 6)
 			},
 			{
-					{"DrPepper", EncounterContext::ChanceArray{50, 50, 50}},
-					{"EsCaliBur", EncounterContext::ChanceArray{50, 50, 50}},
+					{"DrPepper", encounter_context::chance_array{50, 50, 50}},
+					{"EsCaliBur", encounter_context::chance_array{50, 50, 50}},
 			}
 	};
 	std::shared_ptr<std::mt19937> mt = std::make_shared<std::mt19937>(42);
 	fseamMock->dupeReturn<FSeam::RandomGenerator::get>(mt);
 
 	SECTION("test seed") {
-		REQUIRE(2 == fys::util::RandomGenerator::generateInRange(1, 4));
+		REQUIRE(2 == fys::util::random_generator::generate_in_range(1, 4));
 		// encounter 1
-		REQUIRE(80 == fys::util::RandomGenerator::generateInRange(0, 100));
-		REQUIRE(10 == fys::util::RandomGenerator::generateInRange(1, 10));
+		REQUIRE(80 == fys::util::random_generator::generate_in_range(0, 100));
+		REQUIRE(10 == fys::util::random_generator::generate_in_range(1, 10));
 		// encounter 2
-		REQUIRE(18 == fys::util::RandomGenerator::generateInRange(0, 100));
-		REQUIRE(8 == fys::util::RandomGenerator::generateInRange(1, 10));
+		REQUIRE(18 == fys::util::random_generator::generate_in_range(0, 100));
+		REQUIRE(8 == fys::util::random_generator::generate_in_range(1, 10));
 		// Reward
-		REQUIRE(3 == fys::util::RandomGenerator::generateInRange(3, 3));     // number of reward
-		REQUIRE(60 == fys::util::RandomGenerator::generateInRange(0, 100));  // first  reward is EsCaliBur
-		REQUIRE(60 == fys::util::RandomGenerator::generateInRange(0, 100));  // second reward is EsCaliBur
-		REQUIRE(15 == fys::util::RandomGenerator::generateInRange(0, 100));  // third  reward is DrPepper
+		REQUIRE(3 == fys::util::random_generator::generate_in_range(3, 3));     // number of reward
+		REQUIRE(60 == fys::util::random_generator::generate_in_range(0, 100));  // first  reward is EsCaliBur
+		REQUIRE(60 == fys::util::random_generator::generate_in_range(0, 100));  // second reward is EsCaliBur
+		REQUIRE(15 == fys::util::random_generator::generate_in_range(0, 100));  // third  reward is DrPepper
 
 	} // End section : test seed ez
 
 	SECTION("Test one type reward generation") {
-		FightingPitAnnouncer fpa(cml);
-		fpa.setCreatorUserName(" ");
-		fpa.setCreatorUserToken(" ");
-		fpa.setCreatorTeamParty(getPartyTeam(" "));
-		fpa.setDifficulty(FightingPit::MEDIUM);
-		fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
-		fpa.addActionToOneMember(0, "arena:actions:damage:slash.chai", 5);
-		auto fp = fpa.buildFightingPit(ctx, "WS00");
+		fighting_pit_announcer fpa(cml);
+		fpa.set_creator_user_name(" ");
+		fpa.set_creator_user_token(" ");
+		fpa.set_creator_team_party(getPartyTeam(" "));
+		fpa.set_difficulty(fighting_pit::MEDIUM);
+		fpa.set_encounter_type(fighting_pit_announcer::encounter_type::RANDOM);
+		fpa.add_action_to_one_member(0, "arena:actions:damage:slash.chai", 5);
+		auto fp = fpa.build_fighting_pit(ctx, "WS00");
 
-		REQUIRE(1 == FightingPitAnnouncer::getReward(fp).keys.size());
-		REQUIRE(1 == FightingPitAnnouncer::getReward(fp).quantity.size());
-		REQUIRE("EsCaliBur" == FightingPitAnnouncer::getReward(fp).keys.at(0));
-		REQUIRE(2 == FightingPitAnnouncer::getReward(fp).quantity.at(0));
+		REQUIRE(1 == fighting_pit_announcer::get_reward(fp).keys.size());
+		REQUIRE(1 == fighting_pit_announcer::get_reward(fp).quantity.size());
+		REQUIRE("EsCaliBur" == fighting_pit_announcer::get_reward(fp).keys.at(0));
+		REQUIRE(2 == fighting_pit_announcer::get_reward(fp).quantity.at(0));
 
 	} // End section : Test one type reward generation
 
 	SECTION("Test different reward generation") {
-		FightingPitAnnouncer fpa(cml);
-		fpa.setCreatorUserName(" ");
-		fpa.setCreatorUserToken(" ");
-		fpa.setCreatorTeamParty(getPartyTeam(" "));
-		fpa.setDifficulty(FightingPit::EASY);
-		fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
-		fpa.addActionToOneMember(0, "arena:actions:damage:slash.chai", 5);
-		auto fp = fpa.buildFightingPit(ctx, "WS00");
+		fighting_pit_announcer fpa(cml);
+		fpa.set_creator_user_name(" ");
+		fpa.set_creator_user_token(" ");
+		fpa.set_creator_team_party(getPartyTeam(" "));
+		fpa.set_difficulty(fighting_pit::EASY);
+		fpa.set_encounter_type(fighting_pit_announcer::encounter_type::RANDOM);
+		fpa.add_action_to_one_member(0, "arena:actions:damage:slash.chai", 5);
+		auto fp = fpa.build_fighting_pit(ctx, "WS00");
 
-		REQUIRE(2 == FightingPitAnnouncer::getReward(fp).keys.size()); // 2 different reward
-		REQUIRE(2 == FightingPitAnnouncer::getReward(fp).quantity.size());
-		REQUIRE("DrPepper" == FightingPitAnnouncer::getReward(fp).keys.at(0));
-		REQUIRE(1 == FightingPitAnnouncer::getReward(fp).quantity.at(0));
-		REQUIRE("EsCaliBur" == FightingPitAnnouncer::getReward(fp).keys.at(1));
-		REQUIRE(2 == FightingPitAnnouncer::getReward(fp).quantity.at(1));
+		REQUIRE(2 == fighting_pit_announcer::get_reward(fp).keys.size()); // 2 different reward
+		REQUIRE(2 == fighting_pit_announcer::get_reward(fp).quantity.size());
+		REQUIRE("DrPepper" == fighting_pit_announcer::get_reward(fp).keys.at(0));
+		REQUIRE(1 == fighting_pit_announcer::get_reward(fp).quantity.at(0));
+		REQUIRE("EsCaliBur" == fighting_pit_announcer::get_reward(fp).keys.at(1));
+		REQUIRE(2 == fighting_pit_announcer::get_reward(fp).quantity.at(1));
 	} // End section : Test different reward generation
 
 	SECTION("test seed for 'Multiple Monster of same type add up'") {
-		REQUIRE(2 == fys::util::RandomGenerator::generateInRange(1, 4));
+		REQUIRE(2 == fys::util::random_generator::generate_in_range(1, 4));
 		// encounter 1
-		REQUIRE(80 == fys::util::RandomGenerator::generateInRange(0, 100)); // Slime is selected
-		REQUIRE(10 == fys::util::RandomGenerator::generateInRange(1, 10));  // level Slime is 10
+		REQUIRE(80 == fys::util::random_generator::generate_in_range(0, 100)); // Slime is selected
+		REQUIRE(10 == fys::util::random_generator::generate_in_range(1, 10));  // level Slime is 10
 		// encounter 2
-		REQUIRE(18 == fys::util::RandomGenerator::generateInRange(0, 100)); // Sampy is selected
-		REQUIRE(8 == fys::util::RandomGenerator::generateInRange(1, 10));   // level Sampy is 8
+		REQUIRE(18 == fys::util::random_generator::generate_in_range(0, 100)); // Sampy is selected
+		REQUIRE(8 == fys::util::random_generator::generate_in_range(1, 10));   // level Sampy is 8
 
 		// Reward Slime
-		REQUIRE(3 == fys::util::RandomGenerator::generateInRange(3, 3));     // number of reward for Slime
-		REQUIRE(60 == fys::util::RandomGenerator::generateInRange(0, 100));  // first  reward is TriForce
-		REQUIRE(60 == fys::util::RandomGenerator::generateInRange(0, 100));  // second reward is TriForce
-		REQUIRE(15 == fys::util::RandomGenerator::generateInRange(0, 100));  // third  reward is TriForce
+		REQUIRE(3 == fys::util::random_generator::generate_in_range(3, 3));     // number of reward for Slime
+		REQUIRE(60 == fys::util::random_generator::generate_in_range(0, 100));  // first  reward is TriForce
+		REQUIRE(60 == fys::util::random_generator::generate_in_range(0, 100));  // second reward is TriForce
+		REQUIRE(15 == fys::util::random_generator::generate_in_range(0, 100));  // third  reward is TriForce
 		// Reward Sampy
-		REQUIRE(6 == fys::util::RandomGenerator::generateInRange(6, 6));     // number of reward for Sampy
-		REQUIRE(15 == fys::util::RandomGenerator::generateInRange(0, 100));  // first  reward is DrPepper
-		REQUIRE(10 == fys::util::RandomGenerator::generateInRange(0, 100));  // second reward is DrPepper
-		REQUIRE(5 == fys::util::RandomGenerator::generateInRange(0, 100));   // third  reward is DrPepper
-		REQUIRE(46 == fys::util::RandomGenerator::generateInRange(0, 100));  // fourth reward is DrPepper
-		REQUIRE(87 == fys::util::RandomGenerator::generateInRange(0, 100));  // fith   reward is EsCaliBur
-		REQUIRE(33 == fys::util::RandomGenerator::generateInRange(0, 100));  // sixth  reward is DrPepper
+		REQUIRE(6 == fys::util::random_generator::generate_in_range(6, 6));     // number of reward for Sampy
+		REQUIRE(15 == fys::util::random_generator::generate_in_range(0, 100));  // first  reward is DrPepper
+		REQUIRE(10 == fys::util::random_generator::generate_in_range(0, 100));  // second reward is DrPepper
+		REQUIRE(5 == fys::util::random_generator::generate_in_range(0, 100));   // third  reward is DrPepper
+		REQUIRE(46 == fys::util::random_generator::generate_in_range(0, 100));  // fourth reward is DrPepper
+		REQUIRE(87 == fys::util::random_generator::generate_in_range(0, 100));  // fith   reward is EsCaliBur
+		REQUIRE(33 == fys::util::random_generator::generate_in_range(0, 100));  // sixth  reward is DrPepper
 
 	} // End section : test seed ez
 
 	SECTION("Multiple Monster of same type add up") {
 
-		ctx._rewardDescPerContender["Slime"] = EncounterContext::RewardEncounterDesc{
-				std::array<EncounterContext::RngRange, 3>{
-						EncounterContext::RngRange(3, 3),
-						EncounterContext::RngRange(2, 2),
-						EncounterContext::RngRange(3, 3)
+		ctx._rewardDescPerContender["Slime"] = encounter_context::reward_encounter_desc{
+				std::array<encounter_context::rng_range, 3>{
+						encounter_context::rng_range(3, 3),
+						encounter_context::rng_range(2, 2),
+						encounter_context::rng_range(3, 3)
 				},
 				{
-						{"TriForce", EncounterContext::ChanceArray{100, 100, 100}}
+						{"TriForce", encounter_context::chance_array{100, 100, 100}}
 				}
 		};
-		FightingPitAnnouncer fpa(cml);
-		fpa.setCreatorUserName(" ");
-		fpa.setCreatorUserToken(" ");
-		fpa.setCreatorTeamParty(getPartyTeam(" "));
-		fpa.setDifficulty(FightingPit::HARD);
-		fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
-		fpa.addActionToOneMember(0, "arena:actions:damage:slash.chai", 5);
-		auto fp = fpa.buildFightingPit(ctx, "WS00");
+		fighting_pit_announcer fpa(cml);
+		fpa.set_creator_user_name(" ");
+		fpa.set_creator_user_token(" ");
+		fpa.set_creator_team_party(getPartyTeam(" "));
+		fpa.set_difficulty(fighting_pit::HARD);
+		fpa.set_encounter_type(fighting_pit_announcer::encounter_type::RANDOM);
+		fpa.add_action_to_one_member(0, "arena:actions:damage:slash.chai", 5);
+		auto fp = fpa.build_fighting_pit(ctx, "WS00");
 
 		// 3 different rewards
-		REQUIRE(3 == FightingPitAnnouncer::getReward(fp).keys.size());
-		REQUIRE(3 == FightingPitAnnouncer::getReward(fp).quantity.size());
+		REQUIRE(3 == fighting_pit_announcer::get_reward(fp).keys.size());
+		REQUIRE(3 == fighting_pit_announcer::get_reward(fp).quantity.size());
 
-		REQUIRE("DrPepper" == FightingPitAnnouncer::getReward(fp).keys.at(0));
-		REQUIRE(5 == FightingPitAnnouncer::getReward(fp).quantity.at(0));
-		REQUIRE("EsCaliBur" == FightingPitAnnouncer::getReward(fp).keys.at(1));
-		REQUIRE(1 == FightingPitAnnouncer::getReward(fp).quantity.at(1));
-		REQUIRE("TriForce" == FightingPitAnnouncer::getReward(fp).keys.at(2));
-		REQUIRE(3 == FightingPitAnnouncer::getReward(fp).quantity.at(2));
+		REQUIRE("DrPepper" == fighting_pit_announcer::get_reward(fp).keys.at(0));
+		REQUIRE(5 == fighting_pit_announcer::get_reward(fp).quantity.at(0));
+		REQUIRE("EsCaliBur" == fighting_pit_announcer::get_reward(fp).keys.at(1));
+		REQUIRE(1 == fighting_pit_announcer::get_reward(fp).quantity.at(1));
+		REQUIRE("TriForce" == fighting_pit_announcer::get_reward(fp).keys.at(2));
+		REQUIRE(3 == fighting_pit_announcer::get_reward(fp).quantity.at(2));
 
 	} // End section : Multiple Monster of same type add up
 

@@ -26,12 +26,12 @@
 
 #include <chaiscript/chaiscript.hpp>
 
-#include <fightingPit/contender/PitContenders.hh>
-#include <fightingPit/team/AllyPartyTeams.hh>
-#include <fightingPit/team/TeamMember.hh>
+#include <fightingPit/contender/pit_contenders.hh>
+#include <fightingPit/team/ally_party_teams.hh>
+#include <fightingPit/team/team_member.hh>
 #include <CmlCopy.hh>
 
-#include <ChaiRegister.hh>
+#include <chai_register.hh>
 
 namespace {
 std::string
@@ -61,11 +61,11 @@ TEST_CASE("Test register/load player", "[service][arena][script_test]")
 	fys::cache::CmlCopy ccpy(getLocalPathStorage(), getCopyPathStorage());
 	std::filesystem::path baseCache = getLocalPathStorage();
 
-	fys::arena::PitContenders pc;
-	fys::arena::AllyPartyTeams apt;
-	fys::arena::FightingPitLayout layout(pc, apt);
-	auto chai = fys::arena::ChaiRegister::createChaiInstance(pc, apt, layout);
-	fys::arena::ChaiRegister::registerBaseActions(*chai, ccpy);
+	fys::arena::pit_contenders pc;
+	fys::arena::ally_party_teams apt;
+	fys::arena::fighting_pit_layout layout(pc, apt);
+	auto chai = fys::arena::chai_register::make_chai_instance(pc, apt, layout);
+	fys::arena::chai_register::register_base_actions(*chai, ccpy);
 
 	try {
 		REQUIRE(chai->eval<bool>(R"(
@@ -93,13 +93,13 @@ TEST_CASE("Test register/load player", "[service][arena][script_test]")
 
 	SECTION("simple test load player actions") {
 
-		fys::arena::PartyTeam partyTeam("FyS");
-		fys::arena::TeamMemberSPtr tm1 = std::make_shared<fys::arena::TeamMember>(partyTeam.getUserName(), "fyston1");
-		tm1->setId(0);
-		tm1->addDoableAction("arena:actions:damage:slash.chai", 1);
-		partyTeam.addTeamMember(std::move(tm1));
+		fys::arena::party_team partyTeam("FyS");
+		fys::arena::team_member_sptr tm1 = std::make_shared<fys::arena::team_member>(partyTeam.get_user_name(), "fyston1");
+		tm1->set_id(0);
+		tm1->add_doable_action("arena:actions:damage:slash.chai", 1);
+		partyTeam.add_team_member(std::move(tm1));
 
-		fys::arena::ChaiRegister::loadAndRegisterActionPartyTeam(*chai, ccpy, partyTeam);
+		fys::arena::chai_register::load_register_action_party_team(*chai, ccpy, partyTeam);
 
 		try {
 			REQUIRE(chai->eval<bool>(R"(1 == ally_actions.count("FyS_fyston1");)"));
@@ -112,12 +112,12 @@ TEST_CASE("Test register/load player", "[service][arena][script_test]")
 
 		SECTION("simple test register same partyteam with loaded action") {
 
-			fys::arena::TeamMemberSPtr tm2 = std::make_shared<fys::arena::TeamMember>(partyTeam.getUserName(), "fyston2");
-			tm2->setId(1);
-			tm2->addDoableAction("arena:actions:damage:slash.chai", 1);
-			partyTeam.addTeamMember(std::move(tm2));
+			fys::arena::team_member_sptr tm2 = std::make_shared<fys::arena::team_member>(partyTeam.get_user_name(), "fyston2");
+			tm2->set_id(1);
+			tm2->add_doable_action("arena:actions:damage:slash.chai", 1);
+			partyTeam.add_team_member(std::move(tm2));
 
-			fys::arena::ChaiRegister::loadAndRegisterActionPartyTeam(*chai, ccpy, partyTeam);
+			fys::arena::chai_register::load_register_action_party_team(*chai, ccpy, partyTeam);
 
 			try {
 				REQUIRE(chai->eval<bool>(R"(1 == ally_actions.count("FyS_fyston1");)"));
@@ -135,17 +135,17 @@ TEST_CASE("Test register/load player", "[service][arena][script_test]")
 
 		SECTION("simple test register new partyteam with loaded action") {
 
-			fys::arena::PartyTeam partyTeam2("Free");
-			fys::arena::TeamMemberSPtr tm21 = std::make_shared<fys::arena::TeamMember>(partyTeam2.getUserName(), "fyston1");
-			tm21->setId(2);
-			tm21->addDoableAction("arena:actions:damage:slash.chai", 1);
-			partyTeam2.addTeamMember(std::move(tm21));
-			fys::arena::TeamMemberSPtr tm22 = std::make_shared<fys::arena::TeamMember>(partyTeam2.getUserName(), "fyston2");
-			tm22->setId(3);
-			tm22->addDoableAction("arena:actions:damage:slash.chai", 1);
-			partyTeam2.addTeamMember(std::move(tm22));
+			fys::arena::party_team partyTeam2("Free");
+			fys::arena::team_member_sptr tm21 = std::make_shared<fys::arena::team_member>(partyTeam2.get_user_name(), "fyston1");
+			tm21->set_id(2);
+			tm21->add_doable_action("arena:actions:damage:slash.chai", 1);
+			partyTeam2.add_team_member(std::move(tm21));
+			fys::arena::team_member_sptr tm22 = std::make_shared<fys::arena::team_member>(partyTeam2.get_user_name(), "fyston2");
+			tm22->set_id(3);
+			tm22->add_doable_action("arena:actions:damage:slash.chai", 1);
+			partyTeam2.add_team_member(std::move(tm22));
 
-			fys::arena::ChaiRegister::loadAndRegisterActionPartyTeam(*chai, ccpy, partyTeam2);
+			fys::arena::chai_register::load_register_action_party_team(*chai, ccpy, partyTeam2);
 
 			try {
 				REQUIRE(chai->eval<bool>(R"(1 == ally_actions.count("Free_fyston1");)"));

@@ -36,7 +36,7 @@ connection_handler::connection_handler(int threadNumber) noexcept
 void
 connection_handler::setupConnectionManager(const fys::ws::world_server_context& ctx) noexcept
 {
-	_subSocketOnDispatcher.set(zmq::sockopt::subscribe, ctx.getServerCode());
+	_subSocketOnDispatcher.set(zmq::sockopt::subscribe, ctx.get_server_code());
 	_subSocketOnDispatcher.set(zmq::sockopt::subscribe, SERVER_SUB_CHANNEL_KEY);
 	_subSocketOnDispatcher.connect(ctx.get_dispatcher_sub_connection_str());
 	_dealSocketOnDispatcher.connect(ctx.get_dispatcher_connection_str());

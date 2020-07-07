@@ -23,7 +23,7 @@
 
 #include <catch2/catch.hpp>
 
-#include <exchange/ExchangeRoom.hh>
+#include <exchange/exchange_room.hh>
 
 static const std::string ACTUAL_TOKEN = "ThisIsTheActualTokenOfTheExchangeRoom";
 static const std::string RECEIVER = "ReceiverName";
@@ -36,8 +36,8 @@ using namespace fys::inv;
 
 TEST_CASE("ExchangeRoomTestCase", "[service][inventory]")
 {
-	ItemManager im;
-	ExchangeRoom exchangeRoom(EXCHANGE_ID, INITIATOR, RECEIVER, INITIATOR_IDENTITY, ACTUAL_TOKEN, im);
+	item_manager im;
+	exchange_room exchangeRoom(EXCHANGE_ID, INITIATOR, RECEIVER, INITIATOR_IDENTITY, ACTUAL_TOKEN, im);
 
 	const auto& initiatorContent = exchangeRoom.getInitiatorContent();
 	const auto& receiverContent = exchangeRoom.getReceiverContent();

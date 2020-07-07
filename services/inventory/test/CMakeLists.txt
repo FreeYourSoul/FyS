@@ -30,16 +30,16 @@ add_executable(inventory_test
         # Sources
         ${COMMON_SRCS}
         ${CMAKE_CURRENT_LIST_DIR}/../src/inventory_server_context.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/InventoryServerService.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/exchange/ExchangeRoom.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/exchange/ExchangeManager.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/ItemManager.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/inventory_server_service.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/exchange/exchange_room.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/exchange/exchange_manager.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/item_manager.cpp
         ${CMAKE_CURRENT_LIST_DIR}/../src/flatbuffer_generator.cpp
         ${CMAKE_CURRENT_LIST_DIR}/../include/flatbuffer_generator.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../include/ItemManager.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../include/exchange/ExchangeManager.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../include/exchange/ExchangeRoom.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../include/InventoryServerService.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/item_manager.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/exchange/exchange_manager.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/exchange/exchange_room.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/inventory_server_service.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/inventory_server_context.hh
         )
 

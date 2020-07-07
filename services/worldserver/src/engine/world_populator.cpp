@@ -73,62 +73,62 @@ getPathFromKey(std::string base, std::string key)
 namespace fys::ws {
 
 std::shared_ptr<engine>
-world_populator::buildWorldServerEngine()
+world_populator::build_world_server_engine()
 {
 	SPDLOG_INFO("[INIT] Start building ServerEngine...");
 
-	::assertEngineError(_connectionString.empty(), "Connection string is empty");
-	::assertEngineError(static_cast<bool>(_scriptEngine) == false, "Script engine not initialized");
+	::assertEngineError(_connection_string.empty(), "Connection string is empty");
+	::assertEngineError(static_cast<bool>(_script_engine) == false, "Script engine not initialized");
 	::assertEngineError(static_cast<bool>(_map) == false, "Map is not initialized");
 
 	SPDLOG_INFO("[INIT] ServerEngine setup is correct...");
 	auto ret = std::make_shared<engine>
-			(_connectionString, std::move(*_map.get()), std::move(_scriptEngine), _intervalMovement);
+			(_connection_string, std::move(*_map.get()), std::move(_script_engine), _interval_movement);
 	SPDLOG_INFO("[INIT] ServerEngine building is complete");
 	return ret;
 }
 
 world_populator&
-world_populator::populateScriptEngine(const world_server_context& ctx)
+world_populator::populate_script_engine(const world_server_context& ctx)
 {
-	_scriptEngine = std::make_unique<script_engine>();
-	registerCommonLuaEngine(ctx.getPathToLuaInitEngine());
-	generateSpawningPoints(ctx.getSpawningConfigPath(), ctx.getPathLuaBase());
+	_script_engine = std::make_unique<script_engine>();
+	registerCommonLuaEngine(ctx.get_path_to_lua_engine());
+	generateSpawningPoints(ctx.get_spawning_config_path(), ctx.get_path_lua_base());
 	return *this;
 }
 
 world_populator&
-world_populator::populateMap(const world_server_context& ctx)
+world_populator::populate_map(const world_server_context& ctx)
 {
 	// todo : define map and implement it
 	return *this;
 }
 
 void
-world_populator::generateSpawningPoints(const std::string& spawningPointConfigPath, const std::string& basePath)
+world_populator::generateSpawningPoints(const std::string& spawning_point_config_path, const std::string& base_path)
 {
-	std::ifstream i(spawningPointConfigPath);
+	std::ifstream i(spawning_point_config_path);
 	nlohmann::json jsonConfig;
 	i >> jsonConfig;
 
 	auto wsJson = jsonConfig["spawning_points"];
 	unsigned index = 0;
 
-	_scriptEngine->_spawningPoints.resize(wsJson.size());
+	_script_engine->_spawningPoints.resize(wsJson.size());
 	for (auto &[key, value] : wsJson.items()) {
 		const std::string keyCml = value["key_zone"].get<std::string>();
 		const std::string spNamespace = getSPNamespaceFromKey(keyCml);
 
-		_scriptEngine->_spawningPoints[index].spawning_interval = std::chrono::seconds(value["spawning_interval"].get<uint>());
-		_scriptEngine->_spawningPoints[index].id_spawning_point = spNamespace;
-		_scriptEngine->_spawningPoints[index].display_key = value["display_key"].get<std::string>();
+		_script_engine->_spawningPoints[index].spawning_interval = std::chrono::seconds(value["spawning_interval"].get<uint>());
+		_script_engine->_spawningPoints[index].id_spawning_point = spNamespace;
+		_script_engine->_spawningPoints[index].display_key = value["display_key"].get<std::string>();
 
 		try {
-			_scriptEngine->_lua.safe_script_file(getPathFromKey(basePath, keyCml));
-			auto maxSpawn = _scriptEngine->_lua[spNamespace]["numbers"];
-			auto visibilityDistance = _scriptEngine->_lua[spNamespace]["visibility_distance"];
-			auto centerPos_y = _scriptEngine->_lua[spNamespace]["center_point"]["y"];
-			auto centerPos_x = _scriptEngine->_lua[spNamespace]["center_point"]["x"];
+			_script_engine->_lua.safe_script_file(getPathFromKey(base_path, keyCml));
+			auto maxSpawn = _script_engine->_lua[spNamespace]["numbers"];
+			auto visibilityDistance = _script_engine->_lua[spNamespace]["visibility_distance"];
+			auto centerPos_y = _script_engine->_lua[spNamespace]["center_point"]["y"];
+			auto centerPos_x = _script_engine->_lua[spNamespace]["center_point"]["x"];
 
 			if (!visibilityDistance.valid()) {
 				throw std::runtime_error("'visibility_distance' is not properly set'");
@@ -139,17 +139,17 @@ world_populator::generateSpawningPoints(const std::string& spawningPointConfigPa
 			if (!centerPos_x.valid(), !centerPos_y.valid()) {
 				throw std::runtime_error("'center_pos' is not properly set");
 			}
-			_scriptEngine->_spawningPoints[index].center_spawning_point = pos{
+			_script_engine->_spawningPoints[index].center_spawning_point = pos{
 					static_cast<double>(centerPos_x),
 					static_cast<double>(centerPos_y)
 			};
-			_scriptEngine->_spawningPoints[index].max_spawned = static_cast<uint>(maxSpawn);
-			_scriptEngine->_spawningPoints[index].distance_notification = static_cast<uint>(visibilityDistance);
+			_script_engine->_spawningPoints[index].max_spawned = static_cast<uint>(maxSpawn);
+			_script_engine->_spawningPoints[index].distance_notification = static_cast<uint>(visibilityDistance);
 
 		}
 		catch (const std::exception& e) {
 			SPDLOG_ERROR("[INIT] An error occurred while instantiating SpawningPoints '{}' : {}",
-					_scriptEngine->_spawningPoints[index].display_key, e.what());
+					_script_engine->_spawningPoints[index].display_key, e.what());
 		}
 		++index;
 	}
@@ -158,46 +158,46 @@ world_populator::generateSpawningPoints(const std::string& spawningPointConfigPa
 void
 world_populator::registerCommonLuaEngine(const std::string& pathToLuaInitFile)
 {
-	_scriptEngine->_lua.open_libraries(sol::lib::base, sol::lib::package);
+	_script_engine->_lua.open_libraries(sol::lib::base, sol::lib::package);
 
 	try {
-		_scriptEngine->_lua.safe_script_file(pathToLuaInitFile);
+		_script_engine->_lua.safe_script_file(pathToLuaInitFile);
 	}
 	catch (const std::exception& e) {
 		SPDLOG_ERROR("Error while initiating LUA engine : {} ", e.what());
 	}
 
-	auto position = _scriptEngine->_lua.new_usertype<pos>("Pos");
+	auto position = _script_engine->_lua.new_usertype<pos>("Pos");
 	position["x"] = &pos::x;
 	position["y"] = &pos::y;
 
-	auto characterInfo = _scriptEngine->_lua.new_usertype<character_info>("CharacterInfo");
+	auto characterInfo = _script_engine->_lua.new_usertype<character_info>("CharacterInfo");
 	characterInfo["pos"] = &character_info::position;
 	characterInfo["velocity"] = &character_info::velocity;
 	characterInfo["angle"] = &character_info::angle;
 
-	_scriptEngine->_lua["retrieveAngle"] = [](double x, double y, double destinationX, double destinationY) {
+	_script_engine->_lua["retrieveAngle"] = [](double x, double y, double destinationX, double destinationY) {
 		return std::atan((y - destinationY) / (x - destinationX));
 	};
 }
 
 const std::vector<spawning_point>&
-world_populator::getSpawningPoints() const
+world_populator::get_spawning_point() const
 {
-	return _scriptEngine->_spawningPoints;
+	return _script_engine->_spawningPoints;
 }
 
 world_populator&
-world_populator::setConnectionString(std::string connectionString)
+world_populator::set_connection_string(std::string connectionString)
 {
-	_connectionString = std::move(connectionString);
+	_connection_string = std::move(connectionString);
 	return *this;
 }
 
 world_populator&
-world_populator::setIntervalMovement(std::chrono::system_clock::duration intervalMovement)
+world_populator::set_interval_movement(std::chrono::system_clock::duration interval_movement)
 {
-	_intervalMovement = intervalMovement;
+	_interval_movement = interval_movement;
 	return *this;
 }
 

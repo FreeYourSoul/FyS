@@ -28,14 +28,14 @@ namespace fys::common {
 void
 connection_handler::setupConnectionManager(const std::string& dispatcherConnectionStr) noexcept
 {
-	_dealerConnectionToDispatcher.connect(dispatcherConnectionStr);
+	_dealer_connection_to_dispatcher.connect(dispatcherConnectionStr);
 }
 
 void
 connection_handler::sendMessageToDispatcher(zmq::multipart_t&& msg) noexcept
 {
-	if (_dealerConnectionToDispatcher.connected()) {
-		msg.send(_dealerConnectionToDispatcher);
+	if (_dealer_connection_to_dispatcher.connected()) {
+		msg.send(_dealer_connection_to_dispatcher);
 	}
 }
 

@@ -49,16 +49,16 @@ else ()
 endif ()
 
 set(COMMON_SRCS
-        ${CMAKE_CURRENT_LIST_DIR}/src/RandomGenerator.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/src/random_generator.cpp
         ${CMAKE_CURRENT_LIST_DIR}/src/service_context_base.cpp
         ${CMAKE_CURRENT_LIST_DIR}/src/connection_handler.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/connection_handler.hh
-        ${CMAKE_CURRENT_LIST_DIR}/include/RandomGenerator.hh
-        ${CMAKE_CURRENT_LIST_DIR}/include/SizedQueue.hh
-        ${CMAKE_CURRENT_LIST_DIR}/include/BoundaryMap.hh
+        ${CMAKE_CURRENT_LIST_DIR}/include/random_generator.hh
+        ${CMAKE_CURRENT_LIST_DIR}/include/sized_queue.hh
+        ${CMAKE_CURRENT_LIST_DIR}/include/boundary_map.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/service_context_base.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/algorithm/algorithm.hh
-        ${CMAKE_CURRENT_LIST_DIR}/include/Key.hh)
+        ${CMAKE_CURRENT_LIST_DIR}/include/key.hh)
 set(COMMON_INCLUDES_DIR
         ${CMAKE_CURRENT_LIST_DIR}/include
         ${CMAKE_CURRENT_LIST_DIR}/flatbuffer/includes)

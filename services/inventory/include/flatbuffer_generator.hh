@@ -28,7 +28,7 @@
 
 // forward declarations
 namespace fys::inv {
-class ExchangeRoom;
+class exchange_room;
 }
 // end forward declarations
 
@@ -38,19 +38,19 @@ class flatbuffer_generator {
 
 public:
 	[[nodiscard]] std::pair<void*, uint>
-	generate_initiate_exchange_response(const ExchangeRoom& room);
+	generate_initiate_exchange_response(const exchange_room& room);
 
 	[[nodiscard]] std::pair<void*, uint>
-	generateLockRoomTransactionResponse(const ExchangeRoom& room);
+	generate_lock_room_transaction_response(const exchange_room& room);
 
 	[[nodiscard]] std::pair<void*, uint>
-	generateRemoveItemFromRoomResponse(const ExchangeRoom& room);
+	generate_remove_item_from_room_response(const exchange_room& room);
 
 	[[nodiscard]] std::pair<void*, uint>
-	generateAddItemToRoomResponse(const ExchangeRoom& room);
+	generate_add_item_to_room_response(const exchange_room& room);
 
 	[[nodiscard]] std::pair<void*, uint>
-	generateTerminateTransactionResponse(const ExchangeRoom& room);
+	generate_terminate_transaction_response(const exchange_room& room);
 
 private:
 	flatbuffers::FlatBufferBuilder _fbb;

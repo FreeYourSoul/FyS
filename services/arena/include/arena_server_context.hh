@@ -1,0 +1,155 @@
+// MIT License
+//
+// Copyright (c) 2019 Quentin Balland
+// Repository : https://github.com/FreeYourSoul/FyS
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+//         of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+//         to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//         copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+//         copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//         AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+
+#ifndef FYS_ARENASERVERCONTEXT_HH
+#define FYS_ARENASERVERCONTEXT_HH
+
+#include <array>
+#include <nlohmann/json.hpp>
+#include <service_context_base.hh>
+
+namespace fys::arena {
+
+struct encounter_context {
+	using rng_range = std::pair<uint, uint>;
+	using chance_array = std::array<uint, 3>;
+
+	struct encounter_desc {
+		[[nodiscard]] bool
+		operator!=(const encounter_desc& other) const
+		{
+			return std::make_tuple(key, maxEncountering, chance, levelRange) !=
+					std::make_tuple(other.key, other.maxEncountering, other.chance, other.levelRange);
+		}
+
+		//! key of the encounter to find it back via the cache
+		std::string key;
+		//! Max number of this type of monster you can encounter at once
+		uint maxEncountering;
+		//! percentage of chance to encounter this monster out of the 3 different difficulties
+		chance_array chance;
+		//! Range of level the monster is when encountered
+		rng_range levelRange;
+
+	};
+
+	struct reward_encounter_desc {
+		//! range of items than can be dropped for an encounter out of the 3 different difficulties
+		std::array<rng_range, 3> rangeDrop;
+		//! map of items key over the chance of drop out of the 3 different difficulties
+		std::map<std::string, chance_array> item_on_chance_range;
+	};
+
+	/**
+	 * Verify if the given zone is registered in the context
+	 * @param wsId zone to check
+	 * @return true if the zone is registered, false otherwise
+	 */
+	[[nodiscard]] bool
+	zoneRegistered(const std::string& wsId) const noexcept { return _contendersPerZone.find(wsId) != _contendersPerZone.cend(); }
+
+	//! range of number of monster findable per zone
+	std::map<std::string, std::array<rng_range, 3>> _rangeEncounterPerZone;
+	//! contender findable per zone
+	std::map<std::string, std::vector<encounter_desc>> _contendersPerZone;
+	//! reward description per contender
+	std::map<std::string, reward_encounter_desc> _rewardDescPerContender;
+};
+
+class arena_server_context : public fys::common::service_context_base {
+
+	//! Minimum of number of battle in parallels that can be processed by the Arena Server
+	static constexpr unsigned MINIMUM_BATTLE_THRESHOLD = 3;
+
+public:
+	arena_server_context(int ac, const char* const* av);
+
+	[[nodiscard]] std::string
+	to_string() const noexcept;
+
+	[[nodiscard]] std::string
+	get_player_binding_string() const noexcept;
+
+	[[nodiscard]] const std::string&
+	get_server_code() const noexcept { return _code; }
+
+	[[nodiscard]] const encounter_context&
+	get_encounter_context() const noexcept { return _encounter_context; }
+
+	[[nodiscard]] const std::string&
+	getPathLocalStorageCache() const noexcept { return _path_local_storage_cache; }
+
+	[[nodiscard]] const std::string&
+	get_path_source_cache() const noexcept { return _path_source_cache; }
+
+	[[nodiscard]] const std::string&
+	get_db_host() const noexcept { return _db_host; }
+
+	[[nodiscard]] uint
+	get_db_port() const noexcept { return _db_port; }
+
+	[[nodiscard]] uint
+	get_battle_threshold() const noexcept { return _battle_threshold; }
+
+private:
+	[[nodiscard]] bool
+	validate_encounter_context() const;
+
+	[[nodiscard]] bool
+	validate_reward_context() const;
+
+	[[nodiscard]] encounter_context::reward_encounter_desc
+	get_reward_desc_from_json(const nlohmann::json& reward_desc) const;
+
+	void parse_arena_config_file(const nlohmann::json& config_content);
+	void parse_zone_config_file(const nlohmann::json& config_content);
+
+private:
+
+	//! Code of the current ArenaServerService
+	std::string _code;
+
+	//! Path representing the local temporary storage created and maintained by Cml
+	std::string _path_local_storage_cache;
+	//! Path of the reference data for CmlCopy
+	std::string _path_source_cache;
+
+	//! Database hostname
+	std::string _db_host;
+	//! Database port number
+	uint _db_port = 3306;
+
+	//! Database hostname
+	uint _player_connection_port;
+
+	//! Maximum number of concurrent battle handled by the arena service
+	uint _battle_threshold = MINIMUM_BATTLE_THRESHOLD;
+
+	//! Context part specific to encounter handled by this arena server
+	encounter_context _encounter_context;
+};
+
+}
+
+#endif // !FYS_ARENASERVERCONTEXT_HH

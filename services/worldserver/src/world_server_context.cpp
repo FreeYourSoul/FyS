@@ -36,44 +36,44 @@ world_server_context::world_server_context(int ac, const char* const* av)
 		common::service_context_base(ac, av)
 {
 	std::ifstream i(_config_file);
-	json jsonConfig;
-	i >> jsonConfig;
-	initWsContextWithJson(jsonConfig);
+	json json_config;
+	i >> json_config;
+	initWsContextWithJson(json_config);
 }
 
 void
 world_server_context::initWsContextWithJson(json& json)
 {
-	auto wsJson = json["worldServer"];
-	auto confJson = wsJson["conf"];
-	auto overlapsJson = confJson["overlapServer"];
+	auto ws_json = json["worldServer"];
+	auto conf_json = ws_json["conf"];
+	auto overlap_json = conf_json["overlapServer"];
 
-	wsJson["code"].get_to(_serverCode);
-	wsJson["connection_port"].get_to(_portPlayerConnection);
-	wsJson["TMX_Map"].get_to(_tmxMapPath);
-	wsJson["spawning_config"].get_to(_spawningConfigPath);
-	wsJson["path_lua_init_engine"].get_to(_pathToLuaInitEngine);
-	wsJson["script_storage_cache"].get_to(_pathToLocalStorage);
-	wsJson["path_lua_base"].get_to(_pathLuaBase);
-	_serverXBoundaries = {confJson["begin_x"].get<double>(), confJson["end_x"].get<double>()};
-	_serverYBoundaries = {confJson["begin_y"].get<double>(), confJson["end_y"].get<double>()};
-	for (auto &[key, value] : overlapsJson.items()) {
+	ws_json["code"].get_to(_server_code);
+	ws_json["connection_port"].get_to(_port_player_connection);
+	ws_json["TMX_Map"].get_to(_tmx_map_path);
+	ws_json["spawning_config"].get_to(_spawning_config_path);
+	ws_json["path_lua_init_engine"].get_to(_path_to_lua_init_engine);
+	ws_json["script_storage_cache"].get_to(_path_to_local_storage);
+	ws_json["path_lua_base"].get_to(_path_lua_base);
+	_server_x_boundaries = {conf_json["begin_x"].get<double>(), conf_json["end_x"].get<double>()};
+	_server_y_boundaries = {conf_json["begin_y"].get<double>(), conf_json["end_y"].get<double>()};
+	for (auto &[key, value] : overlap_json.items()) {
 		proximity_server proximityServer;
 		proximityServer.code = value["code"].get<std::string>();
 
-		if (auto proxiXJson = value["overlap_x"]; !proxiXJson.is_null()) {
+		if (auto proximity_x_json = value["overlap_x"]; !proximity_x_json.is_null()) {
 			proximityServer.x_axis_requirement = {
-					proxiXJson["value"].get<double>(),
-					proxiXJson["condition"].get<std::string>().find(">") != std::string::npos
+					proximity_x_json["value"].get<double>(),
+					proximity_x_json["condition"].get<std::string>().find(">") != std::string::npos
 			};
 		}
-		if (auto proxiYJson = value["overlap_y"]; !proxiYJson.is_null()) {
+		if (auto proximity_y_json = value["overlap_y"]; !proximity_y_json.is_null()) {
 			proximityServer.y_axis_requirement = {
-					proxiYJson["value"].get<double>(),
-					proxiYJson["condition"].get<std::string>().find(">") != std::string::npos
+					proximity_y_json["value"].get<double>(),
+					proximity_y_json["condition"].get<std::string>().find(">") != std::string::npos
 			};
 		}
-		_serverProximity.emplace_back(std::move(proximityServer));
+		_server_proximity.emplace_back(std::move(proximityServer));
 	}
 }
 
@@ -84,18 +84,18 @@ world_server_context::to_string() const noexcept
 	str = "\n*************************\n";
 	str += "[INIT] Service " + _name + " context VERSION: " + _version + "\n";
 	str += "[INIT] Config file used: " + _config_file + "\n\n";
-	str += "[INIT] World Server code: " + _serverCode + "\n";
-	str += "[INIT] Local CML Storage : " + _pathToLocalStorage + "\n";
-	str += "[INIT] Path to LUA Engine initiator : " + _pathToLuaInitEngine + "\n";
-	str += "[INIT] TMX Map path: " + _tmxMapPath + "\n"; // Will be changed with the new formatting file homemade
-	str += "[INIT] Player connection string: " + getPlayerConnectionString() + "\n";
+	str += "[INIT] World Server code: " + _server_code + "\n";
+	str += "[INIT] Local CML Storage : " + _path_to_local_storage + "\n";
+	str += "[INIT] Path to LUA Engine initiator : " + _path_to_lua_init_engine + "\n";
+	str += "[INIT] TMX Map path: " + _tmx_map_path + "\n"; // Will be changed with the new formatting file homemade
+	str += "[INIT] Player connection string: " + get_player_connection_str() + "\n";
 	str += "[INIT] Dispatcher(AuthServer) subscribing port: " + std::to_string(_dispatcherData.subscriber_port) + "\n";
 	str += "[INIT] Dispatcher(AuthServer) connected port: " + std::to_string(_dispatcherData.port) + "\n";
 	str += "[INIT] Dispatcher(AuthServer) connected host: " + _dispatcherData.address + "\n";
 	str += "[INIT] Dispatcher(AuthServer) Subscriber connection string: " + get_dispatcher_sub_connection_str() + "\n";
 	str += "[INIT] Dispatcher(AuthServer) connection string: " + get_dispatcher_connection_str() + "\n";
 
-	for (const auto& prox : _serverProximity) {
+	for (const auto& prox : _server_proximity) {
 		str += "[INIT] element:\n       ";
 		str += "code: " + prox.code + "\n";
 		if (prox.x_axis_requirement) {
@@ -124,9 +124,9 @@ world_server_context::get_dispatcher_sub_connection_str() const noexcept
 }
 
 std::string
-world_server_context::getPlayerConnectionString() const noexcept
+world_server_context::get_player_connection_str() const noexcept
 {
-	return std::string("tcp://*:").append(std::to_string(_portPlayerConnection));
+	return std::string("tcp://*:").append(std::to_string(_port_player_connection));
 }
 
 

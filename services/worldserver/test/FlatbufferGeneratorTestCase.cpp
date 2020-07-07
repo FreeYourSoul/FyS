@@ -33,7 +33,7 @@ using namespace fys::ws;
 namespace {
 template<typename T>
 [[nodiscard]] bool
-verifyBuffer(const void* fbBuffer, uint size)
+verify_buffer(const void* fbBuffer, uint size)
 {
 	auto v = flatbuffers::Verifier(static_cast<const uint8_t*>(fbBuffer), size);
 	return v.VerifyBuffer<T>();
@@ -50,7 +50,7 @@ TEST_CASE("ws::FlatbufferGeneratorTestCase", "[service][world][util]")
 
 		REQUIRE(nullptr != data);
 		REQUIRE(0 < size);
-		REQUIRE(verifyBuffer<fys::fb::world::ResponseFrame>(data, size));
+		REQUIRE(verify_buffer<fys::fb::world::ResponseFrame>(data, size));
 
 		auto* binary = fys::fb::world::GetResponseFrame(data);
 

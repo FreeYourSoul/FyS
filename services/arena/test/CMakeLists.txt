@@ -30,42 +30,42 @@ addFSeamTests(
         FILES_AS_SOURCE #source tested
         ${COMMON_SRCS}
         ${CMAKE_CURRENT_LIST_DIR}/../include/util/ChaiUtility.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/PriorityOrderList.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/HexagonSide.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/FightingPitAnnouncer.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/FightingPitLayout.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/SideBattle.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/FightingPit.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/contender/FightingContender.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/contender/PitContenders.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/contender/ContenderScripting.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/team/AllyPartyTeams.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/team/TeamMember.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/team/PartyTeam.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/network/WorkerService.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/ArenaServerContext.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/ChaiRegister.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/priority_order_list.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/hexagon_side.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/fighting_pit_announcer.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/fighting_pit_layout.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/side_battle.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/fighting_pit.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/contender/fighting_contender.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/contender/pit_contenders.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/contender/contender_scripting.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/team/ally_party_teams.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/team/team_member.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/fightingPit/team/party_team.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/network/worker_service.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/arena_server_context.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../src/chai_register.cpp
         ${CMAKE_CURRENT_LIST_DIR}/../src/flatbuffer_generator.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/HistoryManager.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../include/HistoryManager.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../src/history_manager.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/../include/history_manager.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/flatbuffer_generator.hh
         ${CMAKE_CURRENT_LIST_DIR}/../include/util/FbUtility.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../include/ChaiRegister.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/team/PartyTeam.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/team/TeamMember.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/Rewards.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/team/AllyPartyTeams.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/contender/ContenderScripting.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/contender/PitContenders.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/contender/FightingContender.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/FightingPit.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/SideBattle.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/FightingPitLayout.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/FightingPitAnnouncer.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/PriorityOrderList.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/HexagonSide.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../include/network/WorkerService.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../include/ArenaServerContext.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/chai_register.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/team/party_team.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/team/team_member.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/rewards.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/team/ally_party_teams.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/contender/contender_scripting.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/contender/pit_contenders.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/contender/fighting_contender.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/fighting_pit.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/side_battle.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/fighting_pit_layout.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/fighting_pit_announcer.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/priority_order_list.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/fightingPit/hexagon_side.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/network/worker_service.hh
+        ${CMAKE_CURRENT_LIST_DIR}/../include/arena_server_context.hh
 
         FOLDER_INCLUDES
         ${CMAKE_CURRENT_SOURCE_DIR}/../include
@@ -83,7 +83,7 @@ addFSeamTests(
 
         TO_MOCK
         ${CMAKE_CURRENT_SOURCE_DIR}/../../common/include/connection_handler.hh
-        ${CMAKE_CURRENT_SOURCE_DIR}/../../common/include/RandomGenerator.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../../common/include/random_generator.hh
 )
 
 addFSeamTests(
@@ -92,34 +92,34 @@ addFSeamTests(
         FILES_AS_SOURCE #source tested
         ${COMMON_SRCS}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/util/ChaiUtility.hh
-        ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/contender/ContenderScripting.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/contender/FightingContender.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/contender/PitContenders.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/team/AllyPartyTeams.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/team/PartyTeam.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/team/TeamMember.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/SideBattle.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/HexagonSide.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/FightingPitLayout.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/PriorityOrderList.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/../src/ChaiRegister.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/contender/contender_scripting.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/contender/fighting_contender.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/contender/pit_contenders.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/team/ally_party_teams.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/team/party_team.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/team/team_member.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/side_battle.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/hexagon_side.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/fighting_pit_layout.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/priority_order_list.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/chai_register.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/flatbuffer_generator.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/../src/HistoryManager.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/../include/HistoryManager.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/history_manager.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/history_manager.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/flatbuffer_generator.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/util/FbUtility.hh
-        ${CMAKE_CURRENT_SOURCE_DIR}/../include/ChaiRegister.hh
-        ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/Rewards.hh
-        ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/SideBattle.hh
-        ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/PriorityOrderList.hh
-        ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/FightingPitLayout.hh
-        ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/contender/ContenderScripting.hh
-        ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/contender/FightingContender.hh
-        ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/contender/PitContenders.hh
-        ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/team/AllyPartyTeams.hh
-        ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/team/PartyTeam.hh
-        ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/team/TeamMember.hh
-        ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/HexagonSide.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/chai_register.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/rewards.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/side_battle.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/priority_order_list.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/fighting_pit_layout.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/contender/contender_scripting.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/contender/fighting_contender.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/contender/pit_contenders.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/team/ally_party_teams.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/team/party_team.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/team/team_member.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/fightingPit/hexagon_side.hh
 
         FOLDER_INCLUDES
         ${CMAKE_CURRENT_SOURCE_DIR}/../include

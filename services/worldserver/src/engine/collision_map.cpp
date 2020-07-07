@@ -51,11 +51,11 @@ getY(double y, unsigned tileSizeY)
 // CollisionMap
 collision_map::collision_map(const world_server_context& ctx)
 		:
-		_boundary_x(ctx.getServerXBoundaries()),
-		_boundary_y(ctx.getServerYBoundaries()),
-		_server_proximity(ctx.getServerProximity())
+		_boundary_x(ctx.get_server_x_boundaries()),
+		_boundary_y(ctx.get_server_y_boundaries()),
+		_server_proximity(ctx.get_server_proximity())
 {
-	build_map_from_tmx(ctx.getTMXMapPath());
+	build_map_from_tmx(ctx.get_tmx_map_path());
 }
 
 void

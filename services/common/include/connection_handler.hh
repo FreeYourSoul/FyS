@@ -36,12 +36,12 @@ class connection_handler {
 
 public:
 	explicit connection_handler(
-			zmq::socket_type typeSocket = zmq::socket_type::dealer,
-			int threadNumber = 1) noexcept
+			zmq::socket_type type_socket = zmq::socket_type::dealer,
+			int thread_number = 1) noexcept
 			:
-			_numberMessage(typeSocket == zmq::socket_type::dealer ? 2 : 3),
-			_zmqContext(threadNumber),
-			_dealerConnectionToDispatcher(_zmqContext, typeSocket) { }
+			_number_message(type_socket == zmq::socket_type::dealer ? 2 : 3),
+			_zmq_context(thread_number),
+			_dealer_connection_to_dispatcher(_zmq_context, type_socket) { }
 
 	/**
 	 * @brief Connect to dispatcher in order to receive requests
@@ -63,29 +63,29 @@ public:
 	{
 		//  Initialize poll set
 		zmq::pollitem_t items[] = {
-				{_dealerConnectionToDispatcher, 0, ZMQ_POLLIN, 0}
+				{_dealer_connection_to_dispatcher, 0, ZMQ_POLLIN, 0}
 		};
 		zmq::poll(&items[0], 1, 100);
 		if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
 			zmq::multipart_t msg;
-			if (!msg.recv(_dealerConnectionToDispatcher, ZMQ_NOBLOCK) || msg.size() != _numberMessage) {
+			if (!msg.recv(_dealer_connection_to_dispatcher, ZMQ_NOBLOCK) || msg.size() != _number_message) {
 				SPDLOG_ERROR("Error while reading on the listener socket");
 			}
 			else {
 				// first frame is idt of the router of the dispatcher
-				auto identityForDispatcher = msg.pop();
+				auto identity_for_dispatcher = msg.pop();
 				// second frame is content
-				std::forward<Handler>(handler)(std::move(identityForDispatcher), msg.pop());
+				std::forward<Handler>(handler)(std::move(identity_for_dispatcher), msg.pop());
 			}
 		}
 	}
 
 private:
-	const uint _numberMessage;
-	zmq::context_t _zmqContext;
+	const uint _number_message;
+	zmq::context_t _zmq_context;
 
 	// write to reply (forwarded to the world server)
-	zmq::socket_t _dealerConnectionToDispatcher;
+	zmq::socket_t _dealer_connection_to_dispatcher;
 
 };
 

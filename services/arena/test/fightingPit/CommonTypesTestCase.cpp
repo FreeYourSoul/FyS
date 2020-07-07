@@ -22,14 +22,14 @@
 // SOFTWARE.
 
 #include <catch2/catch.hpp>
-#include <fightingPit/data/CommonTypes.hh>
+#include <fightingPit/data/common_types.hh>
 
 TEST_CASE("CommonTypesTestCase getActionNameFromKey test", "[service][arena]")
 {
-	REQUIRE("popo" == fys::arena::data::getActionNameFromKey("tete:tete:www:oo:popo.chai"));
-	REQUIRE("popo" == fys::arena::data::getActionNameFromKey("tete:tete:www:oo:popo"));
-	REQUIRE("popo" == fys::arena::data::getActionNameFromKey("popo.chai"));
-	REQUIRE("popo" == fys::arena::data::getActionNameFromKey("popo"));
+	REQUIRE("popo" == fys::arena::data::get_action_name_from_key("tete:tete:www:oo:popo.chai"));
+	REQUIRE("popo" == fys::arena::data::get_action_name_from_key("tete:tete:www:oo:popo"));
+	REQUIRE("popo" == fys::arena::data::get_action_name_from_key("popo.chai"));
+	REQUIRE("popo" == fys::arena::data::get_action_name_from_key("popo"));
 
 } // End TestCase : getActionNameFromKey test
 
@@ -44,18 +44,18 @@ TEST_CASE("CommonTypesTestCase getAlternateNameFromKey test", "[service][arena]"
 
 TEST_CASE("CommonTypesTestCase", "[service][arena]")
 {
-	std::vector<fys::arena::data::Alteration> alterations;
+	std::vector<fys::arena::data::alteration> alterations;
 
 	fys::arena::data::mergeAlterations(alterations, {
-			fys::arena::data::Alteration("burned", 1, 5, [](fys::arena::data::Status&, uint, uint) { return true; }),
-			fys::arena::data::Alteration("burned", 1, 2, [](fys::arena::data::Status&, uint, uint) { return true; }),
-			fys::arena::data::Alteration("burned", 1, 3, [](fys::arena::data::Status&, uint, uint) { return true; }),
-			fys::arena::data::Alteration("frozen", 1, 1, [](fys::arena::data::Status&, uint, uint) { return true; }),
-			fys::arena::data::Alteration("frozen", 1, 9, [](fys::arena::data::Status&, uint, uint) { return true; }),
-			fys::arena::data::Alteration("frozen", 1, 8, [](fys::arena::data::Status&, uint, uint) { return true; }),
-			fys::arena::data::Alteration("paralyzed", 1, 2, [](fys::arena::data::Status&, uint, uint) { return true; }),
-			fys::arena::data::Alteration("paralyzed", 1, 42, [](fys::arena::data::Status&, uint, uint) { return true; }),
-			fys::arena::data::Alteration("paralyzed", 1, 1, [](fys::arena::data::Status&, uint, uint) { return true; })
+			fys::arena::data::alteration("burned", 1, 5, [](fys::arena::data::status&, uint, uint) { return true; }),
+			fys::arena::data::alteration("burned", 1, 2, [](fys::arena::data::status&, uint, uint) { return true; }),
+			fys::arena::data::alteration("burned", 1, 3, [](fys::arena::data::status&, uint, uint) { return true; }),
+			fys::arena::data::alteration("frozen", 1, 1, [](fys::arena::data::status&, uint, uint) { return true; }),
+			fys::arena::data::alteration("frozen", 1, 9, [](fys::arena::data::status&, uint, uint) { return true; }),
+			fys::arena::data::alteration("frozen", 1, 8, [](fys::arena::data::status&, uint, uint) { return true; }),
+			fys::arena::data::alteration("paralyzed", 1, 2, [](fys::arena::data::status&, uint, uint) { return true; }),
+			fys::arena::data::alteration("paralyzed", 1, 42, [](fys::arena::data::status&, uint, uint) { return true; }),
+			fys::arena::data::alteration("paralyzed", 1, 1, [](fys::arena::data::status&, uint, uint) { return true; })
 	}, true);
 
 	REQUIRE(3 == alterations.size());

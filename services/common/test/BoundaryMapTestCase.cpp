@@ -23,12 +23,12 @@
 
 #include <catch2/catch.hpp>
 #include <string>
-#include <BoundaryMap.hh>
+#include <boundary_map.hh>
 
 TEST_CASE ("BoundaryMapTestCase", "[common][util]")
 {
 
-	fys::BoundaryMap<std::string> bmap;
+	fys::boundary_map<std::string> bmap;
 
 	SECTION("test insert") {
 		bmap.insert(1, "123456");

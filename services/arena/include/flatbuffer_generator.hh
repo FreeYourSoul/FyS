@@ -36,15 +36,15 @@ struct Cosmetics;
 struct Reward;
 }
 namespace fys::arena {
-class AllyPartyTeams;
-class PartyTeam;
-class TeamMember;
-class FightingContender;
-class FightingPit;
-struct Rewards;
+class ally_party_teams;
+class party_team;
+class team_member;
+class fighting_contender;
+class fighting_pit;
+struct rewards;
 
-using FightingContenderSPtr = std::shared_ptr<FightingContender>;
-using TeamMemberSPtr = std::shared_ptr<TeamMember>;
+using fighting_contender_sptr = std::shared_ptr<fighting_contender>;
+using team_member_sptr = std::shared_ptr<team_member>;
 
 }
 
@@ -75,18 +75,18 @@ public:
 	generateErrorSaturated(const std::string& arenaCode);
 
 	[[nodiscard]] std::pair<void*, uint>
-	generateFightingPitState(const fys::arena::FightingPit& fp);
+	generateFightingPitState(const fys::arena::fighting_pit& fp);
 
 	[[nodiscard]] std::pair<void*, uint>
-	generatePartyTeamStatus(const fys::arena::PartyTeam& partyTeam);
+	generatePartyTeamStatus(const fys::arena::party_team& partyTeam);
 
 	[[nodiscard]] std::pair<void*, uint>
-	generateEndBattle(bool win, const Rewards& rewards);
+	generateEndBattle(bool win, const rewards& rewards);
 
 	[[nodiscard]] std::pair<void*, uint>
 	generateActionNotification(const std::string& actionKey,
-			const std::vector<FightingContenderSPtr>& contenderTargets,
-			const std::vector<TeamMemberSPtr>& allyTargets);
+			const std::vector<fighting_contender_sptr>& contenderTargets,
+			const std::vector<team_member_sptr>& allyTargets);
 
 //	[[nodiscard]] std::pair<void*, uint>
 //	generateCosmetics(const fys::arena::PartyTeam& partyTeam);
@@ -96,16 +96,16 @@ public:
 
 private:
 	[[nodiscard]] inline std::vector<flatbuffers::Offset<fb::arn::PartyTeamStatus>>
-	generatePartyTeamVecStatusOffset(const AllyPartyTeams& apt);
+	generatePartyTeamVecStatusOffset(const ally_party_teams& apt);
 
 	[[nodiscard]] inline std::vector<flatbuffers::Offset<fb::arn::MemberStatus>>
-	generateTeamMemberVecStatusOffset(const std::vector<TeamMemberSPtr>& members);
+	generateTeamMemberVecStatusOffset(const std::vector<team_member_sptr>& members);
 
 	[[nodiscard]] inline std::vector<flatbuffers::Offset<fys::fb::arn::MemberStatus>>
-	generateContenderVecStatusOffset(const std::vector<FightingContenderSPtr>& contenders);
+	generateContenderVecStatusOffset(const std::vector<fighting_contender_sptr>& contenders);
 
 	[[nodiscard]] inline std::vector<flatbuffers::Offset<fb::arn::Reward>>
-	generateRewardsOffset(const Rewards& rewards);
+	generateRewardsOffset(const rewards& rewards);
 
 //	[[nodiscard]] inline flatbuffers::Offset<fys::fb::arn::Cosmetics>
 //	generateCosmeticsOffset(const fys::arena::PartyTeam&);

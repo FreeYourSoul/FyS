@@ -22,12 +22,12 @@
 // SOFTWARE.
 
 #include <catch2/catch.hpp>
-#include <SizedQueue.hh>
+#include <sized_queue.hh>
 
 TEST_CASE("AlgorithmTestCase SizedQueue testing", "[common]")
 {
 
-	fys::common::SizedQueue<std::string, 7> strQueue;
+	fys::common::sized_queue<std::string, 7> strQueue;
 
 	strQueue.push("1");
 	strQueue.push("2");
@@ -89,7 +89,7 @@ TEST_CASE("AlgorithmTestCase SizedQueue testing", "[common]")
 	}
 
 	SECTION("Mixte") {
-		fys::common::SizedQueue<std::string> strQ;
+		fys::common::sized_queue<std::string> strQ;
 
 		strQ.push("1");
 		strQ.push("2");

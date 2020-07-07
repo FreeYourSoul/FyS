@@ -114,16 +114,16 @@ compose_most_suitable(InputIt first, InputIt last, RetrieverLower&& retriever, A
  * @tparam Accessor accessor function used in order to retrieve a type R of the container from a type to check T
  * This function has to take a to check type as parameter (type T) and return a type checked type (R)
  *
- * @param toCheck vector to check if the content is contained in another vector
+ * @param to_check vector to check if the content is contained in another vector
  * @param container vector to check against
  * @param accessor take the accessor function
  * @return true if all the element from toCheck are in container following the accessor, false otherwise
  */
 template<typename T, typename R, typename Accessor>
 [[nodiscard]] bool
-all_in(const std::vector<T>& toCheck, const std::vector<R>& container, Accessor&& accessor)
+all_in(const std::vector<T>& to_check, const std::vector<R>& container, Accessor&& accessor)
 {
-	return std::all_of(toCheck.cbegin(), toCheck.cend(), [container, &accessor](const T& lhs) {
+	return std::all_of(to_check.cbegin(), to_check.cend(), [container, &accessor](const T& lhs) {
 		return std::find_if(container.cbegin(), container.cend(),
 				[&lhs, &accessor](const auto& v) { return lhs == accessor(v); }) != container.cend();
 	});
@@ -131,9 +131,9 @@ all_in(const std::vector<T>& toCheck, const std::vector<R>& container, Accessor&
 
 template<typename T>
 [[nodiscard]] bool
-all_in(const std::vector<T>& toCheck, const std::vector<T>& container)
+all_in(const std::vector<T>& to_check, const std::vector<T>& container)
 {
-	return std::all_of(toCheck.cbegin(), toCheck.cend(), [container](const T& elem) {
+	return std::all_of(to_check.cbegin(), to_check.cend(), [container](const T& elem) {
 		return std::find(container.cbegin(), container.cent(), elem) != container.cend();
 	});
 }

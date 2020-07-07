@@ -26,15 +26,15 @@
 
 #include <chaiscript/chaiscript.hpp>
 
-#include <fightingPit/contender/FightingContender.hh>
-#include <fightingPit/contender/PitContenders.hh>
-#include <fightingPit/contender/ContenderScripting.hh>
-#include <fightingPit/team/AllyPartyTeams.hh>
-#include <fightingPit/team/TeamMember.hh>
+#include <fightingPit/contender/fighting_contender.hh>
+#include <fightingPit/contender/pit_contenders.hh>
+#include <fightingPit/contender/contender_scripting.hh>
+#include <fightingPit/team/ally_party_teams.hh>
+#include <fightingPit/team/team_member.hh>
 
-#include <ChaiRegister.hh>
+#include <chai_register.hh>
 #include <CmlCopy.hh>
-#include <fightingPit/FightingPitAnnouncer.hh>
+#include <fightingPit/fighting_pit_announcer.hh>
 
 namespace {
 std::string
@@ -74,43 +74,43 @@ TEST_CASE("test damage chaiscript", "[service][arena][script_test]")
 	fys::cache::CmlCopy ccpy(getLocalPathStorage(), getCopyPathStorage());
 	std::filesystem::path baseCache = getLocalPathStorage();
 
-	fys::arena::PitContenders pc;
-	fys::arena::AllyPartyTeams apt;
-	fys::arena::FightingPitLayout layout(pc, apt);
-	auto chai = fys::arena::ChaiRegister::createChaiInstance(pc, apt, layout);
+	fys::arena::pit_contenders pc;
+	fys::arena::ally_party_teams apt;
+	fys::arena::fighting_pit_layout layout(pc, apt);
+	auto chai = fys::arena::chai_register::make_chai_instance(pc, apt, layout);
 
-	fys::arena::ChaiRegister::registerBaseActions(*chai, ccpy);
+	fys::arena::chai_register::register_base_actions(*chai, ccpy);
 
-	fys::arena::ContenderScriptingUPtr sampy = std::make_unique<fys::arena::ContenderScripting>(*chai, 1);
-	sampy->setContenderId(0u);
-	sampy->setContenderName("Sampy");
-	sampy->loadContenderScriptFromFile(getPathSampyChaiScript());
+	fys::arena::ContenderScriptingUPtr sampy = std::make_unique<fys::arena::contender_scripting>(*chai, 1);
+	sampy->set_contender_id(0u);
+	sampy->set_contender_name("Sampy");
+	sampy->load_contender_script_from_file(getPathSampyChaiScript());
 
-	auto fpc = std::make_shared<fys::arena::FightingContender>(std::move(sampy));
+	auto fpc = std::make_shared<fys::arena::fighting_contender>(std::move(sampy));
 	REQUIRE(pc.addContender(fpc));
 
 	SECTION("Test initialization contender") {
-		REQUIRE(153 == fpc->accessStatus().life.current);
-		REQUIRE(8 == pc.getFightingContender(0)->accessStatus().initialSpeed);
-		REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.current);
-		REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.total);
-		REQUIRE(100 == pc.getFightingContender(0)->accessStatus().magicPoint.total);
-		REQUIRE(100 == pc.getFightingContender(0)->accessStatus().magicPoint.total);
+		REQUIRE(153 == fpc->access_status().life.current);
+		REQUIRE(8 == pc.getFightingContender(0)->access_status().initial_speed);
+		REQUIRE(153 == pc.getFightingContender(0)->access_status().life.current);
+		REQUIRE(153 == pc.getFightingContender(0)->access_status().life.total);
+		REQUIRE(100 == pc.getFightingContender(0)->access_status().magic_point.total);
+		REQUIRE(100 == pc.getFightingContender(0)->access_status().magic_point.total);
 	}
 
-	fys::arena::PartyTeam partyTeam("FyS");
-	fys::arena::TeamMemberSPtr tm1 = std::make_shared<fys::arena::TeamMember>(partyTeam.getUserName(), "fyston1");
-	auto& st = tm1->accessStatus();
-	st.initialSpeed = 100;
-	st.magicPoint = {1337, 1337};
+	fys::arena::party_team partyTeam("FyS");
+	fys::arena::team_member_sptr tm1 = std::make_shared<fys::arena::team_member>(partyTeam.get_user_name(), "fyston1");
+	auto& st = tm1->access_status();
+	st.initial_speed = 100;
+	st.magic_point = {1337, 1337};
 	st.life = {42, 42};
 
 	SECTION("test Slash chaiscript") {
 
-		tm1->addDoableAction("arena:actions:damage:slash.chai", 1);
-		partyTeam.addTeamMember(std::move(tm1));
+		tm1->add_doable_action("arena:actions:damage:slash.chai", 1);
+		partyTeam.add_team_member(std::move(tm1));
 
-		fys::arena::ChaiRegister::loadAndRegisterActionPartyTeam(*chai, ccpy, partyTeam);
+		fys::arena::chai_register::load_register_action_party_team(*chai, ccpy, partyTeam);
 
 		SECTION("test damage") {
 
@@ -125,19 +125,19 @@ s.execute(contender);
 				SPDLOG_ERROR("{}", ex.pretty_print());
 				FAIL("Chaiscript : Shouldn't fail here");
 			}
-			REQUIRE(120 == pc.getFightingContender(0)->accessStatus().life.current); // -33 life
-			REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.total);
+			REQUIRE(120 == pc.getFightingContender(0)->access_status().life.current); // -33 life
+			REQUIRE(153 == pc.getFightingContender(0)->access_status().life.total);
 			REQUIRE(1 == pc.getFightingContender(0)->getStatus().alteration_after.size());
-			auto& stat = pc.getFightingContender(0)->accessStatus();
+			auto& stat = pc.getFightingContender(0)->access_status();
 			auto alt = stat.alteration_after.at(0);
 			REQUIRE(2 == alt.getTurn());
-			alt.processAlteration(stat);
+			alt.process_alteration(stat);
 			REQUIRE(1 == alt.getTurn());
 		} // End section : test damage
 
 		SECTION("test over damage") {
 
-			pc.getFightingContender(0)->accessStatus().life.current = 10;
+			pc.getFightingContender(0)->access_status().life.current = 10;
 
 			try {
 				chai->eval(R"(
@@ -150,8 +150,8 @@ s.execute(contender);
 				SPDLOG_ERROR("{}", ex.what());
 				FAIL("Chaiscript : Shouldn't fail here");
 			}
-			REQUIRE(0 == pc.getFightingContender(0)->accessStatus().life.current); // -33 life > 0
-			REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.total);
+			REQUIRE(0 == pc.getFightingContender(0)->access_status().life.current); // -33 life > 0
+			REQUIRE(153 == pc.getFightingContender(0)->access_status().life.total);
 
 		} // End section : test over damage
 
@@ -159,20 +159,20 @@ s.execute(contender);
 
 	SECTION("test Multi_Slash chaiscript") {
 
-		tm1->addDoableAction("arena:actions:damage:multi_slash.chai", 1);
-		partyTeam.addTeamMember(std::move(tm1));
+		tm1->add_doable_action("arena:actions:damage:multi_slash.chai", 1);
+		partyTeam.add_team_member(std::move(tm1));
 
-		fys::arena::ContenderScriptingUPtr sampy2 = std::make_unique<fys::arena::ContenderScripting>(*chai, 1);
-		sampy2->setContenderId(1u);
-		sampy2->setContenderName("Sampy");
-		sampy2->loadContenderScriptFromFile(getPathSampyChaiScript());
+		fys::arena::ContenderScriptingUPtr sampy2 = std::make_unique<fys::arena::contender_scripting>(*chai, 1);
+		sampy2->set_contender_id(1u);
+		sampy2->set_contender_name("Sampy");
+		sampy2->load_contender_script_from_file(getPathSampyChaiScript());
 
-		auto fpc2 = std::make_shared<fys::arena::FightingContender>(std::move(sampy2));
+		auto fpc2 = std::make_shared<fys::arena::fighting_contender>(std::move(sampy2));
 		REQUIRE(pc.addContender(fpc2));
 
-		fys::arena::ChaiRegister::loadAndRegisterActionPartyTeam(*chai, ccpy, partyTeam);
+		fys::arena::chai_register::load_register_action_party_team(*chai, ccpy, partyTeam);
 
-		pc.getFightingContender(1)->accessStatus().life.current = 100;
+		pc.getFightingContender(1)->access_status().life.current = 100;
 
 		SECTION("test damage") {
 
@@ -191,17 +191,17 @@ s.execute(d);
 				SPDLOG_ERROR("{}", ex.what());
 				FAIL("Chaiscript : Shouldn't fail here");
 			}
-			REQUIRE(123 == pc.getFightingContender(0)->accessStatus().life.current); // -33 life
-			REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.total);
+			REQUIRE(123 == pc.getFightingContender(0)->access_status().life.current); // -33 life
+			REQUIRE(153 == pc.getFightingContender(0)->access_status().life.total);
 
-			REQUIRE(70 == pc.getFightingContender(1)->accessStatus().life.current); // -33 life
-			REQUIRE(153 == pc.getFightingContender(1)->accessStatus().life.total);
+			REQUIRE(70 == pc.getFightingContender(1)->access_status().life.current); // -33 life
+			REQUIRE(153 == pc.getFightingContender(1)->access_status().life.total);
 
 		} // End section : test damage
 
 		SECTION("test over damage") {
 
-			pc.getFightingContender(0)->accessStatus().life.current = 10;
+			pc.getFightingContender(0)->access_status().life.current = 10;
 
 			try {
 				chai->eval(R"(
@@ -219,11 +219,11 @@ s.execute(d);
 				FAIL("Chaiscript : Shouldn't fail here");
 			}
 
-			REQUIRE(0 == pc.getFightingContender(0)->accessStatus().life.current); // -33 life > 0
-			REQUIRE(153 == pc.getFightingContender(0)->accessStatus().life.total);
+			REQUIRE(0 == pc.getFightingContender(0)->access_status().life.current); // -33 life > 0
+			REQUIRE(153 == pc.getFightingContender(0)->access_status().life.total);
 
-			REQUIRE(70 == pc.getFightingContender(1)->accessStatus().life.current); // -33 life
-			REQUIRE(153 == pc.getFightingContender(1)->accessStatus().life.total);
+			REQUIRE(70 == pc.getFightingContender(1)->access_status().life.current); // -33 life
+			REQUIRE(153 == pc.getFightingContender(1)->access_status().life.total);
 
 		} // End section : test over damage
 

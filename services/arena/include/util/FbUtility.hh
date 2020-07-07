@@ -33,62 +33,62 @@ using namespace fys::arena;
 using namespace fys::fb::arn;
 
 [[nodiscard]] static SideOrient
-convertArenaOrientToFb(HexagonSide::Orientation orient)
+convertArenaOrientToFb(hexagon_side::orientation orient)
 {
 	switch (orient) {
-		case HexagonSide::Orientation::A_N: return SideOrient_A_N;
-		case HexagonSide::Orientation::A_NE: return SideOrient_A_NE;
-		case HexagonSide::Orientation::A_NW: return SideOrient_A_NW;
-		case HexagonSide::Orientation::A_S: return SideOrient_A_S;
-		case HexagonSide::Orientation::A_SE: return SideOrient_A_SE;
-		case HexagonSide::Orientation::A_SW: return SideOrient_A_SW;
+		case hexagon_side::orientation::A_N: return SideOrient_A_N;
+		case hexagon_side::orientation::A_NE: return SideOrient_A_NE;
+		case hexagon_side::orientation::A_NW: return SideOrient_A_NW;
+		case hexagon_side::orientation::A_S: return SideOrient_A_S;
+		case hexagon_side::orientation::A_SE: return SideOrient_A_SE;
+		case hexagon_side::orientation::A_SW: return SideOrient_A_SW;
 
-		case HexagonSide::Orientation::B_N: return SideOrient_B_N;
-		case HexagonSide::Orientation::B_NE: return SideOrient_B_NE;
-		case HexagonSide::Orientation::B_NW: return SideOrient_B_NW;
-		case HexagonSide::Orientation::B_S: return SideOrient_B_S;
-		case HexagonSide::Orientation::B_SE: return SideOrient_B_SE;
-		case HexagonSide::Orientation::B_SW: return SideOrient_B_SW;
+		case hexagon_side::orientation::B_N: return SideOrient_B_N;
+		case hexagon_side::orientation::B_NE: return SideOrient_B_NE;
+		case hexagon_side::orientation::B_NW: return SideOrient_B_NW;
+		case hexagon_side::orientation::B_S: return SideOrient_B_S;
+		case hexagon_side::orientation::B_SE: return SideOrient_B_SE;
+		case hexagon_side::orientation::B_SW: return SideOrient_B_SW;
 
-		case HexagonSide::Orientation::C_N: return SideOrient_C_N;
-		case HexagonSide::Orientation::C_NE: return SideOrient_C_NE;
-		case HexagonSide::Orientation::C_NW: return SideOrient_C_NW;
-		case HexagonSide::Orientation::C_S: return SideOrient_C_S;
-		case HexagonSide::Orientation::C_SE: return SideOrient_C_SE;
-		case HexagonSide::Orientation::C_SW: return SideOrient_C_SW;
+		case hexagon_side::orientation::C_N: return SideOrient_C_N;
+		case hexagon_side::orientation::C_NE: return SideOrient_C_NE;
+		case hexagon_side::orientation::C_NW: return SideOrient_C_NW;
+		case hexagon_side::orientation::C_S: return SideOrient_C_S;
+		case hexagon_side::orientation::C_SE: return SideOrient_C_SE;
+		case hexagon_side::orientation::C_SW: return SideOrient_C_SW;
 
-		case HexagonSide::Orientation::NONE: break;
+		case hexagon_side::orientation::NONE: break;
 	}
 	SPDLOG_ERROR("Trying to convert Orientation::NONE, value replaced by {}", SideOrient_MIN);
 	return SideOrient_MIN;
 }
 
-[[nodiscard]] static HexagonSide::Orientation
+[[nodiscard]] static hexagon_side::orientation
 convertFbOrientToArena(SideOrient orient)
 {
 	switch (orient) {
-		case SideOrient_A_N: return HexagonSide::Orientation::A_N;
-		case SideOrient_A_NE: return HexagonSide::Orientation::A_NE;
-		case SideOrient_A_NW: return HexagonSide::Orientation::A_NW;
-		case SideOrient_A_S: return HexagonSide::Orientation::A_S;
-		case SideOrient_A_SE: return HexagonSide::Orientation::A_SE;
-		case SideOrient_A_SW: return HexagonSide::Orientation::A_SW;
+		case SideOrient_A_N: return hexagon_side::orientation::A_N;
+		case SideOrient_A_NE: return hexagon_side::orientation::A_NE;
+		case SideOrient_A_NW: return hexagon_side::orientation::A_NW;
+		case SideOrient_A_S: return hexagon_side::orientation::A_S;
+		case SideOrient_A_SE: return hexagon_side::orientation::A_SE;
+		case SideOrient_A_SW: return hexagon_side::orientation::A_SW;
 
-		case SideOrient_B_N: return HexagonSide::Orientation::B_N;
-		case SideOrient_B_NE: return HexagonSide::Orientation::B_NE;
-		case SideOrient_B_NW: return HexagonSide::Orientation::B_NW;
-		case SideOrient_B_S: return HexagonSide::Orientation::B_S;
-		case SideOrient_B_SE: return HexagonSide::Orientation::B_SE;
-		case SideOrient_B_SW: return HexagonSide::Orientation::B_SW;
+		case SideOrient_B_N: return hexagon_side::orientation::B_N;
+		case SideOrient_B_NE: return hexagon_side::orientation::B_NE;
+		case SideOrient_B_NW: return hexagon_side::orientation::B_NW;
+		case SideOrient_B_S: return hexagon_side::orientation::B_S;
+		case SideOrient_B_SE: return hexagon_side::orientation::B_SE;
+		case SideOrient_B_SW: return hexagon_side::orientation::B_SW;
 
-		case SideOrient_C_N: return HexagonSide::Orientation::C_N;
-		case SideOrient_C_NE: return HexagonSide::Orientation::C_NE;
-		case SideOrient_C_NW: return HexagonSide::Orientation::C_NW;
-		case SideOrient_C_S: return HexagonSide::Orientation::C_S;
-		case SideOrient_C_SE: return HexagonSide::Orientation::C_SE;
-		case SideOrient_C_SW: return HexagonSide::Orientation::C_SW;
+		case SideOrient_C_N: return hexagon_side::orientation::C_N;
+		case SideOrient_C_NE: return hexagon_side::orientation::C_NE;
+		case SideOrient_C_NW: return hexagon_side::orientation::C_NW;
+		case SideOrient_C_S: return hexagon_side::orientation::C_S;
+		case SideOrient_C_SE: return hexagon_side::orientation::C_SE;
+		case SideOrient_C_SW: return hexagon_side::orientation::C_SW;
 	}
-	return HexagonSide::Orientation::NONE;
+	return hexagon_side::orientation::NONE;
 }
 
 }

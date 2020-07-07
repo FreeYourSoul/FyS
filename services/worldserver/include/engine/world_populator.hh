@@ -50,27 +50,27 @@ class world_populator {
 
 public:
 	[[nodiscard]] std::shared_ptr<engine>
-	buildWorldServerEngine();
+	build_world_server_engine();
 
 	// Builder methods
-	world_populator& populateMap(const world_server_context& ctx);
-	world_populator& populateScriptEngine(const world_server_context& ctx);
-	world_populator& setConnectionString(std::string connectionString);
-	world_populator& setIntervalMovement(std::chrono::system_clock::duration intervalMovement);
+	world_populator& populate_map(const world_server_context& ctx);
+	world_populator& populate_script_engine(const world_server_context& ctx);
+	world_populator& set_connection_string(std::string connectionString);
+	world_populator& set_interval_movement(std::chrono::system_clock::duration interval_movement);
 
 	// Getters for testing
-	const std::vector<spawning_point> &getSpawningPoints() const;
-	script_engine &getScriptEngine() const { return *_scriptEngine; }
+	const std::vector<spawning_point> &get_spawning_point() const;
+	script_engine &get_script_engine() const { return *_script_engine; }
 
 private:
 	void registerCommonLuaEngine(const std::string& pathToLuaInitFile);
-	void generateSpawningPoints(const std::string& spawningPointConfigPath, const std::string& basePath);
+	void generateSpawningPoints(const std::string& spawning_point_config_path, const std::string& base_path);
 
 private:
-	std::string _connectionString;
-	std::chrono::system_clock::duration _intervalMovement = TIMING_MOVE_INTERVAL;
+	std::string _connection_string;
+	std::chrono::system_clock::duration _interval_movement = TIMING_MOVE_INTERVAL;
 	std::shared_ptr<collision_map> _map;
-	std::shared_ptr<script_engine> _scriptEngine;
+	std::shared_ptr<script_engine> _script_engine;
 
 };
 

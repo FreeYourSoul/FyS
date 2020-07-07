@@ -23,22 +23,22 @@
 
 #include <spdlog/spdlog.h>
 #include <random>
-#include <HistoryManager.hh>
-#include <ArenaServerContext.hh>
-#include <ArenaServerService.hh>
+#include <history_manager.hh>
+#include <arena_server_context.hh>
+#include <arena_server_service.hh>
 
 int
 main(int ac, char** av)
 {
 	try {
 		spdlog::set_pattern("[%D %H:%M:%S][ %22s:%-4# ][%L]: %v");
-		fys::arena::ArenaServerContext ctx(ac, av);
+		fys::arena::arena_server_context ctx(ac, av);
 		int major, minor, patch;
 		zmq_version(&major, &minor, &patch);
-		SPDLOG_INFO("Version ZMQ : {}.{}.{}\n{}", major, minor, patch, ctx.toString());
+		SPDLOG_INFO("Version ZMQ : {}.{}.{}\n{}", major, minor, patch, ctx.to_string());
 
-		fys::arena::ArenaServerService serverService(ctx);
-		fys::arena::HistoryManager::setHistoricManagerOn(true);
+		fys::arena::arena_server_service serverService(ctx);
+		fys::arena::history_manager::setHistoricManagerOn(true);
 
 		serverService.runServerLoop();
 	}

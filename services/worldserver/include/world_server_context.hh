@@ -46,50 +46,50 @@ public:
 	get_dispatcher_connection_str() const noexcept;
 
 	[[nodiscard]] std::string
-	getPlayerConnectionString() const noexcept;
+	get_player_connection_str() const noexcept;
 
 	[[nodiscard]] const std::string&
-	getPathToLocalStorage() const noexcept { return _pathToLocalStorage; }
+	get_path_to_local_storage() const noexcept { return _path_to_local_storage; }
 
 	[[nodiscard]] const std::string&
-	getServerCode() const noexcept { return _serverCode; }
+	get_server_code() const noexcept { return _server_code; }
 
 	[[nodiscard]] const std::string&
-	getTMXMapPath() const noexcept { return _tmxMapPath; }
+	get_tmx_map_path() const noexcept { return _tmx_map_path; }
 
 	[[nodiscard]] const boundary&
-	getServerXBoundaries() const noexcept { return _serverXBoundaries; }
+	get_server_x_boundaries() const noexcept { return _server_x_boundaries; }
 
 	[[nodiscard]] const boundary&
-	getServerYBoundaries() const noexcept { return _serverYBoundaries; }
+	get_server_y_boundaries() const noexcept { return _server_y_boundaries; }
 
 	[[nodiscard]] const std::vector<proximity_server>&
-	getServerProximity() const noexcept { return _serverProximity; }
+	get_server_proximity() const noexcept { return _server_proximity; }
 
 	[[nodiscard]] const std::string&
-	getPathToLuaInitEngine() const noexcept { return _pathToLuaInitEngine; }
+	get_path_to_lua_engine() const noexcept { return _path_to_lua_init_engine; }
 
 	[[nodiscard]] const std::string&
-	getSpawningConfigPath() const noexcept { return _spawningConfigPath; }
+	get_spawning_config_path() const noexcept { return _spawning_config_path; }
 
 	[[nodiscard]] const std::string&
-	getPathLuaBase() const noexcept { return _pathLuaBase; }
+	get_path_lua_base() const noexcept { return _path_lua_base; }
 
 private:
 	void initWsContextWithJson(nlohmann::json& json);
 
 private:
-	std::string _serverCode;
-	std::string _tmxMapPath;
-	std::string _pathToLocalStorage;
-	std::string _pathLuaBase;
-	std::string _pathToLuaInitEngine;
-	std::string _spawningConfigPath;
+	std::string _server_code;
+	std::string _tmx_map_path;
+	std::string _path_to_local_storage;
+	std::string _path_lua_base;
+	std::string _path_to_lua_init_engine;
+	std::string _spawning_config_path;
 
-	uint _portPlayerConnection;
-	boundary _serverXBoundaries;
-	boundary _serverYBoundaries;
-	std::vector<proximity_server> _serverProximity;
+	uint _port_player_connection;
+	boundary _server_x_boundaries;
+	boundary _server_y_boundaries;
+	std::vector<proximity_server> _server_proximity;
 
 };
 

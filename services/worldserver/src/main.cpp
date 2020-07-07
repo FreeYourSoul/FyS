@@ -25,8 +25,8 @@
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <engine/world_populator.hh>
 #include <world_server_context.hh>
-#include <WorldServerService.hh>
-#include <Key.hh>
+#include <world_server_service.hh>
+#include <key.hh>
 
 int
 main(int ac, char** av)
@@ -36,17 +36,17 @@ main(int ac, char** av)
 		fys::ws::world_server_context ctx(ac, av);
 		int major, minor, patch;
 		zmq_version(&major, &minor, &patch);
-		SPDLOG_INFO("Version ZMQ : {}.{}.{}\n{}", major, minor, patch, ctx.toString());
+		SPDLOG_INFO("Version ZMQ : {}.{}.{}\n{}", major, minor, patch, ctx.to_string());
 
-		fys::ws::WorldServerService serverService(ctx,
+		fys::ws::world_server_service serverService(ctx,
 				std::move(*fys::ws::world_populator()
-						.setIntervalMovement(fys::ws::TIMING_MOVE_INTERVAL)
-						.setConnectionString(ctx.getPlayerConnectionString())
-						.populateMap(ctx)
-						.populateScriptEngine(ctx)
-						.buildWorldServerEngine())
+						.set_interval_movement(fys::ws::TIMING_MOVE_INTERVAL)
+						.set_connection_string(ctx.get_player_connection_str())
+						.populate_map(ctx)
+						.populate_script_engine(ctx)
+						.build_world_server_engine())
 		);
-		serverService.runServerLoop();
+		serverService.run_server_loop();
 	}
 	catch (const std::exception& e) {
 		SPDLOG_ERROR("Main caught an exception: {}", e.what());

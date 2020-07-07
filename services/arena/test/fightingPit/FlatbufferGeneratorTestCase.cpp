@@ -23,17 +23,17 @@
 
 #include <catch2/catch.hpp>
 
-#include <fightingPit/FightingPitAnnouncer.hh>
-#include <fightingPit/contender/FightingContender.hh>
-#include <fightingPit/contender/ContenderScripting.hh>
-#include <fightingPit/team/AllyPartyTeams.hh>
-#include <fightingPit/team/PartyTeam.hh>
-#include <fightingPit/team/TeamMember.hh>
-#include <fightingPit/FightingPit.hh>
+#include <fightingPit/fighting_pit_announcer.hh>
+#include <fightingPit/contender/fighting_contender.hh>
+#include <fightingPit/contender/contender_scripting.hh>
+#include <fightingPit/team/ally_party_teams.hh>
+#include <fightingPit/team/party_team.hh>
+#include <fightingPit/team/team_member.hh>
+#include <fightingPit/fighting_pit.hh>
 
 #include <FightingPitState_generated.h>
 
-#include <ArenaServerContext.hh>
+#include <arena_server_context.hh>
 #include <util/FbUtility.hh>
 #include "TestType.hh"
 
@@ -59,11 +59,11 @@ getLocalPathStorage()
 TEST_CASE("arn::FlatbufferGeneratorTestCase", "[service][arena][util]")
 {
 	// Instantiate FightingPit
-	auto fseamMock = FSeam::getDefault<fys::util::RandomGenerator>();
+	auto fseamMock = FSeam::getDefault<fys::util::random_generator>();
 	fys::common::connection_handler handler{};
 	auto fseamConnectionHandlerMock = FSeam::get(&handler);
 	auto cml = CmlBase(getLocalPathStorage());
-	EncounterContext ctx;
+	encounter_context ctx;
 
 	ctx._rangeEncounterPerZone["WS00"] = {
 			std::pair(4, 4), // ez
@@ -71,7 +71,7 @@ TEST_CASE("arn::FlatbufferGeneratorTestCase", "[service][arena][util]")
 			std::pair(1, 1)  // hard
 	};
 	ctx._contendersPerZone["WS00"] = {
-			EncounterContext::EncounterDesc{
+			encounter_context::encounter_desc{
 					"arena:contenders:Sampy.chai",
 					3, {100, 100, 100}, std::pair(1u, 10u)
 			},
@@ -81,69 +81,69 @@ TEST_CASE("arn::FlatbufferGeneratorTestCase", "[service][arena][util]")
 	std::shared_ptr<std::mt19937> mt = std::make_shared<std::mt19937>(42);
 	fseamMock->dupeReturn<FSeam::RandomGenerator::get>(mt);
 
-	FightingPitAnnouncer fpa(cml);
-	fpa.setCreatorUserName("Winner");
-	fpa.setCreatorUserToken("WinnerToken");
-	fpa.setCreatorTeamParty(getPartyTeam("Winner"));
-	fpa.setDifficulty(FightingPit::Level::EASY);
-	fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);
+	fighting_pit_announcer fpa(cml);
+	fpa.set_creator_user_name("Winner");
+	fpa.set_creator_user_token("WinnerToken");
+	fpa.set_creator_team_party(getPartyTeam("Winner"));
+	fpa.set_difficulty(fighting_pit::level::EASY);
+	fpa.set_encounter_type(fighting_pit_announcer::encounter_type::RANDOM);
 
-	fpa.addActionToOneMember(0u, "arena:actions:damage:slash_test.chai", 1u);
-	fpa.addActionToOneMember(1u, "arena:actions:damage:slash_magic.chai", 2u);
-	fpa.addActionToOneMember(2u, "arena:actions:damage:slash_demon.chai", 3u);
-	fpa.addActionToOneMember(3u, "arena:actions:damage:slash_super.chai", 4u);
-	fpa.addActionToOneMember(3u, "arena:actions:damage:slash_didi.chai", 2u);
+	fpa.add_action_to_one_member(0u, "arena:actions:damage:slash_test.chai", 1u);
+	fpa.add_action_to_one_member(1u, "arena:actions:damage:slash_magic.chai", 2u);
+	fpa.add_action_to_one_member(2u, "arena:actions:damage:slash_demon.chai", 3u);
+	fpa.add_action_to_one_member(3u, "arena:actions:damage:slash_super.chai", 4u);
+	fpa.add_action_to_one_member(3u, "arena:actions:damage:slash_didi.chai", 2u);
 
-	auto fp = fpa.buildFightingPit(ctx, "WS00");
+	auto fp = fpa.build_fighting_pit(ctx, "WS00");
 
 	REQUIRE(nullptr != fp);
 
 	SECTION("Initial setup test") {
-		REQUIRE(4 == FightingPitAnnouncer::getPitContenders(fp).getNumberContender());
-		auto contender1 = FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0);
-		REQUIRE("Sampy" == contender1->getName());
-		REQUIRE(0 == contender1->getContenderScripting()->getContenderId());
-		REQUIRE(10 == contender1->getContenderScripting()->getLevel());
+		REQUIRE(4 == fighting_pit_announcer::get_pit_contenders(fp).getNumberContender());
+		auto contender1 = fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0);
+		REQUIRE("Sampy" == contender1->get_name());
+		REQUIRE(0 == contender1->get_contender_scripting()->get_contender_id());
+		REQUIRE(10 == contender1->get_contender_scripting()->get_level());
 		REQUIRE(180 == contender1->getStatus().life.current);
 		REQUIRE(180 == contender1->getStatus().life.total);
-		REQUIRE(100 == contender1->getStatus().magicPoint.current);
-		REQUIRE(100 == contender1->getStatus().magicPoint.total);
+		REQUIRE(100 == contender1->getStatus().magic_point.current);
+		REQUIRE(100 == contender1->getStatus().magic_point.total);
 
-		auto contender2 = FightingPitAnnouncer::getPitContenders(fp).getContenders().at(1);
-		REQUIRE("Sampy" == contender2->getName());
-		REQUIRE(1 == contender2->getContenderScripting()->getContenderId());
-		REQUIRE(8 == contender2->getContenderScripting()->getLevel());
+		auto contender2 = fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(1);
+		REQUIRE("Sampy" == contender2->get_name());
+		REQUIRE(1 == contender2->get_contender_scripting()->get_contender_id());
+		REQUIRE(8 == contender2->get_contender_scripting()->get_level());
 		REQUIRE(174 == contender2->getStatus().life.current);
 		REQUIRE(174 == contender2->getStatus().life.total);
-		REQUIRE(100 == contender2->getStatus().magicPoint.current);
-		REQUIRE(100 == contender2->getStatus().magicPoint.total);
+		REQUIRE(100 == contender2->getStatus().magic_point.current);
+		REQUIRE(100 == contender2->getStatus().magic_point.total);
 
-		auto contender3 = FightingPitAnnouncer::getPitContenders(fp).getContenders().at(2);
-		REQUIRE("Sampy" == contender3->getName());
-		REQUIRE(2 == contender3->getContenderScripting()->getContenderId());
-		REQUIRE(6 == contender3->getContenderScripting()->getLevel());
+		auto contender3 = fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(2);
+		REQUIRE("Sampy" == contender3->get_name());
+		REQUIRE(2 == contender3->get_contender_scripting()->get_contender_id());
+		REQUIRE(6 == contender3->get_contender_scripting()->get_level());
 		REQUIRE(168 == contender3->getStatus().life.current);
 		REQUIRE(168 == contender3->getStatus().life.total);
-		REQUIRE(100 == contender3->getStatus().magicPoint.current);
-		REQUIRE(100 == contender3->getStatus().magicPoint.total);
+		REQUIRE(100 == contender3->getStatus().magic_point.current);
+		REQUIRE(100 == contender3->getStatus().magic_point.total);
 
-		auto contender4 = FightingPitAnnouncer::getPitContenders(fp).getContenders().at(3);
-		REQUIRE(3 == contender4->getContenderScripting()->getContenderId());
-		REQUIRE("Sampy" == contender4->getName());
-		REQUIRE(2 == contender4->getContenderScripting()->getLevel());
+		auto contender4 = fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(3);
+		REQUIRE(3 == contender4->get_contender_scripting()->get_contender_id());
+		REQUIRE("Sampy" == contender4->get_name());
+		REQUIRE(2 == contender4->get_contender_scripting()->get_level());
 		REQUIRE(156 == contender4->getStatus().life.current);
 		REQUIRE(156 == contender4->getStatus().life.total);
-		REQUIRE(100 == contender4->getStatus().magicPoint.current);
-		REQUIRE(100 == contender4->getStatus().magicPoint.total);
+		REQUIRE(100 == contender4->getStatus().magic_point.current);
+		REQUIRE(100 == contender4->getStatus().magic_point.total);
 
-		REQUIRE(4 == fp->getPartyTeams().getNumberAlly());
-		REQUIRE(4 == fp->getPartyTeams().getPartyTeams().at(0)->getTeamMembers().size());
-		REQUIRE(4 == fp->getPartyTeams().getPartyTeams().at(0)->getTeamMembers().at(3)->getId());
-		REQUIRE(3 == fp->getPartyTeams().getPartyTeams().at(0)->getTeamMembers().at(2)->getId());
-		REQUIRE(2 == fp->getPartyTeams().getPartyTeams().at(0)->getTeamMembers().at(1)->getId());
-		REQUIRE(1 == fp->getPartyTeams().getPartyTeams().at(0)->getTeamMembers().at(0)->getId());
+		REQUIRE(4 == fp->get_party_teams().get_number_ally());
+		REQUIRE(4 == fp->get_party_teams().get_party_teams().at(0)->get_team_members().size());
+		REQUIRE(4 == fp->get_party_teams().get_party_teams().at(0)->get_team_members().at(3)->get_id());
+		REQUIRE(3 == fp->get_party_teams().get_party_teams().at(0)->get_team_members().at(2)->get_id());
+		REQUIRE(2 == fp->get_party_teams().get_party_teams().at(0)->get_team_members().at(1)->get_id());
+		REQUIRE(1 == fp->get_party_teams().get_party_teams().at(0)->get_team_members().at(0)->get_id());
 
-		REQUIRE(0 == fp->getId());
+		REQUIRE(0 == fp->get_id());
 
 	} // End section : Initial setup test
 
@@ -237,7 +237,7 @@ TEST_CASE("arn::FlatbufferGeneratorTestCase", "[service][arena][util]")
 	} // End section : Test generateFightingPitState
 
 	SECTION("Test generatePartyTeamStatus") {
-		auto[data, size] = fg.generatePartyTeamStatus(*fp->getPartyTeams().getPartyTeams().at(0));
+		auto[data, size] = fg.generatePartyTeamStatus(*fp->get_party_teams().get_party_teams().at(0));
 
 		REQUIRE(nullptr != data);
 		REQUIRE(0 < size);
@@ -301,8 +301,8 @@ TEST_CASE("arn::FlatbufferGeneratorTestCase", "[service][arena][util]")
 
 	SECTION("Test generateActionNotification") {
 		auto[data, size] = fg.generateActionNotification("ActionKey:Test",
-				FightingPitAnnouncer::getPitContenders(fp).getContenders(),
-				fp->getPartyTeams().getPartyTeams().at(0)->getTeamMembers());
+				fighting_pit_announcer::get_pit_contenders(fp).get_contenders(),
+				fp->get_party_teams().get_party_teams().at(0)->get_team_members());
 
 		REQUIRE(nullptr != data);
 		REQUIRE(0 < size);

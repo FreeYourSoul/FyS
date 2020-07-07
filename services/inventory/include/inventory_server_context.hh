@@ -36,23 +36,23 @@ public:
 	explicit inventory_server_context(int argc, char** argv);
 
 	[[nodiscard]] const std::string&
-	getConnectionStringCacheDB() const { return _connectionStringCacheDB; }
+	get_connection_str_cache_db() const { return _connection_string_cache_db; }
 
 	[[nodiscard]] const std::string&
-	getServerCode() const { return _serverCode; }
+	get_server_code() const { return _server_code; }
 
 	[[nodiscard]] std::string
-	getPlayerConnectionString() const noexcept;
+	get_player_connection_str() const noexcept;
 
 	[[nodiscard]] std::string
-	toString() const;
+	to_string() const;
 
 private:
-	void initInventoryContextWithJson(nlohmann::json& json);
+	void init_inventory_context_with_json(nlohmann::json& json);
 
 private:
-	std::string _connectionStringCacheDB;
-	std::string _serverCode;
+	std::string _connection_string_cache_db;
+	std::string _server_code;
 
 	uint _portPlayerConnection;
 
