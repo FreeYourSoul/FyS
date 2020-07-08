@@ -29,22 +29,26 @@
 
 #include <algorithm/algorithm.hh>
 #include <history_manager.hh>
-#include <network/WorkerService.hh>
+#include <network/worker_service.hh>
 
 #include <fightingPit/contender/fighting_contender.hh>
 #include <fightingPit/fighting_pit.hh>
-#include <fightingPit/team/TeamMember.hh>
+#include <fightingPit/team/team_member.hh>
 #include <flatbuffer_generator.hh>
 
 namespace {
 std::chrono::milliseconds
-retrieveTimeInterludeFromLevelDegree(fys::arena::fighting_pit::level level)
+retrieve_time_interlude_from_level_degree(fys::arena::fighting_pit::level level)
 {
 	switch (level) {
-		case fys::arena::fighting_pit::level::EASY:return fys::arena::interval::EASY;
-		case fys::arena::fighting_pit::level::MEDIUM :return fys::arena::interval::MEDIUM;
-		case fys::arena::fighting_pit::level::HARD :return fys::arena::interval::HARD;
-		default:SPDLOG_ERROR("Incorrect level");
+		case fys::arena::fighting_pit::level::EASY:
+			return fys::arena::interval::EASY;
+		case fys::arena::fighting_pit::level::MEDIUM :
+			return fys::arena::interval::MEDIUM;
+		case fys::arena::fighting_pit::level::HARD :
+			return fys::arena::interval::HARD;
+		default:
+			SPDLOG_ERROR("Incorrect level");
 			return std::chrono::milliseconds{0};
 	}
 }
@@ -52,15 +56,15 @@ retrieveTimeInterludeFromLevelDegree(fys::arena::fighting_pit::level level)
 
 namespace fys::arena {
 
-fighting_pit::fighting_pit(std::string creatorUserName, fys::arena::fighting_pit::level levelFightingPit)
+fighting_pit::fighting_pit(std::string creator_user_name, fys::arena::fighting_pit::level level_fighting_pit)
 		:
 		_progress(progress::ON_HOLD),
-		_level_fighting_pit(levelFightingPit),
-		_time_interlude(retrieveTimeInterludeFromLevelDegree(_level_fighting_pit)),
+		_level_fighting_pit(level_fighting_pit),
+		_time_interlude(retrieve_time_interlude_from_level_degree(_level_fighting_pit)),
 		_layout_mapping(_contenders, _party_teams),
-		_creator_user_name(std::move(creatorUserName)),
+		_creator_user_name(std::move(creator_user_name)),
 		_chai_ptr(chai_register::make_chai_instance(_contenders, _party_teams, _layout_mapping)),
-		_rewards(std::make_unique<Rewards>()) { }
+		_rewards(std::make_unique<rewards>()) { }
 
 void
 fighting_pit::continue_battle(const std::chrono::system_clock::time_point& now)
@@ -69,23 +73,23 @@ fighting_pit::continue_battle(const std::chrono::system_clock::time_point& now)
 		if (battle.empty()) { // if battle side is empty, ignore it
 			continue;
 		}
-		auto currentParticipant = battle.getCurrentParticipantTurn(now, _time_interlude);
-		bool turnExecuted = false;
+		auto current_participant = battle.get_current_participant_turn(now, _time_interlude);
+		bool turn_executed = false;
 
-		if (currentParticipant.isContender) {
+		if (current_participant.is_contender) {
 			// non-playable character (enemy NPC)
-			_contenders.executeContenderAction(currentParticipant);
-			turnExecuted = true;
+			_contenders.execute_contender_action(current_participant);
+			turn_executed = true;
 		}
 		else {
 			// character of a player
-			turnExecuted = _party_teams.executeAllyAction(currentParticipant, _contenders, _chai_ptr);
+			turn_executed = _party_teams.execute_ally_action(current_participant, _contenders, _chai_ptr);
 		}
-		battle.turnDone(turnExecuted);
-		battle.eraseFinishedAlterationAndDeadCharactersFromTurnList();
+		battle.turnDone(turn_executed);
+		battle.erase_finished_alteration_and_dead_characters_from_turn_list();
 	}
 	// execute awaited movements
-	_layout_mapping.executeMovements(_side_battles);
+	_layout_mapping.execute_movements(_side_battles);
 
 	_progress = update_progress_status();
 }
@@ -93,10 +97,10 @@ fighting_pit::continue_battle(const std::chrono::system_clock::time_point& now)
 fighting_pit::progress
 fighting_pit::update_progress_status()
 {
-	if (_party_teams.allDead()) {
+	if (_party_teams.all_dead()) {
 		return progress::CONTENDER_WIN;
 	}
-	else if (_contenders.allDead()) {
+	else if (_contenders.all_dead()) {
 		history_manager::setToBeSaved(_arena_id, false);
 		return progress::ALLY_WIN;
 	}
@@ -104,24 +108,24 @@ fighting_pit::update_progress_status()
 }
 
 void
-fighting_pit::forward_to_team_member(const std::string& user, PlayerAction action)
+fighting_pit::forward_to_team_member(const std::string& user, player_action action)
 {
-	auto member = _party_teams.getSpecificTeamMemberById(user, action.idMember);
+	auto member = _party_teams.get_specific_team_member_by_id(user, action.id_member);
 	if (!member) {
 		SPDLOG_ERROR("[fp:{}] : Player '{}' try to forward a message to not existing member member of id {}",
-				_arena_id, user, action.idMember);
+				_arena_id, user, action.id_member);
 		return;
 	}
 	try {
-		if (!chai::util::memberHasActionRegistered(*_chai_ptr, user, member->getName(), action.actionName)) {
+		if (!chai::util::memberHasActionRegistered(*_chai_ptr, user, member->get_name(), action.action_name)) {
 			SPDLOG_WARN("[fp:{}] : Member {}.{}.{} tried to execute Action '{}' which isn't registered for member '{}'",
-					_arena_id, user, member->getId(), member->getName(), action.actionName, member->getName());
+					_arena_id, user, member->get_id(), member->get_name(), action.action_name, member->get_name());
 			return;
 		}
 		auto[targetIsCorrect, target] = this->check_and_retrieve_target(user, member, action);
 		if (targetIsCorrect) {
-			SPDLOG_INFO("[fp:{}] : Member {}.{}.{} register a new action {}", _arena_id, user, member->getId(), member->getName(), action.actionName);
-			member->addPendingAction(std::move(action.actionName), std::move(target));
+			SPDLOG_INFO("[fp:{}] : Member {}.{}.{} register a new action {}", _arena_id, user, member->get_id(), member->get_name(), action.action_name);
+			member->add_pending_action(std::move(action.action_name), std::move(target));
 		}
 	}
 	catch (const std::exception& e) {
@@ -144,14 +148,14 @@ fighting_pit::is_player_participant(const std::string& name, const std::string& 
 }
 
 void
-fighting_pit::add_party_team_and_register_actions(std::unique_ptr<PartyTeam> pt, cache::Cml& cache)
+fighting_pit::add_party_team_and_register_actions(std::unique_ptr<party_team> pt, cache::Cml& cache)
 {
 	chai_register::load_register_action_party_team(*_chai_ptr, cache, *pt);
-	_layout_mapping.addActivePartyTeam(*pt);
-	_party_teams.addPartyTeam(std::move(pt));
+	_layout_mapping.add_active_party_team(*pt);
+	_party_teams.add_party_team(std::move(pt));
 	std::sort(_side_battles.begin(), _side_battles.end(),
 			[this](auto& lhs, auto& rhs) {
-				return _layout_mapping.activeCharactersOnSide(lhs.getSide()) < _layout_mapping.activeCharactersOnSide(rhs.getSide());
+				return _layout_mapping.active_characters_on_side(lhs.get_side()) < _layout_mapping.active_characters_on_side(rhs.get_side());
 			});
 }
 
@@ -163,28 +167,28 @@ fighting_pit::initialize_side_battles()
 	_side_battles.reserve(hexagon_side::SIDE_NUMBER);
 
 	// Hexagon A creation
-	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::Orientation::A_N);
-	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::Orientation::A_NE);
-	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::Orientation::A_SE);
-	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::Orientation::A_S);
-	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::Orientation::A_SW);
-	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::Orientation::A_NW);
+	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::orientation::A_N);
+	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::orientation::A_NE);
+	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::orientation::A_SE);
+	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::orientation::A_S);
+	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::orientation::A_SW);
+	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::orientation::A_NW);
 
 	// Hexagon B creation
-	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::Orientation::B_N);
-	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::Orientation::B_NE);
-	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::Orientation::B_SE);
-	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::Orientation::B_S);
-	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::Orientation::B_SW);
-	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::Orientation::B_NW);
+	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::orientation::B_N);
+	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::orientation::B_NE);
+	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::orientation::B_SE);
+	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::orientation::B_S);
+	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::orientation::B_SW);
+	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::orientation::B_NW);
 
 	// Hexagon C creation
-	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::Orientation::C_N);
-	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::Orientation::C_NE);
-	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::Orientation::C_SE);
-	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::Orientation::C_S);
-	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::Orientation::C_SW);
-	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::Orientation::C_NW);
+	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::orientation::C_N);
+	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::orientation::C_NE);
+	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::orientation::C_SE);
+	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::orientation::C_S);
+	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::orientation::C_SW);
+	_side_battles.emplace_back(_contenders, _party_teams, hexagon_side::orientation::C_NW);
 
 	initialize_priority_in_side_battles();
 }
@@ -193,14 +197,14 @@ void
 fighting_pit::initialize_priority_in_side_battles()
 {
 	for (auto& sb : _side_battles) {
-		const auto& memberBySide = _party_teams.getMembersBySide(sb.getSide());
-		const auto& contenderBySide = _contenders.getContenderOnSide(sb.getSide());
+		const auto& member_by_side = _party_teams.get_members_by_side(sb.get_side());
+		const auto& contender_by_side = _contenders.get_contender_on_side(sb.get_side());
 
-		for (const TeamMemberSPtr& member : memberBySide) {
-			sb.addParticipantInList(member->getId(), member->getStatus().initialSpeed, false);
+		for (const team_member_sptr & member : member_by_side) {
+			sb.addParticipantInList(member->get_id(), member->get_status().initial_speed, false);
 		}
-		for (unsigned i = 0; i < contenderBySide.size(); ++i) {
-			sb.addParticipantInList(i, contenderBySide.at(i)->getStatus().initialSpeed, true);
+		for (unsigned i = 0; i < contender_by_side.size(); ++i) {
+			sb.addParticipantInList(i, contender_by_side.at(i)->get_status().initial_speed, true);
 		}
 	};
 }
@@ -208,57 +212,57 @@ void
 fighting_pit::set_player_readiness(const std::string& user_name)
 {
 	SPDLOG_INFO("[fp:{}] : Player '{}' is setting readiness", _arena_id, user_name);
-	if (_party_teams.setPartyReadiness(user_name)) {
+	if (_party_teams.set_party_readiness(user_name)) {
 		_progress = progress::ON_GOING;
 	}
 }
 std::pair<bool, std::optional<TargetType>>
-fighting_pit::check_and_retrieve_target(const std::string& user, const TeamMemberSPtr& member, const PlayerAction& action)
+fighting_pit::check_and_retrieve_target(const std::string& user, const team_member_sptr& member, const player_action& action)
 {
-	auto targetType = _chai_ptr->eval<data::Targeting>(
-			chai::util::getAccessAllyAction(user, member->getName(), action.actionName).append(".requireTarget();"));
+	auto target_type = _chai_ptr->eval<data::targeting>(
+			chai::util::getAccessAllyAction(user, member->get_name(), action.action_name).append(".requireTarget();"));
 	std::optional<TargetType> target;
 
 	// Check if the target is appropriate
-	if (targetType == data::Targeting::SELF) {
-		if (!action.allyTarget.empty() || !action.contenderTarget.empty()) {
+	if (target_type == data::targeting::SELF) {
+		if (!action.ally_target.empty() || !action.contender_target.empty()) {
 			SPDLOG_WARN("[fp:{}] : Action {} target type is SELF, but Player {} tried to execute it with targets set",
-					action.actionName, user);
+					action.action_name, user);
 			return std::pair(false, target);
 		}
 		target = std::nullopt;
 	}
-	else if (targetType == data::Targeting::ENNEMY) {
-		if (!action.allyTarget.empty() || action.contenderTarget.empty()) {
+	else if (target_type == data::targeting::ENNEMY) {
+		if (!action.ally_target.empty() || action.contender_target.empty()) {
 			SPDLOG_WARN("[fp:{}] Action {} target type is ENNEMY, but Player {} tried to execute it with ally targets set",
-					_arena_id, action.actionName, user);
+					_arena_id, action.action_name, user);
 			return std::pair(false, target);
 		}
-		target = ContenderTargetId{action.contenderTarget.at(0)};
+		target = contender_target_id{action.contender_target.at(0)};
 	}
-	else if (targetType == data::Targeting::ENNEMIES) {
-		if (!action.allyTarget.empty() || action.contenderTarget.empty()) {
+	else if (target_type == data::targeting::ENNEMIES) {
+		if (!action.ally_target.empty() || action.contender_target.empty()) {
 			SPDLOG_WARN("[fp:{}] : Action {} target type is ENNEMIES, but Player {} tried to execute it with ally targets set",
-					_arena_id, action.actionName, user);
+					_arena_id, action.action_name, user);
 			return std::pair(false, target);
 		}
-		target = ContendersTargetsIds{std::move(action.contenderTarget)};
+		target = contenders_targets_ids{std::move(action.contender_target)};
 	}
-	else if (targetType == data::Targeting::ALLY) {
-		if (action.allyTarget.empty() || !action.contenderTarget.empty()) {
+	else if (target_type == data::targeting::ALLY) {
+		if (action.ally_target.empty() || !action.contender_target.empty()) {
 			SPDLOG_WARN("[fp:{}] : Action {} target type is ALLY, but Player {} tried to execute it with contender targets set",
-					_arena_id, action.actionName, user);
+					_arena_id, action.action_name, user);
 			return std::pair(false, target);
 		}
-		target = AllyTargetId{action.allyTarget.at(0)};
+		target = ally_target_id{action.ally_target.at(0)};
 	}
-	else if (targetType == data::Targeting::ALLIES) {
-		if (action.allyTarget.empty() || !action.contenderTarget.empty()) {
+	else if (target_type == data::targeting::ALLIES) {
+		if (action.ally_target.empty() || !action.contender_target.empty()) {
 			SPDLOG_WARN("[fp:{}] : Action {} target type is ALLIES, but Player {} tried to execute it with contender targets set",
-					_arena_id, action.actionName, user);
+					_arena_id, action.action_name, user);
 			return std::pair(false, target);
 		}
-		target = AlliesTargetsIds{std::move(action.allyTarget)};
+		target = allies_targets_ids{std::move(action.ally_target)};
 	}
 //	else if (targetType == data::Targeting::ALLY_AND_ENNEMY) {}
 //	else if (targetType == data::Targeting::ALLY_OR_ENNEMY) {}
@@ -266,12 +270,12 @@ fighting_pit::check_and_retrieve_target(const std::string& user, const TeamMembe
 		SPDLOG_WARN("NOT IMPLEMENTED YET");
 		return std::pair(false, target);
 	}
-	if (!all_in(action.allyTarget, _party_teams.get_party_team_of_player(user).getTeamMembers(),
-			[](const TeamMemberSPtr& tm) { return tm->getId(); })) {
+	if (!all_in(action.ally_target, _party_teams.get_party_team_of_player(user).get_team_members(),
+			[](const team_member_sptr & tm) { return tm->get_id(); })) {
 		SPDLOG_WARN("[fp:{}] : Player {} tried to target a non-existing Ally", _arena_id, user);
 		return std::pair(false, target);
 	}
-	if (!all_in(action.contenderTarget, _contenders.get_contenders(),
+	if (!all_in(action.contender_target, _contenders.get_contenders(),
 			[](const fighting_contender_sptr& c) { return c->get_id(); })) {
 		SPDLOG_WARN("[fp:{}] : Player {} tried to target a non-existing Contender, Targets are : ", _arena_id, user);
 		return std::pair(false, target);
@@ -281,8 +285,8 @@ fighting_pit::check_and_retrieve_target(const std::string& user, const TeamMembe
 bool
 fighting_pit::add_contender(const std::shared_ptr<fighting_contender>& fc)
 {
-	if (_contenders.addContender(fc)) {
-		_layout_mapping.addActiveContender();
+	if (_contenders.add_contender(fc)) {
+		_layout_mapping.add_active_contender();
 		return true;
 	}
 	return false;
@@ -292,7 +296,7 @@ zmq::message_t
 fighting_pit::make_winner_notification() const
 {
 	flatbuffer_generator fb;
-	auto[data, size] = fb.generateEndBattle(true, *_rewards);
+	auto[data, size] = fb.generate_end_battle(true, *_rewards);
 	return zmq::message_t(data, size);
 }
 
@@ -300,7 +304,7 @@ zmq::message_t
 fighting_pit::make_looser_notification() const
 {
 	flatbuffer_generator fb;
-	auto[data, size] = fb.generateEndBattle(false, {});
+	auto[data, size] = fb.generate_end_battle(false, {});
 	return zmq::message_t(data, size);
 }
 

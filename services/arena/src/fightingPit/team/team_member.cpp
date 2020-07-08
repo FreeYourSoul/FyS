@@ -133,7 +133,7 @@ team_member::execute_action(
 void
 team_member::add_pending_action(const std::string& action_name, std::optional<TargetType> target)
 {
-	if (_status.life.isDead()) {
+	if (_status.life_pt.is_dead()) {
 		SPDLOG_WARN("Player {}::{} tried to add an action while dead", _user_name, _name);
 		return;
 	}

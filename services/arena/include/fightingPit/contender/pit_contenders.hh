@@ -50,26 +50,26 @@ public:
 
 
 	[[nodiscard]] std::vector<std::shared_ptr<fighting_contender>>
-	getContenderOnSide(hexagon_side::orientation side) const;
+	get_contender_on_side(hexagon_side::orientation side) const;
 
 	[[nodiscard]] std::vector<std::shared_ptr<fighting_contender>>
 	getChangingSideContenders() const;
 
 	// scripting utility
 	[[nodiscard]] std::shared_ptr<fighting_contender>
-	selectSuitableContender(comparator_selection<fighting_contender> comp) const;
+	select_suitable_contender(comparator_selection<fighting_contender> comp) const;
 
 	[[nodiscard]] std::shared_ptr<fighting_contender>
-	selectSuitableContenderOnSide(hexagon_side::orientation side, comparator_selection<fighting_contender> comp) const;
+	select_suitable_contender_on_side(hexagon_side::orientation side, comparator_selection<fighting_contender> comp) const;
 
 	[[nodiscard]] std::shared_ptr<fighting_contender>
-	selectRandomContenderOnSideAlive(hexagon_side::orientation side) const;
+	select_random_contender_on_side_alive(hexagon_side::orientation side) const;
 
 	[[nodiscard]] std::shared_ptr<fighting_contender>
-	selectSuitableContenderAlive(comparator_selection<fighting_contender> comp) const;
+	select_suitable_contender_alive(comparator_selection<fighting_contender> comp) const;
 
 	[[nodiscard]] std::shared_ptr<fighting_contender>
-	selectSuitableContenderOnSideAlive(hexagon_side::orientation side, comparator_selection<fighting_contender> comp) const;
+	select_suitable_contender_on_side_alive(hexagon_side::orientation side, comparator_selection<fighting_contender> comp) const;
 
 	[[nodiscard]] std::shared_ptr<fighting_contender>
 	getFightingContender(uint pos) const { return _contenders.at(pos); }
@@ -78,19 +78,19 @@ public:
 	getNumberContender() const { return _contenders.size(); }
 
 	[[nodiscard]] std::vector<std::shared_ptr<fighting_contender>>
-	getDeadContenderOnSide(hexagon_side::orientation side) const;
+	get_dead_contender_on_side(hexagon_side::orientation contender_ptr) const;
 
 	[[nodiscard]] const std::vector<std::shared_ptr<fighting_contender> >&
 	get_contenders() const { return _contenders; }
 
 	[[nodiscard]] unsigned
-	contenderOnSide(hexagon_side::orientation side) const;
+	contender_on_side(hexagon_side::orientation side) const;
 
 	[[nodiscard]] bool
-	addContender(const std::shared_ptr<fighting_contender>& contender);
+	add_contender(const std::shared_ptr<fighting_contender>& contender);
 
 	[[nodiscard]] bool
-	allDead() const;
+	all_dead() const;
 
 private:
 	std::vector<std::shared_ptr<fighting_contender> > _contenders;

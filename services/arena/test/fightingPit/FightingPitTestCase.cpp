@@ -40,7 +40,7 @@ using namespace std::chrono_literals;
 namespace {
 
 [[nodiscard]] static std::string
-getLocalPathStorage()
+local_path_storage()
 {
 	std::string file_path = __FILE__;
 	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
@@ -68,7 +68,7 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]")
 	auto fseamMock = FSeam::getDefault<fys::util::random_generator>();
 	fys::common::connection_handler handler{};
 	auto fseamConnectionHandlerMock = FSeam::get(&handler);
-	auto cml = CmlBaseCopy(getTmpPath(), getLocalPathStorage());
+	auto cml = CmlBaseCopy(getTmpPath(), local_path_storage());
 	DeleteFolderWhenDone raii_delete_folder(getTmpPath());
 
 	encounter_context ctx;
@@ -108,10 +108,10 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]")
 		const auto& contender = fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0);
 		REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).getNumberContender());
 		REQUIRE("TestMonsterSleep" == contender->get_name());
-		REQUIRE(100 == contender->getStatus().life.current);
-		REQUIRE(100 == contender->getStatus().life.total);
+		REQUIRE(100 == contender->get_status().life_pt.current);
+		REQUIRE(100 == contender->get_status().life_pt.total);
 
-		const auto& c = fighting_pit_announcer::get_pit_contenders(fp).getContenderOnSide(hexagon_side::orientation::B_S);
+		const auto& c = fighting_pit_announcer::get_pit_contenders(fp).get_contender_on_side(hexagon_side::orientation::B_S);
 		const auto& p = fighting_pit_announcer::get_party_teams(fp).get_members_by_side(hexagon_side::orientation::B_S);
 
 		REQUIRE(fp->is_joinable());
@@ -132,37 +132,37 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]")
 				// Player id 4 (at index 3) is going to slash the only opponent it has inflicting 42 damage
 				// The ennemy total life is 100, goes to 58
 				fp->continue_battle(now);
-				REQUIRE(58 == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->getStatus().life.current);
-				REQUIRE(100 == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->getStatus().life.total);
+				REQUIRE(58 == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->get_status().life_pt.current);
+				REQUIRE(100 == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->get_status().life_pt.total);
 
 				// Player id 3 (at index 2) is going to slash the only opponent it has inflicting 39 damage
 				// The ennemy total life is 100, current from 58 goes to 19
 				now += fys::arena::interval::EASY + 1ms;
 				fp->continue_battle(now);
-				REQUIRE(19 == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->getStatus().life.current);
-				REQUIRE(100 == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->getStatus().life.total);
+				REQUIRE(19 == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->get_status().life_pt.current);
+				REQUIRE(100 == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->get_status().life_pt.total);
 
 				// Contender id 0 is going to Sleep and so restore 40 hp
 				// The ennemy total life is 100, current from 19 goes to 59
 				now += fys::arena::interval::EASY + 1ms;
 				fp->continue_battle(now);
-				REQUIRE(59 == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->getStatus().life.current);
-				REQUIRE(100 == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->getStatus().life.total);
+				REQUIRE(59 == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->get_status().life_pt.current);
+				REQUIRE(100 == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->get_status().life_pt.total);
 
 				// Player id 2 (at index 1) is going to slash the only opponent it has inflicting 36 damage
 				// The ennemy total life is 100, current from 59 goes to 23
 				now += fys::arena::interval::EASY + 1ms;
 				fp->continue_battle(now);
-				REQUIRE(23 == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->getStatus().life.current);
-				REQUIRE(100 == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->getStatus().life.total);
+				REQUIRE(23 == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->get_status().life_pt.current);
+				REQUIRE(100 == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->get_status().life_pt.total);
 
 				// Player id 2 (at index 1) is going to slash the only opponent it has inflicting 33 damage
 				// The ennemy total life is 100, current from 23 goes to 0 (overkill)
 				now += fys::arena::interval::EASY + 1ms;
 				REQUIRE(fighting_pit_announcer::is_on_going(fp));
 				fp->continue_battle(now);
-				REQUIRE(0 == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->getStatus().life.current);
-				REQUIRE(100 == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->getStatus().life.total);
+				REQUIRE(0 == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->get_status().life_pt.current);
+				REQUIRE(100 == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->get_status().life_pt.total);
 
 				// Battle ended checks
 				REQUIRE_FALSE(fighting_pit_announcer::is_on_going(fp));
@@ -196,11 +196,11 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]")
 		fpa.set_creator_user_name("Loser");
 		fpa.set_creator_user_token("LoserToken");
 		auto partyTeam = getPartyTeam("Loser");
-		partyTeam->access_team_members().at(0)->access_status().magic_point.current = 0;
-		partyTeam->access_team_members().at(1)->access_status().magic_point.current = 0;
-		partyTeam->access_team_members().at(2)->access_status().magic_point.current = 0;
-		partyTeam->access_team_members().at(2)->access_status().life.current = 99; // set to the lowest life in order to ensure as target
-		partyTeam->access_team_members().at(3)->access_status().magic_point.current = 0;
+		partyTeam->access_team_members().at(0)->access_status().magic_pt.current = 0;
+		partyTeam->access_team_members().at(1)->access_status().magic_pt.current = 0;
+		partyTeam->access_team_members().at(2)->access_status().magic_pt.current = 0;
+		partyTeam->access_team_members().at(2)->access_status().life_pt.current = 99; // set to the lowest life in order to ensure as target
+		partyTeam->access_team_members().at(3)->access_status().magic_pt.current = 0;
 		fpa.set_creator_team_party(std::move(partyTeam));
 		fpa.set_difficulty(fighting_pit::level::EASY);
 		fpa.set_encounter_type(fighting_pit_announcer::encounter_type::RANDOM);
@@ -216,30 +216,30 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]")
 
 		REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).getNumberContender());
 		const auto& contender = fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0);
-		const auto& c = fighting_pit_announcer::get_pit_contenders(fp).getContenderOnSide(hexagon_side::orientation::B_S);
+		const auto& c = fighting_pit_announcer::get_pit_contenders(fp).get_contender_on_side(hexagon_side::orientation::B_S);
 		const auto& p = fighting_pit_announcer::get_party_teams(fp).get_members_by_side(hexagon_side::orientation::B_S);
 
 		SECTION("Initial setup") {
 			REQUIRE("TestMonsterAttack" == contender->get_name());
 			REQUIRE(4 == fp->get_party_team_of_player("Loser").get_team_members().size());
-			REQUIRE(100 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life.current);
-			REQUIRE(100 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life.total);
-			REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_point.current);
-			REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life.current);
-			REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life.total);
-			REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_point.current);
-			REQUIRE(99 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life.current); // <<< LOWEST LIFE TARGET
-			REQUIRE(550 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life.total);
-			REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_point.current);
-			REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life.current);
-			REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life.total);
-			REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_point.current);
+			REQUIRE(100 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life_pt.current);
+			REQUIRE(100 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life_pt.total);
+			REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_pt.current);
+			REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life_pt.current);
+			REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life_pt.total);
+			REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_pt.current);
+			REQUIRE(99 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life_pt.current); // <<< LOWEST LIFE TARGET
+			REQUIRE(550 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life_pt.total);
+			REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_pt.current);
+			REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life_pt.current);
+			REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life_pt.total);
+			REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_pt.current);
 
 			REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).getNumberContender());
-			REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).contenderOnSide(hexagon_side::orientation::B_S));
+			REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).contender_on_side(hexagon_side::orientation::B_S));
 			REQUIRE(4 == fighting_pit_announcer::get_party_teams(fp).get_number_ally());
 
-			REQUIRE(8 == c.at(0)->getStatus().initial_speed);
+			REQUIRE(8 == c.at(0)->get_status().initial_speed);
 			REQUIRE(3 == p.at(0)->get_status().initial_speed);
 			REQUIRE(5 == p.at(1)->get_status().initial_speed);
 			REQUIRE(10 == p.at(2)->get_status().initial_speed);
@@ -280,17 +280,17 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]")
 			try {
 				// Player id 4 (at index 3) is going to meditate, restore 40 mp, from 0 mp to 10 (max mp 10)
 				fp->continue_battle(now);
-				REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().magic_point.current);
-				REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().magic_point.current);
-				REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_point.current);
-				REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_point.current);
+				REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().magic_pt.current);
+				REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().magic_pt.current);
+				REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_pt.current);
+				REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_pt.current);
 
 				// Player id 3 (at index 2) is going to meditate, restore 30 mp, from 0 mp to 10 (max mp 10)
 				now += fys::arena::interval::EASY + 1ms;
 				fp->continue_battle(now);
-				REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().magic_point.current);
-				REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_point.current);
-				REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_point.current);
+				REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().magic_pt.current);
+				REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_pt.current);
+				REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_pt.current);
 
 				// Contender turn : Target lowest life opponent:
 				// ally id 1  =  100
@@ -299,28 +299,28 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]")
 				// ally id 4  =  140
 				now += fys::arena::interval::EASY + 1ms;
 				fp->continue_battle(now);
-				REQUIRE(9 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life.current); // damage inflicted
-				REQUIRE(550 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life.total);
+				REQUIRE(9 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life_pt.current); // damage inflicted
+				REQUIRE(550 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life_pt.total);
 
 				// Stay same
-				REQUIRE(100 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life.current);
-				REQUIRE(100 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life.total);
-				REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life.current);
-				REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life.total);
-				REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life.current);
-				REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life.total);
+				REQUIRE(100 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life_pt.current);
+				REQUIRE(100 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life_pt.total);
+				REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life_pt.current);
+				REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life_pt.total);
+				REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life_pt.current);
+				REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life_pt.total);
 
 				// Player id 2 (at index 1) is going to meditate, restore 20 mp, from 0 mp to 0 (max mp 0)
 				now += fys::arena::interval::EASY + 1ms;
 				fp->continue_battle(now);
-				REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_point.current);
-				REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_point.current);
+				REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_pt.current);
+				REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_pt.current);
 
 				// Player id 1 (at index 0) is going to meditate, restore 10 mp, from 0 mp to 10 (max mp 20)
 				now += fys::arena::interval::EASY + 1ms;
 				REQUIRE(fighting_pit_announcer::is_on_going(fp));
 				fp->continue_battle(now);
-				REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_point.current);
+				REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_pt.current);
 
 				SECTION("Battle Turn 2 test") { // a4, a4, a3, c0, a2, c0, a1
 					p.at(1)->add_pending_action("meditate", std::nullopt);
@@ -330,26 +330,26 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]")
 					// Player id 4 (at index 3) is going to meditate, restore 20 mp, from 10 mp to 10 (max mp 10)
 					now += fys::arena::interval::EASY + 1ms;
 					fp->continue_battle(now);
-					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().magic_point.current);
-					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().magic_point.current);
-					REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_point.current);
-					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_point.current);
+					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().magic_pt.current);
+					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().magic_pt.current);
+					REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_pt.current);
+					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_pt.current);
 
 					// Player id 4 (at index 3) is going to meditate, restore 20 mp, from 10 mp to 10 (max mp 10)
 					now += fys::arena::interval::EASY + 1ms;
 					fp->continue_battle(now);
-					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().magic_point.current);
-					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().magic_point.current);
-					REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_point.current);
-					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_point.current);
+					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().magic_pt.current);
+					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().magic_pt.current);
+					REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_pt.current);
+					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_pt.current);
 
 					// Player id 3 (at index 2) is going to meditate, restore 30 mp, from 10 mp to 10 (max mp 10)
 					now += fys::arena::interval::EASY + 1ms;
 					fp->continue_battle(now);
-					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().magic_point.current);
-					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().magic_point.current);
-					REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_point.current);
-					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_point.current);
+					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().magic_pt.current);
+					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().magic_pt.current);
+					REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_pt.current);
+					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_pt.current);
 
 					// Contender turn : Target lowest life opponent:
 					// ally id 1  =  100
@@ -358,25 +358,25 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]")
 					// ally id 4  =  140
 					now += fys::arena::interval::EASY + 1ms;
 					fp->continue_battle(now);
-					REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life.current);
-					REQUIRE(fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life.isDead());
+					REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life_pt.current);
+					REQUIRE(fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life_pt.is_dead());
 					// Stay same
-					REQUIRE(100 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life.current); // damage inflicted
-					REQUIRE(100 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life.total);
-					REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life.current);
-					REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life.total);
-					REQUIRE(550 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life.total);
-					REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life.current);
-					REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life.total);
+					REQUIRE(100 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life_pt.current); // damage inflicted
+					REQUIRE(100 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life_pt.total);
+					REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life_pt.current);
+					REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life_pt.total);
+					REQUIRE(550 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life_pt.total);
+					REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life_pt.current);
+					REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life_pt.total);
 					// Player died and is not in game anymore, he won't play next turn
 
 					// Player id 2 (at index 1) is going to meditate, restore 10 mp, from 0 mp to 0 (max mp 0)
 					now += fys::arena::interval::EASY + 1ms;
 					fp->continue_battle(now);
-					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().magic_point.current);
-					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().magic_point.current);
-					REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_point.current);
-					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_point.current);
+					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().magic_pt.current);
+					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().magic_pt.current);
+					REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_pt.current);
+					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_pt.current);
 
 					// Contender turn : Target lowest life opponent:
 					// ally id 1  =  100 << target from 100 to 10
@@ -385,24 +385,24 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]")
 					// ally id 4  =  140
 					now += fys::arena::interval::EASY + 1ms;
 					fp->continue_battle(now);
-					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life.current); // damage inflicted
-					REQUIRE(100 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life.total);
+					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life_pt.current); // damage inflicted
+					REQUIRE(100 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life_pt.total);
 					// Stay same
-					REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life.current);
-					REQUIRE(fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life.isDead());
-					REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life.current);
-					REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life.total);
-					REQUIRE(550 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life.total);
-					REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life.current);
-					REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life.total);
+					REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life_pt.current);
+					REQUIRE(fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life_pt.is_dead());
+					REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life_pt.current);
+					REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life_pt.total);
+					REQUIRE(550 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life_pt.total);
+					REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life_pt.current);
+					REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life_pt.total);
 
 					// Player id 1 (at index 0) is going to meditate, restore 10 mp, from 10 mp to 10 (max mp 10)
 					now += fys::arena::interval::EASY + 1ms;
 					fp->continue_battle(now);
-					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().magic_point.current);
-					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().magic_point.current);
-					REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_point.current);
-					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_point.current);
+					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().magic_pt.current);
+					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().magic_pt.current);
+					REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_pt.current);
+					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_pt.current);
 
 					SECTION("Battle turn 3 test") {
 						p.at(0)->add_pending_action("meditate", std::nullopt);
@@ -416,17 +416,17 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]")
 						// Contender
 						now += fys::arena::interval::EASY + 1ms;
 						fp->continue_battle(now);
-						REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life.current); // damage inflicted
-						REQUIRE(fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life.isDead());
-						REQUIRE(100 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life.total);
+						REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life_pt.current); // damage inflicted
+						REQUIRE(fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life_pt.is_dead());
+						REQUIRE(100 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life_pt.total);
 						// Stay same
-						REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life.current);
-						REQUIRE(fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life.isDead());
-						REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life.current);
-						REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life.total);
-						REQUIRE(550 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life.total);
-						REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life.current);
-						REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life.total);
+						REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life_pt.current);
+						REQUIRE(fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life_pt.is_dead());
+						REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life_pt.current);
+						REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life_pt.total);
+						REQUIRE(550 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life_pt.total);
+						REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life_pt.current);
+						REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life_pt.total);
 
 						// Player id 2 (at index 1)
 						now += fys::arena::interval::EASY + 1ms;
@@ -475,7 +475,7 @@ TEST_CASE("FightingPitTestCase Move test", "[service][arena]")
 	auto fseamMock = FSeam::getDefault<fys::util::random_generator>();
 	fys::common::connection_handler handler{};
 	auto fseamConnectionHandlerMock = FSeam::get(&handler);
-	auto cml = CmlBaseCopy(getTmpPath(), getLocalPathStorage());
+	auto cml = CmlBaseCopy(getTmpPath(), local_path_storage());
 	DeleteFolderWhenDone raii_delete_folder(getTmpPath());
 
 	encounter_context ctx;
@@ -501,11 +501,11 @@ TEST_CASE("FightingPitTestCase Move test", "[service][arena]")
 		fpa.set_creator_user_name("Loser");
 		fpa.set_creator_user_token("LoserToken");
 		auto partyTeam = getPartyTeam("Loser");
-		partyTeam->access_team_members().at(0)->access_status().magic_point.current = 0;
-		partyTeam->access_team_members().at(1)->access_status().magic_point.current = 0;
-		partyTeam->access_team_members().at(2)->access_status().magic_point.current = 0;
-		partyTeam->access_team_members().at(2)->access_status().life.current = 99; // set to the lowest life in order to ensure as target
-		partyTeam->access_team_members().at(3)->access_status().magic_point.current = 0;
+		partyTeam->access_team_members().at(0)->access_status().magic_pt.current = 0;
+		partyTeam->access_team_members().at(1)->access_status().magic_pt.current = 0;
+		partyTeam->access_team_members().at(2)->access_status().magic_pt.current = 0;
+		partyTeam->access_team_members().at(2)->access_status().life_pt.current = 99; // set to the lowest life in order to ensure as target
+		partyTeam->access_team_members().at(3)->access_status().magic_pt.current = 0;
 		fpa.set_creator_team_party(std::move(partyTeam));
 		fpa.set_difficulty(fighting_pit::level::EASY);
 		fpa.set_encounter_type(fighting_pit_announcer::encounter_type::RANDOM);
@@ -516,27 +516,27 @@ TEST_CASE("FightingPitTestCase Move test", "[service][arena]")
 
 		REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).getNumberContender());
 		const auto& contender = fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0);
-		const auto& c = fighting_pit_announcer::get_pit_contenders(fp).getContenderOnSide(hexagon_side::orientation::B_S);
+		const auto& c = fighting_pit_announcer::get_pit_contenders(fp).get_contender_on_side(hexagon_side::orientation::B_S);
 		const auto& p = fighting_pit_announcer::get_party_teams(fp).get_members_by_side(hexagon_side::orientation::B_S);
 
 		SECTION("Initial setup") {
 			REQUIRE("TestMonsterMove" == contender->get_name());
 			REQUIRE(4 == fp->get_party_team_of_player("Loser").get_team_members().size());
-			REQUIRE(100 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life.current);
-			REQUIRE(100 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life.total);
-			REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_point.current);
-			REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life.current);
-			REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life.total);
-			REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_point.current);
-			REQUIRE(99 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life.current); // <<< LOWEST LIFE TARGET
-			REQUIRE(550 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life.total);
-			REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_point.current);
-			REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life.current);
-			REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life.total);
-			REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_point.current);
+			REQUIRE(100 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life_pt.current);
+			REQUIRE(100 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life_pt.total);
+			REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_pt.current);
+			REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life_pt.current);
+			REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life_pt.total);
+			REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_pt.current);
+			REQUIRE(99 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life_pt.current); // <<< LOWEST LIFE TARGET
+			REQUIRE(550 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life_pt.total);
+			REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_pt.current);
+			REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life_pt.current);
+			REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life_pt.total);
+			REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_pt.current);
 
 			REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).getNumberContender());
-			REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).contenderOnSide(hexagon_side::orientation::B_S));
+			REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).contender_on_side(hexagon_side::orientation::B_S));
 			REQUIRE(4 == fighting_pit_announcer::get_party_teams(fp).get_number_ally());
 
 			const auto& doableActions =
@@ -545,7 +545,7 @@ TEST_CASE("FightingPitTestCase Move test", "[service][arena]")
 			REQUIRE(1 == doableActions.size());
 			REQUIRE("test:key:1" == doableActions.at(0));
 
-			REQUIRE(8 == c.at(0)->getStatus().initial_speed);
+			REQUIRE(8 == c.at(0)->get_status().initial_speed);
 			REQUIRE(3 == p.at(0)->get_status().initial_speed);
 			REQUIRE(5 == p.at(1)->get_status().initial_speed);
 			REQUIRE(10 == p.at(2)->get_status().initial_speed);
@@ -609,7 +609,7 @@ TEST_CASE("FightingPitTestCase Simple Alteration test", "[service][arena]")
 	auto fseamMock = FSeam::getDefault<fys::util::random_generator>();
 	fys::common::connection_handler handler{};
 	auto fseamConnectionHandlerMock = FSeam::get(&handler);
-	auto cml = CmlBaseCopy(getTmpPath(), getLocalPathStorage());
+	auto cml = CmlBaseCopy(getTmpPath(), local_path_storage());
 	DeleteFolderWhenDone raii_delete_folder(getTmpPath());
 
 	encounter_context ctx;
@@ -635,11 +635,11 @@ TEST_CASE("FightingPitTestCase Simple Alteration test", "[service][arena]")
 		fpa.set_creator_user_name("Loser");
 		fpa.set_creator_user_token("LoserToken");
 		auto partyTeam = getPartyTeam("Loser");
-		partyTeam->access_team_members().at(0)->access_status().magic_point.current = 0;
-		partyTeam->access_team_members().at(1)->access_status().magic_point.current = 0;
-		partyTeam->access_team_members().at(2)->access_status().magic_point.current = 0;
-		partyTeam->access_team_members().at(2)->access_status().life.current = 99; // set to the lowest life in order to ensure as target
-		partyTeam->access_team_members().at(3)->access_status().magic_point.current = 0;
+		partyTeam->access_team_members().at(0)->access_status().magic_pt.current = 0;
+		partyTeam->access_team_members().at(1)->access_status().magic_pt.current = 0;
+		partyTeam->access_team_members().at(2)->access_status().magic_pt.current = 0;
+		partyTeam->access_team_members().at(2)->access_status().life_pt.current = 99; // set to the lowest life in order to ensure as target
+		partyTeam->access_team_members().at(3)->access_status().magic_pt.current = 0;
 		fpa.set_creator_team_party(std::move(partyTeam));
 		fpa.set_difficulty(fighting_pit::level::EASY);
 		fpa.set_encounter_type(fighting_pit_announcer::encounter_type::RANDOM);
@@ -655,27 +655,27 @@ TEST_CASE("FightingPitTestCase Simple Alteration test", "[service][arena]")
 
 		REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).getNumberContender());
 		const auto& contender = fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0);
-		const auto& c = fighting_pit_announcer::get_pit_contenders(fp).getContenderOnSide(hexagon_side::orientation::B_S);
+		const auto& c = fighting_pit_announcer::get_pit_contenders(fp).get_contender_on_side(hexagon_side::orientation::B_S);
 		const auto& p = fighting_pit_announcer::get_party_teams(fp).get_members_by_side(hexagon_side::orientation::B_S);
 
 		SECTION("Initial setup") {
 			REQUIRE("TestMonsterPoison" == contender->get_name());
 			REQUIRE(4 == fp->get_party_team_of_player("Loser").get_team_members().size());
-			REQUIRE(100 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life.current);
-			REQUIRE(100 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life.total);
-			REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_point.current);
-			REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life.current);
-			REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life.total);
-			REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_point.current);
-			REQUIRE(99 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life.current); // <<< LOWEST LIFE TARGET
-			REQUIRE(550 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life.total);
-			REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_point.current);
-			REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life.current);
-			REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life.total);
-			REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_point.current);
+			REQUIRE(100 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life_pt.current);
+			REQUIRE(100 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life_pt.total);
+			REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_pt.current);
+			REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life_pt.current);
+			REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life_pt.total);
+			REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_pt.current);
+			REQUIRE(99 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life_pt.current); // <<< LOWEST LIFE TARGET
+			REQUIRE(550 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life_pt.total);
+			REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_pt.current);
+			REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life_pt.current);
+			REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life_pt.total);
+			REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_pt.current);
 
 			REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).getNumberContender());
-			REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).contenderOnSide(hexagon_side::orientation::B_S));
+			REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).contender_on_side(hexagon_side::orientation::B_S));
 			REQUIRE(4 == fighting_pit_announcer::get_party_teams(fp).get_number_ally());
 
 			const auto& doableActions =
@@ -684,7 +684,7 @@ TEST_CASE("FightingPitTestCase Simple Alteration test", "[service][arena]")
 			REQUIRE(1 == doableActions.size());
 			REQUIRE("test:key:1" == doableActions.at(0));
 
-			REQUIRE(8 == c.at(0)->getStatus().initial_speed);
+			REQUIRE(8 == c.at(0)->get_status().initial_speed);
 			REQUIRE(3 == p.at(0)->get_status().initial_speed);
 			REQUIRE(5 == p.at(1)->get_status().initial_speed);
 			REQUIRE(10 == p.at(2)->get_status().initial_speed);
@@ -710,17 +710,17 @@ TEST_CASE("FightingPitTestCase Simple Alteration test", "[service][arena]")
 			try {
 				// Player id 4 (at index 3) is going to meditate, restore 40 mp, from 0 mp to 10 (max mp 10)
 				fp->continue_battle(now);
-				REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().magic_point.current);
-				REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().magic_point.current);
-				REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_point.current);
-				REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_point.current);
+				REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().magic_pt.current);
+				REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().magic_pt.current);
+				REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_pt.current);
+				REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_pt.current);
 
 				// Player id 3 (at index 2) is going to meditate, restore 30 mp, from 0 mp to 10 (max mp 10)
 				now += fys::arena::interval::EASY + 1ms;
 				fp->continue_battle(now);
-				REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().magic_point.current);
-				REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_point.current);
-				REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_point.current);
+				REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().magic_pt.current);
+				REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_pt.current);
+				REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_pt.current);
 
 				// Contender turn : Target lowest life opponent:
 				// ally id 1  =  100
@@ -733,7 +733,7 @@ TEST_CASE("FightingPitTestCase Simple Alteration test", "[service][arena]")
 				REQUIRE("test:alterations:MortalPoison" ==
 						fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().alteration_before.at(0).get_alteration_key());
 				REQUIRE(2 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().alteration_before.at(0).getTurn());
-				REQUIRE_FALSE(fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life.isDead());
+				REQUIRE_FALSE(fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life_pt.is_dead());
 				// Stay same
 				REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().alteration_before.size());
 				REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().alteration_before.size());
@@ -742,15 +742,15 @@ TEST_CASE("FightingPitTestCase Simple Alteration test", "[service][arena]")
 				// Player id 2 (at index 1) is going to meditate, restore 20 mp, from 0 mp to 0 (max mp 0)
 				now += fys::arena::interval::EASY + 1ms;
 				fp->continue_battle(now);
-				REQUIRE_FALSE(fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life.isDead());
-				REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_point.current);
-				REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_point.current);
+				REQUIRE_FALSE(fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life_pt.is_dead());
+				REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_pt.current);
+				REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_pt.current);
 
 				// Player id 1 (at index 0) is going to meditate, restore 10 mp, from 0 mp to 10 (max mp 20)
 				now += fys::arena::interval::EASY + 1ms;
 				REQUIRE(fighting_pit_announcer::is_on_going(fp));
 				fp->continue_battle(now);
-				REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_point.current);
+				REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_pt.current);
 
 				SECTION("Battle Turn 2 test") { // a4, a4, a3, c0, a2, c0, a1
 					p.at(1)->add_pending_action("meditate", std::nullopt);
@@ -760,18 +760,18 @@ TEST_CASE("FightingPitTestCase Simple Alteration test", "[service][arena]")
 					// Player id 4 (at index 3) is going to meditate, restore 20 mp, from 10 mp to 10 (max mp 10)
 					now += fys::arena::interval::EASY + 1ms;
 					fp->continue_battle(now);
-					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().magic_point.current);
-					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().magic_point.current);
-					REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_point.current);
-					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_point.current);
+					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().magic_pt.current);
+					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().magic_pt.current);
+					REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_pt.current);
+					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_pt.current);
 
 					// Player id 4 (at index 3) is going to meditate, restore 20 mp, from 10 mp to 10 (max mp 10)
 					now += fys::arena::interval::EASY + 1ms;
 					fp->continue_battle(now);
-					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().magic_point.current);
-					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().magic_point.current);
-					REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_point.current);
-					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_point.current);
+					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().magic_pt.current);
+					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().magic_pt.current);
+					REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_pt.current);
+					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_pt.current);
 
 					// Player id 3 (at index 2) is going to meditate, restore 30 mp, from 10 mp to 10 (max mp 10)
 					now += fys::arena::interval::EASY + 1ms;
@@ -781,10 +781,10 @@ TEST_CASE("FightingPitTestCase Simple Alteration test", "[service][arena]")
 							fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().alteration_before.at(0).get_alteration_key());
 					REQUIRE(1 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().alteration_before.at(0).getTurn());
 
-					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().magic_point.current);
-					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().magic_point.current);
-					REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_point.current);
-					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_point.current);
+					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().magic_pt.current);
+					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().magic_pt.current);
+					REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_pt.current);
+					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_pt.current);
 
 					// Contender turn : Target lowest life opponent:
 					// ally id 1  =  100
@@ -798,24 +798,24 @@ TEST_CASE("FightingPitTestCase Simple Alteration test", "[service][arena]")
 							fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().alteration_before.at(0).get_alteration_key());
 					// no re-apply of the poison
 					REQUIRE(1 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().alteration_before.at(0).getTurn());
-					REQUIRE_FALSE(fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life.isDead());
+					REQUIRE_FALSE(fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life_pt.is_dead());
 					// Stay same
-					REQUIRE(100 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life.current); // damage inflicted
-					REQUIRE(100 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life.total);
-					REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life.current);
-					REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life.total);
-					REQUIRE(550 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life.total);
-					REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life.current);
-					REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life.total);
+					REQUIRE(100 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life_pt.current); // damage inflicted
+					REQUIRE(100 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().life_pt.total);
+					REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life_pt.current);
+					REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life_pt.total);
+					REQUIRE(550 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life_pt.total);
+					REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life_pt.current);
+					REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life_pt.total);
 					// Player died and is not in game anymore, he won't play next turn
 
 					// Player id 2 (at index 1) is going to meditate, restore 10 mp, from 0 mp to 0 (max mp 0)
 					now += fys::arena::interval::EASY + 1ms;
 					fp->continue_battle(now);
-					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().magic_point.current);
-					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().magic_point.current);
-					REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_point.current);
-					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_point.current);
+					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().magic_pt.current);
+					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().magic_pt.current);
+					REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_pt.current);
+					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_pt.current);
 
 					// Contender turn : Target lowest life opponent:
 					// ally id 1  =  100 << add poison
@@ -828,21 +828,21 @@ TEST_CASE("FightingPitTestCase Simple Alteration test", "[service][arena]")
 					REQUIRE("test:alterations:MortalPoison"
 							== fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().alteration_before.at(0).get_alteration_key());
 					REQUIRE(1 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().alteration_before.at(0).getTurn());
-					REQUIRE_FALSE(fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life.isDead());
+					REQUIRE_FALSE(fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life_pt.is_dead());
 					// Stay same
-					REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life.current);
-					REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life.total);
-					REQUIRE(550 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life.total);
-					REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life.current);
-					REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life.total);
+					REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life_pt.current);
+					REQUIRE(200 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().life_pt.total);
+					REQUIRE(550 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life_pt.total);
+					REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life_pt.current);
+					REQUIRE(140 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().life_pt.total);
 
 					// Player id 1 (at index 0) is going to meditate, restore 10 mp, from 10 mp to 10 (max mp 10)
 					now += fys::arena::interval::EASY + 1ms;
 					fp->continue_battle(now);
-					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().magic_point.current);
-					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().magic_point.current);
-					REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_point.current);
-					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_point.current);
+					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[3]->get_status().magic_pt.current);
+					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().magic_pt.current);
+					REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[1]->get_status().magic_pt.current);
+					REQUIRE(10 == fp->get_party_team_of_player("Loser").get_team_members()[0]->get_status().magic_pt.current);
 
 					SECTION("Battle turn 3 test") {
 						p.at(0)->add_pending_action("meditate", std::nullopt);
@@ -853,7 +853,7 @@ TEST_CASE("FightingPitTestCase Simple Alteration test", "[service][arena]")
 						now += fys::arena::interval::EASY + 1ms;
 						fp->continue_battle(now);
 
-						REQUIRE_FALSE(fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life.isDead());
+						REQUIRE_FALSE(fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life_pt.is_dead());
 						REQUIRE(1 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().alteration_before.size());
 						REQUIRE("test:alterations:MortalPoison"
 								== fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().alteration_before.at(0).get_alteration_key());
@@ -863,7 +863,7 @@ TEST_CASE("FightingPitTestCase Simple Alteration test", "[service][arena]")
 						now += fys::arena::interval::EASY + 1ms;
 						fp->continue_battle(now);
 
-						REQUIRE(fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life.isDead());
+						REQUIRE(fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().life_pt.is_dead());
 						REQUIRE(0 == fp->get_party_team_of_player("Loser").get_team_members()[2]->get_status().alteration_before.size());
 
 					} // End section : Battle turn 3 test

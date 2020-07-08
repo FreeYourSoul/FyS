@@ -27,7 +27,7 @@
 
 namespace {
 std::string
-getLocalPathStorage()
+local_path_storage()
 {
 	std::string file_path = __FILE__;
 	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
@@ -37,7 +37,7 @@ getLocalPathStorage()
 }
 
 std::string
-getCopyPathStorage()
+copy_path_storage()
 {
 	std::string file_path = __FILE__;
 	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
@@ -49,8 +49,8 @@ getCopyPathStorage()
 
 TEST_CASE("CmlCopy", "[common][cml_test]")
 {
-	fys::cache::CmlCopy ccpy(getLocalPathStorage(), getCopyPathStorage());
-	std::filesystem::path baseCache = getLocalPathStorage() + "/copy_folder";
+	fys::cache::CmlCopy ccpy(local_path_storage(), copy_path_storage());
+	std::filesystem::path baseCache = local_path_storage() + "/copy_folder";
 	std::filesystem::remove_all(baseCache);
 	REQUIRE_FALSE(std::filesystem::exists(baseCache));
 

@@ -33,9 +33,9 @@ CmlCopy::createUpToDateFileInLocalStorage(const CmlKey& cmlKey, std::filesystem:
 	std::error_code e;
 
 	// If the file doesn't exist yet, or if it is not up to date then remake it
-	if (!std::filesystem::exists(k.getPath()) || std::filesystem::last_write_time(k.getPath(), e) > cacheTime) {
-		std::filesystem::create_directories(cmlKey.getPath().parent_path(), e);
-		std::filesystem::copy(k.getPath(), cmlKey.getPath(), e);
+	if (!std::filesystem::exists(k.get_path()) || std::filesystem::last_write_time(k.get_path(), e) > cacheTime) {
+		std::filesystem::create_directories(cmlKey.get_path().parent_path(), e);
+		std::filesystem::copy(k.get_path(), cmlKey.get_path(), e);
 	}
 }
 

@@ -33,7 +33,7 @@ using namespace fys::arena;
 using namespace fys::fb::arn;
 
 [[nodiscard]] static SideOrient
-convertArenaOrientToFb(hexagon_side::orientation orient)
+convert_arena_orient_to_fb(hexagon_side::orientation orient)
 {
 	switch (orient) {
 		case hexagon_side::orientation::A_N: return SideOrient_A_N;

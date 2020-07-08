@@ -43,7 +43,7 @@ public:
 
 namespace {
 std::string
-getLocalPathStorage()
+local_path_storage()
 {
 	std::string file_path = __FILE__;
 	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
@@ -57,7 +57,7 @@ using namespace std::chrono_literals;
 
 TEST_CASE("findInCache for Basic CML", "[cml_test]")
 {
-	CmlBaseTest cbt(getLocalPathStorage());
+	CmlBaseTest cbt(local_path_storage());
 
 	SECTION("Test call of createFileInLocalStorage") {
 		cbt.findInCache("inner_folder:testKO");
@@ -121,10 +121,10 @@ John Keats)d";
 
 TEST_CASE("isInLocalStorageAndUpToDate for Basic CML", "[cml_test]")
 {
-	CmlBaseTest cbt(getLocalPathStorage());
-	const fys::cache::CmlKey key1 = fys::cache::CmlKey{getLocalPathStorage(), "test1"};
-	const fys::cache::CmlKey key2 = fys::cache::CmlKey{getLocalPathStorage(), "inner_folder:test2"};
-	const fys::cache::CmlKey key3 = fys::cache::CmlKey{getLocalPathStorage(), "inner_folder:inner_folder_1:test3"};
+	CmlBaseTest cbt(local_path_storage());
+	const fys::cache::CmlKey key1 = fys::cache::CmlKey{local_path_storage(), "test1"};
+	const fys::cache::CmlKey key2 = fys::cache::CmlKey{local_path_storage(), "inner_folder:test2"};
+	const fys::cache::CmlKey key3 = fys::cache::CmlKey{local_path_storage(), "inner_folder:inner_folder_1:test3"};
 
 	// Get from filesystem and store in memcache
 	cbt.findInCache("test1");
@@ -181,7 +181,7 @@ TEST_CASE("isInLocalStorageAndUpToDate for Basic CML", "[cml_test]")
 	} // End Section : isInLocalStorageAndUpToDate false: Not in memCache
 
 	SECTION("createFile") {
-		std::filesystem::path pathToCreate(getLocalPathStorage() + "/imaginary");
+		std::filesystem::path pathToCreate(local_path_storage() + "/imaginary");
 		std::filesystem::path basePath = pathToCreate;
 		std::filesystem::remove_all(basePath);
 

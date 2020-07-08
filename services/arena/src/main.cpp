@@ -40,7 +40,7 @@ main(int ac, char** av)
 		fys::arena::arena_server_service serverService(ctx);
 		fys::arena::history_manager::setHistoricManagerOn(true);
 
-		serverService.runServerLoop();
+		serverService.run_server_loop();
 	}
 	catch (const std::exception& e) {
 		SPDLOG_ERROR("Main caught an exception: {}", e.what());

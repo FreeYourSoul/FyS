@@ -47,7 +47,7 @@ getPathSampyChaiScript()
 }
 
 std::string
-getLocalPathStorage()
+local_path_storage()
 {
 	std::string file_path = __FILE__;
 	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
@@ -57,7 +57,7 @@ getLocalPathStorage()
 }
 
 std::string
-getCopyPathStorage()
+copy_path_storage()
 {
 	std::string file_path = __FILE__;
 	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
@@ -70,8 +70,8 @@ getCopyPathStorage()
 TEST_CASE("test heal chaiscript", "[service][arena][script_test]")
 {
 
-	fys::cache::CmlCopy ccpy(getLocalPathStorage(), getCopyPathStorage());
-	std::filesystem::path baseCache = getLocalPathStorage();
+	fys::cache::CmlCopy ccpy(local_path_storage(), copy_path_storage());
+	std::filesystem::path baseCache = local_path_storage();
 
 	fys::arena::pit_contenders pc;
 	fys::arena::ally_party_teams apt;
@@ -85,22 +85,22 @@ TEST_CASE("test heal chaiscript", "[service][arena][script_test]")
 	sampy->load_contender_script_from_file(getPathSampyChaiScript());
 
 	auto fpc = std::make_shared<fys::arena::fighting_contender>(std::move(sampy));
-	REQUIRE(pc.addContender(fpc));
+	REQUIRE(pc.add_contender(fpc));
 
 	SECTION("Test initialization contender") {
 		REQUIRE(8 == pc.getFightingContender(0)->access_status().initial_speed);
-		REQUIRE(153 == pc.getFightingContender(0)->access_status().life.current);
-		REQUIRE(153 == pc.getFightingContender(0)->access_status().life.total);
-		REQUIRE(100 == pc.getFightingContender(0)->access_status().magic_point.total);
-		REQUIRE(100 == pc.getFightingContender(0)->access_status().magic_point.total);
+		REQUIRE(153 == pc.getFightingContender(0)->access_status().life_pt.current);
+		REQUIRE(153 == pc.getFightingContender(0)->access_status().life_pt.total);
+		REQUIRE(100 == pc.getFightingContender(0)->access_status().magic_pt.total);
+		REQUIRE(100 == pc.getFightingContender(0)->access_status().magic_pt.total);
 	}
 
 	fys::arena::party_team partyTeam("FyS");
 	fys::arena::team_member_sptr tm1 = std::make_shared<fys::arena::team_member>(partyTeam.get_user_name(), "fyston1");
 	auto& st = tm1->access_status();
 	st.initial_speed = 100;
-	st.magic_point = {1337, 1337};
-	st.life = {42, 42};
+	st.magic_pt = {1337, 1337};
+	st.life_pt = {42, 42};
 
 	SECTION("test light_heal chaiscript") {
 
@@ -111,7 +111,7 @@ TEST_CASE("test heal chaiscript", "[service][arena][script_test]")
 
 		SECTION("test heal") {
 
-			pc.getFightingContender(0)->access_status().life.current = 100;
+			pc.getFightingContender(0)->access_status().life_pt.current = 100;
 
 			try {
 				chai->eval(R"(
@@ -124,14 +124,14 @@ s.execute(contender);
 				SPDLOG_ERROR("{}", ex.what());
 				FAIL("Chaiscript : Shouldn't fail here");
 			}
-			REQUIRE(133 == pc.getFightingContender(0)->access_status().life.current); // +33 life
-			REQUIRE(153 == pc.getFightingContender(0)->access_status().life.total);
+			REQUIRE(133 == pc.getFightingContender(0)->access_status().life_pt.current); // +33 life
+			REQUIRE(153 == pc.getFightingContender(0)->access_status().life_pt.total);
 
 		} // End section : test heal
 
 		SECTION("test over healing ") {
 
-			pc.getFightingContender(0)->access_status().life.current = 140;
+			pc.getFightingContender(0)->access_status().life_pt.current = 140;
 
 			try {
 				chai->eval(R"(
@@ -144,8 +144,8 @@ s.execute(contender);
 				SPDLOG_ERROR("{}", ex.what());
 				FAIL("Chaiscript : Shouldn't fail here");
 			}
-			REQUIRE(153 == pc.getFightingContender(0)->access_status().life.current); // +33 life > go to max
-			REQUIRE(153 == pc.getFightingContender(0)->access_status().life.total);
+			REQUIRE(153 == pc.getFightingContender(0)->access_status().life_pt.current); // +33 life > go to max
+			REQUIRE(153 == pc.getFightingContender(0)->access_status().life_pt.total);
 
 		} // End section : test over healing
 

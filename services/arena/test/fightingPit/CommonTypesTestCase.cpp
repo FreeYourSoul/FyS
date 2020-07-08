@@ -35,10 +35,10 @@ TEST_CASE("CommonTypesTestCase getActionNameFromKey test", "[service][arena]")
 
 TEST_CASE("CommonTypesTestCase getAlternateNameFromKey test", "[service][arena]")
 {
-	REQUIRE("alteration_popo" == fys::arena::data::getAlterationNameFromKey("tete:tete:www:oo:popo.chai"));
-	REQUIRE("alteration_popo" == fys::arena::data::getAlterationNameFromKey("tete:tete:www:oo:popo"));
-	REQUIRE("alteration_popo" == fys::arena::data::getAlterationNameFromKey("popo.chai"));
-	REQUIRE("alteration_popo" == fys::arena::data::getAlterationNameFromKey("popo"));
+	REQUIRE("alteration_popo" == fys::arena::data::get_alteration_name_from_key("tete:tete:www:oo:popo.chai"));
+	REQUIRE("alteration_popo" == fys::arena::data::get_alteration_name_from_key("tete:tete:www:oo:popo"));
+	REQUIRE("alteration_popo" == fys::arena::data::get_alteration_name_from_key("popo.chai"));
+	REQUIRE("alteration_popo" == fys::arena::data::get_alteration_name_from_key("popo"));
 
 } // End TestCase : getAlternateNameFromKey test
 

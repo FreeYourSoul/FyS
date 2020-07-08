@@ -32,11 +32,11 @@
 #include <random_generator.hh>
 
 #include <fightingPit/contender/fighting_contender.hh>
-#include <fightingPit/contender/PitContenders.hh>
-#include <fightingPit/team/TeamMember.hh>
-#include <fightingPit/team/AllyPartyTeams.hh>
-#include <fightingPit/team/PartyTeam.hh>
-#include <fightingPit/data/CommonTypes.hh>
+#include <fightingPit/contender/pit_contenders.hh>
+#include <fightingPit/team/team_member.hh>
+#include <fightingPit/team/ally_party_teams.hh>
+#include <fightingPit/team/party_team.hh>
+#include <fightingPit/data/common_types.hh>
 
 #include <connection_handler.hh>
 #include <chai_register.hh>
@@ -48,7 +48,8 @@ using chaiscript::fun;
 namespace fys::arena {
 
 void
-chai_register::register_chai(chaiscript::ChaiScript& chai, PitContenders& pc, AllyPartyTeams& apt, FightingPitLayout& layout)
+chai_register::register_chai(chaiscript::ChaiScript& chai, pit_contenders& pc,
+		ally_party_teams& apt, fighting_pit_layout& layout)
 {
 	try {
 		chaiscript::ModulePtr m = std::make_shared<chaiscript::Module>();
@@ -98,12 +99,12 @@ chai_register::register_base_actions(chaiscript::ChaiScript& chai, cache::Cml& c
 }
 
 bool
-chai_register::load_register_action_party_team(chaiscript::ChaiScript& chai, cache::Cml& cache, PartyTeam& pt)
+chai_register::load_register_action_party_team(chaiscript::ChaiScript& chai, cache::Cml& cache, party_team& pt)
 {
 	try {
 		// Load actions and register Members
-		for (auto& tm : pt.getTeamMembers()) {
-			const auto& actionsDoable = tm->getActionsDoable();
+		for (auto& tm : pt.get_team_members()) {
+			const auto& actionsDoable = tm->get_actions_doable();
 
 			for (const auto &[key, lvl] : actionsDoable) {
 
@@ -111,8 +112,8 @@ chai_register::load_register_action_party_team(chaiscript::ChaiScript& chai, cac
 				load_with_includes(chai, cache, std::set{key});
 
 				// instantiate the action variable for given team member in chai engine
-				const std::string keyPlayer = std::string(pt.getUserName()).append("_").append(tm->getName());
-				const std::string actionName = data::getActionNameFromKey(key);
+				const std::string keyPlayer = std::string(pt.get_user_name()).append("_").append(tm->get_name());
+				const std::string actionName = data::get_action_name_from_key(key);
 				std::string createVar = fmt::format(
 						R"(ally_actions.insert( ["{}":[ "{}":{}({}) ] ] );)", keyPlayer, actionName, actionName, lvl);
 				chai.eval(createVar);
@@ -138,16 +139,16 @@ chai_register::load_with_includes(chaiscript::ChaiScript& chai, cache::Cml& cach
 {
 	for (const auto& key : keys) {
 		load_scripts(chai, cache, key);
-		std::string includeRetrieve = data::getActionNameFromKey(key).append("_includes();");
-		SPDLOG_DEBUG("Retrieve includes of scripts with key {}, eval {}", key, includeRetrieve);
+		std::string include_retrieve = data::get_action_name_from_key(key).append("_includes();");
+		SPDLOG_DEBUG("Retrieve includes of scripts with key {}, eval {}", key, include_retrieve);
 		try {
-			std::vector currentIncludes = chai.eval<std::vector<std::string>>(includeRetrieve);
+			std::vector currentIncludes = chai.eval<std::vector<std::string>>(include_retrieve);
 			if (!currentIncludes.empty() && incursion.insert(key).second) {
 				load_with_includes(chai, cache, currentIncludes, incursion);
 			}
 		}
 		catch (const std::exception& e) {
-			SPDLOG_DEBUG("No include for {}, by evaluating {}: {}", key, includeRetrieve, e.what());
+			SPDLOG_DEBUG("No include for {}, by evaluating {}: {}", key, include_retrieve, e.what());
 		}
 	}
 }
@@ -185,7 +186,7 @@ chai_register::load_scripts(chaiscript::ChaiScript& chai, cache::Cml& cache, con
 }
 
 void
-chai_register::register_utility(chaiscript::ChaiScript& chai, PitContenders& pc, AllyPartyTeams& apt)
+chai_register::register_utility(chaiscript::ChaiScript& chai, pit_contenders& pc, ally_party_teams& apt)
 {
 	chai.add(chaiscript::fun<std::function<double(double, double)> >(
 			[](double rangeA, double rangeB) {
@@ -196,29 +197,29 @@ chai_register::register_utility(chaiscript::ChaiScript& chai, PitContenders& pc,
 				return util::random_generator::generate_in_range(rangeA, rangeB);
 			}), "generateRandomNumber");
 
-	chai.add(chaiscript::fun<std::function<bool(bool, unsigned, hexagon_side::Orientation)> >(
-			[&pc, &apt](bool isContender, unsigned id, hexagon_side::Orientation side) {
+	chai.add(chaiscript::fun<std::function<bool(bool, unsigned, hexagon_side::orientation)> >(
+			[&pc, &apt](bool isContender, unsigned id, hexagon_side::orientation side) {
 				if (isContender && id < pc.getNumberContender()) {
 					return side == pc.getFightingContender(id)->get_hexagon_side_orient();
 				}
-				else if (!isContender && id < apt.getNumberAlly()) {
-					return side == apt.selectMemberById(id)->getHexagonSideOrient();
+				else if (!isContender && id < apt.get_number_ally()) {
+					return side == apt.select_member_by_id(id)->get_hexagon_side_orient();
 				}
 				return false;
 			}), "isCharacterOnSide");
-	chai.add(chaiscript::fun<std::function<bool(bool, unsigned, hexagon_side::Orientation)> >(
-			[&pc, &apt](bool isContender, unsigned id, hexagon_side::Orientation side) {
+	chai.add(chaiscript::fun<std::function<bool(bool, unsigned, hexagon_side::orientation)> >(
+			[&pc, &apt](bool isContender, unsigned id, hexagon_side::orientation side) {
 				if (isContender && id < pc.getNumberContender()) {
-					return pc.getFightingContender(id)->getHexagonSide().canMove(side);
+					return pc.getFightingContender(id)->get_hexagon_side().can_move(side);
 				}
-				else if (!isContender && id < apt.getNumberAlly()) {
-					return apt.selectMemberById(id)->getHexagonSide().canMove(side);
+				else if (!isContender && id < apt.get_number_ally()) {
+					return apt.select_member_by_id(id)->get_hexagon_side().can_move(side);
 				}
 				return false;
 			}), "isCharacterOnAdjacentSide");
-	chai.add(chaiscript::fun<std::function<bool(hexagon_side::Orientation, hexagon_side::Orientation)> >(
-			[](hexagon_side::Orientation lhs, hexagon_side::Orientation rhs) {
-				return hexagon_side{lhs}.canMove(rhs);
+	chai.add(chaiscript::fun<std::function<bool(hexagon_side::orientation, hexagon_side::orientation)> >(
+			[](hexagon_side::orientation lhs, hexagon_side::orientation rhs) {
+				return hexagon_side{lhs}.can_move(rhs);
 			}), "isSideAdjacentSide");
 }
 
@@ -226,33 +227,33 @@ void
 chai_register::register_common(chaiscript::ModulePtr m)
 {
 
-	m->add(chaiscript::fun<std::function<void(fys::arena::data::status&, std::vector<data::Alteration>, bool)>>(
-			[](fys::arena::data::status& status, std::vector<data::Alteration> alterations, bool replaceIfExist) {
+	m->add(chaiscript::fun<std::function<void(fys::arena::data::status&, std::vector<data::alteration>, bool)>>(
+			[](fys::arena::data::status& status, std::vector<data::alteration> alterations, bool replaceIfExist) {
 				data::mergeAlterations(status.alterations, std::move(alterations), replaceIfExist);
 			}), "addOnTurnAlterations");
-	m->add(chaiscript::fun<std::function<void(fys::arena::data::status&, std::vector<data::Alteration>, bool)>>(
-			[](fys::arena::data::status& status, std::vector<data::Alteration> alterations, bool replaceIfExist) {
+	m->add(chaiscript::fun<std::function<void(fys::arena::data::status&, std::vector<data::alteration>, bool)>>(
+			[](fys::arena::data::status& status, std::vector<data::alteration> alterations, bool replaceIfExist) {
 				data::mergeAlterations(status.alteration_before, std::move(alterations), replaceIfExist);
 			}), "addBeforeTurnAlterations");
-	m->add(chaiscript::fun<std::function<void(fys::arena::data::status&, std::vector<data::Alteration>, bool)>>(
-			[](fys::arena::data::status& status, std::vector<data::Alteration> alterations, bool replaceIfExist) {
+	m->add(chaiscript::fun<std::function<void(fys::arena::data::status&, std::vector<data::alteration>, bool)>>(
+			[](fys::arena::data::status& status, std::vector<data::alteration> alterations, bool replaceIfExist) {
 				data::mergeAlterations(status.alteration_after, std::move(alterations), replaceIfExist);
 			}), "addAfterTurnAlterations");
 
-	chaiscript::utility::add_class<fys::arena::FightingPitLayout>(
+	chaiscript::utility::add_class<fys::arena::fighting_pit_layout>(
 			*m,
 			"FightingPitLayout",
 			{},
 			{
-					{fun(&fys::arena::FightingPitLayout::initiateContenderMove), "initiateContenderMove"},
-					{fun(&fys::arena::FightingPitLayout::initiateMemberMove), "initiateMemberMove"},
-					{fun(&fys::arena::FightingPitLayout::initiateForceContenderMove), "initiateForceContenderMove"},
-					{fun(&fys::arena::FightingPitLayout::initiateForceMemberMove), "initiateForceMemberMove"},
-					{fun(&fys::arena::FightingPitLayout::initiateContenderMoveDir), "initiateContenderMoveDir"},
-					{fun(&fys::arena::FightingPitLayout::initiateMemberMoveDir), "initiateMemberMoveDir"}
+					{fun(&fys::arena::fighting_pit_layout::initiate_contender_move), "initiateContenderMove"},
+					{fun(&fys::arena::fighting_pit_layout::initiate_member_move), "initiateMemberMove"},
+					{fun(&fys::arena::fighting_pit_layout::initiate_force_contender_move), "initiateForceContenderMove"},
+					{fun(&fys::arena::fighting_pit_layout::initiate_force_member_move), "initiateForceMemberMove"},
+					{fun(&fys::arena::fighting_pit_layout::initiate_contender_move_dir), "initiateContenderMoveDir"},
+					{fun(&fys::arena::fighting_pit_layout::initiate_member_move_dir), "initiateMemberMoveDir"}
 			});
 
-	chaiscript::utility::add_class<fys::arena::data::Targeting>(
+	chaiscript::utility::add_class<fys::arena::data::targeting>(
 			*m,
 			"Targeting",
 			{
@@ -266,12 +267,12 @@ chai_register::register_common(chaiscript::ModulePtr m)
 					{fys::arena::data::ALLY_AND_ENNEMY, "ALLY_AND_ENNEMY"}
 			});
 
-	chaiscript::utility::add_class<fys::arena::data::Alteration>(
+	chaiscript::utility::add_class<fys::arena::data::alteration>(
 			*m,
 			"Alteration",
 			{
 					{chaiscript::constructor<
-							fys::arena::data::Alteration(
+							fys::arena::data::alteration(
 									std::string alterationKey,
 									uint lvl,
 									uint turn,
@@ -279,65 +280,65 @@ chai_register::register_common(chaiscript::ModulePtr m)
 					}
 			},
 			{
-					{fun(&fys::arena::data::Alteration::processAlteration), "processAlteration"}
+					{fun(&fys::arena::data::alteration::process_alteration), "processAlteration"}
 			}
 	);
 
-	chaiscript::utility::add_class<fys::arena::data::Life>(
+	chaiscript::utility::add_class<fys::arena::data::life>(
 			*m, "Life", {},
 			{
-					{fun(&data::Life::current), "current"},
-					{fun(&data::Life::total), "total"},
-					{fun(&data::Life::isDead), "isDead"}
+					{fun(&data::life::current), "current"},
+					{fun(&data::life::total), "total"},
+					{fun(&data::life::is_dead), "isDead"}
 			});
 
-	chaiscript::utility::add_class<fys::arena::data::MagicPoint>(
+	chaiscript::utility::add_class<fys::arena::data::magic_point>(
 			*m, "MagicPoint", {},
 			{
-					{fun(&data::MagicPoint::current), "current"},
-					{fun(&data::MagicPoint::total), "total"}
+					{fun(&data::magic_point::current), "current"},
+					{fun(&data::magic_point::total), "total"}
 			});
 
 	chaiscript::utility::add_class<fys::arena::data::status>(
 			*m, "Status", {},
 			{
-					{fun(&data::status::life), "life"},
-					{fun(&data::status::magicPoint), "magicPoint"},
-					{fun(&data::status::initialSpeed), "speed"},
+					{fun(&data::status::life_pt), "life"},
+					{fun(&data::status::magic_pt), "magicPoint"},
+					{fun(&data::status::initial_speed), "speed"},
 			});
 
-	chaiscript::utility::add_class<fys::arena::hexagon_side::Orientation>(
+	chaiscript::utility::add_class<fys::arena::hexagon_side::orientation>(
 			*m,
-			"Orientation",
+			"orientation",
 			{
-					{fys::arena::hexagon_side::Orientation::A_N, "A_N"},
-					{fys::arena::hexagon_side::Orientation::A_NE, "A_NE"},
-					{fys::arena::hexagon_side::Orientation::A_NW, "A_NW"},
-					{fys::arena::hexagon_side::Orientation::A_S, "A_S"},
-					{fys::arena::hexagon_side::Orientation::A_SE, "A_SE"},
-					{fys::arena::hexagon_side::Orientation::A_SW, "A_SW"},
-					{fys::arena::hexagon_side::Orientation::B_N, "B_N"},
-					{fys::arena::hexagon_side::Orientation::B_NE, "B_NE"},
-					{fys::arena::hexagon_side::Orientation::B_NW, "B_NW"},
-					{fys::arena::hexagon_side::Orientation::B_S, "B_S"},
-					{fys::arena::hexagon_side::Orientation::B_SE, "B_SE"},
-					{fys::arena::hexagon_side::Orientation::B_SW, "B_SW"},
-					{fys::arena::hexagon_side::Orientation::C_N, "C_N"},
-					{fys::arena::hexagon_side::Orientation::C_NE, "C_NE"},
-					{fys::arena::hexagon_side::Orientation::C_NW, "C_NW"},
-					{fys::arena::hexagon_side::Orientation::C_S, "C_S"},
-					{fys::arena::hexagon_side::Orientation::C_SE, "C_SE"},
-					{fys::arena::hexagon_side::Orientation::C_SW, "C_SW"},
-					{fys::arena::hexagon_side::Orientation::NONE, "NONE"}
+					{fys::arena::hexagon_side::orientation::A_N, "A_N"},
+					{fys::arena::hexagon_side::orientation::A_NE, "A_NE"},
+					{fys::arena::hexagon_side::orientation::A_NW, "A_NW"},
+					{fys::arena::hexagon_side::orientation::A_S, "A_S"},
+					{fys::arena::hexagon_side::orientation::A_SE, "A_SE"},
+					{fys::arena::hexagon_side::orientation::A_SW, "A_SW"},
+					{fys::arena::hexagon_side::orientation::B_N, "B_N"},
+					{fys::arena::hexagon_side::orientation::B_NE, "B_NE"},
+					{fys::arena::hexagon_side::orientation::B_NW, "B_NW"},
+					{fys::arena::hexagon_side::orientation::B_S, "B_S"},
+					{fys::arena::hexagon_side::orientation::B_SE, "B_SE"},
+					{fys::arena::hexagon_side::orientation::B_SW, "B_SW"},
+					{fys::arena::hexagon_side::orientation::C_N, "C_N"},
+					{fys::arena::hexagon_side::orientation::C_NE, "C_NE"},
+					{fys::arena::hexagon_side::orientation::C_NW, "C_NW"},
+					{fys::arena::hexagon_side::orientation::C_S, "C_S"},
+					{fys::arena::hexagon_side::orientation::C_SE, "C_SE"},
+					{fys::arena::hexagon_side::orientation::C_SW, "C_SW"},
+					{fys::arena::hexagon_side::orientation::NONE, "NONE"}
 			});
 
-	chaiscript::utility::add_class<fys::arena::hexagon_side::Hexagon>(
+	chaiscript::utility::add_class<fys::arena::hexagon_side::hexagon>(
 			*m,
 			"Hexagon",
 			{
-					{fys::arena::hexagon_side::Hexagon::A, "A"},
-					{fys::arena::hexagon_side::Hexagon::B, "B"},
-					{fys::arena::hexagon_side::Hexagon::C, "C"}
+					{fys::arena::hexagon_side::hexagon::A, "A"},
+					{fys::arena::hexagon_side::hexagon::B, "B"},
+					{fys::arena::hexagon_side::hexagon::C, "C"}
 			});
 
 }
@@ -358,18 +359,18 @@ chai_register::register_fighting_pit_contender(chaiscript::ChaiScript& chai, cha
 	chaiscript::bootstrap::standard_library::vector_type<std::vector<std::shared_ptr<fighting_contender>>>("VectorFightingContender", *m);
 	chai.add(chaiscript::vector_conversion<std::vector<std::shared_ptr<fighting_contender>>>());
 	chai.add(chaiscript::vector_conversion<std::vector<std::string>>());
-	chai.add(chaiscript::vector_conversion<std::vector<data::Alteration>>());
+	chai.add(chaiscript::vector_conversion<std::vector<data::alteration>>());
 
-	chaiscript::utility::add_class<fys::arena::PitContenders>(
+	chaiscript::utility::add_class<fys::arena::pit_contenders>(
 			*m, "PitContenders", {},
 			{
-					{fun(&PitContenders::selectSuitableContenderOnSide), "selectSuitableContenderOnSide"},
-					{fun(&PitContenders::selectSuitableContender), "selectSuitableContender"},
-					{fun(&PitContenders::selectSuitableContenderOnSideAlive), "selectSuitableContenderOnSideAlive"},
-					{fun(&PitContenders::selectSuitableContenderAlive), "selectSuitableContenderAlive"},
-					{fun(&PitContenders::selectRandomContenderOnSideAlive), "selectRandomContenderAliveOnSide"},
-					{fun(&PitContenders::getFightingContender), "getFightingContender"},
-					{fun(&PitContenders::getContenderOnSide), "getContenderOnSide"}
+					{fun(&pit_contenders::select_suitable_contender_on_side), "selectSuitableContenderOnSide"},
+					{fun(&pit_contenders::select_suitable_contender), "selectSuitableContender"},
+					{fun(&pit_contenders::select_suitable_contender_on_side_alive), "selectSuitableContenderOnSideAlive"},
+					{fun(&pit_contenders::select_suitable_contender_alive), "selectSuitableContenderAlive"},
+					{fun(&pit_contenders::select_random_contender_on_side_alive), "selectRandomContenderAliveOnSide"},
+					{fun(&pit_contenders::getFightingContender), "getFightingContender"},
+					{fun(&pit_contenders::get_contender_on_side), "getContenderOnSide"}
 			}
 	);
 }
@@ -378,29 +379,29 @@ void
 chai_register::register_team_allies(chaiscript::ChaiScript& chai, chaiscript::ModulePtr m)
 {
 
-	chaiscript::utility::add_class<fys::arena::TeamMember>(
+	chaiscript::utility::add_class<fys::arena::team_member>(
 			*m,
 			"TeamMember",
 			{},
 			{
-					{fun(&TeamMember::accessStatus), "accessStatus"}
+					{fun(&team_member::access_status), "accessStatus"}
 			}
 	);
 
-	chaiscript::bootstrap::standard_library::vector_type<std::vector<std::shared_ptr<TeamMember>>>("VectorTeamMember", *m);
-	chai.add(chaiscript::vector_conversion<std::vector<std::shared_ptr<TeamMember>>>());
+	chaiscript::bootstrap::standard_library::vector_type<std::vector<std::shared_ptr<team_member>>>("VectorTeamMember", *m);
+	chai.add(chaiscript::vector_conversion<std::vector<std::shared_ptr<team_member>>>());
 
-	chaiscript::utility::add_class<fys::arena::AllyPartyTeams>(
+	chaiscript::utility::add_class<fys::arena::ally_party_teams>(
 			*m,
 			"AllyPartyTeams",
 			{},
 			{
-					{fun(&AllyPartyTeams::getMembersBySide), "getMembersBySide"},
-					{fun(&AllyPartyTeams::selectSuitableMemberOnSide), "selectSuitableMemberOnSide"},
-					{fun(&AllyPartyTeams::selectSuitableMember), "selectSuitableMember"},
-					{fun(&AllyPartyTeams::selectSuitableMemberOnSideAlive), "selectSuitableMemberOnSideAlive"},
-					{fun(&AllyPartyTeams::selectSuitableMemberAlive), "selectSuitableMemberAlive"},
-					{fun(&AllyPartyTeams::selectRandomMemberOnSideAlive), "selectRandomMemberOnSideAlive"}
+					{fun(&ally_party_teams::get_members_by_side), "getMembersBySide"},
+					{fun(&ally_party_teams::select_suitable_member_on_side), "selectSuitableMemberOnSide"},
+					{fun(&ally_party_teams::select_suitable_member), "selectSuitableMember"},
+					{fun(&ally_party_teams::select_suitable_member_on_side_alive), "selectSuitableMemberOnSideAlive"},
+					{fun(&ally_party_teams::select_suitable_member_alive), "selectSuitableMemberAlive"},
+					{fun(&ally_party_teams::select_random_member_on_side_alive), "selectRandomMemberOnSideAlive"}
 			}
 	);
 
@@ -410,7 +411,7 @@ chai_register::register_team_allies(chaiscript::ChaiScript& chai, chaiscript::Mo
 }
 
 std::unique_ptr<chaiscript::ChaiScript>
-chai_register::make_chai_instance(PitContenders& pc, AllyPartyTeams& apt, FightingPitLayout& layout)
+chai_register::make_chai_instance(pit_contenders& pc, ally_party_teams& apt, fighting_pit_layout& layout)
 {
 	auto chai = std::make_unique<chaiscript::ChaiScript>();
 	register_chai(*chai, pc, apt, layout);
@@ -420,12 +421,12 @@ chai_register::make_chai_instance(PitContenders& pc, AllyPartyTeams& apt, Fighti
 void
 chai_register::register_network_commands(chaiscript::ChaiScript& chai, std::function<void(zmq::message_t&&)> networkHandler)
 {
-	chai.add(fun<std::function<void(const std::string&, const std::vector<TeamMemberSPtr>&)>>(
+	chai.add(fun<std::function<void(const std::string&, const std::vector<team_member_sptr>&)>>(
 			[networkHandler = std::move(networkHandler)](
 					const std::string& actionKey,
-					const std::vector<TeamMemberSPtr>& allyTargets) {
+					const std::vector<team_member_sptr>& allyTargets) {
 				flatbuffer_generator fg;
-				auto[data, size] = fg.generateActionNotification(actionKey, {}, allyTargets);
+				auto[data, size] = fg.generate_action_notification(actionKey, {}, allyTargets);
 				networkHandler(zmq::message_t(data, size));
 			}
 	), "broadcastActionExecuted");
@@ -435,7 +436,7 @@ chai_register::register_network_commands(chaiscript::ChaiScript& chai, std::func
 					const std::string& actionKey,
 					const std::vector<fighting_contender_sptr>& contenderTargets) {
 				flatbuffer_generator fg;
-				auto[data, size] = fg.generateActionNotification(actionKey, contenderTargets, {});
+				auto[data, size] = fg.generate_action_notification(actionKey, contenderTargets, {});
 				networkHandler(zmq::message_t(data, size));
 			}
 	), "broadcastActionExecuted");

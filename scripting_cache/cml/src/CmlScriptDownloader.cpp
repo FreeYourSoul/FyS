@@ -27,9 +27,9 @@
 namespace fys::cache {
 
 void
-CmlScriptDownloader::createUpToDateFileInLocalStorage(const CmlKey& cmlKey, std::filesystem::file_time_type cacheTime)
+CmlScriptDownloader::createUpToDateFileInLocalStorage(const CmlKey& cml_key, std::filesystem::file_time_type cache_time)
 {
-	_downloader(cmlKey.getKey(), cmlKey.getPath().string());
+	_downloader(cml_key.getKey(), cml_key.get_path().string());
 }
 
 }

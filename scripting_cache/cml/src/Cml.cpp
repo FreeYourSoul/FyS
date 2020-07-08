@@ -74,7 +74,7 @@ std::pair<bool, std::filesystem::file_time_type>
 Cml::localStorageInfo(const CmlKey& k) const
 {
 	std::error_code ec;
-	return std::pair(std::filesystem::is_regular_file(k.getPath()), std::filesystem::last_write_time(k.getPath(), ec));
+	return std::pair(std::filesystem::is_regular_file(k.get_path()), std::filesystem::last_write_time(k.get_path(), ec));
 }
 
 bool
@@ -108,7 +108,7 @@ Cml::findInCache(const std::string& key, bool first)
 
 	// Read the file and store it in the cache
 	if (exist) {
-		_inMemCache[key] = InMemoryCached{lastWriteTime, readFile(cmlKey.getPath())};
+		_inMemCache[key] = InMemoryCached{lastWriteTime, readFile(cmlKey.get_path())};
 		return _inMemCache[key].content;
 	}
 	SPDLOG_ERROR("Something wrong occurred in the cache update, no file returned");

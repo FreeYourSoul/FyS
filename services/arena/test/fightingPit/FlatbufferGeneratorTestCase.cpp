@@ -45,7 +45,7 @@ using namespace fys::arena;
 namespace {
 
 [[nodiscard]] static std::string
-getLocalPathStorage()
+local_path_storage()
 {
 	std::string file_path = __FILE__;
 	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
@@ -62,7 +62,7 @@ TEST_CASE("arn::FlatbufferGeneratorTestCase", "[service][arena][util]")
 	auto fseamMock = FSeam::getDefault<fys::util::random_generator>();
 	fys::common::connection_handler handler{};
 	auto fseamConnectionHandlerMock = FSeam::get(&handler);
-	auto cml = CmlBase(getLocalPathStorage());
+	auto cml = CmlBase(local_path_storage());
 	encounter_context ctx;
 
 	ctx._rangeEncounterPerZone["WS00"] = {
@@ -104,37 +104,37 @@ TEST_CASE("arn::FlatbufferGeneratorTestCase", "[service][arena][util]")
 		REQUIRE("Sampy" == contender1->get_name());
 		REQUIRE(0 == contender1->get_contender_scripting()->get_contender_id());
 		REQUIRE(10 == contender1->get_contender_scripting()->get_level());
-		REQUIRE(180 == contender1->getStatus().life.current);
-		REQUIRE(180 == contender1->getStatus().life.total);
-		REQUIRE(100 == contender1->getStatus().magic_point.current);
-		REQUIRE(100 == contender1->getStatus().magic_point.total);
+		REQUIRE(180 == contender1->get_status().life_pt.current);
+		REQUIRE(180 == contender1->get_status().life_pt.total);
+		REQUIRE(100 == contender1->get_status().magic_pt.current);
+		REQUIRE(100 == contender1->get_status().magic_pt.total);
 
 		auto contender2 = fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(1);
 		REQUIRE("Sampy" == contender2->get_name());
 		REQUIRE(1 == contender2->get_contender_scripting()->get_contender_id());
 		REQUIRE(8 == contender2->get_contender_scripting()->get_level());
-		REQUIRE(174 == contender2->getStatus().life.current);
-		REQUIRE(174 == contender2->getStatus().life.total);
-		REQUIRE(100 == contender2->getStatus().magic_point.current);
-		REQUIRE(100 == contender2->getStatus().magic_point.total);
+		REQUIRE(174 == contender2->get_status().life_pt.current);
+		REQUIRE(174 == contender2->get_status().life_pt.total);
+		REQUIRE(100 == contender2->get_status().magic_pt.current);
+		REQUIRE(100 == contender2->get_status().magic_pt.total);
 
 		auto contender3 = fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(2);
 		REQUIRE("Sampy" == contender3->get_name());
 		REQUIRE(2 == contender3->get_contender_scripting()->get_contender_id());
 		REQUIRE(6 == contender3->get_contender_scripting()->get_level());
-		REQUIRE(168 == contender3->getStatus().life.current);
-		REQUIRE(168 == contender3->getStatus().life.total);
-		REQUIRE(100 == contender3->getStatus().magic_point.current);
-		REQUIRE(100 == contender3->getStatus().magic_point.total);
+		REQUIRE(168 == contender3->get_status().life_pt.current);
+		REQUIRE(168 == contender3->get_status().life_pt.total);
+		REQUIRE(100 == contender3->get_status().magic_pt.current);
+		REQUIRE(100 == contender3->get_status().magic_pt.total);
 
 		auto contender4 = fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(3);
 		REQUIRE(3 == contender4->get_contender_scripting()->get_contender_id());
 		REQUIRE("Sampy" == contender4->get_name());
 		REQUIRE(2 == contender4->get_contender_scripting()->get_level());
-		REQUIRE(156 == contender4->getStatus().life.current);
-		REQUIRE(156 == contender4->getStatus().life.total);
-		REQUIRE(100 == contender4->getStatus().magic_point.current);
-		REQUIRE(100 == contender4->getStatus().magic_point.total);
+		REQUIRE(156 == contender4->get_status().life_pt.current);
+		REQUIRE(156 == contender4->get_status().life_pt.total);
+		REQUIRE(100 == contender4->get_status().magic_pt.current);
+		REQUIRE(100 == contender4->get_status().magic_pt.total);
 
 		REQUIRE(4 == fp->get_party_teams().get_number_ally());
 		REQUIRE(4 == fp->get_party_teams().get_party_teams().at(0)->get_team_members().size());
@@ -237,7 +237,7 @@ TEST_CASE("arn::FlatbufferGeneratorTestCase", "[service][arena][util]")
 	} // End section : Test generateFightingPitState
 
 	SECTION("Test generatePartyTeamStatus") {
-		auto[data, size] = fg.generatePartyTeamStatus(*fp->get_party_teams().get_party_teams().at(0));
+		auto[data, size] = fg.generate_party_team_status(*fp->get_party_teams().get_party_teams().at(0));
 
 		REQUIRE(nullptr != data);
 		REQUIRE(0 < size);
@@ -300,7 +300,7 @@ TEST_CASE("arn::FlatbufferGeneratorTestCase", "[service][arena][util]")
 	} // End section : Test generateErrorSaturated
 
 	SECTION("Test generateActionNotification") {
-		auto[data, size] = fg.generateActionNotification("ActionKey:Test",
+		auto[data, size] = fg.generate_action_notification("ActionKey:Test",
 				fighting_pit_announcer::get_pit_contenders(fp).get_contenders(),
 				fp->get_party_teams().get_party_teams().at(0)->get_team_members());
 

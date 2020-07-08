@@ -32,55 +32,55 @@
 namespace fys::arena {
 
 data::priority_elem
-side_battle::getCurrentParticipantTurn(
+side_battle::get_current_participant_turn(
 		const std::chrono::system_clock::time_point& now,
-		const std::chrono::milliseconds& timerInterlude)
+		const std::chrono::milliseconds& timer_interlude)
 {
 	if (_turnDone) {
 		_turnDone = false;
 	}
-	else if (now < _endCurrentTurn && !_priorityOrderList.get_current().is_contender) {
-		return _priorityOrderList.get_current();
+	else if (now < _endCurrentTurn && !_priority_order_list.get_current().is_contender) {
+		return _priority_order_list.get_current();
 	}
-	_endCurrentTurn = now + timerInterlude;
-	return _priorityOrderList.get_next();
+	_endCurrentTurn = now + timer_interlude;
+	return _priority_order_list.get_next();
 }
 
 void
-side_battle::eraseFinishedAlterationAndDeadCharactersFromTurnList()
+side_battle::erase_finished_alteration_and_dead_characters_from_turn_list()
 {
-	for (auto deadContenders = _contenders.get().getDeadContenderOnSide(_side); auto& contender : deadContenders) {
+	for (auto dead_contenders = _contenders.get().get_dead_contender_on_side(_side); auto& contender : dead_contenders) {
 		contender->access_status().cleanup_finished_alteration();
-		_priorityOrderList.rm_participant_from_list(contender->get_contender_scripting()->get_contender_id(), data::CONTENDER);
+		_priority_order_list.rm_participant_from_list(contender->get_contender_scripting()->get_contender_id(), data::CONTENDER);
 	}
-	for (auto deadAllies = _partyTeams.get().get_dead_members_by_side(_side); auto& member : deadAllies) {
+	for (auto dead_allies = _partyTeams.get().get_dead_members_by_side(_side); auto& member : dead_allies) {
 		member->access_status().cleanup_finished_alteration();
-		_priorityOrderList.rm_participant_from_list(member->get_id(), data::PARTY_MEMBER);
+		_priority_order_list.rm_participant_from_list(member->get_id(), data::PARTY_MEMBER);
 	}
 }
 
 void
 side_battle::addParticipantInList(const team_member& tm)
 {
-	_priorityOrderList.add_participant_in_list(tm.get_id(), tm.get_status().initial_speed, false);
+	_priority_order_list.add_participant_in_list(tm.get_id(), tm.get_status().initial_speed, false);
 }
 
 void
 side_battle::addParticipantInList(const fighting_contender& contender)
 {
-	_priorityOrderList.add_participant_in_list(contender.get_id(), contender.getStatus().initial_speed, true);
+	_priority_order_list.add_participant_in_list(contender.get_id(), contender.get_status().initial_speed, true);
 }
 
 void
 side_battle::removeParticipantFromList(const team_member& tm)
 {
-	_priorityOrderList.rm_participant_from_list(tm.get_id(), false);
+	_priority_order_list.rm_participant_from_list(tm.get_id(), false);
 }
 
 void
 side_battle::removeParticipantFromList(const fighting_contender& contender)
 {
-	_priorityOrderList.rm_participant_from_list(contender.get_id(), true);
+	_priority_order_list.rm_participant_from_list(contender.get_id(), true);
 }
 
 }

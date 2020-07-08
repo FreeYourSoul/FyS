@@ -60,17 +60,17 @@ public:
 	 * speed. This Calculation is made in the fys::arena::PriorityOrderList.
 	 *
 	 * @param now timing now in milliseconds (timestamp)
-	 * @param timerInterlude timing of a turn for a player (depend on the level set by the creator of the arena)
+	 * @param timer_interlude timing of a turn for a player (depend on the level set by the creator of the arena)
 	 * @return PriorityElem representing the next player to play its turn
 	 */
 	[[nodiscard]] data::priority_elem
-	getCurrentParticipantTurn(const std::chrono::system_clock::time_point& now,
-			const std::chrono::milliseconds& timerInterlude);
+	get_current_participant_turn(const std::chrono::system_clock::time_point& now,
+			const std::chrono::milliseconds& timer_interlude);
 
 	/**
 	 * Erase characters (contender or ally) from the PriorityOrderList that are dead.
 	 */
-	void eraseFinishedAlterationAndDeadCharactersFromTurnList();
+	void erase_finished_alteration_and_dead_characters_from_turn_list();
 
 	void removeParticipantFromList(const team_member& tm);
 	void removeParticipantFromList(const fighting_contender& contender);
@@ -79,20 +79,20 @@ public:
 	void turnDone(bool turnDone) { _turnDone = turnDone; };
 	void addParticipantInList(uint id, int speed, bool isContender)
 	{
-		_priorityOrderList.add_participant_in_list(id, speed, isContender);
+		_priority_order_list.add_participant_in_list(id, speed, isContender);
 	}
 
 	[[nodiscard]] hexagon_side::orientation
-	getSide() const { return _side; }
+	get_side() const { return _side; }
 
 	[[nodiscard]] bool
-	empty() const { return _priorityOrderList.empty(); }
+	empty() const { return _priority_order_list.empty(); }
 
 private:
 	std::reference_wrapper<pit_contenders> _contenders;
 	std::reference_wrapper<ally_party_teams> _partyTeams;
 
-	priority_order_list _priorityOrderList;
+	priority_order_list _priority_order_list;
 	hexagon_side::orientation _side;
 
 	bool _turnDone;

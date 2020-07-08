@@ -31,7 +31,7 @@
 
 namespace {
 [[nodiscard]] static std::string
-getLocalPathStorage()
+local_path_storage()
 {
 	std::string file_path = __FILE__;
 	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
@@ -46,7 +46,7 @@ using namespace fys::arena;
 TEST_CASE("WorkerServiceTestCase", "[service][arena]")
 {
 	fys::arena::worker_service ws;
-	auto cml = CmlBase(getLocalPathStorage());
+	auto cml = CmlBase(local_path_storage());
 	encounter_context ctx;
 
 	SECTION("Failures") {

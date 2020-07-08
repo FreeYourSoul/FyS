@@ -60,11 +60,11 @@ constexpr static auto HARD = std::chrono::milliseconds(std::chrono::seconds(10))
 }
 
 //! Actions struct containing all the information to forward to the member's pending action Queue
-struct PlayerAction {
-	uint idMember;
-	std::string actionName;
-	std::vector<uint> contenderTarget;
-	std::vector<uint> allyTarget;
+struct player_action {
+	uint id_member;
+	std::string action_name;
+	std::vector<uint> contender_target;
+	std::vector<uint> ally_target;
 };
 
 class fighting_pit_announcer;
@@ -121,7 +121,7 @@ public:
 		NONE
 	};
 
-	explicit fighting_pit(std::string creatorUserName, level levelFightingPit);
+	explicit fighting_pit(std::string creator_user_name, level levelFightingPit);
 
 	/**
 	 *
@@ -133,7 +133,7 @@ public:
 	 *
 	 * @param user
 	 */
-	void forward_to_team_member(const std::string& user, PlayerAction action);
+	void forward_to_team_member(const std::string& user, player_action action);
 
 	/**
 	 * Add an authenticated player in the fighting pit, the player authentication is not verified an thus must be
@@ -164,7 +164,7 @@ public:
 	is_player_participant(const std::string& name, const std::string& token) const;
 
 	[[nodiscard]] const party_team&
-	get_party_team_of_player(const std::string& userName) const { return _party_teams.get_party_team_of_player(userName); }
+	get_party_team_of_player(const std::string& user_name) const { return _party_teams.get_party_team_of_player(user_name); }
 
 	[[nodiscard]] const std::unique_ptr<chaiscript::ChaiScript>&
 	get_chai_ptr() const noexcept { return _chai_ptr; }
@@ -200,16 +200,16 @@ public:
 	/**
 	 * Notify the clients if they won or lose, then set the fighting pit as ready for cleanup
 	 * If a clients win, the rewards are broadcast to the players
-	 * @param broadcastHandler handler to broadcast message to the players
+	 * @param broadcast_handler handler to broadcast message to the players
 	 */
 	template <typename BroadcastHandler>
-	void notify_end_status(BroadcastHandler&& broadcastHandler) {
+	void notify_end_status(BroadcastHandler&& broadcast_handler) {
 		if (_progress == progress::ALLY_WIN) {
-			std::forward<BroadcastHandler>(broadcastHandler)(make_winner_notification());
+			std::forward<BroadcastHandler>(broadcast_handler)(make_winner_notification());
 			_progress = progress::CLEANUP;
 		}
 		else if (_progress == progress::CONTENDER_WIN) {
-			std::forward<BroadcastHandler>(broadcastHandler)(make_looser_notification());
+			std::forward<BroadcastHandler>(broadcast_handler)(make_looser_notification());
 			_progress = progress::CLEANUP;
 		}
 	}
@@ -251,7 +251,7 @@ private:
 	 * @return_target  : a TargetType (Variant) set with the proper type
 	 */
 	[[nodiscard]] std::pair<bool, std::optional<TargetType>>
-	check_and_retrieve_target(const std::string& user, const team_member_sptr& member, const PlayerAction& action);
+	check_and_retrieve_target(const std::string& user, const team_member_sptr& member, const player_action& action);
 
 	/**
 	 * Verify if the fight has been won by a team (contender or ally) and return an appropriate Progress

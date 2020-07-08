@@ -46,11 +46,11 @@ public:
 	/**
 	 * @brief Connect to dispatcher in order to receive requests
 	 */
-	void setupConnectionManager(const std::string& dispatcherConnectionStr) noexcept;
+	void setup_connection_manager(const std::string& dispatcher_connection_str) noexcept;
 	/**
 	 * @brief Reply to the dispatcher using the dealer (direct connection) socket
 	 */
-	void sendMessageToDispatcher(zmq::multipart_t&& msg) noexcept;
+	void send_msg_to_dispatcher(zmq::multipart_t&& msg) noexcept;
 
 	/**
 	 * Read on the dealer socket (connection with the dispatcher/WS) and reply to dispatcher via this socket connection
@@ -59,7 +59,7 @@ public:
 	 * @param handler Handler handler to call when receiving a message
 	 */
 	template<typename Handler>
-	void pollAndProcessMessageFromDispatcher(Handler&& handler) noexcept
+	void poll_process_msg_from_dispatcher(Handler&& handler) noexcept
 	{
 		//  Initialize poll set
 		zmq::pollitem_t items[] = {

@@ -37,7 +37,7 @@ public:
 	priority_order_list() = default;
 	explicit priority_order_list(std::vector<data::priority_elem> base_speed);
 
-	void add_participant_in_list(uint id, int speed, bool is_contender);
+	void add_participant_in_list(uint prio_elem, int speed, bool is_contender);
 	void rm_participant_from_list(uint id_participant, bool is_contender);
 
 	[[nodiscard]] bool

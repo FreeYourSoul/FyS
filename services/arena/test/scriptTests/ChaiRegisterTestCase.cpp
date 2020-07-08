@@ -35,7 +35,7 @@
 
 namespace {
 std::string
-getLocalPathStorage()
+local_path_storage()
 {
 	std::string file_path = __FILE__;
 	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
@@ -45,7 +45,7 @@ getLocalPathStorage()
 }
 
 std::string
-getCopyPathStorage()
+copy_path_storage()
 {
 	std::string file_path = __FILE__;
 	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
@@ -58,8 +58,8 @@ getCopyPathStorage()
 TEST_CASE("Test register/load player", "[service][arena][script_test]")
 {
 
-	fys::cache::CmlCopy ccpy(getLocalPathStorage(), getCopyPathStorage());
-	std::filesystem::path baseCache = getLocalPathStorage();
+	fys::cache::CmlCopy ccpy(local_path_storage(), copy_path_storage());
+	std::filesystem::path baseCache = local_path_storage();
 
 	fys::arena::pit_contenders pc;
 	fys::arena::ally_party_teams apt;

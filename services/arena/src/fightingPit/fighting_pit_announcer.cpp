@@ -25,10 +25,10 @@
 #include <nlohmann/json.hpp>
 #include <algorithm/algorithm.hh>
 
-#include <fightingPit/contender/ContenderScripting.hh>
+#include <fightingPit/contender/contender_scripting.hh>
 #include <fightingPit/contender/fighting_contender.hh>
-#include <fightingPit/team/PartyTeam.hh>
-#include <fightingPit/team/TeamMember.hh>
+#include <fightingPit/team/party_team.hh>
+#include <fightingPit/team/team_member.hh>
 #include <fightingPit/fighting_pit.hh>
 
 #include <Cml.hh>
@@ -117,19 +117,19 @@ fighting_pit_announcer::generate_contenders(fighting_pit& fp, const encounter_co
 		int rng_monster = util::random_generator::generate_in_range(0, 100);
 		auto desc = boundary_map.get(rng_monster)->second;
 		uint level_monster = util::random_generator::generate_in_range(desc.levelRange.first, desc.levelRange.second);
-		auto contender_script = std::make_unique<ContenderScripting>(*fp.get_chai_ptr(), level_monster);
-		std::string name = data::getActionNameFromKey(desc.key);
-		contender_script->setContenderId(i);
-		contender_script->setContenderName(name);
+		auto contender_script = std::make_unique<contender_scripting>(*fp.get_chai_ptr(), level_monster);
+		std::string name = data::get_action_name_from_key(desc.key);
+		contender_script->set_contender_id(i);
+		contender_script->set_contender_name(name);
 		chai_register::load_contender_script(*fp.get_chai_ptr(), _cache, desc.key);
-		contender_script->registerContenderScript();
+		contender_script->register_contender_script();
 		auto contender = std::make_shared<fighting_contender>(std::move(contender_script));
 		if (!fp.add_contender(contender)) {
 			SPDLOG_WARN("FightingPit built invalid, generation of contender {} failed", contender->get_name());
 			return false;
 		}
 		// todo make positioning of contender depending on ambush / or normal one
-		fys::arena::FightingPitLayout::setContenderInitiatePosition(*contender, hexagon_side::Orientation::B_S);
+		fighting_pit_layout::set_contender_initiate_position(*contender, hexagon_side::orientation::B_S);
 	}
 	return true;
 }
@@ -171,11 +171,11 @@ fighting_pit_announcer::get_script_content_string(std::string name, const encoun
 	return _cache.findInCache(desc.key);
 }
 
-SideBattle&
-fighting_pit_announcer::get_side_battle_for_side(const std::unique_ptr<fighting_pit>& fp, hexagon_side::Orientation side)
+side_battle&
+fighting_pit_announcer::get_side_battle_for_side(const std::unique_ptr<fighting_pit>& fp, hexagon_side::orientation side)
 {
 	auto it = std::find_if(fp->_side_battles.begin(), fp->_side_battles.end(),
-			[side](const auto& sb) { return sb.getSide() == side; });
+			[side](const auto& sb) { return sb.get_side() == side; });
 
 	if (it == fp->_side_battles.end()) {
 		SPDLOG_ERROR("Side not found");
@@ -187,7 +187,7 @@ fighting_pit_announcer::get_side_battle_for_side(const std::unique_ptr<fighting_
 void
 fighting_pit_announcer::add_action_to_one_member(uint index, const std::string& action_name, uint level)
 {
-	_creator_party_team->accessTeamMembers()[index]->addDoableAction(action_name, level);
+	_creator_party_team->access_team_members()[index]->add_doable_action(action_name, level);
 }
 
 } // namespace fys::arena

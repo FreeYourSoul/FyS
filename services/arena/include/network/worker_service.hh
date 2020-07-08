@@ -119,7 +119,7 @@ public:
 	 * @param HandlerInGame Handler handler to call when receiving a message to do a player action on a fightingPit
 	 */
 	template<typename HandlerAuth, typename HandlerInGame>
-	void poll_and_process_msg_from_player(HandlerAuth&& handler_auth, HandlerInGame&& handler_in_game) noexcept
+	void poll_process_msg_from_player(HandlerAuth&& handler_auth, HandlerInGame&& handler_in_game) noexcept
 	{
 		//  Initialize poll set
 		zmq::pollitem_t items[] = {

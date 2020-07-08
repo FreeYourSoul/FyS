@@ -48,7 +48,7 @@ namespace fys::inv {
 inventory_server_service::inventory_server_service(const inventory_server_context& ctx)
 		:_ctx(ctx), _exchange_manager(ctx)
 {
-	_connection_handler.setupConnectionManager(ctx.get_dispatcher_connection_str());
+	_connection_handler.setup_connection_manager(ctx.get_dispatcher_connection_str());
 }
 
 void
@@ -57,7 +57,7 @@ inventory_server_service::run_server_loop()
 	SPDLOG_INFO("[Inv : {}] : InventoryServer loop started", _ctx.get().get_server_code());
 
 	while (true) {
-		_connection_handler.pollAndProcessMessageFromDispatcher(
+		_connection_handler.poll_process_msg_from_dispatcher(
 				[this](zmq::message_t&& playerIdt, zmq::message_t&& worldServerMessage) {
 					if (!verify_buffer<fb::ivt::InventoryRequest>(worldServerMessage.data(), worldServerMessage.size())) {
 						SPDLOG_ERROR("[Inv : {}] : Wrongly formatted InventoryRequest buffer", _ctx.get().get_server_code());
@@ -84,7 +84,7 @@ inventory_server_service::run_server_loop()
 							break;
 					}
 					response.add(std::move(playerIdt));
-					_connection_handler.sendMessageToDispatcher(std::move(response));
+					_connection_handler.send_msg_to_dispatcher(std::move(response));
 				}
 		);
 

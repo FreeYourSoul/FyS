@@ -38,9 +38,9 @@ arena_server_context::arena_server_context(int ac, const char* const* av)
 {
 	std::ifstream i(_config_file);
 	SPDLOG_INFO("start parsing file {}", _config_file);
-	json jsonConfig;
-	i >> jsonConfig;
-	parse_arena_config_file(jsonConfig);
+	json json_config;
+	i >> json_config;
+	parse_arena_config_file(json_config);
 }
 
 void

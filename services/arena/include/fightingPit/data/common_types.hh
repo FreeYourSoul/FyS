@@ -38,26 +38,26 @@ static constexpr bool PARTY_MEMBER = false;
 [[nodiscard]] inline std::string
 get_action_name_from_key(const std::string& key)
 {
-	auto startSeparator = key.find_last_of(':');
-	auto endSeparator = key.find_last_of('.');
+	auto start_separator = key.find_last_of(':');
+	auto end_separator = key.find_last_of('.');
 
-	if (startSeparator != std::string::npos && endSeparator != std::string::npos) {
+	if (start_separator != std::string::npos && end_separator != std::string::npos) {
 		// if a ':' and a '.' are found
-		return key.substr(startSeparator + 1, endSeparator - startSeparator - 1);
+		return key.substr(start_separator + 1, end_separator - start_separator - 1);
 	}
-	else if (startSeparator == std::string::npos && endSeparator != std::string::npos) {
+	else if (start_separator == std::string::npos && end_separator != std::string::npos) {
 		// if a ':' is not found but not a '.' is found
-		return key.substr(0, endSeparator);
+		return key.substr(0, end_separator);
 	}
-	else if (startSeparator != std::string::npos && endSeparator == std::string::npos) {
+	else if (start_separator != std::string::npos && end_separator == std::string::npos) {
 		// if a ':' is found but not a '.' is not found
-		return key.substr(startSeparator + 1);
+		return key.substr(start_separator + 1);
 	}
 	return key;
 }
 
 [[nodiscard]] inline std::string
-getAlterationNameFromKey(const std::string& key)
+get_alteration_name_from_key(const std::string& key)
 {
 	std::string prefix = "alteration_";
 	return prefix.append(get_action_name_from_key(key));
@@ -98,7 +98,7 @@ struct life {
 	uint total = 0;
 
 	[[nodiscard]] bool
-	isDead() const { return current == 0; }
+	is_dead() const { return current == 0; }
 };
 
 struct magic_point {
@@ -144,8 +144,8 @@ private:
 };
 
 struct status {
-	life life;
-	magic_point magic_point;
+	life life_pt;
+	magic_point magic_pt;
 	uint initial_speed;
 
 	/**

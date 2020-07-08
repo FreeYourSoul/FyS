@@ -110,6 +110,6 @@ std::ostream&
 operator<<(std::ostream& os, fys::arena::hexagon_side::hexagon hexagon);
 
 std::ostream&
-operator<<(std::ostream& os, fys::arena::hexagon_side hexagonSide);
+operator<<(std::ostream& os, fys::arena::hexagon_side hexagon_side);
 
 #endif // !FYS_HEXAGONSIDE_HH

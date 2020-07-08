@@ -32,7 +32,7 @@
 #include <CmlCopy.hh>
 
 // forward declarations
-namespace fys::fb {
+namespace fys::fb::arn {
 struct ArenaServerValidateAuth;
 struct ArenaFightAction;
 }
@@ -46,11 +46,11 @@ class arena_server_context;
  * @brief contains the information related to the arena that has to be generated
  */
 struct awaiting_arena {
-	std::string serverCode;
-	bool isJoinDisabled;
-	bool isAmbush;
-	unsigned encounterId;
-	fighting_pit::level levelFightingPit;
+	std::string server_code;
+	bool is_join_disabled;
+	bool is_ambush;
+	unsigned encounter_id;
+	fighting_pit::level level_fighting_pit;
 };
 
 /**
@@ -114,7 +114,7 @@ struct awaiting_player_arena {
  *
  */
 class arena_server_service {
-	using AwaitingPlayerArenaIt = const std::unordered_map<std::string, awaiting_player_arena>::const_iterator;
+	using awaiting_player_arena_it = const std::unordered_map<std::string, awaiting_player_arena>::const_iterator;
 
 	//! action name to set readiness
 	static inline const std::string READY_ACTION = "READY";
@@ -129,7 +129,7 @@ public:
 	 * @note This method contains the code of the deserialization of flatbuffer message (ioc with lambda) and then
 	 *       check if the incoming message is coming from an authorized user.
 	 */
-	void runServerLoop() noexcept;
+	void run_server_loop() noexcept;
 
 private:
 	/**
@@ -137,19 +137,19 @@ private:
 	 * @return true if the server is saturated, false otherwise
 	 */
 	[[nodiscard]] inline bool
-	isSaturated() const noexcept;
+	is_saturated() const noexcept;
 
-	[[nodiscard]] PlayerAction
-	createPlayerAction(std::string&& action, const fb::arn::ArenaFightAction* frame) const;
+	[[nodiscard]] player_action
+	create_player_action(std::string&& action, const fb::arn::ArenaFightAction* frame) const;
 
 	[[nodiscard]] unsigned
-	createNewFightingPit(const awaiting_player_arena& awaited) noexcept;
+	create_new_fighting_pit(const awaiting_player_arena& awaited) noexcept;
 
-	[[nodiscard]] std::pair<bool, AwaitingPlayerArenaIt>
-	isPlayerAwaited(const std::string& name, const std::string& token, unsigned idFightingPit) const noexcept;
+	[[nodiscard]] std::pair<bool, awaiting_player_arena_it>
+	is_player_awaited(const std::string& name, const std::string& token, unsigned fp_id) const noexcept;
 
-	inline void sendSaturatedErrorMsg(zmq::message_t&& identity);
-	inline void forwardReplyToDispatcher(zmq::message_t&& idtWs, const fys::arena::awaiting_player_arena& awaitArena) noexcept;
+	inline void send_saturated_error_msg(zmq::message_t&& identity);
+	inline void forward_reply_to_dispatcher(zmq::message_t&& idt_ws, const fys::arena::awaiting_player_arena& await_arena) noexcept;
 
 
 private:
@@ -157,14 +157,14 @@ private:
 	cache::CmlCopy _cache;
 
 	// Manage connections
-	std::unique_ptr<network::db_connector> _dbConnector;
-	common::connection_handler _connectionHandler;
+	std::unique_ptr<network::db_connector> _db_connector;
+	common::connection_handler _connection_handler;
 
 	// Manage fighting pits
-	worker_service _workerService;
+	worker_service _worker_service;
 
 	// map of token on awaiting arena
-	std::unordered_map<std::string, awaiting_player_arena> _awaitingArena;
+	std::unordered_map<std::string, awaiting_player_arena> _awaiting_arena;
 };
 
 }

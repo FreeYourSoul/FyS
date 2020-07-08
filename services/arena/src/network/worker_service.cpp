@@ -59,7 +59,7 @@ worker_service::start_fighting_pits_loop()
 		if (!_arena_instances.empty()) {
 			for (auto &[id, fp] : _arena_instances) {
 				if (fp->is_battle_on_going()) {
-					fp->continueBattle(now);
+					fp->continue_battle(now);
 				}
 				else if (!fp->is_joinable()) {
 					fp->notify_end_status(broadcast_msg_handler(id));
@@ -114,7 +114,7 @@ worker_service::player_join_fighting_pit(unsigned fighting_pit_id, std::unique_p
 	auto it = _arena_instances.find(fighting_pit_id);
 	if (it != _arena_instances.end()) {
 		if (it->second->is_joinable()) {
-			it->second->addPartyTeamAndRegisterActions(std::move(pt), cml);
+			it->second->add_party_team_and_register_actions(std::move(pt), cml);
 		}
 		else {
 			SPDLOG_INFO("User {} can't join fighting pit of id {} as the battle already started.",
@@ -131,7 +131,7 @@ std::optional<std::reference_wrapper<fighting_pit>>
 worker_service::get_authenticated_player_fighting_pit(const std::string& name, const std::string& token, unsigned fp_id)
 {
 	if (auto it = _arena_instances.find(fp_id);
-			(it != _arena_instances.end() && it->second->isPlayerParticipant(name, token))) {
+			(it != _arena_instances.end() && it->second->is_player_participant(name, token))) {
 		return *it->second;
 	}
 	SPDLOG_WARN("Request received from {}:{} for arena id {}, but arena isn't defined", name, token, fp_id);
@@ -147,7 +147,7 @@ worker_service::upsert_player_identifier(unsigned fp_id, std::string user_name, 
 
 	auto& identifiers = itIdt->second;
 	if (auto it = std::find_if(identifiers.begin(), identifiers.end(), [&user_name](const auto& idt) {
-			return idt.userName == user_name;
+			return idt.user_name == user_name;
 		}); it != identifiers.end()) {
 		it->identifier = std::move(idt_player);
 	}
@@ -173,7 +173,7 @@ worker_service::send_msg_new_arriving_team(unsigned fp_id, const std::string& us
 		send_msg_to_player(fp_id, user_name, zmq::message_t(fbMsg, size));
 	}
 	{
-		auto[fbMsg, size] = fg.generatePartyTeamStatus(_arena_instances.at(fp_id)->getPartyTeamOfPlayer(user_name));
+		auto[fbMsg, size] = fg.generate_party_team_status(_arena_instances.at(fp_id)->get_party_team_of_player(user_name));
 		broadcast_msg(fp_id, zmq::message_t(fbMsg, size), user_name);
 	}
 }
@@ -219,13 +219,13 @@ worker_service::broadcast_msg(unsigned fp_id, zmq::message_t&& msg, const std::s
 	toSend.add({}); // add empty frame (identifier frame at index 0)
 	toSend.add(std::move(msg)); // add content
 
-	for (const auto&[userName, identifier] : identifiersIt->second) {
-		if (userName == except)
+	for (const auto&[user_name, identifier] : identifiersIt->second) {
+		if (user_name == except)
 			continue;
 		toSend.at(0).rebuild(identifier.data(), identifier.size());
-		SPDLOG_DEBUG("Send message to player {} with identifier {}", userName, identifier);
+		SPDLOG_DEBUG("Send message to player {} with identifier {}", user_name, identifier);
 		if (!toSend.send(_worker_router)) {
-			SPDLOG_ERROR("fightingPit of id {} : Message has not been correctly sent to {}, {}", fp_id, userName, identifier);
+			SPDLOG_ERROR("fightingPit of id {} : Message has not been correctly sent to {}, {}", fp_id, user_name, identifier);
 			return false;
 		}
 	}
@@ -242,7 +242,7 @@ worker_service::retrieve_player_identifier(unsigned fp_id, const std::string& us
 	}
 
 	auto it = std::find_if(identifiersIt->second.begin(), identifiersIt->second.end(), [&user_name](const auto& ident) {
-		return ident.userName == user_name;
+		return ident.user_name == user_name;
 	});
 	if (it == identifiersIt->second.end()) {
 		SPDLOG_WARN("Trying to retrieve non-existing player identifier {} in fighting pit of id {}", user_name, fp_id);

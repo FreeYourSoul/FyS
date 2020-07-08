@@ -79,18 +79,18 @@ public:
 	ally_number_on_side(hexagon_side::orientation side) const;
 
 	[[nodiscard]] const party_team&
-	get_party_team_of_player(const std::string& user_name) const;
+	get_party_team_of_player(const std::string& party_team) const;
 
 	[[nodiscard]] bool
 	all_dead() const;
 
 	/**
 	 * Validate the readiness of a player to start the battle
-	 * @param user_name name of the player validating its readiness
+	 * @param party_team name of the player validating its readiness
 	 * @return true if all players are ready, false otherwise
 	 */
 	[[nodiscard]] bool
-	set_party_readiness(const std::string& user_name);
+	set_party_readiness(const std::string& party_team);
 
 	[[nodiscard]] const std::vector<std::unique_ptr<party_team>>&
 	get_party_teams() const { return _party_teams; }

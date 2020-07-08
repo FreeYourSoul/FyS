@@ -42,7 +42,7 @@ void
 priority_order_list::add_participant_in_list(uint id, int speed, bool is_contender)
 {
 	if (std::any_of(_base_speed.begin(), _base_speed.end(),
-			[id, is_contender](const auto& prioElem) { return prioElem.id == id && prioElem.isContender == is_contender; })) {
+			[id, is_contender](const auto& prio_elem) { return prio_elem.id == id && prio_elem.is_contender == is_contender; })) {
 		SPDLOG_WARN("Cannot add participant in order list : Participant of id {} already existing", id);
 		return;
 	}

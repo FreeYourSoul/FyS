@@ -61,7 +61,7 @@ fighting_pit_layout::add_active_party_team(const party_team& pt)
 unsigned
 fighting_pit_layout::active_characters_on_side(hexagon_side::orientation side) const
 {
-	return _contenders.get().contenderOnSide(side) + _party_teams.get().ally_number_on_side(side);
+	return _contenders.get().contender_on_side(side) + _party_teams.get().ally_number_on_side(side);
 }
 
 void
@@ -87,12 +87,12 @@ fighting_pit_layout::get_changing_side_team_members()
 {
 	std::vector<std::shared_ptr<team_member>> result;
 
-	for (auto&[userNameId, isMoving] : _moving_flag_ally) {
-		if (isMoving) {
-			auto&[userName, id] = userNameId;
-			result.emplace_back(_party_teams.get().get_specific_team_member_by_id(userName, id));
+	for (auto&[user_name_id, is_moving] : _moving_flag_ally) {
+		if (is_moving) {
+			auto&[user_name, id] = user_name_id;
+			result.emplace_back(_party_teams.get().get_specific_team_member_by_id(user_name, id));
 		}
-		isMoving = false;
+		is_moving = false;
 	}
 	return result;
 }
@@ -134,7 +134,7 @@ fighting_pit_layout::set_ally_move_initiate_position(team_member& tm, hexagon_si
 bool
 fighting_pit_layout::initiate_contender_move(std::shared_ptr<fighting_contender> contender, hexagon_side::orientation move_to)
 {
-	if (contender->getHexagonSide().can_move(move_to)) {
+	if (contender->get_hexagon_side().can_move(move_to)) {
 		contender->_moving = move_to;
 		_moving_flag_contender[contender->get_id()] = true;
 		return true;
@@ -154,13 +154,13 @@ fighting_pit_layout::initiate_contender_move_dir(std::shared_ptr<fighting_conten
 {
 	switch (move_dir) {
 		case data::move_direction::BACK:
-			initiate_contender_move(contender, contender->getHexagonSide().find_back());
+			initiate_contender_move(contender, contender->get_hexagon_side().find_back());
 			break;
 		case data::move_direction::RIGHT:
-			initiate_contender_move(contender, contender->getHexagonSide().find_right());
+			initiate_contender_move(contender, contender->get_hexagon_side().find_right());
 			break;
 		case data::move_direction::LEFT:
-			initiate_contender_move(contender, contender->getHexagonSide().find_left());
+			initiate_contender_move(contender, contender->get_hexagon_side().find_left());
 			break;
 	}
 }

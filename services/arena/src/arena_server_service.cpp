@@ -93,26 +93,26 @@ arena_server_service::arena_server_service(const arena_server_context& ctx)
 		:
 		_ctx(ctx),
 		_cache(ctx.getPathLocalStorageCache(), ctx.get_path_source_cache()),
-		_dbConnector(std::make_unique<network::db_connector>(ctx))
+		_db_connector(std::make_unique<network::db_connector>(ctx))
 {
-	_connectionHandler.setupConnectionManager(ctx.get_dispatcher_connection_str());
-	_workerService.setup_connection_manager(ctx);
+	_connection_handler.setup_connection_manager(ctx.get_dispatcher_connection_str());
+	_worker_service.setup_connection_manager(ctx);
 }
 
 void
-arena_server_service::runServerLoop() noexcept
+arena_server_service::run_server_loop() noexcept
 {
 	SPDLOG_INFO("ArenaServer loop started");
 
-	auto t = std::thread([this] { _workerService.start_fighting_pits_loop(); });
+	auto t = std::thread([this] { _worker_service.start_fighting_pits_loop(); });
 	while (true) {
-		_connectionHandler.pollAndProcessMessageFromDispatcher(
+		_connection_handler.poll_process_msg_from_dispatcher(
 				// World Server inform the Arena that a new awaited player is coming (create or join an existing fighting pit)
 				[this](zmq::message_t&& identityWs, zmq::message_t&& worldServerMessage) {
 
 					// In case of a saturation of the server, return an error to the dispatcher
-					if (isSaturated()) {
-						sendSaturatedErrorMsg(std::move(identityWs));
+					if (is_saturated()) {
+						send_saturated_error_msg(std::move(identityWs));
 						return;
 					}
 
@@ -124,7 +124,7 @@ arena_server_service::runServerLoop() noexcept
 
 					awaiting_player_arena apa = create_awaiting_player(binary);
 
-					if (auto[exist, joinable] = _workerService.fighting_pit_exist_and_joinable(apa.fighting_pit_id);
+					if (auto[exist, joinable] = _worker_service.fighting_pit_exist_and_joinable(apa.fighting_pit_id);
 							!apa.has_to_be_generated() && !exist && !joinable) {
 						SPDLOG_ERROR("Player {} can't be awaited to register on non-existing({})/joinable({})"
 									 " fighting pit {}", exist, joinable, apa.name_player, apa.fighting_pit_id);
@@ -132,100 +132,100 @@ arena_server_service::runServerLoop() noexcept
 					}
 
 					// register player incoming into arena instance with token given by worldserver used as key
-					const auto &[elem, isRegistered] = _awaitingArena.insert({binary->token_auth()->str(), std::move(apa)});
+					const auto &[elem, isRegistered] = _awaiting_arena.insert({binary->token_auth()->str(), std::move(apa)});
 
 					if (isRegistered) {
-						forwardReplyToDispatcher(std::move(identityWs), elem->second);
+						forward_reply_to_dispatcher(std::move(identityWs), elem->second);
 						SPDLOG_INFO("New awaited player is added");
 					}
 				});
 
-		_workerService.poll_and_process_msg_from_player(
+		_worker_service.poll_process_msg_from_player(
 				// Authentication handler : Player try to create/join a fighting pit. The player has to be awaited
 				[this](zmq::message_t&& idtPlayer, zmq::message_t&& authMessage) {
-					if (!verify_buffer<fb::ArenaServerValidateAuth>(authMessage.data(), authMessage.size())) {
+					if (!verify_buffer<fb::arn::ArenaServerValidateAuth>(authMessage.data(), authMessage.size())) {
 						SPDLOG_ERROR("Wrongly formatted ArenaServerValidateAuth buffer");
 						return;
 					}
 
 					const auto* binary = fb::arn::GetArenaServerValidateAuth(authMessage.data());
-					const std::string tokenAuth = binary->token_auth()->str();
-					const std::string userName = binary->user_name()->str();
-					const auto &[isAwaited, playerAwaitedIt] = isPlayerAwaited(userName, tokenAuth, binary->fighting_pit_id());
+					const std::string token_auth = binary->token_auth()->str();
+					const std::string user_name = binary->user_name()->str();
+					const auto &[isAwaited, playerAwaitedIt] = is_player_awaited(user_name, token_auth, binary->fighting_pit_id());
 					unsigned fightingPitId = playerAwaitedIt->second.fighting_pit_id;
 
 					if (!isAwaited) {
 						SPDLOG_WARN("Player '{}' tried to authenticate on Arena server '{}' fighting pit {} "
-									"without being awaited.", userName, _ctx.get().get_server_code(), fightingPitId);
+									"without being awaited.", user_name, _ctx.get().get_server_code(), fightingPitId);
 						return;
 					}
-					SPDLOG_INFO("Awaited Player '{}' login", userName);
+					SPDLOG_INFO("Awaited Player '{}' login", user_name);
 
 					if (playerAwaitedIt->second.has_to_be_generated()) {
-						fightingPitId = createNewFightingPit(playerAwaitedIt->second);
-						_awaitingArena.erase(playerAwaitedIt); // remove player from awaited player
+						fightingPitId = create_new_fighting_pit(playerAwaitedIt->second);
+						_awaiting_arena.erase(playerAwaitedIt); // remove player from awaited player
 						if (fightingPitId == fighting_pit::CREATION_ERROR) return;
 					}
 					else {
-						if (auto[exist, isJoinable] = _workerService.fighting_pit_exist_and_joinable(binary->fighting_pit_id());
+						if (auto[exist, isJoinable] = _worker_service.fighting_pit_exist_and_joinable(binary->fighting_pit_id());
 								!exist || !isJoinable) {
 							SPDLOG_ERROR("Player {} can't be join on non-existing({})/joinable({}) fighting pit {}",
-									exist, isJoinable, userName, binary->fighting_pit_id());
+									exist, isJoinable, user_name, binary->fighting_pit_id());
 							return;
 						}
 
-						auto pt = _dbConnector->retrieve_party_team(userName);
-						_workerService.player_join_fighting_pit(fightingPitId, std::move(pt), _cache);
-						_awaitingArena.erase(playerAwaitedIt); // remove player from awaited player
+						auto pt = _db_connector->retrieve_party_team(user_name);
+						_worker_service.player_join_fighting_pit(fightingPitId, std::move(pt), _cache);
+						_awaiting_arena.erase(playerAwaitedIt); // remove player from awaited player
 					}
-					SPDLOG_INFO("[fp:{}] : Player '{}' has logged in", fightingPitId, userName);
-					_workerService.upsert_player_identifier(fightingPitId, userName, idtPlayer.to_string());
-					_workerService.send_msg_new_arriving_team(fightingPitId, userName);
+					SPDLOG_INFO("[fp:{}] : Player '{}' has logged in", fightingPitId, user_name);
+					_worker_service.upsert_player_identifier(fightingPitId, user_name, idtPlayer.to_string());
+					_worker_service.send_msg_new_arriving_team(fightingPitId, user_name);
 				},
 
 				// InGame handler: Player is sending actions to feed pendingActions queue of their characters
-				[this](zmq::message_t&& idtPlayer, const zmq::message_t& intermediate, zmq::message_t&& playerMsg) {
-					if (!verify_buffer<fb::ArenaServerValidateAuth>(intermediate.data(), intermediate.size())) {
+				[this](zmq::message_t&& idt_player, const zmq::message_t& intermediate, zmq::message_t&& playerMsg) {
+					if (!verify_buffer<fb::arn::ArenaServerValidateAuth>(intermediate.data(), intermediate.size())) {
 						SPDLOG_ERROR("Wrongly formatted ArenaServerValidateAuth (auth frame) buffer");
 						return;
 					}
-					if (!verify_buffer<fb::ArenaFightAction>(playerMsg.data(), playerMsg.size())) {
+					if (!verify_buffer<fb::arn::ArenaFightAction>(playerMsg.data(), playerMsg.size())) {
 						SPDLOG_ERROR("Wrongly formatted ArenaFightAction buffer");
 						return;
 					}
 
-					const auto* authFrame = fb::arn::GetArenaServerValidateAuth(intermediate.data());
-					const std::string userName = authFrame->user_name()->str();
-					auto fp = _workerService.get_authenticated_player_fighting_pit(userName,
-							authFrame->token_auth()->str(),
-							authFrame->fighting_pit_id());
+					const auto* auth_frame = fb::arn::GetArenaServerValidateAuth(intermediate.data());
+					const std::string user_name = auth_frame->user_name()->str();
+					auto fp = _worker_service.get_authenticated_player_fighting_pit(user_name,
+							auth_frame->token_auth()->str(),
+							auth_frame->fighting_pit_id());
 
 					if (!fp) {
-						SPDLOG_WARN("Player {}:{} is not authenticated.", userName, authFrame->token_auth()->str());
+						SPDLOG_WARN("Player {}:{} is not authenticated.", user_name, auth_frame->token_auth()->str());
 						return;
 					}
-					_workerService.upsert_player_identifier(authFrame->fighting_pit_id(), userName, idtPlayer.str());
+					_worker_service.upsert_player_identifier(auth_frame->fighting_pit_id(), user_name, idt_player.str());
 
 					const auto* frame = fb::arn::GetArenaFightAction(playerMsg.data());
 					std::string action = frame->actionId()->str();
 
 					if (frame->memberId() == READY_ACTION_ID && action == READY_ACTION) {
-						fp->get().set_player_readiness(userName);
+						fp->get().set_player_readiness(user_name);
 					}
 					else if (fp->get().is_battle_on_going()) {
-						fp->get().forward_to_team_member(userName, createPlayerAction(std::move(action), frame));
+						fp->get().forward_to_team_member(user_name, create_player_action(std::move(action), frame));
 					}
 					else {
 						SPDLOG_WARN("An action {} action has been received from player {} "
-									"while the battle isn't on-going", action, userName);
+									"while the battle isn't on-going", action, user_name);
 					}
 				});
 	}
 	t.join();
 }
 
-PlayerAction
-arena_server_service::createPlayerAction(std::string&& action, const fb::arn::ArenaFightAction* frame) const
+player_action
+arena_server_service::create_player_action(std::string&& action, const fb::arn::ArenaFightAction* frame) const
 {
 	std::vector<uint> contenders;
 	std::vector<uint> allies;
@@ -238,7 +238,7 @@ arena_server_service::createPlayerAction(std::string&& action, const fb::arn::Ar
 		allies.reserve(frame->targetId_ally()->size());
 		std::move(frame->targetId_ally()->begin(), frame->targetId_ally()->end(), std::back_inserter(allies));
 	}
-	return PlayerAction{
+	return player_action{
 			frame->memberId(),
 			std::move(action),
 			std::move(contenders),
@@ -246,71 +246,71 @@ arena_server_service::createPlayerAction(std::string&& action, const fb::arn::Ar
 }
 
 bool
-arena_server_service::isSaturated() const noexcept
+arena_server_service::is_saturated() const noexcept
 {
-	const unsigned numberArenaManagedByServer = _awaitingArena.size() + _workerService.get_number_battle_running();
+	const unsigned numberArenaManagedByServer = _awaiting_arena.size() + _worker_service.get_number_battle_running();
 	return numberArenaManagedByServer > _ctx.get().get_battle_threshold();
 }
 
 std::pair<bool, const std::unordered_map<std::string, awaiting_player_arena>::const_iterator>
-arena_server_service::isPlayerAwaited(const std::string& name, const std::string& token, unsigned idFightingPit) const noexcept
+arena_server_service::is_player_awaited(const std::string& name, const std::string& token, unsigned fp_id) const noexcept
 {
-	if (const auto it = _awaitingArena.find(token);
-			it != _awaitingArena.end() && it->second.name_player == name && it->second.fighting_pit_id == idFightingPit)
+	if (const auto it = _awaiting_arena.find(token);
+			it != _awaiting_arena.end() && it->second.name_player == name && it->second.fighting_pit_id == fp_id)
 		return {true, it};
-	return {false, _awaitingArena.cend()};
+	return {false, _awaiting_arena.cend()};
 }
 
 void
-arena_server_service::forwardReplyToDispatcher(zmq::message_t&& idtWs, const fys::arena::awaiting_player_arena& awaitArena) noexcept
+arena_server_service::forward_reply_to_dispatcher(zmq::message_t&& idt_ws, const fys::arena::awaiting_player_arena& await_arena) noexcept
 {
 	flatbuffers::FlatBufferBuilder fbb;
 	auto asaFb = fb::arn::CreateArenaServerAuth(
 			fbb,
-			fbb.CreateString(awaitArena.name_player),
-			fbb.CreateString(awaitArena.token),
+			fbb.CreateString(await_arena.name_player),
+			fbb.CreateString(await_arena.token),
 			fbb.CreateString(_ctx.get().get_hostname()),
 			fbb.CreateString(_ctx.get().get_connection_str()),
 			_ctx.get().get_port(),
-			awaitArena.gen ? fbb.CreateString(awaitArena.gen->serverCode) : fbb.CreateString(""));
+			await_arena.gen ? fbb.CreateString(await_arena.gen->server_code) : fbb.CreateString(""));
 	fb::arn::FinishArenaServerAuthBuffer(fbb, asaFb);
 	zmq::multipart_t msg;
-	msg.add(std::move(idtWs));
+	msg.add(std::move(idt_ws));
 	msg.addmem(fbb.GetBufferPointer(), fbb.GetSize());
-	_connectionHandler.sendMessageToDispatcher(std::move(msg));
+	_connection_handler.send_msg_to_dispatcher(std::move(msg));
 }
 
 unsigned
-arena_server_service::createNewFightingPit(const awaiting_player_arena& awaited) noexcept
+arena_server_service::create_new_fighting_pit(const awaiting_player_arena& awaited) noexcept
 {
 	fighting_pit_announcer fpa(_cache);
 
-	fpa.set_difficulty(awaited.gen->levelFightingPit);
-	fpa.set_encounter_id(awaited.gen->encounterId);
-	fpa.enforce_ambush(awaited.gen->isAmbush);
+	fpa.set_difficulty(awaited.gen->level_fighting_pit);
+	fpa.set_encounter_id(awaited.gen->encounter_id);
+	fpa.enforce_ambush(awaited.gen->is_ambush);
 	fpa.set_creator_user_name(awaited.name_player);
 	fpa.set_creator_user_token(awaited.token);
-	fpa.set_creator_team_party(_dbConnector->retrieve_party_team(awaited.name_player));
-	fpa.set_join_disabled(awaited.gen->isJoinDisabled);
+	fpa.set_creator_team_party(_db_connector->retrieve_party_team(awaited.name_player));
+	fpa.set_join_disabled(awaited.gen->is_join_disabled);
 
-	unsigned id = _workerService.add_fighting_pit(
-			fpa.build_fighting_pit(_ctx.get().get_encounter_context(), awaited.gen->serverCode));
+	unsigned id = _worker_service.add_fighting_pit(
+			fpa.build_fighting_pit(_ctx.get().get_encounter_context(), awaited.gen->server_code));
 
 	if (id != fighting_pit::CREATION_ERROR) {
 		SPDLOG_INFO("[fp:{}] : Player '{}' create new FightingPit : token '{}', lvl '{}', encounter_id '{}', isAmbush '{}', "
 					"wsCode '{}', isJoinDisabled '{}'",
-				id, awaited.name_player, awaited.token, awaited.gen->levelFightingPit, awaited.gen->encounterId,
-				awaited.gen->isAmbush, awaited.gen->serverCode, awaited.gen->isJoinDisabled);
+				id, awaited.name_player, awaited.token, awaited.gen->level_fighting_pit, awaited.gen->encounter_id,
+				awaited.gen->is_ambush, awaited.gen->server_code, awaited.gen->is_join_disabled);
 	}
 	return id;
 }
 
 void
-arena_server_service::sendSaturatedErrorMsg(zmq::message_t&& identity)
+arena_server_service::send_saturated_error_msg(zmq::message_t&& identity)
 {
 	SPDLOG_WARN("Arena Server Service is saturated and thus can't process new incoming fighting pit");
 	auto[error, size] = fys::arena::flatbuffer_generator().generateErrorSaturated(_ctx.get().get_server_code());
-	_workerService.direct_send_msg_to_player(std::move(identity), zmq::message_t(error, size));
+	_worker_service.direct_send_msg_to_player(std::move(identity), zmq::message_t(error, size));
 }
 
 } // namespace fys::arena

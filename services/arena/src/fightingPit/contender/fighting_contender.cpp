@@ -21,13 +21,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <fightingPit/contender/ContenderScripting.hh>
+#include <fightingPit/contender/contender_scripting.hh>
 #include <fightingPit/contender/fighting_contender.hh>
 #include <history_manager.hh>
 
 namespace fys::arena {
 
-fighting_contender::fighting_contender(std::unique_ptr<ContenderScripting> contender_scripting)
+fighting_contender::fighting_contender(std::unique_ptr<contender_scripting> contender_scripting)
 		:_contender_scripting(std::move(contender_scripting))
 {
 }
@@ -35,25 +35,25 @@ fighting_contender::fighting_contender(std::unique_ptr<ContenderScripting> conte
 void
 fighting_contender::execute_action()
 {
-	_contender_scripting->executeAction();
+	_contender_scripting->execute_action();
 }
 
 bool
 fighting_contender::setup_contender()
 {
-	return _contender_scripting->setupContender();
+	return _contender_scripting->setup_contender();
 }
 
 const std::string&
 fighting_contender::get_name() const
 {
-	return _contender_scripting->getContenderName();
+	return _contender_scripting->get_contender_name();
 }
 
 unsigned
 fighting_contender::get_id() const
 {
-	return _contender_scripting->getContenderId();
+	return _contender_scripting->get_contender_id();
 }
 
 }

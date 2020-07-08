@@ -50,7 +50,7 @@ getPathSampyChaiScript()
 }
 
 std::string
-getLocalPathStorage()
+local_path_storage()
 {
 	std::string file_path = __FILE__;
 	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
@@ -60,7 +60,7 @@ getLocalPathStorage()
 }
 
 std::string
-getCopyPathStorage()
+copy_path_storage()
 {
 	std::string file_path = __FILE__;
 	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
@@ -77,8 +77,8 @@ getCopyPathStorage()
 TEST_CASE("Test Sampy", "[service][arena][script_test]")
 {
 
-	fys::cache::CmlCopy ccpy(getLocalPathStorage(), getCopyPathStorage());
-	std::filesystem::path baseCache = getLocalPathStorage();
+	fys::cache::CmlCopy ccpy(local_path_storage(), copy_path_storage());
+	std::filesystem::path baseCache = local_path_storage();
 
 	fys::arena::pit_contenders pc;
 	fys::arena::ally_party_teams apt;
@@ -93,29 +93,29 @@ TEST_CASE("Test Sampy", "[service][arena][script_test]")
 	sampy->load_contender_script_from_file(getPathSampyChaiScript());
 
 	auto fpc = std::make_shared<fys::arena::fighting_contender>(std::move(sampy));
-	REQUIRE(pc.addContender(fpc));
+	REQUIRE(pc.add_contender(fpc));
 
-	std::string userName = "FyS";
-	fys::arena::party_team_uptr pt = std::make_unique<fys::arena::party_team>(userName);
-	fys::arena::team_member_sptr teamMember1 = std::make_shared<fys::arena::team_member>(userName, "fyston1");
-	fys::arena::team_member_sptr teamMember2 = std::make_shared<fys::arena::team_member>(userName, "fyston2");
+	std::string user_name = "FyS";
+	fys::arena::party_team_uptr pt = std::make_unique<fys::arena::party_team>(user_name);
+	fys::arena::team_member_sptr team_member_1 = std::make_shared<fys::arena::team_member>(user_name, "fyston1");
+	fys::arena::team_member_sptr team_member_2 = std::make_shared<fys::arena::team_member>(user_name, "fyston2");
 
-	pt->add_team_member(teamMember1);
-	pt->add_team_member(teamMember2);
+	pt->add_team_member(team_member_1);
+	pt->add_team_member(team_member_2);
 
 	fys::arena::fighting_pit_layout::set_contender_initiate_position(*fpc, fys::arena::hexagon_side::orientation::A_N);
-	fys::arena::fighting_pit_layout::set_ally_move_initiate_position(*teamMember1, fys::arena::hexagon_side::orientation::A_N);
-	fys::arena::fighting_pit_layout::set_ally_move_initiate_position(*teamMember2, fys::arena::hexagon_side::orientation::A_N);
+	fys::arena::fighting_pit_layout::set_ally_move_initiate_position(*team_member_1, fys::arena::hexagon_side::orientation::A_N);
+	fys::arena::fighting_pit_layout::set_ally_move_initiate_position(*team_member_2, fys::arena::hexagon_side::orientation::A_N);
 
 	apt.add_party_team(std::move(pt));
 
 	SECTION("Test initialization") {
-		REQUIRE(153 == fpc->access_status().life.current);
+		REQUIRE(153 == fpc->access_status().life_pt.current);
 		REQUIRE(8 == pc.getFightingContender(0)->access_status().initial_speed);
-		REQUIRE(153 == pc.getFightingContender(0)->access_status().life.current);
-		REQUIRE(153 == pc.getFightingContender(0)->access_status().life.total);
-		REQUIRE(100 == pc.getFightingContender(0)->access_status().magic_point.total);
-		REQUIRE(100 == pc.getFightingContender(0)->access_status().magic_point.total);
+		REQUIRE(153 == pc.getFightingContender(0)->access_status().life_pt.current);
+		REQUIRE(153 == pc.getFightingContender(0)->access_status().life_pt.total);
+		REQUIRE(100 == pc.getFightingContender(0)->access_status().magic_pt.total);
+		REQUIRE(100 == pc.getFightingContender(0)->access_status().magic_pt.total);
 
 		// test doable actions
 		std::vector<std::string> actionsDoable;
@@ -137,49 +137,49 @@ retrieveDoableActions(actions.act);)");
 	}
 
 	SECTION("Test Enemy&Attack selection") {
-		fpc->access_status().life.current = 16;
-		fpc->access_status().life.total = 100;
-		teamMember1->access_status().life.current = 10;
-		teamMember1->access_status().life.total = 100;
-		teamMember2->access_status().life.current = 90;
-		teamMember2->access_status().life.total = 110;
+		fpc->access_status().life_pt.current = 16;
+		fpc->access_status().life_pt.total = 100;
+		team_member_1->access_status().life_pt.current = 10;
+		team_member_1->access_status().life_pt.total = 100;
+		team_member_2->access_status().life_pt.current = 90;
+		team_member_2->access_status().life_pt.total = 110;
 
 		fys::arena::data::priority_elem e{0, 1, true};
 
 		SECTION("Test Action selection") {
-			fpc->access_status().life.current = 100;
-			fpc->access_status().life.total = 100;
-			fpc->access_status().magic_point.total = 0;
+			fpc->access_status().life_pt.current = 100;
+			fpc->access_status().life_pt.total = 100;
+			fpc->access_status().magic_pt.total = 0;
 
-			REQUIRE(100 == fpc->access_status().life.current);
-			REQUIRE(100 == fpc->access_status().magic_point.current);
+			REQUIRE(100 == fpc->access_status().life_pt.current);
+			REQUIRE(100 == fpc->access_status().magic_pt.current);
 			pc.execute_contender_action(e);
 
-			REQUIRE(42 == fpc->access_status().magic_point.current);          // Sleeping set the magicPoint to 42
+			REQUIRE(42 == fpc->access_status().magic_pt.current);          // Sleeping set the magicPoint to 42
 
 
 		} // End section : Test baseAttack selection
 
 		SECTION("Test Action Selection BaseAttack") {
-			teamMember1->access_status().life.current = 10;
-			teamMember1->access_status().life.total = 100;
+			team_member_1->access_status().life_pt.current = 10;
+			team_member_1->access_status().life_pt.total = 100;
 
-			REQUIRE(16 == fpc->access_status().life.current);    // 16 < ( 50% of 100hp) so baseAttack is decided (50 damage)
+			REQUIRE(16 == fpc->access_status().life_pt.current);    // 16 < ( 50% of 100hp) so baseAttack is decided (50 damage)
 			pc.execute_contender_action(e);
 
-			REQUIRE(0 == teamMember1->access_status().life.current); // lower life opponent selected (teamMember1 with 10 life point)
-			REQUIRE(teamMember1->access_status().life.isDead());
+			REQUIRE(0 == team_member_1->access_status().life_pt.current); // lower life opponent selected (teamMember1 with 10 life point)
+			REQUIRE(team_member_1->access_status().life_pt.is_dead());
 
 		} // Test Action Selection BaseAttack
 
 		SECTION("Test Selection Change of enemy") {
-			teamMember2->access_status().life.current = 9;       // teamMember2.life.current < teamMember1.life.current
+			team_member_2->access_status().life_pt.current = 9;       // teamMember2.life.current < teamMember1.life.current
 
-			REQUIRE(16 == fpc->access_status().life.current);    // 16 < ( 50% of 100hp) so baseAttack is decided (50 damage)
+			REQUIRE(16 == fpc->access_status().life_pt.current);    // 16 < ( 50% of 100hp) so baseAttack is decided (50 damage)
 			pc.execute_contender_action(e);
 
-			REQUIRE(0 == teamMember2->access_status().life.current); // lower life opponent selected (teamMember1 with 10 life point)
-			REQUIRE(teamMember2->access_status().life.isDead());
+			REQUIRE(0 == team_member_2->access_status().life_pt.current); // lower life opponent selected (teamMember1 with 10 life point)
+			REQUIRE(team_member_2->access_status().life_pt.is_dead());
 
 		} // Test Action Selection BaseAttack
 

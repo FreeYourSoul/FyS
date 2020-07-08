@@ -38,7 +38,7 @@ using namespace fys::arena;
 
 namespace {
 [[nodiscard]] static std::string
-getLocalPathStorage()
+local_path_storage()
 {
 	std::string file_path = __FILE__;
 	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
@@ -51,7 +51,7 @@ getLocalPathStorage()
 TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]")
 {
 	auto fseamMock = FSeam::getDefault<fys::util::random_generator>();
-	auto cml = CmlBase(getLocalPathStorage());
+	auto cml = CmlBase(local_path_storage());
 	encounter_context ctx;
 	ctx._rangeEncounterPerZone["WS00"] = {
 			encounter_context::rng_range(1, 4), // ez
@@ -132,26 +132,26 @@ TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]")
 		const auto &sides = fighting_pit_announcer::get_side_vector(fp);
 		REQUIRE(18 == sides.size());
 
-		REQUIRE(hexagon_side::orientation::A_N == sides[static_cast<uint>(hexagon_side::orientation::A_N)].getSide());
-		REQUIRE(hexagon_side::orientation::A_NE == sides[static_cast<uint>(hexagon_side::orientation::A_NE)].getSide());
-		REQUIRE(hexagon_side::orientation::A_NW == sides[static_cast<uint>(hexagon_side::orientation::A_NW)].getSide());
-		REQUIRE(hexagon_side::orientation::A_S == sides[static_cast<uint>(hexagon_side::orientation::A_S)].getSide());
-		REQUIRE(hexagon_side::orientation::A_SE == sides[static_cast<uint>(hexagon_side::orientation::A_SE)].getSide());
-		REQUIRE(hexagon_side::orientation::A_SW == sides[static_cast<uint>(hexagon_side::orientation::A_SW)].getSide());
+		REQUIRE(hexagon_side::orientation::A_N == sides[static_cast<uint>(hexagon_side::orientation::A_N)].get_side());
+		REQUIRE(hexagon_side::orientation::A_NE == sides[static_cast<uint>(hexagon_side::orientation::A_NE)].get_side());
+		REQUIRE(hexagon_side::orientation::A_NW == sides[static_cast<uint>(hexagon_side::orientation::A_NW)].get_side());
+		REQUIRE(hexagon_side::orientation::A_S == sides[static_cast<uint>(hexagon_side::orientation::A_S)].get_side());
+		REQUIRE(hexagon_side::orientation::A_SE == sides[static_cast<uint>(hexagon_side::orientation::A_SE)].get_side());
+		REQUIRE(hexagon_side::orientation::A_SW == sides[static_cast<uint>(hexagon_side::orientation::A_SW)].get_side());
 
-		REQUIRE(hexagon_side::orientation::B_N == sides[static_cast<uint>(hexagon_side::orientation::B_N)].getSide());
-		REQUIRE(hexagon_side::orientation::B_NE == sides[static_cast<uint>(hexagon_side::orientation::B_NE)].getSide());
-		REQUIRE(hexagon_side::orientation::B_NW == sides[static_cast<uint>(hexagon_side::orientation::B_NW)].getSide());
-		REQUIRE(hexagon_side::orientation::B_S == sides[static_cast<uint>(hexagon_side::orientation::B_S)].getSide());
-		REQUIRE(hexagon_side::orientation::B_SE == sides[static_cast<uint>(hexagon_side::orientation::B_SE)].getSide());
-		REQUIRE(hexagon_side::orientation::B_SW == sides[static_cast<uint>(hexagon_side::orientation::B_SW)].getSide());
+		REQUIRE(hexagon_side::orientation::B_N == sides[static_cast<uint>(hexagon_side::orientation::B_N)].get_side());
+		REQUIRE(hexagon_side::orientation::B_NE == sides[static_cast<uint>(hexagon_side::orientation::B_NE)].get_side());
+		REQUIRE(hexagon_side::orientation::B_NW == sides[static_cast<uint>(hexagon_side::orientation::B_NW)].get_side());
+		REQUIRE(hexagon_side::orientation::B_S == sides[static_cast<uint>(hexagon_side::orientation::B_S)].get_side());
+		REQUIRE(hexagon_side::orientation::B_SE == sides[static_cast<uint>(hexagon_side::orientation::B_SE)].get_side());
+		REQUIRE(hexagon_side::orientation::B_SW == sides[static_cast<uint>(hexagon_side::orientation::B_SW)].get_side());
 
-		REQUIRE(hexagon_side::orientation::C_N == sides[static_cast<uint>(hexagon_side::orientation::C_N)].getSide());
-		REQUIRE(hexagon_side::orientation::C_NE == sides[static_cast<uint>(hexagon_side::orientation::C_NE)].getSide());
-		REQUIRE(hexagon_side::orientation::C_NW == sides[static_cast<uint>(hexagon_side::orientation::C_NW)].getSide());
-		REQUIRE(hexagon_side::orientation::C_S == sides[static_cast<uint>(hexagon_side::orientation::C_S)].getSide());
-		REQUIRE(hexagon_side::orientation::C_SE == sides[static_cast<uint>(hexagon_side::orientation::C_SE)].getSide());
-		REQUIRE(hexagon_side::orientation::C_SW == sides[static_cast<uint>(hexagon_side::orientation::C_SW)].getSide());
+		REQUIRE(hexagon_side::orientation::C_N == sides[static_cast<uint>(hexagon_side::orientation::C_N)].get_side());
+		REQUIRE(hexagon_side::orientation::C_NE == sides[static_cast<uint>(hexagon_side::orientation::C_NE)].get_side());
+		REQUIRE(hexagon_side::orientation::C_NW == sides[static_cast<uint>(hexagon_side::orientation::C_NW)].get_side());
+		REQUIRE(hexagon_side::orientation::C_S == sides[static_cast<uint>(hexagon_side::orientation::C_S)].get_side());
+		REQUIRE(hexagon_side::orientation::C_SE == sides[static_cast<uint>(hexagon_side::orientation::C_SE)].get_side());
+		REQUIRE(hexagon_side::orientation::C_SW == sides[static_cast<uint>(hexagon_side::orientation::C_SW)].get_side());
 	} // End section : Test Side Setup
 
 	SECTION("test seed 42") {
@@ -321,9 +321,9 @@ TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]")
 			REQUIRE(3 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->get_contender_scripting()->get_level());
 
 			SECTION("test ordering turn setup") {
-				REQUIRE(8 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(0)->getStatus().initial_speed);
+				REQUIRE(8 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(0)->get_status().initial_speed);
 				REQUIRE(hexagon_side::orientation::B_S == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(0)->get_hexagon_side_orient());
-				REQUIRE(8 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->getStatus().initial_speed);
+				REQUIRE(8 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->get_status().initial_speed);
 				REQUIRE(hexagon_side::orientation::B_S == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->get_hexagon_side_orient());
 
 				const auto members = fighting_pit_announcer::get_party_teams(fp).get_members_by_side(hexagon_side::orientation::B_S);
@@ -341,34 +341,34 @@ TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]")
 
 					using namespace std::chrono_literals;
 					auto& order = fighting_pit_announcer::get_side_battle_for_side(fp, hexagon_side::orientation::B_S);
-					REQUIRE(hexagon_side::orientation::B_S == order.getSide());
+					REQUIRE(hexagon_side::orientation::B_S == order.get_side());
 
-					const auto elem1 = order.getCurrentParticipantTurn(std::chrono::system_clock::now(), 0ms);
+					const auto elem1 = order.get_current_participant_turn(std::chrono::system_clock::now(), 0ms);
 					REQUIRE(data::priority_elem{4, 20, data::PARTY_MEMBER} == elem1);
 					REQUIRE(20 == elem1.speed);
 					std::this_thread::sleep_for(10ms);
 
-					const auto elem2 = order.getCurrentParticipantTurn(std::chrono::system_clock::now(), 0ms);
+					const auto elem2 = order.get_current_participant_turn(std::chrono::system_clock::now(), 0ms);
 					REQUIRE(data::priority_elem{3, 10, data::PARTY_MEMBER} == elem2);
 					REQUIRE(10 == elem2.speed);
 					std::this_thread::sleep_for(10ms);
 
-					const auto elem3 = order.getCurrentParticipantTurn(std::chrono::system_clock::now(), 0ms);
+					const auto elem3 = order.get_current_participant_turn(std::chrono::system_clock::now(), 0ms);
 					REQUIRE(data::priority_elem{1, 8, data::CONTENDER} == elem3);
 					REQUIRE(8 == elem3.speed);
 					std::this_thread::sleep_for(10ms);
 
-					const auto elem4 = order.getCurrentParticipantTurn(std::chrono::system_clock::now(), 0ms);
+					const auto elem4 = order.get_current_participant_turn(std::chrono::system_clock::now(), 0ms);
 					REQUIRE(data::priority_elem{0, 8, data::CONTENDER} == elem4);
 					REQUIRE(8 == elem4.speed);
 					std::this_thread::sleep_for(10ms);
 
-					const auto elem5 = order.getCurrentParticipantTurn(std::chrono::system_clock::now(), 0ms);
+					const auto elem5 = order.get_current_participant_turn(std::chrono::system_clock::now(), 0ms);
 					REQUIRE(data::priority_elem{2, 5, data::PARTY_MEMBER} == elem5);
 					REQUIRE(5 == elem5.speed);
 					std::this_thread::sleep_for(10ms);
 
-					const auto& elem = order.getCurrentParticipantTurn(std::chrono::system_clock::now(), 0ms);
+					const auto& elem = order.get_current_participant_turn(std::chrono::system_clock::now(), 0ms);
 					REQUIRE(data::priority_elem{1, 4, data::PARTY_MEMBER} == elem);
 					REQUIRE(3 == elem.speed);
 					std::this_thread::sleep_for(10ms);
@@ -388,7 +388,7 @@ TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]")
 TEST_CASE("FightingPitAnnouncerTestCase test reward", "[service][arena]")
 {
 	auto fseamMock = FSeam::getDefault<fys::util::random_generator>();
-	auto cml = CmlBase(getLocalPathStorage());
+	auto cml = CmlBase(local_path_storage());
 	encounter_context ctx;
 	ctx._rangeEncounterPerZone["WS00"] = {
 			encounter_context::rng_range(1, 4), // ez

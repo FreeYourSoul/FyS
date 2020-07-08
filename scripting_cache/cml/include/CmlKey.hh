@@ -39,7 +39,7 @@ public:
 		auto ok = _path.string();
 	}
 
-	[[nodiscard]] const std::filesystem::path& getPath() const { return _path; }
+	[[nodiscard]] const std::filesystem::path& get_path() const { return _path; }
 	[[nodiscard]] const std::string& getKey() const { return _key; }
 
 private:

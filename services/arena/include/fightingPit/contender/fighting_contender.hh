@@ -50,10 +50,10 @@ public:
 	setup_contender();
 
 	[[nodiscard]] const data::status&
-	getStatus() const { return _status; }
+	get_status() const { return _status; }
 
 	[[nodiscard]] const hexagon_side&
-	getHexagonSide() const { return _side; }
+	get_hexagon_side() const { return _side; }
 
 	[[nodiscard]] data::status&
 	access_status() { return _status; }

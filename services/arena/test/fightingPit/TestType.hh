@@ -388,27 +388,27 @@ protected:
 	void createUpToDateFileInLocalStorage(const fys::cache::CmlKey& cmlKey, std::filesystem::file_time_type) override
 	{
 		std::error_code e;
-		std::filesystem::create_directories(cmlKey.getPath().parent_path(), e);
+		std::filesystem::create_directories(cmlKey.get_path().parent_path(), e);
 
 		if ("testing:TestMonsterSleep.chai" == cmlKey.getKey()) {
-			std::ofstream ofs(cmlKey.getPath());
+			std::ofstream ofs(cmlKey.get_path());
 			ofs << MonsterTestScriptSleep;
 		}
 		else if ("testing:TestMonsterAttack.chai" == cmlKey.getKey()) {
-			std::ofstream ofs(cmlKey.getPath());
+			std::ofstream ofs(cmlKey.get_path());
 			ofs << MonsterTestScriptAttack;
 		}
 		else if ("testing:TestMonsterPoison.chai" == cmlKey.getKey()) {
-			std::ofstream ofs(cmlKey.getPath());
+			std::ofstream ofs(cmlKey.get_path());
 			ofs << MonsterTestScriptPoison;
 		}
 		else if ("testing:TestMonsterMove.chai" == cmlKey.getKey()) {
-			std::ofstream ofs(cmlKey.getPath());
+			std::ofstream ofs(cmlKey.get_path());
 			ofs << MonsterTestMoveAttack;
 		}
 		else {
 			fys::cache::CmlKey k(_copyPathStorage, cmlKey.getKey());
-			std::filesystem::copy(k.getPath(), cmlKey.getPath(), e);
+			std::filesystem::copy(k.get_path(), cmlKey.get_path(), e);
 		}
 	}
 };
@@ -426,31 +426,31 @@ getPartyTeam(const std::string& user)
 
 	fys::arena::fighting_pit_layout::set_ally_move_initiate_position(*tm1, fys::arena::hexagon_side::orientation::B_S);
 	auto& s1 = tm1->access_status();
-	s1.life.total = 100;
-	s1.life.current = 100;
-	s1.magic_point.total = 20;
-	s1.magic_point.current = 20;
+	s1.life_pt.total = 100;
+	s1.life_pt.current = 100;
+	s1.magic_pt.total = 20;
+	s1.magic_pt.current = 20;
 	s1.initial_speed = 3;
 	fys::arena::fighting_pit_layout::set_ally_move_initiate_position(*tm2, fys::arena::hexagon_side::orientation::B_S);
 	auto& s2 = tm2->access_status();
-	s2.life.total = 200;
-	s2.life.current = 200;
-	s2.magic_point.total = 0;
-	s2.magic_point.current = 0;
+	s2.life_pt.total = 200;
+	s2.life_pt.current = 200;
+	s2.magic_pt.total = 0;
+	s2.magic_pt.current = 0;
 	s2.initial_speed = 5;
 	fys::arena::fighting_pit_layout::set_ally_move_initiate_position(*tm3, fys::arena::hexagon_side::orientation::B_S);
 	auto& s3 = tm3->access_status();
-	s3.life.total = 550;
-	s3.life.current = 550;
-	s3.magic_point.total = 10;
-	s3.magic_point.current = 10;
+	s3.life_pt.total = 550;
+	s3.life_pt.current = 550;
+	s3.magic_pt.total = 10;
+	s3.magic_pt.current = 10;
 	s3.initial_speed = 10;
 	fys::arena::fighting_pit_layout::set_ally_move_initiate_position(*tm4, fys::arena::hexagon_side::orientation::B_S);
 	auto& s4 = tm4->access_status();
-	s4.life.total = 140;
-	s4.life.current = 140;
-	s4.magic_point.total = 10;
-	s4.magic_point.current = 10;
+	s4.life_pt.total = 140;
+	s4.life_pt.current = 140;
+	s4.magic_pt.total = 10;
+	s4.magic_pt.current = 10;
 	s4.initial_speed = 20;
 
 	team->add_team_member(std::move(tm1));

@@ -78,15 +78,15 @@ public:
 	generateFightingPitState(const fys::arena::fighting_pit& fp);
 
 	[[nodiscard]] std::pair<void*, uint>
-	generatePartyTeamStatus(const fys::arena::party_team& partyTeam);
+	generate_party_team_status(const fys::arena::party_team& partyTeam);
 
 	[[nodiscard]] std::pair<void*, uint>
-	generateEndBattle(bool win, const rewards& rewards);
+	generate_end_battle(bool win, const rewards& rewards);
 
 	[[nodiscard]] std::pair<void*, uint>
-	generateActionNotification(const std::string& actionKey,
-			const std::vector<fighting_contender_sptr>& contenderTargets,
-			const std::vector<team_member_sptr>& allyTargets);
+	generate_action_notification(const std::string& action_key,
+			const std::vector<fighting_contender_sptr>& contender_targets,
+			const std::vector<team_member_sptr>& ally_targets);
 
 //	[[nodiscard]] std::pair<void*, uint>
 //	generateCosmetics(const fys::arena::PartyTeam& partyTeam);
@@ -96,16 +96,16 @@ public:
 
 private:
 	[[nodiscard]] inline std::vector<flatbuffers::Offset<fb::arn::PartyTeamStatus>>
-	generatePartyTeamVecStatusOffset(const ally_party_teams& apt);
+	generate_party_team_vec_status_offset(const ally_party_teams& apt);
 
 	[[nodiscard]] inline std::vector<flatbuffers::Offset<fb::arn::MemberStatus>>
-	generateTeamMemberVecStatusOffset(const std::vector<team_member_sptr>& members);
+	generate_team_member_vec_status_offset(const std::vector<team_member_sptr>& members);
 
 	[[nodiscard]] inline std::vector<flatbuffers::Offset<fys::fb::arn::MemberStatus>>
-	generateContenderVecStatusOffset(const std::vector<fighting_contender_sptr>& contenders);
+	generate_contender_vec_status_offset(const std::vector<fighting_contender_sptr>& contenders);
 
 	[[nodiscard]] inline std::vector<flatbuffers::Offset<fb::arn::Reward>>
-	generateRewardsOffset(const rewards& rewards);
+	generate_rewards_offset(const rewards& rewards);
 
 //	[[nodiscard]] inline flatbuffers::Offset<fys::fb::arn::Cosmetics>
 //	generateCosmeticsOffset(const fys::arena::PartyTeam&);
