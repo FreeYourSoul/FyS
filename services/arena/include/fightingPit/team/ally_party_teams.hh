@@ -64,16 +64,16 @@ public:
 	select_member_by_id(unsigned id_member);
 
 	[[nodiscard]] std::vector<std::shared_ptr<team_member>>
-	get_members_by_side(hexagon_side::orientation side) const;
+	members_by_side(hexagon_side::orientation side) const;
 
 	[[nodiscard]] std::vector<std::shared_ptr<team_member>>
-	get_dead_members_by_side(hexagon_side::orientation side) const;
+	dead_members_by_side(hexagon_side::orientation side) const;
 
 	[[nodiscard]] std::shared_ptr<team_member>
 	get_specific_team_member_by_id(const std::string& user_name, unsigned id_member) const;
 
 	[[nodiscard]] unsigned
-	get_number_ally() const { return _current_team_member_id; }
+	number_ally() const { return _current_team_member_id; }
 
 	[[nodiscard]] unsigned
 	ally_number_on_side(hexagon_side::orientation side) const;
@@ -93,10 +93,10 @@ public:
 	set_party_readiness(const std::string& party_team);
 
 	[[nodiscard]] const std::vector<std::unique_ptr<party_team>>&
-	get_party_teams() const { return _party_teams; }
+	party_teams() const { return _party_teams; }
 
 	[[nodiscard]] uint
-	get_fighting_pit_id() const { return _fighting_pit_id; }
+	fighting_pit_id() const { return _fighting_pit_id; }
 
 	/**
 	 * Get the next registered action of the given ally, and execute it

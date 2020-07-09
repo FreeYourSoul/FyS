@@ -60,7 +60,7 @@ private:
 	retrievePlayerSoulDraughtboard(const fb::ivt::update_player_soul_draughtboard* update_request);
 
 	[[nodiscard]] zmq::message_t
-	retrievePlayerInventory(const fb::ivt::retrieve_player_inventory* retrieve_request);
+	retrieve_player_inventory(const fb::ivt::retrieve_player_inventory* retrieve_request);
 
 private:
 	std::reference_wrapper<const inventory_server_context> _ctx;

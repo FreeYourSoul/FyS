@@ -65,10 +65,10 @@ get_alteration_name_from_key(const std::string& key)
 
 struct priority_elem { // Improve with strong typing on ID/SPEED
 	priority_elem() = default;
-	priority_elem(uint id, int speed, bool is_contender)
+	priority_elem(std::uint32_t id, int speed, bool is_contender)
 			:id(id), speed(speed), is_contender(is_contender) { }
 
-	uint id;
+	std::uint32_t id;
 	int speed;
 	bool is_contender = false;
 
@@ -94,16 +94,16 @@ struct priority_elem { // Improve with strong typing on ID/SPEED
 };
 
 struct life {
-	uint current = 0;
-	uint total = 0;
+	std::uint32_t current = 0;
+	std::uint32_t total = 0;
 
 	[[nodiscard]] bool
 	is_dead() const { return current == 0; }
 };
 
 struct magic_point {
-	uint current = 0;
-	uint total = 0;
+	std::uint32_t current = 0;
+	std::uint32_t total = 0;
 };
 
 struct status;
@@ -113,7 +113,7 @@ struct status;
  */
 class alteration {
 public:
-	alteration(std::string alterationKey, uint lvl, uint turn, std::function<int(data::status&, uint, uint)> a) noexcept
+	alteration(std::string alterationKey, std::uint32_t lvl, std::uint32_t turn, std::function<int(data::status&, uint, uint)> a) noexcept
 			:
 			_alteration_key(std::move(alterationKey)),
 			_lvl(lvl),
@@ -134,19 +134,19 @@ public:
 	}
 
 	const std::string& get_alteration_key() const { return _alteration_key; }
-	uint getTurn() const { return _turn; }
+	std::uint32_t getTurn() const { return _turn; }
 
 private:
 	std::string _alteration_key;
-	uint _lvl;
-	uint _turn;
+	std::uint32_t _lvl;
+	std::uint32_t _turn;
 	std::function<int(status&, uint, uint)> _action;
 };
 
 struct status {
 	life life_pt;
 	magic_point magic_pt;
-	uint initial_speed;
+	std::uint32_t initial_speed;
 
 	/**
 	 * When moving the appropriate flag is set in FightingPitLayout which use

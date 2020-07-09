@@ -49,7 +49,7 @@ enum class StepExchange {
 
 class exchange_room {
 
-	enum class ExchangeRole : uint {
+	enum class ExchangeRole : std::uint32_t {
 		INITIATOR = 0,
 		RECEIVER = 1,
 		NONE
@@ -57,7 +57,7 @@ class exchange_room {
 
 public:
 	explicit exchange_room(
-			uint roomId,
+			std::uint32_t roomId,
 			std::string initiator,
 			std::string receiver,
 			std::string initiatorIdentity,
@@ -94,7 +94,7 @@ private:
 	basicCheck(const std::string& player, const std::string& token);
 
 private:
-	uint _roomId;
+	std::uint32_t _roomId;
 	std::string _tokenExchange;
 	std::reference_wrapper<item_manager> _manager;
 

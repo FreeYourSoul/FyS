@@ -46,13 +46,13 @@ namespace {
 //}
 
 //[[nodiscard]] bool
-//isActionToBeNotified(uint actionId)
+//isActionToBeNotified(std::uint32_t actionId)
 //{
 //	return actionId > fys::ws::NPCAction::IDLE;
 //}
 //
 //[[nodiscard]] bool
-//isActionMovementRelated(uint actionId)
+//isActionMovementRelated(std::uint32_t actionId)
 //{
 //	return actionId == fys::ws::NPCAction::MOVE || actionId == fys::ws::NPCAction::STOP;
 //}
@@ -104,11 +104,11 @@ script_engine::spawn_encounter(unsigned index_spawn)
 void
 script_engine::execute_encounter_scripted_actions()
 {
-	for (uint spawningPointId = 0; spawningPointId < _spawningPoints.size(); ++spawningPointId) {
+	for (std::uint32_t spawningPointId = 0; spawningPointId < _spawningPoints.size(); ++spawningPointId) {
 		std::vector<npc_action> actionsExecuted;
 
 		actionsExecuted.resize(_spawned_per_spawning_point.at(spawningPointId).size());
-		for (uint spawnId = 0; spawnId < _spawned_per_spawning_point.at(spawningPointId).size(); ++spawnId) {
+		for (std::uint32_t spawnId = 0; spawnId < _spawned_per_spawning_point.at(spawningPointId).size(); ++spawnId) {
 			auto& npc = _spawned_per_spawning_point.at(spawningPointId).at(spawnId);
 			try {
 				unsigned actionId;

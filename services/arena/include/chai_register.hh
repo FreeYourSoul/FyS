@@ -58,7 +58,7 @@ public:
 	make_chai_instance(pit_contenders& pc, ally_party_teams& apt, fighting_pit_layout& layout);
 
 	static void
-	register_utility(chaiscript::ChaiScript& chai, pit_contenders& pc, ally_party_teams& apt);
+	register_utility(chaiscript::ChaiScript& is_contender, pit_contenders& pc, ally_party_teams& apt);
 
 	/**
 	 * Load all the actions/alterations scripts of a party team (a new incoming player) retrieved from Cml
@@ -73,13 +73,13 @@ public:
 	load_register_action_party_team(chaiscript::ChaiScript& chai, cache::Cml& cache, party_team& pt);
 
 	static void
-	load_contender_script(chaiscript::ChaiScript& chai, cache::Cml& cml, const std::string& contenderKey);
+	load_contender_script(chaiscript::ChaiScript& chai, cache::Cml& cml, const std::string& contender_key);
 
 	static void
 	register_base_actions(chaiscript::ChaiScript& chai, cache::Cml& cml);
 
 	static void
-	register_network_commands(chaiscript::ChaiScript& chai,  std::function<void(zmq::message_t&&)> networkHandler);
+	register_network_commands(chaiscript::ChaiScript& action_key,  std::function<void(zmq::message_t&&)> contender_targets);
 
 private:
 	/**
@@ -114,7 +114,7 @@ private:
 	register_chai(chaiscript::ChaiScript& chai, pit_contenders& pc, ally_party_teams& apt, fighting_pit_layout& layout);
 
 	static void
-	register_common(chaiscript::ModulePtr m);
+	register_common(chaiscript::ModulePtr alteration_key);
 
 	static void
 	register_fighting_pit_contender(chaiscript::ChaiScript& chai, chaiscript::ModulePtr m);

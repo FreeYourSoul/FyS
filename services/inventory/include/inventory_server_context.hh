@@ -39,7 +39,7 @@ public:
 	get_connection_str_cache_db() const { return _connection_string_cache_db; }
 
 	[[nodiscard]] const std::string&
-	get_server_code() const { return _server_code; }
+	server_code() const { return _server_code; }
 
 	[[nodiscard]] std::string
 	get_player_connection_str() const noexcept;
@@ -54,7 +54,7 @@ private:
 	std::string _connection_string_cache_db;
 	std::string _server_code;
 
-	uint _portPlayerConnection;
+	std::uint32_t _portPlayerConnection;
 
 };
 

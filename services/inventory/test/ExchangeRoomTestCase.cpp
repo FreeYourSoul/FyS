@@ -30,7 +30,7 @@ static const std::string RECEIVER = "ReceiverName";
 static const std::string RECEIVER_IDENTITY = "ReceiverIdt";
 static const std::string INITIATOR = "InitiatorName";
 static const std::string INITIATOR_IDENTITY = "InitiatorIdt";
-static constexpr uint EXCHANGE_ID = 42;
+static constexpr std::uint32_tEXCHANGE_ID = 42;
 
 using namespace fys::inv;
 

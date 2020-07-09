@@ -40,7 +40,7 @@
 
 namespace {
 std::string
-getPathSampyChaiScript()
+path_sampy_chai_script()
 {
 	std::string file_path = __FILE__;
 	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
@@ -90,7 +90,7 @@ TEST_CASE("Test Sampy", "[service][arena][script_test]")
 	fys::arena::ContenderScriptingUPtr sampy = std::make_unique<fys::arena::contender_scripting>(*chai, 1);
 	sampy->set_contender_id(0u);
 	sampy->set_contender_name("Sampy");
-	sampy->load_contender_script_from_file(getPathSampyChaiScript());
+	sampy->load_contender_script_from_file(path_sampy_chai_script());
 
 	auto fpc = std::make_shared<fys::arena::fighting_contender>(std::move(sampy));
 	REQUIRE(pc.add_contender(fpc));
@@ -111,11 +111,11 @@ TEST_CASE("Test Sampy", "[service][arena][script_test]")
 
 	SECTION("Test initialization") {
 		REQUIRE(153 == fpc->access_status().life_pt.current);
-		REQUIRE(8 == pc.getFightingContender(0)->access_status().initial_speed);
-		REQUIRE(153 == pc.getFightingContender(0)->access_status().life_pt.current);
-		REQUIRE(153 == pc.getFightingContender(0)->access_status().life_pt.total);
-		REQUIRE(100 == pc.getFightingContender(0)->access_status().magic_pt.total);
-		REQUIRE(100 == pc.getFightingContender(0)->access_status().magic_pt.total);
+		REQUIRE(8 == pc.fighting_contender_at(0)->access_status().initial_speed);
+		REQUIRE(153 == pc.fighting_contender_at(0)->access_status().life_pt.current);
+		REQUIRE(153 == pc.fighting_contender_at(0)->access_status().life_pt.total);
+		REQUIRE(100 == pc.fighting_contender_at(0)->access_status().magic_pt.total);
+		REQUIRE(100 == pc.fighting_contender_at(0)->access_status().magic_pt.total);
 
 		// test doable actions
 		std::vector<std::string> actionsDoable;

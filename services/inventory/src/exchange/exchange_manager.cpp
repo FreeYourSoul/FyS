@@ -30,7 +30,7 @@ namespace fys::inv {
 exchange_manager::exchange_manager(const inventory_server_context& ctx)
 		:
 		common::direct_connection_manager(1, ctx.get_player_connection_str()),
-		_inventory_server_code(ctx.get_server_code()) { }
+		_inventory_server_code(ctx.server_code()) { }
 
 const exchange_room&
 exchange_manager::makeExchangeRoom(item_manager& itemManager, std::string initiator, std::string receiver, std::string identity)
@@ -70,7 +70,7 @@ exchange_manager::lock_room_transaction(const room_accessor& accessor)
 
 void
 exchange_manager::remove_item_from_room(item_manager& manager, const room_accessor& accessor,
-		const std::string& item_code, uint qty)
+		const std::string& item_code, std::uint32_t qty)
 {
 	auto it = _rooms.find(accessor.idExchange);
 	if (it != _rooms.end()) {
@@ -83,7 +83,7 @@ exchange_manager::remove_item_from_room(item_manager& manager, const room_access
 
 void
 exchange_manager::add_item_in_room(item_manager& manager, const room_accessor& accessor,
-		const std::string& item_code, uint qty)
+		const std::string& item_code, std::uint32_t qty)
 {
 	auto it = _rooms.find(accessor.idExchange);
 	if (it != _rooms.end()) {

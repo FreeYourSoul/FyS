@@ -119,7 +119,7 @@ class arena_server_service {
 	//! action name to set readiness
 	static inline const std::string READY_ACTION = "READY";
 	//! magic id to set readiness
-	static inline const uint READY_ACTION_ID = 1337;
+	static inline const std::uint32_t READY_ACTION_ID = 1337;
 
 public:
 	explicit arena_server_service(const arena_server_context& ctx);

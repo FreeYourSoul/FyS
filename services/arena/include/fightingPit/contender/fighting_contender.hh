@@ -50,25 +50,25 @@ public:
 	setup_contender();
 
 	[[nodiscard]] const data::status&
-	get_status() const { return _status; }
+	status() const { return _status; }
 
 	[[nodiscard]] const hexagon_side&
-	get_hexagon_side() const { return _side; }
+	side() const { return _side; }
 
 	[[nodiscard]] data::status&
 	access_status() { return _status; }
 
 	[[nodiscard]] hexagon_side::orientation
-	get_hexagon_side_orient() const { return (*_side).second; }
+	side_orient() const { return (*_side).second; }
 
 	[[nodiscard]] const std::unique_ptr<contender_scripting>&
 	get_contender_scripting() const { return _contender_scripting; }
 
 	[[nodiscard]] const std::string&
-	get_name() const;
+	name() const;
 
 	[[nodiscard]] unsigned
-	get_id() const;
+	id() const;
 
 private:
 	std::unique_ptr<contender_scripting> _contender_scripting;

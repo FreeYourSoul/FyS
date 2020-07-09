@@ -132,26 +132,26 @@ TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]")
 		const auto &sides = fighting_pit_announcer::get_side_vector(fp);
 		REQUIRE(18 == sides.size());
 
-		REQUIRE(hexagon_side::orientation::A_N == sides[static_cast<uint>(hexagon_side::orientation::A_N)].get_side());
-		REQUIRE(hexagon_side::orientation::A_NE == sides[static_cast<uint>(hexagon_side::orientation::A_NE)].get_side());
-		REQUIRE(hexagon_side::orientation::A_NW == sides[static_cast<uint>(hexagon_side::orientation::A_NW)].get_side());
-		REQUIRE(hexagon_side::orientation::A_S == sides[static_cast<uint>(hexagon_side::orientation::A_S)].get_side());
-		REQUIRE(hexagon_side::orientation::A_SE == sides[static_cast<uint>(hexagon_side::orientation::A_SE)].get_side());
-		REQUIRE(hexagon_side::orientation::A_SW == sides[static_cast<uint>(hexagon_side::orientation::A_SW)].get_side());
+		REQUIRE(hexagon_side::orientation::A_N == sides[static_cast<uint>(hexagon_side::orientation::A_N)].side());
+		REQUIRE(hexagon_side::orientation::A_NE == sides[static_cast<uint>(hexagon_side::orientation::A_NE)].side());
+		REQUIRE(hexagon_side::orientation::A_NW == sides[static_cast<uint>(hexagon_side::orientation::A_NW)].side());
+		REQUIRE(hexagon_side::orientation::A_S == sides[static_cast<uint>(hexagon_side::orientation::A_S)].side());
+		REQUIRE(hexagon_side::orientation::A_SE == sides[static_cast<uint>(hexagon_side::orientation::A_SE)].side());
+		REQUIRE(hexagon_side::orientation::A_SW == sides[static_cast<uint>(hexagon_side::orientation::A_SW)].side());
 
-		REQUIRE(hexagon_side::orientation::B_N == sides[static_cast<uint>(hexagon_side::orientation::B_N)].get_side());
-		REQUIRE(hexagon_side::orientation::B_NE == sides[static_cast<uint>(hexagon_side::orientation::B_NE)].get_side());
-		REQUIRE(hexagon_side::orientation::B_NW == sides[static_cast<uint>(hexagon_side::orientation::B_NW)].get_side());
-		REQUIRE(hexagon_side::orientation::B_S == sides[static_cast<uint>(hexagon_side::orientation::B_S)].get_side());
-		REQUIRE(hexagon_side::orientation::B_SE == sides[static_cast<uint>(hexagon_side::orientation::B_SE)].get_side());
-		REQUIRE(hexagon_side::orientation::B_SW == sides[static_cast<uint>(hexagon_side::orientation::B_SW)].get_side());
+		REQUIRE(hexagon_side::orientation::B_N == sides[static_cast<uint>(hexagon_side::orientation::B_N)].side());
+		REQUIRE(hexagon_side::orientation::B_NE == sides[static_cast<uint>(hexagon_side::orientation::B_NE)].side());
+		REQUIRE(hexagon_side::orientation::B_NW == sides[static_cast<uint>(hexagon_side::orientation::B_NW)].side());
+		REQUIRE(hexagon_side::orientation::B_S == sides[static_cast<uint>(hexagon_side::orientation::B_S)].side());
+		REQUIRE(hexagon_side::orientation::B_SE == sides[static_cast<uint>(hexagon_side::orientation::B_SE)].side());
+		REQUIRE(hexagon_side::orientation::B_SW == sides[static_cast<uint>(hexagon_side::orientation::B_SW)].side());
 
-		REQUIRE(hexagon_side::orientation::C_N == sides[static_cast<uint>(hexagon_side::orientation::C_N)].get_side());
-		REQUIRE(hexagon_side::orientation::C_NE == sides[static_cast<uint>(hexagon_side::orientation::C_NE)].get_side());
-		REQUIRE(hexagon_side::orientation::C_NW == sides[static_cast<uint>(hexagon_side::orientation::C_NW)].get_side());
-		REQUIRE(hexagon_side::orientation::C_S == sides[static_cast<uint>(hexagon_side::orientation::C_S)].get_side());
-		REQUIRE(hexagon_side::orientation::C_SE == sides[static_cast<uint>(hexagon_side::orientation::C_SE)].get_side());
-		REQUIRE(hexagon_side::orientation::C_SW == sides[static_cast<uint>(hexagon_side::orientation::C_SW)].get_side());
+		REQUIRE(hexagon_side::orientation::C_N == sides[static_cast<uint>(hexagon_side::orientation::C_N)].side());
+		REQUIRE(hexagon_side::orientation::C_NE == sides[static_cast<uint>(hexagon_side::orientation::C_NE)].side());
+		REQUIRE(hexagon_side::orientation::C_NW == sides[static_cast<uint>(hexagon_side::orientation::C_NW)].side());
+		REQUIRE(hexagon_side::orientation::C_S == sides[static_cast<uint>(hexagon_side::orientation::C_S)].side());
+		REQUIRE(hexagon_side::orientation::C_SE == sides[static_cast<uint>(hexagon_side::orientation::C_SE)].side());
+		REQUIRE(hexagon_side::orientation::C_SW == sides[static_cast<uint>(hexagon_side::orientation::C_SW)].side());
 	} // End section : Test Side Setup
 
 	SECTION("test seed 42") {
@@ -211,15 +211,15 @@ TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]")
 			REQUIRE(fp->is_joinable());
 			REQUIRE_THROWS(fp->set_player_readiness("NotExisting")); // test if the fp throws in this case
 
-			REQUIRE(2 == fighting_pit_announcer::get_pit_contenders(fp).getNumberContender());
+			REQUIRE(2 == fighting_pit_announcer::get_pit_contenders(fp).number_contender());
 
-			REQUIRE("Slime" == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(0)->get_name());
-			REQUIRE(0 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(0)->get_id());
-			REQUIRE(10 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(0)->get_contender_scripting()->get_level());
+			REQUIRE("Slime" == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(0)->name());
+			REQUIRE(0 == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(0)->id());
+			REQUIRE(10 == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(0)->get_contender_scripting()->level());
 
-			REQUIRE("Sampy" == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->get_name());
-			REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->get_contender_scripting()->get_contender_id());
-			REQUIRE(8 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->get_contender_scripting()->get_level());
+			REQUIRE("Sampy" == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(1)->name());
+			REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(1)->get_contender_scripting()->contender_id());
+			REQUIRE(8 == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(1)->get_contender_scripting()->level());
 
 		} // End section : test generate contender Easy
 
@@ -234,22 +234,22 @@ TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]")
 			fpa.add_action_to_one_member(0, "arena:actions:damage:slash.chai", 5);
 			auto fp = fpa.build_fighting_pit(ctx, "WS00");
 
-			REQUIRE(4 == fighting_pit_announcer::get_party_teams(fp).get_party_team_of_player(" ").get_team_members().size());
+			REQUIRE(4 == fighting_pit_announcer::get_party_teams(fp).get_party_team_of_player(" ").team_members().size());
 			REQUIRE_FALSE(fp->is_joinable());
 
-			REQUIRE(3 == fighting_pit_announcer::get_pit_contenders(fp).getNumberContender());
+			REQUIRE(3 == fighting_pit_announcer::get_pit_contenders(fp).number_contender());
 
-			REQUIRE("Slime" == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(0)->get_name());
-			REQUIRE(0 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(0)->get_contender_scripting()->get_contender_id());
-			REQUIRE(10 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(0)->get_contender_scripting()->get_level());
+			REQUIRE("Slime" == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(0)->name());
+			REQUIRE(0 == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(0)->get_contender_scripting()->contender_id());
+			REQUIRE(10 == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(0)->get_contender_scripting()->level());
 
-			REQUIRE("Sampy" == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->get_name());
-			REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->get_contender_scripting()->get_contender_id());
-			REQUIRE(8 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->get_contender_scripting()->get_level());
+			REQUIRE("Sampy" == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(1)->name());
+			REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(1)->get_contender_scripting()->contender_id());
+			REQUIRE(8 == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(1)->get_contender_scripting()->level());
 
-			REQUIRE("Slime" == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(2)->get_name());
-			REQUIRE(2 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(2)->get_contender_scripting()->get_contender_id());
-			REQUIRE(6 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(2)->get_contender_scripting()->get_level());
+			REQUIRE("Slime" == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(2)->name());
+			REQUIRE(2 == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(2)->get_contender_scripting()->contender_id());
+			REQUIRE(6 == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(2)->get_contender_scripting()->level());
 
 		} // End section : test generate contender Medium
 
@@ -263,24 +263,24 @@ TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]")
 			fpa.add_action_to_one_member(0, "arena:actions:damage:slash.chai", 5);
 			auto fp = fpa.build_fighting_pit(ctx, "WS00");
 
-			REQUIRE(4 == fighting_pit_announcer::get_pit_contenders(fp).getNumberContender());
+			REQUIRE(4 == fighting_pit_announcer::get_pit_contenders(fp).number_contender());
 			REQUIRE(fp->is_joinable());
 
-			REQUIRE("Slime" == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(0)->get_name());
-			REQUIRE(0 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(0)->get_contender_scripting()->get_contender_id());
-			REQUIRE(10 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(0)->get_contender_scripting()->get_level());
+			REQUIRE("Slime" == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(0)->name());
+			REQUIRE(0 == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(0)->get_contender_scripting()->contender_id());
+			REQUIRE(10 == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(0)->get_contender_scripting()->level());
 
-			REQUIRE("Sampy" == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->get_name());
-			REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->get_contender_scripting()->get_contender_id());
-			REQUIRE(8 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->get_contender_scripting()->get_level());
+			REQUIRE("Sampy" == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(1)->name());
+			REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(1)->get_contender_scripting()->contender_id());
+			REQUIRE(8 == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(1)->get_contender_scripting()->level());
 
-			REQUIRE("Slime" == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(2)->get_name());
-			REQUIRE(2 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(2)->get_contender_scripting()->get_contender_id());
-			REQUIRE(6 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(2)->get_contender_scripting()->get_level());
+			REQUIRE("Slime" == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(2)->name());
+			REQUIRE(2 == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(2)->get_contender_scripting()->contender_id());
+			REQUIRE(6 == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(2)->get_contender_scripting()->level());
 
-			REQUIRE("Sampy" == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(3)->get_name());
-			REQUIRE(3 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(3)->get_contender_scripting()->get_contender_id());
-			REQUIRE(2 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(3)->get_contender_scripting()->get_level());
+			REQUIRE("Sampy" == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(3)->name());
+			REQUIRE(3 == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(3)->get_contender_scripting()->contender_id());
+			REQUIRE(2 == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(3)->get_contender_scripting()->level());
 
 		} // End section : test generate contender Hard
 
@@ -310,38 +310,38 @@ TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]")
 			fpa.add_action_to_one_member(0, "arena:actions:damage:slash.chai", 5);
 			auto fp = fpa.build_fighting_pit(ctx, "WS00");
 
-			REQUIRE(2 == fighting_pit_announcer::get_pit_contenders(fp).getNumberContender());
+			REQUIRE(2 == fighting_pit_announcer::get_pit_contenders(fp).number_contender());
 
-			REQUIRE("Sampy" == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(0)->get_name());
-			REQUIRE(0 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(0)->get_contender_scripting()->get_contender_id());
-			REQUIRE(2 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(0)->get_contender_scripting()->get_level());
+			REQUIRE("Sampy" == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(0)->name());
+			REQUIRE(0 == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(0)->get_contender_scripting()->contender_id());
+			REQUIRE(2 == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(0)->get_contender_scripting()->level());
 
-			REQUIRE("Sampy" == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->get_name());
-			REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->get_contender_scripting()->get_contender_id());
-			REQUIRE(3 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->get_contender_scripting()->get_level());
+			REQUIRE("Sampy" == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(1)->name());
+			REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(1)->get_contender_scripting()->contender_id());
+			REQUIRE(3 == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(1)->get_contender_scripting()->level());
 
 			SECTION("test ordering turn setup") {
-				REQUIRE(8 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(0)->get_status().initial_speed);
-				REQUIRE(hexagon_side::orientation::B_S == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(0)->get_hexagon_side_orient());
-				REQUIRE(8 == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->get_status().initial_speed);
-				REQUIRE(hexagon_side::orientation::B_S == fighting_pit_announcer::get_pit_contenders(fp).getFightingContender(1)->get_hexagon_side_orient());
+				REQUIRE(8 == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(0)->status().initial_speed);
+				REQUIRE(hexagon_side::orientation::B_S == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(0)->side_orient());
+				REQUIRE(8 == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(1)->status().initial_speed);
+				REQUIRE(hexagon_side::orientation::B_S == fighting_pit_announcer::get_pit_contenders(fp).fighting_contender_at(1)->side_orient());
 
-				const auto members = fighting_pit_announcer::get_party_teams(fp).get_members_by_side(hexagon_side::orientation::B_S);
+				const auto members = fighting_pit_announcer::get_party_teams(fp).members_by_side(hexagon_side::orientation::B_S);
 				REQUIRE(4 == members.size());
-				REQUIRE(1 == members.at(0)->get_id());
-				REQUIRE(3 == members.at(0)->get_status().initial_speed);
-				REQUIRE(2 == members.at(1)->get_id());
-				REQUIRE(5 == members.at(1)->get_status().initial_speed);
-				REQUIRE(3 == members.at(2)->get_id());
-				REQUIRE(10 == members.at(2)->get_status().initial_speed);
-				REQUIRE(4 == members.at(3)->get_id());
-				REQUIRE(20 == members.at(3)->get_status().initial_speed);
+				REQUIRE(1 == members.at(0)->id());
+				REQUIRE(3 == members.at(0)->status().initial_speed);
+				REQUIRE(2 == members.at(1)->id());
+				REQUIRE(5 == members.at(1)->status().initial_speed);
+				REQUIRE(3 == members.at(2)->id());
+				REQUIRE(10 == members.at(2)->status().initial_speed);
+				REQUIRE(4 == members.at(3)->id());
+				REQUIRE(20 == members.at(3)->status().initial_speed);
 
 				SECTION("test ordering") {
 
 					using namespace std::chrono_literals;
 					auto& order = fighting_pit_announcer::get_side_battle_for_side(fp, hexagon_side::orientation::B_S);
-					REQUIRE(hexagon_side::orientation::B_S == order.get_side());
+					REQUIRE(hexagon_side::orientation::B_S == order.side());
 
 					const auto elem1 = order.get_current_participant_turn(std::chrono::system_clock::now(), 0ms);
 					REQUIRE(data::priority_elem{4, 20, data::PARTY_MEMBER} == elem1);

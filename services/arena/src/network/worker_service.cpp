@@ -44,7 +44,7 @@ worker_service::worker_service()
 void
 worker_service::setup_connection_manager(const fys::arena::arena_server_context& ctx) noexcept
 {
-	_worker_router.bind(ctx.get_player_binding_string());
+	_worker_router.bind(ctx.player_binding_string());
 }
 
 void
@@ -83,7 +83,7 @@ worker_service::add_fighting_pit(std::unique_ptr<fighting_pit> fp)
 		return fighting_pit::CREATION_ERROR;
 	}
 	while (++_current_arena_id != 0 && _arena_instances.find(_current_arena_id) != _arena_instances.end());
-	chai_register::register_network_commands(*fp->get_chai_ptr(), broadcast_msg_handler(fp->get_id()));
+	chai_register::register_network_commands(*fp->get_chai_ptr(), broadcast_msg_handler(fp->id()));
 	fp->set_arena_id(_current_arena_id);
 	history_manager::createHistoric(*fp, 1); // seed is to be changed
 	_arena_instances.insert(std::pair(_current_arena_id, std::move(fp)));
@@ -118,12 +118,12 @@ worker_service::player_join_fighting_pit(unsigned fighting_pit_id, std::unique_p
 		}
 		else {
 			SPDLOG_INFO("User {} can't join fighting pit of id {} as the battle already started.",
-					pt->get_user_name(), fighting_pit_id);
+					pt->user_name(), fighting_pit_id);
 		}
 	}
 	else {
 		SPDLOG_ERROR("PartyTeam of user {} can't join fighting pit of id {}",
-				pt->get_user_name(), fighting_pit_id);
+				pt->user_name(), fighting_pit_id);
 	}
 }
 

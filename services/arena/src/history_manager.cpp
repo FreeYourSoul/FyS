@@ -52,7 +52,7 @@ generateJsonTarget(fys::arena::history_action historyAction)
 namespace fys::arena {
 
 void
-history_manager::addHistoric(unsigned fightingPitId, history_action&& ha)
+history_manager::add_historic(unsigned fightingPitId, history_action&& ha)
 {
 	if (getInstance()._is_manager_on) {
 		auto it = getInstance()._history.find(fightingPitId);
@@ -88,7 +88,7 @@ void
 history_manager::createHistoric(const fighting_pit& fp, unsigned seed)
 {
 	if (getInstance()._is_manager_on) {
-		getInstance()._history[fp.get_id()].seed = seed;
+		getInstance()._history[fp.id()].seed = seed;
 	}
 }
 

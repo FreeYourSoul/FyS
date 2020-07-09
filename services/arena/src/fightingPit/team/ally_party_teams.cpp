@@ -76,11 +76,11 @@ std::shared_ptr<team_member>
 ally_party_teams::select_suitable_member(comparator_selection<team_member> comp)
 {
 	bool found = false;
-	if (_party_teams.empty() || _party_teams.front()->get_team_members().empty())
+	if (_party_teams.empty() || _party_teams.front()->team_members().empty())
 		return nullptr;
-	auto suitable = _party_teams.front()->get_team_members().begin();
+	auto suitable = _party_teams.front()->team_members().begin();
 	for (auto& party_team : _party_teams) {
-		auto& team_members = party_team->get_team_members();
+		auto& team_members = party_team->team_members();
 		auto suitable_tmp = fys::find_most_suitable(team_members.begin(), team_members.end(), comp, suitable);
 
 		if (suitable_tmp != team_members.end()) {
@@ -94,8 +94,8 @@ ally_party_teams::select_suitable_member(comparator_selection<team_member> comp)
 std::shared_ptr<team_member>
 ally_party_teams::select_random_member_on_side_alive(hexagon_side::orientation side)
 {
-	auto members_on_side = get_members_by_side(side);
-	uint random_index = fys::util::random_generator::generate_in_range(1ul, members_on_side.size());
+	auto members_on_side = members_by_side(side);
+	std::uint32_t random_index = fys::util::random_generator::generate_in_range(1ul, members_on_side.size());
 	return members_on_side.at(random_index - 1);
 }
 
@@ -111,7 +111,7 @@ std::shared_ptr<team_member>
 ally_party_teams::select_suitable_member_on_side(hexagon_side::orientation side, comparator_selection<team_member> comp)
 {
 	return select_suitable_member([side, &comp](auto current, auto next) -> bool {
-		return current->get_hexagon_side_orient() == side && next->get_hexagon_side_orient() == side &&
+		return current->side_orient() == side && next->side_orient() == side &&
 				comp(current, next);
 	});
 }
@@ -120,8 +120,8 @@ std::shared_ptr<team_member>
 ally_party_teams::select_suitable_member_on_side_alive(hexagon_side::orientation side, comparator_selection<team_member> comp)
 {
 	return select_suitable_member([side, &comp](auto current, auto next) -> bool {
-		return (!next->get_status().life_pt.is_dead() && !current->get_status().life_pt.is_dead() &&
-				current->get_hexagon_side_orient() == side && next->get_hexagon_side_orient() == side) &&
+		return (!next->status().life_pt.is_dead() && !current->status().life_pt.is_dead() &&
+				current->side_orient() == side && next->side_orient() == side) &&
 				comp(current, next);
 	});
 }
@@ -131,16 +131,16 @@ ally_party_teams::get_specific_team_member_by_id(const std::string& user_name, u
 {
 	auto it_team = std::find_if(_party_teams.cbegin(), _party_teams.cend(),
 			[&user_name](const auto& team) {
-				return team->get_user_name() == user_name;
+				return team->user_name() == user_name;
 			});
 
 	if (it_team != _party_teams.cend()) {
-		auto it_member = std::find_if((*it_team)->get_team_members().cbegin(), (*it_team)->get_team_members().cend(),
+		auto it_member = std::find_if((*it_team)->team_members().cbegin(), (*it_team)->team_members().cend(),
 				[id_member](const auto& member) {
-					return member->get_id() == id_member;
+					return member->id() == id_member;
 				});
 
-		if (it_member != (*it_team)->get_team_members().cend())
+		if (it_member != (*it_team)->team_members().cend())
 			return *it_member;
 	}
 	return nullptr;
@@ -154,7 +154,7 @@ ally_party_teams::select_member_by_id(unsigned id_member)
 	for (auto& partyTeam : _party_teams) {
 		const auto& team_members = partyTeam->access_team_members();
 		auto team_member = std::find_if(team_members.begin(), team_members.end(), [id_member](const auto& tm) {
-			return id_member == tm->get_id();
+			return id_member == tm->id();
 		});
 
 		if (team_member != team_members.end())
@@ -174,24 +174,25 @@ ally_party_teams::ally_number_on_side(hexagon_side::orientation side) const
 }
 
 std::vector<std::shared_ptr<team_member>>
-ally_party_teams::get_members_by_side(hexagon_side::orientation side) const
+ally_party_teams::members_by_side(hexagon_side::orientation side) const
 {
 	std::vector<std::shared_ptr<team_member>> ret;
-	if (_party_teams.empty() || _party_teams.front()->get_team_members().empty())
+	if (_party_teams.empty() || _party_teams.front()->team_members().empty())
 		return ret;
 	for (const auto& party_team : _party_teams) {
-		const auto& members_on_side = party_team->get_team_member_on_side(side);
+		const auto& members_on_side = party_team->team_member_on_side(side);
 		std::copy(members_on_side.begin(), members_on_side.end(), std::back_inserter(ret));
 	}
 	return ret;
 }
 
 std::vector<std::shared_ptr<team_member>>
-ally_party_teams::get_dead_members_by_side(hexagon_side::orientation side) const
+ally_party_teams::dead_members_by_side(hexagon_side::orientation side) const
 {
 	std::vector<std::shared_ptr<team_member>> ret;
-	if (_party_teams.empty() || _party_teams.front()->get_team_members().empty())
+	if (_party_teams.empty() || _party_teams.front()->team_members().empty()) {
 		return ret;
+	}
 	for (const auto& party_team : _party_teams) {
 		const auto& members_on_side = party_team->get_dead_team_members_on_side(side);
 		std::copy(members_on_side.begin(), members_on_side.end(), std::back_inserter(ret));
@@ -203,7 +204,7 @@ const party_team&
 ally_party_teams::get_party_team_of_player(const std::string& user_name) const
 {
 	auto it = std::find_if(_party_teams.begin(), _party_teams.end(), [&user_name](const auto& party_team) {
-		return user_name == party_team->get_user_name();
+		return user_name == party_team->user_name();
 	});
 	if (it == _party_teams.end()) {
 		throw std::runtime_error(fmt::format("GetPartyTeamOfPlayer called on a non-existing player of name {}", user_name));
@@ -215,7 +216,7 @@ bool
 ally_party_teams::set_party_readiness(const std::string& user_name)
 {
 	auto it = std::find_if(_party_teams.begin(), _party_teams.end(), [&user_name](const auto& party_team) {
-		return user_name == party_team->get_user_name();
+		return user_name == party_team->user_name();
 	});
 	if (it == _party_teams.end()) {
 		throw std::runtime_error(fmt::format("GetPartyTeamOfPlayer called on a non-existing player of name {}", user_name));
@@ -236,8 +237,8 @@ bool
 ally_party_teams::all_dead() const
 {
 	return std::all_of(_party_teams.begin(), _party_teams.end(), [](const auto& pt) {
-		return std::all_of(pt->get_team_members().begin(), pt->get_team_members().end(), [](const auto& member) {
-			return member->get_status().life_pt.is_dead();
+		return std::all_of(pt->team_members().begin(), pt->team_members().end(), [](const auto& member) {
+			return member->status().life_pt.is_dead();
 		});
 	});
 }

@@ -98,7 +98,7 @@ fighting_pit_announcer::build_fighting_pit(const encounter_context& ctx, const s
 		return nullptr;
 	}
 
-	generate_reward_for_contender(*fp, ctx, fp->get_pit_contenders().get_contenders());
+	generate_reward_for_contender(*fp, ctx, fp->contenders().contenders());
 
 	fp->initialize_side_battles();
 
@@ -116,7 +116,7 @@ fighting_pit_announcer::generate_contenders(fighting_pit& fp, const encounter_co
 	for (unsigned i = 0; i < number_contenders; ++i) {
 		int rng_monster = util::random_generator::generate_in_range(0, 100);
 		auto desc = boundary_map.get(rng_monster)->second;
-		uint level_monster = util::random_generator::generate_in_range(desc.levelRange.first, desc.levelRange.second);
+		std::uint32_t level_monster = util::random_generator::generate_in_range(desc.levelRange.first, desc.levelRange.second);
 		auto contender_script = std::make_unique<contender_scripting>(*fp.get_chai_ptr(), level_monster);
 		std::string name = data::get_action_name_from_key(desc.key);
 		contender_script->set_contender_id(i);
@@ -125,7 +125,7 @@ fighting_pit_announcer::generate_contenders(fighting_pit& fp, const encounter_co
 		contender_script->register_contender_script();
 		auto contender = std::make_shared<fighting_contender>(std::move(contender_script));
 		if (!fp.add_contender(contender)) {
-			SPDLOG_WARN("FightingPit built invalid, generation of contender {} failed", contender->get_name());
+			SPDLOG_WARN("FightingPit built invalid, generation of contender {} failed", contender->name());
 			return false;
 		}
 		// todo make positioning of contender depending on ambush / or normal one
@@ -140,17 +140,17 @@ fighting_pit_announcer::generate_reward_for_contender(fighting_pit& fp,
 {
 	std::map<std::string, uint> reward_on_quantity;
 	for (const auto& contender : contenders) {
-		const auto& rwd_it = ctx._rewardDescPerContender.find(contender->get_name());
+		const auto& rwd_it = ctx._rewardDescPerContender.find(contender->name());
 		// Check if the contender has a reward description
 		if (rwd_it == ctx._rewardDescPerContender.end())
 			continue;
 
 		boundary_map_reward boundaryMap = make_reward_rng_boundary_map(rwd_it->second, _difficulty);
 		const auto& range_rwd_number = rwd_it->second.rangeDrop.at(static_cast<std::size_t>(_difficulty));
-		const uint number_reward = util::random_generator::generate_in_range(range_rwd_number.first, range_rwd_number.second);
+		const std::uint32_t number_reward = util::random_generator::generate_in_range(range_rwd_number.first, range_rwd_number.second);
 
-		for (uint i = 0; i < number_reward; ++i) {
-			const uint reward_rng = util::random_generator::generate_in_range(0u, 100u);
+		for (std::uint32_t i = 0; i < number_reward; ++i) {
+			const std::uint32_t reward_rng = util::random_generator::generate_in_range(0u, 100u);
 			++reward_on_quantity[boundaryMap.get(reward_rng)->second];
 		}
 	}
@@ -175,7 +175,7 @@ side_battle&
 fighting_pit_announcer::get_side_battle_for_side(const std::unique_ptr<fighting_pit>& fp, hexagon_side::orientation side)
 {
 	auto it = std::find_if(fp->_side_battles.begin(), fp->_side_battles.end(),
-			[side](const auto& sb) { return sb.get_side() == side; });
+			[side](const auto& sb) { return sb.side() == side; });
 
 	if (it == fp->_side_battles.end()) {
 		SPDLOG_ERROR("Side not found");
@@ -185,7 +185,7 @@ fighting_pit_announcer::get_side_battle_for_side(const std::unique_ptr<fighting_
 }
 
 void
-fighting_pit_announcer::add_action_to_one_member(uint index, const std::string& action_name, uint level)
+fighting_pit_announcer::add_action_to_one_member(std::uint32_t index, const std::string& action_name, std::uint32_t level)
 {
 	_creator_party_team->access_team_members()[index]->add_doable_action(action_name, level);
 }

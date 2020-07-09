@@ -38,11 +38,11 @@ world_server_context::world_server_context(int ac, const char* const* av)
 	std::ifstream i(_config_file);
 	json json_config;
 	i >> json_config;
-	initWsContextWithJson(json_config);
+	init_ws_ctx_from_json(json_config);
 }
 
 void
-world_server_context::initWsContextWithJson(json& json)
+world_server_context::init_ws_ctx_from_json(json& json)
 {
 	auto ws_json = json["worldServer"];
 	auto conf_json = ws_json["conf"];
@@ -88,12 +88,12 @@ world_server_context::to_string() const noexcept
 	str += "[INIT] Local CML Storage : " + _path_to_local_storage + "\n";
 	str += "[INIT] Path to LUA Engine initiator : " + _path_to_lua_init_engine + "\n";
 	str += "[INIT] TMX Map path: " + _tmx_map_path + "\n"; // Will be changed with the new formatting file homemade
-	str += "[INIT] Player connection string: " + get_player_connection_str() + "\n";
+	str += "[INIT] Player connection string: " + player_connection_str() + "\n";
 	str += "[INIT] Dispatcher(AuthServer) subscribing port: " + std::to_string(_dispatcherData.subscriber_port) + "\n";
 	str += "[INIT] Dispatcher(AuthServer) connected port: " + std::to_string(_dispatcherData.port) + "\n";
 	str += "[INIT] Dispatcher(AuthServer) connected host: " + _dispatcherData.address + "\n";
-	str += "[INIT] Dispatcher(AuthServer) Subscriber connection string: " + get_dispatcher_sub_connection_str() + "\n";
-	str += "[INIT] Dispatcher(AuthServer) connection string: " + get_dispatcher_connection_str() + "\n";
+	str += "[INIT] Dispatcher(AuthServer) Subscriber connection string: " + dispatcher_sub_connection_str() + "\n";
+	str += "[INIT] Dispatcher(AuthServer) connection string: " + dispatcher_connection_str() + "\n";
 
 	for (const auto& prox : _server_proximity) {
 		str += "[INIT] element:\n       ";
@@ -112,19 +112,19 @@ world_server_context::to_string() const noexcept
 }
 
 std::string
-world_server_context::get_dispatcher_connection_str() const noexcept
+world_server_context::dispatcher_connection_str() const noexcept
 {
 	return std::string("tcp://").append(_dispatcherData.address).append(":").append(std::to_string(_dispatcherData.port));
 }
 
 std::string
-world_server_context::get_dispatcher_sub_connection_str() const noexcept
+world_server_context::dispatcher_sub_connection_str() const noexcept
 {
 	return std::string("tcp://").append(_dispatcherData.address).append(":").append(std::to_string(_dispatcherData.subscriber_port));
 }
 
 std::string
-world_server_context::get_player_connection_str() const noexcept
+world_server_context::player_connection_str() const noexcept
 {
 	return std::string("tcp://*:").append(std::to_string(_port_player_connection));
 }

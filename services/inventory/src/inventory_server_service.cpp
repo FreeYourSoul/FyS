@@ -35,7 +35,7 @@ namespace {
 
 template<typename T>
 [[nodiscard]] bool
-verify_buffer(const void* fbBuffer, uint size)
+verify_buffer(const void* fbBuffer, std::uint32_t size)
 {
 	auto v = flatbuffers::Verifier(static_cast<const uint8_t*>(fbBuffer), size);
 	return v.VerifyBuffer<T>();
@@ -48,26 +48,26 @@ namespace fys::inv {
 inventory_server_service::inventory_server_service(const inventory_server_context& ctx)
 		:_ctx(ctx), _exchange_manager(ctx)
 {
-	_connection_handler.setup_connection_manager(ctx.get_dispatcher_connection_str());
+	_connection_handler.setup_connection_manager(ctx.dispatcher_connection_str());
 }
 
 void
 inventory_server_service::run_server_loop()
 {
-	SPDLOG_INFO("[Inv : {}] : InventoryServer loop started", _ctx.get().get_server_code());
+	SPDLOG_INFO("[Inv : {}] : InventoryServer loop started", _ctx.get().server_code());
 
 	while (true) {
 		_connection_handler.poll_process_msg_from_dispatcher(
-				[this](zmq::message_t&& playerIdt, zmq::message_t&& worldServerMessage) {
-					if (!verify_buffer<fb::ivt::InventoryRequest>(worldServerMessage.data(), worldServerMessage.size())) {
-						SPDLOG_ERROR("[Inv : {}] : Wrongly formatted InventoryRequest buffer", _ctx.get().get_server_code());
+				[this](zmq::message_t&& player_idt, zmq::message_t&& world_server_msg) {
+					if (!verify_buffer<fb::ivt::InventoryRequest>(world_server_msg.data(), world_server_msg.size())) {
+						SPDLOG_ERROR("[Inv : {}] : Wrongly formatted InventoryRequest buffer", _ctx.get().server_code());
 						return;
 					}
-					const auto* binary = fb::ivt::GetInventoryRequest(worldServerMessage.data());
+					const auto* binary = fb::ivt::GetInventoryRequest(world_server_msg.data());
 					zmq::multipart_t response;
 					switch (binary->content_type()) {
 						case fb::ivt::InventoryRequestContent_RetrievePlayerInventory:
-							response.add(retrievePlayerInventory(binary->content_as_RetrievePlayerInventory()));
+							response.add(retrieve_player_inventory(binary->content_as_RetrievePlayerInventory()));
 							break;
 						case fb::ivt::InventoryRequestContent_UpdatePlayerSoulDraughtboard:
 							response.add(update_player_soul_draughtboard(binary->content_as_UpdatePlayerSoulDraughtboard()));
@@ -76,14 +76,14 @@ inventory_server_service::run_server_loop()
 							response.add(retrievePlayerSoulDraughtboard(binary->content_as_RetrievePlayerSoulDraughtboard()));
 							break;
 						case fb::ivt::InventoryRequestContent_InitiateExchange:
-							response.add(exchange_inventory(binary->content_as_InitiateExchange(), playerIdt.str()));
+							response.add(exchange_inventory(binary->content_as_InitiateExchange(), player_idt.str()));
 							break;
 						default:
 							SPDLOG_ERROR("[Inv : {}] : Request type '{}' not supported",
-									_ctx.get().get_server_code(), binary->content_type());
+									_ctx.get().server_code(), binary->content_type());
 							break;
 					}
-					response.add(std::move(playerIdt));
+					response.add(std::move(player_idt));
 					_connection_handler.send_msg_to_dispatcher(std::move(response));
 				}
 		);
@@ -92,7 +92,7 @@ inventory_server_service::run_server_loop()
 		_exchange_manager.pollAndProcessPlayerMessage(
 				[this](zmq::message_t&& identity, zmq::message_t&& authFrame, zmq::message_t&& content) {
 					if (!verify_buffer<fb::ivt::ExchangeInventory>(content.data(), content.size())) {
-						SPDLOG_ERROR("[Inv : {}] : Wrongly formatted ExchangeInventory buffer", _ctx.get().get_server_code());
+						SPDLOG_ERROR("[Inv : {}] : Wrongly formatted ExchangeInventory buffer", _ctx.get().server_code());
 						return;
 					}
 					const auto* binary = fb::ivt::GetExchangeInventory(content.data());
@@ -130,7 +130,7 @@ inventory_server_service::run_server_loop()
 
 						default:
 							SPDLOG_ERROR("[Inv : {}] : Player Request '{}' not supported",
-									_ctx.get().get_server_code(), binary->content_type());
+									_ctx.get().server_code(), binary->content_type());
 							break;
 					}
 
@@ -153,10 +153,10 @@ inventory_server_service::exchange_inventory(const fb::ivt::initiate_exchange_in
 }
 
 zmq::message_t
-inventory_server_service::retrievePlayerInventory(const fb::ivt::retrieve_player_inventory* retrieve_request)
+inventory_server_service::retrieve_player_inventory(const fb::ivt::retrieve_player_inventory* retrieve_request)
 {
-	const std::string playerToRetrieve = retrieve_request->playerToRetrieve()->str();
-	SPDLOG_INFO("[Inv : {}] : Request of player's '{}' inventory.", _ctx.get().get_server_code(), playerToRetrieve);
+	const std::string player_to_retrieve = retrieve_request->playerToRetrieve()->str();
+	SPDLOG_INFO("[Inv : {}] : Request of player's '{}' inventory.", _ctx.get().server_code(), player_to_retrieve);
 	return {};
 }
 

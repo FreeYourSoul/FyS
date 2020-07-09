@@ -34,7 +34,7 @@ namespace fys::util {
 class random_generator {
 public:
 	[[nodiscard]] static fys::util::random_generator&
-	get_instance()
+	instance()
 	{
 		static fys::util::random_generator s{};
 		return s;
@@ -47,11 +47,11 @@ public:
 		static_assert(std::is_integral_v<Type> || std::is_floating_point_v<Type>);
 		if constexpr (std::is_integral_v<Type>) {
 			std::uniform_int_distribution<Type> distribution(rA, rB);
-			return distribution(*get_instance().get());
+			return distribution(*instance().get());
 		}
 		else if constexpr (std::is_floating_point_v<Type>) {
 			std::uniform_real_distribution<Type> distribution(rA, rB);
-			return distribution(*get_instance().get());
+			return distribution(*instance().get());
 		}
 	}
 

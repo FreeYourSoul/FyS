@@ -41,7 +41,7 @@ main(int ac, char** av)
 		fys::ws::world_server_service serverService(ctx,
 				std::move(*fys::ws::world_populator()
 						.set_interval_movement(fys::ws::TIMING_MOVE_INTERVAL)
-						.set_connection_string(ctx.get_player_connection_str())
+						.set_connection_string(ctx.player_connection_str())
 						.populate_map(ctx)
 						.populate_script_engine(ctx)
 						.build_world_server_engine())

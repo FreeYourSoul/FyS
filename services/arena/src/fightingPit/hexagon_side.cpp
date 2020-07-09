@@ -285,7 +285,7 @@ namespace fys::arena {
 bool
 hexagon_side::move(hexagon_side::orientation destination_side, bool force_movement)
 {
-	if (force_movement || (destination_side != hexagon_side::orientation::NONE && can_move(destination_side))) {
+	if (force_movement || (destination_side != hexagon_side::orientation::NONE && can_move_to(destination_side))) {
 		return change_side(destination_side);
 	}
 	return false;
@@ -383,7 +383,7 @@ hexagon_side::is_ambush_side() const
 }
 
 bool
-hexagon_side::can_move(hexagon_side::orientation destination_side) const
+hexagon_side::can_move_to(hexagon_side::orientation destination_side) const
 {
 	if (_hexagon == hexagon::A)
 		return HexaSide<HexaA>::is_movable(_side, destination_side);

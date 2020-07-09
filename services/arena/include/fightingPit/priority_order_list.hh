@@ -37,8 +37,8 @@ public:
 	priority_order_list() = default;
 	explicit priority_order_list(std::vector<data::priority_elem> base_speed);
 
-	void add_participant_in_list(uint prio_elem, int speed, bool is_contender);
-	void rm_participant_from_list(uint id_participant, bool is_contender);
+	void add_participant_in_list(std::uint32_t prio_elem, int speed, bool is_contender);
+	void rm_participant_from_list(std::uint32_t id_participant, bool is_contender);
 
 	[[nodiscard]] bool
 	empty() const { return _base_speed.empty(); }
@@ -50,17 +50,17 @@ public:
 	get_turn_number() const noexcept { return !_current_turn ? 1 : _current_turn; }
 
 	data::priority_elem
-	get_next();
+	next();
 
 private:
 	void sort_base_and_calculate_priority();
 
-	void calculate_priority(uint turn);
+	void calculate_priority(std::uint32_t turn);
 
 	void end_turn_routine();
 
 	[[nodiscard]] int
-	get_computed_speed(const data::priority_elem& elem_to_compute) const;
+	get_computed_speed(const data::priority_elem& analyst_elem) const;
 
 	/**
 	 * Sort in a specific manner
@@ -68,7 +68,7 @@ private:
 	void custom_sort();
 
 	[[nodiscard]] bool
-	is_player_slowest(uint id) const
+	is_player_slowest(std::uint32_t id) const
 	{
 		return _base_speed.front().id == id;
 	}
@@ -93,7 +93,7 @@ private:
 
 	data::priority_elem _current_prio{};
 
-	uint _current_turn = 0;
+	std::uint32_t _current_turn = 0;
 
 };
 

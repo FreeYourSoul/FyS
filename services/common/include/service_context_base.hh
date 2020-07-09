@@ -53,16 +53,16 @@ public:
 	 * @return the connection string required to connect to the current server
 	 */
 	[[nodiscard]] std::string
-	get_connection_str() const;
+	connection_str() const;
 
 	[[nodiscard]] ushort
-	get_port() const { return _port; }
+	port() const { return _port; }
 
 	[[nodiscard]] const std::string&
-	get_hostname() const { return _hostname; }
+	hostname() const { return _hostname; }
 
 	[[nodiscard]] std::string
-	get_dispatcher_connection_str() const noexcept;
+	dispatcher_connection_str() const noexcept;
 
 private:
 	void initialize_from_ini(const std::string& configFilePath);

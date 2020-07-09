@@ -34,12 +34,12 @@
 namespace fys::arena {
 
 std::vector<std::shared_ptr<fighting_contender>>
-pit_contenders::getChangingSideContenders() const
+pit_contenders::changing_side_contenders() const
 {
 	std::vector<std::shared_ptr<fighting_contender>> result;
-	result.reserve(_changeSideFlags.size());
-	for (std::size_t i = 0; i < _changeSideFlags.size(); ++i) {
-		if (_changeSideFlags.at(i)) {
+	result.reserve(_change_side_flags.size());
+	for (std::size_t i = 0; i < _change_side_flags.size(); ++i) {
+		if (_change_side_flags.at(i)) {
 			result.emplace_back(_contenders.at(i));
 		}
 	}
@@ -47,11 +47,11 @@ pit_contenders::getChangingSideContenders() const
 }
 
 std::vector<std::shared_ptr<fighting_contender>>
-pit_contenders::get_contender_on_side(hexagon_side::orientation side) const
+pit_contenders::contenders_on_side(hexagon_side::orientation side) const
 {
 	std::vector<std::shared_ptr<fighting_contender>> result;
 	std::copy_if(_contenders.begin(), _contenders.end(), std::back_inserter(result), [side](const auto& contender_ptr) {
-		return contender_ptr->get_hexagon_side_orient() == side;
+		return contender_ptr->side_orient() == side;
 	});
 	return result;
 }
@@ -61,7 +61,7 @@ pit_contenders::get_dead_contender_on_side(hexagon_side::orientation side) const
 {
 	std::vector<std::shared_ptr<fighting_contender>> result;
 	std::copy_if(_contenders.begin(), _contenders.end(), std::back_inserter(result), [side](const auto& contender_ptr) {
-		return contender_ptr->get_hexagon_side_orient() == side && contender_ptr->get_status().life_pt.is_dead();
+		return contender_ptr->side_orient() == side && contender_ptr->status().life_pt.is_dead();
 	});
 	return result;
 }
@@ -71,7 +71,7 @@ pit_contenders::select_suitable_contender_on_side(hexagon_side::orientation side
 {
 	std::vector<std::shared_ptr<fighting_contender>> result;
 	auto it = fys::find_most_suitable(_contenders.begin(), _contenders.end(), [side, &comp](auto& current, auto& next) {
-		return current->get_hexagon_side_orient() == side && comp(current, next);
+		return current->side_orient() == side && comp(current, next);
 	});
 	if (it == _contenders.end())
 		return nullptr;
@@ -81,11 +81,23 @@ pit_contenders::select_suitable_contender_on_side(hexagon_side::orientation side
 std::shared_ptr<fighting_contender>
 pit_contenders::select_random_contender_on_side_alive(hexagon_side::orientation side) const
 {
-	auto contender_on_side = get_contender_on_side(side);
-	if (contender_on_side.empty())
+	auto contenders = contenders_on_side(side);
+	if (contenders.empty()) {
 		return nullptr;
-	uint randomIndex = fys::util::random_generator::generate_in_range(1ul, contender_on_side.size());
-	return contender_on_side.at(randomIndex - 1);
+	}
+	std::uint32_t randomIndex = fys::util::random_generator::generate_in_range(1ul, contenders.size());
+	return contenders.at(randomIndex - 1);
+}
+
+std::shared_ptr<fighting_contender>
+pit_contenders::select_suitable_contender(comparator_selection<fighting_contender> comp) const
+{
+	std::vector<std::shared_ptr<fighting_contender>> result;
+	auto it = fys::find_most_suitable(_contenders.begin(), _contenders.end(), comp);
+	if (it == _contenders.end()) {
+		return nullptr;
+	}
+	return *it;
 }
 
 std::shared_ptr<fighting_contender>
@@ -94,20 +106,11 @@ pit_contenders::select_suitable_contender_on_side_alive(hexagon_side::orientatio
 	std::vector<std::shared_ptr<fighting_contender>> result;
 	auto it = fys::find_most_suitable(_contenders.begin(), _contenders.end(), [side, &comp](auto& current, auto& next) {
 		return !current->access_status().life_pt.is_dead() && !next->access_status().life_pt.is_dead() &&
-				current->get_hexagon_side_orient() == side && comp(current, next);
+				current->side_orient() == side && comp(current, next);
 	});
-	if (it == _contenders.end())
+	if (it == _contenders.end()) {
 		return nullptr;
-	return *it;
-}
-
-std::shared_ptr<fighting_contender>
-pit_contenders::select_suitable_contender(comparator_selection<fighting_contender> comp) const
-{
-	std::vector<std::shared_ptr<fighting_contender>> result;
-	auto it = fys::find_most_suitable(_contenders.begin(), _contenders.end(), comp);
-	if (it == _contenders.end())
-		return nullptr;
+	}
 	return *it;
 }
 
@@ -141,7 +144,7 @@ bool
 pit_contenders::add_contender(const std::shared_ptr<fighting_contender>& contender)
 {
 	_contenders.emplace_back(contender);
-	_changeSideFlags.emplace_back(false);
+	_change_side_flags.emplace_back(false);
 	return contender->setup_contender();
 }
 
@@ -149,16 +152,16 @@ bool
 pit_contenders::all_dead() const
 {
 	return std::all_of(_contenders.begin(), _contenders.end(), [](const auto& contender) {
-		return contender->get_status().life_pt.is_dead();
+		return contender->status().life_pt.is_dead();
 	});
 }
 
 unsigned
-pit_contenders::contender_on_side(hexagon_side::orientation side) const
+pit_contenders::number_contender_on_side(hexagon_side::orientation side) const
 {
 	return std::count_if(_contenders.cbegin(), _contenders.cend(),
 			[side](const auto& contender) {
-				return side == contender->get_hexagon_side_orient();
+				return side == contender->side_orient();
 			}
 	);
 }

@@ -30,11 +30,11 @@
 namespace fys::arena {
 
 std::vector<std::shared_ptr<team_member>>
-party_team::get_team_member_on_side(fys::arena::hexagon_side::orientation side) const
+party_team::team_member_on_side(fys::arena::hexagon_side::orientation orientation) const
 {
 	std::vector<std::shared_ptr<team_member>> result;
-	std::copy_if(_members.begin(), _members.end(), std::back_inserter(result), [side](const auto& contenderPtr) {
-		return contenderPtr->get_hexagon_side_orient() == side;
+	std::copy_if(_members.begin(), _members.end(), std::back_inserter(result), [orientation](const auto& tm_ptr) {
+		return tm_ptr->side_orient() == orientation;
 	});
 	return result;
 }
@@ -43,8 +43,8 @@ std::vector<std::shared_ptr<team_member>>
 party_team::get_dead_team_members_on_side(fys::arena::hexagon_side::orientation side) const
 {
 	std::vector<std::shared_ptr<team_member>> result;
-	std::copy_if(_members.begin(), _members.end(), std::back_inserter(result), [side](const auto& contender_ptr) {
-		return contender_ptr->get_hexagon_side_orient() == side && contender_ptr->get_status().life_pt.is_dead();
+	std::copy_if(_members.begin(), _members.end(), std::back_inserter(result), [side](const auto& tm_ptr) {
+		return tm_ptr->side_orient() == side && tm_ptr->status().life_pt.is_dead();
 	});
 	return result;
 }
@@ -60,7 +60,7 @@ party_team::ally_number_on_side(hexagon_side::orientation side) const
 {
 	return std::count_if(_members.cbegin(), _members.cend(),
 			[side](const team_member_sptr& ally) {
-				return side == ally->get_hexagon_side_orient();
+				return side == ally->side_orient();
 			}
 	);
 }

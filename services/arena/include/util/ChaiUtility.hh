@@ -36,7 +36,7 @@ class ChaiScript;
 namespace fys::arena::chai::util {
 
 [[nodiscard]] static std::string
-getAccessAllyAction(const std::string& user, const std::string& member, const std::string& action)
+get_ally_action_retriever(const std::string& user, const std::string& member, const std::string& action)
 {
 	return fmt::format(R"(ally_actions["{}_{}"]["{}"])", user, member, action);
 }

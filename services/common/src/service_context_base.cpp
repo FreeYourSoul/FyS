@@ -75,13 +75,13 @@ service_context_base::initialize_from_ini(const std::string& configFilePath)
 }
 
 std::string
-service_context_base::get_dispatcher_connection_str() const noexcept
+service_context_base::dispatcher_connection_str() const noexcept
 {
 	return std::string("tcp://").append(_dispatcherData.address).append(":").append(std::to_string(_dispatcherData.port));
 }
 
 std::string
-service_context_base::get_connection_str() const
+service_context_base::connection_str() const
 {
 	return std::string("tcp://").append(_hostname).append(":").append(std::to_string(_port));
 }

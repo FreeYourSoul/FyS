@@ -80,7 +80,7 @@ public:
 		_encounter_type = type;
 	}
 
-	void set_encounter_id(uint id_encounter)
+	void set_encounter_id(std::uint32_t id_encounter)
 	{
 		if (_encounter_type == RANDOM && !id_encounter)
 			_encounter_type = SCRIPTED;
@@ -114,7 +114,7 @@ public:
 	get_pit_contenders(const std::unique_ptr<fighting_pit>& fp) { return fp->_contenders; }
 
 	[[nodiscard]] static const std::string&
-	get_creator_user_name(const std::unique_ptr<fighting_pit>& fp) { return fp->_creator_user_name; }
+	creator_user_name(const std::unique_ptr<fighting_pit>& fp) { return fp->_creator_user_name; }
 
 	[[nodiscard]] static side_battle&
 	get_side_battle_for_side(const std::unique_ptr<fighting_pit>& fp, hexagon_side::orientation side);
@@ -135,7 +135,7 @@ public:
 	get_side_vector(const std::unique_ptr<fighting_pit>& fp) { return fp->_side_battles; }
 
 	// just for testing purpose
-	void add_action_to_one_member(uint index, const std::string& action_name, uint level);
+	void add_action_to_one_member(std::uint32_t index, const std::string& action_name, std::uint32_t level);
 	void set_interval(const std::unique_ptr<fighting_pit>& fp, std::chrono::milliseconds interval) { fp->_time_interlude = interval; }
 
 private:
@@ -163,7 +163,7 @@ private:
 	 * [1001-*] : globally defined encounters
 	 * [1-1000] : zone defined encounters
 	 */
-	uint _id_encounter = 0;
+	std::uint32_t _id_encounter = 0;
 	fighting_pit::level _difficulty = fighting_pit::level::MEDIUM;
 	encounter_type _encounter_type = encounter_type::RANDOM;
 

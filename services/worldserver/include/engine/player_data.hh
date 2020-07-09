@@ -108,31 +108,31 @@ enum class player_status {
 
 class player_data {
 
-	static constexpr uint MAXIMUM_PLAYER_CONNECTED_TO_WORLD_SERVER = 1000;
+	static constexpr std::uint32_t MAXIMUM_PLAYER_CONNECTED_TO_WORLD_SERVER = 1000;
 
 public:
-	explicit player_data(uint max_connection = MAXIMUM_PLAYER_CONNECTED_TO_WORLD_SERVER) noexcept;
+	explicit player_data(std::uint32_t max_connection = MAXIMUM_PLAYER_CONNECTED_TO_WORLD_SERVER) noexcept;
 
 	template<typename Action>
 	void execution_on_player(Action&& action_to_execute)
 	{
-		for (uint i = 0; i < _status.size(); ++i) {
+		for (std::uint32_t i = 0; i < _status.size(); ++i) {
 			std::forward<Action>(action_to_execute)(i, _status.at(i), _positions.at(i), _identities.at(i), _userNames.at(i));
 		}
 	}
 
-	void set_player_move_action(uint index, double direction)
+	void set_player_move_action(std::uint32_t index, double direction)
 	{
 		_positions.at(index).angle = direction;
 		_status.at(index) = player_status::MOVING;
 	}
 
-	void stop_player_move(uint index)
+	void stop_player_move(std::uint32_t index)
 	{
 		_status.at(index) = player_status::STANDING;
 	}
 
-	void set_player_status_in_arena(uint index, const std::string& arena_id)
+	void set_player_status_in_arena(std::uint32_t index, const std::string& arena_id)
 	{
 		_status.at(index) = player_status::FIGHTING;
 	}
@@ -149,7 +149,7 @@ public:
 	 * @return std::vector<std::string_view>
 	 */
 	[[nodiscard]] inline std::vector<std::string_view>
-	get_player_idts_around_player(uint index_player,
+	get_player_idts_around_player(std::uint32_t index_player,
 			std::optional<std::reference_wrapper<character_info>> position,
 			double distance = DEFAULT_DISTANCE) const noexcept;
 
@@ -165,7 +165,7 @@ public:
 	[[nodiscard]] std::vector<std::string_view>
 	getPlayerIdtsAroundPos(const pos& position,
 			double distance = DEFAULT_DISTANCE,
-			uint ignore_index = LIMIT_NOTIFICATIONS_MOVE) const noexcept;
+			std::uint32_t ignore_index = LIMIT_NOTIFICATIONS_MOVE) const noexcept;
 
 private:
 	std::vector<character_info> _positions;

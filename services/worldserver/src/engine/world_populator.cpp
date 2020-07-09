@@ -92,8 +92,8 @@ world_populator&
 world_populator::populate_script_engine(const world_server_context& ctx)
 {
 	_script_engine = std::make_unique<script_engine>();
-	registerCommonLuaEngine(ctx.get_path_to_lua_engine());
-	generateSpawningPoints(ctx.get_spawning_config_path(), ctx.get_path_lua_base());
+	registerCommonLuaEngine(ctx.path_to_lua_engine());
+	generateSpawningPoints(ctx.spawning_config_path(), ctx.path_lua_base());
 	return *this;
 }
 

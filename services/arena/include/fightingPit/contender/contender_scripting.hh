@@ -64,21 +64,21 @@ public:
 	void set_contender_id(uint contender_id) { _contender_id = contender_id; }
 
 	[[nodiscard]] const std::string&
-	get_contender_name() const { return _contender_name; }
+	contender_name() const { return _contender_name; }
 
 	[[nodiscard]] uint
-	get_contender_id() const { return _contender_id; }
+	contender_id() const { return _contender_id; }
 
 	[[nodiscard]] uint
-	get_level() const { return _level; }
+	level() const { return _level; }
 
 	[[nodiscard]] const std::vector<std::string>&
-	get_doable_actions() const { return _doable_actions; }
+	doable_actions() const { return _doable_actions; }
 
 private:
 
 	[[nodiscard]] std::string
-	get_chai_contender_id() const
+	chai_contender_id() const
 	{
 		return std::string("contender_").append(_contender_name).append(std::to_string(_contender_id));
 	}

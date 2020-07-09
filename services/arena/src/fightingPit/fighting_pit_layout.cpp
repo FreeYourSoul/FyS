@@ -38,14 +38,14 @@ namespace fys::arena {
 fighting_pit_layout::fighting_pit_layout(pit_contenders& contenders, ally_party_teams& partyTeams)
 		:_contenders(contenders), _party_teams(partyTeams)
 {
-	for (auto& pt : partyTeams.get_party_teams()) {
+	for (auto& pt : partyTeams.party_teams()) {
 		add_active_party_team(*pt);
 	}
-	add_active_contender(contenders.getNumberContender());
+	add_active_contender(contenders.number_contender());
 }
 
 void
-fighting_pit_layout::add_active_contender(uint number_contender_to_add)
+fighting_pit_layout::add_active_contender(std::uint32_t number_contender_to_add)
 {
 	_moving_flag_contender.resize(_moving_flag_contender.size() + number_contender_to_add, false);
 }
@@ -53,33 +53,33 @@ fighting_pit_layout::add_active_contender(uint number_contender_to_add)
 void
 fighting_pit_layout::add_active_party_team(const party_team& pt)
 {
-	for (auto& tm : pt.get_team_members()) {
-		_moving_flag_ally[std::pair(tm->get_user_name(), tm->get_id())] = false;
+	for (auto& tm : pt.team_members()) {
+		_moving_flag_ally[std::pair(tm->user_name(), tm->id())] = false;
 	}
 }
 
 unsigned
 fighting_pit_layout::active_characters_on_side(hexagon_side::orientation side) const
 {
-	return _contenders.get().contender_on_side(side) + _party_teams.get().ally_number_on_side(side);
+	return _contenders.get().number_contender_on_side(side) + _party_teams.get().ally_number_on_side(side);
 }
 
 void
 fighting_pit_layout::execute_movements(std::vector<side_battle>& sides)
 {
-	auto changingSideContenders = get_changing_side_contenders();
-	auto changingSideAlly = get_changing_side_team_members();
-	auto movementExecution = [&sides](auto& characterToMove) {
+	auto csc = changing_side_contenders();
+	auto csa = get_changing_side_team_members();
+	auto movement_execution = [&sides](auto& characterToMove) {
 		hexagon_side::orientation sideBeforeMove = (*characterToMove->_side).second;
 		hexagon_side::orientation sideAfterMove = characterToMove->_moving;
 		if (characterToMove->_side.move(sideAfterMove, true)) {
-			sides[static_cast<uint>(sideBeforeMove)].removeParticipantFromList(*characterToMove);
-			sides[static_cast<uint>(sideAfterMove)].addParticipantInList(*characterToMove);
+			sides[static_cast<uint>(sideBeforeMove)].rm_participant_from_list(*characterToMove);
+			sides[static_cast<uint>(sideAfterMove)].add_participant_in_list(*characterToMove);
 		}
 	};
 
-	std::for_each(changingSideAlly.begin(), changingSideAlly.end(), movementExecution);
-	std::for_each(changingSideContenders.begin(), changingSideContenders.end(), movementExecution);
+	std::for_each(csa.begin(), csa.end(), movement_execution);
+	std::for_each(csc.begin(), csc.end(), movement_execution);
 }
 
 std::vector<std::shared_ptr<team_member>>
@@ -98,13 +98,13 @@ fighting_pit_layout::get_changing_side_team_members()
 }
 
 std::vector<std::shared_ptr<fighting_contender>>
-fighting_pit_layout::get_changing_side_contenders()
+fighting_pit_layout::changing_side_contenders()
 {
 	std::vector<std::shared_ptr<fighting_contender>> result;
 
-	for (uint i = 0; i < _moving_flag_contender.size(); ++i) {
+	for (std::uint32_t i = 0; i < _moving_flag_contender.size(); ++i) {
 		if (_moving_flag_contender.at(i) == true) {
-			result.emplace_back(_contenders.get().getFightingContender(i));
+			result.emplace_back(_contenders.get().fighting_contender_at(i));
 		}
 		_moving_flag_contender[i] = false;
 	}
@@ -115,7 +115,7 @@ void
 fighting_pit_layout::set_contender_initiate_position(fighting_contender& contender, hexagon_side::orientation side)
 {
 	if ((*contender._side).second != hexagon_side::orientation::NONE) {
-		SPDLOG_ERROR("Can't set initial position for contender {} as position is not NONE", contender.get_name());
+		SPDLOG_ERROR("Can't set initial position for contender {} as position is not NONE", contender.name());
 		return;
 	}
 	contender._side.move(side, true);
@@ -125,7 +125,7 @@ void
 fighting_pit_layout::set_ally_move_initiate_position(team_member& tm, hexagon_side::orientation side)
 {
 	if ((*tm._side).second != hexagon_side::orientation::NONE) {
-		SPDLOG_ERROR("Can't set initial position for ally {}.{} as position is not NONE", tm.get_user_name(), tm.get_name());
+		SPDLOG_ERROR("Can't set initial position for ally {}.{} as position is not NONE", tm.user_name(), tm.name());
 		return;
 	}
 	tm._side.move(side, true);
@@ -134,9 +134,9 @@ fighting_pit_layout::set_ally_move_initiate_position(team_member& tm, hexagon_si
 bool
 fighting_pit_layout::initiate_contender_move(std::shared_ptr<fighting_contender> contender, hexagon_side::orientation move_to)
 {
-	if (contender->get_hexagon_side().can_move(move_to)) {
+	if (contender->side().can_move_to(move_to)) {
 		contender->_moving = move_to;
-		_moving_flag_contender[contender->get_id()] = true;
+		_moving_flag_contender[contender->id()] = true;
 		return true;
 	}
 	return false;
@@ -146,7 +146,7 @@ void
 fighting_pit_layout::initiate_force_contender_move(std::shared_ptr<fighting_contender> contender, hexagon_side::orientation move_to)
 {
 	contender->_moving = move_to;
-	_moving_flag_contender[contender->get_id()] = true;
+	_moving_flag_contender[contender->id()] = true;
 }
 
 void
@@ -154,13 +154,13 @@ fighting_pit_layout::initiate_contender_move_dir(std::shared_ptr<fighting_conten
 {
 	switch (move_dir) {
 		case data::move_direction::BACK:
-			initiate_contender_move(contender, contender->get_hexagon_side().find_back());
+			initiate_contender_move(contender, contender->side().find_back());
 			break;
 		case data::move_direction::RIGHT:
-			initiate_contender_move(contender, contender->get_hexagon_side().find_right());
+			initiate_contender_move(contender, contender->side().find_right());
 			break;
 		case data::move_direction::LEFT:
-			initiate_contender_move(contender, contender->get_hexagon_side().find_left());
+			initiate_contender_move(contender, contender->side().find_left());
 			break;
 	}
 }
@@ -168,9 +168,9 @@ fighting_pit_layout::initiate_contender_move_dir(std::shared_ptr<fighting_conten
 bool
 fighting_pit_layout::initiate_member_move(std::shared_ptr<team_member> member, hexagon_side::orientation move_to)
 {
-	if (member->get_hexagon_side().can_move(move_to)) {
+	if (member->side().can_move_to(move_to)) {
 		member->_status.moving = move_to;
-		_moving_flag_contender[member->get_id()] = true;
+		_moving_flag_contender[member->id()] = true;
 		return true;
 	}
 	return false;
@@ -180,7 +180,7 @@ void
 fighting_pit_layout::initiate_force_member_move(std::shared_ptr<team_member> member, hexagon_side::orientation move_to)
 {
 	member->_status.moving = move_to;
-	_moving_flag_contender[member->get_id()] = true;
+	_moving_flag_contender[member->id()] = true;
 }
 
 void
@@ -188,13 +188,13 @@ fighting_pit_layout::initiate_member_move_dir(std::shared_ptr<team_member> membe
 {
 	switch (move_dir) {
 		case data::move_direction::BACK:
-			initiate_member_move(member, member->get_hexagon_side().find_back());
+			initiate_member_move(member, member->side().find_back());
 			break;
 		case data::move_direction::RIGHT:
-			initiate_member_move(member, member->get_hexagon_side().find_right());
+			initiate_member_move(member, member->side().find_right());
 			break;
 		case data::move_direction::LEFT:
-			initiate_member_move(member, member->get_hexagon_side().find_left());
+			initiate_member_move(member, member->side().find_left());
 			break;
 	}
 }

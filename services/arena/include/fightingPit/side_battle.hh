@@ -72,18 +72,18 @@ public:
 	 */
 	void erase_finished_alteration_and_dead_characters_from_turn_list();
 
-	void removeParticipantFromList(const team_member& tm);
-	void removeParticipantFromList(const fighting_contender& contender);
-	void addParticipantInList(const team_member& tm);
-	void addParticipantInList(const fighting_contender& contender);
-	void turnDone(bool turnDone) { _turnDone = turnDone; };
-	void addParticipantInList(uint id, int speed, bool isContender)
+	void rm_participant_from_list(const team_member& tm);
+	void rm_participant_from_list(const fighting_contender& contender);
+	void add_participant_in_list(const team_member& tm);
+	void add_participant_in_list(const fighting_contender& contender);
+	void add_participant_in_list(uint id, int speed, bool isContender)
 	{
 		_priority_order_list.add_participant_in_list(id, speed, isContender);
 	}
+	void turn_done(bool turnDone) { _turnDone = turnDone; };
 
 	[[nodiscard]] hexagon_side::orientation
-	get_side() const { return _side; }
+	side() const { return _side; }
 
 	[[nodiscard]] bool
 	empty() const { return _priority_order_list.empty(); }

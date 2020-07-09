@@ -51,11 +51,11 @@ getY(double y, unsigned tileSizeY)
 // CollisionMap
 collision_map::collision_map(const world_server_context& ctx)
 		:
-		_boundary_x(ctx.get_server_x_boundaries()),
-		_boundary_y(ctx.get_server_y_boundaries()),
-		_server_proximity(ctx.get_server_proximity())
+		_boundary_x(ctx.server_x_boundaries()),
+		_boundary_y(ctx.server_y_boundaries()),
+		_server_proximity(ctx.server_proximity())
 {
-	build_map_from_tmx(ctx.get_tmx_map_path());
+	build_map_from_tmx(ctx.tmx_map_path());
 }
 
 void
@@ -109,7 +109,7 @@ collision_map::add_trigger_in_map(const tmx::ObjectGroup& trigger_layer)
 }
 
 void
-collision_map::execute_potential_trigger(uint index, const character_info& position_on_map)
+collision_map::execute_potential_trigger(std::uint32_t index, const character_info& position_on_map)
 {
 }
 
@@ -123,7 +123,7 @@ collision_map::can_move_to(pos pos, std::size_t level) const noexcept
 
 // CollisionMap Element
 void
-map_element::execute_potential_trigger(uint indexPlayer) const
+map_element::execute_potential_trigger(std::uint32_t indexPlayer) const
 {
 	if (_type == e_element_type::TRIGGER) {
 

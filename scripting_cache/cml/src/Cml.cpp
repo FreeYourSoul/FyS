@@ -88,7 +88,7 @@ Cml::isInLocalStorageAndUpToDate(const CmlKey& cmlKey, std::filesystem::file_tim
 }
 
 const std::string&
-Cml::findInCache(const std::string& key, bool first)
+Cml::findInCache(const std::string& key)
 {
 	static const std::string empty{};
 	CmlKey cmlKey(_localPathStorage, key);

@@ -26,7 +26,7 @@
 
 namespace fys::ws {
 
-player_data::player_data(uint max_connection) noexcept {
+player_data::player_data(std::uint32_t max_connection) noexcept {
 	_positions.reserve(max_connection);
 	_status.reserve(max_connection);
 	_identities.reserve(max_connection);
@@ -34,7 +34,7 @@ player_data::player_data(uint max_connection) noexcept {
 }
 
 std::vector<std::string_view>
-player_data::get_player_idts_around_player(uint index_player,
+player_data::get_player_idts_around_player(std::uint32_t index_player,
 		std::optional<std::reference_wrapper<character_info>> position,
 		double distance) const noexcept
 {
@@ -47,7 +47,7 @@ player_data::get_player_idts_around_player(uint index_player,
 std::vector<std::string_view>
 player_data::getPlayerIdtsAroundPos(const pos& position,
 		double distance,
-		uint ignore_index) const noexcept
+		std::uint32_t ignore_index) const noexcept
 {
 	std::vector<std::string_view> player_identities;
 	player_identities.reserve(LIMIT_NOTIFICATIONS_MOVE);
@@ -78,7 +78,7 @@ player_data::add_new_player_data(character_info info, std::string identity, std:
 				_identities.size(), _status.size(), _positions.size(), _userNames.size());
 		return 0;
 	}
-	uint index = _identities.size();
+	std::uint32_t index = _identities.size();
 	_positions.emplace_back(std::move(info));
 	_status.emplace_back(player_status::STANDING);
 	_identities.emplace_back(std::move(identity));

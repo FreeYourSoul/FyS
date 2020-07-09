@@ -40,43 +40,43 @@ public:
 	to_string() const noexcept;
 
 	[[nodiscard]] std::string
-	get_dispatcher_sub_connection_str() const noexcept;
+	dispatcher_sub_connection_str() const noexcept;
 
 	[[nodiscard]] std::string
-	get_dispatcher_connection_str() const noexcept;
+	dispatcher_connection_str() const noexcept;
 
 	[[nodiscard]] std::string
-	get_player_connection_str() const noexcept;
+	player_connection_str() const noexcept;
 
 	[[nodiscard]] const std::string&
-	get_path_to_local_storage() const noexcept { return _path_to_local_storage; }
+	path_to_local_storage() const noexcept { return _path_to_local_storage; }
 
 	[[nodiscard]] const std::string&
-	get_server_code() const noexcept { return _server_code; }
+	server_code() const noexcept { return _server_code; }
 
 	[[nodiscard]] const std::string&
-	get_tmx_map_path() const noexcept { return _tmx_map_path; }
+	tmx_map_path() const noexcept { return _tmx_map_path; }
 
 	[[nodiscard]] const boundary&
-	get_server_x_boundaries() const noexcept { return _server_x_boundaries; }
+	server_x_boundaries() const noexcept { return _server_x_boundaries; }
 
 	[[nodiscard]] const boundary&
-	get_server_y_boundaries() const noexcept { return _server_y_boundaries; }
+	server_y_boundaries() const noexcept { return _server_y_boundaries; }
 
 	[[nodiscard]] const std::vector<proximity_server>&
-	get_server_proximity() const noexcept { return _server_proximity; }
+	server_proximity() const noexcept { return _server_proximity; }
 
 	[[nodiscard]] const std::string&
-	get_path_to_lua_engine() const noexcept { return _path_to_lua_init_engine; }
+	path_to_lua_engine() const noexcept { return _path_to_lua_init_engine; }
 
 	[[nodiscard]] const std::string&
-	get_spawning_config_path() const noexcept { return _spawning_config_path; }
+	spawning_config_path() const noexcept { return _spawning_config_path; }
 
 	[[nodiscard]] const std::string&
-	get_path_lua_base() const noexcept { return _path_lua_base; }
+	path_lua_base() const noexcept { return _path_lua_base; }
 
 private:
-	void initWsContextWithJson(nlohmann::json& json);
+	void init_ws_ctx_from_json(nlohmann::json& json);
 
 private:
 	std::string _server_code;
@@ -86,7 +86,7 @@ private:
 	std::string _path_to_lua_init_engine;
 	std::string _spawning_config_path;
 
-	uint _port_player_connection;
+	std::uint32_t _port_player_connection;
 	boundary _server_x_boundaries;
 	boundary _server_y_boundaries;
 	std::vector<proximity_server> _server_proximity;

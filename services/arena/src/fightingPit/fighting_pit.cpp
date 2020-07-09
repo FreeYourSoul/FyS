@@ -61,9 +61,9 @@ fighting_pit::fighting_pit(std::string creator_user_name, fys::arena::fighting_p
 		_progress(progress::ON_HOLD),
 		_level_fighting_pit(level_fighting_pit),
 		_time_interlude(retrieve_time_interlude_from_level_degree(_level_fighting_pit)),
-		_layout_mapping(_contenders, _party_teams),
+		_layout_map(_contenders, _party_teams),
 		_creator_user_name(std::move(creator_user_name)),
-		_chai_ptr(chai_register::make_chai_instance(_contenders, _party_teams, _layout_mapping)),
+		_chai_ptr(chai_register::make_chai_instance(_contenders, _party_teams, _layout_map)),
 		_rewards(std::make_unique<rewards>()) { }
 
 void
@@ -85,11 +85,11 @@ fighting_pit::continue_battle(const std::chrono::system_clock::time_point& now)
 			// character of a player
 			turn_executed = _party_teams.execute_ally_action(current_participant, _contenders, _chai_ptr);
 		}
-		battle.turnDone(turn_executed);
+		battle.turn_done(turn_executed);
 		battle.erase_finished_alteration_and_dead_characters_from_turn_list();
 	}
 	// execute awaited movements
-	_layout_mapping.execute_movements(_side_battles);
+	_layout_map.execute_movements(_side_battles);
 
 	_progress = update_progress_status();
 }
@@ -117,14 +117,14 @@ fighting_pit::forward_to_team_member(const std::string& user, player_action acti
 		return;
 	}
 	try {
-		if (!chai::util::memberHasActionRegistered(*_chai_ptr, user, member->get_name(), action.action_name)) {
+		if (!chai::util::memberHasActionRegistered(*_chai_ptr, user, member->name(), action.action_name)) {
 			SPDLOG_WARN("[fp:{}] : Member {}.{}.{} tried to execute Action '{}' which isn't registered for member '{}'",
-					_arena_id, user, member->get_id(), member->get_name(), action.action_name, member->get_name());
+					_arena_id, user, member->id(), member->name(), action.action_name, member->name());
 			return;
 		}
 		auto[targetIsCorrect, target] = this->check_and_retrieve_target(user, member, action);
 		if (targetIsCorrect) {
-			SPDLOG_INFO("[fp:{}] : Member {}.{}.{} register a new action {}", _arena_id, user, member->get_id(), member->get_name(), action.action_name);
+			SPDLOG_INFO("[fp:{}] : Member {}.{}.{} register a new action {}", _arena_id, user, member->id(), member->name(), action.action_name);
 			member->add_pending_action(std::move(action.action_name), std::move(target));
 		}
 	}
@@ -151,11 +151,11 @@ void
 fighting_pit::add_party_team_and_register_actions(std::unique_ptr<party_team> pt, cache::Cml& cache)
 {
 	chai_register::load_register_action_party_team(*_chai_ptr, cache, *pt);
-	_layout_mapping.add_active_party_team(*pt);
+	_layout_map.add_active_party_team(*pt);
 	_party_teams.add_party_team(std::move(pt));
 	std::sort(_side_battles.begin(), _side_battles.end(),
 			[this](auto& lhs, auto& rhs) {
-				return _layout_mapping.active_characters_on_side(lhs.get_side()) < _layout_mapping.active_characters_on_side(rhs.get_side());
+				return _layout_map.active_characters_on_side(lhs.side()) < _layout_map.active_characters_on_side(rhs.side());
 			});
 }
 
@@ -197,14 +197,14 @@ void
 fighting_pit::initialize_priority_in_side_battles()
 {
 	for (auto& sb : _side_battles) {
-		const auto& member_by_side = _party_teams.get_members_by_side(sb.get_side());
-		const auto& contender_by_side = _contenders.get_contender_on_side(sb.get_side());
+		const auto& member_by_side = _party_teams.members_by_side(sb.side());
+		const auto& contender_by_side = _contenders.contenders_on_side(sb.side());
 
 		for (const team_member_sptr & member : member_by_side) {
-			sb.addParticipantInList(member->get_id(), member->get_status().initial_speed, false);
+			sb.add_participant_in_list(member->id(), member->status().initial_speed, false);
 		}
 		for (unsigned i = 0; i < contender_by_side.size(); ++i) {
-			sb.addParticipantInList(i, contender_by_side.at(i)->get_status().initial_speed, true);
+			sb.add_participant_in_list(i, contender_by_side.at(i)->status().initial_speed, true);
 		}
 	};
 }
@@ -220,7 +220,7 @@ std::pair<bool, std::optional<TargetType>>
 fighting_pit::check_and_retrieve_target(const std::string& user, const team_member_sptr& member, const player_action& action)
 {
 	auto target_type = _chai_ptr->eval<data::targeting>(
-			chai::util::getAccessAllyAction(user, member->get_name(), action.action_name).append(".requireTarget();"));
+			chai::util::get_ally_action_retriever(user, member->name(), action.action_name).append(".requireTarget();"));
 	std::optional<TargetType> target;
 
 	// Check if the target is appropriate
@@ -270,13 +270,13 @@ fighting_pit::check_and_retrieve_target(const std::string& user, const team_memb
 		SPDLOG_WARN("NOT IMPLEMENTED YET");
 		return std::pair(false, target);
 	}
-	if (!all_in(action.ally_target, _party_teams.get_party_team_of_player(user).get_team_members(),
-			[](const team_member_sptr & tm) { return tm->get_id(); })) {
+	if (!all_in(action.ally_target, _party_teams.get_party_team_of_player(user).team_members(),
+			[](const team_member_sptr & tm) { return tm->id(); })) {
 		SPDLOG_WARN("[fp:{}] : Player {} tried to target a non-existing Ally", _arena_id, user);
 		return std::pair(false, target);
 	}
-	if (!all_in(action.contender_target, _contenders.get_contenders(),
-			[](const fighting_contender_sptr& c) { return c->get_id(); })) {
+	if (!all_in(action.contender_target, _contenders.contenders(),
+			[](const fighting_contender_sptr& c) { return c->id(); })) {
 		SPDLOG_WARN("[fp:{}] : Player {} tried to target a non-existing Contender, Targets are : ", _arena_id, user);
 		return std::pair(false, target);
 	}
@@ -286,7 +286,7 @@ bool
 fighting_pit::add_contender(const std::shared_ptr<fighting_contender>& fc)
 {
 	if (_contenders.add_contender(fc)) {
-		_layout_mapping.add_active_contender();
+		_layout_map.add_active_contender();
 		return true;
 	}
 	return false;

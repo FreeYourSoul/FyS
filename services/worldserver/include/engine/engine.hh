@@ -47,7 +47,7 @@ struct WSAction;
 
 namespace fys::ws {
 
-constexpr static uint NOT_AUTHENTICATED = std::numeric_limits<uint>::max();
+constexpr static std::uint32_t NOT_AUTHENTICATED = std::numeric_limits<uint>::max();
 
 struct auth_player {
 	std::string user_name;
@@ -72,8 +72,8 @@ public:
 			std::shared_ptr<script_engine> script_engine, std::chrono::system_clock::duration time_interval);
 
 	void execute_pending_moves(const std::chrono::system_clock::time_point& player_index);
-	void set_player_move_direction(uint index, double direction);
-	void stop_player_move(uint index);
+	void set_player_move_direction(std::uint32_t index, double direction);
+	void stop_player_move(std::uint32_t index);
 	void authenticate_player(auth_player auth, character_info info, std::string identifier);
 	void spawnNPC(const std::chrono::system_clock::time_point& currentTime);
 
@@ -81,9 +81,9 @@ public:
 	retrieve_data_index(const auth_player& player);
 
 private:
-	inline void move_player_action(const std::string& user_name, uint index_character, character_info& pi);
-	inline void move_npc_action(uint index_character, character_info& pi);
-	inline void move_character_action(const std::string& user_name, uint index_character, character_info& pi, bool is_npc);
+	inline void move_player_action(const std::string& user_name, std::uint32_t index_character, character_info& pi);
+	inline void move_npc_action(std::uint32_t index_character, character_info& pi);
+	inline void move_character_action(const std::string& user_name, std::uint32_t index_character, character_info& pi, bool is_npc);
 
 	inline void notifyClientsOfCharacterMove(const character_info& pi, const std::string& user_name,
 			const std::vector<std::string_view>& idts_to_identify);

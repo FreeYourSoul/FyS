@@ -44,7 +44,7 @@ public:
 	virtual ~Cml() = default;
 	explicit Cml(std::filesystem::path pathLocalStorage);
 
-	const std::string& findInCache(const std::string& key, bool first = true);
+	const std::string& findInCache(const std::string& key);
 
 	virtual void createUpToDateFileInLocalStorage(const CmlKey& cmlKey, std::filesystem::file_time_type cacheTime) = 0;
 

@@ -109,7 +109,7 @@ private:
 	get_changing_side_team_members();
 
 	[[nodiscard]] std::vector<std::shared_ptr<fighting_contender>>
-	get_changing_side_contenders();
+	changing_side_contenders();
 
 private:
 	std::reference_wrapper<pit_contenders> _contenders;

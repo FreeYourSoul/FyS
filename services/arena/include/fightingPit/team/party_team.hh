@@ -42,13 +42,13 @@ public:
 			:_user_name(std::move(user_name)) { }
 
 	[[nodiscard]] std::vector<std::shared_ptr<team_member>>
-	get_team_member_on_side(hexagon_side::orientation side) const;
+	team_member_on_side(hexagon_side::orientation orientation) const;
 
 	[[nodiscard]] const std::string&
-	get_user_name() const { return _user_name; }
+	user_name() const { return _user_name; }
 
 	[[nodiscard]] const std::vector<std::shared_ptr<team_member>>&
-	get_team_members() const { return _members; }
+	team_members() const { return _members; }
 
 	[[nodiscard]] std::vector<std::shared_ptr<team_member>>&
 	access_team_members() { return _members; }
@@ -57,7 +57,7 @@ public:
 	ally_number_on_side(hexagon_side::orientation side) const;
 
 	[[nodiscard]] std::vector<std::shared_ptr<team_member>>
-	get_dead_team_members_on_side(fys::arena::hexagon_side::orientation side) const;
+	get_dead_team_members_on_side(fys::arena::hexagon_side::orientation tm_ptr) const;
 
 	[[nodiscard]] bool
 	is_team_ready() const { return _ready; }

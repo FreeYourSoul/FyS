@@ -45,15 +45,15 @@ fighting_contender::setup_contender()
 }
 
 const std::string&
-fighting_contender::get_name() const
+fighting_contender::name() const
 {
-	return _contender_scripting->get_contender_name();
+	return _contender_scripting->contender_name();
 }
 
 unsigned
-fighting_contender::get_id() const
+fighting_contender::id() const
 {
-	return _contender_scripting->get_contender_id();
+	return _contender_scripting->contender_id();
 }
 
 }

@@ -48,7 +48,7 @@ inventory_server_context::to_string() const
 	str += "[INFO] Config file used: " + _config_file + "\n";
 	str += "\n[INFO] Dispatcher connected port: " + std::to_string(_dispatcherData.port) + "\n";
 	str += "[INFO] Dispatcher connected host: " + _dispatcherData.address + "\n";
-	str += "[INFO] Dispatcher connection string: " + get_dispatcher_connection_str() + "\n";
+	str += "[INFO] Dispatcher connection string: " + dispatcher_connection_str() + "\n";
 	str += "[INFO] Player connection string: " + get_player_connection_str() + "\n";
 	str += "\n*************************\n";
 	return str;

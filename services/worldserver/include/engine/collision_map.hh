@@ -118,7 +118,7 @@ enum class e_element_type {
 class map_element {
 
 public:
-	void execute_potential_trigger(uint indexPlayer) const;
+	void execute_potential_trigger(std::uint32_t indexPlayer) const;
 
 	void set_level(std::size_t level) { _level.set(level); }
 	void set_change_level(std::size_t level) { _change_level.set(level); }
@@ -166,7 +166,7 @@ public:
 	collision_map& operator=(const collision_map&) = delete;
 
 	void build_map_from_tmx(const std::string& tmx_map_path);
-	void execute_potential_trigger(uint index, const character_info& position_on_map);
+	void execute_potential_trigger(std::uint32_t index, const character_info& position_on_map);
 
 	/**
 	 * Check if the position is in the boundary of the map before checking on the map

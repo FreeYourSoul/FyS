@@ -61,7 +61,7 @@ constexpr static auto HARD = std::chrono::milliseconds(std::chrono::seconds(10))
 
 //! Actions struct containing all the information to forward to the member's pending action Queue
 struct player_action {
-	uint id_member;
+	std::uint32_t id_member;
 	std::string action_name;
 	std::vector<uint> contender_target;
 	std::vector<uint> ally_target;
@@ -170,16 +170,16 @@ public:
 	get_chai_ptr() const noexcept { return _chai_ptr; }
 
 	[[nodiscard]] unsigned
-	get_id() const noexcept { return _arena_id; }
+	id() const noexcept { return _arena_id; }
 
 	[[nodiscard]] bool
 	is_joinable() const noexcept { return _progress == progress::ON_HOLD; }
 
 	[[nodiscard]] const ally_party_teams&
-	get_party_teams() const { return _party_teams; }
+	ally_party() const { return _party_teams; }
 
 	[[nodiscard]] const pit_contenders&
-	get_pit_contenders() const { return _contenders; }
+	contenders() const { return _contenders; }
 
 	/**
 	 * Check if the battle is done, the winner doesn't matter, this is a status to cleanup the fighting pit when its done
@@ -281,7 +281,7 @@ private:
 	ally_party_teams _party_teams;
 
 	// mapping of the contenders/NPC with the layout of the FightingPit
-	fighting_pit_layout _layout_mapping;
+	fighting_pit_layout _layout_map;
 
 	std::string _creator_user_name;
 	unsigned _arena_id = 0;

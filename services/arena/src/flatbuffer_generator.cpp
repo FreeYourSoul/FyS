@@ -73,11 +73,11 @@ std::pair<void*, uint>
 flatbuffer_generator::generateFightingPitState(const fys::arena::fighting_pit& fp)
 {
 	_fbb.Clear();
-	auto fbPartyTeamVec = _fbb.CreateVector(generate_party_team_vec_status_offset(fp.get_party_teams()));
-	auto fbContenderVec = _fbb.CreateVector(generate_contender_vec_status_offset(fp.get_pit_contenders().get_contenders()));
+	auto fbPartyTeamVec = _fbb.CreateVector(generate_party_team_vec_status_offset(fp.ally_party()));
+	auto fbContenderVec = _fbb.CreateVector(generate_contender_vec_status_offset(fp.contenders().contenders()));
 	auto fps = fb::arn::CreateFightingPitState(
 			_fbb,
-			fp.get_id(),
+			fp.id(),
 			fbPartyTeamVec,
 			fbContenderVec
 	);
@@ -94,12 +94,12 @@ std::pair<void*, uint>
 flatbuffer_generator::generate_party_team_status(const party_team& partyTeam)
 {
 	_fbb.Clear();
-	auto fb_name = _fbb.CreateString(partyTeam.get_user_name());
-	auto fb_member_vec = _fbb.CreateVector(generate_team_member_vec_status_offset(partyTeam.get_team_members()));
+	auto fb_name = _fbb.CreateString(partyTeam.user_name());
+	auto fb_member_vec = _fbb.CreateVector(generate_team_member_vec_status_offset(partyTeam.team_members()));
 	auto fb_vec_attacks = [this](const party_team& partyTeam) {
 		std::vector<std::string> vecString;
-		for (const auto& tm : partyTeam.get_team_members()) {
-			auto vec = retrieve_string_vector(tm->get_actions_doable());
+		for (const auto& tm : partyTeam.team_members()) {
+			auto vec = retrieve_string_vector(tm->actions_doable());
 			std::move(vec.begin(), vec.end(), std::back_inserter(vecString));
 		}
 		return _fbb.CreateVectorOfStrings(vecString);
@@ -188,16 +188,16 @@ std::vector<flatbuffers::Offset<fb::arn::PartyTeamStatus>>
 flatbuffer_generator::generate_party_team_vec_status_offset(const ally_party_teams& apt)
 {
 	std::vector<flatbuffers::Offset<fb::arn::PartyTeamStatus>> fb_party_teams_status;
-	const auto& party_teams = apt.get_party_teams();
+	const auto& party_teams = apt.party_teams();
 
 	fb_party_teams_status.reserve(party_teams.size());
 	for (const auto& pt : party_teams) {
-		auto fb_user_name = _fbb.CreateString(pt->get_user_name());
-		auto fb_members = _fbb.CreateVector(generate_team_member_vec_status_offset(pt->get_team_members()));
+		auto fb_user_name = _fbb.CreateString(pt->user_name());
+		auto fb_members = _fbb.CreateVector(generate_team_member_vec_status_offset(pt->team_members()));
 		auto fb_attacks = [this](const auto& pt) {
 			std::vector<std::string> attacks;
-			for (const auto& tm : pt->get_team_members()) {
-				auto vec = retrieve_string_vector(tm->get_actions_doable());
+			for (const auto& tm : pt->team_members()) {
+				auto vec = retrieve_string_vector(tm->actions_doable());
 				std::move(vec.begin(), vec.end(), std::back_inserter(attacks));
 			}
 			return _fbb.CreateVectorOfStrings(attacks);
@@ -219,19 +219,19 @@ flatbuffer_generator::generate_contender_vec_status_offset(const std::vector<fig
 
 	fb_character_status.reserve(contenders.size());
 	for (const auto& contender : contenders) {
-		const auto& status = contender->get_status();
+		const auto& status = contender->status();
 		const auto fbStatus = fb::arn::CharacterStatus{
-				contender->get_id(),
+				contender->id(),
 				true, // is_contender
 				status.life_pt.current,
 				status.life_pt.total,
 				status.magic_pt.current,
 				status.magic_pt.total,
-				util::convert_arena_orient_to_fb(contender->get_hexagon_side_orient())
+				util::convert_arena_orient_to_fb(contender->side_orient())
 		};
 		fb_character_status.emplace_back(
 				fb::arn::CreateMemberStatus(_fbb,
-						_fbb.CreateString(contender->get_name()), &fbStatus));
+						_fbb.CreateString(contender->name()), &fbStatus));
 	}
 	return fb_character_status;
 }
@@ -243,19 +243,19 @@ flatbuffer_generator::generate_team_member_vec_status_offset(const std::vector<t
 
 	fbCharacterStatus.reserve(members.size());
 	for (const auto& member : members) {
-		const auto& status = member->get_status();
+		const auto& status = member->status();
 		const auto fbStatus = fb::arn::CharacterStatus{
-				member->get_id(),
+				member->id(),
 				true, // is_contender
 				status.life_pt.current,
 				status.life_pt.total,
 				status.magic_pt.current,
 				status.magic_pt.total,
-				util::convert_arena_orient_to_fb(member->get_hexagon_side_orient())
+				util::convert_arena_orient_to_fb(member->side_orient())
 		};
 		fbCharacterStatus.emplace_back(
 				fb::arn::CreateMemberStatus(_fbb,
-						_fbb.CreateString(member->get_name()), &fbStatus));
+						_fbb.CreateString(member->name()), &fbStatus));
 	}
 	return fbCharacterStatus;
 }

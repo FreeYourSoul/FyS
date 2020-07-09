@@ -94,7 +94,7 @@ TEST_CASE("Test register/load player", "[service][arena][script_test]")
 	SECTION("simple test load player actions") {
 
 		fys::arena::party_team partyTeam("FyS");
-		fys::arena::team_member_sptr tm1 = std::make_shared<fys::arena::team_member>(partyTeam.get_user_name(), "fyston1");
+		fys::arena::team_member_sptr tm1 = std::make_shared<fys::arena::team_member>(partyTeam.user_name(), "fyston1");
 		tm1->set_id(0);
 		tm1->add_doable_action("arena:actions:damage:slash.chai", 1);
 		partyTeam.add_team_member(std::move(tm1));
@@ -112,7 +112,7 @@ TEST_CASE("Test register/load player", "[service][arena][script_test]")
 
 		SECTION("simple test register same partyteam with loaded action") {
 
-			fys::arena::team_member_sptr tm2 = std::make_shared<fys::arena::team_member>(partyTeam.get_user_name(), "fyston2");
+			fys::arena::team_member_sptr tm2 = std::make_shared<fys::arena::team_member>(partyTeam.user_name(), "fyston2");
 			tm2->set_id(1);
 			tm2->add_doable_action("arena:actions:damage:slash.chai", 1);
 			partyTeam.add_team_member(std::move(tm2));
@@ -136,11 +136,11 @@ TEST_CASE("Test register/load player", "[service][arena][script_test]")
 		SECTION("simple test register new partyteam with loaded action") {
 
 			fys::arena::party_team partyTeam2("Free");
-			fys::arena::team_member_sptr tm21 = std::make_shared<fys::arena::team_member>(partyTeam2.get_user_name(), "fyston1");
+			fys::arena::team_member_sptr tm21 = std::make_shared<fys::arena::team_member>(partyTeam2.user_name(), "fyston1");
 			tm21->set_id(2);
 			tm21->add_doable_action("arena:actions:damage:slash.chai", 1);
 			partyTeam2.add_team_member(std::move(tm21));
-			fys::arena::team_member_sptr tm22 = std::make_shared<fys::arena::team_member>(partyTeam2.get_user_name(), "fyston2");
+			fys::arena::team_member_sptr tm22 = std::make_shared<fys::arena::team_member>(partyTeam2.user_name(), "fyston2");
 			tm22->set_id(3);
 			tm22->add_doable_action("arena:actions:damage:slash.chai", 1);
 			partyTeam2.add_team_member(std::move(tm22));

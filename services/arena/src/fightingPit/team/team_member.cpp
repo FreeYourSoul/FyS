@@ -44,10 +44,10 @@ template<class... Ts> overloaded(Ts...) -> overloaded<Ts...>;
 namespace {
 
 [[nodiscard]] auto
-actionMatchKey(const std::string& actionName)
+actionMatchKey(const std::string& action_name)
 {
-	return [&actionName](const auto& action) {
-		return actionName == fys::arena::data::get_action_name_from_key(action.first);
+	return [&action_name](const auto& action) {
+		return action_name == fys::arena::data::get_action_name_from_key(action.first);
 	};
 }
 
@@ -72,43 +72,42 @@ team_member::execute_action(
 				_user_name, _name, _id, pa->id_action);
 		return false;
 	}
-	const std::string actionKey = _actions_doable.at(pa->id_action).first;
-	const std::string allyAction = chai::util::getAccessAllyAction(_user_name, _name,
-			data::get_action_name_from_key(actionKey));
-	const std::string funActionStr = fmt::format(R"(fun(target){{ return {}.execute(target);}})", allyAction);
-	data::targeting targetType;
+	const std::string key = _actions_doable.at(pa->id_action).first;
+	const std::string action = chai::util::get_ally_action_retriever(_user_name, _name, data::get_action_name_from_key(key));
+	const std::string fun_act_str = fmt::format(R"(fun(target){{ return {}.execute(target);}})", action);
+	data::targeting target_type;
 
 	try {
-		targetType = chai_ptr->eval<data::targeting>(allyAction + ".requireTarget();");
+		target_type = chai_ptr->eval<data::targeting>(action + ".requireTarget();");
 	}
 	catch (const std::exception& e) {
-		SPDLOG_ERROR("action retrieved by {} doesn't have requireTarget method {}", allyAction, e.what());
+		SPDLOG_ERROR("action retrieved by {} doesn't have requireTarget method {}", action, e.what());
 		return false;
 	}
 
-	history_manager::addHistoric(apt.get_fighting_pit_id(), history_action{_id, _name, actionKey, pa->target});
+	history_manager::add_historic(apt.fighting_pit_id(), history_action{_id, _name, key, pa->target});
 
 	try {
 		// If a specific target is required, otherwise self is used
 		if (pa->target.has_value()) {
 			std::visit(overloaded{
-					[&apt, &targetType, &funActionStr, &chai_ptr](ally_target_id target) {
-						if (targetType == data::ALLY || targetType == data::ALLY_OR_ENNEMY) {
-							const auto funcAction = chai_ptr->eval<std::function<int(team_member&)>>(funActionStr);
+					[&apt, &target_type, &fun_act_str, &chai_ptr](ally_target_id target) {
+						if (target_type == data::ALLY || target_type == data::ALLY_OR_ENNEMY) {
+							const auto funcAction = chai_ptr->eval<std::function<int(team_member&)>>(fun_act_str);
 							funcAction(*apt.select_member_by_id(target.v));
 						}
 						else {
-							spdlog::error("Action of type {}, couldn't target an AllyTarget of id {}", targetType, target.v);
+							spdlog::error("Action of type {}, couldn't target an AllyTarget of id {}", target_type, target.v);
 						}
 					},
 
-					[&pc, &targetType, &funActionStr, &chai_ptr](contender_target_id target) {
-						if (targetType == data::ENNEMY || targetType == data::ALLY_OR_ENNEMY) {
-							const auto funcAction = chai_ptr->eval<std::function<int(fighting_contender&)>>(funActionStr);
-							funcAction(*pc.getFightingContender(target.v));
+					[&pc, &target_type, &fun_act_str, &chai_ptr](contender_target_id target) {
+						if (target_type == data::ENNEMY || target_type == data::ALLY_OR_ENNEMY) {
+							const auto funcAction = chai_ptr->eval<std::function<int(fighting_contender&)>>(fun_act_str);
+							funcAction(*pc.fighting_contender_at(target.v));
 						}
 						else {
-							spdlog::error("Action of type {}, couldn't target a ContenderTarget of id {}", targetType, target.v);
+							spdlog::error("Action of type {}, couldn't target a ContenderTarget of id {}", target_type, target.v);
 						}
 					},
 
@@ -118,7 +117,7 @@ team_member::execute_action(
 			}, *pa->target);
 		}
 		else {
-			const auto funcAction = chai_ptr->eval<std::function<int(team_member&)>>(funActionStr);
+			const auto funcAction = chai_ptr->eval<std::function<int(team_member&)>>(fun_act_str);
 			funcAction(*this);
 		}
 	}

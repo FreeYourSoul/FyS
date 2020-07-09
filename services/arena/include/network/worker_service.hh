@@ -168,7 +168,7 @@ public:
 	fighting_pit_exist_and_joinable(unsigned fighting_pit_id) const noexcept;
 
 	[[nodiscard]] unsigned
-	get_number_battle_running() const noexcept { return _arena_instances.size(); }
+	number_battle_running() const noexcept { return _arena_instances.size(); }
 
 	/**
 	 * Update or add (if player not register yet) the player identifier mapping with fightingPit

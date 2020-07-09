@@ -32,8 +32,8 @@
 namespace fys::arena {
 
 struct encounter_context {
-	using rng_range = std::pair<uint, uint>;
-	using chance_array = std::array<uint, 3>;
+	using rng_range = std::pair<std::uint32_t, std::uint32_t>;
+	using chance_array = std::array<std::uint32_t, 3>;
 
 	struct encounter_desc {
 		[[nodiscard]] bool
@@ -46,7 +46,7 @@ struct encounter_context {
 		//! key of the encounter to find it back via the cache
 		std::string key;
 		//! Max number of this type of monster you can encounter at once
-		uint maxEncountering;
+		std::uint32_t maxEncountering;
 		//! percentage of chance to encounter this monster out of the 3 different difficulties
 		chance_array chance;
 		//! Range of level the monster is when encountered
@@ -89,28 +89,28 @@ public:
 	to_string() const noexcept;
 
 	[[nodiscard]] std::string
-	get_player_binding_string() const noexcept;
+	player_binding_string() const noexcept;
 
 	[[nodiscard]] const std::string&
-	get_server_code() const noexcept { return _code; }
+	server_code() const noexcept { return _code; }
 
 	[[nodiscard]] const encounter_context&
-	get_encounter_context() const noexcept { return _encounter_context; }
+	encounter_ctx() const noexcept { return _encounter_ctx; }
 
 	[[nodiscard]] const std::string&
-	getPathLocalStorageCache() const noexcept { return _path_local_storage_cache; }
+	path_local_storage_cache() const noexcept { return _path_local_storage_cache; }
 
 	[[nodiscard]] const std::string&
-	get_path_source_cache() const noexcept { return _path_source_cache; }
+	path_source_cache() const noexcept { return _path_source_cache; }
 
 	[[nodiscard]] const std::string&
-	get_db_host() const noexcept { return _db_host; }
+	db_host() const noexcept { return _db_host; }
 
-	[[nodiscard]] uint
-	get_db_port() const noexcept { return _db_port; }
+	[[nodiscard]] std::uint32_t
+	db_port() const noexcept { return _db_port; }
 
-	[[nodiscard]] uint
-	get_battle_threshold() const noexcept { return _battle_threshold; }
+	[[nodiscard]] std::uint32_t
+	battle_threshold() const noexcept { return _battle_threshold; }
 
 private:
 	[[nodiscard]] bool
@@ -120,7 +120,7 @@ private:
 	validate_reward_context() const;
 
 	[[nodiscard]] encounter_context::reward_encounter_desc
-	get_reward_desc_from_json(const nlohmann::json& reward_desc) const;
+	reward_desc_from_json(const nlohmann::json& reward_desc) const;
 
 	void parse_arena_config_file(const nlohmann::json& config_content);
 	void parse_zone_config_file(const nlohmann::json& config_content);
@@ -138,16 +138,16 @@ private:
 	//! Database hostname
 	std::string _db_host;
 	//! Database port number
-	uint _db_port = 3306;
+	std::uint32_t _db_port = 3306;
 
 	//! Database hostname
-	uint _player_connection_port;
+	std::uint32_t _player_connection_port;
 
 	//! Maximum number of concurrent battle handled by the arena service
-	uint _battle_threshold = MINIMUM_BATTLE_THRESHOLD;
+	std::uint32_t _battle_threshold = MINIMUM_BATTLE_THRESHOLD;
 
 	//! Context part specific to encounter handled by this arena server
-	encounter_context _encounter_context;
+	encounter_context _encounter_ctx;
 };
 
 }

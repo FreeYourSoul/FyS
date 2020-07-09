@@ -50,10 +50,10 @@ public:
 
 
 	[[nodiscard]] std::vector<std::shared_ptr<fighting_contender>>
-	get_contender_on_side(hexagon_side::orientation side) const;
+	contenders_on_side(hexagon_side::orientation side) const;
 
 	[[nodiscard]] std::vector<std::shared_ptr<fighting_contender>>
-	getChangingSideContenders() const;
+	changing_side_contenders() const;
 
 	// scripting utility
 	[[nodiscard]] std::shared_ptr<fighting_contender>
@@ -72,19 +72,19 @@ public:
 	select_suitable_contender_on_side_alive(hexagon_side::orientation side, comparator_selection<fighting_contender> comp) const;
 
 	[[nodiscard]] std::shared_ptr<fighting_contender>
-	getFightingContender(uint pos) const { return _contenders.at(pos); }
+	fighting_contender_at(uint pos) const { return _contenders.at(pos); }
 
 	[[nodiscard]] std::size_t
-	getNumberContender() const { return _contenders.size(); }
+	number_contender() const { return _contenders.size(); }
 
 	[[nodiscard]] std::vector<std::shared_ptr<fighting_contender>>
 	get_dead_contender_on_side(hexagon_side::orientation contender_ptr) const;
 
 	[[nodiscard]] const std::vector<std::shared_ptr<fighting_contender> >&
-	get_contenders() const { return _contenders; }
+	contenders() const { return _contenders; }
 
 	[[nodiscard]] unsigned
-	contender_on_side(hexagon_side::orientation side) const;
+	number_contender_on_side(hexagon_side::orientation side) const;
 
 	[[nodiscard]] bool
 	add_contender(const std::shared_ptr<fighting_contender>& contender);
@@ -99,7 +99,7 @@ private:
 	 * Flags determining which contenders are going to move from one side to another
 	 * (only _contenders having this flag (index equivalent) set to true have their position refreshed
 	 */
-	std::vector<bool> _changeSideFlags;
+	std::vector<bool> _change_side_flags;
 
 };
 

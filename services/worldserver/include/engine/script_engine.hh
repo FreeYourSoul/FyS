@@ -79,7 +79,7 @@ struct npc_lua_instance {
 	 * In case of encounter, this will represent the index of the NPC in the spawning point NPC list
 	 * In case of neutral NPC, this represent the unique id of the NPC
 	 */
-	uint npcLuaId;
+	std::uint32_t npcLuaId;
 };
 
 /**
@@ -89,14 +89,14 @@ struct npc_lua_instance {
  */
 struct npc_action {
 	//! id defining a idle action
-	static constexpr uint IDLE = 0u;
+	static constexpr std::uint32_t IDLE = 0u;
 	//! id defining a move action
-	static constexpr uint MOVE = 1u;
+	static constexpr std::uint32_t MOVE = 1u;
 	//! id defining a stop move action
-	static constexpr uint STOP = 2u;
+	static constexpr std::uint32_t STOP = 2u;
 
 	//! Id defining the npc in LUA engine
-	uint npc_lua_id = 0u;
+	std::uint32_t npc_lua_id = 0u;
 
 	/**
 	 * Id of the action made by the NPC
@@ -105,7 +105,7 @@ struct npc_action {
 	 * 2 means a move stopped (afterMove must be filled in this case)
 	 * Another id is a specific action (animation..)
 	 */
-	uint actionId = IDLE;
+	std::uint32_t actionId = IDLE;
 	character_info afterMove {};
 };
 

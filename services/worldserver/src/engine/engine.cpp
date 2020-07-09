@@ -49,18 +49,18 @@ engine::engine(const std::string& player_connect_str,
 void
 engine::authenticate_player(auth_player auth, character_info info, std::string identifier)
 {
-	uint index = _data.add_new_player_data(std::move(info), std::move(identifier), auth.user_name);
+	std::uint32_t index = _data.add_new_player_data(std::move(info), std::move(identifier), auth.user_name);
 	_auth_player_on_data_index.insert(std::pair(std::move(auth), index));
 }
 
 void
-engine::set_player_move_direction(uint index, double direction)
+engine::set_player_move_direction(std::uint32_t index, double direction)
 {
 	_data.set_player_move_action(index, direction);
 }
 
 void
-engine::stop_player_move(uint index)
+engine::stop_player_move(std::uint32_t index)
 {
 	_data.stop_player_move(index);
 }
@@ -76,7 +76,7 @@ engine::execute_pending_moves(const std::chrono::system_clock::time_point& playe
 	_next_tick = _next_tick + TIMING_MOVE_INTERVAL;
 
 	_data.execution_on_player(
-			[this](uint playerIndex, player_status status, character_info& pi, const std::string&, const std::string& userName) {
+			[this](std::uint32_t playerIndex, player_status status, character_info& pi, const std::string&, const std::string& userName) {
 				if (status == player_status::MOVING) {
 					move_player_action(userName, playerIndex, pi);
 				}
@@ -93,19 +93,19 @@ engine::spawnNPC(const std::chrono::system_clock::time_point& currentTime)
 }
 
 void
-engine::move_player_action(const std::string& user_name, uint index_character, character_info& pi)
+engine::move_player_action(const std::string& user_name, std::uint32_t index_character, character_info& pi)
 {
 	move_character_action(user_name, index_character, pi, true);
 }
 
 void
-engine::move_npc_action(uint index_character, character_info& pi)
+engine::move_npc_action(std::uint32_t index_character, character_info& pi)
 {
 	move_character_action(std::string("NPC_").append(std::to_string(index_character)), index_character, pi, true);
 }
 
 void
-engine::move_character_action(const std::string& user_name, uint index_character, character_info& pi, bool is_npc)
+engine::move_character_action(const std::string& user_name, std::uint32_t index_character, character_info& pi, bool is_npc)
 {
 	double velocity = pi.velocity;
 

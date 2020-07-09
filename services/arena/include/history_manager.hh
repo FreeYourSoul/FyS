@@ -43,7 +43,7 @@ namespace fys::arena {
  */
 struct history_action {
 	//! in-game id of the player doing an action
-	uint id_character;
+	std::uint32_t id_character;
 	//! name of the character
 	std::string_view name;
 
@@ -82,7 +82,7 @@ class history_manager {
 public:
 	static void setHistoricManagerOn(bool on);
 	static void createHistoric(const fighting_pit& fp, unsigned seed);
-	static void addHistoric(unsigned fightingPitId, history_action&& ha);
+	static void add_historic(unsigned fightingPitId, history_action&& ha);
 	static void setToBeSaved(unsigned fightingPitId, bool toBeSaved);
 	static void save(unsigned fightingPitId);
 

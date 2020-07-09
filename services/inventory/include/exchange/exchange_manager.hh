@@ -38,7 +38,7 @@ class item_manager;
 namespace fys::inv {
 
 struct room_accessor {
-	uint idExchange;
+	std::uint32_t idExchange;
 	std::string userName;
 	std::string tokenExchange;
 };
@@ -54,8 +54,8 @@ public:
 	void lock_room_transaction(const room_accessor& accessor);
 	void receiver_join_room_transaction(const room_accessor& accessor, std::string identity_receiver);
 	void terminate_room_transaction(item_manager& manager, const room_accessor& accessor);
-	void remove_item_from_room(item_manager& manager, const room_accessor& accessor, const std::string& item_code, uint qty);
-	void add_item_in_room(item_manager& manager, const room_accessor& accessor, const std::string& item_code, uint qty);
+	void remove_item_from_room(item_manager& manager, const room_accessor& accessor, const std::string& item_code, std::uint32_t qty);
+	void add_item_in_room(item_manager& manager, const room_accessor& accessor, const std::string& item_code, std::uint32_t qty);
 
 private:
 	[[nodiscard]] inline std::string

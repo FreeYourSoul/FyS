@@ -101,28 +101,28 @@ public:
 	void add_doable_action(std::string doable, uint level) { _actions_doable.emplace_back(std::move(doable), level); }
 
 	[[nodiscard]] hexagon_side::orientation
-	get_hexagon_side_orient() const { return (*_side).second; }
+	side_orient() const { return (*_side).second; }
 
 	[[nodiscard]] data::status&
 	access_status() { return _status; }
 
 	[[nodiscard]] const hexagon_side&
-	get_hexagon_side() const { return _side; }
+	side() const { return _side; }
 
 	[[nodiscard]] const data::status&
-	get_status() const { return _status; }
+	status() const { return _status; }
 
 	[[nodiscard]] const std::string&
-	get_user_name() const { return _user_name; }
+	user_name() const { return _user_name; }
 
 	[[nodiscard]] const std::string&
-	get_name() const { return _name; }
+	name() const { return _name; }
 
 	[[nodiscard]] const std::vector<std::pair<std::string, uint>>&
-	get_actions_doable() const { return _actions_doable; }
+	actions_doable() const { return _actions_doable; }
 
 	[[nodiscard]] unsigned
-	get_id() const { return _id; }
+	id() const { return _id; }
 
 private:
 	std::string _user_name;

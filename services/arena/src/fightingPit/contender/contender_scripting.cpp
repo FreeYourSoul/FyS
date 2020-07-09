@@ -36,8 +36,8 @@ namespace fys::arena {
 void
 contender_scripting::register_contender_script()
 {
-	const std::string createVar = fmt::format("global {}={}({},{});", get_chai_contender_id(), _contender_name, _contender_id, _level);
-	const std::string retrieveDoableActions = fmt::format("retrieveDoableActions({}.actions.act);", get_chai_contender_id());
+	const std::string createVar = fmt::format("global {}={}({},{});", chai_contender_id(), _contender_name, _contender_id, _level);
+	const std::string retrieveDoableActions = fmt::format("retrieveDoableActions({}.actions.act);", chai_contender_id());
 
 	// register instance in ChaiScript
 	try {
@@ -73,10 +73,10 @@ bool
 contender_scripting::setup_contender()
 {
 	try {
-		_chai.get().eval(get_chai_contender_id() + ".setupContender();");
+		_chai.get().eval(chai_contender_id() + ".setupContender();");
 	}
 	catch (const chaiscript::exception::eval_error& ee) {
-		SPDLOG_ERROR("setupContender failed for {} :\n{}", get_chai_contender_id(), ee.what());
+		SPDLOG_ERROR("setupContender failed for {} :\n{}", chai_contender_id(), ee.what());
 		return false;
 	}
 	return true;
@@ -85,7 +85,7 @@ contender_scripting::setup_contender()
 void
 contender_scripting::execute_action()
 {
-	std::string action = fmt::format("fun(contenderId){{ return {}.runScriptedAction(contenderId);}}", get_chai_contender_id());
+	std::string action = fmt::format("fun(contenderId){{ return {}.runScriptedAction(contenderId);}}", chai_contender_id());
 	try {
 		auto funcAction = _chai.get().eval<std::function<int(unsigned int)>>(action);
 		if (funcAction(_contender_id)) {

@@ -86,14 +86,14 @@ public:
 
 private:
 	inline uint
-	getIndex(const uint index) const
+	getIndex(const std::uint32_t index) const
 	{
 		return index % SIZE_QUEUE;
 	}
 
 private:
-	uint _tail = 0;
-	uint _head = 0;
+	std::uint32_t _tail = 0;
+	std::uint32_t _head = 0;
 
 	std::array<container_type, SIZE_QUEUE> _queue;
 };

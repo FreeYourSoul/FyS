@@ -38,7 +38,7 @@ namespace fys::inv {
 
 struct Item {
 	std::string itemCode;
-	uint quantity;
+	std::uint32_t quantity;
 };
 
 /**

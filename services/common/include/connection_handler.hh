@@ -81,7 +81,7 @@ public:
 	}
 
 private:
-	const uint _number_message;
+	const std::uint32_t _number_message;
 	zmq::context_t _zmq_context;
 
 	// write to reply (forwarded to the world server)

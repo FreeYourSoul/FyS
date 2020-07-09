@@ -80,7 +80,7 @@ public:
 	is_ambush_side() const;
 
 	[[nodiscard]] bool
-	can_move(hexagon_side::orientation destination_side) const;
+	can_move_to(hexagon_side::orientation destination_side) const;
 
 	[[nodiscard]] orientation
 	find_left() const;

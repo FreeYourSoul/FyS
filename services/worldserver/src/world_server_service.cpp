@@ -35,7 +35,7 @@
 namespace {
 template<typename T>
 [[nodiscard]] bool
-verify_buffer(const void* fbBuffer, uint size)
+verify_buffer(const void* fbBuffer, std::uint32_t size)
 {
 	auto v = flatbuffers::Verifier(static_cast<const uint8_t*>(fbBuffer), size);
 	return v.VerifyBuffer<T>();
@@ -119,7 +119,7 @@ world_server_service::run_server_loop() noexcept
 void
 world_server_service::process_player_message(const std::string& user, const std::string& tkn, const fb::world::WSAction* action)
 {
-	uint index = _world_server.retrieve_data_index({user, tkn});
+	std::uint32_t index = _world_server.retrieve_data_index({user, tkn});
 	if (index == NOT_AUTHENTICATED) {
 		SPDLOG_ERROR("Player '{}' isn't authenticated", user);
 		return;
