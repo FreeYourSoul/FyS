@@ -113,9 +113,9 @@ struct status;
  */
 class alteration {
 public:
-	alteration(std::string alterationKey, std::uint32_t lvl, std::uint32_t turn, std::function<int(data::status&, uint, uint)> a) noexcept
+	alteration(std::string alteration_key, std::uint32_t lvl, std::uint32_t turn, std::function<int(data::status&, uint, uint)> a) noexcept
 			:
-			_alteration_key(std::move(alterationKey)),
+			_alteration_key(std::move(alteration_key)),
 			_lvl(lvl),
 			_turn(turn),
 			_action(std::move(a)) { }
@@ -133,8 +133,8 @@ public:
 		return true;
 	}
 
-	const std::string& get_alteration_key() const { return _alteration_key; }
-	std::uint32_t getTurn() const { return _turn; }
+	const std::string& alteration_key() const { return _alteration_key; }
+	std::uint32_t turn() const { return _turn; }
 
 private:
 	std::string _alteration_key;
@@ -183,35 +183,35 @@ struct status {
 	void cleanup_finished_alteration()
 	{
 		alterations.erase(std::remove_if(alterations.begin(), alterations.end(),
-				[](const auto& alt) { return alt.getTurn() <= 0; }), alterations.end());
+				[](const auto& alt) { return alt.turn() <= 0; }), alterations.end());
 		alteration_before.erase(std::remove_if(alteration_before.begin(), alteration_before.end(),
-				[](const auto& alt) { return alt.getTurn() <= 0; }), alteration_before.end());
+				[](const auto& alt) { return alt.turn() <= 0; }), alteration_before.end());
 		alteration_after.erase(std::remove_if(alteration_after.begin(), alteration_after.end(),
-				[](const auto& alt) { return alt.getTurn() <= 0; }), alteration_after.end());
+				[](const auto& alt) { return alt.turn() <= 0; }), alteration_after.end());
 	}
 
 };
 
 /**
  * Merge the alterations, remove doubles, but keep the alteration that would last the longest.
- * @param toModify reference on the alterations vector to modify
- * @param toMerge additional alternations
+ * @param to_modify reference on the alterations vector to modify
+ * @param to_merge additional alternations
  * @param replace_if_exist replace the alteration if it is already existing if set at true,
  * do not add the alteration otherwise
  */
 static void
-mergeAlterations(std::vector<alteration>& toModify, std::vector<alteration> toMerge, bool replace_if_exist = false)
+mergeAlterations(std::vector<alteration>& to_modify, std::vector<alteration> to_merge, bool replace_if_exist = false)
 {
 	(void)mergeAlterations; // suppress unused warning (as it is used, but by ChaiScript)
 
-	std::move(toMerge.begin(), toMerge.end(), std::back_inserter(toModify));
-	std::sort(toModify.begin(), toModify.end(), [replace_if_exist](const alteration& lhs, const alteration& rhs) {
-		return lhs.get_alteration_key() == rhs.get_alteration_key() &&
-				((replace_if_exist && lhs.getTurn() > rhs.getTurn()) || (!replace_if_exist && lhs.getTurn() < rhs.getTurn()));
+	std::move(to_merge.begin(), to_merge.end(), std::back_inserter(to_modify));
+	std::sort(to_modify.begin(), to_modify.end(), [replace_if_exist](const alteration& lhs, const alteration& rhs) {
+		return lhs.alteration_key() == rhs.alteration_key() &&
+				((replace_if_exist && lhs.turn() > rhs.turn()) || (!replace_if_exist && lhs.turn() < rhs.turn()));
 	});
-	toModify.erase(std::unique(toModify.begin(), toModify.end(), [](const alteration& lhs, const alteration& rhs) {
-		return lhs.get_alteration_key() == rhs.get_alteration_key();
-	}), toModify.end());
+	to_modify.erase(std::unique(to_modify.begin(), to_modify.end(), [](const alteration& lhs, const alteration& rhs) {
+		return lhs.alteration_key() == rhs.alteration_key();
+	}), to_modify.end());
 }
 
 enum move_direction {

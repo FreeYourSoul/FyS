@@ -70,27 +70,27 @@ TEST_CASE("SpawningPoint_0 TestCase", "[service][world][script]")
 	SECTION("Create Encounter 0") {
 
 		try {
-			auto result0 = lua["spawn"](lua["spawningPoint_0"]);
-			auto result1 = lua["spawn"](lua["spawningPoint_0"]);
+			auto result_0 = lua["spawn"](lua["spawningPoint_0"]);
+			auto result_1 = lua["spawn"](lua["spawningPoint_0"]);
 
-			REQUIRE(result0.valid());
-			REQUIRE(0 == static_cast<int>(result0));
+			REQUIRE(result_0.valid());
+			REQUIRE(0 == static_cast<int>(result_0));
 
 			auto numbers = lua["spawningPoint_0"]["numbers"];
 			REQUIRE(numbers.valid());
 			REQUIRE(5 == static_cast<uint>(numbers));
 
-			auto firstEncounter = lua["spawningPoint_0"]["spawned"][0];
-			REQUIRE(firstEncounter.valid());
-			REQUIRE(0 == static_cast<uint>(firstEncounter["idSpawningPoint"]));
-			REQUIRE(4 == static_cast<uint>(firstEncounter["numberSteps"]));
-			REQUIRE(10 == static_cast<uint>(firstEncounter["initial_info"]["x"]));
-			REQUIRE(20 == static_cast<uint>(firstEncounter["initial_info"]["y"]));
-			REQUIRE(1. == static_cast<double>(firstEncounter["initial_info"]["velocity"]));
-			REQUIRE(0.5 == static_cast<double>(firstEncounter["initial_info"]["angle"]));
+			auto first_encounter = lua["spawningPoint_0"]["spawned"][0];
+			REQUIRE(first_encounter.valid());
+			REQUIRE(0 == static_cast<uint>(first_encounter["idSpawningPoint"]));
+			REQUIRE(4 == static_cast<uint>(first_encounter["numberSteps"]));
+			REQUIRE(10 == static_cast<uint>(first_encounter["initial_info"]["x"]));
+			REQUIRE(20 == static_cast<uint>(first_encounter["initial_info"]["y"]));
+			REQUIRE(1. == static_cast<double>(first_encounter["initial_info"]["velocity"]));
+			REQUIRE(0.5 == static_cast<double>(first_encounter["initial_info"]["angle"]));
 
-			REQUIRE(result1.valid());
-			REQUIRE(1 == static_cast<int>(result1));
+			REQUIRE(result_1.valid());
+			REQUIRE(1 == static_cast<int>(result_1));
 
 		}
 		catch (const std::exception& e) {

@@ -85,7 +85,7 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]")
 
 	// seed used 42
 	std::shared_ptr<std::mt19937> mt = std::make_shared<std::mt19937>(42);
-	fseamMock->dupeReturn<FSeam::RandomGenerator::get>(mt);
+	fseamMock->dupeReturn<FSeam::random_generator::get>(mt);
 
 	SECTION("InGame fighting Ally Team Win (One Contender)") {
 
@@ -236,7 +236,7 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]")
 			REQUIRE(0 == fp->get_party_team_of_player("Loser").team_members()[0]->status().magic_pt.current);
 
 			REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).number_contender());
-			REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).contenders_on_side(hexagon_side::orientation::B_S));
+			REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).number_contender_on_side(hexagon_side::orientation::B_S));
 			REQUIRE(4 == fighting_pit_announcer::get_party_teams(fp).number_ally());
 
 			REQUIRE(8 == c.at(0)->status().initial_speed);
@@ -493,7 +493,7 @@ TEST_CASE("FightingPitTestCase Move test", "[service][arena]")
 
 	// seed used 42
 	std::shared_ptr<std::mt19937> mt = std::make_shared<std::mt19937>(42);
-	fseamMock->dupeReturn<FSeam::RandomGenerator::get>(mt);
+	fseamMock->dupeReturn<FSeam::random_generator::get>(mt);
 
 	SECTION("InGame MoveTestCase") {
 
@@ -536,12 +536,12 @@ TEST_CASE("FightingPitTestCase Move test", "[service][arena]")
 			REQUIRE(0 == fp->get_party_team_of_player("Loser").team_members()[0]->status().magic_pt.current);
 
 			REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).number_contender());
-			REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).contenders_on_side(hexagon_side::orientation::B_S));
+			REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).number_contender_on_side(hexagon_side::orientation::B_S));
 			REQUIRE(4 == fighting_pit_announcer::get_party_teams(fp).number_ally());
 
 			const auto& doableActions =
 					fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0)->
-							get_contender_scripting()->get_doable_actions();
+							get_contender_scripting()->doable_actions();
 			REQUIRE(1 == doableActions.size());
 			REQUIRE("test:key:1" == doableActions.at(0));
 
@@ -627,7 +627,7 @@ TEST_CASE("FightingPitTestCase Simple Alteration test", "[service][arena]")
 
 	// seed used 42
 	std::shared_ptr<std::mt19937> mt = std::make_shared<std::mt19937>(42);
-	fseamMock->dupeReturn<FSeam::RandomGenerator::get>(mt);
+	fseamMock->dupeReturn<FSeam::random_generator::get>(mt);
 
 	SECTION("InGame fighting Check Character id 3 (index 2) dies because of poison") {
 
@@ -675,12 +675,12 @@ TEST_CASE("FightingPitTestCase Simple Alteration test", "[service][arena]")
 			REQUIRE(0 == fp->get_party_team_of_player("Loser").team_members()[0]->status().magic_pt.current);
 
 			REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).number_contender());
-			REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).contenders_on_side(hexagon_side::orientation::B_S));
+			REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).number_contender_on_side(hexagon_side::orientation::B_S));
 			REQUIRE(4 == fighting_pit_announcer::get_party_teams(fp).number_ally());
 
 			const auto& doableActions =
 					fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0)->
-							get_contender_scripting()->get_doable_actions();
+							get_contender_scripting()->doable_actions();
 			REQUIRE(1 == doableActions.size());
 			REQUIRE("test:key:1" == doableActions.at(0));
 
@@ -731,8 +731,8 @@ TEST_CASE("FightingPitTestCase Simple Alteration test", "[service][arena]")
 				fp->continue_battle(now);
 				REQUIRE(1 == fp->get_party_team_of_player("Loser").team_members()[2]->status().alteration_before.size());
 				REQUIRE("test:alterations:MortalPoison" ==
-						fp->get_party_team_of_player("Loser").team_members()[2]->status().alteration_before.at(0).get_alteration_key());
-				REQUIRE(2 == fp->get_party_team_of_player("Loser").team_members()[2]->status().alteration_before.at(0).getTurn());
+						fp->get_party_team_of_player("Loser").team_members()[2]->status().alteration_before.at(0).alteration_key());
+				REQUIRE(2 == fp->get_party_team_of_player("Loser").team_members()[2]->status().alteration_before.at(0).turn());
 				REQUIRE_FALSE(fp->get_party_team_of_player("Loser").team_members()[2]->status().life_pt.is_dead());
 				// Stay same
 				REQUIRE(0 == fp->get_party_team_of_player("Loser").team_members()[0]->status().alteration_before.size());
@@ -778,8 +778,8 @@ TEST_CASE("FightingPitTestCase Simple Alteration test", "[service][arena]")
 					fp->continue_battle(now);
 					REQUIRE(1 == fp->get_party_team_of_player("Loser").team_members()[2]->status().alteration_before.size());
 					REQUIRE("test:alterations:MortalPoison" ==
-							fp->get_party_team_of_player("Loser").team_members()[2]->status().alteration_before.at(0).get_alteration_key());
-					REQUIRE(1 == fp->get_party_team_of_player("Loser").team_members()[2]->status().alteration_before.at(0).getTurn());
+							fp->get_party_team_of_player("Loser").team_members()[2]->status().alteration_before.at(0).alteration_key());
+					REQUIRE(1 == fp->get_party_team_of_player("Loser").team_members()[2]->status().alteration_before.at(0).turn());
 
 					REQUIRE(10 == fp->get_party_team_of_player("Loser").team_members()[3]->status().magic_pt.current);
 					REQUIRE(10 == fp->get_party_team_of_player("Loser").team_members()[2]->status().magic_pt.current);
@@ -795,9 +795,9 @@ TEST_CASE("FightingPitTestCase Simple Alteration test", "[service][arena]")
 					fp->continue_battle(now);
 					REQUIRE(1 == fp->get_party_team_of_player("Loser").team_members()[2]->status().alteration_before.size());
 					REQUIRE("test:alterations:MortalPoison" ==
-							fp->get_party_team_of_player("Loser").team_members()[2]->status().alteration_before.at(0).get_alteration_key());
+							fp->get_party_team_of_player("Loser").team_members()[2]->status().alteration_before.at(0).alteration_key());
 					// no re-apply of the poison
-					REQUIRE(1 == fp->get_party_team_of_player("Loser").team_members()[2]->status().alteration_before.at(0).getTurn());
+					REQUIRE(1 == fp->get_party_team_of_player("Loser").team_members()[2]->status().alteration_before.at(0).turn());
 					REQUIRE_FALSE(fp->get_party_team_of_player("Loser").team_members()[2]->status().life_pt.is_dead());
 					// Stay same
 					REQUIRE(100 == fp->get_party_team_of_player("Loser").team_members()[0]->status().life_pt.current); // damage inflicted
@@ -826,8 +826,8 @@ TEST_CASE("FightingPitTestCase Simple Alteration test", "[service][arena]")
 					fp->continue_battle(now);
 					REQUIRE(1 == fp->get_party_team_of_player("Loser").team_members()[2]->status().alteration_before.size());
 					REQUIRE("test:alterations:MortalPoison"
-							== fp->get_party_team_of_player("Loser").team_members()[2]->status().alteration_before.at(0).get_alteration_key());
-					REQUIRE(1 == fp->get_party_team_of_player("Loser").team_members()[2]->status().alteration_before.at(0).getTurn());
+							== fp->get_party_team_of_player("Loser").team_members()[2]->status().alteration_before.at(0).alteration_key());
+					REQUIRE(1 == fp->get_party_team_of_player("Loser").team_members()[2]->status().alteration_before.at(0).turn());
 					REQUIRE_FALSE(fp->get_party_team_of_player("Loser").team_members()[2]->status().life_pt.is_dead());
 					// Stay same
 					REQUIRE(200 == fp->get_party_team_of_player("Loser").team_members()[1]->status().life_pt.current);
@@ -856,8 +856,8 @@ TEST_CASE("FightingPitTestCase Simple Alteration test", "[service][arena]")
 						REQUIRE_FALSE(fp->get_party_team_of_player("Loser").team_members()[2]->status().life_pt.is_dead());
 						REQUIRE(1 == fp->get_party_team_of_player("Loser").team_members()[2]->status().alteration_before.size());
 						REQUIRE("test:alterations:MortalPoison"
-								== fp->get_party_team_of_player("Loser").team_members()[2]->status().alteration_before.at(0).get_alteration_key());
-						REQUIRE(1 == fp->get_party_team_of_player("Loser").team_members()[2]->status().alteration_before.at(0).getTurn());
+								== fp->get_party_team_of_player("Loser").team_members()[2]->status().alteration_before.at(0).alteration_key());
+						REQUIRE(1 == fp->get_party_team_of_player("Loser").team_members()[2]->status().alteration_before.at(0).turn());
 
 						// Player id 3 (at index 2) final turn of poison, die now
 						now += fys::arena::interval::EASY + 1ms;

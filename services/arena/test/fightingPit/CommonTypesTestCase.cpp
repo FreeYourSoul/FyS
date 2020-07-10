@@ -59,8 +59,8 @@ TEST_CASE("CommonTypesTestCase", "[service][arena]")
 	}, true);
 
 	REQUIRE(3 == alterations.size());
-	REQUIRE(5 == alterations.at(0).getTurn());
-	REQUIRE(9 == alterations.at(1).getTurn());
-	REQUIRE(42 == alterations.at(2).getTurn());
+	REQUIRE(5 == alterations.at(0).turn());
+	REQUIRE(9 == alterations.at(1).turn());
+	REQUIRE(42 == alterations.at(2).turn());
 
 } // End TestCase : WorkerService test

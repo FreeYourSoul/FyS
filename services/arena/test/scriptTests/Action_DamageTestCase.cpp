@@ -130,9 +130,9 @@ s.execute(contender);
 			REQUIRE(1 == pc.fighting_contender_at(0)->status().alteration_after.size());
 			auto& stat = pc.fighting_contender_at(0)->access_status();
 			auto alt = stat.alteration_after.at(0);
-			REQUIRE(2 == alt.getTurn());
+			REQUIRE(2 == alt.turn());
 			alt.process_alteration(stat);
-			REQUIRE(1 == alt.getTurn());
+			REQUIRE(1 == alt.turn());
 		} // End section : test damage
 
 		SECTION("test over damage") {

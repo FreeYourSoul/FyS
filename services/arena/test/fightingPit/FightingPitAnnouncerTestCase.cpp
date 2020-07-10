@@ -104,7 +104,7 @@ TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]")
 	SECTION("test invalid action name registered") {
 
 		std::shared_ptr<std::mt19937> mt = std::make_shared<std::mt19937>(42);
-		fseamMock->dupeReturn<FSeam::RandomGenerator::get>(mt);
+		fseamMock->dupeReturn<FSeam::random_generator::get>(mt);
 
 		fighting_pit_announcer fpa(cml);
 		fpa.set_creator_user_token(" ");
@@ -119,7 +119,7 @@ TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]")
 
 	SECTION("Test Side Setup") {
 		std::shared_ptr<std::mt19937> mt = std::make_shared<std::mt19937>(42);
-		fseamMock->dupeReturn<FSeam::RandomGenerator::get>(mt);
+		fseamMock->dupeReturn<FSeam::random_generator::get>(mt);
 		fighting_pit_announcer fpa(cml);
 		fpa.set_creator_user_name(" ");
 		fpa.set_creator_user_token(" ");
@@ -156,7 +156,7 @@ TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]")
 
 	SECTION("test seed 42") {
 		std::shared_ptr<std::mt19937> mt = std::make_shared<std::mt19937>(42);
-		fseamMock->dupeReturn<FSeam::RandomGenerator::get>(mt);
+		fseamMock->dupeReturn<FSeam::random_generator::get>(mt);
 
 		SECTION("test seed ez") {
 			REQUIRE(2 == fys::util::random_generator::generate_in_range(1, 4));
@@ -288,7 +288,7 @@ TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]")
 
 	SECTION("test seed 1337") {
 		std::shared_ptr<std::mt19937> mt = std::make_shared<std::mt19937>(1337);
-		fseamMock->dupeReturn<FSeam::RandomGenerator::get>(mt);
+		fseamMock->dupeReturn<FSeam::random_generator::get>(mt);
 
 		SECTION("test seed Easy") {
 			REQUIRE(2 == fys::util::random_generator::generate_in_range(1, 4));
@@ -419,7 +419,7 @@ TEST_CASE("FightingPitAnnouncerTestCase test reward", "[service][arena]")
 			}
 	};
 	std::shared_ptr<std::mt19937> mt = std::make_shared<std::mt19937>(42);
-	fseamMock->dupeReturn<FSeam::RandomGenerator::get>(mt);
+	fseamMock->dupeReturn<FSeam::random_generator::get>(mt);
 
 	SECTION("test seed") {
 		REQUIRE(2 == fys::util::random_generator::generate_in_range(1, 4));

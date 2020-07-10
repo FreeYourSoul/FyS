@@ -79,7 +79,7 @@ TEST_CASE("arn::FlatbufferGeneratorTestCase", "[service][arena][util]")
 
 	// seed used 42
 	std::shared_ptr<std::mt19937> mt = std::make_shared<std::mt19937>(42);
-	fseamMock->dupeReturn<FSeam::RandomGenerator::get>(mt);
+	fseamMock->dupeReturn<FSeam::random_generator::get>(mt);
 
 	fighting_pit_announcer fpa(cml);
 	fpa.set_creator_user_name("Winner");
@@ -102,8 +102,8 @@ TEST_CASE("arn::FlatbufferGeneratorTestCase", "[service][arena][util]")
 		REQUIRE(4 == fighting_pit_announcer::get_pit_contenders(fp).number_contender());
 		auto contender1 = fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0);
 		REQUIRE("Sampy" == contender1->name());
-		REQUIRE(0 == contender1->get_contender_scripting()->get_contender_id());
-		REQUIRE(10 == contender1->get_contender_scripting()->get_level());
+		REQUIRE(0 == contender1->get_contender_scripting()->contender_id());
+		REQUIRE(10 == contender1->get_contender_scripting()->level());
 		REQUIRE(180 == contender1->status().life_pt.current);
 		REQUIRE(180 == contender1->status().life_pt.total);
 		REQUIRE(100 == contender1->status().magic_pt.current);
@@ -111,8 +111,8 @@ TEST_CASE("arn::FlatbufferGeneratorTestCase", "[service][arena][util]")
 
 		auto contender2 = fighting_pit_announcer::get_pit_contenders(fp).contenders().at(1);
 		REQUIRE("Sampy" == contender2->name());
-		REQUIRE(1 == contender2->get_contender_scripting()->get_contender_id());
-		REQUIRE(8 == contender2->get_contender_scripting()->get_level());
+		REQUIRE(1 == contender2->get_contender_scripting()->contender_id());
+		REQUIRE(8 == contender2->get_contender_scripting()->level());
 		REQUIRE(174 == contender2->status().life_pt.current);
 		REQUIRE(174 == contender2->status().life_pt.total);
 		REQUIRE(100 == contender2->status().magic_pt.current);
@@ -120,17 +120,17 @@ TEST_CASE("arn::FlatbufferGeneratorTestCase", "[service][arena][util]")
 
 		auto contender3 = fighting_pit_announcer::get_pit_contenders(fp).contenders().at(2);
 		REQUIRE("Sampy" == contender3->name());
-		REQUIRE(2 == contender3->get_contender_scripting()->get_contender_id());
-		REQUIRE(6 == contender3->get_contender_scripting()->get_level());
+		REQUIRE(2 == contender3->get_contender_scripting()->contender_id());
+		REQUIRE(6 == contender3->get_contender_scripting()->level());
 		REQUIRE(168 == contender3->status().life_pt.current);
 		REQUIRE(168 == contender3->status().life_pt.total);
 		REQUIRE(100 == contender3->status().magic_pt.current);
 		REQUIRE(100 == contender3->status().magic_pt.total);
 
 		auto contender4 = fighting_pit_announcer::get_pit_contenders(fp).contenders().at(3);
-		REQUIRE(3 == contender4->get_contender_scripting()->get_contender_id());
+		REQUIRE(3 == contender4->get_contender_scripting()->contender_id());
 		REQUIRE("Sampy" == contender4->name());
-		REQUIRE(2 == contender4->get_contender_scripting()->get_level());
+		REQUIRE(2 == contender4->get_contender_scripting()->level());
 		REQUIRE(156 == contender4->status().life_pt.current);
 		REQUIRE(156 == contender4->status().life_pt.total);
 		REQUIRE(100 == contender4->status().magic_pt.current);
