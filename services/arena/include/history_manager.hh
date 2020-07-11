@@ -80,17 +80,17 @@ class history_manager {
 	};
 
 public:
-	static void setHistoricManagerOn(bool on);
-	static void createHistoric(const fighting_pit& fp, unsigned seed);
-	static void add_historic(unsigned fightingPitId, history_action&& ha);
-	static void setToBeSaved(unsigned fightingPitId, bool toBeSaved);
-	static void save(unsigned fightingPitId);
+	static void activate_historic_manager(bool on);
+	static void create_historic(const fighting_pit& fp, unsigned seed);
+	static void add_historic(unsigned fp_id, history_action&& ha);
+	static void set_to_be_saved(unsigned pit_id, bool toBeSaved);
+	static void save(unsigned fp_id);
 
 private:
 	history_manager() = default;
 
 	[[nodiscard]] static history_manager&
-	getInstance()
+	get_instance()
 	{
 		static history_manager instance;
 		return instance;

@@ -229,15 +229,15 @@ chai_register::register_common(chaiscript::ModulePtr m)
 
 	m->add(chaiscript::fun<std::function<void(fys::arena::data::status&, std::vector<data::alteration>, bool)>>(
 			[](fys::arena::data::status& status, std::vector<data::alteration> alterations, bool if_exist) {
-				data::mergeAlterations(status.alterations, std::move(alterations), if_exist);
+				data::merge_alterations(status.alterations, std::move(alterations), if_exist);
 			}), "addOnTurnAlterations");
 	m->add(chaiscript::fun<std::function<void(fys::arena::data::status&, std::vector<data::alteration>, bool)>>(
 			[](fys::arena::data::status& status, std::vector<data::alteration> alterations, bool if_exist) {
-				data::mergeAlterations(status.alteration_before, std::move(alterations), if_exist);
+				data::merge_alterations(status.alteration_before, std::move(alterations), if_exist);
 			}), "addBeforeTurnAlterations");
 	m->add(chaiscript::fun<std::function<void(fys::arena::data::status&, std::vector<data::alteration>, bool)>>(
 			[](fys::arena::data::status& status, std::vector<data::alteration> alterations, bool if_exist) {
-				data::mergeAlterations(status.alteration_after, std::move(alterations), if_exist);
+				data::merge_alterations(status.alteration_after, std::move(alterations), if_exist);
 			}), "addAfterTurnAlterations");
 
 	chaiscript::utility::add_class<fys::arena::fighting_pit_layout>(
@@ -419,25 +419,25 @@ chai_register::make_chai_instance(pit_contenders& pc, ally_party_teams& apt, fig
 }
 
 void
-chai_register::register_network_commands(chaiscript::ChaiScript& chai, std::function<void(zmq::message_t&&)> networkHandler)
+chai_register::register_network_commands(chaiscript::ChaiScript& chai, std::function<void(zmq::message_t&&)> network_handler)
 {
 	chai.add(fun<std::function<void(const std::string&, const std::vector<team_member_sptr>&)>>(
-			[networkHandler = std::move(networkHandler)](
+			[handler = std::move(network_handler)](
 					const std::string& actionKey,
-					const std::vector<team_member_sptr>& allyTargets) {
+					const std::vector<team_member_sptr>& ally_targets) {
 				flatbuffer_generator fg;
-				auto[data, size] = fg.generate_action_notification(actionKey, {}, allyTargets);
-				networkHandler(zmq::message_t(data, size));
+				auto[data, size] = fg.generate_action_notification(actionKey, {}, ally_targets);
+				handler(zmq::message_t(data, size));
 			}
 	), "broadcastActionExecuted");
 
 	chai.add(fun<std::function<void(const std::string&, const std::vector<fighting_contender_sptr>&)>>(
-			[networkHandler = std::move(networkHandler)](
+			[handler = std::move(network_handler)](
 					const std::string& action_key,
 					const std::vector<fighting_contender_sptr>& contender_targets) {
 				flatbuffer_generator fg;
 				auto[data, size] = fg.generate_action_notification(action_key, contender_targets, {});
-				networkHandler(zmq::message_t(data, size));
+				handler(zmq::message_t(data, size));
 			}
 	), "broadcastActionExecuted");
 }

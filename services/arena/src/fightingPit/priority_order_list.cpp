@@ -31,7 +31,7 @@ priority_order_list::priority_order_list(std::vector<data::priority_elem> base_s
 		:
 		_base_speed(std::move(base_speed))
 {
-	_priorityList.reserve(_base_speed.size() * 4);
+	_priority_list.reserve(_base_speed.size() * 4);
 	std::uint32_t turn = _current_turn;
 	sort_base_and_calculate_priority();
 	_current_turn = turn;
@@ -50,7 +50,7 @@ priority_order_list::add_participant_in_list(std::uint32_t id, int speed, bool i
 	if (_current_turn > 0)
 		speed += get_fastest_base_speed();
 	_analyzed_list.emplace_back(id, speed, is_contender);
-	_priorityList.clear();
+	_priority_list.clear();
 	std::uint32_t turn = _current_turn;
 	sort_base_and_calculate_priority();
 	_current_turn = turn;
@@ -59,12 +59,15 @@ priority_order_list::add_participant_in_list(std::uint32_t id, int speed, bool i
 void
 priority_order_list::rm_participant_from_list(std::uint32_t id_participant, bool is_contender)
 {
-	auto findParticipantPredicate = [id_participant, is_contender](const data::priority_elem& elem) {
+	auto find_participant_predicate = [id_participant, is_contender](const data::priority_elem& elem) {
 		return elem.id == id_participant && elem.is_contender == is_contender;
 	};
-	_base_speed.erase(std::remove_if(_base_speed.begin(), _base_speed.end(), findParticipantPredicate), _base_speed.end());
-	_priorityList.erase(std::remove_if(_priorityList.begin(), _priorityList.end(), findParticipantPredicate), _priorityList.end());
-	_analyzed_list.erase(std::remove_if(_analyzed_list.begin(), _analyzed_list.end(), findParticipantPredicate), _analyzed_list.end());
+	_base_speed.erase(
+			std::remove_if(_base_speed.begin(), _base_speed.end(), find_participant_predicate), _base_speed.end());
+	_priority_list.erase(
+			std::remove_if(_priority_list.begin(), _priority_list.end(), find_participant_predicate), _priority_list.end());
+	_analyzed_list.erase(
+			std::remove_if(_analyzed_list.begin(), _analyzed_list.end(), find_participant_predicate), _analyzed_list.end());
 }
 
 data::priority_elem
@@ -73,7 +76,7 @@ priority_order_list::next()
 	if (_base_speed.empty()) {
 		return {0, 0, false};
 	}
-	if (_priorityList.empty()) {
+	if (_priority_list.empty()) {
 		// Turn increase automatically if it is the first turn
 		if (_current_turn == 0) {
 			++_current_turn;
@@ -81,8 +84,8 @@ priority_order_list::next()
 		sort_base_and_calculate_priority();
 		return next();
 	}
-	_current_prio = _priorityList.back();
-	_priorityList.pop_back();
+	_current_prio = _priority_list.back();
+	_priority_list.pop_back();
 	return _current_prio;
 }
 
@@ -95,15 +98,17 @@ priority_order_list::custom_sort()
 	if (auto found = std::adjacent_find(_analyzed_list.begin(), _analyzed_list.end(),
 				[this](const auto& e, const auto& e2) {
 					if (e.speed == e2.speed) {
-						std::uint32_t baseSpeedE = 0;
-						std::uint32_t baseSpeedE2 = 0;
-						for (const auto& baseSpeedElem : _base_speed) {
-							if (baseSpeedElem.id == e.id)
-								baseSpeedE = baseSpeedElem.speed;
-							if (baseSpeedElem.id == e2.id)
-								baseSpeedE2 = baseSpeedElem.speed;
+						std::uint32_t base_speed_e = 0;
+						std::uint32_t base_speed_e_2 = 0;
+						for (const auto& base_speed_elem : _base_speed) {
+							if (base_speed_elem.id == e.id) {
+								base_speed_e = base_speed_elem.speed;
+							}
+							if (base_speed_elem.id == e2.id) {
+								base_speed_e_2 = base_speed_elem.speed;
+							}
 						}
-						return baseSpeedE > baseSpeedE2;
+						return base_speed_e > base_speed_e_2;
 					}
 					return false;
 				});
@@ -119,12 +124,13 @@ priority_order_list::custom_sort()
 void
 priority_order_list::sort_base_and_calculate_priority()
 {
-	if (_base_speed.empty())
+	if (_base_speed.empty()) {
 		return;
+	}
 	std::sort(_base_speed.begin(), _base_speed.end());
 	if (_current_turn == 0) {
 		_analyzed_list = _base_speed;
-		_priorityList = _base_speed;
+		_priority_list = _base_speed;
 		++_current_turn;
 		return;
 	}
@@ -166,7 +172,7 @@ priority_order_list::end_turn_routine()
 	}
 	// reverse in order to have faster at the end (to use pop_back)
 	custom_sort();
-	std::reverse(_priorityList.begin(), _priorityList.end());
+	std::reverse(_priority_list.begin(), _priority_list.end());
 }
 
 void
@@ -182,7 +188,7 @@ priority_order_list::calculate_priority(std::uint32_t turn)
 
 	if (_analyzed_list.size() > 1)
 		fastest.speed -= get_computed_speed(fastest);
-	_priorityList.emplace_back(fastest);
+	_priority_list.emplace_back(fastest);
 	if (is_player_slowest(fastest.id)) {
 		end_turn_routine();
 	}

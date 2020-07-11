@@ -200,9 +200,9 @@ struct status {
  * do not add the alteration otherwise
  */
 static void
-mergeAlterations(std::vector<alteration>& to_modify, std::vector<alteration> to_merge, bool replace_if_exist = false)
+merge_alterations(std::vector<alteration>& to_modify, std::vector<alteration> to_merge, bool replace_if_exist = false)
 {
-	(void)mergeAlterations; // suppress unused warning (as it is used, but by ChaiScript)
+	(void)merge_alterations; // suppress unused warning (as it is used, but by ChaiScript)
 
 	std::move(to_merge.begin(), to_merge.end(), std::back_inserter(to_modify));
 	std::sort(to_modify.begin(), to_modify.end(), [replace_if_exist](const alteration& lhs, const alteration& rhs) {

@@ -44,7 +44,7 @@ template<class... Ts> overloaded(Ts...) -> overloaded<Ts...>;
 namespace {
 
 [[nodiscard]] auto
-actionMatchKey(const std::string& action_name)
+action_key_matcher(const std::string& action_name)
 {
 	return [&action_name](const auto& action) {
 		return action_name == fys::arena::data::get_action_name_from_key(action.first);
@@ -136,7 +136,7 @@ team_member::add_pending_action(const std::string& action_name, std::optional<Ta
 		SPDLOG_WARN("Player {}::{} tried to add an action while dead", _user_name, _name);
 		return;
 	}
-	auto it = std::find_if(_actions_doable.begin(), _actions_doable.end(), actionMatchKey(action_name));
+	auto it = std::find_if(_actions_doable.begin(), _actions_doable.end(), action_key_matcher(action_name));
 	if (it == _actions_doable.end()) {
 		SPDLOG_WARN("Player {}::{} tried unrecognized action called {}", _user_name, _name, action_name);
 		return;

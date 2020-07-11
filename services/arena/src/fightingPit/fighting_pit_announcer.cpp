@@ -109,9 +109,9 @@ bool
 fighting_pit_announcer::generate_contenders(fighting_pit& fp, const encounter_context& ctx,
 		const std::string& wsId)
 {
-	const auto& range = ctx._rangeEncounterPerZone.at(wsId).at(static_cast<std::size_t>(_difficulty));
+	const auto& range = ctx.range_encounter_per_zone.at(wsId).at(static_cast<std::size_t>(_difficulty));
 	const unsigned number_contenders = fys::util::random_generator::generate_in_range(range.first, range.second);
-	const auto boundary_map = make_contender_rng_boundary_map(ctx._contendersPerZone.at(wsId), _difficulty);
+	const auto boundary_map = make_contender_rng_boundary_map(ctx.contenders_per_zone.at(wsId), _difficulty);
 
 	for (unsigned i = 0; i < number_contenders; ++i) {
 		int rng_monster = util::random_generator::generate_in_range(0, 100);
@@ -140,9 +140,9 @@ fighting_pit_announcer::generate_reward_for_contender(fighting_pit& fp,
 {
 	std::map<std::string, uint> reward_on_quantity;
 	for (const auto& contender : contenders) {
-		const auto& rwd_it = ctx._rewardDescPerContender.find(contender->name());
+		const auto& rwd_it = ctx.reward_desc_per_contender.find(contender->name());
 		// Check if the contender has a reward description
-		if (rwd_it == ctx._rewardDescPerContender.end())
+		if (rwd_it == ctx.reward_desc_per_contender.end())
 			continue;
 
 		boundary_map_reward boundaryMap = make_reward_rng_boundary_map(rwd_it->second, _difficulty);

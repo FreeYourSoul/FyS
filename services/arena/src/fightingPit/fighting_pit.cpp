@@ -101,7 +101,7 @@ fighting_pit::update_progress_status()
 		return progress::CONTENDER_WIN;
 	}
 	else if (_contenders.all_dead()) {
-		history_manager::setToBeSaved(_arena_id, false);
+		history_manager::set_to_be_saved(_arena_id, false);
 		return progress::ALLY_WIN;
 	}
 	return progress::ON_GOING;

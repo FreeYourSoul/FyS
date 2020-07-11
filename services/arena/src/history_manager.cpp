@@ -35,14 +35,14 @@ targetStr(std::optional<fys::arena::TargetType> target)
 }
 
 [[nodiscard]] nlohmann::json
-generateJsonTarget(fys::arena::history_action historyAction)
+generate_json_target(fys::arena::history_action history_action)
 {
-	const std::optional<fys::arena::TargetType> &target = historyAction.targets;
+	const std::optional<fys::arena::TargetType> &target = history_action.targets;
 	if (target.has_value()) {
 
 	}
 	return {
-			{"id", historyAction.id_character},
+			{"id", history_action.id_character},
 			{"isContender", false}
 	};
 }
@@ -52,13 +52,13 @@ generateJsonTarget(fys::arena::history_action historyAction)
 namespace fys::arena {
 
 void
-history_manager::add_historic(unsigned fightingPitId, history_action&& ha)
+history_manager::add_historic(unsigned fp_id, history_action&& ha)
 {
-	if (getInstance()._is_manager_on) {
-		auto it = getInstance()._history.find(fightingPitId);
-		if (it != getInstance()._history.end()) {
+	if (get_instance()._is_manager_on) {
+		auto it = get_instance()._history.find(fp_id);
+		if (it != get_instance()._history.end()) {
 
-			SPDLOG_INFO("[fp:{}] : Member {}.{} execute action '{}' targeting {}", fightingPitId,
+			SPDLOG_INFO("[fp:{}] : Member {}.{} execute action '{}' targeting {}", fp_id,
 					ha.id_character, ha.name, ha.action_key, targetStr(ha.targets));
 
 			it->second.player_actions.emplace_back(std::move(ha));
@@ -67,17 +67,17 @@ history_manager::add_historic(unsigned fightingPitId, history_action&& ha)
 }
 
 void
-history_manager::setHistoricManagerOn(bool on)
+history_manager::activate_historic_manager(bool on)
 {
-	getInstance()._is_manager_on = on;
+	get_instance()._is_manager_on = on;
 }
 
 void
-history_manager::setToBeSaved(unsigned int fightingPitId, bool toBeSaved)
+history_manager::set_to_be_saved(std::uint32_t pit_id, bool toBeSaved)
 {
-	auto& instance = getInstance();
+	auto& instance = get_instance();
 	if (instance._is_manager_on) {
-		auto it = instance._history.find(fightingPitId);
+		auto it = instance._history.find(pit_id);
 		if (it != instance._history.end()) {
 			it->second.has_to_be_saved = toBeSaved;
 		}
@@ -85,34 +85,34 @@ history_manager::setToBeSaved(unsigned int fightingPitId, bool toBeSaved)
 }
 
 void
-history_manager::createHistoric(const fighting_pit& fp, unsigned seed)
+history_manager::create_historic(const fighting_pit& fp, unsigned seed)
 {
-	if (getInstance()._is_manager_on) {
-		getInstance()._history[fp.id()].seed = seed;
+	if (get_instance()._is_manager_on) {
+		get_instance()._history[fp.id()].seed = seed;
 	}
 }
 
 void
-history_manager::save(unsigned int fightingPitId)
+history_manager::save(std::uint32_t fp_id)
 {
-	auto& instance = getInstance();
+	auto& instance = get_instance();
 	if (!instance._is_manager_on) return;
 
-	auto historyIt = instance._history.find(fightingPitId);
-	if (historyIt == instance._history.end()) return;
+	auto history_it = instance._history.find(fp_id);
+	if (history_it == instance._history.end()) return;
 
-	if (historyIt->second.has_to_be_saved && historyIt->second.seed > 0) {
+	if (history_it->second.has_to_be_saved && history_it->second.seed > 0) {
 		SPDLOG_INFO("[fp:] HistoryAction : Save history file");
 		auto date = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
 		nlohmann::json actions;
 
-		for (const auto& playerAction : historyIt->second.player_actions) {
+		for (const auto& pa : history_it->second.player_actions) {
 			actions["actions"].push_back(nlohmann::json
 					{
-							{"id", playerAction.id_character},
+							{"id", pa.id_character},
 							{"isContender", false},
-							{"actionKey", playerAction.action_key},
-							generateJsonTarget(playerAction)
+							{"actionKey", pa.action_key},
+							generate_json_target(pa)
 					}
 			);
 		}
@@ -122,7 +122,7 @@ history_manager::save(unsigned int fightingPitId)
 				actions
 		};
 	}
-	getInstance()._history.erase(historyIt);
+	get_instance()._history.erase(history_it);
 }
 
 }

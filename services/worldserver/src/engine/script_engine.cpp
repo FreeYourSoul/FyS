@@ -115,17 +115,17 @@ script_engine::execute_encounter_scripted_actions()
 				double x, y, velocity, angle;
 
 				sol::tie(actionId, x, y, velocity, angle) =
-						_lua["execAction"](_lua[npc.spNamespace], npc.npcLuaId, std::ref(npc.info));
+						_lua["execAction"](_lua[npc.sp_namespace], npc.npc_lua_id, std::ref(npc.info));
 
 				npc.info.position.x = x;
 				npc.info.position.y = y;
 				npc.info.velocity = velocity;
 				npc.info.angle = angle;
-				actionsExecuted.emplace_back(npc_action{npc.npcLuaId, actionId, npc.info});
+				actionsExecuted.emplace_back(npc_action{npc.npc_lua_id, actionId, npc.info});
 			}
 			catch (const std::exception& e) {
 				SPDLOG_ERROR("[lua] : An error occurred while executing script action SpawningPoint {} npc {} : \n[ERROR] : {}",
-						npc.spNamespace, npc.npcLuaId, e.what());
+						npc.sp_namespace, npc.npc_lua_id, e.what());
 			}
 		}
 

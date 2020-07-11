@@ -39,13 +39,13 @@ player_data::get_player_idts_around_player(std::uint32_t index_player,
 		double distance) const noexcept
 {
 	if (position.has_value() && index_player < _positions.size()) {
-		return getPlayerIdtsAroundPos(position->get().position, distance, index_player);
+		return get_player_idts_around_pos(position->get().position, distance, index_player);
 	}
-	return getPlayerIdtsAroundPos(_positions.at(index_player).position, distance, index_player);
+	return get_player_idts_around_pos(_positions.at(index_player).position, distance, index_player);
 }
 
 std::vector<std::string_view>
-player_data::getPlayerIdtsAroundPos(const pos& position,
+player_data::get_player_idts_around_pos(const pos& position,
 		double distance,
 		std::uint32_t ignore_index) const noexcept
 {

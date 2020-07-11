@@ -89,9 +89,9 @@ world_server_context::to_string() const noexcept
 	str += "[INIT] Path to LUA Engine initiator : " + _path_to_lua_init_engine + "\n";
 	str += "[INIT] TMX Map path: " + _tmx_map_path + "\n"; // Will be changed with the new formatting file homemade
 	str += "[INIT] Player connection string: " + player_connection_str() + "\n";
-	str += "[INIT] Dispatcher(AuthServer) subscribing port: " + std::to_string(_dispatcherData.subscriber_port) + "\n";
-	str += "[INIT] Dispatcher(AuthServer) connected port: " + std::to_string(_dispatcherData.port) + "\n";
-	str += "[INIT] Dispatcher(AuthServer) connected host: " + _dispatcherData.address + "\n";
+	str += "[INIT] Dispatcher(AuthServer) subscribing port: " + std::to_string(_dispatcher_data.subscriber_port) + "\n";
+	str += "[INIT] Dispatcher(AuthServer) connected port: " + std::to_string(_dispatcher_data.port) + "\n";
+	str += "[INIT] Dispatcher(AuthServer) connected host: " + _dispatcher_data.address + "\n";
 	str += "[INIT] Dispatcher(AuthServer) Subscriber connection string: " + dispatcher_sub_connection_str() + "\n";
 	str += "[INIT] Dispatcher(AuthServer) connection string: " + dispatcher_connection_str() + "\n";
 
@@ -114,13 +114,13 @@ world_server_context::to_string() const noexcept
 std::string
 world_server_context::dispatcher_connection_str() const noexcept
 {
-	return std::string("tcp://").append(_dispatcherData.address).append(":").append(std::to_string(_dispatcherData.port));
+	return std::string("tcp://").append(_dispatcher_data.address).append(":").append(std::to_string(_dispatcher_data.port));
 }
 
 std::string
 world_server_context::dispatcher_sub_connection_str() const noexcept
 {
-	return std::string("tcp://").append(_dispatcherData.address).append(":").append(std::to_string(_dispatcherData.subscriber_port));
+	return std::string("tcp://").append(_dispatcher_data.address).append(":").append(std::to_string(_dispatcher_data.subscriber_port));
 }
 
 std::string

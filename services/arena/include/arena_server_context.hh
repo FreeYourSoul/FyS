@@ -67,14 +67,14 @@ struct encounter_context {
 	 * @return true if the zone is registered, false otherwise
 	 */
 	[[nodiscard]] bool
-	zoneRegistered(const std::string& wsId) const noexcept { return _contendersPerZone.find(wsId) != _contendersPerZone.cend(); }
+	zoneRegistered(const std::string& wsId) const noexcept { return contenders_per_zone.find(wsId) != contenders_per_zone.cend(); }
 
 	//! range of number of monster findable per zone
-	std::map<std::string, std::array<rng_range, 3>> _rangeEncounterPerZone;
+	std::map<std::string, std::array<rng_range, 3>> range_encounter_per_zone;
 	//! contender findable per zone
-	std::map<std::string, std::vector<encounter_desc>> _contendersPerZone;
+	std::map<std::string, std::vector<encounter_desc>> contenders_per_zone;
 	//! reward description per contender
-	std::map<std::string, reward_encounter_desc> _rewardDescPerContender;
+	std::map<std::string, reward_encounter_desc> reward_desc_per_contender;
 };
 
 class arena_server_context : public fys::common::service_context_base {
@@ -120,7 +120,7 @@ private:
 	validate_reward_context() const;
 
 	[[nodiscard]] encounter_context::reward_encounter_desc
-	reward_desc_from_json(const nlohmann::json& reward_desc) const;
+	reward_desc_from_json(const nlohmann::json& rwd_desc) const;
 
 	void parse_arena_config_file(const nlohmann::json& config_content);
 	void parse_zone_config_file(const nlohmann::json& config_content);

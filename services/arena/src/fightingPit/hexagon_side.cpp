@@ -322,7 +322,8 @@ hexagon_side::change_side(hexagon_side::orientation destination)
 			_hexagon = hexagon_side::hexagon::C;
 			_side = destination;
 			return true;
-		default: return false;
+		default:
+			return false;
 	}
 	return false;
 }
@@ -402,23 +403,30 @@ operator<<(std::ostream& os, fys::arena::hexagon_side::orientation orientation)
 	switch (orientation) {
 		case fys::arena::hexagon_side::orientation::A_N:
 		case fys::arena::hexagon_side::orientation::B_N:
-		case fys::arena::hexagon_side::orientation::C_N:return os << "[North]";
+		case fys::arena::hexagon_side::orientation::C_N:
+			return os << "[North]";
 		case fys::arena::hexagon_side::orientation::A_S:
 		case fys::arena::hexagon_side::orientation::B_S:
-		case fys::arena::hexagon_side::orientation::C_S:return os << "[South]";
+		case fys::arena::hexagon_side::orientation::C_S:
+			return os << "[South]";
 		case fys::arena::hexagon_side::orientation::A_NE:
 		case fys::arena::hexagon_side::orientation::B_NE:
-		case fys::arena::hexagon_side::orientation::C_NE:return os << "[NorthEast]";
+		case fys::arena::hexagon_side::orientation::C_NE:
+			return os << "[NorthEast]";
 		case fys::arena::hexagon_side::orientation::A_NW:
 		case fys::arena::hexagon_side::orientation::B_NW:
-		case fys::arena::hexagon_side::orientation::C_NW:return os << "[NorthWest]";
+		case fys::arena::hexagon_side::orientation::C_NW:
+			return os << "[NorthWest]";
 		case fys::arena::hexagon_side::orientation::A_SE:
 		case fys::arena::hexagon_side::orientation::B_SE:
-		case fys::arena::hexagon_side::orientation::C_SE:return os << "[SouthEast]";
+		case fys::arena::hexagon_side::orientation::C_SE:
+			return os << "[SouthEast]";
 		case fys::arena::hexagon_side::orientation::A_SW:
 		case fys::arena::hexagon_side::orientation::B_SW:
-		case fys::arena::hexagon_side::orientation::C_SW:return os << "[SouthWest]";
-		case fys::arena::hexagon_side::orientation::NONE:return os << "[NONE(ERROR)]";
+		case fys::arena::hexagon_side::orientation::C_SW:
+			return os << "[SouthWest]";
+		case fys::arena::hexagon_side::orientation::NONE:
+			return os << "[NONE(ERROR)]";
 	}
 	return os;
 }
@@ -427,9 +435,12 @@ std::ostream&
 operator<<(std::ostream& os, fys::arena::hexagon_side::hexagon hexagon)
 {
 	switch (hexagon) {
-		case fys::arena::hexagon_side::hexagon::A:return os << "[A]";
-		case fys::arena::hexagon_side::hexagon::B:return os << "[B]";
-		case fys::arena::hexagon_side::hexagon::C:return os << "[C]";
+		case fys::arena::hexagon_side::hexagon::A:
+			return os << "[A]";
+		case fys::arena::hexagon_side::hexagon::B:
+			return os << "[B]";
+		case fys::arena::hexagon_side::hexagon::C:
+			return os << "[C]";
 	}
 	return os;
 }

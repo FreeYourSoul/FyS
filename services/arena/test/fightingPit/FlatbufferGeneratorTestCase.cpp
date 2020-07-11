@@ -65,12 +65,12 @@ TEST_CASE("arn::FlatbufferGeneratorTestCase", "[service][arena][util]")
 	auto cml = CmlBase(local_path_storage());
 	encounter_context ctx;
 
-	ctx._rangeEncounterPerZone["WS00"] = {
+	ctx.range_encounter_per_zone["WS00"] = {
 			std::pair(4, 4), // ez
 			std::pair(3, 3), // medium
 			std::pair(1, 1)  // hard
 	};
-	ctx._contendersPerZone["WS00"] = {
+	ctx.contenders_per_zone["WS00"] = {
 			encounter_context::encounter_desc{
 					"arena:contenders:Sampy.chai",
 					3, {100, 100, 100}, std::pair(1u, 10u)

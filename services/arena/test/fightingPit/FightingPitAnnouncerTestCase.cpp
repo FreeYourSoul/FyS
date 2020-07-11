@@ -53,12 +53,12 @@ TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]")
 	auto fseamMock = FSeam::getDefault<fys::util::random_generator>();
 	auto cml = CmlBase(local_path_storage());
 	encounter_context ctx;
-	ctx._rangeEncounterPerZone["WS00"] = {
+	ctx.range_encounter_per_zone["WS00"] = {
 			encounter_context::rng_range(1, 4), // ez
 			encounter_context::rng_range(2, 4), // medium
 			encounter_context::rng_range(3, 5)  // hard
 	};
-	ctx._contendersPerZone["WS00"] = {
+	ctx.contenders_per_zone["WS00"] = {
 			encounter_context::encounter_desc{
 					"arena:contenders:Sampy.chai", 3,
 					encounter_context::chance_array{60, 60, 60},
@@ -390,12 +390,12 @@ TEST_CASE("FightingPitAnnouncerTestCase test reward", "[service][arena]")
 	auto fseamMock = FSeam::getDefault<fys::util::random_generator>();
 	auto cml = CmlBase(local_path_storage());
 	encounter_context ctx;
-	ctx._rangeEncounterPerZone["WS00"] = {
+	ctx.range_encounter_per_zone["WS00"] = {
 			encounter_context::rng_range(1, 4), // ez
 			encounter_context::rng_range(1, 4), // medium
 			encounter_context::rng_range(1, 4)  // hard
 	};
-	ctx._contendersPerZone["WS00"] = {
+	ctx.contenders_per_zone["WS00"] = {
 			encounter_context::encounter_desc{
 					"arena:contenders:Sampy.chai", 3,
 					encounter_context::chance_array{60, 60, 60},
@@ -407,7 +407,7 @@ TEST_CASE("FightingPitAnnouncerTestCase test reward", "[service][arena]")
 					encounter_context::rng_range(1u, 10u)
 			}
 	};
-	ctx._rewardDescPerContender["Sampy"] = encounter_context::reward_encounter_desc{
+	ctx.reward_desc_per_contender["Sampy"] = encounter_context::reward_encounter_desc{
 			std::array<encounter_context::rng_range, 3>{
 					encounter_context::rng_range(3, 3),
 					encounter_context::rng_range(2, 2),
@@ -499,7 +499,7 @@ TEST_CASE("FightingPitAnnouncerTestCase test reward", "[service][arena]")
 
 	SECTION("Multiple Monster of same type add up") {
 
-		ctx._rewardDescPerContender["Slime"] = encounter_context::reward_encounter_desc{
+		ctx.reward_desc_per_contender["Slime"] = encounter_context::reward_encounter_desc{
 				std::array<encounter_context::rng_range, 3>{
 						encounter_context::rng_range(3, 3),
 						encounter_context::rng_range(2, 2),

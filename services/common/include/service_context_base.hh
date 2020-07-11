@@ -65,7 +65,7 @@ public:
 	dispatcher_connection_str() const noexcept;
 
 private:
-	void initialize_from_ini(const std::string& configFilePath);
+	void initialize_from_ini(const std::string& cfg_file_path);
 
 protected:
 	std::string _version;
@@ -75,7 +75,7 @@ protected:
 	std::string _hostname;
 	ushort _port;
 
-	dispatcher_data _dispatcherData;
+	dispatcher_data _dispatcher_data;
 };
 
 }

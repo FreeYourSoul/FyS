@@ -121,7 +121,7 @@ engine::move_character_action(const std::string& user_name, std::uint32_t index_
 		// NPC Character can't trigger map triggers
 		if (!is_npc) _map.execute_potential_trigger(index_character, pi);
 
-		if (const auto clientsToNotify = _data.getPlayerIdtsAroundPos(pi.position); !clientsToNotify.empty()) {
+		if (const auto clientsToNotify = _data.get_player_idts_around_pos(pi.position); !clientsToNotify.empty()) {
 			notifyClientsOfCharacterMove(pi, user_name, clientsToNotify);
 		}
 	}

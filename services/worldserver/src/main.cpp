@@ -38,7 +38,7 @@ main(int ac, char** av)
 		zmq_version(&major, &minor, &patch);
 		SPDLOG_INFO("Version ZMQ : {}.{}.{}\n{}", major, minor, patch, ctx.to_string());
 
-		fys::ws::world_server_service serverService(ctx,
+		fys::ws::world_server_service service(ctx,
 				std::move(*fys::ws::world_populator()
 						.set_interval_movement(fys::ws::TIMING_MOVE_INTERVAL)
 						.set_connection_string(ctx.player_connection_str())
@@ -46,7 +46,7 @@ main(int ac, char** av)
 						.populate_script_engine(ctx)
 						.build_world_server_engine())
 		);
-		serverService.run_server_loop();
+		service.run_server_loop();
 	}
 	catch (const std::exception& e) {
 		SPDLOG_ERROR("Main caught an exception: {}", e.what());

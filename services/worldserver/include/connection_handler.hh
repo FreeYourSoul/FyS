@@ -37,22 +37,22 @@ class connection_handler {
 	inline static const std::string SERVER_SUB_CHANNEL_KEY = "Server_Inter_Com";
 
 public:
-	explicit connection_handler(int threadNumber = 1) noexcept;
+	explicit connection_handler(std::uint32_t thread_number = 1) noexcept;
 
-	void setupConnectionManager(const fys::ws::world_server_context& ctx) noexcept;
-	void sendMessageToDispatcher(zmq::multipart_t&& msg) noexcept;
+	void setup_connection_manager(const fys::ws::world_server_context& ctx) noexcept;
+	void send_msg_to_dispatcher(zmq::multipart_t&& msg) noexcept;
 
 	template<typename HandlerIncoming, typename HandlerInterServer>
-	void pollAndProcessSubMessage(HandlerIncoming&& handlerIncoming, HandlerInterServer&& handlerServer) noexcept
+	void poll_and_process_sub_msg(HandlerIncoming&& handler_incoming, HandlerInterServer&& handler_server) noexcept
 	{
 		//  Initialize poll set
 		zmq::pollitem_t items[] = {
-				{_subSocketOnDispatcher, 0, ZMQ_POLLIN, 0}
+				{_sub_socket_on_dispatcher, 0, ZMQ_POLLIN, 0}
 		};
 		zmq::poll(&items[0], 1, 10);
 		if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
 			zmq::multipart_t msg;
-			if (!msg.recv(_subSocketOnDispatcher, ZMQ_NOBLOCK) || (msg.size() != 3 && msg.size() != 4)) {
+			if (!msg.recv(_sub_socket_on_dispatcher, ZMQ_NOBLOCK) || (msg.size() != 3 && msg.size() != 4)) {
 				SPDLOG_ERROR("Error while reading on the listener socket.");
 				SPDLOG_ERROR("Received message may be ill formatted, contains '{}' part, message is : {}",
 						msg.size(), msg.str());
@@ -66,19 +66,19 @@ public:
 				// third frame is the message content
 
 				if (SERVER_SUB_CHANNEL_KEY == subKey) {
-					std::forward<HandlerInterServer>(handlerServer)(std::move(identity), msg.pop());
+					std::forward<HandlerInterServer>(handler_server)(std::move(identity), msg.pop());
 					return;
 				}
-				std::forward<HandlerIncoming>(handlerIncoming)(std::move(identity), msg.pop());
+				std::forward<HandlerIncoming>(handler_incoming)(std::move(identity), msg.pop());
 			}
 		}
 	}
 
 
 private:
-	zmq::context_t _zmqContext;
-	zmq::socket_t _subSocketOnDispatcher;
-	zmq::socket_t _dealSocketOnDispatcher;
+	zmq::context_t _zmq_ctx;
+	zmq::socket_t _sub_socket_on_dispatcher;
+	zmq::socket_t _deal_socket_on_dispatcher;
 
 };
 

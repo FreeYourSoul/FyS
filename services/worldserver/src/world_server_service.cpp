@@ -47,7 +47,7 @@ namespace fys::ws {
 world_server_service::world_server_service(const world_server_context& ctx, engine engine)
 		:_ctx(ctx), _world_server(std::move(engine))
 {
-	_connection_handler.setupConnectionManager(ctx);
+	_connection_handler.setup_connection_manager(ctx);
 }
 
 void
@@ -56,7 +56,7 @@ world_server_service::run_server_loop() noexcept
 	SPDLOG_INFO("WorldServer loop started");
 
 	while (true) {
-		_connection_handler.pollAndProcessSubMessage(
+		_connection_handler.poll_and_process_sub_msg(
 				// Auth-Server Incoming player
 				// Used by the Auth server in order to authenticate a player
 				[this](zmq::message_t&& identity, zmq::message_t&& content) {

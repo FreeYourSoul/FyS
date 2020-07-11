@@ -85,7 +85,7 @@ worker_service::add_fighting_pit(std::unique_ptr<fighting_pit> fp)
 	while (++_current_arena_id != 0 && _arena_instances.find(_current_arena_id) != _arena_instances.end());
 	chai_register::register_network_commands(*fp->get_chai_ptr(), broadcast_msg_handler(fp->id()));
 	fp->set_arena_id(_current_arena_id);
-	history_manager::createHistoric(*fp, 1); // seed is to be changed
+	history_manager::create_historic(*fp, 1); // seed is to be changed
 	_arena_instances.insert(std::pair(_current_arena_id, std::move(fp)));
 	_arena_id_on_identifier.insert(std::pair(_current_arena_id, std::vector<player_identifier>{}));
 	return _current_arena_id;
@@ -235,16 +235,17 @@ worker_service::broadcast_msg(unsigned fp_id, zmq::message_t&& msg, const std::s
 const std::string&
 worker_service::retrieve_player_identifier(unsigned fp_id, const std::string& user_name)
 {
-	auto identifiersIt = _arena_id_on_identifier.find(fp_id);
-	if (identifiersIt == _arena_id_on_identifier.end()) {
+	auto identifiers_it = _arena_id_on_identifier.find(fp_id);
+	if (identifiers_it == _arena_id_on_identifier.end()) {
 		SPDLOG_WARN("Trying to retrieve player identifier on non-existing fighting pit of id {}", fp_id);
 		return user_name;
 	}
 
-	auto it = std::find_if(identifiersIt->second.begin(), identifiersIt->second.end(), [&user_name](const auto& ident) {
-		return ident.user_name == user_name;
-	});
-	if (it == identifiersIt->second.end()) {
+	auto it = std::find_if(identifiers_it->second.begin(), identifiers_it->second.end(),
+			[&user_name](const auto& ident) {
+				return ident.user_name == user_name;
+			});
+	if (it == identifiers_it->second.end()) {
 		SPDLOG_WARN("Trying to retrieve non-existing player identifier {} in fighting pit of id {}", user_name, fp_id);
 		return user_name;
 	}

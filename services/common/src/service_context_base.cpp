@@ -49,35 +49,35 @@ service_context_base::service_context_base(int ac, const char* const* av) try
 	_config_file = configSpecificPath.getValue();
 	this->initialize_from_ini(configPath.getValue());
 	if (dispatcherPort.getValue() > 0)
-		_dispatcherData.port = dispatcherPort.getValue();
+		_dispatcher_data.port = dispatcherPort.getValue();
 	if ("NONE" == dispatcherHost.getValue())
-		_dispatcherData.address = dispatcherHost.getValue();
+		_dispatcher_data.address = dispatcherHost.getValue();
 	if (subport.getValue() > 0)
-		_dispatcherData.subscriber_port = subport.getValue();
+		_dispatcher_data.subscriber_port = subport.getValue();
 }
 catch (std::exception& e) {
 	SPDLOG_ERROR("Context of the service not initialized caused by : {}", e.what());
 }
 
 void
-service_context_base::initialize_from_ini(const std::string& configFilePath)
+service_context_base::initialize_from_ini(const std::string& cfg_file_path)
 {
 	boost::property_tree::ptree pt;
-	boost::property_tree::read_ini(configFilePath, pt);
+	boost::property_tree::read_ini(cfg_file_path, pt);
 
 	_name = pt.get<std::string>(fys::common::init_beacon::SERVICE_NAME);
 	_hostname = pt.get<std::string>(fys::common::init_beacon::HOSTNAME);
 	_port = pt.get<ushort>(fys::common::init_beacon::PORT);
-	_dispatcherData.subscriber_port = pt.get<ushort>(fys::common::init_beacon::DISPATCHER_SUBPORT);
-	_dispatcherData.port = pt.get<ushort>(fys::common::init_beacon::DISPATCHER_PORT);
-	_dispatcherData.address = pt.get<std::string>(fys::common::init_beacon::DISPATCHER_ADDR);
+	_dispatcher_data.subscriber_port = pt.get<ushort>(fys::common::init_beacon::DISPATCHER_SUBPORT);
+	_dispatcher_data.port = pt.get<ushort>(fys::common::init_beacon::DISPATCHER_PORT);
+	_dispatcher_data.address = pt.get<std::string>(fys::common::init_beacon::DISPATCHER_ADDR);
 
 }
 
 std::string
 service_context_base::dispatcher_connection_str() const noexcept
 {
-	return std::string("tcp://").append(_dispatcherData.address).append(":").append(std::to_string(_dispatcherData.port));
+	return std::string("tcp://").append(_dispatcher_data.address).append(":").append(std::to_string(_dispatcher_data.port));
 }
 
 std::string

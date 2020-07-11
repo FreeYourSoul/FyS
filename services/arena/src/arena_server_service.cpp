@@ -55,10 +55,14 @@ verify_buffer(const void* fbBuffer, std::uint32_t size)
 translate_level_from_flatbuffer(const fys::fb::arn::Level& level)
 {
 	switch (level) {
-		case fys::fb::arn::Level_EASY:return fys::arena::fighting_pit::level::EASY;
-		case fys::fb::arn::Level_MEDIUM:return fys::arena::fighting_pit::level::MEDIUM;
-		case fys::fb::arn::Level_HARD:return fys::arena::fighting_pit::level::HARD;
-		default:return fys::arena::fighting_pit::level::EASY;
+		case fys::fb::arn::Level_EASY:
+			return fys::arena::fighting_pit::level::EASY;
+		case fys::fb::arn::Level_MEDIUM:
+			return fys::arena::fighting_pit::level::MEDIUM;
+		case fys::fb::arn::Level_HARD:
+			return fys::arena::fighting_pit::level::HARD;
+		default:
+			return fys::arena::fighting_pit::level::EASY;
 	}
 }
 
@@ -108,19 +112,19 @@ arena_server_service::run_server_loop() noexcept
 	while (true) {
 		_connection_handler.poll_process_msg_from_dispatcher(
 				// World Server inform the Arena that a new awaited player is coming (create or join an existing fighting pit)
-				[this](zmq::message_t&& identityWs, zmq::message_t&& worldServerMessage) {
+				[this](zmq::message_t&& identity_ws, zmq::message_t&& world_server_msg) {
 
 					// In case of a saturation of the server, return an error to the dispatcher
 					if (is_saturated()) {
-						send_saturated_error_msg(std::move(identityWs));
+						send_saturated_error_msg(std::move(identity_ws));
 						return;
 					}
 
-					if (!verify_buffer<fb::arn::FightingPitEncounter>(worldServerMessage.data(), worldServerMessage.size())) {
+					if (!verify_buffer<fb::arn::FightingPitEncounter>(world_server_msg.data(), world_server_msg.size())) {
 						SPDLOG_ERROR("Wrongly formatted FightingPitEncounter buffer");
 						return;
 					}
-					const auto* binary = fb::arn::GetFightingPitEncounter(worldServerMessage.data());
+					const auto* binary = fb::arn::GetFightingPitEncounter(world_server_msg.data());
 
 					awaiting_player_arena apa = create_awaiting_player(binary);
 
@@ -132,55 +136,55 @@ arena_server_service::run_server_loop() noexcept
 					}
 
 					// register player incoming into arena instance with token given by worldserver used as key
-					const auto &[elem, isRegistered] = _awaiting_arena.insert({binary->token_auth()->str(), std::move(apa)});
+					const auto &[elem, is_registered] = _awaiting_arena.insert({binary->token_auth()->str(), std::move(apa)});
 
-					if (isRegistered) {
-						forward_reply_to_dispatcher(std::move(identityWs), elem->second);
+					if (is_registered) {
+						forward_reply_to_dispatcher(std::move(identity_ws), elem->second);
 						SPDLOG_INFO("New awaited player is added");
 					}
 				});
 
 		_worker_service.poll_process_msg_from_player(
 				// Authentication handler : Player try to create/join a fighting pit. The player has to be awaited
-				[this](zmq::message_t&& idtPlayer, zmq::message_t&& authMessage) {
-					if (!verify_buffer<fb::arn::ArenaServerValidateAuth>(authMessage.data(), authMessage.size())) {
+				[this](zmq::message_t&& idt_player, zmq::message_t&& auth_msg) {
+					if (!verify_buffer<fb::arn::ArenaServerValidateAuth>(auth_msg.data(), auth_msg.size())) {
 						SPDLOG_ERROR("Wrongly formatted ArenaServerValidateAuth buffer");
 						return;
 					}
 
-					const auto* binary = fb::arn::GetArenaServerValidateAuth(authMessage.data());
+					const auto* binary = fb::arn::GetArenaServerValidateAuth(auth_msg.data());
 					const std::string token_auth = binary->token_auth()->str();
 					const std::string user_name = binary->user_name()->str();
-					const auto &[isAwaited, playerAwaitedIt] = is_player_awaited(user_name, token_auth, binary->fighting_pit_id());
-					unsigned fightingPitId = playerAwaitedIt->second.fighting_pit_id;
+					const auto &[awaited, player_awaited_it] = is_player_awaited(user_name, token_auth, binary->fighting_pit_id());
+					unsigned fp_id = player_awaited_it->second.fighting_pit_id;
 
-					if (!isAwaited) {
+					if (!awaited) {
 						SPDLOG_WARN("Player '{}' tried to authenticate on Arena server '{}' fighting pit {} "
-									"without being awaited.", user_name, _ctx.get().server_code(), fightingPitId);
+									"without being awaited.", user_name, _ctx.get().server_code(), fp_id);
 						return;
 					}
 					SPDLOG_INFO("Awaited Player '{}' login", user_name);
 
-					if (playerAwaitedIt->second.has_to_be_generated()) {
-						fightingPitId = create_new_fighting_pit(playerAwaitedIt->second);
-						_awaiting_arena.erase(playerAwaitedIt); // remove player from awaited player
-						if (fightingPitId == fighting_pit::CREATION_ERROR) return;
+					if (player_awaited_it->second.has_to_be_generated()) {
+						fp_id = create_new_fighting_pit(player_awaited_it->second);
+						_awaiting_arena.erase(player_awaited_it); // remove player from awaited player
+						if (fp_id == fighting_pit::CREATION_ERROR) return;
 					}
 					else {
-						if (auto[exist, isJoinable] = _worker_service.fighting_pit_exist_and_joinable(binary->fighting_pit_id());
-								!exist || !isJoinable) {
+						if (auto[exist, is_joinable] = _worker_service.fighting_pit_exist_and_joinable(binary->fighting_pit_id());
+								!exist || !is_joinable) {
 							SPDLOG_ERROR("Player {} can't be join on non-existing({})/joinable({}) fighting pit {}",
-									exist, isJoinable, user_name, binary->fighting_pit_id());
+									exist, is_joinable, user_name, binary->fighting_pit_id());
 							return;
 						}
 
 						auto pt = _db_connector->retrieve_party_team(user_name);
-						_worker_service.player_join_fighting_pit(fightingPitId, std::move(pt), _cache);
-						_awaiting_arena.erase(playerAwaitedIt); // remove player from awaited player
+						_worker_service.player_join_fighting_pit(fp_id, std::move(pt), _cache);
+						_awaiting_arena.erase(player_awaited_it); // remove player from awaited player
 					}
-					SPDLOG_INFO("[fp:{}] : Player '{}' has logged in", fightingPitId, user_name);
-					_worker_service.upsert_player_identifier(fightingPitId, user_name, idtPlayer.to_string());
-					_worker_service.send_msg_new_arriving_team(fightingPitId, user_name);
+					SPDLOG_INFO("[fp:{}] : Player '{}' has logged in", fp_id, user_name);
+					_worker_service.upsert_player_identifier(fp_id, user_name, idt_player.to_string());
+					_worker_service.send_msg_new_arriving_team(fp_id, user_name);
 				},
 
 				// InGame handler: Player is sending actions to feed pendingActions queue of their characters

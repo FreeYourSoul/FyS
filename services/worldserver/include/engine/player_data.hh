@@ -163,7 +163,7 @@ public:
 	 * @note identities are zmq code to reply to a specific client via a router socket
 	 */
 	[[nodiscard]] std::vector<std::string_view>
-	getPlayerIdtsAroundPos(const pos& position,
+	get_player_idts_around_pos(const pos& position,
 			double distance = DEFAULT_DISTANCE,
 			std::uint32_t ignore_index = LIMIT_NOTIFICATIONS_MOVE) const noexcept;
 

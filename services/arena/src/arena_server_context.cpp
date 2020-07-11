@@ -73,52 +73,52 @@ arena_server_context::parse_zone_config_file(const nlohmann::json& config_conten
 	auto& encounter_desc = config_content["encounter_desc"];
 	const std::string& zone = config_content["zone"].get<std::string>();
 
-	std::vector<std::string> keysEncounter;
-	keysEncounter.reserve(encounter_desc.size());
+	std::vector<std::string> keys_encounter;
+	keys_encounter.reserve(encounter_desc.size());
 
-	for (auto& encounterDesc : encounter_desc) {
-		std::string keyEncounter = encounterDesc["key"].get<std::string>();
+	for (auto& ed : encounter_desc) {
+		std::string keyEncounter = ed["key"].get<std::string>();
 		encounter_context::encounter_desc desc = {
-				encounterDesc["key"].get<std::string>(),
-				encounterDesc.value("max_encountering", 99u),
+				ed["key"].get<std::string>(),
+				ed.value("max_encountering", 99u),
 				{
 						encounter_chance[keyEncounter]["easy"].get<std::uint32_t>(),
 						encounter_chance[keyEncounter]["medium"].get<std::uint32_t>(),
 						encounter_chance[keyEncounter]["hard"].get<std::uint32_t>()
 				},
-				std::pair(encounterDesc["level_range"][0].get<std::uint32_t>(), encounterDesc["level_range"][1].get<std::uint32_t>()),
+				std::pair(ed["level_range"][0].get<std::uint32_t>(), ed["level_range"][1].get<std::uint32_t>()),
 		};
 
 		auto& number_encounter = encounter_chance["number_encounter_range"];
-		_encounter_ctx._rangeEncounterPerZone[zone] = {
+		_encounter_ctx.range_encounter_per_zone[zone] = {
 				std::pair(number_encounter["easy"][0].get<std::uint32_t>(), number_encounter["easy"][1].get<std::uint32_t>()),
 				std::pair(number_encounter["medium"][0].get<std::uint32_t>(), number_encounter["medium"][1].get<std::uint32_t>()),
 				std::pair(number_encounter["hard"][0].get<std::uint32_t>(), number_encounter["hard"][1].get<std::uint32_t>())
 		};
 
-		_encounter_ctx._contendersPerZone[zone].emplace_back(std::move(desc));
-		_encounter_ctx._rewardDescPerContender[keyEncounter] = reward_desc_from_json(encounterDesc["reward"]);
-		keysEncounter.emplace_back(std::move(keyEncounter));
+		_encounter_ctx.contenders_per_zone[zone].emplace_back(std::move(desc));
+		_encounter_ctx.reward_desc_per_contender[keyEncounter] = reward_desc_from_json(ed["reward"]);
+		keys_encounter.emplace_back(std::move(keyEncounter));
 	}
 
-	if (!validate_encounter_context())
+	if (!validate_encounter_context()) {
 		throw std::runtime_error("Encounter Context invalid");
-
-	if (!validate_reward_context())
+	}
+	if (!validate_reward_context()) {
 		throw std::runtime_error("Reward Context invalid");
-
+	}
 }
 
 encounter_context::reward_encounter_desc
-arena_server_context::reward_desc_from_json(const nlohmann::json& reward_desc) const
+arena_server_context::reward_desc_from_json(const nlohmann::json& rwd_desc) const
 {
 	encounter_context::reward_encounter_desc red;
 	red.rangeDrop = {
-			std::pair(reward_desc["range"]["easy"][0].get<std::uint32_t>(), reward_desc["range"]["easy"][1].get<std::uint32_t>()),
-			std::pair(reward_desc["range"]["medium"][0].get<std::uint32_t>(), reward_desc["range"]["medium"][1].get<std::uint32_t>()),
-			std::pair(reward_desc["range"]["hard"][0].get<std::uint32_t>(), reward_desc["range"]["hard"][1].get<std::uint32_t>())
+			std::pair(rwd_desc["range"]["easy"][0].get<std::uint32_t>(), rwd_desc["range"]["easy"][1].get<std::uint32_t>()),
+			std::pair(rwd_desc["range"]["medium"][0].get<std::uint32_t>(), rwd_desc["range"]["medium"][1].get<std::uint32_t>()),
+			std::pair(rwd_desc["range"]["hard"][0].get<std::uint32_t>(), rwd_desc["range"]["hard"][1].get<std::uint32_t>())
 	};
-	auto& items = reward_desc["items"];
+	auto& items = rwd_desc["items"];
 	for (auto& item : items) {
 		red.item_on_chance_range[item["key"].get<std::string>()] = {
 				item["chance"]["easy"].get<uint>(),
@@ -132,7 +132,7 @@ arena_server_context::reward_desc_from_json(const nlohmann::json& reward_desc) c
 bool
 arena_server_context::validate_reward_context() const
 {
-	for (const auto &[k, v] : _encounter_ctx._rewardDescPerContender) {
+	for (const auto &[k, v] : _encounter_ctx.reward_desc_per_contender) {
 		for (int i = 0; i < 3; ++i) {
 			std::uint32_t total = 0;
 			total = std::accumulate(v.item_on_chance_range.cbegin(), v.item_on_chance_range.cend(), 0,
@@ -150,7 +150,7 @@ arena_server_context::validate_reward_context() const
 bool
 arena_server_context::validate_encounter_context() const
 {
-	for (const auto &[k, v] : _encounter_ctx._rangeEncounterPerZone) {
+	for (const auto &[k, v] : _encounter_ctx.range_encounter_per_zone) {
 		for (int i = 0; i < 3; ++i) {
 			if (v.at(i).first <= 0) {
 				SPDLOG_ERROR("Encounter Context invalid because of range for {} : "
@@ -159,7 +159,7 @@ arena_server_context::validate_encounter_context() const
 			}
 		}
 	}
-	for (const auto &[k, v] : _encounter_ctx._contendersPerZone) {
+	for (const auto &[k, v] : _encounter_ctx.contenders_per_zone) {
 		for (int i = 0; i < 3; ++i) {
 			std::uint32_t total = 0;
 			total = std::accumulate(v.cbegin(), v.cend(), 0,
@@ -182,9 +182,9 @@ arena_server_context::to_string() const noexcept
 	str += "[INFO] Service " + _name + " context VERSION: " + _version + "\n";
 	str += "[INFO] Config file used: " + _config_file + "\n";
 	str += "[INFO] Handle zones: ";
-	for (auto&[k, v] : _encounter_ctx._rangeEncounterPerZone) str += k + " ";
-	str += "\n[INFO] Dispatcher connected port: " + std::to_string(_dispatcherData.port) + "\n";
-	str += "[INFO] Dispatcher connected host: " + _dispatcherData.address + "\n";
+	for (auto&[k, v] : _encounter_ctx.range_encounter_per_zone) str += k + " ";
+	str += "\n[INFO] Dispatcher connected port: " + std::to_string(_dispatcher_data.port) + "\n";
+	str += "[INFO] Dispatcher connected host: " + _dispatcher_data.address + "\n";
 	str += "[INFO] Dispatcher connection string: " + dispatcher_connection_str() + "\n";
 	str += "[INFO] Player binding string: " + player_binding_string() + "\n";
 	str += "[INFO] Local cache folder: " + path_local_storage_cache() + "\n";

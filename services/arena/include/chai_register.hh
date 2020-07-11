@@ -79,7 +79,7 @@ public:
 	register_base_actions(chaiscript::ChaiScript& chai, cache::Cml& cml);
 
 	static void
-	register_network_commands(chaiscript::ChaiScript& action_key,  std::function<void(zmq::message_t&&)> contender_targets);
+	register_network_commands(chaiscript::ChaiScript& action_key,  std::function<void(zmq::message_t&&)> ally_targets);
 
 private:
 	/**

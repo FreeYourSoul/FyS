@@ -38,7 +38,7 @@ main(int ac, char** av)
 		SPDLOG_INFO("Version ZMQ : {}.{}.{}\n{}", major, minor, patch, ctx.to_string());
 
 		fys::arena::arena_server_service serverService(ctx);
-		fys::arena::history_manager::setHistoricManagerOn(true);
+		fys::arena::history_manager::activate_historic_manager(true);
 
 		serverService.run_server_loop();
 	}

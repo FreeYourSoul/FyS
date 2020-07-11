@@ -239,9 +239,9 @@ flatbuffer_generator::generate_contender_vec_status_offset(const std::vector<fig
 std::vector<flatbuffers::Offset<fb::arn::MemberStatus>>
 flatbuffer_generator::generate_team_member_vec_status_offset(const std::vector<team_member_sptr>& members)
 {
-	std::vector<flatbuffers::Offset<fb::arn::MemberStatus>> fbCharacterStatus;
+	std::vector<flatbuffers::Offset<fb::arn::MemberStatus>> fb_character_status;
 
-	fbCharacterStatus.reserve(members.size());
+	fb_character_status.reserve(members.size());
 	for (const auto& member : members) {
 		const auto& status = member->status();
 		const auto fbStatus = fb::arn::CharacterStatus{
@@ -253,11 +253,11 @@ flatbuffer_generator::generate_team_member_vec_status_offset(const std::vector<t
 				status.magic_pt.total,
 				util::convert_arena_orient_to_fb(member->side_orient())
 		};
-		fbCharacterStatus.emplace_back(
+		fb_character_status.emplace_back(
 				fb::arn::CreateMemberStatus(_fbb,
 						_fbb.CreateString(member->name()), &fbStatus));
 	}
-	return fbCharacterStatus;
+	return fb_character_status;
 }
 
 std::vector<flatbuffers::Offset<fb::arn::Reward>>

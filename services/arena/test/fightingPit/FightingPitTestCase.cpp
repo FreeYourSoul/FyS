@@ -72,12 +72,12 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]")
 	DeleteFolderWhenDone raii_delete_folder(getTmpPath());
 
 	encounter_context ctx;
-	ctx._rangeEncounterPerZone["WS00"] = {
+	ctx.range_encounter_per_zone["WS00"] = {
 			std::pair(1, 1), // ez
 			std::pair(3, 3), // medium
 			std::pair(1, 1)  // hard
 	};
-	ctx._contendersPerZone["WS00"] = {
+	ctx.contenders_per_zone["WS00"] = {
 			encounter_context::encounter_desc{
 					"testing:TestMonsterSleep.chai",
 					3, {100, 100, 100}, std::pair(1u, 10u)},
@@ -185,7 +185,7 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]")
 
 	SECTION("InGame fighting Contender Team Win (One Contender)") {
 
-		ctx._contendersPerZone["WS00"] = {
+		ctx.contenders_per_zone["WS00"] = {
 				encounter_context::encounter_desc{
 						"testing:TestMonsterAttack.chai",
 						3, {100, 100, 100}, std::pair(1u, 10u)
@@ -479,12 +479,12 @@ TEST_CASE("FightingPitTestCase Move test", "[service][arena]")
 	DeleteFolderWhenDone raii_delete_folder(getTmpPath());
 
 	encounter_context ctx;
-	ctx._rangeEncounterPerZone["WS00"] = {
+	ctx.range_encounter_per_zone["WS00"] = {
 			std::pair(1, 1), // ez
 			std::pair(3, 3), // medium
 			std::pair(1, 1)  // hard
 	};
-	ctx._contendersPerZone["WS00"] = {
+	ctx.contenders_per_zone["WS00"] = {
 			encounter_context::encounter_desc{
 					"testing:TestMonsterMove.chai",
 					2, {100, 100, 100}, std::pair(1u, 10u)
@@ -613,12 +613,12 @@ TEST_CASE("FightingPitTestCase Simple Alteration test", "[service][arena]")
 	DeleteFolderWhenDone raii_delete_folder(getTmpPath());
 
 	encounter_context ctx;
-	ctx._rangeEncounterPerZone["WS00"] = {
+	ctx.range_encounter_per_zone["WS00"] = {
 			std::pair(1, 1), // ez
 			std::pair(3, 3), // medium
 			std::pair(1, 1)  // hard
 	};
-	ctx._contendersPerZone["WS00"] = {
+	ctx.contenders_per_zone["WS00"] = {
 			encounter_context::encounter_desc{
 					"testing:TestMonsterPoison.chai",
 					2, {100, 100, 100}, std::pair(1u, 10u)

@@ -72,14 +72,14 @@ struct npc_lua_instance {
 	character_info info;
 
 	//! Spawning Point namespace, empty in case of neutral encounter
-	std::string spNamespace;
+	std::string sp_namespace;
 
 	/**
 	 * Id of the npc used to reference the NPC in LUA
 	 * In case of encounter, this will represent the index of the NPC in the spawning point NPC list
 	 * In case of neutral NPC, this represent the unique id of the NPC
 	 */
-	std::uint32_t npcLuaId;
+	std::uint32_t npc_lua_id;
 };
 
 /**
@@ -105,8 +105,8 @@ struct npc_action {
 	 * 2 means a move stopped (afterMove must be filled in this case)
 	 * Another id is a specific action (animation..)
 	 */
-	std::uint32_t actionId = IDLE;
-	character_info afterMove {};
+	std::uint32_t action_id = IDLE;
+	character_info after_move {};
 };
 
 class script_engine {

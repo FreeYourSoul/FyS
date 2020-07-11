@@ -36,23 +36,24 @@ namespace fys::arena {
 void
 contender_scripting::register_contender_script()
 {
-	const std::string createVar = fmt::format("global {}={}({},{});", chai_contender_id(), _contender_name, _contender_id, _level);
-	const std::string retrieveDoableActions = fmt::format("retrieveDoableActions({}.actions.act);", chai_contender_id());
+	const std::string create_var = fmt::format("global {}={}({},{});",
+			chai_contender_id(), _contender_name, _contender_id, _level);
+	const std::string retrieve_doable_actions = fmt::format("retrieveDoableActions({}.actions.act);", chai_contender_id());
 
 	// register instance in ChaiScript
 	try {
-		_chai.get().eval(createVar);
+		_chai.get().eval(create_var);
 	}
 	catch (const chaiscript::exception::eval_error& ee) {
-		SPDLOG_ERROR("Error caught when instantiating variable (script : '{}')\n{}", createVar, ee.what());
+		SPDLOG_ERROR("Error caught when instantiating variable (script : '{}')\n{}", create_var, ee.what());
 	}
 
 	// load doable actions
 	try {
-		_doable_actions = _chai.get().eval<std::vector<std::string>>(retrieveDoableActions);
+		_doable_actions = _chai.get().eval<std::vector<std::string>>(retrieve_doable_actions);
 	}
 	catch (const chaiscript::exception::eval_error& ee) {
-		SPDLOG_ERROR("Error caught when retrieving doable actions (script : '{}')\n{}", retrieveDoableActions, ee.what());
+		SPDLOG_ERROR("Error caught when retrieving doable actions (script : '{}')\n{}", retrieve_doable_actions, ee.what());
 	}
 }
 

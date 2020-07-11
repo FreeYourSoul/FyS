@@ -46,7 +46,7 @@ TEST_CASE("CommonTypesTestCase", "[service][arena]")
 {
 	std::vector<fys::arena::data::alteration> alterations;
 
-	fys::arena::data::mergeAlterations(alterations, {
+	fys::arena::data::merge_alterations(alterations, {
 			fys::arena::data::alteration("burned", 1, 5, [](fys::arena::data::status&, uint, uint) { return true; }),
 			fys::arena::data::alteration("burned", 1, 2, [](fys::arena::data::status&, uint, uint) { return true; }),
 			fys::arena::data::alteration("burned", 1, 3, [](fys::arena::data::status&, uint, uint) { return true; }),

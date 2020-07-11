@@ -87,7 +87,7 @@ private:
 
 private:
 	std::vector<data::priority_elem> _base_speed;
-	std::vector<data::priority_elem> _priorityList;
+	std::vector<data::priority_elem> _priority_list;
 	// List used as temporary for the calculate priority
 	std::vector<data::priority_elem> _analyzed_list;
 
