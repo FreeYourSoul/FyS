@@ -97,9 +97,9 @@ compose_most_suitable(InputIt first, InputIt last, RetrieverLower&& retriever, A
 
 	auto suitable = retriever(*first).begin();
 	while (first != last) {
-		auto& innerContainer = std::forward(retriever)(*first);
-		if (auto suitableTmp = std::forward(algo)(innerContainer.begin(), innerContainer.end(), suitable);
-				suitableTmp != innerContainer.end())
+		auto& inner_container = std::forward(retriever)(*first);
+		if (auto suitableTmp = std::forward(algo)(inner_container.begin(), inner_container.end(), suitable);
+				suitableTmp != inner_container.end())
 			suitable = suitableTmp;
 		++first;
 	}

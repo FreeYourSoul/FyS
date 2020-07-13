@@ -24,7 +24,7 @@
 #include <spdlog/spdlog.h>
 #include <zmq.h>
 
-#include <InventoryServerContext.hh>
+#include <inventory_server_context.hh>
 #include <inventory_server_service.hh>
 
 int
@@ -32,11 +32,11 @@ main(int ac, char** av)
 {
 	try {
 		spdlog::set_pattern("[%D %H:%M:%S][ %22s:%-4# ][%L]: %v");
-		fys::inv::InventoryServerContext ctx(ac, av);
+		fys::inv::inventory_server_context ctx(ac, av);
 		fys::inv::inventory_server_service serverService(ctx);
 		int major, minor, patch;
 		zmq_version(&major, &minor, &patch);
-		SPDLOG_INFO("Version ZMQ : {}.{}.{}\n{}", major, minor, patch, ctx.toString());
+		SPDLOG_INFO("Version ZMQ : {}.{}.{}\n{}", major, minor, patch, ctx.to_string());
 
 		serverService.run_server_loop();
 	}

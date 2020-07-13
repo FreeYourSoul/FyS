@@ -10,8 +10,6 @@ project(arena_service
         DESCRIPTION "Arena Service Server"
         LANGUAGES CXX)
 
-include(${CMAKE_CURRENT_LIST_DIR}/../common/CMakeLists.txt)
-
 find_package(nlohmann_json REQUIRED)
 find_package(cppzmq REQUIRED)
 find_package(fmt REQUIRED)
@@ -76,6 +74,7 @@ target_link_libraries(arena_service PRIVATE
         cppzmq
         nlohmann_json::nlohmann_json
         fmt::fmt dl cml
+        fys::ar
         ${Flatbuffers_LIBRARIES})
 
 set_target_properties(arena_service PROPERTIES

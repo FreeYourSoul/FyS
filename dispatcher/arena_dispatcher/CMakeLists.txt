@@ -12,16 +12,7 @@ project(arena_dispatcher
 
 find_package(nlohmann_json REQUIRED)
 
-if (NOT RELATIVE_TO_COMMON)
-    set(RELATIVE_TO_COMMON /../common/)
-
-    list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}${RELATIVE_TO_COMMON}cmake)
-endif ()
-
 include_directories(${CMAKE_CURRENT_LIST_DIR}/include)
-
-#include source code to compile
-include(${CMAKE_SOURCE_DIR}${RELATIVE_TO_COMMON}CMakeLists.txt)
 
 #Build executable
 add_executable(arena_dispatcher

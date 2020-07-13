@@ -40,7 +40,7 @@ public:
 	}
 
 	template<typename HandlerPlayer>
-	void pollAndProcessPlayerMessage(HandlerPlayer&& handlerPlayer)
+	void pollAndProcessPlayerMessage(HandlerPlayer&& handler_player)
 	{
 		//  Initialize poll set
 		zmq::pollitem_t items[] = {
@@ -58,8 +58,8 @@ public:
 				// first frame is the identity
 				auto identity = msg.pop();
 				// second frame is auth frame of the player
-				auto authFrame = msg.pop();
-				std::forward<HandlerPlayer>(handlerPlayer)(std::move(identity), std::move(authFrame), msg.pop());
+				auto auth_frame = msg.pop();
+				std::forward<HandlerPlayer>(handler_player)(std::move(identity), std::move(auth_frame), msg.pop());
 			}
 		}
 	}

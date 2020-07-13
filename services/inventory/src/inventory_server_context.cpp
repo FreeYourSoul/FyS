@@ -46,6 +46,7 @@ inventory_server_context::to_string() const
 	str = "dump context\n*************************\n";
 	str += "[INFO] Service " + _name + " context VERSION: " + _version + "\n";
 	str += "[INFO] Config file used: " + _config_file + "\n";
+	str += "[INFO] Server code " + _server_code + "\n";
 	str += "\n[INFO] Dispatcher connected port: " + std::to_string(_dispatcher_data.port) + "\n";
 	str += "[INFO] Dispatcher connected host: " + _dispatcher_data.address + "\n";
 	str += "[INFO] Dispatcher connection string: " + dispatcher_connection_str() + "\n";
@@ -64,6 +65,7 @@ void
 inventory_server_context::init_inventory_context_with_json(json& json)
 {
 	auto invJson = json["inventory"];
+	invJson["code"].get_to(_server_code);
 	_portPlayerConnection = invJson["player_connection_port"].get<uint>();
 }
 

@@ -10,8 +10,6 @@ project(inventory_service
         DESCRIPTION "Arena Service Server"
         LANGUAGES CXX)
 
-include(${CMAKE_CURRENT_LIST_DIR}/../common/CMakeLists.txt)
-
 find_package(nlohmann_json REQUIRED)
 find_package(cppzmq REQUIRED)
 find_package(fmt REQUIRED)
@@ -40,6 +38,7 @@ add_executable(inventory_service
 target_link_libraries(inventory_service PRIVATE
         common_service
         cppzmq
+        fys::fil
         nlohmann_json::nlohmann_json
         fmt::fmt dl cml
         ${Flatbuffers_LIBRARIES})

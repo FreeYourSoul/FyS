@@ -10,8 +10,6 @@ project(worldserver_service
         DESCRIPTION "WorldServer Service Server"
         LANGUAGES CXX)
 
-include(${CMAKE_CURRENT_LIST_DIR}/../common/CMakeLists.txt)
-
 find_package(TMXLITE REQUIRED)
 find_package(nlohmann_json REQUIRED)
 find_package(cppzmq REQUIRED)

@@ -5,10 +5,7 @@ else()
     cmake_policy(VERSION 3.15)
 endif()
 
-if (NOT RELATIVE_TO_COMMON)
-    set(RELATIVE_TO_COMMON /common/)
-    list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}${RELATIVE_TO_COMMON}cmake)
-endif ()
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_LIST_DIR}${RELATIVE_TO_COMMON}cmake")
 
 add_subdirectory(auth_dispatcher)
 add_subdirectory(chat_dispatcher)

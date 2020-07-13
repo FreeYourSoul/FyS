@@ -16,8 +16,6 @@ find_package(fmt REQUIRED)
 find_package(FSeam REQUIRED)
 include(Catch)
 
-include(${CMAKE_CURRENT_LIST_DIR}/../../common/CMakeLists.txt)
-
 enable_testing()
 include_directories(
         ${COMMON_INCLUDES_DIR}
