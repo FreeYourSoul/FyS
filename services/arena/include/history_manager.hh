@@ -50,7 +50,7 @@ struct history_action {
 	//! key of the action executed
 	std::string_view action_key;
 	//! in-game targets
-	std::optional<TargetType> targets;
+	std::optional<target_type> targets;
 };
 
 /**

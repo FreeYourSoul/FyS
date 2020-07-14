@@ -32,8 +32,10 @@
 #include <network/worker_service.hh>
 
 #include <fightingPit/contender/fighting_contender.hh>
-#include <fightingPit/fighting_pit.hh>
 #include <fightingPit/team/team_member.hh>
+#include <fightingPit/team/party_team.hh>
+#include <fightingPit/fighting_pit.hh>
+#include <fightingPit/rewards.hh>
 #include <flatbuffer_generator.hh>
 
 namespace {
@@ -65,6 +67,8 @@ fighting_pit::fighting_pit(std::string creator_user_name, fys::arena::fighting_p
 		_creator_user_name(std::move(creator_user_name)),
 		_chai_ptr(chai_register::make_chai_instance(_contenders, _party_teams, _layout_map)),
 		_rewards(std::make_unique<rewards>()) { }
+
+fighting_pit::~fighting_pit() = default;
 
 void
 fighting_pit::continue_battle(const std::chrono::system_clock::time_point& now)
@@ -216,15 +220,15 @@ fighting_pit::set_player_readiness(const std::string& user_name)
 		_progress = progress::ON_GOING;
 	}
 }
-std::pair<bool, std::optional<TargetType>>
+std::pair<bool, std::optional<target_type>>
 fighting_pit::check_and_retrieve_target(const std::string& user, const team_member_sptr& member, const player_action& action)
 {
-	auto target_type = _chai_ptr->eval<data::targeting>(
+	auto t = _chai_ptr->eval<data::targeting>(
 			chai::util::get_ally_action_retriever(user, member->name(), action.action_name).append(".requireTarget();"));
-	std::optional<TargetType> target;
+	std::optional<target_type> target;
 
 	// Check if the target is appropriate
-	if (target_type == data::targeting::SELF) {
+	if (t == data::targeting::SELF) {
 		if (!action.ally_target.empty() || !action.contender_target.empty()) {
 			SPDLOG_WARN("[fp:{}] : Action {} target type is SELF, but Player {} tried to execute it with targets set",
 					action.action_name, user);
@@ -232,7 +236,7 @@ fighting_pit::check_and_retrieve_target(const std::string& user, const team_memb
 		}
 		target = std::nullopt;
 	}
-	else if (target_type == data::targeting::ENNEMY) {
+	else if (t == data::targeting::ENNEMY) {
 		if (!action.ally_target.empty() || action.contender_target.empty()) {
 			SPDLOG_WARN("[fp:{}] Action {} target type is ENNEMY, but Player {} tried to execute it with ally targets set",
 					_arena_id, action.action_name, user);
@@ -240,7 +244,7 @@ fighting_pit::check_and_retrieve_target(const std::string& user, const team_memb
 		}
 		target = contender_target_id{action.contender_target.at(0)};
 	}
-	else if (target_type == data::targeting::ENNEMIES) {
+	else if (t == data::targeting::ENNEMIES) {
 		if (!action.ally_target.empty() || action.contender_target.empty()) {
 			SPDLOG_WARN("[fp:{}] : Action {} target type is ENNEMIES, but Player {} tried to execute it with ally targets set",
 					_arena_id, action.action_name, user);
@@ -248,7 +252,7 @@ fighting_pit::check_and_retrieve_target(const std::string& user, const team_memb
 		}
 		target = contenders_targets_ids{std::move(action.contender_target)};
 	}
-	else if (target_type == data::targeting::ALLY) {
+	else if (t == data::targeting::ALLY) {
 		if (action.ally_target.empty() || !action.contender_target.empty()) {
 			SPDLOG_WARN("[fp:{}] : Action {} target type is ALLY, but Player {} tried to execute it with contender targets set",
 					_arena_id, action.action_name, user);
@@ -256,7 +260,7 @@ fighting_pit::check_and_retrieve_target(const std::string& user, const team_memb
 		}
 		target = ally_target_id{action.ally_target.at(0)};
 	}
-	else if (target_type == data::targeting::ALLIES) {
+	else if (t == data::targeting::ALLIES) {
 		if (action.ally_target.empty() || !action.contender_target.empty()) {
 			SPDLOG_WARN("[fp:{}] : Action {} target type is ALLIES, but Player {} tried to execute it with contender targets set",
 					_arena_id, action.action_name, user);
@@ -306,6 +310,13 @@ fighting_pit::make_looser_notification() const
 	flatbuffer_generator fb;
 	auto[data, size] = fb.generate_end_battle(false, {});
 	return zmq::message_t(data, size);
+}
+
+void
+fighting_pit::add_rewards(std::string action, uint quantity) noexcept
+{
+	_rewards->keys.emplace_back(std::move(action));
+	_rewards->quantity.emplace_back(quantity);
 }
 
 }

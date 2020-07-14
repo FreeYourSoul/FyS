@@ -27,13 +27,14 @@
 
 #include <vector>
 #include <memory>
-#include <fightingPit/team/party_team.hh>
 
 // forward declarations
 namespace chaiscript {
 class ChaiScript;
 }
 namespace fys::arena {
+class party_team;
+class team_member;
 class pit_contenders;
 }
 
@@ -45,6 +46,8 @@ using comparator_selection = std::function<bool(std::shared_ptr<T>, std::shared_
 class ally_party_teams {
 
 public:
+	~ally_party_teams();
+
 	[[nodiscard]] std::shared_ptr<team_member>
 	select_suitable_member(comparator_selection<team_member> comp);
 
@@ -93,7 +96,7 @@ public:
 	set_party_readiness(const std::string& party_team);
 
 	[[nodiscard]] const std::vector<std::unique_ptr<party_team>>&
-	party_teams() const { return _party_teams; }
+	party_teams() const;
 
 	[[nodiscard]] uint
 	fighting_pit_id() const { return _fighting_pit_id; }

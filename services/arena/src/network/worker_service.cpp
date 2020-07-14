@@ -28,6 +28,7 @@
 
 #include <FightingPitState_generated.h>
 
+#include <fightingPit/team/party_team.hh>
 #include <fightingPit/fighting_pit.hh>
 
 #include <history_manager.hh>

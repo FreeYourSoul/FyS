@@ -28,6 +28,7 @@
 #include <memory>
 #include <vector>
 #include <functional>
+
 #include <fightingPit/data/common_types.hh>
 #include <fightingPit/hexagon_side.hh>
 
@@ -93,7 +94,7 @@ public:
 	all_dead() const;
 
 private:
-	std::vector<std::shared_ptr<fighting_contender> > _contenders;
+	std::vector<std::shared_ptr<fighting_contender>> _contenders;
 
 	/**
 	 * Flags determining which contenders are going to move from one side to another

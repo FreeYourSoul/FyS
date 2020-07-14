@@ -59,8 +59,8 @@ public:
 	};
 
 public:
-	explicit fighting_pit_announcer(cache::Cml& cml)
-			:_cache(cml) { }
+	explicit fighting_pit_announcer(cache::Cml& cml);
+	~fighting_pit_announcer();
 
 	/**
 	 * Build a fighting pit thanks to the information given
@@ -102,13 +102,13 @@ public:
 	void set_creator_user_token(std::string creator_user_token) { _creator_user_token = std::move(creator_user_token); }
 	void enforce_ambush(bool ambush_enforced) noexcept { _is_ambush_enforced = ambush_enforced; }
 	void set_difficulty(fighting_pit::level level) noexcept { _difficulty = level; }
-	void set_creator_team_party(std::unique_ptr<party_team> pt) noexcept { _creator_party_team = std::move(pt); }
+	void set_creator_team_party(std::unique_ptr<party_team> pt) noexcept;
 	void set_join_disabled(bool is_join_disabled) noexcept { _is_join_disabled = is_join_disabled; }
 
 	// ============================================================================================================================
 	// for testing validation purpose
 	[[nodiscard]] static const ally_party_teams&
-	get_party_teams(const std::unique_ptr<fighting_pit>& fp) { return fp->_party_teams; }
+	get_party_teams(const std::unique_ptr<fighting_pit>& fp);
 
 	[[nodiscard]] static const pit_contenders&
 	get_pit_contenders(const std::unique_ptr<fighting_pit>& fp) { return fp->_contenders; }

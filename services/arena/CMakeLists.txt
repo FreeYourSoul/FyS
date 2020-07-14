@@ -74,7 +74,7 @@ target_link_libraries(arena_service PRIVATE
         cppzmq
         nlohmann_json::nlohmann_json
         fmt::fmt dl cml
-        fys::ar
+        resource::ar
         ${Flatbuffers_LIBRARIES})
 
 set_target_properties(arena_service PROPERTIES

@@ -26,6 +26,7 @@
 #define FYS_FIGHTINGCONTENDER_HH
 
 #include <memory>
+
 #include <fightingPit/data/common_types.hh>
 #include <fightingPit/fighting_pit_layout.hh>
 

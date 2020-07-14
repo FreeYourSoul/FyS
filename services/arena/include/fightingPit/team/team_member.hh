@@ -62,7 +62,7 @@ struct allies_targets_ids {
  *   Can be a specific id (of an ally or a contender depending on the action)
  *   Can be a side (as some action can target a whole side)
  */
-using TargetType = std::variant<
+using target_type = std::variant<
 		contender_target_id,
 		contenders_targets_ids,
 		ally_target_id,
@@ -75,7 +75,7 @@ using TargetType = std::variant<
  */
 struct pending_action {
 	uint id_action{};
-	std::optional<TargetType> target;
+	std::optional<target_type> target;
 };
 
 /**
@@ -92,7 +92,7 @@ public:
 	[[nodiscard]] bool
 	execute_action(ally_party_teams& apt, pit_contenders& pc, std::unique_ptr<chaiscript::ChaiScript>& chai_ptr);
 
-	void add_pending_action(const std::string& action_name, std::optional<TargetType> target);
+	void add_pending_action(const std::string& action_name, std::optional<target_type> target);
 
 	/**
 	 * @brief called by #fys::arena::ally_party_team to set the id of the team member

@@ -32,6 +32,7 @@
 #include <fightingPit/team/ally_party_teams.hh>
 #include <fightingPit/team/party_team.hh>
 #include <fightingPit/team/team_member.hh>
+#include <fightingPit/rewards.hh>
 
 #include <util/FbUtility.hh>
 

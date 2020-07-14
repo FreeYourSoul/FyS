@@ -21,11 +21,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <spdlog/spdlog.h>
 #include <random>
+
+#include <cmrc/cmrc.hpp>
+#include <spdlog/spdlog.h>
+
 #include <history_manager.hh>
 #include <arena_server_context.hh>
 #include <arena_server_service.hh>
+
+CMRC_DECLARE(resource);
 
 int
 main(int ac, char** av)

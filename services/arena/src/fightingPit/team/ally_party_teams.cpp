@@ -38,6 +38,8 @@
 
 namespace fys::arena {
 
+ally_party_teams::~ally_party_teams() = default;
+
 bool
 ally_party_teams::execute_ally_action(
 		const data::priority_elem& ally,
@@ -242,5 +244,7 @@ ally_party_teams::all_dead() const
 		});
 	});
 }
+const std::vector<std::unique_ptr<party_team>>&
+ally_party_teams::party_teams() const { return _party_teams; }
 
 }

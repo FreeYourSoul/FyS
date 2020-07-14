@@ -72,7 +72,13 @@ make_reward_rng_boundary_map(const fys::arena::encounter_context::reward_encount
 }
 
 namespace fys::arena {
+
 using json = nlohmann::json;
+
+fighting_pit_announcer::fighting_pit_announcer(cache::Cml& cml)
+		:_cache(cml) { }
+
+fighting_pit_announcer::~fighting_pit_announcer() = default;
 
 std::unique_ptr<fighting_pit>
 fighting_pit_announcer::build_fighting_pit(const encounter_context& ctx, const std::string& ws_id)
@@ -189,5 +195,10 @@ fighting_pit_announcer::add_action_to_one_member(std::uint32_t index, const std:
 {
 	_creator_party_team->access_team_members()[index]->add_doable_action(action_name, level);
 }
+void
+fighting_pit_announcer::set_creator_team_party(std::unique_ptr<party_team> pt) noexcept { _creator_party_team = std::move(pt); }
+
+const ally_party_teams&
+fighting_pit_announcer::get_party_teams(const std::unique_ptr<fighting_pit>& fp) { return fp->_party_teams; }
 
 } // namespace fys::arena

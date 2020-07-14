@@ -33,6 +33,8 @@
 #include <ArenaFightAction_generated.h>
 
 #include <network/db_connector.hh>
+
+#include <fightingPit/team/party_team.hh>
 #include <fightingPit/fighting_pit_announcer.hh>
 
 #include <arena_server_context.hh>
@@ -92,6 +94,8 @@ create_awaiting_player(const fys::fb::arn::FightingPitEncounter* binary)
 }
 
 namespace fys::arena {
+
+arena_server_service::~arena_server_service() = default;
 
 arena_server_service::arena_server_service(const arena_server_context& ctx)
 		:

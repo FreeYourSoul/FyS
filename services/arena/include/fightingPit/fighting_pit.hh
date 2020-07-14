@@ -30,21 +30,22 @@
 #include <optional>
 #include <chrono>
 
-#include <chaiscript/chaiscript.hpp>
-
 #include <fightingPit/contender/pit_contenders.hh>
 #include <fightingPit/fighting_pit_layout.hh>
 #include <fightingPit/side_battle.hh>
-#include <fightingPit/rewards.hh>
 #include <fightingPit/team/ally_party_teams.hh>
 #include <chai_register.hh>
 #include <fightingPit/team/team_member.hh>
 
 // forward declarations
+namespace chaiscript {
+class ChaiScript;
+}
 namespace zmq {
 struct message_t;
 }
 namespace fys::arena {
+struct rewards;
 class fighting_contender;
 class worker_service;
 class party_team;
@@ -122,6 +123,7 @@ public:
 	};
 
 	explicit fighting_pit(std::string creator_user_name, level levelFightingPit);
+	~fighting_pit();
 
 	/**
 	 *
@@ -219,11 +221,7 @@ public:
 	 * Disable the ability to join the battle if the fighting pit is currently reachable
 	 */
 	void disable_join() noexcept { if (is_joinable()) _progress = progress::ON_HOLD_NOT_REACHABLE; }
-	void add_rewards(std::string action, uint quantity) noexcept
-	{
-		_rewards->keys.emplace_back(std::move(action));
-		_rewards->quantity.emplace_back(quantity);
-	};
+	void add_rewards(std::string action, uint quantity) noexcept;
 	void set_player_readiness(const std::string& user_name);
 
 	/**
@@ -250,7 +248,7 @@ private:
 	 * @return_success : false if description doesn't match the requirement and/or target doesn't exist, true otherwise
 	 * @return_target  : a TargetType (Variant) set with the proper type
 	 */
-	[[nodiscard]] std::pair<bool, std::optional<TargetType>>
+	[[nodiscard]] std::pair<bool, std::optional<target_type>>
 	check_and_retrieve_target(const std::string& user, const team_member_sptr& member, const player_action& action);
 
 	/**
@@ -277,6 +275,7 @@ private:
 	progress _progress = progress::ON_HOLD;
 	level _level_fighting_pit;
 	std::chrono::milliseconds _time_interlude;
+
 	pit_contenders _contenders;
 	ally_party_teams _party_teams;
 

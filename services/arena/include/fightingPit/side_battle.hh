@@ -27,6 +27,7 @@
 
 #include <functional>
 #include <chrono>
+
 #include <fightingPit/hexagon_side.hh>
 #include <fightingPit/priority_order_list.hh>
 

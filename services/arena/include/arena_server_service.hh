@@ -32,6 +32,9 @@
 #include <CmlCopy.hh>
 
 // forward declarations
+namespace fys::network {
+class db_connector;
+}
 namespace fys::fb::arn {
 struct ArenaServerValidateAuth;
 struct ArenaFightAction;
@@ -123,6 +126,7 @@ class arena_server_service {
 
 public:
 	explicit arena_server_service(const arena_server_context& ctx);
+	~arena_server_service();
 
 	/**
 	 * @brief Run infinite loop that poll on the connections of the dispatcher, then of the players.

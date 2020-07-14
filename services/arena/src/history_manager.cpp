@@ -29,7 +29,7 @@
 namespace {
 
 [[nodiscard]] std::string
-targetStr(std::optional<fys::arena::TargetType> target)
+target_str(std::optional<fys::arena::target_type>)
 {
 	return "";
 }
@@ -37,7 +37,7 @@ targetStr(std::optional<fys::arena::TargetType> target)
 [[nodiscard]] nlohmann::json
 generate_json_target(fys::arena::history_action history_action)
 {
-	const std::optional<fys::arena::TargetType> &target = history_action.targets;
+	const std::optional<fys::arena::target_type> &target = history_action.targets;
 	if (target.has_value()) {
 
 	}
@@ -59,7 +59,7 @@ history_manager::add_historic(unsigned fp_id, history_action&& ha)
 		if (it != get_instance()._history.end()) {
 
 			SPDLOG_INFO("[fp:{}] : Member {}.{} execute action '{}' targeting {}", fp_id,
-					ha.id_character, ha.name, ha.action_key, targetStr(ha.targets));
+					ha.id_character, ha.name, ha.action_key, target_str(ha.targets));
 
 			it->second.player_actions.emplace_back(std::move(ha));
 		}
