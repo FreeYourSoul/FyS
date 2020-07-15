@@ -46,6 +46,9 @@ engine::engine(const std::string& player_connect_str,
 		_script_engine(std::make_unique<script_engine>(std::move(*engine))), // beurk...
 		_next_tick(std::chrono::system_clock::now() + time_interval) { }
 
+engine::~engine() = default;
+engine::engine(engine&&) noexcept = default;
+
 void
 engine::authenticate_player(auth_player auth, character_info info, std::string identifier)
 {

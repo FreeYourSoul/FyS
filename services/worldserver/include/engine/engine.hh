@@ -34,12 +34,14 @@
 #include <WSAction_generated.h>
 
 #include <engine/player_data.hh>
-#include <engine/script_engine.hh>
 #include <engine/collision_map.hh>
 #include <engine/world_populator.hh>
 #include <direct_connection_manager.hh>
 
 // forward declaration
+namespace fys::ws {
+class script_engine;
+}
 namespace fys::fb {
 struct WSAction;
 }
@@ -70,6 +72,9 @@ class engine : public common::direct_connection_manager {
 public:
 	explicit engine(const std::string& player_connect_str, collision_map&& map,
 			std::shared_ptr<script_engine> script_engine, std::chrono::system_clock::duration time_interval);
+	~engine();
+	engine(engine&&) noexcept;
+	engine(const engine&) = delete;
 
 	void execute_pending_moves(const std::chrono::system_clock::time_point& player_index);
 	void set_player_move_direction(std::uint32_t index, double direction);
