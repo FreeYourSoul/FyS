@@ -27,9 +27,10 @@
 
 #include <zmq.hpp>
 #include <zmq_utils.h>
-#include <StartupDispatcherCtx.hh>
 
 namespace fys {
+
+	class StartupDispatcherCtx;
 
     class SimpleProxy {
 

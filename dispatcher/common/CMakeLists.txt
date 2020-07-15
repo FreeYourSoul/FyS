@@ -1,15 +1,15 @@
-cmake_minimum_required( VERSION 3.6...3.15 )
-if(${CMAKE_VERSION} VERSION_LESS 3.15)
+cmake_minimum_required(VERSION 3.6...3.15)
+if (${CMAKE_VERSION} VERSION_LESS 3.15)
     cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
-else()
+else ()
     cmake_policy(VERSION 3.15)
-endif()
+endif ()
 
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
 # The version number.
-set (VERSION_MAJOR 1)
-set (VERSION_MINOR 0)
+set(VERSION_MAJOR 1)
+set(VERSION_MINOR 0)
 
 set(COMMON_DIR ${CMAKE_SOURCE_DIR}${RELATIVE_TO_COMMON})
 
@@ -18,37 +18,35 @@ find_package(TCLAP REQUIRED)
 
 # configure a header file to pass some of the CMake settings
 # to the source code
-configure_file (
+configure_file(
         "${COMMON_DIR}/include/context/Versioner.hh.in"
         "${COMMON_DIR}/include/context/Versioner.hh"
 )
 
-include_directories(
-        ${COMMON_DIR}/include/context
-        ${COMMON_DIR}/include/core
-)
-
 find_program(CCACHE_FOUND ccache)
-if(CCACHE_FOUND)
+if (CCACHE_FOUND)
     set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
     set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
-endif(CCACHE_FOUND)
+endif (CCACHE_FOUND)
 
-if (NOT TARGET common_dispatcher)
-    add_library(common_dispatcher
-            ${COMMON_DIR}/include/core/SimpleProxy.hh
-            ${COMMON_DIR}/include/core/Dispatcher.hh
-            ${COMMON_DIR}/include/core/DispatcherConnectionManager.hh
-            ${COMMON_DIR}/include/context/StartupDispatcherCtx.hh
-            ${COMMON_DIR}/src/context/StartupDispatcherCtx.cpp
-            ${COMMON_DIR}/src/core/SimpleProxy.cpp
-            ${COMMON_DIR}/src/core/Dispatcher.cpp
-            ${COMMON_DIR}/src/core/DispatcherConnectionManager.cpp)
+add_library(common_dispatcher
+        ${COMMON_DIR}/include/core/SimpleProxy.hh
+        ${COMMON_DIR}/include/core/Dispatcher.hh
+        ${COMMON_DIR}/include/core/DispatcherConnectionManager.hh
+        ${COMMON_DIR}/include/context/StartupDispatcherCtx.hh
+        ${COMMON_DIR}/src/context/StartupDispatcherCtx.cpp
+        ${COMMON_DIR}/src/core/SimpleProxy.cpp
+        ${COMMON_DIR}/src/core/Dispatcher.cpp
+        ${COMMON_DIR}/src/core/DispatcherConnectionManager.cpp)
 
-    set_target_properties(common_dispatcher PROPERTIES
-            CXX_STANDARD 20
-            CMAKE_CXX_COMPILER /usr/bin/g++)
+target_include_directories(common_dispatcher
+        PUBLIC
+        ${COMMON_DIR}/include
+        )
 
-    target_link_libraries(common_dispatcher
-            PUBLIC cppzmq)
-endif ()
+set_target_properties(common_dispatcher PROPERTIES
+        CXX_STANDARD 20
+        CMAKE_CXX_COMPILER /usr/bin/g++)
+
+target_link_libraries(common_dispatcher
+        PUBLIC cppzmq)

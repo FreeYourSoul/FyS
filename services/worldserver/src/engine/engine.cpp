@@ -36,15 +36,27 @@
 
 namespace fys::ws {
 
+struct engine::internal {
+
+	internal(collision_map&& map, std::chrono::system_clock::duration time_interval)
+			:map(std::move(map)), next_tick(std::chrono::system_clock::now() + time_interval) { }
+
+	collision_map map;
+	player_data data;
+
+	//! Next movement tick should take place at this moment
+	std::chrono::system_clock::time_point next_tick;
+};
+
 engine::engine(const std::string& player_connect_str,
 		collision_map&& map,
-		std::shared_ptr<script_engine> engine,
+		std::unique_ptr<script_engine> engine,
 		std::chrono::system_clock::duration time_interval)
 		:
 		common::direct_connection_manager(1, player_connect_str),
-		_map(std::move(map)),
-		_script_engine(std::make_unique<script_engine>(std::move(*engine))), // beurk...
-		_next_tick(std::chrono::system_clock::now() + time_interval) { }
+		_intern(std::make_unique<internal>(std::move(map), time_interval)),
+		_script_engine(std::move(engine))
+{ }
 
 engine::~engine() = default;
 engine::engine(engine&&) noexcept = default;
@@ -79,14 +91,14 @@ engine::execute_pending_moves(const std::chrono::system_clock::time_point& playe
 	_next_tick = _next_tick + TIMING_MOVE_INTERVAL;
 
 	_data.execution_on_player(
-			[this](std::uint32_t playerIndex, player_status status, character_info& pi, const std::string&, const std::string& userName) {
+			[this](std::uint32_t playerIndex, player_status status, character_info& info, const std::string&, const std::string& userName) {
 				if (status == player_status::MOVING) {
-					move_player_action(userName, playerIndex, pi);
+					move_player_action(userName, playerIndex, info);
 				}
 			});
 
-	_script_engine->execute_encounter_scripted_actions();
-	_script_engine->execute_neutral_scripted_actions();
+	auto report = _script_engine->execute_scripted_actions();
+
 }
 
 void
@@ -96,9 +108,9 @@ engine::spawnNPC(const std::chrono::system_clock::time_point& currentTime)
 }
 
 void
-engine::move_player_action(const std::string& user_name, std::uint32_t index_character, character_info& pi)
+engine::move_player_action(const std::string& user_name, std::uint32_t index_character, character_info& info)
 {
-	move_character_action(user_name, index_character, pi, true);
+	move_character_action(user_name, index_character, info, true);
 }
 
 void
@@ -149,7 +161,7 @@ engine::notifyClientsOfCharacterMove(
 	}
 }
 
-uint
+std::uint32_t
 engine::retrieve_data_index(const auth_player& player)
 {
 	auto it = _auth_player_on_data_index.find(player);

@@ -110,6 +110,7 @@ world_server_service::run_server_loop() noexcept
 					}
 				}
 		);
+
 		auto now = std::chrono::system_clock::now();
 		_world_server.spawnNPC(now);
 		_world_server.execute_pending_moves(now);

@@ -32,7 +32,7 @@ int
 main(int ac, char** av)
 {
 	try {
-		spdlog::set_pattern("[%D %H:%M:%S][ %22s:%-4# ][%L]: %v");
+		spdlog::set_pattern("[%D %H:%M:%S][world_server][ %22s:%-4# ][%L]: %v");
 		fys::ws::world_server_context ctx(ac, av);
 		int major, minor, patch;
 		zmq_version(&major, &minor, &patch);

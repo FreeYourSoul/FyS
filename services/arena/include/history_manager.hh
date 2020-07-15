@@ -97,7 +97,7 @@ private:
 	}
 
 private:
-	std::map<unsigned, history_fight> _history;
+	std::unordered_map<unsigned, history_fight> _history;
 	bool _is_manager_on = true;
 
 };

@@ -7,6 +7,7 @@ endif()
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_LIST_DIR}${RELATIVE_TO_COMMON}cmake")
 
+add_subdirectory(common)
 add_subdirectory(auth_dispatcher)
 add_subdirectory(chat_dispatcher)
-add_subdirectory(arena_dispatcher)
+add_subdirectory(generic_dispatcher)

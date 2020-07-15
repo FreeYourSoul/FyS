@@ -27,18 +27,11 @@
 
 #include <memory>
 #include <chrono>
-#include <sol/sol.hpp>
 #include <engine/world_populator.hh>
 #include <engine/player_data.hh>
 #include <CmlScriptDownloader.hh>
 
 using namespace std::chrono_literals;
-
-// forward declarations
-namespace fys::ws {
-class world_server_context;
-}
-// end forward declarations
 
 namespace fys::ws {
 
@@ -66,23 +59,6 @@ struct spawning_point {
 };
 
 /**
- * A representation of a NPC instance (NPC can be a neutral npc or an encounter)
- */
-struct npc_lua_instance {
-	character_info info;
-
-	//! Spawning Point namespace, empty in case of neutral encounter
-	std::string sp_namespace;
-
-	/**
-	 * Id of the npc used to reference the NPC in LUA
-	 * In case of encounter, this will represent the index of the NPC in the spawning point NPC list
-	 * In case of neutral NPC, this represent the unique id of the NPC
-	 */
-	std::uint32_t npc_lua_id;
-};
-
-/**
  * Each action made by an NPC via LUA script has to generate an actionId representing the action made
  * If this id is equal to '1' or '2'. A movement has been made or stopped and afterMove is filled.
  * This struct is used in order to generate the notifications to send to the players
@@ -98,6 +74,9 @@ struct npc_action {
 	//! Id defining the npc in LUA engine
 	std::uint32_t npc_lua_id = 0u;
 
+	//! Spawning point id linked to the encounter npc, std::nullopt if it's a neutral
+	std::optional<std::string_view> id_spawning_point;
+
 	/**
 	 * Id of the action made by the NPC
 	 * 0 means no action are made (no notification should be sent)
@@ -109,34 +88,36 @@ struct npc_action {
 	character_info after_move {};
 };
 
-class script_engine {
+/**
+ * @brief npc actions report of a server tick
+ */
+struct npc_actions_report {
 
+	std::vector<pos> central_positions;
+	std::vector<double> notification_distances;
+	std::vector<npc_action> npc_actions;
+
+};
+
+class script_engine {
 	friend class world_populator;
+
+	struct internal;
 
 	//! character_info_ret_type : position x, position y, velocity, angle
 	using character_info_ret_type = std::tuple<double, double, double, double>;
 
 public:
+	script_engine();
+	~script_engine();
+
 	void spawn_new_encounters(const std::chrono::system_clock::time_point& current_time);
 
-	void execute_encounter_scripted_actions();
-	void execute_neutral_scripted_actions();
+	[[nodiscard]] npc_actions_report
+	execute_scripted_actions();
 
 private:
-	void spawn_encounter(unsigned index_spawn);
-	void send_notification_to_player(std::vector<npc_action> actions, pos central_position_actions, double distance_notif);
-
-private:
-	sol::state _lua;
-
-	//! vector of encounter spawning points
-	std::vector<spawning_point> _spawningPoints;
-
-
-	//! vector of Spawned encounter, the index of the vector is the id of the spawning point corresponding
-	std::vector<std::vector<npc_lua_instance>> _spawned_per_spawning_point;
-
-	std::vector<std::vector<npc_lua_instance>> _neutral_npc_per_zone;
+	std::unique_ptr<internal> _intern;
 
 };
 

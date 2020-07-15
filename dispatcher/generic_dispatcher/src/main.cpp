@@ -1,7 +1,10 @@
 #include <spdlog/spdlog.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
-#include <StartupDispatcherCtx.hh>
-#include <SimpleProxy.hh>
+
+#include <zmq_addon.hpp>
+
+#include <core/SimpleProxy.hh>
+#include <context/StartupDispatcherCtx.hh>
 
 int main(int ac, char **av) {
     try {

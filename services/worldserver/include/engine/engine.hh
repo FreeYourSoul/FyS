@@ -69,9 +69,11 @@ class engine : public common::direct_connection_manager {
 
 	friend class world_populator;
 
+	struct internal;
+
 public:
 	explicit engine(const std::string& player_connect_str, collision_map&& map,
-			std::shared_ptr<script_engine> script_engine, std::chrono::system_clock::duration time_interval);
+			std::unique_ptr<script_engine> engine, std::chrono::system_clock::duration time_interval);
 	~engine();
 	engine(engine&&) noexcept;
 	engine(const engine&) = delete;
@@ -82,11 +84,11 @@ public:
 	void authenticate_player(auth_player auth, character_info info, std::string identifier);
 	void spawnNPC(const std::chrono::system_clock::time_point& currentTime);
 
-	[[nodiscard]] uint
+	[[nodiscard]] std::uint32_t
 	retrieve_data_index(const auth_player& player);
 
 private:
-	inline void move_player_action(const std::string& user_name, std::uint32_t index_character, character_info& pi);
+	inline void move_player_action(const std::string& user_name, std::uint32_t index_character, character_info& info);
 	inline void move_npc_action(std::uint32_t index_character, character_info& pi);
 	inline void move_character_action(const std::string& user_name, std::uint32_t index_character, character_info& pi, bool is_npc);
 
@@ -94,14 +96,12 @@ private:
 			const std::vector<std::string_view>& idts_to_identify);
 
 private:
-	collision_map _map;
-	player_data _data;
+	std::unique_ptr<internal> _intern;
+
 
 	//! Engine managing scripts of NPC and map triggers
 	std::unique_ptr<script_engine> _script_engine;
 
-	//! Next movement tick should take place at this moment
-	std::chrono::system_clock::time_point _next_tick;
 
 	//! Authenticated user token to index in PlayersData
 	std::map<auth_player, uint> _auth_player_on_data_index;

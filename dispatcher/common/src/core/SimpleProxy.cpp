@@ -21,8 +21,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include <context/StartupDispatcherCtx.hh>
 
-#include "SimpleProxy.hh"
+#include "core/SimpleProxy.hh"
 
 namespace fys {
 
