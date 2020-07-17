@@ -52,8 +52,7 @@ namespace {
  * @param distance_notif distance notification at which players should be notified
  */
 void
-merge_notification_in_report(npc_actions_report& report,
-		std::vector<npc_action> actions, pos central_position_actions, double distance_notif)
+merge_spawning_point_in_report(npc_actions_report& report)
 {
 
 }
@@ -85,25 +84,31 @@ struct script_engine::internal {
 	execute_encounter_scripted_actions()
 	{
 		npc_actions_report report;
+
+		report.npc_actions.reserve(spawning_points.size());
 		for (std::uint32_t sp_index = 0; sp_index < spawning_points.size(); ++sp_index) {
+
 			const std::string_view id_spawning_point = spawning_points.at(sp_index).id_spawning_point;
 			std::vector<npc_action> actions_executed;
 
 			actions_executed.reserve(spawned_per_spawning_point.at(sp_index).size());
-			for (std::uint32_t spawnId = 0; spawnId < spawned_per_spawning_point.at(sp_index).size(); ++spawnId) {
-				auto& npc = spawned_per_spawning_point.at(sp_index).at(spawnId);
+			for (std::uint32_t spawn_id = 0; spawn_id < spawned_per_spawning_point.at(sp_index).size(); ++spawn_id) {
+				auto& npc = spawned_per_spawning_point.at(sp_index).at(spawn_id);
 				try {
-					unsigned actionId;
+					unsigned action_id;
 					double x, y, velocity, angle;
 
-					sol::tie(actionId, x, y, velocity, angle) =
+					sol::tie(action_id, x, y, velocity, angle) =
 							lua["execAction"](lua[npc.sp_namespace], npc.npc_lua_id, std::ref(npc.info));
 
-					npc.info.position.x = x;
-					npc.info.position.y = y;
-					npc.info.velocity = velocity;
-					npc.info.angle = angle;
-					actions_executed.emplace_back(npc_action{npc.npc_lua_id, id_spawning_point, actionId, npc.info});
+					if (action_id != npc_action::IDLE) {
+						npc.info.position.x = x;
+						npc.info.position.y = y;
+						npc.info.velocity = velocity;
+						npc.info.angle = angle;
+
+						actions_executed.emplace_back(npc_action{npc.npc_lua_id, id_spawning_point, action_id, npc.info});
+					}
 				}
 				catch (const std::exception& e) {
 					SPDLOG_ERROR("[lua] : An error occurred while executing script action SpawningPoint {} npc {} : \n[ERROR] : {}",
@@ -111,10 +116,9 @@ struct script_engine::internal {
 				}
 			}
 
-			merge_notification_in_report(report, std::move(actions_executed),
-					spawning_points.at(sp_index).center_spawning_point,
-					spawning_points.at(sp_index).distance_notification);
+			report.npc_actions.emplace_back(std::move(actions_executed));
 		}
+//			merge_spawning_point_in_report(report);
 		return report;
 	}
 
@@ -159,7 +163,7 @@ struct script_engine::internal {
 	//! vector of encounter spawning points
 	std::vector<spawning_point> spawning_points;
 
-	//! vector of Spawned encounter, the index of the vector is the id of the spawning point corresponding
+	//! vector of Spawned encounter, the index of the vector is the id of the corresponding spawning point
 	std::vector<std::vector<npc_lua_instance>> spawned_per_spawning_point;
 
 	std::vector<std::vector<npc_lua_instance>> neutral_npc_per_zone;

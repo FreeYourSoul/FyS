@@ -11,12 +11,18 @@ table MoveNotification {
     y:double = 0;
 }
 
+table BulkMove {
+    bulk:[MoveNotification];
+}
+
 union Response {
     /// forward arena reply
     arn.ArenaServerAuth,
 
     /// inform about current position to players in order to adjust if mismatch with local
-    MoveNotification
+    MoveNotification,
+    // Bulk version
+    BulkMove
 }
 
 table ResponseFrame {

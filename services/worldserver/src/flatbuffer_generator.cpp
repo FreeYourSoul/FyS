@@ -29,8 +29,9 @@
 
 namespace fys::ws {
 
-std::pair<void*, uint>
-fys::ws::flatbuffer_generator::generate_move_notif(const std::string& player_name, const fys::ws::character_info& info)
+
+std::pair<void*, std::uint32_t>
+flatbuffer_generator::generate_move_notif(const std::string& player_name, const character_info& info)
 {
 	auto moveNotification = fb::world::CreateMoveNotification(
 			_fbb,
@@ -43,7 +44,7 @@ fys::ws::flatbuffer_generator::generate_move_notif(const std::string& player_nam
 
 	auto message = fb::world::CreateResponseFrame(
 			_fbb,
-			fys::fb::world::Response_MoveNotification,
+			fb::world::Response_MoveNotification,
 			moveNotification.Union()
 	);
 

@@ -57,7 +57,7 @@ retrieve_string_vector(const std::vector<std::pair<std::string, uint>> doableAtt
 
 namespace fys::arena {
 
-std::pair<void*, uint>
+std::pair<void*, std::uint32_t>
 flatbuffer_generator::generateErrorSaturated(const std::string& arenaCode)
 {
 	_fbb.Clear();
@@ -70,7 +70,7 @@ flatbuffer_generator::generateErrorSaturated(const std::string& arenaCode)
 	return std::pair(_fbb.GetBufferPointer(), _fbb.GetSize());
 }
 
-std::pair<void*, uint>
+std::pair<void*, std::uint32_t>
 flatbuffer_generator::generateFightingPitState(const fys::arena::fighting_pit& fp)
 {
 	_fbb.Clear();
@@ -91,7 +91,7 @@ flatbuffer_generator::generateFightingPitState(const fys::arena::fighting_pit& f
 	return std::pair(_fbb.GetBufferPointer(), _fbb.GetSize());
 }
 
-std::pair<void*, uint>
+std::pair<void*, std::uint32_t>
 flatbuffer_generator::generate_party_team_status(const party_team& partyTeam)
 {
 	_fbb.Clear();
@@ -120,7 +120,7 @@ flatbuffer_generator::generate_party_team_status(const party_team& partyTeam)
 	return std::pair(_fbb.GetBufferPointer(), _fbb.GetSize());
 }
 
-std::pair<void*, uint>
+std::pair<void*, std::uint32_t>
 flatbuffer_generator::generate_end_battle(bool win, const rewards& rewards)
 {
 	_fbb.Clear();
@@ -148,7 +148,7 @@ flatbuffer_generator::generate_end_battle(bool win, const rewards& rewards)
 	return std::pair(_fbb.GetBufferPointer(), _fbb.GetSize());
 }
 
-std::pair<void*, uint>
+std::pair<void*, std::uint32_t>
 flatbuffer_generator::generate_action_notification(
 		const std::string& action_key,
 		const std::vector<fighting_contender_sptr>& contender_targets,

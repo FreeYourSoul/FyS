@@ -37,6 +37,7 @@
 #include <engine/collision_map.hh>
 #include <engine/world_populator.hh>
 #include <direct_connection_manager.hh>
+#include "script_engine.hh"
 
 // forward declaration
 namespace fys::ws {
@@ -88,11 +89,9 @@ public:
 	retrieve_data_index(const auth_player& player);
 
 private:
-	inline void move_player_action(const std::string& user_name, std::uint32_t index_character, character_info& info);
-	inline void move_npc_action(std::uint32_t index_character, character_info& pi);
-	inline void move_character_action(const std::string& user_name, std::uint32_t index_character, character_info& pi, bool is_npc);
-
-	inline void notifyClientsOfCharacterMove(const character_info& pi, const std::string& user_name,
+	inline void move_character_action(const std::string& character_name, std::uint32_t index_character, character_info& info);
+	inline void notify_reported_npc_movements(const npc_actions_report& action_report);
+	inline void notify_clients_of_character_move(const character_info& info, const std::string& user_name,
 			const std::vector<std::string_view>& idts_to_identify);
 
 private:

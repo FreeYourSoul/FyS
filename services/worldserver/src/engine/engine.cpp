@@ -36,6 +36,15 @@
 
 namespace fys::ws {
 
+[[nodiscard]] inline pos
+calculate_potential_future_position(const character_info& info)
+{
+	return pos{
+			info.position.x * (info.velocity * std::cos(info.angle)),
+			info.position.y * (info.velocity * std::sin(info.angle))
+	};
+}
+
 struct engine::internal {
 
 	internal(collision_map&& map, std::chrono::system_clock::duration time_interval)
@@ -55,8 +64,7 @@ engine::engine(const std::string& player_connect_str,
 		:
 		common::direct_connection_manager(1, player_connect_str),
 		_intern(std::make_unique<internal>(std::move(map), time_interval)),
-		_script_engine(std::move(engine))
-{ }
+		_script_engine(std::move(engine)) { }
 
 engine::~engine() = default;
 engine::engine(engine&&) noexcept = default;
@@ -64,41 +72,42 @@ engine::engine(engine&&) noexcept = default;
 void
 engine::authenticate_player(auth_player auth, character_info info, std::string identifier)
 {
-	std::uint32_t index = _data.add_new_player_data(std::move(info), std::move(identifier), auth.user_name);
+	std::uint32_t index = _intern->data.add_new_player_data(std::move(info), std::move(identifier), auth.user_name);
 	_auth_player_on_data_index.insert(std::pair(std::move(auth), index));
 }
 
 void
 engine::set_player_move_direction(std::uint32_t index, double direction)
 {
-	_data.set_player_move_action(index, direction);
+	_intern->data.set_player_move_action(index, direction);
 }
 
 void
 engine::stop_player_move(std::uint32_t index)
 {
-	_data.stop_player_move(index);
+	_intern->data.stop_player_move(index);
 }
 
 void
 engine::execute_pending_moves(const std::chrono::system_clock::time_point& player_index)
 {
 	// Don't process pending moves if it isn't ticking
-	if (player_index < _next_tick) {
+	if (player_index < _intern->next_tick) {
 		return;
 	}
 	// Setup next tick time point
-	_next_tick = _next_tick + TIMING_MOVE_INTERVAL;
+	_intern->next_tick = _intern->next_tick + TIMING_MOVE_INTERVAL;
 
-	_data.execution_on_player(
+	// execute and report players movements
+	_intern->data.execution_on_player(
 			[this](std::uint32_t playerIndex, player_status status, character_info& info, const std::string&, const std::string& userName) {
 				if (status == player_status::MOVING) {
-					move_player_action(userName, playerIndex, info);
+					move_character_action(userName, playerIndex, info);
 				}
 			});
 
-	auto report = _script_engine->execute_scripted_actions();
-
+	// execute and report npc movements
+	notify_reported_npc_movements(_script_engine->execute_scripted_actions());
 }
 
 void
@@ -108,56 +117,69 @@ engine::spawnNPC(const std::chrono::system_clock::time_point& currentTime)
 }
 
 void
-engine::move_player_action(const std::string& user_name, std::uint32_t index_character, character_info& info)
+engine::move_character_action(const std::string& character_name, std::uint32_t index_character, character_info& info)
 {
-	move_character_action(user_name, index_character, info, true);
-}
+	pos future_position = calculate_potential_future_position(info);
 
-void
-engine::move_npc_action(std::uint32_t index_character, character_info& pi)
-{
-	move_character_action(std::string("NPC_").append(std::to_string(index_character)), index_character, pi, true);
-}
+	if (_intern->map.can_move_to(future_position, 0)) {
+		info.position = future_position;
 
-void
-engine::move_character_action(const std::string& user_name, std::uint32_t index_character, character_info& pi, bool is_npc)
-{
-	double velocity = pi.velocity;
+		_intern->map.execute_potential_trigger(index_character, info);
 
-	// calculate future position if the move occurs
-	pos futurePos = pos{
-			pi.position.x * (velocity * std::cos(pi.angle)),
-			pi.position.y * (velocity * std::sin(pi.angle))
-	};
-
-	if (_map.can_move_to(futurePos, 0)) {
-		pi.position = futurePos;
-
-		// NPC Character can't trigger map triggers
-		if (!is_npc) _map.execute_potential_trigger(index_character, pi);
-
-		if (const auto clientsToNotify = _data.get_player_idts_around_pos(pi.position); !clientsToNotify.empty()) {
-			notifyClientsOfCharacterMove(pi, user_name, clientsToNotify);
+		if (const auto idts_to_notify = _intern->data.get_player_idts_around_pos(info.position); !idts_to_notify.empty()) {
+			notify_clients_of_character_move(info, character_name, idts_to_notify);
 		}
 	}
 }
 
+static constexpr unsigned index_identity = 0;
+static constexpr unsigned index_notification = 0;
+
 void
-engine::notifyClientsOfCharacterMove(
-		const character_info& pi,
+engine::notify_reported_npc_movements(const npc_actions_report& action_report)
+{
+	zmq::multipart_t to_send;
+
+	to_send.add({});
+	to_send.add({});
+
+	for (std::uint32_t i = 0; i < action_report.npc_actions.size(); ++i) {
+
+		if (action_report.npc_actions.at(i).empty()) {
+			continue;
+		}
+
+		// get the identities to notify around the spawning point
+		const auto idts_to_notify = _intern->data.get_player_idts_around_pos(action_report.central_positions.at(i));
+		if (idts_to_notify.empty()) {
+			continue;
+		}
+
+		auto[binary, size] = flatbuffer_generator().generate_bulk_move_notif(action_report.npc_actions.at(i));
+		to_send.at(index_notification).rebuild(binary, size);
+
+		for (const auto& identity : idts_to_notify) {
+			to_send.at(index_identity).rebuild(identity.data(), identity.size());
+			to_send.send(_router_player_connection);
+		}
+
+	}
+}
+
+void
+engine::notify_clients_of_character_move(
+		const character_info& info,
 		const std::string& user_name,
 		const std::vector<std::string_view>& idts_to_identify)
 {
-	const unsigned indexIdentity = 0;
-	zmq::multipart_t toSend;
-	flatbuffer_generator fg;
+	zmq::multipart_t to_send;
 
-	auto[binary, size] = fg.generate_move_notif(user_name, pi);
-	toSend.add({});
-	toSend.addmem(binary, size);
-	for (const auto& id : idts_to_identify) {
-		toSend.at(indexIdentity).rebuild(id.data(), id.size());
-		toSend.send(_routerPlayerConnection);
+	auto[binary, size] = flatbuffer_generator().generate_move_notif(user_name, info);
+	to_send.add({});
+	to_send.addmem(binary, size);
+	for (const auto& identity : idts_to_identify) {
+		to_send.at(index_identity).rebuild(identity.data(), identity.size());
+		to_send.send(_router_player_connection);
 	}
 }
 

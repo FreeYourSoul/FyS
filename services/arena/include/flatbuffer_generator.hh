@@ -71,27 +71,27 @@ namespace fys::arena {
 class flatbuffer_generator {
 
 public:
-	[[nodiscard]] std::pair<void*, uint>
+	[[nodiscard]] std::pair<void*, std::uint32_t>
 	generateErrorSaturated(const std::string& arenaCode);
 
-	[[nodiscard]] std::pair<void*, uint>
+	[[nodiscard]] std::pair<void*, std::uint32_t>
 	generateFightingPitState(const fys::arena::fighting_pit& fp);
 
-	[[nodiscard]] std::pair<void*, uint>
+	[[nodiscard]] std::pair<void*, std::uint32_t>
 	generate_party_team_status(const fys::arena::party_team& partyTeam);
 
-	[[nodiscard]] std::pair<void*, uint>
+	[[nodiscard]] std::pair<void*, std::uint32_t>
 	generate_end_battle(bool win, const rewards& rewards);
 
-	[[nodiscard]] std::pair<void*, uint>
+	[[nodiscard]] std::pair<void*, std::uint32_t>
 	generate_action_notification(const std::string& action_key,
 			const std::vector<fighting_contender_sptr>& contender_targets,
 			const std::vector<team_member_sptr>& ally_targets);
 
-//	[[nodiscard]] std::pair<void*, uint>
+//	[[nodiscard]] std::pair<void*, std::uint32_t>
 //	generateCosmetics(const fys::arena::PartyTeam& partyTeam);
 //
-//	[[nodiscard]] std::pair<void*, uint>
+//	[[nodiscard]] std::pair<void*, std::uint32_t>
 //	generateCosmetics(const std::vector<PitContenders>& contenders);
 
 private:

@@ -95,7 +95,7 @@ struct npc_actions_report {
 
 	std::vector<pos> central_positions;
 	std::vector<double> notification_distances;
-	std::vector<npc_action> npc_actions;
+	std::vector<std::vector<npc_action>> npc_actions;
 
 };
 
