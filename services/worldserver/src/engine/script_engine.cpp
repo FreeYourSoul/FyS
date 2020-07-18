@@ -274,6 +274,7 @@ world_populator::register_common_lua_engine(const std::string& to_lua_init_file)
 	}
 	catch (const std::exception& e) {
 		SPDLOG_ERROR("Error while initiating LUA engine : {} ", e.what());
+		throw;
 	}
 
 	auto position = _script_engine->_intern->lua.new_usertype<pos>("Pos");
