@@ -40,7 +40,7 @@ namespace fys::ws {
 namespace {
 
 /**
- * Merge actions notification from a given spawning_point (central position, distance of notification),
+ * @brief Merge actions notification from a given spawning_point (central position, distance of notification),
  *
  * TO THINK ABOUT : Making a merge that decrease the amount of spawning points, The issue being that if
  * a spawning point get merged with another one, the distance of notification has to be enlarged. Otherwise
@@ -60,7 +60,7 @@ merge_spawning_point_in_report(npc_actions_report& report)
 }
 
 /**
- * A representation of a NPC instance (NPC can be a neutral npc or an encounter)
+ * @brief A representation of a NPC instance (NPC can be a neutral npc or an encounter)
  */
 struct npc_lua_instance {
 	character_info info;
@@ -69,8 +69,8 @@ struct npc_lua_instance {
 	std::string sp_namespace;
 
 	/**
-	 * Id of the npc used to reference the NPC in LUA
-	 * In case of encounter, this will represent the index of the NPC in the spawning point NPC list
+	 * @brief Id of the npc used to reference the NPC in LUA
+	 * @details In case of encounter, this will represent the index of the NPC in the spawning point NPC list
 	 * In case of neutral NPC, this represent the unique id of the NPC
 	 */
 	std::uint32_t npc_lua_id;
