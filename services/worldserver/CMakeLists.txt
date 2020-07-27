@@ -45,11 +45,9 @@ add_executable(worldserver_service
         )
 
 target_link_libraries(worldserver_service
-        nlohmann_json::nlohmann_json
-        cppzmq
         lua
-        common_service
-        fmt::fmt dl cml
+        fys::common_service
+        dl cml
         ${TMXLITE_LIBRARIES} # to remove
         ${Flatbuffers_LIBRARIES})
 

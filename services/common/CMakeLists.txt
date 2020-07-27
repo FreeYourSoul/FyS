@@ -62,11 +62,14 @@ set(COMMON_INCLUDES_DIR
         ${CMAKE_CURRENT_LIST_DIR}/include
         ${CMAKE_CURRENT_LIST_DIR}/flatbuffer/includes)
 
-if (TARGET common_service)
-else ()
-    add_library(common_service INTERFACE)
-    target_include_directories(common_service INTERFACE ${COMMON_INCLUDES_DIR})
-    target_sources(common_service INTERFACE ${COMMON_SRCS})
-endif ()
+add_library(common_service INTERFACE)
+add_library(fys::common_service ALIAS common_service)
+target_link_libraries(common_service INTERFACE
+        fys::fil
+        cppzmq
+        fmt::fmt
+        nlohmann_json::nlohmann_json)
+target_include_directories(common_service INTERFACE ${COMMON_INCLUDES_DIR})
+target_sources(common_service INTERFACE ${COMMON_SRCS})
 
 include_directories(flatbuffer/includes)

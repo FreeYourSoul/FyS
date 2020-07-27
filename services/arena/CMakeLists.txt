@@ -70,11 +70,9 @@ add_executable(arena_service
 
 target_compile_definitions(arena_service PUBLIC -DCHAISCRIPT_NO_THREADS)
 target_link_libraries(arena_service PRIVATE
-        common_service
-        cppzmq
-        nlohmann_json::nlohmann_json
-        fmt::fmt dl cml
-        resource::ar
+        fys::common_service
+        dl
+        cml
         ${Flatbuffers_LIBRARIES})
 
 set_target_properties(arena_service PROPERTIES

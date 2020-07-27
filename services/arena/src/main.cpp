@@ -23,32 +23,30 @@
 
 #include <random>
 
-#include <cmrc/cmrc.hpp>
+//#include <cmrc/cmrc.hpp>
 #include <spdlog/spdlog.h>
 
 #include <history_manager.hh>
 #include <arena_server_context.hh>
 #include <arena_server_service.hh>
 
-CMRC_DECLARE(resource);
+//CMRC_DECLARE(resource);
 
-int
-main(int ac, char** av)
-{
-	try {
-		spdlog::set_pattern("[%D %H:%M:%S][arena_server][ %22s:%-4# ][%L]: %v");
-		fys::arena::arena_server_context ctx(ac, av);
-		int major, minor, patch;
-		zmq_version(&major, &minor, &patch);
-		SPDLOG_INFO("Version ZMQ : {}.{}.{}\n{}", major, minor, patch, ctx.to_string());
+int main(int ac, char **av) {
+  try {
+	spdlog::set_pattern("[%D %H:%M:%S][arena_server][ %22s:%-4# ][%L]: %v");
+	fys::arena::arena_server_context ctx(ac, av);
+	int major, minor, patch;
+	zmq_version(&major, &minor, &patch);
+	SPDLOG_INFO("Version ZMQ : {}.{}.{}\n{}", major, minor, patch, ctx.to_string());
 
-		fys::arena::arena_server_service serverService(ctx);
-		fys::arena::history_manager::activate_historic_manager(true);
+	fys::arena::arena_server_service serverService(ctx);
+	fys::arena::history_manager::activate_historic_manager(true);
 
-		serverService.run_server_loop();
-	}
-	catch (const std::exception& e) {
-		SPDLOG_ERROR("Main caught an exception: {}", e.what());
-	}
-	return 0;
+	serverService.run_server_loop();
+  }
+  catch (const std::exception& e) {
+	SPDLOG_ERROR("Main caught an exception: {}", e.what());
+  }
+  return 0;
 }
