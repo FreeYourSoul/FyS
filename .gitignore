@@ -44,3 +44,8 @@
 docs/build/
 docs/doxygen/
 docs/sphinx/
+docs/CMakeCache.txt
+docs/CMakeDoxyfile.in
+docs/CMakeDoxygenDefaults.cmake
+docs/Makefile
+docs/cmake_install.cmake
