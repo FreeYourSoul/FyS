@@ -55,8 +55,14 @@ world_populator::build_world_server_engine()
 	::assert_engine_error(static_cast<bool>(_map) == false, "Map is not initialized");
 
 	SPDLOG_INFO("[INIT] ServerEngine setup is correct...");
-	auto ret = std::make_shared<engine>(_connection_string, std::move(*_map.get()), std::move(_script_engine), _interval_movement);
+
+	auto ret = std::make_shared<engine>(_connection_string,
+			std::move(*_map.get()),
+			std::move(_script_engine),
+			_interval_movement);
+
 	SPDLOG_INFO("[INIT] ServerEngine building is complete");
+
 	return ret;
 }
 

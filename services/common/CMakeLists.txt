@@ -1,13 +1,4 @@
-cmake_minimum_required(VERSION 3.6...3.15)
-if (${CMAKE_VERSION} VERSION_LESS 3.15)
-    cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
-else ()
-    cmake_policy(VERSION 3.15)
-endif ()
-
 project(common)
-
-find_package(FlatBuffers REQUIRED)
 
 set(FLAT_BUFFER_PATH ${CMAKE_CURRENT_LIST_DIR}/flatbuffer)
 set(FLATBUFFER_INCLUDE_DIR "${FLAT_BUFFER_PATH}/includes")
@@ -54,9 +45,7 @@ set(COMMON_SRCS
         ${CMAKE_CURRENT_LIST_DIR}/include/connection_handler.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/random_generator.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/sized_queue.hh
-        ${CMAKE_CURRENT_LIST_DIR}/include/boundary_map.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/service_context_base.hh
-        ${CMAKE_CURRENT_LIST_DIR}/include/algorithm/algorithm.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/key.hh)
 set(COMMON_INCLUDES_DIR
         ${CMAKE_CURRENT_LIST_DIR}/include
@@ -65,6 +54,7 @@ set(COMMON_INCLUDES_DIR
 add_library(common_service INTERFACE)
 add_library(fys::common_service ALIAS common_service)
 target_link_libraries(common_service INTERFACE
+        ${Flatbuffers_LIBRARIES}
         fys::fil
         cppzmq
         fmt::fmt

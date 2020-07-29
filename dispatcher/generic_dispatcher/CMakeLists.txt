@@ -10,7 +10,6 @@ project(generic_dispatcher
         DESCRIPTION "Arena Dispatcher"
         LANGUAGES CXX)
 
-find_package(nlohmann_json REQUIRED)
 
 include_directories(${CMAKE_CURRENT_LIST_DIR}/include)
 

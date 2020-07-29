@@ -1,26 +1,7 @@
-cmake_minimum_required(VERSION 3.6...3.15)
-if (${CMAKE_VERSION} VERSION_LESS 3.15)
-    cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
-else ()
-    cmake_policy(VERSION 3.15)
-endif ()
-
 project(worldserver_service
         VERSION 1.0
         DESCRIPTION "WorldServer Service Server"
         LANGUAGES CXX)
-
-find_package(TMXLITE REQUIRED)
-find_package(nlohmann_json REQUIRED)
-find_package(cppzmq REQUIRED)
-find_package(fmt REQUIRED)
-find_package(Lua REQUIRED)
-
-find_program(CCACHE_FOUND ccache)
-if (CCACHE_FOUND)
-    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
-    set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
-endif (CCACHE_FOUND)
 
 add_executable(worldserver_service
         ${CMAKE_CURRENT_LIST_DIR}/src/main.cpp
@@ -47,20 +28,14 @@ add_executable(worldserver_service
 target_link_libraries(worldserver_service
         lua
         fys::common_service
-        dl cml
+        dl fys::cml
         ${TMXLITE_LIBRARIES} # to remove
-        ${Flatbuffers_LIBRARIES})
+        )
 
-set_target_properties(worldserver_service PROPERTIES
-        CXX_STANDARD 17
-        CMAKE_CXX_COMPILER /usr/bin/g++)
-
-set_property(TARGET worldserver_service PROPERTY INCLUDE_DIRECTORIES
+target_include_directories(worldserver_service PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}/include
-        ${CMAKE_CURRENT_LIST_DIR}/../../scripting_cache/cml/include
         ${FLATBUFFER_INCLUDE_DIR}
         ${TMXLITE_HEADERS})
-
 
 include(CheckIPOSupported)
 check_ipo_supported(RESULT result)

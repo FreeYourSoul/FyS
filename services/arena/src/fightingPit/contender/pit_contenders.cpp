@@ -25,7 +25,8 @@
 #include <functional>
 
 #include <random_generator.hh>
-#include <algorithm/algorithm.hh>
+
+#include <fil/algorithm/suitable.hh>
 
 #include <fightingPit/contender/fighting_contender.hh>
 #include <fightingPit/contender/pit_contenders.hh>
@@ -70,7 +71,7 @@ std::shared_ptr<fighting_contender>
 pit_contenders::select_suitable_contender_on_side(hexagon_side::orientation side, comparator_selection<fighting_contender> comp) const
 {
 	std::vector<std::shared_ptr<fighting_contender>> result;
-	auto it = fys::find_most_suitable(_contenders.begin(), _contenders.end(), [side, &comp](auto& current, auto& next) {
+	auto it = fil::find_most_suitable(_contenders.begin(), _contenders.end(), [side, &comp](auto& current, auto& next) {
 		return current->side_orient() == side && comp(current, next);
 	});
 	if (it == _contenders.end())
@@ -93,7 +94,7 @@ std::shared_ptr<fighting_contender>
 pit_contenders::select_suitable_contender(comparator_selection<fighting_contender> comp) const
 {
 	std::vector<std::shared_ptr<fighting_contender>> result;
-	auto it = fys::find_most_suitable(_contenders.begin(), _contenders.end(), comp);
+	auto it = fil::find_most_suitable(_contenders.begin(), _contenders.end(), comp);
 	if (it == _contenders.end()) {
 		return nullptr;
 	}
@@ -104,7 +105,7 @@ std::shared_ptr<fighting_contender>
 pit_contenders::select_suitable_contender_on_side_alive(hexagon_side::orientation side, comparator_selection<fighting_contender> comp) const
 {
 	std::vector<std::shared_ptr<fighting_contender>> result;
-	auto it = fys::find_most_suitable(_contenders.begin(), _contenders.end(), [side, &comp](auto& current, auto& next) {
+	auto it = fil::find_most_suitable(_contenders.begin(), _contenders.end(), [side, &comp](auto& current, auto& next) {
 		return !current->access_status().life_pt.is_dead() && !next->access_status().life_pt.is_dead() &&
 				current->side_orient() == side && comp(current, next);
 	});
@@ -118,7 +119,7 @@ std::shared_ptr<fighting_contender>
 pit_contenders::select_suitable_contender_alive(comparator_selection<fighting_contender> comp) const
 {
 	std::vector<std::shared_ptr<fighting_contender>> result;
-	auto it = fys::find_most_suitable(_contenders.begin(), _contenders.end(), [&comp](auto& current, auto& next) {
+	auto it = fil::find_most_suitable(_contenders.begin(), _contenders.end(), [&comp](auto& current, auto& next) {
 		return !current->access_status().life_pt.is_dead() && comp(current, next);
 	});
 	if (it == _contenders.end())

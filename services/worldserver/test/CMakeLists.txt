@@ -7,22 +7,11 @@ endif ()
 
 project(world_server_test CXX)
 
-set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_COMPILER /usr/bin/g++)
 
-find_package(cppzmq REQUIRED)
-find_package(Catch2 REQUIRED)
-find_package(Lua REQUIRED)
-find_package(fmt REQUIRED)
-#find_package(FSeam)
-include(Catch REQUIRED)
-
-enable_testing()
 include_directories(
-        ${COMMON_INCLUDES_DIR}
         ${TMXLITE_HEADERS}
-        ${CMAKE_CURRENT_LIST_DIR}/../include
-        ${CMAKE_CURRENT_LIST_DIR}/../../../scripting_cache/cml/include)
+        ${CMAKE_CURRENT_LIST_DIR}/../include)
 
 add_executable(world_server_test
         ${CMAKE_CURRENT_LIST_DIR}/catchMain.cpp
@@ -71,21 +60,19 @@ add_executable(world_server_lua_test
         ${CMAKE_CURRENT_LIST_DIR}/../include/engine/world_populator.hh
         )
 
-target_link_libraries(world_server_test cppzmq Catch2::Catch2)
-target_link_libraries(world_server_test
+target_link_libraries(world_server_test PRIVATE
         ${TMXLITE_LIBRARIES} # to remove
-        cppzmq
+        fys::common_service
         Catch2::Catch2
-        fmt
         lua
-        common_service)
+        )
 catch_discover_tests(world_server_test)
 
 target_link_libraries(world_server_lua_test
         ${TMXLITE_LIBRARIES} # to remove
-        cppzmq
+        fys::common_service
         Catch2::Catch2
-        fmt
+        fmt::fmt
         lua
-        common_service)
+        )
 catch_discover_tests(world_server_lua_test)

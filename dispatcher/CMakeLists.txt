@@ -1,13 +1,4 @@
-cmake_minimum_required( VERSION 3.6...3.15 )
-if(${CMAKE_VERSION} VERSION_LESS 3.15)
-    cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
-else()
-    cmake_policy(VERSION 3.15)
-endif()
-
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_LIST_DIR}${RELATIVE_TO_COMMON}cmake")
-
 add_subdirectory(common)
-add_subdirectory(auth_dispatcher)
-add_subdirectory(chat_dispatcher)
+add_subdirectory(auth_gateway)
+add_subdirectory(chat_server)
 add_subdirectory(generic_dispatcher)

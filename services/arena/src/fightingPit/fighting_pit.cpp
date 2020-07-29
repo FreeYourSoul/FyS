@@ -274,12 +274,12 @@ fighting_pit::check_and_retrieve_target(const std::string& user, const team_memb
 		SPDLOG_WARN("NOT IMPLEMENTED YET");
 		return std::pair(false, target);
 	}
-	if (!all_in(action.ally_target, _party_teams.get_party_team_of_player(user).team_members(),
-			[](const team_member_sptr & tm) { return tm->id(); })) {
+	if (!all_contains(action.ally_target, _party_teams.get_party_team_of_player(user).team_members(),
+			[](const team_member_sptr& tm) { return tm->id(); })) {
 		SPDLOG_WARN("[fp:{}] : Player {} tried to target a non-existing Ally", _arena_id, user);
 		return std::pair(false, target);
 	}
-	if (!all_in(action.contender_target, _contenders.contenders(),
+	if (!all_contains(action.contender_target, _contenders.contenders(),
 			[](const fighting_contender_sptr& c) { return c->id(); })) {
 		SPDLOG_WARN("[fp:{}] : Player {} tried to target a non-existing Contender, Targets are : ", _arena_id, user);
 		return std::pair(false, target);

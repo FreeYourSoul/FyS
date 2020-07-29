@@ -1,22 +1,8 @@
-cmake_minimum_required(VERSION 3.6...3.15)
-if (${CMAKE_VERSION} VERSION_LESS 3.15)
-    cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
-else ()
-    cmake_policy(VERSION 3.15)
-endif ()
-
 project(arena_test CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_COMPILER /usr/bin/g++)
 
-find_package(cppzmq REQUIRED)
-find_package(Catch2 REQUIRED)
-find_package(fmt REQUIRED)
-find_package(FSeam REQUIRED)
-include(Catch)
-
-enable_testing()
 include_directories(
         ${COMMON_INCLUDES_DIR}
         ${CMAKE_CURRENT_LIST_DIR}/../../../scripting_cache/cml/include
@@ -133,7 +119,7 @@ addFSeamTests(
         ${CMAKE_CURRENT_SOURCE_DIR}/../../common/include/connection_handler.hh
 )
 target_compile_definitions(sampy_test PUBLIC CHAISCRIPT_NO_THREADS -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)
-target_link_libraries(sampy_test cppzmq fmt::fmt dl cml)
+target_link_libraries(sampy_test cppzmq fmt::fmt dl fys::cml)
 
 target_compile_definitions(arena_test PUBLIC -DCHAISCRIPT_NO_THREADS -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)
-target_link_libraries(arena_test cppzmq Catch2::Catch2 fmt::fmt dl cml)
+target_link_libraries(arena_test cppzmq Catch2::Catch2 fmt::fmt dl fys::cml)

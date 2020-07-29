@@ -1,24 +1,7 @@
-cmake_minimum_required(VERSION 3.6...3.15)
-if (${CMAKE_VERSION} VERSION_LESS 3.15)
-    cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
-else ()
-    cmake_policy(VERSION 3.15)
-endif ()
-
 project(arena_service
         VERSION 1.0
         DESCRIPTION "Arena Service Server"
         LANGUAGES CXX)
-
-find_package(nlohmann_json REQUIRED)
-find_package(cppzmq REQUIRED)
-find_package(fmt REQUIRED)
-
-find_program(CCACHE_FOUND ccache)
-if (CCACHE_FOUND)
-    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
-    set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
-endif (CCACHE_FOUND)
 
 add_executable(arena_service
         ${COMMON_SRCS}
@@ -72,8 +55,7 @@ target_compile_definitions(arena_service PUBLIC -DCHAISCRIPT_NO_THREADS)
 target_link_libraries(arena_service PRIVATE
         fys::common_service
         dl
-        cml
-        ${Flatbuffers_LIBRARIES})
+        fys::cml)
 
 set_target_properties(arena_service PROPERTIES
         CXX_STANDARD 17

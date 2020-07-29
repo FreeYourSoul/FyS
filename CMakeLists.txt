@@ -6,14 +6,32 @@ else ()
 endif ()
 
 project(FyS_Online CXX)
-enable_testing()
 
-set(RELATIVE_TO_COMMON /dispatcher/common/)
+find_package(nlohmann_json REQUIRED)
+find_package(fmt REQUIRED)
+
 list(APPEND CMAKE_MODULE_PATH
-        ${CMAKE_CURRENT_LIST_DIR}/dispatcher/common/cmake
-        ${CMAKE_CURRENT_LIST_DIR}/cmake)
+        ${CMAKE_CURRENT_LIST_DIR}/cmake
+        ${CMAKE_CURRENT_LIST_DIR}/cmake/modules)
+
+find_package(nlohmann_json REQUIRED)
+find_package(cppzmq REQUIRED)
+find_package(Catch2 REQUIRED)
+find_package(Lua REQUIRED)
+find_package(fmt REQUIRED)
+find_package(FlatBuffers REQUIRED)
 
 include(CMakeRC)
+
+find_program(CCACHE_FOUND ccache)
+if (CCACHE_FOUND)
+    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
+    set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
+endif (CCACHE_FOUND)
+
+if (BUILD_TESTING)
+    enable_testing()
+endif ()
 
 add_subdirectory(scripting_cache)
 add_subdirectory(deps/FiL)

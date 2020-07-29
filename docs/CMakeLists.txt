@@ -5,7 +5,6 @@ else()
     cmake_policy(VERSION 3.15)
 endif()
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_LIST_DIR}/../cmake")
 
 find_package(Doxygen REQUIRED)
 find_package(Sphinx REQUIRED)
