@@ -38,6 +38,8 @@ Service handling the movement in the world of the character controlled by the pl
 
 ## External Dependency
 
+* [FiL](https://github.com/FreeYourSoul/FiL)
+    General purpose library (algorithm, utilities...)
 * [ZeroMQ](https://github.com/zeromq/libzmq) And [cppzmq](https://github.com/zeromq/cppzmq)  
     Network library & C++ binding library
 * [spdlog](https://github.com/gabime/spdlog)  
