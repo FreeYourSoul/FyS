@@ -39,7 +39,9 @@ Service handling the movement in the world of the character controlled by the pl
 ## External Dependency
 
 * [FiL](https://github.com/FreeYourSoul/FiL)
-    General purpose library (algorithm, utilities...)
+    General purpose library (algorithm, utilities, database...)
+    * Using [RocksDB](https://github.com/facebook/rocksdb) as base db (easy to locally test)
+    * Another DB would be used in the future following the same interface used for RocksDB for scalability (Cassandra/FoundationDB)
 * [ZeroMQ](https://github.com/zeromq/libzmq) And [cppzmq](https://github.com/zeromq/cppzmq)  
     Network library & C++ binding library
 * [spdlog](https://github.com/gabime/spdlog)  
@@ -52,6 +54,3 @@ Service handling the movement in the world of the character controlled by the pl
     For scripting of monsters in the Arena (fighting mode)
 * [LUA](https://github.com/lua/lua)   --> soon to be  
     For the scripting of NPC in the world map (when moving)
-* [Mariadbpp](https://github.com/viaduck/mariadbpp) :   
-    Used as Maria DB connector
-

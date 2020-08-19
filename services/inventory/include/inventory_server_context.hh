@@ -26,7 +26,7 @@
 #define FYS_ONLINE_INVENTORY_SERVER_CONTEXT_HH
 
 #include <nlohmann/json.hpp>
-#include <service_context_base.hh>
+#include "../../common/include/service_context_base.hh"
 
 namespace fys::inv {
 
