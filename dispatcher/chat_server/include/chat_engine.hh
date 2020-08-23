@@ -24,17 +24,19 @@
 #ifndef FYS_ONLINE_SERVICES_CHAT_SRC_CHAT_ENGINE_HH
 #define FYS_ONLINE_SERVICES_CHAT_SRC_CHAT_ENGINE_HH
 
+#include <string>
+
 namespace fys::chat {
 
 /**
  * The chat room engine register all chat room that are created,
- * It can be a chat default chat room for servers (update purpose, global informations)
+ * It can be a chat default chat room for servers (update purpose, global information)
  * It can be a custom chat room created by players in order to communicate together in the game.
  *
  * In order to create the default chat room,
  * Some can be created at startup of the application thanks to a configuration file used to setup
  * the context of the server.
- * Others are going to be created when the chat_engine will retrieve informations about the current
+ * Others are going to be created when the chat_engine will retrieve information about the current
  * layout of world_servers in the
  *
  */
@@ -46,5 +48,7 @@ inline std::string key_for_player(const std::string &user_name);
 inline std::string key_for_room(const std::string &room_name);
 inline std::string key_for_listing_players_in_room(const std::string &room_name);
 inline std::string key_for_player_in_room(const std::string &room_name, const std::string &user_name);
+
+}
 
 #endif //FYS_ONLINE_SERVICES_CHAT_SRC_CHAT_ENGINE_HH

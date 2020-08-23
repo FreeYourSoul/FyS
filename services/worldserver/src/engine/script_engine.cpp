@@ -21,9 +21,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <fmt/format.h>
 #include <spdlog/spdlog.h>
+#include <fmt/format.h>
 
+#include <fstream>
 #include <algorithm>
 
 #define SOL_ALL_SAFETIES_ON 1
@@ -31,7 +32,6 @@
 
 #include <world_server_context.hh>
 #include <CmlKey.hh>
-#include <fstream>
 
 #include <engine/script_engine.hh>
 
