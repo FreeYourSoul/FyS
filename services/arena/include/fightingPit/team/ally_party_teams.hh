@@ -28,6 +28,8 @@
 #include <vector>
 #include <memory>
 
+#include <fightingPit/hexagon_side.hh>
+
 // forward declarations
 namespace chaiscript {
 class ChaiScript;
@@ -36,6 +38,9 @@ namespace fys::arena {
 class party_team;
 class team_member;
 class pit_contenders;
+}
+namespace fys::arena::data {
+struct priority_elem;
 }
 
 namespace fys::arena {

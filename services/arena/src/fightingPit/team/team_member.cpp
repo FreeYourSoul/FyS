@@ -32,6 +32,7 @@
 #include <fightingPit/contender/fighting_contender.hh>
 #include <fightingPit/team/team_member.hh>
 #include <fightingPit/team/ally_party_teams.hh>
+
 #include <history_manager.hh>
 
 // overloaded trick

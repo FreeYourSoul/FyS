@@ -22,6 +22,8 @@
 // SOFTWARE.
 
 #include <spdlog/spdlog.h>
+
+#include <thread>
 #include <chrono>
 
 #include <chaiscript/chaiscript.hpp>

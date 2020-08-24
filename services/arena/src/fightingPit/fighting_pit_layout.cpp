@@ -23,16 +23,18 @@
 
 #include <fmt/ostream.h>
 #include <spdlog/spdlog.h>
+
 #include <utility>
 
-#include <fightingPit/contender/pit_contenders.hh>
 #include <fightingPit/team/ally_party_teams.hh>
-#include <fightingPit/fighting_pit_layout.hh>
 #include <fightingPit/team/team_member.hh>
 #include <fightingPit/team/party_team.hh>
+#include <fightingPit/contender/pit_contenders.hh>
 #include <fightingPit/contender/contender_scripting.hh>
 #include <fightingPit/contender/fighting_contender.hh>
+
 #include <fightingPit/side_battle.hh>
+#include <fightingPit/fighting_pit_layout.hh>
 
 namespace fys::arena {
 

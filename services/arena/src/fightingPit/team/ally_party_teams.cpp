@@ -26,7 +26,8 @@
 #include <numeric>
 
 #include <chaiscript/chaiscript.hpp>
-#include <algorithm/algorithm.hh>
+
+#include <fil/algorithm/suitable.hh>
 
 #include <random_generator.hh>
 
@@ -83,7 +84,7 @@ ally_party_teams::select_suitable_member(comparator_selection<team_member> comp)
 	auto suitable = _party_teams.front()->team_members().begin();
 	for (auto& party_team : _party_teams) {
 		auto& team_members = party_team->team_members();
-		auto suitable_tmp = fys::find_most_suitable(team_members.begin(), team_members.end(), comp, suitable);
+		auto suitable_tmp = fil::find_most_suitable(team_members.begin(), team_members.end(), comp, suitable);
 
 		if (suitable_tmp != team_members.end()) {
 			found = true;

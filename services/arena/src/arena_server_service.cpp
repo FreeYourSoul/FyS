@@ -22,8 +22,12 @@
 // SOFTWARE.
 
 #include <spdlog/spdlog.h>
+
+#include <thread>
 #include <functional>
+
 #include <chaiscript/chaiscript.hpp>
+
 #include <zmq_addon.hpp>
 
 #include <flatbuffers/flatbuffers.h>

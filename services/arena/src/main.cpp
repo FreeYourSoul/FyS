@@ -23,8 +23,8 @@
 
 #include <random>
 
-//#include <cmrc/cmrc.hpp>
 #include <spdlog/spdlog.h>
+//#include <cmrc/cmrc.hpp>
 
 #include <history_manager.hh>
 #include <arena_server_context.hh>
@@ -38,7 +38,7 @@ int main(int ac, char **av) {
 	fys::arena::arena_server_context ctx(ac, av);
 	int major, minor, patch;
 	zmq_version(&major, &minor, &patch);
-	SPDLOG_INFO("Version ZMQ : {}.{}.{}\n{}", major, minor, patch, ctx.to_string());
+	spdlog::info("Version ZMQ : {}.{}.{}\n{}", major, minor, patch, ctx.to_string());
 
 	fys::arena::arena_server_service serverService(ctx);
 	fys::arena::history_manager::activate_historic_manager(true);

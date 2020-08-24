@@ -57,8 +57,10 @@ target_link_libraries(common_service INTERFACE
         ${Flatbuffers_LIBRARIES}
         fys::fil
         cppzmq
+        spdlog
         fmt::fmt
         nlohmann_json::nlohmann_json)
+#target_compile_definitions(common_service INTERFACE SPDLOG_FMT_EXTERNAL)
 target_include_directories(common_service INTERFACE ${COMMON_INCLUDES_DIR})
 target_sources(common_service INTERFACE ${COMMON_SRCS})
 

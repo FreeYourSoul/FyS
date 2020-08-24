@@ -23,7 +23,8 @@
 
 #include <chaiscript/chaiscript.hpp>
 #include <nlohmann/json.hpp>
-#include <algorithm/algorithm.hh>
+
+#include <fil/datastructure/boundary_map.hh>
 
 #include <fightingPit/contender/contender_scripting.hh>
 #include <fightingPit/contender/fighting_contender.hh>
@@ -35,13 +36,12 @@
 #include <arena_server_context.hh>
 #include <connection_handler.hh>
 #include <random_generator.hh>
-#include <boundary_map.hh>
 
 #include <fightingPit/fighting_pit_announcer.hh>
 
 namespace {
-using boundaray_map_encounter = fys::boundary_map<fys::arena::encounter_context::encounter_desc>;
-using boundary_map_reward = fys::boundary_map<std::string>;
+using boundaray_map_encounter = fil::boundary_map<fys::arena::encounter_context::encounter_desc>;
+using boundary_map_reward = fil::boundary_map<std::string>;
 
 [[nodiscard]] boundaray_map_encounter
 make_contender_rng_boundary_map(const std::vector<fys::arena::encounter_context::encounter_desc>& zone_contenders,

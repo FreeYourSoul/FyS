@@ -249,12 +249,12 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]")
 		SECTION("Test ChaiUtility memberHasActionRegistered") {
 			try {
 				auto& memberId1 = fp->get_party_team_of_player("Loser").team_members()[0];
-				REQUIRE(chai::util::memberHasActionRegistered(*fp->get_chai_ptr(),
-						memberId1->user_name(), memberId1->name(), "meditate"));
-				REQUIRE_FALSE(chai::util::memberHasActionRegistered(*fp->get_chai_ptr(),
-						memberId1->user_name(), memberId1->name(), "DONOTEXIST"));
-				REQUIRE_FALSE(chai::util::memberHasActionRegistered(*fp->get_chai_ptr(),
-						"unknown", "meh", "DONOTEXIST"));
+				REQUIRE(chai::util::member_has_action_registered(*fp->get_chai_ptr(),
+																 memberId1->user_name(), memberId1->name(), "meditate"));
+				REQUIRE_FALSE(chai::util::member_has_action_registered(*fp->get_chai_ptr(),
+																	   memberId1->user_name(), memberId1->name(), "DONOTEXIST"));
+				REQUIRE_FALSE(chai::util::member_has_action_registered(*fp->get_chai_ptr(),
+																	   "unknown", "meh", "DONOTEXIST"));
 			}
 			catch (const std::exception& ee) {
 				FAIL(ee.what());

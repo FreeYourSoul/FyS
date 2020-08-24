@@ -53,8 +53,8 @@ add_executable(arena_service
 
 target_compile_definitions(arena_service PUBLIC -DCHAISCRIPT_NO_THREADS)
 target_link_libraries(arena_service PRIVATE
-        fys::common_service
         dl
+        fys::common_service
         fys::cml)
 
 set_target_properties(arena_service PROPERTIES

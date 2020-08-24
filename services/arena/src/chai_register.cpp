@@ -23,7 +23,6 @@
 
 #include <spdlog/spdlog.h>
 #include <iterator>
-#include <fmt/ostream.h>
 #include <functional>
 #include <random>
 

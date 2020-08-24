@@ -15,8 +15,10 @@ add_library(common_dispatcher
         ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Dispatcher.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/core/DispatcherConnectionManager.cpp)
 
-target_include_directories(common_dispatcher
-        PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
+target_include_directories(common_dispatcher PUBLIC
+         ${CMAKE_CURRENT_SOURCE_DIR}/include/context
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
         )
 
 set_target_properties(common_dispatcher PROPERTIES

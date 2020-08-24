@@ -7,9 +7,6 @@ endif ()
 
 project(FyS_Online CXX)
 
-find_package(nlohmann_json REQUIRED)
-find_package(fmt REQUIRED)
-
 list(APPEND CMAKE_MODULE_PATH
         ${CMAKE_CURRENT_LIST_DIR}/cmake
         ${CMAKE_CURRENT_LIST_DIR}/cmake/modules)
@@ -19,6 +16,8 @@ find_package(cppzmq REQUIRED)
 find_package(Catch2 REQUIRED)
 find_package(Lua REQUIRED)
 find_package(fmt REQUIRED)
+find_package(tmxlite REQUIRED)
+find_package(spdlog REQUIRED)
 find_package(FlatBuffers REQUIRED)
 
 include(CMakeRC)
@@ -33,8 +32,10 @@ if (BUILD_TESTING)
     enable_testing()
 endif ()
 
-add_subdirectory(scripting_cache)
 add_subdirectory(deps/FiL)
+
+add_subdirectory(scripting_cache)
+
 add_subdirectory(scripting_cache/cml)
 add_subdirectory(dispatcher)
 add_subdirectory(services)

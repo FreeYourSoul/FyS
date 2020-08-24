@@ -23,9 +23,9 @@
 
 #include <spdlog/spdlog.h>
 #include <algorithm>
+
 #include <fightingPit/team/team_member.hh>
 #include <fightingPit/team/party_team.hh>
-#include <algorithm/algorithm.hh>
 
 namespace fys::arena {
 
