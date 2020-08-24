@@ -30,6 +30,7 @@
 #include <fightingPit/contender/pit_contenders.hh>
 #include <fightingPit/contender/contender_scripting.hh>
 #include <fightingPit/team/ally_party_teams.hh>
+#include <fightingPit/team/party_team.hh>
 #include <fightingPit/team/team_member.hh>
 
 #include <chai_register.hh>
@@ -98,8 +99,8 @@ TEST_CASE("test damage chaiscript", "[service][arena][script_test]")
 		REQUIRE(100 == pc.fighting_contender_at(0)->access_status().magic_pt.total);
 	}
 
-	fys::arena::party_team partyTeam("FyS");
-	fys::arena::team_member_sptr tm1 = std::make_shared<fys::arena::team_member>(partyTeam.user_name(), "fyston1");
+	fys::arena::party_team party_team("FyS");
+	fys::arena::team_member_sptr tm1 = std::make_shared<fys::arena::team_member>(party_team.user_name(), "fyston1");
 	auto& st = tm1->access_status();
 	st.initial_speed = 100;
 	st.magic_pt = {1337, 1337};
@@ -108,9 +109,9 @@ TEST_CASE("test damage chaiscript", "[service][arena][script_test]")
 	SECTION("test Slash chaiscript") {
 
 		tm1->add_doable_action("arena:actions:damage:slash.chai", 1);
-		partyTeam.add_team_member(std::move(tm1));
+		party_team.add_team_member(std::move(tm1));
 
-		fys::arena::chai_register::load_register_action_party_team(*chai, ccpy, partyTeam);
+		fys::arena::chai_register::load_register_action_party_team(*chai, ccpy, party_team);
 
 		SECTION("test damage") {
 
@@ -160,7 +161,7 @@ s.execute(contender);
 	SECTION("test Multi_Slash chaiscript") {
 
 		tm1->add_doable_action("arena:actions:damage:multi_slash.chai", 1);
-		partyTeam.add_team_member(std::move(tm1));
+		party_team.add_team_member(std::move(tm1));
 
 		fys::arena::ContenderScriptingUPtr sampy2 = std::make_unique<fys::arena::contender_scripting>(*chai, 1);
 		sampy2->set_contender_id(1u);
@@ -170,7 +171,7 @@ s.execute(contender);
 		auto fpc2 = std::make_shared<fys::arena::fighting_contender>(std::move(sampy2));
 		REQUIRE(pc.add_contender(fpc2));
 
-		fys::arena::chai_register::load_register_action_party_team(*chai, ccpy, partyTeam);
+		fys::arena::chai_register::load_register_action_party_team(*chai, ccpy, party_team);
 
 		pc.fighting_contender_at(1)->access_status().life_pt.current = 100;
 

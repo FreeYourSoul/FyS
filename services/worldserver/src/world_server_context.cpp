@@ -25,6 +25,9 @@
 #include <nlohmann/json.hpp>
 #include <iostream>
 #include <fstream>
+
+#include <service_context_base.hh>
+
 #include "world_server_context.hh"
 
 using json = nlohmann::json;

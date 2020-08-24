@@ -23,21 +23,20 @@
 
 #include <context/StartupDispatcherCtx.hh>
 
-#include "core/SimpleProxy.hh"
+#include "core/simple_proxy.hh"
 
 namespace fys {
 
-    SimpleProxy::SimpleProxy(const StartupDispatcherCtx &ctx) noexcept :
-        _ctx(1),
-        _frontend(_ctx, zmq::socket_type::router),
-        _backend(_ctx, zmq::socket_type::dealer)
-    {
-        _frontend.bind(ctx.getListenerBindingString());
-        _backend.bind(ctx.getDispatcherBindingString());
-    }
+simple_proxy::simple_proxy(const StartupDispatcherCtx &ctx) noexcept:
+	_ctx(1),
+	_frontend(_ctx, zmq::socket_type::router),
+	_backend(_ctx, zmq::socket_type::dealer) {
+  _frontend.bind(ctx.getListenerBindingString());
+  _backend.bind(ctx.getDispatcherBindingString());
+}
 
-    void SimpleProxy::startProxy() {
-        zmq::proxy(zmq::socket_ref(_frontend), zmq::socket_ref(_backend));
-    }
+void simple_proxy::startProxy() {
+  zmq::proxy(zmq::socket_ref(_frontend), zmq::socket_ref(_backend));
+}
 
 }

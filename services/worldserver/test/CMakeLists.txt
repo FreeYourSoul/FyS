@@ -10,6 +10,7 @@ project(world_server_test CXX)
 set(CMAKE_CXX_COMPILER /usr/bin/g++)
 
 include_directories(
+        ${COMMON_INCLUDES_DIR}
         ${TMXLITE_HEADERS}
         ${CMAKE_CURRENT_LIST_DIR}/../include)
 
@@ -61,18 +62,19 @@ add_executable(world_server_lua_test
         )
 
 target_link_libraries(world_server_test PRIVATE
-        ${TMXLITE_LIBRARIES} # to remove
-        fys::common_service
         Catch2::Catch2
+        fys::common_service
+        fys::cml
         lua
+        ${TMXLITE_LIBRARIES} # to remove
         )
 catch_discover_tests(world_server_test)
 
 target_link_libraries(world_server_lua_test
-        ${TMXLITE_LIBRARIES} # to remove
-        fys::common_service
         Catch2::Catch2
-        fmt::fmt
+        fys::common_service
+        fys::cml
         lua
+        ${TMXLITE_LIBRARIES} # to remove
         )
 catch_discover_tests(world_server_lua_test)

@@ -30,6 +30,7 @@
 #include <fightingPit/contender/pit_contenders.hh>
 #include <fightingPit/contender/contender_scripting.hh>
 #include <fightingPit/team/ally_party_teams.hh>
+#include <fightingPit/team/party_team.hh>
 #include <fightingPit/team/team_member.hh>
 
 #include <chai_register.hh>

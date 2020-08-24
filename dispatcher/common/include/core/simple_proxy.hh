@@ -32,10 +32,10 @@ namespace fys {
 
 	class StartupDispatcherCtx;
 
-    class SimpleProxy {
+    class simple_proxy {
 
     public:
-        explicit SimpleProxy(const StartupDispatcherCtx &ctx) noexcept;
+        explicit simple_proxy(const StartupDispatcherCtx &ctx) noexcept;
 
         void startProxy();
 

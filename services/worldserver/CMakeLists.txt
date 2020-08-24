@@ -34,6 +34,7 @@ target_link_libraries(worldserver_service
 
 target_include_directories(worldserver_service PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}/include
+        ${COMMON_INCLUDES_DIR}
         ${FLATBUFFER_INCLUDE_DIR}
         ${TMXLITE_HEADERS})
 

@@ -40,28 +40,32 @@ endif ()
 
 set(COMMON_SRCS
         ${CMAKE_CURRENT_LIST_DIR}/src/random_generator.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/src/service_context_base.cpp
         ${CMAKE_CURRENT_LIST_DIR}/src/connection_handler.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/src/service_context_base.cpp
         ${CMAKE_CURRENT_LIST_DIR}/include/connection_handler.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/random_generator.hh
+        ${CMAKE_CURRENT_LIST_DIR}/include/direct_connection_manager.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/sized_queue.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/service_context_base.hh
         ${CMAKE_CURRENT_LIST_DIR}/include/key.hh)
+
 set(COMMON_INCLUDES_DIR
         ${CMAKE_CURRENT_LIST_DIR}/include
         ${CMAKE_CURRENT_LIST_DIR}/flatbuffer/includes)
 
-add_library(common_service INTERFACE)
+add_library(common_service OBJECT ${COMMON_SRCS})
 add_library(fys::common_service ALIAS common_service)
-target_link_libraries(common_service INTERFACE
+target_link_libraries(common_service PUBLIC
         ${Flatbuffers_LIBRARIES}
         fys::fil
         cppzmq
         spdlog
         fmt::fmt
         nlohmann_json::nlohmann_json)
-#target_compile_definitions(common_service INTERFACE SPDLOG_FMT_EXTERNAL)
-target_include_directories(common_service INTERFACE ${COMMON_INCLUDES_DIR})
-target_sources(common_service INTERFACE ${COMMON_SRCS})
+
+target_include_directories(common_service PUBLIC ${COMMON_INCLUDES_DIR})
 
 include_directories(flatbuffer/includes)
+
+set(COMMON_SRCS PARENT_SCOPE)
+set(COMMON_INCLUDES_DIR PARENT_SCOPE)

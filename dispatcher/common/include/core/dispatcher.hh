@@ -25,7 +25,7 @@
 #define FYS_DISPATCHER_HH_
 
 #include <unordered_set>
-#include <DispatcherConnectionManager.hh>
+#include <dispatcher_connection_manager.hh>
 #include <StartupDispatcherCtx.hh>
 
 // forward declarations
@@ -47,15 +47,15 @@ namespace fys
          * @brief This method is processing the inputMessage and dispatch it appropriately among the peers connected to
          * the dispatcher socket
          */
-        void processInputMessage(zmq::multipart_t &&msg, network::DispatcherConnectionManager &manager) noexcept;
+        void process_input_message(zmq::multipart_t &&msg, network::dispatcher_connection_manager &manager) noexcept;
 
         /**
          * @brief This method is dispatching the cluster message and forward it appropriately among the peers connected to
          * the dispatcher socket
          */
-        void processClusterMessage(zmq::multipart_t &&msg, network::DispatcherConnectionManager &manager) noexcept;
+        void process_cluster_message(zmq::multipart_t &&msg, network::dispatcher_connection_manager &manager) noexcept;
 
-        void forwardMessageToFrontend(zmq::multipart_t && msg, network::DispatcherConnectionManager & manager) noexcept;
+        void forward_message_to_frontend(zmq::multipart_t && msg, network::dispatcher_connection_manager & manager) noexcept;
 
 
     private:
@@ -73,9 +73,9 @@ namespace fys
      */
 
     template <typename DispatcherHandler = DispatcherHandlerBase>
-    class Dispatcher {
+    class dispatcher {
     public:
-        explicit Dispatcher(fys::StartupDispatcherCtx &&ctx)  :
+        explicit dispatcher(fys::StartupDispatcherCtx &&ctx)  :
             _connectionManager(1, ctx.isLoadBalancingEnabled()) {
             _connectionManager.setupConnectionManager(ctx);
         }
@@ -88,21 +88,21 @@ namespace fys
                       dispatcherSocketHasSomethingToPoll] = _connectionManager.poll();
                 if (listenerSocketHasSomethingToPoll) {
                     _connectionManager.dispatchMessageFromListenerSocket(
-                            [this](zmq::multipart_t &&msg, network::DispatcherConnectionManager &manager) {
+                            [this](zmq::multipart_t &&msg, network::dispatcher_connection_manager &manager) {
                                 _dispatcher.processInputMessage(std::move(msg), manager);
                             }
                     );
                 }
                 if (subscriberSocketHasSomethingToPoll) {
                     _connectionManager.dispatchMessageFromSubscriberSocket(
-                            [this](zmq::multipart_t &&msg, network::DispatcherConnectionManager &manager) {
+                            [this](zmq::multipart_t &&msg, network::dispatcher_connection_manager &manager) {
                                 _dispatcher.processClusterMessage(std::move(msg), manager);
                             }
                     );
                 }
                 if (dispatcherSocketHasSomethingToPoll) {
                     _connectionManager.dispatchMessageFromDispatcherSocket(
-                            [this](zmq::multipart_t && msg, network::DispatcherConnectionManager &manager){
+                            [this](zmq::multipart_t && msg, network::dispatcher_connection_manager &manager){
                                 _dispatcher.forwardMessageToFrontend(std::move(msg), manager);
                             }
                         );
@@ -111,7 +111,7 @@ namespace fys
         }
 
     private:
-        fys::network::DispatcherConnectionManager _connectionManager;
+        fys::network::dispatcher_connection_manager _connectionManager;
         DispatcherHandler _dispatcher;
 };
 } 

@@ -27,6 +27,7 @@
 #include <catch2/catch.hpp>
 #include <arena_server_context.hh>
 #include <fightingPit/fighting_pit_announcer.hh>
+
 #include <util/ChaiUtility.hh>
 #include <connection_handler.hh>
 #include "TestType.hh"

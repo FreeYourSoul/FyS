@@ -25,9 +25,11 @@
 #ifndef FYS_WORLDSERVERCONTEXT_HH
 #define FYS_WORLDSERVERCONTEXT_HH
 
-#include <service_context_base.hh>
 #include <nlohmann/json.hpp>
+
 #include <engine/collision_map.hh>
+
+#include <service_context_base.hh>
 
 namespace fys::ws {
 

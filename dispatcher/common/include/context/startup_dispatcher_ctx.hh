@@ -51,7 +51,7 @@ namespace fys {
         constexpr auto BACKEND_ADDR    = "proxy_backend.address";
     }
 
-class StartupDispatcherCtx {
+class startup_dispatcher_ctx {
         struct ClusterProxy {
             ushort frontendPort = 0;
             ushort backendPort = 0;
@@ -60,7 +60,7 @@ class StartupDispatcherCtx {
         };
 
         public:
-            StartupDispatcherCtx(int ac, const char *const *av) noexcept;
+            startup_dispatcher_ctx(int ac, const char *const *av) noexcept;
 
             [[nodiscard]] constexpr bool isLoadBalancingEnabled() const noexcept { return _isLoadBalancing; }
             [[nodiscard]] constexpr bool isClusterAware() const noexcept { return _isClusterAware; }

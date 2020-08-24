@@ -25,7 +25,10 @@
 #ifndef FYS_ONLINE_TESTTYPE_HH
 #define FYS_ONLINE_TESTTYPE_HH
 
+#include <fstream>
+
 #include <random_generator.hh>
+
 #include <FSeamMockData.hpp>
 #include <fightingPit/team/party_team.hh>
 #include <fightingPit/team/team_member.hh>

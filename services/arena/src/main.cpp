@@ -26,6 +26,8 @@
 #include <spdlog/spdlog.h>
 //#include <cmrc/cmrc.hpp>
 
+#include <zmq_addon.hpp>
+
 #include <history_manager.hh>
 #include <arena_server_context.hh>
 #include <arena_server_service.hh>
