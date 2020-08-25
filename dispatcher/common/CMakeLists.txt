@@ -6,14 +6,14 @@ configure_file(
 )
 
 add_library(common_dispatcher
-        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/SimpleProxy.hh
-        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/Dispatcher.hh
-        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/DispatcherConnectionManager.hh
-        ${CMAKE_CURRENT_SOURCE_DIR}/include/context/StartupDispatcherCtx.hh
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/context/StartupDispatcherCtx.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/SimpleProxy.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/Dispatcher.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/DispatcherConnectionManager.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/simple_proxy.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/dispatcher.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/core/dispatcher_connection_manager.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/context/startup_dispatcher_ctx.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/context/startup_dispatcher_ctx.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/simple_proxy.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/dispatcher.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/core/dispatcher_connection_manager.cpp)
 
 target_include_directories(common_dispatcher PUBLIC
          ${CMAKE_CURRENT_SOURCE_DIR}/include/context
@@ -26,4 +26,4 @@ set_target_properties(common_dispatcher PROPERTIES
         CMAKE_CXX_COMPILER /usr/bin/g++)
 
 target_link_libraries(common_dispatcher
-        PUBLIC cppzmq fmt::fmt)
+        PUBLIC cppzmq fmt::fmt fys::fil)

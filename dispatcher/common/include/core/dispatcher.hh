@@ -26,7 +26,7 @@
 
 #include <unordered_set>
 #include <dispatcher_connection_manager.hh>
-#include <StartupDispatcherCtx.hh>
+#include <startup_dispatcher_ctx.hh>
 
 // forward declarations
 namespace zmq {
@@ -39,7 +39,7 @@ namespace fys
     /**
      * basic implementation of the dispatcher
      */
-    class DispatcherHandlerBase {
+    class dispatcher_handler_base {
         static constexpr unsigned CACHE_VALIDITY = 600; // in seconds
 
     public:
@@ -72,10 +72,10 @@ namespace fys
      *
      */
 
-    template <typename DispatcherHandler = DispatcherHandlerBase>
+    template <typename DispatcherHandler = dispatcher_handler_base>
     class dispatcher {
     public:
-        explicit dispatcher(fys::StartupDispatcherCtx &&ctx)  :
+        explicit dispatcher(fys::startup_dispatcher_ctx &&ctx)  :
             _connectionManager(1, ctx.isLoadBalancingEnabled()) {
             _connectionManager.setupConnectionManager(ctx);
         }

@@ -53,10 +53,10 @@ namespace fys {
 
 class startup_dispatcher_ctx {
         struct ClusterProxy {
-            ushort frontendPort = 0;
-            ushort backendPort = 0;
-            std::string frontendAddress;
-            std::string backendAddress;
+            ushort frontend_port = 0;
+            ushort backend_port = 0;
+            std::string frontend_address;
+            std::string backend_address;
         };
 
         public:
@@ -69,21 +69,21 @@ class startup_dispatcher_ctx {
             [[nodiscard]] constexpr uint getMaxMsgSize() const noexcept { return _maxMsgSize; }
 
             [[nodiscard]] const std::vector<std::string> &getSubscriptionTopics() const noexcept { return _subTopics; }
-            [[nodiscard]] std::string getListenerBindingString() const noexcept;
-            [[nodiscard]] std::string getDispatcherBindingString() const noexcept;
-            [[nodiscard]] std::string getFrontendClusterProxyConnectionString() const noexcept;
-            [[nodiscard]] std::string getBackendClusterProxyConnectionString () const noexcept;
+            [[nodiscard]] std::string listener_binding_str() const noexcept;
+            [[nodiscard]] std::string dispatcher_binding_str() const noexcept;
+            [[nodiscard]] std::string frontend_cluster_proxy_connection_str() const noexcept;
+            [[nodiscard]] std::string backend_cluster_proxy_connection_str () const noexcept;
 
             /**
              * @return debug string containing the context
              */
-            [[nodiscard]] std::string toString() const noexcept;
+            [[nodiscard]] std::string to_string() const noexcept;
 
         private:
-            void initializeFromIni(const std::string &configFilePath);
+            void initialize_from_ini(const std::string &config_file_path);
 
             template<typename T>
-            [[nodiscard]] std::vector<T> parseToArray(const std::string &s) const noexcept {
+            [[nodiscard]] std::vector<T> to_array(const std::string &s) const noexcept {
                 std::vector<T> result;
                 std::stringstream ss(s);
                 std::string item;

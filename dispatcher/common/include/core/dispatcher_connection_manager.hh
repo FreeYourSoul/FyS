@@ -28,7 +28,7 @@
 #include <zmq_addon.hpp>
 
 namespace fys {
-    class StartupDispatcherCtx;
+    class startup_dispatcher_ctx;
 }
 
 namespace fys::network {
@@ -39,7 +39,7 @@ namespace fys::network {
         bool closed = false;
     };
 
-    class DispatcherConnectionManager {
+    class dispatcher_connection_manager {
         public:
         /**
          * @param threadNumber
@@ -48,9 +48,9 @@ namespace fys::network {
          *          if true, a Dealer socket is instantiated in order to dispatch messages
          *          if false, a Publisher socket is instantiated to do so
          */
-        explicit DispatcherConnectionManager(int threadNumber = 1,  bool isLoadBalancing = true) noexcept;
+        explicit dispatcher_connection_manager(int threadNumber = 1, bool isLoadBalancing = true) noexcept;
 
-        void setupConnectionManager(const fys::StartupDispatcherCtx & ctx) noexcept;
+        void setupConnectionManager(const fys::startup_dispatcher_ctx & ctx) noexcept;
 
         /**
          * @brief Poll the reader socket (the listener one and the subscriber one if the dispatcher is cluster

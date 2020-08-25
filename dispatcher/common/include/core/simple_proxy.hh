@@ -30,14 +30,14 @@
 
 namespace fys {
 
-	class StartupDispatcherCtx;
+	class startup_dispatcher_ctx;
 
     class simple_proxy {
 
     public:
-        explicit simple_proxy(const StartupDispatcherCtx &ctx) noexcept;
+        explicit simple_proxy(const startup_dispatcher_ctx &ctx) noexcept;
 
-        void startProxy();
+        void start_proxy();
 
     private:
         zmq::context_t _ctx;

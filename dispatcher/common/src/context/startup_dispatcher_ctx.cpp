@@ -23,21 +23,21 @@ startup_dispatcher_ctx::startup_dispatcher_ctx(int ac, const char *const *av) no
   cli.add_option(fil::option("-v", [&v = _verbose](bool value) { v = value; }, "Print logs on standard output"));
 
   if ("NONE" != config_path)
-	this->initializeFromIni(config_path);
+	this->initialize_from_ini(config_path);
 }
 catch (std::exception &e) {
   SPDLOG_ERROR("\"Context of the Dispatcher not initialized caused by : {}", e.what());
 }
 
-void startup_dispatcher_ctx::initializeFromIni(const std::string &configFilePath) {
+void startup_dispatcher_ctx::initialize_from_ini(const std::string &config_file_path) {
   boost::property_tree::ptree pt;
-  boost::property_tree::read_ini(configFilePath, pt);
+  boost::property_tree::read_ini(config_file_path, pt);
 
   _maxMsgSize = pt.get<uint>(fys::init_beacon::MAXMSGSIZE);
-  _clusterProxy.backendAddress = pt.get<std::string>(fys::init_beacon::BACKEND_ADDR);
-  _clusterProxy.backendPort = pt.get<ushort>(fys::init_beacon::BACKEND_PORT);
-  _clusterProxy.frontendAddress = pt.get<std::string>(fys::init_beacon::FRONTEND_ADDR);
-  _clusterProxy.frontendPort = pt.get<ushort>(fys::init_beacon::FRONTEND_PORT);
+  _clusterProxy.backend_address = pt.get<std::string>(fys::init_beacon::BACKEND_ADDR);
+  _clusterProxy.backend_port = pt.get<ushort>(fys::init_beacon::BACKEND_PORT);
+  _clusterProxy.frontend_address = pt.get<std::string>(fys::init_beacon::FRONTEND_ADDR);
+  _clusterProxy.frontend_port = pt.get<ushort>(fys::init_beacon::FRONTEND_PORT);
 
   _bindingPort = pt.get<ushort>(fys::init_beacon::BINDINGPORT);
   _dispatchingPort = pt.get<ushort>(fys::init_beacon::DISPATCHERPORT);
@@ -45,8 +45,8 @@ void startup_dispatcher_ctx::initializeFromIni(const std::string &configFilePath
   _isLoadBalancing = pt.get<bool>(fys::init_beacon::ISLOADBALANCING);
   _specificConfigPath = pt.get<std::string>(fys::init_beacon::SPECIFIC_CONFIG);
   _name = pt.get<std::string>(fys::init_beacon::NAME);
-  std::vector<std::string> topicGroups = parseToArray<std::string>(pt.get<std::string>(fys::init_beacon::TOPIC_GROUPS));
-  std::vector<std::string> topics = parseToArray<std::string>(pt.get<std::string>(fys::init_beacon::TOPICS));
+  std::vector<std::string> topicGroups = to_array<std::string>(pt.get<std::string>(fys::init_beacon::TOPIC_GROUPS));
+  std::vector<std::string> topics = to_array<std::string>(pt.get<std::string>(fys::init_beacon::TOPICS));
   if (topicGroups.empty())
 	_subTopics = std::move(topics);
   else {
@@ -59,40 +59,40 @@ void startup_dispatcher_ctx::initializeFromIni(const std::string &configFilePath
   }
 }
 
-std::string startup_dispatcher_ctx::toString() const noexcept {
+std::string startup_dispatcher_ctx::to_string() const noexcept {
   std::string str;
   str = "\n*************************\n";
   str += "[INFO] Dispatcher " + _name + " context VERSION: " + _version + "\n\n";
   str += "[INFO] Client Listener bindingPort: " + std::to_string(_bindingPort) + "\n";
-  str += "[INFO] Listener connection string: " + getListenerBindingString() + "\n";
+  str += "[INFO] Listener connection string: " + listener_binding_str() + "\n";
   str += "[INFO] Service Dispatching Port: " + std::to_string(_dispatchingPort) + "\n";
-  str += "[INFO] Dispatcher connection string: " + getDispatcherBindingString() + "\n";
+  str += "[INFO] Dispatcher connection string: " + dispatcher_binding_str() + "\n";
   str += "[INFO] isClusterAware: " + std::string(_isClusterAware ? "true" : "false") + "\n";
   str += "[INFO] isLoadBalancing: " + std::string(_isLoadBalancing ? "true" : "false") + "\n";
   str += std::accumulate(_subTopics.begin(), _subTopics.end(), std::string{}, [](std::string a, std::string b) {
 	return std::move(a) + "[INFO] Cluster: Subscribing topic: " + std::move(b) + "\n";
   });
-  str += "[INFO] Frontend connection string: " + getFrontendClusterProxyConnectionString() + "\n";
-  str += "[INFO] Backend connection string: " + getBackendClusterProxyConnectionString() + "\n";
+  str += "[INFO] Frontend connection string: " + frontend_cluster_proxy_connection_str() + "\n";
+  str += "[INFO] Backend connection string: " + backend_cluster_proxy_connection_str() + "\n";
   str += "[INFO] Specific configuration file: " + _specificConfigPath + "\n";
   str += "\n*************************\n";
   return str;
 }
 
-std::string startup_dispatcher_ctx::getListenerBindingString() const noexcept {
+std::string startup_dispatcher_ctx::listener_binding_str() const noexcept {
   return "tcp://*:" + std::to_string(_bindingPort);
 }
 
-std::string startup_dispatcher_ctx::getDispatcherBindingString() const noexcept {
+std::string startup_dispatcher_ctx::dispatcher_binding_str() const noexcept {
   return "tcp://*:" + std::to_string(_dispatchingPort);
 }
 
-std::string startup_dispatcher_ctx::getFrontendClusterProxyConnectionString() const noexcept {
-  return "tcp://" + _clusterProxy.frontendAddress + ":" + std::to_string(_clusterProxy.frontendPort);
+std::string startup_dispatcher_ctx::frontend_cluster_proxy_connection_str() const noexcept {
+  return "tcp://" + _clusterProxy.frontend_address + ":" + std::to_string(_clusterProxy.frontend_port);
 }
 
-std::string startup_dispatcher_ctx::getBackendClusterProxyConnectionString() const noexcept {
-  return "tcp://" + _clusterProxy.backendAddress + ":" + std::to_string(_clusterProxy.backendPort);
+std::string startup_dispatcher_ctx::backend_cluster_proxy_connection_str() const noexcept {
+  return "tcp://" + _clusterProxy.backend_address + ":" + std::to_string(_clusterProxy.backend_port);
 }
 
 }

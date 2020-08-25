@@ -1,9 +1,9 @@
-#include <DispatcherConnectionManager.hh>
-#include <StartupDispatcherCtx.hh>
+#include <dispatcher_connection_manager.hh>
+#include <startup_dispatcher_ctx.hh>
 
 namespace fys::network {
 
-DispatcherConnectionManager::DispatcherConnectionManager(int threadNumber, bool isLoadBalancing) noexcept :
+dispatcher_connection_manager::dispatcher_connection_manager(int threadNumber, bool isLoadBalancing) noexcept :
  _isLoadBalancing(isLoadBalancing),
  _zmqContext(threadNumber),
  _listener(_zmqContext, zmq::socket_type::router),
@@ -13,10 +13,10 @@ DispatcherConnectionManager::DispatcherConnectionManager(int threadNumber, bool 
                      false}) {
 }
 
-void DispatcherConnectionManager::setupConnectionManager(const fys::StartupDispatcherCtx &ctx) noexcept {
+void dispatcher_connection_manager::setupConnectionManager(const fys::startup_dispatcher_ctx &ctx) noexcept {
     if (ctx.isClusterAware()) {
-        _clusterConnection.pubSocket.connect(ctx.getFrontendClusterProxyConnectionString());
-        _clusterConnection.subSocket.connect(ctx.getBackendClusterProxyConnectionString());
+        _clusterConnection.pubSocket.connect(ctx.frontend_cluster_proxy_connection_str());
+        _clusterConnection.subSocket.connect(ctx.backend_cluster_proxy_connection_str());
         subscribeToTopics(ctx.getSubscriptionTopics());
     }
     else {
@@ -29,13 +29,13 @@ void DispatcherConnectionManager::setupConnectionManager(const fys::StartupDispa
     _listener.bind("tcp://*:" + std::to_string(ctx.getBindingPort()));
 }
 
-void DispatcherConnectionManager::subscribeToTopics(const std::vector<std::string> &topics) noexcept {
+void dispatcher_connection_manager::subscribeToTopics(const std::vector<std::string> &topics) noexcept {
     for (const auto &topic : topics) {
         _clusterConnection.subSocket.setsockopt(ZMQ_SUBSCRIBE, topic.c_str(), topic.size());
     }
 }
 
-std::tuple<bool, bool, bool> DispatcherConnectionManager::poll() noexcept {
+std::tuple<bool, bool, bool> dispatcher_connection_manager::poll() noexcept {
     //  Initialize poll set
     zmq::pollitem_t items[] = {
         { _listener, 0, ZMQ_POLLIN, 0 },
@@ -49,19 +49,19 @@ std::tuple<bool, bool, bool> DispatcherConnectionManager::poll() noexcept {
     return {listenerPolling, subSocketPolling, dispatcherRespPolling};
 }
 
-bool DispatcherConnectionManager::replyToListenerSocket(zmq::multipart_t && msg) noexcept {
+bool dispatcher_connection_manager::replyToListenerSocket(zmq::multipart_t && msg) noexcept {
     if (!_listener.connected())
         return false;
     return msg.send(_listener);
 }
 
-bool DispatcherConnectionManager::sendMessageToDispatcherSocket(zmq::multipart_t && msg) noexcept {
+bool dispatcher_connection_manager::sendMessageToDispatcherSocket(zmq::multipart_t && msg) noexcept {
     if (!_dispatcher.connected())
         return false;
     return msg.send(_dispatcher);
 }
 
-bool DispatcherConnectionManager::sendMessageToClusterPubSocket(zmq::multipart_t && msg) noexcept {
+bool dispatcher_connection_manager::sendMessageToClusterPubSocket(zmq::multipart_t && msg) noexcept {
     if (_clusterConnection.closed || !_clusterConnection.pubSocket.connected())
         return false;
     return msg.send(_clusterConnection.pubSocket);
