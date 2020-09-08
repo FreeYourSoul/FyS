@@ -1,10 +1,12 @@
 [![Documentation Status](https://readthedocs.org/projects/fys/badge/?version=latest)](https://fys.readthedocs.io/en/latest/?badge=latest)
 [![HitCount](http://hits.dwyl.io/FreeYourSoul/FyS.svg)](http://hits.dwyl.io/FreeYourSoul/FyS)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/2c227695c9824450a0b9bae3c6b881e0)](https://www.codacy.com/manual/FreeYourSoul/FyS?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=FreeYourSoul/FyS&amp;utm_campaign=Badge_Grade)
 ![Last commit](https://img.shields.io/github/last-commit/FreeYourSoul/FyS.svg)
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/FreeYourSoul/FyS/master/LICENSE)
-[![Scc Count Badge](https://sloc.xyz/github/FreeYourSoul/FyS/)](https://github.com/boyter/scc/)
-[![Scc Count Badge](https://sloc.xyz/github/FreeYourSoul/FyS?category=code)](https://github.com/boyter/scc)
+[![](https://tokei.rs/b1/github/XAMPPRocky/tokei?category=files)](https://github.com/XAMPPRocky/tokei)
+[![](https://tokei.rs/b1/github/XAMPPRocky/tokei?category=code)](https://github.com/XAMPPRocky/tokei)
+
 # FyS Online
 
 FreeYourSoul project called Soul's Tale, a scalable MMORPG game
