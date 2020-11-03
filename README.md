@@ -57,3 +57,5 @@ Service handling the movement in the world of the character controlled by the pl
     For scripting of monsters in the Arena (fighting mode)
 * [LUA](https://github.com/lua/lua)   --> soon to be  
     For the scripting of NPC in the world map (when moving)
+* Nix  --> soon
+   Dependency manager for fast installation / setup
