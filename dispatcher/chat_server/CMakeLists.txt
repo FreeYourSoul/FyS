@@ -19,6 +19,5 @@ target_link_libraries(chatserver
         lua
         fys::common_service
         fmt::fmt dl fys::cml
-        ${TMXLITE_LIBRARIES} # to remove
         ${Flatbuffers_LIBRARIES})
 target_include_directories(chatserver PRIVATE ${CMAKE_CURRENT_LIST_DIR}/include)
