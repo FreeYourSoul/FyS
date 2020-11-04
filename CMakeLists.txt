@@ -7,18 +7,33 @@ endif ()
 
 project(FyS_Online CXX)
 
+option(BUILD_SERVICE_ARENA "Build the arena service server binary" ON)
+option(BUILD_SERVICE_QUEST "Build the quest service server binary" ON)
+option(BUILD_SERVICE_WORLD "Build the world service server binary" ON)
+option(BUILD_SERVICE_INVENTORY "Build the inventory service server binary" ON)
+option(BUILD_DISP_CHAT "Build the Char dispatcher binary" ON)
+option(BUILD_DISP_GATEWAY "Build the Gateway dispatcher binary" ON)
+option(BUILD_DISPATCHER "Build the Generic dispatcher binary" ON)
+
 list(APPEND CMAKE_MODULE_PATH
         ${CMAKE_CURRENT_LIST_DIR}/cmake
         ${CMAKE_CURRENT_LIST_DIR}/cmake/modules)
 
 find_package(nlohmann_json REQUIRED)
 find_package(cppzmq REQUIRED)
-find_package(Catch2 REQUIRED)
-find_package(Lua REQUIRED)
 find_package(fmt REQUIRED)
-find_package(tmxlite REQUIRED)
 find_package(spdlog REQUIRED)
 find_package(FlatBuffers REQUIRED)
+if (BUILD_TESTING)
+    find_package(Catch2 REQUIRED)
+    enable_testing()
+endif()
+if (BUILD_SERVICE_WORLD)
+    find_package(Lua REQUIRED)
+endif()
+if (BUILD_SERVICE_WORLD)
+    find_package(tmxlite REQUIRED)
+endif()
 
 include(CMakeRC)
 
@@ -27,10 +42,6 @@ if (CCACHE_FOUND)
     set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
     set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
 endif (CCACHE_FOUND)
-
-if (BUILD_TESTING)
-    enable_testing()
-endif ()
 
 add_subdirectory(deps/FiL)
 
