@@ -41,6 +41,7 @@
 *.exe
 *.out
 *.app
+
 docs/build/
 docs/doxygen/
 docs/sphinx/
@@ -49,3 +50,5 @@ docs/CMakeDoxyfile.in
 docs/CMakeDoxygenDefaults.cmake
 docs/Makefile
 docs/cmake_install.cmake
+
+nix/result

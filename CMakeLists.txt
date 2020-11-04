@@ -24,6 +24,8 @@ find_package(cppzmq REQUIRED)
 find_package(fmt REQUIRED)
 find_package(spdlog REQUIRED)
 find_package(FlatBuffers REQUIRED)
+find_package(fil CONFIG REQUIRED)
+
 if (BUILD_SERVICE_ARENA)
     message(STATUS "Import Arena Service required package")
     find_package(Lua REQUIRED)
@@ -44,8 +46,6 @@ if (CCACHE_FOUND)
     set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
     set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
 endif (CCACHE_FOUND)
-
-add_subdirectory(deps/FiL)
 
 add_subdirectory(scripting_cache)
 
