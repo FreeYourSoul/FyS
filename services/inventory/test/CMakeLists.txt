@@ -19,26 +19,26 @@ include(Catch)
 enable_testing()
 include_directories(
         ${COMMON_INCLUDES_DIR}
-        ${CMAKE_CURRENT_LIST_DIR}/../include)
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include)
 
 add_executable(inventory_test
-        ${CMAKE_CURRENT_LIST_DIR}/catchMain.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/ExchangeRoomTestCase.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/catchMain.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/ExchangeRoomTestCase.cpp
 
         # Sources
         ${COMMON_SRCS}
-        ${CMAKE_CURRENT_LIST_DIR}/../src/inventory_server_context.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/inventory_server_service.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/exchange/exchange_room.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/exchange/exchange_manager.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/item_manager.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/flatbuffer_generator.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../include/flatbuffer_generator.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../include/item_manager.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../include/exchange/exchange_manager.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../include/exchange/exchange_room.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../include/inventory_server_service.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../include/inventory_server_context.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/inventory_server_context.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/inventory_server_service.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/exchange/exchange_room.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/exchange/exchange_manager.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/item_manager.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/flatbuffer_generator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/flatbuffer_generator.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/item_manager.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/exchange/exchange_manager.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/exchange/exchange_room.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/inventory_server_service.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/inventory_server_context.hh
         )
 
 target_compile_definitions(inventory_test PUBLIC -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)

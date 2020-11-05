@@ -4,11 +4,11 @@ project(auth_gateway
         LANGUAGES CXX)
 
 
-include_directories(${CMAKE_CURRENT_LIST_DIR}/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 #Build executable
 add_executable(auth_gateway
-        ${CMAKE_CURRENT_LIST_DIR}/src/main.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp)
 
 target_compile_options(auth_gateway PRIVATE -Wall -Wpedantic -Wextra -Wno-deprecated-declarations)
 

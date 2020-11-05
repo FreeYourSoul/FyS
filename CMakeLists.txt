@@ -17,8 +17,8 @@ option(BUILD_DISP_GATEWAY "Build the Gateway dispatcher binary" ON)
 option(BUILD_DISPATCHER "Build the Generic dispatcher binary" ON)
 
 list(APPEND CMAKE_MODULE_PATH
-        ${CMAKE_CURRENT_LIST_DIR}/cmake
-        ${CMAKE_CURRENT_LIST_DIR}/cmake/modules)
+        ${CMAKE_CURRENT_SOURCE_DIR}/cmake
+        ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
 
 find_package(nlohmann_json REQUIRED)
 find_package(cppzmq REQUIRED)
@@ -27,9 +27,15 @@ find_package(spdlog REQUIRED)
 find_package(FlatBuffers REQUIRED)
 find_package(fil CONFIG REQUIRED)
 
+find_program(FLAT_COMPILER_FOUND flatc REQUIRED)
+set(FLATBUFFERS_FLATC_EXECUTABLE ${FLAT_COMPILER_FOUND})
+
+message(STATUS "flatc compiler found ${FLAT_COMPILER_FOUND}")
+
 if (BUILD_SERVICE_ARENA)
     message(STATUS "Import Arena Service required package")
-    find_package(Lua REQUIRED)
+    find_package(Lua51)
+    find_package(Lua)
 endif()
 if (BUILD_SERVICE_WORLD)
     message(STATUS "Import World Service required package")

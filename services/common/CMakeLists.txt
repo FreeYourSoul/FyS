@@ -1,6 +1,7 @@
 project(common)
 
-set(FLAT_BUFFER_PATH ${CMAKE_CURRENT_LIST_DIR}/flatbuffer)
+set(FLAT_BUFFER_PATH ${CMAKE_CURRENT_SOURCE_DIR}/flatbuffer)
+message(STATUS "FlatBuffer PATH ${FLAT_BUFFER_PATH}")
 set(FLATBUFFER_INCLUDE_DIR "${FLAT_BUFFER_PATH}/includes")
 set(FLATBUFFER_SCHEMA_DIR "${FLAT_BUFFER_PATH}/schemas")
 
@@ -28,7 +29,7 @@ else ()
             ${FLATBUFFER_SCHEMA_DIR}/world/WSAction.fbs
             ${FLATBUFFER_SCHEMA_DIR}/Notifications.fbs)
 
-    message("Flatbuffer generation ${FLATBUFFER_INCLUDE_DIR}")
+    message("Flatbuffer generation ${FLATBUFFER_INCLUDE_DIR} with flatc ${FLATBUFFERS_FLATC_EXECUTABLE}")
     build_flatbuffers("${FLAT_BUFFER_SCHEMAS}"
             "${FLATBUFFER_SCHEMA_DIR}"
             generateFbs
@@ -38,20 +39,32 @@ else ()
             "")
 endif ()
 
+if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/src/random_generator.cpp)
+    message("1 OK")
+else()
+    message("1 KO")
+endif()
+
+if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/flatbuffer/schemas/arena/ArenaFightAction.fbs)
+    message("2 OK")
+else()
+    message("2 KO")
+endif()
+
 set(COMMON_SRCS
-        ${CMAKE_CURRENT_LIST_DIR}/src/random_generator.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/src/connection_handler.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/src/service_context_base.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/include/connection_handler.hh
-        ${CMAKE_CURRENT_LIST_DIR}/include/random_generator.hh
-        ${CMAKE_CURRENT_LIST_DIR}/include/direct_connection_manager.hh
-        ${CMAKE_CURRENT_LIST_DIR}/include/sized_queue.hh
-        ${CMAKE_CURRENT_LIST_DIR}/include/service_context_base.hh
-        ${CMAKE_CURRENT_LIST_DIR}/include/key.hh)
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/random_generator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/connection_handler.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/service_context_base.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/connection_handler.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/random_generator.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/direct_connection_manager.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/sized_queue.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/service_context_base.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/key.hh)
 
 set(COMMON_INCLUDES_DIR
-        ${CMAKE_CURRENT_LIST_DIR}/include
-        ${CMAKE_CURRENT_LIST_DIR}/flatbuffer/includes)
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/flatbuffer/includes)
 
 add_library(common_service OBJECT ${COMMON_SRCS})
 add_library(fys::common_service ALIAS common_service)

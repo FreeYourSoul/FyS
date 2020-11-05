@@ -12,7 +12,7 @@ in with pkgs; rec {
   # FyS Depedencies
 
   dispatcher = import ./recipes/dispatcher.nix {
-    inherit stdenv callPackage cmake
-    nlohmann_json flatbuffers zeromq cppzmq catch2 fmt spdlog fil; 
+    inherit stdenv callPackage cmake flatcc
+    nlohmann_json flatbuffers zeromq cppzmq catch2 fmt spdlog fil boost; 
   }; 
 }

@@ -15,20 +15,20 @@ include(Catch)
 
 enable_testing()
 
-include_directories(${CMAKE_CURRENT_LIST_DIR}/../include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../include)
 
 add_executable(cml_test
         #source tested
-        ${CMAKE_CURRENT_LIST_DIR}/../src/Cml.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../include/Cml.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../include/CmlKey.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../include/CmlCopy.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../src/CmlCopy.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/Cml.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/Cml.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/CmlKey.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/CmlCopy.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/CmlCopy.cpp
 
         #test files
-        ${CMAKE_CURRENT_LIST_DIR}/catchMain.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/BasicCmlTestCase.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/CmlCopyTestCase.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/catchMain.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/BasicCmlTestCase.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/CmlCopyTestCase.cpp
         )
 set(CMAKE_BUILD_TYPE Debug)
 target_link_libraries(cml_test Catch2::Catch2 stdc++fs)

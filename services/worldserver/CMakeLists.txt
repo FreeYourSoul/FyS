@@ -4,25 +4,25 @@ project(worldserver_service
         LANGUAGES CXX)
 
 add_executable(worldserver_service
-        ${CMAKE_CURRENT_LIST_DIR}/src/main.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/src/engine/player_data.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/include/engine/player_data.hh
-        ${CMAKE_CURRENT_LIST_DIR}/src/engine/engine.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/include/engine/engine.hh
-        ${CMAKE_CURRENT_LIST_DIR}/src/engine/collision_map.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/src/flatbuffer_generator.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/include/flatbuffer_generator.hh
-        ${CMAKE_CURRENT_LIST_DIR}/src/engine/script_engine.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/include/engine/script_engine.hh
-        ${CMAKE_CURRENT_LIST_DIR}/include/engine/collision_map.hh
-        ${CMAKE_CURRENT_LIST_DIR}/src/connection_handler.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/include/connection_handler.hh
-        ${CMAKE_CURRENT_LIST_DIR}/src/world_server_service.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/include/world_server_service.hh
-        ${CMAKE_CURRENT_LIST_DIR}/src/world_server_context.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/include/world_server_context.hh
-        ${CMAKE_CURRENT_LIST_DIR}/src/engine/world_populator.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/include/engine/world_populator.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/engine/player_data.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/engine/player_data.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/engine/engine.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/engine/engine.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/engine/collision_map.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/flatbuffer_generator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/flatbuffer_generator.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/engine/script_engine.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/engine/script_engine.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/engine/collision_map.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/connection_handler.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/connection_handler.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/world_server_service.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/world_server_service.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/world_server_context.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/world_server_context.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/engine/world_populator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/engine/world_populator.hh
         )
 
 target_link_libraries(worldserver_service
@@ -33,7 +33,7 @@ target_link_libraries(worldserver_service
         )
 
 target_include_directories(worldserver_service PRIVATE
-        ${CMAKE_CURRENT_LIST_DIR}/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/include
         ${COMMON_INCLUDES_DIR}
         ${FLATBUFFER_INCLUDE_DIR}
         ${TMXLITE_HEADERS})

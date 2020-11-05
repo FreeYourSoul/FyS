@@ -1,4 +1,5 @@
-{stdenv, callPackage, cmake, flatbuffers, zeromq, cppzmq, catch2, fmt, spdlog, nlohmann_json, fil}:
+{ stdenv, callPackage, cmake, flatcc, 
+  boost, flatbuffers, zeromq, cppzmq, catch2, fmt, spdlog, nlohmann_json, fil }:
 
 stdenv.mkDerivation rec {
     inherit (callPackage ./common.nix { }) version src;
@@ -13,9 +14,12 @@ stdenv.mkDerivation rec {
     -DBUILD_SERVICE_INVENTORY=OFF
     -DBUILD_DISP_CHAT=OFF
     -DBUILD_DISP_GATEWAY=OFF
+    
+    -DBUILD_TESTING=OFF
     -DBUILD_DISPATCHER=ON
     ";
 
-    buildInputs = [ cmake zeromq cppzmq flatbuffers spdlog catch2 fmt nlohmann_json fil ];
-
+    buildInputs = [ zeromq cppzmq boost flatbuffers spdlog catch2 fmt nlohmann_json fil ];
+    nativeBuildInputs = [ cmake flatcc ];
+    
 }

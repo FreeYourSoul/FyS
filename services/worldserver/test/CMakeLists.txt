@@ -12,53 +12,53 @@ set(CMAKE_CXX_COMPILER /usr/bin/g++)
 include_directories(
         ${COMMON_INCLUDES_DIR}
         ${TMXLITE_HEADERS}
-        ${CMAKE_CURRENT_LIST_DIR}/../include)
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include)
 
 add_executable(world_server_test
-        ${CMAKE_CURRENT_LIST_DIR}/catchMain.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/catchMain.cpp
 
         # Test files
-        ${CMAKE_CURRENT_LIST_DIR}/WorldServerEngineTestCase.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/FlatbufferGeneratorTestCase.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/WorldServerEngineTestCase.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/FlatbufferGeneratorTestCase.cpp
 
         # Sources
-        ${CMAKE_CURRENT_LIST_DIR}/../src/flatbuffer_generator.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/engine/player_data.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/engine/engine.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/engine/collision_map.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/engine/world_populator.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/flatbuffer_generator.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/engine/script_engine.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/connection_handler.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/world_server_service.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/world_server_context.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/flatbuffer_generator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/engine/player_data.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/engine/engine.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/engine/collision_map.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/engine/world_populator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/flatbuffer_generator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/engine/script_engine.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/connection_handler.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/world_server_service.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/world_server_context.cpp
         )
 
 add_executable(world_server_lua_test
         #Test files
-        ${CMAKE_CURRENT_LIST_DIR}/catchMain.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/script/SpawningPoint_0_TestCase.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/script/WorldPopulatorTestCase.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/catchMain.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/script/SpawningPoint_0_TestCase.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/script/WorldPopulatorTestCase.cpp
 
         #Source files
-        ${CMAKE_CURRENT_LIST_DIR}/../src/engine/player_data.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../include/engine/player_data.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../src/engine/engine.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../include/engine/engine.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../src/engine/collision_map.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../src/flatbuffer_generator.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../include/flatbuffer_generator.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../src/engine/script_engine.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../include/engine/script_engine.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../include/engine/collision_map.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../src/connection_handler.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../include/connection_handler.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../src/world_server_service.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../include/world_server_service.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../src/world_server_context.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../include/world_server_context.hh
-        ${CMAKE_CURRENT_LIST_DIR}/../src/engine/world_populator.cpp
-        ${CMAKE_CURRENT_LIST_DIR}/../include/engine/world_populator.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/engine/player_data.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/engine/player_data.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/engine/engine.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/engine/engine.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/engine/collision_map.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/flatbuffer_generator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/flatbuffer_generator.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/engine/script_engine.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/engine/script_engine.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/engine/collision_map.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/connection_handler.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/connection_handler.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/world_server_service.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/world_server_service.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/world_server_context.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/world_server_context.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/../src/engine/world_populator.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/engine/world_populator.hh
         )
 
 target_link_libraries(world_server_test PRIVATE
