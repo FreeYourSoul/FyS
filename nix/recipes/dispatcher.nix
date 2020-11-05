@@ -4,7 +4,7 @@
 stdenv.mkDerivation rec {
     inherit (callPackage ./common.nix { }) version src;
 
-    name = "fys-inventory-service-${version}";
+    name = "fys-dispatcher-${version}";
 
     cmakeFlags = "
     -DBUILD_CML=OFF
@@ -19,7 +19,7 @@ stdenv.mkDerivation rec {
     -DBUILD_DISPATCHER=ON
     ";
 
-    buildInputs = [ zeromq cppzmq boost flatbuffers spdlog catch2 fmt nlohmann_json fil ];
+    buildInputs = [ zeromq flatcc cppzmq boost flatbuffers spdlog catch2 fmt nlohmann_json fil ];
     nativeBuildInputs = [ cmake flatcc ];
     
 }
