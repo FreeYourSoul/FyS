@@ -6,6 +6,7 @@ stdenv.mkDerivation rec {
     name = "fys-inventory-service-${version}";
 
     cmakeFlags = "
+    -DBUILD_CML=OFF
     -DBUILD_SERVICE_WORLD=OFF
     -DBUILD_SERVICE_QUEST=OFF
     -DBUILD_SERVICE_ARENA=OFF

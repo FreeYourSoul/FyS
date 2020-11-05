@@ -7,6 +7,7 @@ endif ()
 
 project(FyS_Online CXX)
 
+option(BUILD_CML "Build Cache utility library" ON)
 option(BUILD_SERVICE_ARENA "Build the arena service server binary" ON)
 option(BUILD_SERVICE_QUEST "Build the quest service server binary" ON)
 option(BUILD_SERVICE_WORLD "Build the world service server binary" ON)
@@ -47,8 +48,10 @@ if (CCACHE_FOUND)
     set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
 endif (CCACHE_FOUND)
 
-add_subdirectory(scripting_cache)
+if (BUILD_CML)
+    add_subdirectory(scripting_cache)
+    add_subdirectory(scripting_cache/cml)
+endif()
 
-add_subdirectory(scripting_cache/cml)
 add_subdirectory(dispatcher)
 add_subdirectory(services)
