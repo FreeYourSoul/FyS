@@ -21,3 +21,5 @@ target_link_libraries(chatserver
         fmt::fmt dl fys::cml
         ${Flatbuffers_LIBRARIES})
 target_include_directories(chatserver PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+install(TARGETS chatserver DESTINATION ${CMAKE_INSTALL_BINDIR})

@@ -39,18 +39,6 @@ else ()
             "")
 endif ()
 
-if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/src/random_generator.cpp)
-    message("1 OK")
-else()
-    message("1 KO")
-endif()
-
-if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/flatbuffer/schemas/arena/ArenaFightAction.fbs)
-    message("2 OK")
-else()
-    message("2 KO")
-endif()
-
 set(COMMON_SRCS
         ${CMAKE_CURRENT_SOURCE_DIR}/src/random_generator.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/connection_handler.cpp

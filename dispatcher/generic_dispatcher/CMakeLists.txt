@@ -28,3 +28,5 @@ set_target_properties(generic_dispatcher PROPERTIES
         CMAKE_CXX_COMPILER /usr/bin/g++)
 
 message( STATUS Set Warnings flag : ${CMAKE_CXX_FLAGS})
+
+install(TARGETS generic_dispatcher DESTINATION ${CMAKE_INSTALL_BINDIR})

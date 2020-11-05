@@ -20,3 +20,4 @@ set_target_properties(auth_gateway PROPERTIES
         CMAKE_CXX_COMPILER /usr/bin/g++)
 
 message( STATUS Set Warnings flag : ${CMAKE_CXX_FLAGS})
+install(TARGETS auth_gateway DESTINATION ${CMAKE_INSTALL_BINDIR})
