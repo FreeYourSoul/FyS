@@ -3,7 +3,7 @@
 stdenv.mkDerivation rec {
     inherit (callPackage ./common.nix { }) version src;
 
-    name = "fys-inventory-service-${version}";
+    pname = "fys-inventory-service";
 
     buildInputs = [ cmake zeromq lua cppzmq spdlog catch2 fmt nlohmann_json];
 

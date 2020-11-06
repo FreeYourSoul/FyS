@@ -21,7 +21,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
 #ifndef FYS_ONLINE_SIMPLEPROXY_HH
 #define FYS_ONLINE_SIMPLEPROXY_HH
 
@@ -30,22 +29,21 @@
 
 namespace fys {
 
-	class startup_dispatcher_ctx;
+class startup_dispatcher_ctx;
 
-    class simple_proxy {
+class simple_proxy {
 
-    public:
-        explicit simple_proxy(const startup_dispatcher_ctx &ctx) noexcept;
+public:
+  explicit simple_proxy(const startup_dispatcher_ctx &ctx) noexcept;
 
-        void start_proxy();
+  void start_proxy();
 
-    private:
-        zmq::context_t _ctx;
-        zmq::socket_t _frontend;
-        zmq::socket_t _backend;
+private:
+  zmq::context_t _ctx;
+  zmq::socket_t _frontend;
+  zmq::socket_t _backend;
+};
 
-    };
+}// namespace fys
 
-}
-
-#endif //FYS_ONLINE_SIMPLEPROXY_HH
+#endif//FYS_ONLINE_SIMPLEPROXY_HH

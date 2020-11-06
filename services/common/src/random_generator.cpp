@@ -21,15 +21,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
 #include "random_generator.hh"
 
 namespace fys::util {
 
 std::shared_ptr<std::mt19937>
-random_generator::get() const
-{
-	return mt;
+random_generator::get() const {
+  return mt;
 }
 
-}
+}// namespace fys::util

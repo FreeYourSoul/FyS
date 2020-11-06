@@ -24,49 +24,49 @@
 #ifndef FYS_ONLINE_EXCHANGE_MANAGER_HH
 #define FYS_ONLINE_EXCHANGE_MANAGER_HH
 
-#include <map>
 #include <direct_connection_manager.hh>
 #include <exchange/exchange_room.hh>
+#include <map>
 
 // forward declarations
 namespace fys::inv {
 class inventory_server_context;
 class item_manager;
-}
+}// namespace fys::inv
 // end forward declarations
 
 namespace fys::inv {
 
 struct room_accessor {
-	std::uint32_t idExchange;
-	std::string userName;
-	std::string tokenExchange;
+  std::uint32_t idExchange;
+  std::string userName;
+  std::string tokenExchange;
 };
 
 class exchange_manager : public common::direct_connection_manager {
 
 public:
-	explicit exchange_manager(const inventory_server_context& ctx);
+  explicit exchange_manager(const inventory_server_context &ctx);
 
-	[[nodiscard]] const exchange_room&
-	makeExchangeRoom(item_manager& itemManager, std::string initiator, std::string receiver, std::string identity);
+  [[nodiscard]] const exchange_room &
+  makeExchangeRoom(item_manager &itemManager, std::string initiator, std::string receiver, std::string identity);
 
-	void lock_room_transaction(const room_accessor& accessor);
-	void receiver_join_room_transaction(const room_accessor& accessor, std::string identity_receiver);
-	void terminate_room_transaction(item_manager& manager, const room_accessor& accessor);
-	void remove_item_from_room(item_manager& manager, const room_accessor& accessor, const std::string& item_code, std::uint32_t qty);
-	void add_item_in_room(item_manager& manager, const room_accessor& accessor, const std::string& item_code, std::uint32_t qty);
-
-private:
-	[[nodiscard]] inline std::string
-	generate_token(const std::string& token_base) const;
+  void lock_room_transaction(const room_accessor &accessor);
+  void receiver_join_room_transaction(const room_accessor &accessor, std::string identity_receiver);
+  void terminate_room_transaction(item_manager &manager, const room_accessor &accessor);
+  void remove_item_from_room(item_manager &manager, const room_accessor &accessor, const std::string &item_code, std::uint32_t qty);
+  void add_item_in_room(item_manager &manager, const room_accessor &accessor, const std::string &item_code, std::uint32_t qty);
 
 private:
-	std::map<unsigned, exchange_room> _rooms;
-	const std::string_view _inventory_server_code;
-	unsigned _current_room_id = 0;
+  [[nodiscard]] inline std::string
+  generate_token(const std::string &token_base) const;
+
+private:
+  std::map<unsigned, exchange_room> _rooms;
+  const std::string_view _inventory_server_code;
+  unsigned _current_room_id = 0;
 };
 
-}
+}// namespace fys::inv
 
-#endif //FYS_ONLINE_EXCHANGE_MANAGER_HH
+#endif//FYS_ONLINE_EXCHANGE_MANAGER_HH

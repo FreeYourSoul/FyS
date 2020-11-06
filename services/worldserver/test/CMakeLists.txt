@@ -61,20 +61,20 @@ add_executable(world_server_lua_test
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/engine/world_populator.hh
         )
 
-target_link_libraries(world_server_test PRIVATE
+target_link_libraries(world_server_test PUBLIC
         Catch2::Catch2
         fys::common_service
         fys::cml
         lua
         ${TMXLITE_LIBRARIES} # to remove
         )
+
 catch_discover_tests(world_server_test)
 
 target_link_libraries(world_server_lua_test
         Catch2::Catch2
         fys::common_service
         fys::cml
-        lua
         ${TMXLITE_LIBRARIES} # to remove
-        )
+        lua)
 catch_discover_tests(world_server_lua_test)

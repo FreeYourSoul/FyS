@@ -28,9 +28,9 @@
 
 #include <zmq_addon.hpp>
 
-#include <history_manager.hh>
 #include <arena_server_context.hh>
 #include <arena_server_service.hh>
+#include <history_manager.hh>
 
 //CMRC_DECLARE(resource);
 
@@ -46,8 +46,7 @@ int main(int ac, char **av) {
 	fys::arena::history_manager::activate_historic_manager(true);
 
 	serverService.run_server_loop();
-  }
-  catch (const std::exception& e) {
+  } catch (const std::exception &e) {
 	SPDLOG_ERROR("Main caught an exception: {}", e.what());
   }
   return 0;

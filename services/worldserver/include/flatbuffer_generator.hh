@@ -21,7 +21,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
 #ifndef FYS_ONLINE_WS_FLATBUFFERGENERATOR_HH
 #define FYS_ONLINE_WS_FLATBUFFERGENERATOR_HH
 
@@ -29,9 +28,9 @@
 
 // forward declarations
 namespace fys::ws {
-	struct character_info;
-	struct npc_action;
-}
+struct character_info;
+struct npc_action;
+}// namespace fys::ws
 // end forward declarations
 
 namespace fys::ws {
@@ -39,18 +38,16 @@ namespace fys::ws {
 class flatbuffer_generator {
 
 public:
+  std::pair<void *, std::uint32_t>
+  generate_bulk_move_notif(const std::vector<npc_action> &);
 
-	std::pair<void*, std::uint32_t>
-	generate_bulk_move_notif(const std::vector<npc_action>&);
-
-	[[nodiscard]] std::pair<void*, std::uint32_t>
-	generate_move_notif(const std::string& player_name, const character_info& info);
+  [[nodiscard]] std::pair<void *, std::uint32_t>
+  generate_move_notif(const std::string &player_name, const character_info &info);
 
 private:
-	flatbuffers::FlatBufferBuilder _fbb;
-
+  flatbuffers::FlatBufferBuilder _fbb;
 };
 
-}
+}// namespace fys::ws
 
-#endif //FYS_ONLINE_WS_FLATBUFFERGENERATOR_HH
+#endif//FYS_ONLINE_WS_FLATBUFFERGENERATOR_HH

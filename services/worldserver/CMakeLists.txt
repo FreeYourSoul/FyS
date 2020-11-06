@@ -25,7 +25,7 @@ add_executable(worldserver_service
         ${CMAKE_CURRENT_SOURCE_DIR}/include/engine/world_populator.hh
         )
 
-target_link_libraries(worldserver_service
+target_link_libraries(worldserver_service PRIVATE
         lua
         fys::common_service
         dl fys::cml
@@ -34,14 +34,12 @@ target_link_libraries(worldserver_service
 
 target_include_directories(worldserver_service PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/include
-        ${COMMON_INCLUDES_DIR}
-        ${FLATBUFFER_INCLUDE_DIR}
         ${TMXLITE_HEADERS})
 
 include(CheckIPOSupported)
 check_ipo_supported(RESULT result)
 if (result)
-    set_target_properties(arena_service PROPERTIES INTERPROCEDURAL_OPTIMIZATION TRUE)
+    set_target_properties(worldserver_service PROPERTIES INTERPROCEDURAL_OPTIMIZATION TRUE)
 endif ()
 
 target_compile_options(worldserver_service PRIVATE -O2 -fstack-protector-all -g)

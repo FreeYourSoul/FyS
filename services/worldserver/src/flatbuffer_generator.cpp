@@ -29,41 +29,37 @@
 
 namespace fys::ws {
 
+std::pair<void *, std::uint32_t>
+flatbuffer_generator::generate_move_notif(const std::string &player_name, const character_info &info) {
+  auto move_notification = fb::world::CreateMoveNotification(
+	  _fbb,
+	  _fbb.CreateString(player_name),
+	  info.velocity,
+	  info.angle,
+	  info.position.x,
+	  info.position.y);
 
-std::pair<void*, std::uint32_t>
-flatbuffer_generator::generate_move_notif(const std::string& player_name, const character_info& info)
-{
-	auto move_notification = fb::world::CreateMoveNotification(
-			_fbb,
-			_fbb.CreateString(player_name),
-			info.velocity,
-			info.angle,
-			info.position.x,
-			info.position.y
-	);
+  auto message = fb::world::CreateResponseFrame(
+	  _fbb,
+	  fb::world::Response_MoveNotification,
+	  move_notification.Union());
 
-	auto message = fb::world::CreateResponseFrame(
-		_fbb,
-		fb::world::Response_MoveNotification,
-		move_notification.Union()
-	);
-
-	fb::world::FinishResponseFrameBuffer(_fbb, message);
-	return std::pair(_fbb.GetBufferPointer(), _fbb.GetSize());
+  fb::world::FinishResponseFrameBuffer(_fbb, message);
+  return std::pair(_fbb.GetBufferPointer(), _fbb.GetSize());
 }
 
 std::pair<void *, std::uint32_t> flatbuffer_generator::generate_bulk_move_notif(const std::vector<npc_action> &actions) {
 
-//  auto bulk_move_notifications = fb::world::CreateBulkMove(
-//  	_fbb,
-//  	);
+  //  auto bulk_move_notifications = fb::world::CreateBulkMove(
+  //  	_fbb,
+  //  	);
 
-//  auto message = fb::world::CreateResponseFrame(
-//	  _fbb,
-//	  fb::world::BulkMove,
-//	  bulk_move_notifications.Union()
-//  );
+  //  auto message = fb::world::CreateResponseFrame(
+  //	  _fbb,
+  //	  fb::world::BulkMove,
+  //	  bulk_move_notifications.Union()
+  //  );
   return std::pair<void *, std::uint32_t>();
 }
 
-}
+}// namespace fys::ws

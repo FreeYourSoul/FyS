@@ -21,7 +21,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
 #ifndef FYS_SERVICECONTEXTBASE_HH
 #define FYS_SERVICECONTEXTBASE_HH
 
@@ -37,47 +36,47 @@ constexpr static auto PORT = "service.port";
 constexpr static auto DISPATCHER_PORT = "dispatcher.port";
 constexpr static auto DISPATCHER_SUBPORT = "dispatcher.subport";
 constexpr static auto DISPATCHER_ADDR = "dispatcher.address";
-}
+}// namespace init_beacon
 
 struct dispatcher_data {
-	std::string address;
-	ushort subscriber_port;
-	ushort port;
+  std::string address;
+  ushort subscriber_port;
+  ushort port;
 };
 
 class service_context_base {
 public:
-	service_context_base(int ac, const char* const* av);
+  service_context_base(int ac, const char *const *av);
 
-	/**
-	 * @return the connection string required to connect to the current server
-	 */
-	[[nodiscard]] std::string
-	connection_str() const;
+  /**
+   * @return the connection string required to connect to the current server
+   */
+  [[nodiscard]] std::string
+  connection_str() const;
 
-	[[nodiscard]] ushort
-	port() const { return _port; }
+  [[nodiscard]] ushort
+  port() const { return _port; }
 
-	[[nodiscard]] const std::string&
-	hostname() const { return _hostname; }
+  [[nodiscard]] const std::string &
+  hostname() const { return _hostname; }
 
-	[[nodiscard]] std::string
-	dispatcher_connection_str() const noexcept;
+  [[nodiscard]] std::string
+  dispatcher_connection_str() const noexcept;
 
 private:
-	void initialize_from_ini(const std::string& cfg_file_path);
+  void initialize_from_ini(const std::string &cfg_file_path);
 
 protected:
-	std::string _version;
-	std::string _name;
-	std::string _config_file;
+  std::string _version;
+  std::string _name;
+  std::string _config_file;
 
-	std::string _hostname;
-	ushort _port;
+  std::string _hostname;
+  ushort _port;
 
-	dispatcher_data _dispatcher_data;
+  dispatcher_data _dispatcher_data;
 };
 
-}
+}// namespace fys::common
 
-#endif //FYS_SERVICECONTEXTBASE_HH
+#endif//FYS_SERVICECONTEXTBASE_HH

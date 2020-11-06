@@ -27,9 +27,9 @@
 namespace fys::arena {
 
 struct rewards {
-	std::vector<std::string> keys;
-	std::vector<uint> quantity;
+  std::vector<std::string> keys;
+  std::vector<uint> quantity;
 };
 
-}
-#endif //FYS_ONLINE_REWARD_HH
+}// namespace fys::arena
+#endif//FYS_ONLINE_REWARD_HH

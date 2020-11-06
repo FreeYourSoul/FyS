@@ -1,9 +1,9 @@
-cmake_minimum_required( VERSION 3.6...3.15 )
-if(${CMAKE_VERSION} VERSION_LESS 3.15)
+cmake_minimum_required(VERSION 3.6...3.15)
+if (${CMAKE_VERSION} VERSION_LESS 3.15)
     cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
-else()
+else ()
     cmake_policy(VERSION 3.15)
-endif()
+endif ()
 
 project(generic_dispatcher
         VERSION 1.0
@@ -27,6 +27,6 @@ set_target_properties(generic_dispatcher PROPERTIES
         CXX_STANDARD 17
         CMAKE_CXX_COMPILER /usr/bin/g++)
 
-message( STATUS Set Warnings flag : ${CMAKE_CXX_FLAGS})
+message(STATUS Set Warnings flag : ${CMAKE_CXX_FLAGS})
 
 install(TARGETS generic_dispatcher DESTINATION ${CMAKE_INSTALL_BINDIR})

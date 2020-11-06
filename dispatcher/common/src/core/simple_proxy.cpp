@@ -27,10 +27,9 @@
 
 namespace fys {
 
-simple_proxy::simple_proxy(const startup_dispatcher_ctx &ctx) noexcept:
-	_ctx(1),
-	_frontend(_ctx, zmq::socket_type::router),
-	_backend(_ctx, zmq::socket_type::dealer) {
+simple_proxy::simple_proxy(const startup_dispatcher_ctx &ctx) noexcept : _ctx(1),
+																		 _frontend(_ctx, zmq::socket_type::router),
+																		 _backend(_ctx, zmq::socket_type::dealer) {
   _frontend.bind(ctx.listener_binding_str());
   _backend.bind(ctx.dispatcher_binding_str());
 }
@@ -39,4 +38,4 @@ void simple_proxy::start_proxy() {
   zmq::proxy(zmq::socket_ref(_frontend), zmq::socket_ref(_backend));
 }
 
-}
+}// namespace fys

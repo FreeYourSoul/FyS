@@ -24,8 +24,8 @@
 #ifndef FYS_WORLDSERVERSERVICE_HH
 #define FYS_WORLDSERVERSERVICE_HH
 
-#include <engine/engine.hh>
 #include "connection_handler.hh"
+#include <engine/engine.hh>
 
 // forward declarations
 namespace fys::ws {
@@ -37,33 +37,32 @@ namespace fys::ws {
 
 class world_server_service {
 
-	struct awaited_player {
-		auth_player auth{};
-		pos initial_position{};
-		double initial_angle = 0.0;
-		double initial_velocity = 0.0;
-	};
+  struct awaited_player {
+	auth_player auth{};
+	pos initial_position{};
+	double initial_angle = 0.0;
+	double initial_velocity = 0.0;
+  };
 
-//	using awaiting_player_it = std::vector<awaited_player>::const_iterator;
+  //	using awaiting_player_it = std::vector<awaited_player>::const_iterator;
 
 public:
-	explicit world_server_service(const world_server_context& ctx, engine engine);
-	void run_server_loop() noexcept;
+  explicit world_server_service(const world_server_context &ctx, engine engine);
+  void run_server_loop() noexcept;
 
 private:
-	inline void register_awaited_player(const std::string& user, const std::string& token, std::string identity);
-	inline void process_player_message(const std::string& user, const std::string& tkn, const fb::world::WSAction* action);
+  inline void register_awaited_player(const std::string &user, const std::string &token, std::string identity);
+  inline void process_player_message(const std::string &user, const std::string &tkn, const fb::world::WSAction *action);
 
 private:
-	std::reference_wrapper<const world_server_context> _ctx;
+  std::reference_wrapper<const world_server_context> _ctx;
 
-	std::vector<awaited_player> _awaited_incoming_player;
+  std::vector<awaited_player> _awaited_incoming_player;
 
-	engine _world_server;
-	ws::connection_handler _connection_handler;
-
+  engine _world_server;
+  ws::connection_handler _connection_handler;
 };
 
-}
+}// namespace fys::ws
 
-#endif //FYS_WORLDSERVERSERVICE_HH
+#endif//FYS_WORLDSERVERSERVICE_HH

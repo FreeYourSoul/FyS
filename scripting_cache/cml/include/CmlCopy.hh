@@ -21,34 +21,31 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
 #ifndef FYS_SERVICE_CMLSQL_HH
 #define FYS_SERVICE_CMLSQL_HH
 
-#include <spdlog/spdlog.h>
 #include <Cml.hh>
+#include <spdlog/spdlog.h>
 
 namespace fys::cache {
 class
-CmlCopy : public Cml {
+	CmlCopy : public Cml {
 public:
-	~CmlCopy() override { }
-	CmlCopy(const std::string& pathLocalStorage,
-			const std::string& pathCopy)
-			:Cml(pathLocalStorage), _copyPathStorage(pathCopy)
-	{
-		if (!std::filesystem::exists(_copyPathStorage)) {
-			SPDLOG_ERROR("Path copy does not exist {}", pathCopy);
-		}
+  ~CmlCopy() override {}
+  CmlCopy(const std::string &pathLocalStorage,
+		  const std::string &pathCopy)
+	  : Cml(pathLocalStorage), _copyPathStorage(pathCopy) {
+	if (!std::filesystem::exists(_copyPathStorage)) {
+	  SPDLOG_ERROR("Path copy does not exist {}", pathCopy);
 	}
+  }
 
 private:
-	void createUpToDateFileInLocalStorage(const CmlKey& cmlKey, std::filesystem::file_time_type cacheTime) override;
+  void createUpToDateFileInLocalStorage(const CmlKey &cmlKey, std::filesystem::file_time_type cacheTime) override;
 
 protected:
-	std::filesystem::path _copyPathStorage;
-
+  std::filesystem::path _copyPathStorage;
 };
-}
+}// namespace fys::cache
 
-#endif //FYS_SERVICE_CMLSQL_HH
+#endif//FYS_SERVICE_CMLSQL_HH

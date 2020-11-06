@@ -3,7 +3,7 @@
 stdenv.mkDerivation rec {
     inherit (callPackage ./common.nix { }) version src;
 
-    name = "fys-world-service-${version}";
+    pname = "fys-world-service";
 
     buildInputs = [ cmake zmq ];
 

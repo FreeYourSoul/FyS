@@ -29,11 +29,10 @@
 
 namespace fys::chat {
 
-
 // Key Value Database
 
 std::string key_for_player(const std::string &user_name) {
-return fmt::format(FMT_STRING("fys#chat#player#{}"), user_name);
+  return fmt::format(FMT_STRING("fys#chat#player#{}"), user_name);
 }
 
 std::string key_for_room(const std::string &room_name) {
@@ -48,4 +47,4 @@ std::string key_for_player_in_room(const std::string &room_name, const std::stri
   return fmt::format(FMT_STRING("{}{}"), key_for_listing_players_in_room(room_name), user_name);
 }
 
-}
+}// namespace fys::chat

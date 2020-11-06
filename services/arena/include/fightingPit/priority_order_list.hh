@@ -21,82 +21,77 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
 #ifndef FYS_PRIORITYORDERLIST_HH
 #define FYS_PRIORITYORDERLIST_HH
 
+#include <fightingPit/data/common_types.hh>
 #include <utility>
 #include <vector>
-#include <fightingPit/data/common_types.hh>
 
 namespace fys::arena {
 
 class priority_order_list {
 
 public:
-	priority_order_list() = default;
-	explicit priority_order_list(std::vector<data::priority_elem> base_speed);
+  priority_order_list() = default;
+  explicit priority_order_list(std::vector<data::priority_elem> base_speed);
 
-	void add_participant_in_list(std::uint32_t prio_elem, int speed, bool is_contender);
-	void rm_participant_from_list(std::uint32_t id_participant, bool is_contender);
+  void add_participant_in_list(std::uint32_t prio_elem, int speed, bool is_contender);
+  void rm_participant_from_list(std::uint32_t id_participant, bool is_contender);
 
-	[[nodiscard]] bool
-	empty() const { return _base_speed.empty(); }
+  [[nodiscard]] bool
+  empty() const { return _base_speed.empty(); }
 
-	[[nodiscard]] const data::priority_elem&
-	get_current() const noexcept { return _current_prio; }
+  [[nodiscard]] const data::priority_elem &
+  get_current() const noexcept { return _current_prio; }
 
-	[[nodiscard]] unsigned
-	get_turn_number() const noexcept { return !_current_turn ? 1 : _current_turn; }
+  [[nodiscard]] unsigned
+  get_turn_number() const noexcept { return !_current_turn ? 1 : _current_turn; }
 
-	data::priority_elem
-	next();
-
-private:
-	void sort_base_and_calculate_priority();
-
-	void calculate_priority(std::uint32_t turn);
-
-	void end_turn_routine();
-
-	[[nodiscard]] int
-	get_computed_speed(const data::priority_elem& analyst_elem) const;
-
-	/**
-	 * Sort in a specific manner
-	 */
-	void custom_sort();
-
-	[[nodiscard]] bool
-	is_player_slowest(std::uint32_t id) const
-	{
-		return _base_speed.front().id == id;
-	}
-
-	[[nodiscard]] int
-	get_fastest_base_speed() const
-	{
-		return _base_speed.back().speed;
-	}
-
-	[[nodiscard]] int
-	get_slowest_speed() const
-	{
-		return _base_speed.front().speed;
-	}
+  data::priority_elem
+  next();
 
 private:
-	std::vector<data::priority_elem> _base_speed;
-	std::vector<data::priority_elem> _priority_list;
-	// List used as temporary for the calculate priority
-	std::vector<data::priority_elem> _analyzed_list;
+  void sort_base_and_calculate_priority();
 
-	data::priority_elem _current_prio{};
+  void calculate_priority(std::uint32_t turn);
 
-	std::uint32_t _current_turn = 0;
+  void end_turn_routine();
 
+  [[nodiscard]] int
+  get_computed_speed(const data::priority_elem &analyst_elem) const;
+
+  /**
+   * Sort in a specific manner
+   */
+  void custom_sort();
+
+  [[nodiscard]] bool
+  is_player_slowest(std::uint32_t id) const {
+	return _base_speed.front().id == id;
+  }
+
+  [[nodiscard]] int
+  get_fastest_base_speed() const {
+	return _base_speed.back().speed;
+  }
+
+  [[nodiscard]] int
+  get_slowest_speed() const {
+	return _base_speed.front().speed;
+  }
+
+private:
+  std::vector<data::priority_elem> _base_speed;
+  std::vector<data::priority_elem> _priority_list;
+  // List used as temporary for the calculate priority
+  std::vector<data::priority_elem> _analyzed_list;
+
+  data::priority_elem _current_prio{};
+
+  std::uint32_t _current_turn = 0;
 };
 
-}
+}// namespace fys::arena
 
-#endif //FYS_PRIORITYORDERLIST_HH
+#endif//FYS_PRIORITYORDERLIST_HH

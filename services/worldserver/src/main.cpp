@@ -21,35 +21,31 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <spdlog/spdlog.h>
-#include <spdlog/sinks/stdout_color_sinks.h>
 #include <engine/world_populator.hh>
+#include <key.hh>
+#include <spdlog/sinks/stdout_color_sinks.h>
+#include <spdlog/spdlog.h>
 #include <world_server_context.hh>
 #include <world_server_service.hh>
-#include <key.hh>
 
-int
-main(int ac, char** av)
-{
-	try {
-		spdlog::set_pattern("[%D %H:%M:%S][world_server][ %22s:%-4# ][%L]: %v");
-		fys::ws::world_server_context ctx(ac, av);
-		int major, minor, patch;
-		zmq_version(&major, &minor, &patch);
-		SPDLOG_INFO("Version ZMQ : {}.{}.{}\n{}", major, minor, patch, ctx.to_string());
+int main(int ac, char **av) {
+  try {
+	spdlog::set_pattern("[%D %H:%M:%S][world_server][ %22s:%-4# ][%L]: %v");
+	fys::ws::world_server_context ctx(ac, av);
+	int major, minor, patch;
+	zmq_version(&major, &minor, &patch);
+	SPDLOG_INFO("Version ZMQ : {}.{}.{}\n{}", major, minor, patch, ctx.to_string());
 
-		fys::ws::world_server_service service(ctx,
-				std::move(*fys::ws::world_populator()
-						.set_interval_movement(fys::ws::TIMING_MOVE_INTERVAL)
-						.set_connection_string(ctx.player_connection_str())
-						.populate_map(ctx)
-						.populate_script_engine(ctx)
-						.build_world_server_engine())
-		);
-		service.run_server_loop();
-	}
-	catch (const std::exception& e) {
-		SPDLOG_ERROR("Main caught an exception: {}", e.what());
-	}
-	return 0;
+	fys::ws::world_server_service service(ctx,
+										  std::move(*fys::ws::world_populator()
+														 .set_interval_movement(fys::ws::TIMING_MOVE_INTERVAL)
+														 .set_connection_string(ctx.player_connection_str())
+														 .populate_map(ctx)
+														 .populate_script_engine(ctx)
+														 .build_world_server_engine()));
+	service.run_server_loop();
+  } catch (const std::exception &e) {
+	SPDLOG_ERROR("Main caught an exception: {}", e.what());
+  }
+  return 0;
 }

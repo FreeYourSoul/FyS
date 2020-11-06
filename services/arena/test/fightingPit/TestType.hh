@@ -21,7 +21,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
 #ifndef FYS_ONLINE_TESTTYPE_HH
 #define FYS_ONLINE_TESTTYPE_HH
 
@@ -29,12 +28,12 @@
 
 #include <random_generator.hh>
 
+#include <Cml.hh>
+#include <CmlCopy.hh>
+#include <CmlKey.hh>
 #include <FSeamMockData.hpp>
 #include <fightingPit/team/party_team.hh>
 #include <fightingPit/team/team_member.hh>
-#include <CmlKey.hh>
-#include <Cml.hh>
-#include <CmlCopy.hh>
 
 // moving action
 static const std::string actionTestMoveScript = R"(
@@ -354,113 +353,100 @@ class TestMonsterSleep {
 
 class CmlBase final : public fys::cache::Cml {
 public:
-	explicit CmlBase(std::string v)
-			:fys::cache::Cml(std::filesystem::path(std::move(v))) { }
+  explicit CmlBase(std::string v)
+	  : fys::cache::Cml(std::filesystem::path(std::move(v))) {}
 
-	void createUpToDateFileInLocalStorage(const fys::cache::CmlKey&, std::filesystem::file_time_type) override
-	{
-
-	}
-
+  void createUpToDateFileInLocalStorage(const fys::cache::CmlKey &, std::filesystem::file_time_type) override {
+  }
 };
 
 class DeleteFolderWhenDone {
 public:
-	explicit DeleteFolderWhenDone(const std::string& v)
-			:
-			_path(v) { }
+  explicit DeleteFolderWhenDone(const std::string &v)
+	  : _path(v) {}
 
-	~DeleteFolderWhenDone()
-	{
-		SPDLOG_INFO("Delete folder {}", _path.string());
-		std::filesystem::remove_all(_path);
-	}
+  ~DeleteFolderWhenDone() {
+	SPDLOG_INFO("Delete folder {}", _path.string());
+	std::filesystem::remove_all(_path);
+  }
 
 private:
-	std::filesystem::path _path;
-
+  std::filesystem::path _path;
 };
 
 class CmlBaseCopy final : public fys::cache::CmlCopy {
 public:
-	explicit CmlBaseCopy(const std::string& v, const std::string& w)
-			:
-			fys::cache::CmlCopy(v, w) { }
+  explicit CmlBaseCopy(const std::string &v, const std::string &w)
+	  : fys::cache::CmlCopy(v, w) {}
 
 protected:
-	void createUpToDateFileInLocalStorage(const fys::cache::CmlKey& cmlKey, std::filesystem::file_time_type) override
-	{
-		std::error_code e;
-		std::filesystem::create_directories(cmlKey.get_path().parent_path(), e);
+  void createUpToDateFileInLocalStorage(const fys::cache::CmlKey &cmlKey, std::filesystem::file_time_type) override {
+	std::error_code e;
+	std::filesystem::create_directories(cmlKey.get_path().parent_path(), e);
 
-		if ("testing:TestMonsterSleep.chai" == cmlKey.getKey()) {
-			std::ofstream ofs(cmlKey.get_path());
-			ofs << MonsterTestScriptSleep;
-		}
-		else if ("testing:TestMonsterAttack.chai" == cmlKey.getKey()) {
-			std::ofstream ofs(cmlKey.get_path());
-			ofs << MonsterTestScriptAttack;
-		}
-		else if ("testing:TestMonsterPoison.chai" == cmlKey.getKey()) {
-			std::ofstream ofs(cmlKey.get_path());
-			ofs << MonsterTestScriptPoison;
-		}
-		else if ("testing:TestMonsterMove.chai" == cmlKey.getKey()) {
-			std::ofstream ofs(cmlKey.get_path());
-			ofs << MonsterTestMoveAttack;
-		}
-		else {
-			fys::cache::CmlKey k(_copyPathStorage, cmlKey.getKey());
-			std::filesystem::copy(k.get_path(), cmlKey.get_path(), e);
-		}
+	if ("testing:TestMonsterSleep.chai" == cmlKey.getKey()) {
+	  std::ofstream ofs(cmlKey.get_path());
+	  ofs << MonsterTestScriptSleep;
+	} else if ("testing:TestMonsterAttack.chai" == cmlKey.getKey()) {
+	  std::ofstream ofs(cmlKey.get_path());
+	  ofs << MonsterTestScriptAttack;
+	} else if ("testing:TestMonsterPoison.chai" == cmlKey.getKey()) {
+	  std::ofstream ofs(cmlKey.get_path());
+	  ofs << MonsterTestScriptPoison;
+	} else if ("testing:TestMonsterMove.chai" == cmlKey.getKey()) {
+	  std::ofstream ofs(cmlKey.get_path());
+	  ofs << MonsterTestMoveAttack;
+	} else {
+	  fys::cache::CmlKey k(_copyPathStorage, cmlKey.getKey());
+	  std::filesystem::copy(k.get_path(), cmlKey.get_path(), e);
 	}
+  }
 };
 
 [[nodiscard]] static std::unique_ptr<fys::arena::party_team>
-getPartyTeam(const std::string& user)
-{
-	auto team = std::make_unique<fys::arena::party_team>(user);
+getPartyTeam(const std::string &user) {
+  auto team = std::make_unique<fys::arena::party_team>(user);
 
-	// Temporary hard coded party team
-	auto tm1 = std::make_shared<fys::arena::team_member>(user, "Elvo");
-	auto tm2 = std::make_shared<fys::arena::team_member>(user, "Mirael");
-	auto tm3 = std::make_shared<fys::arena::team_member>(user, "Fyston");
-	auto tm4 = std::make_shared<fys::arena::team_member>(user, "Simon");
+  // Temporary hard coded party team
+  auto tm1 = std::make_shared<fys::arena::team_member>(user, "Elvo");
+  auto tm2 = std::make_shared<fys::arena::team_member>(user, "Mirael");
+  auto tm3 = std::make_shared<fys::arena::team_member>(user, "Fyston");
+  auto tm4 = std::make_shared<fys::arena::team_member>(user, "Simon");
 
-	fys::arena::fighting_pit_layout::set_ally_move_initiate_position(*tm1, fys::arena::hexagon_side::orientation::B_S);
-	auto& s1 = tm1->access_status();
-	s1.life_pt.total = 100;
-	s1.life_pt.current = 100;
-	s1.magic_pt.total = 20;
-	s1.magic_pt.current = 20;
-	s1.initial_speed = 3;
-	fys::arena::fighting_pit_layout::set_ally_move_initiate_position(*tm2, fys::arena::hexagon_side::orientation::B_S);
-	auto& s2 = tm2->access_status();
-	s2.life_pt.total = 200;
-	s2.life_pt.current = 200;
-	s2.magic_pt.total = 0;
-	s2.magic_pt.current = 0;
-	s2.initial_speed = 5;
-	fys::arena::fighting_pit_layout::set_ally_move_initiate_position(*tm3, fys::arena::hexagon_side::orientation::B_S);
-	auto& s3 = tm3->access_status();
-	s3.life_pt.total = 550;
-	s3.life_pt.current = 550;
-	s3.magic_pt.total = 10;
-	s3.magic_pt.current = 10;
-	s3.initial_speed = 10;
-	fys::arena::fighting_pit_layout::set_ally_move_initiate_position(*tm4, fys::arena::hexagon_side::orientation::B_S);
-	auto& s4 = tm4->access_status();
-	s4.life_pt.total = 140;
-	s4.life_pt.current = 140;
-	s4.magic_pt.total = 10;
-	s4.magic_pt.current = 10;
-	s4.initial_speed = 20;
+  fys::arena::fighting_pit_layout::set_ally_move_initiate_position(*tm1, fys::arena::hexagon_side::orientation::B_S);
+  auto &s1 = tm1->access_status();
+  s1.life_pt.total = 100;
+  s1.life_pt.current = 100;
+  s1.magic_pt.total = 20;
+  s1.magic_pt.current = 20;
+  s1.initial_speed = 3;
+  fys::arena::fighting_pit_layout::set_ally_move_initiate_position(*tm2, fys::arena::hexagon_side::orientation::B_S);
+  auto &s2 = tm2->access_status();
+  s2.life_pt.total = 200;
+  s2.life_pt.current = 200;
+  s2.magic_pt.total = 0;
+  s2.magic_pt.current = 0;
+  s2.initial_speed = 5;
+  fys::arena::fighting_pit_layout::set_ally_move_initiate_position(*tm3, fys::arena::hexagon_side::orientation::B_S);
+  auto &s3 = tm3->access_status();
+  s3.life_pt.total = 550;
+  s3.life_pt.current = 550;
+  s3.magic_pt.total = 10;
+  s3.magic_pt.current = 10;
+  s3.initial_speed = 10;
+  fys::arena::fighting_pit_layout::set_ally_move_initiate_position(*tm4, fys::arena::hexagon_side::orientation::B_S);
+  auto &s4 = tm4->access_status();
+  s4.life_pt.total = 140;
+  s4.life_pt.current = 140;
+  s4.magic_pt.total = 10;
+  s4.magic_pt.current = 10;
+  s4.initial_speed = 20;
 
-	team->add_team_member(std::move(tm1));
-	team->add_team_member(std::move(tm2));
-	team->add_team_member(std::move(tm3));
-	team->add_team_member(std::move(tm4));
-	return team;
+  team->add_team_member(std::move(tm1));
+  team->add_team_member(std::move(tm2));
+  team->add_team_member(std::move(tm3));
+  team->add_team_member(std::move(tm4));
+  return team;
 }
 
-#endif //FYS_ONLINE_TESTTYPE_HH
+#endif//FYS_ONLINE_TESTTYPE_HH

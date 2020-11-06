@@ -21,16 +21,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
 #ifndef FYS_KEY_HH
 #define FYS_KEY_HH
 
-#include <string>
 #include <algorithm>
-#include <stdexcept>
-#include <iostream>
 #include <charconv>
+#include <iostream>
 #include <random>
+#include <stdexcept>
+#include <string>
 
 namespace fys::util {
 
@@ -44,45 +43,42 @@ namespace fys::util {
  *      one char          KEY_SIZE - (1 + index size)    (KEYSIZE - offset)
  */
 class key {
-	constexpr static unsigned KEY_SIZE = 8;
+  constexpr static unsigned KEY_SIZE = 8;
 
 public:
-	explicit key(unsigned index)
-	{
-		static std::random_device rd;
-		static std::mt19937 g(rd());
-		std::string fillerId = std::to_string(reinterpret_cast<unsigned long long>(this));
-		std::shuffle(fillerId.begin(), fillerId.end(), g);
-		std::string id = std::to_string(index);
-		unsigned offset = KEY_SIZE - id.size();
-		if (offset < 3)
-			throw std::range_error(id.append(" is too big for being an index"));
-		std::string token = std::to_string(offset).append(fillerId.substr(0, offset - 1)).append(id);
-		std::copy_n(token.begin(), KEY_SIZE, _key);
-	}
+  explicit key(unsigned index) {
+	static std::random_device rd;
+	static std::mt19937 g(rd());
+	std::string fillerId = std::to_string(reinterpret_cast<unsigned long long>(this));
+	std::shuffle(fillerId.begin(), fillerId.end(), g);
+	std::string id = std::to_string(index);
+	unsigned offset = KEY_SIZE - id.size();
+	if (offset < 3)
+	  throw std::range_error(id.append(" is too big for being an index"));
+	std::string token = std::to_string(offset).append(fillerId.substr(0, offset - 1)).append(id);
+	std::copy_n(token.begin(), KEY_SIZE, _key);
+  }
 
-	bool
-	operator==(const key& other)
-	{
-		return std::equal(other._key, other._key + KEY_SIZE, _key);
-	}
+  bool
+  operator==(const key &other) {
+	return std::equal(other._key, other._key + KEY_SIZE, _key);
+  }
 
-	unsigned
-	getIndex() const
-	{
-		unsigned res = 0;
-		unsigned offset = _key[0] - '0';
-		std::from_chars(_key + offset, _key + KEY_SIZE, res);
-		return res;
-	}
+  unsigned
+  getIndex() const {
+	unsigned res = 0;
+	unsigned offset = _key[0] - '0';
+	std::from_chars(_key + offset, _key + KEY_SIZE, res);
+	return res;
+  }
 
-	template<typename DisplayPolicy>
-	void display(DisplayPolicy policy) { policy(_key); }
+  template<typename DisplayPolicy>
+  void display(DisplayPolicy policy) { policy(_key); }
 
 private:
-	char _key[KEY_SIZE];
+  char _key[KEY_SIZE];
 };
 
-}
+}// namespace fys::util
 
-#endif //FYS_KEY_HH
+#endif//FYS_KEY_HH

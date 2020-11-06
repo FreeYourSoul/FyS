@@ -21,43 +21,41 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
 #ifndef FYS_ONLINE_INVENTORY_SERVER_CONTEXT_HH
 #define FYS_ONLINE_INVENTORY_SERVER_CONTEXT_HH
 
-#include <nlohmann/json.hpp>
 #include "../../common/include/service_context_base.hh"
+#include <nlohmann/json.hpp>
 
 namespace fys::inv {
 
 class inventory_server_context : public common::service_context_base {
 
 public:
-	explicit inventory_server_context(int argc, char** argv);
+  explicit inventory_server_context(int argc, char **argv);
 
-	[[nodiscard]] const std::string&
-	get_connection_str_cache_db() const { return _connection_string_cache_db; }
+  [[nodiscard]] const std::string &
+  get_connection_str_cache_db() const { return _connection_string_cache_db; }
 
-	[[nodiscard]] const std::string&
-	server_code() const { return _server_code; }
+  [[nodiscard]] const std::string &
+  server_code() const { return _server_code; }
 
-	[[nodiscard]] std::string
-	get_player_connection_str() const noexcept;
+  [[nodiscard]] std::string
+  get_player_connection_str() const noexcept;
 
-	[[nodiscard]] std::string
-	to_string() const;
-
-private:
-	void init_inventory_context_with_json(nlohmann::json& json);
+  [[nodiscard]] std::string
+  to_string() const;
 
 private:
-	std::string _connection_string_cache_db;
-	std::string _server_code;
+  void init_inventory_context_with_json(nlohmann::json &json);
 
-	std::uint32_t _portPlayerConnection;
+private:
+  std::string _connection_string_cache_db;
+  std::string _server_code;
 
+  std::uint32_t _portPlayerConnection;
 };
 
-}
+}// namespace fys::inv
 
-#endif //FYS_ONLINE_INVENTORY_SERVER_CONTEXT_HH
+#endif//FYS_ONLINE_INVENTORY_SERVER_CONTEXT_HH

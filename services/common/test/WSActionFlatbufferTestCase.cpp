@@ -21,65 +21,58 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <catch2/catch.hpp>
-#include <zmq_addon.hpp>
-#include <flatbuffers/flatbuffers.h>
 #include <WSAction_generated.h>
+#include <catch2/catch.hpp>
+#include <flatbuffers/flatbuffers.h>
+#include <zmq_addon.hpp>
 
-TEST_CASE("WSActionFlatbufferTestCase WSAction Move", "[common][fb]")
-{
-	flatbuffers::FlatBufferBuilder fbb;
-	auto move = fys::fb::world::CreateMove(fbb, 42.42);
+TEST_CASE("WSActionFlatbufferTestCase WSAction Move", "[common][fb]") {
+  flatbuffers::FlatBufferBuilder fbb;
+  auto move = fys::fb::world::CreateMove(fbb, 42.42);
 
-	auto p = fys::fb::world::CreateWSAction(fbb, fys::fb::world::Action::Action_Move, move.Union());
-	fys::fb::world::FinishWSActionBuffer(fbb, p);
+  auto p = fys::fb::world::CreateWSAction(fbb, fys::fb::world::Action::Action_Move, move.Union());
+  fys::fb::world::FinishWSActionBuffer(fbb, p);
 
-	SECTION("Verifier") {
-		auto ok = flatbuffers::Verifier(fbb.GetBufferPointer(), fbb.GetSize());
-		CHECK(fys::fb::world::VerifyWSActionBuffer(ok));
-	}
-	uint8_t* binary = fbb.GetBufferPointer();
+  SECTION("Verifier") {
+	auto ok = flatbuffers::Verifier(fbb.GetBufferPointer(), fbb.GetSize());
+	CHECK(fys::fb::world::VerifyWSActionBuffer(ok));
+  }
+  uint8_t *binary = fbb.GetBufferPointer();
 
-	SECTION("Binary to FlatBuffer") {
-		const fys::fb::world::WSAction* fromBinary = fys::fb::world::GetWSAction(binary);
-		REQUIRE(fromBinary->action_as_Move()->direction() == 42.42);
+  SECTION("Binary to FlatBuffer") {
+	const fys::fb::world::WSAction *fromBinary = fys::fb::world::GetWSAction(binary);
+	REQUIRE(fromBinary->action_as_Move()->direction() == 42.42);
 
+  }// End section : Binary to Flatbuffer
 
-	} // End section : Binary to Flatbuffer
-
-
-	SECTION("ZMQ Message to FlatBuffer") {
-		zmq::message_t msg(binary, fbb.GetSize());
-		const fys::fb::world::WSAction* fromBinary = fys::fb::world::GetWSAction(msg.data());
-		REQUIRE(fromBinary->action_as_Move()->direction() == 42.42);
-	}
-
+  SECTION("ZMQ Message to FlatBuffer") {
+	zmq::message_t msg(binary, fbb.GetSize());
+	const fys::fb::world::WSAction *fromBinary = fys::fb::world::GetWSAction(msg.data());
+	REQUIRE(fromBinary->action_as_Move()->direction() == 42.42);
+  }
 }
 
-TEST_CASE("WSActionFlatbufferTestCase PnjInteract")
-{
-	flatbuffers::FlatBufferBuilder fbb;
-	auto pnjInterract = fys::fb::world::CreatePnjInteract(fbb, fbb.CreateString("idPnj"));
-	auto token = fbb.CreateString("totoken");
-	auto p = fys::fb::world::CreateWSAction(fbb, fys::fb::world::Action::Action_PnjInteract, pnjInterract.Union());
-	fys::fb::world::FinishWSActionBuffer(fbb, p);
+TEST_CASE("WSActionFlatbufferTestCase PnjInteract") {
+  flatbuffers::FlatBufferBuilder fbb;
+  auto pnjInterract = fys::fb::world::CreatePnjInteract(fbb, fbb.CreateString("idPnj"));
+  auto token = fbb.CreateString("totoken");
+  auto p = fys::fb::world::CreateWSAction(fbb, fys::fb::world::Action::Action_PnjInteract, pnjInterract.Union());
+  fys::fb::world::FinishWSActionBuffer(fbb, p);
 
-	SECTION("Verifier") {
-		auto ok = flatbuffers::Verifier(fbb.GetBufferPointer(), fbb.GetSize());
-		CHECK(fys::fb::world::VerifyWSActionBuffer(ok));
-	}
-	uint8_t* binary = fbb.GetBufferPointer();
+  SECTION("Verifier") {
+	auto ok = flatbuffers::Verifier(fbb.GetBufferPointer(), fbb.GetSize());
+	CHECK(fys::fb::world::VerifyWSActionBuffer(ok));
+  }
+  uint8_t *binary = fbb.GetBufferPointer();
 
-	SECTION("Binary to FlatBuffer") {
-		const fys::fb::world::WSAction* fromBinary = fys::fb::world::GetWSAction(binary);
-		REQUIRE("idPnj" == std::string(fromBinary->action_as_PnjInteract()->idPnj()->c_str()));
-	} // End section : Binary to Flatbuffer
+  SECTION("Binary to FlatBuffer") {
+	const fys::fb::world::WSAction *fromBinary = fys::fb::world::GetWSAction(binary);
+	REQUIRE("idPnj" == std::string(fromBinary->action_as_PnjInteract()->idPnj()->c_str()));
+  }// End section : Binary to Flatbuffer
 
-
-	SECTION("ZMQ Message to FlatBuffer") {
-		zmq::message_t msg(binary, fbb.GetSize());
-		const fys::fb::world::WSAction* fromBinary = fys::fb::world::GetWSAction(msg.data());
-		REQUIRE("idPnj" == std::string(fromBinary->action_as_PnjInteract()->idPnj()->c_str()));
-}
-
+  SECTION("ZMQ Message to FlatBuffer") {
+	zmq::message_t msg(binary, fbb.GetSize());
+	const fys::fb::world::WSAction *fromBinary = fys::fb::world::GetWSAction(msg.data());
+	REQUIRE("idPnj" == std::string(fromBinary->action_as_PnjInteract()->idPnj()->c_str()));
+  }
 }

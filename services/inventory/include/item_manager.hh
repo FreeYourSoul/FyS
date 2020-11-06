@@ -21,7 +21,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
 #ifndef FYS_ONLINE_ITEM_MANAGER_HH
 #define FYS_ONLINE_ITEM_MANAGER_HH
 
@@ -37,8 +36,8 @@ class inventory_server_context;
 namespace fys::inv {
 
 struct Item {
-	std::string itemCode;
-	std::uint32_t quantity;
+  std::string itemCode;
+  std::uint32_t quantity;
 };
 
 /**
@@ -49,17 +48,15 @@ struct Item {
 class item_manager {
 
 public:
-	// shall take in argument required value for connection
-	explicit item_manager() = default;
+  // shall take in argument required value for connection
+  explicit item_manager() = default;
 
-	[[nodiscard]] bool
-	are_items_owned_by_user(const std::string& user_name, const std::vector<Item>& item);
-
+  [[nodiscard]] bool
+  are_items_owned_by_user(const std::string &user_name, const std::vector<Item> &item);
 
 private:
-	// DB connector ?
-
+  // DB connector ?
 };
 
-}
-#endif //FYS_ONLINE_ITEM_MANAGER_HH
+}// namespace fys::inv
+#endif//FYS_ONLINE_ITEM_MANAGER_HH

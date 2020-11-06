@@ -21,14 +21,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
 #ifndef FYS_PARTYTEAM_HH
 #define FYS_PARTYTEAM_HH
 
-#include <memory>
-#include <vector>
-#include <utility>
 #include <fightingPit/hexagon_side.hh>
+#include <memory>
+#include <utility>
+#include <vector>
 
 namespace fys::arena {
 
@@ -38,42 +37,41 @@ class team_member;
 class party_team {
 
 public:
-	explicit party_team(std::string user_name)
-			:_user_name(std::move(user_name)) { }
+  explicit party_team(std::string user_name)
+	  : _user_name(std::move(user_name)) {}
 
-	[[nodiscard]] std::vector<std::shared_ptr<team_member>>
-	team_member_on_side(hexagon_side::orientation orientation) const;
+  [[nodiscard]] std::vector<std::shared_ptr<team_member>>
+  team_member_on_side(hexagon_side::orientation orientation) const;
 
-	[[nodiscard]] const std::string&
-	user_name() const { return _user_name; }
+  [[nodiscard]] const std::string &
+  user_name() const { return _user_name; }
 
-	[[nodiscard]] const std::vector<std::shared_ptr<team_member>>&
-	team_members() const { return _members; }
+  [[nodiscard]] const std::vector<std::shared_ptr<team_member>> &
+  team_members() const { return _members; }
 
-	[[nodiscard]] std::vector<std::shared_ptr<team_member>>&
-	access_team_members() { return _members; }
+  [[nodiscard]] std::vector<std::shared_ptr<team_member>> &
+  access_team_members() { return _members; }
 
-	[[nodiscard]] unsigned
-	ally_number_on_side(hexagon_side::orientation side) const;
+  [[nodiscard]] unsigned
+  ally_number_on_side(hexagon_side::orientation side) const;
 
-	[[nodiscard]] std::vector<std::shared_ptr<team_member>>
-	get_dead_team_members_on_side(fys::arena::hexagon_side::orientation tm_ptr) const;
+  [[nodiscard]] std::vector<std::shared_ptr<team_member>>
+  get_dead_team_members_on_side(fys::arena::hexagon_side::orientation tm_ptr) const;
 
-	[[nodiscard]] bool
-	is_team_ready() const { return _ready; }
+  [[nodiscard]] bool
+  is_team_ready() const { return _ready; }
 
-	void set_team_ready(bool is_ready) { _ready = is_ready; }
-	void add_team_member(std::shared_ptr<team_member> member);
+  void set_team_ready(bool is_ready) { _ready = is_ready; }
+  void add_team_member(std::shared_ptr<team_member> member);
 
 private:
-	std::string _user_name;
-	std::vector<std::shared_ptr<team_member> > _members;
-	bool _ready = false;
-
+  std::string _user_name;
+  std::vector<std::shared_ptr<team_member>> _members;
+  bool _ready = false;
 };
 
 using party_team_uptr = std::unique_ptr<party_team>;
 
-}
+}// namespace fys::arena
 
-#endif //FYS_PARTYTEAM_HH
+#endif//FYS_PARTYTEAM_HH

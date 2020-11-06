@@ -55,7 +55,6 @@ set(COMMON_INCLUDES_DIR
         ${CMAKE_CURRENT_SOURCE_DIR}/flatbuffer/includes)
 
 add_library(common_service OBJECT ${COMMON_SRCS})
-add_library(fys::common_service ALIAS common_service)
 target_link_libraries(common_service PUBLIC
         ${Flatbuffers_LIBRARIES}
         fys::fil
@@ -65,8 +64,19 @@ target_link_libraries(common_service PUBLIC
         nlohmann_json::nlohmann_json)
 
 target_include_directories(common_service PUBLIC ${COMMON_INCLUDES_DIR})
+add_library(fys::common_service ALIAS common_service)
 
 include_directories(flatbuffer/includes)
 
-set(COMMON_SRCS PARENT_SCOPE)
-set(COMMON_INCLUDES_DIR PARENT_SCOPE)
+set(COMMON_SRCS ${COMMON_SRCS} PARENT_SCOPE)
+set(COMMON_INCLUDES_DIR ${COMMON_INCLUDES_DIR} PARENT_SCOPE)
+
+message(STATUS " IN COMMON
+>>> ${COMMON_INCLUDES_DIR}
+----------------------------
+>>> ${COMMON_SRCS}
+")
+
+if (BUILD_TESTING)
+    add_subdirectory(test)
+endif()

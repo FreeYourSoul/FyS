@@ -24,95 +24,88 @@
 #ifndef FYS_DISPATCHER_HH_
 #define FYS_DISPATCHER_HH_
 
-#include <unordered_set>
 #include <dispatcher_connection_manager.hh>
 #include <startup_dispatcher_ctx.hh>
+#include <unordered_set>
 
 // forward declarations
 namespace zmq {
-    class multipart_t;
+class multipart_t;
 }
 
-namespace fys
-{
+namespace fys {
 
-    /**
-     * basic implementation of the dispatcher
-     */
-    class dispatcher_handler_base {
-        static constexpr unsigned CACHE_VALIDITY = 600; // in seconds
+/**
+ * basic implementation of the dispatcher
+ */
+class dispatcher_handler_base {
+  static constexpr unsigned CACHE_VALIDITY = 600;// in seconds
 
-    public:
-        /**
-         * @brief This method is processing the inputMessage and dispatch it appropriately among the peers connected to
-         * the dispatcher socket
-         */
-        void process_input_message(zmq::multipart_t &&msg, network::dispatcher_connection_manager &manager) noexcept;
+public:
+  /**
+   * @brief This method is processing the inputMessage and dispatch it appropriately among the peers connected to
+   * the dispatcher socket
+   */
+  void process_input_message(zmq::multipart_t &&msg, network::dispatcher_connection_manager &manager) noexcept;
 
-        /**
-         * @brief This method is dispatching the cluster message and forward it appropriately among the peers connected to
-         * the dispatcher socket
-         */
-        void process_cluster_message(zmq::multipart_t &&msg, network::dispatcher_connection_manager &manager) noexcept;
+  /**
+   * @brief This method is dispatching the cluster message and forward it appropriately among the peers connected to
+   * the dispatcher socket
+   */
+  void process_cluster_message(zmq::multipart_t &&msg, network::dispatcher_connection_manager &manager) noexcept;
 
-        void forward_message_to_frontend(zmq::multipart_t && msg, network::dispatcher_connection_manager & manager) noexcept;
+  void forward_message_to_frontend(zmq::multipart_t &&msg, network::dispatcher_connection_manager &manager) noexcept;
 
-
-    private:
-        // map of token over timestamp, the timestamp representing the last time the token has been checked
-        std::unordered_map<std::string, unsigned> _authenticated;
-    };
-
-    /**
-     * Main class of the dispatcher
-     *
-     * @tparam DispatcherHandler class containing two public static method :
-     *  processInputMessage()   : Used to dispatch message from the listener socket (basic one)
-     *  processClusterMessage() : Used to dispatch message from the subscriber socket (in case of ClusterAware)
-     *
-     */
-
-    template <typename DispatcherHandler = dispatcher_handler_base>
-    class dispatcher {
-    public:
-        explicit dispatcher(fys::startup_dispatcher_ctx &&ctx)  :
-            _connectionManager(1, ctx.isLoadBalancingEnabled()) {
-            _connectionManager.setupConnectionManager(ctx);
-        }
-
-
-        void runDispatching() {
-            while (true) {
-                auto [listenerSocketHasSomethingToPoll,
-                      subscriberSocketHasSomethingToPoll,
-                      dispatcherSocketHasSomethingToPoll] = _connectionManager.poll();
-                if (listenerSocketHasSomethingToPoll) {
-                    _connectionManager.dispatchMessageFromListenerSocket(
-                            [this](zmq::multipart_t &&msg, network::dispatcher_connection_manager &manager) {
-                                _dispatcher.processInputMessage(std::move(msg), manager);
-                            }
-                    );
-                }
-                if (subscriberSocketHasSomethingToPoll) {
-                    _connectionManager.dispatchMessageFromSubscriberSocket(
-                            [this](zmq::multipart_t &&msg, network::dispatcher_connection_manager &manager) {
-                                _dispatcher.processClusterMessage(std::move(msg), manager);
-                            }
-                    );
-                }
-                if (dispatcherSocketHasSomethingToPoll) {
-                    _connectionManager.dispatchMessageFromDispatcherSocket(
-                            [this](zmq::multipart_t && msg, network::dispatcher_connection_manager &manager){
-                                _dispatcher.forwardMessageToFrontend(std::move(msg), manager);
-                            }
-                        );
-                }
-            }
-        }
-
-    private:
-        fys::network::dispatcher_connection_manager _connectionManager;
-        DispatcherHandler _dispatcher;
+private:
+  // map of token over timestamp, the timestamp representing the last time the token has been checked
+  std::unordered_map<std::string, unsigned> _authenticated;
 };
-} 
-#endif // !FYS_DISPATCHER_HH_
+
+/**
+ * Main class of the dispatcher
+ *
+ * @tparam DispatcherHandler class containing two public static method :
+ *  processInputMessage()   : Used to dispatch message from the listener socket (basic one)
+ *  processClusterMessage() : Used to dispatch message from the subscriber socket (in case of ClusterAware)
+ *
+ */
+
+template<typename DispatcherHandler = dispatcher_handler_base>
+class dispatcher {
+public:
+  explicit dispatcher(fys::startup_dispatcher_ctx &&ctx) : _connectionManager(1, ctx.isLoadBalancingEnabled()) {
+	_connectionManager.setupConnectionManager(ctx);
+  }
+
+  void runDispatching() {
+	while (true) {
+	  auto [listenerSocketHasSomethingToPoll,
+			subscriberSocketHasSomethingToPoll,
+			dispatcherSocketHasSomethingToPoll] = _connectionManager.poll();
+	  if (listenerSocketHasSomethingToPoll) {
+		_connectionManager.dispatchMessageFromListenerSocket(
+			[this](zmq::multipart_t &&msg, network::dispatcher_connection_manager &manager) {
+			  _dispatcher.processInputMessage(std::move(msg), manager);
+			});
+	  }
+	  if (subscriberSocketHasSomethingToPoll) {
+		_connectionManager.dispatchMessageFromSubscriberSocket(
+			[this](zmq::multipart_t &&msg, network::dispatcher_connection_manager &manager) {
+			  _dispatcher.processClusterMessage(std::move(msg), manager);
+			});
+	  }
+	  if (dispatcherSocketHasSomethingToPoll) {
+		_connectionManager.dispatchMessageFromDispatcherSocket(
+			[this](zmq::multipart_t &&msg, network::dispatcher_connection_manager &manager) {
+			  _dispatcher.forwardMessageToFrontend(std::move(msg), manager);
+			});
+	  }
+	}
+  }
+
+private:
+  fys::network::dispatcher_connection_manager _connectionManager;
+  DispatcherHandler _dispatcher;
+};
+}// namespace fys
+#endif// !FYS_DISPATCHER_HH_

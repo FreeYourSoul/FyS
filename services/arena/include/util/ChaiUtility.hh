@@ -21,13 +21,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
 #ifndef FYS_ONLINE_CHAIUTILITY_HH
 #define FYS_ONLINE_CHAIUTILITY_HH
 
+#include <chaiscript/chaiscript.hpp>
 #include <fmt/format.h>
 #include <string>
-#include <chaiscript/chaiscript.hpp>
 
 namespace chaiscript {
 class ChaiScript;
@@ -36,20 +35,18 @@ class ChaiScript;
 namespace fys::arena::chai::util {
 
 [[nodiscard]] static std::string
-get_ally_action_retriever(const std::string& user, const std::string& member, const std::string& action)
-{
-	return fmt::format(R"(ally_actions["{}_{}"]["{}"])", user, member, action);
+get_ally_action_retriever(const std::string &user, const std::string &member, const std::string &action) {
+  return fmt::format(R"(ally_actions["{}_{}"]["{}"])", user, member, action);
 }
 
 [[nodiscard]] static bool
-member_has_action_registered(chaiscript::ChaiScript& chai,
-							 const std::string& userName, const std::string& memberName, const std::string& actionName)
-{
-	return chai.eval<bool>(
-			fmt::format(R"(ally_actions.count("{}_{}") > 0 && ally_actions["{}_{}"].count("{}") > 0;)",
-					userName, memberName, userName, memberName, actionName));
+member_has_action_registered(chaiscript::ChaiScript &chai,
+							 const std::string &userName, const std::string &memberName, const std::string &actionName) {
+  return chai.eval<bool>(
+	  fmt::format(R"(ally_actions.count("{}_{}") > 0 && ally_actions["{}_{}"].count("{}") > 0;)",
+				  userName, memberName, userName, memberName, actionName));
 }
 
-}
+}// namespace fys::arena::chai::util
 
-#endif //FYS_ONLINE_CHAIUTILITY_HH
+#endif//FYS_ONLINE_CHAIUTILITY_HH

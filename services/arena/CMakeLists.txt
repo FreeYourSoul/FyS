@@ -52,7 +52,7 @@ add_executable(arena_service
         ${CMAKE_CURRENT_SOURCE_DIR}/include/arena_server_service.hh)
 
 target_compile_definitions(arena_service PUBLIC -DCHAISCRIPT_NO_THREADS)
-target_link_libraries(arena_service PRIVATE
+target_link_libraries(arena_service PUBLIC
         dl
         fys::common_service
         fys::cml)
@@ -61,11 +61,10 @@ set_target_properties(arena_service PROPERTIES
         CXX_STANDARD 17
         CMAKE_CXX_COMPILER /usr/bin/g++)
 
-set_property(TARGET arena_service PROPERTY INCLUDE_DIRECTORIES
+target_include_directories(arena_service PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/include
         ${CMAKE_CURRENT_SOURCE_DIR}/../../scripting_cache/cml/include
-        ${fmt_INCLUDE_DIRS}
-        ${FLATBUFFER_INCLUDE_DIR})
+        ${fmt_INCLUDE_DIRS})
 
 include(CheckIPOSupported)
 check_ipo_supported(RESULT result)
@@ -76,3 +75,4 @@ endif ()
 target_compile_options(arena_service PRIVATE -O2 -fstack-protector-all -g -lfmt)
 target_compile_options(arena_service PRIVATE -Wall -Wpedantic -Wextra -Wno-deprecated-declarations)
 target_compile_definitions(arena_service PUBLIC CHAISCRIPT_NO_THREADS -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)
+

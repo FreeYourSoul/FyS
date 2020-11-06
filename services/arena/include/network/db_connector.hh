@@ -21,7 +21,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
 #ifndef FYS_SERVICE_DBCONNECTOR_HH
 #define FYS_SERVICE_DBCONNECTOR_HH
 
@@ -30,31 +29,31 @@
 namespace mariadb {
 class account;
 using account_ref = std::shared_ptr<account>;
-}
+}// namespace mariadb
 
 namespace fys::arena {
 class arena_server_context;
 class party_team;
-}
+}// namespace fys::arena
 
 namespace fys::network {
 
 class db_connector {
 
 public:
-	explicit db_connector(const arena::arena_server_context& ctx);
+  explicit db_connector(const arena::arena_server_context &ctx);
 
-	[[nodiscard]] std::unique_ptr<fys::arena::party_team>
-	retrieve_party_team(const std::string& user);
-
-private:
-	[[nodiscard]] std::vector<std::string>
-	retrieve_attacks_keys(const std::string& user_name);
+  [[nodiscard]] std::unique_ptr<fys::arena::party_team>
+  retrieve_party_team(const std::string &user);
 
 private:
-	mariadb::account_ref _ref_db;
+  [[nodiscard]] std::vector<std::string>
+  retrieve_attacks_keys(const std::string &user_name);
+
+private:
+  mariadb::account_ref _ref_db;
 };
 
-}
+}// namespace fys::network
 
-#endif //FYS_SERVICE_DBCONNECTOR_HH
+#endif//FYS_SERVICE_DBCONNECTOR_HH

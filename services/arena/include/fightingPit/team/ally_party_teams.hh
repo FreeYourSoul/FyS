@@ -21,12 +21,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
 #ifndef FYS_ALLYPARTYTEAMS_HH
 #define FYS_ALLYPARTYTEAMS_HH
 
-#include <vector>
 #include <memory>
+#include <vector>
 
 #include <fightingPit/hexagon_side.hh>
 
@@ -38,7 +37,7 @@ namespace fys::arena {
 class party_team;
 class team_member;
 class pit_contenders;
-}
+}// namespace fys::arena
 namespace fys::arena::data {
 struct priority_elem;
 }
@@ -51,83 +50,82 @@ using comparator_selection = std::function<bool(std::shared_ptr<T>, std::shared_
 class ally_party_teams {
 
 public:
-	~ally_party_teams();
+  ~ally_party_teams();
 
-	[[nodiscard]] std::shared_ptr<team_member>
-	select_suitable_member(comparator_selection<team_member> comp);
+  [[nodiscard]] std::shared_ptr<team_member>
+  select_suitable_member(comparator_selection<team_member> comp);
 
-	[[nodiscard]] std::shared_ptr<team_member>
-	select_suitable_member_on_side(hexagon_side::orientation side, comparator_selection<team_member> comp);
+  [[nodiscard]] std::shared_ptr<team_member>
+  select_suitable_member_on_side(hexagon_side::orientation side, comparator_selection<team_member> comp);
 
-	[[nodiscard]] std::shared_ptr<team_member>
-	select_suitable_member_alive(comparator_selection<team_member> comp);
+  [[nodiscard]] std::shared_ptr<team_member>
+  select_suitable_member_alive(comparator_selection<team_member> comp);
 
-	[[nodiscard]] std::shared_ptr<team_member>
-	select_suitable_member_on_side_alive(hexagon_side::orientation side, comparator_selection<team_member> comp);
+  [[nodiscard]] std::shared_ptr<team_member>
+  select_suitable_member_on_side_alive(hexagon_side::orientation side, comparator_selection<team_member> comp);
 
-	[[nodiscard]] std::shared_ptr<team_member>
-	select_random_member_on_side_alive(hexagon_side::orientation side);
+  [[nodiscard]] std::shared_ptr<team_member>
+  select_random_member_on_side_alive(hexagon_side::orientation side);
 
-	[[nodiscard]] std::shared_ptr<team_member>
-	select_member_by_id(unsigned id_member);
+  [[nodiscard]] std::shared_ptr<team_member>
+  select_member_by_id(unsigned id_member);
 
-	[[nodiscard]] std::vector<std::shared_ptr<team_member>>
-	members_by_side(hexagon_side::orientation side) const;
+  [[nodiscard]] std::vector<std::shared_ptr<team_member>>
+  members_by_side(hexagon_side::orientation side) const;
 
-	[[nodiscard]] std::vector<std::shared_ptr<team_member>>
-	dead_members_by_side(hexagon_side::orientation side) const;
+  [[nodiscard]] std::vector<std::shared_ptr<team_member>>
+  dead_members_by_side(hexagon_side::orientation side) const;
 
-	[[nodiscard]] std::shared_ptr<team_member>
-	get_specific_team_member_by_id(const std::string& user_name, unsigned id_member) const;
+  [[nodiscard]] std::shared_ptr<team_member>
+  get_specific_team_member_by_id(const std::string &user_name, unsigned id_member) const;
 
-	[[nodiscard]] unsigned
-	number_ally() const { return _current_team_member_id; }
+  [[nodiscard]] unsigned
+  number_ally() const { return _current_team_member_id; }
 
-	[[nodiscard]] unsigned
-	ally_number_on_side(hexagon_side::orientation side) const;
+  [[nodiscard]] unsigned
+  ally_number_on_side(hexagon_side::orientation side) const;
 
-	[[nodiscard]] const party_team&
-	get_party_team_of_player(const std::string& party_team) const;
+  [[nodiscard]] const party_team &
+  get_party_team_of_player(const std::string &party_team) const;
 
-	[[nodiscard]] bool
-	all_dead() const;
+  [[nodiscard]] bool
+  all_dead() const;
 
-	/**
-	 * Validate the readiness of a player to start the battle
-	 * @param party_team name of the player validating its readiness
-	 * @return true if all players are ready, false otherwise
-	 */
-	[[nodiscard]] bool
-	set_party_readiness(const std::string& party_team);
+  /**
+   * Validate the readiness of a player to start the battle
+   * @param party_team name of the player validating its readiness
+   * @return true if all players are ready, false otherwise
+   */
+  [[nodiscard]] bool
+  set_party_readiness(const std::string &party_team);
 
-	[[nodiscard]] const std::vector<std::unique_ptr<party_team>>&
-	party_teams() const;
+  [[nodiscard]] const std::vector<std::unique_ptr<party_team>> &
+  party_teams() const;
 
-	[[nodiscard]] uint
-	fighting_pit_id() const { return _fighting_pit_id; }
+  [[nodiscard]] uint
+  fighting_pit_id() const { return _fighting_pit_id; }
 
-	/**
-	 * Get the next registered action of the given ally, and execute it
-	 * @param ally member to execute an action from (if the action queue is filled)
-	 * @param pc PitContender used to check if the target of the action is correct
-	 * @param chai_ptr chai engine pointer to execute the action
-	 * @return true if an action has been executed, false otherwise
-	 */
-	[[nodiscard]] bool
-	execute_ally_action(const data::priority_elem& ally, pit_contenders& pc, std::unique_ptr<chaiscript::ChaiScript>& chai_ptr);
+  /**
+   * Get the next registered action of the given ally, and execute it
+   * @param ally member to execute an action from (if the action queue is filled)
+   * @param pc PitContender used to check if the target of the action is correct
+   * @param chai_ptr chai engine pointer to execute the action
+   * @return true if an action has been executed, false otherwise
+   */
+  [[nodiscard]] bool
+  execute_ally_action(const data::priority_elem &ally, pit_contenders &pc, std::unique_ptr<chaiscript::ChaiScript> &chai_ptr);
 
-	void add_party_team(std::unique_ptr<party_team>&& team);
-	void set_fighting_pit_id(uint fighting_pit_id) { _fighting_pit_id = fighting_pit_id; }
+  void add_party_team(std::unique_ptr<party_team> &&team);
+  void set_fighting_pit_id(uint fighting_pit_id) { _fighting_pit_id = fighting_pit_id; }
 
 private:
-	std::vector<std::unique_ptr<party_team>> _party_teams;
+  std::vector<std::unique_ptr<party_team>> _party_teams;
 
-	// automatically incremented for each TeamMember when adding a PartyTeam
-	unsigned _current_team_member_id{0};
-	unsigned _fighting_pit_id;
-
+  // automatically incremented for each TeamMember when adding a PartyTeam
+  unsigned _current_team_member_id{0};
+  unsigned _fighting_pit_id;
 };
 
-}
+}// namespace fys::arena
 
-#endif //FYS_ALLYPARTYTEAMS_HH
+#endif//FYS_ALLYPARTYTEAMS_HH

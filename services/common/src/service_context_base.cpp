@@ -37,22 +37,25 @@ service_context_base::service_context_base(int ac, const char *const *av) try {
   fil::command_line_interface cli([] {}, "Context setup");
   std::string config_path;
 
-  cli.add_option(fil::option("-c", [&v = config_path](std::string str) { v = std::move(str); }, "Path of the config file"));
-  cli.add_option(fil::option("-s", [&v = _config_file](std::string str) { v = std::move(str); }, "Path of specific config file"));
-  cli.add_option(fil::option("-a", [&v = _dispatcher_data.address](std::string str) { v = std::move(str); }, "Hostname of the service dispatcher"));
-  cli.add_option(fil::option("-p", [&v = _dispatcher_data.subscriber_port](std::uint64_t value) { v = value; }, "Port number of the dispatcher to subscribe to"));
-  cli.add_option(fil::option("-d", [&v = _dispatcher_data.port](std::uint64_t value) { v = value; }, "Port number of the service dispatcher"));
+  cli.add_option(fil::option(
+	  "-c", [&v = config_path](std::string str) { v = std::move(str); }, "Path of the config file"));
+  cli.add_option(fil::option(
+	  "-s", [&v = _config_file](std::string str) { v = std::move(str); }, "Path of specific config file"));
+  cli.add_option(fil::option(
+	  "-a", [&v = _dispatcher_data.address](std::string str) { v = std::move(str); }, "Hostname of the service dispatcher"));
+  cli.add_option(fil::option(
+	  "-p", [&v = _dispatcher_data.subscriber_port](std::uint64_t value) { v = value; }, "Port number of the dispatcher to subscribe to"));
+  cli.add_option(fil::option(
+	  "-d", [&v = _dispatcher_data.port](std::uint64_t value) { v = value; }, "Port number of the service dispatcher"));
 
   cli.parse_command_line(ac, const_cast<char **>(av));
 
   this->initialize_from_ini(config_path);
-}
-catch (std::exception &e) {
+} catch (std::exception &e) {
   SPDLOG_ERROR("Context of the service not initialized caused by : {}", e.what());
 }
 
-void
-service_context_base::initialize_from_ini(const std::string &cfg_file_path) {
+void service_context_base::initialize_from_ini(const std::string &cfg_file_path) {
   boost::property_tree::ptree pt;
   boost::property_tree::read_ini(cfg_file_path, pt);
 
@@ -62,7 +65,6 @@ service_context_base::initialize_from_ini(const std::string &cfg_file_path) {
   _dispatcher_data.subscriber_port = pt.get<ushort>(fys::common::init_beacon::DISPATCHER_SUBPORT);
   _dispatcher_data.port = pt.get<ushort>(fys::common::init_beacon::DISPATCHER_PORT);
   _dispatcher_data.address = pt.get<std::string>(fys::common::init_beacon::DISPATCHER_ADDR);
-
 }
 
 std::string
@@ -75,4 +77,4 @@ service_context_base::connection_str() const {
   return std::string("tcp://").append(_hostname).append(":").append(std::to_string(_port));
 }
 
-}
+}// namespace fys::common

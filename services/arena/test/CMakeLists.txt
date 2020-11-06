@@ -3,11 +3,6 @@ project(arena_test CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_COMPILER /usr/bin/g++)
 
-include_directories(
-        ${COMMON_INCLUDES_DIR}
-        ${CMAKE_CURRENT_SOURCE_DIR}/../../../scripting_cache/cml/include
-        ${CMAKE_CURRENT_SOURCE_DIR}/../include)
-
 addFSeamTests(
         DESTINATION_TARGET arena_test
 
@@ -118,8 +113,17 @@ addFSeamTests(
         TO_MOCK
         ${CMAKE_CURRENT_SOURCE_DIR}/../../common/include/connection_handler.hh
 )
+
 target_compile_definitions(sampy_test PUBLIC CHAISCRIPT_NO_THREADS SPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)
 target_link_libraries(sampy_test cppzmq fys::fil fmt::fmt dl fys::cml)
+target_include_directories(sampy_test PRIVATE
+        ${COMMON_INCLUDES_DIR}
+        ${CMAKE_CURRENT_SOURCE_DIR}/../../../scripting_cache/cml/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include)
 
 target_compile_definitions(arena_test PUBLIC CHAISCRIPT_NO_THREADS SPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)
 target_link_libraries(arena_test cppzmq Catch2::Catch2 fys::fil fmt::fmt dl fys::cml)
+target_include_directories(arena_test PRIVATE
+        ${COMMON_INCLUDES_DIR}
+        ${CMAKE_CURRENT_SOURCE_DIR}/../../../scripting_cache/cml/include
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include)

@@ -21,48 +21,46 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
 #ifndef FYS_SERVICE_CML_HH
 #define FYS_SERVICE_CML_HH
 
+#include <filesystem>
 #include <memory>
 #include <unordered_map>
-#include <filesystem>
 
 namespace fys::cache {
 
 class CmlKey;
 
 struct InMemoryCached {
-	std::filesystem::file_time_type lastWriteTime;
-	std::string content;
+  std::filesystem::file_time_type lastWriteTime;
+  std::string content;
 };
 
 class Cml {
 
 public:
-	virtual ~Cml() = default;
-	explicit Cml(std::filesystem::path pathLocalStorage);
+  virtual ~Cml() = default;
+  explicit Cml(std::filesystem::path pathLocalStorage);
 
-	const std::string& findInCache(const std::string& key);
+  const std::string &findInCache(const std::string &key);
 
-	virtual void createUpToDateFileInLocalStorage(const CmlKey& cmlKey, std::filesystem::file_time_type cacheTime) = 0;
+  virtual void createUpToDateFileInLocalStorage(const CmlKey &cmlKey, std::filesystem::file_time_type cacheTime) = 0;
 
-	void createFile(const std::filesystem::path& pathToFile, const std::string& content) const;
-
-private:
-	[[nodiscard]] inline std::pair<bool, std::filesystem::file_time_type>
-	localStorageInfo(const CmlKey& k) const;
-
-	[[nodiscard]] inline bool
-	isInLocalStorageAndUpToDate(const CmlKey& cmlKey, std::filesystem::file_time_type cacheLastUpdate) const;
+  void createFile(const std::filesystem::path &pathToFile, const std::string &content) const;
 
 private:
-	std::filesystem::path _localPathStorage;
-	std::unordered_map<std::string, InMemoryCached> _inMemCache;
+  [[nodiscard]] inline std::pair<bool, std::filesystem::file_time_type>
+  localStorageInfo(const CmlKey &k) const;
 
+  [[nodiscard]] inline bool
+  isInLocalStorageAndUpToDate(const CmlKey &cmlKey, std::filesystem::file_time_type cacheLastUpdate) const;
+
+private:
+  std::filesystem::path _localPathStorage;
+  std::unordered_map<std::string, InMemoryCached> _inMemCache;
 };
 
-}
+}// namespace fys::cache
 
-#endif //FYS_SERVICE_CML_HH
+#endif//FYS_SERVICE_CML_HH

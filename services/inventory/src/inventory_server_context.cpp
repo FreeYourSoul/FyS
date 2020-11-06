@@ -21,52 +21,46 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <iostream>
-#include <fstream>
 #include "inventory_server_context.hh"
+#include <fstream>
+#include <iostream>
 
 using json = nlohmann::json;
 
 namespace fys::inv {
 
-inventory_server_context::inventory_server_context(int argc, char** argv)
-		:
-		common::service_context_base(argc, argv)
-{
-	std::ifstream i(_config_file);
-	json jsonConfig;
-	i >> jsonConfig;
-	init_inventory_context_with_json(jsonConfig);
+inventory_server_context::inventory_server_context(int argc, char **argv)
+	: common::service_context_base(argc, argv) {
+  std::ifstream i(_config_file);
+  json jsonConfig;
+  i >> jsonConfig;
+  init_inventory_context_with_json(jsonConfig);
 }
 
 std::string
-inventory_server_context::to_string() const
-{
-	std::string str;
-	str = "dump context\n*************************\n";
-	str += "[INFO] Service " + _name + " context VERSION: " + _version + "\n";
-	str += "[INFO] Config file used: " + _config_file + "\n";
-	str += "[INFO] Server code " + _server_code + "\n";
-	str += "\n[INFO] Dispatcher connected port: " + std::to_string(_dispatcher_data.port) + "\n";
-	str += "[INFO] Dispatcher connected host: " + _dispatcher_data.address + "\n";
-	str += "[INFO] Dispatcher connection string: " + dispatcher_connection_str() + "\n";
-	str += "[INFO] Player connection string: " + get_player_connection_str() + "\n";
-	str += "\n*************************\n";
-	return str;
+inventory_server_context::to_string() const {
+  std::string str;
+  str = "dump context\n*************************\n";
+  str += "[INFO] Service " + _name + " context VERSION: " + _version + "\n";
+  str += "[INFO] Config file used: " + _config_file + "\n";
+  str += "[INFO] Server code " + _server_code + "\n";
+  str += "\n[INFO] Dispatcher connected port: " + std::to_string(_dispatcher_data.port) + "\n";
+  str += "[INFO] Dispatcher connected host: " + _dispatcher_data.address + "\n";
+  str += "[INFO] Dispatcher connection string: " + dispatcher_connection_str() + "\n";
+  str += "[INFO] Player connection string: " + get_player_connection_str() + "\n";
+  str += "\n*************************\n";
+  return str;
 }
 
 std::string
-inventory_server_context::get_player_connection_str() const noexcept
-{
-	return std::string("tcp://*:").append(std::to_string(_portPlayerConnection));
+inventory_server_context::get_player_connection_str() const noexcept {
+  return std::string("tcp://*:").append(std::to_string(_portPlayerConnection));
 }
 
-void
-inventory_server_context::init_inventory_context_with_json(json& json)
-{
-	auto invJson = json["inventory"];
-	invJson["code"].get_to(_server_code);
-	_portPlayerConnection = invJson["player_connection_port"].get<uint>();
+void inventory_server_context::init_inventory_context_with_json(json &json) {
+  auto invJson = json["inventory"];
+  invJson["code"].get_to(_server_code);
+  _portPlayerConnection = invJson["player_connection_port"].get<uint>();
 }
 
-}
+}// namespace fys::inv

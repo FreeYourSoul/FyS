@@ -28,8 +28,8 @@
 
 #include <fightingPit/contender/pit_contenders.hh>
 #include <fightingPit/team/ally_party_teams.hh>
-#include <fightingPit/team/team_member.hh>
 #include <fightingPit/team/party_team.hh>
+#include <fightingPit/team/team_member.hh>
 
 #include <CmlCopy.hh>
 
@@ -53,7 +53,7 @@ copy_path_storage() {
 	dir_path = file_path.substr(0, file_path.rfind('/'));
   return dir_path + "/scripts_lnk";
 }
-}
+}// namespace
 
 TEST_CASE("Test register/load player", "[service][arena][script_test]") {
 
@@ -71,8 +71,7 @@ TEST_CASE("Test register/load player", "[service][arena][script_test]") {
         var objs = get_objects();
         objs.count("ally_actions") == 1
         )"));
-  }
-  catch (std::exception &ex) {
+  } catch (std::exception &ex) {
 	SPDLOG_ERROR("{}", ex.what());
 	FAIL("Shouldn't fail here");
   }
@@ -88,7 +87,7 @@ TEST_CASE("Test register/load player", "[service][arena][script_test]") {
 	REQUIRE(std::filesystem::exists(baseCache / "arena" / "actions" / "damage" / "slash.chai"));
 	REQUIRE_FALSE(content.empty());
 
-  } // End section : Test copy cml
+  }// End section : Test copy cml
 
   SECTION("simple test load player actions") {
 
@@ -103,8 +102,7 @@ TEST_CASE("Test register/load player", "[service][arena][script_test]") {
 	try {
 	  REQUIRE(chai->eval<bool>(R"(1 == ally_actions.count("FyS_fyston1");)"));
 	  REQUIRE(chai->eval<bool>(R"(1 == ally_actions["FyS_fyston1"].count("slash");)"));
-	}
-	catch (std::exception &ex) {
+	} catch (std::exception &ex) {
 	  SPDLOG_ERROR("{}", ex.what());
 	  FAIL("Shouldn't fail here");
 	}
@@ -124,13 +122,12 @@ TEST_CASE("Test register/load player", "[service][arena][script_test]") {
 
 		REQUIRE(chai->eval<bool>(R"(1 == ally_actions.count("FyS_fyston2");)"));
 		REQUIRE(chai->eval<bool>(R"(1 == ally_actions["FyS_fyston2"].count("slash");)"));
-	  }
-	  catch (std::exception &ex) {
+	  } catch (std::exception &ex) {
 		SPDLOG_ERROR("{}", ex.what());
 		FAIL("Shouldn't fail here");
 	  }
 
-	} // End section : Test register loaded action
+	}// End section : Test register loaded action
 
 	SECTION("simple test register new partyteam with loaded action") {
 
@@ -152,16 +149,15 @@ TEST_CASE("Test register/load player", "[service][arena][script_test]") {
 
 		REQUIRE(chai->eval<bool>(R"(1 == ally_actions.count("Free_fyston2");)"));
 		REQUIRE(chai->eval<bool>(R"(1 == ally_actions["Free_fyston2"].count("slash");)"));
-	  }
-	  catch (std::exception &ex) {
+	  } catch (std::exception &ex) {
 		SPDLOG_ERROR("{}", ex.what());
 		FAIL("Shouldn't fail here");
 	  }
 
-	} // End section : simple test register new partyteam with loaded action
+	}// End section : simple test register new partyteam with loaded action
 
-  } // End section : Test load player actions
+  }// End section : Test load player actions
 
   std::filesystem::remove_all(baseCache);
 
-} // End TestCase : Test register/load player
+}// End TestCase : Test register/load player

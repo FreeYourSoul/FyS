@@ -27,11 +27,10 @@
 
 using namespace fys::ws;
 
-TEST_CASE("WorldServerEngineTestCase", "[service][world]")
-{
+TEST_CASE("WorldServerEngineTestCase", "[service][world]") {
 
-	SECTION("authenticatePlayer test") {
+  SECTION("authenticatePlayer test") {
 
-	} // End section : 
-	
-} // End TestCase : WorldServerEngineTestCase
+  }// End section :
+
+}// End TestCase : WorldServerEngineTestCase

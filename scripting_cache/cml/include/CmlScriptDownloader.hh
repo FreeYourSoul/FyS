@@ -21,32 +21,30 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
 #ifndef FYS_ONLINE_CMLSCRIPTDOWNLOADER_HH
 #define FYS_ONLINE_CMLSCRIPTDOWNLOADER_HH
 
-#include <functional>
 #include <Cml.hh>
+#include <functional>
 
 namespace fys::cache {
 
 class CmlScriptDownloader final : cache::Cml {
 
 public:
-	virtual ~CmlScriptDownloader() = default;
+  virtual ~CmlScriptDownloader() = default;
 
-	template<typename DownloaderFunc>
-	CmlScriptDownloader(std::filesystem::path pathLocalStorage, DownloaderFunc&& downloader)
-			: cache::Cml(std::move(pathLocalStorage)), _downloader(std::forward<DownloaderFunc>(downloader)) { }
-
-private:
-	void createUpToDateFileInLocalStorage(const CmlKey& cml_key, std::filesystem::file_time_type cache_time) override;
+  template<typename DownloaderFunc>
+  CmlScriptDownloader(std::filesystem::path pathLocalStorage, DownloaderFunc &&downloader)
+	  : cache::Cml(std::move(pathLocalStorage)), _downloader(std::forward<DownloaderFunc>(downloader)) {}
 
 private:
-	std::function<void(const std::string&, const std::string&)> _downloader;
+  void createUpToDateFileInLocalStorage(const CmlKey &cml_key, std::filesystem::file_time_type cache_time) override;
 
+private:
+  std::function<void(const std::string &, const std::string &)> _downloader;
 };
 
-}
+}// namespace fys::cache
 
-#endif //FYS_ONLINE_CMLSCRIPTDOWNLOADER_HH
+#endif//FYS_ONLINE_CMLSCRIPTDOWNLOADER_HH

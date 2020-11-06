@@ -21,48 +21,42 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <spdlog/spdlog.h>
 #include <algorithm>
+#include <spdlog/spdlog.h>
 
-#include <fightingPit/team/team_member.hh>
 #include <fightingPit/team/party_team.hh>
+#include <fightingPit/team/team_member.hh>
 
 namespace fys::arena {
 
 std::vector<std::shared_ptr<team_member>>
-party_team::team_member_on_side(fys::arena::hexagon_side::orientation orientation) const
-{
-	std::vector<std::shared_ptr<team_member>> result;
-	std::copy_if(_members.begin(), _members.end(), std::back_inserter(result), [orientation](const auto& tm_ptr) {
-		return tm_ptr->side_orient() == orientation;
-	});
-	return result;
+party_team::team_member_on_side(fys::arena::hexagon_side::orientation orientation) const {
+  std::vector<std::shared_ptr<team_member>> result;
+  std::copy_if(_members.begin(), _members.end(), std::back_inserter(result), [orientation](const auto &tm_ptr) {
+	return tm_ptr->side_orient() == orientation;
+  });
+  return result;
 }
 
 std::vector<std::shared_ptr<team_member>>
-party_team::get_dead_team_members_on_side(fys::arena::hexagon_side::orientation side) const
-{
-	std::vector<std::shared_ptr<team_member>> result;
-	std::copy_if(_members.begin(), _members.end(), std::back_inserter(result), [side](const auto& tm_ptr) {
-		return tm_ptr->side_orient() == side && tm_ptr->status().life_pt.is_dead();
-	});
-	return result;
+party_team::get_dead_team_members_on_side(fys::arena::hexagon_side::orientation side) const {
+  std::vector<std::shared_ptr<team_member>> result;
+  std::copy_if(_members.begin(), _members.end(), std::back_inserter(result), [side](const auto &tm_ptr) {
+	return tm_ptr->side_orient() == side && tm_ptr->status().life_pt.is_dead();
+  });
+  return result;
 }
 
-void
-party_team::add_team_member(std::shared_ptr<team_member> member)
-{
-	_members.emplace_back(std::move(member));
+void party_team::add_team_member(std::shared_ptr<team_member> member) {
+  _members.emplace_back(std::move(member));
 }
 
 unsigned
-party_team::ally_number_on_side(hexagon_side::orientation side) const
-{
-	return std::count_if(_members.cbegin(), _members.cend(),
-			[side](const team_member_sptr& ally) {
-				return side == ally->side_orient();
-			}
-	);
+party_team::ally_number_on_side(hexagon_side::orientation side) const {
+  return std::count_if(_members.cbegin(), _members.cend(),
+					   [side](const team_member_sptr &ally) {
+						 return side == ally->side_orient();
+					   });
 }
 
-}
+}// namespace fys::arena

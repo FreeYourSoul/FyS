@@ -28,32 +28,25 @@
 namespace fys::arena {
 
 fighting_contender::fighting_contender(std::unique_ptr<contender_scripting> contender_scripting)
-		:_contender_scripting(std::move(contender_scripting))
-{
+	: _contender_scripting(std::move(contender_scripting)) {
 }
 
-void
-fighting_contender::execute_action()
-{
-	_contender_scripting->execute_action();
+void fighting_contender::execute_action() {
+  _contender_scripting->execute_action();
 }
 
-bool
-fighting_contender::setup_contender()
-{
-	return _contender_scripting->setup_contender();
+bool fighting_contender::setup_contender() {
+  return _contender_scripting->setup_contender();
 }
 
-const std::string&
-fighting_contender::name() const
-{
-	return _contender_scripting->contender_name();
+const std::string &
+fighting_contender::name() const {
+  return _contender_scripting->contender_name();
 }
 
 unsigned
-fighting_contender::id() const
-{
-	return _contender_scripting->contender_id();
+fighting_contender::id() const {
+  return _contender_scripting->contender_id();
 }
 
-}
+}// namespace fys::arena

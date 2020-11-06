@@ -21,12 +21,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
 #ifndef FYS_ONLINE_ARN_FLATBUFFERGENERATOR_HH
 #define FYS_ONLINE_ARN_FLATBUFFERGENERATOR_HH
 
-#include <utility>
 #include <flatbuffers/flatbuffers.h>
+#include <utility>
 
 namespace fys::fb::arn {
 struct FightingPitState;
@@ -34,7 +33,7 @@ struct PartyTeamStatus;
 struct MemberStatus;
 struct Cosmetics;
 struct Reward;
-}
+}// namespace fys::fb::arn
 namespace fys::arena {
 class ally_party_teams;
 class party_team;
@@ -46,7 +45,7 @@ struct rewards;
 using fighting_contender_sptr = std::shared_ptr<fighting_contender>;
 using team_member_sptr = std::shared_ptr<team_member>;
 
-}
+}// namespace fys::arena
 
 namespace fys::arena {
 
@@ -71,52 +70,51 @@ namespace fys::arena {
 class flatbuffer_generator {
 
 public:
-	[[nodiscard]] std::pair<void*, std::uint32_t>
-	generateErrorSaturated(const std::string& arenaCode);
+  [[nodiscard]] std::pair<void *, std::uint32_t>
+  generateErrorSaturated(const std::string &arenaCode);
 
-	[[nodiscard]] std::pair<void*, std::uint32_t>
-	generateFightingPitState(const fys::arena::fighting_pit& fp);
+  [[nodiscard]] std::pair<void *, std::uint32_t>
+  generateFightingPitState(const fys::arena::fighting_pit &fp);
 
-	[[nodiscard]] std::pair<void*, std::uint32_t>
-	generate_party_team_status(const fys::arena::party_team& partyTeam);
+  [[nodiscard]] std::pair<void *, std::uint32_t>
+  generate_party_team_status(const fys::arena::party_team &partyTeam);
 
-	[[nodiscard]] std::pair<void*, std::uint32_t>
-	generate_end_battle(bool win, const rewards& rewards);
+  [[nodiscard]] std::pair<void *, std::uint32_t>
+  generate_end_battle(bool win, const rewards &rewards);
 
-	[[nodiscard]] std::pair<void*, std::uint32_t>
-	generate_action_notification(const std::string& action_key,
-			const std::vector<fighting_contender_sptr>& contender_targets,
-			const std::vector<team_member_sptr>& ally_targets);
+  [[nodiscard]] std::pair<void *, std::uint32_t>
+  generate_action_notification(const std::string &action_key,
+							   const std::vector<fighting_contender_sptr> &contender_targets,
+							   const std::vector<team_member_sptr> &ally_targets);
 
-//	[[nodiscard]] std::pair<void*, std::uint32_t>
-//	generateCosmetics(const fys::arena::PartyTeam& partyTeam);
-//
-//	[[nodiscard]] std::pair<void*, std::uint32_t>
-//	generateCosmetics(const std::vector<PitContenders>& contenders);
-
-private:
-	[[nodiscard]] inline std::vector<flatbuffers::Offset<fb::arn::PartyTeamStatus>>
-	generate_party_team_vec_status_offset(const ally_party_teams& apt);
-
-	[[nodiscard]] inline std::vector<flatbuffers::Offset<fb::arn::MemberStatus>>
-	generate_team_member_vec_status_offset(const std::vector<team_member_sptr>& members);
-
-	[[nodiscard]] inline std::vector<flatbuffers::Offset<fys::fb::arn::MemberStatus>>
-	generate_contender_vec_status_offset(const std::vector<fighting_contender_sptr>& contenders);
-
-	[[nodiscard]] inline std::vector<flatbuffers::Offset<fb::arn::Reward>>
-	generate_rewards_offset(const rewards& rewards);
-
-//	[[nodiscard]] inline flatbuffers::Offset<fys::fb::arn::Cosmetics>
-//	generateCosmeticsOffset(const fys::arena::PartyTeam&);
-//
-//	[[nodiscard]] inline flatbuffers::Offset<fys::fb::arn::Cosmetics>
-//	generateCosmeticsOffset(const std::vector<fys::arena::FightingContender>& contenders);
+  //	[[nodiscard]] std::pair<void*, std::uint32_t>
+  //	generateCosmetics(const fys::arena::PartyTeam& partyTeam);
+  //
+  //	[[nodiscard]] std::pair<void*, std::uint32_t>
+  //	generateCosmetics(const std::vector<PitContenders>& contenders);
 
 private:
-	flatbuffers::FlatBufferBuilder _fbb;
+  [[nodiscard]] inline std::vector<flatbuffers::Offset<fb::arn::PartyTeamStatus>>
+  generate_party_team_vec_status_offset(const ally_party_teams &apt);
 
+  [[nodiscard]] inline std::vector<flatbuffers::Offset<fb::arn::MemberStatus>>
+  generate_team_member_vec_status_offset(const std::vector<team_member_sptr> &members);
+
+  [[nodiscard]] inline std::vector<flatbuffers::Offset<fys::fb::arn::MemberStatus>>
+  generate_contender_vec_status_offset(const std::vector<fighting_contender_sptr> &contenders);
+
+  [[nodiscard]] inline std::vector<flatbuffers::Offset<fb::arn::Reward>>
+  generate_rewards_offset(const rewards &rewards);
+
+  //	[[nodiscard]] inline flatbuffers::Offset<fys::fb::arn::Cosmetics>
+  //	generateCosmeticsOffset(const fys::arena::PartyTeam&);
+  //
+  //	[[nodiscard]] inline flatbuffers::Offset<fys::fb::arn::Cosmetics>
+  //	generateCosmeticsOffset(const std::vector<fys::arena::FightingContender>& contenders);
+
+private:
+  flatbuffers::FlatBufferBuilder _fbb;
 };
 
-}
-#endif //FYS_ONLINE_ARN_FLATBUFFERGENERATOR_HH
+}// namespace fys::arena
+#endif//FYS_ONLINE_ARN_FLATBUFFERGENERATOR_HH

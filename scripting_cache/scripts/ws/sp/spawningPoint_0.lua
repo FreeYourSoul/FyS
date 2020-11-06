@@ -3,6 +3,9 @@ spawningPoint_0 = {
         [0] = {
             idSpawningPoint = 0,
             isAlive = false,
+            shouldSpawn = function(this)
+                return this.isAlive
+            end,
             initial_info = { x = 10, y = 20, velocity = 1.0, angle = 0.5 },
             actions = {
                 [0] = { id = 0, x = 10, y = 10 },

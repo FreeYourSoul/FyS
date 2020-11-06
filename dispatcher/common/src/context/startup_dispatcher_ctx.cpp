@@ -1,12 +1,12 @@
-#include <spdlog/spdlog.h>
 #include <numeric>
+#include <spdlog/spdlog.h>
 
 #include <boost/property_tree/ini_parser.hpp>
 
 #include <fil/cli/command_line_interface.hh>
 
-#include <startup_dispatcher_ctx.hh>
 #include <Versioner.hh>
+#include <startup_dispatcher_ctx.hh>
 
 namespace fys {
 
@@ -14,18 +14,24 @@ startup_dispatcher_ctx::startup_dispatcher_ctx(int ac, const char *const *av) no
   fil::command_line_interface cli([] {}, "FyS::Dispatcher");
   std::string config_path = "NONE";
 
-  cli.add_option(fil::option("-c", [&v = config_path](std::string str) { v = std::move(str); }, "Path of the config file"));
-  cli.add_option(fil::option("-s", [&v = _specificConfigPath](std::string str) { v = std::move(str); }, "Path of specific config file"));
-  cli.add_option(fil::option("-n", [&v = _name](std::string str) { v = std::move(str); }, "Name of the Dispatcher (used as key for the cluster)"));
-  cli.add_option(fil::option("-p", [&v = _bindingPort](std::uint64_t value) { v = value; }, "Listening Port"));
-  cli.add_option(fil::option("-a", [&v = _isClusterAware](bool value) { v = value; }, "Is aware of the other cluster member"));
-  cli.add_option(fil::option("-l", [&v = _isLoadBalancing](bool value) { v = value; }, "Dispatch in load balancing mode or publisher mode"));
-  cli.add_option(fil::option("-v", [&v = _verbose](bool value) { v = value; }, "Print logs on standard output"));
+  cli.add_option(fil::option(
+	  "-c", [&v = config_path](std::string str) { v = std::move(str); }, "Path of the config file"));
+  cli.add_option(fil::option(
+	  "-s", [&v = _specificConfigPath](std::string str) { v = std::move(str); }, "Path of specific config file"));
+  cli.add_option(fil::option(
+	  "-n", [&v = _name](std::string str) { v = std::move(str); }, "Name of the Dispatcher (used as key for the cluster)"));
+  cli.add_option(fil::option(
+	  "-p", [&v = _bindingPort](std::uint64_t value) { v = value; }, "Listening Port"));
+  cli.add_option(fil::option(
+	  "-a", [&v = _isClusterAware](bool value) { v = value; }, "Is aware of the other cluster member"));
+  cli.add_option(fil::option(
+	  "-l", [&v = _isLoadBalancing](bool value) { v = value; }, "Dispatch in load balancing mode or publisher mode"));
+  cli.add_option(fil::option(
+	  "-v", [&v = _verbose](bool value) { v = value; }, "Print logs on standard output"));
 
   if ("NONE" != config_path)
 	this->initialize_from_ini(config_path);
-}
-catch (std::exception &e) {
+} catch (std::exception &e) {
   SPDLOG_ERROR("\"Context of the Dispatcher not initialized caused by : {}", e.what());
 }
 
@@ -95,4 +101,4 @@ std::string startup_dispatcher_ctx::backend_cluster_proxy_connection_str() const
   return "tcp://" + _clusterProxy.backend_address + ":" + std::to_string(_clusterProxy.backend_port);
 }
 
-}
+}// namespace fys

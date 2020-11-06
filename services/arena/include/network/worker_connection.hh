@@ -31,16 +31,14 @@ namespace fys::arena {
 class worker_connection {
 
 public:
-	worker_connection() noexcept
-			:
-			_ctx(1), _worker_service_connection(_ctx, zmq::socket_type::dealer) { }
+  worker_connection() noexcept
+	  : _ctx(1), _worker_service_connection(_ctx, zmq::socket_type::dealer) {}
 
 private:
-	zmq::context_t _ctx;
-	zmq::socket_t _worker_service_connection;
-
+  zmq::context_t _ctx;
+  zmq::socket_t _worker_service_connection;
 };
 
-}
+}// namespace fys::arena
 
-#endif // !FYS_WORKERCONNECTION_HH
+#endif// !FYS_WORKERCONNECTION_HH

@@ -21,13 +21,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
 #ifndef FYS_PITCONTENDERS_HH
 #define FYS_PITCONTENDERS_HH
 
+#include <functional>
 #include <memory>
 #include <vector>
-#include <functional>
 
 #include <fightingPit/data/common_types.hh>
 #include <fightingPit/hexagon_side.hh>
@@ -44,66 +43,64 @@ class ally_party_teams;
 class pit_contenders {
 
 public:
-	pit_contenders() = default;
-	pit_contenders(const pit_contenders& other) = delete;
+  pit_contenders() = default;
+  pit_contenders(const pit_contenders &other) = delete;
 
-	void execute_contender_action(const data::priority_elem& contender);
+  void execute_contender_action(const data::priority_elem &contender);
 
+  [[nodiscard]] std::vector<std::shared_ptr<fighting_contender>>
+  contenders_on_side(hexagon_side::orientation side) const;
 
-	[[nodiscard]] std::vector<std::shared_ptr<fighting_contender>>
-	contenders_on_side(hexagon_side::orientation side) const;
+  [[nodiscard]] std::vector<std::shared_ptr<fighting_contender>>
+  changing_side_contenders() const;
 
-	[[nodiscard]] std::vector<std::shared_ptr<fighting_contender>>
-	changing_side_contenders() const;
+  // scripting utility
+  [[nodiscard]] std::shared_ptr<fighting_contender>
+  select_suitable_contender(comparator_selection<fighting_contender> comp) const;
 
-	// scripting utility
-	[[nodiscard]] std::shared_ptr<fighting_contender>
-	select_suitable_contender(comparator_selection<fighting_contender> comp) const;
+  [[nodiscard]] std::shared_ptr<fighting_contender>
+  select_suitable_contender_on_side(hexagon_side::orientation side, comparator_selection<fighting_contender> comp) const;
 
-	[[nodiscard]] std::shared_ptr<fighting_contender>
-	select_suitable_contender_on_side(hexagon_side::orientation side, comparator_selection<fighting_contender> comp) const;
+  [[nodiscard]] std::shared_ptr<fighting_contender>
+  select_random_contender_on_side_alive(hexagon_side::orientation side) const;
 
-	[[nodiscard]] std::shared_ptr<fighting_contender>
-	select_random_contender_on_side_alive(hexagon_side::orientation side) const;
+  [[nodiscard]] std::shared_ptr<fighting_contender>
+  select_suitable_contender_alive(comparator_selection<fighting_contender> comp) const;
 
-	[[nodiscard]] std::shared_ptr<fighting_contender>
-	select_suitable_contender_alive(comparator_selection<fighting_contender> comp) const;
+  [[nodiscard]] std::shared_ptr<fighting_contender>
+  select_suitable_contender_on_side_alive(hexagon_side::orientation side, comparator_selection<fighting_contender> comp) const;
 
-	[[nodiscard]] std::shared_ptr<fighting_contender>
-	select_suitable_contender_on_side_alive(hexagon_side::orientation side, comparator_selection<fighting_contender> comp) const;
+  [[nodiscard]] std::shared_ptr<fighting_contender>
+  fighting_contender_at(uint pos) const { return _contenders.at(pos); }
 
-	[[nodiscard]] std::shared_ptr<fighting_contender>
-	fighting_contender_at(uint pos) const { return _contenders.at(pos); }
+  [[nodiscard]] std::size_t
+  number_contender() const { return _contenders.size(); }
 
-	[[nodiscard]] std::size_t
-	number_contender() const { return _contenders.size(); }
+  [[nodiscard]] std::vector<std::shared_ptr<fighting_contender>>
+  get_dead_contender_on_side(hexagon_side::orientation contender_ptr) const;
 
-	[[nodiscard]] std::vector<std::shared_ptr<fighting_contender>>
-	get_dead_contender_on_side(hexagon_side::orientation contender_ptr) const;
+  [[nodiscard]] const std::vector<std::shared_ptr<fighting_contender>> &
+  contenders() const { return _contenders; }
 
-	[[nodiscard]] const std::vector<std::shared_ptr<fighting_contender> >&
-	contenders() const { return _contenders; }
+  [[nodiscard]] unsigned
+  number_contender_on_side(hexagon_side::orientation side) const;
 
-	[[nodiscard]] unsigned
-	number_contender_on_side(hexagon_side::orientation side) const;
+  [[nodiscard]] bool
+  add_contender(const std::shared_ptr<fighting_contender> &contender);
 
-	[[nodiscard]] bool
-	add_contender(const std::shared_ptr<fighting_contender>& contender);
-
-	[[nodiscard]] bool
-	all_dead() const;
+  [[nodiscard]] bool
+  all_dead() const;
 
 private:
-	std::vector<std::shared_ptr<fighting_contender>> _contenders;
+  std::vector<std::shared_ptr<fighting_contender>> _contenders;
 
-	/**
-	 * Flags determining which contenders are going to move from one side to another
-	 * (only _contenders having this flag (index equivalent) set to true have their position refreshed
-	 */
-	std::vector<bool> _change_side_flags;
-
+  /**
+   * Flags determining which contenders are going to move from one side to another
+   * (only _contenders having this flag (index equivalent) set to true have their position refreshed
+   */
+  std::vector<bool> _change_side_flags;
 };
 
-}
+}// namespace fys::arena
 
-#endif // !FYS_PITCONTENDERS_HH
+#endif// !FYS_PITCONTENDERS_HH

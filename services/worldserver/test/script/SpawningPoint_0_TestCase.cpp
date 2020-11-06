@@ -21,81 +21,75 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <fmt/format.h>
 #include <catch2/catch.hpp>
+#include <fmt/format.h>
 
 #include <sol/state.hpp>
 
 namespace {
 
 [[nodiscard]] std::string
-getScriptFilePath()
-{
-	std::string file_path = __FILE__;
-	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
-	if (dir_path.size() == file_path.size())
-		dir_path = file_path.substr(0, file_path.rfind('/'));
-	return dir_path + "/../../../../scripting_cache/scripts/ws/sp/spawningPoint_0.lua";
+getScriptFilePath() {
+  std::string file_path = __FILE__;
+  std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
+  if (dir_path.size() == file_path.size())
+	dir_path = file_path.substr(0, file_path.rfind('/'));
+  return dir_path + "/../../../../scripting_cache/scripts/ws/sp/spawningPoint_0.lua";
 }
 
 [[nodiscard]] std::string
-getInitFilePath()
-{
-	std::string file_path = __FILE__;
-	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
-	if (dir_path.size() == file_path.size())
-		dir_path = file_path.substr(0, file_path.rfind('/'));
-	return dir_path + "/../../../../scripting_cache/scripts/ws/initialization.lua";
+getInitFilePath() {
+  std::string file_path = __FILE__;
+  std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
+  if (dir_path.size() == file_path.size())
+	dir_path = file_path.substr(0, file_path.rfind('/'));
+  return dir_path + "/../../../../scripting_cache/scripts/ws/initialization.lua";
 }
 
-}
-
+}// namespace
 
 #include <chrono>
 #include <thread>
 
-TEST_CASE("SpawningPoint_0 TestCase", "[service][world][script]")
-{
-	sol::state lua;
-	lua.open_libraries(sol::lib::base, sol::lib::package);
+TEST_CASE("SpawningPoint_0 TestCase", "[service][world][script]") {
+  sol::state lua;
+  lua.open_libraries(sol::lib::base, sol::lib::package);
+
+  try {
+	lua.script_file(getInitFilePath());
+	lua.script_file(getScriptFilePath());
+  } catch (const std::exception &e) {
+	FAIL(e.what());
+  }
+
+  SECTION("Create Encounter 0") {
 
 	try {
-		lua.script_file(getInitFilePath());
-		lua.script_file(getScriptFilePath());
+	  auto result_0 = lua["spawn"](lua["spawningPoint_0"]);
+	  auto result_1 = lua["spawn"](lua["spawningPoint_0"]);
+
+	  REQUIRE(result_0.valid());
+	  REQUIRE(0 == static_cast<int>(result_0));
+
+	  auto numbers = lua["spawningPoint_0"]["numbers"];
+	  REQUIRE(numbers.valid());
+	  REQUIRE(5 == static_cast<uint>(numbers));
+
+	  auto first_encounter = lua["spawningPoint_0"]["spawned"][0];
+	  REQUIRE(first_encounter.valid());
+	  REQUIRE(0 == static_cast<uint>(first_encounter["idSpawningPoint"]));
+	  REQUIRE(4 == static_cast<uint>(first_encounter["numberSteps"]));
+	  REQUIRE(10 == static_cast<uint>(first_encounter["initial_info"]["x"]));
+	  REQUIRE(20 == static_cast<uint>(first_encounter["initial_info"]["y"]));
+	  REQUIRE(1. == static_cast<double>(first_encounter["initial_info"]["velocity"]));
+	  REQUIRE(0.5 == static_cast<double>(first_encounter["initial_info"]["angle"]));
+
+	  REQUIRE(result_1.valid());
+	  REQUIRE(1 == static_cast<int>(result_1));
+
+	} catch (const std::exception &e) {
+	  FAIL(e.what());
 	}
-	catch (const std::exception& e) {
-		FAIL(e.what());
-	}
+  }// End section : Create Encounter 0
 
-	SECTION("Create Encounter 0") {
-
-		try {
-			auto result_0 = lua["spawn"](lua["spawningPoint_0"]);
-			auto result_1 = lua["spawn"](lua["spawningPoint_0"]);
-
-			REQUIRE(result_0.valid());
-			REQUIRE(0 == static_cast<int>(result_0));
-
-			auto numbers = lua["spawningPoint_0"]["numbers"];
-			REQUIRE(numbers.valid());
-			REQUIRE(5 == static_cast<uint>(numbers));
-
-			auto first_encounter = lua["spawningPoint_0"]["spawned"][0];
-			REQUIRE(first_encounter.valid());
-			REQUIRE(0 == static_cast<uint>(first_encounter["idSpawningPoint"]));
-			REQUIRE(4 == static_cast<uint>(first_encounter["numberSteps"]));
-			REQUIRE(10 == static_cast<uint>(first_encounter["initial_info"]["x"]));
-			REQUIRE(20 == static_cast<uint>(first_encounter["initial_info"]["y"]));
-			REQUIRE(1. == static_cast<double>(first_encounter["initial_info"]["velocity"]));
-			REQUIRE(0.5 == static_cast<double>(first_encounter["initial_info"]["angle"]));
-
-			REQUIRE(result_1.valid());
-			REQUIRE(1 == static_cast<int>(result_1));
-
-		}
-		catch (const std::exception& e) {
-			FAIL(e.what());
-		}
-	} // End section : Create Encounter 0
-
-} // End TestCase : SpawningPoint_0 TestCase
+}// End TestCase : SpawningPoint_0 TestCase

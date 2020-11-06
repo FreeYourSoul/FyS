@@ -21,12 +21,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
 #ifndef FYS_ONLINE_SIZED_QUEUE_HH
 #define FYS_ONLINE_SIZED_QUEUE_HH
 
-#include <optional>
 #include <array>
+#include <optional>
 
 namespace fys::common {
 
@@ -41,63 +40,60 @@ namespace fys::common {
 template<typename T, unsigned int SIZE_QUEUE = 32>
 class sized_queue {
 
-	using container_type = T;
+  using container_type = T;
 
-	static_assert(SIZE_QUEUE < std::numeric_limits<unsigned int>::max());
+  static_assert(SIZE_QUEUE < std::numeric_limits<unsigned int>::max());
 
 public:
-	/**
-	 * Pop the next element of the queue
-	 * @return the next element of the queue, if no such element exist, return an empty optional (nullopt)
-	 */
-	[[nodiscard]] std::optional<container_type>
-	pop()
-	{
-		if (_head < _tail) {
-			return _queue[getIndex(_head++)];
-		}
-		_head = 0;
-		_tail = 0;
-		return std::nullopt;
+  /**
+   * Pop the next element of the queue
+   * @return the next element of the queue, if no such element exist, return an empty optional (nullopt)
+   */
+  [[nodiscard]] std::optional<container_type>
+  pop() {
+	if (_head < _tail) {
+	  return _queue[getIndex(_head++)];
 	}
+	_head = 0;
+	_tail = 0;
+	return std::nullopt;
+  }
 
-	/**
-	 * Push an element into the queue
-	 *
-	 * @param elem element to insert into the queue
-	 * @return true if the element has been pushed correctly, false otherwise
-	 */
-	bool
-	push(container_type&& elem)
-	{
-		if (size() >= SIZE_QUEUE)
-			return false;
-		_queue[getIndex(_tail)] = std::forward<container_type>(elem);
-		++_tail;
-		return true;
-	}
+  /**
+   * Push an element into the queue
+   *
+   * @param elem element to insert into the queue
+   * @return true if the element has been pushed correctly, false otherwise
+   */
+  bool
+  push(container_type &&elem) {
+	if (size() >= SIZE_QUEUE)
+	  return false;
+	_queue[getIndex(_tail)] = std::forward<container_type>(elem);
+	++_tail;
+	return true;
+  }
 
-	/**
-	 * Get the number of element in the queue to be popped
-	 * @return number of element that can be popped out of the queue
-	 */
-	[[nodiscard]] uint
-	size() const { return _tail - _head; }
+  /**
+   * Get the number of element in the queue to be popped
+   * @return number of element that can be popped out of the queue
+   */
+  [[nodiscard]] uint
+  size() const { return _tail - _head; }
 
 private:
-	inline uint
-	getIndex(const std::uint32_t index) const
-	{
-		return index % SIZE_QUEUE;
-	}
+  inline uint
+  getIndex(const std::uint32_t index) const {
+	return index % SIZE_QUEUE;
+  }
 
 private:
-	std::uint32_t _tail = 0;
-	std::uint32_t _head = 0;
+  std::uint32_t _tail = 0;
+  std::uint32_t _head = 0;
 
-	std::array<container_type, SIZE_QUEUE> _queue;
+  std::array<container_type, SIZE_QUEUE> _queue;
 };
 
-}
+}// namespace fys::common
 
-#endif //FYS_ONLINE_SIZED_QUEUE_HH
+#endif//FYS_ONLINE_SIZED_QUEUE_HH

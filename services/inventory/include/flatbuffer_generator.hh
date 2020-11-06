@@ -37,26 +37,25 @@ namespace fys::inv {
 class flatbuffer_generator {
 
 public:
-	[[nodiscard]] std::pair<void*, uint>
-	generate_initiate_exchange_response(const exchange_room& room);
+  [[nodiscard]] std::pair<void *, uint>
+  generate_initiate_exchange_response(const exchange_room &room);
 
-	[[nodiscard]] std::pair<void*, uint>
-	generate_lock_room_transaction_response(const exchange_room& room);
+  [[nodiscard]] std::pair<void *, uint>
+  generate_lock_room_transaction_response(const exchange_room &room);
 
-	[[nodiscard]] std::pair<void*, uint>
-	generate_remove_item_from_room_response(const exchange_room& room);
+  [[nodiscard]] std::pair<void *, uint>
+  generate_remove_item_from_room_response(const exchange_room &room);
 
-	[[nodiscard]] std::pair<void*, uint>
-	generate_add_item_to_room_response(const exchange_room& room);
+  [[nodiscard]] std::pair<void *, uint>
+  generate_add_item_to_room_response(const exchange_room &room);
 
-	[[nodiscard]] std::pair<void*, uint>
-	generate_terminate_transaction_response(const exchange_room& room);
+  [[nodiscard]] std::pair<void *, uint>
+  generate_terminate_transaction_response(const exchange_room &room);
 
 private:
-	flatbuffers::FlatBufferBuilder _fbb;
-
+  flatbuffers::FlatBufferBuilder _fbb;
 };
 
-}
+}// namespace fys::inv
 
-#endif //FYS_ONLINE_INV_FLATBUFFERGENERATOR_HH
+#endif//FYS_ONLINE_INV_FLATBUFFERGENERATOR_HH

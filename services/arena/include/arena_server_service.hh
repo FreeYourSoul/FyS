@@ -24,12 +24,12 @@
 #ifndef FYS_ARENASERVERSERVICE_HH
 #define FYS_ARENASERVERSERVICE_HH
 
-#include <unordered_map>
-#include <optional>
+#include <CmlCopy.hh>
+#include <connection_handler.hh>
 #include <network/db_connector.hh>
 #include <network/worker_service.hh>
-#include <connection_handler.hh>
-#include <CmlCopy.hh>
+#include <optional>
+#include <unordered_map>
 
 // forward declarations
 namespace fys::network {
@@ -38,7 +38,7 @@ class db_connector;
 namespace fys::fb::arn {
 struct ArenaServerValidateAuth;
 struct ArenaFightAction;
-}
+}// namespace fys::fb::arn
 // !end forward declarations
 
 namespace fys::arena {
@@ -49,11 +49,11 @@ class arena_server_context;
  * @brief contains the information related to the arena that has to be generated
  */
 struct awaiting_arena {
-	std::string server_code;
-	bool is_join_disabled;
-	bool is_ambush;
-	unsigned encounter_id;
-	fighting_pit::level level_fighting_pit;
+  std::string server_code;
+  bool is_join_disabled;
+  bool is_ambush;
+  unsigned encounter_id;
+  fighting_pit::level level_fighting_pit;
 };
 
 /**
@@ -62,21 +62,19 @@ struct awaiting_arena {
  * one, it contains the information related to the arena that has to be generated (none required when joining).
  */
 struct awaiting_player_arena {
-	std::string name_player;
-	std::string token;
+  std::string name_player;
+  std::string token;
 
-	// if set, a new arena is generated at the client authentication, otherwise the player just join the fightingpit
-	unsigned fighting_pit_id = 0;
+  // if set, a new arena is generated at the client authentication, otherwise the player just join the fightingpit
+  unsigned fighting_pit_id = 0;
 
-	// in case of generation, data of the fighting pit to generate
-	std::optional<awaiting_arena> gen;
+  // in case of generation, data of the fighting pit to generate
+  std::optional<awaiting_arena> gen;
 
-	[[nodiscard]] bool
-	has_to_be_generated() const
-	{
-		return fighting_pit_id == 0 && static_cast<bool>(gen);
-	}
-
+  [[nodiscard]] bool
+  has_to_be_generated() const {
+	return fighting_pit_id == 0 && static_cast<bool>(gen);
+  }
 };
 
 /**
@@ -117,60 +115,59 @@ struct awaiting_player_arena {
  *
  */
 class arena_server_service {
-	using awaiting_player_arena_it = const std::unordered_map<std::string, awaiting_player_arena>::const_iterator;
+  using awaiting_player_arena_it = const std::unordered_map<std::string, awaiting_player_arena>::const_iterator;
 
-	//! action name to set readiness
-	static inline const std::string READY_ACTION = "READY";
-	//! magic id to set readiness
-	static inline const std::uint32_t READY_ACTION_ID = 1337;
+  //! action name to set readiness
+  static inline const std::string READY_ACTION = "READY";
+  //! magic id to set readiness
+  static inline const std::uint32_t READY_ACTION_ID = 1337;
 
 public:
-	explicit arena_server_service(const arena_server_context& ctx);
-	~arena_server_service();
+  explicit arena_server_service(const arena_server_context &ctx);
+  ~arena_server_service();
 
-	/**
-	 * @brief Run infinite loop that poll on the connections of the dispatcher, then of the players.
-	 * @note This method contains the code of the deserialization of flatbuffer message (ioc with lambda) and then
-	 *       check if the incoming message is coming from an authorized user.
-	 */
-	void run_server_loop() noexcept;
-
-private:
-	/**
-	 * Verify if the server is saturated (too many battle at the same time running on this ArenaService)
-	 * @return true if the server is saturated, false otherwise
-	 */
-	[[nodiscard]] inline bool
-	is_saturated() const noexcept;
-
-	[[nodiscard]] player_action
-	create_player_action(std::string&& action, const fb::arn::ArenaFightAction* frame) const;
-
-	[[nodiscard]] unsigned
-	create_new_fighting_pit(const awaiting_player_arena& awaited) noexcept;
-
-	[[nodiscard]] std::pair<bool, awaiting_player_arena_it>
-	is_player_awaited(const std::string& name, const std::string& token, unsigned fp_id) const noexcept;
-
-	inline void send_saturated_error_msg(zmq::message_t&& identity);
-	inline void forward_reply_to_dispatcher(zmq::message_t&& idt_ws, const fys::arena::awaiting_player_arena& await_arena) noexcept;
-
+  /**
+   * @brief Run infinite loop that poll on the connections of the dispatcher, then of the players.
+   * @note This method contains the code of the deserialization of flatbuffer message (ioc with lambda) and then
+   *       check if the incoming message is coming from an authorized user.
+   */
+  void run_server_loop() noexcept;
 
 private:
-	std::reference_wrapper<const arena_server_context> _ctx;
-	cache::CmlCopy _cache;
+  /**
+   * Verify if the server is saturated (too many battle at the same time running on this ArenaService)
+   * @return true if the server is saturated, false otherwise
+   */
+  [[nodiscard]] inline bool
+  is_saturated() const noexcept;
 
-	// Manage connections
-	std::unique_ptr<network::db_connector> _db_connector;
-	common::connection_handler _connection_handler;
+  [[nodiscard]] player_action
+  create_player_action(std::string &&action, const fb::arn::ArenaFightAction *frame) const;
 
-	// Manage fighting pits
-	worker_service _worker_service;
+  [[nodiscard]] unsigned
+  create_new_fighting_pit(const awaiting_player_arena &awaited) noexcept;
 
-	// map of token on awaiting arena
-	std::unordered_map<std::string, awaiting_player_arena> _awaiting_arena;
+  [[nodiscard]] std::pair<bool, awaiting_player_arena_it>
+  is_player_awaited(const std::string &name, const std::string &token, unsigned fp_id) const noexcept;
+
+  inline void send_saturated_error_msg(zmq::message_t &&identity);
+  inline void forward_reply_to_dispatcher(zmq::message_t &&idt_ws, const fys::arena::awaiting_player_arena &await_arena) noexcept;
+
+private:
+  std::reference_wrapper<const arena_server_context> _ctx;
+  cache::CmlCopy _cache;
+
+  // Manage connections
+  std::unique_ptr<network::db_connector> _db_connector;
+  common::connection_handler _connection_handler;
+
+  // Manage fighting pits
+  worker_service _worker_service;
+
+  // map of token on awaiting arena
+  std::unordered_map<std::string, awaiting_player_arena> _awaiting_arena;
 };
 
-}
+}// namespace fys::arena
 
-#endif // !FYS_ARENASERVERSERVICE_HH
+#endif// !FYS_ARENASERVERSERVICE_HH

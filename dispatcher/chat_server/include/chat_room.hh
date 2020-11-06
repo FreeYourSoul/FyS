@@ -56,9 +56,8 @@ public:
   void set_room_description(std::string description);
 
 private:
-	std::unique_ptr<internal> _intern;
-
+  std::unique_ptr<internal> _intern;
 };
 
-}
-#endif //FYS_ONLINE_SERVICES_CHAT_INCLUDE_CHAT_ROOM_HH
+}// namespace fys::chat
+#endif//FYS_ONLINE_SERVICES_CHAT_INCLUDE_CHAT_ROOM_HH

@@ -52,3 +52,4 @@ docs/Makefile
 docs/cmake_install.cmake
 
 nix/result
+/nix/result/

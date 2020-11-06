@@ -25,8 +25,8 @@
 #define FYS_ONLINE_INVENTORY_SERVER_SERVICE_HH
 
 #include <connection_handler.hh>
-#include <utility>
 #include <exchange/exchange_manager.hh>
+#include <utility>
 
 // forward declarations
 namespace fys::fb::ivt {
@@ -34,7 +34,7 @@ struct update_player_soul_draughtboard;
 struct RetrievePlayerSoulDraughtboard;
 struct retrieve_player_inventory;
 struct initiate_exchange_instance;
-}
+}// namespace fys::fb::ivt
 namespace fys::inv {
 class inventory_server_context;
 }
@@ -45,30 +45,29 @@ namespace fys::inv {
 class inventory_server_service {
 
 public:
-	inventory_server_service(const inventory_server_context& ctx);
+  inventory_server_service(const inventory_server_context &ctx);
 
-	void run_server_loop();
-
-private:
-	[[nodiscard]] zmq::message_t
-	exchange_inventory(const fb::ivt::initiate_exchange_instance* exchange_request, std::string identity);
-
-	[[nodiscard]] zmq::message_t
-	update_player_soul_draughtboard(const fb::ivt::update_player_soul_draughtboard* update_request);
-
-	[[nodiscard]] zmq::message_t
-	retrievePlayerSoulDraughtboard(const fb::ivt::update_player_soul_draughtboard* update_request);
-
-	[[nodiscard]] zmq::message_t
-	retrieve_player_inventory(const fb::ivt::retrieve_player_inventory* retrieve_request);
+  void run_server_loop();
 
 private:
-	std::reference_wrapper<const inventory_server_context> _ctx;
-	exchange_manager _exchange_manager;
-	item_manager _item_manager;
-	common::connection_handler _connection_handler;
+  [[nodiscard]] zmq::message_t
+  exchange_inventory(const fb::ivt::initiate_exchange_instance *exchange_request, std::string identity);
 
+  [[nodiscard]] zmq::message_t
+  update_player_soul_draughtboard(const fb::ivt::update_player_soul_draughtboard *update_request);
+
+  [[nodiscard]] zmq::message_t
+  retrievePlayerSoulDraughtboard(const fb::ivt::update_player_soul_draughtboard *update_request);
+
+  [[nodiscard]] zmq::message_t
+  retrieve_player_inventory(const fb::ivt::retrieve_player_inventory *retrieve_request);
+
+private:
+  std::reference_wrapper<const inventory_server_context> _ctx;
+  exchange_manager _exchange_manager;
+  item_manager _item_manager;
+  common::connection_handler _connection_handler;
 };
 
-}
-#endif //FYS_ONLINE_INVENTORY_SERVER_SERVICE_HH
+}// namespace fys::inv
+#endif//FYS_ONLINE_INVENTORY_SERVER_SERVICE_HH

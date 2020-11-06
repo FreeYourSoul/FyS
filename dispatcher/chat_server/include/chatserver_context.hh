@@ -27,9 +27,8 @@
 namespace fys::chat {
 
 class chatserver_context {
-
 };
 
-}
+}// namespace fys::chat
 
-#endif //FYS_ONLINE_SERVICES_CHAT_SRC_CHATSERVER_CONTEXT_HH
+#endif//FYS_ONLINE_SERVICES_CHAT_SRC_CHATSERVER_CONTEXT_HH

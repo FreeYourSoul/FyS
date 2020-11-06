@@ -21,15 +21,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <CmlKey.hh>
 #include "CmlScriptDownloader.hh"
+#include <CmlKey.hh>
 
 namespace fys::cache {
 
-void
-CmlScriptDownloader::createUpToDateFileInLocalStorage(const CmlKey& cml_key, std::filesystem::file_time_type)
-{
-	_downloader(cml_key.getKey(), cml_key.get_path().string());
+void CmlScriptDownloader::createUpToDateFileInLocalStorage(const CmlKey &cml_key, std::filesystem::file_time_type) {
+  _downloader(cml_key.getKey(), cml_key.get_path().string());
 }
 
-}
+}// namespace fys::cache

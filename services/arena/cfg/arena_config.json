@@ -1,18 +1,18 @@
 {
     "Arena": {
-        "code": "ARN01",
+        "code":                         "ARN01",
 
-        "player_connection_port": 20001,
+        "player_connection_port":       20001,
         "connection_warning_threshold": 500,
-        "battle_threshold": 5,
+        "battle_threshold":             5,
 
-        "script_storage_cache": "/tmp/ARN_cache/",
-        "script_cache_source": "/home/FyS/Project/FyS/scripting_cache/scripts",
+        "script_storage_cache":         "/tmp/ARN_cache/",
+        "script_cache_source":          "/home/FyS/Project/FyS/scripting_cache/scripts",
 
-        "db_hostname": "Host-001",
-        "db_port": 3306,
+        "db_hostname":                  "Host-001",
+        "db_port":                      3306,
 
-        "zone_configuration": [
+        "zone_configuration":           [
             "/home/FyS/Project/FyS/services/arena/cfg/zone/zone_ws00_config.json",
             "/home/FyS/Project/FyS/services/arena/cfg/zone/zone_ws01_config.json"
         ]

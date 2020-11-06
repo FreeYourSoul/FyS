@@ -35,8 +35,7 @@ int main(int ac, char **av) {
 	fys::arena::history_manager::activate_historic_manager(true);
 
 	serverService.run_server_loop();
-  }
-  catch (const std::exception& e) {
+  } catch (const std::exception &e) {
 	SPDLOG_ERROR("Main caught an exception: {}", e.what());
   }
   return 0;

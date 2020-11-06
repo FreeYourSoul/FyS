@@ -26,159 +26,153 @@
 
 #include <chaiscript/chaiscript.hpp>
 
+#include <fightingPit/contender/contender_scripting.hh>
 #include <fightingPit/contender/fighting_contender.hh>
 #include <fightingPit/contender/pit_contenders.hh>
-#include <fightingPit/contender/contender_scripting.hh>
 #include <fightingPit/team/ally_party_teams.hh>
 #include <fightingPit/team/party_team.hh>
 #include <fightingPit/team/team_member.hh>
 
-#include <chai_register.hh>
 #include <CmlCopy.hh>
+#include <chai_register.hh>
 #include <fightingPit/fighting_pit_announcer.hh>
 
 namespace {
 std::string
-path_sampy_chai_script()
-{
-	std::string file_path = __FILE__;
-	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
-	if (dir_path.size() == file_path.size())
-		dir_path = file_path.substr(0, file_path.rfind('/'));
-	return dir_path + "/scripts_lnk/arena/contenders/Sampy.chai";
+path_sampy_chai_script() {
+  std::string file_path = __FILE__;
+  std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
+  if (dir_path.size() == file_path.size())
+	dir_path = file_path.substr(0, file_path.rfind('/'));
+  return dir_path + "/scripts_lnk/arena/contenders/Sampy.chai";
 }
 
 std::string
-local_path_storage()
-{
-	std::string file_path = __FILE__;
-	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
-	if (dir_path.size() == file_path.size())
-		dir_path = file_path.substr(0, file_path.rfind('/'));
-	return dir_path + "/testCopyTo";
+local_path_storage() {
+  std::string file_path = __FILE__;
+  std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
+  if (dir_path.size() == file_path.size())
+	dir_path = file_path.substr(0, file_path.rfind('/'));
+  return dir_path + "/testCopyTo";
 }
 
 std::string
-copy_path_storage()
-{
-	std::string file_path = __FILE__;
-	std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
-	if (dir_path.size() == file_path.size())
-		dir_path = file_path.substr(0, file_path.rfind('/'));
-	return dir_path + "/scripts_lnk";
+copy_path_storage() {
+  std::string file_path = __FILE__;
+  std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
+  if (dir_path.size() == file_path.size())
+	dir_path = file_path.substr(0, file_path.rfind('/'));
+  return dir_path + "/scripts_lnk";
 }
-}
+}// namespace
 
-TEST_CASE("test damage chaiscript", "[service][arena][script_test]")
-{
+TEST_CASE("test damage chaiscript", "[service][arena][script_test]") {
 
-	fys::cache::CmlCopy ccpy(local_path_storage(), copy_path_storage());
-	std::filesystem::path baseCache = local_path_storage();
+  fys::cache::CmlCopy ccpy(local_path_storage(), copy_path_storage());
+  std::filesystem::path baseCache = local_path_storage();
 
-	fys::arena::pit_contenders pc;
-	fys::arena::ally_party_teams apt;
-	fys::arena::fighting_pit_layout layout(pc, apt);
-	auto chai = fys::arena::chai_register::make_chai_instance(pc, apt, layout);
+  fys::arena::pit_contenders pc;
+  fys::arena::ally_party_teams apt;
+  fys::arena::fighting_pit_layout layout(pc, apt);
+  auto chai = fys::arena::chai_register::make_chai_instance(pc, apt, layout);
 
-	fys::arena::chai_register::register_base_actions(*chai, ccpy);
+  fys::arena::chai_register::register_base_actions(*chai, ccpy);
 
-	fys::arena::ContenderScriptingUPtr sampy = std::make_unique<fys::arena::contender_scripting>(*chai, 1);
-	sampy->set_contender_id(0u);
-	sampy->set_contender_name("Sampy");
-	sampy->load_contender_script_from_file(path_sampy_chai_script());
+  fys::arena::ContenderScriptingUPtr sampy = std::make_unique<fys::arena::contender_scripting>(*chai, 1);
+  sampy->set_contender_id(0u);
+  sampy->set_contender_name("Sampy");
+  sampy->load_contender_script_from_file(path_sampy_chai_script());
 
-	auto fpc = std::make_shared<fys::arena::fighting_contender>(std::move(sampy));
-	REQUIRE(pc.add_contender(fpc));
+  auto fpc = std::make_shared<fys::arena::fighting_contender>(std::move(sampy));
+  REQUIRE(pc.add_contender(fpc));
 
-	SECTION("Test initialization contender") {
-		REQUIRE(153 == fpc->access_status().life_pt.current);
-		REQUIRE(8 == pc.fighting_contender_at(0)->access_status().initial_speed);
-		REQUIRE(153 == pc.fighting_contender_at(0)->access_status().life_pt.current);
-		REQUIRE(153 == pc.fighting_contender_at(0)->access_status().life_pt.total);
-		REQUIRE(100 == pc.fighting_contender_at(0)->access_status().magic_pt.total);
-		REQUIRE(100 == pc.fighting_contender_at(0)->access_status().magic_pt.total);
-	}
+  SECTION("Test initialization contender") {
+	REQUIRE(153 == fpc->access_status().life_pt.current);
+	REQUIRE(8 == pc.fighting_contender_at(0)->access_status().initial_speed);
+	REQUIRE(153 == pc.fighting_contender_at(0)->access_status().life_pt.current);
+	REQUIRE(153 == pc.fighting_contender_at(0)->access_status().life_pt.total);
+	REQUIRE(100 == pc.fighting_contender_at(0)->access_status().magic_pt.total);
+	REQUIRE(100 == pc.fighting_contender_at(0)->access_status().magic_pt.total);
+  }
 
-	fys::arena::party_team party_team("FyS");
-	fys::arena::team_member_sptr tm1 = std::make_shared<fys::arena::team_member>(party_team.user_name(), "fyston1");
-	auto& st = tm1->access_status();
-	st.initial_speed = 100;
-	st.magic_pt = {1337, 1337};
-	st.life_pt = {42, 42};
+  fys::arena::party_team party_team("FyS");
+  fys::arena::team_member_sptr tm1 = std::make_shared<fys::arena::team_member>(party_team.user_name(), "fyston1");
+  auto &st = tm1->access_status();
+  st.initial_speed = 100;
+  st.magic_pt = {1337, 1337};
+  st.life_pt = {42, 42};
 
-	SECTION("test Slash chaiscript") {
+  SECTION("test Slash chaiscript") {
 
-		tm1->add_doable_action("arena:actions:damage:slash.chai", 1);
-		party_team.add_team_member(std::move(tm1));
+	tm1->add_doable_action("arena:actions:damage:slash.chai", 1);
+	party_team.add_team_member(std::move(tm1));
 
-		fys::arena::chai_register::load_register_action_party_team(*chai, ccpy, party_team);
+	fys::arena::chai_register::load_register_action_party_team(*chai, ccpy, party_team);
 
-		SECTION("test damage") {
+	SECTION("test damage") {
 
-			try {
-				chai->eval(R"(
+	  try {
+		chai->eval(R"(
 var &contender = pitContenders.getFightingContender(0);
 var s = slash(1);
 s.execute(contender);
 )");
-			}
-			catch (const chaiscript::exception::eval_error & ex) {
-				SPDLOG_ERROR("{}", ex.pretty_print());
-				FAIL("Chaiscript : Shouldn't fail here");
-			}
-			REQUIRE(120 == pc.fighting_contender_at(0)->access_status().life_pt.current); // -33 life
-			REQUIRE(153 == pc.fighting_contender_at(0)->access_status().life_pt.total);
-			REQUIRE(1 == pc.fighting_contender_at(0)->status().alteration_after.size());
-			auto& stat = pc.fighting_contender_at(0)->access_status();
-			auto alt = stat.alteration_after.at(0);
-			REQUIRE(2 == alt.turn());
-			alt.process_alteration(stat);
-			REQUIRE(1 == alt.turn());
-		} // End section : test damage
+	  } catch (const chaiscript::exception::eval_error &ex) {
+		SPDLOG_ERROR("{}", ex.pretty_print());
+		FAIL("Chaiscript : Shouldn't fail here");
+	  }
+	  REQUIRE(120 == pc.fighting_contender_at(0)->access_status().life_pt.current);// -33 life
+	  REQUIRE(153 == pc.fighting_contender_at(0)->access_status().life_pt.total);
+	  REQUIRE(1 == pc.fighting_contender_at(0)->status().alteration_after.size());
+	  auto &stat = pc.fighting_contender_at(0)->access_status();
+	  auto alt = stat.alteration_after.at(0);
+	  REQUIRE(2 == alt.turn());
+	  alt.process_alteration(stat);
+	  REQUIRE(1 == alt.turn());
+	}// End section : test damage
 
-		SECTION("test over damage") {
+	SECTION("test over damage") {
 
-			pc.fighting_contender_at(0)->access_status().life_pt.current = 10;
+	  pc.fighting_contender_at(0)->access_status().life_pt.current = 10;
 
-			try {
-				chai->eval(R"(
+	  try {
+		chai->eval(R"(
 var &contender = pitContenders.getFightingContender(0);
 var s = slash(1);
 s.execute(contender);
 )");
-			}
-			catch (std::exception& ex) {
-				SPDLOG_ERROR("{}", ex.what());
-				FAIL("Chaiscript : Shouldn't fail here");
-			}
-			REQUIRE(0 == pc.fighting_contender_at(0)->access_status().life_pt.current); // -33 life > 0
-			REQUIRE(153 == pc.fighting_contender_at(0)->access_status().life_pt.total);
+	  } catch (std::exception &ex) {
+		SPDLOG_ERROR("{}", ex.what());
+		FAIL("Chaiscript : Shouldn't fail here");
+	  }
+	  REQUIRE(0 == pc.fighting_contender_at(0)->access_status().life_pt.current);// -33 life > 0
+	  REQUIRE(153 == pc.fighting_contender_at(0)->access_status().life_pt.total);
 
-		} // End section : test over damage
+	}// End section : test over damage
 
-	} // End section : test Slash chaiscript
+  }// End section : test Slash chaiscript
 
-	SECTION("test Multi_Slash chaiscript") {
+  SECTION("test Multi_Slash chaiscript") {
 
-		tm1->add_doable_action("arena:actions:damage:multi_slash.chai", 1);
-		party_team.add_team_member(std::move(tm1));
+	tm1->add_doable_action("arena:actions:damage:multi_slash.chai", 1);
+	party_team.add_team_member(std::move(tm1));
 
-		fys::arena::ContenderScriptingUPtr sampy2 = std::make_unique<fys::arena::contender_scripting>(*chai, 1);
-		sampy2->set_contender_id(1u);
-		sampy2->set_contender_name("Sampy");
-		sampy2->load_contender_script_from_file(path_sampy_chai_script());
+	fys::arena::ContenderScriptingUPtr sampy2 = std::make_unique<fys::arena::contender_scripting>(*chai, 1);
+	sampy2->set_contender_id(1u);
+	sampy2->set_contender_name("Sampy");
+	sampy2->load_contender_script_from_file(path_sampy_chai_script());
 
-		auto fpc2 = std::make_shared<fys::arena::fighting_contender>(std::move(sampy2));
-		REQUIRE(pc.add_contender(fpc2));
+	auto fpc2 = std::make_shared<fys::arena::fighting_contender>(std::move(sampy2));
+	REQUIRE(pc.add_contender(fpc2));
 
-		fys::arena::chai_register::load_register_action_party_team(*chai, ccpy, party_team);
+	fys::arena::chai_register::load_register_action_party_team(*chai, ccpy, party_team);
 
-		pc.fighting_contender_at(1)->access_status().life_pt.current = 100;
+	pc.fighting_contender_at(1)->access_status().life_pt.current = 100;
 
-		SECTION("test damage") {
+	SECTION("test damage") {
 
-			try {
-				chai->eval(R"(
+	  try {
+		chai->eval(R"(
 var &contenderStatus = pitContenders.getFightingContender(0);
 var &contender2Status = pitContenders.getFightingContender(1);
 var s = multi_slash(1);
@@ -187,25 +181,24 @@ d.push_back_ref(contenderStatus);
 d.push_back_ref(contender2Status);
 s.execute(d);
 )");
-			}
-			catch (std::exception& ex) {
-				SPDLOG_ERROR("{}", ex.what());
-				FAIL("Chaiscript : Shouldn't fail here");
-			}
-			REQUIRE(123 == pc.fighting_contender_at(0)->access_status().life_pt.current); // -33 life
-			REQUIRE(153 == pc.fighting_contender_at(0)->access_status().life_pt.total);
+	  } catch (std::exception &ex) {
+		SPDLOG_ERROR("{}", ex.what());
+		FAIL("Chaiscript : Shouldn't fail here");
+	  }
+	  REQUIRE(123 == pc.fighting_contender_at(0)->access_status().life_pt.current);// -33 life
+	  REQUIRE(153 == pc.fighting_contender_at(0)->access_status().life_pt.total);
 
-			REQUIRE(70 == pc.fighting_contender_at(1)->access_status().life_pt.current); // -33 life
-			REQUIRE(153 == pc.fighting_contender_at(1)->access_status().life_pt.total);
+	  REQUIRE(70 == pc.fighting_contender_at(1)->access_status().life_pt.current);// -33 life
+	  REQUIRE(153 == pc.fighting_contender_at(1)->access_status().life_pt.total);
 
-		} // End section : test damage
+	}// End section : test damage
 
-		SECTION("test over damage") {
+	SECTION("test over damage") {
 
-			pc.fighting_contender_at(0)->access_status().life_pt.current = 10;
+	  pc.fighting_contender_at(0)->access_status().life_pt.current = 10;
 
-			try {
-				chai->eval(R"(
+	  try {
+		chai->eval(R"(
 var &contenderStatus = pitContenders.getFightingContender(0);
 var &contender2Status = pitContenders.getFightingContender(1);
 var s = multi_slash(1);
@@ -214,22 +207,21 @@ d.push_back_ref(contenderStatus);
 d.push_back_ref(contender2Status);
 s.execute(d);
 )");
-			}
-			catch (std::exception& ex) {
-				SPDLOG_ERROR("{}", ex.what());
-				FAIL("Chaiscript : Shouldn't fail here");
-			}
+	  } catch (std::exception &ex) {
+		SPDLOG_ERROR("{}", ex.what());
+		FAIL("Chaiscript : Shouldn't fail here");
+	  }
 
-			REQUIRE(0 == pc.fighting_contender_at(0)->access_status().life_pt.current); // -33 life > 0
-			REQUIRE(153 == pc.fighting_contender_at(0)->access_status().life_pt.total);
+	  REQUIRE(0 == pc.fighting_contender_at(0)->access_status().life_pt.current);// -33 life > 0
+	  REQUIRE(153 == pc.fighting_contender_at(0)->access_status().life_pt.total);
 
-			REQUIRE(70 == pc.fighting_contender_at(1)->access_status().life_pt.current); // -33 life
-			REQUIRE(153 == pc.fighting_contender_at(1)->access_status().life_pt.total);
+	  REQUIRE(70 == pc.fighting_contender_at(1)->access_status().life_pt.current);// -33 life
+	  REQUIRE(153 == pc.fighting_contender_at(1)->access_status().life_pt.total);
 
-		} // End section : test over damage
+	}// End section : test over damage
 
-		std::filesystem::remove_all(baseCache);
+	std::filesystem::remove_all(baseCache);
 
-	} // End section : test Multi_Slash chaiscript
+  }// End section : test Multi_Slash chaiscript
 
-} // End TestCase : test damage chaiscript
+}// End TestCase : test damage chaiscript
