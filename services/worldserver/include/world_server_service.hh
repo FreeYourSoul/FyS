@@ -47,12 +47,12 @@ class world_server_service {
   //	using awaiting_player_it = std::vector<awaited_player>::const_iterator;
 
 public:
-  explicit world_server_service(const world_server_context &ctx, engine engine);
+  explicit world_server_service(const world_server_context& ctx, engine engine);
   void run_server_loop() noexcept;
 
 private:
-  inline void register_awaited_player(const std::string &user, const std::string &token, std::string identity);
-  inline void process_player_message(const std::string &user, const std::string &tkn, const fb::world::WSAction *action);
+  inline void register_awaited_player(const std::string& user, const std::string& token, std::string identity);
+  inline void process_player_message(const std::string& user, const std::string& tkn, const fb::world::WSAction* action);
 
 private:
   std::reference_wrapper<const world_server_context> _ctx;

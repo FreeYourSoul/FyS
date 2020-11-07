@@ -59,13 +59,11 @@ public:
 	std::copy_n(token.begin(), KEY_SIZE, _key);
   }
 
-  bool
-  operator==(const key &other) {
+  bool operator==(const key& other) {
 	return std::equal(other._key, other._key + KEY_SIZE, _key);
   }
 
-  unsigned
-  getIndex() const {
+  unsigned getIndex() const {
 	unsigned res = 0;
 	unsigned offset = _key[0] - '0';
 	std::from_chars(_key + offset, _key + KEY_SIZE, res);

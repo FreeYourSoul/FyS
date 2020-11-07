@@ -32,12 +32,12 @@ namespace fys::inv {
 class inventory_server_context : public common::service_context_base {
 
 public:
-  explicit inventory_server_context(int argc, char **argv);
+  explicit inventory_server_context(int argc, char** argv);
 
-  [[nodiscard]] const std::string &
+  [[nodiscard]] const std::string&
   get_connection_str_cache_db() const { return _connection_string_cache_db; }
 
-  [[nodiscard]] const std::string &
+  [[nodiscard]] const std::string&
   server_code() const { return _server_code; }
 
   [[nodiscard]] std::string
@@ -47,7 +47,7 @@ public:
   to_string() const;
 
 private:
-  void init_inventory_context_with_json(nlohmann::json &json);
+  void init_inventory_context_with_json(nlohmann::json& json);
 
 private:
   std::string _connection_string_cache_db;

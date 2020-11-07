@@ -25,29 +25,29 @@
 
 namespace fys::inv {
 
-std::pair<void *, uint>
-flatbuffer_generator::generate_initiate_exchange_response(const exchange_room &room) {
-  return std::pair<void *, uint>();
+std::pair<void*, uint>
+flatbuffer_generator::generate_initiate_exchange_response(const exchange_room& room) {
+  return std::pair<void*, uint>();
 }
 
-std::pair<void *, uint>
-flatbuffer_generator::generate_add_item_to_room_response(const exchange_room &room) {
-  return std::pair<void *, uint>();
+std::pair<void*, uint>
+flatbuffer_generator::generate_add_item_to_room_response(const exchange_room& room) {
+  return std::pair<void*, uint>();
 }
 
-std::pair<void *, uint>
-flatbuffer_generator::generate_remove_item_from_room_response(const exchange_room &room) {
-  return std::pair<void *, uint>();
+std::pair<void*, uint>
+flatbuffer_generator::generate_remove_item_from_room_response(const exchange_room& room) {
+  return std::pair<void*, uint>();
 }
 
-std::pair<void *, uint>
-flatbuffer_generator::generate_lock_room_transaction_response(const exchange_room &room) {
-  return std::pair<void *, uint>();
+std::pair<void*, uint>
+flatbuffer_generator::generate_lock_room_transaction_response(const exchange_room& room) {
+  return std::pair<void*, uint>();
 }
 
-std::pair<void *, uint>
-flatbuffer_generator::generate_terminate_transaction_response(const exchange_room &room) {
-  return std::pair<void *, uint>();
+std::pair<void*, uint>
+flatbuffer_generator::generate_terminate_transaction_response(const exchange_room& room) {
+  return std::pair<void*, uint>();
 }
 
 }// namespace fys::inv

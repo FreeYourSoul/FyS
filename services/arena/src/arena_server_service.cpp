@@ -51,13 +51,13 @@ namespace {
 
 template<typename T>
 [[nodiscard]] bool
-verify_buffer(const void *fbBuffer, std::uint32_t size) {
-  auto v = flatbuffers::Verifier(static_cast<const uint8_t *>(fbBuffer), size);
+verify_buffer(const void* fbBuffer, std::uint32_t size) {
+  auto v = flatbuffers::Verifier(static_cast<const uint8_t*>(fbBuffer), size);
   return v.VerifyBuffer<T>();
 }
 
 [[nodiscard]] fys::arena::fighting_pit::level
-translate_level_from_flatbuffer(const fys::fb::arn::Level &level) {
+translate_level_from_flatbuffer(const fys::fb::arn::Level& level) {
   switch (level) {
   case fys::fb::arn::Level_EASY: return fys::arena::fighting_pit::level::EASY;
   case fys::fb::arn::Level_MEDIUM: return fys::arena::fighting_pit::level::MEDIUM;
@@ -67,7 +67,7 @@ translate_level_from_flatbuffer(const fys::fb::arn::Level &level) {
 }
 
 [[nodiscard]] fys::arena::awaiting_player_arena
-create_awaiting_player(const fys::fb::arn::FightingPitEncounter *binary) {
+create_awaiting_player(const fys::fb::arn::FightingPitEncounter* binary) {
   std::optional<fys::arena::awaiting_arena> awaitingArena = std::nullopt;
 
   // if fighting_pit_id is 0, a new arena has to be generated, in which case more data are extracted
@@ -92,7 +92,7 @@ namespace fys::arena {
 
 arena_server_service::~arena_server_service() = default;
 
-arena_server_service::arena_server_service(const arena_server_context &ctx)
+arena_server_service::arena_server_service(const arena_server_context& ctx)
 	: _ctx(ctx),
 	  _cache(ctx.path_local_storage_cache(), ctx.path_source_cache()),
 	  _db_connector(std::make_unique<network::db_connector>(ctx)) {
@@ -107,7 +107,7 @@ void arena_server_service::run_server_loop() noexcept {
   while (true) {
 	_connection_handler.poll_process_msg_from_dispatcher(
 		// World Server inform the Arena that a new awaited player is coming (create or join an existing fighting pit)
-		[this](zmq::message_t &&identity_ws, zmq::message_t &&world_server_msg) {
+		[this](zmq::message_t&& identity_ws, zmq::message_t&& world_server_msg) {
 		  // In case of a saturation of the server, return an error to the dispatcher
 		  if (is_saturated()) {
 			send_saturated_error_msg(std::move(identity_ws));
@@ -118,7 +118,7 @@ void arena_server_service::run_server_loop() noexcept {
 			SPDLOG_ERROR("Wrongly formatted FightingPitEncounter buffer");
 			return;
 		  }
-		  const auto *binary = fb::arn::GetFightingPitEncounter(world_server_msg.data());
+		  const auto* binary = fb::arn::GetFightingPitEncounter(world_server_msg.data());
 
 		  awaiting_player_arena apa = create_awaiting_player(binary);
 
@@ -131,7 +131,7 @@ void arena_server_service::run_server_loop() noexcept {
 		  }
 
 		  // register player incoming into arena instance with token given by worldserver used as key
-		  const auto &[elem, is_registered] = _awaiting_arena.insert({binary->token_auth()->str(), std::move(apa)});
+		  const auto& [elem, is_registered] = _awaiting_arena.insert({binary->token_auth()->str(), std::move(apa)});
 
 		  if (is_registered) {
 			forward_reply_to_dispatcher(std::move(identity_ws), elem->second);
@@ -141,16 +141,16 @@ void arena_server_service::run_server_loop() noexcept {
 
 	_worker_service.poll_process_msg_from_player(
 		// Authentication handler : Player try to create/join a fighting pit. The player has to be awaited
-		[this](zmq::message_t &&idt_player, zmq::message_t &&auth_msg) {
+		[this](zmq::message_t&& idt_player, zmq::message_t&& auth_msg) {
 		  if (!verify_buffer<fb::arn::ArenaServerValidateAuth>(auth_msg.data(), auth_msg.size())) {
 			SPDLOG_ERROR("Wrongly formatted ArenaServerValidateAuth buffer");
 			return;
 		  }
 
-		  const auto *binary = fb::arn::GetArenaServerValidateAuth(auth_msg.data());
+		  const auto* binary = fb::arn::GetArenaServerValidateAuth(auth_msg.data());
 		  const std::string token_auth = binary->token_auth()->str();
 		  const std::string user_name = binary->user_name()->str();
-		  const auto &[awaited, player_awaited_it] = is_player_awaited(user_name, token_auth, binary->fighting_pit_id());
+		  const auto& [awaited, player_awaited_it] = is_player_awaited(user_name, token_auth, binary->fighting_pit_id());
 		  unsigned fp_id = player_awaited_it->second.fighting_pit_id;
 
 		  if (!awaited) {
@@ -184,7 +184,7 @@ void arena_server_service::run_server_loop() noexcept {
 		},
 
 		// InGame handler: Player is sending actions to feed pendingActions queue of their characters
-		[this](zmq::message_t &&idt_player, const zmq::message_t &intermediate, zmq::message_t &&playerMsg) {
+		[this](zmq::message_t&& idt_player, const zmq::message_t& intermediate, zmq::message_t&& playerMsg) {
 		  if (!verify_buffer<fb::arn::ArenaServerValidateAuth>(intermediate.data(), intermediate.size())) {
 			SPDLOG_ERROR("Wrongly formatted ArenaServerValidateAuth (auth frame) buffer");
 			return;
@@ -194,7 +194,7 @@ void arena_server_service::run_server_loop() noexcept {
 			return;
 		  }
 
-		  const auto *auth_frame = fb::arn::GetArenaServerValidateAuth(intermediate.data());
+		  const auto* auth_frame = fb::arn::GetArenaServerValidateAuth(intermediate.data());
 		  const std::string user_name = auth_frame->user_name()->str();
 		  auto fp = _worker_service.get_authenticated_player_fighting_pit(user_name,
 																		  auth_frame->token_auth()->str(),
@@ -206,7 +206,7 @@ void arena_server_service::run_server_loop() noexcept {
 		  }
 		  _worker_service.upsert_player_identifier(auth_frame->fighting_pit_id(), user_name, idt_player.str());
 
-		  const auto *frame = fb::arn::GetArenaFightAction(playerMsg.data());
+		  const auto* frame = fb::arn::GetArenaFightAction(playerMsg.data());
 		  std::string action = frame->actionId()->str();
 
 		  if (frame->memberId() == READY_ACTION_ID && action == READY_ACTION) {
@@ -224,7 +224,7 @@ void arena_server_service::run_server_loop() noexcept {
 }
 
 player_action
-arena_server_service::create_player_action(std::string &&action, const fb::arn::ArenaFightAction *frame) const {
+arena_server_service::create_player_action(std::string&& action, const fb::arn::ArenaFightAction* frame) const {
   std::vector<uint> contenders;
   std::vector<uint> allies;
 
@@ -249,14 +249,14 @@ bool arena_server_service::is_saturated() const noexcept {
 }
 
 std::pair<bool, const std::unordered_map<std::string, awaiting_player_arena>::const_iterator>
-arena_server_service::is_player_awaited(const std::string &name, const std::string &token, unsigned fp_id) const noexcept {
+arena_server_service::is_player_awaited(const std::string& name, const std::string& token, unsigned fp_id) const noexcept {
   if (const auto it = _awaiting_arena.find(token);
 	  it != _awaiting_arena.end() && it->second.name_player == name && it->second.fighting_pit_id == fp_id)
 	return {true, it};
   return {false, _awaiting_arena.cend()};
 }
 
-void arena_server_service::forward_reply_to_dispatcher(zmq::message_t &&idt_ws, const fys::arena::awaiting_player_arena &await_arena) noexcept {
+void arena_server_service::forward_reply_to_dispatcher(zmq::message_t&& idt_ws, const fys::arena::awaiting_player_arena& await_arena) noexcept {
   flatbuffers::FlatBufferBuilder fbb;
   auto asaFb = fb::arn::CreateArenaServerAuth(
 	  fbb,
@@ -274,7 +274,7 @@ void arena_server_service::forward_reply_to_dispatcher(zmq::message_t &&idt_ws, 
 }
 
 unsigned
-arena_server_service::create_new_fighting_pit(const awaiting_player_arena &awaited) noexcept {
+arena_server_service::create_new_fighting_pit(const awaiting_player_arena& awaited) noexcept {
   fighting_pit_announcer fpa(_cache);
 
   fpa.set_difficulty(awaited.gen->level_fighting_pit);
@@ -297,7 +297,7 @@ arena_server_service::create_new_fighting_pit(const awaiting_player_arena &await
   return id;
 }
 
-void arena_server_service::send_saturated_error_msg(zmq::message_t &&identity) {
+void arena_server_service::send_saturated_error_msg(zmq::message_t&& identity) {
   SPDLOG_WARN("Arena Server Service is saturated and thus can't process new incoming fighting pit");
   auto [error, size] = fys::arena::flatbuffer_generator().generateErrorSaturated(_ctx.get().server_code());
   _worker_service.direct_send_msg_to_player(std::move(identity), zmq::message_t(error, size));

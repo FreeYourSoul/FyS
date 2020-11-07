@@ -37,7 +37,7 @@ priority_order_list::priority_order_list(std::vector<data::priority_elem> base_s
 
 void priority_order_list::add_participant_in_list(std::uint32_t id, int speed, bool is_contender) {
   if (std::any_of(_base_speed.begin(), _base_speed.end(),
-				  [id, is_contender](const auto &prio_elem) { return prio_elem.id == id && prio_elem.is_contender == is_contender; })) {
+				  [id, is_contender](const auto& prio_elem) { return prio_elem.id == id && prio_elem.is_contender == is_contender; })) {
 	SPDLOG_WARN("Cannot add participant in order list : Participant of id {} already existing", id);
 	return;
   }
@@ -52,7 +52,7 @@ void priority_order_list::add_participant_in_list(std::uint32_t id, int speed, b
 }
 
 void priority_order_list::rm_participant_from_list(std::uint32_t id_participant, bool is_contender) {
-  auto find_participant_predicate = [id_participant, is_contender](const data::priority_elem &elem) {
+  auto find_participant_predicate = [id_participant, is_contender](const data::priority_elem& elem) {
 	return elem.id == id_participant && elem.is_contender == is_contender;
   };
   _base_speed.erase(
@@ -86,11 +86,11 @@ void priority_order_list::custom_sort() {
 
   // reorder equal speeds
   if (auto found = std::adjacent_find(_analyzed_list.begin(), _analyzed_list.end(),
-									  [this](const auto &e, const auto &e2) {
+									  [this](const auto& e, const auto& e2) {
 										if (e.speed == e2.speed) {
 										  std::uint32_t base_speed_e = 0;
 										  std::uint32_t base_speed_e_2 = 0;
-										  for (const auto &base_speed_elem : _base_speed) {
+										  for (const auto& base_speed_elem : _base_speed) {
 											if (base_speed_elem.id == e.id) {
 											  base_speed_e = base_speed_elem.speed;
 											}
@@ -104,7 +104,7 @@ void priority_order_list::custom_sort() {
 									  });
 	  found != _analyzed_list.end()) {
 	if (auto toSwap = std::adjacent_find(_analyzed_list.begin(), _analyzed_list.end(),
-										 [](const auto &e, const auto &e2) { return e.speed != e2.speed; });
+										 [](const auto& e, const auto& e2) { return e.speed != e2.speed; });
 		toSwap != _analyzed_list.end()) {
 	  std::reverse(found, toSwap + 1);
 	}
@@ -125,12 +125,12 @@ void priority_order_list::sort_base_and_calculate_priority() {
   calculate_priority(_current_turn);
 }
 
-int priority_order_list::get_computed_speed(const data::priority_elem &elem_to_compute) const {
+int priority_order_list::get_computed_speed(const data::priority_elem& elem_to_compute) const {
   for (std::uint32_t i = 0; i < _base_speed.size(); ++i) {
 	if (_base_speed.at(i).id == elem_to_compute.id) {
 	  std::uint32_t id_next_in_line = (i == 0) ? _base_speed.back().id : _base_speed.at(i - 1).id;
 	  if (auto it = std::find_if(_analyzed_list.begin(), _analyzed_list.end(),
-								 [id_next_in_line](const auto &analyst_elem) {
+								 [id_next_in_line](const auto& analyst_elem) {
 								   return analyst_elem.id == id_next_in_line;
 								 });
 		  it != _analyzed_list.end()) {
@@ -146,9 +146,9 @@ void priority_order_list::end_turn_routine() {
   if (_base_speed.size() <= 1)
 	return;
 
-  for (const auto &baseSpeedElem : _base_speed) {
+  for (const auto& baseSpeedElem : _base_speed) {
 	if (auto it = std::find_if(_analyzed_list.begin(), _analyzed_list.end(),
-							   [baseId = baseSpeedElem.id](const auto &analyzedElem) {
+							   [baseId = baseSpeedElem.id](const auto& analyzedElem) {
 								 return analyzedElem.id == baseId;
 							   });
 		it != _analyzed_list.end()) {
@@ -167,7 +167,7 @@ void priority_order_list::calculate_priority(std::uint32_t turn) {
   }
   custom_sort();
 
-  auto &fastest = _analyzed_list.back();
+  auto& fastest = _analyzed_list.back();
 
   if (_analyzed_list.size() > 1)
 	fastest.speed -= get_computed_speed(fastest);

@@ -62,7 +62,7 @@ public:
 	  std::string receiver,
 	  std::string initiatorIdentity,
 	  std::string tokenExchange,
-	  item_manager &refIm)
+	  item_manager& refIm)
 	  : _roomId(roomId),
 		_tokenExchange(std::move(tokenExchange)),
 		_manager(refIm),
@@ -70,27 +70,27 @@ public:
 		_receiverUserName(std::move(receiver)),
 		_initiatorIdentity(std::move(initiatorIdentity)) {}
 
-  bool receiverJoin(const std::string &receiver, const std::string &token, std::string identity);
-  bool addItemFromExchangeForPlayer(const std::string &player, const std::string &token, Item toAdd);
-  bool removeItemFromExchangeForPlayer(const std::string &player, const std::string &token, const Item &toRemove);
-  bool lockExchange(const std::string &initiatorPlayer, const std::string &token);
-  bool terminateExchange(const std::string &receiverPlayer, const std::string &token);
+  bool receiverJoin(const std::string& receiver, const std::string& token, std::string identity);
+  bool addItemFromExchangeForPlayer(const std::string& player, const std::string& token, Item toAdd);
+  bool removeItemFromExchangeForPlayer(const std::string& player, const std::string& token, const Item& toRemove);
+  bool lockExchange(const std::string& initiatorPlayer, const std::string& token);
+  bool terminateExchange(const std::string& receiverPlayer, const std::string& token);
 
   [[nodiscard]] StepExchange
   getCurrentStep() const { return _step; }
 
-  [[nodiscard]] const std::vector<Item> &
+  [[nodiscard]] const std::vector<Item>&
   getInitiatorContent() const { return _content.at(static_cast<uint>(ExchangeRole::INITIATOR)); }
 
-  [[nodiscard]] const std::vector<Item> &
+  [[nodiscard]] const std::vector<Item>&
   getReceiverContent() const { return _content.at(static_cast<uint>(ExchangeRole::RECEIVER)); }
 
 private:
   [[nodiscard]] inline ExchangeRole
-  getRolePlayerInExchangeRoom(const std::string &idPlayer) const noexcept;
+  getRolePlayerInExchangeRoom(const std::string& idPlayer) const noexcept;
 
   [[nodiscard]] inline bool
-  basicCheck(const std::string &player, const std::string &token);
+  basicCheck(const std::string& player, const std::string& token);
 
 private:
   std::uint32_t _roomId;

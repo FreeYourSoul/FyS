@@ -74,9 +74,9 @@ namespace fys::arena {
 class fighting_pit_layout {
 
 public:
-  fighting_pit_layout(pit_contenders &contenders, ally_party_teams &partyTeams);
+  fighting_pit_layout(pit_contenders& contenders, ally_party_teams& partyTeams);
 
-  void add_active_party_team(const party_team &pt);
+  void add_active_party_team(const party_team& pt);
   void add_active_contender(uint number_contender_to_add = 1u);
 
   /**
@@ -97,10 +97,10 @@ public:
   void initiate_contender_move_dir(std::shared_ptr<fighting_contender> contender, data::move_direction move_dir);
   void initiate_member_move_dir(std::shared_ptr<team_member> member, data::move_direction move_dir);
 
-  void execute_movements(std::vector<side_battle> &sides);
+  void execute_movements(std::vector<side_battle>& sides);
 
-  static void set_contender_initiate_position(fighting_contender &contender, hexagon_side::orientation side);
-  static void set_ally_move_initiate_position(team_member &tm, hexagon_side::orientation side);
+  static void set_contender_initiate_position(fighting_contender& contender, hexagon_side::orientation side);
+  static void set_ally_move_initiate_position(team_member& tm, hexagon_side::orientation side);
 
 private:
   [[nodiscard]] std::vector<std::shared_ptr<team_member>>

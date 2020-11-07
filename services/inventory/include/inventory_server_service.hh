@@ -45,22 +45,22 @@ namespace fys::inv {
 class inventory_server_service {
 
 public:
-  inventory_server_service(const inventory_server_context &ctx);
+  inventory_server_service(const inventory_server_context& ctx);
 
   void run_server_loop();
 
 private:
   [[nodiscard]] zmq::message_t
-  exchange_inventory(const fb::ivt::initiate_exchange_instance *exchange_request, std::string identity);
+  exchange_inventory(const fb::ivt::initiate_exchange_instance* exchange_request, std::string identity);
 
   [[nodiscard]] zmq::message_t
-  update_player_soul_draughtboard(const fb::ivt::update_player_soul_draughtboard *update_request);
+  update_player_soul_draughtboard(const fb::ivt::update_player_soul_draughtboard* update_request);
 
   [[nodiscard]] zmq::message_t
-  retrievePlayerSoulDraughtboard(const fb::ivt::update_player_soul_draughtboard *update_request);
+  retrievePlayerSoulDraughtboard(const fb::ivt::update_player_soul_draughtboard* update_request);
 
   [[nodiscard]] zmq::message_t
-  retrieve_player_inventory(const fb::ivt::retrieve_player_inventory *retrieve_request);
+  retrieve_player_inventory(const fb::ivt::retrieve_player_inventory* retrieve_request);
 
 private:
   std::reference_wrapper<const inventory_server_context> _ctx;

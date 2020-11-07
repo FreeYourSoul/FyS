@@ -29,8 +29,8 @@
 
 namespace fys::ws {
 
-std::pair<void *, std::uint32_t>
-flatbuffer_generator::generate_move_notif(const std::string &player_name, const character_info &info) {
+std::pair<void*, std::uint32_t>
+flatbuffer_generator::generate_move_notif(const std::string& player_name, const character_info& info) {
   auto move_notification = fb::world::CreateMoveNotification(
 	  _fbb,
 	  _fbb.CreateString(player_name),
@@ -48,7 +48,7 @@ flatbuffer_generator::generate_move_notif(const std::string &player_name, const 
   return std::pair(_fbb.GetBufferPointer(), _fbb.GetSize());
 }
 
-std::pair<void *, std::uint32_t> flatbuffer_generator::generate_bulk_move_notif(const std::vector<npc_action> &actions) {
+std::pair<void*, std::uint32_t> flatbuffer_generator::generate_bulk_move_notif(const std::vector<npc_action>& actions) {
 
   //  auto bulk_move_notifications = fb::world::CreateBulkMove(
   //  	_fbb,
@@ -59,7 +59,7 @@ std::pair<void *, std::uint32_t> flatbuffer_generator::generate_bulk_move_notif(
   //	  fb::world::BulkMove,
   //	  bulk_move_notifications.Union()
   //  );
-  return std::pair<void *, std::uint32_t>();
+  return std::pair<void*, std::uint32_t>();
 }
 
 }// namespace fys::ws

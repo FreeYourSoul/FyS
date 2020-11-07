@@ -35,15 +35,15 @@
 namespace {
 template<typename T>
 [[nodiscard]] bool
-verify_buffer(const void *fbBuffer, std::uint32_t size) {
-  auto v = flatbuffers::Verifier(static_cast<const uint8_t *>(fbBuffer), size);
+verify_buffer(const void* fbBuffer, std::uint32_t size) {
+  auto v = flatbuffers::Verifier(static_cast<const uint8_t*>(fbBuffer), size);
   return v.VerifyBuffer<T>();
 }
 }// namespace
 
 namespace fys::ws {
 
-world_server_service::world_server_service(const world_server_context &ctx, engine engine)
+world_server_service::world_server_service(const world_server_context& ctx, engine engine)
 	: _ctx(ctx), _world_server(std::move(engine)) {
   _connection_handler.setup_connection_manager(ctx);
 }
@@ -55,12 +55,12 @@ void world_server_service::run_server_loop() noexcept {
 	_connection_handler.poll_and_process_sub_msg(
 		// Auth-Server Incoming player
 		// Used by the Auth server in order to authenticate a player
-		[this](zmq::message_t &&identity, zmq::message_t &&content) {
+		[this](zmq::message_t&& identity, zmq::message_t&& content) {
 		  if (verify_buffer<fb::auth::IncomingPlayerOnWs>(content.data(), content.size())) {
 			SPDLOG_ERROR("Wrongly formatted IncomingPlayerOnWs buffer");
 			return;
 		  }
-		  auto *frame = fb::auth::GetIncomingPlayerOnWs(content.data());
+		  auto* frame = fb::auth::GetIncomingPlayerOnWs(content.data());
 
 		  _awaited_incoming_player.emplace_back(
 			  awaited_player{
@@ -72,7 +72,7 @@ void world_server_service::run_server_loop() noexcept {
 
 		// Inter-Server communication
 		// Used when world server are communicating between each others to handle player transition
-		[this](zmq::message_t &&identity, zmq::message_t &&content) {
+		[this](zmq::message_t&& identity, zmq::message_t&& content) {
 		  if (verify_buffer<fb::world::InterServerCom>(content.data(), content.size())) {
 			SPDLOG_ERROR("Wrongly formatted InterServerCom buffer");
 			return;
@@ -83,7 +83,7 @@ void world_server_service::run_server_loop() noexcept {
 
 		// direct player communication
 		// Used when a player is communicating an interaction with the world_server
-		[this](zmq::message_t &&identity, zmq::message_t &&auth_frame_msg, zmq::message_t &&content) {
+		[this](zmq::message_t&& identity, zmq::message_t&& auth_frame_msg, zmq::message_t&& content) {
 		  if (!verify_buffer<fb::world::AuthFrame>(auth_frame_msg.data(), auth_frame_msg.size())) {
 			SPDLOG_ERROR("Ill formatted Authentication frame");
 			return;
@@ -92,8 +92,8 @@ void world_server_service::run_server_loop() noexcept {
 			SPDLOG_ERROR("Ill formatted Authentication frame");
 			return;
 		  }
-		  auto *auth_frame = fb::world::GetAuthFrame(auth_frame_msg.data());
-		  auto *frame = fb::world::GetWSAction(content.data());
+		  auto* auth_frame = fb::world::GetAuthFrame(auth_frame_msg.data());
+		  auto* frame = fb::world::GetWSAction(content.data());
 
 		  if (frame->action_type() == fb::world::Action_ValidateAuth) {
 			register_awaited_player(auth_frame->userName()->str(), auth_frame->token()->str(), std::string());
@@ -108,7 +108,7 @@ void world_server_service::run_server_loop() noexcept {
   }
 }
 
-void world_server_service::process_player_message(const std::string &user, const std::string &tkn, const fb::world::WSAction *action) {
+void world_server_service::process_player_message(const std::string& user, const std::string& tkn, const fb::world::WSAction* action) {
   std::uint32_t index = _world_server.retrieve_data_index({user, tkn});
   if (index == NOT_AUTHENTICATED) {
 	SPDLOG_ERROR("Player '{}' isn't authenticated", user);
@@ -132,9 +132,9 @@ void world_server_service::process_player_message(const std::string &user, const
   SPDLOG_DEBUG("message received with idt='{}', token='{}'", idt, tkn);
 }
 
-void world_server_service::register_awaited_player(const std::string &user, const std::string &token, std::string identity) {
+void world_server_service::register_awaited_player(const std::string& user, const std::string& token, std::string identity) {
   auto awaited_it = std::find_if(_awaited_incoming_player.begin(), _awaited_incoming_player.end(),
-								 [toCheck = auth_player{user, token}](const auto &awaited) {
+								 [toCheck = auth_player{user, token}](const auto& awaited) {
 								   return awaited.auth == toCheck;
 								 });
   if (awaited_it == _awaited_incoming_player.end()) {

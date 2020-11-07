@@ -29,7 +29,7 @@ using json = nlohmann::json;
 
 namespace fys::inv {
 
-inventory_server_context::inventory_server_context(int argc, char **argv)
+inventory_server_context::inventory_server_context(int argc, char** argv)
 	: common::service_context_base(argc, argv) {
   std::ifstream i(_config_file);
   json jsonConfig;
@@ -57,7 +57,7 @@ inventory_server_context::get_player_connection_str() const noexcept {
   return std::string("tcp://*:").append(std::to_string(_portPlayerConnection));
 }
 
-void inventory_server_context::init_inventory_context_with_json(json &json) {
+void inventory_server_context::init_inventory_context_with_json(json& json) {
   auto invJson = json["inventory"];
   invJson["code"].get_to(_server_code);
   _portPlayerConnection = invJson["player_connection_port"].get<uint>();

@@ -78,7 +78,7 @@ TEST_CASE("WorkerServiceTestCase", "[service][arena]") {
 	REQUIRE(1 == id);
 	REQUIRE("4" == fys::arena::fighting_pit_announcer::creator_user_name(ws.get_fighting_pit_instance(id)));
 
-	auto &pt = ws.get_fighting_pit_instance(1u);
+	auto& pt = ws.get_fighting_pit_instance(1u);
 	REQUIRE(nullptr != pt);
 
 	ws.player_join_fighting_pit(1u, getPartyTeam("TestUser"), cml);

@@ -29,7 +29,7 @@
 
 namespace fys::inv {
 
-bool exchange_room::addItemFromExchangeForPlayer(const std::string &player, const std::string &token, Item toAdd) {
+bool exchange_room::addItemFromExchangeForPlayer(const std::string& player, const std::string& token, Item toAdd) {
   if (!basicCheck(player, token) || toAdd.quantity == 0)
 	return false;
 
@@ -40,9 +40,9 @@ bool exchange_room::addItemFromExchangeForPlayer(const std::string &player, cons
 	return false;
   }
 
-  auto &contentOfPlayer = _content[static_cast<uint>(role)];
+  auto& contentOfPlayer = _content[static_cast<uint>(role)];
   auto itemIt = std::find_if(contentOfPlayer.begin(), contentOfPlayer.end(),
-							 [&toAdd](const auto &c) { return c.itemCode == toAdd.itemCode; });
+							 [&toAdd](const auto& c) { return c.itemCode == toAdd.itemCode; });
 
   if (itemIt != contentOfPlayer.end()) {
 	toAdd.quantity += itemIt->quantity;
@@ -64,7 +64,7 @@ bool exchange_room::addItemFromExchangeForPlayer(const std::string &player, cons
   return true;
 }
 
-bool exchange_room::removeItemFromExchangeForPlayer(const std::string &player, const std::string &token, const Item &toRemove) {
+bool exchange_room::removeItemFromExchangeForPlayer(const std::string& player, const std::string& token, const Item& toRemove) {
   if (!basicCheck(player, token))
 	return false;
 
@@ -75,9 +75,9 @@ bool exchange_room::removeItemFromExchangeForPlayer(const std::string &player, c
 	return false;
   }
 
-  auto &contentOfPlayer = _content[static_cast<uint>(role)];
+  auto& contentOfPlayer = _content[static_cast<uint>(role)];
   auto itemIt = std::find_if(contentOfPlayer.begin(), contentOfPlayer.end(),
-							 [&toRemove](const auto &c) { return c.itemCode == toRemove.itemCode; });
+							 [&toRemove](const auto& c) { return c.itemCode == toRemove.itemCode; });
 
   if (itemIt != contentOfPlayer.end()) {
 	if (toRemove.quantity >= itemIt->quantity) {
@@ -93,7 +93,7 @@ bool exchange_room::removeItemFromExchangeForPlayer(const std::string &player, c
   return true;
 }
 
-bool exchange_room::lockExchange(const std::string &initiatorPlayer, const std::string &token) {
+bool exchange_room::lockExchange(const std::string& initiatorPlayer, const std::string& token) {
   if (!basicCheck(initiatorPlayer, token))
 	return false;
   if (_initiatorUserName != initiatorPlayer) {
@@ -105,7 +105,7 @@ bool exchange_room::lockExchange(const std::string &initiatorPlayer, const std::
   return true;
 }
 
-bool exchange_room::terminateExchange(const std::string &receiverPlayer, const std::string &token) {
+bool exchange_room::terminateExchange(const std::string& receiverPlayer, const std::string& token) {
   if (!basicCheck(receiverPlayer, token))
 	return false;
   if (_receiverUserName != receiverPlayer) {
@@ -118,7 +118,7 @@ bool exchange_room::terminateExchange(const std::string &receiverPlayer, const s
   return true;
 }
 
-bool exchange_room::receiverJoin(const std::string &receiver, const std::string &token, std::string identity) {
+bool exchange_room::receiverJoin(const std::string& receiver, const std::string& token, std::string identity) {
   if (_step != StepExchange::AWAIT_TO_BE_JOINED_BY_RECEIVER) {
 	SPDLOG_ERROR("[Exchange : Room {}] : Player '{}' action impossible, exchange room isn't on-going", _roomId, receiver);
 	return false;
@@ -138,7 +138,7 @@ bool exchange_room::receiverJoin(const std::string &receiver, const std::string 
   return true;
 }
 
-bool inv::exchange_room::basicCheck(const std::string &player, const std::string &token) {
+bool inv::exchange_room::basicCheck(const std::string& player, const std::string& token) {
   if (_step != StepExchange::ON_GOING) {
 	SPDLOG_ERROR("[Exchange : Room {}] : Player '{}' action impossible, exchange room isn't on-going", _roomId, player);
 	return false;
@@ -157,7 +157,7 @@ bool inv::exchange_room::basicCheck(const std::string &player, const std::string
 }
 
 fys::inv::exchange_room::ExchangeRole
-inv::exchange_room::getRolePlayerInExchangeRoom(const std::string &idPlayer) const noexcept {
+inv::exchange_room::getRolePlayerInExchangeRoom(const std::string& idPlayer) const noexcept {
   if (_initiatorUserName == idPlayer) {
 	return ExchangeRole::INITIATOR;
   } else if (_receiverUserName == idPlayer) {

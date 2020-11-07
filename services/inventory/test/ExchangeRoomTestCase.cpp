@@ -38,8 +38,8 @@ TEST_CASE("ExchangeRoomTestCase", "[service][inventory]") {
   item_manager im;
   exchange_room exchangeRoom(EXCHANGE_ID, INITIATOR, RECEIVER, INITIATOR_IDENTITY, ACTUAL_TOKEN, im);
 
-  const auto &initiatorContent = exchangeRoom.getInitiatorContent();
-  const auto &receiverContent = exchangeRoom.getReceiverContent();
+  const auto& initiatorContent = exchangeRoom.getInitiatorContent();
+  const auto& receiverContent = exchangeRoom.getReceiverContent();
 
   REQUIRE(exchangeRoom.getInitiatorContent().empty());
   REQUIRE(exchangeRoom.getReceiverContent().empty());

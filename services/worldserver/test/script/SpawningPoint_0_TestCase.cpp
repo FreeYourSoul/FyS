@@ -58,7 +58,7 @@ TEST_CASE("SpawningPoint_0 TestCase", "[service][world][script]") {
   try {
 	lua.script_file(getInitFilePath());
 	lua.script_file(getScriptFilePath());
-  } catch (const std::exception &e) {
+  } catch (const std::exception& e) {
 	FAIL(e.what());
   }
 
@@ -87,7 +87,7 @@ TEST_CASE("SpawningPoint_0 TestCase", "[service][world][script]") {
 	  REQUIRE(result_1.valid());
 	  REQUIRE(1 == static_cast<int>(result_1));
 
-	} catch (const std::exception &e) {
+	} catch (const std::exception& e) {
 	  FAIL(e.what());
 	}
   }// End section : Create Encounter 0

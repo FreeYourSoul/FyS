@@ -94,7 +94,7 @@ TEST_CASE("test heal chaiscript", "[service][arena][script_test]") {
 
   fys::arena::party_team partyTeam("FyS");
   fys::arena::team_member_sptr tm1 = std::make_shared<fys::arena::team_member>(partyTeam.user_name(), "fyston1");
-  auto &st = tm1->access_status();
+  auto& st = tm1->access_status();
   st.initial_speed = 100;
   st.magic_pt = {1337, 1337};
   st.life_pt = {42, 42};
@@ -116,7 +116,7 @@ var &contender = pitContenders.getFightingContender(0);
 var s = light_heal(1);
 s.execute(contender);
 )");
-	  } catch (std::exception &ex) {
+	  } catch (std::exception& ex) {
 		SPDLOG_ERROR("{}", ex.what());
 		FAIL("Chaiscript : Shouldn't fail here");
 	  }
@@ -135,7 +135,7 @@ var &contender = pitContenders.getFightingContender(0);
 var s = light_heal(1);
 s.execute(contender);
 )");
-	  } catch (std::exception &ex) {
+	  } catch (std::exception& ex) {
 		SPDLOG_ERROR("{}", ex.what());
 		FAIL("Chaiscript : Shouldn't fail here");
 	  }

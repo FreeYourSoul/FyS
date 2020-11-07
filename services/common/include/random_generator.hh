@@ -32,7 +32,7 @@ namespace fys::util {
 
 class random_generator {
 public:
-  [[nodiscard]] static fys::util::random_generator &
+  [[nodiscard]] static fys::util::random_generator&
   instance() {
 	static fys::util::random_generator s{};
 	return s;
@@ -51,8 +51,8 @@ public:
 	}
   }
 
-  random_generator(random_generator const &) = delete;
-  random_generator &operator=(random_generator const &) = delete;
+  random_generator(random_generator const&) = delete;
+  random_generator& operator=(random_generator const&) = delete;
 
   std::shared_ptr<std::mt19937> get() const;
 

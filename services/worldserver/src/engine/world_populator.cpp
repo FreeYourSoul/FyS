@@ -30,7 +30,7 @@
 #include <world_server_context.hh>
 
 namespace {
-void assert_engine_error(bool isError, const std::string &errorMsg) {
+void assert_engine_error(bool isError, const std::string& errorMsg) {
   if (isError) {
 	std::string err = std::string("Miss constructed WorldServerEngine : ").append(errorMsg);
 	SPDLOG_ERROR(err);
@@ -63,27 +63,27 @@ world_populator::build_world_server_engine() {
   return ret;
 }
 
-world_populator &
-world_populator::populate_script_engine(const world_server_context &ctx) {
+world_populator&
+world_populator::populate_script_engine(const world_server_context& ctx) {
   _script_engine = std::make_unique<script_engine>();
   register_common_lua_engine(ctx.path_to_lua_engine());
   generate_spawning_points(ctx.spawning_config_path(), ctx.path_lua_base());
   return *this;
 }
 
-world_populator &
-world_populator::populate_map(const world_server_context &ctx) {
+world_populator&
+world_populator::populate_map(const world_server_context& ctx) {
   // todo : define map and implement it
   return *this;
 }
 
-world_populator &
+world_populator&
 world_populator::set_connection_string(std::string connectionString) {
   _connection_string = std::move(connectionString);
   return *this;
 }
 
-world_populator &
+world_populator&
 world_populator::set_interval_movement(std::chrono::system_clock::duration interval_movement) {
   _interval_movement = interval_movement;
   return *this;

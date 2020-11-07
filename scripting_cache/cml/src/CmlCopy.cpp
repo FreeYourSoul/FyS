@@ -26,7 +26,7 @@
 
 namespace fys::cache {
 
-void CmlCopy::createUpToDateFileInLocalStorage(const CmlKey &cmlKey, std::filesystem::file_time_type cacheTime) {
+void CmlCopy::createUpToDateFileInLocalStorage(const CmlKey& cmlKey, std::filesystem::file_time_type cacheTime) {
   CmlKey k(_copyPathStorage, cmlKey.getKey());
   std::error_code e;
 

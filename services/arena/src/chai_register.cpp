@@ -46,8 +46,8 @@ using chaiscript::fun;
 
 namespace fys::arena {
 
-void chai_register::register_chai(chaiscript::ChaiScript &chai, pit_contenders &pc,
-								  ally_party_teams &apt, fighting_pit_layout &layout) {
+void chai_register::register_chai(chaiscript::ChaiScript& chai, pit_contenders& pc,
+								  ally_party_teams& apt, fighting_pit_layout& layout) {
   try {
 	chaiscript::ModulePtr m = std::make_shared<chaiscript::Module>();
 	register_common(m);
@@ -61,12 +61,12 @@ void chai_register::register_chai(chaiscript::ChaiScript &chai, pit_contenders &
 	chai.set_global(chaiscript::var(std::ref(apt)), "allyPartyTeams");
 	chai.set_global(chaiscript::var(std::ref(layout)), "pitLayout");
 
-  } catch (const chaiscript::exception::eval_error &ex) {
+  } catch (const chaiscript::exception::eval_error& ex) {
 	SPDLOG_ERROR("Error caught on script execution:\n{}", ex.what());
   }
 }
 
-void chai_register::register_base_actions(chaiscript::ChaiScript &chai, cache::Cml &cml) {
+void chai_register::register_base_actions(chaiscript::ChaiScript& chai, cache::Cml& cml) {
   static const std::vector<std::string> baseActions = {
 	  "arena:actions:action.chai",
 	  "arena:actions:damage:damage.chai",
@@ -75,7 +75,7 @@ void chai_register::register_base_actions(chaiscript::ChaiScript &chai, cache::C
 	  "arena:actions:zone_heal:zone_heal.chai",
 	  "arena:contenders:contender_functions.chai"};
 
-  for (const auto &actionKey : baseActions) {
+  for (const auto& actionKey : baseActions) {
 	try {
 	  const std::string actionScript = cml.findInCache(actionKey);
 	  if (!actionScript.empty()) {
@@ -83,19 +83,19 @@ void chai_register::register_base_actions(chaiscript::ChaiScript &chai, cache::C
 	  } else {
 		SPDLOG_WARN("The base action {} couldn't be registered; empty script found", actionKey);
 	  }
-	} catch (const chaiscript::exception::eval_error &ee) {
+	} catch (const chaiscript::exception::eval_error& ee) {
 	  SPDLOG_ERROR("Error while loading key {} :\n{}", actionKey, ee.what());
 	}
   }
 }
 
-bool chai_register::load_register_action_party_team(chaiscript::ChaiScript &chai, cache::Cml &cache, party_team &pt) {
+bool chai_register::load_register_action_party_team(chaiscript::ChaiScript& chai, cache::Cml& cache, party_team& pt) {
   try {
 	// Load actions and register Members
-	for (auto &tm : pt.team_members()) {
-	  const auto &actionsDoable = tm->actions_doable();
+	for (auto& tm : pt.team_members()) {
+	  const auto& actionsDoable = tm->actions_doable();
 
-	  for (const auto &[key, lvl] : actionsDoable) {
+	  for (const auto& [key, lvl] : actionsDoable) {
 
 		// load the script with its includes
 		load_with_includes(chai, cache, std::set{key});
@@ -108,20 +108,20 @@ bool chai_register::load_register_action_party_team(chaiscript::ChaiScript &chai
 		chai.eval(create_var);
 	  }
 	}
-  } catch (const chaiscript::exception::eval_error &ee) {
+  } catch (const chaiscript::exception::eval_error& ee) {
 	SPDLOG_ERROR("Error caught on scripting action loading :\n{}", ee.what());
 	return false;
   }
   return true;
 }
 
-void chai_register::load_contender_script(chaiscript::ChaiScript &chai, cache::Cml &cml, const std::string &contender_key) {
+void chai_register::load_contender_script(chaiscript::ChaiScript& chai, cache::Cml& cml, const std::string& contender_key) {
   load_with_includes(chai, cml, std::set<std::string>{contender_key});
 }
 
-void chai_register::load_with_includes(chaiscript::ChaiScript &chai, cache::Cml &cache,
-									   const std::vector<std::string> &keys, std::set<std::string> incursion) {
-  for (const auto &key : keys) {
+void chai_register::load_with_includes(chaiscript::ChaiScript& chai, cache::Cml& cache,
+									   const std::vector<std::string>& keys, std::set<std::string> incursion) {
+  for (const auto& key : keys) {
 	load_scripts(chai, cache, key);
 	std::string include_retrieve = data::get_action_name_from_key(key).append("_includes();");
 	SPDLOG_DEBUG("Retrieve includes of scripts with key {}, eval {}", key, include_retrieve);
@@ -130,38 +130,38 @@ void chai_register::load_with_includes(chaiscript::ChaiScript &chai, cache::Cml 
 	  if (!current_includes.empty() && incursion.insert(key).second) {
 		load_with_includes(chai, cache, current_includes, incursion);
 	  }
-	} catch (const std::exception &e) {
+	} catch (const std::exception& e) {
 	  SPDLOG_DEBUG("No include for {}, by evaluating {}: {}", key, include_retrieve, e.what());
 	}
   }
 }
 
-void chai_register::load_with_includes(chaiscript::ChaiScript &chai, cache::Cml &cache, const std::set<std::string> &keys) {
+void chai_register::load_with_includes(chaiscript::ChaiScript& chai, cache::Cml& cache, const std::set<std::string>& keys) {
   load_with_includes(chai, cache, std::vector(keys.begin(), keys.end()), std::set<std::string>{});
 }
 
-void chai_register::load_scripts(chaiscript::ChaiScript &chai, cache::Cml &cache, const std::vector<std::string> &keys) {
-  for (const auto &key : keys) {
+void chai_register::load_scripts(chaiscript::ChaiScript& chai, cache::Cml& cache, const std::vector<std::string>& keys) {
+  for (const auto& key : keys) {
 	load_scripts(chai, cache, key);
   }
 }
 
-bool chai_register::load_scripts(chaiscript::ChaiScript &chai, cache::Cml &cache, const std::string &keys) {
-  const std::string &action = cache.findInCache(keys);
+bool chai_register::load_scripts(chaiscript::ChaiScript& chai, cache::Cml& cache, const std::string& keys) {
+  const std::string& action = cache.findInCache(keys);
   if (action.empty()) {
 	SPDLOG_ERROR("Action with key {} not found (key may be wrong)", keys);
 	return false;
   }
   try {
 	chai.eval(action);
-  } catch (const std::exception &e) {
+  } catch (const std::exception& e) {
 	SPDLOG_DEBUG("Action with key {} may be already loaded: {}", keys, e.what());
 	return false;
   }
   return true;
 }
 
-void chai_register::register_utility(chaiscript::ChaiScript &chai, pit_contenders &pc, ally_party_teams &apt) {
+void chai_register::register_utility(chaiscript::ChaiScript& chai, pit_contenders& pc, ally_party_teams& apt) {
   chai.add(chaiscript::fun<std::function<double(double, double)>>(
 			   [](double rangeA, double rangeB) {
 				 return util::random_generator::generate_in_range(rangeA, rangeB);
@@ -202,18 +202,18 @@ void chai_register::register_utility(chaiscript::ChaiScript &chai, pit_contender
 
 void chai_register::register_common(chaiscript::ModulePtr m) {
 
-  m->add(chaiscript::fun<std::function<void(fys::arena::data::status &, std::vector<data::alteration>, bool)>>(
-			 [](fys::arena::data::status &status, std::vector<data::alteration> alterations, bool if_exist) {
+  m->add(chaiscript::fun<std::function<void(fys::arena::data::status&, std::vector<data::alteration>, bool)>>(
+			 [](fys::arena::data::status& status, std::vector<data::alteration> alterations, bool if_exist) {
 			   data::merge_alterations(status.alterations, std::move(alterations), if_exist);
 			 }),
 		 "addOnTurnAlterations");
-  m->add(chaiscript::fun<std::function<void(fys::arena::data::status &, std::vector<data::alteration>, bool)>>(
-			 [](fys::arena::data::status &status, std::vector<data::alteration> alterations, bool if_exist) {
+  m->add(chaiscript::fun<std::function<void(fys::arena::data::status&, std::vector<data::alteration>, bool)>>(
+			 [](fys::arena::data::status& status, std::vector<data::alteration> alterations, bool if_exist) {
 			   data::merge_alterations(status.alteration_before, std::move(alterations), if_exist);
 			 }),
 		 "addBeforeTurnAlterations");
-  m->add(chaiscript::fun<std::function<void(fys::arena::data::status &, std::vector<data::alteration>, bool)>>(
-			 [](fys::arena::data::status &status, std::vector<data::alteration> alterations, bool if_exist) {
+  m->add(chaiscript::fun<std::function<void(fys::arena::data::status&, std::vector<data::alteration>, bool)>>(
+			 [](fys::arena::data::status& status, std::vector<data::alteration> alterations, bool if_exist) {
 			   data::merge_alterations(status.alteration_after, std::move(alterations), if_exist);
 			 }),
 		 "addAfterTurnAlterations");
@@ -249,7 +249,7 @@ void chai_register::register_common(chaiscript::ModulePtr m) {
 			  std::string alteration_key,
 			  std::uint32_t lvl,
 			  std::uint32_t turn,
-			  std::function<int(data::status &, std::uint32_t, std::uint32_t)>)>()}},
+			  std::function<int(data::status&, std::uint32_t, std::uint32_t)>)>()}},
 	  {{fun(&fys::arena::data::alteration::process_alteration), "processAlteration"}});
 
   chaiscript::utility::add_class<fys::arena::data::life>(
@@ -302,7 +302,7 @@ void chai_register::register_common(chaiscript::ModulePtr m) {
 	   {fys::arena::hexagon_side::hexagon::C, "C"}});
 }
 
-void chai_register::register_fighting_pit_contender(chaiscript::ChaiScript &chai, chaiscript::ModulePtr m) {
+void chai_register::register_fighting_pit_contender(chaiscript::ChaiScript& chai, chaiscript::ModulePtr m) {
   chaiscript::utility::add_class<fys::arena::fighting_contender>(
 	  *m,
 	  "FightingContender",
@@ -326,7 +326,7 @@ void chai_register::register_fighting_pit_contender(chaiscript::ChaiScript &chai
 	   {fun(&pit_contenders::contenders_on_side), "getContenderOnSide"}});
 }
 
-void chai_register::register_team_allies(chaiscript::ChaiScript &chai, chaiscript::ModulePtr m) {
+void chai_register::register_team_allies(chaiscript::ChaiScript& chai, chaiscript::ModulePtr m) {
 
   chaiscript::utility::add_class<fys::arena::team_member>(
 	  *m,
@@ -353,27 +353,27 @@ void chai_register::register_team_allies(chaiscript::ChaiScript &chai, chaiscrip
 }
 
 std::unique_ptr<chaiscript::ChaiScript>
-chai_register::make_chai_instance(pit_contenders &pc, ally_party_teams &apt, fighting_pit_layout &layout) {
+chai_register::make_chai_instance(pit_contenders& pc, ally_party_teams& apt, fighting_pit_layout& layout) {
   auto chai = std::make_unique<chaiscript::ChaiScript>();
   register_chai(*chai, pc, apt, layout);
   return chai;
 }
 
-void chai_register::register_network_commands(chaiscript::ChaiScript &chai, std::function<void(zmq::message_t &&)> network_handler) {
-  chai.add(fun<std::function<void(const std::string &, const std::vector<team_member_sptr> &)>>(
+void chai_register::register_network_commands(chaiscript::ChaiScript& chai, std::function<void(zmq::message_t&&)> network_handler) {
+  chai.add(fun<std::function<void(const std::string&, const std::vector<team_member_sptr>&)>>(
 			   [handler = std::move(network_handler)](
-				   const std::string &actionKey,
-				   const std::vector<team_member_sptr> &ally_targets) {
+				   const std::string& actionKey,
+				   const std::vector<team_member_sptr>& ally_targets) {
 				 flatbuffer_generator fg;
 				 auto [data, size] = fg.generate_action_notification(actionKey, {}, ally_targets);
 				 handler(zmq::message_t(data, size));
 			   }),
 		   "broadcastActionExecuted");
 
-  chai.add(fun<std::function<void(const std::string &, const std::vector<fighting_contender_sptr> &)>>(
+  chai.add(fun<std::function<void(const std::string&, const std::vector<fighting_contender_sptr>&)>>(
 			   [handler = std::move(network_handler)](
-				   const std::string &action_key,
-				   const std::vector<fighting_contender_sptr> &contender_targets) {
+				   const std::string& action_key,
+				   const std::vector<fighting_contender_sptr>& contender_targets) {
 				 flatbuffer_generator fg;
 				 auto [data, size] = fg.generate_action_notification(action_key, contender_targets, {});
 				 handler(zmq::message_t(data, size));

@@ -58,7 +58,7 @@ public:
   };
 
 public:
-  explicit fighting_pit_announcer(cache::Cml &cml);
+  explicit fighting_pit_announcer(cache::Cml& cml);
   ~fighting_pit_announcer();
 
   /**
@@ -70,7 +70,7 @@ public:
    * @return a newly generated fighting pit
    */
   [[nodiscard]] std::unique_ptr<fighting_pit>
-  build_fighting_pit(const encounter_context &ctx, const std::string &ws_id);
+  build_fighting_pit(const encounter_context& ctx, const std::string& ws_id);
 
   void set_encounter_type(encounter_type type) {
 	if (type == RANDOM)
@@ -104,40 +104,40 @@ public:
 
   // ============================================================================================================================
   // for testing validation purpose
-  [[nodiscard]] static const ally_party_teams &
-  get_party_teams(const std::unique_ptr<fighting_pit> &fp);
+  [[nodiscard]] static const ally_party_teams&
+  get_party_teams(const std::unique_ptr<fighting_pit>& fp);
 
-  [[nodiscard]] static const pit_contenders &
-  get_pit_contenders(const std::unique_ptr<fighting_pit> &fp) { return fp->_contenders; }
+  [[nodiscard]] static const pit_contenders&
+  get_pit_contenders(const std::unique_ptr<fighting_pit>& fp) { return fp->_contenders; }
 
-  [[nodiscard]] static const std::string &
-  creator_user_name(const std::unique_ptr<fighting_pit> &fp) { return fp->_creator_user_name; }
+  [[nodiscard]] static const std::string&
+  creator_user_name(const std::unique_ptr<fighting_pit>& fp) { return fp->_creator_user_name; }
 
-  [[nodiscard]] static side_battle &
-  get_side_battle_for_side(const std::unique_ptr<fighting_pit> &fp, hexagon_side::orientation side);
+  [[nodiscard]] static side_battle&
+  get_side_battle_for_side(const std::unique_ptr<fighting_pit>& fp, hexagon_side::orientation side);
 
   [[nodiscard]] static unsigned
-  get_arena_id(const std::unique_ptr<fighting_pit> &fp) { return fp->_arena_id; }
+  get_arena_id(const std::unique_ptr<fighting_pit>& fp) { return fp->_arena_id; }
 
-  [[nodiscard]] static const rewards &
-  get_reward(const std::unique_ptr<fighting_pit> &fp) { return *fp->_rewards; }
+  [[nodiscard]] static const rewards&
+  get_reward(const std::unique_ptr<fighting_pit>& fp) { return *fp->_rewards; }
 
   [[nodiscard]] static bool
-  is_on_going(const std::unique_ptr<fighting_pit> &fp) { return fp->_progress == fighting_pit::progress::ON_GOING; }
+  is_on_going(const std::unique_ptr<fighting_pit>& fp) { return fp->_progress == fighting_pit::progress::ON_GOING; }
   [[nodiscard]] static bool
-  is_ally_win(const std::unique_ptr<fighting_pit> &fp) { return fp->_progress == fighting_pit::progress::ALLY_WIN; }
+  is_ally_win(const std::unique_ptr<fighting_pit>& fp) { return fp->_progress == fighting_pit::progress::ALLY_WIN; }
   [[nodiscard]] static bool
-  is_contender_win(const std::unique_ptr<fighting_pit> &fp) { return fp->_progress == fighting_pit::progress::CONTENDER_WIN; }
-  [[nodiscard]] static const std::vector<side_battle> &
-  get_side_vector(const std::unique_ptr<fighting_pit> &fp) { return fp->_side_battles; }
+  is_contender_win(const std::unique_ptr<fighting_pit>& fp) { return fp->_progress == fighting_pit::progress::CONTENDER_WIN; }
+  [[nodiscard]] static const std::vector<side_battle>&
+  get_side_vector(const std::unique_ptr<fighting_pit>& fp) { return fp->_side_battles; }
 
   // just for testing purpose
-  void add_action_to_one_member(std::uint32_t index, const std::string &action_name, std::uint32_t level);
-  void set_interval(const std::unique_ptr<fighting_pit> &fp, std::chrono::milliseconds interval) { fp->_time_interlude = interval; }
+  void add_action_to_one_member(std::uint32_t index, const std::string& action_name, std::uint32_t level);
+  void set_interval(const std::unique_ptr<fighting_pit>& fp, std::chrono::milliseconds interval) { fp->_time_interlude = interval; }
 
 private:
-  [[nodiscard]] inline const std::string &
-  get_script_content_string(std::string name, const encounter_context::encounter_desc &desc);
+  [[nodiscard]] inline const std::string&
+  get_script_content_string(std::string name, const encounter_context::encounter_desc& desc);
 
   [[nodiscard]] bool
   is_scripted_encounter() const { return _encounter_type != encounter_type::RANDOM; }
@@ -146,13 +146,13 @@ private:
   is_random_encounter() const { return _encounter_type == encounter_type::RANDOM; }
 
   [[nodiscard]] inline bool
-  generate_contenders(fighting_pit &fp, const encounter_context &ctx, const std::string &wsId);
+  generate_contenders(fighting_pit& fp, const encounter_context& ctx, const std::string& wsId);
 
-  inline void generate_reward_for_contender(fighting_pit &fp, const encounter_context &ctx,
-											const std::vector<std::shared_ptr<fighting_contender>> &contenders);
+  inline void generate_reward_for_contender(fighting_pit& fp, const encounter_context& ctx,
+											const std::vector<std::shared_ptr<fighting_contender>>& contenders);
 
 private:
-  cache::Cml &_cache;
+  cache::Cml& _cache;
 
   /**
    *   range           desc

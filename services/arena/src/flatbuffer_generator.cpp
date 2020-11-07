@@ -46,7 +46,7 @@ namespace {
 retrieve_string_vector(const std::vector<std::pair<std::string, uint>> doableAttacks) {
   std::vector<std::string> stringVec;
   stringVec.reserve(doableAttacks.size());
-  for (const auto &[atkString, atkLvl] : doableAttacks) {
+  for (const auto& [atkString, atkLvl] : doableAttacks) {
 	stringVec.emplace_back(atkString);
   }
   return stringVec;
@@ -56,8 +56,8 @@ retrieve_string_vector(const std::vector<std::pair<std::string, uint>> doableAtt
 
 namespace fys::arena {
 
-std::pair<void *, std::uint32_t>
-flatbuffer_generator::generateErrorSaturated(const std::string &arenaCode) {
+std::pair<void*, std::uint32_t>
+flatbuffer_generator::generateErrorSaturated(const std::string& arenaCode) {
   _fbb.Clear();
   auto errorFb = fb::arn::CreateReplyFrame(
 	  _fbb,
@@ -67,8 +67,8 @@ flatbuffer_generator::generateErrorSaturated(const std::string &arenaCode) {
   return std::pair(_fbb.GetBufferPointer(), _fbb.GetSize());
 }
 
-std::pair<void *, std::uint32_t>
-flatbuffer_generator::generateFightingPitState(const fys::arena::fighting_pit &fp) {
+std::pair<void*, std::uint32_t>
+flatbuffer_generator::generateFightingPitState(const fys::arena::fighting_pit& fp) {
   _fbb.Clear();
   auto fbPartyTeamVec = _fbb.CreateVector(generate_party_team_vec_status_offset(fp.ally_party()));
   auto fbContenderVec = _fbb.CreateVector(generate_contender_vec_status_offset(fp.contenders().contenders()));
@@ -85,14 +85,14 @@ flatbuffer_generator::generateFightingPitState(const fys::arena::fighting_pit &f
   return std::pair(_fbb.GetBufferPointer(), _fbb.GetSize());
 }
 
-std::pair<void *, std::uint32_t>
-flatbuffer_generator::generate_party_team_status(const party_team &partyTeam) {
+std::pair<void*, std::uint32_t>
+flatbuffer_generator::generate_party_team_status(const party_team& partyTeam) {
   _fbb.Clear();
   auto fb_name = _fbb.CreateString(partyTeam.user_name());
   auto fb_member_vec = _fbb.CreateVector(generate_team_member_vec_status_offset(partyTeam.team_members()));
-  auto fb_vec_attacks = [this](const party_team &partyTeam) {
+  auto fb_vec_attacks = [this](const party_team& partyTeam) {
 	std::vector<std::string> vecString;
-	for (const auto &tm : partyTeam.team_members()) {
+	for (const auto& tm : partyTeam.team_members()) {
 	  auto vec = retrieve_string_vector(tm->actions_doable());
 	  std::move(vec.begin(), vec.end(), std::back_inserter(vecString));
 	}
@@ -112,8 +112,8 @@ flatbuffer_generator::generate_party_team_status(const party_team &partyTeam) {
   return std::pair(_fbb.GetBufferPointer(), _fbb.GetSize());
 }
 
-std::pair<void *, std::uint32_t>
-flatbuffer_generator::generate_end_battle(bool win, const rewards &rewards) {
+std::pair<void*, std::uint32_t>
+flatbuffer_generator::generate_end_battle(bool win, const rewards& rewards) {
   _fbb.Clear();
   flatbuffers::Offset<fys::fb::arn::EndBattle> eb;
 
@@ -135,11 +135,11 @@ flatbuffer_generator::generate_end_battle(bool win, const rewards &rewards) {
   return std::pair(_fbb.GetBufferPointer(), _fbb.GetSize());
 }
 
-std::pair<void *, std::uint32_t>
+std::pair<void*, std::uint32_t>
 flatbuffer_generator::generate_action_notification(
-	const std::string &action_key,
-	const std::vector<fighting_contender_sptr> &contender_targets,
-	const std::vector<team_member_sptr> &ally_targets) {
+	const std::string& action_key,
+	const std::vector<fighting_contender_sptr>& contender_targets,
+	const std::vector<team_member_sptr>& ally_targets) {
   auto contender_status_fb = generate_contender_vec_status_offset(contender_targets);
   auto party_team_status_fb = generate_team_member_vec_status_offset(ally_targets);
   auto ae = fb::arn::CreateActionExecuted(_fbb,
@@ -171,17 +171,17 @@ flatbuffer_generator::generate_action_notification(
 // privates
 
 std::vector<flatbuffers::Offset<fb::arn::PartyTeamStatus>>
-flatbuffer_generator::generate_party_team_vec_status_offset(const ally_party_teams &apt) {
+flatbuffer_generator::generate_party_team_vec_status_offset(const ally_party_teams& apt) {
   std::vector<flatbuffers::Offset<fb::arn::PartyTeamStatus>> fb_party_teams_status;
-  const auto &party_teams = apt.party_teams();
+  const auto& party_teams = apt.party_teams();
 
   fb_party_teams_status.reserve(party_teams.size());
-  for (const auto &pt : party_teams) {
+  for (const auto& pt : party_teams) {
 	auto fb_user_name = _fbb.CreateString(pt->user_name());
 	auto fb_members = _fbb.CreateVector(generate_team_member_vec_status_offset(pt->team_members()));
-	auto fb_attacks = [this](const auto &pt) {
+	auto fb_attacks = [this](const auto& pt) {
 	  std::vector<std::string> attacks;
-	  for (const auto &tm : pt->team_members()) {
+	  for (const auto& tm : pt->team_members()) {
 		auto vec = retrieve_string_vector(tm->actions_doable());
 		std::move(vec.begin(), vec.end(), std::back_inserter(attacks));
 	  }
@@ -198,12 +198,12 @@ flatbuffer_generator::generate_party_team_vec_status_offset(const ally_party_tea
 }
 
 std::vector<flatbuffers::Offset<fb::arn::MemberStatus>>
-flatbuffer_generator::generate_contender_vec_status_offset(const std::vector<fighting_contender_sptr> &contenders) {
+flatbuffer_generator::generate_contender_vec_status_offset(const std::vector<fighting_contender_sptr>& contenders) {
   std::vector<flatbuffers::Offset<fb::arn::MemberStatus>> fb_character_status;
 
   fb_character_status.reserve(contenders.size());
-  for (const auto &contender : contenders) {
-	const auto &status = contender->status();
+  for (const auto& contender : contenders) {
+	const auto& status = contender->status();
 	const auto fbStatus = fb::arn::CharacterStatus{
 		contender->id(),
 		true,// is_contender
@@ -220,12 +220,12 @@ flatbuffer_generator::generate_contender_vec_status_offset(const std::vector<fig
 }
 
 std::vector<flatbuffers::Offset<fb::arn::MemberStatus>>
-flatbuffer_generator::generate_team_member_vec_status_offset(const std::vector<team_member_sptr> &members) {
+flatbuffer_generator::generate_team_member_vec_status_offset(const std::vector<team_member_sptr>& members) {
   std::vector<flatbuffers::Offset<fb::arn::MemberStatus>> fb_character_status;
 
   fb_character_status.reserve(members.size());
-  for (const auto &member : members) {
-	const auto &status = member->status();
+  for (const auto& member : members) {
+	const auto& status = member->status();
 	const auto fbStatus = fb::arn::CharacterStatus{
 		member->id(),
 		true,// is_contender
@@ -242,7 +242,7 @@ flatbuffer_generator::generate_team_member_vec_status_offset(const std::vector<t
 }
 
 std::vector<flatbuffers::Offset<fb::arn::Reward>>
-flatbuffer_generator::generate_rewards_offset(const rewards &rewards) {
+flatbuffer_generator::generate_rewards_offset(const rewards& rewards) {
   std::vector<flatbuffers::Offset<fb::arn::Reward>> fb_rewards;
   fb_rewards.reserve(rewards.keys.size());
   for (unsigned i = 0; i < rewards.keys.size(); ++i) {

@@ -25,7 +25,9 @@
 #define FYS_ARENASERVERCONTEXT_HH
 
 #include <array>
+
 #include <nlohmann/json.hpp>
+
 #include <service_context_base.hh>
 
 namespace fys::arena {
@@ -36,7 +38,7 @@ struct encounter_context {
 
   struct encounter_desc {
 	[[nodiscard]] bool
-	operator!=(const encounter_desc &other) const {
+	operator!=(const encounter_desc& other) const {
 	  return std::make_tuple(key, maxEncountering, chance, levelRange) != std::make_tuple(other.key, other.maxEncountering, other.chance, other.levelRange);
 	}
 
@@ -63,7 +65,7 @@ struct encounter_context {
    * @return true if the zone is registered, false otherwise
    */
   [[nodiscard]] bool
-  zoneRegistered(const std::string &wsId) const noexcept { return contenders_per_zone.find(wsId) != contenders_per_zone.cend(); }
+  zoneRegistered(const std::string& wsId) const noexcept { return contenders_per_zone.find(wsId) != contenders_per_zone.cend(); }
 
   //! range of number of monster findable per zone
   std::map<std::string, std::array<rng_range, 3>> range_encounter_per_zone;
@@ -79,7 +81,7 @@ class arena_server_context : public fys::common::service_context_base {
   static constexpr unsigned MINIMUM_BATTLE_THRESHOLD = 3;
 
 public:
-  arena_server_context(int ac, const char *const *av);
+  arena_server_context(int ac, const char* const* av);
 
   [[nodiscard]] std::string
   to_string() const noexcept;
@@ -87,20 +89,23 @@ public:
   [[nodiscard]] std::string
   player_binding_string() const noexcept;
 
-  [[nodiscard]] const std::string &
+  [[nodiscard]] const std::string&
   server_code() const noexcept { return _code; }
 
-  [[nodiscard]] const encounter_context &
+  [[nodiscard]] const encounter_context&
   encounter_ctx() const noexcept { return _encounter_ctx; }
 
-  [[nodiscard]] const std::string &
+  [[nodiscard]] const std::string&
   path_local_storage_cache() const noexcept { return _path_local_storage_cache; }
 
-  [[nodiscard]] const std::string &
+  [[nodiscard]] const std::string&
   path_source_cache() const noexcept { return _path_source_cache; }
 
-  [[nodiscard]] const std::string &
+  [[nodiscard]] const std::string&
   db_host() const noexcept { return _db_host; }
+
+  [[nodiscard]] const std::string&
+  get_history_saving_folder() const noexcept { return _path_history_saving_folder; };
 
   [[nodiscard]] std::uint32_t
   db_port() const noexcept { return _db_port; }
@@ -116,10 +121,10 @@ private:
   validate_reward_context() const;
 
   [[nodiscard]] encounter_context::reward_encounter_desc
-  reward_desc_from_json(const nlohmann::json &rwd_desc) const;
+  reward_desc_from_json(const nlohmann::json& rwd_desc) const;
 
-  void parse_arena_config_file(const nlohmann::json &config_content);
-  void parse_zone_config_file(const nlohmann::json &config_content);
+  void parse_arena_config_file(const nlohmann::json& config_content);
+  void parse_zone_config_file(const nlohmann::json& config_content);
 
 private:
   //! Code of the current ArenaServerService
@@ -129,6 +134,9 @@ private:
   std::string _path_local_storage_cache;
   //! Path of the reference data for CmlCopy
   std::string _path_source_cache;
+
+  //! Path to the saving folder in which the history will be generated
+  std::string _path_history_saving_folder;
 
   //! Database hostname
   std::string _db_host;

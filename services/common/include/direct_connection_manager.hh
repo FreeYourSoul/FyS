@@ -32,13 +32,13 @@ namespace fys::common {
 class direct_connection_manager {
 
 public:
-  direct_connection_manager(unsigned threadNumber, const std::string &bindingString)
+  direct_connection_manager(unsigned threadNumber, const std::string& bindingString)
 	  : _ctx(threadNumber), _router_player_connection(_ctx, zmq::socket_type::router) {
 	_router_player_connection.bind(bindingString);
   }
 
   template<typename HandlerPlayer>
-  void pollAndProcessPlayerMessage(HandlerPlayer &&handler_player) {
+  void pollAndProcessPlayerMessage(HandlerPlayer&& handler_player) {
 	//  Initialize poll set
 	zmq::pollitem_t items[] = {
 		{_router_player_connection, 0, ZMQ_POLLIN, 0}};

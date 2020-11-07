@@ -44,7 +44,7 @@ player_data::get_player_idts_around_player(std::uint32_t index_player,
 }
 
 std::vector<std::string_view>
-player_data::get_player_idts_around_pos(const pos &position,
+player_data::get_player_idts_around_pos(const pos& position,
 										double distance,
 										std::uint32_t ignore_index) const noexcept {
   std::vector<std::string_view> player_identities;

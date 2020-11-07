@@ -31,7 +31,7 @@ namespace fys::cache {
 
 namespace {
 [[nodiscard]] std::string
-readFile(const std::filesystem::path &path) {
+readFile(const std::filesystem::path& path) {
   // Open the stream to 'lock' the file.
   std::ifstream f{path};
 
@@ -47,7 +47,7 @@ readFile(const std::filesystem::path &path) {
   return result;
 }
 
-void writeFile(const std::filesystem::path &file, const std::string &content) {
+void writeFile(const std::filesystem::path& file, const std::string& content) {
   std::ofstream out(file.string());
   out << content << std::endl;
   out.close();
@@ -66,12 +66,12 @@ Cml::Cml(std::filesystem::path pathLocalStorage)
  * @return true if the key represent a cached data in the local storage (filesystem)
  */
 std::pair<bool, std::filesystem::file_time_type>
-Cml::localStorageInfo(const CmlKey &k) const {
+Cml::localStorageInfo(const CmlKey& k) const {
   std::error_code ec;
   return std::pair(std::filesystem::is_regular_file(k.get_path()), std::filesystem::last_write_time(k.get_path(), ec));
 }
 
-bool Cml::isInLocalStorageAndUpToDate(const CmlKey &cmlKey, std::filesystem::file_time_type cacheLastUpdate) const {
+bool Cml::isInLocalStorageAndUpToDate(const CmlKey& cmlKey, std::filesystem::file_time_type cacheLastUpdate) const {
   auto [exist, lastWriteTime] = localStorageInfo(cmlKey);
   if (exist) {
 	return lastWriteTime <= cacheLastUpdate;
@@ -79,8 +79,8 @@ bool Cml::isInLocalStorageAndUpToDate(const CmlKey &cmlKey, std::filesystem::fil
   return false;
 }
 
-const std::string &
-Cml::findInCache(const std::string &key) {
+const std::string&
+Cml::findInCache(const std::string& key) {
   static const std::string empty{};
   CmlKey cmlKey(_localPathStorage, key);
 
@@ -106,7 +106,7 @@ Cml::findInCache(const std::string &key) {
   return empty;
 }
 
-void Cml::createFile(const std::filesystem::path &pathToFile, const std::string &content) const {
+void Cml::createFile(const std::filesystem::path& pathToFile, const std::string& content) const {
   if (!std::filesystem::create_directories(pathToFile.parent_path())) {
 	SPDLOG_ERROR("Couldn't create directories for path : {}", _localPathStorage.string());
 	return;

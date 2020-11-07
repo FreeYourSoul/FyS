@@ -46,20 +46,20 @@ struct room_accessor {
 class exchange_manager : public common::direct_connection_manager {
 
 public:
-  explicit exchange_manager(const inventory_server_context &ctx);
+  explicit exchange_manager(const inventory_server_context& ctx);
 
-  [[nodiscard]] const exchange_room &
-  makeExchangeRoom(item_manager &itemManager, std::string initiator, std::string receiver, std::string identity);
+  [[nodiscard]] const exchange_room&
+  makeExchangeRoom(item_manager& itemManager, std::string initiator, std::string receiver, std::string identity);
 
-  void lock_room_transaction(const room_accessor &accessor);
-  void receiver_join_room_transaction(const room_accessor &accessor, std::string identity_receiver);
-  void terminate_room_transaction(item_manager &manager, const room_accessor &accessor);
-  void remove_item_from_room(item_manager &manager, const room_accessor &accessor, const std::string &item_code, std::uint32_t qty);
-  void add_item_in_room(item_manager &manager, const room_accessor &accessor, const std::string &item_code, std::uint32_t qty);
+  void lock_room_transaction(const room_accessor& accessor);
+  void receiver_join_room_transaction(const room_accessor& accessor, std::string identity_receiver);
+  void terminate_room_transaction(item_manager& manager, const room_accessor& accessor);
+  void remove_item_from_room(item_manager& manager, const room_accessor& accessor, const std::string& item_code, std::uint32_t qty);
+  void add_item_in_room(item_manager& manager, const room_accessor& accessor, const std::string& item_code, std::uint32_t qty);
 
 private:
   [[nodiscard]] inline std::string
-  generate_token(const std::string &token_base) const;
+  generate_token(const std::string& token_base) const;
 
 private:
   std::map<unsigned, exchange_room> _rooms;

@@ -53,18 +53,18 @@ public:
   build_world_server_engine();
 
   // Builder methods
-  world_populator &populate_map(const world_server_context &ctx);
-  world_populator &populate_script_engine(const world_server_context &ctx);
-  world_populator &set_connection_string(std::string connectionString);
-  world_populator &set_interval_movement(std::chrono::system_clock::duration interval_movement);
+  world_populator& populate_map(const world_server_context& ctx);
+  world_populator& populate_script_engine(const world_server_context& ctx);
+  world_populator& set_connection_string(std::string connectionString);
+  world_populator& set_interval_movement(std::chrono::system_clock::duration interval_movement);
 
   // Getters for testing
-  const std::vector<spawning_point> &get_spawning_point() const;
-  script_engine &get_script_engine() const { return *_script_engine; }
+  const std::vector<spawning_point>& get_spawning_point() const;
+  script_engine& get_script_engine() const { return *_script_engine; }
 
 private:
-  void register_common_lua_engine(const std::string &to_lua_init_file);
-  void generate_spawning_points(const std::string &spawning_point_config_path, const std::string &base_path);
+  void register_common_lua_engine(const std::string& to_lua_init_file);
+  void generate_spawning_points(const std::string& spawning_point_config_path, const std::string& base_path);
 
   [[nodiscard]] std::string
   get_path_from_key(std::string base, std::string key) {
@@ -73,7 +73,7 @@ private:
   }
 
   [[nodiscard]] std::string
-  get_sp_namespace_from_key(const std::string &key) {
+  get_sp_namespace_from_key(const std::string& key) {
 	auto startSeparator = key.find_last_of(':');
 	auto endSeparator = key.find_last_of('.');
 

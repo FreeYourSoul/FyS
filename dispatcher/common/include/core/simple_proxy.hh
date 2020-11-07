@@ -34,7 +34,7 @@ class startup_dispatcher_ctx;
 class simple_proxy {
 
 public:
-  explicit simple_proxy(const startup_dispatcher_ctx &ctx) noexcept;
+  explicit simple_proxy(const startup_dispatcher_ctx& ctx) noexcept;
 
   void start_proxy();
 

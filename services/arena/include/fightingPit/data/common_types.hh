@@ -35,7 +35,7 @@ static constexpr bool CONTENDER = true;
 static constexpr bool PARTY_MEMBER = false;
 
 [[nodiscard]] inline std::string
-get_action_name_from_key(const std::string &key) {
+get_action_name_from_key(const std::string& key) {
   auto start_separator = key.find_last_of(':');
   auto end_separator = key.find_last_of('.');
 
@@ -53,7 +53,7 @@ get_action_name_from_key(const std::string &key) {
 }
 
 [[nodiscard]] inline std::string
-get_alteration_name_from_key(const std::string &key) {
+get_alteration_name_from_key(const std::string& key) {
   std::string prefix = "alteration_";
   return prefix.append(get_action_name_from_key(key));
 }
@@ -67,19 +67,19 @@ struct priority_elem {// Improve with strong typing on ID/SPEED
   int speed;
   bool is_contender = false;
 
-  [[nodiscard]] priority_elem &
-  operator-(const priority_elem &other) {
+  [[nodiscard]] priority_elem&
+  operator-(const priority_elem& other) {
 	speed -= other.speed;
 	return *this;
   }
 
   [[nodiscard]] bool
-  operator<(const priority_elem &other) const {
+  operator<(const priority_elem& other) const {
 	return speed < other.speed;
   }
 
   [[nodiscard]] bool
-  operator==(const priority_elem &other) const {
+  operator==(const priority_elem& other) const {
 	return id == other.id && is_contender == other.is_contender;
   }
 };
@@ -104,7 +104,7 @@ struct status;
  */
 class alteration {
 public:
-  alteration(std::string alteration_key, std::uint32_t lvl, std::uint32_t turn, std::function<int(data::status &, uint, uint)> a) noexcept
+  alteration(std::string alteration_key, std::uint32_t lvl, std::uint32_t turn, std::function<int(data::status&, uint, uint)> a) noexcept
 	  : _alteration_key(std::move(alteration_key)),
 		_lvl(lvl),
 		_turn(turn),
@@ -114,7 +114,7 @@ public:
    * Process an alteration action, return if it has an impact on the turn of the player
    * @return false if the player turn is skipped, true otherwise
    */
-  bool process_alteration(status &status) {
+  bool process_alteration(status& status) {
 	if (_action && _turn > 0) {
 	  --_turn;
 	  return _action(status, _lvl, _turn);
@@ -122,14 +122,14 @@ public:
 	return true;
   }
 
-  const std::string &alteration_key() const { return _alteration_key; }
+  const std::string& alteration_key() const { return _alteration_key; }
   std::uint32_t turn() const { return _turn; }
 
 private:
   std::string _alteration_key;
   std::uint32_t _lvl;
   std::uint32_t _turn;
-  std::function<int(status &, uint, uint)> _action;
+  std::function<int(status&, uint, uint)> _action;
 };
 
 struct status {
@@ -155,27 +155,27 @@ struct status {
    */
   bool process_alteration_before_turn() {
 	bool processTurn = true;
-	for (auto &alteration : alteration_before) {
+	for (auto& alteration : alteration_before) {
 	  processTurn &= alteration.process_alteration(*this);
 	}
 	return processTurn;
   }
 
   void process_alteration_after_turn() {
-	for (auto &alteration : alteration_after) {
+	for (auto& alteration : alteration_after) {
 	  alteration.process_alteration(*this);
 	}
   }
 
   void cleanup_finished_alteration() {
 	alterations.erase(std::remove_if(alterations.begin(), alterations.end(),
-									 [](const auto &alt) { return alt.turn() <= 0; }),
+									 [](const auto& alt) { return alt.turn() <= 0; }),
 					  alterations.end());
 	alteration_before.erase(std::remove_if(alteration_before.begin(), alteration_before.end(),
-										   [](const auto &alt) { return alt.turn() <= 0; }),
+										   [](const auto& alt) { return alt.turn() <= 0; }),
 							alteration_before.end());
 	alteration_after.erase(std::remove_if(alteration_after.begin(), alteration_after.end(),
-										  [](const auto &alt) { return alt.turn() <= 0; }),
+										  [](const auto& alt) { return alt.turn() <= 0; }),
 						   alteration_after.end());
   }
 };
@@ -188,14 +188,14 @@ struct status {
  * do not add the alteration otherwise
  */
 static void
-merge_alterations(std::vector<alteration> &to_modify, std::vector<alteration> to_merge, bool replace_if_exist = false) {
+merge_alterations(std::vector<alteration>& to_modify, std::vector<alteration> to_merge, bool replace_if_exist = false) {
   (void)merge_alterations;// suppress unused warning (as it is used, but by ChaiScript)
 
   std::move(to_merge.begin(), to_merge.end(), std::back_inserter(to_modify));
-  std::sort(to_modify.begin(), to_modify.end(), [replace_if_exist](const alteration &lhs, const alteration &rhs) {
+  std::sort(to_modify.begin(), to_modify.end(), [replace_if_exist](const alteration& lhs, const alteration& rhs) {
 	return lhs.alteration_key() == rhs.alteration_key() && ((replace_if_exist && lhs.turn() > rhs.turn()) || (!replace_if_exist && lhs.turn() < rhs.turn()));
   });
-  to_modify.erase(std::unique(to_modify.begin(), to_modify.end(), [](const alteration &lhs, const alteration &rhs) {
+  to_modify.erase(std::unique(to_modify.begin(), to_modify.end(), [](const alteration& lhs, const alteration& rhs) {
 					return lhs.alteration_key() == rhs.alteration_key();
 				  }),
 				  to_modify.end());

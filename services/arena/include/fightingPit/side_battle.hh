@@ -48,7 +48,7 @@ namespace fys::arena {
 class side_battle {
 
 public:
-  side_battle(pit_contenders &pit_contenders, ally_party_teams &ally_party_teams, hexagon_side::orientation side)
+  side_battle(pit_contenders& pit_contenders, ally_party_teams& ally_party_teams, hexagon_side::orientation side)
 	  : _contenders(pit_contenders),
 		_partyTeams(ally_party_teams),
 		_side(side),
@@ -63,18 +63,18 @@ public:
    * @return PriorityElem representing the next player to play its turn
    */
   [[nodiscard]] data::priority_elem
-  get_current_participant_turn(const std::chrono::system_clock::time_point &now,
-							   const std::chrono::milliseconds &timer_interlude);
+  get_current_participant_turn(const std::chrono::system_clock::time_point& now,
+							   const std::chrono::milliseconds& timer_interlude);
 
   /**
    * Erase characters (contender or ally) from the PriorityOrderList that are dead.
    */
   void erase_finished_alteration_and_dead_characters_from_turn_list();
 
-  void rm_participant_from_list(const team_member &tm);
-  void rm_participant_from_list(const fighting_contender &contender);
-  void add_participant_in_list(const team_member &tm);
-  void add_participant_in_list(const fighting_contender &contender);
+  void rm_participant_from_list(const team_member& tm);
+  void rm_participant_from_list(const fighting_contender& contender);
+  void add_participant_in_list(const team_member& tm);
+  void add_participant_in_list(const fighting_contender& contender);
   void add_participant_in_list(uint id, int speed, bool isContender) {
 	_priority_order_list.add_participant_in_list(id, speed, isContender);
   }

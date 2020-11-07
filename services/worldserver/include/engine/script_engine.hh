@@ -115,7 +115,7 @@ public:
   script_engine();
   ~script_engine();
 
-  void spawn_new_encounters(const std::chrono::system_clock::time_point &current_time);
+  void spawn_new_encounters(const std::chrono::system_clock::time_point& current_time);
 
   /**
    * @brief execute all scripted actions and return a report

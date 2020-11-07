@@ -37,11 +37,11 @@ public:
 	auto ok = _path.string();
   }
 
-  [[nodiscard]] const std::filesystem::path &get_path() const { return _path; }
-  [[nodiscard]] const std::string &getKey() const { return _key; }
+  [[nodiscard]] const std::filesystem::path& get_path() const { return _path; }
+  [[nodiscard]] const std::string& getKey() const { return _key; }
 
 private:
-  static std::vector<std::string> tokenizeKey(const CmlKey &key, const std::string &separators) {
+  static std::vector<std::string> tokenizeKey(const CmlKey& key, const std::string& separators) {
 	std::vector<std::string> token;
 	std::size_t pos = 0;
 	while (pos != key._key.size()) {

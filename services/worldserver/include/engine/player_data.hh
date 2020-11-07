@@ -50,7 +50,7 @@ struct vec2 {
   unity_type x = 0;
   unity_type y = 0;
 
-  vec2 operator+(const vec2 &other) const {
+  vec2 operator+(const vec2& other) const {
 	return {x + other.x, y + other.y};
   }
 
@@ -58,7 +58,7 @@ struct vec2 {
 	return {x + value, y + value};
   }
 
-  vec2 operator-(const vec2 &other) const {
+  vec2 operator-(const vec2& other) const {
 	return {x - other.x, y - other.y};
   }
 
@@ -107,7 +107,7 @@ public:
   explicit player_data(std::uint32_t max_connection = MAXIMUM_PLAYER_CONNECTED_TO_WORLD_SERVER) noexcept;
 
   template<typename Action>
-  void execution_on_player(Action &&action_to_execute) {
+  void execution_on_player(Action&& action_to_execute) {
 	for (std::uint32_t i = 0; i < _status.size(); ++i) {
 	  std::forward<Action>(action_to_execute)(i, _status.at(i), _positions.at(i), _identities.at(i), _userNames.at(i));
 	}
@@ -122,7 +122,7 @@ public:
 	_status.at(index) = player_status::STANDING;
   }
 
-  void set_player_status_in_arena(std::uint32_t index, [[maybe_unused]] const std::string &arena_id) {
+  void set_player_status_in_arena(std::uint32_t index, [[maybe_unused]] const std::string& arena_id) {
 	_status.at(index) = player_status::FIGHTING;
   }
 
@@ -152,7 +152,7 @@ public:
    * @note identities are zmq code to reply to a specific client via a router socket
    */
   [[nodiscard]] std::vector<std::string_view>
-  get_player_idts_around_pos(const pos &position,
+  get_player_idts_around_pos(const pos& position,
 							 double distance = DEFAULT_DISTANCE,
 							 std::uint32_t ignore_index = LIMIT_NOTIFICATIONS_MOVE) const noexcept;
 

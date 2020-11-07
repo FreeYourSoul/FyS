@@ -71,7 +71,7 @@ TEST_CASE("Test register/load player", "[service][arena][script_test]") {
         var objs = get_objects();
         objs.count("ally_actions") == 1
         )"));
-  } catch (std::exception &ex) {
+  } catch (std::exception& ex) {
 	SPDLOG_ERROR("{}", ex.what());
 	FAIL("Shouldn't fail here");
   }
@@ -102,7 +102,7 @@ TEST_CASE("Test register/load player", "[service][arena][script_test]") {
 	try {
 	  REQUIRE(chai->eval<bool>(R"(1 == ally_actions.count("FyS_fyston1");)"));
 	  REQUIRE(chai->eval<bool>(R"(1 == ally_actions["FyS_fyston1"].count("slash");)"));
-	} catch (std::exception &ex) {
+	} catch (std::exception& ex) {
 	  SPDLOG_ERROR("{}", ex.what());
 	  FAIL("Shouldn't fail here");
 	}
@@ -122,7 +122,7 @@ TEST_CASE("Test register/load player", "[service][arena][script_test]") {
 
 		REQUIRE(chai->eval<bool>(R"(1 == ally_actions.count("FyS_fyston2");)"));
 		REQUIRE(chai->eval<bool>(R"(1 == ally_actions["FyS_fyston2"].count("slash");)"));
-	  } catch (std::exception &ex) {
+	  } catch (std::exception& ex) {
 		SPDLOG_ERROR("{}", ex.what());
 		FAIL("Shouldn't fail here");
 	  }
@@ -149,7 +149,7 @@ TEST_CASE("Test register/load player", "[service][arena][script_test]") {
 
 		REQUIRE(chai->eval<bool>(R"(1 == ally_actions.count("Free_fyston2");)"));
 		REQUIRE(chai->eval<bool>(R"(1 == ally_actions["Free_fyston2"].count("slash");)"));
-	  } catch (std::exception &ex) {
+	  } catch (std::exception& ex) {
 		SPDLOG_ERROR("{}", ex.what());
 		FAIL("Shouldn't fail here");
 	  }

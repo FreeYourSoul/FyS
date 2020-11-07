@@ -36,7 +36,7 @@
 namespace fys::ws {
 
 [[nodiscard]] inline pos
-calculate_potential_future_position(const character_info &info) {
+calculate_potential_future_position(const character_info& info) {
   return pos{
 	  info.position.x * (info.velocity * std::cos(info.angle)),
 	  info.position.y * (info.velocity * std::sin(info.angle))};
@@ -44,7 +44,7 @@ calculate_potential_future_position(const character_info &info) {
 
 struct engine::internal {
 
-  internal(collision_map &&map, std::chrono::system_clock::duration time_interval)
+  internal(collision_map&& map, std::chrono::system_clock::duration time_interval)
 	  : map(std::move(map)), next_tick(std::chrono::system_clock::now() + time_interval) {}
 
   collision_map map;
@@ -54,8 +54,8 @@ struct engine::internal {
   std::chrono::system_clock::time_point next_tick;
 };
 
-engine::engine(const std::string &player_connect_str,
-			   collision_map &&map,
+engine::engine(const std::string& player_connect_str,
+			   collision_map&& map,
 			   std::unique_ptr<script_engine> engine,
 			   std::chrono::system_clock::duration time_interval)
 	: common::direct_connection_manager(1, player_connect_str),
@@ -63,7 +63,7 @@ engine::engine(const std::string &player_connect_str,
 	  _script_engine(std::move(engine)) {}
 
 engine::~engine() = default;
-engine::engine(engine &&) noexcept = default;
+engine::engine(engine&&) noexcept = default;
 
 void engine::authenticate_player(auth_player auth, character_info info, std::string identifier) {
   std::uint32_t index = _intern->data.add_new_player_data(std::move(info), std::move(identifier), auth.user_name);
@@ -78,7 +78,7 @@ void engine::stop_player_move(std::uint32_t index) {
   _intern->data.stop_player_move(index);
 }
 
-void engine::execute_pending_moves(const std::chrono::system_clock::time_point &player_index) {
+void engine::execute_pending_moves(const std::chrono::system_clock::time_point& player_index) {
   // Don't process pending moves if it isn't ticking
   if (player_index < _intern->next_tick) {
 	return;
@@ -88,7 +88,7 @@ void engine::execute_pending_moves(const std::chrono::system_clock::time_point &
 
   // execute and report players movements
   _intern->data.execution_on_player(
-	  [this](std::uint32_t playerIndex, player_status status, character_info &info, const std::string &, const std::string &userName) {
+	  [this](std::uint32_t playerIndex, player_status status, character_info& info, const std::string&, const std::string& userName) {
 		if (status == player_status::MOVING) {
 		  move_character_action(userName, playerIndex, info);
 		}
@@ -98,11 +98,11 @@ void engine::execute_pending_moves(const std::chrono::system_clock::time_point &
   notify_reported_npc_movements(_script_engine->execute_scripted_actions());
 }
 
-void engine::spawnNPC(const std::chrono::system_clock::time_point &currentTime) {
+void engine::spawnNPC(const std::chrono::system_clock::time_point& currentTime) {
   _script_engine->spawn_new_encounters(currentTime);
 }
 
-void engine::move_character_action(const std::string &character_name, std::uint32_t index_character, character_info &info) {
+void engine::move_character_action(const std::string& character_name, std::uint32_t index_character, character_info& info) {
   pos future_position = calculate_potential_future_position(info);
 
   if (_intern->map.can_move_to(future_position, 0)) {
@@ -119,7 +119,7 @@ void engine::move_character_action(const std::string &character_name, std::uint3
 static constexpr unsigned index_identity = 0;
 static constexpr unsigned index_notification = 0;
 
-void engine::notify_reported_npc_movements(const npc_actions_report &action_report) {
+void engine::notify_reported_npc_movements(const npc_actions_report& action_report) {
   zmq::multipart_t to_send;
 
   to_send.add({});
@@ -140,7 +140,7 @@ void engine::notify_reported_npc_movements(const npc_actions_report &action_repo
 	auto [binary, size] = flatbuffer_generator().generate_bulk_move_notif(action_report.npc_actions.at(i));
 	to_send.at(index_notification).rebuild(binary, size);
 
-	for (const auto &identity : idts_to_notify) {
+	for (const auto& identity : idts_to_notify) {
 	  to_send.at(index_identity).rebuild(identity.data(), identity.size());
 	  to_send.send(_router_player_connection);
 	}
@@ -148,22 +148,22 @@ void engine::notify_reported_npc_movements(const npc_actions_report &action_repo
 }
 
 void engine::notify_clients_of_character_move(
-	const character_info &info,
-	const std::string &user_name,
-	const std::vector<std::string_view> &idts_to_identify) {
+	const character_info& info,
+	const std::string& user_name,
+	const std::vector<std::string_view>& idts_to_identify) {
   zmq::multipart_t to_send;
 
   auto [binary, size] = flatbuffer_generator().generate_move_notif(user_name, info);
   to_send.add({});
   to_send.addmem(binary, size);
-  for (const auto &identity : idts_to_identify) {
+  for (const auto& identity : idts_to_identify) {
 	to_send.at(index_identity).rebuild(identity.data(), identity.size());
 	to_send.send(_router_player_connection);
   }
 }
 
 std::uint32_t
-engine::retrieve_data_index(const auth_player &player) {
+engine::retrieve_data_index(const auth_player& player) {
   auto it = _auth_player_on_data_index.find(player);
   if (it == _auth_player_on_data_index.end()) {
 	return NOT_AUTHENTICATED;

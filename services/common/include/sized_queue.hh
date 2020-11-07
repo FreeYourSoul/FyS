@@ -66,7 +66,7 @@ public:
    * @return true if the element has been pushed correctly, false otherwise
    */
   bool
-  push(container_type &&elem) {
+  push(container_type&& elem) {
 	if (size() >= SIZE_QUEUE)
 	  return false;
 	_queue[getIndex(_tail)] = std::forward<container_type>(elem);

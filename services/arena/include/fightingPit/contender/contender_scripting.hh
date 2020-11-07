@@ -45,7 +45,7 @@ namespace fys::arena {
 class contender_scripting {
 
 public:
-  explicit contender_scripting(chaiscript::ChaiScript &chai, uint level)
+  explicit contender_scripting(chaiscript::ChaiScript& chai, uint level)
 	  : _chai(chai), _level(level) {}
 
   void execute_action();
@@ -58,11 +58,11 @@ public:
 
   //! fill _doable_actions and instantiate the contender in chai engine
   void register_contender_script();
-  void load_contender_script_from_file(const std::string &file_path);
+  void load_contender_script_from_file(const std::string& file_path);
   void set_contender_name(std::string contender_name) { _contender_name = std::move(contender_name); }
   void set_contender_id(uint contender_id) { _contender_id = contender_id; }
 
-  [[nodiscard]] const std::string &
+  [[nodiscard]] const std::string&
   contender_name() const { return _contender_name; }
 
   [[nodiscard]] uint
@@ -71,7 +71,7 @@ public:
   [[nodiscard]] uint
   level() const { return _level; }
 
-  [[nodiscard]] const std::vector<std::string> &
+  [[nodiscard]] const std::vector<std::string>&
   doable_actions() const { return _doable_actions; }
 
 private:

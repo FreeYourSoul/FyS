@@ -43,10 +43,10 @@ namespace fys::chat {
 class chat_engine {
 };
 
-inline std::string key_for_player(const std::string &user_name);
-inline std::string key_for_room(const std::string &room_name);
-inline std::string key_for_listing_players_in_room(const std::string &room_name);
-inline std::string key_for_player_in_room(const std::string &room_name, const std::string &user_name);
+inline std::string key_for_player(const std::string& user_name);
+inline std::string key_for_room(const std::string& room_name);
+inline std::string key_for_listing_players_in_room(const std::string& room_name);
+inline std::string key_for_player_in_room(const std::string& room_name, const std::string& user_name);
 
 }// namespace fys::chat
 

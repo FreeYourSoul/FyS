@@ -25,11 +25,11 @@
 
 namespace fys::common {
 
-void connection_handler::setup_connection_manager(const std::string &dispatcher_connection_str) noexcept {
+void connection_handler::setup_connection_manager(const std::string& dispatcher_connection_str) noexcept {
   _dealer_connection_to_dispatcher.connect(dispatcher_connection_str);
 }
 
-void connection_handler::send_msg_to_dispatcher(zmq::multipart_t &&msg) noexcept {
+void connection_handler::send_msg_to_dispatcher(zmq::multipart_t&& msg) noexcept {
   if (_dealer_connection_to_dispatcher.connected()) {
 	msg.send(_dealer_connection_to_dispatcher);
   }

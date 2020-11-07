@@ -348,8 +348,8 @@ bool hexagon_side::can_move_to(hexagon_side::orientation destination_side) const
 
 }// namespace fys::arena
 
-std::ostream &
-operator<<(std::ostream &os, fys::arena::hexagon_side::orientation orientation) {
+std::ostream&
+operator<<(std::ostream& os, fys::arena::hexagon_side::orientation orientation) {
   switch (orientation) {
   case fys::arena::hexagon_side::orientation::A_N:
   case fys::arena::hexagon_side::orientation::B_N:
@@ -374,8 +374,8 @@ operator<<(std::ostream &os, fys::arena::hexagon_side::orientation orientation) 
   return os;
 }
 
-std::ostream &
-operator<<(std::ostream &os, fys::arena::hexagon_side::hexagon hexagon) {
+std::ostream&
+operator<<(std::ostream& os, fys::arena::hexagon_side::hexagon hexagon) {
   switch (hexagon) {
   case fys::arena::hexagon_side::hexagon::A: return os << "[A]";
   case fys::arena::hexagon_side::hexagon::B: return os << "[B]";
@@ -384,8 +384,8 @@ operator<<(std::ostream &os, fys::arena::hexagon_side::hexagon hexagon) {
   return os;
 }
 
-std::ostream &
-operator<<(std::ostream &os, fys::arena::hexagon_side hexagon_side) {
+std::ostream&
+operator<<(std::ostream& os, fys::arena::hexagon_side hexagon_side) {
   auto hs = *hexagon_side;
   return os << "hexagonSide:" << hs.first << hs.second;
 }

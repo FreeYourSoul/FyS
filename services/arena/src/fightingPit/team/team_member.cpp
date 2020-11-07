@@ -46,8 +46,8 @@ overloaded(Ts...) -> overloaded<Ts...>;
 namespace {
 
 [[nodiscard]] auto
-action_key_matcher(const std::string &action_name) {
-  return [&action_name](const auto &action) {
+action_key_matcher(const std::string& action_name) {
+  return [&action_name](const auto& action) {
 	return action_name == fys::arena::data::get_action_name_from_key(action.first);
   };
 }
@@ -57,9 +57,9 @@ action_key_matcher(const std::string &action_name) {
 namespace fys::arena {
 
 bool team_member::execute_action(
-	ally_party_teams &apt,
-	pit_contenders &pc,
-	std::unique_ptr<chaiscript::ChaiScript> &chai_ptr) {
+	ally_party_teams& apt,
+	pit_contenders& pc,
+	std::unique_ptr<chaiscript::ChaiScript>& chai_ptr) {
   auto pa = _pending_actions.pop();
 
   if (!pa) {
@@ -78,7 +78,7 @@ bool team_member::execute_action(
 
   try {
 	target_type = chai_ptr->eval<data::targeting>(action + ".requireTarget();");
-  } catch (const std::exception &e) {
+  } catch (const std::exception& e) {
 	SPDLOG_ERROR("action retrieved by {} doesn't have requireTarget method {}", action, e.what());
 	return false;
   }
@@ -91,7 +91,7 @@ bool team_member::execute_action(
 	  std::visit(overloaded{
 					 [&apt, &target_type, &fun_act_str, &chai_ptr](ally_target_id target) {
 					   if (target_type == data::ALLY || target_type == data::ALLY_OR_ENNEMY) {
-						 const auto funcAction = chai_ptr->eval<std::function<int(team_member &)>>(fun_act_str);
+						 const auto funcAction = chai_ptr->eval<std::function<int(team_member&)>>(fun_act_str);
 						 funcAction(*apt.select_member_by_id(target.v));
 					   } else {
 						 spdlog::error("Action of type {}, couldn't target an AllyTarget of id {}", target_type, target.v);
@@ -100,7 +100,7 @@ bool team_member::execute_action(
 
 					 [&pc, &target_type, &fun_act_str, &chai_ptr](contender_target_id target) {
 					   if (target_type == data::ENNEMY || target_type == data::ALLY_OR_ENNEMY) {
-						 const auto funcAction = chai_ptr->eval<std::function<int(fighting_contender &)>>(fun_act_str);
+						 const auto funcAction = chai_ptr->eval<std::function<int(fighting_contender&)>>(fun_act_str);
 						 funcAction(*pc.fighting_contender_at(target.v));
 					   } else {
 						 spdlog::error("Action of type {}, couldn't target a ContenderTarget of id {}", target_type, target.v);
@@ -112,10 +112,10 @@ bool team_member::execute_action(
 					 }},
 				 *pa->target);
 	} else {
-	  const auto funcAction = chai_ptr->eval<std::function<int(team_member &)>>(fun_act_str);
+	  const auto funcAction = chai_ptr->eval<std::function<int(team_member&)>>(fun_act_str);
 	  funcAction(*this);
 	}
-  } catch (const chaiscript::exception::eval_error &ee) {
+  } catch (const chaiscript::exception::eval_error& ee) {
 	SPDLOG_ERROR("Error caught on script execution while executing {} with target required {}. Team owned by "
 				 "{} TeamMember {} --> {}",
 				 pa->id_action, static_cast<bool>(pa->target), _user_name, _name, ee.what());
@@ -124,7 +124,7 @@ bool team_member::execute_action(
   return true;
 }
 
-void team_member::add_pending_action(const std::string &action_name, std::optional<target_type> target) {
+void team_member::add_pending_action(const std::string& action_name, std::optional<target_type> target) {
   if (_status.life_pt.is_dead()) {
 	SPDLOG_WARN("Player {}::{} tried to add an action while dead", _user_name, _name);
 	return;

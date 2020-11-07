@@ -32,8 +32,8 @@ class
 	CmlCopy : public Cml {
 public:
   ~CmlCopy() override {}
-  CmlCopy(const std::string &pathLocalStorage,
-		  const std::string &pathCopy)
+  CmlCopy(const std::string& pathLocalStorage,
+		  const std::string& pathCopy)
 	  : Cml(pathLocalStorage), _copyPathStorage(pathCopy) {
 	if (!std::filesystem::exists(_copyPathStorage)) {
 	  SPDLOG_ERROR("Path copy does not exist {}", pathCopy);
@@ -41,7 +41,7 @@ public:
   }
 
 private:
-  void createUpToDateFileInLocalStorage(const CmlKey &cmlKey, std::filesystem::file_time_type cacheTime) override;
+  void createUpToDateFileInLocalStorage(const CmlKey& cmlKey, std::filesystem::file_time_type cacheTime) override;
 
 protected:
   std::filesystem::path _copyPathStorage;

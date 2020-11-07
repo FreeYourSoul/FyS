@@ -47,28 +47,28 @@ getY(double y, unsigned tileSizeY) {
 }// namespace
 
 // CollisionMap
-collision_map::collision_map(const world_server_context &ctx)
+collision_map::collision_map(const world_server_context& ctx)
 	: _boundary_x(ctx.server_x_boundaries()),
 	  _boundary_y(ctx.server_y_boundaries()),
 	  _server_proximity(ctx.server_proximity()) {
   build_map_from_tmx(ctx.tmx_map_path());
 }
 
-void collision_map::build_map_from_tmx(const std::string &tmx_map_path) {
+void collision_map::build_map_from_tmx(const std::string& tmx_map_path) {
   tmx::Map map;
   if (!map.load(tmx_map_path)) {
 	SPDLOG_ERROR("TMX CollisionMap couldn't be loaded");
 	return;
   }
-  const auto &layers = map.getLayers();
+  const auto& layers = map.getLayers();
 
   _map_elems.resize(map.getTileCount().y);
-  for (auto &elemOnY : _map_elems)
+  for (auto& elemOnY : _map_elems)
 	elemOnY.resize(map.getTileCount().x);
 
-  for (const auto &layer : layers) {
+  for (const auto& layer : layers) {
 	if (layer->getType() == tmx::Layer::Type::Object) {
-	  const auto &objectLayer = layer->getLayerAs<tmx::ObjectGroup>();
+	  const auto& objectLayer = layer->getLayerAs<tmx::ObjectGroup>();
 
 	  if (map::algo::is_collision_layer(objectLayer)) {
 		add_collision_in_map({map.getTileSize().x, map.getTileSize().y}, objectLayer);
@@ -79,9 +79,9 @@ void collision_map::build_map_from_tmx(const std::string &tmx_map_path) {
   }
 }
 
-void collision_map::add_collision_in_map(const vec2_u &tile_map_size, const tmx::ObjectGroup &collision_layer) {
-  const auto &objects = collision_layer.getObjects();
-  for (const auto &object : objects) {
+void collision_map::add_collision_in_map(const vec2_u& tile_map_size, const tmx::ObjectGroup& collision_layer) {
+  const auto& objects = collision_layer.getObjects();
+  for (const auto& object : objects) {
 	for (auto y = getX(object.getAABB().top, tile_map_size.y);
 		 y < getX(object.getAABB().top + object.getAABB().height, tile_map_size.y); ++y) {
 	  for (auto x = getY(object.getAABB().left, tile_map_size.x);
@@ -93,11 +93,11 @@ void collision_map::add_collision_in_map(const vec2_u &tile_map_size, const tmx:
   }
 }
 
-void collision_map::add_trigger_in_map(const tmx::ObjectGroup &trigger_layer) {
+void collision_map::add_trigger_in_map(const tmx::ObjectGroup& trigger_layer) {
   // TODO : Add triggers on the map
 }
 
-void collision_map::execute_potential_trigger(std::uint32_t index, const character_info &position_on_map) {
+void collision_map::execute_potential_trigger(std::uint32_t index, const character_info& position_on_map) {
 }
 
 bool collision_map::can_move_to(pos pos, std::size_t level) const noexcept {
@@ -117,7 +117,7 @@ void map_element::execute_potential_trigger(std::uint32_t indexPlayer) const {
 bool map_element::can_go_through(pos position, std::size_t level) const noexcept {
   bool canGoThrough = can_go_to_level(level);
   if (canGoThrough && _type == e_element_type::BLOCK) {
-	return std::none_of(_collisions.begin(), _collisions.end(), [&position](const auto &aabb) {
+	return std::none_of(_collisions.begin(), _collisions.end(), [&position](const auto& aabb) {
 	  return (position.x >= aabb.left && position.x <= aabb.left + aabb.width && position.y >= aabb.top && position.y <= aabb.top + aabb.height);
 	});
   }

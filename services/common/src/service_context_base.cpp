@@ -31,7 +31,7 @@
 
 namespace fys::common {
 
-service_context_base::service_context_base(int ac, const char *const *av) try {
+service_context_base::service_context_base(int ac, const char* const* av) try {
   _version = "0.0.1";
 
   fil::command_line_interface cli([] {}, "Context setup");
@@ -48,14 +48,14 @@ service_context_base::service_context_base(int ac, const char *const *av) try {
   cli.add_option(fil::option(
 	  "-d", [&v = _dispatcher_data.port](std::uint64_t value) { v = value; }, "Port number of the service dispatcher"));
 
-  cli.parse_command_line(ac, const_cast<char **>(av));
+  cli.parse_command_line(ac, const_cast<char**>(av));
 
   this->initialize_from_ini(config_path);
-} catch (std::exception &e) {
+} catch (std::exception& e) {
   SPDLOG_ERROR("Context of the service not initialized caused by : {}", e.what());
 }
 
-void service_context_base::initialize_from_ini(const std::string &cfg_file_path) {
+void service_context_base::initialize_from_ini(const std::string& cfg_file_path) {
   boost::property_tree::ptree pt;
   boost::property_tree::read_ini(cfg_file_path, pt);
 

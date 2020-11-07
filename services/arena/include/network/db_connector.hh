@@ -41,14 +41,14 @@ namespace fys::network {
 class db_connector {
 
 public:
-  explicit db_connector(const arena::arena_server_context &ctx);
+  explicit db_connector(const arena::arena_server_context& ctx);
 
   [[nodiscard]] std::unique_ptr<fys::arena::party_team>
-  retrieve_party_team(const std::string &user);
+  retrieve_party_team(const std::string& user);
 
 private:
   [[nodiscard]] std::vector<std::string>
-  retrieve_attacks_keys(const std::string &user_name);
+  retrieve_attacks_keys(const std::string& user_name);
 
 private:
   mariadb::account_ref _ref_db;

@@ -103,16 +103,16 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]") {
 
 	auto fp = fpa.build_fighting_pit(ctx, "WS00");
 
-	auto &chai = fp->get_chai_ptr();
+	auto& chai = fp->get_chai_ptr();
 
-	const auto &contender = fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0);
+	const auto& contender = fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0);
 	REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).number_contender());
 	REQUIRE("TestMonsterSleep" == contender->name());
 	REQUIRE(100 == contender->status().life_pt.current);
 	REQUIRE(100 == contender->status().life_pt.total);
 
-	const auto &c = fighting_pit_announcer::get_pit_contenders(fp).contenders_on_side(hexagon_side::orientation::B_S);
-	const auto &p = fighting_pit_announcer::get_party_teams(fp).members_by_side(hexagon_side::orientation::B_S);
+	const auto& c = fighting_pit_announcer::get_pit_contenders(fp).contenders_on_side(hexagon_side::orientation::B_S);
+	const auto& p = fighting_pit_announcer::get_party_teams(fp).members_by_side(hexagon_side::orientation::B_S);
 
 	REQUIRE(fp->is_joinable());
 	fp->set_player_readiness("Winner");
@@ -173,7 +173,7 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]") {
 		now += fys::arena::interval::EASY + 1ms;
 		fp->continue_battle(now);
 
-	  } catch (const std::exception &e) {
+	  } catch (const std::exception& e) {
 		SPDLOG_ERROR("Exception during Battle turn 1 test {} ", e.what());
 		FAIL("Should not arrive here");
 	  }
@@ -212,12 +212,12 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]") {
 
 	auto fp = fpa.build_fighting_pit(ctx, "WS00");
 
-	auto &chai = fp->get_chai_ptr();
+	auto& chai = fp->get_chai_ptr();
 
 	REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).number_contender());
-	const auto &contender = fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0);
-	const auto &c = fighting_pit_announcer::get_pit_contenders(fp).contenders_on_side(hexagon_side::orientation::B_S);
-	const auto &p = fighting_pit_announcer::get_party_teams(fp).members_by_side(hexagon_side::orientation::B_S);
+	const auto& contender = fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0);
+	const auto& c = fighting_pit_announcer::get_pit_contenders(fp).contenders_on_side(hexagon_side::orientation::B_S);
+	const auto& p = fighting_pit_announcer::get_party_teams(fp).members_by_side(hexagon_side::orientation::B_S);
 
 	SECTION("Initial setup") {
 	  REQUIRE("TestMonsterAttack" == contender->name());
@@ -248,14 +248,14 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]") {
 
 	SECTION("Test ChaiUtility memberHasActionRegistered") {
 	  try {
-		auto &memberId1 = fp->get_party_team_of_player("Loser").team_members()[0];
+		auto& memberId1 = fp->get_party_team_of_player("Loser").team_members()[0];
 		REQUIRE(chai::util::member_has_action_registered(*fp->get_chai_ptr(),
 														 memberId1->user_name(), memberId1->name(), "meditate"));
 		REQUIRE_FALSE(chai::util::member_has_action_registered(*fp->get_chai_ptr(),
 															   memberId1->user_name(), memberId1->name(), "DONOTEXIST"));
 		REQUIRE_FALSE(chai::util::member_has_action_registered(*fp->get_chai_ptr(),
 															   "unknown", "meh", "DONOTEXIST"));
-	  } catch (const std::exception &ee) {
+	  } catch (const std::exception& ee) {
 		FAIL(ee.what());
 	  }
 	}// End section : Test ChaiUtility memberHasActionRegistered
@@ -452,7 +452,7 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]") {
 		//				now += fys::arena::interval::EASY + 1ms;
 		//				fp->continueBattle(now);
 		//
-	  } catch (const std::exception &e) {
+	  } catch (const std::exception& e) {
 		SPDLOG_ERROR("Exception during Battle turn 1 test {} ", e.what());
 		FAIL("Should not arrive here");
 	  }
@@ -508,12 +508,12 @@ TEST_CASE("FightingPitTestCase Move test", "[service][arena]") {
 
 	auto fp = fpa.build_fighting_pit(ctx, "WS00");
 
-	auto &chai = fp->get_chai_ptr();
+	auto& chai = fp->get_chai_ptr();
 
 	REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).number_contender());
-	const auto &contender = fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0);
-	const auto &c = fighting_pit_announcer::get_pit_contenders(fp).contenders_on_side(hexagon_side::orientation::B_S);
-	const auto &p = fighting_pit_announcer::get_party_teams(fp).members_by_side(hexagon_side::orientation::B_S);
+	const auto& contender = fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0);
+	const auto& c = fighting_pit_announcer::get_pit_contenders(fp).contenders_on_side(hexagon_side::orientation::B_S);
+	const auto& p = fighting_pit_announcer::get_party_teams(fp).members_by_side(hexagon_side::orientation::B_S);
 
 	SECTION("Initial setup") {
 	  REQUIRE("TestMonsterMove" == contender->name());
@@ -535,7 +535,7 @@ TEST_CASE("FightingPitTestCase Move test", "[service][arena]") {
 	  REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).number_contender_on_side(hexagon_side::orientation::B_S));
 	  REQUIRE(4 == fighting_pit_announcer::get_party_teams(fp).number_ally());
 
-	  const auto &doableActions =
+	  const auto& doableActions =
 		  fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0)->get_contender_scripting()->doable_actions();
 	  REQUIRE(1 == doableActions.size());
 	  REQUIRE("test:key:1" == doableActions.at(0));
@@ -583,7 +583,7 @@ TEST_CASE("FightingPitTestCase Move test", "[service][arena]") {
 		//				fp->continueBattle(now);
 		//				REQUIRE(HexagonSide::Orientation::A_NE == FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0)->getHexagonSideOrient());
 
-	  } catch (const std::exception &e) {
+	  } catch (const std::exception& e) {
 		SPDLOG_ERROR("Exception during Battle turn 1 test {} ", e.what());
 		FAIL("Should not arrive here");
 	  }
@@ -644,12 +644,12 @@ TEST_CASE("FightingPitTestCase Simple Alteration test", "[service][arena]") {
 
 	auto fp = fpa.build_fighting_pit(ctx, "WS00");
 
-	auto &chai = fp->get_chai_ptr();
+	auto& chai = fp->get_chai_ptr();
 
 	REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).number_contender());
-	const auto &contender = fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0);
-	const auto &c = fighting_pit_announcer::get_pit_contenders(fp).contenders_on_side(hexagon_side::orientation::B_S);
-	const auto &p = fighting_pit_announcer::get_party_teams(fp).members_by_side(hexagon_side::orientation::B_S);
+	const auto& contender = fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0);
+	const auto& c = fighting_pit_announcer::get_pit_contenders(fp).contenders_on_side(hexagon_side::orientation::B_S);
+	const auto& p = fighting_pit_announcer::get_party_teams(fp).members_by_side(hexagon_side::orientation::B_S);
 
 	SECTION("Initial setup") {
 	  REQUIRE("TestMonsterPoison" == contender->name());
@@ -671,7 +671,7 @@ TEST_CASE("FightingPitTestCase Simple Alteration test", "[service][arena]") {
 	  REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).number_contender_on_side(hexagon_side::orientation::B_S));
 	  REQUIRE(4 == fighting_pit_announcer::get_party_teams(fp).number_ally());
 
-	  const auto &doableActions =
+	  const auto& doableActions =
 		  fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0)->get_contender_scripting()->doable_actions();
 	  REQUIRE(1 == doableActions.size());
 	  REQUIRE("test:key:1" == doableActions.at(0));
@@ -859,7 +859,7 @@ TEST_CASE("FightingPitTestCase Simple Alteration test", "[service][arena]") {
 
 		}// End section : Battle Turn 2 test
 
-	  } catch (const std::exception &e) {
+	  } catch (const std::exception& e) {
 		SPDLOG_ERROR("Exception during Battle turn 1 test {} ", e.what());
 		FAIL("Should not arrive here");
 	  }

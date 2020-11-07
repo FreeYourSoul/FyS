@@ -42,7 +42,7 @@ public:
   [[nodiscard]] bool
   empty() const { return _base_speed.empty(); }
 
-  [[nodiscard]] const data::priority_elem &
+  [[nodiscard]] const data::priority_elem&
   get_current() const noexcept { return _current_prio; }
 
   [[nodiscard]] unsigned
@@ -59,7 +59,7 @@ private:
   void end_turn_routine();
 
   [[nodiscard]] int
-  get_computed_speed(const data::priority_elem &analyst_elem) const;
+  get_computed_speed(const data::priority_elem& analyst_elem) const;
 
   /**
    * Sort in a specific manner

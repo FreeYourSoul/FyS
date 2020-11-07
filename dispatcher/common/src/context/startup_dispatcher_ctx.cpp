@@ -10,7 +10,7 @@
 
 namespace fys {
 
-startup_dispatcher_ctx::startup_dispatcher_ctx(int ac, const char *const *av) noexcept try {
+startup_dispatcher_ctx::startup_dispatcher_ctx(int ac, const char* const* av) noexcept try {
   fil::command_line_interface cli([] {}, "FyS::Dispatcher");
   std::string config_path = "NONE";
 
@@ -31,11 +31,11 @@ startup_dispatcher_ctx::startup_dispatcher_ctx(int ac, const char *const *av) no
 
   if ("NONE" != config_path)
 	this->initialize_from_ini(config_path);
-} catch (std::exception &e) {
+} catch (std::exception& e) {
   SPDLOG_ERROR("\"Context of the Dispatcher not initialized caused by : {}", e.what());
 }
 
-void startup_dispatcher_ctx::initialize_from_ini(const std::string &config_file_path) {
+void startup_dispatcher_ctx::initialize_from_ini(const std::string& config_file_path) {
   boost::property_tree::ptree pt;
   boost::property_tree::read_ini(config_file_path, pt);
 
@@ -57,8 +57,8 @@ void startup_dispatcher_ctx::initialize_from_ini(const std::string &config_file_
 	_subTopics = std::move(topics);
   else {
 	_subTopics.reserve(topics.size());
-	for (std::string &topic : topics) {
-	  for (std::string &group : topicGroups) {
+	for (std::string& topic : topics) {
+	  for (std::string& group : topicGroups) {
 		_subTopics.emplace_back(std::string(group + "_").append(topic));
 	  }
 	}

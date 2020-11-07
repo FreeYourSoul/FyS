@@ -89,9 +89,9 @@ public:
 	  : _user_name(std::move(user_name)), _name(std::move(team_member_name)) {}
 
   [[nodiscard]] bool
-  execute_action(ally_party_teams &apt, pit_contenders &pc, std::unique_ptr<chaiscript::ChaiScript> &chai_ptr);
+  execute_action(ally_party_teams& apt, pit_contenders& pc, std::unique_ptr<chaiscript::ChaiScript>& chai_ptr);
 
-  void add_pending_action(const std::string &action_name, std::optional<target_type> target);
+  void add_pending_action(const std::string& action_name, std::optional<target_type> target);
 
   /**
    * @brief called by #fys::arena::ally_party_team to set the id of the team member
@@ -102,22 +102,22 @@ public:
   [[nodiscard]] hexagon_side::orientation
   side_orient() const { return (*_side).second; }
 
-  [[nodiscard]] data::status &
+  [[nodiscard]] data::status&
   access_status() { return _status; }
 
-  [[nodiscard]] const hexagon_side &
+  [[nodiscard]] const hexagon_side&
   side() const { return _side; }
 
-  [[nodiscard]] const data::status &
+  [[nodiscard]] const data::status&
   status() const { return _status; }
 
-  [[nodiscard]] const std::string &
+  [[nodiscard]] const std::string&
   user_name() const { return _user_name; }
 
-  [[nodiscard]] const std::string &
+  [[nodiscard]] const std::string&
   name() const { return _name; }
 
-  [[nodiscard]] const std::vector<std::pair<std::string, uint>> &
+  [[nodiscard]] const std::vector<std::pair<std::string, uint>>&
   actions_doable() const { return _actions_doable; }
 
   [[nodiscard]] unsigned

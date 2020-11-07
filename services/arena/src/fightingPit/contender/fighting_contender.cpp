@@ -39,7 +39,7 @@ bool fighting_contender::setup_contender() {
   return _contender_scripting->setup_contender();
 }
 
-const std::string &
+const std::string&
 fighting_contender::name() const {
   return _contender_scripting->contender_name();
 }

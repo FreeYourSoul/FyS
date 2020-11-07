@@ -119,7 +119,7 @@ TEST_CASE("Test Sampy", "[service][arena][script_test]") {
 	  actionsDoable = chai->eval<std::vector<std::string>>(R"(
 var actions = contender_Sampy0.actions;
 retrieveDoableActions(actions.act);)");
-	} catch (const std::exception &ee) {
+	} catch (const std::exception& ee) {
 	  SPDLOG_ERROR("Error when eval {}", ee.what());
 	  FAIL("Shouldn't arrive there");
 	}

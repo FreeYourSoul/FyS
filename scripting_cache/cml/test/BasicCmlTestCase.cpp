@@ -35,7 +35,7 @@ public:
 
   bool _localStorageCalled = false;
 
-  void createUpToDateFileInLocalStorage(const fys::cache::CmlKey &cmlKey, std::filesystem::file_time_type cacheTime) override {
+  void createUpToDateFileInLocalStorage(const fys::cache::CmlKey& cmlKey, std::filesystem::file_time_type cacheTime) override {
 	_localStorageCalled = true;
   }
 };

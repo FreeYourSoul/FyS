@@ -44,9 +44,9 @@ class pit_contenders {
 
 public:
   pit_contenders() = default;
-  pit_contenders(const pit_contenders &other) = delete;
+  pit_contenders(const pit_contenders& other) = delete;
 
-  void execute_contender_action(const data::priority_elem &contender);
+  void execute_contender_action(const data::priority_elem& contender);
 
   [[nodiscard]] std::vector<std::shared_ptr<fighting_contender>>
   contenders_on_side(hexagon_side::orientation side) const;
@@ -79,14 +79,14 @@ public:
   [[nodiscard]] std::vector<std::shared_ptr<fighting_contender>>
   get_dead_contender_on_side(hexagon_side::orientation contender_ptr) const;
 
-  [[nodiscard]] const std::vector<std::shared_ptr<fighting_contender>> &
+  [[nodiscard]] const std::vector<std::shared_ptr<fighting_contender>>&
   contenders() const { return _contenders; }
 
   [[nodiscard]] unsigned
   number_contender_on_side(hexagon_side::orientation side) const;
 
   [[nodiscard]] bool
-  add_contender(const std::shared_ptr<fighting_contender> &contender);
+  add_contender(const std::shared_ptr<fighting_contender>& contender);
 
   [[nodiscard]] bool
   all_dead() const;

@@ -123,7 +123,7 @@ class arena_server_service {
   static inline const std::uint32_t READY_ACTION_ID = 1337;
 
 public:
-  explicit arena_server_service(const arena_server_context &ctx);
+  explicit arena_server_service(const arena_server_context& ctx);
   ~arena_server_service();
 
   /**
@@ -142,16 +142,16 @@ private:
   is_saturated() const noexcept;
 
   [[nodiscard]] player_action
-  create_player_action(std::string &&action, const fb::arn::ArenaFightAction *frame) const;
+  create_player_action(std::string&& action, const fb::arn::ArenaFightAction* frame) const;
 
   [[nodiscard]] unsigned
-  create_new_fighting_pit(const awaiting_player_arena &awaited) noexcept;
+  create_new_fighting_pit(const awaiting_player_arena& awaited) noexcept;
 
   [[nodiscard]] std::pair<bool, awaiting_player_arena_it>
-  is_player_awaited(const std::string &name, const std::string &token, unsigned fp_id) const noexcept;
+  is_player_awaited(const std::string& name, const std::string& token, unsigned fp_id) const noexcept;
 
-  inline void send_saturated_error_msg(zmq::message_t &&identity);
-  inline void forward_reply_to_dispatcher(zmq::message_t &&idt_ws, const fys::arena::awaiting_player_arena &await_arena) noexcept;
+  inline void send_saturated_error_msg(zmq::message_t&& identity);
+  inline void forward_reply_to_dispatcher(zmq::message_t&& idt_ws, const fys::arena::awaiting_player_arena& await_arena) noexcept;
 
 private:
   std::reference_wrapper<const arena_server_context> _ctx;

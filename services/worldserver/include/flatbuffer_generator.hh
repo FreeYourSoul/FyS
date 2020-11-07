@@ -38,11 +38,11 @@ namespace fys::ws {
 class flatbuffer_generator {
 
 public:
-  std::pair<void *, std::uint32_t>
-  generate_bulk_move_notif(const std::vector<npc_action> &);
+  std::pair<void*, std::uint32_t>
+  generate_bulk_move_notif(const std::vector<npc_action>&);
 
-  [[nodiscard]] std::pair<void *, std::uint32_t>
-  generate_move_notif(const std::string &player_name, const character_info &info);
+  [[nodiscard]] std::pair<void*, std::uint32_t>
+  generate_move_notif(const std::string& player_name, const character_info& info);
 
 private:
   flatbuffers::FlatBufferBuilder _fbb;

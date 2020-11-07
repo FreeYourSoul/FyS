@@ -77,7 +77,7 @@ public:
   dead_members_by_side(hexagon_side::orientation side) const;
 
   [[nodiscard]] std::shared_ptr<team_member>
-  get_specific_team_member_by_id(const std::string &user_name, unsigned id_member) const;
+  get_specific_team_member_by_id(const std::string& user_name, unsigned id_member) const;
 
   [[nodiscard]] unsigned
   number_ally() const { return _current_team_member_id; }
@@ -85,8 +85,8 @@ public:
   [[nodiscard]] unsigned
   ally_number_on_side(hexagon_side::orientation side) const;
 
-  [[nodiscard]] const party_team &
-  get_party_team_of_player(const std::string &party_team) const;
+  [[nodiscard]] const party_team&
+  get_party_team_of_player(const std::string& party_team) const;
 
   [[nodiscard]] bool
   all_dead() const;
@@ -97,9 +97,9 @@ public:
    * @return true if all players are ready, false otherwise
    */
   [[nodiscard]] bool
-  set_party_readiness(const std::string &party_team);
+  set_party_readiness(const std::string& party_team);
 
-  [[nodiscard]] const std::vector<std::unique_ptr<party_team>> &
+  [[nodiscard]] const std::vector<std::unique_ptr<party_team>>&
   party_teams() const;
 
   [[nodiscard]] uint
@@ -113,9 +113,9 @@ public:
    * @return true if an action has been executed, false otherwise
    */
   [[nodiscard]] bool
-  execute_ally_action(const data::priority_elem &ally, pit_contenders &pc, std::unique_ptr<chaiscript::ChaiScript> &chai_ptr);
+  execute_ally_action(const data::priority_elem& ally, pit_contenders& pc, std::unique_ptr<chaiscript::ChaiScript>& chai_ptr);
 
-  void add_party_team(std::unique_ptr<party_team> &&team);
+  void add_party_team(std::unique_ptr<party_team>&& team);
   void set_fighting_pit_id(uint fighting_pit_id) { _fighting_pit_id = fighting_pit_id; }
 
 private:

@@ -24,6 +24,7 @@
 #ifndef FYS_ONLINE_HISTORY_MANAGER_HH
 #define FYS_ONLINE_HISTORY_MANAGER_HH
 
+#include <filesystem>
 #include <memory>
 #include <unordered_map>
 #include <vector>
@@ -65,8 +66,14 @@ class history_manager {
    */
   struct history_fight {
 	history_fight() = default;
-	history_fight(unsigned seed)
-		: seed(seed) {}
+	history_fight(unsigned id, unsigned seed)
+		: seed(seed), id(id) {}
+
+	//! unique id of the history fight (count of fight on-going for this specific arena instance)
+	unsigned id = 0;
+
+	//! Seed on which the fight occurred
+	unsigned seed = 0;// TODO make the random generator use a given seed, on instance of generator by pit will be needed
 
 	//! Reference to the fighting pit
 	//		std::reference_wrapper<const FightingPit> ref;
@@ -75,28 +82,29 @@ class history_manager {
 
 	//! Set at true in case an issue occurred in the fighting pit (will save the fighting pit in file format)
 	bool has_to_be_saved = true;
-	//! Seed on which the fight occurred
-	unsigned seed = 0;// TODO make the random generator use a given seed, on instance of generator by pit will be needed
+
+	[[nodiscard]] std::string generate_history_filename(const std::filesystem::path& base_path) const;
   };
 
 public:
   static void activate_historic_manager(bool on);
-  static void create_historic(const fighting_pit &fp, unsigned seed);
-  static void add_historic(unsigned fp_id, history_action &&ha);
+  static void create_historic(const fighting_pit& fp, unsigned id, unsigned seed);
+  static void add_historic(unsigned fp_id, history_action&& ha);
   static void set_to_be_saved(unsigned pit_id, bool toBeSaved);
+  static void set_save_folder(std::string save_folder);
   static void save(unsigned fp_id);
 
 private:
   history_manager() = default;
 
-  [[nodiscard]] static history_manager &
-  get_instance() {
+  [[nodiscard]] static history_manager& get_instance() {
 	static history_manager instance;
 	return instance;
   }
 
 private:
   std::unordered_map<unsigned, history_fight> _history;
+  std::string _path_to_save_folder;
   bool _is_manager_on = true;
 };
 

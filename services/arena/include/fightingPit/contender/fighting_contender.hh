@@ -41,30 +41,30 @@ class fighting_contender {
 
 public:
   explicit fighting_contender(std::unique_ptr<contender_scripting> contender_scripting);
-  fighting_contender(const fighting_contender &other) = delete;
-  fighting_contender(fighting_contender &&other) noexcept = default;
+  fighting_contender(const fighting_contender& other) = delete;
+  fighting_contender(fighting_contender&& other) noexcept = default;
 
   void execute_action();
 
   [[nodiscard]] bool
   setup_contender();
 
-  [[nodiscard]] const data::status &
+  [[nodiscard]] const data::status&
   status() const { return _status; }
 
-  [[nodiscard]] const hexagon_side &
+  [[nodiscard]] const hexagon_side&
   side() const { return _side; }
 
-  [[nodiscard]] data::status &
+  [[nodiscard]] data::status&
   access_status() { return _status; }
 
   [[nodiscard]] hexagon_side::orientation
   side_orient() const { return (*_side).second; }
 
-  [[nodiscard]] const std::unique_ptr<contender_scripting> &
+  [[nodiscard]] const std::unique_ptr<contender_scripting>&
   get_contender_scripting() const { return _contender_scripting; }
 
-  [[nodiscard]] const std::string &
+  [[nodiscard]] const std::string&
   name() const;
 
   [[nodiscard]] unsigned

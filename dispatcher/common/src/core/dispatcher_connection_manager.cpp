@@ -12,7 +12,7 @@ dispatcher_connection_manager::dispatcher_connection_manager(int threadNumber, b
 																																	false}) {
 }
 
-void dispatcher_connection_manager::setupConnectionManager(const fys::startup_dispatcher_ctx &ctx) noexcept {
+void dispatcher_connection_manager::setupConnectionManager(const fys::startup_dispatcher_ctx& ctx) noexcept {
   if (ctx.isClusterAware()) {
 	_clusterConnection.pubSocket.connect(ctx.frontend_cluster_proxy_connection_str());
 	_clusterConnection.subSocket.connect(ctx.backend_cluster_proxy_connection_str());
@@ -27,8 +27,8 @@ void dispatcher_connection_manager::setupConnectionManager(const fys::startup_di
   _listener.bind("tcp://*:" + std::to_string(ctx.getBindingPort()));
 }
 
-void dispatcher_connection_manager::subscribeToTopics(const std::vector<std::string> &topics) noexcept {
-  for (const auto &topic : topics) {
+void dispatcher_connection_manager::subscribeToTopics(const std::vector<std::string>& topics) noexcept {
+  for (const auto& topic : topics) {
 	_clusterConnection.subSocket.setsockopt(ZMQ_SUBSCRIBE, topic.c_str(), topic.size());
   }
 }
@@ -46,19 +46,19 @@ std::tuple<bool, bool, bool> dispatcher_connection_manager::poll() noexcept {
   return {listenerPolling, subSocketPolling, dispatcherRespPolling};
 }
 
-bool dispatcher_connection_manager::replyToListenerSocket(zmq::multipart_t &&msg) noexcept {
+bool dispatcher_connection_manager::replyToListenerSocket(zmq::multipart_t&& msg) noexcept {
   if (!_listener.connected())
 	return false;
   return msg.send(_listener);
 }
 
-bool dispatcher_connection_manager::sendMessageToDispatcherSocket(zmq::multipart_t &&msg) noexcept {
+bool dispatcher_connection_manager::sendMessageToDispatcherSocket(zmq::multipart_t&& msg) noexcept {
   if (!_dispatcher.connected())
 	return false;
   return msg.send(_dispatcher);
 }
 
-bool dispatcher_connection_manager::sendMessageToClusterPubSocket(zmq::multipart_t &&msg) noexcept {
+bool dispatcher_connection_manager::sendMessageToClusterPubSocket(zmq::multipart_t&& msg) noexcept {
   if (_clusterConnection.closed || !_clusterConnection.pubSocket.connected())
 	return false;
   return msg.send(_clusterConnection.pubSocket);

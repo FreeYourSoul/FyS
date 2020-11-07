@@ -51,7 +51,7 @@ namespace {
  * @param central_position_actions central point of the spawning point in which the actions occurred
  * @param distance_notif distance notification at which players should be notified
  */
-void merge_spawning_point_in_report(npc_actions_report &report) {
+void merge_spawning_point_in_report(npc_actions_report& report) {
 }
 
 }// namespace
@@ -90,7 +90,7 @@ struct script_engine::internal {
 
 	  actions_executed.reserve(spawned_per_spawning_point.at(sp_index).size());
 	  for (std::uint32_t spawn_id = 0; spawn_id < spawned_per_spawning_point.at(sp_index).size(); ++spawn_id) {
-		auto &npc = spawned_per_spawning_point.at(sp_index).at(spawn_id);
+		auto& npc = spawned_per_spawning_point.at(sp_index).at(spawn_id);
 
 		try {
 		  unsigned action_id;
@@ -106,7 +106,7 @@ struct script_engine::internal {
 			npc.info.angle = angle;
 			actions_executed.emplace_back(npc_action{npc.npc_lua_id, spawning_point_id, action_id, npc.info});
 		  }
-		} catch (const std::exception &e) {
+		} catch (const std::exception& e) {
 		  SPDLOG_ERROR("[lua] : An error occurred while executing script action SpawningPoint {} npc {} : \n[ERROR] : {}",
 					   npc.sp_namespace, npc.npc_lua_id, e.what());
 		}
@@ -145,7 +145,7 @@ struct script_engine::internal {
 			  character_info{pos{std::get<0>(res), std::get<1>(res)}, std::get<2>(res), std::get<3>(res)},
 			  spNamespace,
 			  static_cast<uint>(result)});
-	} catch (const std::exception &e) {
+	} catch (const std::exception& e) {
 	  SPDLOG_ERROR("[lua] : An error occurred while spawning with spawning point '{}' : {}", spNamespace, e.what());
 	}
   }
@@ -166,7 +166,7 @@ script_engine::script_engine()
 
 script_engine::~script_engine() = default;
 
-void script_engine::spawn_new_encounters(const std::chrono::system_clock::time_point &current_time) {
+void script_engine::spawn_new_encounters(const std::chrono::system_clock::time_point& current_time) {
   for (unsigned i = 0; i < _intern->spawning_points.size(); ++i) {
 	if (current_time >= _intern->spawning_points.at(i).next_spawn) {
 	  _intern->spawn_encounter(i);
@@ -200,7 +200,7 @@ npc_actions_report script_engine::execute_scripted_actions() {
 /// ================== World Populator Script Engine Builder =================== ///
 ////////////////////////////////////////////////////////////////////////////////////
 
-void world_populator::generate_spawning_points(const std::string &spawning_point_config_path, const std::string &base_path) {
+void world_populator::generate_spawning_points(const std::string& spawning_point_config_path, const std::string& base_path) {
   std::ifstream i(spawning_point_config_path);
   nlohmann::json jsonConfig;
   i >> jsonConfig;
@@ -209,7 +209,7 @@ void world_populator::generate_spawning_points(const std::string &spawning_point
   unsigned index = 0;
 
   _script_engine->_intern->spawning_points.resize(wsJson.size());
-  for (auto &[key, value] : wsJson.items()) {
+  for (auto& [key, value] : wsJson.items()) {
 	const std::string keyCml = value["key_zone"].get<std::string>();
 	const std::string sp_namespace = get_sp_namespace_from_key(keyCml);
 
@@ -239,7 +239,7 @@ void world_populator::generate_spawning_points(const std::string &spawning_point
 	  _script_engine->_intern->spawning_points[index].max_spawned = static_cast<uint>(maxSpawn);
 	  _script_engine->_intern->spawning_points[index].distance_notification = static_cast<uint>(visibilityDistance);
 
-	} catch (const std::exception &e) {
+	} catch (const std::exception& e) {
 	  SPDLOG_ERROR("[INIT] An error occurred while instantiating SpawningPoints '{}' : {}",
 				   _script_engine->_intern->spawning_points[index].display_key, e.what());
 	}
@@ -247,12 +247,12 @@ void world_populator::generate_spawning_points(const std::string &spawning_point
   }
 }
 
-void world_populator::register_common_lua_engine(const std::string &to_lua_init_file) {
+void world_populator::register_common_lua_engine(const std::string& to_lua_init_file) {
   _script_engine->_intern->lua.open_libraries(sol::lib::base, sol::lib::package);
 
   try {
 	_script_engine->_intern->lua.safe_script_file(to_lua_init_file);
-  } catch (const std::exception &e) {
+  } catch (const std::exception& e) {
 	SPDLOG_ERROR("Error while initiating LUA engine : {} ", e.what());
 	throw;
   }
@@ -271,7 +271,7 @@ void world_populator::register_common_lua_engine(const std::string &to_lua_init_
   };
 }
 
-const std::vector<spawning_point> &
+const std::vector<spawning_point>&
 world_populator::get_spawning_point() const {
   return _script_engine->_intern->spawning_points;
 }

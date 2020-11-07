@@ -52,7 +52,7 @@ public:
   explicit item_manager() = default;
 
   [[nodiscard]] bool
-  are_items_owned_by_user(const std::string &user_name, const std::vector<Item> &item);
+  are_items_owned_by_user(const std::string& user_name, const std::vector<Item>& item);
 
 private:
   // DB connector ?

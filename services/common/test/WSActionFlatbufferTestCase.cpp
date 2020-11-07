@@ -37,17 +37,17 @@ TEST_CASE("WSActionFlatbufferTestCase WSAction Move", "[common][fb]") {
 	auto ok = flatbuffers::Verifier(fbb.GetBufferPointer(), fbb.GetSize());
 	CHECK(fys::fb::world::VerifyWSActionBuffer(ok));
   }
-  uint8_t *binary = fbb.GetBufferPointer();
+  uint8_t* binary = fbb.GetBufferPointer();
 
   SECTION("Binary to FlatBuffer") {
-	const fys::fb::world::WSAction *fromBinary = fys::fb::world::GetWSAction(binary);
+	const fys::fb::world::WSAction* fromBinary = fys::fb::world::GetWSAction(binary);
 	REQUIRE(fromBinary->action_as_Move()->direction() == 42.42);
 
   }// End section : Binary to Flatbuffer
 
   SECTION("ZMQ Message to FlatBuffer") {
 	zmq::message_t msg(binary, fbb.GetSize());
-	const fys::fb::world::WSAction *fromBinary = fys::fb::world::GetWSAction(msg.data());
+	const fys::fb::world::WSAction* fromBinary = fys::fb::world::GetWSAction(msg.data());
 	REQUIRE(fromBinary->action_as_Move()->direction() == 42.42);
   }
 }
@@ -63,16 +63,16 @@ TEST_CASE("WSActionFlatbufferTestCase PnjInteract") {
 	auto ok = flatbuffers::Verifier(fbb.GetBufferPointer(), fbb.GetSize());
 	CHECK(fys::fb::world::VerifyWSActionBuffer(ok));
   }
-  uint8_t *binary = fbb.GetBufferPointer();
+  uint8_t* binary = fbb.GetBufferPointer();
 
   SECTION("Binary to FlatBuffer") {
-	const fys::fb::world::WSAction *fromBinary = fys::fb::world::GetWSAction(binary);
+	const fys::fb::world::WSAction* fromBinary = fys::fb::world::GetWSAction(binary);
 	REQUIRE("idPnj" == std::string(fromBinary->action_as_PnjInteract()->idPnj()->c_str()));
   }// End section : Binary to Flatbuffer
 
   SECTION("ZMQ Message to FlatBuffer") {
 	zmq::message_t msg(binary, fbb.GetSize());
-	const fys::fb::world::WSAction *fromBinary = fys::fb::world::GetWSAction(msg.data());
+	const fys::fb::world::WSAction* fromBinary = fys::fb::world::GetWSAction(msg.data());
 	REQUIRE("idPnj" == std::string(fromBinary->action_as_PnjInteract()->idPnj()->c_str()));
   }
 }

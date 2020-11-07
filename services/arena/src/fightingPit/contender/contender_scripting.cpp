@@ -41,23 +41,23 @@ void contender_scripting::register_contender_script() {
   // register instance in ChaiScript
   try {
 	_chai.get().eval(create_var);
-  } catch (const chaiscript::exception::eval_error &ee) {
+  } catch (const chaiscript::exception::eval_error& ee) {
 	SPDLOG_ERROR("Error caught when instantiating variable (script : '{}')\n{}", create_var, ee.what());
   }
 
   // load doable actions
   try {
 	_doable_actions = _chai.get().eval<std::vector<std::string>>(retrieve_doable_actions);
-  } catch (const chaiscript::exception::eval_error &ee) {
+  } catch (const chaiscript::exception::eval_error& ee) {
 	SPDLOG_ERROR("Error caught when retrieving doable actions (script : '{}')\n{}", retrieve_doable_actions, ee.what());
   }
 }
 
-void contender_scripting::load_contender_script_from_file(const std::string &file_path) {
+void contender_scripting::load_contender_script_from_file(const std::string& file_path) {
   // load script content (containing the class)
   try {
 	_chai.get().use(file_path);
-  } catch (const chaiscript::exception::eval_error &ee) {
+  } catch (const chaiscript::exception::eval_error& ee) {
 	SPDLOG_WARN("Error caught on scripting loading\n{}\n{}", ee.what(), ee.detail);
   }
   register_contender_script();
@@ -66,7 +66,7 @@ void contender_scripting::load_contender_script_from_file(const std::string &fil
 bool contender_scripting::setup_contender() {
   try {
 	_chai.get().eval(chai_contender_id() + ".setupContender();");
-  } catch (const chaiscript::exception::eval_error &ee) {
+  } catch (const chaiscript::exception::eval_error& ee) {
 	SPDLOG_ERROR("setupContender failed for {} :\n{}", chai_contender_id(), ee.what());
 	return false;
   }
@@ -80,7 +80,7 @@ void contender_scripting::execute_action() {
 	if (funcAction(_contender_id)) {
 	  SPDLOG_DEBUG("Contender {}_{} executed action", _contender_name, _contender_id);
 	}
-  } catch (const chaiscript::exception::eval_error &ee) {
+  } catch (const chaiscript::exception::eval_error& ee) {
 	SPDLOG_ERROR("Error caught on script execution while executing action ('{}') of contender.\n{}",
 				 action, ee.what());
   }

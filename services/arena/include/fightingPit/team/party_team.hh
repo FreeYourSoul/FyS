@@ -43,13 +43,13 @@ public:
   [[nodiscard]] std::vector<std::shared_ptr<team_member>>
   team_member_on_side(hexagon_side::orientation orientation) const;
 
-  [[nodiscard]] const std::string &
+  [[nodiscard]] const std::string&
   user_name() const { return _user_name; }
 
-  [[nodiscard]] const std::vector<std::shared_ptr<team_member>> &
+  [[nodiscard]] const std::vector<std::shared_ptr<team_member>>&
   team_members() const { return _members; }
 
-  [[nodiscard]] std::vector<std::shared_ptr<team_member>> &
+  [[nodiscard]] std::vector<std::shared_ptr<team_member>>&
   access_team_members() { return _members; }
 
   [[nodiscard]] unsigned

@@ -46,15 +46,15 @@ public:
    * @brief This method is processing the inputMessage and dispatch it appropriately among the peers connected to
    * the dispatcher socket
    */
-  void process_input_message(zmq::multipart_t &&msg, network::dispatcher_connection_manager &manager) noexcept;
+  void process_input_message(zmq::multipart_t&& msg, network::dispatcher_connection_manager& manager) noexcept;
 
   /**
    * @brief This method is dispatching the cluster message and forward it appropriately among the peers connected to
    * the dispatcher socket
    */
-  void process_cluster_message(zmq::multipart_t &&msg, network::dispatcher_connection_manager &manager) noexcept;
+  void process_cluster_message(zmq::multipart_t&& msg, network::dispatcher_connection_manager& manager) noexcept;
 
-  void forward_message_to_frontend(zmq::multipart_t &&msg, network::dispatcher_connection_manager &manager) noexcept;
+  void forward_message_to_frontend(zmq::multipart_t&& msg, network::dispatcher_connection_manager& manager) noexcept;
 
 private:
   // map of token over timestamp, the timestamp representing the last time the token has been checked
@@ -73,7 +73,7 @@ private:
 template<typename DispatcherHandler = dispatcher_handler_base>
 class dispatcher {
 public:
-  explicit dispatcher(fys::startup_dispatcher_ctx &&ctx) : _connectionManager(1, ctx.isLoadBalancingEnabled()) {
+  explicit dispatcher(fys::startup_dispatcher_ctx&& ctx) : _connectionManager(1, ctx.isLoadBalancingEnabled()) {
 	_connectionManager.setupConnectionManager(ctx);
   }
 
@@ -84,19 +84,19 @@ public:
 			dispatcherSocketHasSomethingToPoll] = _connectionManager.poll();
 	  if (listenerSocketHasSomethingToPoll) {
 		_connectionManager.dispatchMessageFromListenerSocket(
-			[this](zmq::multipart_t &&msg, network::dispatcher_connection_manager &manager) {
+			[this](zmq::multipart_t&& msg, network::dispatcher_connection_manager& manager) {
 			  _dispatcher.processInputMessage(std::move(msg), manager);
 			});
 	  }
 	  if (subscriberSocketHasSomethingToPoll) {
 		_connectionManager.dispatchMessageFromSubscriberSocket(
-			[this](zmq::multipart_t &&msg, network::dispatcher_connection_manager &manager) {
+			[this](zmq::multipart_t&& msg, network::dispatcher_connection_manager& manager) {
 			  _dispatcher.processClusterMessage(std::move(msg), manager);
 			});
 	  }
 	  if (dispatcherSocketHasSomethingToPoll) {
 		_connectionManager.dispatchMessageFromDispatcherSocket(
-			[this](zmq::multipart_t &&msg, network::dispatcher_connection_manager &manager) {
+			[this](zmq::multipart_t&& msg, network::dispatcher_connection_manager& manager) {
 			  _dispatcher.forwardMessageToFrontend(std::move(msg), manager);
 			});
 	  }

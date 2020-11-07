@@ -35,8 +35,8 @@ namespace {
 
 template<typename T>
 [[nodiscard]] bool
-verify_buffer(const void *fbBuffer, std::uint32_t size) {
-  auto v = flatbuffers::Verifier(static_cast<const uint8_t *>(fbBuffer), size);
+verify_buffer(const void* fbBuffer, std::uint32_t size) {
+  auto v = flatbuffers::Verifier(static_cast<const uint8_t*>(fbBuffer), size);
   return v.VerifyBuffer<T>();
 }
 
@@ -44,7 +44,7 @@ verify_buffer(const void *fbBuffer, std::uint32_t size) {
 
 namespace fys::inv {
 
-inventory_server_service::inventory_server_service(const inventory_server_context &ctx)
+inventory_server_service::inventory_server_service(const inventory_server_context& ctx)
 	: _ctx(ctx), _exchange_manager(ctx) {
   _connection_handler.setup_connection_manager(ctx.dispatcher_connection_str());
 }
@@ -54,12 +54,12 @@ void inventory_server_service::run_server_loop() {
 
   while (true) {
 	_connection_handler.poll_process_msg_from_dispatcher(
-		[this](zmq::message_t &&player_idt, zmq::message_t &&world_server_msg) {
+		[this](zmq::message_t&& player_idt, zmq::message_t&& world_server_msg) {
 		  if (!verify_buffer<fb::ivt::InventoryRequest>(world_server_msg.data(), world_server_msg.size())) {
 			SPDLOG_ERROR("[Inv : {}] : Wrongly formatted InventoryRequest buffer", _ctx.get().server_code());
 			return;
 		  }
-		  const auto *binary = fb::ivt::GetInventoryRequest(world_server_msg.data());
+		  const auto* binary = fb::ivt::GetInventoryRequest(world_server_msg.data());
 		  zmq::multipart_t response;
 		  switch (binary->content_type()) {
 		  case fb::ivt::InventoryRequestContent_RetrievePlayerInventory:
@@ -85,12 +85,12 @@ void inventory_server_service::run_server_loop() {
 
 	// direct connection with the client to handle exchanges
 	_exchange_manager.pollAndProcessPlayerMessage(
-		[this](zmq::message_t &&identity, zmq::message_t &&authFrame, zmq::message_t &&content) {
+		[this](zmq::message_t&& identity, zmq::message_t&& authFrame, zmq::message_t&& content) {
 		  if (!verify_buffer<fb::ivt::ExchangeInventory>(content.data(), content.size())) {
 			SPDLOG_ERROR("[Inv : {}] : Wrongly formatted ExchangeInventory buffer", _ctx.get().server_code());
 			return;
 		  }
-		  const auto *binary = fb::ivt::GetExchangeInventory(content.data());
+		  const auto* binary = fb::ivt::GetExchangeInventory(content.data());
 		  auto roomAccessor = room_accessor{
 			  binary->idExchange(),
 			  binary->tokenExchange()->str(),
@@ -133,8 +133,8 @@ void inventory_server_service::run_server_loop() {
 }
 
 zmq::message_t
-inventory_server_service::exchange_inventory(const fb::ivt::initiate_exchange_instance *exchange_request, std::string identity) {
-  const auto &exchangeRoom = _exchange_manager.makeExchangeRoom(_item_manager,
+inventory_server_service::exchange_inventory(const fb::ivt::initiate_exchange_instance* exchange_request, std::string identity) {
+  const auto& exchangeRoom = _exchange_manager.makeExchangeRoom(_item_manager,
 																exchange_request->userInitiator()->str(),
 																exchange_request->userReceiver()->str(),
 																identity);
@@ -145,19 +145,19 @@ inventory_server_service::exchange_inventory(const fb::ivt::initiate_exchange_in
 }
 
 zmq::message_t
-inventory_server_service::retrieve_player_inventory(const fb::ivt::retrieve_player_inventory *retrieve_request) {
+inventory_server_service::retrieve_player_inventory(const fb::ivt::retrieve_player_inventory* retrieve_request) {
   const std::string player_to_retrieve = retrieve_request->playerToRetrieve()->str();
   SPDLOG_INFO("[Inv : {}] : Request of player's '{}' inventory.", _ctx.get().server_code(), player_to_retrieve);
   return {};
 }
 
 zmq::message_t
-inventory_server_service::update_player_soul_draughtboard(const fb::ivt::update_player_soul_draughtboard *update_request) {
+inventory_server_service::update_player_soul_draughtboard(const fb::ivt::update_player_soul_draughtboard* update_request) {
   return {};
 }
 
 zmq::message_t
-inventory_server_service::retrievePlayerSoulDraughtboard(const fb::ivt::update_player_soul_draughtboard *update_request) {
+inventory_server_service::retrievePlayerSoulDraughtboard(const fb::ivt::update_player_soul_draughtboard* update_request) {
   return {};
 }
 

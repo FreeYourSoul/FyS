@@ -35,14 +35,14 @@ public:
   virtual ~CmlScriptDownloader() = default;
 
   template<typename DownloaderFunc>
-  CmlScriptDownloader(std::filesystem::path pathLocalStorage, DownloaderFunc &&downloader)
+  CmlScriptDownloader(std::filesystem::path pathLocalStorage, DownloaderFunc&& downloader)
 	  : cache::Cml(std::move(pathLocalStorage)), _downloader(std::forward<DownloaderFunc>(downloader)) {}
 
 private:
-  void createUpToDateFileInLocalStorage(const CmlKey &cml_key, std::filesystem::file_time_type cache_time) override;
+  void createUpToDateFileInLocalStorage(const CmlKey& cml_key, std::filesystem::file_time_type cache_time) override;
 
 private:
-  std::function<void(const std::string &, const std::string &)> _downloader;
+  std::function<void(const std::string&, const std::string&)> _downloader;
 };
 
 }// namespace fys::cache

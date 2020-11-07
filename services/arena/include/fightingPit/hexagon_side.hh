@@ -100,13 +100,13 @@ private:
 
 }// namespace fys::arena
 
-std::ostream &
-operator<<(std::ostream &os, fys::arena::hexagon_side::orientation orientation);
+std::ostream&
+operator<<(std::ostream& os, fys::arena::hexagon_side::orientation orientation);
 
-std::ostream &
-operator<<(std::ostream &os, fys::arena::hexagon_side::hexagon hexagon);
+std::ostream&
+operator<<(std::ostream& os, fys::arena::hexagon_side::hexagon hexagon);
 
-std::ostream &
-operator<<(std::ostream &os, fys::arena::hexagon_side hexagon_side);
+std::ostream&
+operator<<(std::ostream& os, fys::arena::hexagon_side hexagon_side);
 
 #endif// !FYS_HEXAGONSIDE_HH

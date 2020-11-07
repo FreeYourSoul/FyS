@@ -50,8 +50,8 @@ namespace fys::map::algo {
  * @return true if the given group object layer is used for collision, false otherwise
  */
 template<typename TmxLayer>
-bool is_collision_layer(TmxLayer &&layer) {
-  return std::any_of(layer.getProperties().begin(), layer.getProperties().end(), [](const auto &prop) {
+bool is_collision_layer(TmxLayer&& layer) {
+  return std::any_of(layer.getProperties().begin(), layer.getProperties().end(), [](const auto& prop) {
 	return prop.getName().find("collision") != std::string::npos;
   });
 }
@@ -63,8 +63,8 @@ bool is_collision_layer(TmxLayer &&layer) {
  * @return true if the given group object layer is used for any trigger, false otherwise
  */
 template<typename TmxLayer>
-bool is_trigger_layer(TmxLayer &&layer) {
-  return std::any_of(layer.getProperties().begin(), layer.getProperties().end(), [](const auto &prop) {
+bool is_trigger_layer(TmxLayer&& layer) {
+  return std::any_of(layer.getProperties().begin(), layer.getProperties().end(), [](const auto& prop) {
 	return prop.getName().find("trigger") != std::string::npos;
   });
 }
@@ -125,12 +125,12 @@ public:
   [[nodiscard]] inline bool
   can_go_through(pos position, std::size_t level) const noexcept;
 
-  void add_collision(const tmx::FloatRect &object) {
+  void add_collision(const tmx::FloatRect& object) {
 	_collisions.emplace_back(object);
   }
 
   template<typename T>
-  void set_trigger(T &&trigger) {
+  void set_trigger(T&& trigger) {
 	_trigger = std::forward(trigger);
   }
 
@@ -142,21 +142,21 @@ private:
   std::bitset<4> _level;
   std::bitset<4> _change_level;// set on stairs to pass from a level to another
   e_element_type _type = e_element_type::NONE;
-  std::variant<connection_handler *, void *> _trigger;// TODO: change with std::function<void(LUA::Reference&)>
+  std::variant<connection_handler*, void*> _trigger;// TODO: change with std::function<void(LUA::Reference&)>
   std::vector<tmx::FloatRect> _collisions;
 };
 
 class collision_map {
 
 public:
-  explicit collision_map(const world_server_context &ctx);
+  explicit collision_map(const world_server_context& ctx);
 
-  collision_map(collision_map &&) noexcept = default;
-  collision_map(const collision_map &) = delete;
-  collision_map &operator=(const collision_map &) = delete;
+  collision_map(collision_map&&) noexcept = default;
+  collision_map(const collision_map&) = delete;
+  collision_map& operator=(const collision_map&) = delete;
 
-  void build_map_from_tmx(const std::string &tmx_map_path);
-  void execute_potential_trigger(std::uint32_t index, const character_info &position_on_map);
+  void build_map_from_tmx(const std::string& tmx_map_path);
+  void execute_potential_trigger(std::uint32_t index, const character_info& position_on_map);
 
   /**
    * Check if the position is in the boundary of the map before checking on the map
@@ -171,7 +171,7 @@ private:
    *
    * AABB Objects stands for Axis-Aligned Bounding Box. Basically coordinates to use as hit box for the tiles.
    */
-  void add_collision_in_map(const vec2_u &tile_map_size, const tmx::ObjectGroup &collision_layer);
+  void add_collision_in_map(const vec2_u& tile_map_size, const tmx::ObjectGroup& collision_layer);
 
   /**
    * @brief Add the trigger elements into the map, and link the function associated to this trigger
@@ -181,7 +181,7 @@ private:
    *     teleport the player into another location
    *   - The classical one is going to trigger a script retrieved from the DB thanks to the id defining the trigger
    */
-  void add_trigger_in_map(const tmx::ObjectGroup &trigger_layer);
+  void add_trigger_in_map(const tmx::ObjectGroup& trigger_layer);
 
 private:
   boundary _boundary_x;

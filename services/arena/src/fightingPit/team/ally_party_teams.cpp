@@ -42,9 +42,9 @@ namespace fys::arena {
 ally_party_teams::~ally_party_teams() = default;
 
 bool ally_party_teams::execute_ally_action(
-	const data::priority_elem &ally,
-	pit_contenders &pc,
-	std::unique_ptr<chaiscript::ChaiScript> &chai_ptr) {
+	const data::priority_elem& ally,
+	pit_contenders& pc,
+	std::unique_ptr<chaiscript::ChaiScript>& chai_ptr) {
   if (ally.is_contender) {
 	return false;
   }
@@ -63,8 +63,8 @@ bool ally_party_teams::execute_ally_action(
   }
 }
 
-void ally_party_teams::add_party_team(std::unique_ptr<party_team> &&team) {
-  for (auto &tm : team->access_team_members()) {
+void ally_party_teams::add_party_team(std::unique_ptr<party_team>&& team) {
+  for (auto& tm : team->access_team_members()) {
 	tm->set_id(++_current_team_member_id);
   }
   _party_teams.emplace_back(std::move(team));
@@ -76,8 +76,8 @@ ally_party_teams::select_suitable_member(comparator_selection<team_member> comp)
   if (_party_teams.empty() || _party_teams.front()->team_members().empty())
 	return nullptr;
   auto suitable = _party_teams.front()->team_members().begin();
-  for (auto &party_team : _party_teams) {
-	auto &team_members = party_team->team_members();
+  for (auto& party_team : _party_teams) {
+	auto& team_members = party_team->team_members();
 	auto suitable_tmp = fil::find_most_suitable(team_members.begin(), team_members.end(), comp, suitable);
 
 	if (suitable_tmp != team_members.end()) {
@@ -117,15 +117,15 @@ ally_party_teams::select_suitable_member_on_side_alive(hexagon_side::orientation
 }
 
 std::shared_ptr<team_member>
-ally_party_teams::get_specific_team_member_by_id(const std::string &user_name, unsigned id_member) const {
+ally_party_teams::get_specific_team_member_by_id(const std::string& user_name, unsigned id_member) const {
   auto it_team = std::find_if(_party_teams.cbegin(), _party_teams.cend(),
-							  [&user_name](const auto &team) {
+							  [&user_name](const auto& team) {
 								return team->user_name() == user_name;
 							  });
 
   if (it_team != _party_teams.cend()) {
 	auto it_member = std::find_if((*it_team)->team_members().cbegin(), (*it_team)->team_members().cend(),
-								  [id_member](const auto &member) {
+								  [id_member](const auto& member) {
 									return member->id() == id_member;
 								  });
 
@@ -139,9 +139,9 @@ std::shared_ptr<team_member>
 ally_party_teams::select_member_by_id(unsigned id_member) {
   if (_party_teams.empty() || _party_teams.front()->access_team_members().empty())
 	return nullptr;
-  for (auto &partyTeam : _party_teams) {
-	const auto &team_members = partyTeam->access_team_members();
-	auto team_member = std::find_if(team_members.begin(), team_members.end(), [id_member](const auto &tm) {
+  for (auto& partyTeam : _party_teams) {
+	const auto& team_members = partyTeam->access_team_members();
+	auto team_member = std::find_if(team_members.begin(), team_members.end(), [id_member](const auto& tm) {
 	  return id_member == tm->id();
 	});
 
@@ -154,7 +154,7 @@ ally_party_teams::select_member_by_id(unsigned id_member) {
 unsigned
 ally_party_teams::ally_number_on_side(hexagon_side::orientation side) const {
   return std::accumulate(_party_teams.cbegin(), _party_teams.cend(), 0u,
-						 [side](unsigned count, const party_team_uptr &party) {
+						 [side](unsigned count, const party_team_uptr& party) {
 						   return count + party->ally_number_on_side(side);
 						 });
 }
@@ -164,8 +164,8 @@ ally_party_teams::members_by_side(hexagon_side::orientation side) const {
   std::vector<std::shared_ptr<team_member>> ret;
   if (_party_teams.empty() || _party_teams.front()->team_members().empty())
 	return ret;
-  for (const auto &party_team : _party_teams) {
-	const auto &members_on_side = party_team->team_member_on_side(side);
+  for (const auto& party_team : _party_teams) {
+	const auto& members_on_side = party_team->team_member_on_side(side);
 	std::copy(members_on_side.begin(), members_on_side.end(), std::back_inserter(ret));
   }
   return ret;
@@ -177,16 +177,16 @@ ally_party_teams::dead_members_by_side(hexagon_side::orientation side) const {
   if (_party_teams.empty() || _party_teams.front()->team_members().empty()) {
 	return ret;
   }
-  for (const auto &party_team : _party_teams) {
-	const auto &members_on_side = party_team->get_dead_team_members_on_side(side);
+  for (const auto& party_team : _party_teams) {
+	const auto& members_on_side = party_team->get_dead_team_members_on_side(side);
 	std::copy(members_on_side.begin(), members_on_side.end(), std::back_inserter(ret));
   }
   return ret;
 }
 
-const party_team &
-ally_party_teams::get_party_team_of_player(const std::string &user_name) const {
-  auto it = std::find_if(_party_teams.begin(), _party_teams.end(), [&user_name](const auto &party_team) {
+const party_team&
+ally_party_teams::get_party_team_of_player(const std::string& user_name) const {
+  auto it = std::find_if(_party_teams.begin(), _party_teams.end(), [&user_name](const auto& party_team) {
 	return user_name == party_team->user_name();
   });
   if (it == _party_teams.end()) {
@@ -195,8 +195,8 @@ ally_party_teams::get_party_team_of_player(const std::string &user_name) const {
   return **it;
 }
 
-bool ally_party_teams::set_party_readiness(const std::string &user_name) {
-  auto it = std::find_if(_party_teams.begin(), _party_teams.end(), [&user_name](const auto &party_team) {
+bool ally_party_teams::set_party_readiness(const std::string& user_name) {
+  auto it = std::find_if(_party_teams.begin(), _party_teams.end(), [&user_name](const auto& party_team) {
 	return user_name == party_team->user_name();
   });
   if (it == _party_teams.end()) {
@@ -210,18 +210,18 @@ bool ally_party_teams::set_party_readiness(const std::string &user_name) {
   }
 
   (*it)->set_team_ready(true);
-  return std::all_of(_party_teams.begin(), _party_teams.end(), [](const auto &party_team) {
+  return std::all_of(_party_teams.begin(), _party_teams.end(), [](const auto& party_team) {
 	return party_team->is_team_ready();
   });
 }
 bool ally_party_teams::all_dead() const {
-  return std::all_of(_party_teams.begin(), _party_teams.end(), [](const auto &pt) {
-	return std::all_of(pt->team_members().begin(), pt->team_members().end(), [](const auto &member) {
+  return std::all_of(_party_teams.begin(), _party_teams.end(), [](const auto& pt) {
+	return std::all_of(pt->team_members().begin(), pt->team_members().end(), [](const auto& member) {
 	  return member->status().life_pt.is_dead();
 	});
   });
 }
-const std::vector<std::unique_ptr<party_team>> &
+const std::vector<std::unique_ptr<party_team>>&
 ally_party_teams::party_teams() const { return _party_teams; }
 
 }// namespace fys::arena

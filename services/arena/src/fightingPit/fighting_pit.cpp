@@ -66,8 +66,8 @@ fighting_pit::fighting_pit(std::string creator_user_name, fys::arena::fighting_p
 
 fighting_pit::~fighting_pit() = default;
 
-void fighting_pit::continue_battle(const std::chrono::system_clock::time_point &now) {
-  for (auto &battle : _side_battles) {
+void fighting_pit::continue_battle(const std::chrono::system_clock::time_point& now) {
+  for (auto& battle : _side_battles) {
 	if (battle.empty()) {// if battle side is empty, ignore it
 	  continue;
 	}
@@ -102,7 +102,7 @@ fighting_pit::update_progress_status() {
   return progress::ON_GOING;
 }
 
-void fighting_pit::forward_to_team_member(const std::string &user, player_action action) {
+void fighting_pit::forward_to_team_member(const std::string& user, player_action action) {
   auto member = _party_teams.get_specific_team_member_by_id(user, action.id_member);
   if (!member) {
 	SPDLOG_ERROR("[fp:{}] : Player '{}' try to forward a message to not existing member member of id {}",
@@ -120,7 +120,7 @@ void fighting_pit::forward_to_team_member(const std::string &user, player_action
 	  SPDLOG_INFO("[fp:{}] : Member {}.{}.{} register a new action {}", _arena_id, user, member->id(), member->name(), action.action_name);
 	  member->add_pending_action(std::move(action.action_name), std::move(target));
 	}
-  } catch (const std::exception &e) {
+  } catch (const std::exception& e) {
 	SPDLOG_ERROR("[fp:{}] : An error occurred when checking if an action was doable from user '{}':\n{}",
 				 _arena_id, user, e.what());
   }
@@ -130,17 +130,17 @@ void fighting_pit::add_authenticated_user(std::string user_name, std::string use
   _authenticated_players.push_back({std::move(user_name), std::move(user_token)});
 }
 
-bool fighting_pit::is_player_participant(const std::string &name, const std::string &token) const {
+bool fighting_pit::is_player_participant(const std::string& name, const std::string& token) const {
   return std::any_of(_authenticated_players.begin(), _authenticated_players.end(),
-					 [&name, &token](auto &authPlayer) { return authPlayer.name == name && authPlayer.token == token; });
+					 [&name, &token](auto& authPlayer) { return authPlayer.name == name && authPlayer.token == token; });
 }
 
-void fighting_pit::add_party_team_and_register_actions(std::unique_ptr<party_team> pt, cache::Cml &cache) {
+void fighting_pit::add_party_team_and_register_actions(std::unique_ptr<party_team> pt, cache::Cml& cache) {
   chai_register::load_register_action_party_team(*_chai_ptr, cache, *pt);
   _layout_map.add_active_party_team(*pt);
   _party_teams.add_party_team(std::move(pt));
   std::sort(_side_battles.begin(), _side_battles.end(),
-			[this](auto &lhs, auto &rhs) {
+			[this](auto& lhs, auto& rhs) {
 			  return _layout_map.active_characters_on_side(lhs.side()) < _layout_map.active_characters_on_side(rhs.side());
 			});
 }
@@ -178,11 +178,11 @@ void fighting_pit::initialize_side_battles() {
 }
 
 void fighting_pit::initialize_priority_in_side_battles() {
-  for (auto &sb : _side_battles) {
-	const auto &member_by_side = _party_teams.members_by_side(sb.side());
-	const auto &contender_by_side = _contenders.contenders_on_side(sb.side());
+  for (auto& sb : _side_battles) {
+	const auto& member_by_side = _party_teams.members_by_side(sb.side());
+	const auto& contender_by_side = _contenders.contenders_on_side(sb.side());
 
-	for (const team_member_sptr &member : member_by_side) {
+	for (const team_member_sptr& member : member_by_side) {
 	  sb.add_participant_in_list(member->id(), member->status().initial_speed, false);
 	}
 	for (unsigned i = 0; i < contender_by_side.size(); ++i) {
@@ -190,14 +190,14 @@ void fighting_pit::initialize_priority_in_side_battles() {
 	}
   };
 }
-void fighting_pit::set_player_readiness(const std::string &user_name) {
+void fighting_pit::set_player_readiness(const std::string& user_name) {
   SPDLOG_INFO("[fp:{}] : Player '{}' is setting readiness", _arena_id, user_name);
   if (_party_teams.set_party_readiness(user_name)) {
 	_progress = progress::ON_GOING;
   }
 }
 std::pair<bool, std::optional<target_type>>
-fighting_pit::check_and_retrieve_target(const std::string &user, const team_member_sptr &member, const player_action &action) {
+fighting_pit::check_and_retrieve_target(const std::string& user, const team_member_sptr& member, const player_action& action) {
   auto t = _chai_ptr->eval<data::targeting>(
 	  chai::util::get_ally_action_retriever(user, member->name(), action.action_name).append(".requireTarget();"));
   std::optional<target_type> target;
@@ -246,18 +246,18 @@ fighting_pit::check_and_retrieve_target(const std::string &user, const team_memb
 	return std::pair(false, target);
   }
   if (!fil::all_contains(action.ally_target, _party_teams.get_party_team_of_player(user).team_members(),
-						 [](const team_member_sptr &tm) { return tm->id(); })) {
+						 [](const team_member_sptr& tm) { return tm->id(); })) {
 	SPDLOG_WARN("[fp:{}] : Player {} tried to target a non-existing Ally", _arena_id, user);
 	return std::pair(false, target);
   }
   if (!fil::all_contains(action.contender_target, _contenders.contenders(),
-						 [](const fighting_contender_sptr &c) { return c->id(); })) {
+						 [](const fighting_contender_sptr& c) { return c->id(); })) {
 	SPDLOG_WARN("[fp:{}] : Player {} tried to target a non-existing Contender, Targets are : ", _arena_id, user);
 	return std::pair(false, target);
   }
   return std::pair(true, target);
 }
-bool fighting_pit::add_contender(const std::shared_ptr<fighting_contender> &fc) {
+bool fighting_pit::add_contender(const std::shared_ptr<fighting_contender>& fc) {
   if (_contenders.add_contender(fc)) {
 	_layout_map.add_active_contender();
 	return true;

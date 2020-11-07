@@ -43,7 +43,7 @@ namespace fys::arena {
 worker_service::worker_service()
 	: _ctx(1), _worker_router(_ctx, zmq::socket_type::router), _current_arena_id(0) {}
 
-void worker_service::setup_connection_manager(const fys::arena::arena_server_context &ctx) noexcept {
+void worker_service::setup_connection_manager(const fys::arena::arena_server_context& ctx) noexcept {
   _worker_router.bind(ctx.player_binding_string());
 }
 
@@ -55,7 +55,7 @@ void worker_service::start_fighting_pits_loop() {
 	auto now = std::chrono::system_clock::now();
 
 	if (!_arena_instances.empty()) {
-	  for (auto &[id, fp] : _arena_instances) {
+	  for (auto& [id, fp] : _arena_instances) {
 		if (fp->is_battle_on_going()) {
 		  fp->continue_battle(now);
 		} else if (!fp->is_joinable()) {
@@ -78,11 +78,12 @@ worker_service::add_fighting_pit(std::unique_ptr<fighting_pit> fp) {
 	SPDLOG_ERROR("Cannot add fighting pit in WorkerService (worker full)");
 	return fighting_pit::CREATION_ERROR;
   }
+
   while (++_current_arena_id != 0 && _arena_instances.find(_current_arena_id) != _arena_instances.end())
 	;
   chai_register::register_network_commands(*fp->get_chai_ptr(), broadcast_msg_handler(fp->id()));
   fp->set_arena_id(_current_arena_id);
-  history_manager::create_historic(*fp, 1);// seed is to be changed
+  history_manager::create_historic(*fp, _current_arena_id, 1);// seed is to be changed
   _arena_instances.insert(std::pair(_current_arena_id, std::move(fp)));
   _arena_id_on_identifier.insert(std::pair(_current_arena_id, std::vector<player_identifier>{}));
   return _current_arena_id;
@@ -91,7 +92,7 @@ worker_service::add_fighting_pit(std::unique_ptr<fighting_pit> fp) {
 void worker_service::cleanup_finished_battles() {
   std::vector<unsigned> idsToRemove;
   idsToRemove.reserve(_arena_instances.size());
-  for (auto &[id, fp] : _arena_instances) {
+  for (auto& [id, fp] : _arena_instances) {
 	if (fp->is_battle_over()) {
 	  idsToRemove.emplace_back(id);
 	}
@@ -103,7 +104,7 @@ void worker_service::cleanup_finished_battles() {
   }
 }
 
-void worker_service::player_join_fighting_pit(unsigned fighting_pit_id, std::unique_ptr<party_team> pt, cache::Cml &cml) {
+void worker_service::player_join_fighting_pit(unsigned fighting_pit_id, std::unique_ptr<party_team> pt, cache::Cml& cml) {
   auto it = _arena_instances.find(fighting_pit_id);
   if (it != _arena_instances.end()) {
 	if (it->second->is_joinable()) {
@@ -119,7 +120,7 @@ void worker_service::player_join_fighting_pit(unsigned fighting_pit_id, std::uni
 }
 
 std::optional<std::reference_wrapper<fighting_pit>>
-worker_service::get_authenticated_player_fighting_pit(const std::string &name, const std::string &token, unsigned fp_id) {
+worker_service::get_authenticated_player_fighting_pit(const std::string& name, const std::string& token, unsigned fp_id) {
   if (auto it = _arena_instances.find(fp_id);
 	  (it != _arena_instances.end() && it->second->is_player_participant(name, token))) {
 	return *it->second;
@@ -133,8 +134,8 @@ void worker_service::upsert_player_identifier(unsigned fp_id, std::string user_n
   if (itIdt == _arena_id_on_identifier.end())
 	return;
 
-  auto &identifiers = itIdt->second;
-  if (auto it = std::find_if(identifiers.begin(), identifiers.end(), [&user_name](const auto &idt) {
+  auto& identifiers = itIdt->second;
+  if (auto it = std::find_if(identifiers.begin(), identifiers.end(), [&user_name](const auto& idt) {
 		return idt.user_name == user_name;
 	  });
 	  it != identifiers.end()) {
@@ -150,7 +151,7 @@ worker_service::fighting_pit_exist_and_joinable(unsigned int fighting_pit_id) co
   return std::pair(it != _arena_instances.cend(), it != _arena_instances.cend() && it->second->is_joinable());
 }
 
-void worker_service::send_msg_new_arriving_team(unsigned fp_id, const std::string &user_name) noexcept {
+void worker_service::send_msg_new_arriving_team(unsigned fp_id, const std::string& user_name) noexcept {
   flatbuffer_generator fg;
 
   {
@@ -163,7 +164,7 @@ void worker_service::send_msg_new_arriving_team(unsigned fp_id, const std::strin
   }
 }
 
-void worker_service::direct_send_msg_to_player(zmq::message_t &&identity, zmq::message_t &&msg) {
+void worker_service::direct_send_msg_to_player(zmq::message_t&& identity, zmq::message_t&& msg) {
   zmq::multipart_t toSend;
   toSend.add(std::move(identity));
   toSend.add(std::move(msg));
@@ -172,8 +173,8 @@ void worker_service::direct_send_msg_to_player(zmq::message_t &&identity, zmq::m
   }
 }
 
-bool worker_service::send_msg_to_player(unsigned fp_id, const std::string &user_name, zmq::message_t &&msg) {
-  const std::string &identifier = retrieve_player_identifier(fp_id, user_name);
+bool worker_service::send_msg_to_player(unsigned fp_id, const std::string& user_name, zmq::message_t&& msg) {
+  const std::string& identifier = retrieve_player_identifier(fp_id, user_name);
   if (identifier == user_name) {
 	SPDLOG_ERROR("Cannot send a message in fightingPit {} to player {}. {}", fp_id, user_name, msg.str());
 	return false;
@@ -189,7 +190,7 @@ bool worker_service::send_msg_to_player(unsigned fp_id, const std::string &user_
   return true;
 }
 
-bool worker_service::broadcast_msg(unsigned fp_id, zmq::message_t &&msg, const std::string &except) {
+bool worker_service::broadcast_msg(unsigned fp_id, zmq::message_t&& msg, const std::string& except) {
   const auto identifiersIt = _arena_id_on_identifier.find(fp_id);
   if (identifiersIt == _arena_id_on_identifier.end())
 	return false;
@@ -198,7 +199,7 @@ bool worker_service::broadcast_msg(unsigned fp_id, zmq::message_t &&msg, const s
   toSend.add({});            // add empty frame (identifier frame at index 0)
   toSend.add(std::move(msg));// add content
 
-  for (const auto &[user_name, identifier] : identifiersIt->second) {
+  for (const auto& [user_name, identifier] : identifiersIt->second) {
 	if (user_name == except)
 	  continue;
 	toSend.at(0).rebuild(identifier.data(), identifier.size());
@@ -211,8 +212,8 @@ bool worker_service::broadcast_msg(unsigned fp_id, zmq::message_t &&msg, const s
   return true;
 }
 
-const std::string &
-worker_service::retrieve_player_identifier(unsigned fp_id, const std::string &user_name) {
+const std::string&
+worker_service::retrieve_player_identifier(unsigned fp_id, const std::string& user_name) {
   auto identifiers_it = _arena_id_on_identifier.find(fp_id);
   if (identifiers_it == _arena_id_on_identifier.end()) {
 	SPDLOG_WARN("Trying to retrieve player identifier on non-existing fighting pit of id {}", fp_id);
@@ -220,7 +221,7 @@ worker_service::retrieve_player_identifier(unsigned fp_id, const std::string &us
   }
 
   auto it = std::find_if(identifiers_it->second.begin(), identifiers_it->second.end(),
-						 [&user_name](const auto &ident) {
+						 [&user_name](const auto& ident) {
 						   return ident.user_name == user_name;
 						 });
   if (it == identifiers_it->second.end()) {

@@ -155,9 +155,9 @@ TEST_CASE("arn::FlatbufferGeneratorTestCase", "[service][arena][util]") {
 	REQUIRE(nullptr != data);
 	REQUIRE(0 < size);
 
-	const fys::fb::arn::ReplyFrame *rp = fys::fb::arn::GetReplyFrame(data);
+	const fys::fb::arn::ReplyFrame* rp = fys::fb::arn::GetReplyFrame(data);
 	REQUIRE(fys::fb::arn::Content_FightingPitState == rp->content_type());
-	const fys::fb::arn::FightingPitState *fps = rp->content_as_FightingPitState();
+	const fys::fb::arn::FightingPitState* fps = rp->content_as_FightingPitState();
 
 	REQUIRE(nullptr != fps);
 	REQUIRE(0 == fps->idFightingPit());
@@ -241,9 +241,9 @@ TEST_CASE("arn::FlatbufferGeneratorTestCase", "[service][arena][util]") {
 	REQUIRE(nullptr != data);
 	REQUIRE(0 < size);
 
-	const fys::fb::arn::ReplyFrame *rp = fys::fb::arn::GetReplyFrame(data);
+	const fys::fb::arn::ReplyFrame* rp = fys::fb::arn::GetReplyFrame(data);
 	REQUIRE(fys::fb::arn::Content_PartyTeamStatus == rp->content_type());
-	const fys::fb::arn::PartyTeamStatus *pts = rp->content_as_PartyTeamStatus();
+	const fys::fb::arn::PartyTeamStatus* pts = rp->content_as_PartyTeamStatus();
 
 	REQUIRE(nullptr != pts);
 
@@ -288,9 +288,9 @@ TEST_CASE("arn::FlatbufferGeneratorTestCase", "[service][arena][util]") {
 	REQUIRE(nullptr != data);
 	REQUIRE(0 < size);
 
-	const fys::fb::arn::ReplyFrame *rp = fys::fb::arn::GetReplyFrame(data);
+	const fys::fb::arn::ReplyFrame* rp = fys::fb::arn::GetReplyFrame(data);
 	REQUIRE(fys::fb::arn::Content_ErrorMessage == rp->content_type());
-	const auto *pts = rp->content_as_ErrorMessage();
+	const auto* pts = rp->content_as_ErrorMessage();
 
 	REQUIRE(nullptr != pts);
 	REQUIRE("Arena server is saturated: Code:WS0X0" == rp->content_as_ErrorMessage()->str());
@@ -305,9 +305,9 @@ TEST_CASE("arn::FlatbufferGeneratorTestCase", "[service][arena][util]") {
 	REQUIRE(nullptr != data);
 	REQUIRE(0 < size);
 
-	const fys::fb::arn::ReplyFrame *rp = fys::fb::arn::GetReplyFrame(data);
+	const fys::fb::arn::ReplyFrame* rp = fys::fb::arn::GetReplyFrame(data);
 	REQUIRE(fys::fb::arn::Content_ActionExecuted == rp->content_type());
-	const auto *ae = rp->content_as_ActionExecuted();
+	const auto* ae = rp->content_as_ActionExecuted();
 
 	REQUIRE(nullptr != ae);
 

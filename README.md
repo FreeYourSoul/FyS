@@ -15,7 +15,7 @@ The todo list is available [here](https://trello.com/b/lMR8LAve/fysgithubtodo)
 
 ## Dispatchers
 
-### What is a FyS dispatcher?
+### What is a FyS dispatcher
 
 ## Services
 
@@ -43,17 +43,24 @@ Service handling the movement in the world of the character controlled by the pl
       General purpose library (algorithm, utilities, database...)
     -   Using [RocksDB](https://github.com/facebook/rocksdb) as base db (easy to locally test)
     -   Another DB would be used in the future following the same interface used for RocksDB for scalability (Cassandra/FoundationDB)
+
 -   [ZeroMQ](https://github.com/zeromq/libzmq) And [cppzmq](https://github.com/zeromq/cppzmq)  
       Network library & C++ binding library
+
 -   [spdlog](https://github.com/gabime/spdlog)  
       Logging framework, usage of fmt library for logging
+      
 -   [FSeam](https://github.com/FreeYourSoul/FSeam)  
       Mocking framework
+      
 -   [Catch2](https://github.com/catchorg/Catch2)  
       Testing framework
+
 -   [ChaiScript](https://github.com/ChaiScript/ChaiScript)  
       For scripting of monsters in the Arena (fighting mode)
+
 -   [LUA](https://github.com/lua/lua)   --> soon to be  
       For the scripting of NPC in the world map (when moving)
+      
 -   [Nix](https://nixos.org/learn.html)  
      Dependency manager for fast installation / setup

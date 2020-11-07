@@ -35,7 +35,7 @@ namespace fys::ws {
 class world_server_context : fys::common::service_context_base {
 
 public:
-  explicit world_server_context(int ac, const char *const *av);
+  explicit world_server_context(int ac, const char* const* av);
 
   [[nodiscard]] std::string
   to_string() const noexcept;
@@ -49,35 +49,35 @@ public:
   [[nodiscard]] std::string
   player_connection_str() const noexcept;
 
-  [[nodiscard]] const std::string &
+  [[nodiscard]] const std::string&
   path_to_local_storage() const noexcept { return _path_to_local_storage; }
 
-  [[nodiscard]] const std::string &
+  [[nodiscard]] const std::string&
   server_code() const noexcept { return _server_code; }
 
-  [[nodiscard]] const std::string &
+  [[nodiscard]] const std::string&
   tmx_map_path() const noexcept { return _tmx_map_path; }
 
-  [[nodiscard]] const boundary &
+  [[nodiscard]] const boundary&
   server_x_boundaries() const noexcept { return _server_x_boundaries; }
 
-  [[nodiscard]] const boundary &
+  [[nodiscard]] const boundary&
   server_y_boundaries() const noexcept { return _server_y_boundaries; }
 
-  [[nodiscard]] const std::vector<proximity_server> &
+  [[nodiscard]] const std::vector<proximity_server>&
   server_proximity() const noexcept { return _server_proximity; }
 
-  [[nodiscard]] const std::string &
+  [[nodiscard]] const std::string&
   path_to_lua_engine() const noexcept { return _path_to_lua_init_engine; }
 
-  [[nodiscard]] const std::string &
+  [[nodiscard]] const std::string&
   spawning_config_path() const noexcept { return _spawning_config_path; }
 
-  [[nodiscard]] const std::string &
+  [[nodiscard]] const std::string&
   path_lua_base() const noexcept { return _path_lua_base; }
 
 private:
-  void init_ws_ctx_from_json(nlohmann::json &json);
+  void init_ws_ctx_from_json(nlohmann::json& json);
 
 private:
   std::string _server_code;

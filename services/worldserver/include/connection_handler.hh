@@ -38,11 +38,11 @@ class connection_handler {
 public:
   explicit connection_handler(std::uint32_t thread_number = 1) noexcept;
 
-  void setup_connection_manager(const fys::ws::world_server_context &ctx) noexcept;
-  void send_msg_to_dispatcher(zmq::multipart_t &&msg) noexcept;
+  void setup_connection_manager(const fys::ws::world_server_context& ctx) noexcept;
+  void send_msg_to_dispatcher(zmq::multipart_t&& msg) noexcept;
 
   template<typename HandlerIncoming, typename HandlerInterServer>
-  void poll_and_process_sub_msg(HandlerIncoming &&handler_incoming, HandlerInterServer &&handler_server) noexcept {
+  void poll_and_process_sub_msg(HandlerIncoming&& handler_incoming, HandlerInterServer&& handler_server) noexcept {
 	//  Initialize poll set
 	zmq::pollitem_t items[] = {
 		{_sub_socket_on_dispatcher, 0, ZMQ_POLLIN, 0}};

@@ -33,7 +33,7 @@ using json = nlohmann::json;
 
 namespace fys::ws {
 
-world_server_context::world_server_context(int ac, const char *const *av)
+world_server_context::world_server_context(int ac, const char* const* av)
 	: common::service_context_base(ac, av) {
   std::ifstream i(_config_file);
   json json_config;
@@ -41,7 +41,7 @@ world_server_context::world_server_context(int ac, const char *const *av)
   init_ws_ctx_from_json(json_config);
 }
 
-void world_server_context::init_ws_ctx_from_json(json &json) {
+void world_server_context::init_ws_ctx_from_json(json& json) {
   auto ws_json = json["worldServer"];
   auto conf_json = ws_json["conf"];
   auto overlap_json = conf_json["overlapServer"];
@@ -55,7 +55,7 @@ void world_server_context::init_ws_ctx_from_json(json &json) {
   ws_json["path_lua_base"].get_to(_path_lua_base);
   _server_x_boundaries = {conf_json["begin_x"].get<double>(), conf_json["end_x"].get<double>()};
   _server_y_boundaries = {conf_json["begin_y"].get<double>(), conf_json["end_y"].get<double>()};
-  for (auto &[key, value] : overlap_json.items()) {
+  for (auto& [key, value] : overlap_json.items()) {
 	proximity_server proximityServer;
 	proximityServer.code = value["code"].get<std::string>();
 
@@ -90,7 +90,7 @@ world_server_context::to_string() const noexcept {
   str += "[INIT] Dispatcher(AuthServer) Subscriber connection string: " + dispatcher_sub_connection_str() + "\n";
   str += "[INIT] Dispatcher(AuthServer) connection string: " + dispatcher_connection_str() + "\n";
 
-  for (const auto &prox : _server_proximity) {
+  for (const auto& prox : _server_proximity) {
 	str += "[INIT] element:\n       ";
 	str += "code: " + prox.code + "\n";
 	if (prox.x_axis_requirement) {

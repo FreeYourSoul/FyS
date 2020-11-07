@@ -43,18 +43,18 @@ public:
   virtual ~Cml() = default;
   explicit Cml(std::filesystem::path pathLocalStorage);
 
-  const std::string &findInCache(const std::string &key);
+  const std::string& findInCache(const std::string& key);
 
-  virtual void createUpToDateFileInLocalStorage(const CmlKey &cmlKey, std::filesystem::file_time_type cacheTime) = 0;
+  virtual void createUpToDateFileInLocalStorage(const CmlKey& cmlKey, std::filesystem::file_time_type cacheTime) = 0;
 
-  void createFile(const std::filesystem::path &pathToFile, const std::string &content) const;
+  void createFile(const std::filesystem::path& pathToFile, const std::string& content) const;
 
 private:
   [[nodiscard]] inline std::pair<bool, std::filesystem::file_time_type>
-  localStorageInfo(const CmlKey &k) const;
+  localStorageInfo(const CmlKey& k) const;
 
   [[nodiscard]] inline bool
-  isInLocalStorageAndUpToDate(const CmlKey &cmlKey, std::filesystem::file_time_type cacheLastUpdate) const;
+  isInLocalStorageAndUpToDate(const CmlKey& cmlKey, std::filesystem::file_time_type cacheLastUpdate) const;
 
 private:
   std::filesystem::path _localPathStorage;

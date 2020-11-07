@@ -124,7 +124,7 @@ TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]") {
 	fpa.add_action_to_one_member(0, "arena:actions:damage:slash.chai", 5);
 	auto fp = fpa.build_fighting_pit(ctx, "WS00");
 
-	const auto &sides = fighting_pit_announcer::get_side_vector(fp);
+	const auto& sides = fighting_pit_announcer::get_side_vector(fp);
 	REQUIRE(18 == sides.size());
 
 	REQUIRE(hexagon_side::orientation::A_N == sides[static_cast<uint>(hexagon_side::orientation::A_N)].side());
@@ -335,7 +335,7 @@ TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]") {
 		SECTION("test ordering") {
 
 		  using namespace std::chrono_literals;
-		  auto &order = fighting_pit_announcer::get_side_battle_for_side(fp, hexagon_side::orientation::B_S);
+		  auto& order = fighting_pit_announcer::get_side_battle_for_side(fp, hexagon_side::orientation::B_S);
 		  REQUIRE(hexagon_side::orientation::B_S == order.side());
 
 		  const auto elem1 = order.get_current_participant_turn(std::chrono::system_clock::now(), 0ms);
@@ -363,7 +363,7 @@ TEST_CASE("FightingPitAnnouncerTestCase", "[service][arena]") {
 		  REQUIRE(5 == elem5.speed);
 		  std::this_thread::sleep_for(10ms);
 
-		  const auto &elem = order.get_current_participant_turn(std::chrono::system_clock::now(), 0ms);
+		  const auto& elem = order.get_current_participant_turn(std::chrono::system_clock::now(), 0ms);
 		  REQUIRE(data::priority_elem{1, 4, data::PARTY_MEMBER} == elem);
 		  REQUIRE(3 == elem.speed);
 		  std::this_thread::sleep_for(10ms);

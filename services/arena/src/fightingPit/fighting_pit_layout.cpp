@@ -38,9 +38,9 @@
 
 namespace fys::arena {
 
-fighting_pit_layout::fighting_pit_layout(pit_contenders &contenders, ally_party_teams &partyTeams)
+fighting_pit_layout::fighting_pit_layout(pit_contenders& contenders, ally_party_teams& partyTeams)
 	: _contenders(contenders), _party_teams(partyTeams) {
-  for (auto &pt : partyTeams.party_teams()) {
+  for (auto& pt : partyTeams.party_teams()) {
 	add_active_party_team(*pt);
   }
   add_active_contender(contenders.number_contender());
@@ -50,8 +50,8 @@ void fighting_pit_layout::add_active_contender(std::uint32_t number_contender_to
   _moving_flag_contender.resize(_moving_flag_contender.size() + number_contender_to_add, false);
 }
 
-void fighting_pit_layout::add_active_party_team(const party_team &pt) {
-  for (auto &tm : pt.team_members()) {
+void fighting_pit_layout::add_active_party_team(const party_team& pt) {
+  for (auto& tm : pt.team_members()) {
 	_moving_flag_ally[std::pair(tm->user_name(), tm->id())] = false;
   }
 }
@@ -61,10 +61,10 @@ fighting_pit_layout::active_characters_on_side(hexagon_side::orientation side) c
   return _contenders.get().number_contender_on_side(side) + _party_teams.get().ally_number_on_side(side);
 }
 
-void fighting_pit_layout::execute_movements(std::vector<side_battle> &sides) {
+void fighting_pit_layout::execute_movements(std::vector<side_battle>& sides) {
   auto csc = changing_side_contenders();
   auto csa = get_changing_side_team_members();
-  auto movement_execution = [&sides](auto &characterToMove) {
+  auto movement_execution = [&sides](auto& characterToMove) {
 	hexagon_side::orientation sideBeforeMove = (*characterToMove->_side).second;
 	hexagon_side::orientation sideAfterMove = characterToMove->_moving;
 	if (characterToMove->_side.move(sideAfterMove, true)) {
@@ -81,9 +81,9 @@ std::vector<std::shared_ptr<team_member>>
 fighting_pit_layout::get_changing_side_team_members() {
   std::vector<std::shared_ptr<team_member>> result;
 
-  for (auto &[user_name_id, is_moving] : _moving_flag_ally) {
+  for (auto& [user_name_id, is_moving] : _moving_flag_ally) {
 	if (is_moving) {
-	  auto &[user_name, id] = user_name_id;
+	  auto& [user_name, id] = user_name_id;
 	  result.emplace_back(_party_teams.get().get_specific_team_member_by_id(user_name, id));
 	}
 	is_moving = false;
@@ -104,7 +104,7 @@ fighting_pit_layout::changing_side_contenders() {
   return result;
 }
 
-void fighting_pit_layout::set_contender_initiate_position(fighting_contender &contender, hexagon_side::orientation side) {
+void fighting_pit_layout::set_contender_initiate_position(fighting_contender& contender, hexagon_side::orientation side) {
   if ((*contender._side).second != hexagon_side::orientation::NONE) {
 	SPDLOG_ERROR("Can't set initial position for contender {} as position is not NONE", contender.name());
 	return;
@@ -112,7 +112,7 @@ void fighting_pit_layout::set_contender_initiate_position(fighting_contender &co
   contender._side.move(side, true);
 }
 
-void fighting_pit_layout::set_ally_move_initiate_position(team_member &tm, hexagon_side::orientation side) {
+void fighting_pit_layout::set_ally_move_initiate_position(team_member& tm, hexagon_side::orientation side) {
   if ((*tm._side).second != hexagon_side::orientation::NONE) {
 	SPDLOG_ERROR("Can't set initial position for ally {}.{} as position is not NONE", tm.user_name(), tm.name());
 	return;

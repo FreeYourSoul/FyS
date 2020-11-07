@@ -50,7 +50,7 @@ public:
    */
   explicit dispatcher_connection_manager(int threadNumber = 1, bool isLoadBalancing = true) noexcept;
 
-  void setupConnectionManager(const fys::startup_dispatcher_ctx &ctx) noexcept;
+  void setupConnectionManager(const fys::startup_dispatcher_ctx& ctx) noexcept;
 
   /**
    * @brief Poll the reader socket (the listener one and the subscriber one if the dispatcher is cluster
@@ -69,7 +69,7 @@ public:
    * @param handler function instance to call which take zmq::multipart object as parameter
    */
   template<typename Handler>
-  void dispatchMessageFromListenerSocket(Handler &&handler) {
+  void dispatchMessageFromListenerSocket(Handler&& handler) {
 	zmq::multipart_t msg;
 	if (!msg.recv(_listener)) {
 	  SPDLOG_ERROR("Error while reading on the listener socket");
@@ -85,7 +85,7 @@ public:
    * @param handler function instance to call which take zmq::multipart object as parameter
    */
   template<typename Handler>
-  void dispatchMessageFromSubscriberSocket(Handler &&handler) noexcept {
+  void dispatchMessageFromSubscriberSocket(Handler&& handler) noexcept {
 	if (!_clusterConnection.closed) {
 	  zmq::multipart_t msg;
 	  if (!msg.recv(_clusterConnection.subSocket)) {
@@ -99,7 +99,7 @@ public:
   /**
    */
   template<typename Handler>
-  void dispatchMessageFromDispatcherSocket(Handler &&handler) noexcept {
+  void dispatchMessageFromDispatcherSocket(Handler&& handler) noexcept {
 	zmq::multipart_t msg;
 	if (!msg.recv(_dispatcher)) {
 	  SPDLOG_ERROR("Error while reading on the listener socket");
@@ -114,7 +114,7 @@ public:
    * @param msg reply to the requester client of the dispatcher
    * @return true if the message has been sent correctly, false otherwise
    */
-  bool replyToListenerSocket(zmq::multipart_t &&msg) noexcept;
+  bool replyToListenerSocket(zmq::multipart_t&& msg) noexcept;
   /**
    * @brief Send a message to the servers connected to the dispatcher (load balanced, or distributed dispatching depending
    * on the dispatcher configuration). The message has to contains the identity frame in order for the server to
@@ -122,20 +122,20 @@ public:
    * @param msg incoming message forwarded to the dispatched server
    * @return true if the message has been sent correctly, false otherwise
    */
-  bool sendMessageToDispatcherSocket(zmq::multipart_t &&msg) noexcept;
+  bool sendMessageToDispatcherSocket(zmq::multipart_t&& msg) noexcept;
   /**
    * @brief Send a message to the dispatcher cluster (if configured in the dispatcher)
    * @param msg notification to send to the dispatcher cluster
    * @return  true if the message has been sent correctly, false otherwise
    */
-  bool sendMessageToClusterPubSocket(zmq::multipart_t &&msg) noexcept;
+  bool sendMessageToClusterPubSocket(zmq::multipart_t&& msg) noexcept;
 
 private:
   /**
    * The dispatcher connect to the proxy and subscribe to specifics channels given as parameter
    * @param topics additional topics to subscribe to (customizable through the config file)
    */
-  void subscribeToTopics(const std::vector<std::string> &topics) noexcept;
+  void subscribeToTopics(const std::vector<std::string>& topics) noexcept;
 
 private:
   bool _isLoadBalancing;

@@ -46,7 +46,7 @@ struct dispatcher_data {
 
 class service_context_base {
 public:
-  service_context_base(int ac, const char *const *av);
+  service_context_base(int ac, const char* const* av);
 
   /**
    * @return the connection string required to connect to the current server
@@ -57,14 +57,14 @@ public:
   [[nodiscard]] ushort
   port() const { return _port; }
 
-  [[nodiscard]] const std::string &
+  [[nodiscard]] const std::string&
   hostname() const { return _hostname; }
 
   [[nodiscard]] std::string
   dispatcher_connection_str() const noexcept;
 
 private:
-  void initialize_from_ini(const std::string &cfg_file_path);
+  void initialize_from_ini(const std::string& cfg_file_path);
 
 protected:
   std::string _version;

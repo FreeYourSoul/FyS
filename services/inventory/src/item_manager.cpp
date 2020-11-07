@@ -25,7 +25,7 @@
 
 namespace fys::inv {
 
-bool item_manager::are_items_owned_by_user(const std::string &user_name, const std::vector<Item> &item) {
+bool item_manager::are_items_owned_by_user(const std::string& user_name, const std::vector<Item>& item) {
   return false;
 }
 

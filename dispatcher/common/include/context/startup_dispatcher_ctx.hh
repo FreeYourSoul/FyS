@@ -60,7 +60,7 @@ class startup_dispatcher_ctx {
   };
 
 public:
-  startup_dispatcher_ctx(int ac, const char *const *av) noexcept;
+  startup_dispatcher_ctx(int ac, const char* const* av) noexcept;
 
   [[nodiscard]] constexpr bool isLoadBalancingEnabled() const noexcept { return _isLoadBalancing; }
   [[nodiscard]] constexpr bool isClusterAware() const noexcept { return _isClusterAware; }
@@ -68,7 +68,7 @@ public:
   [[nodiscard]] constexpr ushort getDispatchingPort() const noexcept { return _dispatchingPort; }
   [[nodiscard]] constexpr uint getMaxMsgSize() const noexcept { return _maxMsgSize; }
 
-  [[nodiscard]] const std::vector<std::string> &getSubscriptionTopics() const noexcept { return _subTopics; }
+  [[nodiscard]] const std::vector<std::string>& getSubscriptionTopics() const noexcept { return _subTopics; }
   [[nodiscard]] std::string listener_binding_str() const noexcept;
   [[nodiscard]] std::string dispatcher_binding_str() const noexcept;
   [[nodiscard]] std::string frontend_cluster_proxy_connection_str() const noexcept;
@@ -80,10 +80,10 @@ public:
   [[nodiscard]] std::string to_string() const noexcept;
 
 private:
-  void initialize_from_ini(const std::string &config_file_path);
+  void initialize_from_ini(const std::string& config_file_path);
 
   template<typename T>
-  [[nodiscard]] std::vector<T> to_array(const std::string &s) const noexcept {
+  [[nodiscard]] std::vector<T> to_array(const std::string& s) const noexcept {
 	std::vector<T> result;
 	std::stringstream ss(s);
 	std::string item;

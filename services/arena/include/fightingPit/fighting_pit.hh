@@ -127,13 +127,13 @@ public:
    *
    * @param now
    */
-  void continue_battle(const std::chrono::system_clock::time_point &now);
+  void continue_battle(const std::chrono::system_clock::time_point& now);
 
   /**
    *
    * @param user
    */
-  void forward_to_team_member(const std::string &user, player_action action);
+  void forward_to_team_member(const std::string& user, player_action action);
 
   /**
    * Add an authenticated player in the fighting pit, the player authentication is not verified an thus must be
@@ -152,7 +152,7 @@ public:
    * @param pt party team to add
    * @param cache retrieving object to find the actions
    */
-  void add_party_team_and_register_actions(std::unique_ptr<party_team> pt, cache::Cml &cache);
+  void add_party_team_and_register_actions(std::unique_ptr<party_team> pt, cache::Cml& cache);
 
   /**
    * Check if given player (defined by name/token) is authenticated
@@ -161,12 +161,12 @@ public:
    * @return true if the player is authenticated, false otherwise
    */
   [[nodiscard]] bool
-  is_player_participant(const std::string &name, const std::string &token) const;
+  is_player_participant(const std::string& name, const std::string& token) const;
 
-  [[nodiscard]] const party_team &
-  get_party_team_of_player(const std::string &user_name) const { return _party_teams.get_party_team_of_player(user_name); }
+  [[nodiscard]] const party_team&
+  get_party_team_of_player(const std::string& user_name) const { return _party_teams.get_party_team_of_player(user_name); }
 
-  [[nodiscard]] const std::unique_ptr<chaiscript::ChaiScript> &
+  [[nodiscard]] const std::unique_ptr<chaiscript::ChaiScript>&
   get_chai_ptr() const noexcept { return _chai_ptr; }
 
   [[nodiscard]] unsigned
@@ -175,10 +175,10 @@ public:
   [[nodiscard]] bool
   is_joinable() const noexcept { return _progress == progress::ON_HOLD; }
 
-  [[nodiscard]] const ally_party_teams &
+  [[nodiscard]] const ally_party_teams&
   ally_party() const { return _party_teams; }
 
-  [[nodiscard]] const pit_contenders &
+  [[nodiscard]] const pit_contenders&
   contenders() const { return _contenders; }
 
   /**
@@ -202,7 +202,7 @@ public:
    * @param broadcast_handler handler to broadcast message to the players
    */
   template<typename BroadcastHandler>
-  void notify_end_status(BroadcastHandler &&broadcast_handler) {
+  void notify_end_status(BroadcastHandler&& broadcast_handler) {
 	if (_progress == progress::ALLY_WIN) {
 	  std::forward<BroadcastHandler>(broadcast_handler)(make_winner_notification());
 	  _progress = progress::CLEANUP;
@@ -220,7 +220,7 @@ public:
 	  _progress = progress::ON_HOLD_NOT_REACHABLE;
   }
   void add_rewards(std::string action, uint quantity) noexcept;
-  void set_player_readiness(const std::string &user_name);
+  void set_player_readiness(const std::string& user_name);
 
   /**
    * ArenaId (also called fightingPitId) is not set directly at construction time as it needs to be stored in the
@@ -246,7 +246,7 @@ private:
    * @return_target  : a TargetType (Variant) set with the proper type
    */
   [[nodiscard]] std::pair<bool, std::optional<target_type>>
-  check_and_retrieve_target(const std::string &user, const team_member_sptr &member, const player_action &action);
+  check_and_retrieve_target(const std::string& user, const team_member_sptr& member, const player_action& action);
 
   /**
    * Verify if the fight has been won by a team (contender or ally) and return an appropriate Progress
@@ -256,7 +256,7 @@ private:
   update_progress_status();
 
   [[nodiscard]] bool
-  add_contender(const std::shared_ptr<fighting_contender> &fc);
+  add_contender(const std::shared_ptr<fighting_contender>& fc);
 
   [[nodiscard]] zmq::message_t
   make_winner_notification() const;

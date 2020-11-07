@@ -97,7 +97,7 @@ TEST_CASE("test damage chaiscript", "[service][arena][script_test]") {
 
   fys::arena::party_team party_team("FyS");
   fys::arena::team_member_sptr tm1 = std::make_shared<fys::arena::team_member>(party_team.user_name(), "fyston1");
-  auto &st = tm1->access_status();
+  auto& st = tm1->access_status();
   st.initial_speed = 100;
   st.magic_pt = {1337, 1337};
   st.life_pt = {42, 42};
@@ -117,14 +117,14 @@ var &contender = pitContenders.getFightingContender(0);
 var s = slash(1);
 s.execute(contender);
 )");
-	  } catch (const chaiscript::exception::eval_error &ex) {
+	  } catch (const chaiscript::exception::eval_error& ex) {
 		SPDLOG_ERROR("{}", ex.pretty_print());
 		FAIL("Chaiscript : Shouldn't fail here");
 	  }
 	  REQUIRE(120 == pc.fighting_contender_at(0)->access_status().life_pt.current);// -33 life
 	  REQUIRE(153 == pc.fighting_contender_at(0)->access_status().life_pt.total);
 	  REQUIRE(1 == pc.fighting_contender_at(0)->status().alteration_after.size());
-	  auto &stat = pc.fighting_contender_at(0)->access_status();
+	  auto& stat = pc.fighting_contender_at(0)->access_status();
 	  auto alt = stat.alteration_after.at(0);
 	  REQUIRE(2 == alt.turn());
 	  alt.process_alteration(stat);
@@ -141,7 +141,7 @@ var &contender = pitContenders.getFightingContender(0);
 var s = slash(1);
 s.execute(contender);
 )");
-	  } catch (std::exception &ex) {
+	  } catch (std::exception& ex) {
 		SPDLOG_ERROR("{}", ex.what());
 		FAIL("Chaiscript : Shouldn't fail here");
 	  }
@@ -181,7 +181,7 @@ d.push_back_ref(contenderStatus);
 d.push_back_ref(contender2Status);
 s.execute(d);
 )");
-	  } catch (std::exception &ex) {
+	  } catch (std::exception& ex) {
 		SPDLOG_ERROR("{}", ex.what());
 		FAIL("Chaiscript : Shouldn't fail here");
 	  }
@@ -207,7 +207,7 @@ d.push_back_ref(contenderStatus);
 d.push_back_ref(contender2Status);
 s.execute(d);
 )");
-	  } catch (std::exception &ex) {
+	  } catch (std::exception& ex) {
 		SPDLOG_ERROR("{}", ex.what());
 		FAIL("Chaiscript : Shouldn't fail here");
 	  }
