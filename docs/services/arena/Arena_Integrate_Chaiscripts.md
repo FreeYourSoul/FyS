@@ -110,7 +110,7 @@ TeamMember AllyPartyTeams::selectSuitableMemberOnSideAlive(HexagonSide::Orientat
 //! Retrieve a randomly chosen alive character on a specific side 
 TeamMember AllyPartyTeams::selectRandomMemberOnSideAlive();
 
-``` 
+```
 
 ## Integrate AI scripts
 
@@ -118,13 +118,12 @@ TeamMember AllyPartyTeams::selectRandomMemberOnSideAlive();
 
 Chaiscript for AI are represented by a class which has to take a contenderId and a level as parameter in constructor and follow this implementation:  
 
-| to follow	| descriptions 	| 
-|-----------------------	|------------------------------------------	|
-| Constructor(id, level)	| Constructor taking the level of the contender and its id, this constructor has to set the actions attribute	|
-| runScriptedAction(id) 	| which will determine and apply an action which will be following the next one	|
-| setupContender() 	| which will set the spawning position 	|
-| contains actions	| The contender class has an action attributes, which will be a map of Action chai object	|
-
+| to follow              | descriptions                                                                                                |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Constructor(id, level) | Constructor taking the level of the contender and its id, this constructor has to set the actions attribute |
+| runScriptedAction(id)  | which will determine and apply an action which will be following the next one                               |
+| setupContender()       | which will set the spawning position                                                                        |
+| contains actions       | The contender class has an action attributes, which will be a map of Action chai object                     |
 
 ```cpp
 class Sampy {
@@ -175,6 +174,7 @@ class Sampy {
     }
 
 ```
+
 ### Action attribute
 
 You noticed above the attribute action, which is a core part of the artificial intelligence as it is the place where the decision making is done concerning the target, and which spell is going to be cast.
@@ -217,13 +217,14 @@ This action attribute is firstly set with a vector of action and a function to d
 
 ## Integrate attacks scripts
 
-### Template 
+### Template
 
 ```cpp
+
 ```
 
 ## Integrate alterations script
 
 ### Template
 
-## Include actions 
+## Include actions
