@@ -31,6 +31,7 @@ target_link_libraries(worldserver_service PRIVATE
         dl fys::cml
         ${TMXLITE_LIBRARIES} # to remove
         )
+target_compile_features(worldserver_service PRIVATE cxx_std_20)
 
 target_include_directories(worldserver_service PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/include

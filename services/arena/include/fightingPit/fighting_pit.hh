@@ -28,7 +28,10 @@
 #include <optional>
 #include <vector>
 
+#include <zmq_addon.hpp>
+
 #include <chai_register.hh>
+
 #include <fightingPit/contender/pit_contenders.hh>
 #include <fightingPit/fighting_pit_layout.hh>
 #include <fightingPit/side_battle.hh>
@@ -39,9 +42,6 @@
 namespace chaiscript {
 class ChaiScript;
 }
-namespace zmq {
-struct message_t;
-}
 namespace fys::arena {
 struct rewards;
 class fighting_contender;
@@ -51,10 +51,10 @@ class party_team;
 
 namespace fys::arena {
 
-// interval of time between 2 turn for a player depending on the difficulty
+//! interval of time between 2 turns for a player depending on the difficulty
 namespace interval {
-constexpr static auto EASY = std::chrono::milliseconds(std::chrono::seconds(20));
-constexpr static auto MEDIUM = std::chrono::milliseconds(std::chrono::seconds(15));
+constexpr static auto EASY = std::chrono::milliseconds(std::chrono::seconds(35));
+constexpr static auto MEDIUM = std::chrono::milliseconds(std::chrono::seconds(22));
 constexpr static auto HARD = std::chrono::milliseconds(std::chrono::seconds(10));
 }// namespace interval
 
@@ -71,13 +71,13 @@ class fighting_pit_announcer;
 /**
  * @brief A fighting pit represent a specific instance of a battle.
  *
- * A fightingpit is composed of:
- *  - a layout (mapping of how the monsters/players are spread on the board)
- *  - a PitContenders object managing all the monsters and their behaviours (scripting)
- *  - a AllyPartyTeams object managing the players, each client has a PartyTeam (multiple party teams possible for
- *    one AllyPartyTeams) and the PartyTeam is composed of TeamMember that are the actual characters spread on the
- *    gaming board.
- *  - The 18 instances of SideBattle
+ * A fightingpit is composed of:<br>
+ *  - a layout (mapping of how the monsters/players are spread on the board)<br>
+ *  - a PitContenders object managing all the monsters and their behaviours (scripting)<br>
+ *  - a AllyPartyTeams object managing the players, each client has a PartyTeam (multiple party teams possible for<br>
+ *    one AllyPartyTeams) and the PartyTeam is composed of TeamMember that are the actual characters spread on the<br>
+ *    gaming board.<br>
+ *  - The 18 instances of SideBattle<br>
  *
  * @see SideBattle
  */
@@ -124,14 +124,18 @@ public:
   ~fighting_pit();
 
   /**
-   *
-   * @param now
+   * @brief a "tick" execution in the gaming loop
+   * - Execute the registered player actions
+   * - Execute the contenders scripted actions
+   * - Update the fighting pit status
+   * @param now time at which the continue battle is called
    */
   void continue_battle(const std::chrono::system_clock::time_point& now);
 
   /**
-   *
-   * @param user
+   * @brief Forward an incoming action from the client to the appropriate team member whom had to execute it
+   * @param user name of the client of the team member
+   * @param action action to be executed by the team member
    */
   void forward_to_team_member(const std::string& user, player_action action);
 
@@ -161,7 +165,7 @@ public:
    * @return true if the player is authenticated, false otherwise
    */
   [[nodiscard]] bool
-  is_player_participant(const std::string& name, const std::string& token) const;
+  is_player_participant(const std::string& name, const std::string& token) const noexcept;
 
   [[nodiscard]] const party_team&
   get_party_team_of_player(const std::string& user_name) const { return _party_teams.get_party_team_of_player(user_name); }
@@ -270,13 +274,15 @@ private:
 
 private:
   progress _progress = progress::ON_HOLD;
+
   level _level_fighting_pit;
+  //! maximum time a turn take to be done
   std::chrono::milliseconds _time_interlude;
 
   pit_contenders _contenders;
   ally_party_teams _party_teams;
 
-  // mapping of the contenders/NPC with the layout of the FightingPit
+  //! mapping of the contenders/NPC with the layout of the FightingPit
   fighting_pit_layout _layout_map;
 
   std::string _creator_user_name;

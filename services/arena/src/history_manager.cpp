@@ -37,11 +37,35 @@ target_str(std::optional<fys::arena::target_type>) {
   return "";
 }
 
+// helper type for the visitor
+template<class... Ts>
+struct overloaded : Ts... { using Ts::operator()...; };
+template<class... Ts>
+overloaded(Ts...) -> overloaded<Ts...>;
+
 [[nodiscard]] nlohmann::json
 generate_json_target(fys::arena::history_action history_action) {
   const std::optional<fys::arena::target_type>& target = history_action.targets;
+
   if (target.has_value()) {
+	auto vis = overloaded{
+		[](fys::arena::hexagon_side::orientation target) { return std::vector({fys::arena::to_string(target)}); },
+		[](const fys::arena::contender_target_id& target) { return std::vector({std::to_string(target.v)}); },
+		[](const fys::arena::ally_target_id& target) { return std::vector({std::to_string(target.v)}); },
+		[](const auto& targets) {
+		  std::vector<std::string> result;
+		  result.reserve(targets.v.size());
+		  for (const unsigned v : targets.v) {
+			result.emplace_back(std::to_string(v));
+		  }
+		  return result;
+		}};
+	return {
+		{"id", history_action.id_character},
+		{"isContender", false},
+		{"targets", std::visit(vis, target.value())}};
   }
+
   return {
 	  {"id", history_action.id_character},
 	  {"isContender", false}};
@@ -78,21 +102,29 @@ void history_manager::set_to_be_saved(std::uint32_t pit_id, bool toBeSaved) {
   }
 }
 
-void history_manager::create_historic(const fighting_pit& fp, unsigned id, unsigned seed) {
+void history_manager::create_historic(const fighting_pit& fp, unsigned seed) {
   auto& instance = get_instance();
   if (instance._is_manager_on) {
-	instance._history[fp.id()] = history_fight(id, seed);
+	history_fight to_add(fp.id(), seed);
+	for (const auto& pt : fp.ally_party().get_party_teams()) {
+	  // todo : initial setup in history of the party teams
+	}
+	for (const auto& c : fp.contenders().get_contenders()) {
+	  // todo : initial setup in history of the contenders
+	}
+	instance._history[fp.id()] = std::move(to_add);
   }
 }
 
 void history_manager::save(std::uint32_t fp_id) {
   auto& instance = get_instance();
-  if (!instance._is_manager_on)
+  if (!instance._is_manager_on) {
 	return;
-
+  }
   auto history_it = instance._history.find(fp_id);
-  if (history_it == instance._history.end())
+  if (history_it == instance._history.end()) {
 	return;
+  }
   auto& history_elem = history_it->second;
 
   if (history_elem.has_to_be_saved && history_elem.seed > 0) {
@@ -118,17 +150,20 @@ void history_manager::save(std::uint32_t fp_id) {
   get_instance()._history.erase(history_it);
 }
 
-void history_manager::set_save_folder(std::string save_folder) {
-  auto path = std::filesystem::path(save_folder) / "arena_fight_history";
+void history_manager::set_save_path(std::string save_path) {
+  auto path = std::filesystem::path(save_path) / "arena_fight_history";
   std::error_code ec;
 
   if (std::filesystem::exists(path)) {
 	std::filesystem::rename(
-		path, std::filesystem::path(save_folder) / "arena_fight_history_" / std::to_string(std::chrono::system_clock::now().time_since_epoch().count()), ec);
+		path, std::filesystem::path(save_path)           //
+				  / fmt::format("arena_fight_history_{}",//
+								std::to_string(std::chrono::system_clock::now().time_since_epoch().count())),
+		ec);
   }
   std::filesystem::create_directories(path, ec);
 
-  get_instance()._path_to_save_folder = std::move(save_folder);
+  get_instance()._path_to_save_folder = std::move(save_path);
 }
 
 std::string history_manager::history_fight::generate_history_filename(const std::filesystem::path& base_path) const {

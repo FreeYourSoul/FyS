@@ -82,11 +82,11 @@ TEST_CASE("WorkerServiceTestCase", "[service][arena]") {
 	REQUIRE(nullptr != pt);
 
 	ws.player_join_fighting_pit(1u, getPartyTeam("TestUser"), cml);
-	REQUIRE(1 == pt->ally_party().party_teams().size());
+	REQUIRE(1 == pt->ally_party().get_party_teams().size());
 	REQUIRE(4 == pt->get_party_team_of_player("TestUser").team_members().size());
 
 	ws.player_join_fighting_pit(1u, getPartyTeam("TestUser2"), cml);
-	REQUIRE(2 == pt->ally_party().party_teams().size());
+	REQUIRE(2 == pt->ally_party().get_party_teams().size());
 	REQUIRE(4 == pt->get_party_team_of_player("TestUser2").team_members().size());
 
 	pt->set_player_readiness("TestUser");
@@ -95,11 +95,11 @@ TEST_CASE("WorkerServiceTestCase", "[service][arena]") {
 	REQUIRE_FALSE(pt->is_joinable());
 
 	ws.player_join_fighting_pit(41u, getPartyTeam("NOT_GOOD_FP_ID"), cml);// Not existing fighting pit, partyTeam can't join
-	REQUIRE(2 == pt->ally_party().party_teams().size());
+	REQUIRE(2 == pt->ally_party().get_party_teams().size());
 	REQUIRE_THROWS(pt->get_party_team_of_player("NOT_GOOD_FP_ID"));// Not joinable isn't present in the pit and this has not been added
 
 	ws.player_join_fighting_pit(1u, getPartyTeam("NOT_JOINABLE"), cml);
-	REQUIRE(2 == pt->ally_party().party_teams().size());
+	REQUIRE(2 == pt->ally_party().get_party_teams().size());
 	REQUIRE_THROWS(pt->get_party_team_of_player("NOT_JOINABLE"));// Not joinable isn't present in the pit and this has not been added
 
   }// End section : Test Player join FightingPit

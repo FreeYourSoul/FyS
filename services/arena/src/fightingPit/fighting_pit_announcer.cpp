@@ -101,7 +101,7 @@ fighting_pit_announcer::build_fighting_pit(const encounter_context& ctx, const s
 	return nullptr;
   }
 
-  generate_reward_for_contender(*fp, ctx, fp->contenders().contenders());
+  generate_reward_for_contender(*fp, ctx, fp->contenders().get_contenders());
 
   fp->initialize_side_battles();
 

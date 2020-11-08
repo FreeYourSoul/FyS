@@ -4,7 +4,6 @@ project(arena_service
         LANGUAGES CXX)
 
 add_executable(arena_service
-        ${COMMON_SRCS}
         ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/chai_register.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/fightingPit/fighting_pit.cpp
@@ -56,15 +55,10 @@ target_link_libraries(arena_service PUBLIC
         dl
         fys::common_service
         fys::cml)
-
-set_target_properties(arena_service PROPERTIES
-        CXX_STANDARD 17
-        CMAKE_CXX_COMPILER /usr/bin/g++)
+target_compile_features(arena_service PRIVATE cxx_std_20)
 
 target_include_directories(arena_service PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/include
-        ${CMAKE_CURRENT_SOURCE_DIR}/../../scripting_cache/cml/include
-        ${fmt_INCLUDE_DIRS})
+        ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 include(CheckIPOSupported)
 check_ipo_supported(RESULT result)

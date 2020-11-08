@@ -86,7 +86,7 @@ public:
   ally_number_on_side(hexagon_side::orientation side) const;
 
   [[nodiscard]] const party_team&
-  get_party_team_of_player(const std::string& party_team) const;
+  get_party_team_of_player(const std::string& user_name) const;
 
   [[nodiscard]] bool
   all_dead() const;
@@ -100,7 +100,7 @@ public:
   set_party_readiness(const std::string& party_team);
 
   [[nodiscard]] const std::vector<std::unique_ptr<party_team>>&
-  party_teams() const;
+  get_party_teams() const;
 
   [[nodiscard]] uint
   fighting_pit_id() const { return _fighting_pit_id; }

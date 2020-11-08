@@ -27,7 +27,7 @@
 #include <filesystem>
 #include <memory>
 #include <unordered_map>
-#include <vector>
+#include <list>
 
 #include <fightingPit/team/team_member.hh>
 
@@ -67,7 +67,7 @@ class history_manager {
   struct history_fight {
 	history_fight() = default;
 	history_fight(unsigned id, unsigned seed)
-		: seed(seed), id(id) {}
+		: id(id), seed(seed) {}
 
 	//! unique id of the history fight (count of fight on-going for this specific arena instance)
 	unsigned id = 0;
@@ -75,10 +75,13 @@ class history_manager {
 	//! Seed on which the fight occurred
 	unsigned seed = 0;// TODO make the random generator use a given seed, on instance of generator by pit will be needed
 
-	//! Reference to the fighting pit
-	//		std::reference_wrapper<const FightingPit> ref;
-	//! Vector containing all the actions that occurred in the arena
-	std::vector<history_action> player_actions{};
+	/**
+	 * 	@brief List containing all the actions that occurred in the arena.
+	 * 	A list is used as this is going to be used to log information and won't be iterated through (except
+	 * 	once if saving is enabled), using a list has the advantage to be able to store a very big amount of
+	 * 	player actions without making unwanted re-allocations.
+	 */
+	std::list<history_action> player_actions{};
 
 	//! Set at true in case an issue occurred in the fighting pit (will save the fighting pit in file format)
 	bool has_to_be_saved = true;
@@ -88,10 +91,10 @@ class history_manager {
 
 public:
   static void activate_historic_manager(bool on);
-  static void create_historic(const fighting_pit& fp, unsigned id, unsigned seed);
+  static void create_historic(const fighting_pit& fp, unsigned seed);
   static void add_historic(unsigned fp_id, history_action&& ha);
   static void set_to_be_saved(unsigned pit_id, bool toBeSaved);
-  static void set_save_folder(std::string save_folder);
+  static void set_save_path(std::string save_path);
   static void save(unsigned fp_id);
 
 private:

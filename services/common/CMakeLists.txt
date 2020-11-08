@@ -63,7 +63,7 @@ target_link_libraries(common_service PUBLIC
         fmt::fmt
         nlohmann_json::nlohmann_json)
 
-target_include_directories(common_service PUBLIC ${COMMON_INCLUDES_DIR})
+target_include_directories(common_service PUBLIC ${COMMON_INCLUDES_DIR} ${fmt_INCLUDE_DIRS} ${FLATBUFFER_INCLUDE_DIR})
 add_library(fys::common_service ALIAS common_service)
 
 include_directories(flatbuffer/includes)

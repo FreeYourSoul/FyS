@@ -105,7 +105,7 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]") {
 
 	auto& chai = fp->get_chai_ptr();
 
-	const auto& contender = fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0);
+	const auto& contender = fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0);
 	REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).number_contender());
 	REQUIRE("TestMonsterSleep" == contender->name());
 	REQUIRE(100 == contender->status().life_pt.current);
@@ -132,37 +132,37 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]") {
 		// Player id 4 (at index 3) is going to slash the only opponent it has inflicting 42 damage
 		// The ennemy total life is 100, goes to 58
 		fp->continue_battle(now);
-		REQUIRE(58 == fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0)->status().life_pt.current);
-		REQUIRE(100 == fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0)->status().life_pt.total);
+		REQUIRE(58 == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->status().life_pt.current);
+		REQUIRE(100 == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->status().life_pt.total);
 
 		// Player id 3 (at index 2) is going to slash the only opponent it has inflicting 39 damage
 		// The ennemy total life is 100, current from 58 goes to 19
 		now += fys::arena::interval::EASY + 1ms;
 		fp->continue_battle(now);
-		REQUIRE(19 == fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0)->status().life_pt.current);
-		REQUIRE(100 == fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0)->status().life_pt.total);
+		REQUIRE(19 == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->status().life_pt.current);
+		REQUIRE(100 == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->status().life_pt.total);
 
 		// Contender id 0 is going to Sleep and so restore 40 hp
 		// The ennemy total life is 100, current from 19 goes to 59
 		now += fys::arena::interval::EASY + 1ms;
 		fp->continue_battle(now);
-		REQUIRE(59 == fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0)->status().life_pt.current);
-		REQUIRE(100 == fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0)->status().life_pt.total);
+		REQUIRE(59 == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->status().life_pt.current);
+		REQUIRE(100 == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->status().life_pt.total);
 
 		// Player id 2 (at index 1) is going to slash the only opponent it has inflicting 36 damage
 		// The ennemy total life is 100, current from 59 goes to 23
 		now += fys::arena::interval::EASY + 1ms;
 		fp->continue_battle(now);
-		REQUIRE(23 == fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0)->status().life_pt.current);
-		REQUIRE(100 == fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0)->status().life_pt.total);
+		REQUIRE(23 == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->status().life_pt.current);
+		REQUIRE(100 == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->status().life_pt.total);
 
 		// Player id 2 (at index 1) is going to slash the only opponent it has inflicting 33 damage
 		// The ennemy total life is 100, current from 23 goes to 0 (overkill)
 		now += fys::arena::interval::EASY + 1ms;
 		REQUIRE(fighting_pit_announcer::is_on_going(fp));
 		fp->continue_battle(now);
-		REQUIRE(0 == fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0)->status().life_pt.current);
-		REQUIRE(100 == fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0)->status().life_pt.total);
+		REQUIRE(0 == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->status().life_pt.current);
+		REQUIRE(100 == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->status().life_pt.total);
 
 		// Battle ended checks
 		REQUIRE_FALSE(fighting_pit_announcer::is_on_going(fp));
@@ -215,7 +215,7 @@ TEST_CASE("FightingPitTestCase Simple Fight test", "[service][arena]") {
 	auto& chai = fp->get_chai_ptr();
 
 	REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).number_contender());
-	const auto& contender = fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0);
+	const auto& contender = fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0);
 	const auto& c = fighting_pit_announcer::get_pit_contenders(fp).contenders_on_side(hexagon_side::orientation::B_S);
 	const auto& p = fighting_pit_announcer::get_party_teams(fp).members_by_side(hexagon_side::orientation::B_S);
 
@@ -511,7 +511,7 @@ TEST_CASE("FightingPitTestCase Move test", "[service][arena]") {
 	auto& chai = fp->get_chai_ptr();
 
 	REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).number_contender());
-	const auto& contender = fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0);
+	const auto& contender = fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0);
 	const auto& c = fighting_pit_announcer::get_pit_contenders(fp).contenders_on_side(hexagon_side::orientation::B_S);
 	const auto& p = fighting_pit_announcer::get_party_teams(fp).members_by_side(hexagon_side::orientation::B_S);
 
@@ -536,7 +536,7 @@ TEST_CASE("FightingPitTestCase Move test", "[service][arena]") {
 	  REQUIRE(4 == fighting_pit_announcer::get_party_teams(fp).number_ally());
 
 	  const auto& doableActions =
-		  fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0)->get_contender_scripting()->doable_actions();
+		  fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->get_contender_scripting()->doable_actions();
 	  REQUIRE(1 == doableActions.size());
 	  REQUIRE("test:key:1" == doableActions.at(0));
 
@@ -568,16 +568,16 @@ TEST_CASE("FightingPitTestCase Move test", "[service][arena]") {
 
 		// Contender turn : Move from B_S to A_NE
 		now += fys::arena::interval::EASY + 1ms;
-		REQUIRE(hexagon_side::orientation::B_S == fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0)->side_orient());
+		REQUIRE(hexagon_side::orientation::B_S == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->side_orient());
 		fp->continue_battle(now);
-		REQUIRE(hexagon_side::orientation::A_NE == fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0)->side_orient());
+		REQUIRE(hexagon_side::orientation::A_NE == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->side_orient());
 
 		// second move occurs as the contender is now on a new side where no other player are.
 		// And so alone, so he takes his turn
 
 		now += fys::arena::interval::EASY + 1ms;
 		fp->continue_battle(now);
-		REQUIRE(hexagon_side::orientation::C_NE == fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0)->side_orient());
+		REQUIRE(hexagon_side::orientation::C_NE == fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->side_orient());
 
 		//				now += fys::arena::interval::EASY + 1ms;
 		//				fp->continueBattle(now);
@@ -647,7 +647,7 @@ TEST_CASE("FightingPitTestCase Simple Alteration test", "[service][arena]") {
 	auto& chai = fp->get_chai_ptr();
 
 	REQUIRE(1 == fighting_pit_announcer::get_pit_contenders(fp).number_contender());
-	const auto& contender = fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0);
+	const auto& contender = fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0);
 	const auto& c = fighting_pit_announcer::get_pit_contenders(fp).contenders_on_side(hexagon_side::orientation::B_S);
 	const auto& p = fighting_pit_announcer::get_party_teams(fp).members_by_side(hexagon_side::orientation::B_S);
 
@@ -672,7 +672,7 @@ TEST_CASE("FightingPitTestCase Simple Alteration test", "[service][arena]") {
 	  REQUIRE(4 == fighting_pit_announcer::get_party_teams(fp).number_ally());
 
 	  const auto& doableActions =
-		  fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0)->get_contender_scripting()->doable_actions();
+		  fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0)->get_contender_scripting()->doable_actions();
 	  REQUIRE(1 == doableActions.size());
 	  REQUIRE("test:key:1" == doableActions.at(0));
 

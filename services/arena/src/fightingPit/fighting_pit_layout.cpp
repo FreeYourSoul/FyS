@@ -40,7 +40,7 @@ namespace fys::arena {
 
 fighting_pit_layout::fighting_pit_layout(pit_contenders& contenders, ally_party_teams& partyTeams)
 	: _contenders(contenders), _party_teams(partyTeams) {
-  for (auto& pt : partyTeams.party_teams()) {
+  for (auto& pt : partyTeams.get_party_teams()) {
 	add_active_party_team(*pt);
   }
   add_active_contender(contenders.number_contender());

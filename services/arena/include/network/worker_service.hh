@@ -41,20 +41,20 @@ class arena_server_context;
 namespace fys::arena {
 
 /**
- * Manage the fighting pits :
- *   - Generate a fighting pit
- *   - Assign an ID to it
- *   - Assign a dedicated thread to it
- *
+ * Manage the fighting pits :<br>
+ *   - Generate a fighting pit<br>
+ *   - Assign an ID to it<br>
+ *   - Assign a dedicated thread to it<br>
+ *<br>
  * Fighting pit are created by the WorkerService using the FightingPitAnnouncer as builder in order to
  * ensure that the fightingpit is ready to host a battle, and then start the fighting pit in a dedicated
- * thread.
- *
- * Each fighting pit will contains a DEALER socket that will be used to communicate with the WorkerService.
+ * thread.<br>
+ *<br>
+ * Each fighting pit will contains a DEALER socket that will be used to communicate with the WorkerService.<br>
  * A custom zmq identifier will be provided by the WorkerService in order to be able to target a specific
  * FightingPit for specific players (the map _idOnArenaId being used to register which player is in which
- * FightingPit).
- *
+ * FightingPit).<br>
+ *<br>
  * @see fys::arena::FightingPitAnnouncer
  * @see fys::arena::FightingPit
  */
@@ -97,9 +97,9 @@ public:
   void player_join_fighting_pit(unsigned fighting_pit_id, std::unique_ptr<party_team> pt, cache::Cml& cml);
 
   /**
-   * Broadcast a message containing all the information about the incoming players data
-   * - UserName
-   * - TeamMembers id, name, stats (life, magic points)
+   * Broadcast a message containing all the information about the incoming players data<br>
+   * - UserName<br>
+   * - TeamMembers id, name, stats (life, magic points)<br>
    * - // todo cosmetic information (equipment)
    *
    * @note Checks about the validity of the userName and the fightingPitId given as parameter have to be done beforehand

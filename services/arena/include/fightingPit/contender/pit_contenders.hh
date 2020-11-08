@@ -80,7 +80,7 @@ public:
   get_dead_contender_on_side(hexagon_side::orientation contender_ptr) const;
 
   [[nodiscard]] const std::vector<std::shared_ptr<fighting_contender>>&
-  contenders() const { return _contenders; }
+  get_contenders() const { return _contenders; }
 
   [[nodiscard]] unsigned
   number_contender_on_side(hexagon_side::orientation side) const;
@@ -95,7 +95,7 @@ private:
   std::vector<std::shared_ptr<fighting_contender>> _contenders;
 
   /**
-   * Flags determining which contenders are going to move from one side to another
+   * Flags determining which contenders are going to move from one side to another<br>
    * (only _contenders having this flag (index equivalent) set to true have their position refreshed
    */
   std::vector<bool> _change_side_flags;

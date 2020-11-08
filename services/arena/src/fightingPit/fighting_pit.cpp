@@ -40,7 +40,8 @@
 #include <flatbuffer_generator.hh>
 
 namespace {
-std::chrono::milliseconds
+
+[[nodiscard]] std::chrono::milliseconds
 retrieve_time_interlude_from_level_degree(fys::arena::fighting_pit::level level) {
   switch (level) {
   case fys::arena::fighting_pit::level::EASY: return fys::arena::interval::EASY;
@@ -51,6 +52,7 @@ retrieve_time_interlude_from_level_degree(fys::arena::fighting_pit::level level)
 	return std::chrono::milliseconds{0};
   }
 }
+
 }// namespace
 
 namespace fys::arena {
@@ -130,7 +132,7 @@ void fighting_pit::add_authenticated_user(std::string user_name, std::string use
   _authenticated_players.push_back({std::move(user_name), std::move(user_token)});
 }
 
-bool fighting_pit::is_player_participant(const std::string& name, const std::string& token) const {
+bool fighting_pit::is_player_participant(const std::string& name, const std::string& token) const noexcept {
   return std::any_of(_authenticated_players.begin(), _authenticated_players.end(),
 					 [&name, &token](auto& authPlayer) { return authPlayer.name == name && authPlayer.token == token; });
 }
@@ -250,7 +252,7 @@ fighting_pit::check_and_retrieve_target(const std::string& user, const team_memb
 	SPDLOG_WARN("[fp:{}] : Player {} tried to target a non-existing Ally", _arena_id, user);
 	return std::pair(false, target);
   }
-  if (!fil::all_contains(action.contender_target, _contenders.contenders(),
+  if (!fil::all_contains(action.contender_target, _contenders.get_contenders(),
 						 [](const fighting_contender_sptr& c) { return c->id(); })) {
 	SPDLOG_WARN("[fp:{}] : Player {} tried to target a non-existing Contender, Targets are : ", _arena_id, user);
 	return std::pair(false, target);

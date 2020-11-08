@@ -71,7 +71,7 @@ std::pair<void*, std::uint32_t>
 flatbuffer_generator::generateFightingPitState(const fys::arena::fighting_pit& fp) {
   _fbb.Clear();
   auto fbPartyTeamVec = _fbb.CreateVector(generate_party_team_vec_status_offset(fp.ally_party()));
-  auto fbContenderVec = _fbb.CreateVector(generate_contender_vec_status_offset(fp.contenders().contenders()));
+  auto fbContenderVec = _fbb.CreateVector(generate_contender_vec_status_offset(fp.contenders().get_contenders()));
   auto fps = fb::arn::CreateFightingPitState(
 	  _fbb,
 	  fp.id(),
@@ -173,7 +173,7 @@ flatbuffer_generator::generate_action_notification(
 std::vector<flatbuffers::Offset<fb::arn::PartyTeamStatus>>
 flatbuffer_generator::generate_party_team_vec_status_offset(const ally_party_teams& apt) {
   std::vector<flatbuffers::Offset<fb::arn::PartyTeamStatus>> fb_party_teams_status;
-  const auto& party_teams = apt.party_teams();
+  const auto& party_teams = apt.get_party_teams();
 
   fb_party_teams_status.reserve(party_teams.size());
   for (const auto& pt : party_teams) {

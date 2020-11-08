@@ -83,7 +83,7 @@ worker_service::add_fighting_pit(std::unique_ptr<fighting_pit> fp) {
 	;
   chai_register::register_network_commands(*fp->get_chai_ptr(), broadcast_msg_handler(fp->id()));
   fp->set_arena_id(_current_arena_id);
-  history_manager::create_historic(*fp, _current_arena_id, 1);// seed is to be changed
+  history_manager::create_historic(*fp, 1);// seed is to be changed
   _arena_instances.insert(std::pair(_current_arena_id, std::move(fp)));
   _arena_id_on_identifier.insert(std::pair(_current_arena_id, std::vector<player_identifier>{}));
   return _current_arena_id;

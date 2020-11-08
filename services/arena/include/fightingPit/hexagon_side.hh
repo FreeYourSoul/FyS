@@ -98,6 +98,9 @@ private:
   orientation _side = orientation::NONE;
 };
 
+std::string to_string(hexagon_side::orientation orientation);
+std::string to_string(hexagon_side::hexagon hexagon);
+
 }// namespace fys::arena
 
 std::ostream&

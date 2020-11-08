@@ -20,20 +20,10 @@ add_executable(inventory_service
 
 target_link_libraries(inventory_service PRIVATE
         fys::common_service
-        cppzmq
-        fys::fil
-        nlohmann_json::nlohmann_json
-        fmt::fmt dl fys::cml)
+        dl fys::cml)
+target_compile_features(inventory_service PRIVATE cxx_std_20)
 
-set_target_properties(inventory_service PROPERTIES
-        CXX_STANDARD 17
-        CMAKE_CXX_COMPILER /usr/bin/g++)
-
-set_property(TARGET inventory_service PROPERTY INCLUDE_DIRECTORIES
-        ${CMAKE_CURRENT_SOURCE_DIR}/include
-        ${CMAKE_CURRENT_SOURCE_DIR}/../../scripting_cache/cml/include
-        ${fmt_INCLUDE_DIRS}
-        ${FLATBUFFER_INCLUDE_DIR})
+target_include_directories(inventory_service PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 include(CheckIPOSupported)
 check_ipo_supported(RESULT result)

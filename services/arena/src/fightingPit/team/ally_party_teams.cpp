@@ -222,6 +222,6 @@ bool ally_party_teams::all_dead() const {
   });
 }
 const std::vector<std::unique_ptr<party_team>>&
-ally_party_teams::party_teams() const { return _party_teams; }
+ally_party_teams::get_party_teams() const { return _party_teams; }
 
 }// namespace fys::arena

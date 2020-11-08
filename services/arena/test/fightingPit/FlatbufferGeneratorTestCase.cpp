@@ -99,7 +99,7 @@ TEST_CASE("arn::FlatbufferGeneratorTestCase", "[service][arena][util]") {
 
   SECTION("Initial setup test") {
 	REQUIRE(4 == fighting_pit_announcer::get_pit_contenders(fp).number_contender());
-	auto contender1 = fighting_pit_announcer::get_pit_contenders(fp).contenders().at(0);
+	auto contender1 = fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(0);
 	REQUIRE("Sampy" == contender1->name());
 	REQUIRE(0 == contender1->get_contender_scripting()->contender_id());
 	REQUIRE(10 == contender1->get_contender_scripting()->level());
@@ -108,7 +108,7 @@ TEST_CASE("arn::FlatbufferGeneratorTestCase", "[service][arena][util]") {
 	REQUIRE(100 == contender1->status().magic_pt.current);
 	REQUIRE(100 == contender1->status().magic_pt.total);
 
-	auto contender2 = fighting_pit_announcer::get_pit_contenders(fp).contenders().at(1);
+	auto contender2 = fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(1);
 	REQUIRE("Sampy" == contender2->name());
 	REQUIRE(1 == contender2->get_contender_scripting()->contender_id());
 	REQUIRE(8 == contender2->get_contender_scripting()->level());
@@ -117,7 +117,7 @@ TEST_CASE("arn::FlatbufferGeneratorTestCase", "[service][arena][util]") {
 	REQUIRE(100 == contender2->status().magic_pt.current);
 	REQUIRE(100 == contender2->status().magic_pt.total);
 
-	auto contender3 = fighting_pit_announcer::get_pit_contenders(fp).contenders().at(2);
+	auto contender3 = fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(2);
 	REQUIRE("Sampy" == contender3->name());
 	REQUIRE(2 == contender3->get_contender_scripting()->contender_id());
 	REQUIRE(6 == contender3->get_contender_scripting()->level());
@@ -126,7 +126,7 @@ TEST_CASE("arn::FlatbufferGeneratorTestCase", "[service][arena][util]") {
 	REQUIRE(100 == contender3->status().magic_pt.current);
 	REQUIRE(100 == contender3->status().magic_pt.total);
 
-	auto contender4 = fighting_pit_announcer::get_pit_contenders(fp).contenders().at(3);
+	auto contender4 = fighting_pit_announcer::get_pit_contenders(fp).get_contenders().at(3);
 	REQUIRE(3 == contender4->get_contender_scripting()->contender_id());
 	REQUIRE("Sampy" == contender4->name());
 	REQUIRE(2 == contender4->get_contender_scripting()->level());
@@ -136,11 +136,11 @@ TEST_CASE("arn::FlatbufferGeneratorTestCase", "[service][arena][util]") {
 	REQUIRE(100 == contender4->status().magic_pt.total);
 
 	REQUIRE(4 == fp->ally_party().number_ally());
-	REQUIRE(4 == fp->ally_party().party_teams().at(0)->team_members().size());
-	REQUIRE(4 == fp->ally_party().party_teams().at(0)->team_members().at(3)->id());
-	REQUIRE(3 == fp->ally_party().party_teams().at(0)->team_members().at(2)->id());
-	REQUIRE(2 == fp->ally_party().party_teams().at(0)->team_members().at(1)->id());
-	REQUIRE(1 == fp->ally_party().party_teams().at(0)->team_members().at(0)->id());
+	REQUIRE(4 == fp->ally_party().get_party_teams().at(0)->team_members().size());
+	REQUIRE(4 == fp->ally_party().get_party_teams().at(0)->team_members().at(3)->id());
+	REQUIRE(3 == fp->ally_party().get_party_teams().at(0)->team_members().at(2)->id());
+	REQUIRE(2 == fp->ally_party().get_party_teams().at(0)->team_members().at(1)->id());
+	REQUIRE(1 == fp->ally_party().get_party_teams().at(0)->team_members().at(0)->id());
 
 	REQUIRE(0 == fp->id());
 
@@ -236,7 +236,7 @@ TEST_CASE("arn::FlatbufferGeneratorTestCase", "[service][arena][util]") {
   }// End section : Test generateFightingPitState
 
   SECTION("Test generatePartyTeamStatus") {
-	auto [data, size] = fg.generate_party_team_status(*fp->ally_party().party_teams().at(0));
+	auto [data, size] = fg.generate_party_team_status(*fp->ally_party().get_party_teams().at(0));
 
 	REQUIRE(nullptr != data);
 	REQUIRE(0 < size);
@@ -299,8 +299,8 @@ TEST_CASE("arn::FlatbufferGeneratorTestCase", "[service][arena][util]") {
 
   SECTION("Test generateActionNotification") {
 	auto [data, size] = fg.generate_action_notification("ActionKey:Test",
-														fighting_pit_announcer::get_pit_contenders(fp).contenders(),
-														fp->ally_party().party_teams().at(0)->team_members());
+														fighting_pit_announcer::get_pit_contenders(fp).get_contenders(),
+														fp->ally_party().get_party_teams().at(0)->team_members());
 
 	REQUIRE(nullptr != data);
 	REQUIRE(0 < size);

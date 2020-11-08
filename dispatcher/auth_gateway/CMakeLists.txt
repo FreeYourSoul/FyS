@@ -15,7 +15,7 @@ target_compile_options(auth_gateway PRIVATE -Wall -Wpedantic -Wextra -Wno-deprec
 target_link_libraries(auth_gateway
         PRIVATE common_dispatcher nlohmann_json::nlohmann_json)
 
-target_compile_features(auth_gateway PRIVATE cxx_std_17)
+target_compile_features(auth_gateway PRIVATE cxx_std_20)
 set_target_properties(auth_gateway PROPERTIES
         CMAKE_CXX_COMPILER /usr/bin/g++)
 

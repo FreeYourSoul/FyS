@@ -346,6 +346,38 @@ bool hexagon_side::can_move_to(hexagon_side::orientation destination_side) const
   return false;
 }
 
+std::string to_string(hexagon_side::orientation orientation) {
+  switch (orientation) {
+  case fys::arena::hexagon_side::orientation::A_N: return "A_N";
+  case fys::arena::hexagon_side::orientation::B_N: return "B_N";
+  case fys::arena::hexagon_side::orientation::C_N: return "C_N";
+  case fys::arena::hexagon_side::orientation::A_S: return "A_S";
+  case fys::arena::hexagon_side::orientation::B_S: return "B_S";
+  case fys::arena::hexagon_side::orientation::C_S: return "C_S";
+  case fys::arena::hexagon_side::orientation::A_NE: return "A_NE";
+  case fys::arena::hexagon_side::orientation::B_NE: return "B_NE";
+  case fys::arena::hexagon_side::orientation::C_NE: return "C_NE";
+  case fys::arena::hexagon_side::orientation::A_NW: return "A_NW";
+  case fys::arena::hexagon_side::orientation::B_NW: return "B_NW";
+  case fys::arena::hexagon_side::orientation::C_NW: return "C_NW";
+  case fys::arena::hexagon_side::orientation::A_SE: return "A_SE";
+  case fys::arena::hexagon_side::orientation::B_SE: return "B_SE";
+  case fys::arena::hexagon_side::orientation::C_SE: return "C_SE";
+  case fys::arena::hexagon_side::orientation::A_SW: return "A_SW";
+  case fys::arena::hexagon_side::orientation::B_SW: return "B_SW";
+  case fys::arena::hexagon_side::orientation::C_SW: return "C_SW";
+  case fys::arena::hexagon_side::orientation::NONE: return "NONE(ERROR)";
+  }
+}
+
+std::string to_string(hexagon_side::hexagon hexagon) {
+  switch (hexagon) {
+  case fys::arena::hexagon_side::hexagon::A: return "A";
+  case fys::arena::hexagon_side::hexagon::B: return "B";
+  case fys::arena::hexagon_side::hexagon::C: return "C";
+  }
+}
+
 }// namespace fys::arena
 
 std::ostream&

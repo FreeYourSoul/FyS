@@ -44,7 +44,7 @@ int main(int ac, char** av) {
 
 	fys::arena::arena_server_service serverService(ctx);
 	fys::arena::history_manager::activate_historic_manager(true);
-	fys::arena::history_manager::set_save_folder(ctx.get_history_saving_folder());
+	fys::arena::history_manager::set_save_path(ctx.get_history_saving_folder());
 
 	serverService.run_server_loop();
   } catch (const std::exception& e) {
