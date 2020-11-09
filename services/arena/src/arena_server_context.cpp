@@ -172,16 +172,17 @@ std::string
 arena_server_context::to_string() const noexcept {
   std::string str;
   str = "dump context\n*************************\n";
-  str += "[INFO] Service " + _name + " context VERSION: " + _version + "\n";
-  str += "[INFO] Config file used: " + _config_file + "\n";
-  str += "[INFO] Handle zones: ";
+  str += "[INIT] Service " + _name + " context VERSION: " + _version + "\n";
+  str += "[INIT] Config file used: " + _config_file + "\n";
+  str += "[INIT] Path to fightingpit saves : " + _path_history_saving_folder + "\n";
+  str += "[INIT] Handle zones: [ ";
   for (auto& [k, v] : _encounter_ctx.range_encounter_per_zone)
 	str += k + " ";
-  str += "\n[INFO] Dispatcher connected port: " + std::to_string(_dispatcher_data.port) + "\n";
-  str += "[INFO] Dispatcher connected host: " + _dispatcher_data.address + "\n";
-  str += "[INFO] Dispatcher connection string: " + dispatcher_connection_str() + "\n";
-  str += "[INFO] Player binding string: " + player_binding_string() + "\n";
-  str += "[INFO] Local cache folder: " + path_local_storage_cache() + "\n";
+  str += "]\n[INIT] Dispatcher connected port: " + std::to_string(_dispatcher_data.port) + "\n";
+  str += "[INIT] Dispatcher connected host: " + _dispatcher_data.address + "\n";
+  str += "[INIT] Dispatcher connection string: " + dispatcher_connection_str() + "\n";
+  str += "[INIT] Player binding string: " + player_binding_string() + "\n";
+  str += "[INIT] Local cache folder: " + path_local_storage_cache() + "\n";
   str += "\n*************************\n";
   return str;
 }

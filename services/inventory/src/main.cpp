@@ -29,7 +29,7 @@
 
 int main(int ac, char** av) {
   try {
-	spdlog::set_pattern("[%D %H:%M:%S][ %22s:%-4# ][%L]: %v");
+	spdlog::set_pattern("[%D %H:%M:%S][ %25s:%-4# ][%L]: %v");
 	fys::inv::inventory_server_context ctx(ac, av);
 	fys::inv::inventory_server_service serverService(ctx);
 	int major, minor, patch;

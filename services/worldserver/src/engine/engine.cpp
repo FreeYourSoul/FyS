@@ -78,9 +78,9 @@ void engine::stop_player_move(std::uint32_t index) {
   _intern->data.stop_player_move(index);
 }
 
-void engine::execute_pending_moves(const std::chrono::system_clock::time_point& player_index) {
+void engine::execute_pending_moves(const std::chrono::system_clock::time_point& current_time) {
   // Don't process pending moves if it isn't ticking
-  if (player_index < _intern->next_tick) {
+  if (current_time < _intern->next_tick) {
 	return;
   }
   // Setup next tick time point
@@ -108,7 +108,7 @@ void engine::move_character_action(const std::string& character_name, std::uint3
   if (_intern->map.can_move_to(future_position, 0)) {
 	info.position = future_position;
 
-	_intern->map.execute_potential_trigger(index_character, info);
+	_intern->map.execute_potential_trigger(future_position, index_character, info);
 
 	if (const auto idts_to_notify = _intern->data.get_player_idts_around_pos(info.position); !idts_to_notify.empty()) {
 	  notify_clients_of_character_move(info, character_name, idts_to_notify);
@@ -117,7 +117,7 @@ void engine::move_character_action(const std::string& character_name, std::uint3
 }
 
 static constexpr unsigned index_identity = 0;
-static constexpr unsigned index_notification = 0;
+static constexpr unsigned index_notification = 1;
 
 void engine::notify_reported_npc_movements(const npc_actions_report& action_report) {
   zmq::multipart_t to_send;
@@ -162,8 +162,7 @@ void engine::notify_clients_of_character_move(
   }
 }
 
-std::uint32_t
-engine::retrieve_data_index(const auth_player& player) {
+std::uint32_t engine::retrieve_data_index(const auth_player& player) {
   auto it = _auth_player_on_data_index.find(player);
   if (it == _auth_player_on_data_index.end()) {
 	return NOT_AUTHENTICATED;

@@ -76,7 +76,7 @@ public:
   engine(engine&&) noexcept;
   engine(const engine&) = delete;
 
-  void execute_pending_moves(const std::chrono::system_clock::time_point& player_index);
+  void execute_pending_moves(const std::chrono::system_clock::time_point& current_time);
   void set_player_move_direction(std::uint32_t index, double direction);
   void stop_player_move(std::uint32_t index);
   void authenticate_player(auth_player auth, character_info info, std::string identifier);

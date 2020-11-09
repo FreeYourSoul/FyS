@@ -54,6 +54,30 @@ namespace {
 void merge_spawning_point_in_report(npc_actions_report& report) {
 }
 
+[[nodiscard]] std::string
+get_path_from_key(std::string base, std::string key) {
+  std::replace(key.begin(), key.end(), ':', '/');
+  return base.append("/").append(std::move(key));
+}
+
+[[nodiscard]] std::string
+get_sp_namespace_from_key(const std::string& key) {
+  auto startSeparator = key.find_last_of(':');
+  auto endSeparator = key.find_last_of('.');
+
+  if (startSeparator != std::string::npos && endSeparator != std::string::npos) {
+	// if a ':' and a '.' are found
+	return key.substr(startSeparator + 1, endSeparator - startSeparator - 1);
+  } else if (startSeparator == std::string::npos && endSeparator != std::string::npos) {
+	// if a ':' is not found but not a '.' is found
+	return key.substr(0, endSeparator);
+  } else if (startSeparator != std::string::npos && endSeparator == std::string::npos) {
+	// if a ':' is found but not a '.' is not found
+	return key.substr(startSeparator + 1);
+  }
+  return key;
+}
+
 }// namespace
 
 /**

@@ -55,7 +55,7 @@ void world_server_service::run_server_loop() noexcept {
 	_connection_handler.poll_and_process_sub_msg(
 		// Auth-Server Incoming player
 		// Used by the Auth server in order to authenticate a player
-		[this](zmq::message_t&& identity, zmq::message_t&& content) {
+		[this]([[maybe_unused]] zmq::message_t&& identity, zmq::message_t&& content) {
 		  if (verify_buffer<fb::auth::IncomingPlayerOnWs>(content.data(), content.size())) {
 			SPDLOG_ERROR("Wrongly formatted IncomingPlayerOnWs buffer");
 			return;
@@ -72,7 +72,7 @@ void world_server_service::run_server_loop() noexcept {
 
 		// Inter-Server communication
 		// Used when world server are communicating between each others to handle player transition
-		[this](zmq::message_t&& identity, zmq::message_t&& content) {
+		[this]([[maybe_unused]] zmq::message_t&& identity, zmq::message_t&& content) {
 		  if (verify_buffer<fb::world::InterServerCom>(content.data(), content.size())) {
 			SPDLOG_ERROR("Wrongly formatted InterServerCom buffer");
 			return;
@@ -89,14 +89,14 @@ void world_server_service::run_server_loop() noexcept {
 			return;
 		  }
 		  if (!verify_buffer<fb::world::WSAction>(content.data(), content.size())) {
-			SPDLOG_ERROR("Ill formatted Authentication frame");
+			SPDLOG_ERROR("Ill formatted Action frame");
 			return;
 		  }
 		  auto* auth_frame = fb::world::GetAuthFrame(auth_frame_msg.data());
 		  auto* frame = fb::world::GetWSAction(content.data());
 
 		  if (frame->action_type() == fb::world::Action_ValidateAuth) {
-			register_awaited_player(auth_frame->userName()->str(), auth_frame->token()->str(), std::string());
+			register_awaited_player(auth_frame->userName()->str(), auth_frame->token()->str(), identity.to_string());
 		  } else {
 			process_player_message(auth_frame->userName()->str(), auth_frame->token()->str(), frame);
 		  }

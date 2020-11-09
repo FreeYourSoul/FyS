@@ -24,15 +24,12 @@
 #ifndef FYS_COLLISIONMAP_HH
 #define FYS_COLLISIONMAP_HH
 
-#include "player_data.hh"
-#include <algorithm>
 #include <bitset>
 #include <optional>
-#include <tmxlite/ObjectGroup.hpp>
-#include <tmxlite/Types.hpp>
-#include <utility>
 #include <variant>
 #include <vector>
+
+#include "player_data.hh"
 
 // forward declaration
 namespace fys::ws {
@@ -40,36 +37,6 @@ class world_server_context;
 class connection_handler;
 }// namespace fys::ws
 // end forward declaration
-
-namespace fys::map::algo {
-
-/**
- * Check if the given object layer is used for collision
- * @tparam TmxLayer tmx::GroupObjects layer
- * @param layer perfect forwarding object
- * @return true if the given group object layer is used for collision, false otherwise
- */
-template<typename TmxLayer>
-bool is_collision_layer(TmxLayer&& layer) {
-  return std::any_of(layer.getProperties().begin(), layer.getProperties().end(), [](const auto& prop) {
-	return prop.getName().find("collision") != std::string::npos;
-  });
-}
-
-/**
- * Check if the given object layer is used for any trigger
- * @tparam TmxLayer tmx::GroupObjects layer
- * @param layer perfect forwarding object
- * @return true if the given group object layer is used for any trigger, false otherwise
- */
-template<typename TmxLayer>
-bool is_trigger_layer(TmxLayer&& layer) {
-  return std::any_of(layer.getProperties().begin(), layer.getProperties().end(), [](const auto& prop) {
-	return prop.getName().find("trigger") != std::string::npos;
-  });
-}
-
-}// namespace fys::map::algo
 
 namespace fys::ws {
 
@@ -125,7 +92,7 @@ public:
   [[nodiscard]] inline bool
   can_go_through(pos position, std::size_t level) const noexcept;
 
-  void add_collision(const tmx::FloatRect& object) {
+  void add_collision(const hitbox_d& object) {
 	_collisions.emplace_back(object);
   }
 
@@ -143,20 +110,22 @@ private:
   std::bitset<4> _change_level;// set on stairs to pass from a level to another
   e_element_type _type = e_element_type::NONE;
   std::variant<connection_handler*, void*> _trigger;// TODO: change with std::function<void(LUA::Reference&)>
-  std::vector<tmx::FloatRect> _collisions;
+  std::vector<hitbox_d> _collisions;
 };
 
 class collision_map {
+  struct internal;
 
 public:
   explicit collision_map(const world_server_context& ctx);
+  ~collision_map();
 
-  collision_map(collision_map&&) noexcept = default;
+  collision_map(collision_map&&) noexcept;
   collision_map(const collision_map&) = delete;
   collision_map& operator=(const collision_map&) = delete;
 
-  void build_map_from_tmx(const std::string& tmx_map_path);
-  void execute_potential_trigger(std::uint32_t index, const character_info& position_on_map);
+  void build_map_from_file(const std::string& map_file_path);
+  void execute_potential_trigger(const pos& position, std::uint32_t index, const character_info& position_on_map);
 
   /**
    * Check if the position is in the boundary of the map before checking on the map
@@ -166,28 +135,7 @@ public:
   can_move_to(pos pos, std::size_t level) const noexcept;
 
 private:
-  /**
-   * @brief Add the the collision elements (witht their AABB objects) into the map.
-   *
-   * AABB Objects stands for Axis-Aligned Bounding Box. Basically coordinates to use as hit box for the tiles.
-   */
-  void add_collision_in_map(const vec2_u& tile_map_size, const tmx::ObjectGroup& collision_layer);
-
-  /**
-   * @brief Add the trigger elements into the map, and link the function associated to this trigger
-   *
-   * A trigger is defined with an id, that is going to be checked against the database,
-   *   - Some specific trigger (teleportation trigger) will trigger a complete C++ code that is going to
-   *     teleport the player into another location
-   *   - The classical one is going to trigger a script retrieved from the DB thanks to the id defining the trigger
-   */
-  void add_trigger_in_map(const tmx::ObjectGroup& trigger_layer);
-
-private:
-  boundary _boundary_x;
-  boundary _boundary_y;
-  std::vector<proximity_server> _server_proximity;
-  std::vector<std::vector<map_element>> _map_elems;
+  std::unique_ptr<internal> _intern;
 };
 
 }// namespace fys::ws

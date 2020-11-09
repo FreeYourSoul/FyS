@@ -37,6 +37,7 @@ void assert_engine_error(bool isError, const std::string& errorMsg) {
 	throw std::runtime_error(err);
   }
 }
+
 }// namespace
 
 namespace fys::ws {
