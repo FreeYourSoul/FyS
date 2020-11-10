@@ -90,7 +90,7 @@ bool is_trigger_layer(TmxLayer&& layer) {
 
 struct collision_map::internal {
 
-  internal(const world_server_context& ctx)
+  explicit internal(const world_server_context& ctx)
 	  : _boundary_x(ctx.server_x_boundaries()),
 		_boundary_y(ctx.server_y_boundaries()),
 		_server_proximity(ctx.server_proximity()) {}

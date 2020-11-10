@@ -43,7 +43,7 @@
 namespace {
 
 [[nodiscard]] std::vector<std::string>
-retrieve_string_vector(const std::vector<std::pair<std::string, uint>> doableAttacks) {
+retrieve_string_vector(const std::vector<std::pair<std::string, uint>>& doableAttacks) {
   std::vector<std::string> stringVec;
   stringVec.reserve(doableAttacks.size());
   for (const auto& [atkString, atkLvl] : doableAttacks) {
