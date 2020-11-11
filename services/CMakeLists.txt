@@ -27,3 +27,7 @@ if (BUILD_SERVICE_WORLD)
         add_subdirectory(worldserver/test)
     endif ()
 endif ()
+
+if (BUILD_SERVICE_CLI_TMX_MAP_CONVERTER)
+    add_subdirectory(worldserver/collision_map_converter)
+endif ()
