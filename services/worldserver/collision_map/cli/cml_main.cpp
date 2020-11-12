@@ -21,38 +21,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <spdlog/spdlog.h>
-
-#include <tmxlite/Map.hpp>
-#include <tmxlite/TileLayer.hpp>
+#include <fil/cli/command_line_interface.hh>
 
 #include "collision_map_converter.hh"
 
-namespace fys {
+int main(int ac, char** av) {
+  fil::command_line_interface cli([] {}, "FyS::CollisionMapConverter");
+  std::string config_path = "NONE";
+  std::string specific_file = "NONE";
+  std::string output_file_path = "./output.collision.json";
 
-void convert_map_from_tmx_file(const std::string& tmx_path) {
-  tmx::Map map;
-  if (!map.load(tmx_path)) {
-	SPDLOG_ERROR("TMX CollisionMap couldn't be loaded");
-	return;
-  }
-  const auto& layers = map.getLayers();
-  if (layers.empty()) {
-	SPDLOG_ERROR("TMX Map should have at least one layer");
-	return;
-  }
-  auto [x_bound, y_bound] = map.getTileCount();
-  std::vector<tmx::IntRect> res;
-  layers.front()->getProperties().
-  for (unsigned x = 0; x < x_bound; ++x) {
-	for (unsigned y = 0; y < y_bound; ++y) {
+  cli.add_option(fil::option(
+	  "-t", [&v = config_path](std::string str) { v = std::move(str); }, "Path to tmx folder to convert"));
+  cli.add_option(fil::option(
+	  "-s", [&v = specific_file](std::string str) { v = std::move(str); }, "Name of the file to convert"));
+  cli.add_option(fil::option(
+	  "-o", [&v = output_file_path](std::string value) { v = std::move(value); }, "Collision map : Output file"));
 
-
-
-	}
-
-  }
-
-}
-
+  cli.parse_command_line(ac, av);
+  return 0;
 }

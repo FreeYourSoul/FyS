@@ -71,12 +71,6 @@ include_directories(flatbuffer/includes)
 set(COMMON_SRCS ${COMMON_SRCS} PARENT_SCOPE)
 set(COMMON_INCLUDES_DIR ${COMMON_INCLUDES_DIR} PARENT_SCOPE)
 
-message(STATUS " IN COMMON
->>> ${COMMON_INCLUDES_DIR}
-----------------------------
->>> ${COMMON_SRCS}
-")
-
 if (BUILD_TESTING)
     add_subdirectory(test)
 endif ()

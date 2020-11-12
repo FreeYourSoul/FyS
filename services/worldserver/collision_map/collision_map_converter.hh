@@ -24,11 +24,50 @@
 #ifndef FYS_ONLINE_SERVICES_WORLDSERVER_COLLISION_MAP_CONVERTER_COLLISION_MAP_CONVERTER_HH
 #define FYS_ONLINE_SERVICES_WORLDSERVER_COLLISION_MAP_CONVERTER_COLLISION_MAP_CONVERTER_HH
 
+#include <optional>
 #include <string>
 
-namespace fys {
+#include "../include/engine/player_data.hh"
+
+namespace fys::map_converter {
+
+using trigger_box = std::pair<ws::hitbox_d, unsigned>;
+
+struct map_element {
+  std::vector<trigger_box> hb_trigger;
+  std::vector<ws::hitbox_d> hb_collision;
+};
+
+struct transition_map {
+  unsigned x = 0, y = 0;
+
+  ws::hitbox_d max_size_elem;
+  std::vector<map_element> map;
+};
 
 void convert_map_from_tmx_file(const std::string& tmx_path);
+[[nodiscard]] transition_map retrieve_transition_map(const std::string& collision_map_path);
 
+template<typename MapBuilder>
+void build_from_collision_map(const std::string& collision_map_path, MapBuilder& map_builder) {
+  transition_map transit = retrieve_transition_map(collision_map_path);
+
+  map_builder.init_size(transit.x, transit.y);
+
+  for (unsigned i = 0; i < transit.map.size(); ++i) {
+	const auto& elem = transit.map.at(i);
+
+	if (!elem.hb_collision.empty()) {
+	  bool is_full = elem.hb_collision.front().height == transit.max_size_elem.height
+				  && elem.hb_collision.front().width == transit.max_size_elem.width;
+
+	  map_builder.add_collision(is_full, std::move(elem));
+	}
+	if (!elem.hb_trigger.empty()) {
+	  map_builder.add_trigger(std::move(elem));
+	}
+  }
 }
+
+}// namespace fys::map_converter
 #endif//FYS_ONLINE_SERVICES_WORLDSERVER_COLLISION_MAP_CONVERTER_COLLISION_MAP_CONVERTER_HH

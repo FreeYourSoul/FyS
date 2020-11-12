@@ -28,7 +28,8 @@ add_executable(worldserver_service
 target_link_libraries(worldserver_service PRIVATE
         lua
         fys::common_service
-        dl fys::cml
+        fys::cml
+        dl
         ${TMXLITE_LIBRARIES} # to remove
         )
 target_compile_features(worldserver_service PRIVATE cxx_std_20)

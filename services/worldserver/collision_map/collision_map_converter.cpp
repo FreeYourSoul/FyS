@@ -21,20 +21,38 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <fil/cli/command_line_interface.hh>
+#include <spdlog/spdlog.h>
+
+#include <tmxlite/Map.hpp>
+#include <tmxlite/TileLayer.hpp>
 
 #include "collision_map_converter.hh"
 
-int main(int ac, char** av) {
-  fil::command_line_interface cli([] {}, "FyS::CollisionMapConverter");
-  std::string config_path = "NONE";
-  std::string output_file_path = "./output.collision.json";
+namespace fys::map_converter {
 
-  cli.add_option(fil::option(
-	  "-m", [&v = config_path](std::string str) { v = std::move(str); }, "Path to tmx file to convert"));
-  cli.add_option(fil::option(
-	  "-o", [&v = output_file_path](std::string value) { v = std::move(value); }, "Collision map : Output file"));
+void convert_map_from_tmx_file(const std::string& tmx_path) {
+  tmx::Map map;
+  if (!map.load(tmx_path)) {
+	SPDLOG_ERROR("TMX CollisionMap couldn't be loaded");
+	return;
+  }
+  const auto& layers = map.getLayers();
+  if (layers.empty()) {
+	SPDLOG_ERROR("TMX Map should have at least one layer");
+	return;
+  }
+  auto [x_bound, y_bound] = map.getTileCount();
+  std::vector<tmx::IntRect> res;
 
-  cli.parse_command_line(ac, av);
-  return 0;
+  for (unsigned x = 0; x < x_bound; ++x) {
+	for (unsigned y = 0; y < y_bound; ++y) {
+
+		layers.front()->getLayerAs<tmx::TileLayer>().getTiles();
+
+	}
+
+  }
+
+}
+
 }
