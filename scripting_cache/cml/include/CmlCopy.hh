@@ -29,15 +29,15 @@
 
 namespace fys::cache {
 class
-	CmlCopy : public Cml {
+    CmlCopy : public Cml {
 public:
   ~CmlCopy() override {}
   CmlCopy(const std::string& pathLocalStorage,
-		  const std::string& pathCopy)
-	  : Cml(pathLocalStorage), _copyPathStorage(pathCopy) {
-	if (!std::filesystem::exists(_copyPathStorage)) {
-	  SPDLOG_ERROR("Path copy does not exist {}", pathCopy);
-	}
+          const std::string& pathCopy)
+      : Cml(pathLocalStorage), _copyPathStorage(pathCopy) {
+    if (!std::filesystem::exists(_copyPathStorage)) {
+      SPDLOG_ERROR("Path copy does not exist {}", pathCopy);
+    }
   }
 
 private:

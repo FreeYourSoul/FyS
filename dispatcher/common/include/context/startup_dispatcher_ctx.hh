@@ -53,10 +53,10 @@ constexpr auto BACKEND_ADDR = "proxy_backend.address";
 
 class startup_dispatcher_ctx {
   struct ClusterProxy {
-	ushort frontend_port = 0;
-	ushort backend_port = 0;
-	std::string frontend_address;
-	std::string backend_address;
+    ushort frontend_port = 0;
+    ushort backend_port = 0;
+    std::string frontend_address;
+    std::string backend_address;
   };
 
 public:
@@ -84,12 +84,12 @@ private:
 
   template<typename T>
   [[nodiscard]] std::vector<T> to_array(const std::string& s) const noexcept {
-	std::vector<T> result;
-	std::stringstream ss(s);
-	std::string item;
-	while (std::getline(ss, item, ','))
-	  result.push_back(boost::lexical_cast<T>(item));
-	return result;
+    std::vector<T> result;
+    std::stringstream ss(s);
+    std::string item;
+    while (std::getline(ss, item, ','))
+      result.push_back(boost::lexical_cast<T>(item));
+    return result;
   }
 
 protected:

@@ -36,19 +36,19 @@
 
 int main(int ac, char** av) {
   try {
-	spdlog::set_pattern("[%D %H:%M:%S][arena_server][ %25s:%-4# ][%L]: %v");
-	fys::arena::arena_server_context ctx(ac, av);
-	int major, minor, patch;
-	zmq_version(&major, &minor, &patch);
-	spdlog::info("Version ZMQ : {}.{}.{}\n{}", major, minor, patch, ctx.to_string());
+    spdlog::set_pattern("[%D %H:%M:%S][arena_server][ %25s:%-4# ][%L]: %v");
+    fys::arena::arena_server_context ctx(ac, av);
+    int major, minor, patch;
+    zmq_version(&major, &minor, &patch);
+    spdlog::info("Version ZMQ : {}.{}.{}\n{}", major, minor, patch, ctx.to_string());
 
-	fys::arena::arena_server_service serverService(ctx);
-	fys::arena::history_manager::activate_historic_manager(true);
-	fys::arena::history_manager::set_save_path(ctx.get_history_saving_folder());
+    fys::arena::arena_server_service serverService(ctx);
+    fys::arena::history_manager::activate_historic_manager(true);
+    fys::arena::history_manager::set_save_path(ctx.get_history_saving_folder());
 
-	serverService.run_server_loop();
+    serverService.run_server_loop();
   } catch (const std::exception& e) {
-	SPDLOG_ERROR("Main caught an exception: {}", e.what());
+    SPDLOG_ERROR("Main caught an exception: {}", e.what());
   }
   return 0;
 }

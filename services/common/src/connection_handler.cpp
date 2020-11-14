@@ -31,7 +31,7 @@ void connection_handler::setup_connection_manager(const std::string& dispatcher_
 
 void connection_handler::send_msg_to_dispatcher(zmq::multipart_t&& msg) noexcept {
   if (_dealer_connection_to_dispatcher.connected()) {
-	msg.send(_dealer_connection_to_dispatcher);
+    msg.send(_dealer_connection_to_dispatcher);
   }
 }
 

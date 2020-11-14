@@ -33,30 +33,30 @@ class direct_connection_manager {
 
 public:
   direct_connection_manager(unsigned threadNumber, const std::string& bindingString)
-	  : _ctx(threadNumber), _router_player_connection(_ctx, zmq::socket_type::router) {
-	_router_player_connection.bind(bindingString);
+      : _ctx(threadNumber), _router_player_connection(_ctx, zmq::socket_type::router) {
+    _router_player_connection.bind(bindingString);
   }
 
   template<typename HandlerPlayer>
   void pollAndProcessPlayerMessage(HandlerPlayer&& handler_player) {
-	//  Initialize poll set
-	zmq::pollitem_t items[] = {
-		{_router_player_connection, 0, ZMQ_POLLIN, 0}};
-	zmq::poll(&items[0], 1, 10);
-	if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
-	  zmq::multipart_t msg;
-	  if (!msg.recv(_router_player_connection, ZMQ_NOBLOCK) || (msg.size() != 3)) {
-		SPDLOG_ERROR("Error while reading on the listener socket.");
-		SPDLOG_ERROR("Received message may be ill formatted, contains '{}' part, message is : {}",
-					 msg.size(), msg.str());
-	  } else {
-		// first frame is the identity
-		auto identity = msg.pop();
-		// second frame is auth frame of the player
-		auto auth_frame = msg.pop();
-		std::forward<HandlerPlayer>(handler_player)(std::move(identity), std::move(auth_frame), msg.pop());
-	  }
-	}
+    //  Initialize poll set
+    zmq::pollitem_t items[] = {
+        {_router_player_connection, 0, ZMQ_POLLIN, 0}};
+    zmq::poll(&items[0], 1, 10);
+    if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
+      zmq::multipart_t msg;
+      if (!msg.recv(_router_player_connection, ZMQ_NOBLOCK) || (msg.size() != 3)) {
+        SPDLOG_ERROR("Error while reading on the listener socket.");
+        SPDLOG_ERROR("Received message may be ill formatted, contains '{}' part, message is : {}",
+                     msg.size(), msg.str());
+      } else {
+        // first frame is the identity
+        auto identity = msg.pop();
+        // second frame is auth frame of the player
+        auto auth_frame = msg.pop();
+        std::forward<HandlerPlayer>(handler_player)(std::move(identity), std::move(auth_frame), msg.pop());
+      }
+    }
   }
 
 protected:

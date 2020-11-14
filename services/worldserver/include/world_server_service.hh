@@ -38,10 +38,10 @@ namespace fys::ws {
 class world_server_service {
 
   struct awaited_player {
-	auth_player auth{};
-	pos initial_position{};
-	double initial_angle = 0.0;
-	double initial_velocity = 0.0;
+    auth_player auth{};
+    pos initial_position{};
+    double initial_angle = 0.0;
+    double initial_velocity = 0.0;
   };
 
   //	using awaiting_player_it = std::vector<awaited_player>::const_iterator;

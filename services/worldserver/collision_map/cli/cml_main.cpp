@@ -25,7 +25,7 @@
 
 #include <fil/cli/command_line_interface.hh>
 
-#include "../collision_map_converter.hh"
+#include <collision_map_converter.hh>
 
 int main(int ac, char** av) {
   fil::command_line_interface cli([] {}, "FyS::CollisionMapConverter");
@@ -34,21 +34,20 @@ int main(int ac, char** av) {
   std::string output_file_path = "./output.collision.json";
 
   cli.add_option(fil::option(
-	  "-f", [&v = config_path](std::string str) { v = std::move(str); }, "Path to tmx folder to convert"));
+      "-f", [&v = config_path](std::string str) { v = std::move(str); }, "Path to tmx folder to convert"));
   cli.add_option(fil::option(
-	  "-c", [&v = file_path](std::string str) { v = std::move(str); }, "Path of the file to convert"));
+      "-c", [&v = file_path](std::string str) { v = std::move(str); }, "Path of the file to convert"));
   cli.add_option(fil::option(
-	  "-o", [&v = output_file_path](std::string value) { v = std::move(value); }, "Collision map : Output file"));
+      "-o", [&v = output_file_path](std::string value) { v = std::move(value); }, "Collision map : Output file"));
 
   cli.parse_command_line(ac, av);
 
   fmt::print("Start collision map converter for file {} with output file set to {}\n", file_path, output_file_path);
   try {
-  	fys::map_converter::convert_map_from_tmx_file(file_path, output_file_path);
-  }
-  catch (const std::exception& e) {
-	fmt::print("An error occurred : {}\n", e.what());
-	return 1;
+    fys::map_converter::convert_map_from_tmx_file(file_path, output_file_path);
+  } catch (const std::exception& e) {
+    fmt::print("An error occurred : {}\n", e.what());
+    return 1;
   }
   return 0;
 }

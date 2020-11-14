@@ -47,20 +47,20 @@ struct boundary {
 
 class proximity_server {
   struct proximity_server_axis {
-	double value;
-	bool superiorTo;
+    double value;
+    bool superiorTo;
   };
 
 public:
   [[nodiscard]] constexpr bool
   is_close_by(double axis) const noexcept {
-	bool x_req = x_axis_requirement.has_value();
-	bool y_req = y_axis_requirement.has_value();
-	if (x_req)
-	  x_req = (x_axis_requirement->superiorTo) ? (axis > x_axis_requirement->value) : (axis < x_axis_requirement->value);
-	if (y_req)
-	  y_req = (y_axis_requirement->superiorTo) ? (axis > y_axis_requirement->value) : (axis < y_axis_requirement->value);
-	return x_req && y_req;
+    bool x_req = x_axis_requirement.has_value();
+    bool y_req = y_axis_requirement.has_value();
+    if (x_req)
+      x_req = (x_axis_requirement->superiorTo) ? (axis > x_axis_requirement->value) : (axis < x_axis_requirement->value);
+    if (y_req)
+      y_req = (y_axis_requirement->superiorTo) ? (axis > y_axis_requirement->value) : (axis < y_axis_requirement->value);
+    return x_req && y_req;
   }
 
   std::string code;
@@ -70,6 +70,7 @@ public:
 
 enum class e_element_type {
   BLOCK,
+  FULL_BLOCK,
   TRIGGER,
   TP_TRIGGER,
   NONE
@@ -80,36 +81,27 @@ class map_element {
 public:
   void execute_potential_trigger(std::uint32_t indexPlayer) const;
 
-  void set_level(std::size_t level) { _level.set(level); }
-  void set_change_level(std::size_t level) { _change_level.set(level); }
-
-  void set_type(e_element_type type) { _type = type; }
-
   /**
    * check if the element is of type BLOCK, if it is, check every collision blockers on the mapElement
    * to verify if the PlayerInfo collide with them.
    */
   [[nodiscard]] inline bool
-  can_go_through(pos position, std::size_t level) const noexcept;
+  can_go_through(pos position) const noexcept;
 
   void add_collision(const hitbox_d& object) {
-	_collisions.emplace_back(object);
+    _collisions.emplace_back(object);
   }
 
   template<typename T>
-  void set_trigger(T&& trigger) {
-	_trigger = std::forward(trigger);
+  void add_trigger(T&& trigger, hitbox_d box) {
+    _triggers.emplace_back(box, std::forward(trigger));
   }
 
-private:
-  [[nodiscard]] inline bool
-  can_go_to_level(std::size_t go_level) const noexcept;
+  e_element_type type() const { return _type; }
 
 private:
-  std::bitset<4> _level;
-  std::bitset<4> _change_level;// set on stairs to pass from a level to another
   e_element_type _type = e_element_type::NONE;
-  std::variant<connection_handler*, void*> _trigger;// TODO: change with std::function<void(LUA::Reference&)>
+  std::vector<std::pair<hitbox_d, std::variant<connection_handler*, void*>>> _triggers;// TODO: change with std::function<void(LUA::Reference&)>
   std::vector<hitbox_d> _collisions;
 };
 
@@ -124,15 +116,13 @@ public:
   collision_map(const collision_map&) = delete;
   collision_map& operator=(const collision_map&) = delete;
 
-  void build_map_from_file(const std::string& map_file_path);
-  void execute_potential_trigger(const pos& position, std::uint32_t index, const character_info& position_on_map);
+  void execute_potential_trigger(const pos& position, std::uint32_t index, const character_info& character);
 
   /**
    * Check if the position is in the boundary of the map before checking on the map
    * @return true if it is possible to move on the given position, false otherwise
    */
-  [[nodiscard]] bool
-  can_move_to(pos pos, std::size_t level) const noexcept;
+  [[nodiscard]] bool can_move_to(pos pos, std::size_t level) const noexcept;
 
 private:
   std::unique_ptr<internal> _intern;

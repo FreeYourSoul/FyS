@@ -49,10 +49,10 @@ class side_battle {
 
 public:
   side_battle(pit_contenders& pit_contenders, ally_party_teams& ally_party_teams, hexagon_side::orientation side)
-	  : _contenders(pit_contenders),
-		_partyTeams(ally_party_teams),
-		_side(side),
-		_turnDone(true) {}
+      : _contenders(pit_contenders),
+        _partyTeams(ally_party_teams),
+        _side(side),
+        _turnDone(true) {}
 
   /**
    * Get the next participant in the fighting pit turn (can be either an NPC, or a contender) depending on their
@@ -64,7 +64,7 @@ public:
    */
   [[nodiscard]] data::priority_elem
   get_current_participant_turn(const std::chrono::system_clock::time_point& now,
-							   const std::chrono::milliseconds& timer_interlude);
+                               const std::chrono::milliseconds& timer_interlude);
 
   /**
    * Erase characters (contender or ally) from the PriorityOrderList that are dead.
@@ -76,7 +76,7 @@ public:
   void add_participant_in_list(const team_member& tm);
   void add_participant_in_list(const fighting_contender& contender);
   void add_participant_in_list(uint id, int speed, bool isContender) {
-	_priority_order_list.add_participant_in_list(id, speed, isContender);
+    _priority_order_list.add_participant_in_list(id, speed, isContender);
   }
   void turn_done(bool turnDone) { _turnDone = turnDone; };
 

@@ -30,7 +30,7 @@ using json = nlohmann::json;
 namespace fys::inv {
 
 inventory_server_context::inventory_server_context(int argc, char** argv)
-	: common::service_context_base(argc, argv) {
+    : common::service_context_base(argc, argv) {
   std::ifstream i(_config_file);
   json jsonConfig;
   i >> jsonConfig;

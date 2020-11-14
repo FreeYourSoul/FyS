@@ -53,8 +53,8 @@ class fighting_pit_announcer {
 
 public:
   enum encounter_type {
-	RANDOM,
-	SCRIPTED
+    RANDOM,
+    SCRIPTED
   };
 
 public:
@@ -73,15 +73,15 @@ public:
   build_fighting_pit(const encounter_context& ctx, const std::string& ws_id);
 
   void set_encounter_type(encounter_type type) {
-	if (type == RANDOM)
-	  _id_encounter = 0;
-	_encounter_type = type;
+    if (type == RANDOM)
+      _id_encounter = 0;
+    _encounter_type = type;
   }
 
   void set_encounter_id(std::uint32_t id_encounter) {
-	if (_encounter_type == RANDOM && !id_encounter)
-	  _encounter_type = SCRIPTED;
-	_id_encounter = id_encounter;
+    if (_encounter_type == RANDOM && !id_encounter)
+      _encounter_type = SCRIPTED;
+    _id_encounter = id_encounter;
   }
 
   /**
@@ -149,7 +149,7 @@ private:
   generate_contenders(fighting_pit& fp, const encounter_context& ctx, const std::string& wsId);
 
   inline void generate_reward_for_contender(fighting_pit& fp, const encounter_context& ctx,
-											const std::vector<std::shared_ptr<fighting_contender>>& contenders);
+                                            const std::vector<std::shared_ptr<fighting_contender>>& contenders);
 
 private:
   cache::Cml& _cache;

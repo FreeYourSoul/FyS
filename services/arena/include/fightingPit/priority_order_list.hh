@@ -68,17 +68,17 @@ private:
 
   [[nodiscard]] bool
   is_player_slowest(std::uint32_t id) const {
-	return _base_speed.front().id == id;
+    return _base_speed.front().id == id;
   }
 
   [[nodiscard]] int
   get_fastest_base_speed() const {
-	return _base_speed.back().speed;
+    return _base_speed.back().speed;
   }
 
   [[nodiscard]] int
   get_slowest_speed() const {
-	return _base_speed.front().speed;
+    return _base_speed.front().speed;
   }
 
 private:

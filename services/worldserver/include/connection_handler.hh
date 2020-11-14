@@ -43,31 +43,31 @@ public:
 
   template<typename HandlerIncoming, typename HandlerInterServer>
   void poll_and_process_sub_msg(HandlerIncoming&& handler_incoming, HandlerInterServer&& handler_server) noexcept {
-	//  Initialize poll set
-	zmq::pollitem_t items[] = {
-		{_sub_socket_on_dispatcher, 0, ZMQ_POLLIN, 0}};
-	zmq::poll(&items[0], 1, 10);
-	if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
-	  zmq::multipart_t msg;
-	  if (!msg.recv(_sub_socket_on_dispatcher, ZMQ_NOBLOCK) || (msg.size() != 3 && msg.size() != 4)) {
-		SPDLOG_ERROR("Error while reading on the listener socket.");
-		SPDLOG_ERROR("Received message may be ill formatted, contains '{}' part, message is : {}",
-					 msg.size(), msg.str());
-	  } else {
-		// first  frame is subscription channel
-		const std::string subKey = msg.popstr();
-		// second frame is identity
-		auto identity = msg.pop();
+    //  Initialize poll set
+    zmq::pollitem_t items[] = {
+        {_sub_socket_on_dispatcher, 0, ZMQ_POLLIN, 0}};
+    zmq::poll(&items[0], 1, 10);
+    if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
+      zmq::multipart_t msg;
+      if (!msg.recv(_sub_socket_on_dispatcher, ZMQ_NOBLOCK) || (msg.size() != 3 && msg.size() != 4)) {
+        SPDLOG_ERROR("Error while reading on the listener socket.");
+        SPDLOG_ERROR("Received message may be ill formatted, contains '{}' part, message is : {}",
+                     msg.size(), msg.str());
+      } else {
+        // first  frame is subscription channel
+        const std::string subKey = msg.popstr();
+        // second frame is identity
+        auto identity = msg.pop();
 
-		// third frame is the message content
+        // third frame is the message content
 
-		if (SERVER_SUB_CHANNEL_KEY == subKey) {
-		  std::forward<HandlerInterServer>(handler_server)(std::move(identity), msg.pop());
-		  return;
-		}
-		std::forward<HandlerIncoming>(handler_incoming)(std::move(identity), msg.pop());
-	  }
-	}
+        if (SERVER_SUB_CHANNEL_KEY == subKey) {
+          std::forward<HandlerInterServer>(handler_server)(std::move(identity), msg.pop());
+          return;
+        }
+        std::forward<HandlerIncoming>(handler_incoming)(std::move(identity), msg.pop());
+      }
+    }
   }
 
 private:

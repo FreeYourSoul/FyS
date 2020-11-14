@@ -33,41 +33,41 @@ namespace fys::arena {
 class hexagon_side {
 public:
   enum class hexagon {
-	A,
-	B,
-	C
+    A,
+    B,
+    C
   };
 
   static constexpr unsigned SIDE_NUMBER = 6 * 3;// sidesByHexagon * hexagonNumber
 
   enum class orientation : int {
-	A_N = 0,
-	A_NE,
-	A_SE,
-	A_S,
-	A_SW,
-	A_NW,
-	B_N,
-	B_NE,
-	B_SE,
-	B_S,
-	B_SW,
-	B_NW,
-	C_N,
-	C_NE,
-	C_SE,
-	C_S,
-	C_SW,
-	C_NW,
-	NONE// 18
+    A_N = 0,
+    A_NE,
+    A_SE,
+    A_S,
+    A_SW,
+    A_NW,
+    B_N,
+    B_NE,
+    B_SE,
+    B_S,
+    B_SW,
+    B_NW,
+    C_N,
+    C_NE,
+    C_SE,
+    C_S,
+    C_SW,
+    C_NW,
+    NONE// 18
   };
 
   explicit hexagon_side(orientation orientation) {
-	move(orientation, true);
+    move(orientation, true);
   }
 
   explicit hexagon_side(hexagon hexagon = hexagon::A, orientation orientation = orientation::NONE)
-	  : _hexagon(hexagon), _side(orientation) {}
+      : _hexagon(hexagon), _side(orientation) {}
 
   [[nodiscard]] std::pair<hexagon, orientation>
   operator*() const { return std::pair(_hexagon, _side); }

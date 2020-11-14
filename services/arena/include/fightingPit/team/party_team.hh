@@ -38,7 +38,7 @@ class party_team {
 
 public:
   explicit party_team(std::string user_name)
-	  : _user_name(std::move(user_name)) {}
+      : _user_name(std::move(user_name)) {}
 
   [[nodiscard]] std::vector<std::shared_ptr<team_member>>
   team_member_on_side(hexagon_side::orientation orientation) const;

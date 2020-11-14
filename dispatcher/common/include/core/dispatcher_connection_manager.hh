@@ -70,12 +70,12 @@ public:
    */
   template<typename Handler>
   void dispatchMessageFromListenerSocket(Handler&& handler) {
-	zmq::multipart_t msg;
-	if (!msg.recv(_listener)) {
-	  SPDLOG_ERROR("Error while reading on the listener socket");
-	} else {
-	  std::forward<Handler>(handler)(std::move(msg), *this);
-	}
+    zmq::multipart_t msg;
+    if (!msg.recv(_listener)) {
+      SPDLOG_ERROR("Error while reading on the listener socket");
+    } else {
+      std::forward<Handler>(handler)(std::move(msg), *this);
+    }
   }
 
   /**
@@ -86,26 +86,26 @@ public:
    */
   template<typename Handler>
   void dispatchMessageFromSubscriberSocket(Handler&& handler) noexcept {
-	if (!_clusterConnection.closed) {
-	  zmq::multipart_t msg;
-	  if (!msg.recv(_clusterConnection.subSocket)) {
-		SPDLOG_ERROR("Error while reading on the cluster subscriber socket");
-	  } else {
-		std::forward<Handler>(handler)(std::move(msg), *this);
-	  }
-	}
+    if (!_clusterConnection.closed) {
+      zmq::multipart_t msg;
+      if (!msg.recv(_clusterConnection.subSocket)) {
+        SPDLOG_ERROR("Error while reading on the cluster subscriber socket");
+      } else {
+        std::forward<Handler>(handler)(std::move(msg), *this);
+      }
+    }
   }
 
   /**
    */
   template<typename Handler>
   void dispatchMessageFromDispatcherSocket(Handler&& handler) noexcept {
-	zmq::multipart_t msg;
-	if (!msg.recv(_dispatcher)) {
-	  SPDLOG_ERROR("Error while reading on the listener socket");
-	} else {
-	  std::forward<Handler>(handler)(std::move(msg), *this);
-	}
+    zmq::multipart_t msg;
+    if (!msg.recv(_dispatcher)) {
+      SPDLOG_ERROR("Error while reading on the listener socket");
+    } else {
+      std::forward<Handler>(handler)(std::move(msg), *this);
+    }
   }
 
   /**

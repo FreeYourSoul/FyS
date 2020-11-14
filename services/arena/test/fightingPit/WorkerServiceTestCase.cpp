@@ -35,7 +35,7 @@ local_path_storage() {
   std::string file_path = __FILE__;
   std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
   if (dir_path.size() == file_path.size())
-	dir_path = file_path.substr(0, file_path.rfind('/'));
+    dir_path = file_path.substr(0, file_path.rfind('/'));
   return dir_path + "/../../scriptTests/scripts_lnk";
 }
 }// namespace
@@ -49,58 +49,58 @@ TEST_CASE("WorkerServiceTestCase", "[service][arena]") {
 
   SECTION("Failures") {
 
-	REQUIRE(fys::arena::fighting_pit::CREATION_ERROR == ws.add_fighting_pit(nullptr));
+    REQUIRE(fys::arena::fighting_pit::CREATION_ERROR == ws.add_fighting_pit(nullptr));
 
   }// End section : Failures
 
   SECTION("Test addFightingPit") {
 
-	unsigned id1 = ws.add_fighting_pit(std::make_unique<fys::arena::fighting_pit>("1", fys::arena::fighting_pit::EASY));
-	REQUIRE(1 == id1);
-	REQUIRE("1" == fys::arena::fighting_pit_announcer::creator_user_name(ws.get_fighting_pit_instance(id1)));
+    unsigned id1 = ws.add_fighting_pit(std::make_unique<fys::arena::fighting_pit>("1", fys::arena::fighting_pit::EASY));
+    REQUIRE(1 == id1);
+    REQUIRE("1" == fys::arena::fighting_pit_announcer::creator_user_name(ws.get_fighting_pit_instance(id1)));
 
-	unsigned id2 = ws.add_fighting_pit(std::make_unique<fys::arena::fighting_pit>("2", fys::arena::fighting_pit::EASY));
-	REQUIRE(2 == id2);
-	REQUIRE("2" == fys::arena::fighting_pit_announcer::creator_user_name(ws.get_fighting_pit_instance(id2)));
+    unsigned id2 = ws.add_fighting_pit(std::make_unique<fys::arena::fighting_pit>("2", fys::arena::fighting_pit::EASY));
+    REQUIRE(2 == id2);
+    REQUIRE("2" == fys::arena::fighting_pit_announcer::creator_user_name(ws.get_fighting_pit_instance(id2)));
 
-	unsigned id3 = ws.add_fighting_pit(std::make_unique<fys::arena::fighting_pit>("3", fys::arena::fighting_pit::EASY));
-	REQUIRE(3 == id3);
-	REQUIRE("3" == fys::arena::fighting_pit_announcer::creator_user_name(ws.get_fighting_pit_instance(id3)));
+    unsigned id3 = ws.add_fighting_pit(std::make_unique<fys::arena::fighting_pit>("3", fys::arena::fighting_pit::EASY));
+    REQUIRE(3 == id3);
+    REQUIRE("3" == fys::arena::fighting_pit_announcer::creator_user_name(ws.get_fighting_pit_instance(id3)));
 
-	unsigned id4 = ws.add_fighting_pit(std::make_unique<fys::arena::fighting_pit>("4", fys::arena::fighting_pit::EASY));
-	REQUIRE(4 == id4);
-	REQUIRE("4" == fys::arena::fighting_pit_announcer::creator_user_name(ws.get_fighting_pit_instance(id4)));
+    unsigned id4 = ws.add_fighting_pit(std::make_unique<fys::arena::fighting_pit>("4", fys::arena::fighting_pit::EASY));
+    REQUIRE(4 == id4);
+    REQUIRE("4" == fys::arena::fighting_pit_announcer::creator_user_name(ws.get_fighting_pit_instance(id4)));
 
   }// End section : Test addFightingPit
 
   SECTION("Test Player join FightingPit") {
-	unsigned id = ws.add_fighting_pit(std::make_unique<fys::arena::fighting_pit>("4", fys::arena::fighting_pit::EASY));
-	REQUIRE(1 == id);
-	REQUIRE("4" == fys::arena::fighting_pit_announcer::creator_user_name(ws.get_fighting_pit_instance(id)));
+    unsigned id = ws.add_fighting_pit(std::make_unique<fys::arena::fighting_pit>("4", fys::arena::fighting_pit::EASY));
+    REQUIRE(1 == id);
+    REQUIRE("4" == fys::arena::fighting_pit_announcer::creator_user_name(ws.get_fighting_pit_instance(id)));
 
-	auto& pt = ws.get_fighting_pit_instance(1u);
-	REQUIRE(nullptr != pt);
+    auto& pt = ws.get_fighting_pit_instance(1u);
+    REQUIRE(nullptr != pt);
 
-	ws.player_join_fighting_pit(1u, getPartyTeam("TestUser"), cml);
-	REQUIRE(1 == pt->ally_party().get_party_teams().size());
-	REQUIRE(4 == pt->get_party_team_of_player("TestUser").team_members().size());
+    ws.player_join_fighting_pit(1u, getPartyTeam("TestUser"), cml);
+    REQUIRE(1 == pt->ally_party().get_party_teams().size());
+    REQUIRE(4 == pt->get_party_team_of_player("TestUser").team_members().size());
 
-	ws.player_join_fighting_pit(1u, getPartyTeam("TestUser2"), cml);
-	REQUIRE(2 == pt->ally_party().get_party_teams().size());
-	REQUIRE(4 == pt->get_party_team_of_player("TestUser2").team_members().size());
+    ws.player_join_fighting_pit(1u, getPartyTeam("TestUser2"), cml);
+    REQUIRE(2 == pt->ally_party().get_party_teams().size());
+    REQUIRE(4 == pt->get_party_team_of_player("TestUser2").team_members().size());
 
-	pt->set_player_readiness("TestUser");
-	REQUIRE(pt->is_joinable());
-	pt->set_player_readiness("TestUser2");
-	REQUIRE_FALSE(pt->is_joinable());
+    pt->set_player_readiness("TestUser");
+    REQUIRE(pt->is_joinable());
+    pt->set_player_readiness("TestUser2");
+    REQUIRE_FALSE(pt->is_joinable());
 
-	ws.player_join_fighting_pit(41u, getPartyTeam("NOT_GOOD_FP_ID"), cml);// Not existing fighting pit, partyTeam can't join
-	REQUIRE(2 == pt->ally_party().get_party_teams().size());
-	REQUIRE_THROWS(pt->get_party_team_of_player("NOT_GOOD_FP_ID"));// Not joinable isn't present in the pit and this has not been added
+    ws.player_join_fighting_pit(41u, getPartyTeam("NOT_GOOD_FP_ID"), cml);// Not existing fighting pit, partyTeam can't join
+    REQUIRE(2 == pt->ally_party().get_party_teams().size());
+    REQUIRE_THROWS(pt->get_party_team_of_player("NOT_GOOD_FP_ID"));// Not joinable isn't present in the pit and this has not been added
 
-	ws.player_join_fighting_pit(1u, getPartyTeam("NOT_JOINABLE"), cml);
-	REQUIRE(2 == pt->ally_party().get_party_teams().size());
-	REQUIRE_THROWS(pt->get_party_team_of_player("NOT_JOINABLE"));// Not joinable isn't present in the pit and this has not been added
+    ws.player_join_fighting_pit(1u, getPartyTeam("NOT_JOINABLE"), cml);
+    REQUIRE(2 == pt->ally_party().get_party_teams().size());
+    REQUIRE_THROWS(pt->get_party_team_of_player("NOT_JOINABLE"));// Not joinable isn't present in the pit and this has not been added
 
   }// End section : Test Player join FightingPit
 

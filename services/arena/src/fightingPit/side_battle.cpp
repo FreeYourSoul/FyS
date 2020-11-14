@@ -33,12 +33,12 @@ namespace fys::arena {
 
 data::priority_elem
 side_battle::get_current_participant_turn(
-	const std::chrono::system_clock::time_point& now,
-	const std::chrono::milliseconds& timer_interlude) {
+    const std::chrono::system_clock::time_point& now,
+    const std::chrono::milliseconds& timer_interlude) {
   if (_turnDone) {
-	_turnDone = false;
+    _turnDone = false;
   } else if (now < _endCurrentTurn && !_priority_order_list.get_current().is_contender) {
-	return _priority_order_list.get_current();
+    return _priority_order_list.get_current();
   }
   _endCurrentTurn = now + timer_interlude;
   return _priority_order_list.next();
@@ -46,12 +46,12 @@ side_battle::get_current_participant_turn(
 
 void side_battle::erase_finished_alteration_and_dead_characters_from_turn_list() {
   for (auto dead_contenders = _contenders.get().get_dead_contender_on_side(_side); auto& contender : dead_contenders) {
-	contender->access_status().cleanup_finished_alteration();
-	_priority_order_list.rm_participant_from_list(contender->get_contender_scripting()->contender_id(), data::CONTENDER);
+    contender->access_status().cleanup_finished_alteration();
+    _priority_order_list.rm_participant_from_list(contender->get_contender_scripting()->contender_id(), data::CONTENDER);
   }
   for (auto dead_allies = _partyTeams.get().dead_members_by_side(_side); auto& member : dead_allies) {
-	member->access_status().cleanup_finished_alteration();
-	_priority_order_list.rm_participant_from_list(member->id(), data::PARTY_MEMBER);
+    member->access_status().cleanup_finished_alteration();
+    _priority_order_list.rm_participant_from_list(member->id(), data::PARTY_MEMBER);
   }
 }
 

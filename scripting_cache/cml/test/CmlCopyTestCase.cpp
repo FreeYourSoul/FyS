@@ -31,7 +31,7 @@ local_path_storage() {
   std::string file_path = __FILE__;
   std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
   if (dir_path.size() == file_path.size())
-	dir_path = file_path.substr(0, file_path.rfind('/'));
+    dir_path = file_path.substr(0, file_path.rfind('/'));
   return dir_path + "/testCacheDir";
 }
 
@@ -40,7 +40,7 @@ copy_path_storage() {
   std::string file_path = __FILE__;
   std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
   if (dir_path.size() == file_path.size())
-	dir_path = file_path.substr(0, file_path.rfind('/'));
+    dir_path = file_path.substr(0, file_path.rfind('/'));
   return dir_path + "/testCopyFromCacheDir";
 }
 }// namespace

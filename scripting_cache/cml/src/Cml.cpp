@@ -56,9 +56,9 @@ void writeFile(const std::filesystem::path& file, const std::string& content) {
 }// namespace
 
 Cml::Cml(std::filesystem::path pathLocalStorage)
-	: _localPathStorage(std::move(pathLocalStorage)) {
+    : _localPathStorage(std::move(pathLocalStorage)) {
   try {
-	std::filesystem::create_directories(_localPathStorage);
+    std::filesystem::create_directories(_localPathStorage);
   } catch (...) {}
 }
 
@@ -74,7 +74,7 @@ Cml::localStorageInfo(const CmlKey& k) const {
 bool Cml::isInLocalStorageAndUpToDate(const CmlKey& cmlKey, std::filesystem::file_time_type cacheLastUpdate) const {
   auto [exist, lastWriteTime] = localStorageInfo(cmlKey);
   if (exist) {
-	return lastWriteTime <= cacheLastUpdate;
+    return lastWriteTime <= cacheLastUpdate;
   }
   return false;
 }
@@ -86,9 +86,9 @@ Cml::findInCache(const std::string& key) {
 
   // Check in-memory (and check if file has been updated)
   if (auto it = _inMemCache.find(key); it != _inMemCache.end()) {
-	if (isInLocalStorageAndUpToDate(cmlKey, it->second.lastWriteTime)) {
-	  return it->second.content;
-	}
+    if (isInLocalStorageAndUpToDate(cmlKey, it->second.lastWriteTime)) {
+      return it->second.content;
+    }
   }
 
   // If nothing found in the cache, create a up to date cache file
@@ -99,8 +99,8 @@ Cml::findInCache(const std::string& key) {
 
   // Read the file and store it in the cache
   if (exist) {
-	_inMemCache[key] = InMemoryCached{lastWriteTime, readFile(cmlKey.get_path())};
-	return _inMemCache[key].content;
+    _inMemCache[key] = InMemoryCached{lastWriteTime, readFile(cmlKey.get_path())};
+    return _inMemCache[key].content;
   }
   SPDLOG_ERROR("Something wrong occurred in the cache update, no file returned");
   return empty;
@@ -108,8 +108,8 @@ Cml::findInCache(const std::string& key) {
 
 void Cml::createFile(const std::filesystem::path& pathToFile, const std::string& content) const {
   if (!std::filesystem::create_directories(pathToFile.parent_path())) {
-	SPDLOG_ERROR("Couldn't create directories for path : {}", _localPathStorage.string());
-	return;
+    SPDLOG_ERROR("Couldn't create directories for path : {}", _localPathStorage.string());
+    return;
   }
   writeFile(pathToFile, content);
 }

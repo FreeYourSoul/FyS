@@ -56,7 +56,7 @@ public:
   server_code() const noexcept { return _server_code; }
 
   [[nodiscard]] const std::string&
-  tmx_map_path() const noexcept { return _tmx_map_path; }
+  collision_map_path() const noexcept { return _collision_tmx_map_path; }
 
   [[nodiscard]] const boundary&
   server_x_boundaries() const noexcept { return _server_x_boundaries; }
@@ -81,7 +81,7 @@ private:
 
 private:
   std::string _server_code;
-  std::string _tmx_map_path;
+  std::string _collision_tmx_map_path;
   std::string _path_to_local_storage;
   std::string _path_lua_base;
   std::string _path_to_lua_init_engine;

@@ -36,7 +36,7 @@ public:
 
   template<typename DownloaderFunc>
   CmlScriptDownloader(std::filesystem::path pathLocalStorage, DownloaderFunc&& downloader)
-	  : cache::Cml(std::move(pathLocalStorage)), _downloader(std::forward<DownloaderFunc>(downloader)) {}
+      : cache::Cml(std::move(pathLocalStorage)), _downloader(std::forward<DownloaderFunc>(downloader)) {}
 
 private:
   void createUpToDateFileInLocalStorage(const CmlKey& cml_key, std::filesystem::file_time_type cache_time) override;

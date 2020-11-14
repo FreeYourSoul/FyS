@@ -42,7 +42,7 @@ path_sampy_chai_script() {
   std::string file_path = __FILE__;
   std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
   if (dir_path.size() == file_path.size())
-	dir_path = file_path.substr(0, file_path.rfind('/'));
+    dir_path = file_path.substr(0, file_path.rfind('/'));
   return dir_path + "/scripts_lnk/arena/contenders/Sampy.chai";
 }
 
@@ -51,7 +51,7 @@ local_path_storage() {
   std::string file_path = __FILE__;
   std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
   if (dir_path.size() == file_path.size())
-	dir_path = file_path.substr(0, file_path.rfind('/'));
+    dir_path = file_path.substr(0, file_path.rfind('/'));
   return dir_path + "/testCopyTo";
 }
 
@@ -60,7 +60,7 @@ copy_path_storage() {
   std::string file_path = __FILE__;
   std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
   if (dir_path.size() == file_path.size())
-	dir_path = file_path.substr(0, file_path.rfind('/'));
+    dir_path = file_path.substr(0, file_path.rfind('/'));
   return dir_path + "/scripts_lnk";
 }
 }// namespace
@@ -85,11 +85,11 @@ TEST_CASE("test heal chaiscript", "[service][arena][script_test]") {
   REQUIRE(pc.add_contender(fpc));
 
   SECTION("Test initialization contender") {
-	REQUIRE(8 == pc.fighting_contender_at(0)->access_status().initial_speed);
-	REQUIRE(153 == pc.fighting_contender_at(0)->access_status().life_pt.current);
-	REQUIRE(153 == pc.fighting_contender_at(0)->access_status().life_pt.total);
-	REQUIRE(100 == pc.fighting_contender_at(0)->access_status().magic_pt.total);
-	REQUIRE(100 == pc.fighting_contender_at(0)->access_status().magic_pt.total);
+    REQUIRE(8 == pc.fighting_contender_at(0)->access_status().initial_speed);
+    REQUIRE(153 == pc.fighting_contender_at(0)->access_status().life_pt.current);
+    REQUIRE(153 == pc.fighting_contender_at(0)->access_status().life_pt.total);
+    REQUIRE(100 == pc.fighting_contender_at(0)->access_status().magic_pt.total);
+    REQUIRE(100 == pc.fighting_contender_at(0)->access_status().magic_pt.total);
   }
 
   fys::arena::party_team partyTeam("FyS");
@@ -101,48 +101,48 @@ TEST_CASE("test heal chaiscript", "[service][arena][script_test]") {
 
   SECTION("test light_heal chaiscript") {
 
-	tm1->add_doable_action("arena:actions:heal:light_heal.chai", 1);
-	partyTeam.add_team_member(std::move(tm1));
+    tm1->add_doable_action("arena:actions:heal:light_heal.chai", 1);
+    partyTeam.add_team_member(std::move(tm1));
 
-	fys::arena::chai_register::load_register_action_party_team(*chai, ccpy, partyTeam);
+    fys::arena::chai_register::load_register_action_party_team(*chai, ccpy, partyTeam);
 
-	SECTION("test heal") {
+    SECTION("test heal") {
 
-	  pc.fighting_contender_at(0)->access_status().life_pt.current = 100;
+      pc.fighting_contender_at(0)->access_status().life_pt.current = 100;
 
-	  try {
-		chai->eval(R"(
+      try {
+        chai->eval(R"(
 var &contender = pitContenders.getFightingContender(0);
 var s = light_heal(1);
 s.execute(contender);
 )");
-	  } catch (std::exception& ex) {
-		SPDLOG_ERROR("{}", ex.what());
-		FAIL("Chaiscript : Shouldn't fail here");
-	  }
-	  REQUIRE(133 == pc.fighting_contender_at(0)->access_status().life_pt.current);// +33 life
-	  REQUIRE(153 == pc.fighting_contender_at(0)->access_status().life_pt.total);
+      } catch (std::exception& ex) {
+        SPDLOG_ERROR("{}", ex.what());
+        FAIL("Chaiscript : Shouldn't fail here");
+      }
+      REQUIRE(133 == pc.fighting_contender_at(0)->access_status().life_pt.current);// +33 life
+      REQUIRE(153 == pc.fighting_contender_at(0)->access_status().life_pt.total);
 
-	}// End section : test heal
+    }// End section : test heal
 
-	SECTION("test over healing ") {
+    SECTION("test over healing ") {
 
-	  pc.fighting_contender_at(0)->access_status().life_pt.current = 140;
+      pc.fighting_contender_at(0)->access_status().life_pt.current = 140;
 
-	  try {
-		chai->eval(R"(
+      try {
+        chai->eval(R"(
 var &contender = pitContenders.getFightingContender(0);
 var s = light_heal(1);
 s.execute(contender);
 )");
-	  } catch (std::exception& ex) {
-		SPDLOG_ERROR("{}", ex.what());
-		FAIL("Chaiscript : Shouldn't fail here");
-	  }
-	  REQUIRE(153 == pc.fighting_contender_at(0)->access_status().life_pt.current);// +33 life > go to max
-	  REQUIRE(153 == pc.fighting_contender_at(0)->access_status().life_pt.total);
+      } catch (std::exception& ex) {
+        SPDLOG_ERROR("{}", ex.what());
+        FAIL("Chaiscript : Shouldn't fail here");
+      }
+      REQUIRE(153 == pc.fighting_contender_at(0)->access_status().life_pt.current);// +33 life > go to max
+      REQUIRE(153 == pc.fighting_contender_at(0)->access_status().life_pt.total);
 
-	}// End section : test over healing
+    }// End section : test over healing
 
   }// End section : test light_heal chaiscript
 

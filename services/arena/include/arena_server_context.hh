@@ -37,26 +37,26 @@ struct encounter_context {
   using chance_array = std::array<std::uint32_t, 3>;
 
   struct encounter_desc {
-	[[nodiscard]] bool
-	operator!=(const encounter_desc& other) const {
-	  return std::make_tuple(key, maxEncountering, chance, levelRange) != std::make_tuple(other.key, other.maxEncountering, other.chance, other.levelRange);
-	}
+    [[nodiscard]] bool
+    operator!=(const encounter_desc& other) const {
+      return std::make_tuple(key, maxEncountering, chance, levelRange) != std::make_tuple(other.key, other.maxEncountering, other.chance, other.levelRange);
+    }
 
-	//! key of the encounter to find it back via the cache
-	std::string key;
-	//! Max number of this type of monster you can encounter at once
-	std::uint32_t maxEncountering;
-	//! percentage of chance to encounter this monster out of the 3 different difficulties
-	chance_array chance;
-	//! Range of level the monster is when encountered
-	rng_range levelRange;
+    //! key of the encounter to find it back via the cache
+    std::string key;
+    //! Max number of this type of monster you can encounter at once
+    std::uint32_t maxEncountering;
+    //! percentage of chance to encounter this monster out of the 3 different difficulties
+    chance_array chance;
+    //! Range of level the monster is when encountered
+    rng_range levelRange;
   };
 
   struct reward_encounter_desc {
-	//! range of items than can be dropped for an encounter out of the 3 different difficulties
-	std::array<rng_range, 3> rangeDrop;
-	//! map of items key over the chance of drop out of the 3 different difficulties
-	std::map<std::string, chance_array> item_on_chance_range;
+    //! range of items than can be dropped for an encounter out of the 3 different difficulties
+    std::array<rng_range, 3> rangeDrop;
+    //! map of items key over the chance of drop out of the 3 different difficulties
+    std::map<std::string, chance_array> item_on_chance_range;
   };
 
   /**

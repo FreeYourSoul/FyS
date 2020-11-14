@@ -28,6 +28,7 @@ add_executable(worldserver_service
 target_link_libraries(worldserver_service PRIVATE
         lua
         fys::common_service
+        fys::collision_map
         fys::cml
         dl
         ${TMXLITE_LIBRARIES} # to remove

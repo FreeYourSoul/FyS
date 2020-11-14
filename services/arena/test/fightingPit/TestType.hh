@@ -354,7 +354,7 @@ class TestMonsterSleep {
 class CmlBase final : public fys::cache::Cml {
 public:
   explicit CmlBase(std::string v)
-	  : fys::cache::Cml(std::filesystem::path(std::move(v))) {}
+      : fys::cache::Cml(std::filesystem::path(std::move(v))) {}
 
   void createUpToDateFileInLocalStorage(const fys::cache::CmlKey&, std::filesystem::file_time_type) override {
   }
@@ -363,11 +363,11 @@ public:
 class DeleteFolderWhenDone {
 public:
   explicit DeleteFolderWhenDone(const std::string& v)
-	  : _path(v) {}
+      : _path(v) {}
 
   ~DeleteFolderWhenDone() {
-	SPDLOG_INFO("Delete folder {}", _path.string());
-	std::filesystem::remove_all(_path);
+    SPDLOG_INFO("Delete folder {}", _path.string());
+    std::filesystem::remove_all(_path);
   }
 
 private:
@@ -377,29 +377,29 @@ private:
 class CmlBaseCopy final : public fys::cache::CmlCopy {
 public:
   explicit CmlBaseCopy(const std::string& v, const std::string& w)
-	  : fys::cache::CmlCopy(v, w) {}
+      : fys::cache::CmlCopy(v, w) {}
 
 protected:
   void createUpToDateFileInLocalStorage(const fys::cache::CmlKey& cmlKey, std::filesystem::file_time_type) override {
-	std::error_code e;
-	std::filesystem::create_directories(cmlKey.get_path().parent_path(), e);
+    std::error_code e;
+    std::filesystem::create_directories(cmlKey.get_path().parent_path(), e);
 
-	if ("testing:TestMonsterSleep.chai" == cmlKey.getKey()) {
-	  std::ofstream ofs(cmlKey.get_path());
-	  ofs << MonsterTestScriptSleep;
-	} else if ("testing:TestMonsterAttack.chai" == cmlKey.getKey()) {
-	  std::ofstream ofs(cmlKey.get_path());
-	  ofs << MonsterTestScriptAttack;
-	} else if ("testing:TestMonsterPoison.chai" == cmlKey.getKey()) {
-	  std::ofstream ofs(cmlKey.get_path());
-	  ofs << MonsterTestScriptPoison;
-	} else if ("testing:TestMonsterMove.chai" == cmlKey.getKey()) {
-	  std::ofstream ofs(cmlKey.get_path());
-	  ofs << MonsterTestMoveAttack;
-	} else {
-	  fys::cache::CmlKey k(_copyPathStorage, cmlKey.getKey());
-	  std::filesystem::copy(k.get_path(), cmlKey.get_path(), e);
-	}
+    if ("testing:TestMonsterSleep.chai" == cmlKey.getKey()) {
+      std::ofstream ofs(cmlKey.get_path());
+      ofs << MonsterTestScriptSleep;
+    } else if ("testing:TestMonsterAttack.chai" == cmlKey.getKey()) {
+      std::ofstream ofs(cmlKey.get_path());
+      ofs << MonsterTestScriptAttack;
+    } else if ("testing:TestMonsterPoison.chai" == cmlKey.getKey()) {
+      std::ofstream ofs(cmlKey.get_path());
+      ofs << MonsterTestScriptPoison;
+    } else if ("testing:TestMonsterMove.chai" == cmlKey.getKey()) {
+      std::ofstream ofs(cmlKey.get_path());
+      ofs << MonsterTestMoveAttack;
+    } else {
+      fys::cache::CmlKey k(_copyPathStorage, cmlKey.getKey());
+      std::filesystem::copy(k.get_path(), cmlKey.get_path(), e);
+    }
   }
 };
 

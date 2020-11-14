@@ -15,22 +15,22 @@ startup_dispatcher_ctx::startup_dispatcher_ctx(int ac, const char* const* av) no
   std::string config_path = "NONE";
 
   cli.add_option(fil::option(
-	  "-c", [&v = config_path](std::string str) { v = std::move(str); }, "Path of the config file"));
+      "-c", [&v = config_path](std::string str) { v = std::move(str); }, "Path of the config file"));
   cli.add_option(fil::option(
-	  "-s", [&v = _specificConfigPath](std::string str) { v = std::move(str); }, "Path of specific config file"));
+      "-s", [&v = _specificConfigPath](std::string str) { v = std::move(str); }, "Path of specific config file"));
   cli.add_option(fil::option(
-	  "-n", [&v = _name](std::string str) { v = std::move(str); }, "Name of the Dispatcher (used as key for the cluster)"));
+      "-n", [&v = _name](std::string str) { v = std::move(str); }, "Name of the Dispatcher (used as key for the cluster)"));
   cli.add_option(fil::option(
-	  "-p", [&v = _bindingPort](std::uint64_t value) { v = value; }, "Listening Port"));
+      "-p", [&v = _bindingPort](std::uint64_t value) { v = value; }, "Listening Port"));
   cli.add_option(fil::option(
-	  "-a", [&v = _isClusterAware](bool value) { v = value; }, "Is aware of the other cluster member"));
+      "-a", [&v = _isClusterAware](bool value) { v = value; }, "Is aware of the other cluster member"));
   cli.add_option(fil::option(
-	  "-l", [&v = _isLoadBalancing](bool value) { v = value; }, "Dispatch in load balancing mode or publisher mode"));
+      "-l", [&v = _isLoadBalancing](bool value) { v = value; }, "Dispatch in load balancing mode or publisher mode"));
   cli.add_option(fil::option(
-	  "-v", [&v = _verbose](bool value) { v = value; }, "Print logs on standard output"));
+      "-v", [&v = _verbose](bool value) { v = value; }, "Print logs on standard output"));
 
   if ("NONE" != config_path)
-	this->initialize_from_ini(config_path);
+    this->initialize_from_ini(config_path);
 } catch (std::exception& e) {
   SPDLOG_ERROR("\"Context of the Dispatcher not initialized caused by : {}", e.what());
 }
@@ -54,14 +54,14 @@ void startup_dispatcher_ctx::initialize_from_ini(const std::string& config_file_
   std::vector<std::string> topicGroups = to_array<std::string>(pt.get<std::string>(fys::init_beacon::TOPIC_GROUPS));
   std::vector<std::string> topics = to_array<std::string>(pt.get<std::string>(fys::init_beacon::TOPICS));
   if (topicGroups.empty())
-	_subTopics = std::move(topics);
+    _subTopics = std::move(topics);
   else {
-	_subTopics.reserve(topics.size());
-	for (std::string& topic : topics) {
-	  for (std::string& group : topicGroups) {
-		_subTopics.emplace_back(std::string(group + "_").append(topic));
-	  }
-	}
+    _subTopics.reserve(topics.size());
+    for (std::string& topic : topics) {
+      for (std::string& group : topicGroups) {
+        _subTopics.emplace_back(std::string(group + "_").append(topic));
+      }
+    }
   }
 }
 
@@ -76,7 +76,7 @@ std::string startup_dispatcher_ctx::to_string() const noexcept {
   str += "[INFO] isClusterAware: " + std::string(_isClusterAware ? "true" : "false") + "\n";
   str += "[INFO] isLoadBalancing: " + std::string(_isLoadBalancing ? "true" : "false") + "\n";
   str += std::accumulate(_subTopics.begin(), _subTopics.end(), std::string{}, [](std::string a, std::string b) {
-	return std::move(a) + "[INFO] Cluster: Subscribing topic: " + std::move(b) + "\n";
+    return std::move(a) + "[INFO] Cluster: Subscribing topic: " + std::move(b) + "\n";
   });
   str += "[INFO] Frontend connection string: " + frontend_cluster_proxy_connection_str() + "\n";
   str += "[INFO] Backend connection string: " + backend_cluster_proxy_connection_str() + "\n";

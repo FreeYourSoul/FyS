@@ -46,7 +46,7 @@ class contender_scripting {
 
 public:
   explicit contender_scripting(chaiscript::ChaiScript& chai, uint level)
-	  : _chai(chai), _level(level) {}
+      : _chai(chai), _level(level) {}
 
   void execute_action();
 
@@ -77,7 +77,7 @@ public:
 private:
   [[nodiscard]] std::string
   chai_contender_id() const {
-	return std::string("contender_").append(_contender_name).append(std::to_string(_contender_id));
+    return std::string("contender_").append(_contender_name).append(std::to_string(_contender_id));
   }
 
 private:

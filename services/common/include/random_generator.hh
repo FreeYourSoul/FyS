@@ -34,21 +34,21 @@ class random_generator {
 public:
   [[nodiscard]] static fys::util::random_generator&
   instance() {
-	static fys::util::random_generator s{};
-	return s;
+    static fys::util::random_generator s{};
+    return s;
   }
 
   template<typename Type>
   [[nodiscard]] static Type
   generate_in_range(Type rA, Type rB) {
-	static_assert(std::is_integral_v<Type> || std::is_floating_point_v<Type>);
-	if constexpr (std::is_integral_v<Type>) {
-	  std::uniform_int_distribution<Type> distribution(rA, rB);
-	  return distribution(*instance().get());
-	} else if constexpr (std::is_floating_point_v<Type>) {
-	  std::uniform_real_distribution<Type> distribution(rA, rB);
-	  return distribution(*instance().get());
-	}
+    static_assert(std::is_integral_v<Type> || std::is_floating_point_v<Type>);
+    if constexpr (std::is_integral_v<Type>) {
+      std::uniform_int_distribution<Type> distribution(rA, rB);
+      return distribution(*instance().get());
+    } else if constexpr (std::is_floating_point_v<Type>) {
+      std::uniform_real_distribution<Type> distribution(rA, rB);
+      return distribution(*instance().get());
+    }
   }
 
   random_generator(random_generator const&) = delete;
@@ -60,15 +60,15 @@ public:
 
 private:
   random_generator()
-	  : mt(std::make_shared<std::mt19937>()) {
-	std::random_device rd;
+      : mt(std::make_shared<std::mt19937>()) {
+    std::random_device rd;
 
-	if (rd.entropy() != 0) {
-	  _seed = rd();
-	} else {
-	  _seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
-	}
-	mt->seed(_seed);
+    if (rd.entropy() != 0) {
+      _seed = rd();
+    } else {
+      _seed = std::chrono::high_resolution_clock::now().time_since_epoch().count();
+    }
+    mt->seed(_seed);
   }
 
   ~random_generator() = default;

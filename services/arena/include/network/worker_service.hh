@@ -63,8 +63,8 @@ class worker_service {
   inline static constexpr unsigned SERVER_FULL_CAPACITY = std::numeric_limits<unsigned>::max();
 
   struct player_identifier {
-	std::string user_name;
-	std::string identifier;
+    std::string user_name;
+    std::string identifier;
   };
 
 public:
@@ -120,27 +120,27 @@ public:
    */
   template<typename HandlerAuth, typename HandlerInGame>
   void poll_process_msg_from_player(HandlerAuth&& handler_auth, HandlerInGame&& handler_in_game) noexcept {
-	//  Initialize poll set
-	zmq::pollitem_t items[] = {
-		{_worker_router, 0, ZMQ_POLLIN, 0}};
-	zmq::poll(&items[0], 1, 100);
-	if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
-	  zmq::multipart_t msg;
-	  if (!msg.recv(_worker_router, ZMQ_NOBLOCK)) {
-		SPDLOG_ERROR("Error while reading on the arena worker listener socket");
-	  } else if (auto s = msg.size(); s != 3) {
-		SPDLOG_WARN("An incoming message with {} instead of 3 has been read", s);
-	  } else {
-		auto identity = msg.pop();
-		auto intermediate = msg.pop();
-		auto content = msg.pop();
-		if ("auth" == intermediate.to_string_view()) {
-		  std::forward<HandlerAuth>(handler_auth)(std::move(identity), std::move(content));
-		} else {
-		  std::forward<HandlerInGame>(handler_in_game)(std::move(identity), intermediate, std::move(content));
-		}
-	  }
-	}
+    //  Initialize poll set
+    zmq::pollitem_t items[] = {
+        {_worker_router, 0, ZMQ_POLLIN, 0}};
+    zmq::poll(&items[0], 1, 100);
+    if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
+      zmq::multipart_t msg;
+      if (!msg.recv(_worker_router, ZMQ_NOBLOCK)) {
+        SPDLOG_ERROR("Error while reading on the arena worker listener socket");
+      } else if (auto s = msg.size(); s != 3) {
+        SPDLOG_WARN("An incoming message with {} instead of 3 has been read", s);
+      } else {
+        auto identity = msg.pop();
+        auto intermediate = msg.pop();
+        auto content = msg.pop();
+        if ("auth" == intermediate.to_string_view()) {
+          std::forward<HandlerAuth>(handler_auth)(std::move(identity), std::move(content));
+        } else {
+          std::forward<HandlerInGame>(handler_in_game)(std::move(identity), intermediate, std::move(content));
+        }
+      }
+    }
   }
 
   /**
@@ -184,7 +184,7 @@ private:
 
   [[nodiscard]] auto
   broadcast_msg_handler(unsigned fp_id) {
-	return [this, fp_id](zmq::message_t&& to_send) { this->broadcast_msg(fp_id, std::move(to_send)); };
+    return [this, fp_id](zmq::message_t&& to_send) { this->broadcast_msg(fp_id, std::move(to_send)); };
   }
 
   [[nodiscard]] const std::string&

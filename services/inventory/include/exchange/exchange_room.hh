@@ -50,25 +50,25 @@ enum class StepExchange {
 class exchange_room {
 
   enum class ExchangeRole : std::uint32_t {
-	INITIATOR = 0,
-	RECEIVER = 1,
-	NONE
+    INITIATOR = 0,
+    RECEIVER = 1,
+    NONE
   };
 
 public:
   explicit exchange_room(
-	  std::uint32_t roomId,
-	  std::string initiator,
-	  std::string receiver,
-	  std::string initiatorIdentity,
-	  std::string tokenExchange,
-	  item_manager& refIm)
-	  : _roomId(roomId),
-		_tokenExchange(std::move(tokenExchange)),
-		_manager(refIm),
-		_initiatorUserName(std::move(initiator)),
-		_receiverUserName(std::move(receiver)),
-		_initiatorIdentity(std::move(initiatorIdentity)) {}
+      std::uint32_t roomId,
+      std::string initiator,
+      std::string receiver,
+      std::string initiatorIdentity,
+      std::string tokenExchange,
+      item_manager& refIm)
+      : _roomId(roomId),
+        _tokenExchange(std::move(tokenExchange)),
+        _manager(refIm),
+        _initiatorUserName(std::move(initiator)),
+        _receiverUserName(std::move(receiver)),
+        _initiatorIdentity(std::move(initiatorIdentity)) {}
 
   bool receiverJoin(const std::string& receiver, const std::string& token, std::string identity);
   bool addItemFromExchangeForPlayer(const std::string& player, const std::string& token, Item toAdd);

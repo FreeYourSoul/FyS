@@ -25,9 +25,9 @@
 #define FYS_ONLINE_HISTORY_MANAGER_HH
 
 #include <filesystem>
+#include <list>
 #include <memory>
 #include <unordered_map>
-#include <list>
 
 #include <fightingPit/team/team_member.hh>
 
@@ -65,28 +65,28 @@ class history_manager {
    * This struct is filled via the static method provided by FightingHistoryManager.
    */
   struct history_fight {
-	history_fight() = default;
-	history_fight(unsigned id, unsigned seed)
-		: id(id), seed(seed) {}
+    history_fight() = default;
+    history_fight(unsigned id, unsigned seed)
+        : id(id), seed(seed) {}
 
-	//! unique id of the history fight (count of fight on-going for this specific arena instance)
-	unsigned id = 0;
+    //! unique id of the history fight (count of fight on-going for this specific arena instance)
+    unsigned id = 0;
 
-	//! Seed on which the fight occurred
-	unsigned seed = 0;// TODO make the random generator use a given seed, on instance of generator by pit will be needed
+    //! Seed on which the fight occurred
+    unsigned seed = 0;// TODO make the random generator use a given seed, on instance of generator by pit will be needed
 
-	/**
+    /**
 	 * 	@brief List containing all the actions that occurred in the arena.
 	 * 	A list is used as this is going to be used to log information and won't be iterated through (except
 	 * 	once if saving is enabled), using a list has the advantage to be able to store a very big amount of
 	 * 	player actions without making unwanted re-allocations.
 	 */
-	std::list<history_action> player_actions{};
+    std::list<history_action> player_actions{};
 
-	//! Set at true in case an issue occurred in the fighting pit (will save the fighting pit in file format)
-	bool has_to_be_saved = true;
+    //! Set at true in case an issue occurred in the fighting pit (will save the fighting pit in file format)
+    bool has_to_be_saved = true;
 
-	[[nodiscard]] std::string generate_history_filename(const std::filesystem::path& base_path) const;
+    [[nodiscard]] std::string generate_history_filename(const std::filesystem::path& base_path) const;
   };
 
 public:
@@ -101,8 +101,8 @@ private:
   history_manager() = default;
 
   [[nodiscard]] static history_manager& get_instance() {
-	static history_manager instance;
-	return instance;
+    static history_manager instance;
+    return instance;
   }
 
 private:

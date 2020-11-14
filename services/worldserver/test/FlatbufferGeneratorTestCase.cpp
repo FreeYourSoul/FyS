@@ -44,23 +44,23 @@ TEST_CASE("ws::FlatbufferGeneratorTestCase", "[service][world][util]") {
 
   SECTION("generateMoveNotification") {
 
-	auto [data, size] = fg.generate_move_notif("Naming", character_info{pos{11, 22}, 1337.0, 42.42});
+    auto [data, size] = fg.generate_move_notif("Naming", character_info{pos{11, 22}, 1337.0, 42.42});
 
-	REQUIRE(nullptr != data);
-	REQUIRE(0 < size);
-	REQUIRE(verify_buffer<fys::fb::world::ResponseFrame>(data, size));
+    REQUIRE(nullptr != data);
+    REQUIRE(0 < size);
+    REQUIRE(verify_buffer<fys::fb::world::ResponseFrame>(data, size));
 
-	auto* binary = fys::fb::world::GetResponseFrame(data);
+    auto* binary = fys::fb::world::GetResponseFrame(data);
 
-	REQUIRE(fys::fb::world::Response_MoveNotification == binary->content_type());
+    REQUIRE(fys::fb::world::Response_MoveNotification == binary->content_type());
 
-	auto* moveNotification = binary->content_as_MoveNotification();
+    auto* moveNotification = binary->content_as_MoveNotification();
 
-	REQUIRE("Naming" == moveNotification->id()->string_view());
-	REQUIRE(11 == moveNotification->x());
-	REQUIRE(22 == moveNotification->y());
-	REQUIRE(1337.0 == moveNotification->velocity());
-	REQUIRE(42.42 == moveNotification->dir());
+    REQUIRE("Naming" == moveNotification->id()->string_view());
+    REQUIRE(11 == moveNotification->x());
+    REQUIRE(22 == moveNotification->y());
+    REQUIRE(1337.0 == moveNotification->velocity());
+    REQUIRE(42.42 == moveNotification->dir());
 
   }// End section : generateMoveNotification
 

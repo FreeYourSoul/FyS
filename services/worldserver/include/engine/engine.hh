@@ -56,10 +56,10 @@ struct auth_player {
   std::string token;
 
   bool operator==(const auth_player& other) const {
-	return user_name == other.user_name && token == other.token;
+    return user_name == other.user_name && token == other.token;
   }
   bool operator<(const auth_player& other) const {
-	return user_name < other.user_name && token < other.token;
+    return user_name < other.user_name && token < other.token;
   }
 };
 
@@ -71,7 +71,7 @@ class engine : public common::direct_connection_manager {
 
 public:
   explicit engine(const std::string& player_connect_str, collision_map&& map,
-				  std::unique_ptr<script_engine> engine, std::chrono::system_clock::duration time_interval);
+                  std::unique_ptr<script_engine> engine, std::chrono::system_clock::duration time_interval);
   ~engine();
   engine(engine&&) noexcept;
   engine(const engine&) = delete;
@@ -89,7 +89,7 @@ private:
   inline void move_character_action(const std::string& character_name, std::uint32_t index_character, character_info& info);
   inline void notify_reported_npc_movements(const npc_actions_report& action_report);
   inline void notify_clients_of_character_move(const character_info& info, const std::string& user_name,
-											   const std::vector<std::string_view>& idts_to_identify);
+                                               const std::vector<std::string_view>& idts_to_identify);
 
 private:
   std::unique_ptr<internal> _intern;

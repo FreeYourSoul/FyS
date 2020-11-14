@@ -63,11 +63,11 @@ struct allies_targets_ids {
  *   Can be a side (as some action can target a whole side)
  */
 using target_type = std::variant<
-	contender_target_id,
-	contenders_targets_ids,
-	ally_target_id,
-	allies_targets_ids,
-	hexagon_side::orientation>;
+    contender_target_id,
+    contenders_targets_ids,
+    ally_target_id,
+    allies_targets_ids,
+    hexagon_side::orientation>;
 /**
  * Pending actions of a team member are defined by
  * - the id of the action (mapped as index to the vector TeamMember::_actionDoable)
@@ -86,7 +86,7 @@ class team_member {
 
 public:
   team_member(std::string user_name, std::string team_member_name)
-	  : _user_name(std::move(user_name)), _name(std::move(team_member_name)) {}
+      : _user_name(std::move(user_name)), _name(std::move(team_member_name)) {}
 
   [[nodiscard]] bool
   execute_action(ally_party_teams& apt, pit_contenders& pc, std::unique_ptr<chaiscript::ChaiScript>& chai_ptr);

@@ -84,8 +84,8 @@ public:
 
   [[nodiscard]] std::pair<void*, std::uint32_t>
   generate_action_notification(const std::string& action_key,
-							   const std::vector<fighting_contender_sptr>& contender_targets,
-							   const std::vector<team_member_sptr>& ally_targets);
+                               const std::vector<fighting_contender_sptr>& contender_targets,
+                               const std::vector<team_member_sptr>& ally_targets);
 
   //	[[nodiscard]] std::pair<void*, std::uint32_t>
   //	generateCosmetics(const fys::arena::PartyTeam& partyTeam);

@@ -51,19 +51,19 @@ struct vec2 {
   unity_type y = 0;
 
   vec2 operator+(const vec2& other) const {
-	return {x + other.x, y + other.y};
+    return {x + other.x, y + other.y};
   }
 
   vec2 operator+(unity_type value) const {
-	return {x + value, y + value};
+    return {x + value, y + value};
   }
 
   vec2 operator-(const vec2& other) const {
-	return {x - other.x, y - other.y};
+    return {x - other.x, y - other.y};
   }
 
   vec2 operator-(unity_type value) const {
-	return {x - value, y - value};
+    return {x - value, y - value};
   }
 };
 
@@ -72,17 +72,18 @@ struct rectangle final {
   using unity_type = T;
 
   rectangle()
-	  : left(0), top(0), width(0), height(0) {}
+      : left(0), top(0), width(0), height(0) {}
   rectangle(unity_type l, unity_type t, unity_type w, unity_type h)
-	  : left(l), top(t), width(w), height(h) {}
+      : left(l), top(t), width(w), height(h) {}
   rectangle(vec2<unity_type> position, vec2<unity_type> size)
-	  : left(position.x), top(position.y), width(size.x), height(size.y) {}
+      : left(position.x), top(position.y), width(size.x), height(size.y) {}
   unity_type left, top, width, height;
 };
 
 using hitbox_d = rectangle<double>;
 using hitbox_u = rectangle<uint>;
 using vec2_u = vec2<uint>;
+using vec2_d = vec2<double>;
 
 //! Position in 2D space (X, Y)
 using pos = vec2<double>;
@@ -108,22 +109,22 @@ public:
 
   template<typename Action>
   void execution_on_player(Action&& action_to_execute) {
-	for (std::uint32_t i = 0; i < _status.size(); ++i) {
-	  std::forward<Action>(action_to_execute)(i, _status.at(i), _positions.at(i), _identities.at(i), _userNames.at(i));
-	}
+    for (std::uint32_t i = 0; i < _status.size(); ++i) {
+      std::forward<Action>(action_to_execute)(i, _status.at(i), _positions.at(i), _identities.at(i), _userNames.at(i));
+    }
   }
 
   void set_player_move_action(std::uint32_t index, double direction) {
-	_positions.at(index).angle = direction;
-	_status.at(index) = player_status::MOVING;
+    _positions.at(index).angle = direction;
+    _status.at(index) = player_status::MOVING;
   }
 
   void stop_player_move(std::uint32_t index) {
-	_status.at(index) = player_status::STANDING;
+    _status.at(index) = player_status::STANDING;
   }
 
   void set_player_status_in_arena(std::uint32_t index, [[maybe_unused]] const std::string& arena_id) {
-	_status.at(index) = player_status::FIGHTING;
+    _status.at(index) = player_status::FIGHTING;
   }
 
   [[nodiscard]] uint
@@ -139,8 +140,8 @@ public:
    */
   [[nodiscard]] inline std::vector<std::string_view>
   get_player_idts_around_player(std::uint32_t index_player,
-								std::optional<std::reference_wrapper<character_info>> position,
-								double distance = DEFAULT_DISTANCE) const noexcept;
+                                std::optional<std::reference_wrapper<character_info>> position,
+                                double distance = DEFAULT_DISTANCE) const noexcept;
 
   /**
    * @brief Get the Players Identities Around the given position
@@ -153,8 +154,8 @@ public:
    */
   [[nodiscard]] std::vector<std::string_view>
   get_player_idts_around_pos(const pos& position,
-							 double distance = DEFAULT_DISTANCE,
-							 std::uint32_t ignore_index = LIMIT_NOTIFICATIONS_MOVE) const noexcept;
+                             double distance = DEFAULT_DISTANCE,
+                             std::uint32_t ignore_index = LIMIT_NOTIFICATIONS_MOVE) const noexcept;
 
 private:
   std::vector<character_info> _positions;

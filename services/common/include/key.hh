@@ -47,27 +47,27 @@ class key {
 
 public:
   explicit key(unsigned index) {
-	static std::random_device rd;
-	static std::mt19937 g(rd());
-	std::string fillerId = std::to_string(reinterpret_cast<unsigned long long>(this));
-	std::shuffle(fillerId.begin(), fillerId.end(), g);
-	std::string id = std::to_string(index);
-	unsigned offset = KEY_SIZE - id.size();
-	if (offset < 3)
-	  throw std::range_error(id.append(" is too big for being an index"));
-	std::string token = std::to_string(offset).append(fillerId.substr(0, offset - 1)).append(id);
-	std::copy_n(token.begin(), KEY_SIZE, _key);
+    static std::random_device rd;
+    static std::mt19937 g(rd());
+    std::string fillerId = std::to_string(reinterpret_cast<unsigned long long>(this));
+    std::shuffle(fillerId.begin(), fillerId.end(), g);
+    std::string id = std::to_string(index);
+    unsigned offset = KEY_SIZE - id.size();
+    if (offset < 3)
+      throw std::range_error(id.append(" is too big for being an index"));
+    std::string token = std::to_string(offset).append(fillerId.substr(0, offset - 1)).append(id);
+    std::copy_n(token.begin(), KEY_SIZE, _key);
   }
 
   bool operator==(const key& other) {
-	return std::equal(other._key, other._key + KEY_SIZE, _key);
+    return std::equal(other._key, other._key + KEY_SIZE, _key);
   }
 
   unsigned getIndex() const {
-	unsigned res = 0;
-	unsigned offset = _key[0] - '0';
-	std::from_chars(_key + offset, _key + KEY_SIZE, res);
-	return res;
+    unsigned res = 0;
+    unsigned offset = _key[0] - '0';
+    std::from_chars(_key + offset, _key + KEY_SIZE, res);
+    return res;
   }
 
   template<typename DisplayPolicy>

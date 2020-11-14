@@ -41,10 +41,10 @@ get_ally_action_retriever(const std::string& user, const std::string& member, co
 
 [[nodiscard]] static bool
 member_has_action_registered(chaiscript::ChaiScript& chai,
-							 const std::string& userName, const std::string& memberName, const std::string& actionName) {
+                             const std::string& userName, const std::string& memberName, const std::string& actionName) {
   return chai.eval<bool>(
-	  fmt::format(R"(ally_actions.count("{}_{}") > 0 && ally_actions["{}_{}"].count("{}") > 0;)",
-				  userName, memberName, userName, memberName, actionName));
+      fmt::format(R"(ally_actions.count("{}_{}") > 0 && ally_actions["{}_{}"].count("{}") > 0;)",
+                  userName, memberName, userName, memberName, actionName));
 }
 
 }// namespace fys::arena::chai::util

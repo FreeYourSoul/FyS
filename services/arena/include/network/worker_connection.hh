@@ -32,7 +32,7 @@ class worker_connection {
 
 public:
   worker_connection() noexcept
-	  : _ctx(1), _worker_service_connection(_ctx, zmq::socket_type::dealer) {}
+      : _ctx(1), _worker_service_connection(_ctx, zmq::socket_type::dealer) {}
 
 private:
   zmq::context_t _ctx;

@@ -87,25 +87,25 @@ class fighting_pit {
 
   //! Progress Status Enum: represent the status of the battle
   enum class progress {
-	//! joining fight status
-	ON_HOLD,
-	//! waiting creator readiness
-	ON_HOLD_NOT_REACHABLE,
+    //! joining fight status
+    ON_HOLD,
+    //! waiting creator readiness
+    ON_HOLD_NOT_REACHABLE,
 
-	//! battle is over, fighting pit has to be cleaned out
-	CLEANUP,
-	//! On going battle
-	ON_GOING,
-	//! Contender win, process the loss (if any) of the ally
-	CONTENDER_WIN,
-	//! Allies win, process the earning (if any) to the allies
-	ALLY_WIN
+    //! battle is over, fighting pit has to be cleaned out
+    CLEANUP,
+    //! On going battle
+    ON_GOING,
+    //! Contender win, process the loss (if any) of the ally
+    CONTENDER_WIN,
+    //! Allies win, process the earning (if any) to the allies
+    ALLY_WIN
   };
 
   //! Simple structure representing an authenticated player (pair name/token)
   struct authenticated_player {
-	std::string name;
-	std::string token;
+    std::string name;
+    std::string token;
   };
 
 public:
@@ -114,10 +114,10 @@ public:
 
   //! Complexity of the FightingPit
   enum level : uint {
-	EASY = 0,
-	MEDIUM = 1,
-	HARD = 2,
-	NONE
+    EASY = 0,
+    MEDIUM = 1,
+    HARD = 2,
+    NONE
   };
 
   explicit fighting_pit(std::string creator_user_name, level levelFightingPit);
@@ -207,21 +207,21 @@ public:
    */
   template<typename BroadcastHandler>
   void notify_end_status(BroadcastHandler&& broadcast_handler) {
-	if (_progress == progress::ALLY_WIN) {
-	  std::forward<BroadcastHandler>(broadcast_handler)(make_winner_notification());
-	  _progress = progress::CLEANUP;
-	} else if (_progress == progress::CONTENDER_WIN) {
-	  std::forward<BroadcastHandler>(broadcast_handler)(make_looser_notification());
-	  _progress = progress::CLEANUP;
-	}
+    if (_progress == progress::ALLY_WIN) {
+      std::forward<BroadcastHandler>(broadcast_handler)(make_winner_notification());
+      _progress = progress::CLEANUP;
+    } else if (_progress == progress::CONTENDER_WIN) {
+      std::forward<BroadcastHandler>(broadcast_handler)(make_looser_notification());
+      _progress = progress::CLEANUP;
+    }
   }
 
   /**
    * Disable the ability to join the battle if the fighting pit is currently reachable
    */
   void disable_join() noexcept {
-	if (is_joinable())
-	  _progress = progress::ON_HOLD_NOT_REACHABLE;
+    if (is_joinable())
+      _progress = progress::ON_HOLD_NOT_REACHABLE;
   }
   void add_rewards(std::string action, uint quantity) noexcept;
   void set_player_readiness(const std::string& user_name);
@@ -233,8 +233,8 @@ public:
    * @param arena_id id to set for the fightingPit
    */
   void set_arena_id(unsigned arena_id) noexcept {
-	_party_teams.set_fighting_pit_id(arena_id);
-	_arena_id = arena_id;
+    _party_teams.set_fighting_pit_id(arena_id);
+    _arena_id = arena_id;
   }
 
 private:

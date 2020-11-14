@@ -10,6 +10,7 @@ add_library(collision_map STATIC
 
 target_link_libraries(collision_map PRIVATE
         fys::common_service dl)
+target_include_directories(collision_map PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_library(fys::collision_map ALIAS collision_map)
 

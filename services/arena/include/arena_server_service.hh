@@ -73,7 +73,7 @@ struct awaiting_player_arena {
 
   [[nodiscard]] bool
   has_to_be_generated() const {
-	return fighting_pit_id == 0 && static_cast<bool>(gen);
+    return fighting_pit_id == 0 && static_cast<bool>(gen);
   }
 };
 

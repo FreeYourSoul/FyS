@@ -44,7 +44,7 @@ path_sampy_chai_script() {
   std::string file_path = __FILE__;
   std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
   if (dir_path.size() == file_path.size())
-	dir_path = file_path.substr(0, file_path.rfind('/'));
+    dir_path = file_path.substr(0, file_path.rfind('/'));
   return dir_path + "/scripts_lnk/arena/contenders/Sampy.chai";
 }
 
@@ -53,7 +53,7 @@ local_path_storage() {
   std::string file_path = __FILE__;
   std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
   if (dir_path.size() == file_path.size())
-	dir_path = file_path.substr(0, file_path.rfind('/'));
+    dir_path = file_path.substr(0, file_path.rfind('/'));
   return dir_path + "/testCopyTo";
 }
 
@@ -62,7 +62,7 @@ copy_path_storage() {
   std::string file_path = __FILE__;
   std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
   if (dir_path.size() == file_path.size())
-	dir_path = file_path.substr(0, file_path.rfind('/'));
+    dir_path = file_path.substr(0, file_path.rfind('/'));
   return dir_path + "/scripts_lnk";
 }
 }// namespace
@@ -106,90 +106,90 @@ TEST_CASE("Test Sampy", "[service][arena][script_test]") {
   apt.add_party_team(std::move(pt));
 
   SECTION("Test initialization") {
-	REQUIRE(153 == fpc->access_status().life_pt.current);
-	REQUIRE(8 == pc.fighting_contender_at(0)->access_status().initial_speed);
-	REQUIRE(153 == pc.fighting_contender_at(0)->access_status().life_pt.current);
-	REQUIRE(153 == pc.fighting_contender_at(0)->access_status().life_pt.total);
-	REQUIRE(100 == pc.fighting_contender_at(0)->access_status().magic_pt.total);
-	REQUIRE(100 == pc.fighting_contender_at(0)->access_status().magic_pt.total);
+    REQUIRE(153 == fpc->access_status().life_pt.current);
+    REQUIRE(8 == pc.fighting_contender_at(0)->access_status().initial_speed);
+    REQUIRE(153 == pc.fighting_contender_at(0)->access_status().life_pt.current);
+    REQUIRE(153 == pc.fighting_contender_at(0)->access_status().life_pt.total);
+    REQUIRE(100 == pc.fighting_contender_at(0)->access_status().magic_pt.total);
+    REQUIRE(100 == pc.fighting_contender_at(0)->access_status().magic_pt.total);
 
-	// test doable actions
-	std::vector<std::string> actionsDoable;
-	try {
-	  actionsDoable = chai->eval<std::vector<std::string>>(R"(
+    // test doable actions
+    std::vector<std::string> actionsDoable;
+    try {
+      actionsDoable = chai->eval<std::vector<std::string>>(R"(
 var actions = contender_Sampy0.actions;
 retrieveDoableActions(actions.act);)");
-	} catch (const std::exception& ee) {
-	  SPDLOG_ERROR("Error when eval {}", ee.what());
-	  FAIL("Shouldn't arrive there");
-	}
+    } catch (const std::exception& ee) {
+      SPDLOG_ERROR("Error when eval {}", ee.what());
+      FAIL("Shouldn't arrive there");
+    }
 
-	REQUIRE(3 == actionsDoable.size());
-	REQUIRE("test:key:1" == actionsDoable.at(0));
-	REQUIRE("test:key:2" == actionsDoable.at(1));
-	REQUIRE("test:key:3" == actionsDoable.at(2));
+    REQUIRE(3 == actionsDoable.size());
+    REQUIRE("test:key:1" == actionsDoable.at(0));
+    REQUIRE("test:key:2" == actionsDoable.at(1));
+    REQUIRE("test:key:3" == actionsDoable.at(2));
   }
 
   SECTION("Test Enemy&Attack selection") {
-	fpc->access_status().life_pt.current = 16;
-	fpc->access_status().life_pt.total = 100;
-	team_member_1->access_status().life_pt.current = 10;
-	team_member_1->access_status().life_pt.total = 100;
-	team_member_2->access_status().life_pt.current = 90;
-	team_member_2->access_status().life_pt.total = 110;
+    fpc->access_status().life_pt.current = 16;
+    fpc->access_status().life_pt.total = 100;
+    team_member_1->access_status().life_pt.current = 10;
+    team_member_1->access_status().life_pt.total = 100;
+    team_member_2->access_status().life_pt.current = 90;
+    team_member_2->access_status().life_pt.total = 110;
 
-	fys::arena::data::priority_elem e{0, 1, true};
+    fys::arena::data::priority_elem e{0, 1, true};
 
-	SECTION("Test Action selection") {
-	  fpc->access_status().life_pt.current = 100;
-	  fpc->access_status().life_pt.total = 100;
-	  fpc->access_status().magic_pt.total = 0;
+    SECTION("Test Action selection") {
+      fpc->access_status().life_pt.current = 100;
+      fpc->access_status().life_pt.total = 100;
+      fpc->access_status().magic_pt.total = 0;
 
-	  REQUIRE(100 == fpc->access_status().life_pt.current);
-	  REQUIRE(100 == fpc->access_status().magic_pt.current);
-	  pc.execute_contender_action(e);
+      REQUIRE(100 == fpc->access_status().life_pt.current);
+      REQUIRE(100 == fpc->access_status().magic_pt.current);
+      pc.execute_contender_action(e);
 
-	  REQUIRE(42 == fpc->access_status().magic_pt.current);// Sleeping set the magicPoint to 42
+      REQUIRE(42 == fpc->access_status().magic_pt.current);// Sleeping set the magicPoint to 42
 
-	}// End section : Test baseAttack selection
+    }// End section : Test baseAttack selection
 
-	SECTION("Test Action Selection BaseAttack") {
-	  team_member_1->access_status().life_pt.current = 10;
-	  team_member_1->access_status().life_pt.total = 100;
+    SECTION("Test Action Selection BaseAttack") {
+      team_member_1->access_status().life_pt.current = 10;
+      team_member_1->access_status().life_pt.total = 100;
 
-	  REQUIRE(16 == fpc->access_status().life_pt.current);// 16 < ( 50% of 100hp) so baseAttack is decided (50 damage)
-	  pc.execute_contender_action(e);
+      REQUIRE(16 == fpc->access_status().life_pt.current);// 16 < ( 50% of 100hp) so baseAttack is decided (50 damage)
+      pc.execute_contender_action(e);
 
-	  REQUIRE(0 == team_member_1->access_status().life_pt.current);// lower life opponent selected (teamMember1 with 10 life point)
-	  REQUIRE(team_member_1->access_status().life_pt.is_dead());
+      REQUIRE(0 == team_member_1->access_status().life_pt.current);// lower life opponent selected (teamMember1 with 10 life point)
+      REQUIRE(team_member_1->access_status().life_pt.is_dead());
 
-	}// Test Action Selection BaseAttack
+    }// Test Action Selection BaseAttack
 
-	SECTION("Test Selection Change of enemy") {
-	  team_member_2->access_status().life_pt.current = 9;// teamMember2.life.current < teamMember1.life.current
+    SECTION("Test Selection Change of enemy") {
+      team_member_2->access_status().life_pt.current = 9;// teamMember2.life.current < teamMember1.life.current
 
-	  REQUIRE(16 == fpc->access_status().life_pt.current);// 16 < ( 50% of 100hp) so baseAttack is decided (50 damage)
-	  pc.execute_contender_action(e);
+      REQUIRE(16 == fpc->access_status().life_pt.current);// 16 < ( 50% of 100hp) so baseAttack is decided (50 damage)
+      pc.execute_contender_action(e);
 
-	  REQUIRE(0 == team_member_2->access_status().life_pt.current);// lower life opponent selected (teamMember1 with 10 life point)
-	  REQUIRE(team_member_2->access_status().life_pt.is_dead());
+      REQUIRE(0 == team_member_2->access_status().life_pt.current);// lower life opponent selected (teamMember1 with 10 life point)
+      REQUIRE(team_member_2->access_status().life_pt.is_dead());
 
-	}// Test Action Selection BaseAttack
+    }// Test Action Selection BaseAttack
 
   }// End section : Test Enemy selection
 
   SECTION("Test network message") {
-	auto fseamMock = FSeam::getDefault<fys::arena::ConnectionHandler>();
+    auto fseamMock = FSeam::getDefault<fys::arena::ConnectionHandler>();
 
-	//         fseamMock->expectArg<FSeam::ConnectionHandler::sendMessageToDispatcher>(
-	//             FSeam::CustomComparator<zmq::multipart_t &>([](auto && test) {
-	//                 // verify multipart message contains the selection of the weakest enemy (teamMember1)
-	//                 return true;
-	//             }), FSeam::VerifyCompare{1});
-	// REQUIRE(fseamMock->verify(FSeam::ConnectionHandler::sendMessageToDispatcher::NAME, 1));
+    //         fseamMock->expectArg<FSeam::ConnectionHandler::sendMessageToDispatcher>(
+    //             FSeam::CustomComparator<zmq::multipart_t &>([](auto && test) {
+    //                 // verify multipart message contains the selection of the weakest enemy (teamMember1)
+    //                 return true;
+    //             }), FSeam::VerifyCompare{1});
+    // REQUIRE(fseamMock->verify(FSeam::ConnectionHandler::sendMessageToDispatcher::NAME, 1));
 
-	FSeam::MockVerifier::cleanUp();
-	std::filesystem::remove_all(baseCache);
+    FSeam::MockVerifier::cleanUp();
+    std::filesystem::remove_all(baseCache);
 
   }// End of Section : Test network message
 

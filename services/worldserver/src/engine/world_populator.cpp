@@ -32,9 +32,9 @@
 namespace {
 void assert_engine_error(bool isError, const std::string& errorMsg) {
   if (isError) {
-	std::string err = std::string("Miss constructed WorldServerEngine : ").append(errorMsg);
-	SPDLOG_ERROR(err);
-	throw std::runtime_error(err);
+    std::string err = std::string("Miss constructed WorldServerEngine : ").append(errorMsg);
+    SPDLOG_ERROR(err);
+    throw std::runtime_error(err);
   }
 }
 
@@ -55,9 +55,9 @@ world_populator::build_world_server_engine() {
   SPDLOG_INFO("[INIT] ServerEngine setup is correct...");
 
   auto ret = std::make_shared<engine>(_connection_string,
-									  std::move(*_map.get()),
-									  std::move(_script_engine),
-									  _interval_movement);
+                                      std::move(*_map.get()),
+                                      std::move(_script_engine),
+                                      _interval_movement);
 
   SPDLOG_INFO("[INIT] ServerEngine building is complete");
 

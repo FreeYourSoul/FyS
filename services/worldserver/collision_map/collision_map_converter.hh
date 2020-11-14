@@ -40,7 +40,8 @@ struct map_element {
 };
 
 struct transition_map {
-  unsigned x = 0, y = 0;
+  ws::vec2_u map_size;
+  ws::vec2_u tile_size;
 
   ws::hitbox_d max_size_elem;
   std::vector<map_element> map;
@@ -49,27 +50,6 @@ struct transition_map {
 void convert_map_from_tmx_file(const std::string& tmx_path, const std::string& destination);
 
 [[nodiscard]] transition_map retrieve_transition_map(const std::string& collision_map_path);
-
-template<typename MapBuilder>
-void build_from_collision_map(const std::string& collision_map_path, MapBuilder& map_builder) {
-  transition_map transit = retrieve_transition_map(collision_map_path);
-
-  map_builder.init_size(transit.x, transit.y);
-
-  for (unsigned i = 0; i < transit.map.size(); ++i) {
-	const auto& elem = transit.map.at(i);
-
-	if (!elem.hb_collision.empty()) {
-	  bool is_full = elem.hb_collision.front().height == transit.max_size_elem.height
-				  && elem.hb_collision.front().width == transit.max_size_elem.width;
-
-	  map_builder.add_collision(is_full, std::move(elem));
-	}
-	if (!elem.hb_trigger.empty()) {
-	  map_builder.add_trigger(std::move(elem));
-	}
-  }
-}
 
 }// namespace fys::map_converter
 #endif//FYS_ONLINE_SERVICES_WORLDSERVER_COLLISION_MAP_CONVERTER_COLLISION_MAP_CONVERTER_HH

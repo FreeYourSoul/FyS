@@ -51,12 +51,12 @@ public:
    */
   [[nodiscard]] std::optional<container_type>
   pop() {
-	if (_head < _tail) {
-	  return _queue[getIndex(_head++)];
-	}
-	_head = 0;
-	_tail = 0;
-	return std::nullopt;
+    if (_head < _tail) {
+      return _queue[getIndex(_head++)];
+    }
+    _head = 0;
+    _tail = 0;
+    return std::nullopt;
   }
 
   /**
@@ -67,11 +67,11 @@ public:
    */
   bool
   push(container_type&& elem) {
-	if (size() >= SIZE_QUEUE)
-	  return false;
-	_queue[getIndex(_tail)] = std::forward<container_type>(elem);
-	++_tail;
-	return true;
+    if (size() >= SIZE_QUEUE)
+      return false;
+    _queue[getIndex(_tail)] = std::forward<container_type>(elem);
+    ++_tail;
+    return true;
   }
 
   /**
@@ -84,7 +84,7 @@ public:
 private:
   inline uint
   getIndex(const std::uint32_t index) const {
-	return index % SIZE_QUEUE;
+    return index % SIZE_QUEUE;
   }
 
 private:

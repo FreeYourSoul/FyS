@@ -38,15 +38,15 @@ service_context_base::service_context_base(int ac, const char* const* av) try {
   std::string config_path;
 
   cli.add_option(fil::option(
-	  "-c", [&v = config_path](std::string str) { v = std::move(str); }, "Path of the config file"));
+      "-c", [&v = config_path](std::string str) { v = std::move(str); }, "Path of the config file"));
   cli.add_option(fil::option(
-	  "-s", [&v = _config_file](std::string str) { v = std::move(str); }, "Path of specific config file"));
+      "-s", [&v = _config_file](std::string str) { v = std::move(str); }, "Path of specific config file"));
   cli.add_option(fil::option(
-	  "-a", [&v = _dispatcher_data.address](std::string str) { v = std::move(str); }, "Hostname of the service dispatcher"));
+      "-a", [&v = _dispatcher_data.address](std::string str) { v = std::move(str); }, "Hostname of the service dispatcher"));
   cli.add_option(fil::option(
-	  "-p", [&v = _dispatcher_data.subscriber_port](std::uint64_t value) { v = value; }, "Port number of the dispatcher to subscribe to"));
+      "-p", [&v = _dispatcher_data.subscriber_port](std::uint64_t value) { v = value; }, "Port number of the dispatcher to subscribe to"));
   cli.add_option(fil::option(
-	  "-d", [&v = _dispatcher_data.port](std::uint64_t value) { v = value; }, "Port number of the service dispatcher"));
+      "-d", [&v = _dispatcher_data.port](std::uint64_t value) { v = value; }, "Port number of the service dispatcher"));
 
   cli.parse_command_line(ac, const_cast<char**>(av));
 
