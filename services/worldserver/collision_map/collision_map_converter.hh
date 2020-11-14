@@ -36,6 +36,7 @@ using trigger_box = std::pair<ws::hitbox_d, unsigned>;
 struct map_element {
   std::vector<trigger_box> hb_trigger;
   std::vector<ws::hitbox_d> hb_collision;
+  bool full_collision = false;
 };
 
 struct transition_map {
@@ -45,7 +46,8 @@ struct transition_map {
   std::vector<map_element> map;
 };
 
-void convert_map_from_tmx_file(const std::string& tmx_path);
+void convert_map_from_tmx_file(const std::string& tmx_path, const std::string& destination);
+
 [[nodiscard]] transition_map retrieve_transition_map(const std::string& collision_map_path);
 
 template<typename MapBuilder>
