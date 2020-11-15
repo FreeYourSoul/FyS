@@ -226,9 +226,7 @@ npc_actions_report script_engine::execute_scripted_actions() {
 
 void world_populator::generate_spawning_points(const std::string& spawning_point_config_path, const std::string& base_path) {
   std::ifstream i(spawning_point_config_path);
-  nlohmann::json jsonConfig;
-  i >> jsonConfig;
-
+  auto jsonConfig = nlohmann::json::parse(i);
   auto wsJson = jsonConfig["spawning_points"];
   unsigned index = 0;
 

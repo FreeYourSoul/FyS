@@ -38,8 +38,7 @@ arena_server_context::arena_server_context(int ac, const char* const* av)
     : common::service_context_base(ac, av) {
   std::ifstream i(_config_file);
   SPDLOG_INFO("start parsing file {}", _config_file);
-  json json_config;
-  i >> json_config;
+  json json_config = json::parse(i);
   parse_arena_config_file(json_config);
 }
 
@@ -63,9 +62,7 @@ void arena_server_context::parse_arena_config_file(const json& config_content) {
   for (auto& zone : zone_conf) {
     SPDLOG_INFO("start parsing file {}", zone.get<std::string>());
     std::ifstream i(zone.get<std::string>());
-    json jsonConfig;
-    i >> jsonConfig;
-    parse_zone_config_file(jsonConfig);
+    parse_zone_config_file(json::parse(i));
   }
 }
 

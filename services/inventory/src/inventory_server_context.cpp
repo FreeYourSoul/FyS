@@ -32,9 +32,8 @@ namespace fys::inv {
 inventory_server_context::inventory_server_context(int argc, char** argv)
     : common::service_context_base(argc, argv) {
   std::ifstream i(_config_file);
-  json jsonConfig;
-  i >> jsonConfig;
-  init_inventory_context_with_json(jsonConfig);
+  json json_config = json::parse(i);
+  init_inventory_context_with_json(json_config);
 }
 
 std::string

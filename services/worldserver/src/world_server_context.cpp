@@ -40,8 +40,7 @@ namespace fys::ws {
 world_server_context::world_server_context(int ac, const char* const* av)
     : common::service_context_base(ac, av) {
   std::ifstream i(_config_file);
-  json json_config;
-  i >> json_config;
+  json json_config = json::parse(i);
   init_ws_ctx_from_json(json_config);
 }
 
