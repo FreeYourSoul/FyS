@@ -105,7 +105,7 @@ void engine::spawnNPC(const std::chrono::system_clock::time_point& currentTime) 
 void engine::move_character_action(const std::string& character_name, std::uint32_t index_character, character_info& info) {
   pos future_position = calculate_potential_future_position(info);
 
-  if (_intern->map.can_move_to(future_position, 0)) {
+  if (_intern->map.can_move_to(future_position)) {
     info.position = future_position;
 
     _intern->map.execute_potential_trigger(future_position, index_character, info);

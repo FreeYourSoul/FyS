@@ -37,28 +37,54 @@ namespace fys::ws {
 
 struct collision_map::internal {
 
-  explicit internal(const world_server_context& ctx)
-      : _boundary_x(ctx.server_x_boundaries()),
-        _boundary_y(ctx.server_y_boundaries()),
-        _server_proximity(ctx.server_proximity()) {}
+  explicit internal(boundary x, boundary y, const std::vector<proximity_server>& prox)
+      : _boundary_x(x),
+        _boundary_y(y),
+        _server_proximity(prox) {}
 
-//  [[nodiscard]] unsigned
-//  get_x(double x) {
-//    static const unsigned gTileSizeX = _;
-//    return static_cast<unsigned>(x) / gTileSizeX;
-//  }
-//
-//  [[nodiscard]] unsigned
-//  get_y(double y) {
-//    static const unsigned gTileSizeY = tileSizeY;
-//    return static_cast<unsigned>(y) / gTileSizeY;
-//  }
-
-  map_element get(unsigned long x, unsigned long y) {
-    return {};
+  [[nodiscard]] unsigned
+  get_x(unsigned long x) {
+    if (x > _boundary_x.out) {
+      SPDLOG_ERROR("Trying to retrieve X {} (from_world_map {}) while boundary is [{}:{}]",
+                   x, _boundary_x.in, _boundary_x.out);
+      return 0;
+    }
+    return x % static_cast<unsigned long>(_boundary_x.out);
   }
 
-/**
+  [[nodiscard]] unsigned
+  get_y(unsigned long y) {
+    if (y > _boundary_y.out) {
+      SPDLOG_ERROR("Trying to retrieve Y {} while boundary is [{}:{}]",
+                   y, _boundary_y.in, _boundary_y.out);
+      return 0;
+    }
+    return y % static_cast<unsigned long>(_boundary_y.out);
+  }
+
+  void add_collisions(std::uint32_t index, const map_converter::map_element& element) {
+    if (element.full_collision) {
+      _map_elems[index].set_type(e_element_type::FULL_BLOCK);
+      return;
+    }
+    _map_elems[index].set_type(e_element_type::BLOCK);
+    for (const auto& hitbox : element.hb_collision) {
+      _map_elems[index].add_collision(hitbox);
+    }
+  }
+
+  void add_triggers(std::uint32_t index, const map_converter::map_element& element) {
+    _map_elems[index].set_type(e_element_type::TRIGGER);
+    for (const auto& [hitbox, id_trigger] : element.hb_trigger) {
+      _map_elems[index].add_trigger([]() {}, hitbox);
+    }
+  }
+
+  const map_element& get(unsigned long worldmap_x, unsigned long worldmap_y) {
+    return _map_elems[get_x(worldmap_x) + get_y(worldmap_y)];
+  }
+
+  /**
  * @brief Use a provided file into the collision map format (see collision_map_converter) and fill the collision map
  *
  * @param map_file_path path to a collision map format
@@ -66,19 +92,16 @@ struct collision_map::internal {
   void build_map_from_file(const std::string& map_file_path) {
     map_converter::transition_map transit = map_converter::retrieve_transition_map(map_file_path);
 
-    for (unsigned i = 0; i < transit.map.size(); ++i) {
+    _map_elems.reserve(transit.map.size());
+    for (std::uint32_t i = 0; i < transit.map.size(); ++i) {
       const auto& elem = transit.map.at(i);
 
-      if (elem.full_collision) {
-
-      }
-      else if (!elem.hb_collision.empty()) {
-
-//        map_builder.add_collision(is_full, std::move(elem));
+      if (elem.full_collision || !elem.hb_collision.empty()) {
+        add_collisions(i, elem);
       }
 
       if (!elem.hb_trigger.empty()) {
-//        map_builder.add_trigger(std::move(elem));
+        add_triggers(i, elem);
       }
     }
   }
@@ -91,23 +114,17 @@ struct collision_map::internal {
 };
 
 // CollisionMap Element
-void map_element::execute_potential_trigger(std::uint32_t indexPlayer) const {
-  if (_type == e_element_type::TRIGGER) {
 
-  } else if (_type == e_element_type::TP_TRIGGER) {
-  }
-}
-
-bool map_element::can_go_through(pos position) const noexcept {
-  if (_type == e_element_type::FULL_BLOCK) {
+bool map_element::can_go_through(pos relative_position) const noexcept {
+  if (is(e_element_type::FULL_BLOCK)) {
     return false;
   }
-  if (_type == e_element_type::BLOCK) {
-    return std::none_of(_collisions.begin(), _collisions.end(), [&position](const auto& aabb) {
-      return (position.x >= aabb.left
-              && position.x <= aabb.left + aabb.width
-              && position.y >= aabb.top
-              && position.y <= aabb.top + aabb.height);
+  if (is(e_element_type::BLOCK)) {
+    return std::none_of(_collisions.begin(), _collisions.end(), [&relative_position](const auto& aabb) {
+      return (relative_position.x >= aabb.left
+              && relative_position.x <= aabb.left + aabb.width
+              && relative_position.y >= aabb.top
+              && relative_position.y <= aabb.top + aabb.height);
     });
   }
   return true;
@@ -115,27 +132,42 @@ bool map_element::can_go_through(pos position) const noexcept {
 
 // CollisionMap
 collision_map::collision_map(const world_server_context& ctx)
-    : _intern(std::make_unique<internal>(ctx)) {
+    : _intern(std::make_unique<internal>(ctx.server_x_boundaries(),
+                                         ctx.server_y_boundaries(),
+                                         ctx.server_proximity())) {
+
   _intern->build_map_from_file(ctx.collision_map_path());
+}
+
+collision_map::collision_map(const std::string& map,
+                             boundary x, boundary y,
+                             const std::vector<proximity_server>& prox)
+    : _intern(std::make_unique<internal>(x, y, prox)) {
+
+  _intern->build_map_from_file(map);
 }
 
 collision_map::~collision_map() = default;
 collision_map::collision_map(collision_map&&) noexcept = default;
 
-void collision_map::execute_potential_trigger(const pos& position, std::uint32_t index,
+void collision_map::execute_potential_trigger(const pos& worldmap_pos, std::uint32_t index,
                                               const character_info& character) {
-  if (_intern->get(position.x, position.y).type() == e_element_type::TP_TRIGGER) {
-  }
-  if (_intern->get(position.x, position.y).type() == e_element_type::TRIGGER) {
+  const auto& map_elem = _intern->get(worldmap_pos.x, worldmap_pos.y);
+  if (map_elem.is(e_element_type::TRIGGER)) {
+
+  } else if (map_elem.is(e_element_type::MAP_TRIGGER)) {
   }
 }
 
-bool collision_map::can_move_to(pos pos, std::size_t level) const noexcept {
-  if (pos.x < _intern->_boundary_x.in || pos.x > _intern->_boundary_x.out
-      || pos.y < _intern->_boundary_y.in || pos.y > _intern->_boundary_y.out) {
+bool collision_map::can_move_to(pos world_map_pos) const noexcept {
+  if (world_map_pos.x < _intern->_boundary_x.in || world_map_pos.x > _intern->_boundary_x.out
+      || world_map_pos.y < _intern->_boundary_y.in || world_map_pos.y > _intern->_boundary_y.out) {
     return false;
   }
-  return _intern->get(static_cast<unsigned long>(pos.x), static_cast<unsigned long>(pos.y)).can_go_through(pos);
-}
+  const auto& elem = _intern->get(static_cast<unsigned long>(world_map_pos.x),
+                                                 static_cast<unsigned long>(world_map_pos.y));
 
+  return elem.can_go_through({world_map_pos.x - _intern->_boundary_x.in,
+                              world_map_pos.y - _intern->_boundary_y.in});
+}
 }// namespace fys::ws

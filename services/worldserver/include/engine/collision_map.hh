@@ -68,25 +68,25 @@ public:
   std::optional<proximity_server_axis> y_axis_requirement = std::nullopt;
 };
 
-enum class e_element_type {
-  BLOCK,
-  FULL_BLOCK,
-  TRIGGER,
-  TP_TRIGGER,
-  NONE
+enum class e_element_type : int {
+  BLOCK = 0,
+  FULL_BLOCK = 1,
+  TRIGGER = 2,
+  MAP_TRIGGER = 3,
 };
 
 class map_element {
 
 public:
-  void execute_potential_trigger(std::uint32_t indexPlayer) const;
-
   /**
    * check if the element is of type BLOCK, if it is, check every collision blockers on the mapElement
    * to verify if the PlayerInfo collide with them.
+   *
+   * @param relative_position position relative to the current map (opposite of worldmap position)
+   * @return True if it is possible to go into this position for the element, false otherwise
    */
   [[nodiscard]] inline bool
-  can_go_through(pos position) const noexcept;
+  can_go_through(pos relative_position) const noexcept;
 
   void add_collision(const hitbox_d& object) {
     _collisions.emplace_back(object);
@@ -94,13 +94,19 @@ public:
 
   template<typename T>
   void add_trigger(T&& trigger, hitbox_d box) {
-    _triggers.emplace_back(box, std::forward(trigger));
+//    _triggers.emplace_back(box, std::forward(trigger));
   }
 
-  e_element_type type() const { return _type; }
+  void set_type(e_element_type type) { _type.set(int(type), true); }
+
+  bool is_empty() const { return _type.none(); }
+  bool is(e_element_type to_check) const { return _type[int(to_check)]; }
+  bool isor(const std::vector<e_element_type>& to_check) const {
+    return std::any_of(to_check.begin(), to_check.end(), [this](e_element_type t) { return _type[int(t)]; });
+  }
 
 private:
-  e_element_type _type = e_element_type::NONE;
+  std::bitset<4> _type;
   std::vector<std::pair<hitbox_d, std::variant<connection_handler*, void*>>> _triggers;// TODO: change with std::function<void(LUA::Reference&)>
   std::vector<hitbox_d> _collisions;
 };
@@ -110,19 +116,29 @@ class collision_map {
 
 public:
   explicit collision_map(const world_server_context& ctx);
+  collision_map(const std::string& map, boundary x, boundary y, const std::vector<proximity_server>& prox);
   ~collision_map();
 
   collision_map(collision_map&&) noexcept;
   collision_map(const collision_map&) = delete;
   collision_map& operator=(const collision_map&) = delete;
 
-  void execute_potential_trigger(const pos& position, std::uint32_t index, const character_info& character);
+  /**
+   * @brief Execute all triggers that should be executed on the given movement for a given character
+   * @param worldmap_pos worldmap position in which the given character move
+   * @param index unique index of the character
+   * @param character information of the character moving
+   */
+  void execute_potential_trigger(const pos& worldmap_pos, std::uint32_t index, const character_info& character);
 
   /**
-   * Check if the position is in the boundary of the map before checking on the map
+   * @brief Check if the given worldmap position is in the boundary of the map then check if it is possible to
+   * move to this worldmap position.
+   *
+   * @param world_map_pos worldmap position to check if it possible to move to
    * @return true if it is possible to move on the given position, false otherwise
    */
-  [[nodiscard]] bool can_move_to(pos pos, std::size_t level) const noexcept;
+  [[nodiscard]] bool can_move_to(pos world_map_pos) const noexcept;
 
 private:
   std::unique_ptr<internal> _intern;

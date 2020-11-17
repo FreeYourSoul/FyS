@@ -368,6 +368,7 @@ std::string to_string(hexagon_side::orientation orientation) {
   case fys::arena::hexagon_side::orientation::C_SW: return "C_SW";
   case fys::arena::hexagon_side::orientation::NONE: return "NONE(ERROR)";
   }
+  return "NONE(ERROR)";
 }
 
 std::string to_string(hexagon_side::hexagon hexagon) {
@@ -376,6 +377,7 @@ std::string to_string(hexagon_side::hexagon hexagon) {
   case fys::arena::hexagon_side::hexagon::B: return "B";
   case fys::arena::hexagon_side::hexagon::C: return "C";
   }
+  return "NONE(ERROR)";
 }
 
 }// namespace fys::arena
