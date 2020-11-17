@@ -34,6 +34,7 @@
 #include <world_server_context.hh>
 
 #include <engine/script_engine.hh>
+#include <engine/world_populator.hh>
 
 namespace fys::ws {
 
@@ -296,6 +297,10 @@ void world_populator::register_common_lua_engine(const std::string& to_lua_init_
 const std::vector<spawning_point>&
 world_populator::get_spawning_point() const {
   return _script_engine->_intern->spawning_points;
+}
+
+script_engine& world_populator::get_script_engine() const {
+  return *_script_engine;
 }
 
 }// namespace fys::ws

@@ -8,8 +8,8 @@ add_library(collision_map STATIC
         ${CMAKE_CURRENT_SOURCE_DIR}/collision_map_converter.hh
         )
 
-target_link_libraries(collision_map PRIVATE
-        fys::common_service dl)
+target_link_libraries(collision_map PUBLIC
+        fys::common_service dl ${TMXLITE_LIBRARIES})
 target_include_directories(collision_map PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_library(fys::collision_map ALIAS collision_map)
@@ -19,8 +19,6 @@ if (BUILD_SERVICE_CLI_TMX_MAP_CONVERTER)
     add_executable(collision_map_converter ${CMAKE_CURRENT_SOURCE_DIR}/cli/cml_main.cpp)
 
     target_link_libraries(collision_map_converter PRIVATE
-            fys::common_service
-            fys::collision_map
-            dl ${TMXLITE_LIBRARIES})
+            fys::collision_map)
 
 endif ()

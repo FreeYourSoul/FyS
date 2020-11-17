@@ -83,10 +83,11 @@ public:
    * to verify if the PlayerInfo collide with them.
    *
    * @param relative_position position relative to the current map (opposite of worldmap position)
+   * @param tile_size size of a tile for this map (to use percentage on the position)
    * @return True if it is possible to go into this position for the element, false otherwise
    */
   [[nodiscard]] inline bool
-  can_go_through(pos relative_position) const noexcept;
+  can_go_through(pos relative_position, const vec2_d &tile_size) const noexcept;
 
   void add_collision(const hitbox_d& object) {
     _collisions.emplace_back(object);
@@ -107,8 +108,8 @@ public:
 
 private:
   std::bitset<4> _type;
-  std::vector<std::pair<hitbox_d, std::variant<connection_handler*, void*>>> _triggers;// TODO: change with std::function<void(LUA::Reference&)>
-  std::vector<hitbox_d> _collisions;
+  std::vector<std::pair<hitbox_d, std::variant<connection_handler*, void*>>> _triggers{};
+  std::vector<hitbox_d> _collisions{};
 };
 
 class collision_map {
@@ -116,7 +117,7 @@ class collision_map {
 
 public:
   explicit collision_map(const world_server_context& ctx);
-  collision_map(const std::string& map, boundary x, boundary y, const std::vector<proximity_server>& prox);
+  collision_map(const std::string& map, boundary x, boundary y, std::vector<proximity_server> prox = {});
   ~collision_map();
 
   collision_map(collision_map&&) noexcept;

@@ -15,7 +15,6 @@ add_executable(world_server_test
         ${CMAKE_CURRENT_SOURCE_DIR}/catch_main.cpp
 
         # Test files
-        ${CMAKE_CURRENT_SOURCE_DIR}/world_server_engine_testcase.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/flatbuffer_generator_testcase.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/collision_map_testcase.cpp
 
@@ -40,11 +39,28 @@ add_executable(world_server_test
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/engine/world_populator.hh
         )
 
+target_link_libraries(world_server_test PUBLIC
+        Catch2::Catch2
+        lua
+        fys::common_service
+        fys::collision_map
+        fys::cml
+        dl
+        ${TMXLITE_LIBRARIES} # to remove
+        )
+target_include_directories(world_server_test PRIVATE
+        ${COMMON_INCLUDES_DIR}
+        ${TMXLITE_HEADERS}
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include
+        ${CMAKE_CURRENT_SOURCE_DIR}/../collision_map)
+
+catch_discover_tests(world_server_test)
+
+
 add_executable(world_server_lua_test
         #Test files
         ${CMAKE_CURRENT_SOURCE_DIR}/catch_main.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/script/spawning_point_0_testcase.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/script/world_populator_testcase.cpp
 
         #Source files
 
@@ -68,25 +84,12 @@ add_executable(world_server_lua_test
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/engine/world_populator.hh
         )
 
-target_link_libraries(world_server_test PUBLIC
+target_link_libraries(world_server_lua_test
         Catch2::Catch2
         fys::common_service
         fys::collision_map
         fys::cml
-        lua
-        ${TMXLITE_LIBRARIES} # to remove
-        )
-target_include_directories(world_server_test PRIVATE
-        ${COMMON_INCLUDES_DIR}
-        ${TMXLITE_HEADERS}
-        ${CMAKE_CURRENT_SOURCE_DIR}/../include
-        ${CMAKE_CURRENT_SOURCE_DIR}/../collision_map)
-catch_discover_tests(world_server_test)
-
-target_link_libraries(world_server_lua_test
-        Catch2::Catch2
-        fys::common_service
-        fys::cml
+        dl
         lua)
 target_include_directories(world_server_lua_test PRIVATE
         ${COMMON_INCLUDES_DIR}

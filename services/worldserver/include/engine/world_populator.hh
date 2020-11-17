@@ -64,7 +64,7 @@ public:
 
   // Getters for testing
   const std::vector<spawning_point>& get_spawning_point() const;
-  script_engine& get_script_engine() const { return *_script_engine; }
+  script_engine& get_script_engine() const;
 
 private:
   void register_common_lua_engine(const std::string& to_lua_init_file);
