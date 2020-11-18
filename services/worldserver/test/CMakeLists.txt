@@ -7,8 +7,6 @@ endif ()
 
 project(world_server_test CXX)
 
-set(CMAKE_CXX_COMPILER /usr/bin/g++)
-
 get_target_property(WS_SRCS worldserver_service SOURCES)
 
 add_executable(world_server_test

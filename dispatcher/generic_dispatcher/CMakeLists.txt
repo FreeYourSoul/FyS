@@ -22,10 +22,7 @@ target_compile_options(generic_dispatcher PRIVATE -Wall -Wpedantic -Wextra -Wno-
 
 target_link_libraries(generic_dispatcher
         PRIVATE common_dispatcher nlohmann_json::nlohmann_json)
-
-set_target_properties(generic_dispatcher PROPERTIES
-        CXX_STANDARD 17
-        CMAKE_CXX_COMPILER /usr/bin/g++)
+target_compile_features(generic_dispatcher PRIVATE cxx_std_20)
 
 message(STATUS Set Warnings flag : ${CMAKE_CXX_FLAGS})
 

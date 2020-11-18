@@ -4,8 +4,8 @@
 ![Last commit](https://img.shields.io/github/last-commit/FreeYourSoul/FyS.svg)
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/FreeYourSoul/FyS/master/LICENSE)
-[![](https://tokei.rs/b1/github/XAMPPRocky/tokei?category=files)](https://github.com/XAMPPRocky/tokei)
-[![](https://tokei.rs/b1/github/XAMPPRocky/tokei?category=code)](https://github.com/XAMPPRocky/tokei)
+[![Scc Count Badge](https://sloc.xyz/github/boyter/scc/)](https://github.com/FreeYourSoul/FyS/)
+[![Scc Count Badge](https://sloc.xyz/github/boyter/scc/?category=code)](https://github.com/FreeYourSoul/FyS/)
 
 # FyS Online
 

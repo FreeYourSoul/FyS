@@ -7,9 +7,6 @@ endif ()
 
 project(inventory_test CXX)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_COMPILER /usr/bin/g++)
-
 find_package(cppzmq REQUIRED)
 find_package(Catch2 REQUIRED)
 find_package(fmt REQUIRED)
@@ -43,3 +40,4 @@ add_executable(inventory_test
 
 target_compile_definitions(inventory_test PUBLIC -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)
 target_link_libraries(inventory_test cppzmq fmt::fmt dl fys::cml)
+target_compile_features(inventory_test PRIVATE cxx_std_20)

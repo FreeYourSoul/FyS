@@ -7,9 +7,6 @@ endif ()
 
 project(cml_test CXX)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_COMPILER /usr/bin/g++)
-
 find_package(Catch2 REQUIRED)
 include(Catch)
 
@@ -32,4 +29,5 @@ add_executable(cml_test
         )
 set(CMAKE_BUILD_TYPE Debug)
 target_link_libraries(cml_test Catch2::Catch2 stdc++fs)
+target_compile_features(cml_test PRIVATE cxx_std_20)
 catch_discover_tests(cml_test)

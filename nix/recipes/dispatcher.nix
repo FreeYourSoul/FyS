@@ -6,6 +6,9 @@ stdenv.mkDerivation rec {
 
     pname = "fys-dispatcher";
 
+    buildInputs = [ zeromq flatcc cppzmq boost flatbuffers spdlog catch2 fmt nlohmann_json fil ];
+    nativeBuildInputs = [ cmake flatcc ];
+
     cmakeFlags = [
       "-DBUILD_CML=OFF"
       "-DBUILD_SERVICE_WORLD=OFF"
@@ -24,8 +27,5 @@ stdenv.mkDerivation rec {
     checkPhase = ''
       ctest -VV
     '';
-
-    buildInputs = [ zeromq flatcc cppzmq boost flatbuffers spdlog catch2 fmt nlohmann_json fil ];
-    nativeBuildInputs = [ cmake flatcc ];
     
 }

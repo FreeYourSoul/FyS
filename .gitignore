@@ -54,4 +54,4 @@ docs/cmake_install.cmake
 nix/result
 /nix/result/
 
-/services/worldserver/cfg/maps/2D\ Hand\ Painted\ Tilesets
+/services/worldserver/cfg/maps/2D*

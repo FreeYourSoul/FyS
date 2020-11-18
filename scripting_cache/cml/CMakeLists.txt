@@ -6,12 +6,9 @@ else ()
 endif ()
 
 project(cml CXX)
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_COMPILER /usr/bin/g++)
 
 find_package(nlohmann_json REQUIRED)
 find_package(fmt)
-
 
 add_library(cml
         ${CMAKE_CURRENT_SOURCE_DIR}/src/Cml.cpp
@@ -25,5 +22,6 @@ add_library(fys::cml ALIAS cml)
 target_include_directories(cml PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 target_link_libraries(cml spdlog fmt::fmt dl stdc++fs)
 target_compile_options(cml PRIVATE -Wall -Wpedantic -Wextra -Wno-deprecated-declarations)
+target_compile_features(cml PRIVATE cxx_std_20)
 
 add_subdirectory(test)

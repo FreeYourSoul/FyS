@@ -26,7 +26,7 @@ find_package(cppzmq REQUIRED)
 find_package(fmt REQUIRED)
 find_package(spdlog REQUIRED)
 find_package(FlatBuffers REQUIRED)
-find_package(fil CONFIG REQUIRED)
+find_package(fil REQUIRED)
 
 find_program(FLAT_COMPILER_FOUND flatc REQUIRED)
 set(FLATBUFFERS_FLATC_EXECUTABLE ${FLAT_COMPILER_FOUND})

@@ -22,8 +22,7 @@ target_include_directories(common_dispatcher PUBLIC
         )
 
 set_target_properties(common_dispatcher PROPERTIES
-        CXX_STANDARD 20
-        CMAKE_CXX_COMPILER /usr/bin/g++)
+        CXX_STANDARD 20)
 
 target_link_libraries(common_dispatcher
         PUBLIC cppzmq fmt::fmt fys::fil)

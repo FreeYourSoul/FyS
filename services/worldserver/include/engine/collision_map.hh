@@ -52,8 +52,7 @@ class proximity_server {
   };
 
 public:
-  [[nodiscard]] constexpr bool
-  is_close_by(double axis) const noexcept {
+  [[nodiscard]] constexpr bool is_close_by(double axis) const noexcept {
     bool x_req = x_axis_requirement.has_value();
     bool y_req = y_axis_requirement.has_value();
     if (x_req)
@@ -66,50 +65,6 @@ public:
   std::string code;
   std::optional<proximity_server_axis> x_axis_requirement = std::nullopt;
   std::optional<proximity_server_axis> y_axis_requirement = std::nullopt;
-};
-
-enum class e_element_type : int {
-  BLOCK = 0,
-  FULL_BLOCK = 1,
-  TRIGGER = 2,
-  MAP_TRIGGER = 3,
-};
-
-class map_element {
-
-public:
-  /**
-   * check if the element is of type BLOCK, if it is, check every collision blockers on the mapElement
-   * to verify if the PlayerInfo collide with them.
-   *
-   * @param relative_position position relative to the current map (opposite of worldmap position)
-   * @param tile_size size of a tile for this map (to use percentage on the position)
-   * @return True if it is possible to go into this position for the element, false otherwise
-   */
-  [[nodiscard]] inline bool
-  can_go_through(pos relative_position, const vec2_d &tile_size) const noexcept;
-
-  void add_collision(const hitbox_d& object) {
-    _collisions.emplace_back(object);
-  }
-
-  template<typename T>
-  void add_trigger(T&& trigger, hitbox_d box) {
-//    _triggers.emplace_back(box, std::forward(trigger));
-  }
-
-  void set_type(e_element_type type) { _type.set(int(type), true); }
-
-  bool is_empty() const { return _type.none(); }
-  bool is(e_element_type to_check) const { return _type[int(to_check)]; }
-  bool isor(const std::vector<e_element_type>& to_check) const {
-    return std::any_of(to_check.begin(), to_check.end(), [this](e_element_type t) { return _type[int(t)]; });
-  }
-
-private:
-  std::bitset<4> _type;
-  std::vector<std::pair<hitbox_d, std::variant<connection_handler*, void*>>> _triggers{};
-  std::vector<hitbox_d> _collisions{};
 };
 
 class collision_map {
