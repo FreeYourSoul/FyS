@@ -25,4 +25,4 @@ set_target_properties(common_dispatcher PROPERTIES
         CXX_STANDARD 20)
 
 target_link_libraries(common_dispatcher
-        PUBLIC cppzmq fmt::fmt fys::fil)
+        PUBLIC cppzmq fmt::fmt)

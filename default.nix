@@ -14,8 +14,10 @@ in with pkgs; rec {
 
   # External Dependencies (not default nixpkg)
   tmxlite = (callPackage ./nix/dependency/tmxlite.nix) { };
+  cppzmq = (callPackage ./nix/dependency/cppzmq.nix) { };
+  sol3 = (callPackage ./nix/dependency/sol3.nix) { };
 
   # FyS Dependencies
   dispatcher = (callPackage ./nix/recipes/dispatcher.nix) { inherit fil; };
-  world_service = (callPackage ./nix/recipes/world_service.nix) { inherit fil tmxlite fseam; };
+  world_service = (callPackage ./nix/recipes/world_service.nix) { inherit fil tmxlite fseam sol3 cppzmq; };
 }

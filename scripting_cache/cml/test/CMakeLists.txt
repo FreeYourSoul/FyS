@@ -15,19 +15,11 @@ enable_testing()
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../include)
 
 add_executable(cml_test
-        #source tested
-        ${CMAKE_CURRENT_SOURCE_DIR}/../src/Cml.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/../include/Cml.hh
-        ${CMAKE_CURRENT_SOURCE_DIR}/../include/CmlKey.hh
-        ${CMAKE_CURRENT_SOURCE_DIR}/../include/CmlCopy.hh
-        ${CMAKE_CURRENT_SOURCE_DIR}/../src/CmlCopy.cpp
-
-        #test files
         ${CMAKE_CURRENT_SOURCE_DIR}/catchMain.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/BasicCmlTestCase.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/CmlCopyTestCase.cpp
         )
 set(CMAKE_BUILD_TYPE Debug)
-target_link_libraries(cml_test Catch2::Catch2 stdc++fs)
+target_link_libraries(cml_test PUBLIC fys::cml Catch2::Catch2 stdc++fs)
 target_compile_features(cml_test PRIVATE cxx_std_20)
 catch_discover_tests(cml_test)

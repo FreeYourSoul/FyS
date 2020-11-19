@@ -47,3 +47,5 @@ endif ()
 
 target_compile_options(worldserver_service PRIVATE -O2 -fstack-protector-all -g)
 target_compile_options(worldserver_service PRIVATE -Wall -Wpedantic -Wextra -Wno-deprecated-declarations)
+
+install(TARGETS worldserver_service DESTINATION ${CMAKE_INSTALL_BINDIR})

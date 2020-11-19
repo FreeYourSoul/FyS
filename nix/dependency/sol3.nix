@@ -1,14 +1,13 @@
-{ stdenv, callPackage, cmake }:
+{ stdenv, callPackage, cmake, lua }:
 
 stdenv.mkDerivation rec {
-    version = "1.2.1";
-    pname = "tmxlite";
+    version = "3.2.3";
+    pname = "sol3";
 
     src = builtins.fetchGit {
-        url = "https://github.com/fallahn/tmxlite.git";
-        rev = "8aea23ea52a72f82931d950d878bbb1b946c99c0";
+        url = "https://github.com/ThePhD/sol2.git";
+        rev = "c068aefbeddb3dd1f1fd38d42843ecb49a3b4cdb";
     };
-    sourceRoot = "source/tmxlite";
 
     buildInputs = [ ];
     nativeBuildInputs = [ cmake ];

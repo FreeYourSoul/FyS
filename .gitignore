@@ -54,4 +54,5 @@ docs/cmake_install.cmake
 nix/result
 /nix/result/
 
+sourceme.sh
 /services/worldserver/cfg/maps/2D*

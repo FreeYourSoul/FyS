@@ -19,6 +19,7 @@ stdenv.mkDerivation rec {
       "-DBUILD_DISP_GATEWAY=OFF"
       "-DBUILD_TESTING=OFF"
       "-DBUILD_DISPATCHER=ON"
+      "-DBUILD_SERVICE_CLI_TMX_MAP_CONVERTER=OFF"
     ];
 
     enableParallelBuilding = true;

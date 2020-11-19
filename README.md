@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/FreeYourSoul/FyS.svg?branch=master)](https://travis-ci.com/FreeYourSoul/FyS)
 [![Documentation Status](https://readthedocs.org/projects/fys/badge/?version=latest)](https://fys.readthedocs.io/en/latest/?badge=latest)
 [![HitCount](http://hits.dwyl.io/FreeYourSoul/FyS.svg)](http://hits.dwyl.io/FreeYourSoul/FyS)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/2c227695c9824450a0b9bae3c6b881e0)](https://www.codacy.com/manual/FreeYourSoul/FyS?utm_source=github.com&utm_medium=referral&utm_content=FreeYourSoul/FyS&utm_campaign=Badge_Grade)

@@ -34,3 +34,5 @@ endif ()
 target_compile_options(inventory_service PRIVATE -O2 -fstack-protector-all -g -lfmt)
 target_compile_options(inventory_service PRIVATE -Wall -Wpedantic -Wextra -Wno-deprecated-declarations)
 target_compile_definitions(inventory_service PUBLIC CHAISCRIPT_NO_THREADS -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)
+
+install(TARGETS inventory_service DESTINATION ${CMAKE_INSTALL_BINDIR})

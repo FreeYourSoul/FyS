@@ -21,14 +21,7 @@ function spawn(spawningPoint)
     return nil
 end
 
-function _changeActionsIndex(luaId, backwardLooping)
-    spawningPoint.spawned[luaId].currentActions = spawningPoint.spawned[luaId].currentActions + 1
-    if spawningPoint.spawned[luaId].currentActions == spawningPoint.spawned[luaId].numberSteps then
-        spawningPoint.current = 0
-    end
-end
-
-function _round(num)
+local function _round(num)
     if num >= 0 then
         return math.floor(num + .5)
     else
@@ -36,25 +29,20 @@ function _round(num)
     end
 end
 
--- Lua Function that will execute the next action scripted for the spawn
--- @spawningPoint spawningpoint namespace : Used to retrieve the proper spawn with the luaId
--- @luaId id of the spawn entity : this id is Unique by spawningPoint
--- @info information on the spawn : Position, and orientation of the spawn
--- @return : a tuple of 5 elements
---         1) action_id : Type of action made by the spawn (0: IDLE, 1: MOVE, 2: STOP)
---         2) new x position
---         3) new y position
---         4) new velocity
---         5) new orientation angle
+--- Lua Function that will execute the next action scripted for the spawn
+--- @spawningPoint spawningpoint : Used to retrieve the proper spawn with the luaId
+--- @luaId id of the spawn entity : this id is Unique by spawningPoint
+--- @info information on the spawn : Position, and orientation of the spawn
+--- @return : a tuple of 5 elements
+---         1) action_id : Type of action made by the spawn (0: IDLE, 1: MOVE, 2: STOP)
+---         2) new x position
+---         3) new y position
+---         4) new velocity
+---         5) new orientation angle
 function execAction(spawningPoint, luaId, info)
     -- Retrieve current action
-    action = spawningPoint.spawned[luaId].actions.spawningPoint.spawned[luaId].currentActions
+    action = spawningPoint.spawned[luaId].getNextAction(spawningPoint.spawned[luaId])
 
-    if (action.id > 0)
-    then
-        _changeActionsIndex(luaId, action.backwardLoop)
-        return action.id, .0, .0, 0, 0
-    end
 
     -- todo : Check if monster is close to a player, to try to get him, changing the
 

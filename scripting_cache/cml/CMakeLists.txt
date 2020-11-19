@@ -24,4 +24,9 @@ target_link_libraries(cml spdlog fmt::fmt dl stdc++fs)
 target_compile_options(cml PRIVATE -Wall -Wpedantic -Wextra -Wno-deprecated-declarations)
 target_compile_features(cml PRIVATE cxx_std_20)
 
-add_subdirectory(test)
+if (BUILD_TESTING)
+    add_subdirectory(test)
+endif ()
+
+install(TARGETS cml DESTINATION ${CMAKE_INSTALL_LIBDIR})
+

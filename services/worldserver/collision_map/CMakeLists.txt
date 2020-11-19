@@ -13,6 +13,7 @@ target_link_libraries(collision_map PUBLIC
 target_include_directories(collision_map PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 add_library(fys::collision_map ALIAS collision_map)
+target_compile_features(collision_map PRIVATE cxx_std_20)
 
 if (BUILD_SERVICE_CLI_TMX_MAP_CONVERTER)
 
@@ -20,5 +21,6 @@ if (BUILD_SERVICE_CLI_TMX_MAP_CONVERTER)
 
     target_link_libraries(collision_map_converter PRIVATE
             fys::collision_map)
+    target_compile_features(collision_map_converter PRIVATE cxx_std_20)
 
 endif ()

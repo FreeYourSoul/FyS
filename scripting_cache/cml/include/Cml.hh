@@ -53,7 +53,7 @@ private:
   [[nodiscard]] inline std::pair<bool, std::filesystem::file_time_type>
   localStorageInfo(const CmlKey& k) const;
 
-  [[nodiscard]] inline bool
+  [[nodiscard]] bool
   isInLocalStorageAndUpToDate(const CmlKey& cmlKey, std::filesystem::file_time_type cacheLastUpdate) const;
 
 private:

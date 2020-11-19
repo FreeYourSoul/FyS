@@ -1,5 +1,5 @@
 { stdenv, callPackage, cmake, flatcc,
-  boost, flatbuffers, zeromq, cppzmq, catch2, fmt, spdlog, nlohmann_json, fil, lua, tmxlite,
+  boost, flatbuffers, zeromq, cppzmq, catch2, fmt, spdlog, nlohmann_json, fil, lua, tmxlite, sol3,
   python37, python37Packages, fseam }:
 
 stdenv.mkDerivation rec {
@@ -7,7 +7,9 @@ stdenv.mkDerivation rec {
 
     pname = "world_service";
 
-    buildInputs = [ zeromq flatcc cppzmq flatbuffers spdlog fmt nlohmann_json fil lua tmxlite fseam ];
+    buildInputs = [ zeromq flatcc cppzmq flatbuffers spdlog fmt nlohmann_json boost
+                    fil lua tmxlite fseam sol3 ];
+
     nativeBuildInputs = [ cmake flatcc python37 python37Packages.ply ];
 
     cmakeFlags = [
