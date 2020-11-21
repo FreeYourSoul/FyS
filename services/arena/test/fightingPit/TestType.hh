@@ -366,8 +366,8 @@ public:
       : _path(v) {}
 
   ~DeleteFolderWhenDone() {
-    SPDLOG_INFO("Delete folder {}", _path.string());
-    std::filesystem::remove_all(_path);
+    std::error_code ec;
+    SPDLOG_INFO("Delete folder {} : deleted {}", _path.string(), std::filesystem::remove_all(_path, ec));
   }
 
 private:

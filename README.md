@@ -12,6 +12,9 @@
 
 FreeYourSoul project called Soul's Tale, a scalable MMORPG game
 
+Global documentation (gameplay, story oriented) are in a sphinx documentation available [here](https://readthedocs.org/projects/fys/badge/?version=latest).  
+Developper documentation is available [here](https://codedocs.xyz/FreeYourSoul/FyS/) as doxygen documentation.
+
 The todo list is available [here](https://trello.com/b/lMR8LAve/fysgithubtodo)
 
 ## Dispatchers

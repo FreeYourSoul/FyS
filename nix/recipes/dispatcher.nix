@@ -10,16 +10,19 @@ stdenv.mkDerivation rec {
     nativeBuildInputs = [ cmake flatcc ];
 
     cmakeFlags = [
-      "-DBUILD_CML=OFF"
       "-DBUILD_SERVICE_WORLD=OFF"
       "-DBUILD_SERVICE_QUEST=OFF"
       "-DBUILD_SERVICE_ARENA=OFF"
       "-DBUILD_SERVICE_INVENTORY=OFF"
+
       "-DBUILD_DISP_CHAT=OFF"
       "-DBUILD_DISP_GATEWAY=OFF"
-      "-DBUILD_TESTING=OFF"
       "-DBUILD_DISPATCHER=ON"
+
+      "-DBUILD_CML=OFF"
       "-DBUILD_SERVICE_CLI_TMX_MAP_CONVERTER=OFF"
+
+      "-DBUILD_TESTING=OFF"
     ];
 
     enableParallelBuilding = true;

@@ -13,15 +13,19 @@ stdenv.mkDerivation rec {
     nativeBuildInputs = [ cmake flatcc python37 python37Packages.ply ];
 
     cmakeFlags = [
-      "-DBUILD_CML=ON"
       "-DBUILD_SERVICE_WORLD=ON"
       "-DBUILD_SERVICE_QUEST=OFF"
       "-DBUILD_SERVICE_ARENA=OFF"
       "-DBUILD_SERVICE_INVENTORY=OFF"
+
       "-DBUILD_DISP_CHAT=OFF"
       "-DBUILD_DISP_GATEWAY=OFF"
-      "-DBUILD_TESTING=ON"
       "-DBUILD_DISPATCHER=OFF"
+
+      "-DBUILD_CML=ON"
+      "-DBUILD_SERVICE_CLI_TMX_MAP_CONVERTER=ON"
+
+      "-DBUILD_TESTING=ON"
     ];
 
     enableParallelBuilding = true;

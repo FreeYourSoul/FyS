@@ -1,6 +1,4 @@
-Arena Service Code Documentation!
+Code Documentation!
 ===============================================
 
-.. doxygennamespace:: fys::arena
-    :members:
-    :undoc-members:
+Code documentation can be found in Doxygen here : https://codedocs.xyz/FreeYourSoul/FyS

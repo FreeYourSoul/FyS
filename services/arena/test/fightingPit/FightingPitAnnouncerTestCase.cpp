@@ -43,7 +43,7 @@ local_path_storage() {
   std::string dir_path = file_path.substr(0, file_path.rfind('\\'));
   if (dir_path.size() == file_path.size())
     dir_path = file_path.substr(0, file_path.rfind('/'));
-  return dir_path + "/../../scriptTests/scripts_lnk";
+  return dir_path + "/../../../../scripting_cache/scripts";
 }
 }// namespace
 

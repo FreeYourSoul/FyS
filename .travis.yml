@@ -15,7 +15,7 @@ before_install:
 
 before_cache:
   - mkdir -p $HOME/nix.store
-  - nix copy --to file://$HOME/nix.store -f default.nix fil fseam tmxlite cppzmq sol3
+  - nix copy --to file://$HOME/nix.store -f default.nix fil fseam tmxlite cppzmq sol3 chaiscript
 
 before_script:
   - sudo mkdir -p /etc/nix && echo 'sandbox = true' | sudo tee /etc/nix/nix.conf

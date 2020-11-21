@@ -15,7 +15,7 @@ option(BUILD_SERVICE_INVENTORY "Build the inventory service server binary" ON)
 option(BUILD_DISP_CHAT "Build the Char dispatcher binary" ON)
 option(BUILD_DISP_GATEWAY "Build the Gateway dispatcher binary" ON)
 option(BUILD_DISPATCHER "Build the Generic dispatcher binary" ON)
-option(BUILD_SERVICE_CLI_TMX_MAP_CONVERTER "Build the command line tool to compile tmx files into collision map" ON)
+option(BUILD_SERVICE_CLI_TMX_MAP_CONVERTER "Build the command line tool to compile tmx files into collision map" OFF)
 
 list(APPEND CMAKE_MODULE_PATH
         ${CMAKE_CURRENT_SOURCE_DIR}/cmake
