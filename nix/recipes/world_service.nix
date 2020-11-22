@@ -3,7 +3,9 @@
   python37, python37Packages, fseam }:
 
 stdenv.mkDerivation rec {
-    inherit (callPackage ./common.nix { }) version src;
+    inherit (callPackage ./common.nix {
+        description = "Server service : Handling player/characters movement in the section of the world map";
+    }) version src meta;
 
     pname = "world_service";
 
@@ -36,4 +38,5 @@ stdenv.mkDerivation rec {
     checkPhase = ''
       ctest -VV
     '';
+
 }

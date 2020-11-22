@@ -72,7 +72,6 @@ void fill_map_element(map_element& element, const tmx::Tileset::Tile* tile, unsi
           && static_cast<unsigned>(rec.height) == map_y) {
         element.full_collision = true;
       } else {
-        fmt::print("> Collision found {}\n", tile->ID);
         element.hb_collision.emplace_back(rec.left, rec.top, rec.width, rec.height);
       }
     }
@@ -90,7 +89,7 @@ void fill_map_element(map_element& element, const tmx::Tileset::Tile* tile, unsi
   }
 }
 
-void serialize_in_file(transition_map transition_map, const std::string& destination_path) {
+void serialize_in_file(transition_map transition_map, const std::string& destination_path, bool human_readable) {
 
   nlohmann::json serializer;
 
@@ -129,12 +128,15 @@ void serialize_in_file(transition_map transition_map, const std::string& destina
   }
 
   std::ofstream o(destination_path);
-  o << std::setw(4) << serializer << std::endl;
+  if (human_readable) {
+    o << std::setw(4);
+  }
+  o << serializer << std::endl;
 }
 
 }// namespace
 
-void convert_map_from_tmx_file(const std::string& tmx_path, const std::string& destination) {
+void convert_map_from_tmx_file(const std::string& tmx_path, const std::string& destination, bool human_readable) {
   tmx::Map map;
   if (!map.load(tmx_path)) {
     SPDLOG_ERROR("TMX CollisionMap couldn't be loaded");
@@ -172,7 +174,8 @@ void convert_map_from_tmx_file(const std::string& tmx_path, const std::string& d
   }
   auto [x_tile_size, y_tile_size] = map.getTileSize();
 
-  serialize_in_file(transition_map{ws::vec2_u{x_bound, y_bound}, ws::vec2_u{x_tile_size, y_tile_size}, {}, std::move(result)}, destination);
+  serialize_in_file(transition_map{ws::vec2_u{x_bound, y_bound}, ws::vec2_u{x_tile_size, y_tile_size}, {}, std::move(result)},
+                    destination, human_readable);
 }
 
 transition_map retrieve_transition_map(const std::string& collision_map_path) {
@@ -205,9 +208,9 @@ transition_map retrieve_transition_map(const std::string& collision_map_path) {
     for (auto& trigger_js : map_elem_js["triggers"]) {
       elem.hb_trigger.emplace_back(
           ws::hitbox_d{trigger_js["zone"][0].get<double>(),
-              trigger_js["zone"][1].get<double>(),
-              trigger_js["zone"][2].get<double>(),
-              trigger_js["zone"][3].get<double>()},
+                       trigger_js["zone"][1].get<double>(),
+                       trigger_js["zone"][2].get<double>(),
+                       trigger_js["zone"][3].get<double>()},
           trigger_js["id"].get<unsigned>());
     }
     result.map.emplace_back(elem);

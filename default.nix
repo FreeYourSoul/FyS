@@ -1,6 +1,6 @@
 let
   pkgs = import <nixpkgs> {};
-  
+
 in with pkgs; rec {
 
   # External Dependencies (personal)

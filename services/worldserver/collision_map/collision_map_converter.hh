@@ -47,7 +47,7 @@ struct transition_map {
   std::vector<map_element> map;
 };
 
-void convert_map_from_tmx_file(const std::string& tmx_path, const std::string& destination);
+void convert_map_from_tmx_file(const std::string& tmx_path, const std::string& destination, bool human_readable = false);
 
 [[nodiscard]] transition_map retrieve_transition_map(const std::string& collision_map_path);
 

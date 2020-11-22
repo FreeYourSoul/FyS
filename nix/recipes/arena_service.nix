@@ -3,7 +3,9 @@
   python37, python37Packages, fseam, zlib}:
 
 stdenv.mkDerivation rec {
-    inherit (callPackage ./common.nix { }) version src;
+    inherit (callPackage ./common.nix {
+        description = "Arena service : Handling one or multiple battles";
+    }) version src meta;
 
     pname = "arena_service";
 

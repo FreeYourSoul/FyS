@@ -47,10 +47,8 @@ static const std::string test_collision_map_content = R"colmap(
         {
             "collisions": [
                 [
-                    64.0,
-                    0.0,
-                    64.0,
-                    128.0
+                  64.0,   0.0,
+                  64.0,  128.0
                 ]
             ],
             "full_collision": false,
@@ -62,14 +60,8 @@ static const std::string test_collision_map_content = R"colmap(
             "triggers": []
         }
     ],
-    "map_size": [
-        2,
-        2
-    ],
-    "tile_size": [
-        128,
-        128
-    ]
+    "map_size": [ 2, 2 ],
+    "tile_size": [ 128, 128 ]
 }
 )colmap";
 

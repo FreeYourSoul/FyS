@@ -1,4 +1,4 @@
-{pkgs ? import <nixpkgs> {}, use_revision ? builtins.getEnv "NIX_FYS_REVISION" }:
+{pkgs ? import <nixpkgs> {}, use_revision ? builtins.getEnv "NIX_FYS_REVISION", description ? ""}:
 rec {
     version = "1.0.0-DEV";
 
@@ -8,4 +8,19 @@ rec {
                  url = "https://github.com/FreeYourSoul/FyS.git";
                  rev = use_revision;
              };
+
+    qb = {
+        email = "ballandFyS@protonmail.com";
+        github = "FreeYourSoul";
+        githubId = 11722712;
+        name = "Quentin Balland";
+    };
+
+    meta = with pkgs.stdenv.lib; {
+        maintainers = [ qb ];
+        homepage = "http://freeyoursoul.online";
+        description = description;
+        licences = licenses.mit;
+        platforms = platforms.linux;
+    };
 }

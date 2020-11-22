@@ -29,22 +29,26 @@
 
 int main(int ac, char** av) {
   fil::command_line_interface cli([] {}, "FyS::CollisionMapConverter");
-  std::string config_path = "NONE";
+  std::string config_path = "";
+  bool human_readable = false;
   std::string file_path = "NONE";
   std::string output_file_path = "./output.collision.json";
 
   cli.add_option(fil::option(
-      "-f", [&v = config_path](std::string str) { v = std::move(str); }, "Path to tmx folder to convert"));
+      "-f", [&v = config_path](std::string str) { v = std::move(str); }, "Path to all tmx folder to convert [not implemented yet]"));
   cli.add_option(fil::option(
       "-c", [&v = file_path](std::string str) { v = std::move(str); }, "Path of the file to convert"));
   cli.add_option(fil::option(
       "-o", [&v = output_file_path](std::string value) { v = std::move(value); }, "Collision map : Output file"));
+  cli.add_option(fil::option("-h", [&v = human_readable]() { v = true; }, "Human readable JSON output"));
 
   cli.parse_command_line(ac, av);
+  if (!config_path.empty())
+    throw std::logic_error("Not Implemented Yet");
 
   fmt::print("Start collision map converter for file {} with output file set to {}\n", file_path, output_file_path);
   try {
-    fys::map_converter::convert_map_from_tmx_file(file_path, output_file_path);
+    fys::map_converter::convert_map_from_tmx_file(file_path, output_file_path, human_readable);
   } catch (const std::exception& e) {
     fmt::print("An error occurred : {}\n", e.what());
     return 1;

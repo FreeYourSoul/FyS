@@ -2,7 +2,9 @@
   boost, flatbuffers, zeromq, cppzmq, catch2, fmt, spdlog, nlohmann_json, fil }:
 
 stdenv.mkDerivation rec {
-    inherit (callPackage ./common.nix { }) version src;
+    inherit (callPackage ./common.nix {
+        description = "Service Dispatcher : proxy server to route messages from clients to connected service servers";
+    }) version src meta;
 
     pname = "fys-dispatcher";
 
