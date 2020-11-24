@@ -154,6 +154,7 @@ TEST_CASE("Test register/load player", "[service][arena][script_test]") {
 
   }// End section : Test load player actions
 
-  std::filesystem::remove_all(baseCache);
+  std::error_code ec;
+  std::filesystem::remove_all(baseCache, ec);
 
 }// End TestCase : Test register/load player
