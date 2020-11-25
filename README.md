@@ -63,7 +63,7 @@ Service handling the movement in the world of the character controlled by the pl
 -   [ChaiScript](https://github.com/ChaiScript/ChaiScript)  
       For scripting of monsters in the Arena (fighting mode)
 
--   [LUA](https://github.com/lua/lua)   --> soon to be  
+-   [LUA](https://github.com/lua/lua)
       For the scripting of NPC in the world map (when moving)
       
 -   [Nix](https://nixos.org/learn.html)  
