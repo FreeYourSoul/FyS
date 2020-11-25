@@ -174,7 +174,8 @@ TEST_CASE("isInLocalStorageAndUpToDate for Basic CML", "[cml_test]") {
   SECTION("createFile") {
     std::filesystem::path pathToCreate(local_path_storage() + "/imaginary");
     std::filesystem::path basePath = pathToCreate;
-    std::filesystem::remove_all(basePath);
+    std::error_code ec;
+    std::filesystem::remove_all(basePath, ec);
 
     REQUIRE_FALSE(std::filesystem::exists(pathToCreate));
     pathToCreate /= "cloud";
@@ -198,7 +199,7 @@ TEST_CASE("isInLocalStorageAndUpToDate for Basic CML", "[cml_test]") {
     REQUIRE(pathVerify == pathToCreate);
     CHECK("this is a crazy funny test\n" == cbt.findInCache("imaginary:cloud:surfing:testing.txt"));
 
-    std::filesystem::remove_all(basePath);
+    std::filesystem::remove_all(basePath, ec);
 
   }// End Section : createFile
 

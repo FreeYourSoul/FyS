@@ -186,7 +186,8 @@ retrieveDoableActions(actions.act);)");
     // REQUIRE(fseamMock->verify(FSeam::ConnectionHandler::sendMessageToDispatcher::NAME, 1));
 
     FSeam::MockVerifier::cleanUp();
-    std::filesystem::remove_all(baseCache);
+    std::error_code ec;
+    std::filesystem::remove_all(baseCache, ec);
 
   }// End of Section : Test network message
 

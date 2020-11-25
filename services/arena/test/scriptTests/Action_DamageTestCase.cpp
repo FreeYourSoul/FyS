@@ -216,7 +216,8 @@ s.execute(d);
 
     }// End section : test over damage
 
-    std::filesystem::remove_all(baseCache);
+    std::error_code ec;
+    std::filesystem::remove_all(baseCache, ec);
 
   }// End section : test Multi_Slash chaiscript
 

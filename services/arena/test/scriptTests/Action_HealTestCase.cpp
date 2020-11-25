@@ -142,6 +142,7 @@ s.execute(contender);
 
   }// End section : test light_heal chaiscript
 
-  std::filesystem::remove_all(baseCache);
+  std::error_code ec;
+  std::filesystem::remove_all(baseCache, ec);
 
 }// End TestCase : test Slash chaiscript

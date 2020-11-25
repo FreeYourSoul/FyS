@@ -48,7 +48,8 @@ copy_path_storage() {
 TEST_CASE("CmlCopy", "[common][cml_test]") {
   fys::cache::CmlCopy ccpy(local_path_storage(), copy_path_storage());
   std::filesystem::path baseCache = local_path_storage() + "/copy_folder";
-  std::filesystem::remove_all(baseCache);
+  std::error_code ec;
+  std::filesystem::remove_all(baseCache, ec);
   REQUIRE_FALSE(std::filesystem::exists(baseCache));
 
   auto content = ccpy.findInCache("copy_folder:inner_copy_folder:testingCopyFile.txt");
@@ -57,5 +58,5 @@ TEST_CASE("CmlCopy", "[common][cml_test]") {
   REQUIRE(std::filesystem::exists(baseCache / "inner_copy_folder" / "testingCopyFile.txt"));
   REQUIRE("This is a copied file cache" == content);
 
-  std::filesystem::remove_all(baseCache);
+  std::filesystem::remove_all(baseCache, ec);
 }// End TestCase : CmlCopy
