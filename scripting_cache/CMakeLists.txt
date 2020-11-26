@@ -24,4 +24,10 @@ macro(configure_files srcDir destDir)
     endforeach (templateFile)
 endmacro(configure_files)
 
-configure_files(${CMAKE_CURRENT_SOURCE_DIR}/scripts/arena ${CMAKE_BINARY_DIR}/scripting_cache/scripts/arena)
+configure_files(
+        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/arena
+        ${CMAKE_BINARY_DIR}/scripting_cache/scripts/arena)
+
+configure_files(
+        ${CMAKE_CURRENT_SOURCE_DIR}/scripts/ws
+        ${CMAKE_BINARY_DIR}/scripting_cache/scripts/ws)

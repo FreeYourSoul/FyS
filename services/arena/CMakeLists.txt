@@ -66,7 +66,7 @@ if (result)
     set_target_properties(arena_service PROPERTIES INTERPROCEDURAL_OPTIMIZATION TRUE)
 endif ()
 
-target_compile_options(arena_service PRIVATE -O2 -fstack-protector-all -g -lfmt)
+target_compile_options(arena_service PRIVATE -O2 -fno-diagnostics-show-caret -fstack-protector-all -g -lfmt)
 target_compile_options(arena_service PRIVATE -Wall -Wpedantic -Wextra -Wno-deprecated-declarations)
 target_compile_definitions(arena_service PUBLIC CHAISCRIPT_NO_THREADS -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)
 

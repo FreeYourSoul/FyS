@@ -21,16 +21,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include "world_server_service.hh"
+#include <utility>
+
+#include <spdlog/spdlog.h>
+#include <zmq_addon.hpp>
+
 #include <AuthFrame_generated.h>
 #include <IncomingPlayerOnWs_generated.h>
 #include <InterServerCom_generated.h>
 #include <Notifications_generated.h>
 #include <WSAction_generated.h>
 #include <flatbuffers/flatbuffers.h>
-#include <spdlog/spdlog.h>
-#include <utility>
-#include <zmq_addon.hpp>
+
+#include "world_server_service.hh"
 
 namespace {
 template<typename T>

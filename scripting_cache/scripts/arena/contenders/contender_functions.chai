@@ -90,7 +90,7 @@ decide_target.lower_mana_than = fun(targetType, side, thanValue) {
 };
 decide_target.lower_mana = fun(targetType, side) { decide_target.lower_mana_than(targetType, side, -1); };
 
-decide_target.higher_mana_than = fun(targetType, side) {
+decide_target.higher_mana_than = fun(targetType, side, thanValue) {
     var comparator;
 
     if (-1 == thanValue) {
