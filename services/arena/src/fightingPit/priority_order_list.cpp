@@ -36,8 +36,9 @@ priority_order_list::priority_order_list(std::vector<data::priority_elem> base_s
 }
 
 void priority_order_list::add_participant_in_list(std::uint32_t id, int speed, bool is_contender) {
-  if (std::any_of(_base_speed.begin(), _base_speed.end(),
-                  [id, is_contender](const auto& prio_elem) { return prio_elem.id == id && prio_elem.is_contender == is_contender; })) {
+  if (std::ranges::any_of(_base_speed, [id, is_contender](const auto& prio_elem) {
+        return prio_elem.id == id && prio_elem.is_contender == is_contender;
+      })) {
     SPDLOG_WARN("Cannot add participant in order list : Participant of id {} already existing", id);
     return;
   }
@@ -129,11 +130,11 @@ int priority_order_list::get_computed_speed(const data::priority_elem& elem_to_c
   for (std::uint32_t i = 0; i < _base_speed.size(); ++i) {
     if (_base_speed.at(i).id == elem_to_compute.id) {
       std::uint32_t id_next_in_line = (i == 0) ? _base_speed.back().id : _base_speed.at(i - 1).id;
-      if (auto it = std::find_if(_analyzed_list.begin(), _analyzed_list.end(),
-                                 [id_next_in_line](const auto& analyst_elem) {
-                                   return analyst_elem.id == id_next_in_line;
-                                 });
-          it != _analyzed_list.end()) {
+      if (auto it = std::ranges::find_if(_analyzed_list,
+                                         [id_next_in_line](const auto& analyst_elem) {
+                                           return analyst_elem.id == id_next_in_line;
+                                         });
+          (it != _analyzed_list.end())) {
         return it->speed ? it->speed : 1;
       }
     }
@@ -147,11 +148,10 @@ void priority_order_list::end_turn_routine() {
     return;
 
   for (const auto& baseSpeedElem : _base_speed) {
-    if (auto it = std::find_if(_analyzed_list.begin(), _analyzed_list.end(),
-                               [baseId = baseSpeedElem.id](const auto& analyzedElem) {
-                                 return analyzedElem.id == baseId;
-                               });
-        it != _analyzed_list.end()) {
+    if (auto it = std::ranges::find_if(_analyzed_list, [baseId = baseSpeedElem.id](const auto& analyzedElem) {
+          return analyzedElem.id == baseId;
+        });
+        (it != _analyzed_list.end())) {
       it->speed += baseSpeedElem.speed + get_fastest_base_speed();
     }
   }

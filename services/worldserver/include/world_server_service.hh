@@ -44,8 +44,6 @@ class world_server_service {
     double initial_velocity = 0.0;
   };
 
-  //	using awaiting_player_it = std::vector<awaited_player>::const_iterator;
-
 public:
   explicit world_server_service(const world_server_context& ctx, engine engine);
   void run_server_loop() noexcept;

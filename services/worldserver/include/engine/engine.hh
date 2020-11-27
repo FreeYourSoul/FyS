@@ -82,12 +82,14 @@ public:
   void authenticate_player(auth_player auth, character_info info, std::string identifier);
   void spawnNPC(const std::chrono::system_clock::time_point& currentTime);
 
-  [[nodiscard]] std::uint32_t
-  retrieve_data_index(const auth_player& player);
+  [[nodiscard]] std::uint32_t retrieve_data_index(const auth_player& player) noexcept;
 
 private:
-  inline void move_character_action(const std::string& character_name, std::uint32_t index_character, character_info& info);
+  inline void move_character_action(const std::string& character_name,
+                                    std::uint32_t index_character, character_info& info);
+
   inline void notify_reported_npc_movements(const npc_actions_report& action_report);
+
   inline void notify_clients_of_character_move(const character_info& info, const std::string& user_name,
                                                const std::vector<std::string_view>& idts_to_identify);
 

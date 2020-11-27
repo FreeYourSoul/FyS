@@ -24,10 +24,12 @@
 #ifndef FYS_COMMONDATA_HH
 #define FYS_COMMONDATA_HH
 
-#include <fightingPit/hexagon_side.hh>
+#include <algorithm>
 #include <functional>
 #include <set>
 #include <vector>
+
+#include <fightingPit/hexagon_side.hh>
 
 //! Types and functions linking C++ world with ChaiScript
 namespace fys::arena::data {
@@ -191,9 +193,11 @@ static void
 merge_alterations(std::vector<alteration>& to_modify, std::vector<alteration> to_merge, bool replace_if_exist = false) {
   (void)merge_alterations;// suppress unused warning (as it is used, but by ChaiScript)
 
-  std::move(to_merge.begin(), to_merge.end(), std::back_inserter(to_modify));
-  std::sort(to_modify.begin(), to_modify.end(), [replace_if_exist](const alteration& lhs, const alteration& rhs) {
-    return lhs.alteration_key() == rhs.alteration_key() && ((replace_if_exist && lhs.turn() > rhs.turn()) || (!replace_if_exist && lhs.turn() < rhs.turn()));
+  std::ranges::move(to_merge, std::back_inserter(to_modify));
+  std::ranges::sort(to_modify, [replace_if_exist](const alteration& lhs, const alteration& rhs) {
+    return lhs.alteration_key() == rhs.alteration_key()
+        && ((replace_if_exist && lhs.turn() > rhs.turn())
+            || (!replace_if_exist && lhs.turn() < rhs.turn()));
   });
   to_modify.erase(std::unique(to_modify.begin(), to_modify.end(), [](const alteration& lhs, const alteration& rhs) {
                     return lhs.alteration_key() == rhs.alteration_key();

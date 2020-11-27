@@ -49,7 +49,7 @@ pit_contenders::changing_side_contenders() const {
 std::vector<std::shared_ptr<fighting_contender>>
 pit_contenders::contenders_on_side(hexagon_side::orientation side) const {
   std::vector<std::shared_ptr<fighting_contender>> result;
-  std::copy_if(_contenders.begin(), _contenders.end(), std::back_inserter(result), [side](const auto& contender_ptr) {
+  std::ranges::copy_if(_contenders, std::back_inserter(result), [side](const auto& contender_ptr) {
     return contender_ptr->side_orient() == side;
   });
   return result;
@@ -58,7 +58,7 @@ pit_contenders::contenders_on_side(hexagon_side::orientation side) const {
 std::vector<std::shared_ptr<fighting_contender>>
 pit_contenders::get_dead_contender_on_side(hexagon_side::orientation side) const {
   std::vector<std::shared_ptr<fighting_contender>> result;
-  std::copy_if(_contenders.begin(), _contenders.end(), std::back_inserter(result), [side](const auto& contender_ptr) {
+  std::ranges::copy_if(_contenders, std::back_inserter(result), [side](const auto& contender_ptr) {
     return contender_ptr->side_orient() == side && contender_ptr->status().life_pt.is_dead();
   });
   return result;
@@ -137,17 +137,12 @@ bool pit_contenders::add_contender(const std::shared_ptr<fighting_contender>& co
 }
 
 bool pit_contenders::all_dead() const {
-  return std::all_of(_contenders.begin(), _contenders.end(), [](const auto& contender) {
-    return contender->status().life_pt.is_dead();
-  });
+  return std::ranges::all_of(_contenders, [](const auto& contender) { return contender->status().life_pt.is_dead(); });
 }
 
 unsigned
 pit_contenders::number_contender_on_side(hexagon_side::orientation side) const {
-  return std::count_if(_contenders.cbegin(), _contenders.cend(),
-                       [side](const auto& contender) {
-                         return side == contender->side_orient();
-                       });
+  return std::ranges::count_if(_contenders, [side](const auto& contender) { return side == contender->side_orient(); });
 }
 
 }// namespace fys::arena

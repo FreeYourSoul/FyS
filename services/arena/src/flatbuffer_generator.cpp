@@ -94,7 +94,7 @@ flatbuffer_generator::generate_party_team_status(const party_team& partyTeam) {
     std::vector<std::string> vecString;
     for (const auto& tm : partyTeam.team_members()) {
       auto vec = retrieve_string_vector(tm->actions_doable());
-      std::move(vec.begin(), vec.end(), std::back_inserter(vecString));
+      std::ranges::move(vec, std::back_inserter(vecString));
     }
     return _fbb.CreateVectorOfStrings(vecString);
   }(partyTeam);

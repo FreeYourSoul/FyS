@@ -23,6 +23,8 @@
 
 #include <spdlog/spdlog.h>
 
+#include <ranges>
+
 #include <item_manager.hh>
 
 #include <exchange/exchange_room.hh>
@@ -41,8 +43,7 @@ bool exchange_room::addItemFromExchangeForPlayer(const std::string& player, cons
   }
 
   auto& contentOfPlayer = _content[static_cast<uint>(role)];
-  auto itemIt = std::find_if(contentOfPlayer.begin(), contentOfPlayer.end(),
-                             [&toAdd](const auto& c) { return c.itemCode == toAdd.itemCode; });
+  auto itemIt = std::ranges::find_if(contentOfPlayer, [&toAdd](const auto& c) { return c.itemCode == toAdd.itemCode; });
 
   if (itemIt != contentOfPlayer.end()) {
     toAdd.quantity += itemIt->quantity;
@@ -76,8 +77,7 @@ bool exchange_room::removeItemFromExchangeForPlayer(const std::string& player, c
   }
 
   auto& contentOfPlayer = _content[static_cast<uint>(role)];
-  auto itemIt = std::find_if(contentOfPlayer.begin(), contentOfPlayer.end(),
-                             [&toRemove](const auto& c) { return c.itemCode == toRemove.itemCode; });
+  auto itemIt = std::ranges::find_if(contentOfPlayer, [&toRemove](const auto& c) { return c.itemCode == toRemove.itemCode; });
 
   if (itemIt != contentOfPlayer.end()) {
     if (toRemove.quantity >= itemIt->quantity) {

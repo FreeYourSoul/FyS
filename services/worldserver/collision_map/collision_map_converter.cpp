@@ -42,7 +42,7 @@ namespace fys::map_converter {
 namespace {
 const tmx::Tileset& find_tileset_by_tile_id(const std::vector<tmx::Tileset>& tilesets, std::uint32_t id_tile) {
 
-  auto it = std::find_if(tilesets.cbegin(), tilesets.cend(), [&id_tile](const auto& t) { return t.hasTile(id_tile); });
+  auto it = std::ranges::find_if(tilesets, [&id_tile](const auto& t) { return t.hasTile(id_tile); });
   if (it == tilesets.end()) {
     throw std::runtime_error(fmt::format("id_tile {} cannot be found in tilesets", id_tile));
   }
@@ -50,7 +50,7 @@ const tmx::Tileset& find_tileset_by_tile_id(const std::vector<tmx::Tileset>& til
 }
 
 unsigned get_id_property(const std::vector<tmx::Property>& properties) {
-  auto it = std::find_if(properties.begin(), properties.end(), [](const auto& prop) { return prop.getName() == "id"; });
+  auto it = std::ranges::find_if(properties, [](const auto& prop) { return prop.getName() == "id"; });
   if (it == properties.end()) {
     return 0;
   }

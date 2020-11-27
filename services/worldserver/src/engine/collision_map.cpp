@@ -72,7 +72,7 @@ public:
   bool is_empty() const { return _type.none(); }
   bool is(e_element_type to_check) const { return _type[int(to_check)]; }
   bool isor(const std::vector<e_element_type>& to_check) const {
-    return std::any_of(to_check.begin(), to_check.end(), [this](e_element_type t) { return _type[int(t)]; });
+    return std::ranges::any_of(to_check, [this](e_element_type t) { return _type[int(t)]; });
   }
 
 private:
@@ -172,7 +172,7 @@ bool map_element::can_go_through(pos relative_position, const vec2_d& tile_size)
   if (is(e_element_type::BLOCK)) {
     relative_position.x -= std::floor(relative_position.x);
     relative_position.y -= std::floor(relative_position.y);
-    return std::none_of(_collisions.begin(), _collisions.end(), [&](const auto& aabb) {
+    return std::ranges::none_of(_collisions, [&](const auto& aabb) {
       return (relative_position.x >= (aabb.left / tile_size.x)
               && relative_position.x <= ((aabb.left + aabb.width) / tile_size.x)
               && relative_position.y >= (aabb.top / tile_size.y)
@@ -222,4 +222,14 @@ bool collision_map::can_move_to(pos world_map_pos) const noexcept {
 
   return elem.can_go_through(relative_pos, _intern->_tile_size);
 }
+
+std::vector<proximity_server> collision_map::server_at_proximity(pos pos) const noexcept {
+  auto prox = _intern->_server_proximity
+            | std::views::filter([&pos](const auto& sp) { return sp.is_close_by(pos); });
+
+  std::vector<std::ranges::range_value_t<decltype(prox)>> v;
+  std::ranges::copy(prox, std::back_inserter(v));
+  return v;
+}
+
 }// namespace fys::ws

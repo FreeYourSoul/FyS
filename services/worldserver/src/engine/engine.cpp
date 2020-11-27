@@ -36,7 +36,7 @@
 namespace fys::ws {
 
 [[nodiscard]] inline pos
-calculate_potential_future_position(const character_info& info) {
+calculate_potential_future_position(const character_info& info) noexcept {
   return pos{
       info.position.x * (info.velocity * std::cos(info.angle)),
       info.position.y * (info.velocity * std::sin(info.angle))};
@@ -110,7 +110,7 @@ void engine::move_character_action(const std::string& character_name, std::uint3
 
     _intern->map.execute_potential_trigger(future_position, index_character, info);
 
-    if (const auto idts_to_notify = _intern->data.get_player_idts_around_pos(info.position); !idts_to_notify.empty()) {
+    if (auto idts_to_notify = _intern->data.get_player_idts_around_pos(info.position); !idts_to_notify.empty()) {
       notify_clients_of_character_move(info, character_name, idts_to_notify);
     }
   }
@@ -162,7 +162,7 @@ void engine::notify_clients_of_character_move(
   }
 }
 
-std::uint32_t engine::retrieve_data_index(const auth_player& player) {
+std::uint32_t engine::retrieve_data_index(const auth_player& player) noexcept {
   auto it = _auth_player_on_data_index.find(player);
   if (it == _auth_player_on_data_index.end()) {
     return NOT_AUTHENTICATED;

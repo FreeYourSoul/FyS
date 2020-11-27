@@ -24,6 +24,9 @@
 #ifndef FYS_ONLINE_SERVICES_CHAT_INCLUDE_CHAT_ROOM_HH
 #define FYS_ONLINE_SERVICES_CHAT_INCLUDE_CHAT_ROOM_HH
 
+#include <string>
+#include <memory>
+
 namespace fys::chat {
 
 enum class room_type {

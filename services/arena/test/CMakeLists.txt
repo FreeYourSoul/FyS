@@ -112,7 +112,7 @@ addFSeamTests(
 )
 
 target_compile_definitions(sampy_test PUBLIC CHAISCRIPT_NO_THREADS SPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)
-target_link_libraries(sampy_test cppzmq fmt::fmt dl fys::cml)
+target_link_libraries(sampy_test cppzmq dl fmt::fmt fys::cml nlohmann_json::nlohmann_json)
 target_compile_features(sampy_test PRIVATE cxx_std_20)
 target_compile_options(sampy_test PRIVATE -fno-diagnostics-show-caret )
 target_include_directories(sampy_test PRIVATE
@@ -121,7 +121,7 @@ target_include_directories(sampy_test PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/../include)
 
 target_compile_definitions(arena_test PUBLIC CHAISCRIPT_NO_THREADS SPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)
-target_link_libraries(arena_test cppzmq Catch2::Catch2 fmt::fmt dl fys::cml)
+target_link_libraries(arena_test cppzmq Catch2::Catch2 fmt::fmt dl fys::cml nlohmann_json::nlohmann_json)
 target_compile_features(arena_test PRIVATE cxx_std_20)
 target_compile_options(arena_test PRIVATE -fno-diagnostics-show-caret )
 target_include_directories(arena_test PRIVATE

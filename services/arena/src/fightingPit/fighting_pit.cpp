@@ -133,8 +133,9 @@ void fighting_pit::add_authenticated_user(std::string user_name, std::string use
 }
 
 bool fighting_pit::is_player_participant(const std::string& name, const std::string& token) const noexcept {
-  return std::any_of(_authenticated_players.begin(), _authenticated_players.end(),
-                     [&name, &token](auto& authPlayer) { return authPlayer.name == name && authPlayer.token == token; });
+  return std::ranges::any_of(_authenticated_players, [&name, &token](auto& authPlayer) {
+    return authPlayer.name == name && authPlayer.token == token;
+  });
 }
 
 void fighting_pit::add_party_team_and_register_actions(std::unique_ptr<party_team> pt, cache::Cml& cache) {

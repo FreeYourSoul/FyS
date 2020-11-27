@@ -136,10 +136,9 @@ void world_server_service::process_player_message(const std::string& user, const
 }
 
 void world_server_service::register_awaited_player(const std::string& user, const std::string& token, std::string identity) {
-  auto awaited_it = std::find_if(_awaited_incoming_player.begin(), _awaited_incoming_player.end(),
-                                 [toCheck = auth_player{user, token}](const auto& awaited) {
-                                   return awaited.auth == toCheck;
-                                 });
+  auto awaited_it = std::ranges::find_if(_awaited_incoming_player, [toCheck = auth_player{user, token}](const auto& awaited) {
+    return awaited.auth == toCheck;
+  });
   if (awaited_it == _awaited_incoming_player.end()) {
     SPDLOG_ERROR("Player '{}' isn't awaited with the given token", user, token);
     return;

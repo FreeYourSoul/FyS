@@ -46,19 +46,19 @@ struct boundary {
 };
 
 class proximity_server {
+public:
   struct proximity_server_axis {
     double value;
     bool superiorTo;
   };
 
-public:
-  [[nodiscard]] constexpr bool is_close_by(double axis) const noexcept {
-    bool x_req = x_axis_requirement.has_value();
-    bool y_req = y_axis_requirement.has_value();
-    if (x_req)
-      x_req = (x_axis_requirement->superiorTo) ? (axis > x_axis_requirement->value) : (axis < x_axis_requirement->value);
-    if (y_req)
-      y_req = (y_axis_requirement->superiorTo) ? (axis > y_axis_requirement->value) : (axis < y_axis_requirement->value);
+  [[nodiscard]] constexpr bool is_close_by(const pos& pos) const noexcept {
+    bool x_req = !x_axis_requirement.has_value();
+    bool y_req = !y_axis_requirement.has_value();
+    if (!x_req)
+      x_req = (x_axis_requirement->superiorTo) ? (pos.x > x_axis_requirement->value) : (pos.x < x_axis_requirement->value);
+    if (!y_req)
+      y_req = (y_axis_requirement->superiorTo) ? (pos.y > y_axis_requirement->value) : (pos.y < y_axis_requirement->value);
     return x_req && y_req;
   }
 
@@ -95,6 +95,13 @@ public:
    * @return true if it is possible to move on the given position, false otherwise
    */
   [[nodiscard]] bool can_move_to(pos world_map_pos) const noexcept;
+
+  /**
+   * @brief Retrieve the list of server that are at proximity of the given position
+   * @param pos position to check proximity server from
+   * @return vector of server that are at proximity
+   */
+  [[nodiscard]] std::vector<proximity_server> server_at_proximity(pos pos) const noexcept;
 
 private:
   std::unique_ptr<internal> _intern;

@@ -63,16 +63,16 @@ void inventory_server_service::run_server_loop() {
           zmq::multipart_t response;
           switch (binary->content_type()) {
           case fb::ivt::InventoryRequestContent_RetrievePlayerInventory:
-            response.add(retrieve_player_inventory(binary->content_as_RetrievePlayerInventory()));
+//            response.add(retrieve_player_inventory(binary->content_as_RetrievePlayerInventory()));
             break;
           case fb::ivt::InventoryRequestContent_UpdatePlayerSoulDraughtboard:
-            response.add(update_player_soul_draughtboard(binary->content_as_UpdatePlayerSoulDraughtboard()));
+//            response.add(update_player_soul_draughtboard(binary->content_as_UpdatePlayerSoulDraughtboard()));
             break;
           case fb::ivt::InventoryRequestContent_RetrievePlayerSoulDraughtboard:
-            response.add(retrievePlayerSoulDraughtboard(binary->content_as_RetrievePlayerSoulDraughtboard()));
+//            response.add(retrievePlayerSoulDraughtboard(binary->content_as_RetrievePlayerSoulDraughtboard()));
             break;
           case fb::ivt::InventoryRequestContent_InitiateExchange:
-            response.add(exchange_inventory(binary->content_as_InitiateExchange(), player_idt.str()));
+//            response.add(exchange_inventory(binary->content_as_InitiateExchange(), player_idt.str()));
             break;
           default:
             SPDLOG_ERROR("[Inv : {}] : Request type '{}' not supported",

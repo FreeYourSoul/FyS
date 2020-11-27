@@ -79,10 +79,9 @@ std::string create_tmp_file(std::string name, const std::string& content) {
 }
 
 }// namespace
+using namespace fys::ws;
 
-TEST_CASE("collision_map TestCase", "[service][world][map]") {
-
-  using namespace fys::ws;
+TEST_CASE("collision_map_test_case TestCase", "[service][world][map]") {
   std::string file_path = create_tmp_file("collision_map_test_case.colmap", test_collision_map_content);
   fys::ws::collision_map cmap(file_path, boundary{0, 2}, boundary{0, 2});
 
@@ -112,7 +111,6 @@ TEST_CASE("collision_map TestCase", "[service][world][map]") {
         REQUIRE_FALSE(cmap.can_move_to({i, j}));
       }
     }
-
   }
 
   SECTION("test can_move_to failure: BLOCK") {
@@ -142,9 +140,8 @@ TEST_CASE("collision_map TestCase", "[service][world][map]") {
 
 }// End TestCase : collision_map TestCase
 
-TEST_CASE("collision_map WorldMap Sized TestCase", "[service][world][map]") {
+TEST_CASE("collision_map_test_case collision", "[service][world][map]") {
 
-  using namespace fys::ws;
   std::string file_path = create_tmp_file("collision_map_test_case_size.colmap", test_collision_map_content);
   fys::ws::collision_map cmap(file_path, boundary{150, 152}, boundary{300, 302});
 
@@ -174,7 +171,6 @@ TEST_CASE("collision_map WorldMap Sized TestCase", "[service][world][map]") {
         REQUIRE_FALSE(cmap.can_move_to({i, j}));
       }
     }
-
   }
 
   SECTION("test can_move_to failure: BLOCK") {
@@ -202,4 +198,173 @@ TEST_CASE("collision_map WorldMap Sized TestCase", "[service][world][map]") {
     }
   }
 
-}// End TestCase : collision_map TestCase
+}// End TestCase : collision_map_test_case TestCase
+
+TEST_CASE("collision_map_test_case proximity_server simple") {
+  using psa = proximity_server::proximity_server_axis;
+
+  std::string file_path = create_tmp_file("collision_map_test_case.colmap", test_collision_map_content);
+  fys::ws::collision_map cmap(
+      file_path, boundary{0, 2}, boundary{0, 2},
+      {
+          {"WS_NORTH", std::nullopt, psa{0.5, false}},
+          {"WS_SOUTH", std::nullopt, psa{1.5, true}},
+          {"WS_WEST", psa{0.5, false}, std::nullopt},
+          {"WS_EAST", psa{1.5, true}, std::nullopt},
+      });
+
+  SECTION("no proximity") {
+    auto prox = cmap.server_at_proximity(pos{1.0, 1.0});
+    REQUIRE(prox.empty());
+  }// End section : no proximity
+
+  SECTION("north proximity") {
+    auto prox = cmap.server_at_proximity(pos{1.0, 0.2});
+
+    REQUIRE(1 == prox.size());
+    REQUIRE("WS_NORTH" == prox.at(0).code);
+  }// End section : north proximity
+
+  SECTION("south proximity") {
+    auto prox = cmap.server_at_proximity(pos{1.0, 1.7});
+
+    REQUIRE(1 == prox.size());
+    REQUIRE("WS_SOUTH" == prox.at(0).code);
+  }// End section : south proximity
+
+  SECTION("east proximity") {
+    auto prox = cmap.server_at_proximity(pos{1.7, 1.0});
+
+    REQUIRE(1 == prox.size());
+    REQUIRE("WS_EAST" == prox.at(0).code);
+  }// End section : east proximity
+
+  SECTION("west proximity") {
+    auto prox = cmap.server_at_proximity(pos{0.2, 1.0});
+
+    REQUIRE(1 == prox.size());
+    REQUIRE("WS_WEST" == prox.at(0).code);
+  }// End section : west proximity
+
+  SECTION("south_east proximity") {
+    auto prox = cmap.server_at_proximity(pos{1.7, 1.7});
+
+    REQUIRE(2 == prox.size());
+    REQUIRE("WS_SOUTH" == prox.at(0).code);
+    REQUIRE("WS_EAST" == prox.at(1).code);
+  }// End section : south_east proximity
+
+  SECTION("nort_east proximity") {
+    auto prox = cmap.server_at_proximity(pos{1.7, 0.2});
+
+    REQUIRE(2 == prox.size());
+    REQUIRE("WS_NORTH" == prox.at(0).code);
+    REQUIRE("WS_EAST" == prox.at(1).code);
+  }// End section : north_east proximity
+
+  SECTION("south_west proximity") {
+    auto prox = cmap.server_at_proximity(pos{0.2, 1.7});
+
+    REQUIRE(2 == prox.size());
+    REQUIRE("WS_SOUTH" == prox.at(0).code);
+    REQUIRE("WS_WEST" == prox.at(1).code);
+  }// End section : west_east proximity
+
+  SECTION("nort_west proximity") {
+    auto prox = cmap.server_at_proximity(pos{0.2, 0.2});
+
+    REQUIRE(2 == prox.size());
+    REQUIRE("WS_NORTH" == prox.at(0).code);
+    REQUIRE("WS_WEST" == prox.at(1).code);
+  }// End section : west_east proximity
+
+}// End TestCase : collision_map_test_case proximity_server
+
+TEST_CASE("collision_map_test_case proximity_server corner") {
+  using psa = proximity_server::proximity_server_axis;
+
+  std::string file_path = create_tmp_file("collision_map_test_case_corner.colmap", test_collision_map_content);
+  fys::ws::collision_map cmap(
+      file_path, boundary{0, 2}, boundary{0, 2},
+      {
+          {"WS_NORTH", std::nullopt, psa{0.5, false}},
+          {"WS_SOUTH", std::nullopt, psa{1.5, true}},
+          {"WS_WEST", psa{0.5, false}, std::nullopt},
+          {"WS_EAST", psa{1.5, true}, std::nullopt},
+
+          {"WS_NORTH_WEST", psa{0.5, false}, psa{0.5, false}},
+          {"WS_SOUTH_WEST", psa{0.5, false}, psa{1.5, true}},
+          {"WS_NORTH_EAST", psa{1.5, true}, psa{0.5, false}},
+          {"WS_SOUTH_EAST", psa{1.5, true}, psa{1.5, true}},
+      });
+
+  SECTION("no proximity") {
+    auto prox = cmap.server_at_proximity(pos{1.0, 1.0});
+    REQUIRE(prox.empty());
+  }// End section : no proximity
+
+  SECTION("north proximity") {
+    auto prox = cmap.server_at_proximity(pos{1.0, 0.2});
+
+    REQUIRE(1 == prox.size());
+    REQUIRE("WS_NORTH" == prox.at(0).code);
+  }// End section : north proximity
+
+  SECTION("south proximity") {
+    auto prox = cmap.server_at_proximity(pos{1.0, 1.7});
+
+    REQUIRE(1 == prox.size());
+    REQUIRE("WS_SOUTH" == prox.at(0).code);
+  }// End section : south proximity
+
+  SECTION("east proximity") {
+    auto prox = cmap.server_at_proximity(pos{1.7, 1.0});
+
+    REQUIRE(1 == prox.size());
+    REQUIRE("WS_EAST" == prox.at(0).code);
+  }// End section : east proximity
+
+  SECTION("west proximity") {
+    auto prox = cmap.server_at_proximity(pos{0.2, 1.0});
+
+    REQUIRE(1 == prox.size());
+    REQUIRE("WS_WEST" == prox.at(0).code);
+  }// End section : west proximity
+
+  SECTION("south_east proximity") {
+    auto prox = cmap.server_at_proximity(pos{1.7, 1.7});
+
+    REQUIRE(3 == prox.size());
+    REQUIRE("WS_SOUTH" == prox.at(0).code);
+    REQUIRE("WS_EAST" == prox.at(1).code);
+    REQUIRE("WS_SOUTH_EAST" == prox.at(2).code);
+  }// End section : south_east proximity
+
+  SECTION("nort_east proximity") {
+    auto prox = cmap.server_at_proximity(pos{1.7, 0.2});
+
+    REQUIRE(3 == prox.size());
+    REQUIRE("WS_NORTH" == prox.at(0).code);
+    REQUIRE("WS_EAST" == prox.at(1).code);
+    REQUIRE("WS_NORTH_EAST" == prox.at(2).code);
+  }// End section : north_east proximity
+
+  SECTION("south_west proximity") {
+    auto prox = cmap.server_at_proximity(pos{0.2, 1.7});
+
+    REQUIRE(3 == prox.size());
+    REQUIRE("WS_SOUTH" == prox.at(0).code);
+    REQUIRE("WS_WEST" == prox.at(1).code);
+    REQUIRE("WS_SOUTH_WEST" == prox.at(2).code);
+  }// End section : west_east proximity
+
+  SECTION("nort_west proximity") {
+    auto prox = cmap.server_at_proximity(pos{0.2, 0.2});
+
+    REQUIRE(3 == prox.size());
+    REQUIRE("WS_NORTH" == prox.at(0).code);
+    REQUIRE("WS_WEST" == prox.at(1).code);
+    REQUIRE("WS_NORTH_WEST" == prox.at(2).code);
+  }// End section : west_east proximity
+
+}// End TestCase : collision_map_test_case proximity_server corner

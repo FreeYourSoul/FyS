@@ -129,7 +129,7 @@ void team_member::add_pending_action(const std::string& action_name, std::option
     SPDLOG_WARN("Player {}::{} tried to add an action while dead", _user_name, _name);
     return;
   }
-  auto it = std::find_if(_actions_doable.begin(), _actions_doable.end(), action_key_matcher(action_name));
+  auto it = std::ranges::find_if(_actions_doable, action_key_matcher(action_name));
   if (it == _actions_doable.end()) {
     SPDLOG_WARN("Player {}::{} tried unrecognized action called {}", _user_name, _name, action_name);
     return;

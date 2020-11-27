@@ -162,7 +162,7 @@ void fighting_pit_announcer::generate_reward_for_contender(fighting_pit& fp,
 const std::string&
 fighting_pit_announcer::get_script_content_string(std::string name, const encounter_context::encounter_desc& desc) {
   static const std::string empty{};
-  if (std::any_of(_loaded_script.cbegin(), _loaded_script.cend(), [&name](const auto& s) { return s == name; }))
+  if (std::ranges::any_of(_loaded_script, [&name](const auto& s) { return s == name; }))
     return empty;
 
   _loaded_script.emplace_back(std::move(name));
@@ -171,8 +171,7 @@ fighting_pit_announcer::get_script_content_string(std::string name, const encoun
 
 side_battle&
 fighting_pit_announcer::get_side_battle_for_side(const std::unique_ptr<fighting_pit>& fp, hexagon_side::orientation side) {
-  auto it = std::find_if(fp->_side_battles.begin(), fp->_side_battles.end(),
-                         [side](const auto& sb) { return sb.side() == side; });
+  auto it = std::ranges::find_if(fp->_side_battles, [side](const auto& sb) { return sb.side() == side; });
 
   if (it == fp->_side_battles.end()) {
     SPDLOG_ERROR("Side not found");

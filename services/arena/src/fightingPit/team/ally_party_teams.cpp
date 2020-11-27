@@ -118,16 +118,14 @@ ally_party_teams::select_suitable_member_on_side_alive(hexagon_side::orientation
 
 std::shared_ptr<team_member>
 ally_party_teams::get_specific_team_member_by_id(const std::string& user_name, unsigned id_member) const {
-  auto it_team = std::find_if(_party_teams.cbegin(), _party_teams.cend(),
-                              [&user_name](const auto& team) {
-                                return team->user_name() == user_name;
-                              });
+  auto it_team = std::ranges::find_if(_party_teams, [&user_name](const auto& team) {
+    return team->user_name() == user_name;
+  });
 
   if (it_team != _party_teams.cend()) {
-    auto it_member = std::find_if((*it_team)->team_members().cbegin(), (*it_team)->team_members().cend(),
-                                  [id_member](const auto& member) {
-                                    return member->id() == id_member;
-                                  });
+    auto it_member = std::ranges::find_if((*it_team)->team_members(), [id_member](const auto& member) {
+      return member->id() == id_member;
+    });
 
     if (it_member != (*it_team)->team_members().cend())
       return *it_member;
@@ -141,9 +139,7 @@ ally_party_teams::select_member_by_id(unsigned id_member) {
     return nullptr;
   for (auto& partyTeam : _party_teams) {
     const auto& team_members = partyTeam->access_team_members();
-    auto team_member = std::find_if(team_members.begin(), team_members.end(), [id_member](const auto& tm) {
-      return id_member == tm->id();
-    });
+    auto team_member = std::ranges::find_if(team_members, [id_member](const auto& tm) { return id_member == tm->id(); });
 
     if (team_member != team_members.end())
       return *team_member;
@@ -151,12 +147,10 @@ ally_party_teams::select_member_by_id(unsigned id_member) {
   return nullptr;
 }
 
-unsigned
-ally_party_teams::ally_number_on_side(hexagon_side::orientation side) const {
-  return std::accumulate(_party_teams.cbegin(), _party_teams.cend(), 0u,
-                         [side](unsigned count, const party_team_uptr& party) {
-                           return count + party->ally_number_on_side(side);
-                         });
+unsigned ally_party_teams::ally_number_on_side(hexagon_side::orientation side) const {
+  return std::accumulate(_party_teams.cbegin(), _party_teams.cend(), 0u, [side](unsigned count, const party_team_uptr& party) {
+    return count + party->ally_number_on_side(side);
+  });
 }
 
 std::vector<std::shared_ptr<team_member>>
@@ -166,7 +160,8 @@ ally_party_teams::members_by_side(hexagon_side::orientation side) const {
     return ret;
   for (const auto& party_team : _party_teams) {
     const auto& members_on_side = party_team->team_member_on_side(side);
-    std::copy(members_on_side.begin(), members_on_side.end(), std::back_inserter(ret));
+    ret.reserve(members_on_side.size());
+    std::ranges::copy(members_on_side, std::back_inserter(ret));
   }
   return ret;
 }
@@ -179,14 +174,15 @@ ally_party_teams::dead_members_by_side(hexagon_side::orientation side) const {
   }
   for (const auto& party_team : _party_teams) {
     const auto& members_on_side = party_team->get_dead_team_members_on_side(side);
-    std::copy(members_on_side.begin(), members_on_side.end(), std::back_inserter(ret));
+    ret.reserve(members_on_side.size());
+    std::ranges::copy(members_on_side, std::back_inserter(ret));
   }
   return ret;
 }
 
 const party_team&
 ally_party_teams::get_party_team_of_player(const std::string& user_name) const {
-  auto it = std::find_if(_party_teams.begin(), _party_teams.end(), [&user_name](const auto& party_team) {
+  auto it = std::ranges::find_if(_party_teams, [&user_name](const auto& party_team) {
     return user_name == party_team->user_name();
   });
   if (it == _party_teams.end()) {
@@ -196,7 +192,7 @@ ally_party_teams::get_party_team_of_player(const std::string& user_name) const {
 }
 
 bool ally_party_teams::set_party_readiness(const std::string& user_name) {
-  auto it = std::find_if(_party_teams.begin(), _party_teams.end(), [&user_name](const auto& party_team) {
+  auto it = std::ranges::find_if(_party_teams, [&user_name](const auto& party_team) {
     return user_name == party_team->user_name();
   });
   if (it == _party_teams.end()) {
@@ -210,15 +206,11 @@ bool ally_party_teams::set_party_readiness(const std::string& user_name) {
   }
 
   (*it)->set_team_ready(true);
-  return std::all_of(_party_teams.begin(), _party_teams.end(), [](const auto& party_team) {
-    return party_team->is_team_ready();
-  });
+  return std::ranges::all_of(_party_teams, [](const auto& party_team) { return party_team->is_team_ready(); });
 }
 bool ally_party_teams::all_dead() const {
-  return std::all_of(_party_teams.begin(), _party_teams.end(), [](const auto& pt) {
-    return std::all_of(pt->team_members().begin(), pt->team_members().end(), [](const auto& member) {
-      return member->status().life_pt.is_dead();
-    });
+  return std::ranges::all_of(_party_teams, [](const auto& pt) {
+    return std::ranges::all_of(pt->team_members(), [](const auto& member) { return member->status().life_pt.is_dead(); });
   });
 }
 const std::vector<std::unique_ptr<party_team>>&

@@ -135,10 +135,8 @@ void worker_service::upsert_player_identifier(unsigned fp_id, std::string user_n
     return;
 
   auto& identifiers = itIdt->second;
-  if (auto it = std::find_if(identifiers.begin(), identifiers.end(), [&user_name](const auto& idt) {
-        return idt.user_name == user_name;
-      });
-      it != identifiers.end()) {
+  if (auto it = std::ranges::find_if(identifiers, [&user_name](const auto& idt) { return idt.user_name == user_name; });
+      (it != identifiers.end())) {
     it->identifier = std::move(idt_player);
   } else {
     identifiers.emplace_back(player_identifier{std::move(user_name), std::move(idt_player)});
@@ -220,10 +218,9 @@ worker_service::retrieve_player_identifier(unsigned fp_id, const std::string& us
     return user_name;
   }
 
-  auto it = std::find_if(identifiers_it->second.begin(), identifiers_it->second.end(),
-                         [&user_name](const auto& ident) {
-                           return ident.user_name == user_name;
-                         });
+  auto it = std::ranges::find_if(identifiers_it->second, [&user_name](const auto& ident) {
+    return ident.user_name == user_name;
+  });
   if (it == identifiers_it->second.end()) {
     SPDLOG_WARN("Trying to retrieve non-existing player identifier {} in fighting pit of id {}", user_name, fp_id);
     return user_name;
