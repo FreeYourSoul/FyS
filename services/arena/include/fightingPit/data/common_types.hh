@@ -170,15 +170,9 @@ struct status {
   }
 
   void cleanup_finished_alteration() {
-    alterations.erase(std::remove_if(alterations.begin(), alterations.end(),
-                                     [](const auto& alt) { return alt.turn() <= 0; }),
-                      alterations.end());
-    alteration_before.erase(std::remove_if(alteration_before.begin(), alteration_before.end(),
-                                           [](const auto& alt) { return alt.turn() <= 0; }),
-                            alteration_before.end());
-    alteration_after.erase(std::remove_if(alteration_after.begin(), alteration_after.end(),
-                                          [](const auto& alt) { return alt.turn() <= 0; }),
-                           alteration_after.end());
+    std::erase_if(alterations, [](const auto& alt) { return alt.turn() <= 0; });
+    std::erase_if(alteration_before, [](const auto& alt) { return alt.turn() <= 0; });
+    std::erase_if(alteration_after, [](const auto& alt) { return alt.turn() <= 0; });
   }
 };
 

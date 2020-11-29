@@ -56,12 +56,9 @@ void priority_order_list::rm_participant_from_list(std::uint32_t id_participant,
   auto find_participant_predicate = [id_participant, is_contender](const data::priority_elem& elem) {
     return elem.id == id_participant && elem.is_contender == is_contender;
   };
-  _base_speed.erase(
-      std::remove_if(_base_speed.begin(), _base_speed.end(), find_participant_predicate), _base_speed.end());
-  _priority_list.erase(
-      std::remove_if(_priority_list.begin(), _priority_list.end(), find_participant_predicate), _priority_list.end());
-  _analyzed_list.erase(
-      std::remove_if(_analyzed_list.begin(), _analyzed_list.end(), find_participant_predicate), _analyzed_list.end());
+  std::erase_if(_base_speed, find_participant_predicate);
+  std::erase_if(_priority_list, find_participant_predicate);
+  std::erase_if(_analyzed_list, find_participant_predicate);
 }
 
 data::priority_elem

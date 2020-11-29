@@ -7,6 +7,7 @@ table InterServerComMove {
     posX:double;
     posY:double;
     angle:double;
+    velocity:double;
 
     /// The server "from" give the responsibility of the Player to the server "to"
     /// and thus won't send notification anymore
@@ -17,7 +18,7 @@ union InterServerComContent {
     InterServerComMove
 }
 
-    table InterServerCom {
+table InterServerCom {
     /// ws server code coming from
     from:string(required);
     /// ws server code going to

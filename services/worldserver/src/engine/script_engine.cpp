@@ -202,21 +202,18 @@ void script_engine::spawn_new_encounters(const std::chrono::system_clock::time_p
 
 npc_actions_report script_engine::execute_scripted_actions() {
   npc_actions_report report = _intern->execute_encounter_scripted_actions();
-  npc_actions_report report_neutral_script = _intern->execute_neutral_scripted_actions();
+  npc_actions_report report_neutral = _intern->execute_neutral_scripted_actions();
 
   // merge both reports
 
-  report.notification_distances.reserve(report.notification_distances.size() + report_neutral_script.notification_distances.size());
-  std::move(report_neutral_script.notification_distances.begin(), report_neutral_script.notification_distances.end(),
-            std::back_inserter(report.notification_distances));
+  report.notification_distances.reserve(report.notification_distances.size() + report_neutral.notification_distances.size());
+  std::ranges::move(report_neutral.notification_distances, std::back_inserter(report.notification_distances));
 
-  report.central_positions.reserve(report.central_positions.size() + report_neutral_script.central_positions.size());
-  std::move(report_neutral_script.central_positions.begin(), report_neutral_script.central_positions.end(),
-            std::back_inserter(report.central_positions));
+  report.central_positions.reserve(report.central_positions.size() + report_neutral.central_positions.size());
+  std::ranges::move(report_neutral.central_positions, std::back_inserter(report.central_positions));
 
-  report.npc_actions.reserve(report.npc_actions.size() + report_neutral_script.npc_actions.size());
-  std::move(report_neutral_script.npc_actions.begin(), report_neutral_script.npc_actions.end(),
-            std::back_inserter(report.npc_actions));
+  report.npc_actions.reserve(report.npc_actions.size() + report_neutral.npc_actions.size());
+  std::ranges::move(report_neutral.npc_actions, std::back_inserter(report.npc_actions));
 
   return report;
 }

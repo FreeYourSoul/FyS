@@ -80,6 +80,14 @@ void world_server_service::run_server_loop() noexcept {
             SPDLOG_ERROR("Wrongly formatted InterServerCom buffer");
             return;
           }
+          auto* server_com = fb::world::GetInterServerCom(content.data());
+
+          switch (server_com->content_type()) {
+          case fb::world::InterServerComContent_InterServerComMove:
+            process_transition_server_movement(server_com->content_as_InterServerComMove());
+            break;
+          default: SPDLOG_ERROR("This inter server com isn't handled by WorldServer Service '{}'", server_com->content_type());
+          }
         });
 
     _world_server.pollAndProcessPlayerMessage(
@@ -114,7 +122,7 @@ void world_server_service::run_server_loop() noexcept {
 void world_server_service::process_player_message(const std::string& user, const std::string& tkn, const fb::world::WSAction* action) {
   std::uint32_t index = _world_server.retrieve_data_index({user, tkn});
   if (index == NOT_AUTHENTICATED) {
-    SPDLOG_ERROR("Player '{}' isn't authenticated", user);
+    SPDLOG_ERROR("Player '{}' isn't authenticated for movement", user);
     return;
   }
 
@@ -131,8 +139,37 @@ void world_server_service::process_player_message(const std::string& user, const
     break;
   default: SPDLOG_ERROR("This action isn't handled by WorldServer Service '{}'", action->action_type());
   }
-
   SPDLOG_DEBUG("message received with idt='{}', token='{}'", idt, tkn);
+}
+
+void world_server_service::process_transition_server_movement(const fb::world::InterServerComMove* move_transition) {
+  auth_player transition_player{
+      move_transition->user()->str(), move_transition->token()->str(), move_transition->giveResponsibility()};
+
+  // update player with provided one if authenticated
+  const bool update_worked = _world_server.server_transition_update(transition_player);
+
+  if (!update_worked) {
+    // if update didn't work, then upsert the player in the awaited ones
+
+    auto awaited_it = std::ranges::find_if(_awaited_incoming_player, [&transition_player](const auto& awaited) {
+      return awaited.auth == transition_player;
+    });
+
+    if (awaited_it != _awaited_incoming_player.end()) {
+      // if already awaited, update awaited player with given one
+      awaited_it->auth = std::move(transition_player);
+
+    } else {
+      // otherwise add it in the awaited list
+      _awaited_incoming_player.emplace_back(
+          awaited_player{
+              std::move(transition_player),
+              pos{move_transition->posX(), move_transition->posY()},
+              move_transition->angle(),
+              move_transition->velocity()});
+    }
+  }
 }
 
 void world_server_service::register_awaited_player(const std::string& user, const std::string& token, std::string identity) {

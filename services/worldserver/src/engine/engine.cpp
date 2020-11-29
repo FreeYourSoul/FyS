@@ -84,7 +84,7 @@ void engine::execute_pending_moves(const std::chrono::system_clock::time_point& 
     return;
   }
   // Setup next tick time point
-  _intern->next_tick = _intern->next_tick + TIMING_MOVE_INTERVAL;
+  _intern->next_tick += TIMING_MOVE_INTERVAL;
 
   // execute and report players movements
   _intern->data.execution_on_player(
@@ -163,11 +163,33 @@ void engine::notify_clients_of_character_move(
 }
 
 std::uint32_t engine::retrieve_data_index(const auth_player& player) noexcept {
-  auto it = _auth_player_on_data_index.find(player);
-  if (it == _auth_player_on_data_index.end()) {
+  auto node = _auth_player_on_data_index.extract(player);
+  if (node.empty()) {
     return NOT_AUTHENTICATED;
   }
-  return _auth_player_on_data_index.at(player);
+  if (!node.key().is_responsible) {
+    SPDLOG_ERROR("Trying to retrieve data_index for user {} while not being responsible of him.", player.user_name);
+    return NOT_AUTHENTICATED;
+  }
+
+  std::uint32_t index = node.mapped();
+  _auth_player_on_data_index.insert(std::move(node));
+  return index;
+}
+
+bool engine::server_transition_update(const auth_player& transition_update) {
+  auto ex = _auth_player_on_data_index.extract(transition_update);
+  if (ex.empty()) {
+    return false;
+  }
+  if (ex.key().is_responsible) {
+    SPDLOG_ERROR("Player {} is already under responsibility. Cannot do a server player transition", transition_update.user_name);
+    return false;
+  }
+
+  ex.key() = transition_update;
+  _auth_player_on_data_index.insert(std::move(ex));
+  return true;
 }
 
 }// namespace fys::ws

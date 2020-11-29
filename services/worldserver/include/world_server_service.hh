@@ -24,13 +24,18 @@
 #ifndef FYS_WORLDSERVERSERVICE_HH
 #define FYS_WORLDSERVERSERVICE_HH
 
-#include "connection_handler.hh"
 #include <engine/engine.hh>
+
+#include "connection_handler.hh"
 
 // forward declarations
 namespace fys::ws {
 class world_server_context;
 }
+namespace fys::fb::world {
+struct WSAction;
+struct InterServerComMove;
+}// namespace fys::fb::world
 // end forward declarations
 
 namespace fys::ws {
@@ -51,6 +56,16 @@ public:
 private:
   inline void register_awaited_player(const std::string& user, const std::string& token, std::string identity);
   inline void process_player_message(const std::string& user, const std::string& tkn, const fb::world::WSAction* action);
+
+  /**
+   * @brief handle transition movement initiated by another server.
+   *
+   * register the player as an awaited player without taking responsibility for him. if already registered
+   * (but player didn't connect yet), update the initial position of the awaited player.
+   *
+   * @param move_transition object containing position, authentication and responsibility information for the player.
+   */
+  inline void process_transition_server_movement(const fb::world::InterServerComMove* move_transition);
 
 private:
   std::reference_wrapper<const world_server_context> _ctx;
