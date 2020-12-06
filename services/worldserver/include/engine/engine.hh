@@ -67,9 +67,7 @@ struct auth_player {
 
   bool operator==(const auth_player& other) const {
     return user_name == other.user_name && token == other.token;
-  }
-
-  bool operator<(const auth_player& other) const {
+cd  bool operator<(const auth_player& other) const {
     return user_name < other.user_name && token < other.token;
   }
 };

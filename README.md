@@ -5,8 +5,8 @@
 ![Last commit](https://img.shields.io/github/last-commit/FreeYourSoul/FyS.svg)
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/FreeYourSoul/FyS/master/LICENSE)
-[![Scc Count Badge](https://sloc.xyz/github/boyter/scc/)](https://github.com/FreeYourSoul/FyS/)
-[![Scc Count Badge](https://sloc.xyz/github/boyter/scc/?category=code)](https://github.com/FreeYourSoul/FyS/)
+[![Scc Count Badge](https://sloc.xyz/github/FreeYourSoul/FyS/)](https://github.com/FreeYourSoul/FyS/)
+[![Scc Count Badge](https://sloc.xyz/github/FreeYourSoul/FyS/?category=code)](https://github.com/FreeYourSoul/FyS/)
 
 # FyS Online
 
