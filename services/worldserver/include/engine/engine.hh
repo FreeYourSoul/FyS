@@ -1,6 +1,6 @@
 // MIT License
 //
-// Copyright (c) 2019 Quentin Balland
+// Copyright (c) 2021 Quentin Balland
 // Repository : https://github.com/FreeYourSoul/FyS
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -67,7 +67,8 @@ struct auth_player {
 
   bool operator==(const auth_player& other) const {
     return user_name == other.user_name && token == other.token;
-cd  bool operator<(const auth_player& other) const {
+  }
+  bool operator<(const auth_player& other) const {
     return user_name < other.user_name && token < other.token;
   }
 };
