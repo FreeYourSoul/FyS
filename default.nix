@@ -20,15 +20,16 @@ in with pkgs; rec {
   tmxlite = (callPackage ./nix/dependency/tmxlite.nix) { };
   cppzmq = (callPackage ./nix/dependency/cppzmq.nix) { };
   sol3 = (callPackage ./nix/dependency/sol3.nix) { };
+  spdlog = (callPackage ./nix/dependency/spdlog.nix) { };
 
   # FyS Dependencies
   dispatcher = (callPackage ./nix/recipes/dispatcher.nix) {
-    inherit stdenv nlohmann_json fil;
+    inherit stdenv nlohmann_json fil spdlog;
   };
   world_service = (callPackage ./nix/recipes/world_service.nix) {
-    inherit stdenv fil nlohmann_json tmxlite fseam sol3 cppzmq;
+    inherit stdenv fil nlohmann_json tmxlite fseam sol3 cppzmq spdlog;
   };
   arena_service = (callPackage ./nix/recipes/arena_service.nix) {
-    inherit stdenv fil nlohmann_json fseam chaiscript cppzmq;
+    inherit stdenv fil nlohmann_json fseam chaiscript cppzmq spdlog;
   };
 }

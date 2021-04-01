@@ -17,7 +17,7 @@
     name = "Quentin Balland";
   };
 
-  meta = with pkgs.stdenv.lib; {
+  meta = with pkgs.lib; {
     maintainers = [ qb ];
     homepage = "http://freeyoursoul.online";
     description = description;
