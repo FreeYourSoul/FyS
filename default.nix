@@ -6,7 +6,7 @@ in with pkgs; rec {
   # External Dependencies (personal)
   fil = (callPackage (builtins.fetchurl
     "https://raw.githubusercontent.com/FreeYourSoul/FiL/9a38ffe32a7cd709efe56bf7f05255259acb95a0/fil-recipee.nix") {
-      rev = "903f138ab473c6249b58e1571191c71b61e912ab";
+      rev = "60af488da2b23962b0c085bc0c6a8444745c7471";
     });
 
   fseam = (callPackage (builtins.fetchurl
