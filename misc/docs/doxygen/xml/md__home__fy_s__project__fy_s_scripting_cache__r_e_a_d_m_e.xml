@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="md__home__fy_s__project__fy_s_scripting_cache__r_e_a_d_m_e" kind="page">
+    <compoundname>md__home_FyS_Project_FyS_scripting_cache_README</compoundname>
+    <title>FyS Online Scripts</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>This is the scripting of FyS Online (MMORPG) game. It contains all the scripts of the contenders, and attacks that exist in the game (in a separate submodule). <linebreak/>
+</para>
+<para><heading level="1">Scripts</heading>
+</para>
+<para>The submodule containing all the scripts that are going to be stored and retrieved by the services via CML (see below).</para>
+<para><heading level="1">Cache Manager Library (CML)</heading>
+</para>
+<para>This is a library that is used in order to retrieve data from the database, and cache it in order to not have expensive db call. <linebreak/>
+ More information ../docs/CML.md &quot;here&quot; </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

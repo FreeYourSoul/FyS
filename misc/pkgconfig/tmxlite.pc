@@ -1,0 +1,10 @@
+prefix=${pcfiledir}/../../
+libdir=${pcfiledir}/../
+includedir=${prefix}/include
+
+Name: tmxlite
+Description: lightweight C++14 parser for Tiled tmx files
+URL: https://github.com/fallahn/tmxlite
+Version: 1.2.1
+Cflags: -I${includedir}
+Libs: -L${libdir} -ltmxlite

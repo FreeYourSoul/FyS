@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="struct_f_seam_1_1_type_parse_traits_3_01fys_1_1arena_1_1_connection_handler_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>FSeam::TypeParseTraits&lt; fys::arena::ConnectionHandler &gt;</compoundname>
+    <templateparamlist>
+    </templateparamlist>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="struct_f_seam_1_1_type_parse_traits_3_01fys_1_1arena_1_1_connection_handler_01_4_1a3380ca860f2ba9e977e8a4c88f631421" prot="public" static="yes" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string FSeam::TypeParseTraits&lt; fys::arena::ConnectionHandler &gt;::ClassName</definition>
+        <argsstring></argsstring>
+        <name>ClassName</name>
+        <initializer>= &quot;ConnectionHandler&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/FSeamMockData.hpp" line="32" column="37" bodyfile="/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/FSeamMockData.hpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/FSeamMockData.hpp" line="31" column="34" bodyfile="/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/FSeamMockData.hpp" bodystart="31" bodyend="33"/>
+    <listofallmembers>
+      <member refid="struct_f_seam_1_1_type_parse_traits_3_01fys_1_1arena_1_1_connection_handler_01_4_1a3380ca860f2ba9e977e8a4c88f631421" prot="public" virt="non-virtual"><scope>FSeam::TypeParseTraits&lt; fys::arena::ConnectionHandler &gt;</scope><name>ClassName</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

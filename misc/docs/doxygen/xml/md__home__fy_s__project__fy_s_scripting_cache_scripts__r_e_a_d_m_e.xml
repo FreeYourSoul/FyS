@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="md__home__fy_s__project__fy_s_scripting_cache_scripts__r_e_a_d_m_e" kind="page">
+    <compoundname>md__home_FyS_Project_FyS_scripting_cache_scripts_README</compoundname>
+    <title>Scripts</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>The submodule containing all the scripts that are going to be stored and retrieved by the services via [CML]().</para>
+<para><heading level="1">Hierarchie</heading>
+</para>
+<para><itemizedlist>
+<listitem><para>arena<itemizedlist>
+<listitem><para>Contenders : Monsters scripting (AI, attacks available, stats...)</para>
+</listitem><listitem><para>Actions : Actions possible (attacks, spells, items usage...)</para>
+</listitem></itemizedlist>
+</para>
+</listitem><listitem><para>worldserver : NPC movement scripts, event scripts. </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

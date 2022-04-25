@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_4e86f6e5b7fdc5d806a1254b3188f33b" kind="dir">
+    <compoundname>/home/FyS/Project/FyS/services/common/test/message</compoundname>
+    <innerfile refid="_flat_message_builder_test_case_8cpp">FlatMessageBuilderTestCase.cpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/common/test/message/"/>
+  </compounddef>
+</doxygen>

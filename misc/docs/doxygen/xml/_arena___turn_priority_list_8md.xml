@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="_arena___turn_priority_list_8md" kind="file" language="Markdown">
+    <compoundname>Arena_TurnPriorityList.md</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>Turn<sp/>per<sp/>Turn<sp/>priority</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">#<sp/>Requirements</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*<sp/>A<sp/>full<sp/>turn<sp/>is<sp/>defined<sp/>as<sp/>follow:<sp/>The<sp/>slowest<sp/>pit<sp/>participant<sp/>played<sp/>sign<sp/>the<sp/>completion<sp/>of<sp/>the<sp/>current<sp/>turn</highlight></codeline>
+<codeline><highlight class="normal">*<sp/>A<sp/>player&apos;s<sp/>character<sp/>(or<sp/>a<sp/>contender)<sp/>can<sp/>have<sp/>multiple<sp/>action<sp/>in<sp/>a<sp/>single<sp/>turn<sp/>depending<sp/>to<sp/>its<sp/>speed</highlight></codeline>
+<codeline><highlight class="normal">*<sp/>The<sp/>priority<sp/>list<sp/>has<sp/>to<sp/>be<sp/>recalculated<sp/>when<sp/>:</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>*<sp/>A<sp/>player&apos;s<sp/>character<sp/>(or<sp/>contender)<sp/>die<sp/>and<sp/>is<sp/>temporarily<sp/>(for<sp/>player&apos;s<sp/>character)<sp/>or<sp/>definitely<sp/>removed<sp/>from<sp/>the<sp/>priority<sp/>list.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>*<sp/>When<sp/>a<sp/>player<sp/>or<sp/>a<sp/>contender<sp/>join<sp/>the<sp/>fight<sp/>(as<sp/>for<sp/>character<sp/>reviving)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/>*<sp/>The<sp/>speed<sp/>of<sp/>a<sp/>character<sp/>has<sp/>been<sp/>impacted<sp/>(by<sp/>a<sp/>spell,<sp/>an<sp/>item,<sp/>an<sp/>attack).</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">#<sp/>Implementation<sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal">Each<sp/>pit<sp/>participant<sp/>has<sp/>a<sp/>speed<sp/>defined<sp/>as<sp/>an<sp/>unsigned<sp/>integer.<sp/>The<sp/>faster<sp/>go<sp/>before<sp/>the<sp/>slowest.<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">**Generation<sp/>of<sp/>priorityList**<sp/>:<sp/></highlight></codeline>
+<codeline><highlight class="normal">1.<sp/>Order<sp/>the<sp/>list<sp/>of<sp/>speed<sp/>from<sp/>fastest<sp/>to<sp/>slowest.</highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>The<sp/>first<sp/>one<sp/>is<sp/>the<sp/>first<sp/>one<sp/>to<sp/>have<sp/>a<sp/>turn<sp/>(add<sp/>him<sp/>in<sp/>the<sp/>priority<sp/>list<sp/>as<sp/>first)</highlight></codeline>
+<codeline><highlight class="normal">3.<sp/>Subtract<sp/>his<sp/>speed<sp/>with<sp/>the<sp/>second<sp/>one</highlight></codeline>
+<codeline><highlight class="normal">4.<sp/>Re-order<sp/>the<sp/>list<sp/>of<sp/>speed<sp/>from<sp/>fastest<sp/>to<sp/>slowest.</highlight></codeline>
+<codeline><highlight class="normal">5.<sp/>The<sp/>first<sp/>one<sp/>in<sp/>this<sp/>list<sp/>is<sp/>added<sp/>in<sp/>priority<sp/>list</highlight></codeline>
+<codeline><highlight class="normal">6.<sp/>Subtract<sp/>his<sp/>speed<sp/>with<sp/>the<sp/>second<sp/>one</highlight></codeline>
+<codeline><highlight class="normal">7.<sp/>Re-order..</highlight></codeline>
+<codeline><highlight class="normal">8.<sp/>...</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">_Graphical<sp/>example_,<sp/>each<sp/>color<sp/>represent<sp/>a<sp/>different<sp/>character<sp/>(monster<sp/>or<sp/>player&apos;s<sp/>character):</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![turn1](https://raw.githubusercontent.com/FreeYourSoul/FyS/master/doc/other/Turn1.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>difference<sp/>of<sp/>speed<sp/>between<sp/>the<sp/>fastest<sp/>and<sp/>the<sp/>slowest<sp/>being<sp/>important,<sp/>the<sp/>purple<sp/>player<sp/>can<sp/>play<sp/>4<sp/>times<sp/>before<sp/>the<sp/>end<sp/>of<sp/>the<sp/>turn.<sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal">For<sp/>the<sp/>second<sp/>turn,<sp/>the<sp/>base<sp/>maximum<sp/>speed<sp/>is<sp/>added<sp/>to<sp/>the<sp/>every<sp/>one<sp/>plus<sp/>their<sp/>own<sp/>base<sp/>speed.</highlight></codeline>
+<codeline><highlight class="normal"><sp/></highlight></codeline>
+<codeline><highlight class="normal">![turn2](https://raw.githubusercontent.com/FreeYourSoul/FyS/master/doc/other/Turn2.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>turn<sp/>is<sp/>way<sp/>shorter<sp/>than<sp/>the<sp/>previous<sp/>turn<sp/>(every<sp/>character<sp/>play<sp/>only<sp/>once),<sp/>but<sp/>the<sp/>next<sp/>one<sp/>as<sp/>the<sp/>speed<sp/>stabilized<sp/>a<sp/>little<sp/>bit,<sp/>but<sp/>in<sp/>the<sp/>third<sp/>turn,<sp/>as<sp/>the<sp/>purple<sp/>player<sp/>end<sp/>this<sp/>turn<sp/>with<sp/>19<sp/>of<sp/>speed,<sp/>he<sp/>will<sp/>play<sp/>multiple<sp/>times<sp/>before<sp/>the<sp/>end<sp/>of<sp/>the<sp/>turn.<sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal">This<sp/>algorithm<sp/>give<sp/>an<sp/>edge<sp/>to<sp/>the<sp/>fast<sp/>player<sp/>without<sp/>being<sp/>broken<sp/>(playing<sp/>multiple<sp/>time<sp/>every<sp/>single<sp/>turns).<sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal">Here<sp/>a<sp/>resume<sp/>of<sp/>the<sp/>two<sp/>turns:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![resume](https://raw.githubusercontent.com/FreeYourSoul/FyS/master/doc/other/TurnResume.png)</highlight></codeline>
+    </programlisting>
+    <location file="services/arena/Arena_TurnPriorityList.md"/>
+  </compounddef>
+</doxygen>

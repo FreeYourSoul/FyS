@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="scripting__cache_2_r_e_a_d_m_e_8md" kind="file" language="Markdown">
+    <compoundname>README.md</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>FyS<sp/>Online<sp/>Scripts</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>is<sp/>the<sp/>scripting<sp/>of<sp/>FyS<sp/>Online<sp/>(MMORPG)<sp/>game.<sp/>It<sp/>contains<sp/>all<sp/>the<sp/>scripts<sp/>of<sp/>the<sp/>contenders,<sp/>and<sp/>attacks<sp/>that<sp/>exist<sp/>in<sp/>the<sp/>game<sp/>(in<sp/>a<sp/>separate<sp/>submodule).<sp/><sp/></highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Scripts</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>submodule<sp/>containing<sp/>all<sp/>the<sp/>scripts<sp/>that<sp/>are<sp/>going<sp/>to<sp/>be<sp/>stored<sp/>and<sp/>retrieved<sp/>by<sp/>the<sp/>services<sp/>via<sp/>CML<sp/>(see<sp/>below).</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Cache<sp/>Manager<sp/>Library<sp/>(CML)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>is<sp/>a<sp/>library<sp/>that<sp/>is<sp/>used<sp/>in<sp/>order<sp/>to<sp/>retrieve<sp/>data<sp/>from<sp/>the<sp/>database,<sp/>and<sp/>cache<sp/>it<sp/>in<sp/>order<sp/>to<sp/>not<sp/>have<sp/>expensive<sp/>db<sp/>call.<sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal">More<sp/>information<sp/>[here](../docs/CML.md)</highlight></codeline>
+    </programlisting>
+    <location file="/home/FyS/Project/FyS/scripting_cache/README.md"/>
+  </compounddef>
+</doxygen>

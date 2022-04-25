@@ -1,0 +1,581 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="_action___damage_test_case_8cpp" kind="file" language="C++">
+    <compoundname>Action_DamageTestCase.cpp</compoundname>
+    <includes local="no">catch2/catch.hpp</includes>
+    <includes local="no">memory</includes>
+    <includes local="no">chaiscript/chaiscript.hpp</includes>
+    <includes refid="_fighting_contender_8hh" local="no">fightingPit/contender/FightingContender.hh</includes>
+    <includes refid="_pit_contenders_8hh" local="no">fightingPit/contender/PitContenders.hh</includes>
+    <includes refid="_contender_scripting_8hh" local="no">fightingPit/contender/ContenderScripting.hh</includes>
+    <includes refid="_ally_party_teams_8hh" local="no">fightingPit/team/AllyPartyTeams.hh</includes>
+    <includes refid="_team_member_8hh" local="no">fightingPit/team/TeamMember.hh</includes>
+    <includes refid="_chai_register_8hh" local="no">ChaiRegister.hh</includes>
+    <includes refid="_cml_copy_8hh" local="no">CmlCopy.hh</includes>
+    <includes refid="_fighting_pit_announcer_8hh" local="no">fightingPit/FightingPitAnnouncer.hh</includes>
+    <incdepgraph>
+      <node id="32">
+        <label>ArenaServerContext.hh</label>
+        <link refid="_arena_server_context_8hh_source"/>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>fightingPit/FightingPitLayout.hh</label>
+        <link refid="_fighting_pit_layout_8hh_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>functional</label>
+      </node>
+      <node id="38">
+        <label>fightingPit/PriorityOrderList.hh</label>
+        <link refid="_priority_order_list_8hh_source"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>filesystem</label>
+      </node>
+      <node id="11">
+        <label>fightingPit/HexagonSide.hh</label>
+        <link refid="_hexagon_side_8hh_source"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>fightingPit/SideBattle.hh</label>
+        <link refid="_side_battle_8hh_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/FyS/Project/FyS/services/arena/test/scriptTests/Action_DamageTestCase.cpp</label>
+        <link refid="_action___damage_test_case_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>variant</label>
+      </node>
+      <node id="25">
+        <label>ChaiRegister.hh</label>
+        <link refid="_chai_register_8hh_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>fightingPit/team/TeamMember.hh</label>
+        <link refid="_team_member_8hh_source"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>chaiscript/chaiscript.hpp</label>
+      </node>
+      <node id="35">
+        <label>fightingPit/FightingPit.hh</label>
+        <link refid="_fighting_pit_8hh_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>string</label>
+      </node>
+      <node id="31">
+        <label>fightingPit/FightingPitAnnouncer.hh</label>
+        <link refid="_fighting_pit_announcer_8hh_source"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>Cml.hh</label>
+        <link refid="_cml_8hh_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>ostream</label>
+      </node>
+      <node id="34">
+        <label>ServiceContextBase.hh</label>
+        <link refid="_service_context_base_8hh_source"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>spdlog/spdlog.h</label>
+      </node>
+      <node id="23">
+        <label>optional</label>
+      </node>
+      <node id="7">
+        <label>vector</label>
+      </node>
+      <node id="12">
+        <label>utility</label>
+      </node>
+      <node id="24">
+        <label>array</label>
+      </node>
+      <node id="13">
+        <label>zconf.h</label>
+      </node>
+      <node id="18">
+        <label>fightingPit/team/AllyPartyTeams.hh</label>
+        <link refid="_ally_party_teams_8hh_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>SizedQueue.hh</label>
+        <link refid="_sized_queue_8hh_source"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>fightingPit/data/CommonTypes.hh</label>
+        <link refid="_common_types_8hh_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>fightingPit/contender/ContenderScripting.hh</label>
+        <link refid="_contender_scripting_8hh_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>fightingPit/contender/FightingContender.hh</label>
+        <link refid="_fighting_contender_8hh_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>catch2/catch.hpp</label>
+      </node>
+      <node id="39">
+        <label>fightingPit/Rewards.hh</label>
+        <link refid="_rewards_8hh_source"/>
+      </node>
+      <node id="29">
+        <label>unordered_map</label>
+      </node>
+      <node id="26">
+        <label>CmlCopy.hh</label>
+        <link refid="_cml_copy_8hh_source"/>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>chrono</label>
+      </node>
+      <node id="15">
+        <label>fightingPit/contender/PitContenders.hh</label>
+        <link refid="_pit_contenders_8hh_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>set</label>
+      </node>
+      <node id="33">
+        <label>nlohmann/json.hpp</label>
+      </node>
+      <node id="3">
+        <label>memory</label>
+      </node>
+      <node id="19">
+        <label>fightingPit/team/PartyTeam.hh</label>
+        <link refid="_party_team_8hh_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_action___damage_test_case_8cpp_1a6f45d308c33c4eda6c122167ec30ad3c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_CASE</definition>
+        <argsstring>(&quot;test damage chaiscript&quot;, &quot;[service][arena][script_test]&quot;)</argsstring>
+        <name>TEST_CASE</name>
+        <param>
+          <type>&quot;test damage chaiscript&quot;</type>
+        </param>
+        <param>
+          <type>&quot;&quot;</type>
+          <array>[service][arena][script_test]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/test/scriptTests/Action_DamageTestCase.cpp" line="71" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/test/scriptTests/Action_DamageTestCase.cpp" bodystart="71" bodyend="233"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>MIT<sp/>License</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Copyright<sp/>(c)<sp/>2019<sp/>Quentin<sp/>Balland</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Repository<sp/>:<sp/>https://github.com/FreeYourSoul/FyS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Permission<sp/>is<sp/>hereby<sp/>granted,<sp/>free<sp/>of<sp/>charge,<sp/>to<sp/>any<sp/>person<sp/>obtaining<sp/>a<sp/>copy</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>of<sp/>this<sp/>software<sp/>and<sp/>associated<sp/>documentation<sp/>files<sp/>(the<sp/>&quot;Software&quot;),<sp/>to<sp/>deal</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="comment">//<sp/>in<sp/>the<sp/>Software<sp/>without<sp/>restriction,<sp/>including<sp/>without<sp/>limitation<sp/>the<sp/>rights</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>to<sp/>use,<sp/>copy,<sp/>modify,<sp/>merge,<sp/>publish,<sp/>distribute,<sp/>sublicense,<sp/>and/or<sp/>sell</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>copies<sp/>of<sp/>the<sp/>Software,<sp/>and<sp/>to<sp/>permit<sp/>persons<sp/>to<sp/>whom<sp/>the<sp/>Software<sp/>is</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment">//<sp/>furnished<sp/>to<sp/>do<sp/>so,<sp/>subject<sp/>to<sp/>the<sp/>following<sp/>conditions:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="comment">//<sp/>The<sp/>above<sp/>copyright<sp/>notice<sp/>and<sp/>this<sp/>permission<sp/>notice<sp/>shall<sp/>be<sp/>included<sp/>in<sp/>all</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>copies<sp/>or<sp/>substantial<sp/>portions<sp/>of<sp/>the<sp/>Software.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="comment">//<sp/>THE<sp/>SOFTWARE<sp/>IS<sp/>PROVIDED<sp/>&quot;AS<sp/>IS&quot;,<sp/>WITHOUT<sp/>WARRANTY<sp/>OF<sp/>ANY<sp/>KIND,<sp/>EXPRESS<sp/>OR</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="comment">//<sp/>IMPLIED,<sp/>INCLUDING<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO<sp/>THE<sp/>WARRANTIES<sp/>OF<sp/>MERCHANTABILITY,</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="comment">//<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR<sp/>PURPOSE<sp/>AND<sp/>NONINFRINGEMENT.<sp/>IN<sp/>NO<sp/>EVENT<sp/>SHALL<sp/>THE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AUTHORS<sp/>OR<sp/>COPYRIGHT<sp/>HOLDERS<sp/>BE<sp/>LIABLE<sp/>FOR<sp/>ANY<sp/>CLAIM,<sp/>DAMAGES<sp/>OR<sp/>OTHER</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="comment">//<sp/>LIABILITY,<sp/>WHETHER<sp/>IN<sp/>AN<sp/>ACTION<sp/>OF<sp/>CONTRACT,<sp/>TORT<sp/>OR<sp/>OTHERWISE,<sp/>ARISING<sp/>FROM,</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="comment">//<sp/>OUT<sp/>OF<sp/>OR<sp/>IN<sp/>CONNECTION<sp/>WITH<sp/>THE<sp/>SOFTWARE<sp/>OR<sp/>THE<sp/>USE<sp/>OR<sp/>OTHER<sp/>DEALINGS<sp/>IN<sp/>THE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="comment">//<sp/>SOFTWARE.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;catch2/catch.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;chaiscript/chaiscript.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;fightingPit/contender/FightingContender.hh&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;fightingPit/contender/PitContenders.hh&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;fightingPit/contender/ContenderScripting.hh&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;fightingPit/team/AllyPartyTeams.hh&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;fightingPit/team/TeamMember.hh&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ChaiRegister.hh&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;CmlCopy.hh&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;fightingPit/FightingPitAnnouncer.hh&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="40"><highlight class="normal">std::string</highlight></codeline>
+<codeline lineno="41"><highlight class="normal">getPathSampyChaiScript()</highlight></codeline>
+<codeline lineno="42"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>file_path<sp/>=<sp/>__FILE__;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>dir_path<sp/>=<sp/>file_path.substr(0,<sp/>file_path.rfind(</highlight><highlight class="charliteral">&apos;\\&apos;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(dir_path.size()<sp/>==<sp/>file_path.size())</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dir_path<sp/>=<sp/>file_path.substr(0,<sp/>file_path.rfind(</highlight><highlight class="charliteral">&apos;/&apos;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>dir_path<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;/scripts_lnk/arena/contenders/Sampy.chai&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal">std::string</highlight></codeline>
+<codeline lineno="51"><highlight class="normal">getLocalPathStorage()</highlight></codeline>
+<codeline lineno="52"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>file_path<sp/>=<sp/>__FILE__;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>dir_path<sp/>=<sp/>file_path.substr(0,<sp/>file_path.rfind(</highlight><highlight class="charliteral">&apos;\\&apos;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(dir_path.size()<sp/>==<sp/>file_path.size())</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dir_path<sp/>=<sp/>file_path.substr(0,<sp/>file_path.rfind(</highlight><highlight class="charliteral">&apos;/&apos;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>dir_path<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;/testCopyTo&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal">std::string</highlight></codeline>
+<codeline lineno="61"><highlight class="normal">getCopyPathStorage()</highlight></codeline>
+<codeline lineno="62"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>file_path<sp/>=<sp/>__FILE__;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>dir_path<sp/>=<sp/>file_path.substr(0,<sp/>file_path.rfind(</highlight><highlight class="charliteral">&apos;\\&apos;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(dir_path.size()<sp/>==<sp/>file_path.size())</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dir_path<sp/>=<sp/>file_path.substr(0,<sp/>file_path.rfind(</highlight><highlight class="charliteral">&apos;/&apos;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>dir_path<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;/scripts_lnk&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="69"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal">TEST_CASE(</highlight><highlight class="stringliteral">&quot;test<sp/>damage<sp/>chaiscript&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;[service][arena][script_test]&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="72"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfys_1_1cache_1_1_cml_copy" kindref="compound">fys::cache::CmlCopy</ref><sp/>ccpy(getLocalPathStorage(),<sp/>getCopyPathStorage());</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>std::filesystem::path<sp/>baseCache<sp/>=<sp/>getLocalPathStorage();</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfys_1_1arena_1_1_pit_contenders" kindref="compound">fys::arena::PitContenders</ref><sp/>pc;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfys_1_1arena_1_1_ally_party_teams" kindref="compound">fys::arena::AllyPartyTeams</ref><sp/>apt;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>chai<sp/>=<sp/>fys::arena::ChaiRegister::createChaiInstance(pc,<sp/>apt);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>fys::arena::ChaiRegister::registerBaseActions(*chai,<sp/>ccpy);</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>fys::arena::ContenderScriptingUPtr<sp/>sampy<sp/>=<sp/>std::make_unique&lt;fys::arena::ContenderScripting&gt;(*chai,<sp/>1);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>sampy-&gt;setContenderId(0u);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>sampy-&gt;setContenderName(</highlight><highlight class="stringliteral">&quot;Sampy&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>sampy-&gt;loadContenderScriptFromFile(getPathSampyChaiScript());</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>fpc<sp/>=<sp/>std::make_shared&lt;fys::arena::FightingContender&gt;(std::move(sampy));</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>REQUIRE(pc.addContender(fpc));</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/>SECTION(</highlight><highlight class="stringliteral">&quot;Test<sp/>initialization<sp/>contender&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(153<sp/>==<sp/>fpc-&gt;accessStatus().life.current);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(8<sp/>==<sp/>pc.getFightingContender(0)-&gt;accessStatus().initialSpeed);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(153<sp/>==<sp/>pc.getFightingContender(0)-&gt;accessStatus().life.current);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(153<sp/>==<sp/>pc.getFightingContender(0)-&gt;accessStatus().life.total);</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(100<sp/>==<sp/>pc.getFightingContender(0)-&gt;accessStatus().magicPoint.total);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(100<sp/>==<sp/>pc.getFightingContender(0)-&gt;accessStatus().magicPoint.total);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfys_1_1arena_1_1_party_team" kindref="compound">fys::arena::PartyTeam</ref><sp/>partyTeam(</highlight><highlight class="stringliteral">&quot;FyS&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/>fys::arena::TeamMemberSPtr<sp/>tm1<sp/>=<sp/>std::make_shared&lt;fys::arena::TeamMember&gt;(partyTeam.getUserName(),<sp/></highlight><highlight class="stringliteral">&quot;fyston1&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>st<sp/>=<sp/>tm1-&gt;accessStatus();</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/>st.initialSpeed<sp/>=<sp/>100;</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/>st.magicPoint<sp/>=<sp/>{1337,<sp/>1337};</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/>st.life<sp/>=<sp/>{42,<sp/>42};</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/>SECTION(</highlight><highlight class="stringliteral">&quot;test<sp/>Slash<sp/>chaiscript&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tm1-&gt;addDoableAction(</highlight><highlight class="stringliteral">&quot;arena:actions:damage:slash.chai&quot;</highlight><highlight class="normal">,<sp/>1);</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>partyTeam.addTeamMember(std::move(tm1));</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classfys_1_1arena_1_1_chai_register_1a4e8a0600dd21b51011cc826e31a274ce" kindref="member">fys::arena::ChaiRegister::loadAndRegisterActionPartyTeam</ref>(*chai,<sp/>ccpy,<sp/>partyTeam);</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SECTION(</highlight><highlight class="stringliteral">&quot;test<sp/>damage&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>chai-&gt;eval(R</highlight><highlight class="stringliteral">&quot;(</highlight></codeline>
+<codeline lineno="118"><highlight class="stringliteral">var<sp/>&amp;contender<sp/>=<sp/>pitContenders.getFightingContender(0);</highlight></codeline>
+<codeline lineno="119"><highlight class="stringliteral">var<sp/>s<sp/>=<sp/>slash(1);</highlight></codeline>
+<codeline lineno="120"><highlight class="stringliteral">s.execute(contender.accessStatus());</highlight></codeline>
+<codeline lineno="121"><highlight class="stringliteral">)&quot;);</highlight></codeline>
+<codeline lineno="122"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="123"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>chaiscript::exception::eval_error<sp/>&amp;<sp/>ex)<sp/>{</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SPDLOG_ERROR(</highlight><highlight class="stringliteral">&quot;{}&quot;</highlight><highlight class="normal">,<sp/>ex.pretty_print());</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FAIL(</highlight><highlight class="stringliteral">&quot;Chaiscript<sp/>:<sp/>Shouldn&apos;t<sp/>fail<sp/>here&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(120<sp/>==<sp/>pc.getFightingContender(0)-&gt;accessStatus().life.current);<sp/></highlight><highlight class="comment">//<sp/>-33<sp/>life</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(153<sp/>==<sp/>pc.getFightingContender(0)-&gt;accessStatus().life.total);</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(1<sp/>==<sp/>pc.getFightingContender(0)-&gt;getStatus().alteration_after.size());</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>stat<sp/>=<sp/>pc.getFightingContender(0)-&gt;accessStatus();</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>alt<sp/>=<sp/>stat.alteration_after.at(0);</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(2<sp/>==<sp/>alt.getTurn());</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>alt.processAlteration(stat);</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(1<sp/>==<sp/>alt.getTurn());</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>section<sp/>:<sp/>test<sp/>damage</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SECTION(</highlight><highlight class="stringliteral">&quot;test<sp/>over<sp/>damage&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pc.getFightingContender(0)-&gt;accessStatus().life.current<sp/>=<sp/>10;</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>chai-&gt;eval(R</highlight><highlight class="stringliteral">&quot;(</highlight></codeline>
+<codeline lineno="143"><highlight class="stringliteral">var<sp/>&amp;contender<sp/>=<sp/>pitContenders.getFightingContender(0);</highlight></codeline>
+<codeline lineno="144"><highlight class="stringliteral">var<sp/>s<sp/>=<sp/>slash(1);</highlight></codeline>
+<codeline lineno="145"><highlight class="stringliteral">s.execute(contender.accessStatus());</highlight></codeline>
+<codeline lineno="146"><highlight class="stringliteral">)&quot;);</highlight></codeline>
+<codeline lineno="147"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="148"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(std::exception&amp;<sp/>ex)<sp/>{</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SPDLOG_ERROR(</highlight><highlight class="stringliteral">&quot;{}&quot;</highlight><highlight class="normal">,<sp/>ex.what());</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FAIL(</highlight><highlight class="stringliteral">&quot;Chaiscript<sp/>:<sp/>Shouldn&apos;t<sp/>fail<sp/>here&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(0<sp/>==<sp/>pc.getFightingContender(0)-&gt;accessStatus().life.current);<sp/></highlight><highlight class="comment">//<sp/>-33<sp/>life<sp/>&gt;<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(153<sp/>==<sp/>pc.getFightingContender(0)-&gt;accessStatus().life.total);</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>section<sp/>:<sp/>test<sp/>over<sp/>damage</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"></highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>section<sp/>:<sp/>test<sp/>Slash<sp/>chaiscript</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/>SECTION(</highlight><highlight class="stringliteral">&quot;test<sp/>Multi_Slash<sp/>chaiscript&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tm1-&gt;addDoableAction(</highlight><highlight class="stringliteral">&quot;arena:actions:damage:multi_slash.chai&quot;</highlight><highlight class="normal">,<sp/>1);</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>partyTeam.addTeamMember(std::move(tm1));</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fys::arena::ContenderScriptingUPtr<sp/>sampy2<sp/>=<sp/>std::make_unique&lt;fys::arena::ContenderScripting&gt;(*chai,<sp/>1);</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sampy2-&gt;setContenderId(1u);</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sampy2-&gt;setContenderName(</highlight><highlight class="stringliteral">&quot;Sampy&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sampy2-&gt;loadContenderScriptFromFile(getPathSampyChaiScript());</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>fpc2<sp/>=<sp/>std::make_shared&lt;fys::arena::FightingContender&gt;(std::move(sampy2));</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(pc.addContender(fpc2));</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classfys_1_1arena_1_1_chai_register_1a4e8a0600dd21b51011cc826e31a274ce" kindref="member">fys::arena::ChaiRegister::loadAndRegisterActionPartyTeam</ref>(*chai,<sp/>ccpy,<sp/>partyTeam);</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"></highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pc.getFightingContender(1)-&gt;accessStatus().life.current<sp/>=<sp/>100;</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"></highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SECTION(</highlight><highlight class="stringliteral">&quot;test<sp/>damage&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"></highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>chai-&gt;eval(R</highlight><highlight class="stringliteral">&quot;(</highlight></codeline>
+<codeline lineno="180"><highlight class="stringliteral">var<sp/>&amp;contenderStatus<sp/>=<sp/>pitContenders.getFightingContender(0).accessStatus();</highlight></codeline>
+<codeline lineno="181"><highlight class="stringliteral">var<sp/>&amp;contender2Status<sp/>=<sp/>pitContenders.getFightingContender(1).accessStatus();</highlight></codeline>
+<codeline lineno="182"><highlight class="stringliteral">var<sp/>s<sp/>=<sp/>multi_slash(1);</highlight></codeline>
+<codeline lineno="183"><highlight class="stringliteral">var<sp/>d<sp/>=<sp/>[];</highlight></codeline>
+<codeline lineno="184"><highlight class="stringliteral">d.push_back_ref(contenderStatus);</highlight></codeline>
+<codeline lineno="185"><highlight class="stringliteral">d.push_back_ref(contender2Status);</highlight></codeline>
+<codeline lineno="186"><highlight class="stringliteral">s.execute(d);</highlight></codeline>
+<codeline lineno="187"><highlight class="stringliteral">)&quot;);</highlight></codeline>
+<codeline lineno="188"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="189"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(std::exception&amp;<sp/>ex)<sp/>{</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SPDLOG_ERROR(</highlight><highlight class="stringliteral">&quot;{}&quot;</highlight><highlight class="normal">,<sp/>ex.what());</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FAIL(</highlight><highlight class="stringliteral">&quot;Chaiscript<sp/>:<sp/>Shouldn&apos;t<sp/>fail<sp/>here&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(123<sp/>==<sp/>pc.getFightingContender(0)-&gt;accessStatus().life.current);<sp/></highlight><highlight class="comment">//<sp/>-33<sp/>life</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(153<sp/>==<sp/>pc.getFightingContender(0)-&gt;accessStatus().life.total);</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(70<sp/>==<sp/>pc.getFightingContender(1)-&gt;accessStatus().life.current);<sp/></highlight><highlight class="comment">//<sp/>-33<sp/>life</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(153<sp/>==<sp/>pc.getFightingContender(1)-&gt;accessStatus().life.total);</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>section<sp/>:<sp/>test<sp/>damage</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="200"><highlight class="normal"></highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SECTION(</highlight><highlight class="stringliteral">&quot;test<sp/>over<sp/>damage&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"></highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pc.getFightingContender(0)-&gt;accessStatus().life.current<sp/>=<sp/>10;</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"></highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>chai-&gt;eval(R</highlight><highlight class="stringliteral">&quot;(</highlight></codeline>
+<codeline lineno="207"><highlight class="stringliteral">var<sp/>&amp;contenderStatus<sp/>=<sp/>pitContenders.getFightingContender(0).accessStatus();</highlight></codeline>
+<codeline lineno="208"><highlight class="stringliteral">var<sp/>&amp;contender2Status<sp/>=<sp/>pitContenders.getFightingContender(1).accessStatus();</highlight></codeline>
+<codeline lineno="209"><highlight class="stringliteral">var<sp/>s<sp/>=<sp/>multi_slash(1);</highlight></codeline>
+<codeline lineno="210"><highlight class="stringliteral">var<sp/>d<sp/>=<sp/>[];</highlight></codeline>
+<codeline lineno="211"><highlight class="stringliteral">d.push_back_ref(contenderStatus);</highlight></codeline>
+<codeline lineno="212"><highlight class="stringliteral">d.push_back_ref(contender2Status);</highlight></codeline>
+<codeline lineno="213"><highlight class="stringliteral">s.execute(d);</highlight></codeline>
+<codeline lineno="214"><highlight class="stringliteral">)&quot;);</highlight></codeline>
+<codeline lineno="215"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="216"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(std::exception&amp;<sp/>ex)<sp/>{</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SPDLOG_ERROR(</highlight><highlight class="stringliteral">&quot;{}&quot;</highlight><highlight class="normal">,<sp/>ex.what());</highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FAIL(</highlight><highlight class="stringliteral">&quot;Chaiscript<sp/>:<sp/>Shouldn&apos;t<sp/>fail<sp/>here&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"></highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(0<sp/>==<sp/>pc.getFightingContender(0)-&gt;accessStatus().life.current);<sp/></highlight><highlight class="comment">//<sp/>-33<sp/>life<sp/>&gt;<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(153<sp/>==<sp/>pc.getFightingContender(0)-&gt;accessStatus().life.total);</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"></highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(70<sp/>==<sp/>pc.getFightingContender(1)-&gt;accessStatus().life.current);<sp/></highlight><highlight class="comment">//<sp/>-33<sp/>life</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(153<sp/>==<sp/>pc.getFightingContender(1)-&gt;accessStatus().life.total);</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"></highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>section<sp/>:<sp/>test<sp/>over<sp/>damage</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="228"><highlight class="normal"></highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::filesystem::remove_all(baseCache);</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"></highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>section<sp/>:<sp/>test<sp/>Multi_Slash<sp/>chaiscript</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="232"><highlight class="normal"></highlight></codeline>
+<codeline lineno="233"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>TestCase<sp/>:<sp/>test<sp/>damage<sp/>chaiscript</highlight></codeline>
+    </programlisting>
+    <location file="/home/FyS/Project/FyS/services/arena/test/scriptTests/Action_DamageTestCase.cpp"/>
+  </compounddef>
+</doxygen>

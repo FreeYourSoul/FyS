@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_ba3a3d0d3f3532e2992eca17a4f59228" kind="dir">
+    <compoundname>/home/FyS/Project/FyS/services/worldserver</compoundname>
+    <innerdir refid="dir_40111163db33f22a67483dd9fda764bd">/home/FyS/Project/FyS/services/worldserver/include</innerdir>
+    <innerdir refid="dir_7d523fe4b29342855ee9d542397e3693">/home/FyS/Project/FyS/services/worldserver/src</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/worldserver/"/>
+  </compounddef>
+</doxygen>

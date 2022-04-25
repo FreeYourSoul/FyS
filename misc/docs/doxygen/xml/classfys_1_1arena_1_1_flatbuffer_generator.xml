@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1arena_1_1_flatbuffer_generator" kind="class" language="C++" prot="public">
+    <compoundname>fys::arena::FlatbufferGenerator</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_flatbuffer_generator_1a351fd32355949ba44779a9ec1f896783" prot="private" static="no" mutable="no">
+        <type>flatbuffers::FlatBufferBuilder</type>
+        <definition>flatbuffers::FlatBufferBuilder fys::arena::FlatbufferGenerator::_fbb</definition>
+        <argsstring></argsstring>
+        <name>_fbb</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/FlatbufferGenerator.hh" line="97" column="32" bodyfile="/home/FyS/Project/FyS/services/arena/include/FlatbufferGenerator.hh" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1arena_1_1_flatbuffer_generator_1a59c35831547bcebf2586b8766499c485" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::pair&lt; void *, uint &gt;</type>
+        <definition>std::pair&lt; void *, uint &gt; fys::arena::FlatbufferGenerator::generateFightingPitState</definition>
+        <argsstring>(const fys::arena::FightingPit &amp;fp)</argsstring>
+        <name>generateFightingPitState</name>
+        <param>
+          <type>const <ref refid="classfys_1_1arena_1_1_fighting_pit" kindref="compound">fys::arena::FightingPit</ref> &amp;</type>
+          <declname>fp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/FlatbufferGenerator.hh" line="69" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/FlatbufferGenerator.cpp" bodystart="57" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_flatbuffer_generator_1a95d2307d8023586b49638422a4fcccd3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::pair&lt; void *, uint &gt;</type>
+        <definition>std::pair&lt; void *, uint &gt; fys::arena::FlatbufferGenerator::generatePartyTeamStatus</definition>
+        <argsstring>(const fys::arena::PartyTeam &amp;partyTeam)</argsstring>
+        <name>generatePartyTeamStatus</name>
+        <param>
+          <type>const <ref refid="classfys_1_1arena_1_1_party_team" kindref="compound">fys::arena::PartyTeam</ref> &amp;</type>
+          <declname>partyTeam</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/FlatbufferGenerator.hh" line="72" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/FlatbufferGenerator.cpp" bodystart="73" bodyend="94"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classfys_1_1arena_1_1_flatbuffer_generator_1a973d00543b273f4d3dfe648f658d0918" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; flatbuffers::Offset&lt; fb::PartyTeamStatus &gt; &gt;</type>
+        <definition>std::vector&lt; flatbuffers::Offset&lt; fb::PartyTeamStatus &gt; &gt; fys::arena::FlatbufferGenerator::generatePartyTeamVecStatusOffset</definition>
+        <argsstring>(const AllyPartyTeams &amp;apt)</argsstring>
+        <name>generatePartyTeamVecStatusOffset</name>
+        <param>
+          <type>const <ref refid="classfys_1_1arena_1_1_ally_party_teams" kindref="compound">AllyPartyTeams</ref> &amp;</type>
+          <declname>apt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/FlatbufferGenerator.hh" line="82" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/FlatbufferGenerator.cpp" bodystart="113" bodyend="138"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_flatbuffer_generator_1aefa47d8a10e60cb314491064e4c15769" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; flatbuffers::Offset&lt; fb::MemberStatus &gt; &gt;</type>
+        <definition>std::vector&lt; flatbuffers::Offset&lt; fb::MemberStatus &gt; &gt; fys::arena::FlatbufferGenerator::generateTeamMemberVecStatusOffset</definition>
+        <argsstring>(const PartyTeam &amp;partyTeam)</argsstring>
+        <name>generateTeamMemberVecStatusOffset</name>
+        <param>
+          <type>const <ref refid="classfys_1_1arena_1_1_party_team" kindref="compound">PartyTeam</ref> &amp;</type>
+          <declname>partyTeam</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/FlatbufferGenerator.hh" line="85" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/FlatbufferGenerator.cpp" bodystart="166" bodyend="188"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_flatbuffer_generator_1a58d3d30bd0979a466c780e00a022811b" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; flatbuffers::Offset&lt; fys::fb::MemberStatus &gt; &gt;</type>
+        <definition>std::vector&lt; flatbuffers::Offset&lt; fb::MemberStatus &gt; &gt; fys::arena::FlatbufferGenerator::generateContenderVecStatusOffset</definition>
+        <argsstring>(const PitContenders &amp;pitContender)</argsstring>
+        <name>generateContenderVecStatusOffset</name>
+        <param>
+          <type>const <ref refid="classfys_1_1arena_1_1_pit_contenders" kindref="compound">PitContenders</ref> &amp;</type>
+          <declname>pitContender</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/FlatbufferGenerator.hh" line="88" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/FlatbufferGenerator.cpp" bodystart="141" bodyend="163"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/FlatbufferGenerator.hh" line="65" column="26" bodyfile="/home/FyS/Project/FyS/services/arena/include/FlatbufferGenerator.hh" bodystart="65" bodyend="99"/>
+    <listofallmembers>
+      <member refid="classfys_1_1arena_1_1_flatbuffer_generator_1a351fd32355949ba44779a9ec1f896783" prot="private" virt="non-virtual"><scope>fys::arena::FlatbufferGenerator</scope><name>_fbb</name></member>
+      <member refid="classfys_1_1arena_1_1_flatbuffer_generator_1a58d3d30bd0979a466c780e00a022811b" prot="private" virt="non-virtual"><scope>fys::arena::FlatbufferGenerator</scope><name>generateContenderVecStatusOffset</name></member>
+      <member refid="classfys_1_1arena_1_1_flatbuffer_generator_1a59c35831547bcebf2586b8766499c485" prot="public" virt="non-virtual"><scope>fys::arena::FlatbufferGenerator</scope><name>generateFightingPitState</name></member>
+      <member refid="classfys_1_1arena_1_1_flatbuffer_generator_1a95d2307d8023586b49638422a4fcccd3" prot="public" virt="non-virtual"><scope>fys::arena::FlatbufferGenerator</scope><name>generatePartyTeamStatus</name></member>
+      <member refid="classfys_1_1arena_1_1_flatbuffer_generator_1a973d00543b273f4d3dfe648f658d0918" prot="private" virt="non-virtual"><scope>fys::arena::FlatbufferGenerator</scope><name>generatePartyTeamVecStatusOffset</name></member>
+      <member refid="classfys_1_1arena_1_1_flatbuffer_generator_1aefa47d8a10e60cb314491064e4c15769" prot="private" virt="non-virtual"><scope>fys::arena::FlatbufferGenerator</scope><name>generateTeamMemberVecStatusOffset</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

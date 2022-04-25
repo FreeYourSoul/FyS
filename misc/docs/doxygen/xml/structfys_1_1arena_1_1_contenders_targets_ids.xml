@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1arena_1_1_contenders_targets_ids" kind="struct" language="C++" prot="public">
+    <compoundname>fys::arena::ContendersTargetsIds</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_contenders_targets_ids_1ab3c336ecfd5857823d02e764149e77b5" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; uint &gt;</type>
+        <definition>std::vector&lt;uint&gt; fys::arena::ContendersTargetsIds::v</definition>
+        <argsstring></argsstring>
+        <name>v</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/TeamMember.hh" line="49" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/TeamMember.hh" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/TeamMember.hh" line="48" column="27" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/TeamMember.hh" bodystart="48" bodyend="50"/>
+    <listofallmembers>
+      <member refid="structfys_1_1arena_1_1_contenders_targets_ids_1ab3c336ecfd5857823d02e764149e77b5" prot="public" virt="non-virtual"><scope>fys::arena::ContendersTargetsIds</scope><name>v</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

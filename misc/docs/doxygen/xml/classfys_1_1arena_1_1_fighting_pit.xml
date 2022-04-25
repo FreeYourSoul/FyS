@@ -1,0 +1,868 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1arena_1_1_fighting_pit" kind="class" language="C++" prot="public">
+    <compoundname>fys::arena::FightingPit</compoundname>
+    <includes refid="_fighting_pit_8hh" local="no">FightingPit.hh</includes>
+    <innerclass refid="structfys_1_1arena_1_1_fighting_pit_1_1_authenticated_player" prot="private">fys::arena::FightingPit::AuthenticatedPlayer</innerclass>
+      <sectiondef kind="private-type">
+      <memberdef kind="enum" id="classfys_1_1arena_1_1_fighting_pit_1ad0f8685b3db65e99d84db65ab03e5515" prot="private" static="no" strong="yes">
+        <type></type>
+        <name>Progress</name>
+        <enumvalue id="classfys_1_1arena_1_1_fighting_pit_1ad0f8685b3db65e99d84db65ab03e5515a6f1a495a52f041d5e850acd8a4118d39" prot="private">
+          <name>ON_HOLD</name>
+          <briefdescription>
+<para>joining fight status </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classfys_1_1arena_1_1_fighting_pit_1ad0f8685b3db65e99d84db65ab03e5515add5b92c8bfb0ab0d00d24715c6bba767" prot="private">
+          <name>ON_HOLD_NOT_REACHABLE</name>
+          <briefdescription>
+<para>waiting creator readiness </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classfys_1_1arena_1_1_fighting_pit_1ad0f8685b3db65e99d84db65ab03e5515a3bdb81b260b21a403c3e23fadf1e8f7c" prot="private">
+          <name>CLEANUP</name>
+          <briefdescription>
+<para>battle is over, fighting pit has to be cleaned out </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classfys_1_1arena_1_1_fighting_pit_1ad0f8685b3db65e99d84db65ab03e5515ae4757da6dda218553c0fed9768625b95" prot="private">
+          <name>ON_GOING</name>
+          <briefdescription>
+<para>On going battle. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classfys_1_1arena_1_1_fighting_pit_1ad0f8685b3db65e99d84db65ab03e5515afe4f469cee8d6e7801acaea54eb2bbfa" prot="private">
+          <name>CONTENDER_WIN</name>
+          <briefdescription>
+<para>Contender win, process the loss (if any) of the ally. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classfys_1_1arena_1_1_fighting_pit_1ad0f8685b3db65e99d84db65ab03e5515a74b154394664cb58fed9f2619f0824ca" prot="private">
+          <name>ALLY_WIN</name>
+          <briefdescription>
+<para>Allies win, process the earning (if any) to the allies. </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Progress Status Enum: represent the status of the battle. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="87" column="20" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="87" bodyend="101"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classfys_1_1arena_1_1_fighting_pit_1a279b049c942fadc5171fb53779626202" prot="public" static="no" strong="no">
+        <type>uint</type>
+        <name>Level</name>
+        <enumvalue id="classfys_1_1arena_1_1_fighting_pit_1a279b049c942fadc5171fb53779626202af6a3c26b9159bf33cf3f828eccd64ddc" prot="public">
+          <name>EASY</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classfys_1_1arena_1_1_fighting_pit_1a279b049c942fadc5171fb53779626202ac3a4e6cc4110454bfc9f4951e01f44a1" prot="public">
+          <name>MEDIUM</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classfys_1_1arena_1_1_fighting_pit_1a279b049c942fadc5171fb53779626202a41cca61dcfcf59b5a37273440e16d280" prot="public">
+          <name>HARD</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classfys_1_1arena_1_1_fighting_pit_1a279b049c942fadc5171fb53779626202a64e57719b9ecd0fdfebcede1d69189bd" prot="public">
+          <name>NONE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+<para>Complexity of the <ref refid="classfys_1_1arena_1_1_fighting_pit" kindref="compound">FightingPit</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="114" column="11" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="114" bodyend="119"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="classfys_1_1arena_1_1_fighting_pit_1a33db2bbe50775c983c51d8cce9d2e443" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend class</type>
+        <definition>friend class FightingPitAnnouncer</definition>
+        <argsstring></argsstring>
+        <name>FightingPitAnnouncer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="84" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_fighting_pit_1ad27a20dcca9411de7281580ef8efa782" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr unsigned</type>
+        <definition>constexpr unsigned fys::arena::FightingPit::CREATION_ERROR</definition>
+        <argsstring></argsstring>
+        <name>CREATION_ERROR</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>used as a wrong id when a fighting pit is wrongly generated </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="111" column="27" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_fighting_pit_1a7f1db0d0276712fd37d25261582b7491" prot="private" static="no" mutable="no">
+        <type>Progress</type>
+        <definition>Progress fys::arena::FightingPit::_progress</definition>
+        <argsstring></argsstring>
+        <name>_progress</name>
+        <initializer>= Progress::ON_HOLD</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="237" column="10" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="237" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_fighting_pit_1a0604ca0e5483daf0b8355932f8321fc4" prot="private" static="no" mutable="no">
+        <type><ref refid="classfys_1_1arena_1_1_fighting_pit_1a279b049c942fadc5171fb53779626202" kindref="member">Level</ref></type>
+        <definition>Level fys::arena::FightingPit::_levelFightingPit</definition>
+        <argsstring></argsstring>
+        <name>_levelFightingPit</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="238" column="7" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="238" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_fighting_pit_1add88c963ae74f3d94e17a041bd3dcbb9" prot="private" static="no" mutable="no">
+        <type>std::chrono::milliseconds</type>
+        <definition>std::chrono::milliseconds fys::arena::FightingPit::_timeInterlude</definition>
+        <argsstring></argsstring>
+        <name>_timeInterlude</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="239" column="27" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="239" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_fighting_pit_1aa19f6af924c1082cf067a7ac8acd28fc" prot="private" static="no" mutable="no">
+        <type><ref refid="classfys_1_1arena_1_1_pit_contenders" kindref="compound">PitContenders</ref></type>
+        <definition>PitContenders fys::arena::FightingPit::_contenders</definition>
+        <argsstring></argsstring>
+        <name>_contenders</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="240" column="15" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="240" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_fighting_pit_1a68f294eb5a74468e6a7a068c3084d4ac" prot="private" static="no" mutable="no">
+        <type><ref refid="classfys_1_1arena_1_1_ally_party_teams" kindref="compound">AllyPartyTeams</ref></type>
+        <definition>AllyPartyTeams fys::arena::FightingPit::_partyTeams</definition>
+        <argsstring></argsstring>
+        <name>_partyTeams</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="241" column="16" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="241" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_fighting_pit_1a3a3b0c417be56d20ca1e7d803c6c6a96" prot="private" static="no" mutable="no">
+        <type><ref refid="classfys_1_1arena_1_1_fighting_pit_layout" kindref="compound">FightingPitLayout</ref></type>
+        <definition>FightingPitLayout fys::arena::FightingPit::_layoutMapping</definition>
+        <argsstring></argsstring>
+        <name>_layoutMapping</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="244" column="19" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="244" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_fighting_pit_1ab2f3483b33b147ced8f84a9d180e16a1" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string fys::arena::FightingPit::_creator_user_name</definition>
+        <argsstring></argsstring>
+        <name>_creator_user_name</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="246" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="246" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_fighting_pit_1a48cc1da754b77b630f2648a2166b0083" prot="private" static="no" mutable="no">
+        <type>unsigned</type>
+        <definition>unsigned fys::arena::FightingPit::_arenaId</definition>
+        <argsstring></argsstring>
+        <name>_arenaId</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="247" column="10" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="247" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_fighting_pit_1a5a88730f35dad68a8b6fa0ae94a4551e" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; AuthenticatedPlayer &gt;</type>
+        <definition>std::vector&lt;AuthenticatedPlayer&gt; fys::arena::FightingPit::_authenticatedPlayers</definition>
+        <argsstring></argsstring>
+        <name>_authenticatedPlayers</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="249" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="249" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_fighting_pit_1ae0065a3f275fdc97a3a5e90c9ded1e31" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; chaiscript::ChaiScript &gt;</type>
+        <definition>std::unique_ptr&lt;chaiscript::ChaiScript&gt; fys::arena::FightingPit::_chaiPtr</definition>
+        <argsstring></argsstring>
+        <name>_chaiPtr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="251" column="17" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="251" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_fighting_pit_1aa3a638cec9f2357dc0d0efd7be8bf869" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="structfys_1_1arena_1_1_rewards" kindref="compound">Rewards</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;Rewards&gt; fys::arena::FightingPit::_rewards</definition>
+        <argsstring></argsstring>
+        <name>_rewards</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="252" column="17" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="252" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_fighting_pit_1a6b59f06ee319257bf3c833c3160b11fa" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classfys_1_1arena_1_1_side_battle" kindref="compound">SideBattle</ref> &gt;</type>
+        <definition>std::vector&lt;SideBattle&gt; fys::arena::FightingPit::_sideBattles</definition>
+        <argsstring></argsstring>
+        <name>_sideBattles</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="253" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="253" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1arena_1_1_fighting_pit_1a4fdd82b8b225e7f25417c9d044b5f399" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fys::arena::FightingPit::FightingPit</definition>
+        <argsstring>(std::string creatorUserName, Level levelFightingPit)</argsstring>
+        <name>FightingPit</name>
+        <param>
+          <type>std::string</type>
+          <declname>creatorUserName</declname>
+        </param>
+        <param>
+          <type><ref refid="classfys_1_1arena_1_1_fighting_pit_1a279b049c942fadc5171fb53779626202" kindref="member">Level</ref></type>
+          <declname>levelFightingPit</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="121" column="10" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/FightingPit.cpp" bodystart="52" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_fighting_pit_1ae609e502615fd54a865a297824d1f9e5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::FightingPit::continueBattle</definition>
+        <argsstring>(const std::chrono::system_clock::time_point &amp;now)</argsstring>
+        <name>continueBattle</name>
+        <param>
+          <type>const std::chrono::system_clock::time_point &amp;</type>
+          <declname>now</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>now</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="127" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/FightingPit.cpp" bodystart="92" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_fighting_pit_1a3c312c72d716955f36e7c1d7866c893e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::FightingPit::forwardActionToTeamMember</definition>
+        <argsstring>(const std::string &amp;user, PlayerAction action)</argsstring>
+        <name>forwardActionToTeamMember</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>user</declname>
+        </param>
+        <param>
+          <type><ref refid="structfys_1_1arena_1_1_player_action" kindref="compound">PlayerAction</ref></type>
+          <declname>action</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>user</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="133" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/FightingPit.cpp" bodystart="128" bodyend="150"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_fighting_pit_1ab9875d72e8264f0198c0f124a5feb218" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::FightingPit::addAuthenticatedUser</definition>
+        <argsstring>(std::string userName, std::string userToken)</argsstring>
+        <name>addAuthenticatedUser</name>
+        <param>
+          <type>std::string</type>
+          <declname>userName</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>userToken</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Add an authenticated player in the fighting pit, the player authentication is not verified an thus must be verified beforehand. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>userName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>unique name of the player to add </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>userToken</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>token of the player to add </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="141" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/FightingPit.cpp" bodystart="153" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_fighting_pit_1acc672e9b3c7c3f92d19654604db126a1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::FightingPit::addPartyTeamAndRegisterActions</definition>
+        <argsstring>(std::unique_ptr&lt; PartyTeam &gt; pt, cache::Cml &amp;cache)</argsstring>
+        <name>addPartyTeamAndRegisterActions</name>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classfys_1_1arena_1_1_party_team" kindref="compound">PartyTeam</ref> &gt;</type>
+          <declname>pt</declname>
+        </param>
+        <param>
+          <type><ref refid="classfys_1_1cache_1_1_cml" kindref="compound">cache::Cml</ref> &amp;</type>
+          <declname>cache</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Used to add a new party team (incoming player in the fighting pit) and register its action to chai</para>
+<para><simplesect kind="note"><para>The verification if the fighting pit is in ON_HOLD mode is not done in this function and thus should be done before the <ref refid="classfys_1_1arena_1_1_party_team" kindref="compound">PartyTeam</ref> object is created.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>pt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>party team to add </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cache</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>retrieving object to find the actions </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="152" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/FightingPit.cpp" bodystart="166" bodyend="174"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_fighting_pit_1a8bf69a6fbb1f257db8aeb2c39a3cf887" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::FightingPit::isPlayerParticipant</definition>
+        <argsstring>(const std::string &amp;name, const std::string &amp;token) const</argsstring>
+        <name>isPlayerParticipant</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>token</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Check if given player (defined by name/token) is authenticated <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>unique name of the player to check </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>token of the player to check </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the player is authenticated, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="161" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/FightingPit.cpp" bodystart="159" bodyend="163"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_fighting_pit_1a39c0c637375b5fd54c9ce5639a6e1cad" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="classfys_1_1arena_1_1_party_team" kindref="compound">PartyTeam</ref> &amp;</type>
+        <definition>const PartyTeam&amp; fys::arena::FightingPit::getPartyTeamOfPlayer</definition>
+        <argsstring>(const std::string &amp;userName) const</argsstring>
+        <name>getPartyTeamOfPlayer</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>userName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="164" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="164" bodyend="164"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_fighting_pit_1ab10b8f90312f01162931acc8629a6762" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const std::unique_ptr&lt; chaiscript::ChaiScript &gt; &amp;</type>
+        <definition>const std::unique_ptr&lt;chaiscript::ChaiScript&gt;&amp; fys::arena::FightingPit::getChaiPtr</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getChaiPtr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="167" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="167" bodyend="167"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_fighting_pit_1ac5c3cad2bcbe12d0dedf2cb58f625094" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>unsigned</type>
+        <definition>unsigned fys::arena::FightingPit::getId</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="170" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="170" bodyend="170"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_fighting_pit_1af6ea986c3ffac3901f427d20fa27d9f1" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::FightingPit::isJoinable</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>isJoinable</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="173" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="173" bodyend="173"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_fighting_pit_1a65f59589d7c698fb2f4b6e84a11c6dbb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="classfys_1_1arena_1_1_ally_party_teams" kindref="compound">AllyPartyTeams</ref> &amp;</type>
+        <definition>const AllyPartyTeams&amp; fys::arena::FightingPit::getPartyTeams</definition>
+        <argsstring>() const</argsstring>
+        <name>getPartyTeams</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="176" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="176" bodyend="176"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_fighting_pit_1a49a6c76bf9d170620edee50bbe4b39f7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const <ref refid="classfys_1_1arena_1_1_pit_contenders" kindref="compound">PitContenders</ref> &amp;</type>
+        <definition>const PitContenders&amp; fys::arena::FightingPit::getPitContenders</definition>
+        <argsstring>() const</argsstring>
+        <name>getPitContenders</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="179" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="179" bodyend="179"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_fighting_pit_1a00bb3c0ca8eac4ebe6961c5bd32eaddf" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::FightingPit::isBattleOver</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>isBattleOver</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Check if the battle is done, the winner doesn&apos;t matter, this is a status to cleanup the fighting pit when its done <simplesect kind="return"><para>true if the battle is over, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="186" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="186" bodyend="186"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_fighting_pit_1a60bb0689e3f44664197090db415866db" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::FightingPit::disableJoin</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>disableJoin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Disable the ability to join the battle if the fighting pit is currently reachable </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="191" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="191" bodyend="191"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_fighting_pit_1a611f2c79fa753eb46fee895a7d22d417" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::FightingPit::addReward</definition>
+        <argsstring>(std::string action, uint quantity) noexcept</argsstring>
+        <name>addReward</name>
+        <param>
+          <type>std::string</type>
+          <declname>action</declname>
+        </param>
+        <param>
+          <type>uint</type>
+          <declname>quantity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="192" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="192" bodyend="195"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_fighting_pit_1ad28b4a44689b3a554f6b7e6a56c12aaf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::FightingPit::setPlayerReadiness</definition>
+        <argsstring>(const std::string &amp;userName)</argsstring>
+        <name>setPlayerReadiness</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>userName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="196" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/FightingPit.cpp" bodystart="226" bodyend="231"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_fighting_pit_1abd0e6c2472151eab247dd29be99f2f32" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::FightingPit::setArenaId</definition>
+        <argsstring>(unsigned arenaId) noexcept</argsstring>
+        <name>setArenaId</name>
+        <param>
+          <type>unsigned</type>
+          <declname>arenaId</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="197" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="197" bodyend="197"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classfys_1_1arena_1_1_fighting_pit_1a4058ebb45e92f6da8998253c473ccc28" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::FightingPit::checkEndStatusFightingPit</definition>
+        <argsstring>()</argsstring>
+        <name>checkEndStatusFightingPit</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Check if the fight has started, if it has check if the fight is finished (winner determined) If ally wins, a generation of the loot is made and returned to the clients If enemy wins, a notification is sent to players <simplesect kind="return"><para>true if the fight has been terminated, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="207" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/FightingPit.cpp" bodystart="63" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_fighting_pit_1a11d17d778ad4dbb9c1ef0997ada2a165" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::pair&lt; bool, std::optional&lt; TargetType &gt; &gt;</type>
+        <definition>std::pair&lt; bool, std::optional&lt; TargetType &gt; &gt; fys::arena::FightingPit::checkAndRetrieveTarget</definition>
+        <argsstring>(const std::string &amp;user, const TeamMemberSPtr &amp;member, const PlayerAction &amp;action)</argsstring>
+        <name>checkAndRetrieveTarget</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>user</declname>
+        </param>
+        <param>
+          <type>const TeamMemberSPtr &amp;</type>
+          <declname>member</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structfys_1_1arena_1_1_player_action" kindref="compound">PlayerAction</ref> &amp;</type>
+          <declname>action</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Check if the target is registered in the ChaiScript engine, if it is, check if the action requested by the player match the type of target required by the registered action. Finally check if the target exist in the fightingPit <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>user</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Player name that is executing the action </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>member</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>name that is doing an action </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>action</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>information about the action to execute (contains target) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>a pair (success, target) @return_success : false if description doesn&apos;t match the requirement and/or target doesn&apos;t exist, true otherwise @return_target : a TargetType (Variant) set with the proper type </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="221" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/FightingPit.cpp" bodystart="233" bodyend="301"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_fighting_pit_1a49fccfb87269f78b5dc7f3d818057a9e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>Progress</type>
+        <definition>FightingPit::Progress fys::arena::FightingPit::updateProgressStatus</definition>
+        <argsstring>()</argsstring>
+        <name>updateProgressStatus</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Verify if the fight has been won by a team (contender or ally) and return an appropriate Progress <simplesect kind="return"><para>Progress::ALLY_WIN if the ally win, Progress::CONTENDER_WIN if the contender win, Progress::ON_GOING otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="228" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/FightingPit.cpp" bodystart="116" bodyend="125"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_fighting_pit_1a41cc233f94d795c9bf275070271d3cc0" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::FightingPit::addContender</definition>
+        <argsstring>(const std::shared_ptr&lt; FightingContender &gt; &amp;fc)</argsstring>
+        <name>addContender</name>
+        <param>
+          <type>const std::shared_ptr&lt; <ref refid="classfys_1_1arena_1_1_fighting_contender" kindref="compound">FightingContender</ref> &gt; &amp;</type>
+          <declname>fc</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="231" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="231" bodyend="231"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_fighting_pit_1aa84c702d2cb2840ae00208f5e6962a4b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::FightingPit::initializeSideBattles</definition>
+        <argsstring>()</argsstring>
+        <name>initializeSideBattles</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="233" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/FightingPit.cpp" bodystart="179" bodyend="208"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_fighting_pit_1ae89d3b363c4de98cbf39d6108fda237d" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::FightingPit::initializePriorityListInSidesBattle</definition>
+        <argsstring>()</argsstring>
+        <name>initializePriorityListInSidesBattle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="234" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/FightingPit.cpp" bodystart="211" bodyend="224"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A fighting pit represent a specific instance of a battle. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>A fightingpit is composed of:<itemizedlist>
+<listitem><para>a layout (mapping of how the monsters/players are spread on the board)</para>
+</listitem><listitem><para>a <ref refid="classfys_1_1arena_1_1_pit_contenders" kindref="compound">PitContenders</ref> object managing all the monsters and their behaviours (scripting)</para>
+</listitem><listitem><para>a <ref refid="classfys_1_1arena_1_1_ally_party_teams" kindref="compound">AllyPartyTeams</ref> object managing the players, each client has a <ref refid="classfys_1_1arena_1_1_party_team" kindref="compound">PartyTeam</ref> (multiple party teams possible for one <ref refid="classfys_1_1arena_1_1_ally_party_teams" kindref="compound">AllyPartyTeams</ref>) and the <ref refid="classfys_1_1arena_1_1_party_team" kindref="compound">PartyTeam</ref> is composed of <ref refid="classfys_1_1arena_1_1_team_member" kindref="compound">TeamMember</ref> that are the actual characters spread on the gaming board.</para>
+</listitem><listitem><para>The 18 instances of <ref refid="classfys_1_1arena_1_1_side_battle" kindref="compound">SideBattle</ref></para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="see"><para><ref refid="classfys_1_1arena_1_1_side_battle" kindref="compound">SideBattle</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="82" column="18" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="82" bodyend="255"/>
+    <listofallmembers>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1a48cc1da754b77b630f2648a2166b0083" prot="private" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>_arenaId</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1a5a88730f35dad68a8b6fa0ae94a4551e" prot="private" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>_authenticatedPlayers</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1ae0065a3f275fdc97a3a5e90c9ded1e31" prot="private" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>_chaiPtr</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1aa19f6af924c1082cf067a7ac8acd28fc" prot="private" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>_contenders</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1ab2f3483b33b147ced8f84a9d180e16a1" prot="private" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>_creator_user_name</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1a3a3b0c417be56d20ca1e7d803c6c6a96" prot="private" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>_layoutMapping</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1a0604ca0e5483daf0b8355932f8321fc4" prot="private" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>_levelFightingPit</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1a68f294eb5a74468e6a7a068c3084d4ac" prot="private" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>_partyTeams</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1a7f1db0d0276712fd37d25261582b7491" prot="private" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>_progress</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1aa3a638cec9f2357dc0d0efd7be8bf869" prot="private" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>_rewards</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1a6b59f06ee319257bf3c833c3160b11fa" prot="private" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>_sideBattles</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1add88c963ae74f3d94e17a041bd3dcbb9" prot="private" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>_timeInterlude</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1ab9875d72e8264f0198c0f124a5feb218" prot="public" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>addAuthenticatedUser</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1a41cc233f94d795c9bf275070271d3cc0" prot="private" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>addContender</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1acc672e9b3c7c3f92d19654604db126a1" prot="public" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>addPartyTeamAndRegisterActions</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1a611f2c79fa753eb46fee895a7d22d417" prot="public" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>addReward</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1a11d17d778ad4dbb9c1ef0997ada2a165" prot="private" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>checkAndRetrieveTarget</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1a4058ebb45e92f6da8998253c473ccc28" prot="private" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>checkEndStatusFightingPit</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1ae609e502615fd54a865a297824d1f9e5" prot="public" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>continueBattle</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1ad27a20dcca9411de7281580ef8efa782" prot="public" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>CREATION_ERROR</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1a60bb0689e3f44664197090db415866db" prot="public" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>disableJoin</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1a279b049c942fadc5171fb53779626202af6a3c26b9159bf33cf3f828eccd64ddc" prot="public" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>EASY</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1a4fdd82b8b225e7f25417c9d044b5f399" prot="public" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>FightingPit</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1a33db2bbe50775c983c51d8cce9d2e443" prot="private" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>FightingPitAnnouncer</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1a3c312c72d716955f36e7c1d7866c893e" prot="public" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>forwardActionToTeamMember</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1ab10b8f90312f01162931acc8629a6762" prot="public" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>getChaiPtr</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1ac5c3cad2bcbe12d0dedf2cb58f625094" prot="public" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>getId</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1a39c0c637375b5fd54c9ce5639a6e1cad" prot="public" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>getPartyTeamOfPlayer</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1a65f59589d7c698fb2f4b6e84a11c6dbb" prot="public" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>getPartyTeams</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1a49a6c76bf9d170620edee50bbe4b39f7" prot="public" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>getPitContenders</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1a279b049c942fadc5171fb53779626202a41cca61dcfcf59b5a37273440e16d280" prot="public" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>HARD</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1ae89d3b363c4de98cbf39d6108fda237d" prot="private" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>initializePriorityListInSidesBattle</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1aa84c702d2cb2840ae00208f5e6962a4b" prot="private" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>initializeSideBattles</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1a00bb3c0ca8eac4ebe6961c5bd32eaddf" prot="public" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>isBattleOver</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1af6ea986c3ffac3901f427d20fa27d9f1" prot="public" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>isJoinable</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1a8bf69a6fbb1f257db8aeb2c39a3cf887" prot="public" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>isPlayerParticipant</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1a279b049c942fadc5171fb53779626202" prot="public" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>Level</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1a279b049c942fadc5171fb53779626202ac3a4e6cc4110454bfc9f4951e01f44a1" prot="public" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>MEDIUM</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1a279b049c942fadc5171fb53779626202a64e57719b9ecd0fdfebcede1d69189bd" prot="public" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>NONE</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1ad0f8685b3db65e99d84db65ab03e5515" prot="private" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>Progress</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1abd0e6c2472151eab247dd29be99f2f32" prot="public" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>setArenaId</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1ad28b4a44689b3a554f6b7e6a56c12aaf" prot="public" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>setPlayerReadiness</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_1a49fccfb87269f78b5dc7f3d818057a9e" prot="private" virt="non-virtual"><scope>fys::arena::FightingPit</scope><name>updateProgressStatus</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

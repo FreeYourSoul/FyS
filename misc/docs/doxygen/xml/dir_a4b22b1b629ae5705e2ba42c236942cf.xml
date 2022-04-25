@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_a4b22b1b629ae5705e2ba42c236942cf" kind="dir">
+    <compoundname>/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/include</compoundname>
+    <innerfile refid="dispatcher_2worldserver__dispatcher_2include_2_world_server_context_8hh">WorldServerContext.hh</innerfile>
+    <innerfile refid="_world_server_dispatcher_handler_8hh">WorldServerDispatcherHandler.hh</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/include/"/>
+  </compounddef>
+</doxygen>

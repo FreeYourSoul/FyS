@@ -1,0 +1,195 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacefys_1_1init__beacon" kind="namespace" language="C++">
+    <compoundname>fys::init_beacon</compoundname>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="namespacefys_1_1init__beacon_1aad798ac2bc0ab6d462ef8efb9fdb2161" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto fys::init_beacon::NAME</definition>
+        <argsstring></argsstring>
+        <name>NAME</name>
+        <initializer>= &quot;dispatcher.name&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="39" column="24" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacefys_1_1init__beacon_1a50d5a6103d20bdaa7fe0d3f8fb9fe46e" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto fys::init_beacon::TOPICS</definition>
+        <argsstring></argsstring>
+        <name>TOPICS</name>
+        <initializer>= &quot;dispatcher.topics&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="40" column="24" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacefys_1_1init__beacon_1ac8e2c14efd2c0ffeca5a27ad6d521c0b" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto fys::init_beacon::ISCLUSTERAWARE</definition>
+        <argsstring></argsstring>
+        <name>ISCLUSTERAWARE</name>
+        <initializer>= &quot;dispatcher.isClusterAware&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="41" column="24" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacefys_1_1init__beacon_1aa31eed40890b1c6bce60ae1e2ce425fd" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto fys::init_beacon::MAXMSGSIZE</definition>
+        <argsstring></argsstring>
+        <name>MAXMSGSIZE</name>
+        <initializer>= &quot;dispatcher.maxMsgSize&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="42" column="24" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacefys_1_1init__beacon_1ad8614f8f762aa5af07a27b43874051f0" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto fys::init_beacon::BINDINGPORT</definition>
+        <argsstring></argsstring>
+        <name>BINDINGPORT</name>
+        <initializer>= &quot;dispatcher.bindingPort&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="43" column="24" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacefys_1_1init__beacon_1ad819d34dce2a418bac1dde1309678a6c" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto fys::init_beacon::DISPATCHERPORT</definition>
+        <argsstring></argsstring>
+        <name>DISPATCHERPORT</name>
+        <initializer>= &quot;dispatcher.dispatcherPort&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="44" column="24" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacefys_1_1init__beacon_1aa9a3c4ece8f3a617b6246de3dad38a01" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto fys::init_beacon::ISLOADBALANCING</definition>
+        <argsstring></argsstring>
+        <name>ISLOADBALANCING</name>
+        <initializer>= &quot;dispatcher.isLoadBalancing&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="45" column="24" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacefys_1_1init__beacon_1a4ece78ead6eef2838afa61ffbbe75a00" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto fys::init_beacon::TOPIC_GROUPS</definition>
+        <argsstring></argsstring>
+        <name>TOPIC_GROUPS</name>
+        <initializer>= &quot;dispatcher.topicGroups&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="46" column="24" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacefys_1_1init__beacon_1a7a5a16d48d1efc8f6f6bfe7c67286fc0" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto fys::init_beacon::SPECIFIC_CONFIG</definition>
+        <argsstring></argsstring>
+        <name>SPECIFIC_CONFIG</name>
+        <initializer>= &quot;dispatcher.specific_config&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="47" column="24" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacefys_1_1init__beacon_1aaef28acc1ec4044b1d694e8b56904e8e" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto fys::init_beacon::FRONTEND_PORT</definition>
+        <argsstring></argsstring>
+        <name>FRONTEND_PORT</name>
+        <initializer>= &quot;proxy_frontend.port&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="48" column="24" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacefys_1_1init__beacon_1ad83de4e85a297423a0f0de9d02e622ab" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto fys::init_beacon::FRONTEND_ADDR</definition>
+        <argsstring></argsstring>
+        <name>FRONTEND_ADDR</name>
+        <initializer>= &quot;proxy_frontend.address&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="49" column="24" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacefys_1_1init__beacon_1ac37ead690a9cc084a1eef540747dbf74" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto fys::init_beacon::BACKEND_PORT</definition>
+        <argsstring></argsstring>
+        <name>BACKEND_PORT</name>
+        <initializer>= &quot;proxy_backend.port&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="50" column="24" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacefys_1_1init__beacon_1a489653ffcbea264efb2cf8748d957a24" prot="public" static="no" constexpr="yes" mutable="no">
+        <type>constexpr auto</type>
+        <definition>constexpr auto fys::init_beacon::BACKEND_ADDR</definition>
+        <argsstring></argsstring>
+        <name>BACKEND_ADDR</name>
+        <initializer>= &quot;proxy_backend.address&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="51" column="24" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="38" column="25"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,40 @@
+\hypertarget{classfys_1_1arena_1_1data_1_1_alteration}{}\doxysection{fys\+::arena\+::data\+::Alteration Class Reference}
+\label{classfys_1_1arena_1_1data_1_1_alteration}\index{fys::arena::data::Alteration@{fys::arena::data::Alteration}}
+
+
+{\ttfamily \#include $<$Common\+Types.\+hh$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1data_1_1_alteration_a7b6f5798bf02f0ef148b57e45cce52e1}\label{classfys_1_1arena_1_1data_1_1_alteration_a7b6f5798bf02f0ef148b57e45cce52e1}} 
+{\bfseries Alteration} (std\+::string alteration\+Key, uint lvl, uint turn, std\+::function$<$ int(\mbox{\hyperlink{structfys_1_1arena_1_1data_1_1_status}{data\+::\+Status}} \&, uint, uint)$>$ a) noexcept
+\item 
+bool \mbox{\hyperlink{classfys_1_1arena_1_1data_1_1_alteration_a863c11e33260ef1e3bee882738e615b6}{process\+Alteration}} (\mbox{\hyperlink{structfys_1_1arena_1_1data_1_1_status}{Status}} \&status)
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1data_1_1_alteration_a05dcbc714d221273c5401e27796f8136}\label{classfys_1_1arena_1_1data_1_1_alteration_a05dcbc714d221273c5401e27796f8136}} 
+const std\+::string \& {\bfseries get\+Alteration\+Key} () const
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1data_1_1_alteration_a577edb1541799356e07c93591984cc1d}\label{classfys_1_1arena_1_1data_1_1_alteration_a577edb1541799356e07c93591984cc1d}} 
+uint {\bfseries get\+Turn} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Representation of a status alteration of a character 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfys_1_1arena_1_1data_1_1_alteration_a863c11e33260ef1e3bee882738e615b6}\label{classfys_1_1arena_1_1data_1_1_alteration_a863c11e33260ef1e3bee882738e615b6}} 
+\index{fys::arena::data::Alteration@{fys::arena::data::Alteration}!processAlteration@{processAlteration}}
+\index{processAlteration@{processAlteration}!fys::arena::data::Alteration@{fys::arena::data::Alteration}}
+\doxysubsubsection{\texorpdfstring{processAlteration()}{processAlteration()}}
+{\footnotesize\ttfamily bool fys\+::arena\+::data\+::\+Alteration\+::process\+Alteration (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structfys_1_1arena_1_1data_1_1_status}{Status}} \&}]{status }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Process an alteration action, return if it has an impact on the turn of the player \begin{DoxyReturn}{Returns}
+false if the player turn is skipped, true otherwise 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/services/arena/include/fighting\+Pit/data/Common\+Types.\+hh\end{DoxyCompactItemize}

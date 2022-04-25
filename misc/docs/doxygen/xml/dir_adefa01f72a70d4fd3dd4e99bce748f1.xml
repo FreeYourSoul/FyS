@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_adefa01f72a70d4fd3dd4e99bce748f1" kind="dir">
+    <compoundname>/home/FyS/Project/FyS/services/common</compoundname>
+    <innerdir refid="dir_aa942a3048fa26b14697c2ca34942078">/home/FyS/Project/FyS/services/common/cmake-build-debug</innerdir>
+    <innerdir refid="dir_fbc93c67b173e32a1bccf49b3abda541">/home/FyS/Project/FyS/services/common/flatbuffer</innerdir>
+    <innerdir refid="dir_e0d4314f918ca6fe14484e71bf16c790">/home/FyS/Project/FyS/services/common/include</innerdir>
+    <innerdir refid="dir_ded6099de5cb6e0099c59692edf31f18">/home/FyS/Project/FyS/services/common/src</innerdir>
+    <innerdir refid="dir_c8bbe1efbf5d48e36fade67960384839">/home/FyS/Project/FyS/services/common/test</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/common/"/>
+  </compounddef>
+</doxygen>

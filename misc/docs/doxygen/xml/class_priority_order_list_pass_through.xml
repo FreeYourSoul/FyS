@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="class_priority_order_list_pass_through" kind="class" language="C++" prot="public">
+    <compoundname>PriorityOrderListPassThrough</compoundname>
+    <basecompoundref refid="classfys_1_1arena_1_1_priority_order_list" prot="public" virt="non-virtual">fys::arena::PriorityOrderList</basecompoundref>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_priority_order_list_pass_through_1aa95e358b7d3015ac774242409699ce54" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void PriorityOrderListPassThrough::sortBaseAndCalculatePriority</definition>
+        <argsstring>()</argsstring>
+        <name>sortBaseAndCalculatePriority</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/test/fightingPit/PriorityOrderListTestCase.cpp" line="36" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/test/fightingPit/PriorityOrderListTestCase.cpp" bodystart="36" bodyend="40"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>PriorityOrderListPassThrough</label>
+        <link refid="class_priority_order_list_pass_through"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>fys::arena::PriorityOrderList</label>
+        <link refid="classfys_1_1arena_1_1_priority_order_list"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>PriorityOrderListPassThrough</label>
+        <link refid="class_priority_order_list_pass_through"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>fys::arena::PriorityOrderList</label>
+        <link refid="classfys_1_1arena_1_1_priority_order_list"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/FyS/Project/FyS/services/arena/test/fightingPit/PriorityOrderListTestCase.cpp" line="33" column="72" bodyfile="/home/FyS/Project/FyS/services/arena/test/fightingPit/PriorityOrderListTestCase.cpp" bodystart="33" bodyend="46"/>
+    <listofallmembers>
+      <member refid="classfys_1_1arena_1_1_priority_order_list_1a108bb8e1c5fd8e9f745b09135c26a834" prot="public" virt="non-virtual"><scope>PriorityOrderListPassThrough</scope><name>addParticipantInList</name></member>
+      <member refid="classfys_1_1arena_1_1_priority_order_list_1af13af7be2f3b7a87c8e9ddb65e16c10d" prot="public" virt="non-virtual"><scope>PriorityOrderListPassThrough</scope><name>empty</name></member>
+      <member refid="classfys_1_1arena_1_1_priority_order_list_1a9090c56e953a37b539dea776fa916525" prot="public" virt="non-virtual"><scope>PriorityOrderListPassThrough</scope><name>getCurrent</name></member>
+      <member refid="classfys_1_1arena_1_1_priority_order_list_1a39e71bcfac4ce882cca7504536ba2122" prot="public" virt="non-virtual"><scope>PriorityOrderListPassThrough</scope><name>getNext</name></member>
+      <member refid="classfys_1_1arena_1_1_priority_order_list_1ab5311726c30e5b7923da3360c890ddfd" prot="public" virt="non-virtual"><scope>PriorityOrderListPassThrough</scope><name>getTurnNumber</name></member>
+      <member refid="classfys_1_1arena_1_1_priority_order_list_1adc1e8229ffbc1124cd33e3b1840791d6" prot="public" virt="non-virtual"><scope>PriorityOrderListPassThrough</scope><name>PriorityOrderList</name></member>
+      <member refid="classfys_1_1arena_1_1_priority_order_list_1a517557fc8c0e2e4c06dc889546884244" prot="public" virt="non-virtual"><scope>PriorityOrderListPassThrough</scope><name>PriorityOrderList</name></member>
+      <member refid="classfys_1_1arena_1_1_priority_order_list_1a51adec2200b483e253be8ab37b926546" prot="public" virt="non-virtual"><scope>PriorityOrderListPassThrough</scope><name>removeParticipantFromList</name></member>
+      <member refid="class_priority_order_list_pass_through_1aa95e358b7d3015ac774242409699ce54" prot="public" virt="non-virtual"><scope>PriorityOrderListPassThrough</scope><name>sortBaseAndCalculatePriority</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,31 @@
+\hypertarget{classfys_1_1util_1_1_key}{}\doxysection{fys\+::util\+::Key Class Reference}
+\label{classfys_1_1util_1_1_key}\index{fys::util::Key@{fys::util::Key}}
+
+
+{\ttfamily \#include $<$Key.\+hh$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classfys_1_1util_1_1_key_a8214ac574f05bc58f23474816e02baa9}\label{classfys_1_1util_1_1_key_a8214ac574f05bc58f23474816e02baa9}} 
+{\bfseries Key} (unsigned index)
+\item 
+\mbox{\Hypertarget{classfys_1_1util_1_1_key_a99dee83e2f60e355bc6f7f1679c7907c}\label{classfys_1_1util_1_1_key_a99dee83e2f60e355bc6f7f1679c7907c}} 
+bool {\bfseries operator==} (const \mbox{\hyperlink{classfys_1_1util_1_1_key}{Key}} \&other)
+\item 
+\mbox{\Hypertarget{classfys_1_1util_1_1_key_a13bfbc06373bfc30a299d472fc323369}\label{classfys_1_1util_1_1_key_a13bfbc06373bfc30a299d472fc323369}} 
+unsigned {\bfseries get\+Index} () const
+\item 
+\mbox{\Hypertarget{classfys_1_1util_1_1_key_a2b27b1abace1af803ecd4e4ebbbf8371}\label{classfys_1_1util_1_1_key_a2b27b1abace1af803ecd4e4ebbbf8371}} 
+{\footnotesize template$<$typename Display\+Policy $>$ }\\void {\bfseries display} (Display\+Policy policy)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classfys_1_1util_1_1_key}{Key}} used as token At creation will create a token of 8 characters that will be initialized using the address of the \mbox{\hyperlink{classfys_1_1util_1_1_key}{Key}} object as base. Hide the array index (index that the player data are in) inside the token.
+
+The encoding follow this rule\+: $<$offset until=\char`\"{}\char`\"{} index=\char`\"{}\char`\"{}$>$ $<$random$>$ $<$index$>$ one char K\+E\+Y\+\_\+\+S\+I\+ZE -\/ (1 + index size) (K\+E\+Y\+S\+I\+ZE -\/ offset) 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/services/common/include/Key.\+hh\end{DoxyCompactItemize}

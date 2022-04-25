@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1fb_1_1_reply_frame_builder" kind="struct" language="C++" prot="public">
+    <compoundname>fys::fb::ReplyFrameBuilder</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1fb_1_1_reply_frame_builder_1a70837df2e31bb47c62029d9edb9e1129" prot="public" static="no" mutable="no">
+        <type>flatbuffers::FlatBufferBuilder &amp;</type>
+        <definition>flatbuffers::FlatBufferBuilder&amp; fys::fb::ReplyFrameBuilder::fbb_</definition>
+        <argsstring></argsstring>
+        <name>fbb_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="213" column="34" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="213" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1fb_1_1_reply_frame_builder_1a00f9e183bf296b0f4ff7d9b6265701e0" prot="public" static="no" mutable="no">
+        <type>flatbuffers::uoffset_t</type>
+        <definition>flatbuffers::uoffset_t fys::fb::ReplyFrameBuilder::start_</definition>
+        <argsstring></argsstring>
+        <name>start_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="214" column="26" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="214" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfys_1_1fb_1_1_reply_frame_builder_1a919ae665705ba9744ee2cde9d6c628e0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::ReplyFrameBuilder::add_typeReply</definition>
+        <argsstring>(fys::fb::TypeReply typeReply)</argsstring>
+        <name>add_typeReply</name>
+        <param>
+          <type>fys::fb::TypeReply</type>
+          <declname>typeReply</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="215" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="215" bodyend="217"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_reply_frame_builder_1ac1d81a01ca255209b82f266590deed88" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::ReplyFrameBuilder::add_content_type</definition>
+        <argsstring>(fys::fb::Content content_type)</argsstring>
+        <name>add_content_type</name>
+        <param>
+          <type>fys::fb::Content</type>
+          <declname>content_type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="218" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="218" bodyend="220"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_reply_frame_builder_1afa983e307a34377ec8d470898cd09ba4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::ReplyFrameBuilder::add_content</definition>
+        <argsstring>(flatbuffers::Offset&lt; void &gt; content)</argsstring>
+        <name>add_content</name>
+        <param>
+          <type>flatbuffers::Offset&lt; void &gt;</type>
+          <declname>content</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="221" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="221" bodyend="223"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_reply_frame_builder_1af1464a4fc77b89123e9061042c82b394" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::fb::ReplyFrameBuilder::ReplyFrameBuilder</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb)</argsstring>
+        <name>ReplyFrameBuilder</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="224" column="12" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="224" bodyend="227"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_reply_frame_builder_1aad04c579421d335908619cf395ba1af3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfys_1_1fb_1_1_reply_frame_builder" kindref="compound">ReplyFrameBuilder</ref> &amp;</type>
+        <definition>ReplyFrameBuilder&amp; fys::fb::ReplyFrameBuilder::operator=</definition>
+        <argsstring>(const ReplyFrameBuilder &amp;)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="structfys_1_1fb_1_1_reply_frame_builder" kindref="compound">ReplyFrameBuilder</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="228" column="21"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_reply_frame_builder_1a9b5beed3f96fb1a7c08d40f3c521fdfb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; ReplyFrame &gt;</type>
+        <definition>flatbuffers::Offset&lt;ReplyFrame&gt; fys::fb::ReplyFrameBuilder::Finish</definition>
+        <argsstring>()</argsstring>
+        <name>Finish</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="229" column="23" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="229" bodyend="233"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="212" column="24" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="212" bodyend="234"/>
+    <listofallmembers>
+      <member refid="structfys_1_1fb_1_1_reply_frame_builder_1afa983e307a34377ec8d470898cd09ba4" prot="public" virt="non-virtual"><scope>fys::fb::ReplyFrameBuilder</scope><name>add_content</name></member>
+      <member refid="structfys_1_1fb_1_1_reply_frame_builder_1ac1d81a01ca255209b82f266590deed88" prot="public" virt="non-virtual"><scope>fys::fb::ReplyFrameBuilder</scope><name>add_content_type</name></member>
+      <member refid="structfys_1_1fb_1_1_reply_frame_builder_1a919ae665705ba9744ee2cde9d6c628e0" prot="public" virt="non-virtual"><scope>fys::fb::ReplyFrameBuilder</scope><name>add_typeReply</name></member>
+      <member refid="structfys_1_1fb_1_1_reply_frame_builder_1a70837df2e31bb47c62029d9edb9e1129" prot="public" virt="non-virtual"><scope>fys::fb::ReplyFrameBuilder</scope><name>fbb_</name></member>
+      <member refid="structfys_1_1fb_1_1_reply_frame_builder_1a9b5beed3f96fb1a7c08d40f3c521fdfb" prot="public" virt="non-virtual"><scope>fys::fb::ReplyFrameBuilder</scope><name>Finish</name></member>
+      <member refid="structfys_1_1fb_1_1_reply_frame_builder_1aad04c579421d335908619cf395ba1af3" prot="public" virt="non-virtual"><scope>fys::fb::ReplyFrameBuilder</scope><name>operator=</name></member>
+      <member refid="structfys_1_1fb_1_1_reply_frame_builder_1af1464a4fc77b89123e9061042c82b394" prot="public" virt="non-virtual"><scope>fys::fb::ReplyFrameBuilder</scope><name>ReplyFrameBuilder</name></member>
+      <member refid="structfys_1_1fb_1_1_reply_frame_builder_1a00f9e183bf296b0f4ff7d9b6265701e0" prot="public" virt="non-virtual"><scope>fys::fb::ReplyFrameBuilder</scope><name>start_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

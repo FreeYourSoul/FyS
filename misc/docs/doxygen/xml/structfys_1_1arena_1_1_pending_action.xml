@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1arena_1_1_pending_action" kind="struct" language="C++" prot="public">
+    <compoundname>fys::arena::PendingAction</compoundname>
+    <includes refid="_team_member_8hh" local="no">TeamMember.hh</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_pending_action_1a757c773c3e966879b9d9e5cdead47635" prot="public" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint fys::arena::PendingAction::idAction</definition>
+        <argsstring></argsstring>
+        <name>idAction</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/TeamMember.hh" line="76" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/TeamMember.hh" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_pending_action_1ad00312735f62834d7271d1cc5720c11b" prot="public" static="no" mutable="no">
+        <type>std::optional&lt; TargetType &gt;</type>
+        <definition>std::optional&lt;TargetType&gt; fys::arena::PendingAction::target</definition>
+        <argsstring></argsstring>
+        <name>target</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/TeamMember.hh" line="77" column="15" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/TeamMember.hh" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Pending actions of a team member are defined by<itemizedlist>
+<listitem><para>the id of the action (mapped as index to the vector TeamMember::_actionDoable)</para>
+</listitem><listitem><para>a target type defined in the alias fys::arena::TargetType </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/TeamMember.hh" line="75" column="20" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/TeamMember.hh" bodystart="75" bodyend="78"/>
+    <listofallmembers>
+      <member refid="structfys_1_1arena_1_1_pending_action_1a757c773c3e966879b9d9e5cdead47635" prot="public" virt="non-virtual"><scope>fys::arena::PendingAction</scope><name>idAction</name></member>
+      <member refid="structfys_1_1arena_1_1_pending_action_1ad00312735f62834d7271d1cc5720c11b" prot="public" virt="non-virtual"><scope>fys::arena::PendingAction</scope><name>target</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

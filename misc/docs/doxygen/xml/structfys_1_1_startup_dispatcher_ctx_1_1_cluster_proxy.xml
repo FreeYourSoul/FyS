@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1_startup_dispatcher_ctx_1_1_cluster_proxy" kind="struct" language="C++" prot="private">
+    <compoundname>fys::StartupDispatcherCtx::ClusterProxy</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1_startup_dispatcher_ctx_1_1_cluster_proxy_1a94dc4f5552233db438384e4e53976635" prot="public" static="no" mutable="no">
+        <type>ushort</type>
+        <definition>ushort fys::StartupDispatcherCtx::ClusterProxy::frontendPort</definition>
+        <argsstring></argsstring>
+        <name>frontendPort</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="56" column="20" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1_startup_dispatcher_ctx_1_1_cluster_proxy_1a272160d15e1ffb65295c6bd05677562d" prot="public" static="no" mutable="no">
+        <type>ushort</type>
+        <definition>ushort fys::StartupDispatcherCtx::ClusterProxy::backendPort</definition>
+        <argsstring></argsstring>
+        <name>backendPort</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="57" column="20" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1_startup_dispatcher_ctx_1_1_cluster_proxy_1a86b26c4fe6ef3756bcad2735884ecbee" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string fys::StartupDispatcherCtx::ClusterProxy::frontendAddress</definition>
+        <argsstring></argsstring>
+        <name>frontendAddress</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="58" column="25" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1_startup_dispatcher_ctx_1_1_cluster_proxy_1ab06db8d6972a403514baf3cbcc38b787" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string fys::StartupDispatcherCtx::ClusterProxy::backendAddress</definition>
+        <argsstring></argsstring>
+        <name>backendAddress</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="59" column="25" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="55" column="27" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="55" bodyend="60"/>
+    <listofallmembers>
+      <member refid="structfys_1_1_startup_dispatcher_ctx_1_1_cluster_proxy_1ab06db8d6972a403514baf3cbcc38b787" prot="public" virt="non-virtual"><scope>fys::StartupDispatcherCtx::ClusterProxy</scope><name>backendAddress</name></member>
+      <member refid="structfys_1_1_startup_dispatcher_ctx_1_1_cluster_proxy_1a272160d15e1ffb65295c6bd05677562d" prot="public" virt="non-virtual"><scope>fys::StartupDispatcherCtx::ClusterProxy</scope><name>backendPort</name></member>
+      <member refid="structfys_1_1_startup_dispatcher_ctx_1_1_cluster_proxy_1a86b26c4fe6ef3756bcad2735884ecbee" prot="public" virt="non-virtual"><scope>fys::StartupDispatcherCtx::ClusterProxy</scope><name>frontendAddress</name></member>
+      <member refid="structfys_1_1_startup_dispatcher_ctx_1_1_cluster_proxy_1a94dc4f5552233db438384e4e53976635" prot="public" virt="non-virtual"><scope>fys::StartupDispatcherCtx::ClusterProxy</scope><name>frontendPort</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

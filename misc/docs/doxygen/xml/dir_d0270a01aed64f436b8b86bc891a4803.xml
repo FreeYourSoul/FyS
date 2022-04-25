@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_d0270a01aed64f436b8b86bc891a4803" kind="dir">
+    <compoundname>/home/FyS/Project/FyS/services/arena/include/fightingPit</compoundname>
+    <innerdir refid="dir_10f1762d56b44ed7fe63212d914f288d">/home/FyS/Project/FyS/services/arena/include/fightingPit/contender</innerdir>
+    <innerdir refid="dir_508c702d3a34116e9c296758b4e27746">/home/FyS/Project/FyS/services/arena/include/fightingPit/data</innerdir>
+    <innerdir refid="dir_7ab64dabf0f7efb6f0253246ebe126f5">/home/FyS/Project/FyS/services/arena/include/fightingPit/team</innerdir>
+    <innerfile refid="_fighting_pit_8hh">FightingPit.hh</innerfile>
+    <innerfile refid="_fighting_pit_announcer_8hh">FightingPitAnnouncer.hh</innerfile>
+    <innerfile refid="_fighting_pit_layout_8hh">FightingPitLayout.hh</innerfile>
+    <innerfile refid="_hexagon_side_8hh">HexagonSide.hh</innerfile>
+    <innerfile refid="_priority_order_list_8hh">PriorityOrderList.hh</innerfile>
+    <innerfile refid="_rewards_8hh">Rewards.hh</innerfile>
+    <innerfile refid="_side_battle_8hh">SideBattle.hh</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/"/>
+  </compounddef>
+</doxygen>

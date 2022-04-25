@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="services_2arena_2_r_e_a_d_m_e_8md" kind="file" language="Markdown">
+    <compoundname>README.md</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>Arena<sp/>Service</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>service<sp/>is<sp/>the<sp/>one<sp/>managing<sp/>battle<sp/>for<sp/>FyS<sp/>Online<sp/>(MMORPG).<sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal">More<sp/>information<sp/>on<sp/>the<sp/>[documentation<sp/>part].</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>TODO</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*<sp/>Create<sp/>the<sp/>internal<sp/>(interprocess)<sp/>zmq<sp/>communication<sp/>channel<sp/>(even<sp/>without<sp/>threading<sp/>pool)<sp/>to<sp/>read<sp/>from<sp/>the<sp/>FightingPit</highlight></codeline>
+<codeline><highlight class="normal">*<sp/>Implement<sp/>a<sp/>first<sp/>fighting<sp/>version<sp/>without<sp/>multiple<sp/>without<sp/>multiple<sp/>battles.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>*<sp/>Make<sp/>one<sp/>Arena<sp/>Worker<sp/>by<sp/>default.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>*<sp/>Implement<sp/>chai<sp/>scripting</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Minimum<sp/>script<sp/>call<sp/>possible<sp/>in<sp/>a<sp/>first<sp/>place.<sp/>Monster<sp/>will<sp/>have<sp/>their<sp/>script<sp/>fully<sp/>loaded<sp/>and<sp/>have<sp/>a<sp/>&quot;executeAction&quot;<sp/>function<sp/>that<sp/>will<sp/>be<sp/>called<sp/>from<sp/>the<sp/>cpp</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Players<sp/>will<sp/>have<sp/>to<sp/>launch<sp/>chai<sp/>script<sp/>to<sp/>execute<sp/>actions<sp/>(no<sp/>c++<sp/>hard<sp/>coded<sp/>action)<sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Each<sp/>chai<sp/>scripts<sp/>need<sp/>to<sp/>be<sp/>tested<sp/>unitarly<sp/>by<sp/>a<sp/>cpp<sp/>test<sp/>case<sp/>which<sp/>has<sp/>to<sp/>be<sp/>developped<sp/>in<sp/>a<sp/>way<sp/>that<sp/>it<sp/>will<sp/>be<sp/>reusable.</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>When<sp/>scripting<sp/>are<sp/>done<sp/>and<sp/>tested,<sp/>create<sp/>a<sp/>repository<sp/>to<sp/>store<sp/>those<sp/>scripts<sp/>(and<sp/>all<sp/>the<sp/>upcoming<sp/>ones).<sp/>And<sp/>link<sp/>them<sp/>to<sp/>the<sp/>repository<sp/>FyS<sp/>via<sp/>a<sp/>submodule.<sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>*<sp/>Check<sp/>if<sp/>it<sp/>is<sp/>faster<sp/>to<sp/>return<sp/>a<sp/>cpp<sp/>function<sp/>from<sp/>chaiscript<sp/>and<sp/>execute<sp/>it<sp/>compared<sp/>to<sp/>executing<sp/>the<sp/>code<sp/>in<sp/>chaiscript.</highlight></codeline>
+<codeline><highlight class="normal">*<sp/>Unit<sp/>test<sp/>the<sp/>fighting<sp/>mechanism<sp/>with<sp/>mocked<sp/>scripting</highlight></codeline>
+<codeline><highlight class="normal">*<sp/>Test<sp/>external<sp/>authentication/implement<sp/>messaging<sp/>of<sp/>notifications<sp/>to<sp/>players</highlight></codeline>
+<codeline><highlight class="normal">*<sp/>Implement<sp/>thread<sp/>pool<sp/>into<sp/>each<sp/>worker<sp/>to<sp/>enable<sp/>multiple<sp/>fightingPit<sp/>per<sp/>service</highlight></codeline>
+<codeline></codeline>
+    </programlisting>
+    <location file="/home/FyS/Project/FyS/services/arena/README.md"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespace_f_seam_1_1_connection_handler" kind="namespace" language="C++">
+    <compoundname>FSeam::ConnectionHandler</compoundname>
+    <innerclass refid="struct_f_seam_1_1_connection_handler_1_1send_message_to_dispatcher" prot="public">FSeam::ConnectionHandler::sendMessageToDispatcher</innerclass>
+    <innerclass refid="struct_f_seam_1_1_connection_handler_1_1setup_connection_manager" prot="public">FSeam::ConnectionHandler::setupConnectionManager</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/FSeamMockData.hpp" line="35" column="27"/>
+  </compounddef>
+</doxygen>

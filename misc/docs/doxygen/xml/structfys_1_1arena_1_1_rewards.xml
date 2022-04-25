@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1arena_1_1_rewards" kind="struct" language="C++" prot="public">
+    <compoundname>fys::arena::Rewards</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_rewards_1a4fcd59c337d14d5912ab1cfa0199df94" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; fys::arena::Rewards::keys</definition>
+        <argsstring></argsstring>
+        <name>keys</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/Rewards.hh" line="30" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/Rewards.hh" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_rewards_1a65d622043436c06080fce40e3a3942c2" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; uint &gt;</type>
+        <definition>std::vector&lt;uint&gt; fys::arena::Rewards::quantity</definition>
+        <argsstring></argsstring>
+        <name>quantity</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/Rewards.hh" line="31" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/Rewards.hh" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/Rewards.hh" line="29" column="14" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/Rewards.hh" bodystart="29" bodyend="32"/>
+    <listofallmembers>
+      <member refid="structfys_1_1arena_1_1_rewards_1a4fcd59c337d14d5912ab1cfa0199df94" prot="public" virt="non-virtual"><scope>fys::arena::Rewards</scope><name>keys</name></member>
+      <member refid="structfys_1_1arena_1_1_rewards_1a65d622043436c06080fce40e3a3942c2" prot="public" virt="non-virtual"><scope>fys::arena::Rewards</scope><name>quantity</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

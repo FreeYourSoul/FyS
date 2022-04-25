@@ -1,0 +1,273 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1ws_1_1_world_server_context" kind="class" language="C++" prot="public">
+    <compoundname>fys::ws::WorldServerContext</compoundname>
+    <basecompoundref refid="classfys_1_1common_1_1_service_context_base" prot="private" virt="non-virtual">fys::common::ServiceContextBase</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfys_1_1ws_1_1_world_server_context_1a54a531550344c42039e17e5d999d02c7" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string fys::ws::WorldServerContext::_serverCode</definition>
+        <argsstring></argsstring>
+        <name>_serverCode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/WorldServerContext.hh" line="60" column="13" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/WorldServerContext.hh" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1ws_1_1_world_server_context_1af2ca7eba469734c77f6c25b36a9d0559" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string fys::ws::WorldServerContext::_tmxMapPath</definition>
+        <argsstring></argsstring>
+        <name>_tmxMapPath</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/WorldServerContext.hh" line="61" column="13" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/WorldServerContext.hh" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1ws_1_1_world_server_context_1a37114fa5fab356d5c4cc94815f5cbb8b" prot="private" static="no" mutable="no">
+        <type>std::pair&lt; double, double &gt;</type>
+        <definition>std::pair&lt;double, double&gt; fys::ws::WorldServerContext::_serverXBoundaries</definition>
+        <argsstring></argsstring>
+        <name>_serverXBoundaries</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/WorldServerContext.hh" line="62" column="11" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/WorldServerContext.hh" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1ws_1_1_world_server_context_1a4f27172e751531ff10854ebf3d0aa0e7" prot="private" static="no" mutable="no">
+        <type>std::pair&lt; double, double &gt;</type>
+        <definition>std::pair&lt;double, double&gt; fys::ws::WorldServerContext::_serverYBoundaries</definition>
+        <argsstring></argsstring>
+        <name>_serverYBoundaries</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/WorldServerContext.hh" line="63" column="11" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/WorldServerContext.hh" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1ws_1_1_world_server_context_1ad57a2ee545d047a9a31b6ad7aab2bfe1" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classfys_1_1ws_1_1_proximity_server" kindref="compound">ProximityServer</ref> &gt;</type>
+        <definition>std::vector&lt;ProximityServer&gt; fys::ws::WorldServerContext::_serverProximity</definition>
+        <argsstring></argsstring>
+        <name>_serverProximity</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/WorldServerContext.hh" line="64" column="13" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/WorldServerContext.hh" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1ws_1_1_world_server_context_1afd7f21bd09f99e83be61777438f99b74" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fys::ws::WorldServerContext::WorldServerContext</definition>
+        <argsstring>(int ac, const char *const *av)</argsstring>
+        <name>WorldServerContext</name>
+        <param>
+          <type>int</type>
+          <declname>ac</declname>
+        </param>
+        <param>
+          <type>const char *const *</type>
+          <declname>av</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/WorldServerContext.hh" line="37" column="1" bodyfile="/home/FyS/Project/FyS/services/worldserver/src/WorldServerContext.cpp" bodystart="34" bodyend="42"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1ws_1_1_world_server_context_1af6c3795ead6c38134ac11d43f5724597" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string fys::ws::WorldServerContext::toString</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>toString</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/WorldServerContext.hh" line="40" column="1" bodyfile="/home/FyS/Project/FyS/services/worldserver/src/WorldServerContext.cpp" bodystart="76" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1ws_1_1_world_server_context_1af16ab8802809924a9186708b44fee9a7" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string fys::ws::WorldServerContext::getDispatcherSubConnectionString</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getDispatcherSubConnectionString</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/WorldServerContext.hh" line="42" column="1" bodyfile="/home/FyS/Project/FyS/services/worldserver/src/WorldServerContext.cpp" bodystart="143" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1ws_1_1_world_server_context_1a0bdbb486f1cf4bd21119e2cb19019a6f" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string fys::ws::WorldServerContext::getDispatcherConnectionString</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getDispatcherConnectionString</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/WorldServerContext.hh" line="44" column="1" bodyfile="/home/FyS/Project/FyS/services/worldserver/src/WorldServerContext.cpp" bodystart="137" bodyend="140"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1ws_1_1_world_server_context_1a4cb56de026a075f53fd46406bed68784" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const std::string &amp;</type>
+        <definition>const std::string &amp; fys::ws::WorldServerContext::getServerCode</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getServerCode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/WorldServerContext.hh" line="46" column="1" bodyfile="/home/FyS/Project/FyS/services/worldserver/src/WorldServerContext.cpp" bodystart="107" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1ws_1_1_world_server_context_1a4ca5f76fae418a12d1919c333db404e1" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const std::string &amp;</type>
+        <definition>const std::string &amp; fys::ws::WorldServerContext::getTMXMapPath</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getTMXMapPath</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/WorldServerContext.hh" line="48" column="1" bodyfile="/home/FyS/Project/FyS/services/worldserver/src/WorldServerContext.cpp" bodystart="113" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1ws_1_1_world_server_context_1a465408e935fe8fe2a4e4113b9db69542" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const std::pair&lt; double, double &gt; &amp;</type>
+        <definition>const std::pair&lt; double, double &gt; &amp; fys::ws::WorldServerContext::getServerXBoundaries</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getServerXBoundaries</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/WorldServerContext.hh" line="50" column="1" bodyfile="/home/FyS/Project/FyS/services/worldserver/src/WorldServerContext.cpp" bodystart="125" bodyend="128"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1ws_1_1_world_server_context_1a3564c74a8c1053bcf76d3795b00fe27b" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const std::pair&lt; double, double &gt; &amp;</type>
+        <definition>const std::pair&lt; double, double &gt; &amp; fys::ws::WorldServerContext::getServerYBoundaries</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getServerYBoundaries</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/WorldServerContext.hh" line="52" column="1" bodyfile="/home/FyS/Project/FyS/services/worldserver/src/WorldServerContext.cpp" bodystart="131" bodyend="134"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1ws_1_1_world_server_context_1a2f4ae88445cff9de8f5ad6995727642b" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>const std::vector&lt; <ref refid="classfys_1_1ws_1_1_proximity_server" kindref="compound">ProximityServer</ref> &gt; &amp;</type>
+        <definition>const std::vector&lt; ProximityServer &gt; &amp; fys::ws::WorldServerContext::getServerProximity</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getServerProximity</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/WorldServerContext.hh" line="54" column="1" bodyfile="/home/FyS/Project/FyS/services/worldserver/src/WorldServerContext.cpp" bodystart="119" bodyend="122"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classfys_1_1ws_1_1_world_server_context_1ac8abb43f35b922993e93a2efbe6bf8ab" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::ws::WorldServerContext::initWsContextWithJson</definition>
+        <argsstring>(nlohmann::json &amp;json)</argsstring>
+        <name>initWsContextWithJson</name>
+        <param>
+          <type>nlohmann::json &amp;</type>
+          <declname>json</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/WorldServerContext.hh" line="57" column="6" bodyfile="/home/FyS/Project/FyS/services/worldserver/src/WorldServerContext.cpp" bodystart="45" bodyend="73"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>fys::common::ServiceContextBase</label>
+        <link refid="classfys_1_1common_1_1_service_context_base"/>
+      </node>
+      <node id="1">
+        <label>fys::ws::WorldServerContext</label>
+        <link refid="classfys_1_1ws_1_1_world_server_context"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>fys::common::ServiceContextBase</label>
+        <link refid="classfys_1_1common_1_1_service_context_base"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>_dispatcherData</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>fys::ws::WorldServerContext</label>
+        <link refid="classfys_1_1ws_1_1_world_server_context"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>fys::common::DispatcherData</label>
+        <link refid="structfys_1_1common_1_1_dispatcher_data"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/FyS/Project/FyS/services/worldserver/include/WorldServerContext.hh" line="34" column="57" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/WorldServerContext.hh" bodystart="34" bodyend="66"/>
+    <listofallmembers>
+      <member refid="classfys_1_1ws_1_1_world_server_context_1a54a531550344c42039e17e5d999d02c7" prot="private" virt="non-virtual"><scope>fys::ws::WorldServerContext</scope><name>_serverCode</name></member>
+      <member refid="classfys_1_1ws_1_1_world_server_context_1ad57a2ee545d047a9a31b6ad7aab2bfe1" prot="private" virt="non-virtual"><scope>fys::ws::WorldServerContext</scope><name>_serverProximity</name></member>
+      <member refid="classfys_1_1ws_1_1_world_server_context_1a37114fa5fab356d5c4cc94815f5cbb8b" prot="private" virt="non-virtual"><scope>fys::ws::WorldServerContext</scope><name>_serverXBoundaries</name></member>
+      <member refid="classfys_1_1ws_1_1_world_server_context_1a4f27172e751531ff10854ebf3d0aa0e7" prot="private" virt="non-virtual"><scope>fys::ws::WorldServerContext</scope><name>_serverYBoundaries</name></member>
+      <member refid="classfys_1_1ws_1_1_world_server_context_1af2ca7eba469734c77f6c25b36a9d0559" prot="private" virt="non-virtual"><scope>fys::ws::WorldServerContext</scope><name>_tmxMapPath</name></member>
+      <member refid="classfys_1_1ws_1_1_world_server_context_1a0bdbb486f1cf4bd21119e2cb19019a6f" prot="public" virt="non-virtual"><scope>fys::ws::WorldServerContext</scope><name>getDispatcherConnectionString</name></member>
+      <member refid="classfys_1_1ws_1_1_world_server_context_1af16ab8802809924a9186708b44fee9a7" prot="public" virt="non-virtual"><scope>fys::ws::WorldServerContext</scope><name>getDispatcherSubConnectionString</name></member>
+      <member refid="classfys_1_1ws_1_1_world_server_context_1a4cb56de026a075f53fd46406bed68784" prot="public" virt="non-virtual"><scope>fys::ws::WorldServerContext</scope><name>getServerCode</name></member>
+      <member refid="classfys_1_1ws_1_1_world_server_context_1a2f4ae88445cff9de8f5ad6995727642b" prot="public" virt="non-virtual"><scope>fys::ws::WorldServerContext</scope><name>getServerProximity</name></member>
+      <member refid="classfys_1_1ws_1_1_world_server_context_1a465408e935fe8fe2a4e4113b9db69542" prot="public" virt="non-virtual"><scope>fys::ws::WorldServerContext</scope><name>getServerXBoundaries</name></member>
+      <member refid="classfys_1_1ws_1_1_world_server_context_1a3564c74a8c1053bcf76d3795b00fe27b" prot="public" virt="non-virtual"><scope>fys::ws::WorldServerContext</scope><name>getServerYBoundaries</name></member>
+      <member refid="classfys_1_1ws_1_1_world_server_context_1a4ca5f76fae418a12d1919c333db404e1" prot="public" virt="non-virtual"><scope>fys::ws::WorldServerContext</scope><name>getTMXMapPath</name></member>
+      <member refid="classfys_1_1ws_1_1_world_server_context_1ac8abb43f35b922993e93a2efbe6bf8ab" prot="private" virt="non-virtual"><scope>fys::ws::WorldServerContext</scope><name>initWsContextWithJson</name></member>
+      <member refid="classfys_1_1ws_1_1_world_server_context_1af6c3795ead6c38134ac11d43f5724597" prot="public" virt="non-virtual"><scope>fys::ws::WorldServerContext</scope><name>toString</name></member>
+      <member refid="classfys_1_1ws_1_1_world_server_context_1afd7f21bd09f99e83be61777438f99b74" prot="public" virt="non-virtual"><scope>fys::ws::WorldServerContext</scope><name>WorldServerContext</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

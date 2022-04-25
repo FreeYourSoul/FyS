@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_40d574b74d515a04d0ea398cb7faaf73" kind="dir">
+    <compoundname>/home/FyS/Project/FyS/services/arena/src/fightingPit/contender</compoundname>
+    <innerfile refid="_contender_scripting_8cpp">ContenderScripting.cpp</innerfile>
+    <innerfile refid="_fighting_contender_8cpp">FightingContender.cpp</innerfile>
+    <innerfile refid="_pit_contenders_8cpp">PitContenders.cpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/src/fightingPit/contender/"/>
+  </compounddef>
+</doxygen>

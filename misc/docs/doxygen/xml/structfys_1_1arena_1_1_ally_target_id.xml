@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1arena_1_1_ally_target_id" kind="struct" language="C++" prot="public">
+    <compoundname>fys::arena::AllyTargetId</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_ally_target_id_1af254b9d6f5727208dad583fe5c1888c0" prot="public" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint fys::arena::AllyTargetId::v</definition>
+        <argsstring></argsstring>
+        <name>v</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/TeamMember.hh" line="52" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/TeamMember.hh" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/TeamMember.hh" line="51" column="19" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/TeamMember.hh" bodystart="51" bodyend="53"/>
+    <listofallmembers>
+      <member refid="structfys_1_1arena_1_1_ally_target_id_1af254b9d6f5727208dad583fe5c1888c0" prot="public" virt="non-virtual"><scope>fys::arena::AllyTargetId</scope><name>v</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

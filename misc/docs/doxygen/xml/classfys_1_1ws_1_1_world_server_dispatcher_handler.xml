@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1ws_1_1_world_server_dispatcher_handler" kind="class" language="C++" prot="public">
+    <compoundname>fys::ws::WorldServerDispatcherHandler</compoundname>
+    <basecompoundref refid="classfys_1_1_dispatcher_handler_base" prot="protected" virt="non-virtual">fys::DispatcherHandlerBase</basecompoundref>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1ws_1_1_world_server_dispatcher_handler_1aea5c6389c38915aa0e85ec3d2e48f76f" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::ws::WorldServerDispatcherHandler::processInputMessage</definition>
+        <argsstring>(zmq::multipart_t &amp;&amp;msg, network::DispatcherConnectionManager &amp;manager) noexcept</argsstring>
+        <name>processInputMessage</name>
+        <param>
+          <type>zmq::multipart_t &amp;&amp;</type>
+          <declname>msg</declname>
+        </param>
+        <param>
+          <type><ref refid="classfys_1_1network_1_1_dispatcher_connection_manager" kindref="compound">network::DispatcherConnectionManager</ref> &amp;</type>
+          <declname>manager</declname>
+        </param>
+        <briefdescription>
+<para>This method is processing the inputMessage and dispatch it appropriately among the peers connected to the DEALER socket. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/include/WorldServerDispatcherHandler.hh" line="47" column="14" bodyfile="/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/src/WorldServerDispatcherHandler.cpp" bodystart="11" bodyend="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1ws_1_1_world_server_dispatcher_handler_1aa3ae7a1a89330ec835a0db46f7a2eaae" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::ws::WorldServerDispatcherHandler::processClusterMessage</definition>
+        <argsstring>(zmq::multipart_t &amp;&amp;msg, network::DispatcherConnectionManager &amp;manager) noexcept</argsstring>
+        <name>processClusterMessage</name>
+        <param>
+          <type>zmq::multipart_t &amp;&amp;</type>
+          <declname>msg</declname>
+        </param>
+        <param>
+          <type><ref refid="classfys_1_1network_1_1_dispatcher_connection_manager" kindref="compound">network::DispatcherConnectionManager</ref> &amp;</type>
+          <declname>manager</declname>
+        </param>
+        <briefdescription>
+<para>This method is dispatching the message. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/include/WorldServerDispatcherHandler.hh" line="52" column="14" bodyfile="/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/src/WorldServerDispatcherHandler.cpp" bodystart="17" bodyend="21"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>fys::ws::WorldServerDispatcherHandler</label>
+        <link refid="classfys_1_1ws_1_1_world_server_dispatcher_handler"/>
+        <childnode refid="2" relation="protected-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>fys::DispatcherHandlerBase</label>
+        <link refid="classfys_1_1_dispatcher_handler_base"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>fys::ws::WorldServerDispatcherHandler</label>
+        <link refid="classfys_1_1ws_1_1_world_server_dispatcher_handler"/>
+        <childnode refid="2" relation="protected-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>fys::DispatcherHandlerBase</label>
+        <link refid="classfys_1_1_dispatcher_handler_base"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/include/WorldServerDispatcherHandler.hh" line="41" column="71" bodyfile="/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/include/WorldServerDispatcherHandler.hh" bodystart="41" bodyend="54"/>
+    <listofallmembers>
+      <member refid="classfys_1_1_dispatcher_handler_base_1aacb192c18798171bd41d5002f93f4264" prot="protected" virt="non-virtual"><scope>fys::ws::WorldServerDispatcherHandler</scope><name>forwardMessageToFrontend</name></member>
+      <member refid="classfys_1_1ws_1_1_world_server_dispatcher_handler_1aa3ae7a1a89330ec835a0db46f7a2eaae" prot="public" virt="non-virtual"><scope>fys::ws::WorldServerDispatcherHandler</scope><name>processClusterMessage</name></member>
+      <member refid="classfys_1_1ws_1_1_world_server_dispatcher_handler_1aea5c6389c38915aa0e85ec3d2e48f76f" prot="public" virt="non-virtual"><scope>fys::ws::WorldServerDispatcherHandler</scope><name>processInputMessage</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

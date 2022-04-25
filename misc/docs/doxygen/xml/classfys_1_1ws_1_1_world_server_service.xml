@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1ws_1_1_world_server_service" kind="class" language="C++" prot="public">
+    <compoundname>fys::ws::WorldServerService</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfys_1_1ws_1_1_world_server_service_1a35b71ac4abcabfdfe01bf92f1825e5f0" prot="private" static="no" mutable="no">
+        <type><ref refid="classfys_1_1ws_1_1_world_server_engine" kindref="compound">fys::ws::WorldServerEngine</ref></type>
+        <definition>fys::ws::WorldServerEngine fys::ws::WorldServerService::_worldServer</definition>
+        <argsstring></argsstring>
+        <name>_worldServer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/WorldServerService.hh" line="43" column="28" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/WorldServerService.hh" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1ws_1_1_world_server_service_1ab1fe0fa10bcdb525c9da31bb10cb16a3" prot="private" static="no" mutable="no">
+        <type><ref refid="classfys_1_1ws_1_1_connection_handler" kindref="compound">fys::ws::ConnectionHandler</ref></type>
+        <definition>fys::ws::ConnectionHandler fys::ws::WorldServerService::_connectionHandler</definition>
+        <argsstring></argsstring>
+        <name>_connectionHandler</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/WorldServerService.hh" line="44" column="28" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/WorldServerService.hh" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1ws_1_1_world_server_service_1a5223a3c517a773bc335518c0331446f4" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fys::ws::WorldServerService::WorldServerService</definition>
+        <argsstring>(const WorldServerContext &amp;ctx)</argsstring>
+        <name>WorldServerService</name>
+        <param>
+          <type>const <ref refid="classfys_1_1ws_1_1_world_server_context" kindref="compound">WorldServerContext</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/WorldServerService.hh" line="35" column="10" bodyfile="/home/FyS/Project/FyS/services/worldserver/src/WorldServerService.cpp" bodystart="33" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1ws_1_1_world_server_service_1a61ea5b21df0f9a2d467f73611f187789" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::ws::WorldServerService::runServerLoop</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>runServerLoop</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/WorldServerService.hh" line="36" column="6" bodyfile="/home/FyS/Project/FyS/services/worldserver/src/WorldServerService.cpp" bodystart="41" bodyend="73"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classfys_1_1ws_1_1_world_server_service_1afa429636c0e1fc40596932d0768a6a4a" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::ws::WorldServerService::processMessage</definition>
+        <argsstring>(std::string &amp;&amp;idt, std::string &amp;&amp;token, const zmq::message_t &amp;content, const std::optional&lt; std::string &gt; &amp;internalMagic)</argsstring>
+        <name>processMessage</name>
+        <param>
+          <type>std::string &amp;&amp;</type>
+          <declname>idt</declname>
+        </param>
+        <param>
+          <type>std::string &amp;&amp;</type>
+          <declname>token</declname>
+        </param>
+        <param>
+          <type>const zmq::message_t &amp;</type>
+          <declname>content</declname>
+        </param>
+        <param>
+          <type>const std::optional&lt; std::string &gt; &amp;</type>
+          <declname>internalMagic</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/WorldServerService.hh" line="39" column="13" bodyfile="/home/FyS/Project/FyS/services/worldserver/src/WorldServerService.cpp" bodystart="76" bodyend="86"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/worldserver/include/WorldServerService.hh" line="32" column="25" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/WorldServerService.hh" bodystart="32" bodyend="45"/>
+    <listofallmembers>
+      <member refid="classfys_1_1ws_1_1_world_server_service_1ab1fe0fa10bcdb525c9da31bb10cb16a3" prot="private" virt="non-virtual"><scope>fys::ws::WorldServerService</scope><name>_connectionHandler</name></member>
+      <member refid="classfys_1_1ws_1_1_world_server_service_1a35b71ac4abcabfdfe01bf92f1825e5f0" prot="private" virt="non-virtual"><scope>fys::ws::WorldServerService</scope><name>_worldServer</name></member>
+      <member refid="classfys_1_1ws_1_1_world_server_service_1afa429636c0e1fc40596932d0768a6a4a" prot="private" virt="non-virtual"><scope>fys::ws::WorldServerService</scope><name>processMessage</name></member>
+      <member refid="classfys_1_1ws_1_1_world_server_service_1a61ea5b21df0f9a2d467f73611f187789" prot="public" virt="non-virtual"><scope>fys::ws::WorldServerService</scope><name>runServerLoop</name></member>
+      <member refid="classfys_1_1ws_1_1_world_server_service_1a5223a3c517a773bc335518c0331446f4" prot="public" virt="non-virtual"><scope>fys::ws::WorldServerService</scope><name>WorldServerService</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

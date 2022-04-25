@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1arena_1_1_worker_service_1_1_player_identifier" kind="struct" language="C++" prot="private">
+    <compoundname>fys::arena::WorkerService::PlayerIdentifier</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_worker_service_1_1_player_identifier_1a67d84a5fb925b0600585a806832ac2ae" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string fys::arena::WorkerService::PlayerIdentifier::userName</definition>
+        <argsstring></argsstring>
+        <name>userName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" line="63" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_worker_service_1_1_player_identifier_1a40d52e8f244d4e04038b485b2a207107" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string fys::arena::WorkerService::PlayerIdentifier::identifier</definition>
+        <argsstring></argsstring>
+        <name>identifier</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" line="64" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" line="62" column="23" bodyfile="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" bodystart="62" bodyend="65"/>
+    <listofallmembers>
+      <member refid="structfys_1_1arena_1_1_worker_service_1_1_player_identifier_1a40d52e8f244d4e04038b485b2a207107" prot="public" virt="non-virtual"><scope>fys::arena::WorkerService::PlayerIdentifier</scope><name>identifier</name></member>
+      <member refid="structfys_1_1arena_1_1_worker_service_1_1_player_identifier_1a67d84a5fb925b0600585a806832ac2ae" prot="public" virt="non-virtual"><scope>fys::arena::WorkerService::PlayerIdentifier</scope><name>userName</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -20,7 +20,7 @@ add_library(cml
         ${CMAKE_CURRENT_SOURCE_DIR}/src/CmlCopy.cpp)
 add_library(fys::cml ALIAS cml)
 target_include_directories(cml PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
-target_link_libraries(cml spdlog fmt::fmt dl stdc++fs)
+target_link_libraries(cml spdlog::spdlog fmt::fmt dl stdc++fs)
 target_compile_options(cml PRIVATE -Wall -Wpedantic -Wextra -Wno-deprecated-declarations)
 target_compile_features(cml PRIVATE cxx_std_20)
 

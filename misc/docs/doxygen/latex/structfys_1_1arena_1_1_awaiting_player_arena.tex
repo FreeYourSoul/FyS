@@ -1,0 +1,40 @@
+\hypertarget{structfys_1_1arena_1_1_awaiting_player_arena}{}\doxysection{fys\+::arena\+::Awaiting\+Player\+Arena Struct Reference}
+\label{structfys_1_1arena_1_1_awaiting_player_arena}\index{fys::arena::AwaitingPlayerArena@{fys::arena::AwaitingPlayerArena}}
+
+
+A Player is awaited whom could generate a new \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit}{Fighting\+Pit}} if \+\_\+fighting\+Pit\+Id is not set \mbox{\hyperlink{structfys_1_1arena_1_1_awaiting_player_arena}{Awaiting\+Player\+Arena}} represent a player that is the trigger of a new fighting pit or a join action of an existing one, it contains the information related to the arena that has to be generated (none required when joining).  
+
+
+
+
+{\ttfamily \#include $<$Arena\+Server\+Service.\+hh$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structfys_1_1arena_1_1_awaiting_player_arena_a5f310e67f258a1651127ab64e6442d97}\label{structfys_1_1arena_1_1_awaiting_player_arena_a5f310e67f258a1651127ab64e6442d97}} 
+bool {\bfseries has\+To\+Be\+Generated} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structfys_1_1arena_1_1_awaiting_player_arena_a621a9d3961b9228dd84e549b3a67baaa}\label{structfys_1_1arena_1_1_awaiting_player_arena_a621a9d3961b9228dd84e549b3a67baaa}} 
+std\+::string {\bfseries name\+Player}
+\item 
+\mbox{\Hypertarget{structfys_1_1arena_1_1_awaiting_player_arena_abcf107ee15aa9446c601cecc6a7de7b2}\label{structfys_1_1arena_1_1_awaiting_player_arena_abcf107ee15aa9446c601cecc6a7de7b2}} 
+std\+::string {\bfseries token}
+\item 
+\mbox{\Hypertarget{structfys_1_1arena_1_1_awaiting_player_arena_afac334acfc2daf885b245a8b0b8c0b8e}\label{structfys_1_1arena_1_1_awaiting_player_arena_afac334acfc2daf885b245a8b0b8c0b8e}} 
+unsigned {\bfseries fighting\+Pit\+Id} = 0
+\item 
+\mbox{\Hypertarget{structfys_1_1arena_1_1_awaiting_player_arena_a421d3737acbf869a32a695acac9f9df4}\label{structfys_1_1arena_1_1_awaiting_player_arena_a421d3737acbf869a32a695acac9f9df4}} 
+std\+::optional$<$ \mbox{\hyperlink{structfys_1_1arena_1_1_awaiting_arena}{Awaiting\+Arena}} $>$ {\bfseries gen}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A Player is awaited whom could generate a new \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit}{Fighting\+Pit}} if \+\_\+fighting\+Pit\+Id is not set \mbox{\hyperlink{structfys_1_1arena_1_1_awaiting_player_arena}{Awaiting\+Player\+Arena}} represent a player that is the trigger of a new fighting pit or a join action of an existing one, it contains the information related to the arena that has to be generated (none required when joining). 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/services/arena/include/Arena\+Server\+Service.\+hh\end{DoxyCompactItemize}

@@ -1,0 +1,68 @@
+\hypertarget{classfys_1_1arena_1_1_side_battle}{}\doxysection{fys\+::arena\+::Side\+Battle Class Reference}
+\label{classfys_1_1arena_1_1_side_battle}\index{fys::arena::SideBattle@{fys::arena::SideBattle}}
+
+
+Represent a battle on a specific side of one of the 3 hexagons.  
+
+
+
+
+{\ttfamily \#include $<$Side\+Battle.\+hh$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_side_battle_ab963e128698d2f129f0d31f23c6fd2a1}\label{classfys_1_1arena_1_1_side_battle_ab963e128698d2f129f0d31f23c6fd2a1}} 
+{\bfseries Side\+Battle} (\mbox{\hyperlink{classfys_1_1arena_1_1_pit_contenders}{Pit\+Contenders}} \&pit\+Contenders, \mbox{\hyperlink{classfys_1_1arena_1_1_ally_party_teams}{Ally\+Party\+Teams}} \&ally\+Party\+Teams, Hexagon\+Side\+::\+Orientation side)
+\item 
+\mbox{\hyperlink{structfys_1_1arena_1_1data_1_1_priority_elem}{data\+::\+Priority\+Elem}} \mbox{\hyperlink{classfys_1_1arena_1_1_side_battle_a8c52b3c38cfc67a561657c0207e9efef}{get\+Current\+Participant\+Turn}} (const std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point \&now, const std\+::chrono\+::milliseconds \&timer\+Interlude)
+\item 
+void \mbox{\hyperlink{classfys_1_1arena_1_1_side_battle_a0b3529526b593101db492e37c776c316}{erase\+Finished\+Alteration\+And\+Dead\+Characters\+From\+Turn\+List}} ()
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_side_battle_a75f1355e1b134fe60a7c737e8df1a51e}\label{classfys_1_1arena_1_1_side_battle_a75f1355e1b134fe60a7c737e8df1a51e}} 
+void {\bfseries add\+Participant\+In\+List} (uint id, int speed, bool is\+Contender)
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_side_battle_a54c8c60c43ed1047267e783616dc36c9}\label{classfys_1_1arena_1_1_side_battle_a54c8c60c43ed1047267e783616dc36c9}} 
+Hexagon\+Side\+::\+Orientation {\bfseries get\+Side} () const
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_side_battle_ad8c1f7770304ca1175795037614bb99e}\label{classfys_1_1arena_1_1_side_battle_ad8c1f7770304ca1175795037614bb99e}} 
+bool {\bfseries empty} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represent a battle on a specific side of one of the 3 hexagons. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfys_1_1arena_1_1_side_battle_a0b3529526b593101db492e37c776c316}\label{classfys_1_1arena_1_1_side_battle_a0b3529526b593101db492e37c776c316}} 
+\index{fys::arena::SideBattle@{fys::arena::SideBattle}!eraseFinishedAlterationAndDeadCharactersFromTurnList@{eraseFinishedAlterationAndDeadCharactersFromTurnList}}
+\index{eraseFinishedAlterationAndDeadCharactersFromTurnList@{eraseFinishedAlterationAndDeadCharactersFromTurnList}!fys::arena::SideBattle@{fys::arena::SideBattle}}
+\doxysubsubsection{\texorpdfstring{eraseFinishedAlterationAndDeadCharactersFromTurnList()}{eraseFinishedAlterationAndDeadCharactersFromTurnList()}}
+{\footnotesize\ttfamily void fys\+::arena\+::\+Side\+Battle\+::erase\+Finished\+Alteration\+And\+Dead\+Characters\+From\+Turn\+List (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Erase characters (contender or ally) from the \mbox{\hyperlink{classfys_1_1arena_1_1_priority_order_list}{Priority\+Order\+List}} that are dead. \mbox{\Hypertarget{classfys_1_1arena_1_1_side_battle_a8c52b3c38cfc67a561657c0207e9efef}\label{classfys_1_1arena_1_1_side_battle_a8c52b3c38cfc67a561657c0207e9efef}} 
+\index{fys::arena::SideBattle@{fys::arena::SideBattle}!getCurrentParticipantTurn@{getCurrentParticipantTurn}}
+\index{getCurrentParticipantTurn@{getCurrentParticipantTurn}!fys::arena::SideBattle@{fys::arena::SideBattle}}
+\doxysubsubsection{\texorpdfstring{getCurrentParticipantTurn()}{getCurrentParticipantTurn()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structfys_1_1arena_1_1data_1_1_priority_elem}{data\+::\+Priority\+Elem}} fys\+::arena\+::\+Side\+Battle\+::get\+Current\+Participant\+Turn (\begin{DoxyParamCaption}\item[{const std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point \&}]{now,  }\item[{const std\+::chrono\+::milliseconds \&}]{timer\+Interlude }\end{DoxyParamCaption})}
+
+Get the next participant in the fighting pit turn (can be either an N\+PC, or a contender) depending on their speed. This Calculation is made in the \mbox{\hyperlink{classfys_1_1arena_1_1_priority_order_list}{fys\+::arena\+::\+Priority\+Order\+List}}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em now} & timing now in milliseconds (timestamp) \\
+\hline
+{\em timer\+Interlude} & timing of a turn for a player (depend on the level set by the creator of the arena) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Priority\+Elem representing the next player to play its turn 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/services/arena/include/fighting\+Pit/Side\+Battle.\+hh\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/services/arena/src/fighting\+Pit/Side\+Battle.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,149 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1ws_1_1_world_server_ctx" kind="class" language="C++" prot="public">
+    <compoundname>fys::ws::WorldServerCtx</compoundname>
+    <basecompoundref refid="classfys_1_1_startup_dispatcher_ctx" prot="public" virt="non-virtual">fys::StartupDispatcherCtx</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfys_1_1ws_1_1_world_server_ctx_1a962c7f12ec2c5889599159de152442a9" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string fys::ws::WorldServerCtx::_serverCode</definition>
+        <argsstring></argsstring>
+        <name>_serverCode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/include/WorldServerContext.hh" line="53" column="21" bodyfile="/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/include/WorldServerContext.hh" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1ws_1_1_world_server_ctx_1a6e1059b6c4375a2726e9b333c34c512a" prot="private" static="no" mutable="no">
+        <type>std::pair&lt; double, double &gt;</type>
+        <definition>std::pair&lt;double, double&gt; fys::ws::WorldServerCtx::_serverBoundaries</definition>
+        <argsstring></argsstring>
+        <name>_serverBoundaries</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/include/WorldServerContext.hh" line="54" column="19" bodyfile="/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/include/WorldServerContext.hh" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1ws_1_1_world_server_ctx_1a5964f11dcdcf2bd500a30d315b00af69" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structfys_1_1ws_1_1_proximity_server_axis" kindref="compound">ProximityServerAxis</ref> &gt;</type>
+        <definition>std::vector&lt;ProximityServerAxis&gt; fys::ws::WorldServerCtx::_xAxisServerProximity</definition>
+        <argsstring></argsstring>
+        <name>_xAxisServerProximity</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/include/WorldServerContext.hh" line="55" column="21" bodyfile="/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/include/WorldServerContext.hh" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1ws_1_1_world_server_ctx_1aa1fee9a5a0aa817e16353a709a5a7fa5" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structfys_1_1ws_1_1_proximity_server_axis" kindref="compound">ProximityServerAxis</ref> &gt;</type>
+        <definition>std::vector&lt;ProximityServerAxis&gt; fys::ws::WorldServerCtx::_yAxisServerProximity</definition>
+        <argsstring></argsstring>
+        <name>_yAxisServerProximity</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/include/WorldServerContext.hh" line="56" column="21" bodyfile="/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/include/WorldServerContext.hh" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1ws_1_1_world_server_ctx_1abdbfb0346fd062630fdcecc6ca633585" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::ws::WorldServerCtx::WorldServerCtx</definition>
+        <argsstring>(int ac, const char *const *av) noexcept</argsstring>
+        <name>WorldServerCtx</name>
+        <param>
+          <type>int</type>
+          <declname>ac</declname>
+        </param>
+        <param>
+          <type>const char *const *</type>
+          <declname>av</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/include/WorldServerContext.hh" line="50" column="9" bodyfile="/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/src/WorldServerContext.cpp" bodystart="32" bodyend="33"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>fys::StartupDispatcherCtx</label>
+        <link refid="classfys_1_1_startup_dispatcher_ctx"/>
+      </node>
+      <node id="1">
+        <label>fys::ws::WorldServerCtx</label>
+        <link refid="classfys_1_1ws_1_1_world_server_ctx"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>fys::StartupDispatcherCtx</label>
+        <link refid="classfys_1_1_startup_dispatcher_ctx"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>_clusterProxy</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>fys::ws::WorldServerCtx</label>
+        <link refid="classfys_1_1ws_1_1_world_server_ctx"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>fys::StartupDispatcherCtx::ClusterProxy</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/include/WorldServerContext.hh" line="47" column="53" bodyfile="/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/include/WorldServerContext.hh" bodystart="47" bodyend="58"/>
+    <listofallmembers>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a3bb65d28444c4d978345685a1ca86827" prot="protected" virt="non-virtual"><scope>fys::ws::WorldServerCtx</scope><name>_bindingPort</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a60f914ef1384d8fdf2b5289efb52fdb7" prot="protected" virt="non-virtual"><scope>fys::ws::WorldServerCtx</scope><name>_clusterProxy</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a9e19704e4016c6cbaa1f459ba9e56581" prot="protected" virt="non-virtual"><scope>fys::ws::WorldServerCtx</scope><name>_dispatchingPort</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a55518844cd56cd806c2d047cbab75645" prot="protected" virt="non-virtual"><scope>fys::ws::WorldServerCtx</scope><name>_isClusterAware</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a426c954de1c7cec1f80f0b0ab62ade54" prot="protected" virt="non-virtual"><scope>fys::ws::WorldServerCtx</scope><name>_isLoadBalancing</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a9a8d10c8011b1eb05ee485497a8f3bcc" prot="protected" virt="non-virtual"><scope>fys::ws::WorldServerCtx</scope><name>_maxMsgSize</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a8c0dc51f317c500e2949093d7fd52c2b" prot="protected" virt="non-virtual"><scope>fys::ws::WorldServerCtx</scope><name>_name</name></member>
+      <member refid="classfys_1_1ws_1_1_world_server_ctx_1a6e1059b6c4375a2726e9b333c34c512a" prot="private" virt="non-virtual"><scope>fys::ws::WorldServerCtx</scope><name>_serverBoundaries</name></member>
+      <member refid="classfys_1_1ws_1_1_world_server_ctx_1a962c7f12ec2c5889599159de152442a9" prot="private" virt="non-virtual"><scope>fys::ws::WorldServerCtx</scope><name>_serverCode</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a7189b5a8610d5d63c881172b009a0e04" prot="protected" virt="non-virtual"><scope>fys::ws::WorldServerCtx</scope><name>_specificConfigPath</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a22377ec0fc44e0280ee25ebd58104766" prot="protected" virt="non-virtual"><scope>fys::ws::WorldServerCtx</scope><name>_subTopics</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a29c792670a4cbac913d58b6876fddc85" prot="protected" virt="non-virtual"><scope>fys::ws::WorldServerCtx</scope><name>_verbose</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a751b3ec6bbcbfd2a4743d19717b7071e" prot="protected" virt="non-virtual"><scope>fys::ws::WorldServerCtx</scope><name>_version</name></member>
+      <member refid="classfys_1_1ws_1_1_world_server_ctx_1a5964f11dcdcf2bd500a30d315b00af69" prot="private" virt="non-virtual"><scope>fys::ws::WorldServerCtx</scope><name>_xAxisServerProximity</name></member>
+      <member refid="classfys_1_1ws_1_1_world_server_ctx_1aa1fee9a5a0aa817e16353a709a5a7fa5" prot="private" virt="non-virtual"><scope>fys::ws::WorldServerCtx</scope><name>_yAxisServerProximity</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1aefd2de96330512037a6babc79d00d88e" prot="public" virt="non-virtual"><scope>fys::ws::WorldServerCtx</scope><name>getBackendClusterProxyConnectionString</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1aafe860c36a60a28d7c521cdb6afa2186" prot="public" virt="non-virtual"><scope>fys::ws::WorldServerCtx</scope><name>getBindingPort</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1afe9277c482dfff06199702c1d8e1fe21" prot="public" virt="non-virtual"><scope>fys::ws::WorldServerCtx</scope><name>getDispatcherBindingString</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a2e0b7a6aea133b5520cf18a7e0d1830d" prot="public" virt="non-virtual"><scope>fys::ws::WorldServerCtx</scope><name>getDispatchingPort</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a944041b68d44de936dd0614a7bd6e16a" prot="public" virt="non-virtual"><scope>fys::ws::WorldServerCtx</scope><name>getFrontendClusterProxyConnectionString</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a0bece763aa9869cec948b8cd369d7f0b" prot="public" virt="non-virtual"><scope>fys::ws::WorldServerCtx</scope><name>getListenerBindingString</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a71e5e2c581ff9c8f29991fe5fbbb6968" prot="public" virt="non-virtual"><scope>fys::ws::WorldServerCtx</scope><name>getMaxMsgSize</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a8941a0b8ca22f867ec996d24cbc06420" prot="public" virt="non-virtual"><scope>fys::ws::WorldServerCtx</scope><name>getSubscriptionTopics</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1acde65a094658b70f786a305363857452" prot="public" virt="non-virtual"><scope>fys::ws::WorldServerCtx</scope><name>isClusterAware</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a6cabaa4684d031e619f080f623ce02e6" prot="public" virt="non-virtual"><scope>fys::ws::WorldServerCtx</scope><name>isLoadBalancingEnabled</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a06698efad77910337fb1abf9f1b8568a" prot="public" virt="non-virtual"><scope>fys::ws::WorldServerCtx</scope><name>StartupDispatcherCtx</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1adcb2d75409c8d59af598cbf31384480b" prot="public" virt="non-virtual"><scope>fys::ws::WorldServerCtx</scope><name>toString</name></member>
+      <member refid="classfys_1_1ws_1_1_world_server_ctx_1abdbfb0346fd062630fdcecc6ca633585" prot="public" virt="non-virtual"><scope>fys::ws::WorldServerCtx</scope><name>WorldServerCtx</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

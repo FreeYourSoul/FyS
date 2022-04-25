@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1arena_1_1data_1_1_priority_elem" kind="struct" language="C++" prot="public">
+    <compoundname>fys::arena::data::PriorityElem</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1arena_1_1data_1_1_priority_elem_1aa24b7b59e3da72aa00b30cdae433fab5" prot="public" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint fys::arena::data::PriorityElem::id</definition>
+        <argsstring></argsstring>
+        <name>id</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" line="70" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1data_1_1_priority_elem_1abfc6bd738df57cd9311a7ee404f0130a" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int fys::arena::data::PriorityElem::speed</definition>
+        <argsstring></argsstring>
+        <name>speed</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" line="71" column="5" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1data_1_1_priority_elem_1a6f4bd6c2c8b23ec119766d486c6d4bfb" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool fys::arena::data::PriorityElem::isContender</definition>
+        <argsstring></argsstring>
+        <name>isContender</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" line="72" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfys_1_1arena_1_1data_1_1_priority_elem_1abda12146d9520fcd0d53e73174ee46db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fys::arena::data::PriorityElem::PriorityElem</definition>
+        <argsstring>()=default</argsstring>
+        <name>PriorityElem</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" line="66" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1arena_1_1data_1_1_priority_elem_1adc43225ba11110ef45ea87d466cae236" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::arena::data::PriorityElem::PriorityElem</definition>
+        <argsstring>(uint aid, int aspeed, bool aisContender)</argsstring>
+        <name>PriorityElem</name>
+        <param>
+          <type>uint</type>
+          <declname>aid</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>aspeed</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>aisContender</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" line="67" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" bodystart="67" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1arena_1_1data_1_1_priority_elem_1a31f487073feee7987378daefb4efdce9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="structfys_1_1arena_1_1data_1_1_priority_elem" kindref="compound">PriorityElem</ref> &amp;</type>
+        <definition>PriorityElem&amp; fys::arena::data::PriorityElem::operator-</definition>
+        <argsstring>(const PriorityElem &amp;other)</argsstring>
+        <name>operator-</name>
+        <param>
+          <type>const <ref refid="structfys_1_1arena_1_1data_1_1_priority_elem" kindref="compound">PriorityElem</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" line="75" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" bodystart="75" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1arena_1_1data_1_1_priority_elem_1adddc783ee8f0c2c27b0c2f3dbde8f430" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::data::PriorityElem::operator&lt;</definition>
+        <argsstring>(const PriorityElem &amp;other) const</argsstring>
+        <name>operator&lt;</name>
+        <param>
+          <type>const <ref refid="structfys_1_1arena_1_1data_1_1_priority_elem" kindref="compound">PriorityElem</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" line="81" column="2" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" bodystart="82" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1arena_1_1data_1_1_priority_elem_1a19463b8069aa34aafdbdcff349f256af" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::data::PriorityElem::operator==</definition>
+        <argsstring>(const PriorityElem &amp;other) const</argsstring>
+        <name>operator==</name>
+        <param>
+          <type>const <ref refid="structfys_1_1arena_1_1data_1_1_priority_elem" kindref="compound">PriorityElem</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" line="88" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" bodystart="88" bodyend="91"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" line="65" column="19" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" bodystart="65" bodyend="93"/>
+    <listofallmembers>
+      <member refid="structfys_1_1arena_1_1data_1_1_priority_elem_1aa24b7b59e3da72aa00b30cdae433fab5" prot="public" virt="non-virtual"><scope>fys::arena::data::PriorityElem</scope><name>id</name></member>
+      <member refid="structfys_1_1arena_1_1data_1_1_priority_elem_1a6f4bd6c2c8b23ec119766d486c6d4bfb" prot="public" virt="non-virtual"><scope>fys::arena::data::PriorityElem</scope><name>isContender</name></member>
+      <member refid="structfys_1_1arena_1_1data_1_1_priority_elem_1a31f487073feee7987378daefb4efdce9" prot="public" virt="non-virtual"><scope>fys::arena::data::PriorityElem</scope><name>operator-</name></member>
+      <member refid="structfys_1_1arena_1_1data_1_1_priority_elem_1adddc783ee8f0c2c27b0c2f3dbde8f430" prot="public" virt="non-virtual"><scope>fys::arena::data::PriorityElem</scope><name>operator&lt;</name></member>
+      <member refid="structfys_1_1arena_1_1data_1_1_priority_elem_1a19463b8069aa34aafdbdcff349f256af" prot="public" virt="non-virtual"><scope>fys::arena::data::PriorityElem</scope><name>operator==</name></member>
+      <member refid="structfys_1_1arena_1_1data_1_1_priority_elem_1abda12146d9520fcd0d53e73174ee46db" prot="public" virt="non-virtual"><scope>fys::arena::data::PriorityElem</scope><name>PriorityElem</name></member>
+      <member refid="structfys_1_1arena_1_1data_1_1_priority_elem_1adc43225ba11110ef45ea87d466cae236" prot="public" virt="non-virtual"><scope>fys::arena::data::PriorityElem</scope><name>PriorityElem</name></member>
+      <member refid="structfys_1_1arena_1_1data_1_1_priority_elem_1abfc6bd738df57cd9311a7ee404f0130a" prot="public" virt="non-virtual"><scope>fys::arena::data::PriorityElem</scope><name>speed</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

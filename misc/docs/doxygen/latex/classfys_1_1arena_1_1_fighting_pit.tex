@@ -1,0 +1,192 @@
+\hypertarget{classfys_1_1arena_1_1_fighting_pit}{}\doxysection{fys\+::arena\+::Fighting\+Pit Class Reference}
+\label{classfys_1_1arena_1_1_fighting_pit}\index{fys::arena::FightingPit@{fys::arena::FightingPit}}
+
+
+A fighting pit represent a specific instance of a battle.  
+
+
+
+
+{\ttfamily \#include $<$Fighting\+Pit.\+hh$>$}
+
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_fighting_pit_a279b049c942fadc5171fb53779626202}\label{classfys_1_1arena_1_1_fighting_pit_a279b049c942fadc5171fb53779626202}} 
+enum \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit_a279b049c942fadc5171fb53779626202}{Level}} \+: uint \{ {\bfseries E\+A\+SY} = 0, 
+{\bfseries M\+E\+D\+I\+UM} = 1, 
+{\bfseries H\+A\+RD} = 2, 
+{\bfseries N\+O\+NE}
+ \}
+\begin{DoxyCompactList}\small\item\em Complexity of the \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit}{Fighting\+Pit}}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_fighting_pit_a4fdd82b8b225e7f25417c9d044b5f399}\label{classfys_1_1arena_1_1_fighting_pit_a4fdd82b8b225e7f25417c9d044b5f399}} 
+{\bfseries Fighting\+Pit} (std\+::string creator\+User\+Name, \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit_a279b049c942fadc5171fb53779626202}{Level}} level\+Fighting\+Pit)
+\item 
+void \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit_ae609e502615fd54a865a297824d1f9e5}{continue\+Battle}} (const std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point \&now)
+\item 
+void \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit_a3c312c72d716955f36e7c1d7866c893e}{forward\+Action\+To\+Team\+Member}} (const std\+::string \&user, \mbox{\hyperlink{structfys_1_1arena_1_1_player_action}{Player\+Action}} action)
+\item 
+void \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit_ab9875d72e8264f0198c0f124a5feb218}{add\+Authenticated\+User}} (std\+::string user\+Name, std\+::string user\+Token)
+\item 
+void \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit_acc672e9b3c7c3f92d19654604db126a1}{add\+Party\+Team\+And\+Register\+Actions}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classfys_1_1arena_1_1_party_team}{Party\+Team}} $>$ pt, \mbox{\hyperlink{classfys_1_1cache_1_1_cml}{cache\+::\+Cml}} \&cache)
+\item 
+bool \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit_a8bf69a6fbb1f257db8aeb2c39a3cf887}{is\+Player\+Participant}} (const std\+::string \&name, const std\+::string \&token) const
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_fighting_pit_a39c0c637375b5fd54c9ce5639a6e1cad}\label{classfys_1_1arena_1_1_fighting_pit_a39c0c637375b5fd54c9ce5639a6e1cad}} 
+const \mbox{\hyperlink{classfys_1_1arena_1_1_party_team}{Party\+Team}} \& {\bfseries get\+Party\+Team\+Of\+Player} (const std\+::string \&user\+Name) const
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_fighting_pit_ab10b8f90312f01162931acc8629a6762}\label{classfys_1_1arena_1_1_fighting_pit_ab10b8f90312f01162931acc8629a6762}} 
+const std\+::unique\+\_\+ptr$<$ chaiscript\+::\+Chai\+Script $>$ \& {\bfseries get\+Chai\+Ptr} () const noexcept
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_fighting_pit_ac5c3cad2bcbe12d0dedf2cb58f625094}\label{classfys_1_1arena_1_1_fighting_pit_ac5c3cad2bcbe12d0dedf2cb58f625094}} 
+unsigned {\bfseries get\+Id} () const noexcept
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_fighting_pit_af6ea986c3ffac3901f427d20fa27d9f1}\label{classfys_1_1arena_1_1_fighting_pit_af6ea986c3ffac3901f427d20fa27d9f1}} 
+bool {\bfseries is\+Joinable} () const noexcept
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_fighting_pit_a65f59589d7c698fb2f4b6e84a11c6dbb}\label{classfys_1_1arena_1_1_fighting_pit_a65f59589d7c698fb2f4b6e84a11c6dbb}} 
+const \mbox{\hyperlink{classfys_1_1arena_1_1_ally_party_teams}{Ally\+Party\+Teams}} \& {\bfseries get\+Party\+Teams} () const
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_fighting_pit_a49a6c76bf9d170620edee50bbe4b39f7}\label{classfys_1_1arena_1_1_fighting_pit_a49a6c76bf9d170620edee50bbe4b39f7}} 
+const \mbox{\hyperlink{classfys_1_1arena_1_1_pit_contenders}{Pit\+Contenders}} \& {\bfseries get\+Pit\+Contenders} () const
+\item 
+bool \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit_a00bb3c0ca8eac4ebe6961c5bd32eaddf}{is\+Battle\+Over}} () const noexcept
+\item 
+void \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit_a60bb0689e3f44664197090db415866db}{disable\+Join}} () noexcept
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_fighting_pit_a611f2c79fa753eb46fee895a7d22d417}\label{classfys_1_1arena_1_1_fighting_pit_a611f2c79fa753eb46fee895a7d22d417}} 
+void {\bfseries add\+Reward} (std\+::string action, uint quantity) noexcept
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_fighting_pit_ad28b4a44689b3a554f6b7e6a56c12aaf}\label{classfys_1_1arena_1_1_fighting_pit_ad28b4a44689b3a554f6b7e6a56c12aaf}} 
+void {\bfseries set\+Player\+Readiness} (const std\+::string \&user\+Name)
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_fighting_pit_abd0e6c2472151eab247dd29be99f2f32}\label{classfys_1_1arena_1_1_fighting_pit_abd0e6c2472151eab247dd29be99f2f32}} 
+void {\bfseries set\+Arena\+Id} (unsigned arena\+Id) noexcept
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_fighting_pit_ad27a20dcca9411de7281580ef8efa782}\label{classfys_1_1arena_1_1_fighting_pit_ad27a20dcca9411de7281580ef8efa782}} 
+static constexpr unsigned \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit_ad27a20dcca9411de7281580ef8efa782}{C\+R\+E\+A\+T\+I\+O\+N\+\_\+\+E\+R\+R\+OR}} = 0
+\begin{DoxyCompactList}\small\item\em used as a wrong id when a fighting pit is wrongly generated \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_fighting_pit_a33db2bbe50775c983c51d8cce9d2e443}\label{classfys_1_1arena_1_1_fighting_pit_a33db2bbe50775c983c51d8cce9d2e443}} 
+class {\bfseries Fighting\+Pit\+Announcer}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A fighting pit represent a specific instance of a battle. 
+
+A fightingpit is composed of\+:
+\begin{DoxyItemize}
+\item a layout (mapping of how the monsters/players are spread on the board)
+\item a \mbox{\hyperlink{classfys_1_1arena_1_1_pit_contenders}{Pit\+Contenders}} object managing all the monsters and their behaviours (scripting)
+\item a \mbox{\hyperlink{classfys_1_1arena_1_1_ally_party_teams}{Ally\+Party\+Teams}} object managing the players, each client has a \mbox{\hyperlink{classfys_1_1arena_1_1_party_team}{Party\+Team}} (multiple party teams possible for one \mbox{\hyperlink{classfys_1_1arena_1_1_ally_party_teams}{Ally\+Party\+Teams}}) and the \mbox{\hyperlink{classfys_1_1arena_1_1_party_team}{Party\+Team}} is composed of \mbox{\hyperlink{classfys_1_1arena_1_1_team_member}{Team\+Member}} that are the actual characters spread on the gaming board.
+\item The 18 instances of \mbox{\hyperlink{classfys_1_1arena_1_1_side_battle}{Side\+Battle}}
+\end{DoxyItemize}
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classfys_1_1arena_1_1_side_battle}{Side\+Battle}} 
+\end{DoxySeeAlso}
+\begin{Desc}
+\item[Examples]\par
+\mbox{\hyperlink{_2home_2_fy_s_2_project_2_fy_s_2services_2arena_2include_2_flatbuffer_generator_8hh-example}{/home/\+Fy\+S/\+Project/\+Fy\+S/services/arena/include/\+Flatbuffer\+Generator.\+hh}}.\end{Desc}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfys_1_1arena_1_1_fighting_pit_ab9875d72e8264f0198c0f124a5feb218}\label{classfys_1_1arena_1_1_fighting_pit_ab9875d72e8264f0198c0f124a5feb218}} 
+\index{fys::arena::FightingPit@{fys::arena::FightingPit}!addAuthenticatedUser@{addAuthenticatedUser}}
+\index{addAuthenticatedUser@{addAuthenticatedUser}!fys::arena::FightingPit@{fys::arena::FightingPit}}
+\doxysubsubsection{\texorpdfstring{addAuthenticatedUser()}{addAuthenticatedUser()}}
+{\footnotesize\ttfamily void fys\+::arena\+::\+Fighting\+Pit\+::add\+Authenticated\+User (\begin{DoxyParamCaption}\item[{std\+::string}]{user\+Name,  }\item[{std\+::string}]{user\+Token }\end{DoxyParamCaption})}
+
+Add an authenticated player in the fighting pit, the player authentication is not verified an thus must be verified beforehand. 
+\begin{DoxyParams}{Parameters}
+{\em user\+Name} & unique name of the player to add \\
+\hline
+{\em user\+Token} & token of the player to add \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfys_1_1arena_1_1_fighting_pit_acc672e9b3c7c3f92d19654604db126a1}\label{classfys_1_1arena_1_1_fighting_pit_acc672e9b3c7c3f92d19654604db126a1}} 
+\index{fys::arena::FightingPit@{fys::arena::FightingPit}!addPartyTeamAndRegisterActions@{addPartyTeamAndRegisterActions}}
+\index{addPartyTeamAndRegisterActions@{addPartyTeamAndRegisterActions}!fys::arena::FightingPit@{fys::arena::FightingPit}}
+\doxysubsubsection{\texorpdfstring{addPartyTeamAndRegisterActions()}{addPartyTeamAndRegisterActions()}}
+{\footnotesize\ttfamily void fys\+::arena\+::\+Fighting\+Pit\+::add\+Party\+Team\+And\+Register\+Actions (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classfys_1_1arena_1_1_party_team}{Party\+Team}} $>$}]{pt,  }\item[{\mbox{\hyperlink{classfys_1_1cache_1_1_cml}{cache\+::\+Cml}} \&}]{cache }\end{DoxyParamCaption})}
+
+Used to add a new party team (incoming player in the fighting pit) and register its action to chai
+
+\begin{DoxyNote}{Note}
+The verification if the fighting pit is in O\+N\+\_\+\+H\+O\+LD mode is not done in this function and thus should be done before the \mbox{\hyperlink{classfys_1_1arena_1_1_party_team}{Party\+Team}} object is created.
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em pt} & party team to add \\
+\hline
+{\em cache} & retrieving object to find the actions \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfys_1_1arena_1_1_fighting_pit_ae609e502615fd54a865a297824d1f9e5}\label{classfys_1_1arena_1_1_fighting_pit_ae609e502615fd54a865a297824d1f9e5}} 
+\index{fys::arena::FightingPit@{fys::arena::FightingPit}!continueBattle@{continueBattle}}
+\index{continueBattle@{continueBattle}!fys::arena::FightingPit@{fys::arena::FightingPit}}
+\doxysubsubsection{\texorpdfstring{continueBattle()}{continueBattle()}}
+{\footnotesize\ttfamily void fys\+::arena\+::\+Fighting\+Pit\+::continue\+Battle (\begin{DoxyParamCaption}\item[{const std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point \&}]{now }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em now} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfys_1_1arena_1_1_fighting_pit_a60bb0689e3f44664197090db415866db}\label{classfys_1_1arena_1_1_fighting_pit_a60bb0689e3f44664197090db415866db}} 
+\index{fys::arena::FightingPit@{fys::arena::FightingPit}!disableJoin@{disableJoin}}
+\index{disableJoin@{disableJoin}!fys::arena::FightingPit@{fys::arena::FightingPit}}
+\doxysubsubsection{\texorpdfstring{disableJoin()}{disableJoin()}}
+{\footnotesize\ttfamily void fys\+::arena\+::\+Fighting\+Pit\+::disable\+Join (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Disable the ability to join the battle if the fighting pit is currently reachable \mbox{\Hypertarget{classfys_1_1arena_1_1_fighting_pit_a3c312c72d716955f36e7c1d7866c893e}\label{classfys_1_1arena_1_1_fighting_pit_a3c312c72d716955f36e7c1d7866c893e}} 
+\index{fys::arena::FightingPit@{fys::arena::FightingPit}!forwardActionToTeamMember@{forwardActionToTeamMember}}
+\index{forwardActionToTeamMember@{forwardActionToTeamMember}!fys::arena::FightingPit@{fys::arena::FightingPit}}
+\doxysubsubsection{\texorpdfstring{forwardActionToTeamMember()}{forwardActionToTeamMember()}}
+{\footnotesize\ttfamily void fys\+::arena\+::\+Fighting\+Pit\+::forward\+Action\+To\+Team\+Member (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{user,  }\item[{\mbox{\hyperlink{structfys_1_1arena_1_1_player_action}{Player\+Action}}}]{action }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em user} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfys_1_1arena_1_1_fighting_pit_a00bb3c0ca8eac4ebe6961c5bd32eaddf}\label{classfys_1_1arena_1_1_fighting_pit_a00bb3c0ca8eac4ebe6961c5bd32eaddf}} 
+\index{fys::arena::FightingPit@{fys::arena::FightingPit}!isBattleOver@{isBattleOver}}
+\index{isBattleOver@{isBattleOver}!fys::arena::FightingPit@{fys::arena::FightingPit}}
+\doxysubsubsection{\texorpdfstring{isBattleOver()}{isBattleOver()}}
+{\footnotesize\ttfamily bool fys\+::arena\+::\+Fighting\+Pit\+::is\+Battle\+Over (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Check if the battle is done, the winner doesn\textquotesingle{}t matter, this is a status to cleanup the fighting pit when its done \begin{DoxyReturn}{Returns}
+true if the battle is over, false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfys_1_1arena_1_1_fighting_pit_a8bf69a6fbb1f257db8aeb2c39a3cf887}\label{classfys_1_1arena_1_1_fighting_pit_a8bf69a6fbb1f257db8aeb2c39a3cf887}} 
+\index{fys::arena::FightingPit@{fys::arena::FightingPit}!isPlayerParticipant@{isPlayerParticipant}}
+\index{isPlayerParticipant@{isPlayerParticipant}!fys::arena::FightingPit@{fys::arena::FightingPit}}
+\doxysubsubsection{\texorpdfstring{isPlayerParticipant()}{isPlayerParticipant()}}
+{\footnotesize\ttfamily bool fys\+::arena\+::\+Fighting\+Pit\+::is\+Player\+Participant (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name,  }\item[{const std\+::string \&}]{token }\end{DoxyParamCaption}) const}
+
+Check if given player (defined by name/token) is authenticated 
+\begin{DoxyParams}{Parameters}
+{\em name} & unique name of the player to check \\
+\hline
+{\em token} & token of the player to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the player is authenticated, false otherwise 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/services/arena/include/fighting\+Pit/Fighting\+Pit.\+hh\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/services/arena/src/fighting\+Pit/Fighting\+Pit.\+cpp\end{DoxyCompactItemize}

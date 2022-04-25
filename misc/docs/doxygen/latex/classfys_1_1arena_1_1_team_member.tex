@@ -1,0 +1,56 @@
+\hypertarget{classfys_1_1arena_1_1_team_member}{}\doxysection{fys\+::arena\+::Team\+Member Class Reference}
+\label{classfys_1_1arena_1_1_team_member}\index{fys::arena::TeamMember@{fys::arena::TeamMember}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_team_member_af9af20a8bd9668697232a6f429a0373a}\label{classfys_1_1arena_1_1_team_member_af9af20a8bd9668697232a6f429a0373a}} 
+{\bfseries Team\+Member} (std\+::string user\+Name, std\+::string team\+Member\+Name)
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_team_member_a907580dbdc0bca373d561b3b105f3841}\label{classfys_1_1arena_1_1_team_member_a907580dbdc0bca373d561b3b105f3841}} 
+void {\bfseries execute\+Action} (\mbox{\hyperlink{classfys_1_1arena_1_1_ally_party_teams}{Ally\+Party\+Teams}} \&apt, \mbox{\hyperlink{classfys_1_1arena_1_1_pit_contenders}{Pit\+Contenders}} \&pc, std\+::unique\+\_\+ptr$<$ chaiscript\+::\+Chai\+Script $>$ \&chai\+Ptr)
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_team_member_ad2f047f2b311cb7fea56a009fbc9822a}\label{classfys_1_1arena_1_1_team_member_ad2f047f2b311cb7fea56a009fbc9822a}} 
+void {\bfseries add\+Pending\+Action} (const std\+::string \&action\+Name, std\+::optional$<$ Target\+Type $>$ target)
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_team_member_a373e9aec5925cbfbeddcf93655fc141f}\label{classfys_1_1arena_1_1_team_member_a373e9aec5925cbfbeddcf93655fc141f}} 
+void \mbox{\hyperlink{classfys_1_1arena_1_1_team_member_a373e9aec5925cbfbeddcf93655fc141f}{set\+Id}} (unsigned id)
+\begin{DoxyCompactList}\small\item\em called by \#fys\+::arena\+::\+Ally\+Party\+Team to set the id of the team member \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_team_member_ac01d4cd3b6b51c82983f3575aa712215}\label{classfys_1_1arena_1_1_team_member_ac01d4cd3b6b51c82983f3575aa712215}} 
+void {\bfseries add\+Doable\+Action} (std\+::string doable, uint level)
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_team_member_a97fd1d841eeb67c14f41e3e1372de8e3}\label{classfys_1_1arena_1_1_team_member_a97fd1d841eeb67c14f41e3e1372de8e3}} 
+Hexagon\+Side\+::\+Orientation {\bfseries get\+Hexagon\+Side\+Orient} () const
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_team_member_a86d953c11364e8d0cc06776adef670f9}\label{classfys_1_1arena_1_1_team_member_a86d953c11364e8d0cc06776adef670f9}} 
+\mbox{\hyperlink{structfys_1_1arena_1_1data_1_1_status}{data\+::\+Status}} \& {\bfseries access\+Status} ()
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_team_member_a3683807fde71cec35aac1ac43b3c653b}\label{classfys_1_1arena_1_1_team_member_a3683807fde71cec35aac1ac43b3c653b}} 
+const \mbox{\hyperlink{classfys_1_1arena_1_1_hexagon_side}{Hexagon\+Side}} \& {\bfseries get\+Hexagon\+Side} () const
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_team_member_a4f795e0181eb230909b9f36904b130b1}\label{classfys_1_1arena_1_1_team_member_a4f795e0181eb230909b9f36904b130b1}} 
+const \mbox{\hyperlink{structfys_1_1arena_1_1data_1_1_status}{data\+::\+Status}} \& {\bfseries get\+Status} () const
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_team_member_aedf76d5c13a1fdc56931ee51c51d1b7a}\label{classfys_1_1arena_1_1_team_member_aedf76d5c13a1fdc56931ee51c51d1b7a}} 
+const std\+::string \& {\bfseries get\+User\+Name} () const
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_team_member_a9ef52335e294dc0e88de53f9c7724856}\label{classfys_1_1arena_1_1_team_member_a9ef52335e294dc0e88de53f9c7724856}} 
+const std\+::string \& {\bfseries get\+Name} () const
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_team_member_a59200142db40ed684f4410c62f8ac4a0}\label{classfys_1_1arena_1_1_team_member_a59200142db40ed684f4410c62f8ac4a0}} 
+const std\+::vector$<$ std\+::pair$<$ std\+::string, uint $>$ $>$ \& {\bfseries get\+Actions\+Doable} () const
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_team_member_abd53859929bba00f4887a1a2654c2b74}\label{classfys_1_1arena_1_1_team_member_abd53859929bba00f4887a1a2654c2b74}} 
+unsigned {\bfseries get\+Id} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_team_member_a6667038f23009fac5d8323319f3e166e}\label{classfys_1_1arena_1_1_team_member_a6667038f23009fac5d8323319f3e166e}} 
+class {\bfseries Fighting\+Pit\+Layout}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/services/arena/include/fighting\+Pit/team/Team\+Member.\+hh\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/services/arena/src/fighting\+Pit/team/Team\+Member.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,55 @@
+
+\begin{DoxyItemize}
+\item \href{\#integrate-ai-scripts}{\texttt{ Integrate AI}} (opponent artificial intelligence)
+\item \href{\#integrate-attacks-scripts}{\texttt{ Integrate attacks}} (used by opponent and team characters)
+\end{DoxyItemize}
+
+\doxysection*{Introduction \+: Chaiscript}
+
+\doxysubsection*{Existing C++/\+Chai Mapping}
+
+
+\begin{DoxyCode}{0}
+\end{DoxyCode}
+
+
+\doxysection*{Integrate AI scripts}
+
+\doxysubsection*{Template}
+
+Chaiscript for AI are represented by a class which has to take a contender\+Id as parameter in constructor and implement the methods\+:
+\begin{DoxyItemize}
+\item run\+Scripted\+Action(id) which will determine and apply an action.
+\item define\+Spawning\+Position() which will return the position on the battle field for the opponent
+\end{DoxyItemize}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{class }TemplateChai \{}
+\DoxyCodeLine{    var contenderId;}
+\DoxyCodeLine{    }
+\DoxyCodeLine{    TemplateChai(contenderId) \{}
+\DoxyCodeLine{        this.contenderId = contenderId;}
+\DoxyCodeLine{    \}    }
+\DoxyCodeLine{}
+\DoxyCodeLine{    def runScriptedAction(\textcolor{keywordtype}{id}) \{}
+\DoxyCodeLine{        \textcolor{comment}{// decide attack}}
+\DoxyCodeLine{        \textcolor{comment}{// decide a target (if needed)}}
+\DoxyCodeLine{        \textcolor{comment}{// apply and send message}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    def defineSpawningPosition() \{}
+\DoxyCodeLine{        \textcolor{comment}{// return HexagonSide}}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+
+
+\doxysection*{Integrate attacks scripts}
+
+\doxysubsection*{Template}
+
+
+\begin{DoxyCode}{0}
+\end{DoxyCode}
+ 

@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1fb_1_1_content_traits" kind="struct" language="C++" prot="public">
+    <compoundname>fys::fb::ContentTraits</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structfys_1_1fb_1_1_content_traits_1aad226e57ca2226301cc26eb6a9aca9a2" prot="public" static="yes" mutable="no">
+        <type>const Content</type>
+        <definition>const Content fys::fb::ContentTraits&lt; T &gt;::enum_value</definition>
+        <argsstring></argsstring>
+        <name>enum_value</name>
+        <initializer>= Content_NONE</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="118" column="24" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="117" column="31" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="117" bodyend="119"/>
+    <listofallmembers>
+      <member refid="structfys_1_1fb_1_1_content_traits_1aad226e57ca2226301cc26eb6a9aca9a2" prot="public" virt="non-virtual"><scope>fys::fb::ContentTraits</scope><name>enum_value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

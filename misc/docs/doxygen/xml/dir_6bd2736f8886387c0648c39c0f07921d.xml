@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_6bd2736f8886387c0648c39c0f07921d" kind="dir">
+    <compoundname>/home/FyS/Project/FyS/services/arena/src/fightingPit/team</compoundname>
+    <innerfile refid="_ally_party_teams_8cpp">AllyPartyTeams.cpp</innerfile>
+    <innerfile refid="_party_team_8cpp">PartyTeam.cpp</innerfile>
+    <innerfile refid="_team_member_8cpp">TeamMember.cpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/src/fightingPit/team/"/>
+  </compounddef>
+</doxygen>

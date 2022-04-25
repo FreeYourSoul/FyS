@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacefys_1_1cache" kind="namespace" language="C++">
+    <compoundname>fys::cache</compoundname>
+    <innerclass refid="classfys_1_1cache_1_1_cml" prot="public">fys::cache::Cml</innerclass>
+    <innerclass refid="classfys_1_1cache_1_1_cml_copy" prot="public">fys::cache::CmlCopy</innerclass>
+    <innerclass refid="classfys_1_1cache_1_1_cml_key" prot="public">fys::cache::CmlKey</innerclass>
+    <innerclass refid="classfys_1_1cache_1_1_cml_sqlite" prot="public">fys::cache::CmlSqlite</innerclass>
+    <innerclass refid="structfys_1_1cache_1_1_in_memory_cached" prot="public">fys::cache::InMemoryCached</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/scripting_cache/cml/include/Cml.hh" line="32" column="20"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_069a10266203a8a740f6f0214a444a53" kind="dir">
+    <compoundname>/home/FyS/Project/FyS/cmake-build-debug/services/arena</compoundname>
+    <innerdir refid="dir_e60b423ce8658c8a81340afbc191ae65">/home/FyS/Project/FyS/cmake-build-debug/services/arena/CMakeFiles</innerdir>
+    <innerdir refid="dir_eccfed2f044366ccfb0cd99a81849617">/home/FyS/Project/FyS/cmake-build-debug/services/arena/test</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/cmake-build-debug/services/arena/"/>
+  </compounddef>
+</doxygen>

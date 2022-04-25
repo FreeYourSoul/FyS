@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacefys_1_1common_1_1init__beacon" kind="namespace" language="C++">
+    <compoundname>fys::common::init_beacon</compoundname>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="namespacefys_1_1common_1_1init__beacon_1adc58bfa5b52ba43e9b55d3573cdfcf24" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr static auto</type>
+        <definition>constexpr static auto fys::common::init_beacon::SERVICE_NAME</definition>
+        <argsstring></argsstring>
+        <name>SERVICE_NAME</name>
+        <initializer>= &quot;service.name&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" line="33" column="23" bodyfile="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacefys_1_1common_1_1init__beacon_1aa57bf52de4542af842b774b3068fca0f" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr static auto</type>
+        <definition>constexpr static auto fys::common::init_beacon::HOSTNAME</definition>
+        <argsstring></argsstring>
+        <name>HOSTNAME</name>
+        <initializer>= &quot;service.hostname&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" line="34" column="23" bodyfile="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacefys_1_1common_1_1init__beacon_1a61bb5c03cb67663dd7ed3804ccf5eedb" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr static auto</type>
+        <definition>constexpr static auto fys::common::init_beacon::PORT</definition>
+        <argsstring></argsstring>
+        <name>PORT</name>
+        <initializer>= &quot;service.port&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" line="35" column="23" bodyfile="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacefys_1_1common_1_1init__beacon_1a29cc11691847d707e846730dabb42c5e" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr static auto</type>
+        <definition>constexpr static auto fys::common::init_beacon::DISPATCHER_PORT</definition>
+        <argsstring></argsstring>
+        <name>DISPATCHER_PORT</name>
+        <initializer>= &quot;dispatcher.port&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" line="37" column="23" bodyfile="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacefys_1_1common_1_1init__beacon_1a6d075a97a3334e008a5367e22ca4fd85" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr static auto</type>
+        <definition>constexpr static auto fys::common::init_beacon::DISPATCHER_SUBPORT</definition>
+        <argsstring></argsstring>
+        <name>DISPATCHER_SUBPORT</name>
+        <initializer>= &quot;dispatcher.subport&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" line="38" column="23" bodyfile="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacefys_1_1common_1_1init__beacon_1a71d0cfa9078288f242f5f31df53b9116" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr static auto</type>
+        <definition>constexpr static auto fys::common::init_beacon::DISPATCHER_ADDR</definition>
+        <argsstring></argsstring>
+        <name>DISPATCHER_ADDR</name>
+        <initializer>= &quot;dispatcher.address&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" line="39" column="23" bodyfile="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" line="32" column="21"/>
+  </compounddef>
+</doxygen>

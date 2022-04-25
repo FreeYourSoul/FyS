@@ -1,0 +1,51 @@
+\hypertarget{structfys_1_1arena_1_1data_1_1_status}{}\doxysection{fys\+::arena\+::data\+::Status Struct Reference}
+\label{structfys_1_1arena_1_1data_1_1_status}\index{fys::arena::data::Status@{fys::arena::data::Status}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{structfys_1_1arena_1_1data_1_1_status_a0f26d7ff12453ec70bccd2aa5b1502c1}{process\+Alteration\+Before\+Turn}} ()
+\item 
+\mbox{\Hypertarget{structfys_1_1arena_1_1data_1_1_status_a7c13230475563a58e29c0608cdc79df4}\label{structfys_1_1arena_1_1data_1_1_status_a7c13230475563a58e29c0608cdc79df4}} 
+void {\bfseries process\+Alteration\+After\+Turn} ()
+\item 
+\mbox{\Hypertarget{structfys_1_1arena_1_1data_1_1_status_a8610cab7f4b91785d1e19233746eb69f}\label{structfys_1_1arena_1_1data_1_1_status_a8610cab7f4b91785d1e19233746eb69f}} 
+void {\bfseries cleanup\+Finished\+Alteration} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structfys_1_1arena_1_1data_1_1_status_ac74d47a0248dd69205a84ef6c0a2f2cb}\label{structfys_1_1arena_1_1data_1_1_status_ac74d47a0248dd69205a84ef6c0a2f2cb}} 
+\mbox{\hyperlink{structfys_1_1arena_1_1data_1_1_life}{Life}} {\bfseries life}
+\item 
+\mbox{\Hypertarget{structfys_1_1arena_1_1data_1_1_status_a8d5eb6af7f9afd5c5fcdf775c641cf7c}\label{structfys_1_1arena_1_1data_1_1_status_a8d5eb6af7f9afd5c5fcdf775c641cf7c}} 
+\mbox{\hyperlink{structfys_1_1arena_1_1data_1_1_magic_point}{Magic\+Point}} {\bfseries magic\+Point}
+\item 
+\mbox{\Hypertarget{structfys_1_1arena_1_1data_1_1_status_a8b6b277d46a376264de6d4bb6401a94e}\label{structfys_1_1arena_1_1data_1_1_status_a8b6b277d46a376264de6d4bb6401a94e}} 
+uint {\bfseries initial\+Speed}
+\item 
+\mbox{\Hypertarget{structfys_1_1arena_1_1data_1_1_status_a982b481594d68651ebbcb140313e6fe1}\label{structfys_1_1arena_1_1data_1_1_status_a982b481594d68651ebbcb140313e6fe1}} 
+std\+::vector$<$ \mbox{\hyperlink{classfys_1_1arena_1_1data_1_1_alteration}{Alteration}} $>$ {\bfseries alteration\+\_\+before}
+\item 
+\mbox{\Hypertarget{structfys_1_1arena_1_1data_1_1_status_a313713965329c33ba5166dd7f3468aad}\label{structfys_1_1arena_1_1data_1_1_status_a313713965329c33ba5166dd7f3468aad}} 
+std\+::vector$<$ \mbox{\hyperlink{classfys_1_1arena_1_1data_1_1_alteration}{Alteration}} $>$ {\bfseries alteration\+\_\+after}
+\item 
+\mbox{\Hypertarget{structfys_1_1arena_1_1data_1_1_status_a818059e8abe20c05b9ee52d2b163c02d}\label{structfys_1_1arena_1_1data_1_1_status_a818059e8abe20c05b9ee52d2b163c02d}} 
+std\+::vector$<$ \mbox{\hyperlink{classfys_1_1arena_1_1data_1_1_alteration}{Alteration}} $>$ \mbox{\hyperlink{structfys_1_1arena_1_1data_1_1_status_a818059e8abe20c05b9ee52d2b163c02d}{alterations}}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classfys_1_1arena_1_1data_1_1_alteration}{Alteration}} executed on the turn (usually stat modification impacting the damages/heal) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structfys_1_1arena_1_1data_1_1_status_a0f26d7ff12453ec70bccd2aa5b1502c1}\label{structfys_1_1arena_1_1data_1_1_status_a0f26d7ff12453ec70bccd2aa5b1502c1}} 
+\index{fys::arena::data::Status@{fys::arena::data::Status}!processAlterationBeforeTurn@{processAlterationBeforeTurn}}
+\index{processAlterationBeforeTurn@{processAlterationBeforeTurn}!fys::arena::data::Status@{fys::arena::data::Status}}
+\doxysubsubsection{\texorpdfstring{processAlterationBeforeTurn()}{processAlterationBeforeTurn()}}
+{\footnotesize\ttfamily bool fys\+::arena\+::data\+::\+Status\+::process\+Alteration\+Before\+Turn (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Process all alteration before turn stored \begin{DoxyReturn}{Returns}
+true if the turn is executed, false if it is cancelled 
+\end{DoxyReturn}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/services/arena/include/fighting\+Pit/data/Common\+Types.\+hh\end{DoxyCompactItemize}

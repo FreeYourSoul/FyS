@@ -1,0 +1,585 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1arena_1_1_worker_service" kind="class" language="C++" prot="public">
+    <compoundname>fys::arena::WorkerService</compoundname>
+    <includes refid="_worker_service_8hh" local="no">WorkerService.hh</includes>
+    <innerclass refid="structfys_1_1arena_1_1_worker_service_1_1_player_identifier" prot="private">fys::arena::WorkerService::PlayerIdentifier</innerclass>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_worker_service_1acccc6431ef253be36b1db1d21adbc5b4" prot="private" static="no" mutable="no">
+        <type>zmq::context_t</type>
+        <definition>zmq::context_t fys::arena::WorkerService::_ctx</definition>
+        <argsstring></argsstring>
+        <name>_ctx</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" line="188" column="16" bodyfile="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" bodystart="188" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_worker_service_1a49ae59bca2657000f5f028de3178da60" prot="private" static="no" mutable="no">
+        <type>zmq::socket_t</type>
+        <definition>zmq::socket_t fys::arena::WorkerService::_workerRouter</definition>
+        <argsstring></argsstring>
+        <name>_workerRouter</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" line="189" column="15" bodyfile="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" bodystart="189" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_worker_service_1a3f06984a6888cca06ce109eab816204c" prot="private" static="no" mutable="no">
+        <type>unsigned</type>
+        <definition>unsigned fys::arena::WorkerService::_currentArenaId</definition>
+        <argsstring></argsstring>
+        <name>_currentArenaId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" line="190" column="10" bodyfile="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" bodystart="190" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_worker_service_1a44ef4acdd68df0f9ebdb7e22d5e0379d" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; unsigned, std::vector&lt; PlayerIdentifier &gt; &gt;</type>
+        <definition>std::unordered_map&lt;unsigned, std::vector&lt;PlayerIdentifier&gt; &gt; fys::arena::WorkerService::_arenaIdOnIdentifier</definition>
+        <argsstring></argsstring>
+        <name>_arenaIdOnIdentifier</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" line="193" column="20" bodyfile="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" bodystart="193" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_worker_service_1a3d396f9b49a01785682fb9484805bad6" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; unsigned, std::unique_ptr&lt; <ref refid="classfys_1_1arena_1_1_fighting_pit" kindref="compound">FightingPit</ref> &gt; &gt;</type>
+        <definition>std::unordered_map&lt;unsigned, std::unique_ptr&lt;FightingPit&gt; &gt; fys::arena::WorkerService::_arenaInstances</definition>
+        <argsstring></argsstring>
+        <name>_arenaInstances</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" line="194" column="20" bodyfile="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" bodystart="194" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1arena_1_1_worker_service_1a3380617d006ed6505fd4511856003576" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fys::arena::WorkerService::WorkerService</definition>
+        <argsstring>()</argsstring>
+        <name>WorkerService</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" line="68" column="10" bodyfile="/home/FyS/Project/FyS/services/arena/src/network/WorkerService.cpp" bodystart="39" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_worker_service_1afc77549c54e3e8a680810bad3045e930" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::WorkerService::startFightingPitsLoop</definition>
+        <argsstring>()</argsstring>
+        <name>startFightingPitsLoop</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" line="70" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/network/WorkerService.cpp" bodystart="50" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_worker_service_1a8f2be68bc18768419dcf9aa4bc2be062" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::WorkerService::setupConnectionManager</definition>
+        <argsstring>(const fys::arena::ArenaServerContext &amp;ctx) noexcept</argsstring>
+        <name>setupConnectionManager</name>
+        <param>
+          <type>const <ref refid="classfys_1_1arena_1_1_arena_server_context" kindref="compound">fys::arena::ArenaServerContext</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <briefdescription>
+<para>Bind the ArenaService for the player to connect directly to the Arena. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" line="76" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/network/WorkerService.cpp" bodystart="44" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_worker_service_1aaac35104ca164f68392d733907156ed1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>unsigned</type>
+        <definition>unsigned fys::arena::WorkerService::addFightingPit</definition>
+        <argsstring>(std::unique_ptr&lt; FightingPit &gt; fp)</argsstring>
+        <name>addFightingPit</name>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classfys_1_1arena_1_1_fighting_pit" kindref="compound">FightingPit</ref> &gt;</type>
+          <declname>fp</declname>
+        </param>
+        <briefdescription>
+<para>Add a fighting pit to the worker service, adding this instance to the on-going/accessible fighting pit of the arena server. Create an id for the newly created arena and set it to the fighting pit. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classfys_1_1arena_1_1_fighting_pit" kindref="compound">FightingPit</ref> to add in the current <ref refid="classfys_1_1arena_1_1_worker_service" kindref="compound">WorkerService</ref> </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>newly added fighting pit id, or 0 (<ref refid="classfys_1_1arena_1_1_fighting_pit_1ad27a20dcca9411de7281580ef8efa782" kindref="member">FightingPit::CREATION_ERROR</ref>) if an error occurred </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" line="86" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/network/WorkerService.cpp" bodystart="69" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_worker_service_1a9b030f873ca8655426996f62b3508fbd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::WorkerService::playerJoinFightingPit</definition>
+        <argsstring>(unsigned fightingPitId, std::unique_ptr&lt; PartyTeam &gt; pt, cache::Cml &amp;cml)</argsstring>
+        <name>playerJoinFightingPit</name>
+        <param>
+          <type>unsigned</type>
+          <declname>fightingPitId</declname>
+        </param>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classfys_1_1arena_1_1_party_team" kindref="compound">PartyTeam</ref> &gt;</type>
+          <declname>pt</declname>
+        </param>
+        <param>
+          <type><ref refid="classfys_1_1cache_1_1_cml" kindref="compound">cache::Cml</ref> &amp;</type>
+          <declname>cml</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Player join a given fighting pit <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fightingPitId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>id of the fighting pit to join </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>party team retrieved to add </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cml</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>cache manager used to register chaiscript scripts </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" line="94" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/network/WorkerService.cpp" bodystart="105" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_worker_service_1a5208f792ab88c5493e32371784bb52c1" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::WorkerService::sendMsgNewArrivingTeam</definition>
+        <argsstring>(unsigned fpId, const std::string &amp;userName) noexcept</argsstring>
+        <name>sendMsgNewArrivingTeam</name>
+        <param>
+          <type>unsigned</type>
+          <declname>fpId</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>userName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Broadcast a message containing all the information about the incoming players data<itemizedlist>
+<listitem><para>UserName</para>
+</listitem><listitem><para>TeamMembers id, name, stats (life, magic points)</para>
+</listitem><listitem><para>// todo cosmetic information (equipment)</para>
+</listitem></itemizedlist>
+</para>
+<para><simplesect kind="note"><para>Checks about the validity of the userName and the fightingPitId given as parameter have to be done beforehand</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fpId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>id of the fighting pit, HAS TO BE ACCURATE </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>userName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>user whom is going to </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" line="107" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/network/WorkerService.cpp" bodystart="160" bodyend="172"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_worker_service_1ae2c13525a43315b511afb90ceb658549" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename HandlerAuth</type>
+          </param>
+          <param>
+            <type>typename HandlerInGame</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void fys::arena::WorkerService::pollAndProcessMessageFromPlayer</definition>
+        <argsstring>(HandlerAuth &amp;&amp;handlerAuth, HandlerInGame &amp;&amp;handlerInGame) noexcept</argsstring>
+        <name>pollAndProcessMessageFromPlayer</name>
+        <param>
+          <type>HandlerAuth &amp;&amp;</type>
+          <declname>handlerAuth</declname>
+        </param>
+        <param>
+          <type>HandlerInGame &amp;&amp;</type>
+          <declname>handlerInGame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Read on the router socket (connection with the players) and reply to them thanks to the zmq::router protocol <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Lambda</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>type following the signature =&gt; void (string, zmq::message_t) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>HandlerAuth</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Handler handler to call when receiving a message to authenticate an awaited player </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>HandlerInGame</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Handler handler to call when receiving a message to do a player action on a fightingPit </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" line="116" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" bodystart="116" bodyend="143"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_worker_service_1a7d65ee78a5b80c6bdeabf7a3b1ea0493" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::optional&lt; std::reference_wrapper&lt; <ref refid="classfys_1_1arena_1_1_fighting_pit" kindref="compound">FightingPit</ref> &gt; &gt;</type>
+        <definition>std::optional&lt; std::reference_wrapper&lt; FightingPit &gt; &gt; fys::arena::WorkerService::getAuthenticatedPlayerFightingPit</definition>
+        <argsstring>(const std::string &amp;name, const std::string &amp;token, unsigned fightingPitId)</argsstring>
+        <name>getAuthenticatedPlayerFightingPit</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>token</declname>
+        </param>
+        <param>
+          <type>unsigned</type>
+          <declname>fightingPitId</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Check if the player defined by an unique name/token is authenticated on the given fightingArenaId And return the given fightingpit if it&apos;s the case</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>player name </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>authentication token </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>fightingPitId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>arena to check if the player is authenticated on </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A reference to the fighting pit if the player is authenticated on the given fightingPit, return std::nullopt otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" line="156" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/network/WorkerService.cpp" bodystart="124" bodyend="132"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_worker_service_1a7e4b8861cf42055eee7dba66fcbc20a3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::unique_ptr&lt; <ref refid="classfys_1_1arena_1_1_fighting_pit" kindref="compound">FightingPit</ref> &gt; &amp;</type>
+        <definition>const std::unique_ptr&lt;FightingPit&gt;&amp; fys::arena::WorkerService::getFightingPitInstance</definition>
+        <argsstring>(unsigned arenaId) const</argsstring>
+        <name>getFightingPitInstance</name>
+        <param>
+          <type>unsigned</type>
+          <declname>arenaId</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" line="159" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" bodystart="159" bodyend="159"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_worker_service_1a7c0166940a9a3228fc4812bff896b9b9" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::pair&lt; bool, bool &gt;</type>
+        <definition>std::pair&lt; bool, bool &gt; fys::arena::WorkerService::fightingPitExistAndJoinable</definition>
+        <argsstring>(unsigned fightingPitId) const noexcept</argsstring>
+        <name>fightingPitExistAndJoinable</name>
+        <param>
+          <type>unsigned</type>
+          <declname>fightingPitId</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" line="162" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/network/WorkerService.cpp" bodystart="153" bodyend="157"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_worker_service_1a61c658c9a8dd6e6279314d454e765f9f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>unsigned</type>
+        <definition>unsigned fys::arena::WorkerService::getNumberBattleRunning</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getNumberBattleRunning</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" line="165" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" bodystart="165" bodyend="165"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_worker_service_1abe7760cdcb08565d96533251f5b53a43" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::WorkerService::upsertPlayerIdentifier</definition>
+        <argsstring>(unsigned fightingPitId, std::string userName, std::string idtPlayer)</argsstring>
+        <name>upsertPlayerIdentifier</name>
+        <param>
+          <type>unsigned</type>
+          <declname>fightingPitId</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>userName</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>idtPlayer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Update or add (if player not register yet) the player identifier mapping with fightingPit <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>fightingPitId</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>key of the mapping, multiple players are linked with a fightingpit </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>userName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>unique name of the player </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idtPlayer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>network identity of the player </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" line="173" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/network/WorkerService.cpp" bodystart="135" bodyend="150"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classfys_1_1arena_1_1_worker_service_1a6401a8c7745d9f0a790dff562a545c5a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::WorkerService::broadcastMsg</definition>
+        <argsstring>(unsigned fpId, zmq::message_t &amp;&amp;msg, const std::string &amp;except=&quot;&quot;)</argsstring>
+        <name>broadcastMsg</name>
+        <param>
+          <type>unsigned</type>
+          <declname>fpId</declname>
+        </param>
+        <param>
+          <type>zmq::message_t &amp;&amp;</type>
+          <declname>msg</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>except</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" line="177" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/network/WorkerService.cpp" bodystart="194" bodyend="215"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_worker_service_1a24ccc880a3332f9210a9eb3b2093eba2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::WorkerService::sendMessageToPlayer</definition>
+        <argsstring>(unsigned fpId, const std::string &amp;userName, zmq::message_t &amp;&amp;msg)</argsstring>
+        <name>sendMessageToPlayer</name>
+        <param>
+          <type>unsigned</type>
+          <declname>fpId</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>userName</declname>
+        </param>
+        <param>
+          <type>zmq::message_t &amp;&amp;</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" line="180" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/network/WorkerService.cpp" bodystart="175" bodyend="191"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_worker_service_1a567a077a6ce0abe471d360bcd219d612" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::string &amp;</type>
+        <definition>const std::string &amp; fys::arena::WorkerService::retrievePlayerIdentifier</definition>
+        <argsstring>(unsigned fpId, const std::string &amp;userName)</argsstring>
+        <name>retrievePlayerIdentifier</name>
+        <param>
+          <type>unsigned</type>
+          <declname>fpId</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>userName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" line="183" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/network/WorkerService.cpp" bodystart="218" bodyend="234"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_worker_service_1af904ea29ac92549cc73d0b23f2f3b9c0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::WorkerService::cleanUpFinishedBattles</definition>
+        <argsstring>()</argsstring>
+        <name>cleanUpFinishedBattles</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" line="185" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/network/WorkerService.cpp" bodystart="88" bodyend="102"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Manage the fighting pits :<itemizedlist>
+<listitem><para>Generate a fighting pit</para>
+</listitem><listitem><para>Assign an ID to it</para>
+</listitem><listitem><para>Assign a dedicated thread to it</para>
+</listitem></itemizedlist>
+</para>
+<para>Fighting pit are created by the <ref refid="classfys_1_1arena_1_1_worker_service" kindref="compound">WorkerService</ref> using the <ref refid="classfys_1_1arena_1_1_fighting_pit_announcer" kindref="compound">FightingPitAnnouncer</ref> as builder in order to ensure that the fightingpit is ready to host a battle, and then start the fighting pit in a dedicated thread.</para>
+<para>Each fighting pit will contains a DEALER socket that will be used to communicate with the <ref refid="classfys_1_1arena_1_1_worker_service" kindref="compound">WorkerService</ref>. A custom zmq identifier will be provided by the <ref refid="classfys_1_1arena_1_1_worker_service" kindref="compound">WorkerService</ref> in order to be able to target a specific <ref refid="classfys_1_1arena_1_1_fighting_pit" kindref="compound">FightingPit</ref> for specific players (the map _idOnArenaId being used to register which player is in which <ref refid="classfys_1_1arena_1_1_fighting_pit" kindref="compound">FightingPit</ref>).</para>
+<para><simplesect kind="see"><para><ref refid="classfys_1_1arena_1_1_fighting_pit_announcer" kindref="compound">fys::arena::FightingPitAnnouncer</ref> </para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classfys_1_1arena_1_1_fighting_pit" kindref="compound">fys::arena::FightingPit</ref> </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" line="60" column="20" bodyfile="/home/FyS/Project/FyS/services/arena/include/network/WorkerService.hh" bodystart="60" bodyend="196"/>
+    <listofallmembers>
+      <member refid="classfys_1_1arena_1_1_worker_service_1a44ef4acdd68df0f9ebdb7e22d5e0379d" prot="private" virt="non-virtual"><scope>fys::arena::WorkerService</scope><name>_arenaIdOnIdentifier</name></member>
+      <member refid="classfys_1_1arena_1_1_worker_service_1a3d396f9b49a01785682fb9484805bad6" prot="private" virt="non-virtual"><scope>fys::arena::WorkerService</scope><name>_arenaInstances</name></member>
+      <member refid="classfys_1_1arena_1_1_worker_service_1acccc6431ef253be36b1db1d21adbc5b4" prot="private" virt="non-virtual"><scope>fys::arena::WorkerService</scope><name>_ctx</name></member>
+      <member refid="classfys_1_1arena_1_1_worker_service_1a3f06984a6888cca06ce109eab816204c" prot="private" virt="non-virtual"><scope>fys::arena::WorkerService</scope><name>_currentArenaId</name></member>
+      <member refid="classfys_1_1arena_1_1_worker_service_1a49ae59bca2657000f5f028de3178da60" prot="private" virt="non-virtual"><scope>fys::arena::WorkerService</scope><name>_workerRouter</name></member>
+      <member refid="classfys_1_1arena_1_1_worker_service_1aaac35104ca164f68392d733907156ed1" prot="public" virt="non-virtual"><scope>fys::arena::WorkerService</scope><name>addFightingPit</name></member>
+      <member refid="classfys_1_1arena_1_1_worker_service_1a6401a8c7745d9f0a790dff562a545c5a" prot="private" virt="non-virtual"><scope>fys::arena::WorkerService</scope><name>broadcastMsg</name></member>
+      <member refid="classfys_1_1arena_1_1_worker_service_1af904ea29ac92549cc73d0b23f2f3b9c0" prot="private" virt="non-virtual"><scope>fys::arena::WorkerService</scope><name>cleanUpFinishedBattles</name></member>
+      <member refid="classfys_1_1arena_1_1_worker_service_1a7c0166940a9a3228fc4812bff896b9b9" prot="public" virt="non-virtual"><scope>fys::arena::WorkerService</scope><name>fightingPitExistAndJoinable</name></member>
+      <member refid="classfys_1_1arena_1_1_worker_service_1a7d65ee78a5b80c6bdeabf7a3b1ea0493" prot="public" virt="non-virtual"><scope>fys::arena::WorkerService</scope><name>getAuthenticatedPlayerFightingPit</name></member>
+      <member refid="classfys_1_1arena_1_1_worker_service_1a7e4b8861cf42055eee7dba66fcbc20a3" prot="public" virt="non-virtual"><scope>fys::arena::WorkerService</scope><name>getFightingPitInstance</name></member>
+      <member refid="classfys_1_1arena_1_1_worker_service_1a61c658c9a8dd6e6279314d454e765f9f" prot="public" virt="non-virtual"><scope>fys::arena::WorkerService</scope><name>getNumberBattleRunning</name></member>
+      <member refid="classfys_1_1arena_1_1_worker_service_1a9b030f873ca8655426996f62b3508fbd" prot="public" virt="non-virtual"><scope>fys::arena::WorkerService</scope><name>playerJoinFightingPit</name></member>
+      <member refid="classfys_1_1arena_1_1_worker_service_1ae2c13525a43315b511afb90ceb658549" prot="public" virt="non-virtual"><scope>fys::arena::WorkerService</scope><name>pollAndProcessMessageFromPlayer</name></member>
+      <member refid="classfys_1_1arena_1_1_worker_service_1a567a077a6ce0abe471d360bcd219d612" prot="private" virt="non-virtual"><scope>fys::arena::WorkerService</scope><name>retrievePlayerIdentifier</name></member>
+      <member refid="classfys_1_1arena_1_1_worker_service_1a24ccc880a3332f9210a9eb3b2093eba2" prot="private" virt="non-virtual"><scope>fys::arena::WorkerService</scope><name>sendMessageToPlayer</name></member>
+      <member refid="classfys_1_1arena_1_1_worker_service_1a5208f792ab88c5493e32371784bb52c1" prot="public" virt="non-virtual"><scope>fys::arena::WorkerService</scope><name>sendMsgNewArrivingTeam</name></member>
+      <member refid="classfys_1_1arena_1_1_worker_service_1a8f2be68bc18768419dcf9aa4bc2be062" prot="public" virt="non-virtual"><scope>fys::arena::WorkerService</scope><name>setupConnectionManager</name></member>
+      <member refid="classfys_1_1arena_1_1_worker_service_1afc77549c54e3e8a680810bad3045e930" prot="public" virt="non-virtual"><scope>fys::arena::WorkerService</scope><name>startFightingPitsLoop</name></member>
+      <member refid="classfys_1_1arena_1_1_worker_service_1abe7760cdcb08565d96533251f5b53a43" prot="public" virt="non-virtual"><scope>fys::arena::WorkerService</scope><name>upsertPlayerIdentifier</name></member>
+      <member refid="classfys_1_1arena_1_1_worker_service_1a3380617d006ed6505fd4511856003576" prot="public" virt="non-virtual"><scope>fys::arena::WorkerService</scope><name>WorkerService</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

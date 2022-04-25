@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1arena_1_1_connection_handler" kind="class" language="C++" prot="public">
+    <compoundname>fys::arena::ConnectionHandler</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_connection_handler_1ad634c2ea8eede78800e2b806ae5b6d01" prot="private" static="no" mutable="no">
+        <type>zmq::context_t</type>
+        <definition>zmq::context_t fys::arena::ConnectionHandler::_zmq_context</definition>
+        <argsstring></argsstring>
+        <name>_zmq_context</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ConnectionHandler.hh" line="81" column="16" bodyfile="/home/FyS/Project/FyS/services/arena/include/ConnectionHandler.hh" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_connection_handler_1a332078853e076d5aba2a9e0426f04e6b" prot="private" static="no" mutable="no">
+        <type>zmq::socket_t</type>
+        <definition>zmq::socket_t fys::arena::ConnectionHandler::_dealerConnectionToDispatcher</definition>
+        <argsstring></argsstring>
+        <name>_dealerConnectionToDispatcher</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ConnectionHandler.hh" line="84" column="15" bodyfile="/home/FyS/Project/FyS/services/arena/include/ConnectionHandler.hh" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1arena_1_1_connection_handler_1ab9e57a357e3f48c0ba2be752bca3e1f8" prot="public" static="no" const="no" explicit="yes" inline="yes" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::arena::ConnectionHandler::ConnectionHandler</definition>
+        <argsstring>(int threadNumber=1) noexcept</argsstring>
+        <name>ConnectionHandler</name>
+        <param>
+          <type>int</type>
+          <declname>threadNumber</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ConnectionHandler.hh" line="38" column="10" bodyfile="/home/FyS/Project/FyS/services/arena/include/ConnectionHandler.hh" bodystart="38" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_connection_handler_1afcd5843eb523467a548501e14ef8719e" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::ConnectionHandler::setupConnectionManager</definition>
+        <argsstring>(const fys::arena::ArenaServerContext &amp;ctx) noexcept</argsstring>
+        <name>setupConnectionManager</name>
+        <param>
+          <type>const <ref refid="classfys_1_1arena_1_1_arena_server_context" kindref="compound">fys::arena::ArenaServerContext</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <briefdescription>
+<para>Connect to the Arena dispatcher in order to receive request from the WS to create new fightingPit. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><ref refid="namespace_f_seam" kindref="compound">FSeam</ref> generated class for ConnectionHandler.hh Please do not modify </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ConnectionHandler.hh" line="46" column="6" bodyfile="/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/ConnectionHandler.fseam.cc" bodystart="17" bodyend="28"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_connection_handler_1ab0feacaff0b2010410f0b52afbee5e94" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::ConnectionHandler::sendMessageToDispatcher</definition>
+        <argsstring>(zmq::multipart_t &amp;&amp;msg) noexcept</argsstring>
+        <name>sendMessageToDispatcher</name>
+        <param>
+          <type>zmq::multipart_t &amp;&amp;</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+<para>Reply to the dispatcher using the dealer (direct connection) socket. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ConnectionHandler.hh" line="50" column="6" bodyfile="/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/ConnectionHandler.fseam.cc" bodystart="30" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_connection_handler_1a21874f70ec3cebce589d817b4705451e" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Handler</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void fys::arena::ConnectionHandler::pollAndProcessMessageFromDispatcher</definition>
+        <argsstring>(Handler &amp;&amp;handler) noexcept</argsstring>
+        <name>pollAndProcessMessageFromDispatcher</name>
+        <param>
+          <type>Handler &amp;&amp;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Read on the dealer socket (connection with the dispatcher/WS) and reply to dispatcher via this socket connection (which will forward the message the the proper WorldServer) <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Lambda</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>type following the signature =&gt; void (string, zmq::message_t) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Handler handler to call when receiving a message </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ConnectionHandler.hh" line="59" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/ConnectionHandler.hh" bodystart="59" bodyend="78"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/ConnectionHandler.hh" line="35" column="24" bodyfile="/home/FyS/Project/FyS/services/arena/include/ConnectionHandler.hh" bodystart="35" bodyend="86"/>
+    <listofallmembers>
+      <member refid="classfys_1_1arena_1_1_connection_handler_1a332078853e076d5aba2a9e0426f04e6b" prot="private" virt="non-virtual"><scope>fys::arena::ConnectionHandler</scope><name>_dealerConnectionToDispatcher</name></member>
+      <member refid="classfys_1_1arena_1_1_connection_handler_1ad634c2ea8eede78800e2b806ae5b6d01" prot="private" virt="non-virtual"><scope>fys::arena::ConnectionHandler</scope><name>_zmq_context</name></member>
+      <member refid="classfys_1_1arena_1_1_connection_handler_1ab9e57a357e3f48c0ba2be752bca3e1f8" prot="public" virt="non-virtual"><scope>fys::arena::ConnectionHandler</scope><name>ConnectionHandler</name></member>
+      <member refid="classfys_1_1arena_1_1_connection_handler_1a21874f70ec3cebce589d817b4705451e" prot="public" virt="non-virtual"><scope>fys::arena::ConnectionHandler</scope><name>pollAndProcessMessageFromDispatcher</name></member>
+      <member refid="classfys_1_1arena_1_1_connection_handler_1ab0feacaff0b2010410f0b52afbee5e94" prot="public" virt="non-virtual"><scope>fys::arena::ConnectionHandler</scope><name>sendMessageToDispatcher</name></member>
+      <member refid="classfys_1_1arena_1_1_connection_handler_1afcd5843eb523467a548501e14ef8719e" prot="public" virt="non-virtual"><scope>fys::arena::ConnectionHandler</scope><name>setupConnectionManager</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

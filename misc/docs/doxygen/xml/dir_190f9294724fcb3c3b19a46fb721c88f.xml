@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_190f9294724fcb3c3b19a46fb721c88f" kind="dir">
+    <compoundname>/home/FyS/Project/FyS/services/arena/test/scriptTests</compoundname>
+    <innerfile refid="_action___damage_test_case_8cpp">Action_DamageTestCase.cpp</innerfile>
+    <innerfile refid="_action___heal_test_case_8cpp">Action_HealTestCase.cpp</innerfile>
+    <innerfile refid="_chai_register_test_case_8cpp">ChaiRegisterTestCase.cpp</innerfile>
+    <innerfile refid="_contender___sampy_test_case_8cpp">Contender_SampyTestCase.cpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/test/scriptTests/"/>
+  </compounddef>
+</doxygen>

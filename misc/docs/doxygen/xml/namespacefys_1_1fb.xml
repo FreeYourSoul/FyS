@@ -1,0 +1,3544 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacefys_1_1fb" kind="namespace" language="C++">
+    <compoundname>fys::fb</compoundname>
+    <innerclass refid="structfys_1_1fb_1_1_action_traits" prot="public">fys::fb::ActionTraits</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1_action_traits_3_01fys_1_1fb_1_1_interruption_01_4" prot="public">fys::fb::ActionTraits&lt; fys::fb::Interruption &gt;</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1_action_traits_3_01fys_1_1fb_1_1_move_01_4" prot="public">fys::fb::ActionTraits&lt; fys::fb::Move &gt;</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1_action_traits_3_01fys_1_1fb_1_1_pnj_interact_01_4" prot="public">fys::fb::ActionTraits&lt; fys::fb::PnjInteract &gt;</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1_arena_fight_action_builder" prot="public">fys::fb::ArenaFightActionBuilder</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1_arena_server_auth_builder" prot="public">fys::fb::ArenaServerAuthBuilder</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1_arena_server_validate_auth_builder" prot="public">fys::fb::ArenaServerValidateAuthBuilder</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1_content_traits" prot="public">fys::fb::ContentTraits</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1_content_traits_3_01flatbuffers_1_1_string_01_4" prot="public">fys::fb::ContentTraits&lt; flatbuffers::String &gt;</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1_content_traits_3_01fys_1_1fb_1_1_end_battle_01_4" prot="public">fys::fb::ContentTraits&lt; fys::fb::EndBattle &gt;</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1_content_traits_3_01fys_1_1fb_1_1_fighting_pit_state_01_4" prot="public">fys::fb::ContentTraits&lt; fys::fb::FightingPitState &gt;</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1_content_traits_3_01fys_1_1fb_1_1_member_status_01_4" prot="public">fys::fb::ContentTraits&lt; fys::fb::MemberStatus &gt;</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1_content_traits_3_01fys_1_1fb_1_1_party_team_status_01_4" prot="public">fys::fb::ContentTraits&lt; fys::fb::PartyTeamStatus &gt;</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1_cosmetics_builder" prot="public">fys::fb::CosmeticsBuilder</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1_end_battle_builder" prot="public">fys::fb::EndBattleBuilder</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1_fighting_pit_encounter_builder" prot="public">fys::fb::FightingPitEncounterBuilder</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1_fighting_pit_state_builder" prot="public">fys::fb::FightingPitStateBuilder</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s" prot="public">fys::fb::FLATBUFFERS_FINAL_CLASS</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1_interruption_builder" prot="public">fys::fb::InterruptionBuilder</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1_member_status_builder" prot="public">fys::fb::MemberStatusBuilder</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1_move_builder" prot="public">fys::fb::MoveBuilder</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1_move_ping_builder" prot="public">fys::fb::MovePingBuilder</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1_party_team_status_builder" prot="public">fys::fb::PartyTeamStatusBuilder</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1_pnj_interact_builder" prot="public">fys::fb::PnjInteractBuilder</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1_reply_frame_builder" prot="public">fys::fb::ReplyFrameBuilder</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1_reward_builder" prot="public">fys::fb::RewardBuilder</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1_w_s_action_builder" prot="public">fys::fb::WSActionBuilder</innerclass>
+    <innernamespace refid="namespacefys_1_1fb_1_1internal">fys::fb::internal</innernamespace>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="namespacefys_1_1fb_1a18a07c6e7ce49106b59a46d4666fcfbb" prot="public" static="no" strong="no">
+        <type></type>
+        <name>Targeting</name>
+        <enumvalue id="namespacefys_1_1fb_1a18a07c6e7ce49106b59a46d4666fcfbbaa2056ca8b79c4719362d263158d1b9df" prot="public">
+          <name>Targeting_SELF</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a18a07c6e7ce49106b59a46d4666fcfbbab0650d511105663eb25d315db3729605" prot="public">
+          <name>Targeting_ENNEMY</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a18a07c6e7ce49106b59a46d4666fcfbba2add26507e33c3bee56522fadfd0c75f" prot="public">
+          <name>Targeting_ALLY</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a18a07c6e7ce49106b59a46d4666fcfbba299a1ff24ac01b634c46255fbaf2bc17" prot="public">
+          <name>Targeting_ENNEMIES</name>
+          <initializer>= 3</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a18a07c6e7ce49106b59a46d4666fcfbba1a002aa473c97b485fe39066314231ec" prot="public">
+          <name>Targeting_ALLIES</name>
+          <initializer>= 4</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a18a07c6e7ce49106b59a46d4666fcfbbac1ae889601e3dfd631caafef62debadd" prot="public">
+          <name>Targeting_ALLY_AND_ENNEMY</name>
+          <initializer>= 5</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a18a07c6e7ce49106b59a46d4666fcfbba45468be0fb7bd0364cdc9ff2daa41dfe" prot="public">
+          <name>Targeting_ALLY_OR_ENNEMY</name>
+          <initializer>= 6</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a18a07c6e7ce49106b59a46d4666fcfbba8ad4d24bc2ce71e3cc9b14ffd9fab364" prot="public">
+          <name>Targeting_SIDE</name>
+          <initializer>= 7</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a18a07c6e7ce49106b59a46d4666fcfbba074b12187ec7635f4725bafaa85a39b2" prot="public">
+          <name>Targeting_MIN</name>
+          <initializer>= Targeting_SELF</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a18a07c6e7ce49106b59a46d4666fcfbba4eff3cfa0a57e98a39ee2e8534d5846c" prot="public">
+          <name>Targeting_MAX</name>
+          <initializer>= Targeting_SIDE</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" line="14" column="15" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" bodystart="14" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="enum" id="namespacefys_1_1fb_1a00fa000e8ffdab9707ad304845ab4c38" prot="public" static="no" strong="no">
+        <type></type>
+        <name>TypeAction</name>
+        <enumvalue id="namespacefys_1_1fb_1a00fa000e8ffdab9707ad304845ab4c38ad9986492a6179621156c73ce95656cf7" prot="public">
+          <name>TypeAction_READINESS</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a00fa000e8ffdab9707ad304845ab4c38a849bddcc3037907126d07a2c58fa78ff" prot="public">
+          <name>TypeAction_FIGHT</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a00fa000e8ffdab9707ad304845ab4c38a38f41189051f4dbd24f0733d58fd160b" prot="public">
+          <name>TypeAction_INFO</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a00fa000e8ffdab9707ad304845ab4c38a1e6d83c9b0fa1ee3bba94a252512fae4" prot="public">
+          <name>TypeAction_MIN</name>
+          <initializer>= TypeAction_READINESS</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a00fa000e8ffdab9707ad304845ab4c38a963329a7fdd0dab011a066dff4b93b62" prot="public">
+          <name>TypeAction_MAX</name>
+          <initializer>= TypeAction_INFO</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" line="62" column="16" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" bodystart="62" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="enum" id="namespacefys_1_1fb_1a07c8866f3151c7939af2f0dc1a95fe53" prot="public" static="no" strong="no">
+        <type></type>
+        <name>SideOrient</name>
+        <enumvalue id="namespacefys_1_1fb_1a07c8866f3151c7939af2f0dc1a95fe53a7c9f1a4fe340e2a62a8ebf58fd1fde41" prot="public">
+          <name>SideOrient_A_N</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a07c8866f3151c7939af2f0dc1a95fe53a34a6a373959765dabef4ce3983d6350f" prot="public">
+          <name>SideOrient_A_NE</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a07c8866f3151c7939af2f0dc1a95fe53a0fa29522f2dcbfe79593071b9d60bdb7" prot="public">
+          <name>SideOrient_A_SE</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a07c8866f3151c7939af2f0dc1a95fe53a83b0639f8125149005106123a4210a0e" prot="public">
+          <name>SideOrient_A_S</name>
+          <initializer>= 3</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a07c8866f3151c7939af2f0dc1a95fe53a4cf8d3ebe92336ca9c1b3af0e5727cc2" prot="public">
+          <name>SideOrient_A_SW</name>
+          <initializer>= 4</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a07c8866f3151c7939af2f0dc1a95fe53ac30f9418facef16ca7e2bb7ff9c95e90" prot="public">
+          <name>SideOrient_A_NW</name>
+          <initializer>= 5</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a07c8866f3151c7939af2f0dc1a95fe53a6bdb724fb81737687a4facefd79ebbb9" prot="public">
+          <name>SideOrient_B_N</name>
+          <initializer>= 6</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a07c8866f3151c7939af2f0dc1a95fe53a6e5ae8695efb0cc0644629f0ef87d26a" prot="public">
+          <name>SideOrient_B_NE</name>
+          <initializer>= 7</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a07c8866f3151c7939af2f0dc1a95fe53a4ed024efce3560f8d2c748968dd4e49d" prot="public">
+          <name>SideOrient_B_SE</name>
+          <initializer>= 8</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a07c8866f3151c7939af2f0dc1a95fe53aad02f362d28e1f23a2f82dfdc65540e0" prot="public">
+          <name>SideOrient_B_S</name>
+          <initializer>= 9</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a07c8866f3151c7939af2f0dc1a95fe53a58ab0cf270053e43e787a1050424ac98" prot="public">
+          <name>SideOrient_B_SW</name>
+          <initializer>= 10</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a07c8866f3151c7939af2f0dc1a95fe53ada3aee50179da2141ed76a52707ca0d3" prot="public">
+          <name>SideOrient_B_NW</name>
+          <initializer>= 11</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a07c8866f3151c7939af2f0dc1a95fe53a9d0c6760e89578418ee0b95dff7ce1c0" prot="public">
+          <name>SideOrient_C_N</name>
+          <initializer>= 12</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a07c8866f3151c7939af2f0dc1a95fe53ad028c9cbc24d88dc2b9ef29937d97ce7" prot="public">
+          <name>SideOrient_C_NE</name>
+          <initializer>= 13</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a07c8866f3151c7939af2f0dc1a95fe53ac3c68e83426a2c39a3089a8c11785159" prot="public">
+          <name>SideOrient_C_SE</name>
+          <initializer>= 14</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a07c8866f3151c7939af2f0dc1a95fe53a6684d47b9f7efde632bf975c2e90ca32" prot="public">
+          <name>SideOrient_C_S</name>
+          <initializer>= 15</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a07c8866f3151c7939af2f0dc1a95fe53a8b14b2565a21df67b6f1d6dcac83b270" prot="public">
+          <name>SideOrient_C_SW</name>
+          <initializer>= 16</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a07c8866f3151c7939af2f0dc1a95fe53a23afc98a2f86d2d83965e1653368de59" prot="public">
+          <name>SideOrient_C_NW</name>
+          <initializer>= 17</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a07c8866f3151c7939af2f0dc1a95fe53a100b641f4100ff52ed1436939f1f6833" prot="public">
+          <name>SideOrient_MIN</name>
+          <initializer>= SideOrient_A_N</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a07c8866f3151c7939af2f0dc1a95fe53af094a655d8e471724c216ba3e623bb9c" prot="public">
+          <name>SideOrient_MAX</name>
+          <initializer>= SideOrient_C_NW</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" line="18" column="16" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" bodystart="18" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="enum" id="namespacefys_1_1fb_1ad446783faa64caa2ad2d839082ba1baa" prot="public" static="no" strong="no">
+        <type></type>
+        <name>CosmeticType</name>
+        <enumvalue id="namespacefys_1_1fb_1ad446783faa64caa2ad2d839082ba1baaa94e7b1380000186564b3c8676a826b60" prot="public">
+          <name>CosmeticType_WEAPON</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1ad446783faa64caa2ad2d839082ba1baaa1d500cc324a8c27711527ddb2bae4588" prot="public">
+          <name>CosmeticType_CHARACTER</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1ad446783faa64caa2ad2d839082ba1baaa47e967246f100f870d2a837e78355354" prot="public">
+          <name>CosmeticType_EQUIPMENT</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1ad446783faa64caa2ad2d839082ba1baaa7e4a2c51b05a3d888e5db3a9c684412a" prot="public">
+          <name>CosmeticType_MIN</name>
+          <initializer>= CosmeticType_WEAPON</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1ad446783faa64caa2ad2d839082ba1baaa1f1011c1dc230c715eafcc97553fce6e" prot="public">
+          <name>CosmeticType_MAX</name>
+          <initializer>= CosmeticType_EQUIPMENT</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" line="96" column="18" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" bodystart="96" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="enum" id="namespacefys_1_1fb_1a6abca5ae711862f6156d29d8a68fbe56" prot="public" static="no" strong="no">
+        <type></type>
+        <name>StatusBattle</name>
+        <enumvalue id="namespacefys_1_1fb_1a6abca5ae711862f6156d29d8a68fbe56a8d55e127fb677302d04f24ba9b9a1fca" prot="public">
+          <name>StatusBattle_WON</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a6abca5ae711862f6156d29d8a68fbe56a31d637a52db516743dc56b6d50f94c19" prot="public">
+          <name>StatusBattle_LOST</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a6abca5ae711862f6156d29d8a68fbe56aedbc9efb429dd4b52785afc1b8e3e6a5" prot="public">
+          <name>StatusBattle_MIN</name>
+          <initializer>= StatusBattle_WON</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a6abca5ae711862f6156d29d8a68fbe56a4615e2403fcc8956648874fbb190d463" prot="public">
+          <name>StatusBattle_MAX</name>
+          <initializer>= StatusBattle_LOST</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" line="16" column="18" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" bodystart="16" bodyend="21"/>
+      </memberdef>
+      <memberdef kind="enum" id="namespacefys_1_1fb_1afa8d5a591f97452c3c37dd93a4d7ef99" prot="public" static="no" strong="no">
+        <type></type>
+        <name>Level</name>
+        <enumvalue id="namespacefys_1_1fb_1afa8d5a591f97452c3c37dd93a4d7ef99a407c1afc86e0ea814848d1c9be6c0034" prot="public">
+          <name>Level_EASY</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1afa8d5a591f97452c3c37dd93a4d7ef99a9c6a0091baf7843f70a657dc1271c023" prot="public">
+          <name>Level_MEDIUM</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1afa8d5a591f97452c3c37dd93a4d7ef99a6214746c672011b105e75e240af9b072" prot="public">
+          <name>Level_HARD</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1afa8d5a591f97452c3c37dd93a4d7ef99a367d3894fb398f8e4f1e31f891af8ad8" prot="public">
+          <name>Level_MIN</name>
+          <initializer>= Level_EASY</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1afa8d5a591f97452c3c37dd93a4d7ef99a81502524e3fa52a87b963473343438e4" prot="public">
+          <name>Level_MAX</name>
+          <initializer>= Level_HARD</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" line="14" column="11" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" bodystart="14" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="enum" id="namespacefys_1_1fb_1a05f7491eb4fbb5d7ee169afd9da611d1" prot="public" static="no" strong="no">
+        <type></type>
+        <name>TypeReply</name>
+        <enumvalue id="namespacefys_1_1fb_1a05f7491eb4fbb5d7ee169afd9da611d1a595966212b561741f3de4639d1b22dc6" prot="public">
+          <name>TypeReply_FIGHTINGPIT_STATE</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+<para>send the full status of the fighting pit </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a05f7491eb4fbb5d7ee169afd9da611d1a0b7112dfd2453947c9256c2b932acee7" prot="public">
+          <name>TypeReply_PARTY_TEAM_STATUS</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+<para>send the team status of a player </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a05f7491eb4fbb5d7ee169afd9da611d1a53be9ecd320a025f207081f9b7f16874" prot="public">
+          <name>TypeReply_END_BATTLE</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+<para>sent when the battle end, contains the rewards if won </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a05f7491eb4fbb5d7ee169afd9da611d1ac4b4babe6847a4387c31cc0d8b27f934" prot="public">
+          <name>TypeReply_PLAYER_READY</name>
+          <initializer>= 3</initializer>
+          <briefdescription>
+<para>sent when a player set his readiness (get a full list of player ready and not) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a05f7491eb4fbb5d7ee169afd9da611d1aa14072c6a4a4134c22d36d87735cce89" prot="public">
+          <name>TypeReply_INCOMING_CONTENDER</name>
+          <initializer>= 4</initializer>
+          <briefdescription>
+<para>sent when a new contender join the battle (adds) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a05f7491eb4fbb5d7ee169afd9da611d1a249c4811223de026583ced474d7bd146" prot="public">
+          <name>TypeReply_ARENA_SERVICE_SATURATED</name>
+          <initializer>= 5</initializer>
+          <briefdescription>
+<para>sent when the server is saturated (no Content linked) </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a05f7491eb4fbb5d7ee169afd9da611d1a708a45e70e7866c5cdbb6bd8ede86f55" prot="public">
+          <name>TypeReply_ERROR</name>
+          <initializer>= 6</initializer>
+          <briefdescription>
+<para>sent when something wrong occurred </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a05f7491eb4fbb5d7ee169afd9da611d1a0f04a18da4ebf277ab6bbeb96bef400f" prot="public">
+          <name>TypeReply_MIN</name>
+          <initializer>= TypeReply_FIGHTINGPIT_STATE</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a05f7491eb4fbb5d7ee169afd9da611d1a9066dd2d79465e3682594394d15589f9" prot="public">
+          <name>TypeReply_MAX</name>
+          <initializer>= TypeReply_ERROR</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="18" column="15" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="18" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="enum" id="namespacefys_1_1fb_1a277d78a9ddd1e75becf5d7652153a1c0" prot="public" static="no" strong="no">
+        <type></type>
+        <name>Content</name>
+        <enumvalue id="namespacefys_1_1fb_1a277d78a9ddd1e75becf5d7652153a1c0a13c5877d4f1cbcd248cda2151e362a38" prot="public">
+          <name>Content_NONE</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a277d78a9ddd1e75becf5d7652153a1c0a34729c052040ede70daac377d678ee56" prot="public">
+          <name>Content_FightingPitState</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+<para>content for TypeReply.FIGHTINGPIT_STATE </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a277d78a9ddd1e75becf5d7652153a1c0aaa4e8b66c82288b2505937b2afc33bcb" prot="public">
+          <name>Content_PartyTeamStatus</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+<para>content for TypeReply.PARTY_TEAM_STATUS </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a277d78a9ddd1e75becf5d7652153a1c0aa00327200241a1b9fca43c4a5bcb2c1c" prot="public">
+          <name>Content_EndBattle</name>
+          <initializer>= 3</initializer>
+          <briefdescription>
+<para>content for TypeReply.END_BATTLE </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a277d78a9ddd1e75becf5d7652153a1c0a6059cde603099ce7f190a578b211bb4f" prot="public">
+          <name>Content_ContenderStatus</name>
+          <initializer>= 4</initializer>
+          <briefdescription>
+<para>content for TypeReply.INCOMING_CONTENDER </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a277d78a9ddd1e75becf5d7652153a1c0a80d412f13537a52f2636a9e9e5ca65fb" prot="public">
+          <name>Content_ErrorMessage</name>
+          <initializer>= 5</initializer>
+          <briefdescription>
+<para>content for TypeReply.ERROR: Error message </para>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a277d78a9ddd1e75becf5d7652153a1c0a0c64c2df6ccac34efca64eaf9df9dbd6" prot="public">
+          <name>Content_MIN</name>
+          <initializer>= Content_NONE</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a277d78a9ddd1e75becf5d7652153a1c0a66b9de02f3822e4d692eaf59a75dcaea" prot="public">
+          <name>Content_MAX</name>
+          <initializer>= Content_ErrorMessage</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="70" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="70" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="enum" id="namespacefys_1_1fb_1a88ebad909d9797435c028de669a02629" prot="public" static="no" strong="no">
+        <type></type>
+        <name>Action</name>
+        <enumvalue id="namespacefys_1_1fb_1a88ebad909d9797435c028de669a02629ad1cc293052486c86a12de0cb21ca6c5c" prot="public">
+          <name>Action_NONE</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a88ebad909d9797435c028de669a02629a981aebcb88ea10911e5a481fc5e1675d" prot="public">
+          <name>Action_Move</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a88ebad909d9797435c028de669a02629acd6d3bf6dcfb7d0df68c6f9cee8f980d" prot="public">
+          <name>Action_Interruption</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a88ebad909d9797435c028de669a02629a5d369617ca54f9132eee8400c3895b99" prot="public">
+          <name>Action_PnjInteract</name>
+          <initializer>= 3</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a88ebad909d9797435c028de669a02629a179e84c8404c602acfb3cab42799ca48" prot="public">
+          <name>Action_MIN</name>
+          <initializer>= Action_NONE</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1a88ebad909d9797435c028de669a02629a63380f8c24689f09959286082b8e7ba6" prot="public">
+          <name>Action_MAX</name>
+          <initializer>= Action_PnjInteract</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="20" column="12" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="20" bodyend="27"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacefys_1_1fb_1a001618f2600b328a0a3eb238e9ee30bd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const Targeting(&amp;</type>
+        <definition>const Targeting(&amp; fys::fb::EnumValuesTargeting</definition>
+        <argsstring>())[8]</argsstring>
+        <name>EnumValuesTargeting</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" line="27" column="14" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" bodystart="27" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a2995393d514f7fb87ee2416819879930" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const char *const *</type>
+        <definition>const char* const * fys::fb::EnumNamesTargeting</definition>
+        <argsstring>()</argsstring>
+        <name>EnumNamesTargeting</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" line="41" column="26" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" bodystart="41" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1afbfd4151d189603017cb12bfc8c43161" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char* fys::fb::EnumNameTargeting</definition>
+        <argsstring>(Targeting e)</argsstring>
+        <name>EnumNameTargeting</name>
+        <param>
+          <type>Targeting</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" line="56" column="19" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" bodystart="56" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1aa1742460fc5827c3965703846999d8b3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const TypeAction(&amp;</type>
+        <definition>const TypeAction(&amp; fys::fb::EnumValuesTypeAction</definition>
+        <argsstring>())[3]</argsstring>
+        <name>EnumValuesTypeAction</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" line="70" column="14" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" bodystart="70" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a46bf679bb226b54643fde0baeddfe909" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const char *const *</type>
+        <definition>const char* const * fys::fb::EnumNamesTypeAction</definition>
+        <argsstring>()</argsstring>
+        <name>EnumNamesTypeAction</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" line="79" column="26" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" bodystart="79" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1afd95e1b0206cacae604adf0a46657543" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char* fys::fb::EnumNameTypeAction</definition>
+        <argsstring>(TypeAction e)</argsstring>
+        <name>EnumNameTypeAction</name>
+        <param>
+          <type>TypeAction</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" line="89" column="19" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" bodystart="89" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a643612f46801ac4806d63732ee773b99" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; ArenaFightAction &gt;</type>
+        <definition>flatbuffers::Offset&lt;ArenaFightAction&gt; fys::fb::CreateArenaFightAction</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, uint32_t memberId=0, flatbuffers::Offset&lt; flatbuffers::String &gt; actionId=0, fys::fb::Targeting targetType=fys::fb::Targeting_SELF, flatbuffers::Offset&lt; flatbuffers::Vector&lt; uint32_t &gt;&gt; targetId_contender=0, flatbuffers::Offset&lt; flatbuffers::Vector&lt; uint32_t &gt;&gt; targetId_ally=0)</argsstring>
+        <name>CreateArenaFightAction</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>memberId</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>actionId</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>fys::fb::Targeting</type>
+          <declname>targetType</declname>
+          <defval>fys::fb::Targeting_SELF</defval>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::Vector&lt; uint32_t &gt;&gt;</type>
+          <declname>targetId_contender</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::Vector&lt; uint32_t &gt;&gt;</type>
+          <declname>targetId_ally</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" line="179" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" bodystart="179" bodyend="193"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a119608b5a677ff54ce4f69cea48cd6fb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; ArenaFightAction &gt;</type>
+        <definition>flatbuffers::Offset&lt;ArenaFightAction&gt; fys::fb::CreateArenaFightActionDirect</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, uint32_t memberId=0, const char *actionId=nullptr, fys::fb::Targeting targetType=fys::fb::Targeting_SELF, const std::vector&lt; uint32_t &gt; *targetId_contender=nullptr, const std::vector&lt; uint32_t &gt; *targetId_ally=nullptr)</argsstring>
+        <name>CreateArenaFightActionDirect</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>memberId</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>actionId</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>fys::fb::Targeting</type>
+          <declname>targetType</declname>
+          <defval>fys::fb::Targeting_SELF</defval>
+        </param>
+        <param>
+          <type>const std::vector&lt; uint32_t &gt; *</type>
+          <declname>targetId_contender</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>const std::vector&lt; uint32_t &gt; *</type>
+          <declname>targetId_ally</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" line="195" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" bodystart="195" bodyend="212"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1aea3eea581315a4cb2f8e626f232378e8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const fys::fb::ArenaFightAction *</type>
+        <definition>const fys::fb::ArenaFightAction* fys::fb::GetArenaFightAction</definition>
+        <argsstring>(const void *buf)</argsstring>
+        <name>GetArenaFightAction</name>
+        <param>
+          <type>const void *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" line="214" column="40" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" bodystart="214" bodyend="216"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a6978dc8253fe906a282e95e9ed789d35" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const fys::fb::ArenaFightAction *</type>
+        <definition>const fys::fb::ArenaFightAction* fys::fb::GetSizePrefixedArenaFightAction</definition>
+        <argsstring>(const void *buf)</argsstring>
+        <name>GetSizePrefixedArenaFightAction</name>
+        <param>
+          <type>const void *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" line="218" column="40" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" bodystart="218" bodyend="220"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a934334a8696c5ec9c989bbd13df86def" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>ArenaFightAction *</type>
+        <definition>ArenaFightAction* fys::fb::GetMutableArenaFightAction</definition>
+        <argsstring>(void *buf)</argsstring>
+        <name>GetMutableArenaFightAction</name>
+        <param>
+          <type>void *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" line="222" column="25" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" bodystart="222" bodyend="224"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a8b6279c4d18c572594034fbbe96b3957" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::VerifyArenaFightActionBuffer</definition>
+        <argsstring>(flatbuffers::Verifier &amp;verifier)</argsstring>
+        <name>VerifyArenaFightActionBuffer</name>
+        <param>
+          <type>flatbuffers::Verifier &amp;</type>
+          <declname>verifier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" line="226" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" bodystart="226" bodyend="229"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a56f9e643c4af542b6682842616c933e5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::VerifySizePrefixedArenaFightActionBuffer</definition>
+        <argsstring>(flatbuffers::Verifier &amp;verifier)</argsstring>
+        <name>VerifySizePrefixedArenaFightActionBuffer</name>
+        <param>
+          <type>flatbuffers::Verifier &amp;</type>
+          <declname>verifier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" line="231" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" bodystart="231" bodyend="234"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1ad5f80bc8c7774b69bfed0c830dbd3f84" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::FinishArenaFightActionBuffer</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;fbb, flatbuffers::Offset&lt; fys::fb::ArenaFightAction &gt; root)</argsstring>
+        <name>FinishArenaFightActionBuffer</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>fbb</declname>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; fys::fb::ArenaFightAction &gt;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" line="236" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" bodystart="236" bodyend="240"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1ad969e473c0a70b958c94deb20da61d24" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::FinishSizePrefixedArenaFightActionBuffer</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;fbb, flatbuffers::Offset&lt; fys::fb::ArenaFightAction &gt; root)</argsstring>
+        <name>FinishSizePrefixedArenaFightActionBuffer</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>fbb</declname>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; fys::fb::ArenaFightAction &gt;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" line="242" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" bodystart="242" bodyend="246"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a573c05ae98511d741282f9142df256d7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; ArenaServerAuth &gt;</type>
+        <definition>flatbuffers::Offset&lt;ArenaServerAuth&gt; fys::fb::CreateArenaServerAuth</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, flatbuffers::Offset&lt; flatbuffers::String &gt; user_name=0, flatbuffers::Offset&lt; flatbuffers::String &gt; token_auth=0, flatbuffers::Offset&lt; flatbuffers::String &gt; ip=0, flatbuffers::Offset&lt; flatbuffers::String &gt; connection_str=0, uint32_t id_fightingpit=0, flatbuffers::Offset&lt; flatbuffers::String &gt; arena_server_code=0)</argsstring>
+        <name>CreateArenaServerAuth</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>user_name</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>token_auth</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>ip</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>connection_str</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>id_fightingpit</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>arena_server_code</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" line="117" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" bodystart="117" bodyend="133"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a1b1d65792fe4ccb5179aeab5a08be48b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; ArenaServerAuth &gt;</type>
+        <definition>flatbuffers::Offset&lt;ArenaServerAuth&gt; fys::fb::CreateArenaServerAuthDirect</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, const char *user_name=nullptr, const char *token_auth=nullptr, const char *ip=nullptr, const char *connection_str=nullptr, uint32_t id_fightingpit=0, const char *arena_server_code=nullptr)</argsstring>
+        <name>CreateArenaServerAuthDirect</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>user_name</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>token_auth</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>ip</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>connection_str</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>id_fightingpit</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>arena_server_code</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" line="135" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" bodystart="135" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a7464db7f1a39efde86024812059388a5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const fys::fb::ArenaServerAuth *</type>
+        <definition>const fys::fb::ArenaServerAuth* fys::fb::GetArenaServerAuth</definition>
+        <argsstring>(const void *buf)</argsstring>
+        <name>GetArenaServerAuth</name>
+        <param>
+          <type>const void *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" line="158" column="39" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" bodystart="158" bodyend="160"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1afbc4a087b988bd7aa844668e0fb51702" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const fys::fb::ArenaServerAuth *</type>
+        <definition>const fys::fb::ArenaServerAuth* fys::fb::GetSizePrefixedArenaServerAuth</definition>
+        <argsstring>(const void *buf)</argsstring>
+        <name>GetSizePrefixedArenaServerAuth</name>
+        <param>
+          <type>const void *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" line="162" column="39" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" bodystart="162" bodyend="164"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1afa10e635bd5cc4dc89c0eabb949af78c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>ArenaServerAuth *</type>
+        <definition>ArenaServerAuth* fys::fb::GetMutableArenaServerAuth</definition>
+        <argsstring>(void *buf)</argsstring>
+        <name>GetMutableArenaServerAuth</name>
+        <param>
+          <type>void *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" line="166" column="24" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" bodystart="166" bodyend="168"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1af92fcb6e4a0e94eaeaaa071952a76057" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::VerifyArenaServerAuthBuffer</definition>
+        <argsstring>(flatbuffers::Verifier &amp;verifier)</argsstring>
+        <name>VerifyArenaServerAuthBuffer</name>
+        <param>
+          <type>flatbuffers::Verifier &amp;</type>
+          <declname>verifier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" line="170" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" bodystart="170" bodyend="173"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1aaa69f002da10d65d08fe8e6c2d414513" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::VerifySizePrefixedArenaServerAuthBuffer</definition>
+        <argsstring>(flatbuffers::Verifier &amp;verifier)</argsstring>
+        <name>VerifySizePrefixedArenaServerAuthBuffer</name>
+        <param>
+          <type>flatbuffers::Verifier &amp;</type>
+          <declname>verifier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" line="175" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" bodystart="175" bodyend="178"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a8ca8a0454ae09344172908cf2a73665d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::FinishArenaServerAuthBuffer</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;fbb, flatbuffers::Offset&lt; fys::fb::ArenaServerAuth &gt; root)</argsstring>
+        <name>FinishArenaServerAuthBuffer</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>fbb</declname>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; fys::fb::ArenaServerAuth &gt;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" line="180" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" bodystart="180" bodyend="184"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1acc9dd76d1e474335c6d9041272bfcc48" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::FinishSizePrefixedArenaServerAuthBuffer</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;fbb, flatbuffers::Offset&lt; fys::fb::ArenaServerAuth &gt; root)</argsstring>
+        <name>FinishSizePrefixedArenaServerAuthBuffer</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>fbb</declname>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; fys::fb::ArenaServerAuth &gt;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" line="186" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" bodystart="186" bodyend="190"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a3226af57d7d6a076ec5fca8751d3b8df" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; ArenaServerValidateAuth &gt;</type>
+        <definition>flatbuffers::Offset&lt;ArenaServerValidateAuth&gt; fys::fb::CreateArenaServerValidateAuth</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, flatbuffers::Offset&lt; flatbuffers::String &gt; user_name=0, flatbuffers::Offset&lt; flatbuffers::String &gt; token_auth=0, uint32_t fighting_pit_id=0)</argsstring>
+        <name>CreateArenaServerValidateAuth</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>user_name</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>token_auth</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fighting_pit_id</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" line="78" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" bodystart="78" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1abc558f2a69bb6bcf0267ef1c7c66aeba" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; ArenaServerValidateAuth &gt;</type>
+        <definition>flatbuffers::Offset&lt;ArenaServerValidateAuth&gt; fys::fb::CreateArenaServerValidateAuthDirect</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, const char *user_name=nullptr, const char *token_auth=nullptr, uint32_t fighting_pit_id=0)</argsstring>
+        <name>CreateArenaServerValidateAuthDirect</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>user_name</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>token_auth</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fighting_pit_id</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" line="90" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" bodystart="90" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1aa4f63a450664f6d10f3d4b24571d573c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const fys::fb::ArenaServerValidateAuth *</type>
+        <definition>const fys::fb::ArenaServerValidateAuth* fys::fb::GetArenaServerValidateAuth</definition>
+        <argsstring>(const void *buf)</argsstring>
+        <name>GetArenaServerValidateAuth</name>
+        <param>
+          <type>const void *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" line="104" column="47" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" bodystart="104" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a08750b0fca2576713aafa0e0ea740c41" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const fys::fb::ArenaServerValidateAuth *</type>
+        <definition>const fys::fb::ArenaServerValidateAuth* fys::fb::GetSizePrefixedArenaServerValidateAuth</definition>
+        <argsstring>(const void *buf)</argsstring>
+        <name>GetSizePrefixedArenaServerValidateAuth</name>
+        <param>
+          <type>const void *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" line="108" column="47" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" bodystart="108" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a18e1fd28ee7da27b7491e4deec2c3d34" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>ArenaServerValidateAuth *</type>
+        <definition>ArenaServerValidateAuth* fys::fb::GetMutableArenaServerValidateAuth</definition>
+        <argsstring>(void *buf)</argsstring>
+        <name>GetMutableArenaServerValidateAuth</name>
+        <param>
+          <type>void *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" line="112" column="32" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" bodystart="112" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a1fc8b4bd72d1a1026332f21dd6979195" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::VerifyArenaServerValidateAuthBuffer</definition>
+        <argsstring>(flatbuffers::Verifier &amp;verifier)</argsstring>
+        <name>VerifyArenaServerValidateAuthBuffer</name>
+        <param>
+          <type>flatbuffers::Verifier &amp;</type>
+          <declname>verifier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" line="116" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" bodystart="116" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1ad33e71faf4029afaac3f41f5ff21e2be" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::VerifySizePrefixedArenaServerValidateAuthBuffer</definition>
+        <argsstring>(flatbuffers::Verifier &amp;verifier)</argsstring>
+        <name>VerifySizePrefixedArenaServerValidateAuthBuffer</name>
+        <param>
+          <type>flatbuffers::Verifier &amp;</type>
+          <declname>verifier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" line="121" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" bodystart="121" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a3486fd05fe4cbdd8a37bd85f738dd9ce" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::FinishArenaServerValidateAuthBuffer</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;fbb, flatbuffers::Offset&lt; fys::fb::ArenaServerValidateAuth &gt; root)</argsstring>
+        <name>FinishArenaServerValidateAuthBuffer</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>fbb</declname>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; fys::fb::ArenaServerValidateAuth &gt;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" line="126" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" bodystart="126" bodyend="130"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a9a1e457fcaf464e0eda31e1f1fef6091" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::FinishSizePrefixedArenaServerValidateAuthBuffer</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;fbb, flatbuffers::Offset&lt; fys::fb::ArenaServerValidateAuth &gt; root)</argsstring>
+        <name>FinishSizePrefixedArenaServerValidateAuthBuffer</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>fbb</declname>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; fys::fb::ArenaServerValidateAuth &gt;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" line="132" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" bodystart="132" bodyend="136"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1aa63d26189eab73d9898536af05f9512a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const SideOrient(&amp;</type>
+        <definition>const SideOrient(&amp; fys::fb::EnumValuesSideOrient</definition>
+        <argsstring>())[18]</argsstring>
+        <name>EnumValuesSideOrient</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" line="41" column="14" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" bodystart="41" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a96e1b3b9a8c4b1cfea68e08cc1d9b373" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const char *const *</type>
+        <definition>const char* const * fys::fb::EnumNamesSideOrient</definition>
+        <argsstring>()</argsstring>
+        <name>EnumNamesSideOrient</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" line="65" column="26" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" bodystart="65" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a5acaf096e6d3bb020aecc0dccf5ccbce" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char* fys::fb::EnumNameSideOrient</definition>
+        <argsstring>(SideOrient e)</argsstring>
+        <name>EnumNameSideOrient</name>
+        <param>
+          <type>SideOrient</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" line="90" column="19" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" bodystart="90" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a6b006aefa71a16825dba1d7d7ad383fc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const CosmeticType(&amp;</type>
+        <definition>const CosmeticType(&amp; fys::fb::EnumValuesCosmeticType</definition>
+        <argsstring>())[3]</argsstring>
+        <name>EnumValuesCosmeticType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" line="104" column="14" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" bodystart="104" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a93bfc7379cf1a94df630bebee761bb80" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const char *const *</type>
+        <definition>const char* const * fys::fb::EnumNamesCosmeticType</definition>
+        <argsstring>()</argsstring>
+        <name>EnumNamesCosmeticType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" line="113" column="26" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" bodystart="113" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1ad43856257a11a8ead07fe56a3af4bbe7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char* fys::fb::EnumNameCosmeticType</definition>
+        <argsstring>(CosmeticType e)</argsstring>
+        <name>EnumNameCosmeticType</name>
+        <param>
+          <type>CosmeticType</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" line="123" column="19" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" bodystart="123" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1ad4446879c5629739d97596a363de210b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fys::fb::FLATBUFFERS_MANUALLY_ALIGNED_STRUCT</definition>
+        <argsstring>(4) CharacterStatus FLATBUFFERS_FINAL_CLASS</argsstring>
+        <name>FLATBUFFERS_MANUALLY_ALIGNED_STRUCT</name>
+        <param>
+          <type>4</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" line="129" column="1" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" bodystart="129" bodyend="202"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1afb98a1f82edc6a68d0b69e967fbc4dfe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fys::fb::FLATBUFFERS_STRUCT_END</definition>
+        <argsstring>(CharacterStatus, 28)</argsstring>
+        <name>FLATBUFFERS_STRUCT_END</name>
+        <param>
+          <type>CharacterStatus</type>
+        </param>
+        <param>
+          <type>28</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" line="203" column="1" declfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" declline="203" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a5965821c545a827e052b6bf554cec28a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fys::fb::FLATBUFFERS_STRUCT_END</definition>
+        <argsstring>(Cosmetic, 12)</argsstring>
+        <name>FLATBUFFERS_STRUCT_END</name>
+        <param>
+          <type>Cosmetic</type>
+        </param>
+        <param>
+          <type>12</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" line="243" column="1" declfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" declline="243" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a34e66c5adefd7e429db65d9fe67d3c40" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; Cosmetics &gt;</type>
+        <definition>flatbuffers::Offset&lt;Cosmetics&gt; fys::fb::CreateCosmetics</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, flatbuffers::Offset&lt; flatbuffers::Vector&lt; const fys::fb::Cosmetic * &gt;&gt; cosmetic=0)</argsstring>
+        <name>CreateCosmetics</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::Vector&lt; const fys::fb::Cosmetic * &gt;&gt;</type>
+          <declname>cosmetic</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" line="281" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" bodystart="281" bodyend="287"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1af553f18c8040afe088e6ca96055c4d22" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; Cosmetics &gt;</type>
+        <definition>flatbuffers::Offset&lt;Cosmetics&gt; fys::fb::CreateCosmeticsDirect</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, const std::vector&lt; fys::fb::Cosmetic &gt; *cosmetic=nullptr)</argsstring>
+        <name>CreateCosmeticsDirect</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; fys::fb::Cosmetic &gt; *</type>
+          <declname>cosmetic</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" line="289" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" bodystart="289" bodyend="296"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a882d5b9abe680aba9e373b96722fa98e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; MovePing &gt;</type>
+        <definition>flatbuffers::Offset&lt;MovePing&gt; fys::fb::CreateMovePing</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, double direction=0.0, double x=0.0, double y=0.0, flatbuffers::Offset&lt; flatbuffers::String &gt; id=0)</argsstring>
+        <name>CreateMovePing</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>direction</declname>
+          <defval>0.0</defval>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>x</declname>
+          <defval>0.0</defval>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>y</declname>
+          <defval>0.0</defval>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>id</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" line="83" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" bodystart="83" bodyend="95"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1aa7f85b13a4fc61a4fdafb64619120ceb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; MovePing &gt;</type>
+        <definition>flatbuffers::Offset&lt;MovePing&gt; fys::fb::CreateMovePingDirect</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, double direction=0.0, double x=0.0, double y=0.0, const char *id=nullptr)</argsstring>
+        <name>CreateMovePingDirect</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>direction</declname>
+          <defval>0.0</defval>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>x</declname>
+          <defval>0.0</defval>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>y</declname>
+          <defval>0.0</defval>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>id</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" line="97" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" bodystart="97" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a0c8426ddb9fa05fe70891752f29ac161" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const fys::fb::MovePing *</type>
+        <definition>const fys::fb::MovePing* fys::fb::GetMovePing</definition>
+        <argsstring>(const void *buf)</argsstring>
+        <name>GetMovePing</name>
+        <param>
+          <type>const void *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" line="112" column="32" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" bodystart="112" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1af56f53331c276bcfb025a3ddff36fca3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const fys::fb::MovePing *</type>
+        <definition>const fys::fb::MovePing* fys::fb::GetSizePrefixedMovePing</definition>
+        <argsstring>(const void *buf)</argsstring>
+        <name>GetSizePrefixedMovePing</name>
+        <param>
+          <type>const void *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" line="116" column="32" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" bodystart="116" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a4495d2363ad56d5956dae7304e430f26" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>MovePing *</type>
+        <definition>MovePing* fys::fb::GetMutableMovePing</definition>
+        <argsstring>(void *buf)</argsstring>
+        <name>GetMutableMovePing</name>
+        <param>
+          <type>void *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" line="120" column="17" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" bodystart="120" bodyend="122"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1af5710e23a0110133e25a1fd89d443008" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::VerifyMovePingBuffer</definition>
+        <argsstring>(flatbuffers::Verifier &amp;verifier)</argsstring>
+        <name>VerifyMovePingBuffer</name>
+        <param>
+          <type>flatbuffers::Verifier &amp;</type>
+          <declname>verifier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" line="124" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" bodystart="124" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a4de827422d2880624bebc28ce94a1f7a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::VerifySizePrefixedMovePingBuffer</definition>
+        <argsstring>(flatbuffers::Verifier &amp;verifier)</argsstring>
+        <name>VerifySizePrefixedMovePingBuffer</name>
+        <param>
+          <type>flatbuffers::Verifier &amp;</type>
+          <declname>verifier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" line="129" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" bodystart="129" bodyend="132"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a1443aefdf9a7ed9965ba6eabfc7c2b14" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::FinishMovePingBuffer</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;fbb, flatbuffers::Offset&lt; fys::fb::MovePing &gt; root)</argsstring>
+        <name>FinishMovePingBuffer</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>fbb</declname>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; fys::fb::MovePing &gt;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" line="134" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" bodystart="134" bodyend="138"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a08dc755dc9bc4badbb5204738e009dbe" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::FinishSizePrefixedMovePingBuffer</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;fbb, flatbuffers::Offset&lt; fys::fb::MovePing &gt; root)</argsstring>
+        <name>FinishSizePrefixedMovePingBuffer</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>fbb</declname>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; fys::fb::MovePing &gt;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" line="140" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" bodystart="140" bodyend="144"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a3f0aecdf7d70ae01fe6cd67c3bd7c132" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const StatusBattle(&amp;</type>
+        <definition>const StatusBattle(&amp; fys::fb::EnumValuesStatusBattle</definition>
+        <argsstring>())[2]</argsstring>
+        <name>EnumValuesStatusBattle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" line="23" column="14" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" bodystart="23" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a0eff8e92c9e6160f30612811531938c8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const char *const *</type>
+        <definition>const char* const * fys::fb::EnumNamesStatusBattle</definition>
+        <argsstring>()</argsstring>
+        <name>EnumNamesStatusBattle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" line="31" column="26" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" bodystart="31" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a27e097bd1a64b37dadb0ddb1df760150" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char* fys::fb::EnumNameStatusBattle</definition>
+        <argsstring>(StatusBattle e)</argsstring>
+        <name>EnumNameStatusBattle</name>
+        <param>
+          <type>StatusBattle</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" line="40" column="19" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" bodystart="40" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a823f90ce7dfd2fcc63bfdf9e74c2d2f8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; Reward &gt;</type>
+        <definition>flatbuffers::Offset&lt;Reward&gt; fys::fb::CreateReward</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, flatbuffers::Offset&lt; flatbuffers::String &gt; rewardKey=0, uint32_t quantity=0)</argsstring>
+        <name>CreateReward</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>rewardKey</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>quantity</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" line="93" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" bodystart="93" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a242d2df4cc4b7736b076395a2e68b2e0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; Reward &gt;</type>
+        <definition>flatbuffers::Offset&lt;Reward&gt; fys::fb::CreateRewardDirect</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, const char *rewardKey=nullptr, uint32_t quantity=0)</argsstring>
+        <name>CreateRewardDirect</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>rewardKey</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>quantity</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" line="103" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" bodystart="103" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a2796ecf46e824d79db286205bc5e4f90" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; EndBattle &gt;</type>
+        <definition>flatbuffers::Offset&lt;EndBattle&gt; fys::fb::CreateEndBattle</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, fys::fb::StatusBattle status=fys::fb::StatusBattle_WON, flatbuffers::Offset&lt; flatbuffers::Vector&lt; flatbuffers::Offset&lt; fys::fb::Reward &gt;&gt;&gt; rewards=0)</argsstring>
+        <name>CreateEndBattle</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>fys::fb::StatusBattle</type>
+          <declname>status</declname>
+          <defval>fys::fb::StatusBattle_WON</defval>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::Vector&lt; flatbuffers::Offset&lt; fys::fb::Reward &gt;&gt;&gt;</type>
+          <declname>rewards</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" line="162" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" bodystart="162" bodyend="170"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a32c7efc117e1a0759dc64de6e7fb4a10" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; EndBattle &gt;</type>
+        <definition>flatbuffers::Offset&lt;EndBattle&gt; fys::fb::CreateEndBattleDirect</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, fys::fb::StatusBattle status=fys::fb::StatusBattle_WON, const std::vector&lt; flatbuffers::Offset&lt; fys::fb::Reward &gt;&gt; *rewards=nullptr)</argsstring>
+        <name>CreateEndBattleDirect</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>fys::fb::StatusBattle</type>
+          <declname>status</declname>
+          <defval>fys::fb::StatusBattle_WON</defval>
+        </param>
+        <param>
+          <type>const std::vector&lt; flatbuffers::Offset&lt; fys::fb::Reward &gt;&gt; *</type>
+          <declname>rewards</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" line="172" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" bodystart="172" bodyend="181"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a873efbc4f7ea983f18edea1fdf3c9bbf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const fys::fb::EndBattle *</type>
+        <definition>const fys::fb::EndBattle* fys::fb::GetEndBattle</definition>
+        <argsstring>(const void *buf)</argsstring>
+        <name>GetEndBattle</name>
+        <param>
+          <type>const void *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" line="183" column="33" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" bodystart="183" bodyend="185"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1ac2b948da8b16c724f8fbec1a28adc115" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const fys::fb::EndBattle *</type>
+        <definition>const fys::fb::EndBattle* fys::fb::GetSizePrefixedEndBattle</definition>
+        <argsstring>(const void *buf)</argsstring>
+        <name>GetSizePrefixedEndBattle</name>
+        <param>
+          <type>const void *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" line="187" column="33" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" bodystart="187" bodyend="189"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1adb53e7e8a1988854d5f793990ec27717" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>EndBattle *</type>
+        <definition>EndBattle* fys::fb::GetMutableEndBattle</definition>
+        <argsstring>(void *buf)</argsstring>
+        <name>GetMutableEndBattle</name>
+        <param>
+          <type>void *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" line="191" column="18" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" bodystart="191" bodyend="193"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1adcbcac682c36e28d854ea6800e9a4cef" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::VerifyEndBattleBuffer</definition>
+        <argsstring>(flatbuffers::Verifier &amp;verifier)</argsstring>
+        <name>VerifyEndBattleBuffer</name>
+        <param>
+          <type>flatbuffers::Verifier &amp;</type>
+          <declname>verifier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" line="195" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" bodystart="195" bodyend="198"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1ac43313bd3171707426c5643cfced6791" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::VerifySizePrefixedEndBattleBuffer</definition>
+        <argsstring>(flatbuffers::Verifier &amp;verifier)</argsstring>
+        <name>VerifySizePrefixedEndBattleBuffer</name>
+        <param>
+          <type>flatbuffers::Verifier &amp;</type>
+          <declname>verifier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" line="200" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" bodystart="200" bodyend="203"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a661ae48ec4e1d8af69d8f94d41f4d312" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::FinishEndBattleBuffer</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;fbb, flatbuffers::Offset&lt; fys::fb::EndBattle &gt; root)</argsstring>
+        <name>FinishEndBattleBuffer</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>fbb</declname>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; fys::fb::EndBattle &gt;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" line="205" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" bodystart="205" bodyend="209"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1adb2b1ba81586205716cb5b7a789868a1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::FinishSizePrefixedEndBattleBuffer</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;fbb, flatbuffers::Offset&lt; fys::fb::EndBattle &gt; root)</argsstring>
+        <name>FinishSizePrefixedEndBattleBuffer</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>fbb</declname>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; fys::fb::EndBattle &gt;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" line="211" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" bodystart="211" bodyend="215"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1aaec34acb72fafec02f6ccdc2bcc29b5a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const Level(&amp;</type>
+        <definition>const Level(&amp; fys::fb::EnumValuesLevel</definition>
+        <argsstring>())[3]</argsstring>
+        <name>EnumValuesLevel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" line="22" column="14" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" bodystart="22" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a6bec874802ecd848222c8a3291826f0e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const char *const *</type>
+        <definition>const char* const * fys::fb::EnumNamesLevel</definition>
+        <argsstring>()</argsstring>
+        <name>EnumNamesLevel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" line="31" column="26" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" bodystart="31" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a85744a8e6d9e00e76a1d5254553d759e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char* fys::fb::EnumNameLevel</definition>
+        <argsstring>(Level e)</argsstring>
+        <name>EnumNameLevel</name>
+        <param>
+          <type>Level</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" line="41" column="19" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" bodystart="41" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1ad44aba6607301ad4994e9a33571f75c2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; FightingPitEncounter &gt;</type>
+        <definition>flatbuffers::Offset&lt;FightingPitEncounter&gt; fys::fb::CreateFightingPitEncounter</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, flatbuffers::Offset&lt; flatbuffers::String &gt; user_name=0, flatbuffers::Offset&lt; flatbuffers::String &gt; token_auth=0, uint32_t fighting_pit_id=0, flatbuffers::Offset&lt; flatbuffers::String &gt; world_server_id=0, bool disable_join=false, fys::fb::Level level_encounter=fys::fb::Level_EASY, uint32_t id_encounter=0, bool is_ambush=false, double x_player=0.0, double y_player=0.0)</argsstring>
+        <name>CreateFightingPitEncounter</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>user_name</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>token_auth</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fighting_pit_id</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>world_server_id</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>disable_join</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>fys::fb::Level</type>
+          <declname>level_encounter</declname>
+          <defval>fys::fb::Level_EASY</defval>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>id_encounter</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>is_ambush</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>x_player</declname>
+          <defval>0.0</defval>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>y_player</declname>
+          <defval>0.0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" line="187" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" bodystart="187" bodyend="211"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a6e0f435d9dcf1911ae2535f6f76ec1d9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; FightingPitEncounter &gt;</type>
+        <definition>flatbuffers::Offset&lt;FightingPitEncounter&gt; fys::fb::CreateFightingPitEncounterDirect</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, const char *user_name=nullptr, const char *token_auth=nullptr, uint32_t fighting_pit_id=0, const char *world_server_id=nullptr, bool disable_join=false, fys::fb::Level level_encounter=fys::fb::Level_EASY, uint32_t id_encounter=0, bool is_ambush=false, double x_player=0.0, double y_player=0.0)</argsstring>
+        <name>CreateFightingPitEncounterDirect</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>user_name</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>token_auth</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>fighting_pit_id</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>world_server_id</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>disable_join</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>fys::fb::Level</type>
+          <declname>level_encounter</declname>
+          <defval>fys::fb::Level_EASY</defval>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>id_encounter</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>is_ambush</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>x_player</declname>
+          <defval>0.0</defval>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>y_player</declname>
+          <defval>0.0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" line="213" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" bodystart="213" bodyend="240"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a5a60b001710da3f9280fcb59da96e2cd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const fys::fb::FightingPitEncounter *</type>
+        <definition>const fys::fb::FightingPitEncounter* fys::fb::GetFightingPitEncounter</definition>
+        <argsstring>(const void *buf)</argsstring>
+        <name>GetFightingPitEncounter</name>
+        <param>
+          <type>const void *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" line="242" column="44" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" bodystart="242" bodyend="244"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a1153df265e09818956072872c5ed6971" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const fys::fb::FightingPitEncounter *</type>
+        <definition>const fys::fb::FightingPitEncounter* fys::fb::GetSizePrefixedFightingPitEncounter</definition>
+        <argsstring>(const void *buf)</argsstring>
+        <name>GetSizePrefixedFightingPitEncounter</name>
+        <param>
+          <type>const void *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" line="246" column="44" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" bodystart="246" bodyend="248"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a82a2e82f974eae5350c23b00d99dba51" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>FightingPitEncounter *</type>
+        <definition>FightingPitEncounter* fys::fb::GetMutableFightingPitEncounter</definition>
+        <argsstring>(void *buf)</argsstring>
+        <name>GetMutableFightingPitEncounter</name>
+        <param>
+          <type>void *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" line="250" column="29" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" bodystart="250" bodyend="252"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a98024e714e8bc4e3afddfdf00becdf57" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::VerifyFightingPitEncounterBuffer</definition>
+        <argsstring>(flatbuffers::Verifier &amp;verifier)</argsstring>
+        <name>VerifyFightingPitEncounterBuffer</name>
+        <param>
+          <type>flatbuffers::Verifier &amp;</type>
+          <declname>verifier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" line="254" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" bodystart="254" bodyend="257"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a5adcc176bdbd642785461980f84924a9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::VerifySizePrefixedFightingPitEncounterBuffer</definition>
+        <argsstring>(flatbuffers::Verifier &amp;verifier)</argsstring>
+        <name>VerifySizePrefixedFightingPitEncounterBuffer</name>
+        <param>
+          <type>flatbuffers::Verifier &amp;</type>
+          <declname>verifier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" line="259" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" bodystart="259" bodyend="262"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a2c8ba7a229fc4ad72cfa02ee0a413731" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::FinishFightingPitEncounterBuffer</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;fbb, flatbuffers::Offset&lt; fys::fb::FightingPitEncounter &gt; root)</argsstring>
+        <name>FinishFightingPitEncounterBuffer</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>fbb</declname>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; fys::fb::FightingPitEncounter &gt;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" line="264" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" bodystart="264" bodyend="268"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1ab478386d0645330d83b33f26a061230a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::FinishSizePrefixedFightingPitEncounterBuffer</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;fbb, flatbuffers::Offset&lt; fys::fb::FightingPitEncounter &gt; root)</argsstring>
+        <name>FinishSizePrefixedFightingPitEncounterBuffer</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>fbb</declname>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; fys::fb::FightingPitEncounter &gt;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" line="270" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" bodystart="270" bodyend="274"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a6eeff9abeac6381cb03f09dfd6248069" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; MemberStatus &gt;</type>
+        <definition>flatbuffers::Offset&lt;MemberStatus&gt; fys::fb::CreateMemberStatus</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, flatbuffers::Offset&lt; flatbuffers::String &gt; characterName=0, const fys::fb::CharacterStatus *status=0)</argsstring>
+        <name>CreateMemberStatus</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>characterName</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>const fys::fb::CharacterStatus *</type>
+          <declname>status</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" line="69" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" bodystart="69" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1ad82e053f675b958ab41db09aeccc4b5e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; MemberStatus &gt;</type>
+        <definition>flatbuffers::Offset&lt;MemberStatus&gt; fys::fb::CreateMemberStatusDirect</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, const char *characterName=nullptr, const fys::fb::CharacterStatus *status=0)</argsstring>
+        <name>CreateMemberStatusDirect</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>characterName</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>const fys::fb::CharacterStatus *</type>
+          <declname>status</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" line="79" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" bodystart="79" bodyend="88"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a3d4938a529b05b3d476a5310c3e12a31" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; PartyTeamStatus &gt;</type>
+        <definition>flatbuffers::Offset&lt;PartyTeamStatus&gt; fys::fb::CreatePartyTeamStatus</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, flatbuffers::Offset&lt; flatbuffers::String &gt; user_name=0, flatbuffers::Offset&lt; flatbuffers::Vector&lt; flatbuffers::Offset&lt; fys::fb::MemberStatus &gt;&gt;&gt; members=0, flatbuffers::Offset&lt; flatbuffers::Vector&lt; flatbuffers::Offset&lt; flatbuffers::String &gt;&gt;&gt; attacks=0, flatbuffers::Offset&lt; fys::fb::Cosmetics &gt; cosmetics=0)</argsstring>
+        <name>CreatePartyTeamStatus</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>user_name</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::Vector&lt; flatbuffers::Offset&lt; fys::fb::MemberStatus &gt;&gt;&gt;</type>
+          <declname>members</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::Vector&lt; flatbuffers::Offset&lt; flatbuffers::String &gt;&gt;&gt;</type>
+          <declname>attacks</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; fys::fb::Cosmetics &gt;</type>
+          <declname>cosmetics</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" line="166" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" bodystart="166" bodyend="178"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1ab8a813835a6fe0783ca3d316293d621b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; PartyTeamStatus &gt;</type>
+        <definition>flatbuffers::Offset&lt;PartyTeamStatus&gt; fys::fb::CreatePartyTeamStatusDirect</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, const char *user_name=nullptr, const std::vector&lt; flatbuffers::Offset&lt; fys::fb::MemberStatus &gt;&gt; *members=nullptr, const std::vector&lt; flatbuffers::Offset&lt; flatbuffers::String &gt;&gt; *attacks=nullptr, flatbuffers::Offset&lt; fys::fb::Cosmetics &gt; cosmetics=0)</argsstring>
+        <name>CreatePartyTeamStatusDirect</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>user_name</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>const std::vector&lt; flatbuffers::Offset&lt; fys::fb::MemberStatus &gt;&gt; *</type>
+          <declname>members</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>const std::vector&lt; flatbuffers::Offset&lt; flatbuffers::String &gt;&gt; *</type>
+          <declname>attacks</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; fys::fb::Cosmetics &gt;</type>
+          <declname>cosmetics</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" line="180" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" bodystart="180" bodyend="195"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1adec9581e1105faf065d25a8082264a15" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; FightingPitState &gt;</type>
+        <definition>flatbuffers::Offset&lt;FightingPitState&gt; fys::fb::CreateFightingPitState</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, uint32_t idFightingPit=0, flatbuffers::Offset&lt; flatbuffers::Vector&lt; flatbuffers::Offset&lt; fys::fb::PartyTeamStatus &gt;&gt;&gt; partyTeams=0, flatbuffers::Offset&lt; flatbuffers::Vector&lt; flatbuffers::Offset&lt; fys::fb::MemberStatus &gt;&gt;&gt; monstersStatus=0)</argsstring>
+        <name>CreateFightingPitState</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>idFightingPit</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::Vector&lt; flatbuffers::Offset&lt; fys::fb::PartyTeamStatus &gt;&gt;&gt;</type>
+          <declname>partyTeams</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::Vector&lt; flatbuffers::Offset&lt; fys::fb::MemberStatus &gt;&gt;&gt;</type>
+          <declname>monstersStatus</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" line="258" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" bodystart="258" bodyend="268"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a9f5deb2912a9b20906876d9869f0aced" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; FightingPitState &gt;</type>
+        <definition>flatbuffers::Offset&lt;FightingPitState&gt; fys::fb::CreateFightingPitStateDirect</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, uint32_t idFightingPit=0, const std::vector&lt; flatbuffers::Offset&lt; fys::fb::PartyTeamStatus &gt;&gt; *partyTeams=nullptr, const std::vector&lt; flatbuffers::Offset&lt; fys::fb::MemberStatus &gt;&gt; *monstersStatus=nullptr)</argsstring>
+        <name>CreateFightingPitStateDirect</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>uint32_t</type>
+          <declname>idFightingPit</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>const std::vector&lt; flatbuffers::Offset&lt; fys::fb::PartyTeamStatus &gt;&gt; *</type>
+          <declname>partyTeams</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>const std::vector&lt; flatbuffers::Offset&lt; fys::fb::MemberStatus &gt;&gt; *</type>
+          <declname>monstersStatus</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" line="270" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" bodystart="270" bodyend="282"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a580fe877841f36f011c0a8e102bdfc59" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const fys::fb::FightingPitState *</type>
+        <definition>const fys::fb::FightingPitState* fys::fb::GetFightingPitState</definition>
+        <argsstring>(const void *buf)</argsstring>
+        <name>GetFightingPitState</name>
+        <param>
+          <type>const void *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" line="284" column="40" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" bodystart="284" bodyend="286"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a9bb375c3f9e2a6e8c5c70ee940207ad4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const fys::fb::FightingPitState *</type>
+        <definition>const fys::fb::FightingPitState* fys::fb::GetSizePrefixedFightingPitState</definition>
+        <argsstring>(const void *buf)</argsstring>
+        <name>GetSizePrefixedFightingPitState</name>
+        <param>
+          <type>const void *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" line="288" column="40" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" bodystart="288" bodyend="290"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a212a11956fa8f41af04332c6139b9eac" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>FightingPitState *</type>
+        <definition>FightingPitState* fys::fb::GetMutableFightingPitState</definition>
+        <argsstring>(void *buf)</argsstring>
+        <name>GetMutableFightingPitState</name>
+        <param>
+          <type>void *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" line="292" column="25" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" bodystart="292" bodyend="294"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1ad5d9c37e3a71c99b24ebc7041613e9a7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::VerifyFightingPitStateBuffer</definition>
+        <argsstring>(flatbuffers::Verifier &amp;verifier)</argsstring>
+        <name>VerifyFightingPitStateBuffer</name>
+        <param>
+          <type>flatbuffers::Verifier &amp;</type>
+          <declname>verifier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" line="296" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" bodystart="296" bodyend="299"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1aa2f44b4998dd4413af5f351212409ddf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::VerifySizePrefixedFightingPitStateBuffer</definition>
+        <argsstring>(flatbuffers::Verifier &amp;verifier)</argsstring>
+        <name>VerifySizePrefixedFightingPitStateBuffer</name>
+        <param>
+          <type>flatbuffers::Verifier &amp;</type>
+          <declname>verifier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" line="301" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" bodystart="301" bodyend="304"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a2987cd0aef9d9a3cbfe404a66e28ed5f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::FinishFightingPitStateBuffer</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;fbb, flatbuffers::Offset&lt; fys::fb::FightingPitState &gt; root)</argsstring>
+        <name>FinishFightingPitStateBuffer</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>fbb</declname>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; fys::fb::FightingPitState &gt;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" line="306" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" bodystart="306" bodyend="310"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1aa710d985da535d41b392616560040b3b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::FinishSizePrefixedFightingPitStateBuffer</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;fbb, flatbuffers::Offset&lt; fys::fb::FightingPitState &gt; root)</argsstring>
+        <name>FinishSizePrefixedFightingPitStateBuffer</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>fbb</declname>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; fys::fb::FightingPitState &gt;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" line="312" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" bodystart="312" bodyend="316"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a25107078472167b7c661eaa06ed36663" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const TypeReply(&amp;</type>
+        <definition>const TypeReply(&amp; fys::fb::EnumValuesTypeReply</definition>
+        <argsstring>())[7]</argsstring>
+        <name>EnumValuesTypeReply</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="37" column="14" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="37" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a2018f3a6b14332f26d77d1a5e8299a2c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const char *const *</type>
+        <definition>const char* const * fys::fb::EnumNamesTypeReply</definition>
+        <argsstring>()</argsstring>
+        <name>EnumNamesTypeReply</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="50" column="26" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="50" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1ac7475e689c23df7f05f606b53efa7a09" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char* fys::fb::EnumNameTypeReply</definition>
+        <argsstring>(TypeReply e)</argsstring>
+        <name>EnumNameTypeReply</name>
+        <param>
+          <type>TypeReply</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="64" column="19" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="64" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a9e58f6c4f8e8af4f281d3d2362446cb5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const Content(&amp;</type>
+        <definition>const Content(&amp; fys::fb::EnumValuesContent</definition>
+        <argsstring>())[6]</argsstring>
+        <name>EnumValuesContent</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="86" column="14" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="86" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a23207f67891a9ffd44cf870d9ba8070b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const char *const *</type>
+        <definition>const char* const * fys::fb::EnumNamesContent</definition>
+        <argsstring>()</argsstring>
+        <name>EnumNamesContent</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="98" column="26" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="98" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a871710bf0fc2613ad7163b85e9c9bbd0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char* fys::fb::EnumNameContent</definition>
+        <argsstring>(Content e)</argsstring>
+        <name>EnumNameContent</name>
+        <param>
+          <type>Content</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="111" column="19" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="111" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1aaed5671ce00aca09ee0f6c939e2ef438" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::VerifyContent</definition>
+        <argsstring>(flatbuffers::Verifier &amp;verifier, const void *obj, Content type)</argsstring>
+        <name>VerifyContent</name>
+        <param>
+          <type>flatbuffers::Verifier &amp;</type>
+          <declname>verifier</declname>
+        </param>
+        <param>
+          <type>const void *</type>
+          <declname>obj</declname>
+        </param>
+        <param>
+          <type>Content</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="248" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="248" bodyend="275" declfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" declline="141" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1af768c5b76242138932cb6eb2fcc77676" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::VerifyContentVector</definition>
+        <argsstring>(flatbuffers::Verifier &amp;verifier, const flatbuffers::Vector&lt; flatbuffers::Offset&lt; void &gt;&gt; *values, const flatbuffers::Vector&lt; uint8_t &gt; *types)</argsstring>
+        <name>VerifyContentVector</name>
+        <param>
+          <type>flatbuffers::Verifier &amp;</type>
+          <declname>verifier</declname>
+        </param>
+        <param>
+          <type>const flatbuffers::Vector&lt; flatbuffers::Offset&lt; void &gt;&gt; *</type>
+          <declname>values</declname>
+        </param>
+        <param>
+          <type>const flatbuffers::Vector&lt; uint8_t &gt; *</type>
+          <declname>types</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="277" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="277" bodyend="287" declfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" declline="142" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a6ef45733b8982e81460efe00b2c82ca2" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+        </templateparamlist>
+        <type>const fys::fb::FightingPitState *</type>
+        <definition>const fys::fb::FightingPitState* fys::fb::ReplyFrame::content_as&lt; fys::fb::FightingPitState &gt;</definition>
+        <argsstring>() const</argsstring>
+        <name>ReplyFrame::content_as&lt; fys::fb::FightingPitState &gt;</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="192" column="24" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="192" bodyend="194"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1ab8dfaa2a37cf90f21a93ea063b063161" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+        </templateparamlist>
+        <type>const fys::fb::PartyTeamStatus *</type>
+        <definition>const fys::fb::PartyTeamStatus* fys::fb::ReplyFrame::content_as&lt; fys::fb::PartyTeamStatus &gt;</definition>
+        <argsstring>() const</argsstring>
+        <name>ReplyFrame::content_as&lt; fys::fb::PartyTeamStatus &gt;</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="196" column="24" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="196" bodyend="198"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a8332f8bd940d39c1fe8a78528ae8e5b7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+        </templateparamlist>
+        <type>const fys::fb::EndBattle *</type>
+        <definition>const fys::fb::EndBattle* fys::fb::ReplyFrame::content_as&lt; fys::fb::EndBattle &gt;</definition>
+        <argsstring>() const</argsstring>
+        <name>ReplyFrame::content_as&lt; fys::fb::EndBattle &gt;</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="200" column="24" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="200" bodyend="202"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a78b616ae8324e0411f68bc852dee9431" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+        </templateparamlist>
+        <type>const fys::fb::MemberStatus *</type>
+        <definition>const fys::fb::MemberStatus* fys::fb::ReplyFrame::content_as&lt; fys::fb::MemberStatus &gt;</definition>
+        <argsstring>() const</argsstring>
+        <name>ReplyFrame::content_as&lt; fys::fb::MemberStatus &gt;</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="204" column="24" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="204" bodyend="206"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a535ecfc3daba12626ac95122f0daa653" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+        </templateparamlist>
+        <type>const flatbuffers::String *</type>
+        <definition>const flatbuffers::String* fys::fb::ReplyFrame::content_as&lt; flatbuffers::String &gt;</definition>
+        <argsstring>() const</argsstring>
+        <name>ReplyFrame::content_as&lt; flatbuffers::String &gt;</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="208" column="24" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="208" bodyend="210"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1af45f496537042585326941973e0303f3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; ReplyFrame &gt;</type>
+        <definition>flatbuffers::Offset&lt;ReplyFrame&gt; fys::fb::CreateReplyFrame</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, fys::fb::TypeReply typeReply=fys::fb::TypeReply_FIGHTINGPIT_STATE, fys::fb::Content content_type=fys::fb::Content_NONE, flatbuffers::Offset&lt; void &gt; content=0)</argsstring>
+        <name>CreateReplyFrame</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>fys::fb::TypeReply</type>
+          <declname>typeReply</declname>
+          <defval>fys::fb::TypeReply_FIGHTINGPIT_STATE</defval>
+        </param>
+        <param>
+          <type>fys::fb::Content</type>
+          <declname>content_type</declname>
+          <defval>fys::fb::Content_NONE</defval>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; void &gt;</type>
+          <declname>content</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="236" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="236" bodyend="246"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a7fb277f4c1e472a92ae7f8e050c59c07" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const fys::fb::ReplyFrame *</type>
+        <definition>const fys::fb::ReplyFrame* fys::fb::GetReplyFrame</definition>
+        <argsstring>(const void *buf)</argsstring>
+        <name>GetReplyFrame</name>
+        <param>
+          <type>const void *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="289" column="34" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="289" bodyend="291"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a68e4cb825685dc86f430381e1d118763" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const fys::fb::ReplyFrame *</type>
+        <definition>const fys::fb::ReplyFrame* fys::fb::GetSizePrefixedReplyFrame</definition>
+        <argsstring>(const void *buf)</argsstring>
+        <name>GetSizePrefixedReplyFrame</name>
+        <param>
+          <type>const void *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="293" column="34" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="293" bodyend="295"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1aad37d6b36966f5e7ec3fa5a2d5798b74" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>ReplyFrame *</type>
+        <definition>ReplyFrame* fys::fb::GetMutableReplyFrame</definition>
+        <argsstring>(void *buf)</argsstring>
+        <name>GetMutableReplyFrame</name>
+        <param>
+          <type>void *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="297" column="19" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="297" bodyend="299"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a95792b622e917fc9b58612776a480ecb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::VerifyReplyFrameBuffer</definition>
+        <argsstring>(flatbuffers::Verifier &amp;verifier)</argsstring>
+        <name>VerifyReplyFrameBuffer</name>
+        <param>
+          <type>flatbuffers::Verifier &amp;</type>
+          <declname>verifier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="301" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="301" bodyend="304"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a88d0a5377b4e4c5b1fe9fca13a87a503" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::VerifySizePrefixedReplyFrameBuffer</definition>
+        <argsstring>(flatbuffers::Verifier &amp;verifier)</argsstring>
+        <name>VerifySizePrefixedReplyFrameBuffer</name>
+        <param>
+          <type>flatbuffers::Verifier &amp;</type>
+          <declname>verifier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="306" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="306" bodyend="309"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1ac1b870648cc32d3f959518c84eb25e1a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::FinishReplyFrameBuffer</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;fbb, flatbuffers::Offset&lt; fys::fb::ReplyFrame &gt; root)</argsstring>
+        <name>FinishReplyFrameBuffer</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>fbb</declname>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; fys::fb::ReplyFrame &gt;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="311" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="311" bodyend="315"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a3a44ba1b8272e81cff3470ba36aa424f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::FinishSizePrefixedReplyFrameBuffer</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;fbb, flatbuffers::Offset&lt; fys::fb::ReplyFrame &gt; root)</argsstring>
+        <name>FinishSizePrefixedReplyFrameBuffer</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>fbb</declname>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; fys::fb::ReplyFrame &gt;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="317" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="317" bodyend="321"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a23783170964d6e37055eaf5aac8b958a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const Action(&amp;</type>
+        <definition>const Action(&amp; fys::fb::EnumValuesAction</definition>
+        <argsstring>())[4]</argsstring>
+        <name>EnumValuesAction</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="29" column="14" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="29" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a810fca62bc2f75bd144a25e9cada4110" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const char *const *</type>
+        <definition>const char* const * fys::fb::EnumNamesAction</definition>
+        <argsstring>()</argsstring>
+        <name>EnumNamesAction</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="39" column="26" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="39" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1ad03790b7edd6eced1b2243cb0fcb0c86" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char* fys::fb::EnumNameAction</definition>
+        <argsstring>(Action e)</argsstring>
+        <name>EnumNameAction</name>
+        <param>
+          <type>Action</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="50" column="19" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="50" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a2834f903e1ab027848324291ea5787ef" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::VerifyAction</definition>
+        <argsstring>(flatbuffers::Verifier &amp;verifier, const void *obj, Action type)</argsstring>
+        <name>VerifyAction</name>
+        <param>
+          <type>flatbuffers::Verifier &amp;</type>
+          <declname>verifier</declname>
+        </param>
+        <param>
+          <type>const void *</type>
+          <declname>obj</declname>
+        </param>
+        <param>
+          <type>Action</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="342" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="342" bodyend="361" declfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" declline="72" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a2ebac31f9fcc7e672584eae58e7ac90f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::VerifyActionVector</definition>
+        <argsstring>(flatbuffers::Verifier &amp;verifier, const flatbuffers::Vector&lt; flatbuffers::Offset&lt; void &gt;&gt; *values, const flatbuffers::Vector&lt; uint8_t &gt; *types)</argsstring>
+        <name>VerifyActionVector</name>
+        <param>
+          <type>flatbuffers::Verifier &amp;</type>
+          <declname>verifier</declname>
+        </param>
+        <param>
+          <type>const flatbuffers::Vector&lt; flatbuffers::Offset&lt; void &gt;&gt; *</type>
+          <declname>values</declname>
+        </param>
+        <param>
+          <type>const flatbuffers::Vector&lt; uint8_t &gt; *</type>
+          <declname>types</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="363" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="363" bodyend="373" declfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" declline="73" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a538cdb71b5323c2157f9331b0fe8d1c5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; Move &gt;</type>
+        <definition>flatbuffers::Offset&lt;Move&gt; fys::fb::CreateMove</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, double direction=0.0)</argsstring>
+        <name>CreateMove</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>direction</declname>
+          <defval>0.0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="110" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="110" bodyend="116"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a589f11e3d8fe0fd9b3a0452449e2eda3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; Interruption &gt;</type>
+        <definition>flatbuffers::Offset&lt;Interruption&gt; fys::fb::CreateInterruption</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, bool enterArena=false, flatbuffers::Offset&lt; flatbuffers::String &gt; arenaId=0)</argsstring>
+        <name>CreateInterruption</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>enterArena</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>arenaId</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="165" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="165" bodyend="173"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a7301bed294219e08359d1e1f10c773cf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; Interruption &gt;</type>
+        <definition>flatbuffers::Offset&lt;Interruption&gt; fys::fb::CreateInterruptionDirect</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, bool enterArena=false, const char *arenaId=nullptr)</argsstring>
+        <name>CreateInterruptionDirect</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>enterArena</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>arenaId</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="175" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="175" bodyend="184"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1af48805764caca77fd198b3602e04fbbf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; PnjInteract &gt;</type>
+        <definition>flatbuffers::Offset&lt;PnjInteract&gt; fys::fb::CreatePnjInteract</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, flatbuffers::Offset&lt; flatbuffers::String &gt; idPnj=0)</argsstring>
+        <name>CreatePnjInteract</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>idPnj</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="222" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="222" bodyend="228"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a7bcfd5e25922088a39332a5c90f4c4f3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; PnjInteract &gt;</type>
+        <definition>flatbuffers::Offset&lt;PnjInteract&gt; fys::fb::CreatePnjInteractDirect</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, const char *idPnj=nullptr)</argsstring>
+        <name>CreatePnjInteractDirect</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>idPnj</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="230" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="230" bodyend="237"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a5573947c351793baa5240d6a201c3c19" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+        </templateparamlist>
+        <type>const fys::fb::Move *</type>
+        <definition>const fys::fb::Move* fys::fb::WSAction::action_as&lt; fys::fb::Move &gt;</definition>
+        <argsstring>() const</argsstring>
+        <name>WSAction::action_as&lt; fys::fb::Move &gt;</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="281" column="24" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="281" bodyend="283"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a0a57cb830035736f383f8c507d184ceb" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+        </templateparamlist>
+        <type>const fys::fb::Interruption *</type>
+        <definition>const fys::fb::Interruption* fys::fb::WSAction::action_as&lt; fys::fb::Interruption &gt;</definition>
+        <argsstring>() const</argsstring>
+        <name>WSAction::action_as&lt; fys::fb::Interruption &gt;</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="285" column="24" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="285" bodyend="287"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a57486dd19ef1df4a7a0e03c97f114d22" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+        </templateparamlist>
+        <type>const fys::fb::PnjInteract *</type>
+        <definition>const fys::fb::PnjInteract* fys::fb::WSAction::action_as&lt; fys::fb::PnjInteract &gt;</definition>
+        <argsstring>() const</argsstring>
+        <name>WSAction::action_as&lt; fys::fb::PnjInteract &gt;</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="289" column="24" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="289" bodyend="291"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1ab7dc0783cb4cbad0306a90cbf531a4d5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; WSAction &gt;</type>
+        <definition>flatbuffers::Offset&lt;WSAction&gt; fys::fb::CreateWSAction</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, fys::fb::Action action_type=fys::fb::Action_NONE, flatbuffers::Offset&lt; void &gt; action=0, flatbuffers::Offset&lt; flatbuffers::String &gt; token_client=0)</argsstring>
+        <name>CreateWSAction</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>fys::fb::Action</type>
+          <declname>action_type</declname>
+          <defval>fys::fb::Action_NONE</defval>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; void &gt;</type>
+          <declname>action</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>token_client</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="317" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="317" bodyend="327"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a80033dfc76611306100bee8f2e994060" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; WSAction &gt;</type>
+        <definition>flatbuffers::Offset&lt;WSAction&gt; fys::fb::CreateWSActionDirect</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, fys::fb::Action action_type=fys::fb::Action_NONE, flatbuffers::Offset&lt; void &gt; action=0, const char *token_client=nullptr)</argsstring>
+        <name>CreateWSActionDirect</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>fys::fb::Action</type>
+          <declname>action_type</declname>
+          <defval>fys::fb::Action_NONE</defval>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; void &gt;</type>
+          <declname>action</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>token_client</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="329" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="329" bodyend="340"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1ad28adafe28b1808e7a5e66ebaa103f33" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const fys::fb::WSAction *</type>
+        <definition>const fys::fb::WSAction* fys::fb::GetWSAction</definition>
+        <argsstring>(const void *buf)</argsstring>
+        <name>GetWSAction</name>
+        <param>
+          <type>const void *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="375" column="32" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="375" bodyend="377"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a1ac2aae86e6ab50c2e7cd8fbeb6bb622" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const fys::fb::WSAction *</type>
+        <definition>const fys::fb::WSAction* fys::fb::GetSizePrefixedWSAction</definition>
+        <argsstring>(const void *buf)</argsstring>
+        <name>GetSizePrefixedWSAction</name>
+        <param>
+          <type>const void *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="379" column="32" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="379" bodyend="381"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1ae4413b411fecfabd64a36571a472661e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>WSAction *</type>
+        <definition>WSAction* fys::fb::GetMutableWSAction</definition>
+        <argsstring>(void *buf)</argsstring>
+        <name>GetMutableWSAction</name>
+        <param>
+          <type>void *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="383" column="17" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="383" bodyend="385"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a28a3121ead9330378af10b5b8a39a229" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::VerifyWSActionBuffer</definition>
+        <argsstring>(flatbuffers::Verifier &amp;verifier)</argsstring>
+        <name>VerifyWSActionBuffer</name>
+        <param>
+          <type>flatbuffers::Verifier &amp;</type>
+          <declname>verifier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="387" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="387" bodyend="390"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1aaccef0f9256f4ce91108d085092aa7b2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::VerifySizePrefixedWSActionBuffer</definition>
+        <argsstring>(flatbuffers::Verifier &amp;verifier)</argsstring>
+        <name>VerifySizePrefixedWSActionBuffer</name>
+        <param>
+          <type>flatbuffers::Verifier &amp;</type>
+          <declname>verifier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="392" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="392" bodyend="395"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a004893509b749e79ccd1d47120d8d404" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::FinishWSActionBuffer</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;fbb, flatbuffers::Offset&lt; fys::fb::WSAction &gt; root)</argsstring>
+        <name>FinishWSActionBuffer</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>fbb</declname>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; fys::fb::WSAction &gt;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="397" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="397" bodyend="401"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1a0929b64fca1d361fec00339af37a1839" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::FinishSizePrefixedWSActionBuffer</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;fbb, flatbuffers::Offset&lt; fys::fb::WSAction &gt; root)</argsstring>
+        <name>FinishSizePrefixedWSActionBuffer</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>fbb</declname>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; fys::fb::WSAction &gt;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="403" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="403" bodyend="407"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" line="35" column="17"/>
+  </compounddef>
+</doxygen>

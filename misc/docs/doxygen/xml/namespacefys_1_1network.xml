@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacefys_1_1network" kind="namespace" language="C++">
+    <compoundname>fys::network</compoundname>
+    <innerclass refid="structfys_1_1network_1_1_cluster_connection" prot="public">fys::network::ClusterConnection</innerclass>
+    <innerclass refid="classfys_1_1network_1_1_d_b_connector" prot="public">fys::network::DBConnector</innerclass>
+    <innerclass refid="classfys_1_1network_1_1_dispatcher_connection_manager" prot="public">fys::network::DispatcherConnectionManager</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" line="34" column="22"/>
+  </compounddef>
+</doxygen>

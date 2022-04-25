@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1_dispatcher_handler_base" kind="class" language="C++" prot="public">
+    <compoundname>fys::DispatcherHandlerBase</compoundname>
+    <derivedcompoundref refid="classfys_1_1ws_1_1_world_server_dispatcher_handler" prot="protected" virt="non-virtual">fys::ws::WorldServerDispatcherHandler</derivedcompoundref>
+    <includes refid="_dispatcher_8hh" local="no">Dispatcher.hh</includes>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classfys_1_1_dispatcher_handler_base_1a6c11694f3dac4ce782e2346f5beedc0c" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr unsigned</type>
+        <definition>constexpr unsigned fys::DispatcherHandlerBase::CACHE_VALIDITY</definition>
+        <argsstring></argsstring>
+        <name>CACHE_VALIDITY</name>
+        <initializer>= 600</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/Dispatcher.hh" line="43" column="35" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/core/Dispatcher.hh" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfys_1_1_dispatcher_handler_base_1a78f15bbf282ca7629785841ac50c4457" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, unsigned &gt;</type>
+        <definition>std::unordered_map&lt;std::string, unsigned&gt; fys::DispatcherHandlerBase::_authenticated</definition>
+        <argsstring></argsstring>
+        <name>_authenticated</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/Dispatcher.hh" line="63" column="28" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/core/Dispatcher.hh" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1_dispatcher_handler_base_1a3cfca05ef8fe5518e923b5bcb86b9f8b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::DispatcherHandlerBase::processInputMessage</definition>
+        <argsstring>(zmq::multipart_t &amp;&amp;msg, network::DispatcherConnectionManager &amp;manager) noexcept</argsstring>
+        <name>processInputMessage</name>
+        <param>
+          <type>zmq::multipart_t &amp;&amp;</type>
+          <declname>msg</declname>
+        </param>
+        <param>
+          <type><ref refid="classfys_1_1network_1_1_dispatcher_connection_manager" kindref="compound">network::DispatcherConnectionManager</ref> &amp;</type>
+          <declname>manager</declname>
+        </param>
+        <briefdescription>
+<para>This method is processing the inputMessage and dispatch it appropriately among the peers connected to the dispatcher socket. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/Dispatcher.hh" line="50" column="14" bodyfile="/home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.cpp" bodystart="13" bodyend="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1_dispatcher_handler_base_1ab8bff2bf6a8e11aadd08d3c1c5fd0b43" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::DispatcherHandlerBase::processClusterMessage</definition>
+        <argsstring>(zmq::multipart_t &amp;&amp;msg, network::DispatcherConnectionManager &amp;manager) noexcept</argsstring>
+        <name>processClusterMessage</name>
+        <param>
+          <type>zmq::multipart_t &amp;&amp;</type>
+          <declname>msg</declname>
+        </param>
+        <param>
+          <type><ref refid="classfys_1_1network_1_1_dispatcher_connection_manager" kindref="compound">network::DispatcherConnectionManager</ref> &amp;</type>
+          <declname>manager</declname>
+        </param>
+        <briefdescription>
+<para>This method is dispatching the cluster message and forward it appropriately among the peers connected to the dispatcher socket. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/Dispatcher.hh" line="56" column="14" bodyfile="/home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.cpp" bodystart="7" bodyend="11"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1_dispatcher_handler_base_1aacb192c18798171bd41d5002f93f4264" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::DispatcherHandlerBase::forwardMessageToFrontend</definition>
+        <argsstring>(zmq::multipart_t &amp;&amp;msg, network::DispatcherConnectionManager &amp;manager) noexcept</argsstring>
+        <name>forwardMessageToFrontend</name>
+        <param>
+          <type>zmq::multipart_t &amp;&amp;</type>
+          <declname>msg</declname>
+        </param>
+        <param>
+          <type><ref refid="classfys_1_1network_1_1_dispatcher_connection_manager" kindref="compound">network::DispatcherConnectionManager</ref> &amp;</type>
+          <declname>manager</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/Dispatcher.hh" line="58" column="14" bodyfile="/home/FyS/Project/FyS/dispatcher/common/src/core/Dispatcher.cpp" bodystart="19" bodyend="23"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>basic implementation of the dispatcher </para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>fys::ws::WorldServerDispatcherHandler</label>
+        <link refid="classfys_1_1ws_1_1_world_server_dispatcher_handler"/>
+        <childnode refid="1" relation="protected-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>fys::DispatcherHandlerBase</label>
+        <link refid="classfys_1_1_dispatcher_handler_base"/>
+      </node>
+    </inheritancegraph>
+    <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/Dispatcher.hh" line="42" column="32" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/core/Dispatcher.hh" bodystart="42" bodyend="64"/>
+    <listofallmembers>
+      <member refid="classfys_1_1_dispatcher_handler_base_1a78f15bbf282ca7629785841ac50c4457" prot="private" virt="non-virtual"><scope>fys::DispatcherHandlerBase</scope><name>_authenticated</name></member>
+      <member refid="classfys_1_1_dispatcher_handler_base_1a6c11694f3dac4ce782e2346f5beedc0c" prot="private" virt="non-virtual"><scope>fys::DispatcherHandlerBase</scope><name>CACHE_VALIDITY</name></member>
+      <member refid="classfys_1_1_dispatcher_handler_base_1aacb192c18798171bd41d5002f93f4264" prot="public" virt="non-virtual"><scope>fys::DispatcherHandlerBase</scope><name>forwardMessageToFrontend</name></member>
+      <member refid="classfys_1_1_dispatcher_handler_base_1ab8bff2bf6a8e11aadd08d3c1c5fd0b43" prot="public" virt="non-virtual"><scope>fys::DispatcherHandlerBase</scope><name>processClusterMessage</name></member>
+      <member refid="classfys_1_1_dispatcher_handler_base_1a3cfca05ef8fe5518e923b5bcb86b9f8b" prot="public" virt="non-virtual"><scope>fys::DispatcherHandlerBase</scope><name>processInputMessage</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

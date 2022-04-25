@@ -1,0 +1,298 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1arena_1_1_contender_scripting" kind="class" language="C++" prot="public">
+    <compoundname>fys::arena::ContenderScripting</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_contender_scripting_1a0e0d26ee9d08fc287294a832f78fc62e" prot="private" static="no" mutable="no">
+        <type>std::reference_wrapper&lt; chaiscript::ChaiScript &gt;</type>
+        <definition>std::reference_wrapper&lt;chaiscript::ChaiScript&gt; fys::arena::ContenderScripting::_chai</definition>
+        <argsstring></argsstring>
+        <name>_chai</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" line="88" column="24" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_contender_scripting_1acb6e26a83a8d96292f519520f3ba93dd" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string fys::arena::ContenderScripting::_contenderName</definition>
+        <argsstring></argsstring>
+        <name>_contenderName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" line="89" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_contender_scripting_1a898bc62381b681d3c225653490527871" prot="private" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint fys::arena::ContenderScripting::_level</definition>
+        <argsstring></argsstring>
+        <name>_level</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" line="90" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_contender_scripting_1a0be405caa7e82f74f23fdab12a16bae0" prot="private" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint fys::arena::ContenderScripting::_contenderId</definition>
+        <argsstring></argsstring>
+        <name>_contenderId</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" line="91" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_contender_scripting_1abf3f11e8ba9b4eb0662be7f7f9d14883" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; fys::arena::ContenderScripting::_doableActions</definition>
+        <argsstring></argsstring>
+        <name>_doableActions</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" line="92" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1arena_1_1_contender_scripting_1af69bf67333f8dcc0231593ead09e6658" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::arena::ContenderScripting::ContenderScripting</definition>
+        <argsstring>(chaiscript::ChaiScript &amp;chai, uint level)</argsstring>
+        <name>ContenderScripting</name>
+        <param>
+          <type>chaiscript::ChaiScript &amp;</type>
+          <declname>chai</declname>
+        </param>
+        <param>
+          <type>uint</type>
+          <declname>level</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" line="50" column="10" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" bodystart="50" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_contender_scripting_1a917fa4dd98c4e7eef570277e78967912" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::ContenderScripting::executeAction</definition>
+        <argsstring>()</argsstring>
+        <name>executeAction</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" line="53" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/contender/ContenderScripting.cpp" bodystart="76" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_contender_scripting_1a3407e67318142b80d77fbf61ec7da2fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::ContenderScripting::setupContender</definition>
+        <argsstring>()</argsstring>
+        <name>setupContender</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Method called after the contender has been added in the fighting pit, in order to initialize its stats </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" line="59" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/contender/ContenderScripting.cpp" bodystart="63" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_contender_scripting_1a5292d9c085995a5e1284c51b5e2f9bc7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::ContenderScripting::registerContenderScript</definition>
+        <argsstring>()</argsstring>
+        <name>registerContenderScript</name>
+        <briefdescription>
+<para>instantiate the contender in chai engine </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" line="62" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/contender/ContenderScripting.cpp" bodystart="37" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_contender_scripting_1a294149ae7301b71df6c18d01c7c8a7a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::ContenderScripting::loadContenderScriptFromFile</definition>
+        <argsstring>(const std::string &amp;filePath)</argsstring>
+        <name>loadContenderScriptFromFile</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>filePath</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" line="63" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/contender/ContenderScripting.cpp" bodystart="50" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_contender_scripting_1a93a13541c240a3e526ad004fcd477f02" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::ContenderScripting::setContenderName</definition>
+        <argsstring>(std::string contenderName)</argsstring>
+        <name>setContenderName</name>
+        <param>
+          <type>std::string</type>
+          <declname>contenderName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" line="64" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" bodystart="64" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_contender_scripting_1a6e7bfedc3393bbfc7d15a4e793b40c0b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::ContenderScripting::setContenderId</definition>
+        <argsstring>(uint contenderId)</argsstring>
+        <name>setContenderId</name>
+        <param>
+          <type>uint</type>
+          <declname>contenderId</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" line="65" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" bodystart="65" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_contender_scripting_1a7f33ad634169571d93f9b737f6af1053" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::string &amp;</type>
+        <definition>const std::string&amp; fys::arena::ContenderScripting::getContenderName</definition>
+        <argsstring>() const</argsstring>
+        <name>getContenderName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" line="68" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" bodystart="68" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_contender_scripting_1aff73c6f99ac54be57f06c8a92d08ddd7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint</type>
+        <definition>uint fys::arena::ContenderScripting::getContenderId</definition>
+        <argsstring>() const</argsstring>
+        <name>getContenderId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" line="71" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" bodystart="71" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_contender_scripting_1a1d420d555d6e5bbb8d372a33a220c045" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint</type>
+        <definition>uint fys::arena::ContenderScripting::getLevel</definition>
+        <argsstring>() const</argsstring>
+        <name>getLevel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" line="74" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" bodystart="74" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_contender_scripting_1a99d182ef3b6167282d0b3639eaedcfee" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::vector&lt; std::string &gt; &amp;</type>
+        <definition>const std::vector&lt;std::string&gt;&amp; fys::arena::ContenderScripting::getDoableActions</definition>
+        <argsstring>() const</argsstring>
+        <name>getDoableActions</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" line="77" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" bodystart="77" bodyend="77"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classfys_1_1arena_1_1_contender_scripting_1a89d4650688848d3d5731a9da62a99d81" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string fys::arena::ContenderScripting::getChaiMethodName</definition>
+        <argsstring>(std::string &amp;&amp;methodName) const</argsstring>
+        <name>getChaiMethodName</name>
+        <param>
+          <type>std::string &amp;&amp;</type>
+          <declname>methodName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" line="82" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" bodystart="82" bodyend="82"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_contender_scripting_1ad2ef37f144a22d4eb57541be03b3bbce" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string fys::arena::ContenderScripting::getChaiContenderId</definition>
+        <argsstring>() const</argsstring>
+        <name>getChaiContenderId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" line="85" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" bodystart="85" bodyend="85"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" line="47" column="25" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" bodystart="47" bodyend="94"/>
+    <listofallmembers>
+      <member refid="classfys_1_1arena_1_1_contender_scripting_1a0e0d26ee9d08fc287294a832f78fc62e" prot="private" virt="non-virtual"><scope>fys::arena::ContenderScripting</scope><name>_chai</name></member>
+      <member refid="classfys_1_1arena_1_1_contender_scripting_1a0be405caa7e82f74f23fdab12a16bae0" prot="private" virt="non-virtual"><scope>fys::arena::ContenderScripting</scope><name>_contenderId</name></member>
+      <member refid="classfys_1_1arena_1_1_contender_scripting_1acb6e26a83a8d96292f519520f3ba93dd" prot="private" virt="non-virtual"><scope>fys::arena::ContenderScripting</scope><name>_contenderName</name></member>
+      <member refid="classfys_1_1arena_1_1_contender_scripting_1abf3f11e8ba9b4eb0662be7f7f9d14883" prot="private" virt="non-virtual"><scope>fys::arena::ContenderScripting</scope><name>_doableActions</name></member>
+      <member refid="classfys_1_1arena_1_1_contender_scripting_1a898bc62381b681d3c225653490527871" prot="private" virt="non-virtual"><scope>fys::arena::ContenderScripting</scope><name>_level</name></member>
+      <member refid="classfys_1_1arena_1_1_contender_scripting_1af69bf67333f8dcc0231593ead09e6658" prot="public" virt="non-virtual"><scope>fys::arena::ContenderScripting</scope><name>ContenderScripting</name></member>
+      <member refid="classfys_1_1arena_1_1_contender_scripting_1a917fa4dd98c4e7eef570277e78967912" prot="public" virt="non-virtual"><scope>fys::arena::ContenderScripting</scope><name>executeAction</name></member>
+      <member refid="classfys_1_1arena_1_1_contender_scripting_1ad2ef37f144a22d4eb57541be03b3bbce" prot="private" virt="non-virtual"><scope>fys::arena::ContenderScripting</scope><name>getChaiContenderId</name></member>
+      <member refid="classfys_1_1arena_1_1_contender_scripting_1a89d4650688848d3d5731a9da62a99d81" prot="private" virt="non-virtual"><scope>fys::arena::ContenderScripting</scope><name>getChaiMethodName</name></member>
+      <member refid="classfys_1_1arena_1_1_contender_scripting_1aff73c6f99ac54be57f06c8a92d08ddd7" prot="public" virt="non-virtual"><scope>fys::arena::ContenderScripting</scope><name>getContenderId</name></member>
+      <member refid="classfys_1_1arena_1_1_contender_scripting_1a7f33ad634169571d93f9b737f6af1053" prot="public" virt="non-virtual"><scope>fys::arena::ContenderScripting</scope><name>getContenderName</name></member>
+      <member refid="classfys_1_1arena_1_1_contender_scripting_1a99d182ef3b6167282d0b3639eaedcfee" prot="public" virt="non-virtual"><scope>fys::arena::ContenderScripting</scope><name>getDoableActions</name></member>
+      <member refid="classfys_1_1arena_1_1_contender_scripting_1a1d420d555d6e5bbb8d372a33a220c045" prot="public" virt="non-virtual"><scope>fys::arena::ContenderScripting</scope><name>getLevel</name></member>
+      <member refid="classfys_1_1arena_1_1_contender_scripting_1a294149ae7301b71df6c18d01c7c8a7a6" prot="public" virt="non-virtual"><scope>fys::arena::ContenderScripting</scope><name>loadContenderScriptFromFile</name></member>
+      <member refid="classfys_1_1arena_1_1_contender_scripting_1a5292d9c085995a5e1284c51b5e2f9bc7" prot="public" virt="non-virtual"><scope>fys::arena::ContenderScripting</scope><name>registerContenderScript</name></member>
+      <member refid="classfys_1_1arena_1_1_contender_scripting_1a6e7bfedc3393bbfc7d15a4e793b40c0b" prot="public" virt="non-virtual"><scope>fys::arena::ContenderScripting</scope><name>setContenderId</name></member>
+      <member refid="classfys_1_1arena_1_1_contender_scripting_1a93a13541c240a3e526ad004fcd477f02" prot="public" virt="non-virtual"><scope>fys::arena::ContenderScripting</scope><name>setContenderName</name></member>
+      <member refid="classfys_1_1arena_1_1_contender_scripting_1a3407e67318142b80d77fbf61ec7da2fe" prot="public" virt="non-virtual"><scope>fys::arena::ContenderScripting</scope><name>setupContender</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

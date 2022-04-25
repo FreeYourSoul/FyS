@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1fb_1_1_interruption_builder" kind="struct" language="C++" prot="public">
+    <compoundname>fys::fb::InterruptionBuilder</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1fb_1_1_interruption_builder_1abdb3e89d527688ac100e8697922af025" prot="public" static="no" mutable="no">
+        <type>flatbuffers::FlatBufferBuilder &amp;</type>
+        <definition>flatbuffers::FlatBufferBuilder&amp; fys::fb::InterruptionBuilder::fbb_</definition>
+        <argsstring></argsstring>
+        <name>fbb_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="145" column="34" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="145" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1fb_1_1_interruption_builder_1a3b1a6a65ac709c589f52fede442e36f1" prot="public" static="no" mutable="no">
+        <type>flatbuffers::uoffset_t</type>
+        <definition>flatbuffers::uoffset_t fys::fb::InterruptionBuilder::start_</definition>
+        <argsstring></argsstring>
+        <name>start_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="146" column="26" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="146" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfys_1_1fb_1_1_interruption_builder_1add8c869bb4816669ce2f2125a5b14e88" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::InterruptionBuilder::add_enterArena</definition>
+        <argsstring>(bool enterArena)</argsstring>
+        <name>add_enterArena</name>
+        <param>
+          <type>bool</type>
+          <declname>enterArena</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="147" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="147" bodyend="149"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_interruption_builder_1a36d870ca9b3c652a84839adfdbecc243" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::InterruptionBuilder::add_arenaId</definition>
+        <argsstring>(flatbuffers::Offset&lt; flatbuffers::String &gt; arenaId)</argsstring>
+        <name>add_arenaId</name>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>arenaId</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="150" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="150" bodyend="152"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_interruption_builder_1a3d652c78c50cd604c0e1cf1506d17917" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::fb::InterruptionBuilder::InterruptionBuilder</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb)</argsstring>
+        <name>InterruptionBuilder</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="153" column="12" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="153" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_interruption_builder_1ad1814ebde38933fff3b70421814582b8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfys_1_1fb_1_1_interruption_builder" kindref="compound">InterruptionBuilder</ref> &amp;</type>
+        <definition>InterruptionBuilder&amp; fys::fb::InterruptionBuilder::operator=</definition>
+        <argsstring>(const InterruptionBuilder &amp;)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="structfys_1_1fb_1_1_interruption_builder" kindref="compound">InterruptionBuilder</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="157" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_interruption_builder_1a4e174eb0924355d9bdf29adb735e2e22" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; Interruption &gt;</type>
+        <definition>flatbuffers::Offset&lt;Interruption&gt; fys::fb::InterruptionBuilder::Finish</definition>
+        <argsstring>()</argsstring>
+        <name>Finish</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="158" column="23" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="158" bodyend="162"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="144" column="26" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="144" bodyend="163"/>
+    <listofallmembers>
+      <member refid="structfys_1_1fb_1_1_interruption_builder_1a36d870ca9b3c652a84839adfdbecc243" prot="public" virt="non-virtual"><scope>fys::fb::InterruptionBuilder</scope><name>add_arenaId</name></member>
+      <member refid="structfys_1_1fb_1_1_interruption_builder_1add8c869bb4816669ce2f2125a5b14e88" prot="public" virt="non-virtual"><scope>fys::fb::InterruptionBuilder</scope><name>add_enterArena</name></member>
+      <member refid="structfys_1_1fb_1_1_interruption_builder_1abdb3e89d527688ac100e8697922af025" prot="public" virt="non-virtual"><scope>fys::fb::InterruptionBuilder</scope><name>fbb_</name></member>
+      <member refid="structfys_1_1fb_1_1_interruption_builder_1a4e174eb0924355d9bdf29adb735e2e22" prot="public" virt="non-virtual"><scope>fys::fb::InterruptionBuilder</scope><name>Finish</name></member>
+      <member refid="structfys_1_1fb_1_1_interruption_builder_1a3d652c78c50cd604c0e1cf1506d17917" prot="public" virt="non-virtual"><scope>fys::fb::InterruptionBuilder</scope><name>InterruptionBuilder</name></member>
+      <member refid="structfys_1_1fb_1_1_interruption_builder_1ad1814ebde38933fff3b70421814582b8" prot="public" virt="non-virtual"><scope>fys::fb::InterruptionBuilder</scope><name>operator=</name></member>
+      <member refid="structfys_1_1fb_1_1_interruption_builder_1a3b1a6a65ac709c589f52fede442e36f1" prot="public" virt="non-virtual"><scope>fys::fb::InterruptionBuilder</scope><name>start_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

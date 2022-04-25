@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1fb_1_1_content_traits_3_01flatbuffers_1_1_string_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>fys::fb::ContentTraits&lt; flatbuffers::String &gt;</compoundname>
+    <templateparamlist>
+    </templateparamlist>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structfys_1_1fb_1_1_content_traits_3_01flatbuffers_1_1_string_01_4_1af1e734f232dda414c1967c12dcce6aaa" prot="public" static="yes" mutable="no">
+        <type>const Content</type>
+        <definition>const Content fys::fb::ContentTraits&lt; flatbuffers::String &gt;::enum_value</definition>
+        <argsstring></argsstring>
+        <name>enum_value</name>
+        <initializer>= Content_ErrorMessage</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="138" column="24" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="138" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" line="137" column="31" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ReplyFrame_generated.h" bodystart="137" bodyend="139"/>
+    <listofallmembers>
+      <member refid="structfys_1_1fb_1_1_content_traits_3_01flatbuffers_1_1_string_01_4_1af1e734f232dda414c1967c12dcce6aaa" prot="public" virt="non-virtual"><scope>fys::fb::ContentTraits&lt; flatbuffers::String &gt;</scope><name>enum_value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

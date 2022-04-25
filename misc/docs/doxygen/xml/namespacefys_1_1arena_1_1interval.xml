@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacefys_1_1arena_1_1interval" kind="namespace" language="C++">
+    <compoundname>fys::arena::interval</compoundname>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="namespacefys_1_1arena_1_1interval_1a710b407fcce55f7c27535071227ee81f" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr static auto</type>
+        <definition>constexpr static auto fys::arena::interval::EASY</definition>
+        <argsstring></argsstring>
+        <name>EASY</name>
+        <initializer>= std::chrono::milliseconds(20000)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="54" column="23" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacefys_1_1arena_1_1interval_1acf4aeff30a03ff8621d6a6e50e2b8b9d" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr static auto</type>
+        <definition>constexpr static auto fys::arena::interval::MEDIUM</definition>
+        <argsstring></argsstring>
+        <name>MEDIUM</name>
+        <initializer>= std::chrono::milliseconds(15000)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="55" column="23" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacefys_1_1arena_1_1interval_1ad75a3dd8264cf85dd159205041b92a10" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr static auto</type>
+        <definition>constexpr static auto fys::arena::interval::HARD</definition>
+        <argsstring></argsstring>
+        <name>HARD</name>
+        <initializer>= std::chrono::milliseconds(10000)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="56" column="23" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="53" column="18"/>
+  </compounddef>
+</doxygen>

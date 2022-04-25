@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="md__home__fy_s__project__fy_s_services_worldserver__r_e_a_d_m_e" kind="page">
+    <compoundname>md__home_FyS_Project_FyS_services_worldserver_README</compoundname>
+    <title>WorldServer Service</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>This service is the one managing movement of character for FyS Online (MMORPG). <linebreak/>
+ More information on the [documentation part]().</para>
+<para><heading level="1">TODO</heading>
+</para>
+<para><itemizedlist>
+<listitem><para>Move a player on the map<itemizedlist>
+<listitem><para>Print log displaying the character movement is taken into account</para>
+</listitem><listitem><para>Create a stupid client that is going to get every move notifications and display it (slow).</para>
+</listitem><listitem><para>Prepare a client-server prediction in order to reduce bandwidth traffic. </para>
+</listitem></itemizedlist>
+</para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

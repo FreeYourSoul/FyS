@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1common_1_1_dispatcher_data" kind="struct" language="C++" prot="public">
+    <compoundname>fys::common::DispatcherData</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1common_1_1_dispatcher_data_1a302ae1d6635c96d59240f1d27375390c" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string fys::common::DispatcherData::address</definition>
+        <argsstring></argsstring>
+        <name>address</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" line="43" column="13" bodyfile="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1common_1_1_dispatcher_data_1a78a44dea9c76c235f3b0291b61969e66" prot="public" static="no" mutable="no">
+        <type>ushort</type>
+        <definition>ushort fys::common::DispatcherData::subscriberPort</definition>
+        <argsstring></argsstring>
+        <name>subscriberPort</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" line="44" column="8" bodyfile="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1common_1_1_dispatcher_data_1a5b9b71d3f41f3fe4bcba5d646060fde8" prot="public" static="no" mutable="no">
+        <type>ushort</type>
+        <definition>ushort fys::common::DispatcherData::port</definition>
+        <argsstring></argsstring>
+        <name>port</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" line="45" column="8" bodyfile="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" line="42" column="21" bodyfile="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" bodystart="42" bodyend="46"/>
+    <listofallmembers>
+      <member refid="structfys_1_1common_1_1_dispatcher_data_1a302ae1d6635c96d59240f1d27375390c" prot="public" virt="non-virtual"><scope>fys::common::DispatcherData</scope><name>address</name></member>
+      <member refid="structfys_1_1common_1_1_dispatcher_data_1a5b9b71d3f41f3fe4bcba5d646060fde8" prot="public" virt="non-virtual"><scope>fys::common::DispatcherData</scope><name>port</name></member>
+      <member refid="structfys_1_1common_1_1_dispatcher_data_1a78a44dea9c76c235f3b0291b61969e66" prot="public" virt="non-virtual"><scope>fys::common::DispatcherData</scope><name>subscriberPort</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

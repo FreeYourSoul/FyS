@@ -1,0 +1,195 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="_startup_dispatcher_ctx_8cpp" kind="file" language="C++">
+    <compoundname>StartupDispatcherCtx.cpp</compoundname>
+    <includes local="no">spdlog/spdlog.h</includes>
+    <includes local="no">numeric</includes>
+    <includes local="no">tclap/ValueArg.h</includes>
+    <includes local="no">tclap/CmdLine.h</includes>
+    <includes local="no">boost/property_tree/ini_parser.hpp</includes>
+    <includes refid="_startup_dispatcher_ctx_8hh" local="no">StartupDispatcherCtx.hh</includes>
+    <includes refid="_versioner_8hh" local="no">Versioner.hh</includes>
+    <incdepgraph>
+      <node id="5">
+        <label>tclap/CmdLine.h</label>
+      </node>
+      <node id="10">
+        <label>boost/lexical_cast.hpp</label>
+      </node>
+      <node id="6">
+        <label>boost/property_tree/ini_parser.hpp</label>
+      </node>
+      <node id="3">
+        <label>numeric</label>
+      </node>
+      <node id="11">
+        <label>string</label>
+      </node>
+      <node id="12">
+        <label>Versioner.hh</label>
+        <link refid="_versioner_8hh_source"/>
+      </node>
+      <node id="1">
+        <label>/home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp</label>
+        <link refid="_startup_dispatcher_ctx_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>tclap/ValueArg.h</label>
+      </node>
+      <node id="2">
+        <label>spdlog/spdlog.h</label>
+      </node>
+      <node id="9">
+        <label>boost/property_tree/json_parser.hpp</label>
+      </node>
+      <node id="8">
+        <label>boost/property_tree/ptree.hpp</label>
+      </node>
+      <node id="7">
+        <label>StartupDispatcherCtx.hh</label>
+        <link refid="_startup_dispatcher_ctx_8hh_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespacefys">fys</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;spdlog/spdlog.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;numeric&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;tclap/ValueArg.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;tclap/CmdLine.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;boost/property_tree/ini_parser.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;StartupDispatcherCtx.hh&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Versioner.hh&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">fys<sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/>StartupDispatcherCtx::StartupDispatcherCtx(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>ac,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>*av)<sp/>noexcept<sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_version<sp/>=<sp/>std::to_string(VERSION_MAJOR)<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;.&quot;</highlight><highlight class="normal"><sp/>+<sp/>std::to_string(VERSION_MINOR);</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TCLAP::CmdLine<sp/>cli(</highlight><highlight class="stringliteral">&quot;FyS::Dispatcher&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;<sp/>&apos;</highlight><highlight class="normal">,<sp/>_version);</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TCLAP::ValueArg&lt;std::string&gt;<sp/>configPath(</highlight><highlight class="stringliteral">&quot;c&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;config&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;Path<sp/>of<sp/>config<sp/>file&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;NONE&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;string&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TCLAP::ValueArg&lt;std::string&gt;<sp/>configSpecificPath(</highlight><highlight class="stringliteral">&quot;s&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;specificConfig&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;Path<sp/>of<sp/>specific<sp/>config<sp/>file&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;NONE&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;string&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TCLAP::ValueArg&lt;std::string&gt;<sp/>name(</highlight><highlight class="stringliteral">&quot;n&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;name&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;Name<sp/>of<sp/>the<sp/>Dispatcher<sp/>(used<sp/>as<sp/>key<sp/>for<sp/>the<sp/>cluster)&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;string&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TCLAP::ValueArg&lt;ushort&gt;<sp/>changePort(</highlight><highlight class="stringliteral">&quot;p&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;port&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;Listening<sp/>Port&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/>0,<sp/></highlight><highlight class="stringliteral">&quot;integer&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TCLAP::ValueArg&lt;bool&gt;<sp/>aware(</highlight><highlight class="stringliteral">&quot;a&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;aware&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;Is<sp/>aware<sp/>of<sp/>the<sp/>other<sp/>cluster<sp/>member&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;boolean&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TCLAP::ValueArg&lt;bool&gt;<sp/>loadBalance(</highlight><highlight class="stringliteral">&quot;l&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;load_balance&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;Dispatch<sp/>in<sp/>load<sp/>balancing<sp/>mode<sp/>or<sp/>publisher<sp/>mode&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;boolean&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TCLAP::ValueArg&lt;bool&gt;<sp/>verbose(</highlight><highlight class="stringliteral">&quot;v&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;verbose&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;Print<sp/>logs<sp/>on<sp/>standard<sp/>output&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;boolean&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cli.add(configPath);</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cli.add(changePort);</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cli.add(name);</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cli.add(aware);</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cli.add(verbose);</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cli.add(configSpecificPath);</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cli.parse(ac,<sp/>av);</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(</highlight><highlight class="stringliteral">&quot;NONE&quot;</highlight><highlight class="normal"><sp/>!=<sp/>configPath.getValue())</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this-&gt;initializeFromIni(configPath.getValue());</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(</highlight><highlight class="stringliteral">&quot;NONE&quot;</highlight><highlight class="normal"><sp/>!=<sp/>configSpecificPath.getValue())</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_specificConfigPath<sp/>=<sp/>configSpecificPath.getValue();</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(changePort.getValue()<sp/>&gt;<sp/>0)</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_bindingPort<sp/>=<sp/>changePort.getValue();</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!name.getValue().empty())</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_name<sp/>=<sp/>name.getValue();</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_isClusterAware<sp/>=<sp/>!aware.getValue()<sp/>?<sp/>false<sp/>:<sp/>_isClusterAware;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_isLoadBalancing<sp/>=<sp/>!loadBalance.getValue()<sp/>?<sp/>false<sp/>:<sp/>_isLoadBalancing;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_verbose<sp/>=<sp/>verbose.getValue();</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(std::exception<sp/>&amp;e)<sp/>{</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SPDLOG_ERROR(</highlight><highlight class="stringliteral">&quot;\&quot;Context<sp/>of<sp/>the<sp/>Dispatcher<sp/>not<sp/>initialized<sp/>caused<sp/>by<sp/>:<sp/>{}&quot;</highlight><highlight class="normal">,<sp/>e.what());</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>StartupDispatcherCtx::initializeFromIni(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;configFilePath)<sp/>{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>boost::property_tree::ptree<sp/>pt;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>boost::property_tree::read_ini(configFilePath,<sp/>pt);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classfys_1_1_startup_dispatcher_ctx_1a9a8d10c8011b1eb05ee485497a8f3bcc" kindref="member">_maxMsgSize</ref><sp/>=<sp/>pt.get&lt;uint&gt;(fys::init_beacon::MAXMSGSIZE);</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_clusterProxy.backendAddress<sp/>=<sp/>pt.get&lt;std::string&gt;(fys::init_beacon::BACKEND_ADDR);</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_clusterProxy.backendPort=<sp/>pt.get&lt;ushort&gt;(fys::init_beacon::BACKEND_PORT);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_clusterProxy.frontendAddress<sp/>=<sp/>pt.get&lt;std::string&gt;(fys::init_beacon::FRONTEND_ADDR);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_clusterProxy.frontendPort<sp/>=<sp/>pt.get&lt;ushort&gt;(fys::init_beacon::FRONTEND_PORT);</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classfys_1_1_startup_dispatcher_ctx_1a3bb65d28444c4d978345685a1ca86827" kindref="member">_bindingPort</ref><sp/>=<sp/>pt.get&lt;ushort&gt;(fys::init_beacon::BINDINGPORT);</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classfys_1_1_startup_dispatcher_ctx_1a9e19704e4016c6cbaa1f459ba9e56581" kindref="member">_dispatchingPort</ref><sp/>=<sp/>pt.get&lt;ushort&gt;(fys::init_beacon::DISPATCHERPORT);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_isClusterAware<sp/>=<sp/>pt.get&lt;</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">&gt;(fys::init_beacon::ISCLUSTERAWARE);</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_isLoadBalancing<sp/>=<sp/>pt.get&lt;</highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">&gt;(fys::init_beacon::ISLOADBALANCING);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_specificConfigPath<sp/>=<sp/>pt.get&lt;std::string&gt;(fys::init_beacon::SPECIFIC_CONFIG);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_name<sp/>=<sp/>pt.get&lt;std::string&gt;(fys::init_beacon::NAME);</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;std::string&gt;<sp/>topicGroups<sp/>=<sp/>parseToArray&lt;std::string&gt;(pt.get&lt;std::string&gt;(fys::init_beacon::TOPIC_GROUPS));</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;std::string&gt;<sp/>topics<sp/>=<sp/>parseToArray&lt;std::string&gt;(pt.get&lt;std::string&gt;(fys::init_beacon::TOPICS));</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(topicGroups.empty())</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_subTopics<sp/>=<sp/>std::move(topics);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_subTopics.reserve(topics.size());</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(std::string<sp/>&amp;topic<sp/>:<sp/>topics)<sp/>{</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(std::string<sp/>&amp;group<sp/>:<sp/>topicGroups)<sp/>{</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_subTopics.emplace_back(std::string(group<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;_&quot;</highlight><highlight class="normal">).append(topic));</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/><ref refid="classfys_1_1_startup_dispatcher_ctx_1adcb2d75409c8d59af598cbf31384480b" kindref="member">StartupDispatcherCtx::toString</ref>()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>str;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>str<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;\n*************************\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>str+=<sp/></highlight><highlight class="stringliteral">&quot;[INFO]<sp/>Dispatcher<sp/>&quot;</highlight><highlight class="normal"><sp/>+<sp/>_name<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;<sp/>context<sp/>VERSION:<sp/>&quot;</highlight><highlight class="normal"><sp/>+<sp/>_version<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;\n\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>str+=<sp/></highlight><highlight class="stringliteral">&quot;[INFO]<sp/>Client<sp/>Listener<sp/>bindingPort:<sp/>&quot;</highlight><highlight class="normal"><sp/>+<sp/>std::to_string(<ref refid="classfys_1_1_startup_dispatcher_ctx_1a3bb65d28444c4d978345685a1ca86827" kindref="member">_bindingPort</ref>)<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>str+=<sp/></highlight><highlight class="stringliteral">&quot;[INFO]<sp/>Listener<sp/>connection<sp/>string:<sp/>&quot;</highlight><highlight class="normal"><sp/>+<sp/>getListenerBindingString()<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>str+=<sp/></highlight><highlight class="stringliteral">&quot;[INFO]<sp/>Service<sp/>Dispatching<sp/>Port:<sp/>&quot;</highlight><highlight class="normal"><sp/>+<sp/>std::to_string(<ref refid="classfys_1_1_startup_dispatcher_ctx_1a9e19704e4016c6cbaa1f459ba9e56581" kindref="member">_dispatchingPort</ref>)<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>str+=<sp/></highlight><highlight class="stringliteral">&quot;[INFO]<sp/>Dispatcher<sp/>connection<sp/>string:<sp/>&quot;</highlight><highlight class="normal"><sp/>+<sp/>getDispatcherBindingString()<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>str+=<sp/></highlight><highlight class="stringliteral">&quot;[INFO]<sp/>isClusterAware:<sp/>&quot;</highlight><highlight class="normal"><sp/>+<sp/>std::string(_isClusterAware<sp/>?<sp/></highlight><highlight class="stringliteral">&quot;true&quot;</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="stringliteral">&quot;false&quot;</highlight><highlight class="normal">)<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>str+=<sp/></highlight><highlight class="stringliteral">&quot;[INFO]<sp/>isLoadBalancing:<sp/>&quot;</highlight><highlight class="normal"><sp/>+<sp/>std::string(_isLoadBalancing<sp/>?<sp/></highlight><highlight class="stringliteral">&quot;true&quot;</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="stringliteral">&quot;false&quot;</highlight><highlight class="normal">)<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>str<sp/>+=<sp/>std::accumulate(_subTopics.begin(),<sp/>_subTopics.end(),<sp/>std::string{},<sp/>[](std::string<sp/>a,<sp/>std::string<sp/>b){</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>return<sp/>std::move(a)<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;[INFO]<sp/>Cluster:<sp/>Subscribing<sp/>topic:<sp/>&quot;</highlight><highlight class="normal"><sp/>+<sp/>std::move(b)<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>str+=<sp/></highlight><highlight class="stringliteral">&quot;[INFO]<sp/>Frontend<sp/>connection<sp/>string:<sp/>&quot;</highlight><highlight class="normal"><sp/>+<sp/>getFrontendClusterProxyConnectionString()<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>str+=<sp/></highlight><highlight class="stringliteral">&quot;[INFO]<sp/>Backend<sp/>connection<sp/>string:<sp/>&quot;</highlight><highlight class="normal"><sp/>+<sp/>getBackendClusterProxyConnectionString()<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>str+=<sp/></highlight><highlight class="stringliteral">&quot;[INFO]<sp/>Specific<sp/>configuration<sp/>file:<sp/>&quot;</highlight><highlight class="normal"><sp/>+<sp/>_specificConfigPath<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>str+=<sp/></highlight><highlight class="stringliteral">&quot;\n*************************\n&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>str;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>StartupDispatcherCtx::getListenerBindingString()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;tcp://*:&quot;</highlight><highlight class="normal"><sp/>+<sp/>std::to_string(<ref refid="classfys_1_1_startup_dispatcher_ctx_1a3bb65d28444c4d978345685a1ca86827" kindref="member">_bindingPort</ref>);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>StartupDispatcherCtx::getDispatcherBindingString()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;tcp://*:&quot;</highlight><highlight class="normal"><sp/>+<sp/>std::to_string(<ref refid="classfys_1_1_startup_dispatcher_ctx_1a9e19704e4016c6cbaa1f459ba9e56581" kindref="member">_dispatchingPort</ref>);</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>StartupDispatcherCtx::getFrontendClusterProxyConnectionString()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;tcp://&quot;</highlight><highlight class="normal"><sp/>+<sp/>_clusterProxy.frontendAddress<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;:&quot;</highlight><highlight class="normal"><sp/>+<sp/>std::to_string(_clusterProxy.frontendPort);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>StartupDispatcherCtx::getBackendClusterProxyConnectionString()<sp/>const<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;tcp://&quot;</highlight><highlight class="normal"><sp/>+<sp/>_clusterProxy.backendAddress<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;:&quot;</highlight><highlight class="normal"><sp/>+<sp/>std::to_string(_clusterProxy.backendPort);</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp"/>
+  </compounddef>
+</doxygen>

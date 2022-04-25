@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1arena_1_1_encounter_context_1_1_encounter_desc" kind="struct" language="C++" prot="public">
+    <compoundname>fys::arena::EncounterContext::EncounterDesc</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_encounter_context_1_1_encounter_desc_1a54968ac840a235bbf34a477e0298eb48" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string fys::arena::EncounterContext::EncounterDesc::key</definition>
+        <argsstring></argsstring>
+        <name>key</name>
+        <briefdescription>
+<para>key of the encounter to find it back via the cache </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="47" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_encounter_context_1_1_encounter_desc_1a11c2da9619ffc452a250e7f827088dff" prot="public" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint fys::arena::EncounterContext::EncounterDesc::maxEncountering</definition>
+        <argsstring></argsstring>
+        <name>maxEncountering</name>
+        <briefdescription>
+<para>Max number of this type of monster you can encounter at once. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="49" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_encounter_context_1_1_encounter_desc_1acf12dc3cb99771c06444de9e94b56863" prot="public" static="no" mutable="no">
+        <type>ChanceArray</type>
+        <definition>ChanceArray fys::arena::EncounterContext::EncounterDesc::chance</definition>
+        <argsstring></argsstring>
+        <name>chance</name>
+        <briefdescription>
+<para>percentage of chance to encounter this monster out of the 3 different difficulties </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="51" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_encounter_context_1_1_encounter_desc_1ae167653f9f8d20d8a8b5321b60e899d3" prot="public" static="no" mutable="no">
+        <type>RngRange</type>
+        <definition>RngRange fys::arena::EncounterContext::EncounterDesc::levelRange</definition>
+        <argsstring></argsstring>
+        <name>levelRange</name>
+        <briefdescription>
+<para>Range of level the monster is when encountered. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="53" column="10" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfys_1_1arena_1_1_encounter_context_1_1_encounter_desc_1ab890ea126acb62168b839c4dccc23022" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::EncounterContext::EncounterDesc::operator!=</definition>
+        <argsstring>(const EncounterDesc &amp;other) const</argsstring>
+        <name>operator!=</name>
+        <param>
+          <type>const <ref refid="structfys_1_1arena_1_1_encounter_context_1_1_encounter_desc" kindref="compound">EncounterDesc</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="40" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" bodystart="40" bodyend="44"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="38" column="20" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" bodystart="38" bodyend="55"/>
+    <listofallmembers>
+      <member refid="structfys_1_1arena_1_1_encounter_context_1_1_encounter_desc_1acf12dc3cb99771c06444de9e94b56863" prot="public" virt="non-virtual"><scope>fys::arena::EncounterContext::EncounterDesc</scope><name>chance</name></member>
+      <member refid="structfys_1_1arena_1_1_encounter_context_1_1_encounter_desc_1a54968ac840a235bbf34a477e0298eb48" prot="public" virt="non-virtual"><scope>fys::arena::EncounterContext::EncounterDesc</scope><name>key</name></member>
+      <member refid="structfys_1_1arena_1_1_encounter_context_1_1_encounter_desc_1ae167653f9f8d20d8a8b5321b60e899d3" prot="public" virt="non-virtual"><scope>fys::arena::EncounterContext::EncounterDesc</scope><name>levelRange</name></member>
+      <member refid="structfys_1_1arena_1_1_encounter_context_1_1_encounter_desc_1a11c2da9619ffc452a250e7f827088dff" prot="public" virt="non-virtual"><scope>fys::arena::EncounterContext::EncounterDesc</scope><name>maxEncountering</name></member>
+      <member refid="structfys_1_1arena_1_1_encounter_context_1_1_encounter_desc_1ab890ea126acb62168b839c4dccc23022" prot="public" virt="non-virtual"><scope>fys::arena::EncounterContext::EncounterDesc</scope><name>operator!=</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

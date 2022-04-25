@@ -1,0 +1,73 @@
+\hypertarget{classfys_1_1arena_1_1_arena_server_service}{}\doxysection{fys\+::arena\+::Arena\+Server\+Service Class Reference}
+\label{classfys_1_1arena_1_1_arena_server_service}\index{fys::arena::ArenaServerService@{fys::arena::ArenaServerService}}
+
+
+Class managing an Arena Server. ~\newline
+ An arena server is a server handling multiple arena fighting pit instance at once. In order to properly works, it need to work with an Arena\+Dispatcher, which is a proxy for the World\+Server to communicate with Arena.  
+
+
+
+
+{\ttfamily \#include $<$Arena\+Server\+Service.\+hh$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_arena_server_service_afab9e43f2294fd99b3019bb42d94f83c}\label{classfys_1_1arena_1_1_arena_server_service_afab9e43f2294fd99b3019bb42d94f83c}} 
+{\bfseries Arena\+Server\+Service} (const \mbox{\hyperlink{classfys_1_1arena_1_1_arena_server_context}{Arena\+Server\+Context}} \&ctx)
+\item 
+void \mbox{\hyperlink{classfys_1_1arena_1_1_arena_server_service_ae335fe525fd28119a792fa4b49093d85}{run\+Server\+Loop}} () noexcept
+\begin{DoxyCompactList}\small\item\em Run infinite loop that poll on the connections of the dispatcher, then of the players. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class managing an Arena Server. ~\newline
+ An arena server is a server handling multiple arena fighting pit instance at once. In order to properly works, it need to work with an Arena\+Dispatcher, which is a proxy for the World\+Server to communicate with Arena. 
+
+fys\+::arena\+::\+Arena\+Server\+Service\+::create\+New\+Fighting\+Pit In case of a new encounter for a player, the following workflow apply\+:
+\begin{DoxyItemize}
+\item Player is moving / doing an action on the World\+Map (managed by a World\+Server) that is triggering a new encounter. \mbox{[}publisher socket send notification\mbox{]} ~\newline
+~\newline
+
+\item World\+Server send a message to a Arena\+Dispatcher containing configuration data to generate a fighting pit and authentication information, those are the following\+:~\newline
+
+\begin{DoxyItemize}
+\item a generated token (used as authentication key)~\newline
+
+\item the difficulty of the fight (configuration of the player)~\newline
+
+\item the id of encounter; if equal to 0, it is a random encounter. scripted id otherwise.~\newline
+
+\end{DoxyItemize}
+\item The \mbox{\hyperlink{classfys_1_1_dispatcher}{Dispatcher}} forward the message to an Arena\+Server that is going to register the incoming player that will initiate the creation of the fighting pit. ~\newline
+~\newline
+
+\item The Arena server reply to the dispatcher (that will reply to the World\+Server), the message will return to the player, message containing the ip (connection string) of the Arena\+Server that will create the fighting pit. ~\newline
+~\newline
+
+\item The Player can then directly connect to the Arena\+Server using the token to validate the authentication, The Arena service validate the connection, and use the data (difficulty ect..) in order to generate the fighting pit (with an id unique). When the fight is setup, the initial handshake with the client contains the id of the fighting pit in order to enable other player to join. ~\newline
+
+\end{DoxyItemize}
+
+@join\+Fighting\+Pit Another player than the creator can join an existing arena by specifying its fighting pit id to the World\+Server, which will check if the position of the joining player is close enough of the creator of the fighting pit. The Arena\+Server is then just going to check the existence of the id and will add the player into the fight. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfys_1_1arena_1_1_arena_server_service_ae335fe525fd28119a792fa4b49093d85}\label{classfys_1_1arena_1_1_arena_server_service_ae335fe525fd28119a792fa4b49093d85}} 
+\index{fys::arena::ArenaServerService@{fys::arena::ArenaServerService}!runServerLoop@{runServerLoop}}
+\index{runServerLoop@{runServerLoop}!fys::arena::ArenaServerService@{fys::arena::ArenaServerService}}
+\doxysubsubsection{\texorpdfstring{runServerLoop()}{runServerLoop()}}
+{\footnotesize\ttfamily void fys\+::arena\+::\+Arena\+Server\+Service\+::run\+Server\+Loop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Run infinite loop that poll on the connections of the dispatcher, then of the players. 
+
+\begin{DoxyNote}{Note}
+This method contains the code of the deserialization of flatbuffer message (ioc with lambda) and then check if the incoming message is coming from an authorized user. 
+\end{DoxyNote}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/services/arena/include/Arena\+Server\+Service.\+hh\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/services/arena/src/Arena\+Server\+Service.\+cpp\end{DoxyCompactItemize}

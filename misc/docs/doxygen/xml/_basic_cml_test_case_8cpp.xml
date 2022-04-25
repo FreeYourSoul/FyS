@@ -1,0 +1,316 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="_basic_cml_test_case_8cpp" kind="file" language="C++">
+    <compoundname>BasicCmlTestCase.cpp</compoundname>
+    <includes local="no">catch2/catch.hpp</includes>
+    <includes refid="_cml_key_8hh" local="no">CmlKey.hh</includes>
+    <includes refid="_cml_8hh" local="no">Cml.hh</includes>
+    <incdepgraph>
+      <node id="5">
+        <label>filesystem</label>
+      </node>
+      <node id="6">
+        <label>Cml.hh</label>
+        <link refid="_cml_8hh_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/FyS/Project/FyS/scripting_cache/cml/test/BasicCmlTestCase.cpp</label>
+        <link refid="_basic_cml_test_case_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>catch2/catch.hpp</label>
+      </node>
+      <node id="8">
+        <label>unordered_map</label>
+      </node>
+      <node id="4">
+        <label>algorithm</label>
+      </node>
+      <node id="3">
+        <label>CmlKey.hh</label>
+        <link refid="_cml_key_8hh_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="class_cml_base_test" prot="public">CmlBaseTest</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_basic_cml_test_case_8cpp_1a6a1d6e1a12975a4e9a0b5b952e79eaad" prot="public" static="no">
+        <name>private</name>
+        <initializer>protected</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/scripting_cache/cml/test/BasicCmlTestCase.cpp" line="26" column="11" bodyfile="/home/FyS/Project/FyS/scripting_cache/cml/test/BasicCmlTestCase.cpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_basic_cml_test_case_8cpp_1a2119bae24ded3832a186c609e91e1f8e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_CASE</definition>
+        <argsstring>(&quot;findInCache for Basic CML&quot;, &quot;[cml_test]&quot;)</argsstring>
+        <name>TEST_CASE</name>
+        <param>
+          <type>&quot;findInCache for Basic CML&quot;</type>
+        </param>
+        <param>
+          <type>&quot;&quot;</type>
+          <array>[cml_test]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/scripting_cache/cml/test/BasicCmlTestCase.cpp" line="52" column="1" bodyfile="/home/FyS/Project/FyS/scripting_cache/cml/test/BasicCmlTestCase.cpp" bodystart="52" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="_basic_cml_test_case_8cpp_1a0294c9cf8f0285838682c538cecac338" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_CASE</definition>
+        <argsstring>(&quot;isInLocalStorageAndUpToDate for Basic CML&quot;, &quot;[cml_test]&quot;)</argsstring>
+        <name>TEST_CASE</name>
+        <param>
+          <type>&quot;isInLocalStorageAndUpToDate for Basic CML&quot;</type>
+        </param>
+        <param>
+          <type>&quot;&quot;</type>
+          <array>[cml_test]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/scripting_cache/cml/test/BasicCmlTestCase.cpp" line="102" column="1" bodyfile="/home/FyS/Project/FyS/scripting_cache/cml/test/BasicCmlTestCase.cpp" bodystart="102" bodyend="193"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>MIT<sp/>License</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Copyright<sp/>(c)<sp/>2019<sp/>Quentin<sp/>Balland</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Repository<sp/>:<sp/>https://github.com/FreeYourSoul/FyS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Permission<sp/>is<sp/>hereby<sp/>granted,<sp/>free<sp/>of<sp/>charge,<sp/>to<sp/>any<sp/>person<sp/>obtaining<sp/>a<sp/>copy</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>of<sp/>this<sp/>software<sp/>and<sp/>associated<sp/>documentation<sp/>files<sp/>(the<sp/>&quot;Software&quot;),<sp/>to<sp/>deal</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="comment">//<sp/>in<sp/>the<sp/>Software<sp/>without<sp/>restriction,<sp/>including<sp/>without<sp/>limitation<sp/>the<sp/>rights</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>to<sp/>use,<sp/>copy,<sp/>modify,<sp/>merge,<sp/>publish,<sp/>distribute,<sp/>sublicense,<sp/>and/or<sp/>sell</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>copies<sp/>of<sp/>the<sp/>Software,<sp/>and<sp/>to<sp/>permit<sp/>persons<sp/>to<sp/>whom<sp/>the<sp/>Software<sp/>is</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment">//<sp/>furnished<sp/>to<sp/>do<sp/>so,<sp/>subject<sp/>to<sp/>the<sp/>following<sp/>conditions:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="comment">//<sp/>The<sp/>above<sp/>copyright<sp/>notice<sp/>and<sp/>this<sp/>permission<sp/>notice<sp/>shall<sp/>be<sp/>included<sp/>in<sp/>all</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>copies<sp/>or<sp/>substantial<sp/>portions<sp/>of<sp/>the<sp/>Software.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="comment">//<sp/>THE<sp/>SOFTWARE<sp/>IS<sp/>PROVIDED<sp/>&quot;AS<sp/>IS&quot;,<sp/>WITHOUT<sp/>WARRANTY<sp/>OF<sp/>ANY<sp/>KIND,<sp/>EXPRESS<sp/>OR</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="comment">//<sp/>IMPLIED,<sp/>INCLUDING<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO<sp/>THE<sp/>WARRANTIES<sp/>OF<sp/>MERCHANTABILITY,</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="comment">//<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR<sp/>PURPOSE<sp/>AND<sp/>NONINFRINGEMENT.<sp/>IN<sp/>NO<sp/>EVENT<sp/>SHALL<sp/>THE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AUTHORS<sp/>OR<sp/>COPYRIGHT<sp/>HOLDERS<sp/>BE<sp/>LIABLE<sp/>FOR<sp/>ANY<sp/>CLAIM,<sp/>DAMAGES<sp/>OR<sp/>OTHER</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="comment">//<sp/>LIABILITY,<sp/>WHETHER<sp/>IN<sp/>AN<sp/>ACTION<sp/>OF<sp/>CONTRACT,<sp/>TORT<sp/>OR<sp/>OTHERWISE,<sp/>ARISING<sp/>FROM,</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="comment">//<sp/>OUT<sp/>OF<sp/>OR<sp/>IN<sp/>CONNECTION<sp/>WITH<sp/>THE<sp/>SOFTWARE<sp/>OR<sp/>THE<sp/>USE<sp/>OR<sp/>OTHER<sp/>DEALINGS<sp/>IN<sp/>THE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="comment">//<sp/>SOFTWARE.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;catch2/catch.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;CmlKey.hh&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>private<sp/>protected</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Cml.hh&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29" refid="class_cml_base_test" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_cml_base_test" kindref="compound">CmlBaseTest</ref><sp/>final<sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classfys_1_1cache_1_1_cml" kindref="compound">fys::cache::Cml</ref><sp/>{</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="class_cml_base_test" kindref="compound">CmlBaseTest</ref>(std::string<sp/>v)<sp/>:<sp/><ref refid="classfys_1_1cache_1_1_cml" kindref="compound">fys::cache::Cml</ref>(std::filesystem::path(std::move(v)))<sp/>{}</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>fys::cache::Cml::isInLocalStorageAndUpToDate;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using</highlight><highlight class="normal"><sp/>fys::cache::Cml::_inMemCache;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>_localStorageCalled<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>createFileInLocalStorage(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classfys_1_1cache_1_1_cml_key" kindref="compound">fys::cache::CmlKey</ref><sp/>&amp;cmlKey)</highlight><highlight class="keyword"><sp/>override<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_localStorageCalled<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="40"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>getLocalPathStorage()<sp/>{</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>file_path<sp/>=<sp/>__FILE__;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>dir_path<sp/>=<sp/>file_path.substr(0,<sp/>file_path.rfind(</highlight><highlight class="charliteral">&apos;\\&apos;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(dir_path.size()<sp/>==<sp/>file_path.size())</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dir_path<sp/>=<sp/>file_path.substr(0,<sp/>file_path.rfind(</highlight><highlight class="charliteral">&apos;/&apos;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>dir_path<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;/testCacheDir&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="50"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal">TEST_CASE(</highlight><highlight class="stringliteral">&quot;findInCache<sp/>for<sp/>Basic<sp/>CML&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;[cml_test]&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_cml_base_test" kindref="compound">CmlBaseTest</ref><sp/>cbt(getLocalPathStorage());</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>SECTION(</highlight><highlight class="stringliteral">&quot;Test<sp/>call<sp/>of<sp/>createFileInLocalStorage&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cbt.findInCache(</highlight><highlight class="stringliteral">&quot;inner_folder:testKO&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(cbt._localStorageCalled);</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>Section<sp/>:<sp/>Test<sp/>call<sp/>of<sp/>createFileInLocalStorage</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>SECTION(</highlight><highlight class="stringliteral">&quot;Test<sp/>CML<sp/>on<sp/>filesystem&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(cbt._inMemCache.find(</highlight><highlight class="stringliteral">&quot;test1&quot;</highlight><highlight class="normal">)<sp/>==<sp/>cbt._inMemCache.end());</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(cbt._inMemCache.find(</highlight><highlight class="stringliteral">&quot;inner_folder:test2&quot;</highlight><highlight class="normal">)<sp/>==<sp/>cbt._inMemCache.end());</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(cbt._inMemCache.find(</highlight><highlight class="stringliteral">&quot;inner_folder:inner_folder_1:test3&quot;</highlight><highlight class="normal">)<sp/>==<sp/>cbt._inMemCache.end());</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SECTION(</highlight><highlight class="stringliteral">&quot;Test<sp/>file<sp/>at<sp/>root&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string_view<sp/>cacheContent<sp/>=<sp/>cbt.findInCache(</highlight><highlight class="stringliteral">&quot;test1&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;test1<sp/>content&quot;</highlight><highlight class="normal"><sp/>==<sp/>cacheContent);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE_FALSE(cbt._localStorageCalled);</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(cbt._inMemCache.find(</highlight><highlight class="stringliteral">&quot;test1&quot;</highlight><highlight class="normal">)<sp/>!=<sp/>cbt._inMemCache.end());</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>Section<sp/>:<sp/>Test<sp/>file<sp/>at<sp/>root</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SECTION(</highlight><highlight class="stringliteral">&quot;Test<sp/>file<sp/>in<sp/>folder&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string_view<sp/>cacheTest2<sp/>=<sp/>cbt.findInCache(</highlight><highlight class="stringliteral">&quot;inner_folder:test2&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string_view<sp/>cacheTest3<sp/>=<sp/>cbt.findInCache(</highlight><highlight class="stringliteral">&quot;inner_folder:inner_folder_1:test3&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;test2<sp/>content&quot;</highlight><highlight class="normal"><sp/>==<sp/>cacheTest2);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;test3<sp/>content&quot;</highlight><highlight class="normal"><sp/>==<sp/>cacheTest3);</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE_FALSE(cbt._localStorageCalled);</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(cbt._inMemCache.find(</highlight><highlight class="stringliteral">&quot;inner_folder:test2&quot;</highlight><highlight class="normal">)<sp/>!=<sp/>cbt._inMemCache.end());</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(cbt._inMemCache.find(</highlight><highlight class="stringliteral">&quot;inner_folder:inner_folder_1:test3&quot;</highlight><highlight class="normal">)<sp/>!=<sp/>cbt._inMemCache.end());</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>Section<sp/>:<sp/>Test<sp/>file<sp/>in<sp/>folder</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SECTION(</highlight><highlight class="stringliteral">&quot;Test<sp/>Multiple<sp/>line<sp/>file&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>contentToFind<sp/>=</highlight></codeline>
+<codeline lineno="89"><highlight class="normal">R</highlight><highlight class="stringliteral">&quot;d(A<sp/>thing<sp/>of<sp/>beauty<sp/>is<sp/>a<sp/>joy<sp/>for<sp/>ever:</highlight></codeline>
+<codeline lineno="90"><highlight class="stringliteral">Its<sp/>loveliness<sp/>increases;<sp/>it<sp/>will<sp/>never</highlight></codeline>
+<codeline lineno="91"><highlight class="stringliteral">Pass<sp/>into<sp/>nothingness;<sp/>but<sp/>still<sp/>will<sp/>keep</highlight></codeline>
+<codeline lineno="92"><highlight class="stringliteral">A<sp/>bower<sp/>quiet<sp/>for<sp/>us,<sp/>and<sp/>a<sp/>sleep</highlight></codeline>
+<codeline lineno="93"><highlight class="stringliteral">Full<sp/>of<sp/>sweet<sp/>dreams,<sp/>and<sp/>health,<sp/>and<sp/>quiet<sp/>breathing.</highlight></codeline>
+<codeline lineno="94"><highlight class="stringliteral"></highlight></codeline>
+<codeline lineno="95"><highlight class="stringliteral">John<sp/>Keats)d&quot;;</highlight></codeline>
+<codeline lineno="96"><highlight class="stringliteral"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string_view<sp/>cacheTest4<sp/>=<sp/>cbt.findInCache(</highlight><highlight class="stringliteral">&quot;inner_folder:inner_folder_1:test4&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(contentToFind<sp/>==<sp/>cacheTest4);</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE_FALSE(cbt._localStorageCalled);</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(cbt._inMemCache.find(</highlight><highlight class="stringliteral">&quot;inner_folder:inner_folder_1:test4&quot;</highlight><highlight class="normal">)<sp/>!=<sp/>cbt._inMemCache.end());</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>section<sp/>:<sp/>Test<sp/>CML<sp/>on<sp/>filesystem</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>TestCase<sp/>:<sp/>Test<sp/>Basic<sp/>CML</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal">TEST_CASE(</highlight><highlight class="stringliteral">&quot;isInLocalStorageAndUpToDate<sp/>for<sp/>Basic<sp/>CML&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;[cml_test]&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="class_cml_base_test" kindref="compound">CmlBaseTest</ref><sp/>cbt(getLocalPathStorage());</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classfys_1_1cache_1_1_cml_key" kindref="compound">fys::cache::CmlKey</ref><sp/>key1<sp/>=<sp/><ref refid="classfys_1_1cache_1_1_cml_key" kindref="compound">fys::cache::CmlKey</ref>{getLocalPathStorage(),<sp/></highlight><highlight class="stringliteral">&quot;test1&quot;</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classfys_1_1cache_1_1_cml_key" kindref="compound">fys::cache::CmlKey</ref><sp/>key2<sp/>=<sp/><ref refid="classfys_1_1cache_1_1_cml_key" kindref="compound">fys::cache::CmlKey</ref>{getLocalPathStorage(),<sp/></highlight><highlight class="stringliteral">&quot;inner_folder:test2&quot;</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classfys_1_1cache_1_1_cml_key" kindref="compound">fys::cache::CmlKey</ref><sp/>key3<sp/>=<sp/><ref refid="classfys_1_1cache_1_1_cml_key" kindref="compound">fys::cache::CmlKey</ref>{getLocalPathStorage(),<sp/></highlight><highlight class="stringliteral">&quot;inner_folder:inner_folder_1:test3&quot;</highlight><highlight class="normal">};</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Get<sp/>from<sp/>filesystem<sp/>and<sp/>store<sp/>in<sp/>memcache</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/>cbt.findInCache(</highlight><highlight class="stringliteral">&quot;test1&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/>cbt.findInCache(</highlight><highlight class="stringliteral">&quot;inner_folder:test2&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/>SECTION(</highlight><highlight class="stringliteral">&quot;isInLocalStorageAndUpToDate<sp/>true&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cbt.findInCache(key1.getKey());</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>it<sp/>=<sp/>cbt._inMemCache.find(key1.getKey());<sp/>it<sp/>!=<sp/>cbt._inMemCache.end())<sp/>{</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(cbt.isInLocalStorageAndUpToDate(key1,<sp/>it-&gt;second.timestamp));</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;test1<sp/>content&quot;</highlight><highlight class="normal"><sp/>==<sp/>it-&gt;second.content);</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FAIL(</highlight><highlight class="stringliteral">&quot;test1<sp/>has<sp/>not<sp/>been<sp/>found<sp/>in<sp/>memcache&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>it<sp/>=<sp/>cbt._inMemCache.find(key2.getKey());<sp/>it<sp/>!=<sp/>cbt._inMemCache.end())<sp/>{</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(cbt.isInLocalStorageAndUpToDate(key2,<sp/>it-&gt;second.timestamp));</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;test2<sp/>content&quot;</highlight><highlight class="normal"><sp/>==<sp/>it-&gt;second.content);</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FAIL(</highlight><highlight class="stringliteral">&quot;test2<sp/>has<sp/>not<sp/>been<sp/>found<sp/>in<sp/>memcache&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>Section<sp/>:<sp/>isInLocalStorageAndUpToDate</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/>SECTION(</highlight><highlight class="stringliteral">&quot;isInLocalStorageAndUpToDate<sp/>false:<sp/>Not<sp/>in<sp/>memCache&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>it<sp/>=<sp/>cbt._inMemCache.find(key3.getKey());<sp/>it<sp/>!=<sp/>cbt._inMemCache.end())<sp/>{</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FAIL(</highlight><highlight class="stringliteral">&quot;test3<sp/>has<sp/>not<sp/>been<sp/>found<sp/>in<sp/>memcache<sp/>before<sp/>being<sp/>called&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>content<sp/>=<sp/>cbt.findInCache(</highlight><highlight class="stringliteral">&quot;inner_folder:inner_folder_1:test3&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;test3<sp/>content&quot;</highlight><highlight class="normal"><sp/>==<sp/>content);</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>it<sp/>=<sp/>cbt._inMemCache.find(key3.getKey());<sp/>it<sp/>!=<sp/>cbt._inMemCache.end())<sp/>{</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(cbt.isInLocalStorageAndUpToDate(key3,<sp/>it-&gt;second.timestamp));</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;test3<sp/>content&quot;</highlight><highlight class="normal"><sp/>==<sp/>it-&gt;second.content);</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FAIL(</highlight><highlight class="stringliteral">&quot;test3<sp/>has<sp/>not<sp/>been<sp/>found<sp/>in<sp/>memcache&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>Section<sp/>:<sp/>isInLocalStorageAndUpToDate<sp/>false:<sp/>Not<sp/>in<sp/>memCache</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/>SECTION(</highlight><highlight class="stringliteral">&quot;isInLocalStorageAndUpToDate<sp/>false:<sp/>timestamp<sp/>changed&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>it<sp/>=<sp/>cbt._inMemCache.find(key3.getKey());<sp/>it<sp/>!=<sp/>cbt._inMemCache.end())<sp/>{</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FAIL(</highlight><highlight class="stringliteral">&quot;test3<sp/>has<sp/>not<sp/>been<sp/>found<sp/>in<sp/>memcache<sp/>before<sp/>being<sp/>called&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>content<sp/>=<sp/>cbt.findInCache(</highlight><highlight class="stringliteral">&quot;inner_folder:inner_folder_1:test3&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;test3<sp/>content&quot;</highlight><highlight class="normal"><sp/>==<sp/>content);</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>it<sp/>=<sp/>cbt._inMemCache.find(key3.getKey());<sp/>it<sp/>!=<sp/>cbt._inMemCache.end())<sp/>{</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Add<sp/>90seconds<sp/>on<sp/>the<sp/>timestamp<sp/>to<sp/>represent<sp/>a<sp/>file<sp/>update</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(cbt.isInLocalStorageAndUpToDate(key3,<sp/>it-&gt;second.timestamp<sp/>+<sp/>90));<sp/></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;test3<sp/>content&quot;</highlight><highlight class="normal"><sp/>==<sp/>it-&gt;second.content);</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FAIL(</highlight><highlight class="stringliteral">&quot;test3<sp/>has<sp/>not<sp/>been<sp/>found<sp/>in<sp/>memcache&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>Section<sp/>:<sp/>isInLocalStorageAndUpToDate<sp/>false:<sp/>Not<sp/>in<sp/>memCache</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/>SECTION(</highlight><highlight class="stringliteral">&quot;createFile&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::filesystem::path<sp/>pathToCreate(getLocalPathStorage()<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;/imaginary&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::filesystem::path<sp/>basePath<sp/>=<sp/>pathToCreate;</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::filesystem::remove_all(basePath);</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE_FALSE(std::filesystem::exists(pathToCreate));</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pathToCreate<sp/>/=<sp/></highlight><highlight class="stringliteral">&quot;cloud&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE_FALSE(std::filesystem::exists(pathToCreate));</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pathToCreate<sp/>/=<sp/></highlight><highlight class="stringliteral">&quot;surfing&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE_FALSE(std::filesystem::exists(pathToCreate));</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pathToCreate<sp/>/=<sp/></highlight><highlight class="stringliteral">&quot;testing.txt&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>cbt.createFile(pathToCreate,<sp/></highlight><highlight class="stringliteral">&quot;this<sp/>is<sp/>a<sp/>crazy<sp/>funny<sp/>test&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::filesystem::path<sp/>pathVerify<sp/>=<sp/>basePath;</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(std::filesystem::exists(pathVerify));</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pathVerify<sp/>/=<sp/></highlight><highlight class="stringliteral">&quot;cloud&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(std::filesystem::exists(pathVerify));</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pathVerify<sp/>/=<sp/></highlight><highlight class="stringliteral">&quot;surfing&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(std::filesystem::exists(pathVerify));</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pathVerify<sp/>/=<sp/></highlight><highlight class="stringliteral">&quot;testing.txt&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"></highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(std::filesystem::exists(pathToCreate));</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(std::filesystem::exists(pathVerify));</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(pathVerify<sp/>==<sp/>pathToCreate);</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CHECK(</highlight><highlight class="stringliteral">&quot;this<sp/>is<sp/>a<sp/>crazy<sp/>funny<sp/>test\n&quot;</highlight><highlight class="normal"><sp/>==<sp/>cbt.findInCache(</highlight><highlight class="stringliteral">&quot;imaginary:cloud:surfing:testing.txt&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"></highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::filesystem::remove_all(basePath);</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>Section<sp/>:<sp/>createFile</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight></codeline>
+<codeline lineno="199"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>TestCase<sp/>:<sp/>Implementation<sp/>for<sp/>Basic<sp/>CML</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/FyS/Project/FyS/scripting_cache/cml/test/BasicCmlTestCase.cpp"/>
+  </compounddef>
+</doxygen>

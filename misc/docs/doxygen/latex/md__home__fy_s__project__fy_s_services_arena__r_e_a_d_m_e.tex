@@ -1,0 +1,24 @@
+This service is the one managing battle for FyS Online (M\+M\+O\+R\+PG). ~\newline
+ More information on the \mbox{[}documentation part\mbox{]}.
+
+\doxysection*{T\+O\+DO}
+
+
+\begin{DoxyItemize}
+\item Create the internal (interprocess) zmq communication channel (even without threading pool) to read from the Fighting\+Pit
+\item Implement a first fighting version without multiple without multiple battles.
+\begin{DoxyItemize}
+\item Make one Arena Worker by default.
+\item Implement chai scripting
+\begin{DoxyItemize}
+\item Minimum script call possible in a first place. Monster will have their script fully loaded and have a \char`\"{}execute\+Action\char`\"{} function that will be called from the cpp
+\item Players will have to launch chai script to execute actions (no c++ hard coded action)
+\item Each chai scripts need to be tested unitarly by a cpp test case which has to be developped in a way that it will be reusable.
+\item When scripting are done and tested, create a repository to store those scripts (and all the upcoming ones). And link them to the repository FyS via a submodule.
+\end{DoxyItemize}
+\item Check if it is faster to return a cpp function from chaiscript and execute it compared to executing the code in chaiscript.
+\end{DoxyItemize}
+\item Unit test the fighting mechanism with mocked scripting
+\item Test external authentication/implement messaging of notifications to players
+\item Implement thread pool into each worker to enable multiple fighting\+Pit per service 
+\end{DoxyItemize}

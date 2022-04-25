@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1fb_1_1internal_1_1_w_s_server_reg_builder" kind="struct" language="C++" prot="public">
+    <compoundname>fys::fb::internal::WSServerRegBuilder</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1fb_1_1internal_1_1_w_s_server_reg_builder_1a6a0adc83419dd34bba420e37c13ed0f9" prot="public" static="no" mutable="no">
+        <type>flatbuffers::FlatBufferBuilder &amp;</type>
+        <definition>flatbuffers::FlatBufferBuilder&amp; fys::fb::internal::WSServerRegBuilder::fbb_</definition>
+        <argsstring></argsstring>
+        <name>fbb_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="282" column="34" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="282" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1fb_1_1internal_1_1_w_s_server_reg_builder_1aa5b872f5bdb4e27b7fe051d184b3a9e7" prot="public" static="no" mutable="no">
+        <type>flatbuffers::uoffset_t</type>
+        <definition>flatbuffers::uoffset_t fys::fb::internal::WSServerRegBuilder::start_</definition>
+        <argsstring></argsstring>
+        <name>start_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="283" column="26" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="283" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_w_s_server_reg_builder_1a55c1450a0961fc0d3f15918f75c8538c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::internal::WSServerRegBuilder::add_serverCode</definition>
+        <argsstring>(flatbuffers::Offset&lt; flatbuffers::String &gt; serverCode)</argsstring>
+        <name>add_serverCode</name>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>serverCode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="284" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="284" bodyend="286"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_w_s_server_reg_builder_1aef92664f1bdb63a4207de9747cbcad7e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::internal::WSServerRegBuilder::add_xPos</definition>
+        <argsstring>(double xPos)</argsstring>
+        <name>add_xPos</name>
+        <param>
+          <type>double</type>
+          <declname>xPos</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="287" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="287" bodyend="289"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_w_s_server_reg_builder_1a0fbceb110174f0540e8a0c67f31663ee" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::internal::WSServerRegBuilder::add_yPos</definition>
+        <argsstring>(double yPos)</argsstring>
+        <name>add_yPos</name>
+        <param>
+          <type>double</type>
+          <declname>yPos</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="290" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="290" bodyend="292"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_w_s_server_reg_builder_1a24d0c6e58876005c0ff63e9d973b46fe" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::fb::internal::WSServerRegBuilder::WSServerRegBuilder</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb)</argsstring>
+        <name>WSServerRegBuilder</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="293" column="12" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="293" bodyend="296"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_w_s_server_reg_builder_1a85dc41af718f76a75e649eec526bfa89" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfys_1_1fb_1_1internal_1_1_w_s_server_reg_builder" kindref="compound">WSServerRegBuilder</ref> &amp;</type>
+        <definition>WSServerRegBuilder&amp; fys::fb::internal::WSServerRegBuilder::operator=</definition>
+        <argsstring>(const WSServerRegBuilder &amp;)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="structfys_1_1fb_1_1internal_1_1_w_s_server_reg_builder" kindref="compound">WSServerRegBuilder</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="297" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_w_s_server_reg_builder_1aa6e839ac6d74a592ebbd70a31f6a19f1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; WSServerReg &gt;</type>
+        <definition>flatbuffers::Offset&lt;WSServerReg&gt; fys::fb::internal::WSServerRegBuilder::Finish</definition>
+        <argsstring>()</argsstring>
+        <name>Finish</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="298" column="23" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="298" bodyend="302"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="281" column="25" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="281" bodyend="303"/>
+    <listofallmembers>
+      <member refid="structfys_1_1fb_1_1internal_1_1_w_s_server_reg_builder_1a55c1450a0961fc0d3f15918f75c8538c" prot="public" virt="non-virtual"><scope>fys::fb::internal::WSServerRegBuilder</scope><name>add_serverCode</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_w_s_server_reg_builder_1aef92664f1bdb63a4207de9747cbcad7e" prot="public" virt="non-virtual"><scope>fys::fb::internal::WSServerRegBuilder</scope><name>add_xPos</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_w_s_server_reg_builder_1a0fbceb110174f0540e8a0c67f31663ee" prot="public" virt="non-virtual"><scope>fys::fb::internal::WSServerRegBuilder</scope><name>add_yPos</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_w_s_server_reg_builder_1a6a0adc83419dd34bba420e37c13ed0f9" prot="public" virt="non-virtual"><scope>fys::fb::internal::WSServerRegBuilder</scope><name>fbb_</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_w_s_server_reg_builder_1aa6e839ac6d74a592ebbd70a31f6a19f1" prot="public" virt="non-virtual"><scope>fys::fb::internal::WSServerRegBuilder</scope><name>Finish</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_w_s_server_reg_builder_1a85dc41af718f76a75e649eec526bfa89" prot="public" virt="non-virtual"><scope>fys::fb::internal::WSServerRegBuilder</scope><name>operator=</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_w_s_server_reg_builder_1aa5b872f5bdb4e27b7fe051d184b3a9e7" prot="public" virt="non-virtual"><scope>fys::fb::internal::WSServerRegBuilder</scope><name>start_</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_w_s_server_reg_builder_1a24d0c6e58876005c0ff63e9d973b46fe" prot="public" virt="non-virtual"><scope>fys::fb::internal::WSServerRegBuilder</scope><name>WSServerRegBuilder</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

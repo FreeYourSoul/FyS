@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="worldserver_2_c_make_files_2___c_make_l_t_o_test-_c_2src_2foo_8c" kind="file" language="C++">
+    <compoundname>foo.c</compoundname>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="worldserver_2_c_make_files_2___c_make_l_t_o_test-_c_2src_2foo_8c_1a14bcd2d544b22300bba3863251393e0f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int foo</definition>
+        <argsstring>()</argsstring>
+        <name>foo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/cmake-build-debug/services/worldserver/CMakeFiles/_CMakeLTOTest-C/src/foo.c" line="1" column="5" bodyfile="/home/FyS/Project/FyS/cmake-build-debug/services/worldserver/CMakeFiles/_CMakeLTOTest-C/src/foo.c" bodystart="1" bodyend="4"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>foo()</highlight></codeline>
+<codeline lineno="2"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="3"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0x42;</highlight></codeline>
+<codeline lineno="4"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/home/FyS/Project/FyS/cmake-build-debug/services/worldserver/CMakeFiles/_CMakeLTOTest-C/src/foo.c"/>
+  </compounddef>
+</doxygen>

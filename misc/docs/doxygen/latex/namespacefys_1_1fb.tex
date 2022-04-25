@@ -1,0 +1,684 @@
+\hypertarget{namespacefys_1_1fb}{}\doxysection{fys\+::fb Namespace Reference}
+\label{namespacefys_1_1fb}\index{fys::fb@{fys::fb}}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacefys_1_1fb_1_1internal}{internal}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structfys_1_1fb_1_1_action_traits}{Action\+Traits}}
+\item 
+struct \mbox{\hyperlink{structfys_1_1fb_1_1_action_traits_3_01fys_1_1fb_1_1_interruption_01_4}{Action\+Traits$<$ fys\+::fb\+::\+Interruption $>$}}
+\item 
+struct \mbox{\hyperlink{structfys_1_1fb_1_1_action_traits_3_01fys_1_1fb_1_1_move_01_4}{Action\+Traits$<$ fys\+::fb\+::\+Move $>$}}
+\item 
+struct \mbox{\hyperlink{structfys_1_1fb_1_1_action_traits_3_01fys_1_1fb_1_1_pnj_interact_01_4}{Action\+Traits$<$ fys\+::fb\+::\+Pnj\+Interact $>$}}
+\item 
+struct \mbox{\hyperlink{structfys_1_1fb_1_1_arena_fight_action_builder}{Arena\+Fight\+Action\+Builder}}
+\item 
+struct \mbox{\hyperlink{structfys_1_1fb_1_1_arena_server_auth_builder}{Arena\+Server\+Auth\+Builder}}
+\item 
+struct \mbox{\hyperlink{structfys_1_1fb_1_1_arena_server_validate_auth_builder}{Arena\+Server\+Validate\+Auth\+Builder}}
+\item 
+struct \mbox{\hyperlink{structfys_1_1fb_1_1_fighting_pit_encounter_builder}{Fighting\+Pit\+Encounter\+Builder}}
+\item 
+struct \mbox{\hyperlink{structfys_1_1fb_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s}{F\+L\+A\+T\+B\+U\+F\+F\+E\+R\+S\+\_\+\+F\+I\+N\+A\+L\+\_\+\+C\+L\+A\+SS}}
+\item 
+struct \mbox{\hyperlink{structfys_1_1fb_1_1_interruption_builder}{Interruption\+Builder}}
+\item 
+struct \mbox{\hyperlink{structfys_1_1fb_1_1_move_builder}{Move\+Builder}}
+\item 
+struct \mbox{\hyperlink{structfys_1_1fb_1_1_move_ping_builder}{Move\+Ping\+Builder}}
+\item 
+struct \mbox{\hyperlink{structfys_1_1fb_1_1_pnj_interact_builder}{Pnj\+Interact\+Builder}}
+\item 
+struct \mbox{\hyperlink{structfys_1_1fb_1_1_w_s_action_builder}{W\+S\+Action\+Builder}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99}{Level}} \{ \newline
+\mbox{\hyperlink{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99a407c1afc86e0ea814848d1c9be6c0034}{Level\+\_\+\+E\+A\+SY}} = 0, 
+\mbox{\hyperlink{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99a9c6a0091baf7843f70a657dc1271c023}{Level\+\_\+\+M\+E\+D\+I\+UM}} = 1, 
+\mbox{\hyperlink{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99a6214746c672011b105e75e240af9b072}{Level\+\_\+\+H\+A\+RD}} = 2, 
+\mbox{\hyperlink{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99a367d3894fb398f8e4f1e31f891af8ad8}{Level\+\_\+\+M\+IN}} = Level\+\_\+\+E\+A\+SY, 
+\newline
+\mbox{\hyperlink{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99a81502524e3fa52a87b963473343438e4}{Level\+\_\+\+M\+AX}} = Level\+\_\+\+H\+A\+RD
+ \}
+\item 
+enum \mbox{\hyperlink{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629}{Action}} \{ \newline
+\mbox{\hyperlink{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629ad1cc293052486c86a12de0cb21ca6c5c}{Action\+\_\+\+N\+O\+NE}} = 0, 
+\mbox{\hyperlink{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629a981aebcb88ea10911e5a481fc5e1675d}{Action\+\_\+\+Move}} = 1, 
+\mbox{\hyperlink{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629acd6d3bf6dcfb7d0df68c6f9cee8f980d}{Action\+\_\+\+Interruption}} = 2, 
+\mbox{\hyperlink{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629a5d369617ca54f9132eee8400c3895b99}{Action\+\_\+\+Pnj\+Interact}} = 3, 
+\newline
+\mbox{\hyperlink{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629a179e84c8404c602acfb3cab42799ca48}{Action\+\_\+\+M\+IN}} = Action\+\_\+\+N\+O\+NE, 
+\mbox{\hyperlink{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629a63380f8c24689f09959286082b8e7ba6}{Action\+\_\+\+M\+AX}} = Action\+\_\+\+Pnj\+Interact
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+flatbuffers\+::\+Offset$<$ Arena\+Fight\+Action $>$ \mbox{\hyperlink{namespacefys_1_1fb_af8e6eee3dfddbfc756487776c4b6f71b}{Create\+Arena\+Fight\+Action}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&\+\_\+fbb, uint32\+\_\+t ok=0)
+\item 
+const fys\+::fb\+::\+Arena\+Fight\+Action $\ast$ \mbox{\hyperlink{namespacefys_1_1fb_aea3eea581315a4cb2f8e626f232378e8}{Get\+Arena\+Fight\+Action}} (const void $\ast$buf)
+\item 
+const fys\+::fb\+::\+Arena\+Fight\+Action $\ast$ \mbox{\hyperlink{namespacefys_1_1fb_a6978dc8253fe906a282e95e9ed789d35}{Get\+Size\+Prefixed\+Arena\+Fight\+Action}} (const void $\ast$buf)
+\item 
+Arena\+Fight\+Action $\ast$ \mbox{\hyperlink{namespacefys_1_1fb_a934334a8696c5ec9c989bbd13df86def}{Get\+Mutable\+Arena\+Fight\+Action}} (void $\ast$buf)
+\item 
+bool \mbox{\hyperlink{namespacefys_1_1fb_a8b6279c4d18c572594034fbbe96b3957}{Verify\+Arena\+Fight\+Action\+Buffer}} (flatbuffers\+::\+Verifier \&verifier)
+\item 
+bool \mbox{\hyperlink{namespacefys_1_1fb_a56f9e643c4af542b6682842616c933e5}{Verify\+Size\+Prefixed\+Arena\+Fight\+Action\+Buffer}} (flatbuffers\+::\+Verifier \&verifier)
+\item 
+void \mbox{\hyperlink{namespacefys_1_1fb_ad5f80bc8c7774b69bfed0c830dbd3f84}{Finish\+Arena\+Fight\+Action\+Buffer}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&fbb, flatbuffers\+::\+Offset$<$ fys\+::fb\+::\+Arena\+Fight\+Action $>$ root)
+\item 
+void \mbox{\hyperlink{namespacefys_1_1fb_ad969e473c0a70b958c94deb20da61d24}{Finish\+Size\+Prefixed\+Arena\+Fight\+Action\+Buffer}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&fbb, flatbuffers\+::\+Offset$<$ fys\+::fb\+::\+Arena\+Fight\+Action $>$ root)
+\item 
+flatbuffers\+::\+Offset$<$ Arena\+Server\+Auth $>$ \mbox{\hyperlink{namespacefys_1_1fb_a573c05ae98511d741282f9142df256d7}{Create\+Arena\+Server\+Auth}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&\+\_\+fbb, flatbuffers\+::\+Offset$<$ flatbuffers\+::\+String $>$ user\+\_\+name=0, flatbuffers\+::\+Offset$<$ flatbuffers\+::\+String $>$ token\+\_\+auth=0, flatbuffers\+::\+Offset$<$ flatbuffers\+::\+String $>$ ip=0, flatbuffers\+::\+Offset$<$ flatbuffers\+::\+String $>$ connection\+\_\+str=0, uint32\+\_\+t id\+\_\+fightingpit=0, flatbuffers\+::\+Offset$<$ flatbuffers\+::\+String $>$ arena\+\_\+server\+\_\+code=0)
+\item 
+flatbuffers\+::\+Offset$<$ Arena\+Server\+Auth $>$ \mbox{\hyperlink{namespacefys_1_1fb_a1b1d65792fe4ccb5179aeab5a08be48b}{Create\+Arena\+Server\+Auth\+Direct}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&\+\_\+fbb, const char $\ast$user\+\_\+name=nullptr, const char $\ast$token\+\_\+auth=nullptr, const char $\ast$ip=nullptr, const char $\ast$connection\+\_\+str=nullptr, uint32\+\_\+t id\+\_\+fightingpit=0, const char $\ast$arena\+\_\+server\+\_\+code=nullptr)
+\item 
+const fys\+::fb\+::\+Arena\+Server\+Auth $\ast$ \mbox{\hyperlink{namespacefys_1_1fb_a7464db7f1a39efde86024812059388a5}{Get\+Arena\+Server\+Auth}} (const void $\ast$buf)
+\item 
+const fys\+::fb\+::\+Arena\+Server\+Auth $\ast$ \mbox{\hyperlink{namespacefys_1_1fb_afbc4a087b988bd7aa844668e0fb51702}{Get\+Size\+Prefixed\+Arena\+Server\+Auth}} (const void $\ast$buf)
+\item 
+Arena\+Server\+Auth $\ast$ \mbox{\hyperlink{namespacefys_1_1fb_afa10e635bd5cc4dc89c0eabb949af78c}{Get\+Mutable\+Arena\+Server\+Auth}} (void $\ast$buf)
+\item 
+bool \mbox{\hyperlink{namespacefys_1_1fb_af92fcb6e4a0e94eaeaaa071952a76057}{Verify\+Arena\+Server\+Auth\+Buffer}} (flatbuffers\+::\+Verifier \&verifier)
+\item 
+bool \mbox{\hyperlink{namespacefys_1_1fb_aaa69f002da10d65d08fe8e6c2d414513}{Verify\+Size\+Prefixed\+Arena\+Server\+Auth\+Buffer}} (flatbuffers\+::\+Verifier \&verifier)
+\item 
+void \mbox{\hyperlink{namespacefys_1_1fb_a8ca8a0454ae09344172908cf2a73665d}{Finish\+Arena\+Server\+Auth\+Buffer}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&fbb, flatbuffers\+::\+Offset$<$ fys\+::fb\+::\+Arena\+Server\+Auth $>$ root)
+\item 
+void \mbox{\hyperlink{namespacefys_1_1fb_acc9dd76d1e474335c6d9041272bfcc48}{Finish\+Size\+Prefixed\+Arena\+Server\+Auth\+Buffer}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&fbb, flatbuffers\+::\+Offset$<$ fys\+::fb\+::\+Arena\+Server\+Auth $>$ root)
+\item 
+flatbuffers\+::\+Offset$<$ Arena\+Server\+Validate\+Auth $>$ \mbox{\hyperlink{namespacefys_1_1fb_a3226af57d7d6a076ec5fca8751d3b8df}{Create\+Arena\+Server\+Validate\+Auth}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&\+\_\+fbb, flatbuffers\+::\+Offset$<$ flatbuffers\+::\+String $>$ user\+\_\+name=0, flatbuffers\+::\+Offset$<$ flatbuffers\+::\+String $>$ token\+\_\+auth=0, uint32\+\_\+t fighting\+\_\+pit\+\_\+id=0)
+\item 
+flatbuffers\+::\+Offset$<$ Arena\+Server\+Validate\+Auth $>$ \mbox{\hyperlink{namespacefys_1_1fb_abc558f2a69bb6bcf0267ef1c7c66aeba}{Create\+Arena\+Server\+Validate\+Auth\+Direct}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&\+\_\+fbb, const char $\ast$user\+\_\+name=nullptr, const char $\ast$token\+\_\+auth=nullptr, uint32\+\_\+t fighting\+\_\+pit\+\_\+id=0)
+\item 
+const fys\+::fb\+::\+Arena\+Server\+Validate\+Auth $\ast$ \mbox{\hyperlink{namespacefys_1_1fb_aa4f63a450664f6d10f3d4b24571d573c}{Get\+Arena\+Server\+Validate\+Auth}} (const void $\ast$buf)
+\item 
+const fys\+::fb\+::\+Arena\+Server\+Validate\+Auth $\ast$ \mbox{\hyperlink{namespacefys_1_1fb_a08750b0fca2576713aafa0e0ea740c41}{Get\+Size\+Prefixed\+Arena\+Server\+Validate\+Auth}} (const void $\ast$buf)
+\item 
+Arena\+Server\+Validate\+Auth $\ast$ \mbox{\hyperlink{namespacefys_1_1fb_a18e1fd28ee7da27b7491e4deec2c3d34}{Get\+Mutable\+Arena\+Server\+Validate\+Auth}} (void $\ast$buf)
+\item 
+bool \mbox{\hyperlink{namespacefys_1_1fb_a1fc8b4bd72d1a1026332f21dd6979195}{Verify\+Arena\+Server\+Validate\+Auth\+Buffer}} (flatbuffers\+::\+Verifier \&verifier)
+\item 
+bool \mbox{\hyperlink{namespacefys_1_1fb_ad33e71faf4029afaac3f41f5ff21e2be}{Verify\+Size\+Prefixed\+Arena\+Server\+Validate\+Auth\+Buffer}} (flatbuffers\+::\+Verifier \&verifier)
+\item 
+void \mbox{\hyperlink{namespacefys_1_1fb_a3486fd05fe4cbdd8a37bd85f738dd9ce}{Finish\+Arena\+Server\+Validate\+Auth\+Buffer}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&fbb, flatbuffers\+::\+Offset$<$ fys\+::fb\+::\+Arena\+Server\+Validate\+Auth $>$ root)
+\item 
+void \mbox{\hyperlink{namespacefys_1_1fb_a9a1e457fcaf464e0eda31e1f1fef6091}{Finish\+Size\+Prefixed\+Arena\+Server\+Validate\+Auth\+Buffer}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&fbb, flatbuffers\+::\+Offset$<$ fys\+::fb\+::\+Arena\+Server\+Validate\+Auth $>$ root)
+\item 
+flatbuffers\+::\+Offset$<$ Move\+Ping $>$ \mbox{\hyperlink{namespacefys_1_1fb_a882d5b9abe680aba9e373b96722fa98e}{Create\+Move\+Ping}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&\+\_\+fbb, double direction=0.\+0, double x=0.\+0, double y=0.\+0, flatbuffers\+::\+Offset$<$ flatbuffers\+::\+String $>$ id=0)
+\item 
+flatbuffers\+::\+Offset$<$ Move\+Ping $>$ \mbox{\hyperlink{namespacefys_1_1fb_aa7f85b13a4fc61a4fdafb64619120ceb}{Create\+Move\+Ping\+Direct}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&\+\_\+fbb, double direction=0.\+0, double x=0.\+0, double y=0.\+0, const char $\ast$id=nullptr)
+\item 
+const fys\+::fb\+::\+Move\+Ping $\ast$ \mbox{\hyperlink{namespacefys_1_1fb_a0c8426ddb9fa05fe70891752f29ac161}{Get\+Move\+Ping}} (const void $\ast$buf)
+\item 
+const fys\+::fb\+::\+Move\+Ping $\ast$ \mbox{\hyperlink{namespacefys_1_1fb_af56f53331c276bcfb025a3ddff36fca3}{Get\+Size\+Prefixed\+Move\+Ping}} (const void $\ast$buf)
+\item 
+Move\+Ping $\ast$ \mbox{\hyperlink{namespacefys_1_1fb_a4495d2363ad56d5956dae7304e430f26}{Get\+Mutable\+Move\+Ping}} (void $\ast$buf)
+\item 
+bool \mbox{\hyperlink{namespacefys_1_1fb_af5710e23a0110133e25a1fd89d443008}{Verify\+Move\+Ping\+Buffer}} (flatbuffers\+::\+Verifier \&verifier)
+\item 
+bool \mbox{\hyperlink{namespacefys_1_1fb_a4de827422d2880624bebc28ce94a1f7a}{Verify\+Size\+Prefixed\+Move\+Ping\+Buffer}} (flatbuffers\+::\+Verifier \&verifier)
+\item 
+void \mbox{\hyperlink{namespacefys_1_1fb_a1443aefdf9a7ed9965ba6eabfc7c2b14}{Finish\+Move\+Ping\+Buffer}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&fbb, flatbuffers\+::\+Offset$<$ fys\+::fb\+::\+Move\+Ping $>$ root)
+\item 
+void \mbox{\hyperlink{namespacefys_1_1fb_a08dc755dc9bc4badbb5204738e009dbe}{Finish\+Size\+Prefixed\+Move\+Ping\+Buffer}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&fbb, flatbuffers\+::\+Offset$<$ fys\+::fb\+::\+Move\+Ping $>$ root)
+\item 
+const \mbox{\hyperlink{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99}{Level}}(\& \mbox{\hyperlink{namespacefys_1_1fb_aaec34acb72fafec02f6ccdc2bcc29b5a}{Enum\+Values\+Level}} ())\mbox{[}3\mbox{]}
+\item 
+const char $\ast$const  $\ast$ \mbox{\hyperlink{namespacefys_1_1fb_af472613584f1f2c5fe12d1e091e6b1e9}{Enum\+Names\+Level}} ()
+\item 
+const char $\ast$ \mbox{\hyperlink{namespacefys_1_1fb_a85744a8e6d9e00e76a1d5254553d759e}{Enum\+Name\+Level}} (\mbox{\hyperlink{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99}{Level}} e)
+\item 
+flatbuffers\+::\+Offset$<$ Fighting\+Pit\+Encounter $>$ \mbox{\hyperlink{namespacefys_1_1fb_a1dfd620b3d7ece5825b2189328119f16}{Create\+Fighting\+Pit\+Encounter}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&\+\_\+fbb, flatbuffers\+::\+Offset$<$ flatbuffers\+::\+String $>$ user\+\_\+name=0, flatbuffers\+::\+Offset$<$ flatbuffers\+::\+String $>$ token\+\_\+auth=0, uint32\+\_\+t fighting\+\_\+pit\+\_\+id=0, flatbuffers\+::\+Offset$<$ flatbuffers\+::\+String $>$ world\+\_\+server\+\_\+id=0, \mbox{\hyperlink{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99}{fys\+::fb\+::\+Level}} level\+\_\+encounter=\mbox{\hyperlink{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99a407c1afc86e0ea814848d1c9be6c0034}{fys\+::fb\+::\+Level\+\_\+\+E\+A\+SY}}, uint32\+\_\+t id\+\_\+encounter=0, bool is\+\_\+ambush=false, double x\+\_\+player=0.\+0, double y\+\_\+player=0.\+0)
+\item 
+flatbuffers\+::\+Offset$<$ Fighting\+Pit\+Encounter $>$ \mbox{\hyperlink{namespacefys_1_1fb_a69b9f8b2f796f6ee7af20d0747f2d697}{Create\+Fighting\+Pit\+Encounter\+Direct}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&\+\_\+fbb, const char $\ast$user\+\_\+name=nullptr, const char $\ast$token\+\_\+auth=nullptr, uint32\+\_\+t fighting\+\_\+pit\+\_\+id=0, const char $\ast$world\+\_\+server\+\_\+id=nullptr, \mbox{\hyperlink{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99}{fys\+::fb\+::\+Level}} level\+\_\+encounter=\mbox{\hyperlink{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99a407c1afc86e0ea814848d1c9be6c0034}{fys\+::fb\+::\+Level\+\_\+\+E\+A\+SY}}, uint32\+\_\+t id\+\_\+encounter=0, bool is\+\_\+ambush=false, double x\+\_\+player=0.\+0, double y\+\_\+player=0.\+0)
+\item 
+const fys\+::fb\+::\+Fighting\+Pit\+Encounter $\ast$ \mbox{\hyperlink{namespacefys_1_1fb_a5a60b001710da3f9280fcb59da96e2cd}{Get\+Fighting\+Pit\+Encounter}} (const void $\ast$buf)
+\item 
+const fys\+::fb\+::\+Fighting\+Pit\+Encounter $\ast$ \mbox{\hyperlink{namespacefys_1_1fb_a1153df265e09818956072872c5ed6971}{Get\+Size\+Prefixed\+Fighting\+Pit\+Encounter}} (const void $\ast$buf)
+\item 
+Fighting\+Pit\+Encounter $\ast$ \mbox{\hyperlink{namespacefys_1_1fb_a82a2e82f974eae5350c23b00d99dba51}{Get\+Mutable\+Fighting\+Pit\+Encounter}} (void $\ast$buf)
+\item 
+bool \mbox{\hyperlink{namespacefys_1_1fb_a98024e714e8bc4e3afddfdf00becdf57}{Verify\+Fighting\+Pit\+Encounter\+Buffer}} (flatbuffers\+::\+Verifier \&verifier)
+\item 
+bool \mbox{\hyperlink{namespacefys_1_1fb_a5adcc176bdbd642785461980f84924a9}{Verify\+Size\+Prefixed\+Fighting\+Pit\+Encounter\+Buffer}} (flatbuffers\+::\+Verifier \&verifier)
+\item 
+void \mbox{\hyperlink{namespacefys_1_1fb_a2c8ba7a229fc4ad72cfa02ee0a413731}{Finish\+Fighting\+Pit\+Encounter\+Buffer}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&fbb, flatbuffers\+::\+Offset$<$ fys\+::fb\+::\+Fighting\+Pit\+Encounter $>$ root)
+\item 
+void \mbox{\hyperlink{namespacefys_1_1fb_ab478386d0645330d83b33f26a061230a}{Finish\+Size\+Prefixed\+Fighting\+Pit\+Encounter\+Buffer}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&fbb, flatbuffers\+::\+Offset$<$ fys\+::fb\+::\+Fighting\+Pit\+Encounter $>$ root)
+\item 
+const \mbox{\hyperlink{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629}{Action}}(\& \mbox{\hyperlink{namespacefys_1_1fb_a23783170964d6e37055eaf5aac8b958a}{Enum\+Values\+Action}} ())\mbox{[}4\mbox{]}
+\item 
+const char $\ast$const  $\ast$ \mbox{\hyperlink{namespacefys_1_1fb_ad6b4cee49aeb1405bdc81800849fdb89}{Enum\+Names\+Action}} ()
+\item 
+const char $\ast$ \mbox{\hyperlink{namespacefys_1_1fb_ad03790b7edd6eced1b2243cb0fcb0c86}{Enum\+Name\+Action}} (\mbox{\hyperlink{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629}{Action}} e)
+\item 
+bool \mbox{\hyperlink{namespacefys_1_1fb_a2834f903e1ab027848324291ea5787ef}{Verify\+Action}} (flatbuffers\+::\+Verifier \&verifier, const void $\ast$obj, \mbox{\hyperlink{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629}{Action}} type)
+\item 
+bool \mbox{\hyperlink{namespacefys_1_1fb_a2ebac31f9fcc7e672584eae58e7ac90f}{Verify\+Action\+Vector}} (flatbuffers\+::\+Verifier \&verifier, const flatbuffers\+::\+Vector$<$ flatbuffers\+::\+Offset$<$ void $>$$>$ $\ast$values, const flatbuffers\+::\+Vector$<$ uint8\+\_\+t $>$ $\ast$types)
+\item 
+flatbuffers\+::\+Offset$<$ Move $>$ \mbox{\hyperlink{namespacefys_1_1fb_a538cdb71b5323c2157f9331b0fe8d1c5}{Create\+Move}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&\+\_\+fbb, double direction=0.\+0)
+\item 
+flatbuffers\+::\+Offset$<$ Interruption $>$ \mbox{\hyperlink{namespacefys_1_1fb_a589f11e3d8fe0fd9b3a0452449e2eda3}{Create\+Interruption}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&\+\_\+fbb, bool enter\+Arena=false, flatbuffers\+::\+Offset$<$ flatbuffers\+::\+String $>$ arena\+Id=0)
+\item 
+flatbuffers\+::\+Offset$<$ Interruption $>$ \mbox{\hyperlink{namespacefys_1_1fb_a7301bed294219e08359d1e1f10c773cf}{Create\+Interruption\+Direct}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&\+\_\+fbb, bool enter\+Arena=false, const char $\ast$arena\+Id=nullptr)
+\item 
+flatbuffers\+::\+Offset$<$ Pnj\+Interact $>$ \mbox{\hyperlink{namespacefys_1_1fb_af48805764caca77fd198b3602e04fbbf}{Create\+Pnj\+Interact}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&\+\_\+fbb, flatbuffers\+::\+Offset$<$ flatbuffers\+::\+String $>$ id\+Pnj=0)
+\item 
+flatbuffers\+::\+Offset$<$ Pnj\+Interact $>$ \mbox{\hyperlink{namespacefys_1_1fb_a7bcfd5e25922088a39332a5c90f4c4f3}{Create\+Pnj\+Interact\+Direct}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&\+\_\+fbb, const char $\ast$id\+Pnj=nullptr)
+\item 
+template$<$$>$ const fys\+::fb\+::\+Move $\ast$ \mbox{\hyperlink{namespacefys_1_1fb_a5573947c351793baa5240d6a201c3c19}{W\+S\+Action\+::action\+\_\+as$<$ fys\+::fb\+::\+Move $>$}} () const
+\item 
+template$<$$>$ const fys\+::fb\+::\+Interruption $\ast$ \mbox{\hyperlink{namespacefys_1_1fb_a0a57cb830035736f383f8c507d184ceb}{W\+S\+Action\+::action\+\_\+as$<$ fys\+::fb\+::\+Interruption $>$}} () const
+\item 
+template$<$$>$ const fys\+::fb\+::\+Pnj\+Interact $\ast$ \mbox{\hyperlink{namespacefys_1_1fb_a57486dd19ef1df4a7a0e03c97f114d22}{W\+S\+Action\+::action\+\_\+as$<$ fys\+::fb\+::\+Pnj\+Interact $>$}} () const
+\item 
+flatbuffers\+::\+Offset$<$ W\+S\+Action $>$ \mbox{\hyperlink{namespacefys_1_1fb_ab7dc0783cb4cbad0306a90cbf531a4d5}{Create\+W\+S\+Action}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&\+\_\+fbb, \mbox{\hyperlink{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629}{fys\+::fb\+::\+Action}} action\+\_\+type=\mbox{\hyperlink{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629ad1cc293052486c86a12de0cb21ca6c5c}{fys\+::fb\+::\+Action\+\_\+\+N\+O\+NE}}, flatbuffers\+::\+Offset$<$ void $>$ action=0, flatbuffers\+::\+Offset$<$ flatbuffers\+::\+String $>$ token\+\_\+client=0)
+\item 
+flatbuffers\+::\+Offset$<$ W\+S\+Action $>$ \mbox{\hyperlink{namespacefys_1_1fb_a80033dfc76611306100bee8f2e994060}{Create\+W\+S\+Action\+Direct}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&\+\_\+fbb, \mbox{\hyperlink{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629}{fys\+::fb\+::\+Action}} action\+\_\+type=\mbox{\hyperlink{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629ad1cc293052486c86a12de0cb21ca6c5c}{fys\+::fb\+::\+Action\+\_\+\+N\+O\+NE}}, flatbuffers\+::\+Offset$<$ void $>$ action=0, const char $\ast$token\+\_\+client=nullptr)
+\item 
+const fys\+::fb\+::\+W\+S\+Action $\ast$ \mbox{\hyperlink{namespacefys_1_1fb_ad28adafe28b1808e7a5e66ebaa103f33}{Get\+W\+S\+Action}} (const void $\ast$buf)
+\item 
+const fys\+::fb\+::\+W\+S\+Action $\ast$ \mbox{\hyperlink{namespacefys_1_1fb_a1ac2aae86e6ab50c2e7cd8fbeb6bb622}{Get\+Size\+Prefixed\+W\+S\+Action}} (const void $\ast$buf)
+\item 
+W\+S\+Action $\ast$ \mbox{\hyperlink{namespacefys_1_1fb_ae4413b411fecfabd64a36571a472661e}{Get\+Mutable\+W\+S\+Action}} (void $\ast$buf)
+\item 
+bool \mbox{\hyperlink{namespacefys_1_1fb_a28a3121ead9330378af10b5b8a39a229}{Verify\+W\+S\+Action\+Buffer}} (flatbuffers\+::\+Verifier \&verifier)
+\item 
+bool \mbox{\hyperlink{namespacefys_1_1fb_aaccef0f9256f4ce91108d085092aa7b2}{Verify\+Size\+Prefixed\+W\+S\+Action\+Buffer}} (flatbuffers\+::\+Verifier \&verifier)
+\item 
+void \mbox{\hyperlink{namespacefys_1_1fb_a004893509b749e79ccd1d47120d8d404}{Finish\+W\+S\+Action\+Buffer}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&fbb, flatbuffers\+::\+Offset$<$ fys\+::fb\+::\+W\+S\+Action $>$ root)
+\item 
+void \mbox{\hyperlink{namespacefys_1_1fb_a0929b64fca1d361fec00339af37a1839}{Finish\+Size\+Prefixed\+W\+S\+Action\+Buffer}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&fbb, flatbuffers\+::\+Offset$<$ fys\+::fb\+::\+W\+S\+Action $>$ root)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629}\label{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629}} 
+\index{fys::fb@{fys::fb}!Action@{Action}}
+\index{Action@{Action}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{Action}{Action}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629}{fys\+::fb\+::\+Action}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Action\_NONE@{Action\_NONE}!fys::fb@{fys::fb}}\index{fys::fb@{fys::fb}!Action\_NONE@{Action\_NONE}}}\mbox{\Hypertarget{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629ad1cc293052486c86a12de0cb21ca6c5c}\label{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629ad1cc293052486c86a12de0cb21ca6c5c}} 
+Action\+\_\+\+N\+O\+NE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Action\_Move@{Action\_Move}!fys::fb@{fys::fb}}\index{fys::fb@{fys::fb}!Action\_Move@{Action\_Move}}}\mbox{\Hypertarget{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629a981aebcb88ea10911e5a481fc5e1675d}\label{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629a981aebcb88ea10911e5a481fc5e1675d}} 
+Action\+\_\+\+Move&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Action\_Interruption@{Action\_Interruption}!fys::fb@{fys::fb}}\index{fys::fb@{fys::fb}!Action\_Interruption@{Action\_Interruption}}}\mbox{\Hypertarget{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629acd6d3bf6dcfb7d0df68c6f9cee8f980d}\label{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629acd6d3bf6dcfb7d0df68c6f9cee8f980d}} 
+Action\+\_\+\+Interruption&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Action\_PnjInteract@{Action\_PnjInteract}!fys::fb@{fys::fb}}\index{fys::fb@{fys::fb}!Action\_PnjInteract@{Action\_PnjInteract}}}\mbox{\Hypertarget{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629a5d369617ca54f9132eee8400c3895b99}\label{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629a5d369617ca54f9132eee8400c3895b99}} 
+Action\+\_\+\+Pnj\+Interact&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Action\_MIN@{Action\_MIN}!fys::fb@{fys::fb}}\index{fys::fb@{fys::fb}!Action\_MIN@{Action\_MIN}}}\mbox{\Hypertarget{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629a179e84c8404c602acfb3cab42799ca48}\label{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629a179e84c8404c602acfb3cab42799ca48}} 
+Action\+\_\+\+M\+IN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Action\_MAX@{Action\_MAX}!fys::fb@{fys::fb}}\index{fys::fb@{fys::fb}!Action\_MAX@{Action\_MAX}}}\mbox{\Hypertarget{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629a63380f8c24689f09959286082b8e7ba6}\label{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629a63380f8c24689f09959286082b8e7ba6}} 
+Action\+\_\+\+M\+AX&\\
+\hline
+
+\end{DoxyEnumFields}
+\mbox{\Hypertarget{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99}\label{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99}} 
+\index{fys::fb@{fys::fb}!Level@{Level}}
+\index{Level@{Level}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{Level}{Level}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99}{fys\+::fb\+::\+Level}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Level\_EASY@{Level\_EASY}!fys::fb@{fys::fb}}\index{fys::fb@{fys::fb}!Level\_EASY@{Level\_EASY}}}\mbox{\Hypertarget{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99a407c1afc86e0ea814848d1c9be6c0034}\label{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99a407c1afc86e0ea814848d1c9be6c0034}} 
+Level\+\_\+\+E\+A\+SY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Level\_MEDIUM@{Level\_MEDIUM}!fys::fb@{fys::fb}}\index{fys::fb@{fys::fb}!Level\_MEDIUM@{Level\_MEDIUM}}}\mbox{\Hypertarget{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99a9c6a0091baf7843f70a657dc1271c023}\label{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99a9c6a0091baf7843f70a657dc1271c023}} 
+Level\+\_\+\+M\+E\+D\+I\+UM&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Level\_HARD@{Level\_HARD}!fys::fb@{fys::fb}}\index{fys::fb@{fys::fb}!Level\_HARD@{Level\_HARD}}}\mbox{\Hypertarget{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99a6214746c672011b105e75e240af9b072}\label{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99a6214746c672011b105e75e240af9b072}} 
+Level\+\_\+\+H\+A\+RD&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Level\_MIN@{Level\_MIN}!fys::fb@{fys::fb}}\index{fys::fb@{fys::fb}!Level\_MIN@{Level\_MIN}}}\mbox{\Hypertarget{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99a367d3894fb398f8e4f1e31f891af8ad8}\label{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99a367d3894fb398f8e4f1e31f891af8ad8}} 
+Level\+\_\+\+M\+IN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Level\_MAX@{Level\_MAX}!fys::fb@{fys::fb}}\index{fys::fb@{fys::fb}!Level\_MAX@{Level\_MAX}}}\mbox{\Hypertarget{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99a81502524e3fa52a87b963473343438e4}\label{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99a81502524e3fa52a87b963473343438e4}} 
+Level\+\_\+\+M\+AX&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacefys_1_1fb_af8e6eee3dfddbfc756487776c4b6f71b}\label{namespacefys_1_1fb_af8e6eee3dfddbfc756487776c4b6f71b}} 
+\index{fys::fb@{fys::fb}!CreateArenaFightAction@{CreateArenaFightAction}}
+\index{CreateArenaFightAction@{CreateArenaFightAction}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{CreateArenaFightAction()}{CreateArenaFightAction()}}
+{\footnotesize\ttfamily flatbuffers\+::\+Offset$<$Arena\+Fight\+Action$>$ fys\+::fb\+::\+Create\+Arena\+Fight\+Action (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Flat\+Buffer\+Builder \&}]{\+\_\+fbb,  }\item[{uint32\+\_\+t}]{ok = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a573c05ae98511d741282f9142df256d7}\label{namespacefys_1_1fb_a573c05ae98511d741282f9142df256d7}} 
+\index{fys::fb@{fys::fb}!CreateArenaServerAuth@{CreateArenaServerAuth}}
+\index{CreateArenaServerAuth@{CreateArenaServerAuth}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{CreateArenaServerAuth()}{CreateArenaServerAuth()}}
+{\footnotesize\ttfamily flatbuffers\+::\+Offset$<$Arena\+Server\+Auth$>$ fys\+::fb\+::\+Create\+Arena\+Server\+Auth (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Flat\+Buffer\+Builder \&}]{\+\_\+fbb,  }\item[{flatbuffers\+::\+Offset$<$ flatbuffers\+::\+String $>$}]{user\+\_\+name = {\ttfamily 0},  }\item[{flatbuffers\+::\+Offset$<$ flatbuffers\+::\+String $>$}]{token\+\_\+auth = {\ttfamily 0},  }\item[{flatbuffers\+::\+Offset$<$ flatbuffers\+::\+String $>$}]{ip = {\ttfamily 0},  }\item[{flatbuffers\+::\+Offset$<$ flatbuffers\+::\+String $>$}]{connection\+\_\+str = {\ttfamily 0},  }\item[{uint32\+\_\+t}]{id\+\_\+fightingpit = {\ttfamily 0},  }\item[{flatbuffers\+::\+Offset$<$ flatbuffers\+::\+String $>$}]{arena\+\_\+server\+\_\+code = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a1b1d65792fe4ccb5179aeab5a08be48b}\label{namespacefys_1_1fb_a1b1d65792fe4ccb5179aeab5a08be48b}} 
+\index{fys::fb@{fys::fb}!CreateArenaServerAuthDirect@{CreateArenaServerAuthDirect}}
+\index{CreateArenaServerAuthDirect@{CreateArenaServerAuthDirect}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{CreateArenaServerAuthDirect()}{CreateArenaServerAuthDirect()}}
+{\footnotesize\ttfamily flatbuffers\+::\+Offset$<$Arena\+Server\+Auth$>$ fys\+::fb\+::\+Create\+Arena\+Server\+Auth\+Direct (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Flat\+Buffer\+Builder \&}]{\+\_\+fbb,  }\item[{const char $\ast$}]{user\+\_\+name = {\ttfamily nullptr},  }\item[{const char $\ast$}]{token\+\_\+auth = {\ttfamily nullptr},  }\item[{const char $\ast$}]{ip = {\ttfamily nullptr},  }\item[{const char $\ast$}]{connection\+\_\+str = {\ttfamily nullptr},  }\item[{uint32\+\_\+t}]{id\+\_\+fightingpit = {\ttfamily 0},  }\item[{const char $\ast$}]{arena\+\_\+server\+\_\+code = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a3226af57d7d6a076ec5fca8751d3b8df}\label{namespacefys_1_1fb_a3226af57d7d6a076ec5fca8751d3b8df}} 
+\index{fys::fb@{fys::fb}!CreateArenaServerValidateAuth@{CreateArenaServerValidateAuth}}
+\index{CreateArenaServerValidateAuth@{CreateArenaServerValidateAuth}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{CreateArenaServerValidateAuth()}{CreateArenaServerValidateAuth()}}
+{\footnotesize\ttfamily flatbuffers\+::\+Offset$<$Arena\+Server\+Validate\+Auth$>$ fys\+::fb\+::\+Create\+Arena\+Server\+Validate\+Auth (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Flat\+Buffer\+Builder \&}]{\+\_\+fbb,  }\item[{flatbuffers\+::\+Offset$<$ flatbuffers\+::\+String $>$}]{user\+\_\+name = {\ttfamily 0},  }\item[{flatbuffers\+::\+Offset$<$ flatbuffers\+::\+String $>$}]{token\+\_\+auth = {\ttfamily 0},  }\item[{uint32\+\_\+t}]{fighting\+\_\+pit\+\_\+id = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_abc558f2a69bb6bcf0267ef1c7c66aeba}\label{namespacefys_1_1fb_abc558f2a69bb6bcf0267ef1c7c66aeba}} 
+\index{fys::fb@{fys::fb}!CreateArenaServerValidateAuthDirect@{CreateArenaServerValidateAuthDirect}}
+\index{CreateArenaServerValidateAuthDirect@{CreateArenaServerValidateAuthDirect}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{CreateArenaServerValidateAuthDirect()}{CreateArenaServerValidateAuthDirect()}}
+{\footnotesize\ttfamily flatbuffers\+::\+Offset$<$Arena\+Server\+Validate\+Auth$>$ fys\+::fb\+::\+Create\+Arena\+Server\+Validate\+Auth\+Direct (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Flat\+Buffer\+Builder \&}]{\+\_\+fbb,  }\item[{const char $\ast$}]{user\+\_\+name = {\ttfamily nullptr},  }\item[{const char $\ast$}]{token\+\_\+auth = {\ttfamily nullptr},  }\item[{uint32\+\_\+t}]{fighting\+\_\+pit\+\_\+id = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a1dfd620b3d7ece5825b2189328119f16}\label{namespacefys_1_1fb_a1dfd620b3d7ece5825b2189328119f16}} 
+\index{fys::fb@{fys::fb}!CreateFightingPitEncounter@{CreateFightingPitEncounter}}
+\index{CreateFightingPitEncounter@{CreateFightingPitEncounter}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{CreateFightingPitEncounter()}{CreateFightingPitEncounter()}}
+{\footnotesize\ttfamily flatbuffers\+::\+Offset$<$Fighting\+Pit\+Encounter$>$ fys\+::fb\+::\+Create\+Fighting\+Pit\+Encounter (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Flat\+Buffer\+Builder \&}]{\+\_\+fbb,  }\item[{flatbuffers\+::\+Offset$<$ flatbuffers\+::\+String $>$}]{user\+\_\+name = {\ttfamily 0},  }\item[{flatbuffers\+::\+Offset$<$ flatbuffers\+::\+String $>$}]{token\+\_\+auth = {\ttfamily 0},  }\item[{uint32\+\_\+t}]{fighting\+\_\+pit\+\_\+id = {\ttfamily 0},  }\item[{flatbuffers\+::\+Offset$<$ flatbuffers\+::\+String $>$}]{world\+\_\+server\+\_\+id = {\ttfamily 0},  }\item[{\mbox{\hyperlink{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99}{fys\+::fb\+::\+Level}}}]{level\+\_\+encounter = {\ttfamily \mbox{\hyperlink{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99a407c1afc86e0ea814848d1c9be6c0034}{fys\+::fb\+::\+Level\+\_\+\+E\+A\+SY}}},  }\item[{uint32\+\_\+t}]{id\+\_\+encounter = {\ttfamily 0},  }\item[{bool}]{is\+\_\+ambush = {\ttfamily false},  }\item[{double}]{x\+\_\+player = {\ttfamily 0.0},  }\item[{double}]{y\+\_\+player = {\ttfamily 0.0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a69b9f8b2f796f6ee7af20d0747f2d697}\label{namespacefys_1_1fb_a69b9f8b2f796f6ee7af20d0747f2d697}} 
+\index{fys::fb@{fys::fb}!CreateFightingPitEncounterDirect@{CreateFightingPitEncounterDirect}}
+\index{CreateFightingPitEncounterDirect@{CreateFightingPitEncounterDirect}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{CreateFightingPitEncounterDirect()}{CreateFightingPitEncounterDirect()}}
+{\footnotesize\ttfamily flatbuffers\+::\+Offset$<$Fighting\+Pit\+Encounter$>$ fys\+::fb\+::\+Create\+Fighting\+Pit\+Encounter\+Direct (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Flat\+Buffer\+Builder \&}]{\+\_\+fbb,  }\item[{const char $\ast$}]{user\+\_\+name = {\ttfamily nullptr},  }\item[{const char $\ast$}]{token\+\_\+auth = {\ttfamily nullptr},  }\item[{uint32\+\_\+t}]{fighting\+\_\+pit\+\_\+id = {\ttfamily 0},  }\item[{const char $\ast$}]{world\+\_\+server\+\_\+id = {\ttfamily nullptr},  }\item[{\mbox{\hyperlink{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99}{fys\+::fb\+::\+Level}}}]{level\+\_\+encounter = {\ttfamily \mbox{\hyperlink{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99a407c1afc86e0ea814848d1c9be6c0034}{fys\+::fb\+::\+Level\+\_\+\+E\+A\+SY}}},  }\item[{uint32\+\_\+t}]{id\+\_\+encounter = {\ttfamily 0},  }\item[{bool}]{is\+\_\+ambush = {\ttfamily false},  }\item[{double}]{x\+\_\+player = {\ttfamily 0.0},  }\item[{double}]{y\+\_\+player = {\ttfamily 0.0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a589f11e3d8fe0fd9b3a0452449e2eda3}\label{namespacefys_1_1fb_a589f11e3d8fe0fd9b3a0452449e2eda3}} 
+\index{fys::fb@{fys::fb}!CreateInterruption@{CreateInterruption}}
+\index{CreateInterruption@{CreateInterruption}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{CreateInterruption()}{CreateInterruption()}}
+{\footnotesize\ttfamily flatbuffers\+::\+Offset$<$Interruption$>$ fys\+::fb\+::\+Create\+Interruption (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Flat\+Buffer\+Builder \&}]{\+\_\+fbb,  }\item[{bool}]{enter\+Arena = {\ttfamily false},  }\item[{flatbuffers\+::\+Offset$<$ flatbuffers\+::\+String $>$}]{arena\+Id = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a7301bed294219e08359d1e1f10c773cf}\label{namespacefys_1_1fb_a7301bed294219e08359d1e1f10c773cf}} 
+\index{fys::fb@{fys::fb}!CreateInterruptionDirect@{CreateInterruptionDirect}}
+\index{CreateInterruptionDirect@{CreateInterruptionDirect}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{CreateInterruptionDirect()}{CreateInterruptionDirect()}}
+{\footnotesize\ttfamily flatbuffers\+::\+Offset$<$Interruption$>$ fys\+::fb\+::\+Create\+Interruption\+Direct (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Flat\+Buffer\+Builder \&}]{\+\_\+fbb,  }\item[{bool}]{enter\+Arena = {\ttfamily false},  }\item[{const char $\ast$}]{arena\+Id = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a538cdb71b5323c2157f9331b0fe8d1c5}\label{namespacefys_1_1fb_a538cdb71b5323c2157f9331b0fe8d1c5}} 
+\index{fys::fb@{fys::fb}!CreateMove@{CreateMove}}
+\index{CreateMove@{CreateMove}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{CreateMove()}{CreateMove()}}
+{\footnotesize\ttfamily flatbuffers\+::\+Offset$<$Move$>$ fys\+::fb\+::\+Create\+Move (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Flat\+Buffer\+Builder \&}]{\+\_\+fbb,  }\item[{double}]{direction = {\ttfamily 0.0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a882d5b9abe680aba9e373b96722fa98e}\label{namespacefys_1_1fb_a882d5b9abe680aba9e373b96722fa98e}} 
+\index{fys::fb@{fys::fb}!CreateMovePing@{CreateMovePing}}
+\index{CreateMovePing@{CreateMovePing}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{CreateMovePing()}{CreateMovePing()}}
+{\footnotesize\ttfamily flatbuffers\+::\+Offset$<$Move\+Ping$>$ fys\+::fb\+::\+Create\+Move\+Ping (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Flat\+Buffer\+Builder \&}]{\+\_\+fbb,  }\item[{double}]{direction = {\ttfamily 0.0},  }\item[{double}]{x = {\ttfamily 0.0},  }\item[{double}]{y = {\ttfamily 0.0},  }\item[{flatbuffers\+::\+Offset$<$ flatbuffers\+::\+String $>$}]{id = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_aa7f85b13a4fc61a4fdafb64619120ceb}\label{namespacefys_1_1fb_aa7f85b13a4fc61a4fdafb64619120ceb}} 
+\index{fys::fb@{fys::fb}!CreateMovePingDirect@{CreateMovePingDirect}}
+\index{CreateMovePingDirect@{CreateMovePingDirect}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{CreateMovePingDirect()}{CreateMovePingDirect()}}
+{\footnotesize\ttfamily flatbuffers\+::\+Offset$<$Move\+Ping$>$ fys\+::fb\+::\+Create\+Move\+Ping\+Direct (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Flat\+Buffer\+Builder \&}]{\+\_\+fbb,  }\item[{double}]{direction = {\ttfamily 0.0},  }\item[{double}]{x = {\ttfamily 0.0},  }\item[{double}]{y = {\ttfamily 0.0},  }\item[{const char $\ast$}]{id = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_af48805764caca77fd198b3602e04fbbf}\label{namespacefys_1_1fb_af48805764caca77fd198b3602e04fbbf}} 
+\index{fys::fb@{fys::fb}!CreatePnjInteract@{CreatePnjInteract}}
+\index{CreatePnjInteract@{CreatePnjInteract}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{CreatePnjInteract()}{CreatePnjInteract()}}
+{\footnotesize\ttfamily flatbuffers\+::\+Offset$<$Pnj\+Interact$>$ fys\+::fb\+::\+Create\+Pnj\+Interact (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Flat\+Buffer\+Builder \&}]{\+\_\+fbb,  }\item[{flatbuffers\+::\+Offset$<$ flatbuffers\+::\+String $>$}]{id\+Pnj = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a7bcfd5e25922088a39332a5c90f4c4f3}\label{namespacefys_1_1fb_a7bcfd5e25922088a39332a5c90f4c4f3}} 
+\index{fys::fb@{fys::fb}!CreatePnjInteractDirect@{CreatePnjInteractDirect}}
+\index{CreatePnjInteractDirect@{CreatePnjInteractDirect}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{CreatePnjInteractDirect()}{CreatePnjInteractDirect()}}
+{\footnotesize\ttfamily flatbuffers\+::\+Offset$<$Pnj\+Interact$>$ fys\+::fb\+::\+Create\+Pnj\+Interact\+Direct (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Flat\+Buffer\+Builder \&}]{\+\_\+fbb,  }\item[{const char $\ast$}]{id\+Pnj = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_ab7dc0783cb4cbad0306a90cbf531a4d5}\label{namespacefys_1_1fb_ab7dc0783cb4cbad0306a90cbf531a4d5}} 
+\index{fys::fb@{fys::fb}!CreateWSAction@{CreateWSAction}}
+\index{CreateWSAction@{CreateWSAction}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{CreateWSAction()}{CreateWSAction()}}
+{\footnotesize\ttfamily flatbuffers\+::\+Offset$<$W\+S\+Action$>$ fys\+::fb\+::\+Create\+W\+S\+Action (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Flat\+Buffer\+Builder \&}]{\+\_\+fbb,  }\item[{\mbox{\hyperlink{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629}{fys\+::fb\+::\+Action}}}]{action\+\_\+type = {\ttfamily \mbox{\hyperlink{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629ad1cc293052486c86a12de0cb21ca6c5c}{fys\+::fb\+::\+Action\+\_\+\+N\+O\+NE}}},  }\item[{flatbuffers\+::\+Offset$<$ void $>$}]{action = {\ttfamily 0},  }\item[{flatbuffers\+::\+Offset$<$ flatbuffers\+::\+String $>$}]{token\+\_\+client = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a80033dfc76611306100bee8f2e994060}\label{namespacefys_1_1fb_a80033dfc76611306100bee8f2e994060}} 
+\index{fys::fb@{fys::fb}!CreateWSActionDirect@{CreateWSActionDirect}}
+\index{CreateWSActionDirect@{CreateWSActionDirect}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{CreateWSActionDirect()}{CreateWSActionDirect()}}
+{\footnotesize\ttfamily flatbuffers\+::\+Offset$<$W\+S\+Action$>$ fys\+::fb\+::\+Create\+W\+S\+Action\+Direct (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Flat\+Buffer\+Builder \&}]{\+\_\+fbb,  }\item[{\mbox{\hyperlink{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629}{fys\+::fb\+::\+Action}}}]{action\+\_\+type = {\ttfamily \mbox{\hyperlink{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629ad1cc293052486c86a12de0cb21ca6c5c}{fys\+::fb\+::\+Action\+\_\+\+N\+O\+NE}}},  }\item[{flatbuffers\+::\+Offset$<$ void $>$}]{action = {\ttfamily 0},  }\item[{const char $\ast$}]{token\+\_\+client = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_ad03790b7edd6eced1b2243cb0fcb0c86}\label{namespacefys_1_1fb_ad03790b7edd6eced1b2243cb0fcb0c86}} 
+\index{fys::fb@{fys::fb}!EnumNameAction@{EnumNameAction}}
+\index{EnumNameAction@{EnumNameAction}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{EnumNameAction()}{EnumNameAction()}}
+{\footnotesize\ttfamily const char$\ast$ fys\+::fb\+::\+Enum\+Name\+Action (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629}{Action}}}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a85744a8e6d9e00e76a1d5254553d759e}\label{namespacefys_1_1fb_a85744a8e6d9e00e76a1d5254553d759e}} 
+\index{fys::fb@{fys::fb}!EnumNameLevel@{EnumNameLevel}}
+\index{EnumNameLevel@{EnumNameLevel}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{EnumNameLevel()}{EnumNameLevel()}}
+{\footnotesize\ttfamily const char$\ast$ fys\+::fb\+::\+Enum\+Name\+Level (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99}{Level}}}]{e }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_ad6b4cee49aeb1405bdc81800849fdb89}\label{namespacefys_1_1fb_ad6b4cee49aeb1405bdc81800849fdb89}} 
+\index{fys::fb@{fys::fb}!EnumNamesAction@{EnumNamesAction}}
+\index{EnumNamesAction@{EnumNamesAction}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{EnumNamesAction()}{EnumNamesAction()}}
+{\footnotesize\ttfamily const char$\ast$ const$\ast$ fys\+::fb\+::\+Enum\+Names\+Action (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_af472613584f1f2c5fe12d1e091e6b1e9}\label{namespacefys_1_1fb_af472613584f1f2c5fe12d1e091e6b1e9}} 
+\index{fys::fb@{fys::fb}!EnumNamesLevel@{EnumNamesLevel}}
+\index{EnumNamesLevel@{EnumNamesLevel}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{EnumNamesLevel()}{EnumNamesLevel()}}
+{\footnotesize\ttfamily const char$\ast$ const$\ast$ fys\+::fb\+::\+Enum\+Names\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a23783170964d6e37055eaf5aac8b958a}\label{namespacefys_1_1fb_a23783170964d6e37055eaf5aac8b958a}} 
+\index{fys::fb@{fys::fb}!EnumValuesAction@{EnumValuesAction}}
+\index{EnumValuesAction@{EnumValuesAction}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{EnumValuesAction()}{EnumValuesAction()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629}{Action}}(\& fys\+::fb\+::\+Enum\+Values\+Action (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}))\mbox{[}4\mbox{]}\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_aaec34acb72fafec02f6ccdc2bcc29b5a}\label{namespacefys_1_1fb_aaec34acb72fafec02f6ccdc2bcc29b5a}} 
+\index{fys::fb@{fys::fb}!EnumValuesLevel@{EnumValuesLevel}}
+\index{EnumValuesLevel@{EnumValuesLevel}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{EnumValuesLevel()}{EnumValuesLevel()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99}{Level}}(\& fys\+::fb\+::\+Enum\+Values\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}))\mbox{[}3\mbox{]}\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_ad5f80bc8c7774b69bfed0c830dbd3f84}\label{namespacefys_1_1fb_ad5f80bc8c7774b69bfed0c830dbd3f84}} 
+\index{fys::fb@{fys::fb}!FinishArenaFightActionBuffer@{FinishArenaFightActionBuffer}}
+\index{FinishArenaFightActionBuffer@{FinishArenaFightActionBuffer}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{FinishArenaFightActionBuffer()}{FinishArenaFightActionBuffer()}}
+{\footnotesize\ttfamily void fys\+::fb\+::\+Finish\+Arena\+Fight\+Action\+Buffer (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Flat\+Buffer\+Builder \&}]{fbb,  }\item[{flatbuffers\+::\+Offset$<$ fys\+::fb\+::\+Arena\+Fight\+Action $>$}]{root }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a8ca8a0454ae09344172908cf2a73665d}\label{namespacefys_1_1fb_a8ca8a0454ae09344172908cf2a73665d}} 
+\index{fys::fb@{fys::fb}!FinishArenaServerAuthBuffer@{FinishArenaServerAuthBuffer}}
+\index{FinishArenaServerAuthBuffer@{FinishArenaServerAuthBuffer}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{FinishArenaServerAuthBuffer()}{FinishArenaServerAuthBuffer()}}
+{\footnotesize\ttfamily void fys\+::fb\+::\+Finish\+Arena\+Server\+Auth\+Buffer (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Flat\+Buffer\+Builder \&}]{fbb,  }\item[{flatbuffers\+::\+Offset$<$ fys\+::fb\+::\+Arena\+Server\+Auth $>$}]{root }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a3486fd05fe4cbdd8a37bd85f738dd9ce}\label{namespacefys_1_1fb_a3486fd05fe4cbdd8a37bd85f738dd9ce}} 
+\index{fys::fb@{fys::fb}!FinishArenaServerValidateAuthBuffer@{FinishArenaServerValidateAuthBuffer}}
+\index{FinishArenaServerValidateAuthBuffer@{FinishArenaServerValidateAuthBuffer}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{FinishArenaServerValidateAuthBuffer()}{FinishArenaServerValidateAuthBuffer()}}
+{\footnotesize\ttfamily void fys\+::fb\+::\+Finish\+Arena\+Server\+Validate\+Auth\+Buffer (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Flat\+Buffer\+Builder \&}]{fbb,  }\item[{flatbuffers\+::\+Offset$<$ fys\+::fb\+::\+Arena\+Server\+Validate\+Auth $>$}]{root }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a2c8ba7a229fc4ad72cfa02ee0a413731}\label{namespacefys_1_1fb_a2c8ba7a229fc4ad72cfa02ee0a413731}} 
+\index{fys::fb@{fys::fb}!FinishFightingPitEncounterBuffer@{FinishFightingPitEncounterBuffer}}
+\index{FinishFightingPitEncounterBuffer@{FinishFightingPitEncounterBuffer}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{FinishFightingPitEncounterBuffer()}{FinishFightingPitEncounterBuffer()}}
+{\footnotesize\ttfamily void fys\+::fb\+::\+Finish\+Fighting\+Pit\+Encounter\+Buffer (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Flat\+Buffer\+Builder \&}]{fbb,  }\item[{flatbuffers\+::\+Offset$<$ fys\+::fb\+::\+Fighting\+Pit\+Encounter $>$}]{root }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a1443aefdf9a7ed9965ba6eabfc7c2b14}\label{namespacefys_1_1fb_a1443aefdf9a7ed9965ba6eabfc7c2b14}} 
+\index{fys::fb@{fys::fb}!FinishMovePingBuffer@{FinishMovePingBuffer}}
+\index{FinishMovePingBuffer@{FinishMovePingBuffer}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{FinishMovePingBuffer()}{FinishMovePingBuffer()}}
+{\footnotesize\ttfamily void fys\+::fb\+::\+Finish\+Move\+Ping\+Buffer (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Flat\+Buffer\+Builder \&}]{fbb,  }\item[{flatbuffers\+::\+Offset$<$ fys\+::fb\+::\+Move\+Ping $>$}]{root }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_ad969e473c0a70b958c94deb20da61d24}\label{namespacefys_1_1fb_ad969e473c0a70b958c94deb20da61d24}} 
+\index{fys::fb@{fys::fb}!FinishSizePrefixedArenaFightActionBuffer@{FinishSizePrefixedArenaFightActionBuffer}}
+\index{FinishSizePrefixedArenaFightActionBuffer@{FinishSizePrefixedArenaFightActionBuffer}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{FinishSizePrefixedArenaFightActionBuffer()}{FinishSizePrefixedArenaFightActionBuffer()}}
+{\footnotesize\ttfamily void fys\+::fb\+::\+Finish\+Size\+Prefixed\+Arena\+Fight\+Action\+Buffer (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Flat\+Buffer\+Builder \&}]{fbb,  }\item[{flatbuffers\+::\+Offset$<$ fys\+::fb\+::\+Arena\+Fight\+Action $>$}]{root }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_acc9dd76d1e474335c6d9041272bfcc48}\label{namespacefys_1_1fb_acc9dd76d1e474335c6d9041272bfcc48}} 
+\index{fys::fb@{fys::fb}!FinishSizePrefixedArenaServerAuthBuffer@{FinishSizePrefixedArenaServerAuthBuffer}}
+\index{FinishSizePrefixedArenaServerAuthBuffer@{FinishSizePrefixedArenaServerAuthBuffer}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{FinishSizePrefixedArenaServerAuthBuffer()}{FinishSizePrefixedArenaServerAuthBuffer()}}
+{\footnotesize\ttfamily void fys\+::fb\+::\+Finish\+Size\+Prefixed\+Arena\+Server\+Auth\+Buffer (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Flat\+Buffer\+Builder \&}]{fbb,  }\item[{flatbuffers\+::\+Offset$<$ fys\+::fb\+::\+Arena\+Server\+Auth $>$}]{root }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a9a1e457fcaf464e0eda31e1f1fef6091}\label{namespacefys_1_1fb_a9a1e457fcaf464e0eda31e1f1fef6091}} 
+\index{fys::fb@{fys::fb}!FinishSizePrefixedArenaServerValidateAuthBuffer@{FinishSizePrefixedArenaServerValidateAuthBuffer}}
+\index{FinishSizePrefixedArenaServerValidateAuthBuffer@{FinishSizePrefixedArenaServerValidateAuthBuffer}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{FinishSizePrefixedArenaServerValidateAuthBuffer()}{FinishSizePrefixedArenaServerValidateAuthBuffer()}}
+{\footnotesize\ttfamily void fys\+::fb\+::\+Finish\+Size\+Prefixed\+Arena\+Server\+Validate\+Auth\+Buffer (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Flat\+Buffer\+Builder \&}]{fbb,  }\item[{flatbuffers\+::\+Offset$<$ fys\+::fb\+::\+Arena\+Server\+Validate\+Auth $>$}]{root }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_ab478386d0645330d83b33f26a061230a}\label{namespacefys_1_1fb_ab478386d0645330d83b33f26a061230a}} 
+\index{fys::fb@{fys::fb}!FinishSizePrefixedFightingPitEncounterBuffer@{FinishSizePrefixedFightingPitEncounterBuffer}}
+\index{FinishSizePrefixedFightingPitEncounterBuffer@{FinishSizePrefixedFightingPitEncounterBuffer}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{FinishSizePrefixedFightingPitEncounterBuffer()}{FinishSizePrefixedFightingPitEncounterBuffer()}}
+{\footnotesize\ttfamily void fys\+::fb\+::\+Finish\+Size\+Prefixed\+Fighting\+Pit\+Encounter\+Buffer (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Flat\+Buffer\+Builder \&}]{fbb,  }\item[{flatbuffers\+::\+Offset$<$ fys\+::fb\+::\+Fighting\+Pit\+Encounter $>$}]{root }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a08dc755dc9bc4badbb5204738e009dbe}\label{namespacefys_1_1fb_a08dc755dc9bc4badbb5204738e009dbe}} 
+\index{fys::fb@{fys::fb}!FinishSizePrefixedMovePingBuffer@{FinishSizePrefixedMovePingBuffer}}
+\index{FinishSizePrefixedMovePingBuffer@{FinishSizePrefixedMovePingBuffer}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{FinishSizePrefixedMovePingBuffer()}{FinishSizePrefixedMovePingBuffer()}}
+{\footnotesize\ttfamily void fys\+::fb\+::\+Finish\+Size\+Prefixed\+Move\+Ping\+Buffer (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Flat\+Buffer\+Builder \&}]{fbb,  }\item[{flatbuffers\+::\+Offset$<$ fys\+::fb\+::\+Move\+Ping $>$}]{root }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a0929b64fca1d361fec00339af37a1839}\label{namespacefys_1_1fb_a0929b64fca1d361fec00339af37a1839}} 
+\index{fys::fb@{fys::fb}!FinishSizePrefixedWSActionBuffer@{FinishSizePrefixedWSActionBuffer}}
+\index{FinishSizePrefixedWSActionBuffer@{FinishSizePrefixedWSActionBuffer}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{FinishSizePrefixedWSActionBuffer()}{FinishSizePrefixedWSActionBuffer()}}
+{\footnotesize\ttfamily void fys\+::fb\+::\+Finish\+Size\+Prefixed\+W\+S\+Action\+Buffer (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Flat\+Buffer\+Builder \&}]{fbb,  }\item[{flatbuffers\+::\+Offset$<$ fys\+::fb\+::\+W\+S\+Action $>$}]{root }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a004893509b749e79ccd1d47120d8d404}\label{namespacefys_1_1fb_a004893509b749e79ccd1d47120d8d404}} 
+\index{fys::fb@{fys::fb}!FinishWSActionBuffer@{FinishWSActionBuffer}}
+\index{FinishWSActionBuffer@{FinishWSActionBuffer}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{FinishWSActionBuffer()}{FinishWSActionBuffer()}}
+{\footnotesize\ttfamily void fys\+::fb\+::\+Finish\+W\+S\+Action\+Buffer (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Flat\+Buffer\+Builder \&}]{fbb,  }\item[{flatbuffers\+::\+Offset$<$ fys\+::fb\+::\+W\+S\+Action $>$}]{root }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_aea3eea581315a4cb2f8e626f232378e8}\label{namespacefys_1_1fb_aea3eea581315a4cb2f8e626f232378e8}} 
+\index{fys::fb@{fys::fb}!GetArenaFightAction@{GetArenaFightAction}}
+\index{GetArenaFightAction@{GetArenaFightAction}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{GetArenaFightAction()}{GetArenaFightAction()}}
+{\footnotesize\ttfamily const fys\+::fb\+::\+Arena\+Fight\+Action$\ast$ fys\+::fb\+::\+Get\+Arena\+Fight\+Action (\begin{DoxyParamCaption}\item[{const void $\ast$}]{buf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a7464db7f1a39efde86024812059388a5}\label{namespacefys_1_1fb_a7464db7f1a39efde86024812059388a5}} 
+\index{fys::fb@{fys::fb}!GetArenaServerAuth@{GetArenaServerAuth}}
+\index{GetArenaServerAuth@{GetArenaServerAuth}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{GetArenaServerAuth()}{GetArenaServerAuth()}}
+{\footnotesize\ttfamily const fys\+::fb\+::\+Arena\+Server\+Auth$\ast$ fys\+::fb\+::\+Get\+Arena\+Server\+Auth (\begin{DoxyParamCaption}\item[{const void $\ast$}]{buf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_aa4f63a450664f6d10f3d4b24571d573c}\label{namespacefys_1_1fb_aa4f63a450664f6d10f3d4b24571d573c}} 
+\index{fys::fb@{fys::fb}!GetArenaServerValidateAuth@{GetArenaServerValidateAuth}}
+\index{GetArenaServerValidateAuth@{GetArenaServerValidateAuth}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{GetArenaServerValidateAuth()}{GetArenaServerValidateAuth()}}
+{\footnotesize\ttfamily const fys\+::fb\+::\+Arena\+Server\+Validate\+Auth$\ast$ fys\+::fb\+::\+Get\+Arena\+Server\+Validate\+Auth (\begin{DoxyParamCaption}\item[{const void $\ast$}]{buf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a5a60b001710da3f9280fcb59da96e2cd}\label{namespacefys_1_1fb_a5a60b001710da3f9280fcb59da96e2cd}} 
+\index{fys::fb@{fys::fb}!GetFightingPitEncounter@{GetFightingPitEncounter}}
+\index{GetFightingPitEncounter@{GetFightingPitEncounter}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{GetFightingPitEncounter()}{GetFightingPitEncounter()}}
+{\footnotesize\ttfamily const fys\+::fb\+::\+Fighting\+Pit\+Encounter$\ast$ fys\+::fb\+::\+Get\+Fighting\+Pit\+Encounter (\begin{DoxyParamCaption}\item[{const void $\ast$}]{buf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a0c8426ddb9fa05fe70891752f29ac161}\label{namespacefys_1_1fb_a0c8426ddb9fa05fe70891752f29ac161}} 
+\index{fys::fb@{fys::fb}!GetMovePing@{GetMovePing}}
+\index{GetMovePing@{GetMovePing}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{GetMovePing()}{GetMovePing()}}
+{\footnotesize\ttfamily const fys\+::fb\+::\+Move\+Ping$\ast$ fys\+::fb\+::\+Get\+Move\+Ping (\begin{DoxyParamCaption}\item[{const void $\ast$}]{buf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a934334a8696c5ec9c989bbd13df86def}\label{namespacefys_1_1fb_a934334a8696c5ec9c989bbd13df86def}} 
+\index{fys::fb@{fys::fb}!GetMutableArenaFightAction@{GetMutableArenaFightAction}}
+\index{GetMutableArenaFightAction@{GetMutableArenaFightAction}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{GetMutableArenaFightAction()}{GetMutableArenaFightAction()}}
+{\footnotesize\ttfamily Arena\+Fight\+Action$\ast$ fys\+::fb\+::\+Get\+Mutable\+Arena\+Fight\+Action (\begin{DoxyParamCaption}\item[{void $\ast$}]{buf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_afa10e635bd5cc4dc89c0eabb949af78c}\label{namespacefys_1_1fb_afa10e635bd5cc4dc89c0eabb949af78c}} 
+\index{fys::fb@{fys::fb}!GetMutableArenaServerAuth@{GetMutableArenaServerAuth}}
+\index{GetMutableArenaServerAuth@{GetMutableArenaServerAuth}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{GetMutableArenaServerAuth()}{GetMutableArenaServerAuth()}}
+{\footnotesize\ttfamily Arena\+Server\+Auth$\ast$ fys\+::fb\+::\+Get\+Mutable\+Arena\+Server\+Auth (\begin{DoxyParamCaption}\item[{void $\ast$}]{buf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a18e1fd28ee7da27b7491e4deec2c3d34}\label{namespacefys_1_1fb_a18e1fd28ee7da27b7491e4deec2c3d34}} 
+\index{fys::fb@{fys::fb}!GetMutableArenaServerValidateAuth@{GetMutableArenaServerValidateAuth}}
+\index{GetMutableArenaServerValidateAuth@{GetMutableArenaServerValidateAuth}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{GetMutableArenaServerValidateAuth()}{GetMutableArenaServerValidateAuth()}}
+{\footnotesize\ttfamily Arena\+Server\+Validate\+Auth$\ast$ fys\+::fb\+::\+Get\+Mutable\+Arena\+Server\+Validate\+Auth (\begin{DoxyParamCaption}\item[{void $\ast$}]{buf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a82a2e82f974eae5350c23b00d99dba51}\label{namespacefys_1_1fb_a82a2e82f974eae5350c23b00d99dba51}} 
+\index{fys::fb@{fys::fb}!GetMutableFightingPitEncounter@{GetMutableFightingPitEncounter}}
+\index{GetMutableFightingPitEncounter@{GetMutableFightingPitEncounter}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{GetMutableFightingPitEncounter()}{GetMutableFightingPitEncounter()}}
+{\footnotesize\ttfamily Fighting\+Pit\+Encounter$\ast$ fys\+::fb\+::\+Get\+Mutable\+Fighting\+Pit\+Encounter (\begin{DoxyParamCaption}\item[{void $\ast$}]{buf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a4495d2363ad56d5956dae7304e430f26}\label{namespacefys_1_1fb_a4495d2363ad56d5956dae7304e430f26}} 
+\index{fys::fb@{fys::fb}!GetMutableMovePing@{GetMutableMovePing}}
+\index{GetMutableMovePing@{GetMutableMovePing}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{GetMutableMovePing()}{GetMutableMovePing()}}
+{\footnotesize\ttfamily Move\+Ping$\ast$ fys\+::fb\+::\+Get\+Mutable\+Move\+Ping (\begin{DoxyParamCaption}\item[{void $\ast$}]{buf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_ae4413b411fecfabd64a36571a472661e}\label{namespacefys_1_1fb_ae4413b411fecfabd64a36571a472661e}} 
+\index{fys::fb@{fys::fb}!GetMutableWSAction@{GetMutableWSAction}}
+\index{GetMutableWSAction@{GetMutableWSAction}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{GetMutableWSAction()}{GetMutableWSAction()}}
+{\footnotesize\ttfamily W\+S\+Action$\ast$ fys\+::fb\+::\+Get\+Mutable\+W\+S\+Action (\begin{DoxyParamCaption}\item[{void $\ast$}]{buf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a6978dc8253fe906a282e95e9ed789d35}\label{namespacefys_1_1fb_a6978dc8253fe906a282e95e9ed789d35}} 
+\index{fys::fb@{fys::fb}!GetSizePrefixedArenaFightAction@{GetSizePrefixedArenaFightAction}}
+\index{GetSizePrefixedArenaFightAction@{GetSizePrefixedArenaFightAction}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{GetSizePrefixedArenaFightAction()}{GetSizePrefixedArenaFightAction()}}
+{\footnotesize\ttfamily const fys\+::fb\+::\+Arena\+Fight\+Action$\ast$ fys\+::fb\+::\+Get\+Size\+Prefixed\+Arena\+Fight\+Action (\begin{DoxyParamCaption}\item[{const void $\ast$}]{buf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_afbc4a087b988bd7aa844668e0fb51702}\label{namespacefys_1_1fb_afbc4a087b988bd7aa844668e0fb51702}} 
+\index{fys::fb@{fys::fb}!GetSizePrefixedArenaServerAuth@{GetSizePrefixedArenaServerAuth}}
+\index{GetSizePrefixedArenaServerAuth@{GetSizePrefixedArenaServerAuth}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{GetSizePrefixedArenaServerAuth()}{GetSizePrefixedArenaServerAuth()}}
+{\footnotesize\ttfamily const fys\+::fb\+::\+Arena\+Server\+Auth$\ast$ fys\+::fb\+::\+Get\+Size\+Prefixed\+Arena\+Server\+Auth (\begin{DoxyParamCaption}\item[{const void $\ast$}]{buf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a08750b0fca2576713aafa0e0ea740c41}\label{namespacefys_1_1fb_a08750b0fca2576713aafa0e0ea740c41}} 
+\index{fys::fb@{fys::fb}!GetSizePrefixedArenaServerValidateAuth@{GetSizePrefixedArenaServerValidateAuth}}
+\index{GetSizePrefixedArenaServerValidateAuth@{GetSizePrefixedArenaServerValidateAuth}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{GetSizePrefixedArenaServerValidateAuth()}{GetSizePrefixedArenaServerValidateAuth()}}
+{\footnotesize\ttfamily const fys\+::fb\+::\+Arena\+Server\+Validate\+Auth$\ast$ fys\+::fb\+::\+Get\+Size\+Prefixed\+Arena\+Server\+Validate\+Auth (\begin{DoxyParamCaption}\item[{const void $\ast$}]{buf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a1153df265e09818956072872c5ed6971}\label{namespacefys_1_1fb_a1153df265e09818956072872c5ed6971}} 
+\index{fys::fb@{fys::fb}!GetSizePrefixedFightingPitEncounter@{GetSizePrefixedFightingPitEncounter}}
+\index{GetSizePrefixedFightingPitEncounter@{GetSizePrefixedFightingPitEncounter}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{GetSizePrefixedFightingPitEncounter()}{GetSizePrefixedFightingPitEncounter()}}
+{\footnotesize\ttfamily const fys\+::fb\+::\+Fighting\+Pit\+Encounter$\ast$ fys\+::fb\+::\+Get\+Size\+Prefixed\+Fighting\+Pit\+Encounter (\begin{DoxyParamCaption}\item[{const void $\ast$}]{buf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_af56f53331c276bcfb025a3ddff36fca3}\label{namespacefys_1_1fb_af56f53331c276bcfb025a3ddff36fca3}} 
+\index{fys::fb@{fys::fb}!GetSizePrefixedMovePing@{GetSizePrefixedMovePing}}
+\index{GetSizePrefixedMovePing@{GetSizePrefixedMovePing}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{GetSizePrefixedMovePing()}{GetSizePrefixedMovePing()}}
+{\footnotesize\ttfamily const fys\+::fb\+::\+Move\+Ping$\ast$ fys\+::fb\+::\+Get\+Size\+Prefixed\+Move\+Ping (\begin{DoxyParamCaption}\item[{const void $\ast$}]{buf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a1ac2aae86e6ab50c2e7cd8fbeb6bb622}\label{namespacefys_1_1fb_a1ac2aae86e6ab50c2e7cd8fbeb6bb622}} 
+\index{fys::fb@{fys::fb}!GetSizePrefixedWSAction@{GetSizePrefixedWSAction}}
+\index{GetSizePrefixedWSAction@{GetSizePrefixedWSAction}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{GetSizePrefixedWSAction()}{GetSizePrefixedWSAction()}}
+{\footnotesize\ttfamily const fys\+::fb\+::\+W\+S\+Action$\ast$ fys\+::fb\+::\+Get\+Size\+Prefixed\+W\+S\+Action (\begin{DoxyParamCaption}\item[{const void $\ast$}]{buf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_ad28adafe28b1808e7a5e66ebaa103f33}\label{namespacefys_1_1fb_ad28adafe28b1808e7a5e66ebaa103f33}} 
+\index{fys::fb@{fys::fb}!GetWSAction@{GetWSAction}}
+\index{GetWSAction@{GetWSAction}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{GetWSAction()}{GetWSAction()}}
+{\footnotesize\ttfamily const fys\+::fb\+::\+W\+S\+Action$\ast$ fys\+::fb\+::\+Get\+W\+S\+Action (\begin{DoxyParamCaption}\item[{const void $\ast$}]{buf }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a2834f903e1ab027848324291ea5787ef}\label{namespacefys_1_1fb_a2834f903e1ab027848324291ea5787ef}} 
+\index{fys::fb@{fys::fb}!VerifyAction@{VerifyAction}}
+\index{VerifyAction@{VerifyAction}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{VerifyAction()}{VerifyAction()}}
+{\footnotesize\ttfamily bool fys\+::fb\+::\+Verify\+Action (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Verifier \&}]{verifier,  }\item[{const void $\ast$}]{obj,  }\item[{\mbox{\hyperlink{namespacefys_1_1fb_a88ebad909d9797435c028de669a02629}{Action}}}]{type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a2ebac31f9fcc7e672584eae58e7ac90f}\label{namespacefys_1_1fb_a2ebac31f9fcc7e672584eae58e7ac90f}} 
+\index{fys::fb@{fys::fb}!VerifyActionVector@{VerifyActionVector}}
+\index{VerifyActionVector@{VerifyActionVector}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{VerifyActionVector()}{VerifyActionVector()}}
+{\footnotesize\ttfamily bool fys\+::fb\+::\+Verify\+Action\+Vector (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Verifier \&}]{verifier,  }\item[{const flatbuffers\+::\+Vector$<$ flatbuffers\+::\+Offset$<$ void $>$$>$ $\ast$}]{values,  }\item[{const flatbuffers\+::\+Vector$<$ uint8\+\_\+t $>$ $\ast$}]{types }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a8b6279c4d18c572594034fbbe96b3957}\label{namespacefys_1_1fb_a8b6279c4d18c572594034fbbe96b3957}} 
+\index{fys::fb@{fys::fb}!VerifyArenaFightActionBuffer@{VerifyArenaFightActionBuffer}}
+\index{VerifyArenaFightActionBuffer@{VerifyArenaFightActionBuffer}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{VerifyArenaFightActionBuffer()}{VerifyArenaFightActionBuffer()}}
+{\footnotesize\ttfamily bool fys\+::fb\+::\+Verify\+Arena\+Fight\+Action\+Buffer (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Verifier \&}]{verifier }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_af92fcb6e4a0e94eaeaaa071952a76057}\label{namespacefys_1_1fb_af92fcb6e4a0e94eaeaaa071952a76057}} 
+\index{fys::fb@{fys::fb}!VerifyArenaServerAuthBuffer@{VerifyArenaServerAuthBuffer}}
+\index{VerifyArenaServerAuthBuffer@{VerifyArenaServerAuthBuffer}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{VerifyArenaServerAuthBuffer()}{VerifyArenaServerAuthBuffer()}}
+{\footnotesize\ttfamily bool fys\+::fb\+::\+Verify\+Arena\+Server\+Auth\+Buffer (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Verifier \&}]{verifier }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a1fc8b4bd72d1a1026332f21dd6979195}\label{namespacefys_1_1fb_a1fc8b4bd72d1a1026332f21dd6979195}} 
+\index{fys::fb@{fys::fb}!VerifyArenaServerValidateAuthBuffer@{VerifyArenaServerValidateAuthBuffer}}
+\index{VerifyArenaServerValidateAuthBuffer@{VerifyArenaServerValidateAuthBuffer}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{VerifyArenaServerValidateAuthBuffer()}{VerifyArenaServerValidateAuthBuffer()}}
+{\footnotesize\ttfamily bool fys\+::fb\+::\+Verify\+Arena\+Server\+Validate\+Auth\+Buffer (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Verifier \&}]{verifier }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a98024e714e8bc4e3afddfdf00becdf57}\label{namespacefys_1_1fb_a98024e714e8bc4e3afddfdf00becdf57}} 
+\index{fys::fb@{fys::fb}!VerifyFightingPitEncounterBuffer@{VerifyFightingPitEncounterBuffer}}
+\index{VerifyFightingPitEncounterBuffer@{VerifyFightingPitEncounterBuffer}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{VerifyFightingPitEncounterBuffer()}{VerifyFightingPitEncounterBuffer()}}
+{\footnotesize\ttfamily bool fys\+::fb\+::\+Verify\+Fighting\+Pit\+Encounter\+Buffer (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Verifier \&}]{verifier }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_af5710e23a0110133e25a1fd89d443008}\label{namespacefys_1_1fb_af5710e23a0110133e25a1fd89d443008}} 
+\index{fys::fb@{fys::fb}!VerifyMovePingBuffer@{VerifyMovePingBuffer}}
+\index{VerifyMovePingBuffer@{VerifyMovePingBuffer}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{VerifyMovePingBuffer()}{VerifyMovePingBuffer()}}
+{\footnotesize\ttfamily bool fys\+::fb\+::\+Verify\+Move\+Ping\+Buffer (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Verifier \&}]{verifier }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a56f9e643c4af542b6682842616c933e5}\label{namespacefys_1_1fb_a56f9e643c4af542b6682842616c933e5}} 
+\index{fys::fb@{fys::fb}!VerifySizePrefixedArenaFightActionBuffer@{VerifySizePrefixedArenaFightActionBuffer}}
+\index{VerifySizePrefixedArenaFightActionBuffer@{VerifySizePrefixedArenaFightActionBuffer}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{VerifySizePrefixedArenaFightActionBuffer()}{VerifySizePrefixedArenaFightActionBuffer()}}
+{\footnotesize\ttfamily bool fys\+::fb\+::\+Verify\+Size\+Prefixed\+Arena\+Fight\+Action\+Buffer (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Verifier \&}]{verifier }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_aaa69f002da10d65d08fe8e6c2d414513}\label{namespacefys_1_1fb_aaa69f002da10d65d08fe8e6c2d414513}} 
+\index{fys::fb@{fys::fb}!VerifySizePrefixedArenaServerAuthBuffer@{VerifySizePrefixedArenaServerAuthBuffer}}
+\index{VerifySizePrefixedArenaServerAuthBuffer@{VerifySizePrefixedArenaServerAuthBuffer}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{VerifySizePrefixedArenaServerAuthBuffer()}{VerifySizePrefixedArenaServerAuthBuffer()}}
+{\footnotesize\ttfamily bool fys\+::fb\+::\+Verify\+Size\+Prefixed\+Arena\+Server\+Auth\+Buffer (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Verifier \&}]{verifier }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_ad33e71faf4029afaac3f41f5ff21e2be}\label{namespacefys_1_1fb_ad33e71faf4029afaac3f41f5ff21e2be}} 
+\index{fys::fb@{fys::fb}!VerifySizePrefixedArenaServerValidateAuthBuffer@{VerifySizePrefixedArenaServerValidateAuthBuffer}}
+\index{VerifySizePrefixedArenaServerValidateAuthBuffer@{VerifySizePrefixedArenaServerValidateAuthBuffer}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{VerifySizePrefixedArenaServerValidateAuthBuffer()}{VerifySizePrefixedArenaServerValidateAuthBuffer()}}
+{\footnotesize\ttfamily bool fys\+::fb\+::\+Verify\+Size\+Prefixed\+Arena\+Server\+Validate\+Auth\+Buffer (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Verifier \&}]{verifier }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a5adcc176bdbd642785461980f84924a9}\label{namespacefys_1_1fb_a5adcc176bdbd642785461980f84924a9}} 
+\index{fys::fb@{fys::fb}!VerifySizePrefixedFightingPitEncounterBuffer@{VerifySizePrefixedFightingPitEncounterBuffer}}
+\index{VerifySizePrefixedFightingPitEncounterBuffer@{VerifySizePrefixedFightingPitEncounterBuffer}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{VerifySizePrefixedFightingPitEncounterBuffer()}{VerifySizePrefixedFightingPitEncounterBuffer()}}
+{\footnotesize\ttfamily bool fys\+::fb\+::\+Verify\+Size\+Prefixed\+Fighting\+Pit\+Encounter\+Buffer (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Verifier \&}]{verifier }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a4de827422d2880624bebc28ce94a1f7a}\label{namespacefys_1_1fb_a4de827422d2880624bebc28ce94a1f7a}} 
+\index{fys::fb@{fys::fb}!VerifySizePrefixedMovePingBuffer@{VerifySizePrefixedMovePingBuffer}}
+\index{VerifySizePrefixedMovePingBuffer@{VerifySizePrefixedMovePingBuffer}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{VerifySizePrefixedMovePingBuffer()}{VerifySizePrefixedMovePingBuffer()}}
+{\footnotesize\ttfamily bool fys\+::fb\+::\+Verify\+Size\+Prefixed\+Move\+Ping\+Buffer (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Verifier \&}]{verifier }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_aaccef0f9256f4ce91108d085092aa7b2}\label{namespacefys_1_1fb_aaccef0f9256f4ce91108d085092aa7b2}} 
+\index{fys::fb@{fys::fb}!VerifySizePrefixedWSActionBuffer@{VerifySizePrefixedWSActionBuffer}}
+\index{VerifySizePrefixedWSActionBuffer@{VerifySizePrefixedWSActionBuffer}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{VerifySizePrefixedWSActionBuffer()}{VerifySizePrefixedWSActionBuffer()}}
+{\footnotesize\ttfamily bool fys\+::fb\+::\+Verify\+Size\+Prefixed\+W\+S\+Action\+Buffer (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Verifier \&}]{verifier }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a28a3121ead9330378af10b5b8a39a229}\label{namespacefys_1_1fb_a28a3121ead9330378af10b5b8a39a229}} 
+\index{fys::fb@{fys::fb}!VerifyWSActionBuffer@{VerifyWSActionBuffer}}
+\index{VerifyWSActionBuffer@{VerifyWSActionBuffer}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{VerifyWSActionBuffer()}{VerifyWSActionBuffer()}}
+{\footnotesize\ttfamily bool fys\+::fb\+::\+Verify\+W\+S\+Action\+Buffer (\begin{DoxyParamCaption}\item[{flatbuffers\+::\+Verifier \&}]{verifier }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a0a57cb830035736f383f8c507d184ceb}\label{namespacefys_1_1fb_a0a57cb830035736f383f8c507d184ceb}} 
+\index{fys::fb@{fys::fb}!WSAction::action\_as$<$ fys::fb::Interruption $>$@{WSAction::action\_as$<$ fys::fb::Interruption $>$}}
+\index{WSAction::action\_as$<$ fys::fb::Interruption $>$@{WSAction::action\_as$<$ fys::fb::Interruption $>$}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{WSAction::action\_as$<$ fys::fb::Interruption $>$()}{WSAction::action\_as< fys::fb::Interruption >()}}
+{\footnotesize\ttfamily template$<$$>$ \\
+const fys\+::fb\+::\+Interruption$\ast$ fys\+::fb\+::\+W\+S\+Action\+::action\+\_\+as$<$ fys\+::fb\+::\+Interruption $>$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a5573947c351793baa5240d6a201c3c19}\label{namespacefys_1_1fb_a5573947c351793baa5240d6a201c3c19}} 
+\index{fys::fb@{fys::fb}!WSAction::action\_as$<$ fys::fb::Move $>$@{WSAction::action\_as$<$ fys::fb::Move $>$}}
+\index{WSAction::action\_as$<$ fys::fb::Move $>$@{WSAction::action\_as$<$ fys::fb::Move $>$}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{WSAction::action\_as$<$ fys::fb::Move $>$()}{WSAction::action\_as< fys::fb::Move >()}}
+{\footnotesize\ttfamily template$<$$>$ \\
+const fys\+::fb\+::\+Move$\ast$ fys\+::fb\+::\+W\+S\+Action\+::action\+\_\+as$<$ fys\+::fb\+::\+Move $>$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{namespacefys_1_1fb_a57486dd19ef1df4a7a0e03c97f114d22}\label{namespacefys_1_1fb_a57486dd19ef1df4a7a0e03c97f114d22}} 
+\index{fys::fb@{fys::fb}!WSAction::action\_as$<$ fys::fb::PnjInteract $>$@{WSAction::action\_as$<$ fys::fb::PnjInteract $>$}}
+\index{WSAction::action\_as$<$ fys::fb::PnjInteract $>$@{WSAction::action\_as$<$ fys::fb::PnjInteract $>$}!fys::fb@{fys::fb}}
+\doxysubsubsection{\texorpdfstring{WSAction::action\_as$<$ fys::fb::PnjInteract $>$()}{WSAction::action\_as< fys::fb::PnjInteract >()}}
+{\footnotesize\ttfamily template$<$$>$ \\
+const fys\+::fb\+::\+Pnj\+Interact$\ast$ fys\+::fb\+::\+W\+S\+Action\+::action\+\_\+as$<$ fys\+::fb\+::\+Pnj\+Interact $>$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+

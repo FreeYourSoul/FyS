@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacefys_1_1common" kind="namespace" language="C++">
+    <compoundname>fys::common</compoundname>
+    <innerclass refid="structfys_1_1common_1_1_dispatcher_data" prot="public">fys::common::DispatcherData</innerclass>
+    <innerclass refid="classfys_1_1common_1_1_service_context_base" prot="public">fys::common::ServiceContextBase</innerclass>
+    <innerclass refid="classfys_1_1common_1_1_sized_queue" prot="public">fys::common::SizedQueue</innerclass>
+    <innernamespace refid="namespacefys_1_1common_1_1init__beacon">fys::common::init_beacon</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" line="30" column="21"/>
+  </compounddef>
+</doxygen>

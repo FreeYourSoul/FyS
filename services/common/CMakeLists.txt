@@ -58,7 +58,7 @@ add_library(common_service OBJECT ${COMMON_SRCS})
 target_link_libraries(common_service PUBLIC
         ${Flatbuffers_LIBRARIES}
         cppzmq
-        spdlog
+        spdlog::spdlog
         fmt::fmt
         nlohmann_json::nlohmann_json)
 

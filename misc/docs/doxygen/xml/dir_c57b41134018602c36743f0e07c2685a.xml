@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_c57b41134018602c36743f0e07c2685a" kind="dir">
+    <compoundname>/home/FyS/Project/FyS/dispatcher/common/include</compoundname>
+    <innerdir refid="dir_636a655b07bb4e909494ce3b9b3bf2a4">/home/FyS/Project/FyS/dispatcher/common/include/context</innerdir>
+    <innerdir refid="dir_1610391f8e00b239c1c6847fda56e36d">/home/FyS/Project/FyS/dispatcher/common/include/core</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/dispatcher/common/include/"/>
+  </compounddef>
+</doxygen>

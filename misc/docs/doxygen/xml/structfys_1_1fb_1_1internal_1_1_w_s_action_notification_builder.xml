@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1fb_1_1internal_1_1_w_s_action_notification_builder" kind="struct" language="C++" prot="public">
+    <compoundname>fys::fb::internal::WSActionNotificationBuilder</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1fb_1_1internal_1_1_w_s_action_notification_builder_1a3b393739f1c2afca3f30d3ed18c25957" prot="public" static="no" mutable="no">
+        <type>flatbuffers::FlatBufferBuilder &amp;</type>
+        <definition>flatbuffers::FlatBufferBuilder&amp; fys::fb::internal::WSActionNotificationBuilder::fbb_</definition>
+        <argsstring></argsstring>
+        <name>fbb_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="139" column="34" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="139" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1fb_1_1internal_1_1_w_s_action_notification_builder_1a3e6a7fb0ef71090a4bc6ec52240ac015" prot="public" static="no" mutable="no">
+        <type>flatbuffers::uoffset_t</type>
+        <definition>flatbuffers::uoffset_t fys::fb::internal::WSActionNotificationBuilder::start_</definition>
+        <argsstring></argsstring>
+        <name>start_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="140" column="26" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="140" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_w_s_action_notification_builder_1abab5105e6edcab9f4b50a5bef7de86ee" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::internal::WSActionNotificationBuilder::add_token_client</definition>
+        <argsstring>(flatbuffers::Offset&lt; flatbuffers::String &gt; token_client)</argsstring>
+        <name>add_token_client</name>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>token_client</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="141" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="141" bodyend="143"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_w_s_action_notification_builder_1a35ddc3c7caa7802ea610287bfb34f143" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::internal::WSActionNotificationBuilder::add_x</definition>
+        <argsstring>(double x)</argsstring>
+        <name>add_x</name>
+        <param>
+          <type>double</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="144" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="144" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_w_s_action_notification_builder_1a8ef10d263387c2d80e3e02ea4d18555b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::internal::WSActionNotificationBuilder::add_y</definition>
+        <argsstring>(double y)</argsstring>
+        <name>add_y</name>
+        <param>
+          <type>double</type>
+          <declname>y</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="147" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="147" bodyend="149"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_w_s_action_notification_builder_1a3c7f28820b1b2e9c338751728a1965b2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::internal::WSActionNotificationBuilder::add_action</definition>
+        <argsstring>(fys::fb::internal::Action action)</argsstring>
+        <name>add_action</name>
+        <param>
+          <type>fys::fb::internal::Action</type>
+          <declname>action</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="150" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="150" bodyend="152"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_w_s_action_notification_builder_1a7db546e986ab8fa897b096a258571afb" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::fb::internal::WSActionNotificationBuilder::WSActionNotificationBuilder</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb)</argsstring>
+        <name>WSActionNotificationBuilder</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="153" column="12" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="153" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_w_s_action_notification_builder_1a0ee67a193999142a7f227f56e5c60805" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfys_1_1fb_1_1internal_1_1_w_s_action_notification_builder" kindref="compound">WSActionNotificationBuilder</ref> &amp;</type>
+        <definition>WSActionNotificationBuilder&amp; fys::fb::internal::WSActionNotificationBuilder::operator=</definition>
+        <argsstring>(const WSActionNotificationBuilder &amp;)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="structfys_1_1fb_1_1internal_1_1_w_s_action_notification_builder" kindref="compound">WSActionNotificationBuilder</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="157" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_w_s_action_notification_builder_1ab202be1d2f1e6e0745291832b516bdb4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; WSActionNotification &gt;</type>
+        <definition>flatbuffers::Offset&lt;WSActionNotification&gt; fys::fb::internal::WSActionNotificationBuilder::Finish</definition>
+        <argsstring>()</argsstring>
+        <name>Finish</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="158" column="23" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="158" bodyend="162"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="138" column="34" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="138" bodyend="163"/>
+    <listofallmembers>
+      <member refid="structfys_1_1fb_1_1internal_1_1_w_s_action_notification_builder_1a3c7f28820b1b2e9c338751728a1965b2" prot="public" virt="non-virtual"><scope>fys::fb::internal::WSActionNotificationBuilder</scope><name>add_action</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_w_s_action_notification_builder_1abab5105e6edcab9f4b50a5bef7de86ee" prot="public" virt="non-virtual"><scope>fys::fb::internal::WSActionNotificationBuilder</scope><name>add_token_client</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_w_s_action_notification_builder_1a35ddc3c7caa7802ea610287bfb34f143" prot="public" virt="non-virtual"><scope>fys::fb::internal::WSActionNotificationBuilder</scope><name>add_x</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_w_s_action_notification_builder_1a8ef10d263387c2d80e3e02ea4d18555b" prot="public" virt="non-virtual"><scope>fys::fb::internal::WSActionNotificationBuilder</scope><name>add_y</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_w_s_action_notification_builder_1a3b393739f1c2afca3f30d3ed18c25957" prot="public" virt="non-virtual"><scope>fys::fb::internal::WSActionNotificationBuilder</scope><name>fbb_</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_w_s_action_notification_builder_1ab202be1d2f1e6e0745291832b516bdb4" prot="public" virt="non-virtual"><scope>fys::fb::internal::WSActionNotificationBuilder</scope><name>Finish</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_w_s_action_notification_builder_1a0ee67a193999142a7f227f56e5c60805" prot="public" virt="non-virtual"><scope>fys::fb::internal::WSActionNotificationBuilder</scope><name>operator=</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_w_s_action_notification_builder_1a3e6a7fb0ef71090a4bc6ec52240ac015" prot="public" virt="non-virtual"><scope>fys::fb::internal::WSActionNotificationBuilder</scope><name>start_</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_w_s_action_notification_builder_1a7db546e986ab8fa897b096a258571afb" prot="public" virt="non-virtual"><scope>fys::fb::internal::WSActionNotificationBuilder</scope><name>WSActionNotificationBuilder</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

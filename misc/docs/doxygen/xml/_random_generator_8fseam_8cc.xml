@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="_random_generator_8fseam_8cc" kind="file" language="C++">
+    <compoundname>RandomGenerator.fseam.cc</compoundname>
+    <includes local="no">memory</includes>
+    <includes local="no">random</includes>
+    <includes local="no">chrono</includes>
+    <includes local="no">functional</includes>
+    <includes refid="_f_seam_mock_data_8hpp" local="no">FSeamMockData.hpp</includes>
+    <includes local="no">FSeam/FSeam.hpp</includes>
+    <includes refid="_random_generator_8hh" local="no">RandomGenerator.hh</includes>
+    <incdepgraph>
+      <node id="8">
+        <label>zmq_addon.hpp</label>
+      </node>
+      <node id="5">
+        <label>functional</label>
+      </node>
+      <node id="6">
+        <label>FSeamMockData.hpp</label>
+        <link refid="_f_seam_mock_data_8hpp_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/RandomGenerator.fseam.cc</label>
+        <link refid="_random_generator_8fseam_8cc"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>spdlog/spdlog.h</label>
+      </node>
+      <node id="3">
+        <label>random</label>
+      </node>
+      <node id="10">
+        <label>optional</label>
+      </node>
+      <node id="12">
+        <label>ConnectionHandler.hh</label>
+      </node>
+      <node id="13">
+        <label>RandomGenerator.hh</label>
+        <link refid="_random_generator_8hh_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>FSeam/FSeam.hpp</label>
+      </node>
+      <node id="4">
+        <label>chrono</label>
+      </node>
+      <node id="9">
+        <label>type_traits</label>
+      </node>
+      <node id="2">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="6"><highlight class="comment">//<sp/>includes</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;memory&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;random&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;chrono&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;functional&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;FSeamMockData.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;FSeam/FSeam.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;RandomGenerator.hh&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="comment">//<sp/>RandomGenerator<sp/>public</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Methods<sp/>Mocked<sp/>Implementation<sp/>for<sp/>class<sp/>RandomGenerator</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal">std::shared_ptr&lt;std::mt19937&gt;<sp/><ref refid="classfys_1_1util_1_1_random_generator_1a130a48043e674335a9a7de085e490cc7" kindref="member">fys::util::RandomGenerator::get</ref>()</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>mockVerifier<sp/>=<sp/>(FSeam::MockVerifier::instance().isMockRegistered(</highlight><highlight class="keyword">this</highlight><highlight class="normal">))<sp/>?</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FSeam::MockVerifier::instance().getMock(</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;RandomGenerator&quot;</highlight><highlight class="normal">)<sp/>:</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FSeam::MockVerifier::instance().getDefaultMock(</highlight><highlight class="stringliteral">&quot;RandomGenerator&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_f_seam_1_1_random_generator_data" kindref="compound">FSeam::RandomGeneratorData</ref><sp/>data<sp/>{};</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>mockVerifier-&gt;invokeDupedMethod(__func__,<sp/>&amp;data);</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>mockVerifier-&gt;methodCall(__func__,<sp/>&amp;data);</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>data.<ref refid="struct_f_seam_1_1_random_generator_data_1ad1365776393f3d69d563fc282ab32881" kindref="member">get_ReturnValue</ref>;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="comment">//<sp/>RandomGenerator<sp/>protected</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Methods<sp/>Mocked<sp/>Implementation<sp/>for<sp/>class<sp/>RandomGenerator</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="comment">//<sp/>RandomGenerator<sp/>private</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Methods<sp/>Mocked<sp/>Implementation<sp/>for<sp/>class<sp/>RandomGenerator</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/RandomGenerator.fseam.cc"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="_versioner_8hh" kind="file" language="C++">
+    <compoundname>Versioner.hh</compoundname>
+    <includedby refid="_startup_dispatcher_ctx_8cpp" local="no">/home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp</includedby>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_versioner_8hh_1a1a53b724b6de666faa8a9e0d06d1055f" prot="public" static="no">
+        <name>VERSION_MAJOR</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/Versioner.hh" line="9" column="9" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/Versioner.hh" bodystart="9" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="_versioner_8hh_1ae0cb52afb79b185b1bf82c7e235f682b" prot="public" static="no">
+        <name>VERSION_MINOR</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/Versioner.hh" line="10" column="9" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/Versioner.hh" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Created<sp/>by<sp/>FyS<sp/>on<sp/>3/7/19.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>PROXY_CLUSTER_DISPATCHER_VERSIONER_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>PROXY_CLUSTER_DISPATCHER_VERSIONER_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="comment">//<sp/>the<sp/>configured<sp/>options<sp/>and<sp/>settings<sp/>for<sp/>Tutorial</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>VERSION_MAJOR<sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>VERSION_MINOR<sp/>0</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/>//PROXY_CLUSTER_DISPATCHER_VERSIONER_H</highlight></codeline>
+    </programlisting>
+    <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/Versioner.hh"/>
+  </compounddef>
+</doxygen>

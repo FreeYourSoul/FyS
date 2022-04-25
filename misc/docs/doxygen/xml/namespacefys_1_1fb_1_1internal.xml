@@ -1,0 +1,611 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacefys_1_1fb_1_1internal" kind="namespace" language="C++">
+    <compoundname>fys::fb::internal</compoundname>
+    <innerclass refid="structfys_1_1fb_1_1internal_1_1_chat_server_reg_builder" prot="public">fys::fb::internal::ChatServerRegBuilder</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s" prot="public">fys::fb::internal::FLATBUFFERS_FINAL_CLASS</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1internal_1_1_register_authenticated_player_builder" prot="public">fys::fb::internal::RegisterAuthenticatedPlayerBuilder</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1internal_1_1_register_server_traits" prot="public">fys::fb::internal::RegisterServerTraits</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1internal_1_1_register_server_traits_3_01fys_1_1fb_1_1internal_1_1_chat_server_reg_01_4" prot="public">fys::fb::internal::RegisterServerTraits&lt; fys::fb::internal::ChatServerReg &gt;</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1internal_1_1_register_server_traits_3_01fys_1_1fb_1_1internal_1_1_w_s_server_reg_01_4" prot="public">fys::fb::internal::RegisterServerTraits&lt; fys::fb::internal::WSServerReg &gt;</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1internal_1_1_w_s_action_notification_builder" prot="public">fys::fb::internal::WSActionNotificationBuilder</innerclass>
+    <innerclass refid="structfys_1_1fb_1_1internal_1_1_w_s_server_reg_builder" prot="public">fys::fb::internal::WSServerRegBuilder</innerclass>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="namespacefys_1_1fb_1_1internal_1ae9ff925111deebf96baab5ced3be8976" prot="public" static="no" strong="no">
+        <type></type>
+        <name>Action</name>
+        <enumvalue id="namespacefys_1_1fb_1_1internal_1ae9ff925111deebf96baab5ced3be8976aa8d1f0976ff6e183bdbce834544ecef2" prot="public">
+          <name>Action_Move</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1_1internal_1ae9ff925111deebf96baab5ced3be8976ae2fbe725b478048a0faa3c79258f4da8" prot="public">
+          <name>Action_MIN</name>
+          <initializer>= Action_Move</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1_1internal_1ae9ff925111deebf96baab5ced3be8976abe945a44db99becb2b68698c8cec24fd" prot="public">
+          <name>Action_MAX</name>
+          <initializer>= Action_Move</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="21" column="12" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="21" bodyend="25"/>
+      </memberdef>
+      <memberdef kind="enum" id="namespacefys_1_1fb_1_1internal_1a78ff0d98a7836ecdf5ec2b69b907a506" prot="public" static="no" strong="no">
+        <type></type>
+        <name>RegisterServer</name>
+        <enumvalue id="namespacefys_1_1fb_1_1internal_1a78ff0d98a7836ecdf5ec2b69b907a506adf020d331b3a763c3adf934b17a2f561" prot="public">
+          <name>RegisterServer_NONE</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1_1internal_1a78ff0d98a7836ecdf5ec2b69b907a506a3b557da42ee0c06eaf371a268d3560b9" prot="public">
+          <name>RegisterServer_WSServerReg</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1_1internal_1a78ff0d98a7836ecdf5ec2b69b907a506aa7835b63082b80bfeeead0f2131c42d5" prot="public">
+          <name>RegisterServer_ChatServerReg</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1_1internal_1a78ff0d98a7836ecdf5ec2b69b907a506a42cdde00bd5b9d447d2c15b783fd656c" prot="public">
+          <name>RegisterServer_MIN</name>
+          <initializer>= RegisterServer_NONE</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1fb_1_1internal_1a78ff0d98a7836ecdf5ec2b69b907a506a3b08dd611a4bc3a8b77737cc5724bb69" prot="public">
+          <name>RegisterServer_MAX</name>
+          <initializer>= RegisterServer_ChatServerReg</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="48" column="20" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="48" bodyend="54"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacefys_1_1fb_1_1internal_1af46c6c7253ec49ad6c95aaebf1d03a20" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const Action(&amp;</type>
+        <definition>const Action(&amp; fys::fb::internal::EnumValuesAction</definition>
+        <argsstring>())[1]</argsstring>
+        <name>EnumValuesAction</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="27" column="14" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="27" bodyend="32"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1_1internal_1a4c849bdbc0625efefb1d71499788e794" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const char *const *</type>
+        <definition>const char* const * fys::fb::internal::EnumNamesAction</definition>
+        <argsstring>()</argsstring>
+        <name>EnumNamesAction</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="34" column="26" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="34" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1_1internal_1acff6f9717370a7310af1eab81f0c8bf5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char* fys::fb::internal::EnumNameAction</definition>
+        <argsstring>(Action e)</argsstring>
+        <name>EnumNameAction</name>
+        <param>
+          <type>Action</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="42" column="19" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="42" bodyend="46"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1_1internal_1a45115cf83c58e045e799fde6166cbf8f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const RegisterServer(&amp;</type>
+        <definition>const RegisterServer(&amp; fys::fb::internal::EnumValuesRegisterServer</definition>
+        <argsstring>())[3]</argsstring>
+        <name>EnumValuesRegisterServer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="56" column="14" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="56" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1_1internal_1ace92794c22bf78c71e3f848c6e2bd12c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const char *const *</type>
+        <definition>const char* const * fys::fb::internal::EnumNamesRegisterServer</definition>
+        <argsstring>()</argsstring>
+        <name>EnumNamesRegisterServer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="65" column="26" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="65" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1_1internal_1aa5b120376437e4980a76e96cd5d2d8eb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const char *</type>
+        <definition>const char* fys::fb::internal::EnumNameRegisterServer</definition>
+        <argsstring>(RegisterServer e)</argsstring>
+        <name>EnumNameRegisterServer</name>
+        <param>
+          <type>RegisterServer</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="75" column="19" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="75" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1_1internal_1afd47bb46d51437b952d0c1425db2fe62" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::internal::VerifyRegisterServer</definition>
+        <argsstring>(flatbuffers::Verifier &amp;verifier, const void *obj, RegisterServer type)</argsstring>
+        <name>VerifyRegisterServer</name>
+        <param>
+          <type>flatbuffers::Verifier &amp;</type>
+          <declname>verifier</declname>
+        </param>
+        <param>
+          <type>const void *</type>
+          <declname>obj</declname>
+        </param>
+        <param>
+          <type>RegisterServer</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="399" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="399" bodyend="414" declfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" declline="93" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1_1internal_1a83aa061cc21d0d6ba3c5f119749c44ac" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::internal::VerifyRegisterServerVector</definition>
+        <argsstring>(flatbuffers::Verifier &amp;verifier, const flatbuffers::Vector&lt; flatbuffers::Offset&lt; void &gt;&gt; *values, const flatbuffers::Vector&lt; uint8_t &gt; *types)</argsstring>
+        <name>VerifyRegisterServerVector</name>
+        <param>
+          <type>flatbuffers::Verifier &amp;</type>
+          <declname>verifier</declname>
+        </param>
+        <param>
+          <type>const flatbuffers::Vector&lt; flatbuffers::Offset&lt; void &gt;&gt; *</type>
+          <declname>values</declname>
+        </param>
+        <param>
+          <type>const flatbuffers::Vector&lt; uint8_t &gt; *</type>
+          <declname>types</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="416" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="416" bodyend="426" declfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" declline="94" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1_1internal_1ab7da845673005f912e9ebc52d90200ae" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; WSActionNotification &gt;</type>
+        <definition>flatbuffers::Offset&lt;WSActionNotification&gt; fys::fb::internal::CreateWSActionNotification</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, flatbuffers::Offset&lt; flatbuffers::String &gt; token_client=0, double x=0.0, double y=0.0, fys::fb::internal::Action action=fys::fb::internal::Action_Move)</argsstring>
+        <name>CreateWSActionNotification</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>token_client</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>x</declname>
+          <defval>0.0</defval>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>y</declname>
+          <defval>0.0</defval>
+        </param>
+        <param>
+          <type>fys::fb::internal::Action</type>
+          <declname>action</declname>
+          <defval>fys::fb::internal::Action_Move</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="165" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="165" bodyend="177"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1_1internal_1ab3cd1decae9c9ef7465468c9ff38dcee" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; WSActionNotification &gt;</type>
+        <definition>flatbuffers::Offset&lt;WSActionNotification&gt; fys::fb::internal::CreateWSActionNotificationDirect</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, const char *token_client=nullptr, double x=0.0, double y=0.0, fys::fb::internal::Action action=fys::fb::internal::Action_Move)</argsstring>
+        <name>CreateWSActionNotificationDirect</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>token_client</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>x</declname>
+          <defval>0.0</defval>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>y</declname>
+          <defval>0.0</defval>
+        </param>
+        <param>
+          <type>fys::fb::internal::Action</type>
+          <declname>action</declname>
+          <defval>fys::fb::internal::Action_Move</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="179" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="179" bodyend="192"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1_1internal_1a91932b3a5f653eb6798c872ab71c5f07" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; ChatServerReg &gt;</type>
+        <definition>flatbuffers::Offset&lt;ChatServerReg&gt; fys::fb::internal::CreateChatServerReg</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, flatbuffers::Offset&lt; flatbuffers::String &gt; serverCode=0)</argsstring>
+        <name>CreateChatServerReg</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>serverCode</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="230" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="230" bodyend="236"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1_1internal_1ae343cf1a138d60f65ddb9ab0c63c270e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; ChatServerReg &gt;</type>
+        <definition>flatbuffers::Offset&lt;ChatServerReg&gt; fys::fb::internal::CreateChatServerRegDirect</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, const char *serverCode=nullptr)</argsstring>
+        <name>CreateChatServerRegDirect</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>serverCode</declname>
+          <defval>nullptr</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="238" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="238" bodyend="245"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1_1internal_1a447443d07dc1669ce0860ffd99ae7f67" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; WSServerReg &gt;</type>
+        <definition>flatbuffers::Offset&lt;WSServerReg&gt; fys::fb::internal::CreateWSServerReg</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, flatbuffers::Offset&lt; flatbuffers::String &gt; serverCode=0, double xPos=0.0, double yPos=0.0)</argsstring>
+        <name>CreateWSServerReg</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>serverCode</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>xPos</declname>
+          <defval>0.0</defval>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>yPos</declname>
+          <defval>0.0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="305" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="305" bodyend="315"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1_1internal_1a03ce4f6c419e8c9b2199ce6c4ff046fa" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; WSServerReg &gt;</type>
+        <definition>flatbuffers::Offset&lt;WSServerReg&gt; fys::fb::internal::CreateWSServerRegDirect</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, const char *serverCode=nullptr, double xPos=0.0, double yPos=0.0)</argsstring>
+        <name>CreateWSServerRegDirect</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>serverCode</declname>
+          <defval>nullptr</defval>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>xPos</declname>
+          <defval>0.0</defval>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>yPos</declname>
+          <defval>0.0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="317" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="317" bodyend="328"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1_1internal_1aa5c1e388c60228c4d7321132e745c5ac" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+        </templateparamlist>
+        <type>const fys::fb::internal::WSServerReg *</type>
+        <definition>const fys::fb::internal::WSServerReg* fys::fb::internal::RegisterAuthenticatedPlayer::registerTo_as&lt; fys::fb::internal::WSServerReg &gt;</definition>
+        <argsstring>() const</argsstring>
+        <name>RegisterAuthenticatedPlayer::registerTo_as&lt; fys::fb::internal::WSServerReg &gt;</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="360" column="24" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="360" bodyend="362"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1_1internal_1aadc992652b94d30d582dd3a04b7ff27c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+        </templateparamlist>
+        <type>const fys::fb::internal::ChatServerReg *</type>
+        <definition>const fys::fb::internal::ChatServerReg* fys::fb::internal::RegisterAuthenticatedPlayer::registerTo_as&lt; fys::fb::internal::ChatServerReg &gt;</definition>
+        <argsstring>() const</argsstring>
+        <name>RegisterAuthenticatedPlayer::registerTo_as&lt; fys::fb::internal::ChatServerReg &gt;</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="364" column="24" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="364" bodyend="366"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1_1internal_1a02b89b80bd85c9ebd327a31fc903bcdd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; RegisterAuthenticatedPlayer &gt;</type>
+        <definition>flatbuffers::Offset&lt;RegisterAuthenticatedPlayer&gt; fys::fb::internal::CreateRegisterAuthenticatedPlayer</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb, fys::fb::internal::RegisterServer registerTo_type=fys::fb::internal::RegisterServer_NONE, flatbuffers::Offset&lt; void &gt; registerTo=0)</argsstring>
+        <name>CreateRegisterAuthenticatedPlayer</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <param>
+          <type>fys::fb::internal::RegisterServer</type>
+          <declname>registerTo_type</declname>
+          <defval>fys::fb::internal::RegisterServer_NONE</defval>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; void &gt;</type>
+          <declname>registerTo</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="389" column="28" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="389" bodyend="397"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1_1internal_1ac424e52e8222d20322305d52d8e77669" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const fys::fb::internal::RegisterAuthenticatedPlayer *</type>
+        <definition>const fys::fb::internal::RegisterAuthenticatedPlayer* fys::fb::internal::GetRegisterAuthenticatedPlayer</definition>
+        <argsstring>(const void *buf)</argsstring>
+        <name>GetRegisterAuthenticatedPlayer</name>
+        <param>
+          <type>const void *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="428" column="61" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="428" bodyend="430"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1_1internal_1a22570ef9b8f3aa072b9f0561660927af" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>const fys::fb::internal::RegisterAuthenticatedPlayer *</type>
+        <definition>const fys::fb::internal::RegisterAuthenticatedPlayer* fys::fb::internal::GetSizePrefixedRegisterAuthenticatedPlayer</definition>
+        <argsstring>(const void *buf)</argsstring>
+        <name>GetSizePrefixedRegisterAuthenticatedPlayer</name>
+        <param>
+          <type>const void *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="432" column="61" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="432" bodyend="434"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1_1internal_1a69c247ccaa264f7251d2b5444d4f2048" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>RegisterAuthenticatedPlayer *</type>
+        <definition>RegisterAuthenticatedPlayer* fys::fb::internal::GetMutableRegisterAuthenticatedPlayer</definition>
+        <argsstring>(void *buf)</argsstring>
+        <name>GetMutableRegisterAuthenticatedPlayer</name>
+        <param>
+          <type>void *</type>
+          <declname>buf</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="436" column="36" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="436" bodyend="438"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1_1internal_1a0bcc3c971b6144bed184c7d5dbe93e5d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::internal::VerifyRegisterAuthenticatedPlayerBuffer</definition>
+        <argsstring>(flatbuffers::Verifier &amp;verifier)</argsstring>
+        <name>VerifyRegisterAuthenticatedPlayerBuffer</name>
+        <param>
+          <type>flatbuffers::Verifier &amp;</type>
+          <declname>verifier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="440" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="440" bodyend="443"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1_1internal_1ae4363da3bdaca6a4990a4f265ed1601e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::internal::VerifySizePrefixedRegisterAuthenticatedPlayerBuffer</definition>
+        <argsstring>(flatbuffers::Verifier &amp;verifier)</argsstring>
+        <name>VerifySizePrefixedRegisterAuthenticatedPlayerBuffer</name>
+        <param>
+          <type>flatbuffers::Verifier &amp;</type>
+          <declname>verifier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="445" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="445" bodyend="448"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1_1internal_1ac21c1259d035d7f6f871e26d21703541" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::internal::FinishRegisterAuthenticatedPlayerBuffer</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;fbb, flatbuffers::Offset&lt; fys::fb::internal::RegisterAuthenticatedPlayer &gt; root)</argsstring>
+        <name>FinishRegisterAuthenticatedPlayerBuffer</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>fbb</declname>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; fys::fb::internal::RegisterAuthenticatedPlayer &gt;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="450" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="450" bodyend="454"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1fb_1_1internal_1a20039ad515cd610d3a39f865a91f4aaf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::internal::FinishSizePrefixedRegisterAuthenticatedPlayerBuffer</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;fbb, flatbuffers::Offset&lt; fys::fb::internal::RegisterAuthenticatedPlayer &gt; root)</argsstring>
+        <name>FinishSizePrefixedRegisterAuthenticatedPlayerBuffer</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>fbb</declname>
+        </param>
+        <param>
+          <type>flatbuffers::Offset&lt; fys::fb::internal::RegisterAuthenticatedPlayer &gt;</type>
+          <declname>root</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="456" column="13" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="456" bodyend="460"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="11" column="18"/>
+  </compounddef>
+</doxygen>

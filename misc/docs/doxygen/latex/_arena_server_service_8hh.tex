@@ -1,0 +1,24 @@
+\hypertarget{_arena_server_service_8hh}{}\doxysection{/home/\+Fy\+S/\+Project/\+Fy\+S/services/arena/include/\+Arena\+Server\+Service.hh File Reference}
+\label{_arena_server_service_8hh}\index{/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh@{/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh}}
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+{\ttfamily \#include $<$optional$>$}\newline
+{\ttfamily \#include $<$network/\+Worker\+Service.\+hh$>$}\newline
+{\ttfamily \#include $<$Connection\+Handler.\+hh$>$}\newline
+{\ttfamily \#include $<$Cml\+Copy.\+hh$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structfys_1_1arena_1_1_awaiting_arena}{fys\+::arena\+::\+Awaiting\+Arena}}
+\begin{DoxyCompactList}\small\item\em contains the information related to the arena that has to be generated \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structfys_1_1arena_1_1_awaiting_player_arena}{fys\+::arena\+::\+Awaiting\+Player\+Arena}}
+\begin{DoxyCompactList}\small\item\em A Player is awaited whom could generate a new \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit}{Fighting\+Pit}} if \+\_\+fighting\+Pit\+Id is not set \mbox{\hyperlink{structfys_1_1arena_1_1_awaiting_player_arena}{Awaiting\+Player\+Arena}} represent a player that is the trigger of a new fighting pit or a join action of an existing one, it contains the information related to the arena that has to be generated (none required when joining). \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfys_1_1arena_1_1_arena_server_service}{fys\+::arena\+::\+Arena\+Server\+Service}}
+\begin{DoxyCompactList}\small\item\em Class managing an Arena Server. ~\newline
+ An arena server is a server handling multiple arena fighting pit instance at once. In order to properly works, it need to work with an Arena\+Dispatcher, which is a proxy for the World\+Server to communicate with Arena. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacefys}{fys}}
+\item 
+ \mbox{\hyperlink{namespacefys_1_1arena}{fys\+::arena}}
+\end{DoxyCompactItemize}

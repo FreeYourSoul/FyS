@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_11b07651c728b604190fe027eb04bb28" kind="dir">
+    <compoundname>/home/FyS/Project/FyS/services/worldserver/include/engine</compoundname>
+    <innerfile refid="_collision_map_8hh">CollisionMap.hh</innerfile>
+    <innerfile refid="_players_data_8hh">PlayersData.hh</innerfile>
+    <innerfile refid="_world_server_engine_8hh">WorldServerEngine.hh</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/"/>
+  </compounddef>
+</doxygen>

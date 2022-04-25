@@ -1,0 +1,78 @@
+\hypertarget{classfys_1_1common_1_1_sized_queue}{}\doxysection{fys\+::common\+::Sized\+Queue$<$ Type\+Container, S\+I\+Z\+E\+\_\+\+Q\+U\+E\+UE $>$ Class Template Reference}
+\label{classfys_1_1common_1_1_sized_queue}\index{fys::common::SizedQueue$<$ TypeContainer, SIZE\_QUEUE $>$@{fys::common::SizedQueue$<$ TypeContainer, SIZE\_QUEUE $>$}}
+
+
+{\ttfamily \#include $<$Sized\+Queue.\+hh$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::optional$<$ Type\+Container $>$ \mbox{\hyperlink{classfys_1_1common_1_1_sized_queue_a4ec9f87d0f88230412e3c81232d87b50}{pop}} ()
+\item 
+bool \mbox{\hyperlink{classfys_1_1common_1_1_sized_queue_a2e47e3b2a7a42eda1f58fbf3a75102b5}{push}} (Type\+Container \&\&elem)
+\item 
+uint \mbox{\hyperlink{classfys_1_1common_1_1_sized_queue_a11bbb38ce47072bdfa62b58a8b58eb94}{size}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Type\+Container, unsigned int S\+I\+Z\+E\+\_\+\+Q\+U\+E\+UE = 100$>$\newline
+class fys\+::common\+::\+Sized\+Queue$<$ Type\+Container, S\+I\+Z\+E\+\_\+\+Q\+U\+E\+U\+E $>$}
+
+A Queue (aligned in memory, implemented through an array) with a fixed max. If the queue is fulled, value are not override (do not work like a ringbuffer)
+
+\begin{DoxyNote}{Note}
+Not thread safe (for thread safe usage, a Lock\+Free\+Queue should be used) 
+\end{DoxyNote}
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Type\+Container} & type the queue contains \\
+\hline
+{\em S\+I\+Z\+E\+\_\+\+Q\+U\+E\+UE} & maximum size of the queue, defaulted to 100 \\
+\hline
+\end{DoxyTemplParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfys_1_1common_1_1_sized_queue_a4ec9f87d0f88230412e3c81232d87b50}\label{classfys_1_1common_1_1_sized_queue_a4ec9f87d0f88230412e3c81232d87b50}} 
+\index{fys::common::SizedQueue$<$ TypeContainer, SIZE\_QUEUE $>$@{fys::common::SizedQueue$<$ TypeContainer, SIZE\_QUEUE $>$}!pop@{pop}}
+\index{pop@{pop}!fys::common::SizedQueue$<$ TypeContainer, SIZE\_QUEUE $>$@{fys::common::SizedQueue$<$ TypeContainer, SIZE\_QUEUE $>$}}
+\doxysubsubsection{\texorpdfstring{pop()}{pop()}}
+{\footnotesize\ttfamily template$<$typename Type\+Container , unsigned int S\+I\+Z\+E\+\_\+\+Q\+U\+E\+UE = 100$>$ \\
+std\+::optional$<$Type\+Container$>$ \mbox{\hyperlink{classfys_1_1common_1_1_sized_queue}{fys\+::common\+::\+Sized\+Queue}}$<$ Type\+Container, S\+I\+Z\+E\+\_\+\+Q\+U\+E\+UE $>$\+::pop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Pop the next element of the queue \begin{DoxyReturn}{Returns}
+the next element of the queue, if no such element exist, return an empty optional (nullopt) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfys_1_1common_1_1_sized_queue_a2e47e3b2a7a42eda1f58fbf3a75102b5}\label{classfys_1_1common_1_1_sized_queue_a2e47e3b2a7a42eda1f58fbf3a75102b5}} 
+\index{fys::common::SizedQueue$<$ TypeContainer, SIZE\_QUEUE $>$@{fys::common::SizedQueue$<$ TypeContainer, SIZE\_QUEUE $>$}!push@{push}}
+\index{push@{push}!fys::common::SizedQueue$<$ TypeContainer, SIZE\_QUEUE $>$@{fys::common::SizedQueue$<$ TypeContainer, SIZE\_QUEUE $>$}}
+\doxysubsubsection{\texorpdfstring{push()}{push()}}
+{\footnotesize\ttfamily template$<$typename Type\+Container , unsigned int S\+I\+Z\+E\+\_\+\+Q\+U\+E\+UE = 100$>$ \\
+bool \mbox{\hyperlink{classfys_1_1common_1_1_sized_queue}{fys\+::common\+::\+Sized\+Queue}}$<$ Type\+Container, S\+I\+Z\+E\+\_\+\+Q\+U\+E\+UE $>$\+::push (\begin{DoxyParamCaption}\item[{Type\+Container \&\&}]{elem }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Push an element into the queue
+
+
+\begin{DoxyParams}{Parameters}
+{\em elem} & element to insert into the queue \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the element has been pushed correctly, false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfys_1_1common_1_1_sized_queue_a11bbb38ce47072bdfa62b58a8b58eb94}\label{classfys_1_1common_1_1_sized_queue_a11bbb38ce47072bdfa62b58a8b58eb94}} 
+\index{fys::common::SizedQueue$<$ TypeContainer, SIZE\_QUEUE $>$@{fys::common::SizedQueue$<$ TypeContainer, SIZE\_QUEUE $>$}!size@{size}}
+\index{size@{size}!fys::common::SizedQueue$<$ TypeContainer, SIZE\_QUEUE $>$@{fys::common::SizedQueue$<$ TypeContainer, SIZE\_QUEUE $>$}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily template$<$typename Type\+Container , unsigned int S\+I\+Z\+E\+\_\+\+Q\+U\+E\+UE = 100$>$ \\
+uint \mbox{\hyperlink{classfys_1_1common_1_1_sized_queue}{fys\+::common\+::\+Sized\+Queue}}$<$ Type\+Container, S\+I\+Z\+E\+\_\+\+Q\+U\+E\+UE $>$\+::size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Get the number of element in the queue to be popped \begin{DoxyReturn}{Returns}
+number of element that can be popped out of the queue 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/services/common/include/Sized\+Queue.\+hh\end{DoxyCompactItemize}

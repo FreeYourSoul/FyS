@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="struct_f_seam_1_1_connection_handler_data" kind="struct" language="C++" prot="public">
+    <compoundname>FSeam::ConnectionHandlerData</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_f_seam_1_1_connection_handler_data_1a3c0b1a7b2db9afd534fedf1a1fe920a5" prot="public" static="no" mutable="no">
+        <type>std::optional&lt; std::reference_wrapper&lt; const <ref refid="classfys_1_1arena_1_1_arena_server_context" kindref="compound">fys::arena::ArenaServerContext</ref> &gt; &gt;</type>
+        <definition>std::optional&lt;std::reference_wrapper&lt;const fys::arena::ArenaServerContext &gt; &gt; FSeam::ConnectionHandlerData::setupConnectionManager_ctx_ParamValue</definition>
+        <argsstring></argsstring>
+        <name>setupConnectionManager_ctx_ParamValue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>method metadata : <ref refid="struct_f_seam_1_1_connection_handler_1_1setup_connection_manager" kindref="compound">ConnectionHandler::setupConnectionManager</ref> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/FSeamMockData.hpp" line="23" column="19" bodyfile="/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/FSeamMockData.hpp" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_f_seam_1_1_connection_handler_data_1a1a52ff972fea4b14ef4fdcbe299df8ad" prot="public" static="no" mutable="no">
+        <type>std::optional&lt; std::reference_wrapper&lt; zmq::multipart_t &gt; &gt;</type>
+        <definition>std::optional&lt;std::reference_wrapper&lt;zmq::multipart_t &gt; &gt; FSeam::ConnectionHandlerData::sendMessageToDispatcher_msg_ParamValue</definition>
+        <argsstring></argsstring>
+        <name>sendMessageToDispatcher_msg_ParamValue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>method metadata : <ref refid="struct_f_seam_1_1_connection_handler_1_1send_message_to_dispatcher" kindref="compound">ConnectionHandler::sendMessageToDispatcher</ref> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/FSeamMockData.hpp" line="27" column="19" bodyfile="/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/FSeamMockData.hpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/FSeamMockData.hpp" line="19" column="28" bodyfile="/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/FSeamMockData.hpp" bodystart="19" bodyend="28"/>
+    <listofallmembers>
+      <member refid="struct_f_seam_1_1_connection_handler_data_1a1a52ff972fea4b14ef4fdcbe299df8ad" prot="public" virt="non-virtual"><scope>FSeam::ConnectionHandlerData</scope><name>sendMessageToDispatcher_msg_ParamValue</name></member>
+      <member refid="struct_f_seam_1_1_connection_handler_data_1a3c0b1a7b2db9afd534fedf1a1fe920a5" prot="public" virt="non-virtual"><scope>FSeam::ConnectionHandlerData</scope><name>setupConnectionManager_ctx_ParamValue</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

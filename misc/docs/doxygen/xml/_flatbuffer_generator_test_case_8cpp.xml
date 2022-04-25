@@ -1,0 +1,742 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="_flatbuffer_generator_test_case_8cpp" kind="file" language="C++">
+    <compoundname>FlatbufferGeneratorTestCase.cpp</compoundname>
+    <includes local="no">catch2/catch.hpp</includes>
+    <includes refid="_fighting_pit_announcer_8hh" local="no">fightingPit/FightingPitAnnouncer.hh</includes>
+    <includes refid="_fighting_contender_8hh" local="no">fightingPit/contender/FightingContender.hh</includes>
+    <includes refid="_contender_scripting_8hh" local="no">fightingPit/contender/ContenderScripting.hh</includes>
+    <includes refid="_ally_party_teams_8hh" local="no">fightingPit/team/AllyPartyTeams.hh</includes>
+    <includes refid="_party_team_8hh" local="no">fightingPit/team/PartyTeam.hh</includes>
+    <includes refid="_team_member_8hh" local="no">fightingPit/team/TeamMember.hh</includes>
+    <includes refid="_fighting_pit_8hh" local="no">fightingPit/FightingPit.hh</includes>
+    <includes refid="_fighting_pit_state__generated_8h" local="no">FightingPitState_generated.h</includes>
+    <includes refid="_arena_server_context_8hh" local="no">ArenaServerContext.hh</includes>
+    <includes refid="_fb_utility_8hh" local="no">util/FbUtility.hh</includes>
+    <includes refid="_test_type_8hh" local="yes">TestType.hh</includes>
+    <includes refid="_flatbuffer_generator_8hh" local="no">FlatbufferGenerator.hh</includes>
+    <incdepgraph>
+      <node id="7">
+        <label>ArenaServerContext.hh</label>
+        <link refid="_arena_server_context_8hh_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>fightingPit/FightingPitLayout.hh</label>
+        <link refid="_fighting_pit_layout_8hh_source"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="44">
+        <label>zmq_addon.hpp</label>
+      </node>
+      <node id="13">
+        <label>functional</label>
+      </node>
+      <node id="38">
+        <label>util/FbUtility.hh</label>
+        <link refid="_fb_utility_8hh_source"/>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>fightingPit/PriorityOrderList.hh</label>
+        <link refid="_priority_order_list_8hh_source"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="50">
+        <label>filesystem</label>
+      </node>
+      <node id="16">
+        <label>fightingPit/HexagonSide.hh</label>
+        <link refid="_hexagon_side_8hh_source"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>fightingPit/SideBattle.hh</label>
+        <link refid="_side_battle_8hh_source"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>variant</label>
+      </node>
+      <node id="29">
+        <label>ChaiRegister.hh</label>
+        <link refid="_chai_register_8hh_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>fightingPit/team/TeamMember.hh</label>
+        <link refid="_team_member_8hh_source"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>FightingPitState_generated.h</label>
+        <link refid="_fighting_pit_state__generated_8h_source"/>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>chaiscript/chaiscript.hpp</label>
+      </node>
+      <node id="22">
+        <label>fightingPit/FightingPit.hh</label>
+        <link refid="_fighting_pit_8hh_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>string</label>
+      </node>
+      <node id="40">
+        <label>TestType.hh</label>
+        <link refid="_test_type_8hh_source"/>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>fightingPit/FightingPitAnnouncer.hh</label>
+        <link refid="_fighting_pit_announcer_8hh_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="51">
+        <label>Cml.hh</label>
+        <link refid="_cml_8hh_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="52" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>ostream</label>
+      </node>
+      <node id="43">
+        <label>FSeamMockData.hpp</label>
+        <link refid="_f_seam_mock_data_8hpp_source"/>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>ServiceContextBase.hh</label>
+        <link refid="_service_context_base_8hh_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>spdlog/spdlog.h</label>
+      </node>
+      <node id="42">
+        <label>random</label>
+      </node>
+      <node id="4">
+        <label>optional</label>
+      </node>
+      <node id="47">
+        <label>ConnectionHandler.hh</label>
+      </node>
+      <node id="6">
+        <label>vector</label>
+      </node>
+      <node id="17">
+        <label>utility</label>
+      </node>
+      <node id="41">
+        <label>RandomGenerator.hh</label>
+        <link refid="_random_generator_8hh_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>array</label>
+      </node>
+      <node id="18">
+        <label>zconf.h</label>
+      </node>
+      <node id="46">
+        <label>FSeam/FSeam.hpp</label>
+      </node>
+      <node id="20">
+        <label>fightingPit/team/AllyPartyTeams.hh</label>
+        <link refid="_ally_party_teams_8hh_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/FyS/Project/FyS/services/arena/test/fightingPit/FlatbufferGeneratorTestCase.cpp</label>
+        <link refid="_flatbuffer_generator_test_case_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>SizedQueue.hh</label>
+        <link refid="_sized_queue_8hh_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>CharacterStatus_generated.h</label>
+        <link refid="_character_status__generated_8h_source"/>
+        <childnode refid="36" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>fightingPit/data/CommonTypes.hh</label>
+        <link refid="_common_types_8hh_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>fightingPit/contender/ContenderScripting.hh</label>
+        <link refid="_contender_scripting_8hh_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>fightingPit/contender/FightingContender.hh</label>
+        <link refid="_fighting_contender_8hh_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="36">
+        <label>flatbuffers/flatbuffers.h</label>
+      </node>
+      <node id="2">
+        <label>catch2/catch.hpp</label>
+      </node>
+      <node id="28">
+        <label>fightingPit/Rewards.hh</label>
+        <link refid="_rewards_8hh_source"/>
+      </node>
+      <node id="52">
+        <label>unordered_map</label>
+      </node>
+      <node id="53">
+        <label>CmlCopy.hh</label>
+        <link refid="_cml_copy_8hh_source"/>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>chrono</label>
+      </node>
+      <node id="54">
+        <label>FlatbufferGenerator.hh</label>
+        <link refid="_flatbuffer_generator_8hh_source"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>fightingPit/contender/PitContenders.hh</label>
+        <link refid="_pit_contenders_8hh_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>type_traits</label>
+      </node>
+      <node id="15">
+        <label>set</label>
+      </node>
+      <node id="9">
+        <label>nlohmann/json.hpp</label>
+      </node>
+      <node id="49">
+        <label>algorithm</label>
+      </node>
+      <node id="48">
+        <label>CmlKey.hh</label>
+        <link refid="_cml_key_8hh_source"/>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>memory</label>
+      </node>
+      <node id="21">
+        <label>fightingPit/team/PartyTeam.hh</label>
+        <link refid="_party_team_8hh_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_flatbuffer_generator_test_case_8cpp_1a643abe6727f9870a5cd85e7332c8077a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_CASE</definition>
+        <argsstring>(&quot;FlatbufferGeneratorTestCase&quot;, &quot;[service][arena][util]&quot;)</argsstring>
+        <name>TEST_CASE</name>
+        <param>
+          <type>&quot;FlatbufferGeneratorTestCase&quot;</type>
+        </param>
+        <param>
+          <type>&quot;&quot;</type>
+          <array>[service][arena][util]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/test/fightingPit/FlatbufferGeneratorTestCase.cpp" line="58" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/test/fightingPit/FlatbufferGeneratorTestCase.cpp" bodystart="58" bodyend="285"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>MIT<sp/>License</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Copyright<sp/>(c)<sp/>2019<sp/>Quentin<sp/>Balland</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Repository<sp/>:<sp/>https://github.com/FreeYourSoul/FyS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Permission<sp/>is<sp/>hereby<sp/>granted,<sp/>free<sp/>of<sp/>charge,<sp/>to<sp/>any<sp/>person<sp/>obtaining<sp/>a<sp/>copy</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>of<sp/>this<sp/>software<sp/>and<sp/>associated<sp/>documentation<sp/>files<sp/>(the<sp/>&quot;Software&quot;),<sp/>to<sp/>deal</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="comment">//<sp/>in<sp/>the<sp/>Software<sp/>without<sp/>restriction,<sp/>including<sp/>without<sp/>limitation<sp/>the<sp/>rights</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>to<sp/>use,<sp/>copy,<sp/>modify,<sp/>merge,<sp/>publish,<sp/>distribute,<sp/>sublicense,<sp/>and/or<sp/>sell</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>copies<sp/>of<sp/>the<sp/>Software,<sp/>and<sp/>to<sp/>permit<sp/>persons<sp/>to<sp/>whom<sp/>the<sp/>Software<sp/>is</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment">//<sp/>furnished<sp/>to<sp/>do<sp/>so,<sp/>subject<sp/>to<sp/>the<sp/>following<sp/>conditions:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="comment">//<sp/>The<sp/>above<sp/>copyright<sp/>notice<sp/>and<sp/>this<sp/>permission<sp/>notice<sp/>shall<sp/>be<sp/>included<sp/>in<sp/>all</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>copies<sp/>or<sp/>substantial<sp/>portions<sp/>of<sp/>the<sp/>Software.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="comment">//<sp/>THE<sp/>SOFTWARE<sp/>IS<sp/>PROVIDED<sp/>&quot;AS<sp/>IS&quot;,<sp/>WITHOUT<sp/>WARRANTY<sp/>OF<sp/>ANY<sp/>KIND,<sp/>EXPRESS<sp/>OR</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="comment">//<sp/>IMPLIED,<sp/>INCLUDING<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO<sp/>THE<sp/>WARRANTIES<sp/>OF<sp/>MERCHANTABILITY,</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="comment">//<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR<sp/>PURPOSE<sp/>AND<sp/>NONINFRINGEMENT.<sp/>IN<sp/>NO<sp/>EVENT<sp/>SHALL<sp/>THE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AUTHORS<sp/>OR<sp/>COPYRIGHT<sp/>HOLDERS<sp/>BE<sp/>LIABLE<sp/>FOR<sp/>ANY<sp/>CLAIM,<sp/>DAMAGES<sp/>OR<sp/>OTHER</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="comment">//<sp/>LIABILITY,<sp/>WHETHER<sp/>IN<sp/>AN<sp/>ACTION<sp/>OF<sp/>CONTRACT,<sp/>TORT<sp/>OR<sp/>OTHERWISE,<sp/>ARISING<sp/>FROM,</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="comment">//<sp/>OUT<sp/>OF<sp/>OR<sp/>IN<sp/>CONNECTION<sp/>WITH<sp/>THE<sp/>SOFTWARE<sp/>OR<sp/>THE<sp/>USE<sp/>OR<sp/>OTHER<sp/>DEALINGS<sp/>IN<sp/>THE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="comment">//<sp/>SOFTWARE.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;catch2/catch.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;fightingPit/FightingPitAnnouncer.hh&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;fightingPit/contender/FightingContender.hh&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;fightingPit/contender/ContenderScripting.hh&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;fightingPit/team/AllyPartyTeams.hh&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;fightingPit/team/PartyTeam.hh&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;fightingPit/team/TeamMember.hh&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;fightingPit/FightingPit.hh&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;FightingPitState_generated.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ArenaServerContext.hh&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;util/FbUtility.hh&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;TestType.hh&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;FlatbufferGenerator.hh&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal">fys::arena;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal">[[nodiscard]]<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::string</highlight></codeline>
+<codeline lineno="47"><highlight class="normal">getLocalPathStorage()</highlight></codeline>
+<codeline lineno="48"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>file_path<sp/>=<sp/>__FILE__;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>dir_path<sp/>=<sp/>file_path.substr(0,<sp/>file_path.rfind(</highlight><highlight class="charliteral">&apos;\\&apos;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(dir_path.size()<sp/>==<sp/>file_path.size())</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dir_path<sp/>=<sp/>file_path.substr(0,<sp/>file_path.rfind(</highlight><highlight class="charliteral">&apos;/&apos;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>dir_path<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;/../scriptTests/scripts_lnk&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal">TEST_CASE(</highlight><highlight class="stringliteral">&quot;FlatbufferGeneratorTestCase&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;[service][arena][util]&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="59"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Instantiate<sp/>FightingPit</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>fseamMock<sp/>=<sp/>FSeam::getDefault&lt;fys::util::RandomGenerator&gt;();</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfys_1_1arena_1_1_connection_handler" kindref="compound">ConnectionHandler</ref><sp/>handler{};</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>fseamConnectionHandlerMock<sp/>=<sp/>FSeam::get(&amp;handler);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>cml<sp/>=<sp/><ref refid="class_cml_base" kindref="compound">CmlBase</ref>(getLocalPathStorage());</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structfys_1_1arena_1_1_encounter_context" kindref="compound">EncounterContext</ref><sp/>ctx;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>ctx.<ref refid="structfys_1_1arena_1_1_encounter_context_1a6bf02b286f57645e4186cee95c4671a6" kindref="member">_rangeEncounterPerZone</ref>[</highlight><highlight class="stringliteral">&quot;WS00&quot;</highlight><highlight class="normal">]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::pair(4,<sp/>4),<sp/></highlight><highlight class="comment">//<sp/>ez</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::pair(3,<sp/>3),<sp/></highlight><highlight class="comment">//<sp/>medium</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::pair(1,<sp/>1)<sp/><sp/></highlight><highlight class="comment">//<sp/>hard</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>ctx.<ref refid="structfys_1_1arena_1_1_encounter_context_1aaf63454c4f1577532e83da240ac3c51e" kindref="member">_contendersPerZone</ref>[</highlight><highlight class="stringliteral">&quot;WS00&quot;</highlight><highlight class="normal">]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structfys_1_1arena_1_1_encounter_context_1_1_encounter_desc" kindref="compound">EncounterContext::EncounterDesc</ref>{</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;arena:contenders:Sampy.chai&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>3,<sp/>{100,<sp/>100,<sp/>100},<sp/>std::pair(1u,<sp/>10u)</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>},</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>seed<sp/>used<sp/>42</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/>std::shared_ptr&lt;std::mt19937&gt;<sp/>mt<sp/>=<sp/>std::make_shared&lt;std::mt19937&gt;(42);</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>fseamMock-&gt;dupeReturn&lt;<ref refid="struct_f_seam_1_1_random_generator_1_1get" kindref="compound">FSeam::RandomGenerator::get</ref>&gt;(mt);</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfys_1_1arena_1_1_fighting_pit_announcer" kindref="compound">FightingPitAnnouncer</ref><sp/>fpa(cml);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>fpa.setCreatorUserName(</highlight><highlight class="stringliteral">&quot;Winner&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>fpa.setCreatorUserToken(</highlight><highlight class="stringliteral">&quot;WinnerToken&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>fpa.setCreatorTeamParty(getPartyTeam(</highlight><highlight class="stringliteral">&quot;Winner&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>fpa.setDifficulty(FightingPit::Level::EASY);</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/>fpa.setEncounterType(FightingPitAnnouncer::EncounterType::RANDOM);</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>fpa.addActionToOneMember(0u,<sp/></highlight><highlight class="stringliteral">&quot;arena:actions:damage:slash_test.chai&quot;</highlight><highlight class="normal">,<sp/>1u);</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/>fpa.addActionToOneMember(1u,<sp/></highlight><highlight class="stringliteral">&quot;arena:actions:damage:slash_magic.chai&quot;</highlight><highlight class="normal">,<sp/>2u);</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/>fpa.addActionToOneMember(2u,<sp/></highlight><highlight class="stringliteral">&quot;arena:actions:damage:slash_demon.chai&quot;</highlight><highlight class="normal">,<sp/>3u);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>fpa.addActionToOneMember(3u,<sp/></highlight><highlight class="stringliteral">&quot;arena:actions:damage:slash_super.chai&quot;</highlight><highlight class="normal">,<sp/>4u);</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/>fpa.addActionToOneMember(3u,<sp/></highlight><highlight class="stringliteral">&quot;arena:actions:damage:slash_didi.chai&quot;</highlight><highlight class="normal">,<sp/>2u);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>fp<sp/>=<sp/>fpa.buildFightingPit(ctx,<sp/></highlight><highlight class="stringliteral">&quot;WS00&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>!=<sp/>fp);</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/>SECTION(</highlight><highlight class="stringliteral">&quot;Initial<sp/>setup<sp/>test&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(4<sp/>==<sp/>FightingPitAnnouncer::getPitContenders(fp).getNumberContender());</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>contender1<sp/>=<sp/>FightingPitAnnouncer::getPitContenders(fp).getContenders().at(0);</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;Sampy&quot;</highlight><highlight class="normal"><sp/>==<sp/>contender1-&gt;getName());</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(0<sp/>==<sp/>contender1-&gt;getContenderScripting()-&gt;getContenderId());</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(10<sp/>==<sp/>contender1-&gt;getContenderScripting()-&gt;getLevel());</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(180<sp/>==<sp/>contender1-&gt;getStatus().life.current);</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(180<sp/>==<sp/>contender1-&gt;getStatus().life.total);</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(100<sp/>==<sp/>contender1-&gt;getStatus().magicPoint.current);</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(100<sp/>==<sp/>contender1-&gt;getStatus().magicPoint.total);</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>contender2<sp/>=<sp/>FightingPitAnnouncer::getPitContenders(fp).getContenders().at(1);</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;Sampy&quot;</highlight><highlight class="normal"><sp/>==<sp/>contender2-&gt;getName());</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(1<sp/>==<sp/>contender2-&gt;getContenderScripting()-&gt;getContenderId());</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(8<sp/>==<sp/>contender2-&gt;getContenderScripting()-&gt;getLevel());</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(174<sp/>==<sp/>contender2-&gt;getStatus().life.current);</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(174<sp/>==<sp/>contender2-&gt;getStatus().life.total);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(100<sp/>==<sp/>contender2-&gt;getStatus().magicPoint.current);</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(100<sp/>==<sp/>contender2-&gt;getStatus().magicPoint.total);</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>contender3<sp/>=<sp/>FightingPitAnnouncer::getPitContenders(fp).getContenders().at(2);</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;Sampy&quot;</highlight><highlight class="normal"><sp/>==<sp/>contender3-&gt;getName());</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(2<sp/>==<sp/>contender3-&gt;getContenderScripting()-&gt;getContenderId());</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(6<sp/>==<sp/>contender3-&gt;getContenderScripting()-&gt;getLevel());</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(168<sp/>==<sp/>contender3-&gt;getStatus().life.current);</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(168<sp/>==<sp/>contender3-&gt;getStatus().life.total);</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(100<sp/>==<sp/>contender3-&gt;getStatus().magicPoint.current);</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(100<sp/>==<sp/>contender3-&gt;getStatus().magicPoint.total);</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>contender4<sp/>=<sp/>FightingPitAnnouncer::getPitContenders(fp).getContenders().at(3);</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(3<sp/>==<sp/>contender4-&gt;getContenderScripting()-&gt;getContenderId());</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;Sampy&quot;</highlight><highlight class="normal"><sp/>==<sp/>contender4-&gt;getName());</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(2<sp/>==<sp/>contender4-&gt;getContenderScripting()-&gt;getLevel());</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(156<sp/>==<sp/>contender4-&gt;getStatus().life.current);</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(156<sp/>==<sp/>contender4-&gt;getStatus().life.total);</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(100<sp/>==<sp/>contender4-&gt;getStatus().magicPoint.current);</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(100<sp/>==<sp/>contender4-&gt;getStatus().magicPoint.total);</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(4<sp/>==<sp/>fp-&gt;getPartyTeams().getNumberAlly());</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(4<sp/>==<sp/>fp-&gt;getPartyTeams().getPartyTeams().at(0)-&gt;getTeamMembers().size());</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(4<sp/>==<sp/>fp-&gt;getPartyTeams().getPartyTeams().at(0)-&gt;getTeamMembers().at(3)-&gt;getId());</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(3<sp/>==<sp/>fp-&gt;getPartyTeams().getPartyTeams().at(0)-&gt;getTeamMembers().at(2)-&gt;getId());</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(2<sp/>==<sp/>fp-&gt;getPartyTeams().getPartyTeams().at(0)-&gt;getTeamMembers().at(1)-&gt;getId());</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(1<sp/>==<sp/>fp-&gt;getPartyTeams().getPartyTeams().at(0)-&gt;getTeamMembers().at(0)-&gt;getId());</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(0<sp/>==<sp/>fp-&gt;getId());</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>section<sp/>:<sp/>Initial<sp/>setup<sp/>test</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfys_1_1arena_1_1_flatbuffer_generator" kindref="compound">fys::arena::FlatbufferGenerator</ref><sp/>fg;</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/>SECTION(</highlight><highlight class="stringliteral">&quot;Test<sp/>generateFightingPitState&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">[data,<sp/>size]<sp/>=<sp/>fg.generateFightingPitState(*fp);</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>!=<sp/>data);</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(0<sp/>&lt;<sp/>size);</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>fys::fb::FightingPitState*<sp/>fps<sp/>=<sp/>flatbuffers::GetRoot&lt;fys::fb::FightingPitState&gt;(data);</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>!=<sp/>fps);</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(0<sp/>==<sp/>fps-&gt;idFightingPit());</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(1<sp/>==<sp/>fps-&gt;partyTeams()-&gt;size());</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(4<sp/>==<sp/>fps-&gt;partyTeams()-&gt;Get(0)-&gt;members()-&gt;size());</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;Elvo&quot;</highlight><highlight class="normal"><sp/>==<sp/>fps-&gt;partyTeams()-&gt;Get(0)-&gt;members()-&gt;Get(0)-&gt;characterName()-&gt;str());</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(1<sp/>==<sp/>fps-&gt;partyTeams()-&gt;Get(0)-&gt;members()-&gt;Get(0)-&gt;status()-&gt;character_id());</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(fps-&gt;partyTeams()-&gt;Get(0)-&gt;members()-&gt;Get(0)-&gt;status()-&gt;isContender());</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(100<sp/>==<sp/>fps-&gt;partyTeams()-&gt;Get(0)-&gt;members()-&gt;Get(0)-&gt;status()-&gt;current_life());</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(100<sp/>==<sp/>fps-&gt;partyTeams()-&gt;Get(0)-&gt;members()-&gt;Get(0)-&gt;status()-&gt;total_life());</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(20<sp/>==<sp/>fps-&gt;partyTeams()-&gt;Get(0)-&gt;members()-&gt;Get(0)-&gt;status()-&gt;current_mp());</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(20<sp/>==<sp/>fps-&gt;partyTeams()-&gt;Get(0)-&gt;members()-&gt;Get(0)-&gt;status()-&gt;total_mp());</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;Mirael&quot;</highlight><highlight class="normal"><sp/>==<sp/>fps-&gt;partyTeams()-&gt;Get(0)-&gt;members()-&gt;Get(1)-&gt;characterName()-&gt;str());</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(2<sp/>==<sp/>fps-&gt;partyTeams()-&gt;Get(0)-&gt;members()-&gt;Get(1)-&gt;status()-&gt;character_id());</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(fps-&gt;partyTeams()-&gt;Get(0)-&gt;members()-&gt;Get(1)-&gt;status()-&gt;isContender());</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(200<sp/>==<sp/>fps-&gt;partyTeams()-&gt;Get(0)-&gt;members()-&gt;Get(1)-&gt;status()-&gt;current_life());</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(200<sp/>==<sp/>fps-&gt;partyTeams()-&gt;Get(0)-&gt;members()-&gt;Get(1)-&gt;status()-&gt;total_life());</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(0<sp/>==<sp/>fps-&gt;partyTeams()-&gt;Get(0)-&gt;members()-&gt;Get(1)-&gt;status()-&gt;current_mp());</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(0<sp/>==<sp/>fps-&gt;partyTeams()-&gt;Get(0)-&gt;members()-&gt;Get(1)-&gt;status()-&gt;total_mp());</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;Fyston&quot;</highlight><highlight class="normal"><sp/>==<sp/>fps-&gt;partyTeams()-&gt;Get(0)-&gt;members()-&gt;Get(2)-&gt;characterName()-&gt;str());</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(3<sp/>==<sp/>fps-&gt;partyTeams()-&gt;Get(0)-&gt;members()-&gt;Get(2)-&gt;status()-&gt;character_id());</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(fps-&gt;partyTeams()-&gt;Get(0)-&gt;members()-&gt;Get(2)-&gt;status()-&gt;isContender());</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(550<sp/>==<sp/>fps-&gt;partyTeams()-&gt;Get(0)-&gt;members()-&gt;Get(2)-&gt;status()-&gt;current_life());</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(550<sp/>==<sp/>fps-&gt;partyTeams()-&gt;Get(0)-&gt;members()-&gt;Get(2)-&gt;status()-&gt;total_life());</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(10<sp/>==<sp/>fps-&gt;partyTeams()-&gt;Get(0)-&gt;members()-&gt;Get(2)-&gt;status()-&gt;current_mp());</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(10<sp/>==<sp/>fps-&gt;partyTeams()-&gt;Get(0)-&gt;members()-&gt;Get(2)-&gt;status()-&gt;total_mp());</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;Simon&quot;</highlight><highlight class="normal"><sp/>==<sp/>fps-&gt;partyTeams()-&gt;Get(0)-&gt;members()-&gt;Get(3)-&gt;characterName()-&gt;str());</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(4<sp/>==<sp/>fps-&gt;partyTeams()-&gt;Get(0)-&gt;members()-&gt;Get(3)-&gt;status()-&gt;character_id());</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(fps-&gt;partyTeams()-&gt;Get(0)-&gt;members()-&gt;Get(3)-&gt;status()-&gt;isContender());</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(140<sp/>==<sp/>fps-&gt;partyTeams()-&gt;Get(0)-&gt;members()-&gt;Get(3)-&gt;status()-&gt;current_life());</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(140<sp/>==<sp/>fps-&gt;partyTeams()-&gt;Get(0)-&gt;members()-&gt;Get(3)-&gt;status()-&gt;total_life());</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(10<sp/>==<sp/>fps-&gt;partyTeams()-&gt;Get(0)-&gt;members()-&gt;Get(3)-&gt;status()-&gt;current_mp());</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(10<sp/>==<sp/>fps-&gt;partyTeams()-&gt;Get(0)-&gt;members()-&gt;Get(3)-&gt;status()-&gt;total_mp());</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(5<sp/>==<sp/>fps-&gt;partyTeams()-&gt;Get(0)-&gt;attacks()-&gt;size());</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;arena:actions:damage:slash_test.chai&quot;</highlight><highlight class="normal"><sp/>==<sp/>fps-&gt;partyTeams()-&gt;Get(0)-&gt;attacks()-&gt;Get(0)-&gt;str());</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;arena:actions:damage:slash_magic.chai&quot;</highlight><highlight class="normal"><sp/>==<sp/>fps-&gt;partyTeams()-&gt;Get(0)-&gt;attacks()-&gt;Get(1)-&gt;str());</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;arena:actions:damage:slash_demon.chai&quot;</highlight><highlight class="normal"><sp/>==<sp/>fps-&gt;partyTeams()-&gt;Get(0)-&gt;attacks()-&gt;Get(2)-&gt;str());</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;arena:actions:damage:slash_super.chai&quot;</highlight><highlight class="normal"><sp/>==<sp/>fps-&gt;partyTeams()-&gt;Get(0)-&gt;attacks()-&gt;Get(3)-&gt;str());</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;arena:actions:damage:slash_didi.chai&quot;</highlight><highlight class="normal"><sp/>==<sp/>fps-&gt;partyTeams()-&gt;Get(0)-&gt;attacks()-&gt;Get(4)-&gt;str());</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"></highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(4<sp/>==<sp/>fps-&gt;monstersStatus()-&gt;size());</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(0<sp/>==<sp/>fps-&gt;monstersStatus()-&gt;Get(0)-&gt;status()-&gt;character_id());</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;Sampy&quot;</highlight><highlight class="normal"><sp/>==<sp/>fps-&gt;monstersStatus()-&gt;Get(0)-&gt;characterName()-&gt;str());</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(fps-&gt;monstersStatus()-&gt;Get(0)-&gt;status()-&gt;isContender());</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(180<sp/>==<sp/>fps-&gt;monstersStatus()-&gt;Get(0)-&gt;status()-&gt;current_life());</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(180<sp/>==<sp/>fps-&gt;monstersStatus()-&gt;Get(0)-&gt;status()-&gt;total_life());</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(100<sp/>==<sp/>fps-&gt;monstersStatus()-&gt;Get(0)-&gt;status()-&gt;current_mp());</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(100<sp/>==<sp/>fps-&gt;monstersStatus()-&gt;Get(0)-&gt;status()-&gt;total_mp());</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"></highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(1<sp/>==<sp/>fps-&gt;monstersStatus()-&gt;Get(1)-&gt;status()-&gt;character_id());</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;Sampy&quot;</highlight><highlight class="normal"><sp/>==<sp/>fps-&gt;monstersStatus()-&gt;Get(1)-&gt;characterName()-&gt;str());</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(fps-&gt;monstersStatus()-&gt;Get(1)-&gt;status()-&gt;isContender());</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(174<sp/>==<sp/>fps-&gt;monstersStatus()-&gt;Get(1)-&gt;status()-&gt;current_life());</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(174<sp/>==<sp/>fps-&gt;monstersStatus()-&gt;Get(1)-&gt;status()-&gt;total_life());</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(100<sp/>==<sp/>fps-&gt;monstersStatus()-&gt;Get(1)-&gt;status()-&gt;current_mp());</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(100<sp/>==<sp/>fps-&gt;monstersStatus()-&gt;Get(1)-&gt;status()-&gt;total_mp());</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"></highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(2<sp/>==<sp/>fps-&gt;monstersStatus()-&gt;Get(2)-&gt;status()-&gt;character_id());</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;Sampy&quot;</highlight><highlight class="normal"><sp/>==<sp/>fps-&gt;monstersStatus()-&gt;Get(2)-&gt;characterName()-&gt;str());</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(fps-&gt;monstersStatus()-&gt;Get(2)-&gt;status()-&gt;isContender());</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(168<sp/>==<sp/>fps-&gt;monstersStatus()-&gt;Get(2)-&gt;status()-&gt;current_life());</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(168<sp/>==<sp/>fps-&gt;monstersStatus()-&gt;Get(2)-&gt;status()-&gt;total_life());</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(100<sp/>==<sp/>fps-&gt;monstersStatus()-&gt;Get(2)-&gt;status()-&gt;current_mp());</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(100<sp/>==<sp/>fps-&gt;monstersStatus()-&gt;Get(2)-&gt;status()-&gt;total_mp());</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"></highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(3<sp/>==<sp/>fps-&gt;monstersStatus()-&gt;Get(3)-&gt;status()-&gt;character_id());</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;Sampy&quot;</highlight><highlight class="normal"><sp/>==<sp/>fps-&gt;monstersStatus()-&gt;Get(3)-&gt;characterName()-&gt;str());</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(fps-&gt;monstersStatus()-&gt;Get(3)-&gt;status()-&gt;isContender());</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(156<sp/>==<sp/>fps-&gt;monstersStatus()-&gt;Get(3)-&gt;status()-&gt;current_life());</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(156<sp/>==<sp/>fps-&gt;monstersStatus()-&gt;Get(3)-&gt;status()-&gt;total_life());</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(100<sp/>==<sp/>fps-&gt;monstersStatus()-&gt;Get(3)-&gt;status()-&gt;current_mp());</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(100<sp/>==<sp/>fps-&gt;monstersStatus()-&gt;Get(3)-&gt;status()-&gt;total_mp());</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"></highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>section<sp/>:<sp/>Test<sp/>generateFightingPitState</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="235"><highlight class="normal"></highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/>SECTION(</highlight><highlight class="stringliteral">&quot;Test<sp/>generatePartyTeamStatus&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">[data,<sp/>size]<sp/>=<sp/>fg.generatePartyTeamStatus(*fp-&gt;getPartyTeams().getPartyTeams().at(0));</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"></highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>!=<sp/>data);</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(0<sp/>&lt;<sp/>size);</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"></highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>fys::fb::PartyTeamStatus*<sp/>pts<sp/>=<sp/>flatbuffers::GetRoot&lt;fys::fb::PartyTeamStatus&gt;(data);</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"></highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>!=<sp/>pts);</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"></highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(4<sp/>==<sp/>pts-&gt;members()-&gt;size());</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;Elvo&quot;</highlight><highlight class="normal"><sp/>==<sp/>pts-&gt;members()-&gt;Get(0)-&gt;characterName()-&gt;str());</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(1<sp/>==<sp/>pts-&gt;members()-&gt;Get(0)-&gt;status()-&gt;character_id());</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(100<sp/>==<sp/>pts-&gt;members()-&gt;Get(0)-&gt;status()-&gt;current_life());</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(100<sp/>==<sp/>pts-&gt;members()-&gt;Get(0)-&gt;status()-&gt;total_life());</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(20<sp/>==<sp/>pts-&gt;members()-&gt;Get(0)-&gt;status()-&gt;current_mp());</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(20<sp/>==<sp/>pts-&gt;members()-&gt;Get(0)-&gt;status()-&gt;total_mp());</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;Mirael&quot;</highlight><highlight class="normal"><sp/>==<sp/>pts-&gt;members()-&gt;Get(1)-&gt;characterName()-&gt;str());</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(2<sp/>==<sp/>pts-&gt;members()-&gt;Get(1)-&gt;status()-&gt;character_id());</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(200<sp/>==<sp/>pts-&gt;members()-&gt;Get(1)-&gt;status()-&gt;current_life());</highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(200<sp/>==<sp/>pts-&gt;members()-&gt;Get(1)-&gt;status()-&gt;total_life());</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(0<sp/>==<sp/>pts-&gt;members()-&gt;Get(1)-&gt;status()-&gt;current_mp());</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(0<sp/>==<sp/>pts-&gt;members()-&gt;Get(1)-&gt;status()-&gt;total_mp());</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;Fyston&quot;</highlight><highlight class="normal"><sp/>==<sp/>pts-&gt;members()-&gt;Get(2)-&gt;characterName()-&gt;str());</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(3<sp/>==<sp/>pts-&gt;members()-&gt;Get(2)-&gt;status()-&gt;character_id());</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(550<sp/>==<sp/>pts-&gt;members()-&gt;Get(2)-&gt;status()-&gt;current_life());</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(550<sp/>==<sp/>pts-&gt;members()-&gt;Get(2)-&gt;status()-&gt;total_life());</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(10<sp/>==<sp/>pts-&gt;members()-&gt;Get(2)-&gt;status()-&gt;current_mp());</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(10<sp/>==<sp/>pts-&gt;members()-&gt;Get(2)-&gt;status()-&gt;total_mp());</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;Simon&quot;</highlight><highlight class="normal"><sp/>==<sp/>pts-&gt;members()-&gt;Get(3)-&gt;characterName()-&gt;str());</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(4<sp/>==<sp/>pts-&gt;members()-&gt;Get(3)-&gt;status()-&gt;character_id());</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(140<sp/>==<sp/>pts-&gt;members()-&gt;Get(3)-&gt;status()-&gt;current_life());</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(140<sp/>==<sp/>pts-&gt;members()-&gt;Get(3)-&gt;status()-&gt;total_life());</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(10<sp/>==<sp/>pts-&gt;members()-&gt;Get(3)-&gt;status()-&gt;current_mp());</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(10<sp/>==<sp/>pts-&gt;members()-&gt;Get(3)-&gt;status()-&gt;total_mp());</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"></highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(5<sp/>==<sp/>pts-&gt;attacks()-&gt;size());</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;arena:actions:damage:slash_test.chai&quot;</highlight><highlight class="normal"><sp/>==<sp/>pts-&gt;attacks()-&gt;Get(0)-&gt;str());</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;arena:actions:damage:slash_magic.chai&quot;</highlight><highlight class="normal"><sp/>==<sp/>pts-&gt;attacks()-&gt;Get(1)-&gt;str());</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;arena:actions:damage:slash_demon.chai&quot;</highlight><highlight class="normal"><sp/>==<sp/>pts-&gt;attacks()-&gt;Get(2)-&gt;str());</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;arena:actions:damage:slash_super.chai&quot;</highlight><highlight class="normal"><sp/>==<sp/>pts-&gt;attacks()-&gt;Get(3)-&gt;str());</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;arena:actions:damage:slash_didi.chai&quot;</highlight><highlight class="normal"><sp/>==<sp/>pts-&gt;attacks()-&gt;Get(4)-&gt;str());</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"></highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>section<sp/>:<sp/>Test<sp/>generatePartyTeamStatus</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="280"><highlight class="normal"></highlight></codeline>
+<codeline lineno="281"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/>SECTION(&quot;Test<sp/>Generate<sp/>Cosmetic&quot;)<sp/>{</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="282"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="283"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/>}<sp/>//<sp/>End<sp/>section<sp/>:<sp/>Test<sp/>Generate<sp/>Cosmetic</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="284"><highlight class="normal"></highlight></codeline>
+<codeline lineno="285"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>TestCase<sp/>:<sp/>Flatbuffer<sp/>Generator<sp/>Test</highlight></codeline>
+    </programlisting>
+    <location file="/home/FyS/Project/FyS/services/arena/test/fightingPit/FlatbufferGeneratorTestCase.cpp"/>
+  </compounddef>
+</doxygen>

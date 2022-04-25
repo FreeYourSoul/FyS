@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1fb_1_1_action_traits_3_01_move_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>fys::fb::ActionTraits&lt; Move &gt;</compoundname>
+    <templateparamlist>
+    </templateparamlist>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structfys_1_1fb_1_1_action_traits_3_01_move_01_4_1a6437ba633ab6bdd39251effa9bd53914" prot="public" static="yes" mutable="no">
+        <type>const Action</type>
+        <definition>const Action fys::fb::ActionTraits&lt; Move &gt;::enum_value</definition>
+        <argsstring></argsstring>
+        <name>enum_value</name>
+        <initializer>= Action_Move</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="61" column="23" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" line="60" column="30" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/WSAction_generated.h" bodystart="60" bodyend="62"/>
+    <listofallmembers>
+      <member refid="structfys_1_1fb_1_1_action_traits_3_01_move_01_4_1a6437ba633ab6bdd39251effa9bd53914" prot="public" virt="non-virtual"><scope>fys::fb::ActionTraits&lt; Move &gt;</scope><name>enum_value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

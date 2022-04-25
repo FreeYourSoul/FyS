@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacefys_1_1arena_1_1chai_1_1util" kind="namespace" language="C++">
+    <compoundname>fys::arena::chai::util</compoundname>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacefys_1_1arena_1_1chai_1_1util_1ac39d3b2fad86622983918b8c83302bd5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>static std::string fys::arena::chai::util::getAccessAllyAction</definition>
+        <argsstring>(const std::string &amp;user, const std::string &amp;member, const std::string &amp;action)</argsstring>
+        <name>getAccessAllyAction</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>user</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>member</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>action</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/util/ChaiUtility.hh" line="38" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/util/ChaiUtility.hh" bodystart="38" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1arena_1_1chai_1_1util_1a3b99dbf854652657ea3f8714802d34b6" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>static bool fys::arena::chai::util::memberHasActionRegistered</definition>
+        <argsstring>(chaiscript::ChaiScript &amp;chai, const std::string &amp;userName, const std::string &amp;memberName, const std::string &amp;actionName)</argsstring>
+        <name>memberHasActionRegistered</name>
+        <param>
+          <type>chaiscript::ChaiScript &amp;</type>
+          <declname>chai</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>userName</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>memberName</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>actionName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/util/ChaiUtility.hh" line="44" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/util/ChaiUtility.hh" bodystart="44" bodyend="49"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/util/ChaiUtility.hh" line="35" column="32"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1fb_1_1_cosmetics_builder" kind="struct" language="C++" prot="public">
+    <compoundname>fys::fb::CosmeticsBuilder</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1fb_1_1_cosmetics_builder_1a4f0ec705803e234a9a5cbb24d58d71c7" prot="public" static="no" mutable="no">
+        <type>flatbuffers::FlatBufferBuilder &amp;</type>
+        <definition>flatbuffers::FlatBufferBuilder&amp; fys::fb::CosmeticsBuilder::fbb_</definition>
+        <argsstring></argsstring>
+        <name>fbb_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" line="264" column="34" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" bodystart="264" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1fb_1_1_cosmetics_builder_1a70a21acd482f7e26faf5f954e29bb5b1" prot="public" static="no" mutable="no">
+        <type>flatbuffers::uoffset_t</type>
+        <definition>flatbuffers::uoffset_t fys::fb::CosmeticsBuilder::start_</definition>
+        <argsstring></argsstring>
+        <name>start_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" line="265" column="26" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" bodystart="265" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfys_1_1fb_1_1_cosmetics_builder_1a58f3fda2b13ae12e6659d0ad3a38ec0e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::CosmeticsBuilder::add_cosmetic</definition>
+        <argsstring>(flatbuffers::Offset&lt; flatbuffers::Vector&lt; const fys::fb::Cosmetic * &gt;&gt; cosmetic)</argsstring>
+        <name>add_cosmetic</name>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::Vector&lt; const fys::fb::Cosmetic * &gt;&gt;</type>
+          <declname>cosmetic</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" line="266" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" bodystart="266" bodyend="268"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_cosmetics_builder_1ac8ef33357df1e894dbf3bd70356791b0" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::fb::CosmeticsBuilder::CosmeticsBuilder</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb)</argsstring>
+        <name>CosmeticsBuilder</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" line="269" column="12" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" bodystart="269" bodyend="272"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_cosmetics_builder_1a41bb88a67add7428984ed248e84b86da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfys_1_1fb_1_1_cosmetics_builder" kindref="compound">CosmeticsBuilder</ref> &amp;</type>
+        <definition>CosmeticsBuilder&amp; fys::fb::CosmeticsBuilder::operator=</definition>
+        <argsstring>(const CosmeticsBuilder &amp;)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="structfys_1_1fb_1_1_cosmetics_builder" kindref="compound">CosmeticsBuilder</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" line="273" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_cosmetics_builder_1ab918dcfef39e02a8ea707c572d47f351" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; Cosmetics &gt;</type>
+        <definition>flatbuffers::Offset&lt;Cosmetics&gt; fys::fb::CosmeticsBuilder::Finish</definition>
+        <argsstring>()</argsstring>
+        <name>Finish</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" line="274" column="23" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" bodystart="274" bodyend="278"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" line="263" column="23" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/CharacterStatus_generated.h" bodystart="263" bodyend="279"/>
+    <listofallmembers>
+      <member refid="structfys_1_1fb_1_1_cosmetics_builder_1a58f3fda2b13ae12e6659d0ad3a38ec0e" prot="public" virt="non-virtual"><scope>fys::fb::CosmeticsBuilder</scope><name>add_cosmetic</name></member>
+      <member refid="structfys_1_1fb_1_1_cosmetics_builder_1ac8ef33357df1e894dbf3bd70356791b0" prot="public" virt="non-virtual"><scope>fys::fb::CosmeticsBuilder</scope><name>CosmeticsBuilder</name></member>
+      <member refid="structfys_1_1fb_1_1_cosmetics_builder_1a4f0ec705803e234a9a5cbb24d58d71c7" prot="public" virt="non-virtual"><scope>fys::fb::CosmeticsBuilder</scope><name>fbb_</name></member>
+      <member refid="structfys_1_1fb_1_1_cosmetics_builder_1ab918dcfef39e02a8ea707c572d47f351" prot="public" virt="non-virtual"><scope>fys::fb::CosmeticsBuilder</scope><name>Finish</name></member>
+      <member refid="structfys_1_1fb_1_1_cosmetics_builder_1a41bb88a67add7428984ed248e84b86da" prot="public" virt="non-virtual"><scope>fys::fb::CosmeticsBuilder</scope><name>operator=</name></member>
+      <member refid="structfys_1_1fb_1_1_cosmetics_builder_1a70a21acd482f7e26faf5f954e29bb5b1" prot="public" virt="non-virtual"><scope>fys::fb::CosmeticsBuilder</scope><name>start_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

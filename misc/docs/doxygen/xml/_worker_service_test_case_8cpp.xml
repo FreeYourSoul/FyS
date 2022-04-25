@@ -1,0 +1,501 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="_worker_service_test_case_8cpp" kind="file" language="C++">
+    <compoundname>WorkerServiceTestCase.cpp</compoundname>
+    <includes local="no">catch2/catch.hpp</includes>
+    <includes refid="_fighting_pit_announcer_8hh" local="no">fightingPit/FightingPitAnnouncer.hh</includes>
+    <includes refid="_worker_service_8hh" local="no">network/WorkerService.hh</includes>
+    <includes refid="_f_seam_mock_data_8hpp" local="no">FSeamMockData.hpp</includes>
+    <includes refid="_test_type_8hh" local="yes">TestType.hh</includes>
+    <incdepgraph>
+      <node id="7">
+        <label>ArenaServerContext.hh</label>
+        <link refid="_arena_server_context_8hh_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="25">
+        <label>fightingPit/FightingPitLayout.hh</label>
+        <link refid="_fighting_pit_layout_8hh_source"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="35">
+        <label>zmq_addon.hpp</label>
+      </node>
+      <node id="13">
+        <label>functional</label>
+      </node>
+      <node id="27">
+        <label>fightingPit/PriorityOrderList.hh</label>
+        <link refid="_priority_order_list_8hh_source"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="45">
+        <label>filesystem</label>
+      </node>
+      <node id="16">
+        <label>fightingPit/HexagonSide.hh</label>
+        <link refid="_hexagon_side_8hh_source"/>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="33">
+        <label>network/WorkerService.hh</label>
+        <link refid="_worker_service_8hh_source"/>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>fightingPit/SideBattle.hh</label>
+        <link refid="_side_battle_8hh_source"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>variant</label>
+      </node>
+      <node id="29">
+        <label>ChaiRegister.hh</label>
+        <link refid="_chai_register_8hh_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
+        <label>fightingPit/team/TeamMember.hh</label>
+        <link refid="_team_member_8hh_source"/>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="32" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
+        <label>chaiscript/chaiscript.hpp</label>
+      </node>
+      <node id="22">
+        <label>fightingPit/FightingPit.hh</label>
+        <link refid="_fighting_pit_8hh_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>string</label>
+      </node>
+      <node id="42">
+        <label>TestType.hh</label>
+        <link refid="_test_type_8hh_source"/>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>fightingPit/FightingPitAnnouncer.hh</label>
+        <link refid="_fighting_pit_announcer_8hh_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="46">
+        <label>Cml.hh</label>
+        <link refid="_cml_8hh_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>ostream</label>
+      </node>
+      <node id="36">
+        <label>FSeamMockData.hpp</label>
+        <link refid="_f_seam_mock_data_8hpp_source"/>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>ServiceContextBase.hh</label>
+        <link refid="_service_context_base_8hh_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
+        <label>spdlog/spdlog.h</label>
+      </node>
+      <node id="41">
+        <label>random</label>
+      </node>
+      <node id="4">
+        <label>optional</label>
+      </node>
+      <node id="39">
+        <label>ConnectionHandler.hh</label>
+      </node>
+      <node id="6">
+        <label>vector</label>
+      </node>
+      <node id="17">
+        <label>utility</label>
+      </node>
+      <node id="40">
+        <label>RandomGenerator.hh</label>
+        <link refid="_random_generator_8hh_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>array</label>
+      </node>
+      <node id="18">
+        <label>zconf.h</label>
+      </node>
+      <node id="38">
+        <label>FSeam/FSeam.hpp</label>
+      </node>
+      <node id="20">
+        <label>fightingPit/team/AllyPartyTeams.hh</label>
+        <link refid="_ally_party_teams_8hh_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>SizedQueue.hh</label>
+        <link refid="_sized_queue_8hh_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>fightingPit/data/CommonTypes.hh</label>
+        <link refid="_common_types_8hh_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>catch2/catch.hpp</label>
+      </node>
+      <node id="28">
+        <label>fightingPit/Rewards.hh</label>
+        <link refid="_rewards_8hh_source"/>
+      </node>
+      <node id="47">
+        <label>unordered_map</label>
+      </node>
+      <node id="1">
+        <label>/home/FyS/Project/FyS/services/arena/test/fightingPit/WorkerServiceTestCase.cpp</label>
+        <link refid="_worker_service_test_case_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>CmlCopy.hh</label>
+        <link refid="_cml_copy_8hh_source"/>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>chrono</label>
+      </node>
+      <node id="12">
+        <label>fightingPit/contender/PitContenders.hh</label>
+        <link refid="_pit_contenders_8hh_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="37">
+        <label>type_traits</label>
+      </node>
+      <node id="15">
+        <label>set</label>
+      </node>
+      <node id="9">
+        <label>nlohmann/json.hpp</label>
+      </node>
+      <node id="44">
+        <label>algorithm</label>
+      </node>
+      <node id="43">
+        <label>CmlKey.hh</label>
+        <link refid="_cml_key_8hh_source"/>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>memory</label>
+      </node>
+      <node id="21">
+        <label>fightingPit/team/PartyTeam.hh</label>
+        <link refid="_party_team_8hh_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_worker_service_test_case_8cpp_1aed628033cc3d733ceca7dfc7dc3e7889" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>TEST_CASE</definition>
+        <argsstring>(&quot;WorkerServiceTestCase&quot;, &quot;[service][arena]&quot;)</argsstring>
+        <name>TEST_CASE</name>
+        <param>
+          <type>&quot;WorkerServiceTestCase&quot;</type>
+        </param>
+        <param>
+          <type>&quot;&quot;</type>
+          <array>[service][arena]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/test/fightingPit/WorkerServiceTestCase.cpp" line="46" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/test/fightingPit/WorkerServiceTestCase.cpp" bodystart="46" bodyend="109"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>MIT<sp/>License</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Copyright<sp/>(c)<sp/>2019<sp/>Quentin<sp/>Balland</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Repository<sp/>:<sp/>https://github.com/FreeYourSoul/FyS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Permission<sp/>is<sp/>hereby<sp/>granted,<sp/>free<sp/>of<sp/>charge,<sp/>to<sp/>any<sp/>person<sp/>obtaining<sp/>a<sp/>copy</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>of<sp/>this<sp/>software<sp/>and<sp/>associated<sp/>documentation<sp/>files<sp/>(the<sp/>&quot;Software&quot;),<sp/>to<sp/>deal</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="comment">//<sp/>in<sp/>the<sp/>Software<sp/>without<sp/>restriction,<sp/>including<sp/>without<sp/>limitation<sp/>the<sp/>rights</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>to<sp/>use,<sp/>copy,<sp/>modify,<sp/>merge,<sp/>publish,<sp/>distribute,<sp/>sublicense,<sp/>and/or<sp/>sell</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>copies<sp/>of<sp/>the<sp/>Software,<sp/>and<sp/>to<sp/>permit<sp/>persons<sp/>to<sp/>whom<sp/>the<sp/>Software<sp/>is</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment">//<sp/>furnished<sp/>to<sp/>do<sp/>so,<sp/>subject<sp/>to<sp/>the<sp/>following<sp/>conditions:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="comment">//<sp/>The<sp/>above<sp/>copyright<sp/>notice<sp/>and<sp/>this<sp/>permission<sp/>notice<sp/>shall<sp/>be<sp/>included<sp/>in<sp/>all</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>copies<sp/>or<sp/>substantial<sp/>portions<sp/>of<sp/>the<sp/>Software.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="comment">//<sp/>THE<sp/>SOFTWARE<sp/>IS<sp/>PROVIDED<sp/>&quot;AS<sp/>IS&quot;,<sp/>WITHOUT<sp/>WARRANTY<sp/>OF<sp/>ANY<sp/>KIND,<sp/>EXPRESS<sp/>OR</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="comment">//<sp/>IMPLIED,<sp/>INCLUDING<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO<sp/>THE<sp/>WARRANTIES<sp/>OF<sp/>MERCHANTABILITY,</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="comment">//<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR<sp/>PURPOSE<sp/>AND<sp/>NONINFRINGEMENT.<sp/>IN<sp/>NO<sp/>EVENT<sp/>SHALL<sp/>THE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AUTHORS<sp/>OR<sp/>COPYRIGHT<sp/>HOLDERS<sp/>BE<sp/>LIABLE<sp/>FOR<sp/>ANY<sp/>CLAIM,<sp/>DAMAGES<sp/>OR<sp/>OTHER</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="comment">//<sp/>LIABILITY,<sp/>WHETHER<sp/>IN<sp/>AN<sp/>ACTION<sp/>OF<sp/>CONTRACT,<sp/>TORT<sp/>OR<sp/>OTHERWISE,<sp/>ARISING<sp/>FROM,</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="comment">//<sp/>OUT<sp/>OF<sp/>OR<sp/>IN<sp/>CONNECTION<sp/>WITH<sp/>THE<sp/>SOFTWARE<sp/>OR<sp/>THE<sp/>USE<sp/>OR<sp/>OTHER<sp/>DEALINGS<sp/>IN<sp/>THE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="comment">//<sp/>SOFTWARE.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;catch2/catch.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;fightingPit/FightingPitAnnouncer.hh&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;network/WorkerService.hh&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;FSeamMockData.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;TestType.hh&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="33"><highlight class="normal">[[nodiscard]]<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>std::string</highlight></codeline>
+<codeline lineno="34"><highlight class="normal">getLocalPathStorage()</highlight></codeline>
+<codeline lineno="35"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>file_path<sp/>=<sp/>__FILE__;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>dir_path<sp/>=<sp/>file_path.substr(0,<sp/>file_path.rfind(</highlight><highlight class="charliteral">&apos;\\&apos;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(dir_path.size()<sp/>==<sp/>file_path.size())</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dir_path<sp/>=<sp/>file_path.substr(0,<sp/>file_path.rfind(</highlight><highlight class="charliteral">&apos;/&apos;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>dir_path<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;/../../scriptTests/scripts_lnk&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="42"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="keyword">using<sp/>namespace<sp/></highlight><highlight class="normal">fys::arena;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal">TEST_CASE(</highlight><highlight class="stringliteral">&quot;WorkerServiceTestCase&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;[service][arena]&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="47"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classfys_1_1arena_1_1_worker_service" kindref="compound">fys::arena::WorkerService</ref><sp/>ws;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>cml<sp/>=<sp/><ref refid="class_cml_base" kindref="compound">CmlBase</ref>(getLocalPathStorage());</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structfys_1_1arena_1_1_encounter_context" kindref="compound">EncounterContext</ref><sp/>ctx;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>SECTION(</highlight><highlight class="stringliteral">&quot;Failures&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(<ref refid="classfys_1_1arena_1_1_fighting_pit_1ad27a20dcca9411de7281580ef8efa782" kindref="member">fys::arena::FightingPit::CREATION_ERROR</ref><sp/>==<sp/>ws.<ref refid="classfys_1_1arena_1_1_worker_service_1aaac35104ca164f68392d733907156ed1" kindref="member">addFightingPit</ref>(</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>section<sp/>:<sp/>Failures</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>SECTION(</highlight><highlight class="stringliteral">&quot;Test<sp/>addFightingPit&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/>id1<sp/>=<sp/>ws.<ref refid="classfys_1_1arena_1_1_worker_service_1aaac35104ca164f68392d733907156ed1" kindref="member">addFightingPit</ref>(std::make_unique&lt;fys::arena::FightingPit&gt;(</highlight><highlight class="stringliteral">&quot;1&quot;</highlight><highlight class="normal">,<sp/>fys::arena::FightingPit::EASY));</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(1<sp/>==<sp/>id1);</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;1&quot;</highlight><highlight class="normal"><sp/>==<sp/>fys::arena::FightingPitAnnouncer::getCreatorUserName(ws.getFightingPitInstance(id1)));</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/>id2<sp/>=<sp/>ws.<ref refid="classfys_1_1arena_1_1_worker_service_1aaac35104ca164f68392d733907156ed1" kindref="member">addFightingPit</ref>(std::make_unique&lt;fys::arena::FightingPit&gt;(</highlight><highlight class="stringliteral">&quot;2&quot;</highlight><highlight class="normal">,<sp/>fys::arena::FightingPit::EASY));</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(2<sp/>==<sp/>id2);</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;2&quot;</highlight><highlight class="normal"><sp/>==<sp/>fys::arena::FightingPitAnnouncer::getCreatorUserName(ws.getFightingPitInstance(id2)));</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/>id3<sp/>=<sp/>ws.<ref refid="classfys_1_1arena_1_1_worker_service_1aaac35104ca164f68392d733907156ed1" kindref="member">addFightingPit</ref>(std::make_unique&lt;fys::arena::FightingPit&gt;(</highlight><highlight class="stringliteral">&quot;3&quot;</highlight><highlight class="normal">,<sp/>fys::arena::FightingPit::EASY));</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(3<sp/>==<sp/>id3);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;3&quot;</highlight><highlight class="normal"><sp/>==<sp/>fys::arena::FightingPitAnnouncer::getCreatorUserName(ws.getFightingPitInstance(id3)));</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/>id4<sp/>=<sp/>ws.<ref refid="classfys_1_1arena_1_1_worker_service_1aaac35104ca164f68392d733907156ed1" kindref="member">addFightingPit</ref>(std::make_unique&lt;fys::arena::FightingPit&gt;(</highlight><highlight class="stringliteral">&quot;4&quot;</highlight><highlight class="normal">,<sp/>fys::arena::FightingPit::EASY));</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(4<sp/>==<sp/>id4);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;4&quot;</highlight><highlight class="normal"><sp/>==<sp/>fys::arena::FightingPitAnnouncer::getCreatorUserName(ws.getFightingPitInstance(id4)));</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>section<sp/>:<sp/>Test<sp/>addFightingPit</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>SECTION(</highlight><highlight class="stringliteral">&quot;Test<sp/>Player<sp/>join<sp/>FightingPit&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal"><sp/>=<sp/>ws.<ref refid="classfys_1_1arena_1_1_worker_service_1aaac35104ca164f68392d733907156ed1" kindref="member">addFightingPit</ref>(std::make_unique&lt;fys::arena::FightingPit&gt;(</highlight><highlight class="stringliteral">&quot;4&quot;</highlight><highlight class="normal">,<sp/>fys::arena::FightingPit::EASY));</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(1<sp/>==<sp/></highlight><highlight class="keywordtype">id</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="stringliteral">&quot;4&quot;</highlight><highlight class="normal"><sp/>==<sp/>fys::arena::FightingPitAnnouncer::getCreatorUserName(ws.getFightingPitInstance(</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)));</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>pt<sp/>=<sp/>ws.getFightingPitInstance(1u);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(</highlight><highlight class="keyword">nullptr</highlight><highlight class="normal"><sp/>!=<sp/>pt);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ws.<ref refid="classfys_1_1arena_1_1_worker_service_1a9b030f873ca8655426996f62b3508fbd" kindref="member">playerJoinFightingPit</ref>(1u,<sp/>getPartyTeam(</highlight><highlight class="stringliteral">&quot;TestUser&quot;</highlight><highlight class="normal">),<sp/>cml);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(1<sp/>==<sp/>pt-&gt;getPartyTeams().getPartyTeams().size());</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(4<sp/>==<sp/>pt-&gt;getPartyTeamOfPlayer(</highlight><highlight class="stringliteral">&quot;TestUser&quot;</highlight><highlight class="normal">).getTeamMembers().size());</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ws.<ref refid="classfys_1_1arena_1_1_worker_service_1a9b030f873ca8655426996f62b3508fbd" kindref="member">playerJoinFightingPit</ref>(1u,<sp/>getPartyTeam(</highlight><highlight class="stringliteral">&quot;TestUser2&quot;</highlight><highlight class="normal">),<sp/>cml);</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(2<sp/>==<sp/>pt-&gt;getPartyTeams().getPartyTeams().size());</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(4<sp/>==<sp/>pt-&gt;getPartyTeamOfPlayer(</highlight><highlight class="stringliteral">&quot;TestUser2&quot;</highlight><highlight class="normal">).getTeamMembers().size());</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pt-&gt;setPlayerReadiness(</highlight><highlight class="stringliteral">&quot;TestUser&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(pt-&gt;isJoinable());</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pt-&gt;setPlayerReadiness(</highlight><highlight class="stringliteral">&quot;TestUser2&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE_FALSE(pt-&gt;isJoinable());</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ws.<ref refid="classfys_1_1arena_1_1_worker_service_1a9b030f873ca8655426996f62b3508fbd" kindref="member">playerJoinFightingPit</ref>(41u,<sp/>getPartyTeam(</highlight><highlight class="stringliteral">&quot;NOT_GOOD_FP_ID&quot;</highlight><highlight class="normal">),<sp/>cml);<sp/></highlight><highlight class="comment">//<sp/>Not<sp/>existing<sp/>fighting<sp/>pit,<sp/>partyTeam<sp/>can&apos;t<sp/>join</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(2<sp/>==<sp/>pt-&gt;getPartyTeams().getPartyTeams().size());</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE_THROWS(pt-&gt;getPartyTeamOfPlayer(</highlight><highlight class="stringliteral">&quot;NOT_GOOD_FP_ID&quot;</highlight><highlight class="normal">));<sp/></highlight><highlight class="comment">//<sp/>Not<sp/>joinable<sp/>isn&apos;t<sp/>present<sp/>in<sp/>the<sp/>pit<sp/>and<sp/>this<sp/>has<sp/>not<sp/>been<sp/>added</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ws.<ref refid="classfys_1_1arena_1_1_worker_service_1a9b030f873ca8655426996f62b3508fbd" kindref="member">playerJoinFightingPit</ref>(1u,<sp/>getPartyTeam(</highlight><highlight class="stringliteral">&quot;NOT_JOINABLE&quot;</highlight><highlight class="normal">),<sp/>cml);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE(2<sp/>==<sp/>pt-&gt;getPartyTeams().getPartyTeams().size());</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>REQUIRE_THROWS(pt-&gt;getPartyTeamOfPlayer(</highlight><highlight class="stringliteral">&quot;NOT_JOINABLE&quot;</highlight><highlight class="normal">));<sp/></highlight><highlight class="comment">//<sp/>Not<sp/>joinable<sp/>isn&apos;t<sp/>present<sp/>in<sp/>the<sp/>pit<sp/>and<sp/>this<sp/>has<sp/>not<sp/>been<sp/>added</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>section<sp/>:<sp/>Test<sp/>Player<sp/>join<sp/>FightingPit</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>End<sp/>TestCase<sp/>:<sp/>WorkerService<sp/>test</highlight></codeline>
+    </programlisting>
+    <location file="/home/FyS/Project/FyS/services/arena/test/fightingPit/WorkerServiceTestCase.cpp"/>
+  </compounddef>
+</doxygen>

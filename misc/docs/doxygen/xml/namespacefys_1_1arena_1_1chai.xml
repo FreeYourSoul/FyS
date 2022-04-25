@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacefys_1_1arena_1_1chai" kind="namespace" language="C++">
+    <compoundname>fys::arena::chai</compoundname>
+    <innernamespace refid="namespacefys_1_1arena_1_1chai_1_1util">fys::arena::chai::util</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/util/ChaiUtility.hh" line="35" column="32"/>
+  </compounddef>
+</doxygen>

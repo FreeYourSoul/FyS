@@ -1,0 +1,129 @@
+\hypertarget{namespacefys_1_1arena}{}\doxysection{fys\+::arena Namespace Reference}
+\label{namespacefys_1_1arena}\index{fys::arena@{fys::arena}}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacefys_1_1arena_1_1data}{data}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structfys_1_1arena_1_1_allies_targets_ids}{Allies\+Targets\+Ids}}
+\item 
+class \mbox{\hyperlink{classfys_1_1arena_1_1_ally_party_teams}{Ally\+Party\+Teams}}
+\item 
+struct \mbox{\hyperlink{structfys_1_1arena_1_1_ally_target_id}{Ally\+Target\+Id}}
+\item 
+class \mbox{\hyperlink{classfys_1_1arena_1_1_arena_server_context}{Arena\+Server\+Context}}
+\item 
+class \mbox{\hyperlink{classfys_1_1arena_1_1_arena_server_service}{Arena\+Server\+Service}}
+\begin{DoxyCompactList}\small\item\em Class managing an Arena Server. ~\newline
+ An arena server is a server handling multiple arena fighting pit instance at once. In order to properly works, it need to work with an Arena\+Dispatcher, which is a proxy for the World\+Server to communicate with Arena. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structfys_1_1arena_1_1_awaiting_arena}{Awaiting\+Arena}}
+\begin{DoxyCompactList}\small\item\em contains the information related to the arena that has to be generated \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structfys_1_1arena_1_1_awaiting_player_arena}{Awaiting\+Player\+Arena}}
+\begin{DoxyCompactList}\small\item\em A Player is awaited whom could generate a new \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit}{Fighting\+Pit}} if \+\_\+fighting\+Pit\+Id is not set \mbox{\hyperlink{structfys_1_1arena_1_1_awaiting_player_arena}{Awaiting\+Player\+Arena}} represent a player that is the trigger of a new fighting pit or a join action of an existing one, it contains the information related to the arena that has to be generated (none required when joining). \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfys_1_1arena_1_1_chai_register}{Chai\+Register}}
+\item 
+class \mbox{\hyperlink{classfys_1_1arena_1_1_connection_handler}{Connection\+Handler}}
+\item 
+class \mbox{\hyperlink{classfys_1_1arena_1_1_contender_scripting}{Contender\+Scripting}}
+\item 
+struct \mbox{\hyperlink{structfys_1_1arena_1_1_contenders_targets_ids}{Contenders\+Targets\+Ids}}
+\item 
+struct \mbox{\hyperlink{structfys_1_1arena_1_1_contender_target_id}{Contender\+Target\+Id}}
+\item 
+struct \mbox{\hyperlink{structfys_1_1arena_1_1_encounter_context}{Encounter\+Context}}
+\item 
+class \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_contender}{Fighting\+Contender}}
+\item 
+class \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit}{Fighting\+Pit}}
+\begin{DoxyCompactList}\small\item\em A fighting pit represent a specific instance of a battle. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit_announcer}{Fighting\+Pit\+Announcer}}
+\begin{DoxyCompactList}\small\item\em Builder class to create the \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit}{Fighting\+Pit}}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit_layout}{Fighting\+Pit\+Layout}}
+\begin{DoxyCompactList}\small\item\em Layout of the fighting pit. Manage the positions of monsters and the players/monsters movements. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfys_1_1arena_1_1_hexagon_side}{Hexagon\+Side}}
+\item 
+class \mbox{\hyperlink{classfys_1_1arena_1_1_party_team}{Party\+Team}}
+\item 
+struct \mbox{\hyperlink{structfys_1_1arena_1_1_pending_action}{Pending\+Action}}
+\item 
+class \mbox{\hyperlink{classfys_1_1arena_1_1_pit_contenders}{Pit\+Contenders}}
+\item 
+class \mbox{\hyperlink{classfys_1_1arena_1_1_priority_order_list}{Priority\+Order\+List}}
+\item 
+class \mbox{\hyperlink{classfys_1_1arena_1_1_side_battle}{Side\+Battle}}
+\begin{DoxyCompactList}\small\item\em Represent a battle on a specific side of one of the 3 hexagons. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfys_1_1arena_1_1_team_member}{Team\+Member}}
+\item 
+class \mbox{\hyperlink{classfys_1_1arena_1_1_worker_connection}{Worker\+Connection}}
+\item 
+class \mbox{\hyperlink{classfys_1_1arena_1_1_worker_service}{Worker\+Service}}
+\begin{DoxyCompactList}\small\item\em Manage the fighting pits \+: \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespacefys_1_1arena_ad6481673f3408c376e4b059922d8b268}{Contender\+Scripting\+U\+Ptr}} = std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classfys_1_1arena_1_1_contender_scripting}{Contender\+Scripting}} $>$
+\item 
+using \mbox{\hyperlink{namespacefys_1_1arena_af02a44d59c5a685dc4960d2eeaff8abd}{Fighting\+Contender\+S\+Ptr}} = std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_contender}{Fighting\+Contender}} $>$
+\item 
+{\footnotesize template$<$typename T $>$ }\\using \mbox{\hyperlink{namespacefys_1_1arena_a992898b81ee68cd4f8603f501d528318}{Comparator\+Selection}} = std\+::function$<$ bool(std\+::shared\+\_\+ptr$<$ T $>$, std\+::shared\+\_\+ptr$<$ T $>$)$>$
+\item 
+using \mbox{\hyperlink{namespacefys_1_1arena_a42788d4d2daac4d36ecd42ba997fdf43}{Party\+Team\+U\+Ptr}} = std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classfys_1_1arena_1_1_party_team}{Party\+Team}} $>$
+\item 
+using \mbox{\hyperlink{namespacefys_1_1arena_ab3753e35fbe151466a87a08bb677e108}{Target\+Type}} = std\+::variant$<$ \mbox{\hyperlink{structfys_1_1arena_1_1_contender_target_id}{Contender\+Target\+Id}}, \mbox{\hyperlink{structfys_1_1arena_1_1_contenders_targets_ids}{Contenders\+Targets\+Ids}}, \mbox{\hyperlink{structfys_1_1arena_1_1_ally_target_id}{Ally\+Target\+Id}}, \mbox{\hyperlink{structfys_1_1arena_1_1_allies_targets_ids}{Allies\+Targets\+Ids}}, \mbox{\hyperlink{classfys_1_1arena_1_1_hexagon_side_a07edccc39e12cbb5ecffd5a6e40fc133}{Hexagon\+Side\+::\+Orientation}} $>$
+\item 
+using \mbox{\hyperlink{namespacefys_1_1arena_ab62578f5b4f32dba293cacd655e43d1a}{Team\+Member\+S\+Ptr}} = std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classfys_1_1arena_1_1_team_member}{Team\+Member}} $>$
+\item 
+using \mbox{\hyperlink{namespacefys_1_1arena_a73914539dab5f9da3119bb7e32a39617}{json}} = nlohmann\+::json
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{namespacefys_1_1arena_a992898b81ee68cd4f8603f501d528318}\label{namespacefys_1_1arena_a992898b81ee68cd4f8603f501d528318}} 
+\index{fys::arena@{fys::arena}!ComparatorSelection@{ComparatorSelection}}
+\index{ComparatorSelection@{ComparatorSelection}!fys::arena@{fys::arena}}
+\doxysubsubsection{\texorpdfstring{ComparatorSelection}{ComparatorSelection}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+using \mbox{\hyperlink{namespacefys_1_1arena_a992898b81ee68cd4f8603f501d528318}{fys\+::arena\+::\+Comparator\+Selection}} = typedef std\+::function$<$bool(std\+::shared\+\_\+ptr$<$T$>$, std\+::shared\+\_\+ptr$<$T$>$)$>$}
+
+\mbox{\Hypertarget{namespacefys_1_1arena_ad6481673f3408c376e4b059922d8b268}\label{namespacefys_1_1arena_ad6481673f3408c376e4b059922d8b268}} 
+\index{fys::arena@{fys::arena}!ContenderScriptingUPtr@{ContenderScriptingUPtr}}
+\index{ContenderScriptingUPtr@{ContenderScriptingUPtr}!fys::arena@{fys::arena}}
+\doxysubsubsection{\texorpdfstring{ContenderScriptingUPtr}{ContenderScriptingUPtr}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacefys_1_1arena_ad6481673f3408c376e4b059922d8b268}{fys\+::arena\+::\+Contender\+Scripting\+U\+Ptr}} = typedef std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classfys_1_1arena_1_1_contender_scripting}{Contender\+Scripting}}$>$}
+
+\mbox{\Hypertarget{namespacefys_1_1arena_af02a44d59c5a685dc4960d2eeaff8abd}\label{namespacefys_1_1arena_af02a44d59c5a685dc4960d2eeaff8abd}} 
+\index{fys::arena@{fys::arena}!FightingContenderSPtr@{FightingContenderSPtr}}
+\index{FightingContenderSPtr@{FightingContenderSPtr}!fys::arena@{fys::arena}}
+\doxysubsubsection{\texorpdfstring{FightingContenderSPtr}{FightingContenderSPtr}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacefys_1_1arena_af02a44d59c5a685dc4960d2eeaff8abd}{fys\+::arena\+::\+Fighting\+Contender\+S\+Ptr}} = typedef std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classfys_1_1arena_1_1_fighting_contender}{Fighting\+Contender}}$>$}
+
+\mbox{\Hypertarget{namespacefys_1_1arena_a73914539dab5f9da3119bb7e32a39617}\label{namespacefys_1_1arena_a73914539dab5f9da3119bb7e32a39617}} 
+\index{fys::arena@{fys::arena}!json@{json}}
+\index{json@{json}!fys::arena@{fys::arena}}
+\doxysubsubsection{\texorpdfstring{json}{json}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacefys_1_1arena_a73914539dab5f9da3119bb7e32a39617}{fys\+::arena\+::json}} = typedef nlohmann\+::json}
+
+\mbox{\Hypertarget{namespacefys_1_1arena_a42788d4d2daac4d36ecd42ba997fdf43}\label{namespacefys_1_1arena_a42788d4d2daac4d36ecd42ba997fdf43}} 
+\index{fys::arena@{fys::arena}!PartyTeamUPtr@{PartyTeamUPtr}}
+\index{PartyTeamUPtr@{PartyTeamUPtr}!fys::arena@{fys::arena}}
+\doxysubsubsection{\texorpdfstring{PartyTeamUPtr}{PartyTeamUPtr}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacefys_1_1arena_a42788d4d2daac4d36ecd42ba997fdf43}{fys\+::arena\+::\+Party\+Team\+U\+Ptr}} = typedef std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classfys_1_1arena_1_1_party_team}{Party\+Team}}$>$}
+
+\mbox{\Hypertarget{namespacefys_1_1arena_ab3753e35fbe151466a87a08bb677e108}\label{namespacefys_1_1arena_ab3753e35fbe151466a87a08bb677e108}} 
+\index{fys::arena@{fys::arena}!TargetType@{TargetType}}
+\index{TargetType@{TargetType}!fys::arena@{fys::arena}}
+\doxysubsubsection{\texorpdfstring{TargetType}{TargetType}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacefys_1_1arena_ab3753e35fbe151466a87a08bb677e108}{fys\+::arena\+::\+Target\+Type}} = typedef std\+::variant$<$ \mbox{\hyperlink{structfys_1_1arena_1_1_contender_target_id}{Contender\+Target\+Id}}, \mbox{\hyperlink{structfys_1_1arena_1_1_contenders_targets_ids}{Contenders\+Targets\+Ids}}, \mbox{\hyperlink{structfys_1_1arena_1_1_ally_target_id}{Ally\+Target\+Id}}, \mbox{\hyperlink{structfys_1_1arena_1_1_allies_targets_ids}{Allies\+Targets\+Ids}}, \mbox{\hyperlink{classfys_1_1arena_1_1_hexagon_side_a07edccc39e12cbb5ecffd5a6e40fc133}{Hexagon\+Side\+::\+Orientation}}$>$}
+
+
+\begin{DoxyItemize}
+\item the target, optional as every action doesn\textquotesingle{}t require target. Can be a specific id (of an ally or a contender depending on the action) Can be a side (as some action can target a whole side) 
+\end{DoxyItemize}\mbox{\Hypertarget{namespacefys_1_1arena_ab62578f5b4f32dba293cacd655e43d1a}\label{namespacefys_1_1arena_ab62578f5b4f32dba293cacd655e43d1a}} 
+\index{fys::arena@{fys::arena}!TeamMemberSPtr@{TeamMemberSPtr}}
+\index{TeamMemberSPtr@{TeamMemberSPtr}!fys::arena@{fys::arena}}
+\doxysubsubsection{\texorpdfstring{TeamMemberSPtr}{TeamMemberSPtr}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacefys_1_1arena_ab62578f5b4f32dba293cacd655e43d1a}{fys\+::arena\+::\+Team\+Member\+S\+Ptr}} = typedef std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classfys_1_1arena_1_1_team_member}{Team\+Member}}$>$}
+

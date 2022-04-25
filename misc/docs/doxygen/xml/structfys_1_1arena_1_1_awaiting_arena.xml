@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1arena_1_1_awaiting_arena" kind="struct" language="C++" prot="public">
+    <compoundname>fys::arena::AwaitingArena</compoundname>
+    <includes refid="_arena_server_service_8hh" local="no">ArenaServerService.hh</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_awaiting_arena_1a77217e9490a7e0fd3d72f3f565b1d74f" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string fys::arena::AwaitingArena::serverCode</definition>
+        <argsstring></argsstring>
+        <name>serverCode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" line="49" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_awaiting_arena_1a14e8bc82fdef70c5e101a811081c5ac4" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool fys::arena::AwaitingArena::isJoinDisabled</definition>
+        <argsstring></argsstring>
+        <name>isJoinDisabled</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" line="50" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_awaiting_arena_1a36fdacfe04543c8cc4ec2b522b5c164a" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool fys::arena::AwaitingArena::isAmbush</definition>
+        <argsstring></argsstring>
+        <name>isAmbush</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" line="51" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_awaiting_arena_1a3e244823f4ce72798b628cbe152a7ead" prot="public" static="no" mutable="no">
+        <type>unsigned</type>
+        <definition>unsigned fys::arena::AwaitingArena::encounterId</definition>
+        <argsstring></argsstring>
+        <name>encounterId</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" line="52" column="10" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_awaiting_arena_1a0d6378c8a93d83be8dac77977a7c5ebd" prot="public" static="no" mutable="no">
+        <type><ref refid="classfys_1_1arena_1_1_fighting_pit_1a279b049c942fadc5171fb53779626202" kindref="member">FightingPit::Level</ref></type>
+        <definition>FightingPit::Level fys::arena::AwaitingArena::levelFightingPit</definition>
+        <argsstring></argsstring>
+        <name>levelFightingPit</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" line="53" column="20" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>contains the information related to the arena that has to be generated </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" line="48" column="20" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" bodystart="48" bodyend="54"/>
+    <listofallmembers>
+      <member refid="structfys_1_1arena_1_1_awaiting_arena_1a3e244823f4ce72798b628cbe152a7ead" prot="public" virt="non-virtual"><scope>fys::arena::AwaitingArena</scope><name>encounterId</name></member>
+      <member refid="structfys_1_1arena_1_1_awaiting_arena_1a36fdacfe04543c8cc4ec2b522b5c164a" prot="public" virt="non-virtual"><scope>fys::arena::AwaitingArena</scope><name>isAmbush</name></member>
+      <member refid="structfys_1_1arena_1_1_awaiting_arena_1a14e8bc82fdef70c5e101a811081c5ac4" prot="public" virt="non-virtual"><scope>fys::arena::AwaitingArena</scope><name>isJoinDisabled</name></member>
+      <member refid="structfys_1_1arena_1_1_awaiting_arena_1a0d6378c8a93d83be8dac77977a7c5ebd" prot="public" virt="non-virtual"><scope>fys::arena::AwaitingArena</scope><name>levelFightingPit</name></member>
+      <member refid="structfys_1_1arena_1_1_awaiting_arena_1a77217e9490a7e0fd3d72f3f565b1d74f" prot="public" virt="non-virtual"><scope>fys::arena::AwaitingArena</scope><name>serverCode</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

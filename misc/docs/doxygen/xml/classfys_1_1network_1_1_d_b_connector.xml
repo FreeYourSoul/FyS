@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1network_1_1_d_b_connector" kind="class" language="C++" prot="public">
+    <compoundname>fys::network::DBConnector</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfys_1_1network_1_1_d_b_connector_1aec8093638944bf682bf7792b62c925e5" prot="private" static="no" mutable="no">
+        <type>mariadb::account_ref</type>
+        <definition>mariadb::account_ref fys::network::DBConnector::_refDb</definition>
+        <argsstring></argsstring>
+        <name>_refDb</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/network/DBConnector.hh" line="55" column="22" bodyfile="/home/FyS/Project/FyS/services/arena/include/network/DBConnector.hh" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1network_1_1_d_b_connector_1a2f58340aabee52583964a561bb856eb3" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fys::network::DBConnector::DBConnector</definition>
+        <argsstring>(const arena::ArenaServerContext &amp;ctx)</argsstring>
+        <name>DBConnector</name>
+        <param>
+          <type>const <ref refid="classfys_1_1arena_1_1_arena_server_context" kindref="compound">arena::ArenaServerContext</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/network/DBConnector.hh" line="45" column="10" bodyfile="/home/FyS/Project/FyS/services/arena/src/network/DBConnector.cpp" bodystart="34" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1network_1_1_d_b_connector_1aa889fe91eff74c3f2fc562cfd5f4dec1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::unique_ptr&lt; <ref refid="classfys_1_1arena_1_1_party_team" kindref="compound">fys::arena::PartyTeam</ref> &gt;</type>
+        <definition>std::unique_ptr&lt; fys::arena::PartyTeam &gt; fys::network::DBConnector::retrievePartyTeam</definition>
+        <argsstring>(const std::string &amp;user)</argsstring>
+        <name>retrievePartyTeam</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>user</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/network/DBConnector.hh" line="48" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/network/DBConnector.cpp" bodystart="40" bodyend="96"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classfys_1_1network_1_1_d_b_connector_1a8235ad343bec3f3249c87cdff1ace199" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt; std::string &gt; fys::network::DBConnector::retrieveAttacksKeys</definition>
+        <argsstring>(const std::string &amp;userName)</argsstring>
+        <name>retrieveAttacksKeys</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>userName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/network/DBConnector.hh" line="52" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/network/DBConnector.cpp" bodystart="99" bodyend="103"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/network/DBConnector.hh" line="42" column="18" bodyfile="/home/FyS/Project/FyS/services/arena/include/network/DBConnector.hh" bodystart="42" bodyend="56"/>
+    <listofallmembers>
+      <member refid="classfys_1_1network_1_1_d_b_connector_1aec8093638944bf682bf7792b62c925e5" prot="private" virt="non-virtual"><scope>fys::network::DBConnector</scope><name>_refDb</name></member>
+      <member refid="classfys_1_1network_1_1_d_b_connector_1a2f58340aabee52583964a561bb856eb3" prot="public" virt="non-virtual"><scope>fys::network::DBConnector</scope><name>DBConnector</name></member>
+      <member refid="classfys_1_1network_1_1_d_b_connector_1a8235ad343bec3f3249c87cdff1ace199" prot="private" virt="non-virtual"><scope>fys::network::DBConnector</scope><name>retrieveAttacksKeys</name></member>
+      <member refid="classfys_1_1network_1_1_d_b_connector_1aa889fe91eff74c3f2fc562cfd5f4dec1" prot="public" virt="non-virtual"><scope>fys::network::DBConnector</scope><name>retrievePartyTeam</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacefys_1_1ws" kind="namespace" language="C++">
+    <compoundname>fys::ws</compoundname>
+    <innerclass refid="classfys_1_1ws_1_1_collision_map" prot="public">fys::ws::CollisionMap</innerclass>
+    <innerclass refid="classfys_1_1ws_1_1_connection_handler" prot="public">fys::ws::ConnectionHandler</innerclass>
+    <innerclass refid="classfys_1_1ws_1_1_map_element" prot="public">fys::ws::MapElement</innerclass>
+    <innerclass refid="structfys_1_1ws_1_1_player_info" prot="public">fys::ws::PlayerInfo</innerclass>
+    <innerclass refid="classfys_1_1ws_1_1_players_data" prot="public">fys::ws::PlayersData</innerclass>
+    <innerclass refid="classfys_1_1ws_1_1_proximity_server" prot="public">fys::ws::ProximityServer</innerclass>
+    <innerclass refid="structfys_1_1ws_1_1_proximity_server_axis" prot="public">fys::ws::ProximityServerAxis</innerclass>
+    <innerclass refid="classfys_1_1ws_1_1_world_server_context" prot="public">fys::ws::WorldServerContext</innerclass>
+    <innerclass refid="classfys_1_1ws_1_1_world_server_ctx" prot="public">fys::ws::WorldServerCtx</innerclass>
+    <innerclass refid="classfys_1_1ws_1_1_world_server_dispatcher_handler" prot="public">fys::ws::WorldServerDispatcherHandler</innerclass>
+    <innerclass refid="classfys_1_1ws_1_1_world_server_engine" prot="public">fys::ws::WorldServerEngine</innerclass>
+    <innerclass refid="classfys_1_1ws_1_1_world_server_service" prot="public">fys::ws::WorldServerService</innerclass>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="namespacefys_1_1ws_1a7bc52b5021184bcbb50b1cecca44ab20" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>eElementType</name>
+        <enumvalue id="namespacefys_1_1ws_1a7bc52b5021184bcbb50b1cecca44ab20a4d34f53389ed7f28ca91fc31ea360a66" prot="public">
+          <name>BLOCK</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1ws_1a7bc52b5021184bcbb50b1cecca44ab20ab8cd801b107a9a8f62c5b61ea5646620" prot="public">
+          <name>TRIGGER</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1ws_1a7bc52b5021184bcbb50b1cecca44ab20a020ebc1e6df871342fd2c133792f857c" prot="public">
+          <name>TP_TRIGGER</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1ws_1a7bc52b5021184bcbb50b1cecca44ab20ab50339a10e1de285ac99d4c3990b8693" prot="public">
+          <name>NONE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" line="102" column="24" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" bodystart="102" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="enum" id="namespacefys_1_1ws_1a6f04d19e882b0ec2f77b9fdad26dc717" prot="public" static="no" strong="yes">
+        <type>uint</type>
+        <name>PlayerStatus</name>
+        <enumvalue id="namespacefys_1_1ws_1a6f04d19e882b0ec2f77b9fdad26dc717a6e9c3aa3679088b7ad2fe28437935573" prot="public">
+          <name>FIGHTING</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1ws_1a6f04d19e882b0ec2f77b9fdad26dc717aaf5a690fd5ec6f789dbfc51ec6a891ba" prot="public">
+          <name>MOVING</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1ws_1a6f04d19e882b0ec2f77b9fdad26dc717a8b66d287aa051afb964a1882dc18c42a" prot="public">
+          <name>STANDING</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/PlayersData.hh" line="49" column="24" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/engine/PlayersData.hh" bodystart="49" bodyend="53"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="namespacefys_1_1ws_1acd15c5a38610eecc420be6f9b11f1755" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr static double</type>
+        <definition>constexpr static double fys::ws::DEFAULT_DISTANCE</definition>
+        <argsstring></argsstring>
+        <name>DEFAULT_DISTANCE</name>
+        <initializer>= 30</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/PlayersData.hh" line="40" column="25" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/engine/PlayersData.hh" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacefys_1_1ws_1a76aa97e796c4a1d00167d1fec8126c3f" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr static unsigned</type>
+        <definition>constexpr static unsigned fys::ws::LIMIT_NOTIFICATIONS_MOVE</definition>
+        <argsstring></argsstring>
+        <name>LIMIT_NOTIFICATIONS_MOVE</name>
+        <initializer>= 50</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/PlayersData.hh" line="41" column="27" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/engine/PlayersData.hh" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/include/WorldServerContext.hh" line="34" column="17"/>
+  </compounddef>
+</doxygen>

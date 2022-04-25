@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1ws_1_1_proximity_server" kind="class" language="C++" prot="public">
+    <compoundname>fys::ws::ProximityServer</compoundname>
+    <innerclass refid="structfys_1_1ws_1_1_proximity_server_1_1_proximity_server_axis" prot="private">fys::ws::ProximityServer::ProximityServerAxis</innerclass>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classfys_1_1ws_1_1_proximity_server_1a29fef8be4c52fbd96b2ab2b3634a2cc1" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string fys::ws::ProximityServer::code</definition>
+        <argsstring></argsstring>
+        <name>code</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" line="97" column="13" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1ws_1_1_proximity_server_1ab7d2dd1f457002460bdca3ba59de558e" prot="public" static="no" mutable="no">
+        <type>std::optional&lt; ProximityServerAxis &gt;</type>
+        <definition>std::optional&lt;ProximityServerAxis&gt; fys::ws::ProximityServer::xAxisRequirement</definition>
+        <argsstring></argsstring>
+        <name>xAxisRequirement</name>
+        <initializer>= std::nullopt</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" line="98" column="15" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1ws_1_1_proximity_server_1a99ac2866aee35fb61db00e43ca1ee6fd" prot="public" static="no" mutable="no">
+        <type>std::optional&lt; ProximityServerAxis &gt;</type>
+        <definition>std::optional&lt;ProximityServerAxis&gt; fys::ws::ProximityServer::yAxisRequirement</definition>
+        <argsstring></argsstring>
+        <name>yAxisRequirement</name>
+        <initializer>= std::nullopt</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" line="99" column="15" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1ws_1_1_proximity_server_1aa48f78ea8b6a440fface3f15012e55fb" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr bool</type>
+        <definition>constexpr bool fys::ws::ProximityServer::isAtProximity</definition>
+        <argsstring>(double axis) const noexcept</argsstring>
+        <name>isAtProximity</name>
+        <param>
+          <type>double</type>
+          <declname>axis</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" line="86" column="1" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" bodystart="86" bodyend="95"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" line="78" column="22" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" bodystart="78" bodyend="100"/>
+    <listofallmembers>
+      <member refid="classfys_1_1ws_1_1_proximity_server_1a29fef8be4c52fbd96b2ab2b3634a2cc1" prot="public" virt="non-virtual"><scope>fys::ws::ProximityServer</scope><name>code</name></member>
+      <member refid="classfys_1_1ws_1_1_proximity_server_1aa48f78ea8b6a440fface3f15012e55fb" prot="public" virt="non-virtual"><scope>fys::ws::ProximityServer</scope><name>isAtProximity</name></member>
+      <member refid="classfys_1_1ws_1_1_proximity_server_1ab7d2dd1f457002460bdca3ba59de558e" prot="public" virt="non-virtual"><scope>fys::ws::ProximityServer</scope><name>xAxisRequirement</name></member>
+      <member refid="classfys_1_1ws_1_1_proximity_server_1a99ac2866aee35fb61db00e43ca1ee6fd" prot="public" virt="non-virtual"><scope>fys::ws::ProximityServer</scope><name>yAxisRequirement</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

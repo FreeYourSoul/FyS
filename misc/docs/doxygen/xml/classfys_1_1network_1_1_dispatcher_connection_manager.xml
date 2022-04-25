@@ -1,0 +1,397 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1network_1_1_dispatcher_connection_manager" kind="class" language="C++" prot="public">
+    <compoundname>fys::network::DispatcherConnectionManager</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfys_1_1network_1_1_dispatcher_connection_manager_1a47ff5afd7e3297b0bf5b329c7837a4f9" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool fys::network::DispatcherConnectionManager::_isLoadBalancing</definition>
+        <argsstring></argsstring>
+        <name>_isLoadBalancing</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" line="145" column="18" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" bodystart="145" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1network_1_1_dispatcher_connection_manager_1a1d295d625c4ee294d451846063bafe34" prot="private" static="no" mutable="no">
+        <type>zmq::context_t</type>
+        <definition>zmq::context_t fys::network::DispatcherConnectionManager::_zmq_context</definition>
+        <argsstring></argsstring>
+        <name>_zmq_context</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" line="146" column="28" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" bodystart="146" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1network_1_1_dispatcher_connection_manager_1a645b9a9b691dfe0619b99e5b4f35356f" prot="private" static="no" mutable="no">
+        <type>zmq::socket_t</type>
+        <definition>zmq::socket_t fys::network::DispatcherConnectionManager::_listener</definition>
+        <argsstring></argsstring>
+        <name>_listener</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" line="147" column="27" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" bodystart="147" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1network_1_1_dispatcher_connection_manager_1a3d7b38cedc9cbe339fa53ab56676b3ab" prot="private" static="no" mutable="no">
+        <type>zmq::socket_t</type>
+        <definition>zmq::socket_t fys::network::DispatcherConnectionManager::_dispatcher</definition>
+        <argsstring></argsstring>
+        <name>_dispatcher</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" line="148" column="27" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" bodystart="148" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1network_1_1_dispatcher_connection_manager_1a96972ba7687419ed5ad0d980867a2fc8" prot="private" static="no" mutable="no">
+        <type><ref refid="structfys_1_1network_1_1_cluster_connection" kindref="compound">ClusterConnection</ref></type>
+        <definition>ClusterConnection fys::network::DispatcherConnectionManager::_clusterConnection</definition>
+        <argsstring></argsstring>
+        <name>_clusterConnection</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" line="150" column="31" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" bodystart="150" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1network_1_1_dispatcher_connection_manager_1ae0e3789b542894047814c0602e1b069a" prot="public" static="no" const="no" explicit="yes" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::network::DispatcherConnectionManager::DispatcherConnectionManager</definition>
+        <argsstring>(int threadNumber=1, bool isLoadBalancing=true) noexcept</argsstring>
+        <name>DispatcherConnectionManager</name>
+        <param>
+          <type>int</type>
+          <declname>threadNumber</declname>
+          <defval>1</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>isLoadBalancing</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>threadNumber</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number of thread used by the zmq::context in order to manage messages </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>isLoadBalancing</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>if true, a Dealer socket is instantiated in order to dispatch messages if false, a Publisher socket is instantiated to do so </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" line="51" column="18" bodyfile="/home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp" bodystart="6" bodyend="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1network_1_1_dispatcher_connection_manager_1ad4c7378367a101c50352c3d0037f7e4b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::network::DispatcherConnectionManager::setupConnectionManager</definition>
+        <argsstring>(const fys::StartupDispatcherCtx &amp;ctx) noexcept</argsstring>
+        <name>setupConnectionManager</name>
+        <param>
+          <type>const <ref refid="classfys_1_1_startup_dispatcher_ctx" kindref="compound">fys::StartupDispatcherCtx</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" line="53" column="14" bodyfile="/home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp" bodystart="16" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1network_1_1_dispatcher_connection_manager_1a5b4554f6c31b43d70ad653b9b7d663a6" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::tuple&lt; bool, bool, bool &gt;</type>
+        <definition>std::tuple&lt; bool, bool, bool &gt; fys::network::DispatcherConnectionManager::poll</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>poll</name>
+        <briefdescription>
+<para>Poll the reader socket (the listener one and the subscriber one if the dispatcher is cluster aware. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>a pair of bool with first : is there anything on the listener socket to read second : is there anything on the subscriber socket to read </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" line="63" column="20" bodyfile="/home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp" bodystart="38" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1network_1_1_dispatcher_connection_manager_1ab2be255a1a680a01d444e9929b88853d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Handler</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void fys::network::DispatcherConnectionManager::dispatchMessageFromListenerSocket</definition>
+        <argsstring>(Handler &amp;&amp;handler)</argsstring>
+        <name>dispatchMessageFromListenerSocket</name>
+        <param>
+          <type>Handler &amp;&amp;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>Read the Listener socket and call a given handler with this message as parameter. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>function to call after reading message from socket (multipart_t object sent as parameter) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>function instance to call which take zmq::multipart object as parameter </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" line="73" column="14" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" bodystart="73" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1network_1_1_dispatcher_connection_manager_1a5e086c13b30b237f9d813ef9ab4402ee" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Handler</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void fys::network::DispatcherConnectionManager::dispatchMessageFromSubscriberSocket</definition>
+        <argsstring>(Handler &amp;&amp;handler) noexcept</argsstring>
+        <name>dispatchMessageFromSubscriberSocket</name>
+        <param>
+          <type>Handler &amp;&amp;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+<para>Read the Cluster subscriber socket and call a given handler with this message as parameter. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>function to call after reading message from socket (multipart_t object sent as parameter) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>handler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>function instance to call which take zmq::multipart object as parameter </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" line="90" column="14" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" bodystart="90" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1network_1_1_dispatcher_connection_manager_1a77298948e3747e60431c235d21d15507" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Handler</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void fys::network::DispatcherConnectionManager::dispatchMessageFromDispatcherSocket</definition>
+        <argsstring>(Handler &amp;&amp;handler) noexcept</argsstring>
+        <name>dispatchMessageFromDispatcherSocket</name>
+        <param>
+          <type>Handler &amp;&amp;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" line="105" column="14" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" bodystart="105" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1network_1_1_dispatcher_connection_manager_1afad4e81f4d20213938ec257e2a36fb86" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::network::DispatcherConnectionManager::replyToListenerSocket</definition>
+        <argsstring>(zmq::multipart_t &amp;&amp;msg) noexcept</argsstring>
+        <name>replyToListenerSocket</name>
+        <param>
+          <type>zmq::multipart_t &amp;&amp;</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+<para>Send a message to the frontend socket of the dispatcher (proxy). This socket is a router socket, and so the message has to contains an identity frame to be routed correctly. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>msg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>reply to the requester client of the dispatcher </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the message has been sent correctly, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" line="121" column="14" bodyfile="/home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp" bodystart="52" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1network_1_1_dispatcher_connection_manager_1a0c9a88ab523473d6ab928b0b1edc1c62" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::network::DispatcherConnectionManager::sendMessageToDispatcherSocket</definition>
+        <argsstring>(zmq::multipart_t &amp;&amp;msg) noexcept</argsstring>
+        <name>sendMessageToDispatcherSocket</name>
+        <param>
+          <type>zmq::multipart_t &amp;&amp;</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+<para>Send a message to the servers connected to the dispatcher (load balanced, or distributed dispatching depending on the dispatcher configuration). The message has to contains the identity frame in order for the server to resend it in the reply. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>msg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>incoming message forwarded to the dispatched server </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the message has been sent correctly, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" line="129" column="14" bodyfile="/home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp" bodystart="58" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1network_1_1_dispatcher_connection_manager_1a2350732d67f54ae362c14ce417d04042" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::network::DispatcherConnectionManager::sendMessageToClusterPubSocket</definition>
+        <argsstring>(zmq::multipart_t &amp;&amp;msg) noexcept</argsstring>
+        <name>sendMessageToClusterPubSocket</name>
+        <param>
+          <type>zmq::multipart_t &amp;&amp;</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+<para>Send a message to the dispatcher cluster (if configured in the dispatcher) </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>msg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>notification to send to the dispatcher cluster </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the message has been sent correctly, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" line="135" column="14" bodyfile="/home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp" bodystart="64" bodyend="68"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classfys_1_1network_1_1_dispatcher_connection_manager_1acf227042d92919b725efdece72f87a61" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::network::DispatcherConnectionManager::subscribeToTopics</definition>
+        <argsstring>(const std::vector&lt; std::string &gt; &amp;topics) noexcept</argsstring>
+        <name>subscribeToTopics</name>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>topics</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>The dispatcher connect to the proxy and subscribe to specifics channels given as parameter <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>topics</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>additional topics to subscribe to (customizable through the config file) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" line="142" column="14" bodyfile="/home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp" bodystart="32" bodyend="36"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" line="42" column="38" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" bodystart="42" bodyend="152"/>
+    <listofallmembers>
+      <member refid="classfys_1_1network_1_1_dispatcher_connection_manager_1a96972ba7687419ed5ad0d980867a2fc8" prot="private" virt="non-virtual"><scope>fys::network::DispatcherConnectionManager</scope><name>_clusterConnection</name></member>
+      <member refid="classfys_1_1network_1_1_dispatcher_connection_manager_1a3d7b38cedc9cbe339fa53ab56676b3ab" prot="private" virt="non-virtual"><scope>fys::network::DispatcherConnectionManager</scope><name>_dispatcher</name></member>
+      <member refid="classfys_1_1network_1_1_dispatcher_connection_manager_1a47ff5afd7e3297b0bf5b329c7837a4f9" prot="private" virt="non-virtual"><scope>fys::network::DispatcherConnectionManager</scope><name>_isLoadBalancing</name></member>
+      <member refid="classfys_1_1network_1_1_dispatcher_connection_manager_1a645b9a9b691dfe0619b99e5b4f35356f" prot="private" virt="non-virtual"><scope>fys::network::DispatcherConnectionManager</scope><name>_listener</name></member>
+      <member refid="classfys_1_1network_1_1_dispatcher_connection_manager_1a1d295d625c4ee294d451846063bafe34" prot="private" virt="non-virtual"><scope>fys::network::DispatcherConnectionManager</scope><name>_zmq_context</name></member>
+      <member refid="classfys_1_1network_1_1_dispatcher_connection_manager_1ae0e3789b542894047814c0602e1b069a" prot="public" virt="non-virtual"><scope>fys::network::DispatcherConnectionManager</scope><name>DispatcherConnectionManager</name></member>
+      <member refid="classfys_1_1network_1_1_dispatcher_connection_manager_1a77298948e3747e60431c235d21d15507" prot="public" virt="non-virtual"><scope>fys::network::DispatcherConnectionManager</scope><name>dispatchMessageFromDispatcherSocket</name></member>
+      <member refid="classfys_1_1network_1_1_dispatcher_connection_manager_1ab2be255a1a680a01d444e9929b88853d" prot="public" virt="non-virtual"><scope>fys::network::DispatcherConnectionManager</scope><name>dispatchMessageFromListenerSocket</name></member>
+      <member refid="classfys_1_1network_1_1_dispatcher_connection_manager_1a5e086c13b30b237f9d813ef9ab4402ee" prot="public" virt="non-virtual"><scope>fys::network::DispatcherConnectionManager</scope><name>dispatchMessageFromSubscriberSocket</name></member>
+      <member refid="classfys_1_1network_1_1_dispatcher_connection_manager_1a5b4554f6c31b43d70ad653b9b7d663a6" prot="public" virt="non-virtual"><scope>fys::network::DispatcherConnectionManager</scope><name>poll</name></member>
+      <member refid="classfys_1_1network_1_1_dispatcher_connection_manager_1afad4e81f4d20213938ec257e2a36fb86" prot="public" virt="non-virtual"><scope>fys::network::DispatcherConnectionManager</scope><name>replyToListenerSocket</name></member>
+      <member refid="classfys_1_1network_1_1_dispatcher_connection_manager_1a2350732d67f54ae362c14ce417d04042" prot="public" virt="non-virtual"><scope>fys::network::DispatcherConnectionManager</scope><name>sendMessageToClusterPubSocket</name></member>
+      <member refid="classfys_1_1network_1_1_dispatcher_connection_manager_1a0c9a88ab523473d6ab928b0b1edc1c62" prot="public" virt="non-virtual"><scope>fys::network::DispatcherConnectionManager</scope><name>sendMessageToDispatcherSocket</name></member>
+      <member refid="classfys_1_1network_1_1_dispatcher_connection_manager_1ad4c7378367a101c50352c3d0037f7e4b" prot="public" virt="non-virtual"><scope>fys::network::DispatcherConnectionManager</scope><name>setupConnectionManager</name></member>
+      <member refid="classfys_1_1network_1_1_dispatcher_connection_manager_1acf227042d92919b725efdece72f87a61" prot="private" virt="non-virtual"><scope>fys::network::DispatcherConnectionManager</scope><name>subscribeToTopics</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

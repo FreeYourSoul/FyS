@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="_arena___integrate___chaiscripts_8md" kind="file" language="Markdown">
+    <compoundname>Arena_Integrate_Chaiscripts.md</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>Integrate<sp/>Chaiscript</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*<sp/>[Integrate<sp/>AI](#integrate-ai-scripts)<sp/>(opponent<sp/>artificial<sp/>intelligence)</highlight></codeline>
+<codeline><highlight class="normal">*<sp/>[Integrate<sp/>attacks](#integrate-attacks-scripts)<sp/>(used<sp/>by<sp/>opponent<sp/>and<sp/>team<sp/>characters)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Introduction<sp/>:<sp/>Chaiscript</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Existing<sp/>C++/Chai<sp/>Mapping</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Integrate<sp/>AI<sp/>scripts</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Template</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Chaiscript<sp/>for<sp/>AI<sp/>are<sp/>represented<sp/>by<sp/>a<sp/>class<sp/>which<sp/>has<sp/>to<sp/>take<sp/>a<sp/>contenderId<sp/>as<sp/>parameter<sp/>in<sp/>constructor<sp/>and<sp/>implement<sp/>the<sp/>methods:</highlight></codeline>
+<codeline><highlight class="normal"><sp/>*<sp/>runScriptedAction(id)<sp/>which<sp/>will<sp/>determine<sp/>and<sp/>apply<sp/>an<sp/>action.</highlight></codeline>
+<codeline><highlight class="normal"><sp/>*<sp/>defineSpawningPosition()<sp/>which<sp/>will<sp/>return<sp/>the<sp/>position<sp/>on<sp/>the<sp/>battle<sp/>field<sp/>for<sp/>the<sp/>opponent</highlight></codeline>
+<codeline><highlight class="normal"><sp/></highlight></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">class<sp/>TemplateChai<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>var<sp/>contenderId;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>TemplateChai(contenderId)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this.contenderId<sp/>=<sp/>contenderId;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>def<sp/>runScriptedAction(id)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>decide<sp/>attack</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>decide<sp/>a<sp/>target<sp/>(if<sp/>needed)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>apply<sp/>and<sp/>send<sp/>message</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>def<sp/>defineSpawningPosition()<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>return<sp/>HexagonSide</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Integrate<sp/>attacks<sp/>scripts</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Template<sp/></highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">```cpp</highlight></codeline>
+<codeline><highlight class="normal">```</highlight></codeline>
+    </programlisting>
+    <location file="services/arena/Arena_Integrate_Chaiscripts.md"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1fb_1_1_move_ping_builder" kind="struct" language="C++" prot="public">
+    <compoundname>fys::fb::MovePingBuilder</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1fb_1_1_move_ping_builder_1a6ad6042763dbfafe222366b26acf508b" prot="public" static="no" mutable="no">
+        <type>flatbuffers::FlatBufferBuilder &amp;</type>
+        <definition>flatbuffers::FlatBufferBuilder&amp; fys::fb::MovePingBuilder::fbb_</definition>
+        <argsstring></argsstring>
+        <name>fbb_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" line="57" column="34" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1fb_1_1_move_ping_builder_1a4460cdf103b81c2712fd061932242906" prot="public" static="no" mutable="no">
+        <type>flatbuffers::uoffset_t</type>
+        <definition>flatbuffers::uoffset_t fys::fb::MovePingBuilder::start_</definition>
+        <argsstring></argsstring>
+        <name>start_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" line="58" column="26" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfys_1_1fb_1_1_move_ping_builder_1a6c3b791cb69d3eb0e1cd7eaf12f57e04" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::MovePingBuilder::add_direction</definition>
+        <argsstring>(double direction)</argsstring>
+        <name>add_direction</name>
+        <param>
+          <type>double</type>
+          <declname>direction</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" line="59" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" bodystart="59" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_move_ping_builder_1ac40a8bedc574d10fc735e44b35da094a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::MovePingBuilder::add_x</definition>
+        <argsstring>(double x)</argsstring>
+        <name>add_x</name>
+        <param>
+          <type>double</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" line="62" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" bodystart="62" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_move_ping_builder_1a2e6da0523c1990dc193d5baf19a0938a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::MovePingBuilder::add_y</definition>
+        <argsstring>(double y)</argsstring>
+        <name>add_y</name>
+        <param>
+          <type>double</type>
+          <declname>y</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" line="65" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" bodystart="65" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_move_ping_builder_1a79b348557ff7034710e6d070f997f1e1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::MovePingBuilder::add_id</definition>
+        <argsstring>(flatbuffers::Offset&lt; flatbuffers::String &gt; id)</argsstring>
+        <name>add_id</name>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" line="68" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" bodystart="68" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_move_ping_builder_1af40bb88e3f8d587dcba2d8ddabdef9cf" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::fb::MovePingBuilder::MovePingBuilder</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb)</argsstring>
+        <name>MovePingBuilder</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" line="71" column="12" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" bodystart="71" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_move_ping_builder_1a7e8bd48b190c42a871afc90240570026" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfys_1_1fb_1_1_move_ping_builder" kindref="compound">MovePingBuilder</ref> &amp;</type>
+        <definition>MovePingBuilder&amp; fys::fb::MovePingBuilder::operator=</definition>
+        <argsstring>(const MovePingBuilder &amp;)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="structfys_1_1fb_1_1_move_ping_builder" kindref="compound">MovePingBuilder</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" line="75" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_move_ping_builder_1a6e1c6ecde66232ad897cb367e052b6e8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; MovePing &gt;</type>
+        <definition>flatbuffers::Offset&lt;MovePing&gt; fys::fb::MovePingBuilder::Finish</definition>
+        <argsstring>()</argsstring>
+        <name>Finish</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" line="76" column="23" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" bodystart="76" bodyend="80"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" line="56" column="22" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ClientCom_generated.h" bodystart="56" bodyend="81"/>
+    <listofallmembers>
+      <member refid="structfys_1_1fb_1_1_move_ping_builder_1a6c3b791cb69d3eb0e1cd7eaf12f57e04" prot="public" virt="non-virtual"><scope>fys::fb::MovePingBuilder</scope><name>add_direction</name></member>
+      <member refid="structfys_1_1fb_1_1_move_ping_builder_1a79b348557ff7034710e6d070f997f1e1" prot="public" virt="non-virtual"><scope>fys::fb::MovePingBuilder</scope><name>add_id</name></member>
+      <member refid="structfys_1_1fb_1_1_move_ping_builder_1ac40a8bedc574d10fc735e44b35da094a" prot="public" virt="non-virtual"><scope>fys::fb::MovePingBuilder</scope><name>add_x</name></member>
+      <member refid="structfys_1_1fb_1_1_move_ping_builder_1a2e6da0523c1990dc193d5baf19a0938a" prot="public" virt="non-virtual"><scope>fys::fb::MovePingBuilder</scope><name>add_y</name></member>
+      <member refid="structfys_1_1fb_1_1_move_ping_builder_1a6ad6042763dbfafe222366b26acf508b" prot="public" virt="non-virtual"><scope>fys::fb::MovePingBuilder</scope><name>fbb_</name></member>
+      <member refid="structfys_1_1fb_1_1_move_ping_builder_1a6e1c6ecde66232ad897cb367e052b6e8" prot="public" virt="non-virtual"><scope>fys::fb::MovePingBuilder</scope><name>Finish</name></member>
+      <member refid="structfys_1_1fb_1_1_move_ping_builder_1af40bb88e3f8d587dcba2d8ddabdef9cf" prot="public" virt="non-virtual"><scope>fys::fb::MovePingBuilder</scope><name>MovePingBuilder</name></member>
+      <member refid="structfys_1_1fb_1_1_move_ping_builder_1a7e8bd48b190c42a871afc90240570026" prot="public" virt="non-virtual"><scope>fys::fb::MovePingBuilder</scope><name>operator=</name></member>
+      <member refid="structfys_1_1fb_1_1_move_ping_builder_1a4460cdf103b81c2712fd061932242906" prot="public" virt="non-virtual"><scope>fys::fb::MovePingBuilder</scope><name>start_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_1373c6955a20ed7e63ec56ca9d5fc95b" kind="dir">
+    <compoundname>/home/FyS/Project/FyS/services/arena</compoundname>
+    <innerdir refid="dir_accbbac37dd753a9b0a3b3ee2d77fd1b">/home/FyS/Project/FyS/services/arena/include</innerdir>
+    <innerdir refid="dir_4888cf0ca1a7c0eba618a56426a2b2c0">/home/FyS/Project/FyS/services/arena/src</innerdir>
+    <innerdir refid="dir_bcd54145494237a31d3c7218abff7028">/home/FyS/Project/FyS/services/arena/test</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/"/>
+  </compounddef>
+</doxygen>

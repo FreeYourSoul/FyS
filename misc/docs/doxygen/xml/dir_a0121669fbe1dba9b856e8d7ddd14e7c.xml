@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_a0121669fbe1dba9b856e8d7ddd14e7c" kind="dir">
+    <compoundname>/home/FyS/Project/FyS/dispatcher</compoundname>
+    <innerdir refid="dir_06d60e34bc871c871297b8cbc157d0b8">/home/FyS/Project/FyS/dispatcher/arena_dispatcher</innerdir>
+    <innerdir refid="dir_88945ed3fb2d8085d0ef735f87d2d379">/home/FyS/Project/FyS/dispatcher/common</innerdir>
+    <innerdir refid="dir_c5ecbdc8cb5a3b63768e9d18ebf6ae0b">/home/FyS/Project/FyS/dispatcher/proxy_cluster_dispatcher</innerdir>
+    <innerdir refid="dir_6fdb383f62d36da7b9c3d9833ae9d91e">/home/FyS/Project/FyS/dispatcher/quest_dispatcher</innerdir>
+    <innerdir refid="dir_ffaf34bbbd5f80d560bd6e7b8b819c2f">/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher</innerdir>
+    <innerfile refid="_port_setting_displayer_8py">PortSettingDisplayer.py</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/dispatcher/"/>
+  </compounddef>
+</doxygen>

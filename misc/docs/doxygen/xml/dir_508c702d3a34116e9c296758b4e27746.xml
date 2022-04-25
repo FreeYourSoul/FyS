@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_508c702d3a34116e9c296758b4e27746" kind="dir">
+    <compoundname>/home/FyS/Project/FyS/services/arena/include/fightingPit/data</compoundname>
+    <innerfile refid="_common_types_8hh">CommonTypes.hh</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/"/>
+  </compounddef>
+</doxygen>

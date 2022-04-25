@@ -1,0 +1,265 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1ws_1_1_collision_map" kind="class" language="C++" prot="public">
+    <compoundname>fys::ws::CollisionMap</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfys_1_1ws_1_1_collision_map_1ad42b9a9f8abc1431db5305a8d2731d29" prot="private" static="no" mutable="no">
+        <type>std::pair&lt; double, double &gt;</type>
+        <definition>std::pair&lt;double, double&gt; fys::ws::CollisionMap::_boundaryX</definition>
+        <argsstring></argsstring>
+        <name>_boundaryX</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" line="195" column="11" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" bodystart="195" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1ws_1_1_collision_map_1a67b9a85ee2404c1d7a48722f75f48725" prot="private" static="no" mutable="no">
+        <type>std::pair&lt; double, double &gt;</type>
+        <definition>std::pair&lt;double, double&gt; fys::ws::CollisionMap::_boundaryY</definition>
+        <argsstring></argsstring>
+        <name>_boundaryY</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" line="196" column="11" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" bodystart="196" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1ws_1_1_collision_map_1ae73e3bf1d52104ad32a968f23db45f16" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classfys_1_1ws_1_1_proximity_server" kindref="compound">ProximityServer</ref> &gt;</type>
+        <definition>std::vector&lt;ProximityServer&gt; fys::ws::CollisionMap::_serverProximity</definition>
+        <argsstring></argsstring>
+        <name>_serverProximity</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" line="197" column="13" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" bodystart="197" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1ws_1_1_collision_map_1a7170475ebb712e2965779468ba78e2d4" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::vector&lt; <ref refid="classfys_1_1ws_1_1_map_element" kindref="compound">MapElement</ref> &gt; &gt;</type>
+        <definition>std::vector&lt;std::vector&lt;MapElement&gt; &gt; fys::ws::CollisionMap::_mapElems</definition>
+        <argsstring></argsstring>
+        <name>_mapElems</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" line="198" column="13" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" bodystart="198" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1ws_1_1_collision_map_1a94d57c017974db95793c16c541319f23" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fys::ws::CollisionMap::CollisionMap</definition>
+        <argsstring>(const WorldServerContext &amp;ctx)</argsstring>
+        <name>CollisionMap</name>
+        <param>
+          <type>const <ref refid="classfys_1_1ws_1_1_world_server_context" kindref="compound">WorldServerContext</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" line="157" column="10" bodyfile="/home/FyS/Project/FyS/services/worldserver/src/engine/CollisionMap.cpp" bodystart="51" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1ws_1_1_collision_map_1a03d3c59f5efc9a589ebf01fa59999821" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::ws::CollisionMap::CollisionMap</definition>
+        <argsstring>(CollisionMap &amp;&amp;) noexcept=default</argsstring>
+        <name>CollisionMap</name>
+        <param>
+          <type><ref refid="classfys_1_1ws_1_1_collision_map" kindref="compound">CollisionMap</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" line="159" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1ws_1_1_collision_map_1a03328dfef8ae96a6fd8a06ee1589cb3d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fys::ws::CollisionMap::CollisionMap</definition>
+        <argsstring>(const CollisionMap &amp;)=delete</argsstring>
+        <name>CollisionMap</name>
+        <param>
+          <type>const <ref refid="classfys_1_1ws_1_1_collision_map" kindref="compound">CollisionMap</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" line="160" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1ws_1_1_collision_map_1a80d6ac73199d8bc2a60a248e11e58882" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classfys_1_1ws_1_1_collision_map" kindref="compound">CollisionMap</ref> &amp;</type>
+        <definition>CollisionMap&amp; fys::ws::CollisionMap::operator=</definition>
+        <argsstring>(const CollisionMap &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="classfys_1_1ws_1_1_collision_map" kindref="compound">CollisionMap</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" line="162" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1ws_1_1_collision_map_1ae1cff40e6f6c585950fa1dd088f70eba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::ws::CollisionMap::buildMapFromTmx</definition>
+        <argsstring>(const std::string &amp;tmxMapPath)</argsstring>
+        <name>buildMapFromTmx</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>tmxMapPath</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" line="165" column="1" bodyfile="/home/FyS/Project/FyS/services/worldserver/src/engine/CollisionMap.cpp" bodystart="61" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1ws_1_1_collision_map_1a57620c4b56a9e0882e11e31c011bc773" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::ws::CollisionMap::canMoveTo</definition>
+        <argsstring>(double x, double y, std::size_t level) const noexcept</argsstring>
+        <name>canMoveTo</name>
+        <param>
+          <type>double</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>level</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Check if the position is in the boundary of the map before checking on the map <simplesect kind="return"><para>true if it is possible to move on the given position, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" line="171" column="1" bodyfile="/home/FyS/Project/FyS/services/worldserver/src/engine/CollisionMap.cpp" bodystart="117" bodyend="122"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1ws_1_1_collision_map_1a7cf2bb0b2c0a2b32354d0ba848c27d6e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::ws::CollisionMap::executePotentialTrigger</definition>
+        <argsstring>(uint index, const PlayerInfo &amp;positionOnMap, ws::ConnectionHandler &amp;conn)</argsstring>
+        <name>executePotentialTrigger</name>
+        <param>
+          <type>uint</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structfys_1_1ws_1_1_player_info" kindref="compound">PlayerInfo</ref> &amp;</type>
+          <declname>positionOnMap</declname>
+        </param>
+        <param>
+          <type><ref refid="classfys_1_1ws_1_1_connection_handler" kindref="compound">ws::ConnectionHandler</ref> &amp;</type>
+          <declname>conn</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" line="173" column="1" bodyfile="/home/FyS/Project/FyS/services/worldserver/src/engine/CollisionMap.cpp" bodystart="111" bodyend="114"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classfys_1_1ws_1_1_collision_map_1ab597b99b9a02fbcd2d3f15d0418f2774" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::ws::CollisionMap::addCollisionInMap</definition>
+        <argsstring>(const tmx::Vector2u &amp;tileMapSize, const tmx::ObjectGroup &amp;collisionLayer)</argsstring>
+        <name>addCollisionInMap</name>
+        <param>
+          <type>const tmx::Vector2u &amp;</type>
+          <declname>tileMapSize</declname>
+        </param>
+        <param>
+          <type>const tmx::ObjectGroup &amp;</type>
+          <declname>collisionLayer</declname>
+        </param>
+        <briefdescription>
+<para>Add the the collision elements (witht their AABB objects) into the map. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>AABB Objects stands for Axis-Aligned Bounding Box. Basically coordinates to use as hit box for the tiles. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" line="182" column="1" bodyfile="/home/FyS/Project/FyS/services/worldserver/src/engine/CollisionMap.cpp" bodystart="89" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1ws_1_1_collision_map_1aaa39c6bb07bc8e06c74e2606a480b11a" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::ws::CollisionMap::addTriggerInMap</definition>
+        <argsstring>(const tmx::ObjectGroup &amp;triggerLayer)</argsstring>
+        <name>addTriggerInMap</name>
+        <param>
+          <type>const tmx::ObjectGroup &amp;</type>
+          <declname>triggerLayer</declname>
+        </param>
+        <briefdescription>
+<para>Add the trigger elements into the map, and link the function associated to this trigger. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>A trigger is defined with an id, that is going to be checked against the database,<itemizedlist>
+<listitem><para>Some specific trigger (teleportation trigger) will trigger a complete C++ code that is going to teleport the player into another location</para>
+</listitem><listitem><para>The classical one is going to trigger a script retrieved from the DB thanks to the id defining the trigger </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" line="192" column="1" bodyfile="/home/FyS/Project/FyS/services/worldserver/src/engine/CollisionMap.cpp" bodystart="105" bodyend="108"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" line="154" column="19" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" bodystart="154" bodyend="200"/>
+    <listofallmembers>
+      <member refid="classfys_1_1ws_1_1_collision_map_1ad42b9a9f8abc1431db5305a8d2731d29" prot="private" virt="non-virtual"><scope>fys::ws::CollisionMap</scope><name>_boundaryX</name></member>
+      <member refid="classfys_1_1ws_1_1_collision_map_1a67b9a85ee2404c1d7a48722f75f48725" prot="private" virt="non-virtual"><scope>fys::ws::CollisionMap</scope><name>_boundaryY</name></member>
+      <member refid="classfys_1_1ws_1_1_collision_map_1a7170475ebb712e2965779468ba78e2d4" prot="private" virt="non-virtual"><scope>fys::ws::CollisionMap</scope><name>_mapElems</name></member>
+      <member refid="classfys_1_1ws_1_1_collision_map_1ae73e3bf1d52104ad32a968f23db45f16" prot="private" virt="non-virtual"><scope>fys::ws::CollisionMap</scope><name>_serverProximity</name></member>
+      <member refid="classfys_1_1ws_1_1_collision_map_1ab597b99b9a02fbcd2d3f15d0418f2774" prot="private" virt="non-virtual"><scope>fys::ws::CollisionMap</scope><name>addCollisionInMap</name></member>
+      <member refid="classfys_1_1ws_1_1_collision_map_1aaa39c6bb07bc8e06c74e2606a480b11a" prot="private" virt="non-virtual"><scope>fys::ws::CollisionMap</scope><name>addTriggerInMap</name></member>
+      <member refid="classfys_1_1ws_1_1_collision_map_1ae1cff40e6f6c585950fa1dd088f70eba" prot="public" virt="non-virtual"><scope>fys::ws::CollisionMap</scope><name>buildMapFromTmx</name></member>
+      <member refid="classfys_1_1ws_1_1_collision_map_1a57620c4b56a9e0882e11e31c011bc773" prot="public" virt="non-virtual"><scope>fys::ws::CollisionMap</scope><name>canMoveTo</name></member>
+      <member refid="classfys_1_1ws_1_1_collision_map_1a94d57c017974db95793c16c541319f23" prot="public" virt="non-virtual"><scope>fys::ws::CollisionMap</scope><name>CollisionMap</name></member>
+      <member refid="classfys_1_1ws_1_1_collision_map_1a03d3c59f5efc9a589ebf01fa59999821" prot="public" virt="non-virtual"><scope>fys::ws::CollisionMap</scope><name>CollisionMap</name></member>
+      <member refid="classfys_1_1ws_1_1_collision_map_1a03328dfef8ae96a6fd8a06ee1589cb3d" prot="public" virt="non-virtual"><scope>fys::ws::CollisionMap</scope><name>CollisionMap</name></member>
+      <member refid="classfys_1_1ws_1_1_collision_map_1a7cf2bb0b2c0a2b32354d0ba848c27d6e" prot="public" virt="non-virtual"><scope>fys::ws::CollisionMap</scope><name>executePotentialTrigger</name></member>
+      <member refid="classfys_1_1ws_1_1_collision_map_1a80d6ac73199d8bc2a60a248e11e58882" prot="public" virt="non-virtual"><scope>fys::ws::CollisionMap</scope><name>operator=</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

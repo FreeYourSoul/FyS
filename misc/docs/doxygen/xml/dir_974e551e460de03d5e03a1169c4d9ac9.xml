@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_974e551e460de03d5e03a1169c4d9ac9" kind="dir">
+    <compoundname>services</compoundname>
+    <innerdir refid="dir_5127af35029da30acb8050536745b922">services/arena</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="services/"/>
+  </compounddef>
+</doxygen>

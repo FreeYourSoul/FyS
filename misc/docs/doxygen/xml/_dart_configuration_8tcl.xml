@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="_dart_configuration_8tcl" kind="file" language="Tcl">
+    <compoundname>DartConfiguration.tcl</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="comment">#<sp/>This<sp/>file<sp/>is<sp/>configured<sp/>by<sp/>CMake<sp/>automatically<sp/>as<sp/>DartConfiguration.tcl</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="comment">#<sp/>If<sp/>you<sp/>choose<sp/>not<sp/>to<sp/>use<sp/>CMake,<sp/>this<sp/>file<sp/>may<sp/>be<sp/>hand<sp/>configured,<sp/>by</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="comment">#<sp/>filling<sp/>in<sp/>the<sp/>required<sp/>variables.</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">#<sp/>Configuration<sp/>directories<sp/>and<sp/>files</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">SourceDirectory:<sp/>/home/FyS/Project/FyS/services/arena/test</highlight><highlight class="comment"></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">BuildDirectory:<sp/>/home/FyS/Project/FyS/cmake-build-debug/services/arena/test</highlight><highlight class="comment"></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">#<sp/>Where<sp/>to<sp/>place<sp/>the<sp/>cost<sp/>data<sp/>store</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">CostDataFile:</highlight><highlight class="comment"><sp/></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">#<sp/>Site<sp/>is<sp/>something<sp/>like<sp/>machine.domain,<sp/>i.e.<sp/>pragmatic.crd</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">Site:<sp/>Host-003</highlight><highlight class="comment"></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">#<sp/>Build<sp/>name<sp/>is<sp/>osname-revision-compiler,<sp/>i.e.<sp/>Linux-2.4.2-2smp-c++</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">BuildName:<sp/>Linux-g++</highlight><highlight class="comment"></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">#<sp/>Subprojects</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">LabelsForSubprojects:</highlight><highlight class="comment"><sp/></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">#<sp/>Submission<sp/>information</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">SubmitURL:<sp/>http://</highlight><highlight class="comment"></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">#<sp/>Dashboard<sp/>start<sp/>time</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">NightlyStartTime:<sp/>00:00:00<sp/>EDT</highlight><highlight class="comment"></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">#<sp/>Commands<sp/>for<sp/>the<sp/>build/test/submit<sp/>cycle</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">ConfigureCommand:<sp/>&quot;/home/FyS/Documents/CLion/bin/cmake/linux/bin/cmake&quot;<sp/>&quot;/home/FyS/Project/FyS/services/arena/test&quot;</highlight><highlight class="comment"></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">MakeCommand:<sp/>/home/FyS/Documents/CLion/bin/cmake/linux/bin/cmake<sp/>--build<sp/>.<sp/>--config<sp/>&quot;${CTEST_CONFIGURATION_TYPE}&quot;</highlight><highlight class="comment"></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">DefaultCTestConfigurationType:<sp/>Release</highlight><highlight class="comment"></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">#<sp/>version<sp/>control</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">UpdateVersionOnly:</highlight><highlight class="comment"><sp/></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">#<sp/>CVS<sp/>options</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="comment">#<sp/>Default<sp/>is<sp/>&quot;-d<sp/>-P<sp/>-A&quot;</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">CVSCommand:<sp/>CVSCOMMAND-NOTFOUND</highlight><highlight class="comment"></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">CVSUpdateOptions:<sp/>-d<sp/>-A<sp/>-P</highlight><highlight class="comment"></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">#<sp/>Subversion<sp/>options</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">SVNCommand:<sp/>/usr/bin/svn</highlight><highlight class="comment"></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">SVNOptions:</highlight><highlight class="comment"><sp/></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">SVNUpdateOptions:</highlight><highlight class="comment"><sp/></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">#<sp/>Git<sp/>options</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">GITCommand:<sp/>/usr/bin/git</highlight><highlight class="comment"></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">GITInitSubmodules:</highlight><highlight class="comment"><sp/></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">GITUpdateOptions:</highlight><highlight class="comment"><sp/></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">GITUpdateCustom:</highlight><highlight class="comment"><sp/></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">#<sp/>Perforce<sp/>options</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">P4Command:<sp/>P4COMMAND-NOTFOUND</highlight><highlight class="comment"></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">P4Client:</highlight><highlight class="comment"><sp/></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">P4Options:</highlight><highlight class="comment"><sp/></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">P4UpdateOptions:</highlight><highlight class="comment"><sp/></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">P4UpdateCustom:</highlight><highlight class="comment"><sp/></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">#<sp/>Generic<sp/>update<sp/>command</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">UpdateCommand:</highlight><highlight class="comment"><sp/></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">UpdateOptions:</highlight><highlight class="comment"><sp/></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">UpdateType:</highlight><highlight class="comment"><sp/></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">#<sp/>Compiler<sp/>info</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">Compiler:<sp/>/usr/bin/g++</highlight><highlight class="comment"></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">CompilerVersion:<sp/>9.3.1</highlight><highlight class="comment"></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">#<sp/>Dynamic<sp/>analysis<sp/>(MemCheck)</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">PurifyCommand:</highlight><highlight class="comment"><sp/></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">ValgrindCommand:</highlight><highlight class="comment"><sp/></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">ValgrindCommandOptions:</highlight><highlight class="comment"><sp/></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">MemoryCheckType:</highlight><highlight class="comment"><sp/></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">MemoryCheckSanitizerOptions:</highlight><highlight class="comment"><sp/></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">MemoryCheckCommand:<sp/>/usr/bin/valgrind</highlight><highlight class="comment"></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">MemoryCheckCommandOptions:</highlight><highlight class="comment"><sp/></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">MemoryCheckSuppressionFile:</highlight><highlight class="comment"><sp/></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">#<sp/>Coverage</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">CoverageCommand:<sp/>/usr/bin/gcov</highlight><highlight class="comment"></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">CoverageExtraFlags:<sp/>-l</highlight><highlight class="comment"></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">#<sp/>Cluster<sp/>commands</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">SlurmBatchCommand:<sp/>SLURM_SBATCH_COMMAND-NOTFOUND</highlight><highlight class="comment"></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">SlurmRunCommand:<sp/>SLURM_SRUN_COMMAND-NOTFOUND</highlight><highlight class="comment"></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">#<sp/>Testing<sp/>options</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="comment">#<sp/>TimeOut<sp/>is<sp/>the<sp/>amount<sp/>of<sp/>time<sp/>in<sp/>seconds<sp/>to<sp/>wait<sp/>for<sp/>processes</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="comment">#<sp/>to<sp/>complete<sp/>during<sp/>testing.<sp/><sp/>After<sp/>TimeOut<sp/>seconds,<sp/>the</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="comment">#<sp/>process<sp/>will<sp/>be<sp/>summarily<sp/>terminated.</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="comment">#<sp/>Currently<sp/>set<sp/>to<sp/>25<sp/>minutes</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">TimeOut:<sp/>1500</highlight><highlight class="comment"></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">#<sp/>During<sp/>parallel<sp/>testing<sp/>CTest<sp/>will<sp/>not<sp/>start<sp/>a<sp/>new<sp/>test<sp/>if<sp/>doing</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="comment">#<sp/>so<sp/>would<sp/>cause<sp/>the<sp/>system<sp/>load<sp/>to<sp/>exceed<sp/>this<sp/>value.</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">TestLoad:</highlight><highlight class="comment"><sp/></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal">UseLaunchers:</highlight><highlight class="comment"><sp/></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">CurlOptions:</highlight><highlight class="comment"><sp/></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="comment">#<sp/>warning,<sp/>if<sp/>you<sp/>add<sp/>new<sp/>options<sp/>here<sp/>that<sp/>have<sp/>to<sp/>do<sp/>with<sp/>submit,</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="comment">#<sp/>you<sp/>have<sp/>to<sp/>update<sp/>cmCTestSubmitCommand.cxx</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"></highlight><highlight class="comment">#<sp/>For<sp/>CTest<sp/>submissions<sp/>that<sp/>timeout,<sp/>these<sp/>options</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="comment">#<sp/>specify<sp/>behavior<sp/>for<sp/>retrying<sp/>the<sp/>submission</highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">CTestSubmitRetryDelay:<sp/>5</highlight><highlight class="comment"></highlight></codeline>
+<codeline><highlight class="comment"></highlight><highlight class="normal">CTestSubmitRetryCount:<sp/>3</highlight><highlight class="comment"></highlight></codeline>
+    </programlisting>
+    <location file="/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/DartConfiguration.tcl"/>
+  </compounddef>
+</doxygen>

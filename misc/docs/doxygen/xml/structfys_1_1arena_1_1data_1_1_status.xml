@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1arena_1_1data_1_1_status" kind="struct" language="C++" prot="public">
+    <compoundname>fys::arena::data::Status</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1arena_1_1data_1_1_status_1ac74d47a0248dd69205a84ef6c0a2f2cb" prot="public" static="no" mutable="no">
+        <type><ref refid="structfys_1_1arena_1_1data_1_1_life" kindref="compound">Life</ref></type>
+        <definition>Life fys::arena::data::Status::life</definition>
+        <argsstring></argsstring>
+        <name>life</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" line="146" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" bodystart="146" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1data_1_1_status_1a8d5eb6af7f9afd5c5fcdf775c641cf7c" prot="public" static="no" mutable="no">
+        <type><ref refid="structfys_1_1arena_1_1data_1_1_magic_point" kindref="compound">MagicPoint</ref></type>
+        <definition>MagicPoint fys::arena::data::Status::magicPoint</definition>
+        <argsstring></argsstring>
+        <name>magicPoint</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" line="147" column="12" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" bodystart="147" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1data_1_1_status_1a8b6b277d46a376264de6d4bb6401a94e" prot="public" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint fys::arena::data::Status::initialSpeed</definition>
+        <argsstring></argsstring>
+        <name>initialSpeed</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" line="148" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" bodystart="148" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1data_1_1_status_1a982b481594d68651ebbcb140313e6fe1" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classfys_1_1arena_1_1data_1_1_alteration" kindref="compound">Alteration</ref> &gt;</type>
+        <definition>std::vector&lt;Alteration&gt; fys::arena::data::Status::alteration_before</definition>
+        <argsstring></argsstring>
+        <name>alteration_before</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" line="150" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" bodystart="150" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1data_1_1_status_1a313713965329c33ba5166dd7f3468aad" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classfys_1_1arena_1_1data_1_1_alteration" kindref="compound">Alteration</ref> &gt;</type>
+        <definition>std::vector&lt;Alteration&gt; fys::arena::data::Status::alteration_after</definition>
+        <argsstring></argsstring>
+        <name>alteration_after</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" line="151" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" bodystart="151" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1data_1_1_status_1a818059e8abe20c05b9ee52d2b163c02d" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="classfys_1_1arena_1_1data_1_1_alteration" kindref="compound">Alteration</ref> &gt;</type>
+        <definition>std::vector&lt;Alteration&gt; fys::arena::data::Status::alterations</definition>
+        <argsstring></argsstring>
+        <name>alterations</name>
+        <briefdescription>
+<para><ref refid="classfys_1_1arena_1_1data_1_1_alteration" kindref="compound">Alteration</ref> executed on the turn (usually stat modification impacting the damages/heal) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" line="154" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" bodystart="154" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfys_1_1arena_1_1data_1_1_status_1a0f26d7ff12453ec70bccd2aa5b1502c1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::data::Status::processAlterationBeforeTurn</definition>
+        <argsstring>()</argsstring>
+        <name>processAlterationBeforeTurn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Process all alteration before turn stored <simplesect kind="return"><para>true if the turn is executed, false if it is cancelled </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" line="160" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" bodystart="160" bodyend="167"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1arena_1_1data_1_1_status_1a7c13230475563a58e29c0608cdc79df4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::data::Status::processAlterationAfterTurn</definition>
+        <argsstring>()</argsstring>
+        <name>processAlterationAfterTurn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" line="169" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" bodystart="169" bodyend="174"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1arena_1_1data_1_1_status_1a8610cab7f4b91785d1e19233746eb69f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::data::Status::cleanupFinishedAlteration</definition>
+        <argsstring>()</argsstring>
+        <name>cleanupFinishedAlteration</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" line="176" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" bodystart="176" bodyend="184"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="3">
+        <label>fys::arena::data::Life</label>
+        <link refid="structfys_1_1arena_1_1data_1_1_life"/>
+      </node>
+      <node id="2">
+        <label>fys::arena::data::MagicPoint</label>
+        <link refid="structfys_1_1arena_1_1data_1_1_magic_point"/>
+      </node>
+      <node id="1">
+        <label>fys::arena::data::Status</label>
+        <link refid="structfys_1_1arena_1_1data_1_1_status"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>magicPoint</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>life</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" line="145" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" bodystart="145" bodyend="186"/>
+    <listofallmembers>
+      <member refid="structfys_1_1arena_1_1data_1_1_status_1a313713965329c33ba5166dd7f3468aad" prot="public" virt="non-virtual"><scope>fys::arena::data::Status</scope><name>alteration_after</name></member>
+      <member refid="structfys_1_1arena_1_1data_1_1_status_1a982b481594d68651ebbcb140313e6fe1" prot="public" virt="non-virtual"><scope>fys::arena::data::Status</scope><name>alteration_before</name></member>
+      <member refid="structfys_1_1arena_1_1data_1_1_status_1a818059e8abe20c05b9ee52d2b163c02d" prot="public" virt="non-virtual"><scope>fys::arena::data::Status</scope><name>alterations</name></member>
+      <member refid="structfys_1_1arena_1_1data_1_1_status_1a8610cab7f4b91785d1e19233746eb69f" prot="public" virt="non-virtual"><scope>fys::arena::data::Status</scope><name>cleanupFinishedAlteration</name></member>
+      <member refid="structfys_1_1arena_1_1data_1_1_status_1a8b6b277d46a376264de6d4bb6401a94e" prot="public" virt="non-virtual"><scope>fys::arena::data::Status</scope><name>initialSpeed</name></member>
+      <member refid="structfys_1_1arena_1_1data_1_1_status_1ac74d47a0248dd69205a84ef6c0a2f2cb" prot="public" virt="non-virtual"><scope>fys::arena::data::Status</scope><name>life</name></member>
+      <member refid="structfys_1_1arena_1_1data_1_1_status_1a8d5eb6af7f9afd5c5fcdf775c641cf7c" prot="public" virt="non-virtual"><scope>fys::arena::data::Status</scope><name>magicPoint</name></member>
+      <member refid="structfys_1_1arena_1_1data_1_1_status_1a7c13230475563a58e29c0608cdc79df4" prot="public" virt="non-virtual"><scope>fys::arena::data::Status</scope><name>processAlterationAfterTurn</name></member>
+      <member refid="structfys_1_1arena_1_1data_1_1_status_1a0f26d7ff12453ec70bccd2aa5b1502c1" prot="public" virt="non-virtual"><scope>fys::arena::data::Status</scope><name>processAlterationBeforeTurn</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1ws_1_1_proximity_server_1_1_proximity_server_axis" kind="struct" language="C++" prot="private">
+    <compoundname>fys::ws::ProximityServer::ProximityServerAxis</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1ws_1_1_proximity_server_1_1_proximity_server_axis_1a8eae0728fd94ffcaa09f3c26b08de11d" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double fys::ws::ProximityServer::ProximityServerAxis::value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" line="80" column="8" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1ws_1_1_proximity_server_1_1_proximity_server_axis_1a8debeb6e2015c87bef06a9cfe2cd062c" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool fys::ws::ProximityServer::ProximityServerAxis::superiorTo</definition>
+        <argsstring></argsstring>
+        <name>superiorTo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" line="81" column="6" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" line="79" column="26" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" bodystart="79" bodyend="82"/>
+    <listofallmembers>
+      <member refid="structfys_1_1ws_1_1_proximity_server_1_1_proximity_server_axis_1a8debeb6e2015c87bef06a9cfe2cd062c" prot="public" virt="non-virtual"><scope>fys::ws::ProximityServer::ProximityServerAxis</scope><name>superiorTo</name></member>
+      <member refid="structfys_1_1ws_1_1_proximity_server_1_1_proximity_server_axis_1a8eae0728fd94ffcaa09f3c26b08de11d" prot="public" virt="non-virtual"><scope>fys::ws::ProximityServer::ProximityServerAxis</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

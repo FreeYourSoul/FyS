@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="cmake-build-debug_2services_2arena_2_c_make_files_2___c_make_l_t_o_test-_c_x_x_2src_2main_8cpp" kind="file" language="C++">
+    <compoundname>main.cpp</compoundname>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="cmake-build-debug_2services_2arena_2_c_make_files_2___c_make_l_t_o_test-_c_x_x_2src_2main_8cpp_1a14bcd2d544b22300bba3863251393e0f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int foo</definition>
+        <argsstring>()</argsstring>
+        <name>foo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/cmake-build-debug/services/arena/CMakeFiles/_CMakeLTOTest-CXX/src/main.cpp" line="1" column="5" bodyfile="/home/FyS/Project/FyS/cmake-build-debug/services/arena/CMakeFiles/_CMakeLTOTest-C/src/foo.c" bodystart="1" bodyend="4" declfile="/home/FyS/Project/FyS/cmake-build-debug/services/arena/CMakeFiles/_CMakeLTOTest-CXX/src/main.cpp" declline="1" declcolumn="5"/>
+      </memberdef>
+      <memberdef kind="function" id="cmake-build-debug_2services_2arena_2_c_make_files_2___c_make_l_t_o_test-_c_x_x_2src_2main_8cpp_1ae66f6b31b5ad750f1fe042a706a4e3d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int main</definition>
+        <argsstring>()</argsstring>
+        <name>main</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/cmake-build-debug/services/arena/CMakeFiles/_CMakeLTOTest-CXX/src/main.cpp" line="3" column="5" bodyfile="/home/FyS/Project/FyS/cmake-build-debug/services/arena/CMakeFiles/_CMakeLTOTest-CXX/src/main.cpp" bodystart="3" bodyend="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>foo();</highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>main()</highlight></codeline>
+<codeline lineno="4"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>foo();</highlight></codeline>
+<codeline lineno="6"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/home/FyS/Project/FyS/cmake-build-debug/services/arena/CMakeFiles/_CMakeLTOTest-CXX/src/main.cpp"/>
+  </compounddef>
+</doxygen>

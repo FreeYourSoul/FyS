@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="md_services_arena__arena__integrate__chaiscripts" kind="page">
+    <compoundname>md_services_arena_Arena_Integrate_Chaiscripts</compoundname>
+    <title>Integrate Chaiscript</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><itemizedlist>
+<listitem><para><ulink url="#integrate-ai-scripts">Integrate AI</ulink> (opponent artificial intelligence)</para>
+</listitem><listitem><para><ulink url="#integrate-attacks-scripts">Integrate attacks</ulink> (used by opponent and team characters)</para>
+</listitem></itemizedlist>
+</para>
+<para><heading level="1">Introduction : Chaiscript</heading>
+</para>
+<para><heading level="2">Existing C++/Chai Mapping</heading>
+</para>
+<para><programlisting filename=".cpp"></programlisting></para>
+<para><heading level="1">Integrate AI scripts</heading>
+</para>
+<para><heading level="2">Template</heading>
+</para>
+<para>Chaiscript for AI are represented by a class which has to take a contenderId as parameter in constructor and implement the methods:<itemizedlist>
+<listitem><para>runScriptedAction(id) which will determine and apply an action.</para>
+</listitem><listitem><para>defineSpawningPosition() which will return the position on the battle field for the opponent</para>
+</listitem></itemizedlist>
+</para>
+<para><programlisting filename=".cpp"><codeline><highlight class="keyword">class<sp/></highlight><highlight class="normal">TemplateChai<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>var<sp/>contenderId;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>TemplateChai(contenderId)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>this.contenderId<sp/>=<sp/>contenderId;</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>def<sp/>runScriptedAction(</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>decide<sp/>attack</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>decide<sp/>a<sp/>target<sp/>(if<sp/>needed)</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>apply<sp/>and<sp/>send<sp/>message</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>def<sp/>defineSpawningPosition()<sp/>{</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>return<sp/>HexagonSide</highlight><highlight class="normal"></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline><highlight class="normal">}</highlight></codeline>
+</programlisting></para>
+<para><heading level="1">Integrate attacks scripts</heading>
+</para>
+<para><heading level="2">Template</heading>
+</para>
+<para><programlisting filename=".cpp"></programlisting> </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

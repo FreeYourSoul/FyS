@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1is__iterator" kind="struct" language="C++" prot="public">
+    <compoundname>fys::is_iterator</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+      <param>
+        <type>typename</type>
+        <defval>void</defval>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structfys_1_1is__iterator_1ab742b16f32a72687c04925bc8bdd767a" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr bool</type>
+        <definition>constexpr bool fys::is_iterator&lt; T, typename &gt;::value</definition>
+        <argsstring></argsstring>
+        <name>value</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/algorithm/algorithm.hh" line="34" column="23" bodyfile="/home/FyS/Project/FyS/services/common/include/algorithm/algorithm.hh" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/common/include/algorithm/algorithm.hh" line="33" column="18" bodyfile="/home/FyS/Project/FyS/services/common/include/algorithm/algorithm.hh" bodystart="33" bodyend="35"/>
+    <listofallmembers>
+      <member refid="structfys_1_1is__iterator_1ab742b16f32a72687c04925bc8bdd767a" prot="public" virt="non-virtual"><scope>fys::is_iterator</scope><name>value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

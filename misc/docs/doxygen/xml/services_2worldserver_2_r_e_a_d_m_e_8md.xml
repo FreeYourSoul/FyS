@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="services_2worldserver_2_r_e_a_d_m_e_8md" kind="file" language="Markdown">
+    <compoundname>README.md</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>WorldServer<sp/>Service</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>service<sp/>is<sp/>the<sp/>one<sp/>managing<sp/>movement<sp/>of<sp/>character<sp/>for<sp/>FyS<sp/>Online<sp/>(MMORPG).<sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal">More<sp/>information<sp/>on<sp/>the<sp/>[documentation<sp/>part]().</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>TODO</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*<sp/>Move<sp/>a<sp/>player<sp/>on<sp/>the<sp/>map</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>*<sp/>Print<sp/>log<sp/>displaying<sp/>the<sp/>character<sp/>movement<sp/>is<sp/>taken<sp/>into<sp/>account</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>*<sp/>Create<sp/>a<sp/>stupid<sp/>client<sp/>that<sp/>is<sp/>going<sp/>to<sp/>get<sp/>every<sp/>move<sp/>notifications<sp/>and<sp/>display<sp/>it<sp/>(slow).</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>*<sp/>Prepare<sp/>a<sp/>client-server<sp/>prediction<sp/>in<sp/>order<sp/>to<sp/>reduce<sp/>bandwidth<sp/>traffic.</highlight></codeline>
+<codeline></codeline>
+    </programlisting>
+    <location file="/home/FyS/Project/FyS/services/worldserver/README.md"/>
+  </compounddef>
+</doxygen>

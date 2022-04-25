@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1network_1_1_cluster_connection" kind="struct" language="C++" prot="public">
+    <compoundname>fys::network::ClusterConnection</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1network_1_1_cluster_connection_1a2549b23817bfb42e2f7ea647e982419e" prot="public" static="no" mutable="no">
+        <type>zmq::socket_t</type>
+        <definition>zmq::socket_t fys::network::ClusterConnection::subSocket</definition>
+        <argsstring></argsstring>
+        <name>subSocket</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" line="37" column="23" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1network_1_1_cluster_connection_1a5e63247a5011ea2edc0dead2890f0911" prot="public" static="no" mutable="no">
+        <type>zmq::socket_t</type>
+        <definition>zmq::socket_t fys::network::ClusterConnection::pubSocket</definition>
+        <argsstring></argsstring>
+        <name>pubSocket</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" line="38" column="23" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1network_1_1_cluster_connection_1afdee7672fcbe6c982caa277d501a7edc" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool fys::network::ClusterConnection::closed</definition>
+        <argsstring></argsstring>
+        <name>closed</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" line="39" column="14" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" line="36" column="28" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/core/DispatcherConnectionManager.hh" bodystart="36" bodyend="40"/>
+    <listofallmembers>
+      <member refid="structfys_1_1network_1_1_cluster_connection_1afdee7672fcbe6c982caa277d501a7edc" prot="public" virt="non-virtual"><scope>fys::network::ClusterConnection</scope><name>closed</name></member>
+      <member refid="structfys_1_1network_1_1_cluster_connection_1a5e63247a5011ea2edc0dead2890f0911" prot="public" virt="non-virtual"><scope>fys::network::ClusterConnection</scope><name>pubSocket</name></member>
+      <member refid="structfys_1_1network_1_1_cluster_connection_1a2549b23817bfb42e2f7ea647e982419e" prot="public" virt="non-virtual"><scope>fys::network::ClusterConnection</scope><name>subSocket</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

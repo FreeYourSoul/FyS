@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_accbbac37dd753a9b0a3b3ee2d77fd1b" kind="dir">
+    <compoundname>/home/FyS/Project/FyS/services/arena/include</compoundname>
+    <innerdir refid="dir_d0270a01aed64f436b8b86bc891a4803">/home/FyS/Project/FyS/services/arena/include/fightingPit</innerdir>
+    <innerdir refid="dir_c8534e851ac17f325a03947633d70eda">/home/FyS/Project/FyS/services/arena/include/network</innerdir>
+    <innerdir refid="dir_c7c8846372d3e3ba7f282d299b8dd58a">/home/FyS/Project/FyS/services/arena/include/util</innerdir>
+    <innerfile refid="_arena_server_context_8hh">ArenaServerContext.hh</innerfile>
+    <innerfile refid="_arena_server_service_8hh">ArenaServerService.hh</innerfile>
+    <innerfile refid="_chai_register_8hh">ChaiRegister.hh</innerfile>
+    <innerfile refid="arena_2include_2_connection_handler_8hh">ConnectionHandler.hh</innerfile>
+    <innerfile refid="_fighting_history_manager_8hh">FightingHistoryManager.hh</innerfile>
+    <innerfile refid="_flatbuffer_generator_8hh">FlatbufferGenerator.hh</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/"/>
+  </compounddef>
+</doxygen>

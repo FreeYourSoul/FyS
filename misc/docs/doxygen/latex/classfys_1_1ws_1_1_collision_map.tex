@@ -1,0 +1,43 @@
+\hypertarget{classfys_1_1ws_1_1_collision_map}{}\doxysection{fys\+::ws\+::Collision\+Map Class Reference}
+\label{classfys_1_1ws_1_1_collision_map}\index{fys::ws::CollisionMap@{fys::ws::CollisionMap}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classfys_1_1ws_1_1_collision_map_a94d57c017974db95793c16c541319f23}\label{classfys_1_1ws_1_1_collision_map_a94d57c017974db95793c16c541319f23}} 
+{\bfseries Collision\+Map} (const \mbox{\hyperlink{classfys_1_1ws_1_1_world_server_context}{World\+Server\+Context}} \&ctx)
+\item 
+\mbox{\Hypertarget{classfys_1_1ws_1_1_collision_map_a03d3c59f5efc9a589ebf01fa59999821}\label{classfys_1_1ws_1_1_collision_map_a03d3c59f5efc9a589ebf01fa59999821}} 
+{\bfseries Collision\+Map} (\mbox{\hyperlink{classfys_1_1ws_1_1_collision_map}{Collision\+Map}} \&\&) noexcept=default
+\item 
+\mbox{\Hypertarget{classfys_1_1ws_1_1_collision_map_a03328dfef8ae96a6fd8a06ee1589cb3d}\label{classfys_1_1ws_1_1_collision_map_a03328dfef8ae96a6fd8a06ee1589cb3d}} 
+{\bfseries Collision\+Map} (const \mbox{\hyperlink{classfys_1_1ws_1_1_collision_map}{Collision\+Map}} \&)=delete
+\item 
+\mbox{\Hypertarget{classfys_1_1ws_1_1_collision_map_a80d6ac73199d8bc2a60a248e11e58882}\label{classfys_1_1ws_1_1_collision_map_a80d6ac73199d8bc2a60a248e11e58882}} 
+\mbox{\hyperlink{classfys_1_1ws_1_1_collision_map}{Collision\+Map}} \& {\bfseries operator=} (const \mbox{\hyperlink{classfys_1_1ws_1_1_collision_map}{Collision\+Map}} \&)=delete
+\item 
+\mbox{\Hypertarget{classfys_1_1ws_1_1_collision_map_ae1cff40e6f6c585950fa1dd088f70eba}\label{classfys_1_1ws_1_1_collision_map_ae1cff40e6f6c585950fa1dd088f70eba}} 
+void {\bfseries build\+Map\+From\+Tmx} (const std\+::string \&tmx\+Map\+Path)
+\item 
+bool \mbox{\hyperlink{classfys_1_1ws_1_1_collision_map_a57620c4b56a9e0882e11e31c011bc773}{can\+Move\+To}} (double x, double y, std\+::size\+\_\+t level) const noexcept
+\item 
+\mbox{\Hypertarget{classfys_1_1ws_1_1_collision_map_a7cf2bb0b2c0a2b32354d0ba848c27d6e}\label{classfys_1_1ws_1_1_collision_map_a7cf2bb0b2c0a2b32354d0ba848c27d6e}} 
+void {\bfseries execute\+Potential\+Trigger} (uint index, const \mbox{\hyperlink{structfys_1_1ws_1_1_player_info}{Player\+Info}} \&position\+On\+Map, \mbox{\hyperlink{classfys_1_1ws_1_1_connection_handler}{ws\+::\+Connection\+Handler}} \&conn)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfys_1_1ws_1_1_collision_map_a57620c4b56a9e0882e11e31c011bc773}\label{classfys_1_1ws_1_1_collision_map_a57620c4b56a9e0882e11e31c011bc773}} 
+\index{fys::ws::CollisionMap@{fys::ws::CollisionMap}!canMoveTo@{canMoveTo}}
+\index{canMoveTo@{canMoveTo}!fys::ws::CollisionMap@{fys::ws::CollisionMap}}
+\doxysubsubsection{\texorpdfstring{canMoveTo()}{canMoveTo()}}
+{\footnotesize\ttfamily bool fys\+::ws\+::\+Collision\+Map\+::can\+Move\+To (\begin{DoxyParamCaption}\item[{double}]{x,  }\item[{double}]{y,  }\item[{std\+::size\+\_\+t}]{level }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Check if the position is in the boundary of the map before checking on the map \begin{DoxyReturn}{Returns}
+true if it is possible to move on the given position, false otherwise 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/services/worldserver/include/engine/Collision\+Map.\+hh\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/services/worldserver/src/engine/Collision\+Map.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="class_delete_folder_when_done" kind="class" language="C++" prot="public">
+    <compoundname>DeleteFolderWhenDone</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_delete_folder_when_done_1a06f47e0406befc4ee547348cced069b4" prot="private" static="no" mutable="no">
+        <type>std::filesystem::path</type>
+        <definition>std::filesystem::path DeleteFolderWhenDone::_path</definition>
+        <argsstring></argsstring>
+        <name>_path</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/test/fightingPit/TestType.hh" line="301" column="23" bodyfile="/home/FyS/Project/FyS/services/arena/test/fightingPit/TestType.hh" bodystart="301" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_delete_folder_when_done_1af4fb51503ec86231d6ff8643e25ccf52" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>DeleteFolderWhenDone::DeleteFolderWhenDone</definition>
+        <argsstring>(const std::string &amp;v)</argsstring>
+        <name>DeleteFolderWhenDone</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/test/fightingPit/TestType.hh" line="290" column="10" bodyfile="/home/FyS/Project/FyS/services/arena/test/fightingPit/TestType.hh" bodystart="290" bodyend="292"/>
+      </memberdef>
+      <memberdef kind="function" id="class_delete_folder_when_done_1ae74104fd854893a7d4a9b23c1e480f01" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>DeleteFolderWhenDone::~DeleteFolderWhenDone</definition>
+        <argsstring>()</argsstring>
+        <name>~DeleteFolderWhenDone</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/test/fightingPit/TestType.hh" line="294" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/test/fightingPit/TestType.hh" bodystart="294" bodyend="298"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/test/fightingPit/TestType.hh" line="288" column="27" bodyfile="/home/FyS/Project/FyS/services/arena/test/fightingPit/TestType.hh" bodystart="288" bodyend="303"/>
+    <listofallmembers>
+      <member refid="class_delete_folder_when_done_1a06f47e0406befc4ee547348cced069b4" prot="private" virt="non-virtual"><scope>DeleteFolderWhenDone</scope><name>_path</name></member>
+      <member refid="class_delete_folder_when_done_1af4fb51503ec86231d6ff8643e25ccf52" prot="public" virt="non-virtual"><scope>DeleteFolderWhenDone</scope><name>DeleteFolderWhenDone</name></member>
+      <member refid="class_delete_folder_when_done_1ae74104fd854893a7d4a9b23c1e480f01" prot="public" virt="non-virtual"><scope>DeleteFolderWhenDone</scope><name>~DeleteFolderWhenDone</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1fb_1_1_reward_builder" kind="struct" language="C++" prot="public">
+    <compoundname>fys::fb::RewardBuilder</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1fb_1_1_reward_builder_1a0c8e3be961ef2dc8484b8a41faf37784" prot="public" static="no" mutable="no">
+        <type>flatbuffers::FlatBufferBuilder &amp;</type>
+        <definition>flatbuffers::FlatBufferBuilder&amp; fys::fb::RewardBuilder::fbb_</definition>
+        <argsstring></argsstring>
+        <name>fbb_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" line="73" column="34" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1fb_1_1_reward_builder_1a9eb64b6d4cf04f5951bc6bad08c2e30d" prot="public" static="no" mutable="no">
+        <type>flatbuffers::uoffset_t</type>
+        <definition>flatbuffers::uoffset_t fys::fb::RewardBuilder::start_</definition>
+        <argsstring></argsstring>
+        <name>start_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" line="74" column="26" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfys_1_1fb_1_1_reward_builder_1a3fa8666dea6a2a9b0c35868e0a3af117" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::RewardBuilder::add_rewardKey</definition>
+        <argsstring>(flatbuffers::Offset&lt; flatbuffers::String &gt; rewardKey)</argsstring>
+        <name>add_rewardKey</name>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>rewardKey</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" line="75" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" bodystart="75" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_reward_builder_1ab4d5daec4691078f7100c107b7a5ab82" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::RewardBuilder::add_quantity</definition>
+        <argsstring>(uint32_t quantity)</argsstring>
+        <name>add_quantity</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>quantity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" line="78" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" bodystart="78" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_reward_builder_1ac6a0a0c9526705190e9c26d563bc40b5" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::fb::RewardBuilder::RewardBuilder</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb)</argsstring>
+        <name>RewardBuilder</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" line="81" column="12" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" bodystart="81" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_reward_builder_1ab992ad95486675a0232e17128f9993ee" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfys_1_1fb_1_1_reward_builder" kindref="compound">RewardBuilder</ref> &amp;</type>
+        <definition>RewardBuilder&amp; fys::fb::RewardBuilder::operator=</definition>
+        <argsstring>(const RewardBuilder &amp;)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="structfys_1_1fb_1_1_reward_builder" kindref="compound">RewardBuilder</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" line="85" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_reward_builder_1a832030356c367b253e4e04ac25d6bde4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; Reward &gt;</type>
+        <definition>flatbuffers::Offset&lt;Reward&gt; fys::fb::RewardBuilder::Finish</definition>
+        <argsstring>()</argsstring>
+        <name>Finish</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" line="86" column="23" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" bodystart="86" bodyend="90"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" line="72" column="20" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" bodystart="72" bodyend="91"/>
+    <listofallmembers>
+      <member refid="structfys_1_1fb_1_1_reward_builder_1ab4d5daec4691078f7100c107b7a5ab82" prot="public" virt="non-virtual"><scope>fys::fb::RewardBuilder</scope><name>add_quantity</name></member>
+      <member refid="structfys_1_1fb_1_1_reward_builder_1a3fa8666dea6a2a9b0c35868e0a3af117" prot="public" virt="non-virtual"><scope>fys::fb::RewardBuilder</scope><name>add_rewardKey</name></member>
+      <member refid="structfys_1_1fb_1_1_reward_builder_1a0c8e3be961ef2dc8484b8a41faf37784" prot="public" virt="non-virtual"><scope>fys::fb::RewardBuilder</scope><name>fbb_</name></member>
+      <member refid="structfys_1_1fb_1_1_reward_builder_1a832030356c367b253e4e04ac25d6bde4" prot="public" virt="non-virtual"><scope>fys::fb::RewardBuilder</scope><name>Finish</name></member>
+      <member refid="structfys_1_1fb_1_1_reward_builder_1ab992ad95486675a0232e17128f9993ee" prot="public" virt="non-virtual"><scope>fys::fb::RewardBuilder</scope><name>operator=</name></member>
+      <member refid="structfys_1_1fb_1_1_reward_builder_1ac6a0a0c9526705190e9c26d563bc40b5" prot="public" virt="non-virtual"><scope>fys::fb::RewardBuilder</scope><name>RewardBuilder</name></member>
+      <member refid="structfys_1_1fb_1_1_reward_builder_1a9eb64b6d4cf04f5951bc6bad08c2e30d" prot="public" virt="non-virtual"><scope>fys::fb::RewardBuilder</scope><name>start_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

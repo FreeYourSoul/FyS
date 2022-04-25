@@ -1,0 +1,67 @@
+\hypertarget{classfys_1_1arena_1_1_fighting_pit_layout}{}\doxysection{fys\+::arena\+::Fighting\+Pit\+Layout Class Reference}
+\label{classfys_1_1arena_1_1_fighting_pit_layout}\index{fys::arena::FightingPitLayout@{fys::arena::FightingPitLayout}}
+
+
+Layout of the fighting pit. Manage the positions of monsters and the players/monsters movements.  
+
+
+
+
+{\ttfamily \#include $<$Fighting\+Pit\+Layout.\+hh$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_fighting_pit_layout_a4b00d960f2a33e5c63a21ccfd290fb0f}\label{classfys_1_1arena_1_1_fighting_pit_layout_a4b00d960f2a33e5c63a21ccfd290fb0f}} 
+{\bfseries Fighting\+Pit\+Layout} (\mbox{\hyperlink{classfys_1_1arena_1_1_pit_contenders}{Pit\+Contenders}} \&contenders, \mbox{\hyperlink{classfys_1_1arena_1_1_ally_party_teams}{Ally\+Party\+Teams}} \&party\+Teams)
+\item 
+unsigned \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit_layout_ac73e339b8b9f44b68ea393ba3fd9e1f1}{active\+Characters\+On\+Side}} (Hexagon\+Side\+::\+Orientation side) const
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_fighting_pit_layout_aab1f7493f6c2673f9c61f443ed2943ab}\label{classfys_1_1arena_1_1_fighting_pit_layout_aab1f7493f6c2673f9c61f443ed2943ab}} 
+void {\bfseries execute\+Movements} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_fighting_pit_layout_a832699dd680ff20d13b9b2db145e281a}\label{classfys_1_1arena_1_1_fighting_pit_layout_a832699dd680ff20d13b9b2db145e281a}} 
+static void {\bfseries set\+Contender\+Initiate\+Position} (\mbox{\hyperlink{classfys_1_1arena_1_1_fighting_contender}{Fighting\+Contender}} \&contender, Hexagon\+Side\+::\+Orientation side)
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_fighting_pit_layout_a2276a2688d11aacc39a4a764c8b321cf}\label{classfys_1_1arena_1_1_fighting_pit_layout_a2276a2688d11aacc39a4a764c8b321cf}} 
+static void {\bfseries set\+Ally\+Move\+Initiate\+Position} (\mbox{\hyperlink{classfys_1_1arena_1_1_team_member}{Team\+Member}} \&team\+Member, Hexagon\+Side\+::\+Orientation side)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Layout of the fighting pit. Manage the positions of monsters and the players/monsters movements. 
+
+This class is mapping the characters (contenders or N\+PC) with the layout of the fightingpit. The layout of the fighting pit can be taken as a draughtboard composed of 3 hexagons as shown as below
+
+\DoxyHorRuler
+ / \textbackslash{} \+\_\+\+\_\+\+\_\+\+\_\+\+\_\+/ B \textbackslash{} 18 possible playable sides / \textbackslash{} / 6 possible ambush sides \mbox{[}A\+\_\+\+NE, B\+\_\+\+SW, A\+\_\+\+SE, C\+\_\+\+NW, C\+\_\+N, B\+\_\+S\mbox{]} / A \+\_\+\+\_\+\+\_\+\+\_\+\+\_\+/ \textbackslash{} / \textbackslash{} \+\_\+\+\_\+\+\_\+\+\_\+\+\_\+/ C \textbackslash{} \textbackslash{} / \+\_\+\+\_\+\+\_\+\+\_\+\+\_\+/
+
+Each hexagon represent the monster position. The Player can have character of its team spread on the lines representing the sides of the hexagons. Here is the hexagon at coordinate A, with its sides (where the characters can stands to attack the monster). \begin{DoxyVerb}      A_N
+      _____                N  = North
+\end{DoxyVerb}
+ A\+\_\+\+NW / \textbackslash{} A\+\_\+\+NE NE = North-\/\+East / A \textbackslash{} NW = North-\/\+West \textbackslash{} / S = South A\+\_\+\+SW \+\_\+\+\_\+\+\_\+\+\_\+\+\_\+/ A\+\_\+\+SE SE = South-\/\+East SW = South-\/\+West A\+\_\+S 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfys_1_1arena_1_1_fighting_pit_layout_ac73e339b8b9f44b68ea393ba3fd9e1f1}\label{classfys_1_1arena_1_1_fighting_pit_layout_ac73e339b8b9f44b68ea393ba3fd9e1f1}} 
+\index{fys::arena::FightingPitLayout@{fys::arena::FightingPitLayout}!activeCharactersOnSide@{activeCharactersOnSide}}
+\index{activeCharactersOnSide@{activeCharactersOnSide}!fys::arena::FightingPitLayout@{fys::arena::FightingPitLayout}}
+\doxysubsubsection{\texorpdfstring{activeCharactersOnSide()}{activeCharactersOnSide()}}
+{\footnotesize\ttfamily unsigned fys\+::arena\+::\+Fighting\+Pit\+Layout\+::active\+Characters\+On\+Side (\begin{DoxyParamCaption}\item[{Hexagon\+Side\+::\+Orientation}]{side }\end{DoxyParamCaption}) const}
+
+Retrieve the number of active characters (contenders or players) on the given side 
+\begin{DoxyParams}{Parameters}
+{\em side} & to check the contender and/or players \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+number of active player on the side 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/services/arena/include/fighting\+Pit/Fighting\+Pit\+Layout.\+hh\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/services/arena/src/fighting\+Pit/Fighting\+Pit\+Layout.\+cpp\end{DoxyCompactItemize}

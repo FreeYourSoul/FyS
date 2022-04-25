@@ -1,0 +1,40 @@
+\hypertarget{classfys_1_1ws_1_1_map_element}{}\doxysection{fys\+::ws\+::Map\+Element Class Reference}
+\label{classfys_1_1ws_1_1_map_element}\index{fys::ws::MapElement@{fys::ws::MapElement}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classfys_1_1ws_1_1_map_element_a5c7965fedd49bb4161c9b87dd3d2b687}\label{classfys_1_1ws_1_1_map_element_a5c7965fedd49bb4161c9b87dd3d2b687}} 
+constexpr void {\bfseries execute\+Potential\+Trigger} (uint index\+Player) const
+\item 
+bool \mbox{\hyperlink{classfys_1_1ws_1_1_map_element_af3630d120ea3b104ac259e3cc8a6364f}{can\+Go\+Through}} (double x, double y, std\+::size\+\_\+t level) const noexcept
+\item 
+\mbox{\Hypertarget{classfys_1_1ws_1_1_map_element_ad88203f4f3fb52f4c9917dd82a18446b}\label{classfys_1_1ws_1_1_map_element_ad88203f4f3fb52f4c9917dd82a18446b}} 
+void {\bfseries set\+Level} (std\+::size\+\_\+t level)
+\item 
+\mbox{\Hypertarget{classfys_1_1ws_1_1_map_element_a08023014b792608c4c4057d26cb1cb5d}\label{classfys_1_1ws_1_1_map_element_a08023014b792608c4c4057d26cb1cb5d}} 
+void {\bfseries set\+Change\+Level} (std\+::size\+\_\+t level)
+\item 
+\mbox{\Hypertarget{classfys_1_1ws_1_1_map_element_a6aaaa4daff7d0ceef247517c79e96456}\label{classfys_1_1ws_1_1_map_element_a6aaaa4daff7d0ceef247517c79e96456}} 
+constexpr void {\bfseries set\+Type} (e\+Element\+Type type)
+\item 
+\mbox{\Hypertarget{classfys_1_1ws_1_1_map_element_ab77bdacaeed135fb1e17af55e2a0d12d}\label{classfys_1_1ws_1_1_map_element_ab77bdacaeed135fb1e17af55e2a0d12d}} 
+void {\bfseries add\+Collision} (const tmx\+::\+Float\+Rect \&object)
+\item 
+\mbox{\Hypertarget{classfys_1_1ws_1_1_map_element_ace910ded0b34a9938099cb7de9d88fb4}\label{classfys_1_1ws_1_1_map_element_ace910ded0b34a9938099cb7de9d88fb4}} 
+{\footnotesize template$<$typename T $>$ }\\constexpr void {\bfseries set\+Trigger} (T \&\&trigger)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfys_1_1ws_1_1_map_element_af3630d120ea3b104ac259e3cc8a6364f}\label{classfys_1_1ws_1_1_map_element_af3630d120ea3b104ac259e3cc8a6364f}} 
+\index{fys::ws::MapElement@{fys::ws::MapElement}!canGoThrough@{canGoThrough}}
+\index{canGoThrough@{canGoThrough}!fys::ws::MapElement@{fys::ws::MapElement}}
+\doxysubsubsection{\texorpdfstring{canGoThrough()}{canGoThrough()}}
+{\footnotesize\ttfamily bool fys\+::ws\+::\+Map\+Element\+::can\+Go\+Through (\begin{DoxyParamCaption}\item[{double}]{x,  }\item[{double}]{y,  }\item[{std\+::size\+\_\+t}]{level }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+check if the element is of type B\+L\+O\+CK, if it is, check every collision blockers on the map\+Element to verify if the \mbox{\hyperlink{structfys_1_1ws_1_1_player_info}{Player\+Info}} collide with them. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/services/worldserver/include/engine/Collision\+Map.\+hh\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/services/worldserver/src/engine/Collision\+Map.\+cpp\end{DoxyCompactItemize}

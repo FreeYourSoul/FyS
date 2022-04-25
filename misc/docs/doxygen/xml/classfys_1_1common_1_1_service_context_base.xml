@@ -1,0 +1,218 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1common_1_1_service_context_base" kind="class" language="C++" prot="public">
+    <compoundname>fys::common::ServiceContextBase</compoundname>
+    <derivedcompoundref refid="classfys_1_1arena_1_1_arena_server_context" prot="public" virt="non-virtual">fys::arena::ArenaServerContext</derivedcompoundref>
+    <derivedcompoundref refid="classfys_1_1ws_1_1_world_server_context" prot="private" virt="non-virtual">fys::ws::WorldServerContext</derivedcompoundref>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classfys_1_1common_1_1_service_context_base_1a3b980d9775a46014bf1f586f557c82b7" prot="protected" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string fys::common::ServiceContextBase::_version</definition>
+        <argsstring></argsstring>
+        <name>_version</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" line="65" column="13" bodyfile="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1common_1_1_service_context_base_1aeb9795a676f4f0ebb1c3db1d95ea98a4" prot="protected" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string fys::common::ServiceContextBase::_name</definition>
+        <argsstring></argsstring>
+        <name>_name</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" line="66" column="13" bodyfile="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1common_1_1_service_context_base_1a8faa9975800eddf1f6f266c1c6ebc616" prot="protected" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string fys::common::ServiceContextBase::_configFile</definition>
+        <argsstring></argsstring>
+        <name>_configFile</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" line="67" column="13" bodyfile="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1common_1_1_service_context_base_1aed74fe40e171a10a0950bf46e0e305ad" prot="protected" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string fys::common::ServiceContextBase::_hostname</definition>
+        <argsstring></argsstring>
+        <name>_hostname</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" line="69" column="13" bodyfile="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1common_1_1_service_context_base_1abc37f80fdcffe74e5a76c418149cd81f" prot="protected" static="no" mutable="no">
+        <type>ushort</type>
+        <definition>ushort fys::common::ServiceContextBase::_port</definition>
+        <argsstring></argsstring>
+        <name>_port</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" line="70" column="8" bodyfile="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1common_1_1_service_context_base_1a568a3da59fea85f97e27e1bee0356169" prot="protected" static="no" mutable="no">
+        <type><ref refid="structfys_1_1common_1_1_dispatcher_data" kindref="compound">DispatcherData</ref></type>
+        <definition>DispatcherData fys::common::ServiceContextBase::_dispatcherData</definition>
+        <argsstring></argsstring>
+        <name>_dispatcherData</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" line="72" column="16" bodyfile="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1common_1_1_service_context_base_1ad3471d7038a6fcd8a92974124d1c4937" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fys::common::ServiceContextBase::ServiceContextBase</definition>
+        <argsstring>(int ac, const char *const *av)</argsstring>
+        <name>ServiceContextBase</name>
+        <param>
+          <type>int</type>
+          <declname>ac</declname>
+        </param>
+        <param>
+          <type>const char *const *</type>
+          <declname>av</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" line="50" column="1" bodyfile="/home/FyS/Project/FyS/services/common/src/ServiceContextBase.cpp" bodystart="34" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1common_1_1_service_context_base_1a6852c81cd6edd25b86b5ba7b6455687a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string fys::common::ServiceContextBase::getConnectionString</definition>
+        <argsstring>() const</argsstring>
+        <name>getConnectionString</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" line="53" column="1" bodyfile="/home/FyS/Project/FyS/services/common/src/ServiceContextBase.cpp" bodystart="78" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1common_1_1_service_context_base_1a1e9f65ec3d7154b245cab9f17a312276" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>ushort</type>
+        <definition>ushort fys::common::ServiceContextBase::getPort</definition>
+        <argsstring>() const</argsstring>
+        <name>getPort</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" line="56" column="1" bodyfile="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" bodystart="56" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1common_1_1_service_context_base_1a3f87a32136601361983f90c58d6fd501" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::string &amp;</type>
+        <definition>const std::string&amp; fys::common::ServiceContextBase::getHostname</definition>
+        <argsstring>() const</argsstring>
+        <name>getHostname</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" line="59" column="1" bodyfile="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" bodystart="59" bodyend="59"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classfys_1_1common_1_1_service_context_base_1aa62785255df317099a04aad2ef490842" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::common::ServiceContextBase::initializeFromIni</definition>
+        <argsstring>(const std::string &amp;configFilePath)</argsstring>
+        <name>initializeFromIni</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>configFilePath</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" line="62" column="6" bodyfile="/home/FyS/Project/FyS/services/common/src/ServiceContextBase.cpp" bodystart="63" bodyend="75"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>fys::common::ServiceContextBase</label>
+        <link refid="classfys_1_1common_1_1_service_context_base"/>
+      </node>
+      <node id="2">
+        <label>fys::arena::ArenaServerContext</label>
+        <link refid="classfys_1_1arena_1_1_arena_server_context"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>fys::ws::WorldServerContext</label>
+        <link refid="classfys_1_1ws_1_1_world_server_context"/>
+        <childnode refid="1" relation="private-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>fys::common::ServiceContextBase</label>
+        <link refid="classfys_1_1common_1_1_service_context_base"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>_dispatcherData</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>fys::common::DispatcherData</label>
+        <link refid="structfys_1_1common_1_1_dispatcher_data"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" line="48" column="25" bodyfile="/home/FyS/Project/FyS/services/common/include/ServiceContextBase.hh" bodystart="48" bodyend="73"/>
+    <listofallmembers>
+      <member refid="classfys_1_1common_1_1_service_context_base_1a8faa9975800eddf1f6f266c1c6ebc616" prot="protected" virt="non-virtual"><scope>fys::common::ServiceContextBase</scope><name>_configFile</name></member>
+      <member refid="classfys_1_1common_1_1_service_context_base_1a568a3da59fea85f97e27e1bee0356169" prot="protected" virt="non-virtual"><scope>fys::common::ServiceContextBase</scope><name>_dispatcherData</name></member>
+      <member refid="classfys_1_1common_1_1_service_context_base_1aed74fe40e171a10a0950bf46e0e305ad" prot="protected" virt="non-virtual"><scope>fys::common::ServiceContextBase</scope><name>_hostname</name></member>
+      <member refid="classfys_1_1common_1_1_service_context_base_1aeb9795a676f4f0ebb1c3db1d95ea98a4" prot="protected" virt="non-virtual"><scope>fys::common::ServiceContextBase</scope><name>_name</name></member>
+      <member refid="classfys_1_1common_1_1_service_context_base_1abc37f80fdcffe74e5a76c418149cd81f" prot="protected" virt="non-virtual"><scope>fys::common::ServiceContextBase</scope><name>_port</name></member>
+      <member refid="classfys_1_1common_1_1_service_context_base_1a3b980d9775a46014bf1f586f557c82b7" prot="protected" virt="non-virtual"><scope>fys::common::ServiceContextBase</scope><name>_version</name></member>
+      <member refid="classfys_1_1common_1_1_service_context_base_1a6852c81cd6edd25b86b5ba7b6455687a" prot="public" virt="non-virtual"><scope>fys::common::ServiceContextBase</scope><name>getConnectionString</name></member>
+      <member refid="classfys_1_1common_1_1_service_context_base_1a3f87a32136601361983f90c58d6fd501" prot="public" virt="non-virtual"><scope>fys::common::ServiceContextBase</scope><name>getHostname</name></member>
+      <member refid="classfys_1_1common_1_1_service_context_base_1a1e9f65ec3d7154b245cab9f17a312276" prot="public" virt="non-virtual"><scope>fys::common::ServiceContextBase</scope><name>getPort</name></member>
+      <member refid="classfys_1_1common_1_1_service_context_base_1aa62785255df317099a04aad2ef490842" prot="private" virt="non-virtual"><scope>fys::common::ServiceContextBase</scope><name>initializeFromIni</name></member>
+      <member refid="classfys_1_1common_1_1_service_context_base_1ad3471d7038a6fcd8a92974124d1c4937" prot="public" virt="non-virtual"><scope>fys::common::ServiceContextBase</scope><name>ServiceContextBase</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

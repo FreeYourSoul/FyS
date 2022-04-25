@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1arena_1_1_history_action" kind="struct" language="C++" prot="public">
+    <compoundname>fys::arena::HistoryAction</compoundname>
+    <includes refid="_fighting_history_manager_8hh" local="no">FightingHistoryManager.hh</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_history_action_1a914e23cd71a884f87bd81287e9adb36a" prot="public" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint fys::arena::HistoryAction::idCharacter</definition>
+        <argsstring></argsstring>
+        <name>idCharacter</name>
+        <briefdescription>
+<para>in-game id of the target </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/FightingHistoryManager.hh" line="44" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/FightingHistoryManager.hh" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_history_action_1a3c95ca28a2229f4ef922159bb99415ec" prot="public" static="no" mutable="no">
+        <type>std::string_view</type>
+        <definition>std::string_view fys::arena::HistoryAction::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <briefdescription>
+<para>name of the character </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/FightingHistoryManager.hh" line="46" column="18" bodyfile="/home/FyS/Project/FyS/services/arena/include/FightingHistoryManager.hh" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_history_action_1afd60917761f25dc3f6c378df4f79e291" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool fys::arena::HistoryAction::isContender</definition>
+        <argsstring></argsstring>
+        <name>isContender</name>
+        <briefdescription>
+<para>is the character an ally or a contender </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/FightingHistoryManager.hh" line="48" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/FightingHistoryManager.hh" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_history_action_1ab848b051cb42b621b832e38b8d2f998e" prot="public" static="no" mutable="no">
+        <type>std::string_view</type>
+        <definition>std::string_view fys::arena::HistoryAction::actionKey</definition>
+        <argsstring></argsstring>
+        <name>actionKey</name>
+        <briefdescription>
+<para>key of the action executed </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/FightingHistoryManager.hh" line="50" column="18" bodyfile="/home/FyS/Project/FyS/services/arena/include/FightingHistoryManager.hh" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_history_action_1ab001f9f1750386772bf4291d9ecace53" prot="public" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint fys::arena::HistoryAction::idTarget</definition>
+        <argsstring></argsstring>
+        <name>idTarget</name>
+        <briefdescription>
+<para>in-game id of the target </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/FightingHistoryManager.hh" line="52" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/FightingHistoryManager.hh" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Store a specific action made during the arena <simplesect kind="note"><para>String are stored in string_views pointing to the fighting pit&apos;s data, as we have to ensure the fighting pit instance is still alive until the end of the History process. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/FightingHistoryManager.hh" line="42" column="20" bodyfile="/home/FyS/Project/FyS/services/arena/include/FightingHistoryManager.hh" bodystart="42" bodyend="53"/>
+    <listofallmembers>
+      <member refid="structfys_1_1arena_1_1_history_action_1ab848b051cb42b621b832e38b8d2f998e" prot="public" virt="non-virtual"><scope>fys::arena::HistoryAction</scope><name>actionKey</name></member>
+      <member refid="structfys_1_1arena_1_1_history_action_1a914e23cd71a884f87bd81287e9adb36a" prot="public" virt="non-virtual"><scope>fys::arena::HistoryAction</scope><name>idCharacter</name></member>
+      <member refid="structfys_1_1arena_1_1_history_action_1ab001f9f1750386772bf4291d9ecace53" prot="public" virt="non-virtual"><scope>fys::arena::HistoryAction</scope><name>idTarget</name></member>
+      <member refid="structfys_1_1arena_1_1_history_action_1afd60917761f25dc3f6c378df4f79e291" prot="public" virt="non-virtual"><scope>fys::arena::HistoryAction</scope><name>isContender</name></member>
+      <member refid="structfys_1_1arena_1_1_history_action_1a3c95ca28a2229f4ef922159bb99415ec" prot="public" virt="non-virtual"><scope>fys::arena::HistoryAction</scope><name>name</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

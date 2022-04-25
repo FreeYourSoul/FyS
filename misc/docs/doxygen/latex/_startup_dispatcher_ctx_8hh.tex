@@ -1,0 +1,63 @@
+\hypertarget{_startup_dispatcher_ctx_8hh}{}\doxysection{/home/\+Fy\+S/\+Project/\+Fy\+S/dispatcher/common/include/context/\+Startup\+Dispatcher\+Ctx.hh File Reference}
+\label{_startup_dispatcher_ctx_8hh}\index{/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh@{/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh}}
+{\ttfamily \#include $<$boost/property\+\_\+tree/ptree.\+hpp$>$}\newline
+{\ttfamily \#include $<$boost/property\+\_\+tree/json\+\_\+parser.\+hpp$>$}\newline
+{\ttfamily \#include $<$boost/lexical\+\_\+cast.\+hpp$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classfys_1_1_startup_dispatcher_ctx}{fys\+::\+Startup\+Dispatcher\+Ctx}}
+\item 
+struct \mbox{\hyperlink{structfys_1_1_startup_dispatcher_ctx_1_1_cluster_proxy}{fys\+::\+Startup\+Dispatcher\+Ctx\+::\+Cluster\+Proxy}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacefys}{fys}}
+\item 
+ \mbox{\hyperlink{namespacefys_1_1init__beacon}{fys\+::init\+\_\+beacon}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_startup_dispatcher_ctx_8hh_a2c5d6fb01563439646a676bcd5146d0a}{V\+E\+R\+S\+I\+O\+N\+\_\+\+D\+I\+S\+P\+A\+T\+C\+H\+ER}}~\char`\"{}1.\+0\char`\"{}
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+constexpr auto \mbox{\hyperlink{namespacefys_1_1init__beacon_aad798ac2bc0ab6d462ef8efb9fdb2161}{fys\+::init\+\_\+beacon\+::\+N\+A\+ME}} = \char`\"{}dispatcher.\+name\char`\"{}
+\item 
+constexpr auto \mbox{\hyperlink{namespacefys_1_1init__beacon_a50d5a6103d20bdaa7fe0d3f8fb9fe46e}{fys\+::init\+\_\+beacon\+::\+T\+O\+P\+I\+CS}} = \char`\"{}dispatcher.\+topics\char`\"{}
+\item 
+constexpr auto \mbox{\hyperlink{namespacefys_1_1init__beacon_ac8e2c14efd2c0ffeca5a27ad6d521c0b}{fys\+::init\+\_\+beacon\+::\+I\+S\+C\+L\+U\+S\+T\+E\+R\+A\+W\+A\+RE}} = \char`\"{}dispatcher.\+is\+Cluster\+Aware\char`\"{}
+\item 
+constexpr auto \mbox{\hyperlink{namespacefys_1_1init__beacon_aa31eed40890b1c6bce60ae1e2ce425fd}{fys\+::init\+\_\+beacon\+::\+M\+A\+X\+M\+S\+G\+S\+I\+ZE}} = \char`\"{}dispatcher.\+max\+Msg\+Size\char`\"{}
+\item 
+constexpr auto \mbox{\hyperlink{namespacefys_1_1init__beacon_ad8614f8f762aa5af07a27b43874051f0}{fys\+::init\+\_\+beacon\+::\+B\+I\+N\+D\+I\+N\+G\+P\+O\+RT}} = \char`\"{}dispatcher.\+binding\+Port\char`\"{}
+\item 
+constexpr auto \mbox{\hyperlink{namespacefys_1_1init__beacon_ad819d34dce2a418bac1dde1309678a6c}{fys\+::init\+\_\+beacon\+::\+D\+I\+S\+P\+A\+T\+C\+H\+E\+R\+P\+O\+RT}} = \char`\"{}dispatcher.\+dispatcher\+Port\char`\"{}
+\item 
+constexpr auto \mbox{\hyperlink{namespacefys_1_1init__beacon_aa9a3c4ece8f3a617b6246de3dad38a01}{fys\+::init\+\_\+beacon\+::\+I\+S\+L\+O\+A\+D\+B\+A\+L\+A\+N\+C\+I\+NG}} = \char`\"{}dispatcher.\+is\+Load\+Balancing\char`\"{}
+\item 
+constexpr auto \mbox{\hyperlink{namespacefys_1_1init__beacon_a4ece78ead6eef2838afa61ffbbe75a00}{fys\+::init\+\_\+beacon\+::\+T\+O\+P\+I\+C\+\_\+\+G\+R\+O\+U\+PS}} = \char`\"{}dispatcher.\+topic\+Groups\char`\"{}
+\item 
+constexpr auto \mbox{\hyperlink{namespacefys_1_1init__beacon_a7a5a16d48d1efc8f6f6bfe7c67286fc0}{fys\+::init\+\_\+beacon\+::\+S\+P\+E\+C\+I\+F\+I\+C\+\_\+\+C\+O\+N\+F\+IG}} = \char`\"{}dispatcher.\+specific\+\_\+config\char`\"{}
+\item 
+constexpr auto \mbox{\hyperlink{namespacefys_1_1init__beacon_aaef28acc1ec4044b1d694e8b56904e8e}{fys\+::init\+\_\+beacon\+::\+F\+R\+O\+N\+T\+E\+N\+D\+\_\+\+P\+O\+RT}} = \char`\"{}proxy\+\_\+frontend.\+port\char`\"{}
+\item 
+constexpr auto \mbox{\hyperlink{namespacefys_1_1init__beacon_ad83de4e85a297423a0f0de9d02e622ab}{fys\+::init\+\_\+beacon\+::\+F\+R\+O\+N\+T\+E\+N\+D\+\_\+\+A\+D\+DR}} = \char`\"{}proxy\+\_\+frontend.\+address\char`\"{}
+\item 
+constexpr auto \mbox{\hyperlink{namespacefys_1_1init__beacon_ac37ead690a9cc084a1eef540747dbf74}{fys\+::init\+\_\+beacon\+::\+B\+A\+C\+K\+E\+N\+D\+\_\+\+P\+O\+RT}} = \char`\"{}proxy\+\_\+backend.\+port\char`\"{}
+\item 
+constexpr auto \mbox{\hyperlink{namespacefys_1_1init__beacon_a489653ffcbea264efb2cf8748d957a24}{fys\+::init\+\_\+beacon\+::\+B\+A\+C\+K\+E\+N\+D\+\_\+\+A\+D\+DR}} = \char`\"{}proxy\+\_\+backend.\+address\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_startup_dispatcher_ctx_8hh_a2c5d6fb01563439646a676bcd5146d0a}\label{_startup_dispatcher_ctx_8hh_a2c5d6fb01563439646a676bcd5146d0a}} 
+\index{StartupDispatcherCtx.hh@{StartupDispatcherCtx.hh}!VERSION\_DISPATCHER@{VERSION\_DISPATCHER}}
+\index{VERSION\_DISPATCHER@{VERSION\_DISPATCHER}!StartupDispatcherCtx.hh@{StartupDispatcherCtx.hh}}
+\doxysubsubsection{\texorpdfstring{VERSION\_DISPATCHER}{VERSION\_DISPATCHER}}
+{\footnotesize\ttfamily \#define V\+E\+R\+S\+I\+O\+N\+\_\+\+D\+I\+S\+P\+A\+T\+C\+H\+ER~\char`\"{}1.\+0\char`\"{}}
+

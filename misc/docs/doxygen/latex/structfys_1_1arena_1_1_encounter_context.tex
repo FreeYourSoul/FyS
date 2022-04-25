@@ -1,0 +1,57 @@
+\hypertarget{structfys_1_1arena_1_1_encounter_context}{}\doxysection{fys\+::arena\+::Encounter\+Context Struct Reference}
+\label{structfys_1_1arena_1_1_encounter_context}\index{fys::arena::EncounterContext@{fys::arena::EncounterContext}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structfys_1_1arena_1_1_encounter_context_1_1_encounter_desc}{Encounter\+Desc}}
+\item 
+struct \mbox{\hyperlink{structfys_1_1arena_1_1_encounter_context_1_1_reward_encounter_desc}{Reward\+Encounter\+Desc}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structfys_1_1arena_1_1_encounter_context_a39350dd39cd4dada015ec83fc4d97c16}\label{structfys_1_1arena_1_1_encounter_context_a39350dd39cd4dada015ec83fc4d97c16}} 
+using {\bfseries Rng\+Range} = std\+::pair$<$ uint, uint $>$
+\item 
+\mbox{\Hypertarget{structfys_1_1arena_1_1_encounter_context_ae2f01baa79fc61f60c90cdcd21a5c192}\label{structfys_1_1arena_1_1_encounter_context_ae2f01baa79fc61f60c90cdcd21a5c192}} 
+using {\bfseries Chance\+Array} = std\+::array$<$ uint, 3 $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{structfys_1_1arena_1_1_encounter_context_a1a41ab106ed5e9f561820a764a83a4c1}{zone\+Registered}} (const std\+::string \&ws\+Id) const noexcept
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{structfys_1_1arena_1_1_encounter_context_a6bf02b286f57645e4186cee95c4671a6}\label{structfys_1_1arena_1_1_encounter_context_a6bf02b286f57645e4186cee95c4671a6}} 
+std\+::map$<$ std\+::string, std\+::array$<$ Rng\+Range, 3 $>$ $>$ \mbox{\hyperlink{structfys_1_1arena_1_1_encounter_context_a6bf02b286f57645e4186cee95c4671a6}{\+\_\+range\+Encounter\+Per\+Zone}}
+\begin{DoxyCompactList}\small\item\em range of number of monster findable per zone \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structfys_1_1arena_1_1_encounter_context_aaf63454c4f1577532e83da240ac3c51e}\label{structfys_1_1arena_1_1_encounter_context_aaf63454c4f1577532e83da240ac3c51e}} 
+std\+::map$<$ std\+::string, std\+::vector$<$ \mbox{\hyperlink{structfys_1_1arena_1_1_encounter_context_1_1_encounter_desc}{Encounter\+Desc}} $>$ $>$ \mbox{\hyperlink{structfys_1_1arena_1_1_encounter_context_aaf63454c4f1577532e83da240ac3c51e}{\+\_\+contenders\+Per\+Zone}}
+\begin{DoxyCompactList}\small\item\em contender findable per zone \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{structfys_1_1arena_1_1_encounter_context_a8e0e4519052ba3e27ddd88d364e8cd9c}\label{structfys_1_1arena_1_1_encounter_context_a8e0e4519052ba3e27ddd88d364e8cd9c}} 
+std\+::map$<$ std\+::string, \mbox{\hyperlink{structfys_1_1arena_1_1_encounter_context_1_1_reward_encounter_desc}{Reward\+Encounter\+Desc}} $>$ \mbox{\hyperlink{structfys_1_1arena_1_1_encounter_context_a8e0e4519052ba3e27ddd88d364e8cd9c}{\+\_\+reward\+Desc\+Per\+Contender}}
+\begin{DoxyCompactList}\small\item\em reward description per contender \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{structfys_1_1arena_1_1_encounter_context_a1a41ab106ed5e9f561820a764a83a4c1}\label{structfys_1_1arena_1_1_encounter_context_a1a41ab106ed5e9f561820a764a83a4c1}} 
+\index{fys::arena::EncounterContext@{fys::arena::EncounterContext}!zoneRegistered@{zoneRegistered}}
+\index{zoneRegistered@{zoneRegistered}!fys::arena::EncounterContext@{fys::arena::EncounterContext}}
+\doxysubsubsection{\texorpdfstring{zoneRegistered()}{zoneRegistered()}}
+{\footnotesize\ttfamily bool fys\+::arena\+::\+Encounter\+Context\+::zone\+Registered (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{ws\+Id }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Verify if the given zone is registered in the context 
+\begin{DoxyParams}{Parameters}
+{\em ws\+Id} & zone to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the zone is registered, false otherwise 
+\end{DoxyReturn}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/services/arena/include/Arena\+Server\+Context.\+hh\end{DoxyCompactItemize}

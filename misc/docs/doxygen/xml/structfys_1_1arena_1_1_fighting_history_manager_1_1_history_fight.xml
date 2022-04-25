@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1arena_1_1_fighting_history_manager_1_1_history_fight" kind="struct" language="C++" prot="private">
+    <compoundname>fys::arena::FightingHistoryManager::HistoryFight</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_fighting_history_manager_1_1_history_fight_1a8b6f93cfa269c4a27f9745a2239a472b" prot="public" static="no" mutable="no">
+        <type>std::reference_wrapper&lt; const <ref refid="classfys_1_1arena_1_1_fighting_pit" kindref="compound">FightingPit</ref> &gt;</type>
+        <definition>std::reference_wrapper&lt;const FightingPit&gt; fys::arena::FightingHistoryManager::HistoryFight::ref</definition>
+        <argsstring></argsstring>
+        <name>ref</name>
+        <briefdescription>
+<para>Reference to the fighting pit. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/FightingHistoryManager.hh" line="70" column="24" bodyfile="/home/FyS/Project/FyS/services/arena/include/FightingHistoryManager.hh" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_fighting_history_manager_1_1_history_fight_1a4b3fa990b5d912c3adc8d3f77fd3c88d" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structfys_1_1arena_1_1_history_action" kindref="compound">HistoryAction</ref> &gt;</type>
+        <definition>std::vector&lt;HistoryAction&gt; fys::arena::FightingHistoryManager::HistoryFight::hist</definition>
+        <argsstring></argsstring>
+        <name>hist</name>
+        <briefdescription>
+<para>Vector containing all the actions that occurred in the arena. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/FightingHistoryManager.hh" line="72" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/FightingHistoryManager.hh" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_fighting_history_manager_1_1_history_fight_1a06a4a0139ec7acde952bebf3303dcc07" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool fys::arena::FightingHistoryManager::HistoryFight::hasToBeSaved</definition>
+        <argsstring></argsstring>
+        <name>hasToBeSaved</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>Set at true in case an issue occurred in the fighting pit (will save the fighting pit in file format) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/FightingHistoryManager.hh" line="75" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/FightingHistoryManager.hh" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_fighting_history_manager_1_1_history_fight_1afdf87e67ddf85fe0bb4ee4b4bda4331d" prot="public" static="no" mutable="no">
+        <type>unsigned</type>
+        <definition>unsigned fys::arena::FightingHistoryManager::HistoryFight::seed</definition>
+        <argsstring></argsstring>
+        <name>seed</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+<para>Seed on which the fight occurred. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/FightingHistoryManager.hh" line="77" column="10" bodyfile="/home/FyS/Project/FyS/services/arena/include/FightingHistoryManager.hh" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfys_1_1arena_1_1_fighting_history_manager_1_1_history_fight_1af9c914c382abe840e3c2eeeaf2e065d9" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::arena::FightingHistoryManager::HistoryFight::HistoryFight</definition>
+        <argsstring>(const FightingPit &amp;pt, unsigned seed=0) noexcept</argsstring>
+        <name>HistoryFight</name>
+        <param>
+          <type>const <ref refid="classfys_1_1arena_1_1_fighting_pit" kindref="compound">FightingPit</ref> &amp;</type>
+          <declname>pt</declname>
+        </param>
+        <param>
+          <type>unsigned</type>
+          <declname>seed</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/FightingHistoryManager.hh" line="66" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/FightingHistoryManager.cpp" bodystart="67" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1arena_1_1_fighting_history_manager_1_1_history_fight_1a19e5770c9203080700323f5b0be5060c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fys::arena::FightingHistoryManager::HistoryFight::~HistoryFight</definition>
+        <argsstring>()</argsstring>
+        <name>~HistoryFight</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/FightingHistoryManager.hh" line="67" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/FightingHistoryManager.cpp" bodystart="70" bodyend="75"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>R.A.I.I History fight instance containing the list of actions that occurred during a fight This struct is filled via the static method provided by <ref refid="classfys_1_1arena_1_1_fighting_history_manager" kindref="compound">FightingHistoryManager</ref>. When destroyed, if the seed is set (superior to 0) and if the hasToBeSaved variable has been set to true </para>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/FightingHistoryManager.hh" line="65" column="19" bodyfile="/home/FyS/Project/FyS/services/arena/include/FightingHistoryManager.hh" bodystart="65" bodyend="78"/>
+    <listofallmembers>
+      <member refid="structfys_1_1arena_1_1_fighting_history_manager_1_1_history_fight_1a06a4a0139ec7acde952bebf3303dcc07" prot="public" virt="non-virtual"><scope>fys::arena::FightingHistoryManager::HistoryFight</scope><name>hasToBeSaved</name></member>
+      <member refid="structfys_1_1arena_1_1_fighting_history_manager_1_1_history_fight_1a4b3fa990b5d912c3adc8d3f77fd3c88d" prot="public" virt="non-virtual"><scope>fys::arena::FightingHistoryManager::HistoryFight</scope><name>hist</name></member>
+      <member refid="structfys_1_1arena_1_1_fighting_history_manager_1_1_history_fight_1af9c914c382abe840e3c2eeeaf2e065d9" prot="public" virt="non-virtual"><scope>fys::arena::FightingHistoryManager::HistoryFight</scope><name>HistoryFight</name></member>
+      <member refid="structfys_1_1arena_1_1_fighting_history_manager_1_1_history_fight_1a8b6f93cfa269c4a27f9745a2239a472b" prot="public" virt="non-virtual"><scope>fys::arena::FightingHistoryManager::HistoryFight</scope><name>ref</name></member>
+      <member refid="structfys_1_1arena_1_1_fighting_history_manager_1_1_history_fight_1afdf87e67ddf85fe0bb4ee4b4bda4331d" prot="public" virt="non-virtual"><scope>fys::arena::FightingHistoryManager::HistoryFight</scope><name>seed</name></member>
+      <member refid="structfys_1_1arena_1_1_fighting_history_manager_1_1_history_fight_1a19e5770c9203080700323f5b0be5060c" prot="public" virt="non-virtual"><scope>fys::arena::FightingHistoryManager::HistoryFight</scope><name>~HistoryFight</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

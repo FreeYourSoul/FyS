@@ -1,0 +1,159 @@
+\hypertarget{classfys_1_1network_1_1_dispatcher_connection_manager}{}\doxysection{fys\+::network\+::Dispatcher\+Connection\+Manager Class Reference}
+\label{classfys_1_1network_1_1_dispatcher_connection_manager}\index{fys::network::DispatcherConnectionManager@{fys::network::DispatcherConnectionManager}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfys_1_1network_1_1_dispatcher_connection_manager_ae0e3789b542894047814c0602e1b069a}{Dispatcher\+Connection\+Manager}} (int thread\+Number=1, bool is\+Load\+Balancing=true) noexcept
+\item 
+\mbox{\Hypertarget{classfys_1_1network_1_1_dispatcher_connection_manager_ad4c7378367a101c50352c3d0037f7e4b}\label{classfys_1_1network_1_1_dispatcher_connection_manager_ad4c7378367a101c50352c3d0037f7e4b}} 
+void {\bfseries setup\+Connection\+Manager} (const \mbox{\hyperlink{classfys_1_1_startup_dispatcher_ctx}{fys\+::\+Startup\+Dispatcher\+Ctx}} \&ctx) noexcept
+\item 
+std\+::tuple$<$ bool, bool, bool $>$ \mbox{\hyperlink{classfys_1_1network_1_1_dispatcher_connection_manager_a5b4554f6c31b43d70ad653b9b7d663a6}{poll}} () noexcept
+\begin{DoxyCompactList}\small\item\em Poll the reader socket (the listener one and the subscriber one if the dispatcher is cluster aware. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Handler $>$ }\\void \mbox{\hyperlink{classfys_1_1network_1_1_dispatcher_connection_manager_ab2be255a1a680a01d444e9929b88853d}{dispatch\+Message\+From\+Listener\+Socket}} (Handler \&\&handler)
+\begin{DoxyCompactList}\small\item\em Read the Listener socket and call a given handler with this message as parameter. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Handler $>$ }\\void \mbox{\hyperlink{classfys_1_1network_1_1_dispatcher_connection_manager_a5e086c13b30b237f9d813ef9ab4402ee}{dispatch\+Message\+From\+Subscriber\+Socket}} (Handler \&\&handler) noexcept
+\begin{DoxyCompactList}\small\item\em Read the Cluster subscriber socket and call a given handler with this message as parameter. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classfys_1_1network_1_1_dispatcher_connection_manager_a77298948e3747e60431c235d21d15507}\label{classfys_1_1network_1_1_dispatcher_connection_manager_a77298948e3747e60431c235d21d15507}} 
+{\footnotesize template$<$typename Handler $>$ }\\void {\bfseries dispatch\+Message\+From\+Dispatcher\+Socket} (Handler \&\&handler) noexcept
+\item 
+bool \mbox{\hyperlink{classfys_1_1network_1_1_dispatcher_connection_manager_afad4e81f4d20213938ec257e2a36fb86}{reply\+To\+Listener\+Socket}} (zmq\+::multipart\+\_\+t \&\&msg) noexcept
+\begin{DoxyCompactList}\small\item\em Send a message to the frontend socket of the dispatcher (proxy). This socket is a router socket, and so the message has to contains an identity frame to be routed correctly. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classfys_1_1network_1_1_dispatcher_connection_manager_a0c9a88ab523473d6ab928b0b1edc1c62}{send\+Message\+To\+Dispatcher\+Socket}} (zmq\+::multipart\+\_\+t \&\&msg) noexcept
+\begin{DoxyCompactList}\small\item\em Send a message to the servers connected to the dispatcher (load balanced, or distributed dispatching depending on the dispatcher configuration). The message has to contains the identity frame in order for the server to resend it in the reply. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classfys_1_1network_1_1_dispatcher_connection_manager_a2350732d67f54ae362c14ce417d04042}{send\+Message\+To\+Cluster\+Pub\+Socket}} (zmq\+::multipart\+\_\+t \&\&msg) noexcept
+\begin{DoxyCompactList}\small\item\em Send a message to the dispatcher cluster (if configured in the dispatcher) \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfys_1_1network_1_1_dispatcher_connection_manager_ae0e3789b542894047814c0602e1b069a}\label{classfys_1_1network_1_1_dispatcher_connection_manager_ae0e3789b542894047814c0602e1b069a}} 
+\index{fys::network::DispatcherConnectionManager@{fys::network::DispatcherConnectionManager}!DispatcherConnectionManager@{DispatcherConnectionManager}}
+\index{DispatcherConnectionManager@{DispatcherConnectionManager}!fys::network::DispatcherConnectionManager@{fys::network::DispatcherConnectionManager}}
+\doxysubsubsection{\texorpdfstring{DispatcherConnectionManager()}{DispatcherConnectionManager()}}
+{\footnotesize\ttfamily fys\+::network\+::\+Dispatcher\+Connection\+Manager\+::\+Dispatcher\+Connection\+Manager (\begin{DoxyParamCaption}\item[{int}]{thread\+Number = {\ttfamily 1},  }\item[{bool}]{is\+Load\+Balancing = {\ttfamily true} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [noexcept]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em thread\+Number} & number of thread used by the zmq\+::context in order to manage messages \\
+\hline
+{\em is\+Load\+Balancing} & if true, a Dealer socket is instantiated in order to dispatch messages if false, a Publisher socket is instantiated to do so \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfys_1_1network_1_1_dispatcher_connection_manager_ab2be255a1a680a01d444e9929b88853d}\label{classfys_1_1network_1_1_dispatcher_connection_manager_ab2be255a1a680a01d444e9929b88853d}} 
+\index{fys::network::DispatcherConnectionManager@{fys::network::DispatcherConnectionManager}!dispatchMessageFromListenerSocket@{dispatchMessageFromListenerSocket}}
+\index{dispatchMessageFromListenerSocket@{dispatchMessageFromListenerSocket}!fys::network::DispatcherConnectionManager@{fys::network::DispatcherConnectionManager}}
+\doxysubsubsection{\texorpdfstring{dispatchMessageFromListenerSocket()}{dispatchMessageFromListenerSocket()}}
+{\footnotesize\ttfamily template$<$typename Handler $>$ \\
+void fys\+::network\+::\+Dispatcher\+Connection\+Manager\+::dispatch\+Message\+From\+Listener\+Socket (\begin{DoxyParamCaption}\item[{Handler \&\&}]{handler }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Read the Listener socket and call a given handler with this message as parameter. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Handler} & function to call after reading message from socket (multipart\+\_\+t object sent as parameter) \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em handler} & function instance to call which take zmq\+::multipart object as parameter \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfys_1_1network_1_1_dispatcher_connection_manager_a5e086c13b30b237f9d813ef9ab4402ee}\label{classfys_1_1network_1_1_dispatcher_connection_manager_a5e086c13b30b237f9d813ef9ab4402ee}} 
+\index{fys::network::DispatcherConnectionManager@{fys::network::DispatcherConnectionManager}!dispatchMessageFromSubscriberSocket@{dispatchMessageFromSubscriberSocket}}
+\index{dispatchMessageFromSubscriberSocket@{dispatchMessageFromSubscriberSocket}!fys::network::DispatcherConnectionManager@{fys::network::DispatcherConnectionManager}}
+\doxysubsubsection{\texorpdfstring{dispatchMessageFromSubscriberSocket()}{dispatchMessageFromSubscriberSocket()}}
+{\footnotesize\ttfamily template$<$typename Handler $>$ \\
+void fys\+::network\+::\+Dispatcher\+Connection\+Manager\+::dispatch\+Message\+From\+Subscriber\+Socket (\begin{DoxyParamCaption}\item[{Handler \&\&}]{handler }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Read the Cluster subscriber socket and call a given handler with this message as parameter. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Handler} & function to call after reading message from socket (multipart\+\_\+t object sent as parameter) \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em handler} & function instance to call which take zmq\+::multipart object as parameter \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfys_1_1network_1_1_dispatcher_connection_manager_a5b4554f6c31b43d70ad653b9b7d663a6}\label{classfys_1_1network_1_1_dispatcher_connection_manager_a5b4554f6c31b43d70ad653b9b7d663a6}} 
+\index{fys::network::DispatcherConnectionManager@{fys::network::DispatcherConnectionManager}!poll@{poll}}
+\index{poll@{poll}!fys::network::DispatcherConnectionManager@{fys::network::DispatcherConnectionManager}}
+\doxysubsubsection{\texorpdfstring{poll()}{poll()}}
+{\footnotesize\ttfamily std\+::tuple$<$ bool, bool, bool $>$ fys\+::network\+::\+Dispatcher\+Connection\+Manager\+::poll (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Poll the reader socket (the listener one and the subscriber one if the dispatcher is cluster aware. 
+
+\begin{DoxyReturn}{Returns}
+a pair of bool with first \+: is there anything on the listener socket to read second \+: is there anything on the subscriber socket to read 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfys_1_1network_1_1_dispatcher_connection_manager_afad4e81f4d20213938ec257e2a36fb86}\label{classfys_1_1network_1_1_dispatcher_connection_manager_afad4e81f4d20213938ec257e2a36fb86}} 
+\index{fys::network::DispatcherConnectionManager@{fys::network::DispatcherConnectionManager}!replyToListenerSocket@{replyToListenerSocket}}
+\index{replyToListenerSocket@{replyToListenerSocket}!fys::network::DispatcherConnectionManager@{fys::network::DispatcherConnectionManager}}
+\doxysubsubsection{\texorpdfstring{replyToListenerSocket()}{replyToListenerSocket()}}
+{\footnotesize\ttfamily bool fys\+::network\+::\+Dispatcher\+Connection\+Manager\+::reply\+To\+Listener\+Socket (\begin{DoxyParamCaption}\item[{zmq\+::multipart\+\_\+t \&\&}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Send a message to the frontend socket of the dispatcher (proxy). This socket is a router socket, and so the message has to contains an identity frame to be routed correctly. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & reply to the requester client of the dispatcher \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the message has been sent correctly, false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfys_1_1network_1_1_dispatcher_connection_manager_a2350732d67f54ae362c14ce417d04042}\label{classfys_1_1network_1_1_dispatcher_connection_manager_a2350732d67f54ae362c14ce417d04042}} 
+\index{fys::network::DispatcherConnectionManager@{fys::network::DispatcherConnectionManager}!sendMessageToClusterPubSocket@{sendMessageToClusterPubSocket}}
+\index{sendMessageToClusterPubSocket@{sendMessageToClusterPubSocket}!fys::network::DispatcherConnectionManager@{fys::network::DispatcherConnectionManager}}
+\doxysubsubsection{\texorpdfstring{sendMessageToClusterPubSocket()}{sendMessageToClusterPubSocket()}}
+{\footnotesize\ttfamily bool fys\+::network\+::\+Dispatcher\+Connection\+Manager\+::send\+Message\+To\+Cluster\+Pub\+Socket (\begin{DoxyParamCaption}\item[{zmq\+::multipart\+\_\+t \&\&}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Send a message to the dispatcher cluster (if configured in the dispatcher) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & notification to send to the dispatcher cluster \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the message has been sent correctly, false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfys_1_1network_1_1_dispatcher_connection_manager_a0c9a88ab523473d6ab928b0b1edc1c62}\label{classfys_1_1network_1_1_dispatcher_connection_manager_a0c9a88ab523473d6ab928b0b1edc1c62}} 
+\index{fys::network::DispatcherConnectionManager@{fys::network::DispatcherConnectionManager}!sendMessageToDispatcherSocket@{sendMessageToDispatcherSocket}}
+\index{sendMessageToDispatcherSocket@{sendMessageToDispatcherSocket}!fys::network::DispatcherConnectionManager@{fys::network::DispatcherConnectionManager}}
+\doxysubsubsection{\texorpdfstring{sendMessageToDispatcherSocket()}{sendMessageToDispatcherSocket()}}
+{\footnotesize\ttfamily bool fys\+::network\+::\+Dispatcher\+Connection\+Manager\+::send\+Message\+To\+Dispatcher\+Socket (\begin{DoxyParamCaption}\item[{zmq\+::multipart\+\_\+t \&\&}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Send a message to the servers connected to the dispatcher (load balanced, or distributed dispatching depending on the dispatcher configuration). The message has to contains the identity frame in order for the server to resend it in the reply. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & incoming message forwarded to the dispatched server \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the message has been sent correctly, false otherwise 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/dispatcher/common/include/core/Dispatcher\+Connection\+Manager.\+hh\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/dispatcher/common/src/core/Dispatcher\+Connection\+Manager.\+cpp\end{DoxyCompactItemize}

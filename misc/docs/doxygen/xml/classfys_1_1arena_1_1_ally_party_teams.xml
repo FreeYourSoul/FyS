@@ -1,0 +1,372 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1arena_1_1_ally_party_teams" kind="class" language="C++" prot="public">
+    <compoundname>fys::arena::AllyPartyTeams</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_ally_party_teams_1adc2cece0d2bbc4803dbdf7e98635f5dd" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::unique_ptr&lt; <ref refid="classfys_1_1arena_1_1_party_team" kindref="compound">PartyTeam</ref> &gt; &gt;</type>
+        <definition>std::vector&lt;std::unique_ptr&lt;PartyTeam&gt; &gt; fys::arena::AllyPartyTeams::_partyTeams</definition>
+        <argsstring></argsstring>
+        <name>_partyTeams</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/AllyPartyTeams.hh" line="102" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/AllyPartyTeams.hh" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_ally_party_teams_1a7aaab01ae3cf056e1695031db9838793" prot="private" static="no" mutable="no">
+        <type>unsigned</type>
+        <definition>unsigned fys::arena::AllyPartyTeams::_currentTeamMemberId</definition>
+        <argsstring></argsstring>
+        <name>_currentTeamMemberId</name>
+        <initializer>{0}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/AllyPartyTeams.hh" line="105" column="10" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/AllyPartyTeams.hh" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1arena_1_1_ally_party_teams_1aaecf79810ffba7548a68e967f310f13b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classfys_1_1arena_1_1_team_member" kindref="compound">TeamMember</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; TeamMember &gt; fys::arena::AllyPartyTeams::selectSuitableMember</definition>
+        <argsstring>(ComparatorSelection&lt; TeamMember &gt; comp)</argsstring>
+        <name>selectSuitableMember</name>
+        <param>
+          <type>ComparatorSelection&lt; <ref refid="classfys_1_1arena_1_1_team_member" kindref="compound">TeamMember</ref> &gt;</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/AllyPartyTeams.hh" line="49" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/team/AllyPartyTeams.cpp" bodystart="68" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_ally_party_teams_1a9e3d76fe96bc02f801b6729eb176f5f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classfys_1_1arena_1_1_team_member" kindref="compound">TeamMember</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; TeamMember &gt; fys::arena::AllyPartyTeams::selectSuitableMemberOnSide</definition>
+        <argsstring>(HexagonSide::Orientation side, ComparatorSelection&lt; TeamMember &gt; comp)</argsstring>
+        <name>selectSuitableMemberOnSide</name>
+        <param>
+          <type>HexagonSide::Orientation</type>
+          <declname>side</declname>
+        </param>
+        <param>
+          <type>ComparatorSelection&lt; <ref refid="classfys_1_1arena_1_1_team_member" kindref="compound">TeamMember</ref> &gt;</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/AllyPartyTeams.hh" line="52" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/team/AllyPartyTeams.cpp" bodystart="103" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_ally_party_teams_1acf064a101fe7562d2d9329dedb198d32" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classfys_1_1arena_1_1_team_member" kindref="compound">TeamMember</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; TeamMember &gt; fys::arena::AllyPartyTeams::selectSuitableMemberAlive</definition>
+        <argsstring>(ComparatorSelection&lt; TeamMember &gt; comp)</argsstring>
+        <name>selectSuitableMemberAlive</name>
+        <param>
+          <type>ComparatorSelection&lt; <ref refid="classfys_1_1arena_1_1_team_member" kindref="compound">TeamMember</ref> &gt;</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/AllyPartyTeams.hh" line="55" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/team/AllyPartyTeams.cpp" bodystart="95" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_ally_party_teams_1a5a61c4cb54d80d522294a88e5b38d0f7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classfys_1_1arena_1_1_team_member" kindref="compound">TeamMember</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; TeamMember &gt; fys::arena::AllyPartyTeams::selectSuitableMemberOnSideAlive</definition>
+        <argsstring>(HexagonSide::Orientation side, ComparatorSelection&lt; TeamMember &gt; comp)</argsstring>
+        <name>selectSuitableMemberOnSideAlive</name>
+        <param>
+          <type>HexagonSide::Orientation</type>
+          <declname>side</declname>
+        </param>
+        <param>
+          <type>ComparatorSelection&lt; <ref refid="classfys_1_1arena_1_1_team_member" kindref="compound">TeamMember</ref> &gt;</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/AllyPartyTeams.hh" line="58" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/team/AllyPartyTeams.cpp" bodystart="112" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_ally_party_teams_1a95cfb0056f09215638afee8c6dc3c734" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classfys_1_1arena_1_1_team_member" kindref="compound">TeamMember</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; TeamMember &gt; fys::arena::AllyPartyTeams::selectRandomMemberOnSideAlive</definition>
+        <argsstring>(HexagonSide::Orientation side)</argsstring>
+        <name>selectRandomMemberOnSideAlive</name>
+        <param>
+          <type>HexagonSide::Orientation</type>
+          <declname>side</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/AllyPartyTeams.hh" line="61" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/team/AllyPartyTeams.cpp" bodystart="87" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_ally_party_teams_1a7044a23ee4a32c78eabd5bfa971dcc90" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classfys_1_1arena_1_1_team_member" kindref="compound">TeamMember</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; TeamMember &gt; fys::arena::AllyPartyTeams::selectMemberById</definition>
+        <argsstring>(unsigned idMember)</argsstring>
+        <name>selectMemberById</name>
+        <param>
+          <type>unsigned</type>
+          <declname>idMember</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/AllyPartyTeams.hh" line="64" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/team/AllyPartyTeams.cpp" bodystart="142" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_ally_party_teams_1a043350e33c265c9339a8b063fab6ef61" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classfys_1_1arena_1_1_team_member" kindref="compound">TeamMember</ref> &gt; &gt;</type>
+        <definition>std::vector&lt; std::shared_ptr&lt; TeamMember &gt; &gt; fys::arena::AllyPartyTeams::getMembersBySide</definition>
+        <argsstring>(HexagonSide::Orientation side) const</argsstring>
+        <name>getMembersBySide</name>
+        <param>
+          <type>HexagonSide::Orientation</type>
+          <declname>side</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/AllyPartyTeams.hh" line="67" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/team/AllyPartyTeams.cpp" bodystart="169" bodyend="179"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_ally_party_teams_1ada99d4d94ead1bdad5b6502d08646ad1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classfys_1_1arena_1_1_team_member" kindref="compound">TeamMember</ref> &gt; &gt;</type>
+        <definition>std::vector&lt; std::shared_ptr&lt; TeamMember &gt; &gt; fys::arena::AllyPartyTeams::getDeadMembersBySide</definition>
+        <argsstring>(HexagonSide::Orientation side) const</argsstring>
+        <name>getDeadMembersBySide</name>
+        <param>
+          <type>HexagonSide::Orientation</type>
+          <declname>side</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/AllyPartyTeams.hh" line="70" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/team/AllyPartyTeams.cpp" bodystart="182" bodyend="192"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_ally_party_teams_1a3c91be76a878083046b53f83b53b0387" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classfys_1_1arena_1_1_team_member" kindref="compound">TeamMember</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; TeamMember &gt; fys::arena::AllyPartyTeams::getSpecificTeamMemberById</definition>
+        <argsstring>(const std::string &amp;userName, unsigned idMember) const</argsstring>
+        <name>getSpecificTeamMemberById</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>userName</declname>
+        </param>
+        <param>
+          <type>unsigned</type>
+          <declname>idMember</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/AllyPartyTeams.hh" line="73" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/team/AllyPartyTeams.cpp" bodystart="122" bodyend="139"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_ally_party_teams_1a79be9c18fd9d9e0c9985482110e85818" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>unsigned</type>
+        <definition>unsigned fys::arena::AllyPartyTeams::getNumberAlly</definition>
+        <argsstring>() const</argsstring>
+        <name>getNumberAlly</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/AllyPartyTeams.hh" line="76" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/AllyPartyTeams.hh" bodystart="76" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_ally_party_teams_1a34dff22395f7789cb84d446a937d5a9a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>unsigned</type>
+        <definition>unsigned fys::arena::AllyPartyTeams::allyNumberOnSide</definition>
+        <argsstring>(HexagonSide::Orientation side) const</argsstring>
+        <name>allyNumberOnSide</name>
+        <param>
+          <type>HexagonSide::Orientation</type>
+          <declname>side</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/AllyPartyTeams.hh" line="79" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/team/AllyPartyTeams.cpp" bodystart="159" bodyend="166"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_ally_party_teams_1a4e2f4187712cfcdbcfa5db15c318025b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>const <ref refid="classfys_1_1arena_1_1_party_team" kindref="compound">PartyTeam</ref> &amp;</type>
+        <definition>const PartyTeam &amp; fys::arena::AllyPartyTeams::getPartyTeamOfPlayer</definition>
+        <argsstring>(const std::string &amp;userName) const</argsstring>
+        <name>getPartyTeamOfPlayer</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>userName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/AllyPartyTeams.hh" line="82" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/team/AllyPartyTeams.cpp" bodystart="195" bodyend="204"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_ally_party_teams_1ab29fba4c5ddef42d3e32ab9d54a71122" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::AllyPartyTeams::allDead</definition>
+        <argsstring>() const</argsstring>
+        <name>allDead</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/AllyPartyTeams.hh" line="85" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/team/AllyPartyTeams.cpp" bodystart="228" bodyend="235"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_ally_party_teams_1ab0c6a9a3ed37b5778f42dbbc7a788537" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::AllyPartyTeams::setPartyReadiness</definition>
+        <argsstring>(const std::string &amp;userName)</argsstring>
+        <name>setPartyReadiness</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>userName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Validate the readiness of a player to start the battle <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>userName</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>name of the player validating its readiness </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all players are ready, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/AllyPartyTeams.hh" line="93" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/team/AllyPartyTeams.cpp" bodystart="207" bodyend="226"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_ally_party_teams_1ac2713b63835d533ea9e00eafde76da49" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::vector&lt; std::unique_ptr&lt; <ref refid="classfys_1_1arena_1_1_party_team" kindref="compound">PartyTeam</ref> &gt; &gt; &amp;</type>
+        <definition>const std::vector&lt;std::unique_ptr&lt;PartyTeam&gt; &gt;&amp; fys::arena::AllyPartyTeams::getPartyTeams</definition>
+        <argsstring>() const</argsstring>
+        <name>getPartyTeams</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/AllyPartyTeams.hh" line="96" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/AllyPartyTeams.hh" bodystart="96" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_ally_party_teams_1acfd62c046c1fc7e1518e5c5cdb0ec3fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::AllyPartyTeams::executeAllyAction</definition>
+        <argsstring>(const data::PriorityElem &amp;ally, PitContenders &amp;pc, std::unique_ptr&lt; chaiscript::ChaiScript &gt; &amp;chaiPtr)</argsstring>
+        <name>executeAllyAction</name>
+        <param>
+          <type>const <ref refid="structfys_1_1arena_1_1data_1_1_priority_elem" kindref="compound">data::PriorityElem</ref> &amp;</type>
+          <declname>ally</declname>
+        </param>
+        <param>
+          <type><ref refid="classfys_1_1arena_1_1_pit_contenders" kindref="compound">PitContenders</ref> &amp;</type>
+          <declname>pc</declname>
+        </param>
+        <param>
+          <type>std::unique_ptr&lt; chaiscript::ChaiScript &gt; &amp;</type>
+          <declname>chaiPtr</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/AllyPartyTeams.hh" line="98" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/team/AllyPartyTeams.cpp" bodystart="41" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_ally_party_teams_1a560f0318fdcdc07e7605f26fe9e506de" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::AllyPartyTeams::addPartyTeam</definition>
+        <argsstring>(std::unique_ptr&lt; PartyTeam &gt; &amp;&amp;team)</argsstring>
+        <name>addPartyTeam</name>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classfys_1_1arena_1_1_party_team" kindref="compound">PartyTeam</ref> &gt; &amp;&amp;</type>
+          <declname>team</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/AllyPartyTeams.hh" line="99" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/team/AllyPartyTeams.cpp" bodystart="59" bodyend="65"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/AllyPartyTeams.hh" line="45" column="21" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/AllyPartyTeams.hh" bodystart="45" bodyend="107"/>
+    <listofallmembers>
+      <member refid="classfys_1_1arena_1_1_ally_party_teams_1a7aaab01ae3cf056e1695031db9838793" prot="private" virt="non-virtual"><scope>fys::arena::AllyPartyTeams</scope><name>_currentTeamMemberId</name></member>
+      <member refid="classfys_1_1arena_1_1_ally_party_teams_1adc2cece0d2bbc4803dbdf7e98635f5dd" prot="private" virt="non-virtual"><scope>fys::arena::AllyPartyTeams</scope><name>_partyTeams</name></member>
+      <member refid="classfys_1_1arena_1_1_ally_party_teams_1a560f0318fdcdc07e7605f26fe9e506de" prot="public" virt="non-virtual"><scope>fys::arena::AllyPartyTeams</scope><name>addPartyTeam</name></member>
+      <member refid="classfys_1_1arena_1_1_ally_party_teams_1ab29fba4c5ddef42d3e32ab9d54a71122" prot="public" virt="non-virtual"><scope>fys::arena::AllyPartyTeams</scope><name>allDead</name></member>
+      <member refid="classfys_1_1arena_1_1_ally_party_teams_1a34dff22395f7789cb84d446a937d5a9a" prot="public" virt="non-virtual"><scope>fys::arena::AllyPartyTeams</scope><name>allyNumberOnSide</name></member>
+      <member refid="classfys_1_1arena_1_1_ally_party_teams_1acfd62c046c1fc7e1518e5c5cdb0ec3fe" prot="public" virt="non-virtual"><scope>fys::arena::AllyPartyTeams</scope><name>executeAllyAction</name></member>
+      <member refid="classfys_1_1arena_1_1_ally_party_teams_1ada99d4d94ead1bdad5b6502d08646ad1" prot="public" virt="non-virtual"><scope>fys::arena::AllyPartyTeams</scope><name>getDeadMembersBySide</name></member>
+      <member refid="classfys_1_1arena_1_1_ally_party_teams_1a043350e33c265c9339a8b063fab6ef61" prot="public" virt="non-virtual"><scope>fys::arena::AllyPartyTeams</scope><name>getMembersBySide</name></member>
+      <member refid="classfys_1_1arena_1_1_ally_party_teams_1a79be9c18fd9d9e0c9985482110e85818" prot="public" virt="non-virtual"><scope>fys::arena::AllyPartyTeams</scope><name>getNumberAlly</name></member>
+      <member refid="classfys_1_1arena_1_1_ally_party_teams_1a4e2f4187712cfcdbcfa5db15c318025b" prot="public" virt="non-virtual"><scope>fys::arena::AllyPartyTeams</scope><name>getPartyTeamOfPlayer</name></member>
+      <member refid="classfys_1_1arena_1_1_ally_party_teams_1ac2713b63835d533ea9e00eafde76da49" prot="public" virt="non-virtual"><scope>fys::arena::AllyPartyTeams</scope><name>getPartyTeams</name></member>
+      <member refid="classfys_1_1arena_1_1_ally_party_teams_1a3c91be76a878083046b53f83b53b0387" prot="public" virt="non-virtual"><scope>fys::arena::AllyPartyTeams</scope><name>getSpecificTeamMemberById</name></member>
+      <member refid="classfys_1_1arena_1_1_ally_party_teams_1a7044a23ee4a32c78eabd5bfa971dcc90" prot="public" virt="non-virtual"><scope>fys::arena::AllyPartyTeams</scope><name>selectMemberById</name></member>
+      <member refid="classfys_1_1arena_1_1_ally_party_teams_1a95cfb0056f09215638afee8c6dc3c734" prot="public" virt="non-virtual"><scope>fys::arena::AllyPartyTeams</scope><name>selectRandomMemberOnSideAlive</name></member>
+      <member refid="classfys_1_1arena_1_1_ally_party_teams_1aaecf79810ffba7548a68e967f310f13b" prot="public" virt="non-virtual"><scope>fys::arena::AllyPartyTeams</scope><name>selectSuitableMember</name></member>
+      <member refid="classfys_1_1arena_1_1_ally_party_teams_1acf064a101fe7562d2d9329dedb198d32" prot="public" virt="non-virtual"><scope>fys::arena::AllyPartyTeams</scope><name>selectSuitableMemberAlive</name></member>
+      <member refid="classfys_1_1arena_1_1_ally_party_teams_1a9e3d76fe96bc02f801b6729eb176f5f7" prot="public" virt="non-virtual"><scope>fys::arena::AllyPartyTeams</scope><name>selectSuitableMemberOnSide</name></member>
+      <member refid="classfys_1_1arena_1_1_ally_party_teams_1a5a61c4cb54d80d522294a88e5b38d0f7" prot="public" virt="non-virtual"><scope>fys::arena::AllyPartyTeams</scope><name>selectSuitableMemberOnSideAlive</name></member>
+      <member refid="classfys_1_1arena_1_1_ally_party_teams_1ab0c6a9a3ed37b5778f42dbbc7a788537" prot="public" virt="non-virtual"><scope>fys::arena::AllyPartyTeams</scope><name>setPartyReadiness</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

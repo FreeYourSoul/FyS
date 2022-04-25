@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="_r_e_a_d_m_e_8md" kind="file" language="Markdown">
+    <compoundname>README.md</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">[![CodeGrade](https://www.code-inspector.com/project/1982/status/svg)](https://www.code-inspector.com/project/dashboard/1982)</highlight></codeline>
+<codeline><highlight class="normal">[![BCH<sp/>compliance](https://bettercodehub.com/edge/badge/FreeYourSoul/FyS?branch=master)](https://bettercodehub.com/)</highlight></codeline>
+<codeline><highlight class="normal">[![Documentation<sp/>Status](https://readthedocs.org/projects/fys/badge/?version=latest)](https://fys.readthedocs.io/en/latest/?badge=latest)</highlight></codeline>
+<codeline><highlight class="normal">[![HitCount](http://hits.dwyl.io/FreeYourSoul/FyS.svg)](http://hits.dwyl.io/FreeYourSoul/FyS)</highlight></codeline>
+<codeline><highlight class="normal">![Last<sp/>commit](https://img.shields.io/github/last-commit/FreeYourSoul/FyS.svg)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">[![GitHub<sp/>license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/FreeYourSoul/FyS/master/LICENSE)</highlight></codeline>
+<codeline><highlight class="normal">[![Scc<sp/>Count<sp/>Badge](https://sloc.xyz/github/FreeYourSoul/FyS/)](https://github.com/boyter/scc/)</highlight></codeline>
+<codeline><highlight class="normal">[![Scc<sp/>Count<sp/>Badge](https://sloc.xyz/github/FreeYourSoul/FyS?category=code)](https://github.com/boyter/scc)</highlight></codeline>
+<codeline><highlight class="normal">#<sp/>FyS<sp/>Online</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">FreeYourSoul<sp/>Online,<sp/>a<sp/>scalable<sp/>mmorpg<sp/>game</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Dispatchers</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>What<sp/>is<sp/>a<sp/>FyS<sp/>dispatcher?</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Services</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Arena<sp/>Service</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">FreeYourSoul<sp/>Online<sp/>is<sp/>using<sp/>an<sp/>original<sp/>battle<sp/>system<sp/>inspired<sp/>by<sp/>Final<sp/>Fantasy<sp/>turn<sp/>per<sp/>turn<sp/>systems.<sp/>It<sp/>is<sp/>called<sp/>Side<sp/>Condition<sp/>Timed<sp/>Battle<sp/>(SCTB)<sp/>and<sp/>it<sp/>is<sp/>explained<sp/>into<sp/>further<sp/>details<sp/>[here](docs/services/Arena_BattleSystem.md#arena).</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>World<sp/>Service</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>InventoryGrab<sp/>Service</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>InventoryUse<sp/>Service</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Inventory<sp/>Trade<sp/>Service</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Chat<sp/>Service</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">###<sp/>Quest<sp/>Service</highlight></codeline>
+<codeline></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>External<sp/>Dependency</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*<sp/>[ZeroMQ](https://github.com/zeromq/libzmq)<sp/>And<sp/>[cppzmq](https://github.com/zeromq/cppzmq)<sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>Network<sp/>library<sp/>&amp;<sp/>C++<sp/>binding<sp/>library</highlight></codeline>
+<codeline><highlight class="normal">*<sp/>[spdlog](https://github.com/gabime/spdlog)<sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>Logging<sp/>framework,<sp/>usage<sp/>of<sp/>fmt<sp/>library<sp/>for<sp/>logging</highlight></codeline>
+<codeline><highlight class="normal">*<sp/>[FSeam](https://github.com/FreeYourSoul/FSeam)<sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>Mocking<sp/>framework</highlight></codeline>
+<codeline><highlight class="normal">*<sp/>[Catch2](https://github.com/catchorg/Catch2)<sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>Testing<sp/>framework</highlight></codeline>
+<codeline><highlight class="normal">*<sp/>[ChaiScript](https://github.com/ChaiScript/ChaiScript)<sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>For<sp/>scripting<sp/>of<sp/>monsters<sp/>in<sp/>the<sp/>Arena<sp/>(fighting<sp/>mode)</highlight></codeline>
+<codeline><highlight class="normal">*<sp/>[LUA](https://github.com/lua/lua)<sp/><sp/><sp/>--&gt;<sp/>soon<sp/>to<sp/>be<sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>For<sp/>the<sp/>scripting<sp/>of<sp/>NPC<sp/>in<sp/>the<sp/>world<sp/>map<sp/>(when<sp/>moving)</highlight></codeline>
+<codeline><highlight class="normal">*<sp/>[Mariadbpp](https://github.com/viaduck/mariadbpp)<sp/>:<sp/><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>Used<sp/>as<sp/>Maria<sp/>DB<sp/>connector</highlight></codeline>
+<codeline></codeline>
+    </programlisting>
+    <location file="/home/FyS/Project/FyS/README.md"/>
+  </compounddef>
+</doxygen>

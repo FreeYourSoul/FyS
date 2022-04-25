@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1fb_1_1_member_status_builder" kind="struct" language="C++" prot="public">
+    <compoundname>fys::fb::MemberStatusBuilder</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1fb_1_1_member_status_builder_1a82ddfb77b3f146fb9f58216ed1d820c8" prot="public" static="no" mutable="no">
+        <type>flatbuffers::FlatBufferBuilder &amp;</type>
+        <definition>flatbuffers::FlatBufferBuilder&amp; fys::fb::MemberStatusBuilder::fbb_</definition>
+        <argsstring></argsstring>
+        <name>fbb_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" line="47" column="34" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1fb_1_1_member_status_builder_1a37c7e9778760a259ac698f5049525f21" prot="public" static="no" mutable="no">
+        <type>flatbuffers::uoffset_t</type>
+        <definition>flatbuffers::uoffset_t fys::fb::MemberStatusBuilder::start_</definition>
+        <argsstring></argsstring>
+        <name>start_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" line="48" column="26" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfys_1_1fb_1_1_member_status_builder_1a99c1a36f065ccacadc5a8b72a4168807" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::MemberStatusBuilder::add_characterName</definition>
+        <argsstring>(flatbuffers::Offset&lt; flatbuffers::String &gt; characterName)</argsstring>
+        <name>add_characterName</name>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>characterName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" line="49" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" bodystart="49" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_member_status_builder_1af6c7f4cf92360da808dd8fa75c57b116" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::MemberStatusBuilder::add_status</definition>
+        <argsstring>(const fys::fb::CharacterStatus *status)</argsstring>
+        <name>add_status</name>
+        <param>
+          <type>const fys::fb::CharacterStatus *</type>
+          <declname>status</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" line="52" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" bodystart="52" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_member_status_builder_1a86cab3fd62a05413b9f3df8e5b396499" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::fb::MemberStatusBuilder::MemberStatusBuilder</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb)</argsstring>
+        <name>MemberStatusBuilder</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" line="55" column="12" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" bodystart="55" bodyend="58"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_member_status_builder_1a3c85d0b0eb82d9cb28d2cd87befdfdf4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfys_1_1fb_1_1_member_status_builder" kindref="compound">MemberStatusBuilder</ref> &amp;</type>
+        <definition>MemberStatusBuilder&amp; fys::fb::MemberStatusBuilder::operator=</definition>
+        <argsstring>(const MemberStatusBuilder &amp;)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="structfys_1_1fb_1_1_member_status_builder" kindref="compound">MemberStatusBuilder</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" line="59" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_member_status_builder_1a9fa79e5f1cbaff6ef42bbf7ac5e739c2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; MemberStatus &gt;</type>
+        <definition>flatbuffers::Offset&lt;MemberStatus&gt; fys::fb::MemberStatusBuilder::Finish</definition>
+        <argsstring>()</argsstring>
+        <name>Finish</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" line="60" column="23" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" bodystart="60" bodyend="66"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" line="46" column="26" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" bodystart="46" bodyend="67"/>
+    <listofallmembers>
+      <member refid="structfys_1_1fb_1_1_member_status_builder_1a99c1a36f065ccacadc5a8b72a4168807" prot="public" virt="non-virtual"><scope>fys::fb::MemberStatusBuilder</scope><name>add_characterName</name></member>
+      <member refid="structfys_1_1fb_1_1_member_status_builder_1af6c7f4cf92360da808dd8fa75c57b116" prot="public" virt="non-virtual"><scope>fys::fb::MemberStatusBuilder</scope><name>add_status</name></member>
+      <member refid="structfys_1_1fb_1_1_member_status_builder_1a82ddfb77b3f146fb9f58216ed1d820c8" prot="public" virt="non-virtual"><scope>fys::fb::MemberStatusBuilder</scope><name>fbb_</name></member>
+      <member refid="structfys_1_1fb_1_1_member_status_builder_1a9fa79e5f1cbaff6ef42bbf7ac5e739c2" prot="public" virt="non-virtual"><scope>fys::fb::MemberStatusBuilder</scope><name>Finish</name></member>
+      <member refid="structfys_1_1fb_1_1_member_status_builder_1a86cab3fd62a05413b9f3df8e5b396499" prot="public" virt="non-virtual"><scope>fys::fb::MemberStatusBuilder</scope><name>MemberStatusBuilder</name></member>
+      <member refid="structfys_1_1fb_1_1_member_status_builder_1a3c85d0b0eb82d9cb28d2cd87befdfdf4" prot="public" virt="non-virtual"><scope>fys::fb::MemberStatusBuilder</scope><name>operator=</name></member>
+      <member refid="structfys_1_1fb_1_1_member_status_builder_1a37c7e9778760a259ac698f5049525f21" prot="public" virt="non-virtual"><scope>fys::fb::MemberStatusBuilder</scope><name>start_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

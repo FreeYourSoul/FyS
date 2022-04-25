@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="md__home__fy_s__project__fy_s__r_e_a_d_m_e" kind="page">
+    <compoundname>md__home_FyS_Project_FyS_README</compoundname>
+    <title>README</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><ulink url="https://www.code-inspector.com/project/dashboard/1982"><image type="html" name="svg" inline="yes"></image>
+</ulink> <ulink url="https://bettercodehub.com/"><image type="html" name="FyS?branch=master" inline="yes"></image>
+</ulink> <ulink url="https://fys.readthedocs.io/en/latest/?badge=latest"><image type="html" name="?version=latest" inline="yes"></image>
+</ulink> <ulink url="http://hits.dwyl.io/FreeYourSoul/FyS"><image type="html" name="FyS.svg" inline="yes"></image>
+</ulink> <image type="html" name="FyS.svg" inline="yes"></image>
+</para>
+<para><ulink url="https://raw.githubusercontent.com/FreeYourSoul/FyS/master/LICENSE"><image type="html" name="license-MIT-blue.svg" inline="yes"></image>
+</ulink> <ulink url="https://github.com/boyter/scc/"><image type="html" inline="yes"></image>
+</ulink> <ulink url="https://github.com/boyter/scc"><image type="html" name="FyS?category=code" inline="yes"></image>
+</ulink> <heading level="1">FyS Online</heading>
+</para>
+<para>FreeYourSoul Online, a scalable mmorpg game</para>
+<para><heading level="2">Dispatchers</heading>
+</para>
+<para><heading level="3">What is a FyS dispatcher?</heading>
+</para>
+<para><heading level="2">Services</heading>
+</para>
+<para><heading level="3">Arena Service</heading>
+</para>
+<para>FreeYourSoul Online is using an original battle system inspired by Final Fantasy turn per turn systems. It is called Side Condition Timed Battle (SCTB) and it is explained into further details <ulink url="docs/services/Arena_BattleSystem.md#arena">here</ulink>.</para>
+<para><heading level="3">World Service</heading>
+</para>
+<para><heading level="3">InventoryGrab Service</heading>
+</para>
+<para><heading level="3">InventoryUse Service</heading>
+</para>
+<para><heading level="3">Inventory Trade Service</heading>
+</para>
+<para><heading level="3">Chat Service</heading>
+</para>
+<para><heading level="3">Quest Service</heading>
+</para>
+<para><heading level="2">External Dependency</heading>
+</para>
+<para><itemizedlist>
+<listitem><para><ulink url="https://github.com/zeromq/libzmq">ZeroMQ</ulink> And <ulink url="https://github.com/zeromq/cppzmq">cppzmq</ulink> <linebreak/>
+ Network library &amp; C++ binding library</para>
+</listitem><listitem><para><ulink url="https://github.com/gabime/spdlog">spdlog</ulink> <linebreak/>
+ Logging framework, usage of fmt library for logging</para>
+</listitem><listitem><para><ulink url="https://github.com/FreeYourSoul/FSeam">FSeam</ulink> <linebreak/>
+ Mocking framework</para>
+</listitem><listitem><para><ulink url="https://github.com/catchorg/Catch2">Catch2</ulink> <linebreak/>
+ Testing framework</para>
+</listitem><listitem><para><ulink url="https://github.com/ChaiScript/ChaiScript">ChaiScript</ulink> <linebreak/>
+ For scripting of monsters in the Arena (fighting mode)</para>
+</listitem><listitem><para><ulink url="https://github.com/lua/lua">LUA</ulink> --&gt; soon to be <linebreak/>
+ For the scripting of NPC in the world map (when moving)</para>
+</listitem><listitem><para><ulink url="https://github.com/viaduck/mariadbpp">Mariadbpp</ulink> : <linebreak/>
+ Used as Maria DB connector </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

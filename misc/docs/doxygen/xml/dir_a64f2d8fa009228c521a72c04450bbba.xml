@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_a64f2d8fa009228c521a72c04450bbba" kind="dir">
+    <compoundname>/home/FyS/Project/FyS/cmake-build-debug/services/worldserver/CMakeFiles</compoundname>
+    <innerdir refid="dir_9355527d926575a13804da5cf3005ca1">/home/FyS/Project/FyS/cmake-build-debug/services/worldserver/CMakeFiles/_CMakeLTOTest-C</innerdir>
+    <innerdir refid="dir_c7c77301f5100bbd42e65e5f4bbe414c">/home/FyS/Project/FyS/cmake-build-debug/services/worldserver/CMakeFiles/_CMakeLTOTest-CXX</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/cmake-build-debug/services/worldserver/CMakeFiles/"/>
+  </compounddef>
+</doxygen>

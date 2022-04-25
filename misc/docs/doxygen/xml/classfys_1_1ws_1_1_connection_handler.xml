@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1ws_1_1_connection_handler" kind="class" language="C++" prot="public">
+    <compoundname>fys::ws::ConnectionHandler</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfys_1_1ws_1_1_connection_handler_1a6c85d01a7b3bca52ae3c81e46514b1a5" prot="private" static="no" mutable="no">
+        <type>zmq::context_t</type>
+        <definition>zmq::context_t fys::ws::ConnectionHandler::_zmq_context</definition>
+        <argsstring></argsstring>
+        <name>_zmq_context</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/ConnectionHandler.hh" line="62" column="16" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/ConnectionHandler.hh" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1ws_1_1_connection_handler_1a95ed631d58fed3d9ec9128a4449befdb" prot="private" static="no" mutable="no">
+        <type>zmq::socket_t</type>
+        <definition>zmq::socket_t fys::ws::ConnectionHandler::_subSocket</definition>
+        <argsstring></argsstring>
+        <name>_subSocket</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/ConnectionHandler.hh" line="63" column="15" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/ConnectionHandler.hh" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1ws_1_1_connection_handler_1a3e3b05188c9365c65505793cb709f3cc" prot="private" static="no" mutable="no">
+        <type>zmq::socket_t</type>
+        <definition>zmq::socket_t fys::ws::ConnectionHandler::_dispatcherConnection</definition>
+        <argsstring></argsstring>
+        <name>_dispatcherConnection</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/ConnectionHandler.hh" line="64" column="15" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/ConnectionHandler.hh" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1ws_1_1_connection_handler_1a4c6239956bb923d61dc15af66389d887" prot="public" static="no" const="no" explicit="yes" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::ws::ConnectionHandler::ConnectionHandler</definition>
+        <argsstring>(int threadNumber=1) noexcept</argsstring>
+        <name>ConnectionHandler</name>
+        <param>
+          <type>int</type>
+          <declname>threadNumber</declname>
+          <defval>1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/ConnectionHandler.hh" line="37" column="10" bodyfile="/home/FyS/Project/FyS/services/worldserver/src/ConnectionHandler.cpp" bodystart="28" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1ws_1_1_connection_handler_1a1c7e2dfdab8b0d524ddd4b666e292a74" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::ws::ConnectionHandler::setupConnectionManager</definition>
+        <argsstring>(const fys::ws::WorldServerContext &amp;ctx) noexcept</argsstring>
+        <name>setupConnectionManager</name>
+        <param>
+          <type>const <ref refid="classfys_1_1ws_1_1_world_server_context" kindref="compound">fys::ws::WorldServerContext</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/ConnectionHandler.hh" line="39" column="6" bodyfile="/home/FyS/Project/FyS/services/worldserver/src/ConnectionHandler.cpp" bodystart="38" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1ws_1_1_connection_handler_1ab3796047382605a16b4042b901b5756b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::ws::ConnectionHandler::sendMessageToDispatcher</definition>
+        <argsstring>(zmq::multipart_t &amp;&amp;msg) noexcept</argsstring>
+        <name>sendMessageToDispatcher</name>
+        <param>
+          <type>zmq::multipart_t &amp;&amp;</type>
+          <declname>msg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/ConnectionHandler.hh" line="40" column="6" bodyfile="/home/FyS/Project/FyS/services/worldserver/src/ConnectionHandler.cpp" bodystart="46" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1ws_1_1_connection_handler_1a9c92fefe0705a02786e454834c7e75be" prot="public" static="no" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Handler</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void fys::ws::ConnectionHandler::pollAndProcessSubMessage</definition>
+        <argsstring>(Handler &amp;&amp;handler) noexcept</argsstring>
+        <name>pollAndProcessSubMessage</name>
+        <param>
+          <type>Handler &amp;&amp;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/ConnectionHandler.hh" line="43" column="6" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/ConnectionHandler.hh" bodystart="43" bodyend="59"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/worldserver/include/ConnectionHandler.hh" line="34" column="24" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/ConnectionHandler.hh" bodystart="34" bodyend="66"/>
+    <listofallmembers>
+      <member refid="classfys_1_1ws_1_1_connection_handler_1a3e3b05188c9365c65505793cb709f3cc" prot="private" virt="non-virtual"><scope>fys::ws::ConnectionHandler</scope><name>_dispatcherConnection</name></member>
+      <member refid="classfys_1_1ws_1_1_connection_handler_1a95ed631d58fed3d9ec9128a4449befdb" prot="private" virt="non-virtual"><scope>fys::ws::ConnectionHandler</scope><name>_subSocket</name></member>
+      <member refid="classfys_1_1ws_1_1_connection_handler_1a6c85d01a7b3bca52ae3c81e46514b1a5" prot="private" virt="non-virtual"><scope>fys::ws::ConnectionHandler</scope><name>_zmq_context</name></member>
+      <member refid="classfys_1_1ws_1_1_connection_handler_1a4c6239956bb923d61dc15af66389d887" prot="public" virt="non-virtual"><scope>fys::ws::ConnectionHandler</scope><name>ConnectionHandler</name></member>
+      <member refid="classfys_1_1ws_1_1_connection_handler_1a9c92fefe0705a02786e454834c7e75be" prot="public" virt="non-virtual"><scope>fys::ws::ConnectionHandler</scope><name>pollAndProcessSubMessage</name></member>
+      <member refid="classfys_1_1ws_1_1_connection_handler_1ab3796047382605a16b4042b901b5756b" prot="public" virt="non-virtual"><scope>fys::ws::ConnectionHandler</scope><name>sendMessageToDispatcher</name></member>
+      <member refid="classfys_1_1ws_1_1_connection_handler_1a1c7e2dfdab8b0d524ddd4b666e292a74" prot="public" virt="non-virtual"><scope>fys::ws::ConnectionHandler</scope><name>setupConnectionManager</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

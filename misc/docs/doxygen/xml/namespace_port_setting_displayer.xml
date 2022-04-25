@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespace_port_setting_displayer" kind="namespace" language="Python">
+    <compoundname>PortSettingDisplayer</compoundname>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="namespace_port_setting_displayer_1a8982ed6314a8d9368fe9b9870f056dab" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>PortSettingDisplayer.config</definition>
+        <argsstring></argsstring>
+        <name>config</name>
+        <initializer>=  configparser.ConfigParser()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/PortSettingDisplayer.py" line="7" column="1" bodyfile="/home/FyS/Project/FyS/dispatcher/PortSettingDisplayer.py" bodystart="7" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespace_port_setting_displayer_1ab3fd841d0efc1a5c4aa9e9fb3d2957f0" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>PortSettingDisplayer.path</definition>
+        <argsstring></argsstring>
+        <name>path</name>
+        <initializer>=  os.path.join(root, filename)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/PortSettingDisplayer.py" line="8" column="1" bodyfile="/home/FyS/Project/FyS/dispatcher/PortSettingDisplayer.py" bodystart="8" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/dispatcher/PortSettingDisplayer.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

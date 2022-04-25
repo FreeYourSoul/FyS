@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1fb_1_1_arena_server_validate_auth_builder" kind="struct" language="C++" prot="public">
+    <compoundname>fys::fb::ArenaServerValidateAuthBuilder</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1fb_1_1_arena_server_validate_auth_builder_1a6bba46b59d743440445e676b72611c90" prot="public" static="no" mutable="no">
+        <type>flatbuffers::FlatBufferBuilder &amp;</type>
+        <definition>flatbuffers::FlatBufferBuilder&amp; fys::fb::ArenaServerValidateAuthBuilder::fbb_</definition>
+        <argsstring></argsstring>
+        <name>fbb_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" line="53" column="34" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1fb_1_1_arena_server_validate_auth_builder_1aa7c0bed333e50650b4c5479672568401" prot="public" static="no" mutable="no">
+        <type>flatbuffers::uoffset_t</type>
+        <definition>flatbuffers::uoffset_t fys::fb::ArenaServerValidateAuthBuilder::start_</definition>
+        <argsstring></argsstring>
+        <name>start_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" line="54" column="26" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfys_1_1fb_1_1_arena_server_validate_auth_builder_1a15c3d38f04f077f4554c4277e5b6dc46" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::ArenaServerValidateAuthBuilder::add_user_name</definition>
+        <argsstring>(flatbuffers::Offset&lt; flatbuffers::String &gt; user_name)</argsstring>
+        <name>add_user_name</name>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>user_name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" line="55" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" bodystart="55" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_arena_server_validate_auth_builder_1a23f9d51215a8798384ee9a15764322c7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::ArenaServerValidateAuthBuilder::add_token_auth</definition>
+        <argsstring>(flatbuffers::Offset&lt; flatbuffers::String &gt; token_auth)</argsstring>
+        <name>add_token_auth</name>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>token_auth</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" line="58" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" bodystart="58" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_arena_server_validate_auth_builder_1a4c377b1f0635a162f24984cb5df345e0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::ArenaServerValidateAuthBuilder::add_fighting_pit_id</definition>
+        <argsstring>(uint32_t fighting_pit_id)</argsstring>
+        <name>add_fighting_pit_id</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>fighting_pit_id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" line="61" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" bodystart="61" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_arena_server_validate_auth_builder_1a3d377087af84a4e74082c06926ac70de" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::fb::ArenaServerValidateAuthBuilder::ArenaServerValidateAuthBuilder</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb)</argsstring>
+        <name>ArenaServerValidateAuthBuilder</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" line="64" column="12" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" bodystart="64" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_arena_server_validate_auth_builder_1a9c4a1db65f94f5bf1798a1608c963e7a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfys_1_1fb_1_1_arena_server_validate_auth_builder" kindref="compound">ArenaServerValidateAuthBuilder</ref> &amp;</type>
+        <definition>ArenaServerValidateAuthBuilder&amp; fys::fb::ArenaServerValidateAuthBuilder::operator=</definition>
+        <argsstring>(const ArenaServerValidateAuthBuilder &amp;)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="structfys_1_1fb_1_1_arena_server_validate_auth_builder" kindref="compound">ArenaServerValidateAuthBuilder</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" line="68" column="34"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_arena_server_validate_auth_builder_1a267df3c98351d1dad06fda9ff6da923c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; ArenaServerValidateAuth &gt;</type>
+        <definition>flatbuffers::Offset&lt;ArenaServerValidateAuth&gt; fys::fb::ArenaServerValidateAuthBuilder::Finish</definition>
+        <argsstring>()</argsstring>
+        <name>Finish</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" line="69" column="23" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" bodystart="69" bodyend="75"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" line="52" column="37" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerValidateAuth_generated.h" bodystart="52" bodyend="76"/>
+    <listofallmembers>
+      <member refid="structfys_1_1fb_1_1_arena_server_validate_auth_builder_1a4c377b1f0635a162f24984cb5df345e0" prot="public" virt="non-virtual"><scope>fys::fb::ArenaServerValidateAuthBuilder</scope><name>add_fighting_pit_id</name></member>
+      <member refid="structfys_1_1fb_1_1_arena_server_validate_auth_builder_1a23f9d51215a8798384ee9a15764322c7" prot="public" virt="non-virtual"><scope>fys::fb::ArenaServerValidateAuthBuilder</scope><name>add_token_auth</name></member>
+      <member refid="structfys_1_1fb_1_1_arena_server_validate_auth_builder_1a15c3d38f04f077f4554c4277e5b6dc46" prot="public" virt="non-virtual"><scope>fys::fb::ArenaServerValidateAuthBuilder</scope><name>add_user_name</name></member>
+      <member refid="structfys_1_1fb_1_1_arena_server_validate_auth_builder_1a3d377087af84a4e74082c06926ac70de" prot="public" virt="non-virtual"><scope>fys::fb::ArenaServerValidateAuthBuilder</scope><name>ArenaServerValidateAuthBuilder</name></member>
+      <member refid="structfys_1_1fb_1_1_arena_server_validate_auth_builder_1a6bba46b59d743440445e676b72611c90" prot="public" virt="non-virtual"><scope>fys::fb::ArenaServerValidateAuthBuilder</scope><name>fbb_</name></member>
+      <member refid="structfys_1_1fb_1_1_arena_server_validate_auth_builder_1a267df3c98351d1dad06fda9ff6da923c" prot="public" virt="non-virtual"><scope>fys::fb::ArenaServerValidateAuthBuilder</scope><name>Finish</name></member>
+      <member refid="structfys_1_1fb_1_1_arena_server_validate_auth_builder_1a9c4a1db65f94f5bf1798a1608c963e7a" prot="public" virt="non-virtual"><scope>fys::fb::ArenaServerValidateAuthBuilder</scope><name>operator=</name></member>
+      <member refid="structfys_1_1fb_1_1_arena_server_validate_auth_builder_1aa7c0bed333e50650b4c5479672568401" prot="public" virt="non-virtual"><scope>fys::fb::ArenaServerValidateAuthBuilder</scope><name>start_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacefys_1_1arena" kind="namespace" language="C++">
+    <compoundname>fys::arena</compoundname>
+    <innerclass refid="structfys_1_1arena_1_1_allies_targets_ids" prot="public">fys::arena::AlliesTargetsIds</innerclass>
+    <innerclass refid="classfys_1_1arena_1_1_ally_party_teams" prot="public">fys::arena::AllyPartyTeams</innerclass>
+    <innerclass refid="structfys_1_1arena_1_1_ally_target_id" prot="public">fys::arena::AllyTargetId</innerclass>
+    <innerclass refid="classfys_1_1arena_1_1_arena_server_context" prot="public">fys::arena::ArenaServerContext</innerclass>
+    <innerclass refid="classfys_1_1arena_1_1_arena_server_service" prot="public">fys::arena::ArenaServerService</innerclass>
+    <innerclass refid="structfys_1_1arena_1_1_awaiting_arena" prot="public">fys::arena::AwaitingArena</innerclass>
+    <innerclass refid="structfys_1_1arena_1_1_awaiting_player_arena" prot="public">fys::arena::AwaitingPlayerArena</innerclass>
+    <innerclass refid="classfys_1_1arena_1_1_chai_register" prot="public">fys::arena::ChaiRegister</innerclass>
+    <innerclass refid="classfys_1_1arena_1_1_connection_handler" prot="public">fys::arena::ConnectionHandler</innerclass>
+    <innerclass refid="classfys_1_1arena_1_1_contender_scripting" prot="public">fys::arena::ContenderScripting</innerclass>
+    <innerclass refid="structfys_1_1arena_1_1_contenders_targets_ids" prot="public">fys::arena::ContendersTargetsIds</innerclass>
+    <innerclass refid="structfys_1_1arena_1_1_contender_target_id" prot="public">fys::arena::ContenderTargetId</innerclass>
+    <innerclass refid="structfys_1_1arena_1_1_encounter_context" prot="public">fys::arena::EncounterContext</innerclass>
+    <innerclass refid="classfys_1_1arena_1_1_fighting_contender" prot="public">fys::arena::FightingContender</innerclass>
+    <innerclass refid="classfys_1_1arena_1_1_fighting_history_manager" prot="public">fys::arena::FightingHistoryManager</innerclass>
+    <innerclass refid="classfys_1_1arena_1_1_fighting_pit" prot="public">fys::arena::FightingPit</innerclass>
+    <innerclass refid="classfys_1_1arena_1_1_fighting_pit_announcer" prot="public">fys::arena::FightingPitAnnouncer</innerclass>
+    <innerclass refid="classfys_1_1arena_1_1_fighting_pit_layout" prot="public">fys::arena::FightingPitLayout</innerclass>
+    <innerclass refid="classfys_1_1arena_1_1_flatbuffer_generator" prot="public">fys::arena::FlatbufferGenerator</innerclass>
+    <innerclass refid="classfys_1_1arena_1_1_hexagon_side" prot="public">fys::arena::HexagonSide</innerclass>
+    <innerclass refid="structfys_1_1arena_1_1_history_action" prot="public">fys::arena::HistoryAction</innerclass>
+    <innerclass refid="classfys_1_1arena_1_1_party_team" prot="public">fys::arena::PartyTeam</innerclass>
+    <innerclass refid="structfys_1_1arena_1_1_pending_action" prot="public">fys::arena::PendingAction</innerclass>
+    <innerclass refid="classfys_1_1arena_1_1_pit_contenders" prot="public">fys::arena::PitContenders</innerclass>
+    <innerclass refid="structfys_1_1arena_1_1_player_action" prot="public">fys::arena::PlayerAction</innerclass>
+    <innerclass refid="classfys_1_1arena_1_1_priority_order_list" prot="public">fys::arena::PriorityOrderList</innerclass>
+    <innerclass refid="structfys_1_1arena_1_1_rewards" prot="public">fys::arena::Rewards</innerclass>
+    <innerclass refid="classfys_1_1arena_1_1_side_battle" prot="public">fys::arena::SideBattle</innerclass>
+    <innerclass refid="classfys_1_1arena_1_1_team_member" prot="public">fys::arena::TeamMember</innerclass>
+    <innerclass refid="classfys_1_1arena_1_1_worker_connection" prot="public">fys::arena::WorkerConnection</innerclass>
+    <innerclass refid="classfys_1_1arena_1_1_worker_service" prot="public">fys::arena::WorkerService</innerclass>
+    <innernamespace refid="namespacefys_1_1arena_1_1chai">fys::arena::chai</innernamespace>
+    <innernamespace refid="namespacefys_1_1arena_1_1data">fys::arena::data</innernamespace>
+    <innernamespace refid="namespacefys_1_1arena_1_1interval">fys::arena::interval</innernamespace>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacefys_1_1arena_1ad6481673f3408c376e4b059922d8b268" prot="public" static="no">
+        <type>std::unique_ptr&lt; <ref refid="classfys_1_1arena_1_1_contender_scripting" kindref="compound">ContenderScripting</ref> &gt;</type>
+        <definition>using fys::arena::ContenderScriptingUPtr = typedef std::unique_ptr&lt;ContenderScripting&gt;</definition>
+        <argsstring></argsstring>
+        <name>ContenderScriptingUPtr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" line="96" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/ContenderScripting.hh" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacefys_1_1arena_1af02a44d59c5a685dc4960d2eeaff8abd" prot="public" static="no">
+        <type>std::shared_ptr&lt; <ref refid="classfys_1_1arena_1_1_fighting_contender" kindref="compound">FightingContender</ref> &gt;</type>
+        <definition>using fys::arena::FightingContenderSPtr = typedef std::shared_ptr&lt;FightingContender&gt;</definition>
+        <argsstring></argsstring>
+        <name>FightingContenderSPtr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/FightingContender.hh" line="79" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/FightingContender.hh" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacefys_1_1arena_1a992898b81ee68cd4f8603f501d528318" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>std::function&lt; bool(std::shared_ptr&lt; T &gt;, std::shared_ptr&lt; T &gt;)&gt;</type>
+        <definition>using fys::arena::ComparatorSelection = typedef std::function&lt;bool(std::shared_ptr&lt;T&gt;, std::shared_ptr&lt;T&gt;)&gt;</definition>
+        <argsstring></argsstring>
+        <name>ComparatorSelection</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/PitContenders.hh" line="37" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/PitContenders.hh" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacefys_1_1arena_1a42788d4d2daac4d36ecd42ba997fdf43" prot="public" static="no">
+        <type>std::unique_ptr&lt; <ref refid="classfys_1_1arena_1_1_party_team" kindref="compound">PartyTeam</ref> &gt;</type>
+        <definition>using fys::arena::PartyTeamUPtr = typedef std::unique_ptr&lt;PartyTeam&gt;</definition>
+        <argsstring></argsstring>
+        <name>PartyTeamUPtr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/PartyTeam.hh" line="75" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/PartyTeam.hh" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacefys_1_1arena_1ab3753e35fbe151466a87a08bb677e108" prot="public" static="no">
+        <type>std::variant&lt; <ref refid="structfys_1_1arena_1_1_contender_target_id" kindref="compound">ContenderTargetId</ref>, <ref refid="structfys_1_1arena_1_1_contenders_targets_ids" kindref="compound">ContendersTargetsIds</ref>, <ref refid="structfys_1_1arena_1_1_ally_target_id" kindref="compound">AllyTargetId</ref>, <ref refid="structfys_1_1arena_1_1_allies_targets_ids" kindref="compound">AlliesTargetsIds</ref>, HexagonSide::Orientation &gt;</type>
+        <definition>using fys::arena::TargetType = typedef std::variant&lt; ContenderTargetId, ContendersTargetsIds, AllyTargetId, AlliesTargetsIds, HexagonSide::Orientation&gt;</definition>
+        <argsstring></argsstring>
+        <name>TargetType</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><itemizedlist>
+<listitem><para>the target, optional as every action doesn&apos;t require target. Can be a specific id (of an ally or a contender depending on the action) Can be a side (as some action can target a whole side) </para>
+</listitem></itemizedlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/TeamMember.hh" line="64" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/TeamMember.hh" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacefys_1_1arena_1ab62578f5b4f32dba293cacd655e43d1a" prot="public" static="no">
+        <type>std::shared_ptr&lt; <ref refid="classfys_1_1arena_1_1_team_member" kindref="compound">TeamMember</ref> &gt;</type>
+        <definition>using fys::arena::TeamMemberSPtr = typedef std::shared_ptr&lt;TeamMember&gt;</definition>
+        <argsstring></argsstring>
+        <name>TeamMemberSPtr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/TeamMember.hh" line="137" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/team/TeamMember.hh" bodystart="137" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespacefys_1_1arena_1a73914539dab5f9da3119bb7e32a39617" prot="public" static="no">
+        <type>nlohmann::json</type>
+        <definition>using fys::arena::json = typedef nlohmann::json</definition>
+        <argsstring></argsstring>
+        <name>json</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/src/fightingPit/FightingPitAnnouncer.cpp" line="75" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/FightingPitAnnouncer.cpp" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="32" column="20"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="class_cml_base_test" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>CmlBaseTest</compoundname>
+    <basecompoundref refid="classfys_1_1cache_1_1_cml" prot="public" virt="non-virtual">fys::cache::Cml</basecompoundref>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="class_cml_base_test_1a907ecc16b9da83aa54e578f4e6ca3727" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool CmlBaseTest::_localStorageCalled</definition>
+        <argsstring></argsstring>
+        <name>_localStorageCalled</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/scripting_cache/cml/test/BasicCmlTestCase.cpp" line="35" column="10" bodyfile="/home/FyS/Project/FyS/scripting_cache/cml/test/BasicCmlTestCase.cpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_cml_base_test_1afc77fea628fc40c47e675747a0c37e6c" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>CmlBaseTest::CmlBaseTest</definition>
+        <argsstring>(std::string v)</argsstring>
+        <name>CmlBaseTest</name>
+        <param>
+          <type>std::string</type>
+          <declname>v</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/scripting_cache/cml/test/BasicCmlTestCase.cpp" line="31" column="14" bodyfile="/home/FyS/Project/FyS/scripting_cache/cml/test/BasicCmlTestCase.cpp" bodystart="31" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="class_cml_base_test_1ac594bbfaea236ede00fe710c265b62d5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="virtual">
+        <type>void</type>
+        <definition>void CmlBaseTest::createFileInLocalStorage</definition>
+        <argsstring>(const fys::cache::CmlKey &amp;cmlKey) override</argsstring>
+        <name>createFileInLocalStorage</name>
+        <reimplements refid="classfys_1_1cache_1_1_cml_1abcffc2d7aeeff06798c06265f0956b6f">createFileInLocalStorage</reimplements>
+        <param>
+          <type>const <ref refid="classfys_1_1cache_1_1_cml_key" kindref="compound">fys::cache::CmlKey</ref> &amp;</type>
+          <declname>cmlKey</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/scripting_cache/cml/test/BasicCmlTestCase.cpp" line="37" column="10" bodyfile="/home/FyS/Project/FyS/scripting_cache/cml/test/BasicCmlTestCase.cpp" bodystart="37" bodyend="39"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>CmlBaseTest</label>
+        <link refid="class_cml_base_test"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>fys::cache::Cml</label>
+        <link refid="classfys_1_1cache_1_1_cml"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>CmlBaseTest</label>
+        <link refid="class_cml_base_test"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>fys::cache::Cml</label>
+        <link refid="classfys_1_1cache_1_1_cml"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/FyS/Project/FyS/scripting_cache/cml/test/BasicCmlTestCase.cpp" line="29" column="41" bodyfile="/home/FyS/Project/FyS/scripting_cache/cml/test/BasicCmlTestCase.cpp" bodystart="29" bodyend="40"/>
+    <listofallmembers>
+      <member refid="class_cml_base_test_1a907ecc16b9da83aa54e578f4e6ca3727" prot="public" virt="non-virtual"><scope>CmlBaseTest</scope><name>_localStorageCalled</name></member>
+      <member refid="classfys_1_1cache_1_1_cml_1a492f2c0efa80a500bc910c5eee63e67a" prot="public" virt="non-virtual"><scope>CmlBaseTest</scope><name>Cml</name></member>
+      <member refid="class_cml_base_test_1afc77fea628fc40c47e675747a0c37e6c" prot="public" virt="non-virtual"><scope>CmlBaseTest</scope><name>CmlBaseTest</name></member>
+      <member refid="classfys_1_1cache_1_1_cml_1afb8685c38f117140d2364a25d5276a9b" prot="public" virt="non-virtual"><scope>CmlBaseTest</scope><name>createFile</name></member>
+      <member refid="class_cml_base_test_1ac594bbfaea236ede00fe710c265b62d5" prot="public" virt="virtual"><scope>CmlBaseTest</scope><name>createFileInLocalStorage</name></member>
+      <member refid="classfys_1_1cache_1_1_cml_1a1b98dfd73b6828338ff93938d321bbd6" prot="public" virt="non-virtual"><scope>CmlBaseTest</scope><name>findInCache</name></member>
+      <member refid="classfys_1_1cache_1_1_cml_1a7fedbd32d3aaf5c14ea8e44c86a9eedf" prot="public" virt="virtual"><scope>CmlBaseTest</scope><name>~Cml</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1ws_1_1_world_server_engine" kind="class" language="C++" prot="public">
+    <compoundname>fys::ws::WorldServerEngine</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfys_1_1ws_1_1_world_server_engine_1a1333a3e82ba7a1fd86744444d48f739e" prot="private" static="no" mutable="no">
+        <type><ref refid="classfys_1_1ws_1_1_collision_map" kindref="compound">CollisionMap</ref></type>
+        <definition>CollisionMap fys::ws::WorldServerEngine::_map</definition>
+        <argsstring></argsstring>
+        <name>_map</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/WorldServerEngine.hh" line="63" column="14" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/engine/WorldServerEngine.hh" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1ws_1_1_world_server_engine_1ad71433a799422c3b118357ce078def61" prot="private" static="no" mutable="no">
+        <type><ref refid="classfys_1_1ws_1_1_players_data" kindref="compound">PlayersData</ref></type>
+        <definition>PlayersData fys::ws::WorldServerEngine::_data</definition>
+        <argsstring></argsstring>
+        <name>_data</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/WorldServerEngine.hh" line="64" column="13" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/engine/WorldServerEngine.hh" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1ws_1_1_world_server_engine_1afd0bd7afcc6887bc8bb06b01441cdcf9" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fys::ws::WorldServerEngine::WorldServerEngine</definition>
+        <argsstring>(const WorldServerContext &amp;ctx)</argsstring>
+        <name>WorldServerEngine</name>
+        <param>
+          <type>const <ref refid="classfys_1_1ws_1_1_world_server_context" kindref="compound">WorldServerContext</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/WorldServerEngine.hh" line="47" column="10" bodyfile="/home/FyS/Project/FyS/services/worldserver/src/engine/WorldServerEngine.cpp" bodystart="34" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1ws_1_1_world_server_engine_1aa525bc1ae220aeaeb508bb18de333f24" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::ws::WorldServerEngine::processPlayerInputMessage</definition>
+        <argsstring>(std::string &amp;&amp;idt, std::string &amp;&amp;token, const fys::fb::WSAction *actionMsg, ConnectionHandler &amp;handler)</argsstring>
+        <name>processPlayerInputMessage</name>
+        <param>
+          <type>std::string &amp;&amp;</type>
+          <declname>idt</declname>
+        </param>
+        <param>
+          <type>std::string &amp;&amp;</type>
+          <declname>token</declname>
+        </param>
+        <param>
+          <type>const fys::fb::WSAction *</type>
+          <declname>actionMsg</declname>
+        </param>
+        <param>
+          <type><ref refid="classfys_1_1ws_1_1_connection_handler" kindref="compound">ConnectionHandler</ref> &amp;</type>
+          <declname>handler</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/WorldServerEngine.hh" line="50" column="1" bodyfile="/home/FyS/Project/FyS/services/worldserver/src/engine/WorldServerEngine.cpp" bodystart="50" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1ws_1_1_world_server_engine_1ae263343268839d8124d6388de55748f8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::ws::WorldServerEngine::executePendingActions</definition>
+        <argsstring>(ws::ConnectionHandler &amp;conn)</argsstring>
+        <name>executePendingActions</name>
+        <param>
+          <type><ref refid="classfys_1_1ws_1_1_connection_handler" kindref="compound">ws::ConnectionHandler</ref> &amp;</type>
+          <declname>conn</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/WorldServerEngine.hh" line="54" column="1" bodyfile="/home/FyS/Project/FyS/services/worldserver/src/engine/WorldServerEngine.cpp" bodystart="40" bodyend="47"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classfys_1_1ws_1_1_world_server_engine_1a0f2682b64f4cc934e3fbe04e8d86dda1" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::ws::WorldServerEngine::movePlayerAction</definition>
+        <argsstring>(const std::string &amp;idt, uint indexPlayer, PlayerInfo &amp;pi, ws::ConnectionHandler &amp;conn)</argsstring>
+        <name>movePlayerAction</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>idt</declname>
+        </param>
+        <param>
+          <type>uint</type>
+          <declname>indexPlayer</declname>
+        </param>
+        <param>
+          <type><ref refid="structfys_1_1ws_1_1_player_info" kindref="compound">PlayerInfo</ref> &amp;</type>
+          <declname>pi</declname>
+        </param>
+        <param>
+          <type><ref refid="classfys_1_1ws_1_1_connection_handler" kindref="compound">ws::ConnectionHandler</ref> &amp;</type>
+          <declname>conn</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/WorldServerEngine.hh" line="58" column="1" bodyfile="/home/FyS/Project/FyS/services/worldserver/src/engine/WorldServerEngine.cpp" bodystart="70" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1ws_1_1_world_server_engine_1acdcb7ea8f33a8b169f1f3812c09f3dd9" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::ws::WorldServerEngine::notifyClientsOfMove</definition>
+        <argsstring>(const std::vector&lt; std::string_view &gt; &amp;ids, ws::ConnectionHandler &amp;conn) const</argsstring>
+        <name>notifyClientsOfMove</name>
+        <param>
+          <type>const std::vector&lt; std::string_view &gt; &amp;</type>
+          <declname>ids</declname>
+        </param>
+        <param>
+          <type><ref refid="classfys_1_1ws_1_1_connection_handler" kindref="compound">ws::ConnectionHandler</ref> &amp;</type>
+          <declname>conn</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/WorldServerEngine.hh" line="60" column="1" bodyfile="/home/FyS/Project/FyS/services/worldserver/src/engine/WorldServerEngine.cpp" bodystart="88" bodyend="93"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/WorldServerEngine.hh" line="44" column="24" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/engine/WorldServerEngine.hh" bodystart="44" bodyend="66"/>
+    <listofallmembers>
+      <member refid="classfys_1_1ws_1_1_world_server_engine_1ad71433a799422c3b118357ce078def61" prot="private" virt="non-virtual"><scope>fys::ws::WorldServerEngine</scope><name>_data</name></member>
+      <member refid="classfys_1_1ws_1_1_world_server_engine_1a1333a3e82ba7a1fd86744444d48f739e" prot="private" virt="non-virtual"><scope>fys::ws::WorldServerEngine</scope><name>_map</name></member>
+      <member refid="classfys_1_1ws_1_1_world_server_engine_1ae263343268839d8124d6388de55748f8" prot="public" virt="non-virtual"><scope>fys::ws::WorldServerEngine</scope><name>executePendingActions</name></member>
+      <member refid="classfys_1_1ws_1_1_world_server_engine_1a0f2682b64f4cc934e3fbe04e8d86dda1" prot="private" virt="non-virtual"><scope>fys::ws::WorldServerEngine</scope><name>movePlayerAction</name></member>
+      <member refid="classfys_1_1ws_1_1_world_server_engine_1acdcb7ea8f33a8b169f1f3812c09f3dd9" prot="private" virt="non-virtual"><scope>fys::ws::WorldServerEngine</scope><name>notifyClientsOfMove</name></member>
+      <member refid="classfys_1_1ws_1_1_world_server_engine_1aa525bc1ae220aeaeb508bb18de333f24" prot="public" virt="non-virtual"><scope>fys::ws::WorldServerEngine</scope><name>processPlayerInputMessage</name></member>
+      <member refid="classfys_1_1ws_1_1_world_server_engine_1afd0bd7afcc6887bc8bb06b01441cdcf9" prot="public" virt="non-virtual"><scope>fys::ws::WorldServerEngine</scope><name>WorldServerEngine</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="struct_f_seam_1_1_random_generator_1_1get" kind="struct" language="C++" prot="public">
+    <compoundname>FSeam::RandomGenerator::get</compoundname>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="struct_f_seam_1_1_random_generator_1_1get_1aefe9c72d4d6e3b0edb4b49fb936611e0" prot="public" static="yes" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string FSeam::RandomGenerator::get::NAME</definition>
+        <argsstring></argsstring>
+        <name>NAME</name>
+        <initializer>= &quot;get&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/FSeamMockData.hpp" line="59" column="46" bodyfile="/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/FSeamMockData.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/FSeamMockData.hpp" line="59" column="14" bodyfile="/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/FSeamMockData.hpp" bodystart="59" bodyend="59"/>
+    <listofallmembers>
+      <member refid="struct_f_seam_1_1_random_generator_1_1get_1aefe9c72d4d6e3b0edb4b49fb936611e0" prot="public" virt="non-virtual"><scope>FSeam::RandomGenerator::get</scope><name>NAME</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

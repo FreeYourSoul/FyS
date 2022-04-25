@@ -1,0 +1,159 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="_f_seam_mock_data_8hpp" kind="file" language="C++">
+    <compoundname>FSeamMockData.hpp</compoundname>
+    <includes local="no">spdlog/spdlog.h</includes>
+    <includes local="no">zmq_addon.hpp</includes>
+    <includes local="no">type_traits</includes>
+    <includes local="no">optional</includes>
+    <includes local="no">FSeam/FSeam.hpp</includes>
+    <includes local="no">ConnectionHandler.hh</includes>
+    <includes refid="_random_generator_8hh" local="no">RandomGenerator.hh</includes>
+    <includedby refid="_connection_handler_8fseam_8cc" local="no">/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/ConnectionHandler.fseam.cc</includedby>
+    <includedby refid="_f_seam_specialization_8cpp" local="no">/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/FSeamSpecialization.cpp</includedby>
+    <includedby refid="_random_generator_8fseam_8cc" local="no">/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/RandomGenerator.fseam.cc</includedby>
+    <includedby refid="_fighting_pit_announcer_test_case_8cpp" local="no">/home/FyS/Project/FyS/services/arena/test/fightingPit/FightingPitAnnouncerTestCase.cpp</includedby>
+    <includedby refid="_test_type_8hh" local="no">/home/FyS/Project/FyS/services/arena/test/fightingPit/TestType.hh</includedby>
+    <includedby refid="_worker_service_test_case_8cpp" local="no">/home/FyS/Project/FyS/services/arena/test/fightingPit/WorkerServiceTestCase.cpp</includedby>
+    <includedby refid="_contender___sampy_test_case_8cpp" local="no">/home/FyS/Project/FyS/services/arena/test/scriptTests/Contender_SampyTestCase.cpp</includedby>
+    <incdepgraph>
+      <node id="3">
+        <label>zmq_addon.hpp</label>
+      </node>
+      <node id="1">
+        <label>/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/FSeamMockData.hpp</label>
+        <link refid="_f_seam_mock_data_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>spdlog/spdlog.h</label>
+      </node>
+      <node id="10">
+        <label>random</label>
+      </node>
+      <node id="5">
+        <label>optional</label>
+      </node>
+      <node id="7">
+        <label>ConnectionHandler.hh</label>
+      </node>
+      <node id="8">
+        <label>RandomGenerator.hh</label>
+        <link refid="_random_generator_8hh_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>FSeam/FSeam.hpp</label>
+      </node>
+      <node id="11">
+        <label>chrono</label>
+      </node>
+      <node id="4">
+        <label>type_traits</label>
+      </node>
+      <node id="9">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>/home/FyS/Project/FyS/services/arena/test/fightingPit/TestType.hh</label>
+        <link refid="_test_type_8hh_source"/>
+      </node>
+      <node id="1">
+        <label>/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/FSeamMockData.hpp</label>
+        <link refid="_f_seam_mock_data_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="struct_f_seam_1_1_connection_handler_data" prot="public">FSeam::ConnectionHandlerData</innerclass>
+    <innerclass refid="struct_f_seam_1_1_type_parse_traits_3_01fys_1_1arena_1_1_connection_handler_01_4" prot="public">FSeam::TypeParseTraits&lt; fys::arena::ConnectionHandler &gt;</innerclass>
+    <innerclass refid="struct_f_seam_1_1_connection_handler_1_1setup_connection_manager" prot="public">FSeam::ConnectionHandler::setupConnectionManager</innerclass>
+    <innerclass refid="struct_f_seam_1_1_connection_handler_1_1send_message_to_dispatcher" prot="public">FSeam::ConnectionHandler::sendMessageToDispatcher</innerclass>
+    <innerclass refid="struct_f_seam_1_1_random_generator_data" prot="public">FSeam::RandomGeneratorData</innerclass>
+    <innerclass refid="struct_f_seam_1_1_type_parse_traits_3_01fys_1_1util_1_1_random_generator_01_4" prot="public">FSeam::TypeParseTraits&lt; fys::util::RandomGenerator &gt;</innerclass>
+    <innerclass refid="struct_f_seam_1_1_random_generator_1_1get" prot="public">FSeam::RandomGenerator::get</innerclass>
+    <innernamespace refid="namespace_f_seam">FSeam</innernamespace>
+    <innernamespace refid="namespace_f_seam_1_1_connection_handler">FSeam::ConnectionHandler</innernamespace>
+    <innernamespace refid="namespace_f_seam_1_1_random_generator">FSeam::RandomGenerator</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="6"><highlight class="preprocessor">#ifndef<sp/>FREESOULS_DATAMOCK_HPP<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>FREESOULS_DATAMOCK_HPP</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;spdlog/spdlog.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;zmq_addon.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;type_traits&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;optional&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;FSeam/FSeam.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ConnectionHandler.hh&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;RandomGenerator.hh&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17" refid="namespace_f_seam" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_f_seam" kindref="compound">FSeam</ref><sp/>{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="comment">//Beginning<sp/>of<sp/>ConnectionHandler</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19" refid="struct_f_seam_1_1_connection_handler_data" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_f_seam_1_1_connection_handler_data" kindref="compound">ConnectionHandlerData</ref><sp/>{</highlight></codeline>
+<codeline lineno="23" refid="struct_f_seam_1_1_connection_handler_data_1a3c0b1a7b2db9afd534fedf1a1fe920a5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::optional&lt;std::reference_wrapper&lt;const<sp/>fys::arena::ArenaServerContext<sp/>&gt;<sp/>&gt;<sp/><ref refid="struct_f_seam_1_1_connection_handler_data_1a3c0b1a7b2db9afd534fedf1a1fe920a5" kindref="member">setupConnectionManager_ctx_ParamValue</ref>;</highlight></codeline>
+<codeline lineno="27" refid="struct_f_seam_1_1_connection_handler_data_1a1a52ff972fea4b14ef4fdcbe299df8ad" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::optional&lt;std::reference_wrapper&lt;zmq::multipart_t<sp/>&gt;<sp/>&gt;<sp/><ref refid="struct_f_seam_1_1_connection_handler_data_1a1a52ff972fea4b14ef4fdcbe299df8ad" kindref="member">sendMessageToDispatcher_msg_ParamValue</ref>;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="comment">//<sp/>NameTypeTraits</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31" refid="struct_f_seam_1_1_type_parse_traits_3_01fys_1_1arena_1_1_connection_handler_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;&gt;<sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">TypeParseTraits&lt;fys::arena::ConnectionHandler&gt;<sp/>{</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>ClassName<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;ConnectionHandler&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="comment">//<sp/>ClassMethodIdentifiers</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ConnectionHandler<sp/>{</highlight></codeline>
+<codeline lineno="36" refid="struct_f_seam_1_1_connection_handler_1_1setup_connection_manager" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_f_seam_1_1_connection_handler_1_1setup_connection_manager" kindref="compound">setupConnectionManager</ref><sp/>{<sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>NAME<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;setupConnectionManager&quot;</highlight><highlight class="normal">;};</highlight></codeline>
+<codeline lineno="37" refid="struct_f_seam_1_1_connection_handler_1_1send_message_to_dispatcher" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_f_seam_1_1_connection_handler_1_1send_message_to_dispatcher" kindref="compound">sendMessageToDispatcher</ref><sp/>{<sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>NAME<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;sendMessageToDispatcher&quot;</highlight><highlight class="normal">;};</highlight></codeline>
+<codeline lineno="38"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="comment">//<sp/>End<sp/>of<sp/>DataStructure<sp/>ConnectionHandler</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_f_seam" kindref="compound">FSeam</ref><sp/>{</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="comment">//Beginning<sp/>of<sp/>RandomGenerator</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45" refid="struct_f_seam_1_1_random_generator_data" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_f_seam_1_1_random_generator_data" kindref="compound">RandomGeneratorData</ref><sp/>{</highlight></codeline>
+<codeline lineno="49" refid="struct_f_seam_1_1_random_generator_data_1ad1365776393f3d69d563fc282ab32881" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::shared_ptr&lt;std::mt19937&gt;<sp/><ref refid="struct_f_seam_1_1_random_generator_data_1ad1365776393f3d69d563fc282ab32881" kindref="member">get_ReturnValue</ref>;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="comment">//<sp/>NameTypeTraits</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54" refid="struct_f_seam_1_1_type_parse_traits_3_01fys_1_1util_1_1_random_generator_01_4" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;&gt;<sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">TypeParseTraits&lt;fys::util::RandomGenerator&gt;<sp/>{</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>ClassName<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;RandomGenerator&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="comment">//<sp/>ClassMethodIdentifiers</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">RandomGenerator<sp/>{</highlight></codeline>
+<codeline lineno="59" refid="struct_f_seam_1_1_random_generator_1_1get" refkind="compound"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_f_seam_1_1_random_generator_1_1get" kindref="compound">get</ref><sp/>{<sp/></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>NAME<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;get&quot;</highlight><highlight class="normal">;};</highlight></codeline>
+<codeline lineno="60"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight><highlight class="comment">//<sp/>End<sp/>of<sp/>DataStructure<sp/>RandomGenerator</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/FSeamMockData.hpp"/>
+  </compounddef>
+</doxygen>

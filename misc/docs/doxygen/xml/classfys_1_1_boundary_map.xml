@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1_boundary_map" kind="class" language="C++" prot="public">
+    <compoundname>fys::BoundaryMap</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+        <defval>int</defval>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfys_1_1_boundary_map_1af8b8d63e4b2995b2ef77c4f449defb49" prot="private" static="no" mutable="no">
+        <type>std::map&lt; int, T &gt;</type>
+        <definition>std::map&lt;int, T&gt; fys::BoundaryMap&lt; T &gt;::_map</definition>
+        <argsstring></argsstring>
+        <name>_map</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/BoundaryMap.hh" line="65" column="10" bodyfile="/home/FyS/Project/FyS/services/common/include/BoundaryMap.hh" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1_boundary_map_1a64e49fad7ea9e436e9b855c72992ea3e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto fys::BoundaryMap&lt; T &gt;::get</definition>
+        <argsstring>(int index) const</argsstring>
+        <name>get</name>
+        <param>
+          <type>int</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/BoundaryMap.hh" line="32" column="1" bodyfile="/home/FyS/Project/FyS/services/common/include/BoundaryMap.hh" bodystart="32" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1_boundary_map_1a83c7a4336edd06bbbd740deeb238069d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::BoundaryMap&lt; T &gt;::insert</definition>
+        <argsstring>(int index, T &amp;&amp;element)</argsstring>
+        <name>insert</name>
+        <param>
+          <type>int</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>T &amp;&amp;</type>
+          <declname>element</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/BoundaryMap.hh" line="37" column="6" bodyfile="/home/FyS/Project/FyS/services/common/include/BoundaryMap.hh" bodystart="37" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1_boundary_map_1aba732cbfb51d3b9da1886e9f03901628" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::BoundaryMap&lt; T &gt;::insert</definition>
+        <argsstring>(int index, const T &amp;element)</argsstring>
+        <name>insert</name>
+        <param>
+          <type>int</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>const T &amp;</type>
+          <declname>element</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/BoundaryMap.hh" line="52" column="6" bodyfile="/home/FyS/Project/FyS/services/common/include/BoundaryMap.hh" bodystart="52" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1_boundary_map_1a5cdfa3f8d71016b786f16a8a40e836b3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>auto</type>
+        <definition>auto fys::BoundaryMap&lt; T &gt;::end</definition>
+        <argsstring>() const</argsstring>
+        <name>end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/BoundaryMap.hh" line="59" column="1" bodyfile="/home/FyS/Project/FyS/services/common/include/BoundaryMap.hh" bodystart="59" bodyend="62"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/common/include/BoundaryMap.hh" line="28" column="18" bodyfile="/home/FyS/Project/FyS/services/common/include/BoundaryMap.hh" bodystart="28" bodyend="66"/>
+    <listofallmembers>
+      <member refid="classfys_1_1_boundary_map_1af8b8d63e4b2995b2ef77c4f449defb49" prot="private" virt="non-virtual"><scope>fys::BoundaryMap</scope><name>_map</name></member>
+      <member refid="classfys_1_1_boundary_map_1a5cdfa3f8d71016b786f16a8a40e836b3" prot="public" virt="non-virtual"><scope>fys::BoundaryMap</scope><name>end</name></member>
+      <member refid="classfys_1_1_boundary_map_1a64e49fad7ea9e436e9b855c72992ea3e" prot="public" virt="non-virtual"><scope>fys::BoundaryMap</scope><name>get</name></member>
+      <member refid="classfys_1_1_boundary_map_1a83c7a4336edd06bbbd740deeb238069d" prot="public" virt="non-virtual"><scope>fys::BoundaryMap</scope><name>insert</name></member>
+      <member refid="classfys_1_1_boundary_map_1aba732cbfb51d3b9da1886e9f03901628" prot="public" virt="non-virtual"><scope>fys::BoundaryMap</scope><name>insert</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

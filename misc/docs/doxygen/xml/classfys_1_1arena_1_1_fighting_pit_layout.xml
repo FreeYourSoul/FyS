@@ -1,0 +1,219 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1arena_1_1_fighting_pit_layout" kind="class" language="C++" prot="public">
+    <compoundname>fys::arena::FightingPitLayout</compoundname>
+    <includes refid="_fighting_pit_layout_8hh" local="no">FightingPitLayout.hh</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_fighting_pit_layout_1abce7df023b7c7eaba9e125cccbcb8d1d" prot="private" static="no" mutable="no">
+        <type>std::reference_wrapper&lt; <ref refid="classfys_1_1arena_1_1_pit_contenders" kindref="compound">PitContenders</ref> &gt;</type>
+        <definition>std::reference_wrapper&lt;PitContenders&gt; fys::arena::FightingPitLayout::_contenders</definition>
+        <argsstring></argsstring>
+        <name>_contenders</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPitLayout.hh" line="96" column="24" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPitLayout.hh" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_fighting_pit_layout_1a19d51c19b141fffa0c2302e26700391d" prot="private" static="no" mutable="no">
+        <type>std::reference_wrapper&lt; <ref refid="classfys_1_1arena_1_1_ally_party_teams" kindref="compound">AllyPartyTeams</ref> &gt;</type>
+        <definition>std::reference_wrapper&lt;AllyPartyTeams&gt; fys::arena::FightingPitLayout::_partyTeams</definition>
+        <argsstring></argsstring>
+        <name>_partyTeams</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPitLayout.hh" line="97" column="24" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPitLayout.hh" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_fighting_pit_layout_1a8de3b4791870625770b411af65a51137" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; bool &gt;</type>
+        <definition>std::vector&lt;bool&gt; fys::arena::FightingPitLayout::_movingFlagContender</definition>
+        <argsstring></argsstring>
+        <name>_movingFlagContender</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPitLayout.hh" line="99" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPitLayout.hh" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1arena_1_1_fighting_pit_layout_1a4b00d960f2a33e5c63a21ccfd290fb0f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::arena::FightingPitLayout::FightingPitLayout</definition>
+        <argsstring>(PitContenders &amp;contenders, AllyPartyTeams &amp;partyTeams)</argsstring>
+        <name>FightingPitLayout</name>
+        <param>
+          <type><ref refid="classfys_1_1arena_1_1_pit_contenders" kindref="compound">PitContenders</ref> &amp;</type>
+          <declname>contenders</declname>
+        </param>
+        <param>
+          <type><ref refid="classfys_1_1arena_1_1_ally_party_teams" kindref="compound">AllyPartyTeams</ref> &amp;</type>
+          <declname>partyTeams</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPitLayout.hh" line="72" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPitLayout.hh" bodystart="72" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_fighting_pit_layout_1ac73e339b8b9f44b68ea393ba3fd9e1f1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>unsigned</type>
+        <definition>unsigned fys::arena::FightingPitLayout::activeCharactersOnSide</definition>
+        <argsstring>(HexagonSide::Orientation side) const</argsstring>
+        <name>activeCharactersOnSide</name>
+        <param>
+          <type>HexagonSide::Orientation</type>
+          <declname>side</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Retrieve the number of active characters (contenders or players) on the given side <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>side</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>to check the contender and/or players </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>number of active player on the side </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPitLayout.hh" line="81" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/FightingPitLayout.cpp" bodystart="36" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_fighting_pit_layout_1aab1f7493f6c2673f9c61f443ed2943ab" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::FightingPitLayout::executeMovements</definition>
+        <argsstring>()</argsstring>
+        <name>executeMovements</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPitLayout.hh" line="83" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/FightingPitLayout.cpp" bodystart="42" bodyend="45"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classfys_1_1arena_1_1_fighting_pit_layout_1a832699dd680ff20d13b9b2db145e281a" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::FightingPitLayout::setContenderInitiatePosition</definition>
+        <argsstring>(FightingContender &amp;contender, HexagonSide::Orientation side)</argsstring>
+        <name>setContenderInitiatePosition</name>
+        <param>
+          <type><ref refid="classfys_1_1arena_1_1_fighting_contender" kindref="compound">FightingContender</ref> &amp;</type>
+          <declname>contender</declname>
+        </param>
+        <param>
+          <type>HexagonSide::Orientation</type>
+          <declname>side</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPitLayout.hh" line="85" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/FightingPitLayout.cpp" bodystart="80" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_fighting_pit_layout_1a2276a2688d11aacc39a4a764c8b321cf" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::FightingPitLayout::setAllyMoveInitiatePosition</definition>
+        <argsstring>(TeamMember &amp;teamMember, HexagonSide::Orientation side)</argsstring>
+        <name>setAllyMoveInitiatePosition</name>
+        <param>
+          <type><ref refid="classfys_1_1arena_1_1_team_member" kindref="compound">TeamMember</ref> &amp;</type>
+          <declname>teamMember</declname>
+        </param>
+        <param>
+          <type>HexagonSide::Orientation</type>
+          <declname>side</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPitLayout.hh" line="86" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/FightingPitLayout.cpp" bodystart="90" bodyend="97"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classfys_1_1arena_1_1_fighting_pit_layout_1a34e4c15d7e507162def4c336644dab57" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::FightingPitLayout::move</definition>
+        <argsstring>(HexagonSide &amp;side, data::MoveDirection direction)</argsstring>
+        <name>move</name>
+        <param>
+          <type><ref refid="classfys_1_1arena_1_1_hexagon_side" kindref="compound">HexagonSide</ref> &amp;</type>
+          <declname>side</declname>
+        </param>
+        <param>
+          <type>data::MoveDirection</type>
+          <declname>direction</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPitLayout.hh" line="90" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/FightingPitLayout.cpp" bodystart="56" bodyend="77"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classfys_1_1arena_1_1_fighting_pit_layout_1a66668783acae3aa99a3c505c070ceea5" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classfys_1_1arena_1_1_team_member" kindref="compound">TeamMember</ref> &gt; &gt;</type>
+        <definition>std::vector&lt; std::shared_ptr&lt; TeamMember &gt; &gt; fys::arena::FightingPitLayout::getChangingSideTeamMember</definition>
+        <argsstring>() const</argsstring>
+        <name>getChangingSideTeamMember</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPitLayout.hh" line="93" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/FightingPitLayout.cpp" bodystart="48" bodyend="53"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Layout of the fighting pit. Manage the positions of monsters and the players/monsters movements. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This class is mapping the characters (contenders or NPC) with the layout of the fightingpit. The layout of the fighting pit can be taken as a draughtboard composed of 3 hexagons as shown as below</para>
+<para><hruler/>
+ / \ _____/ B \ 18 possible playable sides / \ / 6 possible ambush sides [A_NE, B_SW, A_SE, C_NW, C_N, B_S] / A _____/ \ / \ _____/ C \ \ / _____/</para>
+<para>Each hexagon represent the monster position. The Player can have character of its team spread on the lines representing the sides of the hexagons. Here is the hexagon at coordinate A, with its sides (where the characters can stands to attack the monster). <verbatim>      A_N
+      _____                N  = North
+</verbatim> A_NW / \ A_NE NE = North-East / A \ NW = North-West \ / S = South A_SW _____/ A_SE SE = South-East SW = South-West A_S </para>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPitLayout.hh" line="69" column="24" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPitLayout.hh" bodystart="69" bodyend="101"/>
+    <listofallmembers>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_layout_1abce7df023b7c7eaba9e125cccbcb8d1d" prot="private" virt="non-virtual"><scope>fys::arena::FightingPitLayout</scope><name>_contenders</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_layout_1a8de3b4791870625770b411af65a51137" prot="private" virt="non-virtual"><scope>fys::arena::FightingPitLayout</scope><name>_movingFlagContender</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_layout_1a19d51c19b141fffa0c2302e26700391d" prot="private" virt="non-virtual"><scope>fys::arena::FightingPitLayout</scope><name>_partyTeams</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_layout_1ac73e339b8b9f44b68ea393ba3fd9e1f1" prot="public" virt="non-virtual"><scope>fys::arena::FightingPitLayout</scope><name>activeCharactersOnSide</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_layout_1aab1f7493f6c2673f9c61f443ed2943ab" prot="public" virt="non-virtual"><scope>fys::arena::FightingPitLayout</scope><name>executeMovements</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_layout_1a4b00d960f2a33e5c63a21ccfd290fb0f" prot="public" virt="non-virtual"><scope>fys::arena::FightingPitLayout</scope><name>FightingPitLayout</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_layout_1a66668783acae3aa99a3c505c070ceea5" prot="private" virt="non-virtual"><scope>fys::arena::FightingPitLayout</scope><name>getChangingSideTeamMember</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_layout_1a34e4c15d7e507162def4c336644dab57" prot="private" virt="non-virtual"><scope>fys::arena::FightingPitLayout</scope><name>move</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_layout_1a2276a2688d11aacc39a4a764c8b321cf" prot="public" virt="non-virtual"><scope>fys::arena::FightingPitLayout</scope><name>setAllyMoveInitiatePosition</name></member>
+      <member refid="classfys_1_1arena_1_1_fighting_pit_layout_1a832699dd680ff20d13b9b2db145e281a" prot="public" virt="non-virtual"><scope>fys::arena::FightingPitLayout</scope><name>setContenderInitiatePosition</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

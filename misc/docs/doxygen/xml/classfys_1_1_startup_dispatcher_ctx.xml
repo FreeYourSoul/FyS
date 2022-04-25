@@ -1,0 +1,428 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1_startup_dispatcher_ctx" kind="class" language="C++" prot="public">
+    <compoundname>fys::StartupDispatcherCtx</compoundname>
+    <derivedcompoundref refid="classfys_1_1ws_1_1_world_server_ctx" prot="public" virt="non-virtual">fys::ws::WorldServerCtx</derivedcompoundref>
+    <innerclass refid="structfys_1_1_startup_dispatcher_ctx_1_1_cluster_proxy" prot="private">fys::StartupDispatcherCtx::ClusterProxy</innerclass>
+      <sectiondef kind="protected-attrib">
+      <memberdef kind="variable" id="classfys_1_1_startup_dispatcher_ctx_1a751b3ec6bbcbfd2a4743d19717b7071e" prot="protected" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string fys::StartupDispatcherCtx::_version</definition>
+        <argsstring></argsstring>
+        <name>_version</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="96" column="25" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1_startup_dispatcher_ctx_1a8c0dc51f317c500e2949093d7fd52c2b" prot="protected" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string fys::StartupDispatcherCtx::_name</definition>
+        <argsstring></argsstring>
+        <name>_name</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="97" column="25" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1_startup_dispatcher_ctx_1a3bb65d28444c4d978345685a1ca86827" prot="protected" static="no" mutable="no">
+        <type>ushort</type>
+        <definition>ushort fys::StartupDispatcherCtx::_bindingPort</definition>
+        <argsstring></argsstring>
+        <name>_bindingPort</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Client port </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="102" column="20" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1_startup_dispatcher_ctx_1a9e19704e4016c6cbaa1f459ba9e56581" prot="protected" static="no" mutable="no">
+        <type>ushort</type>
+        <definition>ushort fys::StartupDispatcherCtx::_dispatchingPort</definition>
+        <argsstring></argsstring>
+        <name>_dispatchingPort</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Dispatching to service port (for publishing / load balancing) </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="106" column="20" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="106" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1_startup_dispatcher_ctx_1a9a8d10c8011b1eb05ee485497a8f3bcc" prot="protected" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint fys::StartupDispatcherCtx::_maxMsgSize</definition>
+        <argsstring></argsstring>
+        <name>_maxMsgSize</name>
+        <initializer>= 1024</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Maximum size in byte of an inbound message </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="111" column="18" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1_startup_dispatcher_ctx_1a29c792670a4cbac913d58b6876fddc85" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool fys::StartupDispatcherCtx::_verbose</definition>
+        <argsstring></argsstring>
+        <name>_verbose</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="113" column="18" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="113" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1_startup_dispatcher_ctx_1a60f914ef1384d8fdf2b5289efb52fdb7" prot="protected" static="no" mutable="no">
+        <type>ClusterProxy</type>
+        <definition>ClusterProxy fys::StartupDispatcherCtx::_clusterProxy</definition>
+        <argsstring></argsstring>
+        <name>_clusterProxy</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="115" column="26" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1_startup_dispatcher_ctx_1a22377ec0fc44e0280ee25ebd58104766" prot="protected" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; fys::StartupDispatcherCtx::_subTopics</definition>
+        <argsstring></argsstring>
+        <name>_subTopics</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="116" column="25" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="116" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1_startup_dispatcher_ctx_1a7189b5a8610d5d63c881172b009a0e04" prot="protected" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string fys::StartupDispatcherCtx::_specificConfigPath</definition>
+        <argsstring></argsstring>
+        <name>_specificConfigPath</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="118" column="25" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1_startup_dispatcher_ctx_1a55518844cd56cd806c2d047cbab75645" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool fys::StartupDispatcherCtx::_isClusterAware</definition>
+        <argsstring></argsstring>
+        <name>_isClusterAware</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="120" column="18" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1_startup_dispatcher_ctx_1a426c954de1c7cec1f80f0b0ab62ade54" prot="protected" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool fys::StartupDispatcherCtx::_isLoadBalancing</definition>
+        <argsstring></argsstring>
+        <name>_isLoadBalancing</name>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="121" column="18" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1_startup_dispatcher_ctx_1a06698efad77910337fb1abf9f1b8568a" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::StartupDispatcherCtx::StartupDispatcherCtx</definition>
+        <argsstring>(int ac, const char *const *av) noexcept</argsstring>
+        <name>StartupDispatcherCtx</name>
+        <param>
+          <type>int</type>
+          <declname>ac</declname>
+        </param>
+        <param>
+          <type>const char *const *</type>
+          <declname>av</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="63" column="13" bodyfile="/home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp" bodystart="11" bodyend="43"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1_startup_dispatcher_ctx_1a6cabaa4684d031e619f080f623ce02e6" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr bool</type>
+        <definition>constexpr bool fys::StartupDispatcherCtx::isLoadBalancingEnabled</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>isLoadBalancingEnabled</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="65" column="29" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="65" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1_startup_dispatcher_ctx_1acde65a094658b70f786a305363857452" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr bool</type>
+        <definition>constexpr bool fys::StartupDispatcherCtx::isClusterAware</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>isClusterAware</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="66" column="29" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="66" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1_startup_dispatcher_ctx_1aafe860c36a60a28d7c521cdb6afa2186" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr ushort</type>
+        <definition>constexpr ushort fys::StartupDispatcherCtx::getBindingPort</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getBindingPort</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="67" column="31" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="67" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1_startup_dispatcher_ctx_1a2e0b7a6aea133b5520cf18a7e0d1830d" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr ushort</type>
+        <definition>constexpr ushort fys::StartupDispatcherCtx::getDispatchingPort</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getDispatchingPort</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="68" column="31" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="68" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1_startup_dispatcher_ctx_1a71e5e2c581ff9c8f29991fe5fbbb6968" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr uint</type>
+        <definition>constexpr uint fys::StartupDispatcherCtx::getMaxMsgSize</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getMaxMsgSize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="69" column="29" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="69" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1_startup_dispatcher_ctx_1a8941a0b8ca22f867ec996d24cbc06420" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const std::vector&lt; std::string &gt; &amp;</type>
+        <definition>const std::vector&lt;std::string&gt;&amp; fys::StartupDispatcherCtx::getSubscriptionTopics</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getSubscriptionTopics</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="71" column="32" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="71" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1_startup_dispatcher_ctx_1a0bece763aa9869cec948b8cd369d7f0b" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string fys::StartupDispatcherCtx::getListenerBindingString</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getListenerBindingString</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="72" column="26" bodyfile="/home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp" bodystart="95" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1_startup_dispatcher_ctx_1afe9277c482dfff06199702c1d8e1fe21" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string fys::StartupDispatcherCtx::getDispatcherBindingString</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getDispatcherBindingString</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="73" column="26" bodyfile="/home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp" bodystart="99" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1_startup_dispatcher_ctx_1a944041b68d44de936dd0614a7bd6e16a" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string fys::StartupDispatcherCtx::getFrontendClusterProxyConnectionString</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getFrontendClusterProxyConnectionString</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="74" column="26" bodyfile="/home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp" bodystart="103" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1_startup_dispatcher_ctx_1aefd2de96330512037a6babc79d00d88e" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string fys::StartupDispatcherCtx::getBackendClusterProxyConnectionString</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getBackendClusterProxyConnectionString</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="75" column="26" bodyfile="/home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp" bodystart="107" bodyend="109"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1_startup_dispatcher_ctx_1adcb2d75409c8d59af598cbf31384480b" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string fys::StartupDispatcherCtx::toString</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>toString</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>debug string containing the context </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="80" column="26" bodyfile="/home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp" bodystart="75" bodyend="93"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classfys_1_1_startup_dispatcher_ctx_1a390741c84adda2dd66f6d93b0a1bd11e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::StartupDispatcherCtx::initializeFromIni</definition>
+        <argsstring>(const std::string &amp;configFilePath)</argsstring>
+        <name>initializeFromIni</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>configFilePath</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="83" column="18" bodyfile="/home/FyS/Project/FyS/dispatcher/common/src/context/StartupDispatcherCtx.cpp" bodystart="46" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1_startup_dispatcher_ctx_1aa7a8c2a30fa110527ea48aa211826c3f" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>std::vector&lt; T &gt;</type>
+        <definition>std::vector&lt;T&gt; fys::StartupDispatcherCtx::parseToArray</definition>
+        <argsstring>(const std::string &amp;s) const noexcept</argsstring>
+        <name>parseToArray</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="86" column="26" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="86" bodyend="93"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>fys::StartupDispatcherCtx</label>
+        <link refid="classfys_1_1_startup_dispatcher_ctx"/>
+      </node>
+      <node id="2">
+        <label>fys::ws::WorldServerCtx</label>
+        <link refid="classfys_1_1ws_1_1_world_server_ctx"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>fys::StartupDispatcherCtx</label>
+        <link refid="classfys_1_1_startup_dispatcher_ctx"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>_clusterProxy</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>fys::StartupDispatcherCtx::ClusterProxy</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="54" column="27" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" bodystart="54" bodyend="123"/>
+    <listofallmembers>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a3bb65d28444c4d978345685a1ca86827" prot="protected" virt="non-virtual"><scope>fys::StartupDispatcherCtx</scope><name>_bindingPort</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a60f914ef1384d8fdf2b5289efb52fdb7" prot="protected" virt="non-virtual"><scope>fys::StartupDispatcherCtx</scope><name>_clusterProxy</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a9e19704e4016c6cbaa1f459ba9e56581" prot="protected" virt="non-virtual"><scope>fys::StartupDispatcherCtx</scope><name>_dispatchingPort</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a55518844cd56cd806c2d047cbab75645" prot="protected" virt="non-virtual"><scope>fys::StartupDispatcherCtx</scope><name>_isClusterAware</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a426c954de1c7cec1f80f0b0ab62ade54" prot="protected" virt="non-virtual"><scope>fys::StartupDispatcherCtx</scope><name>_isLoadBalancing</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a9a8d10c8011b1eb05ee485497a8f3bcc" prot="protected" virt="non-virtual"><scope>fys::StartupDispatcherCtx</scope><name>_maxMsgSize</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a8c0dc51f317c500e2949093d7fd52c2b" prot="protected" virt="non-virtual"><scope>fys::StartupDispatcherCtx</scope><name>_name</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a7189b5a8610d5d63c881172b009a0e04" prot="protected" virt="non-virtual"><scope>fys::StartupDispatcherCtx</scope><name>_specificConfigPath</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a22377ec0fc44e0280ee25ebd58104766" prot="protected" virt="non-virtual"><scope>fys::StartupDispatcherCtx</scope><name>_subTopics</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a29c792670a4cbac913d58b6876fddc85" prot="protected" virt="non-virtual"><scope>fys::StartupDispatcherCtx</scope><name>_verbose</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a751b3ec6bbcbfd2a4743d19717b7071e" prot="protected" virt="non-virtual"><scope>fys::StartupDispatcherCtx</scope><name>_version</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1aefd2de96330512037a6babc79d00d88e" prot="public" virt="non-virtual"><scope>fys::StartupDispatcherCtx</scope><name>getBackendClusterProxyConnectionString</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1aafe860c36a60a28d7c521cdb6afa2186" prot="public" virt="non-virtual"><scope>fys::StartupDispatcherCtx</scope><name>getBindingPort</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1afe9277c482dfff06199702c1d8e1fe21" prot="public" virt="non-virtual"><scope>fys::StartupDispatcherCtx</scope><name>getDispatcherBindingString</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a2e0b7a6aea133b5520cf18a7e0d1830d" prot="public" virt="non-virtual"><scope>fys::StartupDispatcherCtx</scope><name>getDispatchingPort</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a944041b68d44de936dd0614a7bd6e16a" prot="public" virt="non-virtual"><scope>fys::StartupDispatcherCtx</scope><name>getFrontendClusterProxyConnectionString</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a0bece763aa9869cec948b8cd369d7f0b" prot="public" virt="non-virtual"><scope>fys::StartupDispatcherCtx</scope><name>getListenerBindingString</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a71e5e2c581ff9c8f29991fe5fbbb6968" prot="public" virt="non-virtual"><scope>fys::StartupDispatcherCtx</scope><name>getMaxMsgSize</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a8941a0b8ca22f867ec996d24cbc06420" prot="public" virt="non-virtual"><scope>fys::StartupDispatcherCtx</scope><name>getSubscriptionTopics</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a390741c84adda2dd66f6d93b0a1bd11e" prot="private" virt="non-virtual"><scope>fys::StartupDispatcherCtx</scope><name>initializeFromIni</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1acde65a094658b70f786a305363857452" prot="public" virt="non-virtual"><scope>fys::StartupDispatcherCtx</scope><name>isClusterAware</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a6cabaa4684d031e619f080f623ce02e6" prot="public" virt="non-virtual"><scope>fys::StartupDispatcherCtx</scope><name>isLoadBalancingEnabled</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1aa7a8c2a30fa110527ea48aa211826c3f" prot="private" virt="non-virtual"><scope>fys::StartupDispatcherCtx</scope><name>parseToArray</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1a06698efad77910337fb1abf9f1b8568a" prot="public" virt="non-virtual"><scope>fys::StartupDispatcherCtx</scope><name>StartupDispatcherCtx</name></member>
+      <member refid="classfys_1_1_startup_dispatcher_ctx_1adcb2d75409c8d59af598cbf31384480b" prot="public" virt="non-virtual"><scope>fys::StartupDispatcherCtx</scope><name>toString</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,230 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1cache_1_1_cml" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>fys::cache::Cml</compoundname>
+    <derivedcompoundref refid="class_cml_base" prot="public" virt="non-virtual">CmlBase</derivedcompoundref>
+    <derivedcompoundref refid="class_cml_base_test" prot="public" virt="non-virtual">CmlBaseTest</derivedcompoundref>
+    <derivedcompoundref refid="classfys_1_1cache_1_1_cml_copy" prot="public" virt="non-virtual">fys::cache::CmlCopy</derivedcompoundref>
+    <derivedcompoundref refid="classfys_1_1cache_1_1_cml_sqlite" prot="public" virt="non-virtual">fys::cache::CmlSqlite</derivedcompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfys_1_1cache_1_1_cml_1a0540591fb3b55ad149526437a3de2ab6" prot="private" static="no" mutable="no">
+        <type>std::filesystem::path</type>
+        <definition>std::filesystem::path fys::cache::Cml::_localPathStorage</definition>
+        <argsstring></argsstring>
+        <name>_localPathStorage</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/scripting_cache/cml/include/Cml.hh" line="57" column="31" bodyfile="/home/FyS/Project/FyS/scripting_cache/cml/include/Cml.hh" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1cache_1_1_cml_1a4ffa3f196dc7ebbe3ebcba11bc442c78" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, <ref refid="structfys_1_1cache_1_1_in_memory_cached" kindref="compound">InMemoryCached</ref> &gt;</type>
+        <definition>std::unordered_map&lt;std::string, InMemoryCached&gt; fys::cache::Cml::_inMemCache</definition>
+        <argsstring></argsstring>
+        <name>_inMemCache</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/scripting_cache/cml/include/Cml.hh" line="58" column="28" bodyfile="/home/FyS/Project/FyS/scripting_cache/cml/include/Cml.hh" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1cache_1_1_cml_1a7fedbd32d3aaf5c14ea8e44c86a9eedf" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type></type>
+        <definition>virtual fys::cache::Cml::~Cml</definition>
+        <argsstring>()=default</argsstring>
+        <name>~Cml</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/scripting_cache/cml/include/Cml.hh" line="44" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1cache_1_1_cml_1a492f2c0efa80a500bc910c5eee63e67a" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fys::cache::Cml::Cml</definition>
+        <argsstring>(std::filesystem::path pathLocalStorage)</argsstring>
+        <name>Cml</name>
+        <param>
+          <type>std::filesystem::path</type>
+          <declname>pathLocalStorage</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/scripting_cache/cml/include/Cml.hh" line="45" column="18" bodyfile="/home/FyS/Project/FyS/scripting_cache/cml/src/Cml.cpp" bodystart="57" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1cache_1_1_cml_1a1b98dfd73b6828338ff93938d321bbd6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>const std::string &amp;</type>
+        <definition>const std::string &amp; fys::cache::Cml::findInCache</definition>
+        <argsstring>(const std::string &amp;key, bool first=true)</argsstring>
+        <name>findInCache</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>first</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/scripting_cache/cml/include/Cml.hh" line="47" column="27" bodyfile="/home/FyS/Project/FyS/scripting_cache/cml/src/Cml.cpp" bodystart="77" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1cache_1_1_cml_1abcffc2d7aeeff06798c06265f0956b6f" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void fys::cache::Cml::createFileInLocalStorage</definition>
+        <argsstring>(const CmlKey &amp;cmlKey)=0</argsstring>
+        <name>createFileInLocalStorage</name>
+        <reimplementedby refid="classfys_1_1cache_1_1_cml_sqlite_1a304b2498ed2d3bb7151dce8204641c22">createFileInLocalStorage</reimplementedby>
+        <reimplementedby refid="classfys_1_1cache_1_1_cml_copy_1a17775739b7d6359bd5f3cbf9ea94f989">createFileInLocalStorage</reimplementedby>
+        <reimplementedby refid="class_cml_base_test_1ac594bbfaea236ede00fe710c265b62d5">createFileInLocalStorage</reimplementedby>
+        <reimplementedby refid="class_cml_base_1acb39eb3db9a9614eaeefd88aebdb66ed">createFileInLocalStorage</reimplementedby>
+        <reimplementedby refid="class_cml_base_copy_1ae41808006a47ce8d00daf8675dd8cd02">createFileInLocalStorage</reimplementedby>
+        <param>
+          <type>const <ref refid="classfys_1_1cache_1_1_cml_key" kindref="compound">CmlKey</ref> &amp;</type>
+          <declname>cmlKey</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/scripting_cache/cml/include/Cml.hh" line="49" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1cache_1_1_cml_1afb8685c38f117140d2364a25d5276a9b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::cache::Cml::createFile</definition>
+        <argsstring>(const std::filesystem::path &amp;pathToFile, const std::string &amp;content) const</argsstring>
+        <name>createFile</name>
+        <param>
+          <type>const std::filesystem::path &amp;</type>
+          <declname>pathToFile</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>content</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/scripting_cache/cml/include/Cml.hh" line="50" column="14" bodyfile="/home/FyS/Project/FyS/scripting_cache/cml/src/Cml.cpp" bodystart="98" bodyend="104"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classfys_1_1cache_1_1_cml_1a5c7a0d8662534404c431cd38367b70cb" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::cache::Cml::isInLocalStorage</definition>
+        <argsstring>(const CmlKey &amp;cmlKey) const</argsstring>
+        <name>isInLocalStorage</name>
+        <param>
+          <type>const <ref refid="classfys_1_1cache_1_1_cml_key" kindref="compound">CmlKey</ref> &amp;</type>
+          <declname>cmlKey</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>true if the key represent a cached data in the local storage (filesystem) </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/scripting_cache/cml/include/Cml.hh" line="53" column="21" bodyfile="/home/FyS/Project/FyS/scripting_cache/cml/src/Cml.cpp" bodystart="66" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1cache_1_1_cml_1a5b12670cb6e4fe7be14349f0ebc6f512" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::cache::Cml::isInLocalStorageAndUpToDate</definition>
+        <argsstring>(const CmlKey &amp;cmlKey, long timestamp) const</argsstring>
+        <name>isInLocalStorageAndUpToDate</name>
+        <param>
+          <type>const <ref refid="classfys_1_1cache_1_1_cml_key" kindref="compound">CmlKey</ref> &amp;</type>
+          <declname>cmlKey</declname>
+        </param>
+        <param>
+          <type>long</type>
+          <declname>timestamp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/scripting_cache/cml/include/Cml.hh" line="54" column="21" bodyfile="/home/FyS/Project/FyS/scripting_cache/cml/src/Cml.cpp" bodystart="70" bodyend="75"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>CmlBase</label>
+        <link refid="class_cml_base"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>CmlBaseTest</label>
+        <link refid="class_cml_base_test"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>fys::cache::CmlCopy</label>
+        <link refid="classfys_1_1cache_1_1_cml_copy"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>fys::cache::Cml</label>
+        <link refid="classfys_1_1cache_1_1_cml"/>
+      </node>
+      <node id="6">
+        <label>fys::cache::CmlSqlite</label>
+        <link refid="classfys_1_1cache_1_1_cml_sqlite"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>CmlBaseCopy</label>
+        <link refid="class_cml_base_copy"/>
+        <childnode refid="4" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="/home/FyS/Project/FyS/scripting_cache/cml/include/Cml.hh" line="41" column="14" bodyfile="/home/FyS/Project/FyS/scripting_cache/cml/include/Cml.hh" bodystart="41" bodyend="60"/>
+    <listofallmembers>
+      <member refid="classfys_1_1cache_1_1_cml_1a4ffa3f196dc7ebbe3ebcba11bc442c78" prot="private" virt="non-virtual"><scope>fys::cache::Cml</scope><name>_inMemCache</name></member>
+      <member refid="classfys_1_1cache_1_1_cml_1a0540591fb3b55ad149526437a3de2ab6" prot="private" virt="non-virtual"><scope>fys::cache::Cml</scope><name>_localPathStorage</name></member>
+      <member refid="classfys_1_1cache_1_1_cml_1a492f2c0efa80a500bc910c5eee63e67a" prot="public" virt="non-virtual"><scope>fys::cache::Cml</scope><name>Cml</name></member>
+      <member refid="classfys_1_1cache_1_1_cml_1afb8685c38f117140d2364a25d5276a9b" prot="public" virt="non-virtual"><scope>fys::cache::Cml</scope><name>createFile</name></member>
+      <member refid="classfys_1_1cache_1_1_cml_1abcffc2d7aeeff06798c06265f0956b6f" prot="public" virt="pure-virtual"><scope>fys::cache::Cml</scope><name>createFileInLocalStorage</name></member>
+      <member refid="classfys_1_1cache_1_1_cml_1a1b98dfd73b6828338ff93938d321bbd6" prot="public" virt="non-virtual"><scope>fys::cache::Cml</scope><name>findInCache</name></member>
+      <member refid="classfys_1_1cache_1_1_cml_1a5c7a0d8662534404c431cd38367b70cb" prot="private" virt="non-virtual"><scope>fys::cache::Cml</scope><name>isInLocalStorage</name></member>
+      <member refid="classfys_1_1cache_1_1_cml_1a5b12670cb6e4fe7be14349f0ebc6f512" prot="private" virt="non-virtual"><scope>fys::cache::Cml</scope><name>isInLocalStorageAndUpToDate</name></member>
+      <member refid="classfys_1_1cache_1_1_cml_1a7fedbd32d3aaf5c14ea8e44c86a9eedf" prot="public" virt="virtual"><scope>fys::cache::Cml</scope><name>~Cml</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

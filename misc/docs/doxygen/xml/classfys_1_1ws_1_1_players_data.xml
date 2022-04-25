@@ -1,0 +1,345 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1ws_1_1_players_data" kind="class" language="C++" prot="public">
+    <compoundname>fys::ws::PlayersData</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfys_1_1ws_1_1_players_data_1ac186210cdc8d574bcf93fc4e81da2fc0" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structfys_1_1ws_1_1_player_info" kindref="compound">PlayerInfo</ref> &gt;</type>
+        <definition>std::vector&lt;PlayerInfo&gt; fys::ws::PlayersData::_positions</definition>
+        <argsstring></argsstring>
+        <name>_positions</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/PlayersData.hh" line="129" column="13" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/engine/PlayersData.hh" bodystart="129" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1ws_1_1_players_data_1a76e5fd2349bc10a23c74cd822e3e3a09" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; PlayerStatus &gt;</type>
+        <definition>std::vector&lt;PlayerStatus&gt; fys::ws::PlayersData::_status</definition>
+        <argsstring></argsstring>
+        <name>_status</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/PlayersData.hh" line="130" column="13" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/engine/PlayersData.hh" bodystart="130" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1ws_1_1_players_data_1a906e8dba7225795f7b0ded51057d39c9" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt;std::string&gt; fys::ws::PlayersData::_identities</definition>
+        <argsstring></argsstring>
+        <name>_identities</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/PlayersData.hh" line="131" column="13" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/engine/PlayersData.hh" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1ws_1_1_players_data_1ad3176c51af5c7ebb6ae901a3531bf1c5" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, uint &gt;</type>
+        <definition>std::unordered_map&lt;std::string, uint&gt; fys::ws::PlayersData::_tokenToIndex</definition>
+        <argsstring></argsstring>
+        <name>_tokenToIndex</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/PlayersData.hh" line="132" column="20" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/engine/PlayersData.hh" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1ws_1_1_players_data_1a8f6f7bc04d3f51b978ed6f72df228074" prot="public" static="no" const="no" explicit="yes" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::ws::PlayersData::PlayersData</definition>
+        <argsstring>(uint maxConnection=1000) noexcept</argsstring>
+        <name>PlayersData</name>
+        <param>
+          <type>uint</type>
+          <declname>maxConnection</declname>
+          <defval>1000</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/PlayersData.hh" line="58" column="10" bodyfile="/home/FyS/Project/FyS/services/worldserver/src/engine/PlayersData.cpp" bodystart="28" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1ws_1_1_players_data_1abf4c1d7ce142fc4d8a913a131bd931f9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfys_1_1ws_1_1_player_info" kindref="compound">PlayerInfo</ref> &amp;</type>
+        <definition>PlayerInfo&amp; fys::ws::PlayersData::accessPlayerPosition</definition>
+        <argsstring>(uint indexPlayer)</argsstring>
+        <name>accessPlayerPosition</name>
+        <param>
+          <type>uint</type>
+          <declname>indexPlayer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/PlayersData.hh" line="61" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1ws_1_1_players_data_1a4ff6890d702dfc697517fd55446bde60" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Action</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void fys::ws::PlayersData::executeOnPlayers</definition>
+        <argsstring>(Action &amp;&amp;actionToExecute)</argsstring>
+        <name>executeOnPlayers</name>
+        <param>
+          <type>Action &amp;&amp;</type>
+          <declname>actionToExecute</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/PlayersData.hh" line="65" column="1" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/engine/PlayersData.hh" bodystart="65" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1ws_1_1_players_data_1af52213b1f6e9b99138e1582c1dd01ca6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::ws::PlayersData::setPlayerMoveAction</definition>
+        <argsstring>(uint index, double direction)</argsstring>
+        <name>setPlayerMoveAction</name>
+        <param>
+          <type>uint</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>direction</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/PlayersData.hh" line="73" column="1" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/engine/PlayersData.hh" bodystart="73" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1ws_1_1_players_data_1a172c4e68df2d79a6407a646db4e1ee86" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::ws::PlayersData::stopPlayerMove</definition>
+        <argsstring>(uint index)</argsstring>
+        <name>stopPlayerMove</name>
+        <param>
+          <type>uint</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/PlayersData.hh" line="80" column="1" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/engine/PlayersData.hh" bodystart="80" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1ws_1_1_players_data_1a2e5d28bfe185181e859f1621093fa937" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::ws::PlayersData::setPlayerArena</definition>
+        <argsstring>(uint index, const std::string &amp;arenaId)</argsstring>
+        <name>setPlayerArena</name>
+        <param>
+          <type>uint</type>
+          <declname>index</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>arenaId</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/PlayersData.hh" line="86" column="1" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/engine/PlayersData.hh" bodystart="86" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1ws_1_1_players_data_1acb5d4ecb4535a124f14ba2b77d970927" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint</type>
+        <definition>uint fys::ws::PlayersData::getIndexAndUpdatePlayerConnection</definition>
+        <argsstring>(const std::string &amp;token, std::string idt)</argsstring>
+        <name>getIndexAndUpdatePlayerConnection</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>token</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>idt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Retrieve the index corresponding to the given token</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>token</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>index corresponding to the given token, std::numeric_limits&lt;uint&gt;::max() is returned if no corresponding token </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/PlayersData.hh" line="100" column="1" bodyfile="/home/FyS/Project/FyS/services/worldserver/src/engine/PlayersData.cpp" bodystart="33" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1ws_1_1_players_data_1a2aa08b2fc91fe9e55666e86f3b217fad" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>std::vector&lt; std::string_view &gt;</type>
+        <definition>std::vector&lt; std::string_view &gt; fys::ws::PlayersData::getPlayerIdtsArroundPlayer</definition>
+        <argsstring>(uint indexPlayer, std::optional&lt; std::reference_wrapper&lt; PlayerInfo &gt;&gt; position, double distance=DEFAULT_DISTANCE) const noexcept</argsstring>
+        <name>getPlayerIdtsArroundPlayer</name>
+        <param>
+          <type>uint</type>
+          <declname>indexPlayer</declname>
+        </param>
+        <param>
+          <type>std::optional&lt; std::reference_wrapper&lt; <ref refid="structfys_1_1ws_1_1_player_info" kindref="compound">PlayerInfo</ref> &gt;&gt;</type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>distance</declname>
+          <defval>DEFAULT_DISTANCE</defval>
+        </param>
+        <briefdescription>
+<para>Get the Players Identities Arround the given player except himself. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>indexPlayer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>player </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>distance</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>std::vector&lt;std::string_view&gt; </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/PlayersData.hh" line="111" column="1" bodyfile="/home/FyS/Project/FyS/services/worldserver/src/engine/PlayersData.cpp" bodystart="43" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1ws_1_1_players_data_1ae18e2d43f710929ed2694ddfc34beb0e" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::vector&lt; std::string_view &gt;</type>
+        <definition>std::vector&lt; std::string_view &gt; fys::ws::PlayersData::getPlayerIdtsArroundPos</definition>
+        <argsstring>(const PlayerInfo &amp;position, double distance=DEFAULT_DISTANCE, uint ignoreIndex=LIMIT_NOTIFICATIONS_MOVE) const noexcept</argsstring>
+        <name>getPlayerIdtsArroundPos</name>
+        <param>
+          <type>const <ref refid="structfys_1_1ws_1_1_player_info" kindref="compound">PlayerInfo</ref> &amp;</type>
+          <declname>position</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>distance</declname>
+          <defval>DEFAULT_DISTANCE</defval>
+        </param>
+        <param>
+          <type>uint</type>
+          <declname>ignoreIndex</declname>
+          <defval>LIMIT_NOTIFICATIONS_MOVE</defval>
+        </param>
+        <briefdescription>
+<para>Get the Players Identities Arround the given position. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>position</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>to check arround </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>distance</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>radius arround the given point to search </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>std::vector&lt;std::string_view&gt; vector of view on the identities of the players arround the given point </para>
+</simplesect>
+<simplesect kind="note"><para>identities are zmq code to reply to a specific client via a router socket </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/PlayersData.hh" line="124" column="1" bodyfile="/home/FyS/Project/FyS/services/worldserver/src/engine/PlayersData.cpp" bodystart="53" bodyend="73"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/PlayersData.hh" line="55" column="18" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/engine/PlayersData.hh" bodystart="55" bodyend="134"/>
+    <listofallmembers>
+      <member refid="classfys_1_1ws_1_1_players_data_1a906e8dba7225795f7b0ded51057d39c9" prot="private" virt="non-virtual"><scope>fys::ws::PlayersData</scope><name>_identities</name></member>
+      <member refid="classfys_1_1ws_1_1_players_data_1ac186210cdc8d574bcf93fc4e81da2fc0" prot="private" virt="non-virtual"><scope>fys::ws::PlayersData</scope><name>_positions</name></member>
+      <member refid="classfys_1_1ws_1_1_players_data_1a76e5fd2349bc10a23c74cd822e3e3a09" prot="private" virt="non-virtual"><scope>fys::ws::PlayersData</scope><name>_status</name></member>
+      <member refid="classfys_1_1ws_1_1_players_data_1ad3176c51af5c7ebb6ae901a3531bf1c5" prot="private" virt="non-virtual"><scope>fys::ws::PlayersData</scope><name>_tokenToIndex</name></member>
+      <member refid="classfys_1_1ws_1_1_players_data_1abf4c1d7ce142fc4d8a913a131bd931f9" prot="public" virt="non-virtual"><scope>fys::ws::PlayersData</scope><name>accessPlayerPosition</name></member>
+      <member refid="classfys_1_1ws_1_1_players_data_1a4ff6890d702dfc697517fd55446bde60" prot="public" virt="non-virtual"><scope>fys::ws::PlayersData</scope><name>executeOnPlayers</name></member>
+      <member refid="classfys_1_1ws_1_1_players_data_1acb5d4ecb4535a124f14ba2b77d970927" prot="public" virt="non-virtual"><scope>fys::ws::PlayersData</scope><name>getIndexAndUpdatePlayerConnection</name></member>
+      <member refid="classfys_1_1ws_1_1_players_data_1a2aa08b2fc91fe9e55666e86f3b217fad" prot="public" virt="non-virtual"><scope>fys::ws::PlayersData</scope><name>getPlayerIdtsArroundPlayer</name></member>
+      <member refid="classfys_1_1ws_1_1_players_data_1ae18e2d43f710929ed2694ddfc34beb0e" prot="public" virt="non-virtual"><scope>fys::ws::PlayersData</scope><name>getPlayerIdtsArroundPos</name></member>
+      <member refid="classfys_1_1ws_1_1_players_data_1a8f6f7bc04d3f51b978ed6f72df228074" prot="public" virt="non-virtual"><scope>fys::ws::PlayersData</scope><name>PlayersData</name></member>
+      <member refid="classfys_1_1ws_1_1_players_data_1a2e5d28bfe185181e859f1621093fa937" prot="public" virt="non-virtual"><scope>fys::ws::PlayersData</scope><name>setPlayerArena</name></member>
+      <member refid="classfys_1_1ws_1_1_players_data_1af52213b1f6e9b99138e1582c1dd01ca6" prot="public" virt="non-virtual"><scope>fys::ws::PlayersData</scope><name>setPlayerMoveAction</name></member>
+      <member refid="classfys_1_1ws_1_1_players_data_1a172c4e68df2d79a6407a646db4e1ee86" prot="public" virt="non-virtual"><scope>fys::ws::PlayersData</scope><name>stopPlayerMove</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

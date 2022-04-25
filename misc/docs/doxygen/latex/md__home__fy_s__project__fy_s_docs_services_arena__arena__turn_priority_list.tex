@@ -1,0 +1,47 @@
+\doxysection*{Requirements}
+
+
+\begin{DoxyItemize}
+\item A full turn is defined as follow\+: The slowest pit participant played sign the completion of the current turn
+\item A player\textquotesingle{}s character (or a contender) can have multiple action in a single turn depending to its speed
+\item The priority list has to be recalculated when \+:
+\begin{DoxyItemize}
+\item A player\textquotesingle{}s character (or contender) die and is temporarily (for player\textquotesingle{}s character) or definitely removed from the priority list.
+\item When a player or a contender join the fight (as for character reviving)
+\item The speed of a character has been impacted (by a spell, an item, an attack).
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+\doxysection*{Implementation}
+
+Each pit participant has a speed defined as an unsigned integer. The faster go before the slowest. ~\newline
+
+
+{\bfseries{Generation of priority\+List}} \+:
+\begin{DoxyEnumerate}
+\item Order the list of speed from fastest to slowest.
+\item The first one is the first one to have a turn (add him in the priority list as first)
+\item Subtract his speed with the second one
+\item Re-\/order the list of speed from fastest to slowest.
+\item The first one in this list is added in priority list
+\item Subtract his speed with the second one
+\item Re-\/order..
+\item ...
+\end{DoxyEnumerate}
+
+{\itshape Graphical example}, each color represent a different character (monster or player\textquotesingle{}s character)\+:
+
+
+
+The difference of speed between the fastest and the slowest being important, the purple player can play 4 times before the end of the turn. ~\newline
+ For the second turn, the base maximum speed is added to the every one plus their own base speed.
+
+
+
+This turn is way shorter than the previous turn (every character play only once), but the next one as the speed stabilized a little bit, but in the third turn, as the purple player end this turn with 19 of speed, he will play multiple times before the end of the turn. ~\newline
+ This algorithm give an edge to the fast player without being broken (playing multiple time every single turns). ~\newline
+
+
+Here a resume of the two turns\+:
+
+ 

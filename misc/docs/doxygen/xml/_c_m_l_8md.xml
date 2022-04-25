@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="_c_m_l_8md" kind="file" language="Markdown">
+    <compoundname>CML.md</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>Cache<sp/>Manager<sp/>Library<sp/>(CML)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">This<sp/>is<sp/>a<sp/>library<sp/>that<sp/>is<sp/>used<sp/>in<sp/>order<sp/>to<sp/>retrieve<sp/>data<sp/>from<sp/>the<sp/>database,<sp/>and<sp/>cache<sp/>it<sp/>in<sp/>order<sp/>to<sp/>not<sp/>have<sp/>expensive<sp/>db<sp/>call.<sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal">For<sp/>example;<sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal">in<sp/>the<sp/>case<sp/>of<sp/>the<sp/>Arena<sp/>Service<sp/>([Battle<sp/>service](services/Arena_BattleSystem.md#arena)).<sp/>At<sp/>the<sp/>start<sp/>of<sp/>a<sp/>battle,<sp/>the<sp/>contenders<sp/>(monsters)<sp/>that<sp/>the<sp/>player<sp/>are<sp/>facing<sp/>are<sp/>selected<sp/>and<sp/>thus<sp/>known.<sp/>The<sp/>Service<sp/>will<sp/>have<sp/>to<sp/>fetch<sp/>how<sp/>the<sp/>contenders<sp/>behaviour<sp/>are<sp/>(stats,<sp/>attacks,<sp/>artificial<sp/>intelligence<sp/>and<sp/>so<sp/>on..),<sp/>this<sp/>logic<sp/>is<sp/>stored<sp/>as<sp/>chai<sp/>scripts<sp/>in<sp/>the<sp/>DB.<sp/>When<sp/>the<sp/>battle<sp/>end,<sp/>if<sp/>necessary,<sp/>the<sp/>memory<sp/>is<sp/>flushed<sp/>for<sp/>the<sp/>next<sp/>battle<sp/>(new<sp/>contenders<sp/>/<sp/>actions<sp/>to<sp/>fetch).<sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal">But<sp/>in<sp/>case<sp/>the<sp/>same<sp/>contender<sp/>is<sp/>selected<sp/>for<sp/>the<sp/>next<sp/>fight,<sp/>it<sp/>would<sp/>be<sp/>a<sp/>waster<sp/>to<sp/>retrieve<sp/>the<sp/>behaviours<sp/>twice<sp/>in<sp/>the<sp/>database.<sp/><sp/></highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>To<sp/>resolve<sp/>this<sp/>issue<sp/>:<sp/>CML<sp/>is<sp/>composed<sp/>of<sp/>3<sp/>distincts<sp/>steps:</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*<sp/>Retrieve<sp/>from<sp/>the<sp/>database</highlight></codeline>
+<codeline><highlight class="normal">*<sp/>Create<sp/>a<sp/>at<sp/>a<sp/>specified<sp/>file<sp/>system<sp/>location<sp/>a<sp/>folder<sp/>hierarchy<sp/>in<sp/>order<sp/>to<sp/>find<sp/>the<sp/>contender<sp/>again<sp/>if<sp/>needed.</highlight></codeline>
+<codeline><highlight class="normal">*<sp/>If<sp/>the<sp/>scripts<sp/>is<sp/>considered<sp/>as<sp/>&quot;hot&quot;<sp/>(often<sp/>used),<sp/>it<sp/>is<sp/>kept<sp/>in<sp/>memory<sp/>and<sp/>not<sp/>flushed<sp/>at<sp/>the<sp/>end<sp/>of<sp/>the<sp/>battle.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">Thanks<sp/>to<sp/>those<sp/>3<sp/>steps,<sp/>in<sp/>the<sp/>second<sp/>attempt<sp/>to<sp/>retrieve<sp/>the<sp/>contender<sp/>data.<sp/></highlight></codeline>
+<codeline><highlight class="normal">1.<sp/>First<sp/>it<sp/>will<sp/>be<sp/>checked<sp/>if<sp/>it<sp/>is<sp/>a<sp/>hot<sp/>scripts<sp/>(basically<sp/>contenders<sp/>are<sp/>not<sp/>hot<sp/>scripts,<sp/>but<sp/>actions<sp/>like<sp/>attacks<sp/>are).<sp/></highlight></codeline>
+<codeline><highlight class="normal">2.<sp/>If<sp/>it<sp/>is<sp/>not<sp/>a<sp/>hot<sp/>script,<sp/>the<sp/>local<sp/>file<sp/>system<sp/>is<sp/>checking<sp/>for<sp/>the<sp/>existance<sp/>of<sp/>the<sp/>file<sp/>that<sp/>should<sp/>correspond<sp/>the<sp/>script.<sp/><sp/></highlight></codeline>
+<codeline><highlight class="normal">3.<sp/>If<sp/>it<sp/>is<sp/>found,<sp/>it<sp/>will<sp/>be<sp/>loaded,<sp/>otherwise<sp/>the<sp/>database<sp/>is<sp/>requested.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">![conditionalDiagramCML](../docs/assets/conditionalDiagramCML.png)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Up<sp/>to<sp/>date</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">In<sp/>order<sp/>to<sp/>not<sp/>have<sp/>not<sp/>up<sp/>to<sp/>date<sp/>scripts<sp/>stored<sp/>in<sp/>the<sp/>file<sp/>system.<sp/>Two<sp/>mecanisms<sp/>are<sp/>possible:</highlight></codeline>
+<codeline><highlight class="normal">*<sp/>Cleanup<sp/>of<sp/>the<sp/>script<sp/>at<sp/>back-end<sp/>startup<sp/>(to<sp/>enforce<sp/>new<sp/>database<sp/>fetch)</highlight></codeline>
+<codeline><highlight class="normal">*<sp/>Redownload<sp/>from<sp/>database<sp/>of<sp/>the<sp/>scripts<sp/>stored<sp/>on<sp/>the<sp/>file<sp/>system<sp/>at<sp/>the<sp/>back-end<sp/>startup<sp/>(to<sp/>ensure<sp/>up<sp/>to<sp/>date<sp/>data).</highlight></codeline>
+    </programlisting>
+    <location file="CML.md"/>
+  </compounddef>
+</doxygen>

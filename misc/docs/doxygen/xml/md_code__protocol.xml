@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="md_code__protocol" kind="page">
+    <compoundname>md_code_Protocol</compoundname>
+    <title>Protocol</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><heading level="1">Client &amp; WorldServer</heading>
+</para>
+<para><programlisting><codeline><highlight class="normal">//<sp/>FlatBuffer<sp/></highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+</para>
+<para><programlisting><codeline><highlight class="normal">//<sp/>FlatBuffer<sp/></highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+</para>
+<para><programlisting><codeline><highlight class="normal">//<sp/>FlatBuffer<sp/></highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+</para>
+<para><programlisting><codeline><highlight class="normal">//<sp/>FlatBuffer<sp/></highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+</para>
+<para><heading level="1">Client &amp; ArenaServer</heading>
+</para>
+<para><programlisting><codeline><highlight class="normal">//<sp/>FlatBuffer<sp/></highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+</para>
+<para><programlisting><codeline><highlight class="normal">//<sp/>FlatBuffer<sp/></highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+</para>
+<para><programlisting><codeline><highlight class="normal">//<sp/>FlatBuffer<sp/></highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+</para>
+<para><programlisting><codeline><highlight class="normal">//<sp/>FlatBuffer<sp/></highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+</para>
+<para><heading level="1">Client &amp; InventoryServer</heading>
+</para>
+<para><programlisting><codeline><highlight class="normal">//<sp/>FlatBuffer<sp/></highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+</para>
+<para><programlisting><codeline><highlight class="normal">//<sp/>FlatBuffer<sp/></highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+</para>
+<para><programlisting><codeline><highlight class="normal">//<sp/>FlatBuffer<sp/></highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+</para>
+<para><programlisting><codeline><highlight class="normal">//<sp/>FlatBuffer<sp/></highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+</para>
+<para><heading level="1">Internals</heading>
+</para>
+<para><heading level="2">WorldServer &amp; ArenaServer</heading>
+</para>
+<para><programlisting><codeline><highlight class="normal">//<sp/>FlatBuffer<sp/></highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+</para>
+<para><programlisting><codeline><highlight class="normal">//<sp/>FlatBuffer<sp/></highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+</para>
+<para><heading level="2">ArenaServer &amp; InventoryServer</heading>
+</para>
+<para><programlisting><codeline><highlight class="normal">//<sp/>FlatBuffer<sp/></highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+</para>
+<para><programlisting><codeline><highlight class="normal">//<sp/>FlatBuffer<sp/></highlight></codeline>
+</programlisting></para>
+<para><hruler/>
+ </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

@@ -18,15 +18,21 @@ option(BUILD_DISPATCHER "Build the Generic dispatcher binary" ON)
 option(BUILD_SERVICE_CLI_TMX_MAP_CONVERTER "Build the command line tool to compile tmx files into collision map" OFF)
 
 list(APPEND CMAKE_MODULE_PATH
-        ${CMAKE_CURRENT_SOURCE_DIR}/cmake
-        ${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules)
+        ${CMAKE_CURRENT_SOURCE_DIR}/misc/cmake
+        ${CMAKE_CURRENT_SOURCE_DIR}/misc/cmake/modules)
+
+list(APPEND PKG_CONFIG_PATH
+        ${CMAKE_CURRENT_SOURCE_DIR}/misc/pkgconfig)
 
 find_package(nlohmann_json REQUIRED)
 find_package(cppzmq REQUIRED)
 find_package(fmt REQUIRED)
 find_package(spdlog REQUIRED)
 find_package(FlatBuffers REQUIRED)
-find_package(fil REQUIRED)
+find_package(FSeam REQUIRED)
+find_package(PkgConfig REQUIRED)
+
+pkg_check_modules(FIL_LIB fil>=1.0.0)
 
 find_program(FLAT_COMPILER_FOUND flatc REQUIRED)
 set(FLATBUFFERS_FLATC_EXECUTABLE ${FLAT_COMPILER_FOUND})
@@ -38,13 +44,15 @@ if (BUILD_SERVICE_ARENA)
 endif()
 if (BUILD_SERVICE_WORLD)
     message(STATUS "Import World Service required package")
-    find_package(tmxlite REQUIRED)
     find_package(Lua51)
     find_package(Lua)
+#    find_package(tmxlite REQUIRED)
+    pkg_check_modules(TMXLITE_LIB tmxlite>=1.2.1)
 endif()
 if (BUILD_SERVICE_CLI_TMX_MAP_CONVERTER)
     message(STATUS "Import TMX Converter required package")
-    find_package(tmxlite REQUIRED)
+#    find_package(tmxlite REQUIRED)
+    pkg_check_modules(TMXLITE_LIB tmxlite>=1.2.1)
 endif()
 if (BUILD_TESTING)
     find_package(FSeam REQUIRED)

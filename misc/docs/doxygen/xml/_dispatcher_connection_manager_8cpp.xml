@@ -1,0 +1,135 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="_dispatcher_connection_manager_8cpp" kind="file" language="C++">
+    <compoundname>DispatcherConnectionManager.cpp</compoundname>
+    <includes refid="_dispatcher_connection_manager_8hh" local="no">DispatcherConnectionManager.hh</includes>
+    <includes refid="_startup_dispatcher_ctx_8hh" local="no">StartupDispatcherCtx.hh</includes>
+    <incdepgraph>
+      <node id="4">
+        <label>zmq_addon.hpp</label>
+      </node>
+      <node id="8">
+        <label>boost/lexical_cast.hpp</label>
+      </node>
+      <node id="9">
+        <label>string</label>
+      </node>
+      <node id="1">
+        <label>/home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp</label>
+        <link refid="_dispatcher_connection_manager_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>spdlog/spdlog.h</label>
+      </node>
+      <node id="2">
+        <label>DispatcherConnectionManager.hh</label>
+        <link refid="_dispatcher_connection_manager_8hh_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>boost/property_tree/json_parser.hpp</label>
+      </node>
+      <node id="6">
+        <label>boost/property_tree/ptree.hpp</label>
+      </node>
+      <node id="5">
+        <label>StartupDispatcherCtx.hh</label>
+        <link refid="_startup_dispatcher_ctx_8hh_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespacefys">fys</innernamespace>
+    <innernamespace refid="namespacefys_1_1network">fys::network</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;DispatcherConnectionManager.hh&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;StartupDispatcherCtx.hh&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">fys::network<sp/>{</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"><ref refid="classfys_1_1network_1_1_dispatcher_connection_manager_1ae0e3789b542894047814c0602e1b069a" kindref="member">DispatcherConnectionManager::DispatcherConnectionManager</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>threadNumber,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>isLoadBalancing)<sp/>noexcept<sp/>:</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/>_isLoadBalancing(isLoadBalancing),</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/>_zmq_context(threadNumber),</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/>_listener(_zmq_context,<sp/>zmq::socket_type::router),</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/>_dispatcher(_zmq_context,<sp/>(isLoadBalancing)<sp/>?<sp/>zmq::socket_type::dealer<sp/>:<sp/>zmq::socket_type::pub),</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/>_clusterConnection({zmq::socket_t(_zmq_context,<sp/>zmq::socket_type::sub),</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>zmq::socket_t(_zmq_context,<sp/>zmq::socket_type::pub),</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">})<sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DispatcherConnectionManager::setupConnectionManager(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classfys_1_1_startup_dispatcher_ctx" kindref="compound">fys::StartupDispatcherCtx</ref><sp/>&amp;ctx)<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(ctx.isClusterAware())<sp/>{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_clusterConnection.pubSocket.connect(ctx.getFrontendClusterProxyConnectionString());</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_clusterConnection.subSocket.connect(ctx.getBackendClusterProxyConnectionString());</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>subscribeToTopics(ctx.getSubscriptionTopics());</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_clusterConnection.pubSocket.close();</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_clusterConnection.subSocket.close();</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_clusterConnection.closed<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>_dispatcher.setsockopt(ZMQ_MAXMSGSIZE,<sp/>ctx.getMaxMsgSize());</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>_dispatcher.bind(</highlight><highlight class="stringliteral">&quot;tcp://*:&quot;</highlight><highlight class="normal"><sp/>+<sp/>std::to_string(ctx.getDispatchingPort()));</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>_listener.bind(</highlight><highlight class="stringliteral">&quot;tcp://*:&quot;</highlight><highlight class="normal"><sp/>+<sp/>std::to_string(ctx.getBindingPort()));</highlight></codeline>
+<codeline lineno="30"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>DispatcherConnectionManager::subscribeToTopics(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::vector&lt;std::string&gt;<sp/>&amp;topics)<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;topic<sp/>:<sp/>topics)<sp/>{</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_clusterConnection.subSocket.setsockopt(ZMQ_SUBSCRIBE,<sp/>topic.c_str(),<sp/>topic.size());</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="36"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal">std::tuple&lt;bool,<sp/>bool,<sp/>bool&gt;<sp/><ref refid="classfys_1_1network_1_1_dispatcher_connection_manager_1a5b4554f6c31b43d70ad653b9b7d663a6" kindref="member">DispatcherConnectionManager::poll</ref>()<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/>Initialize<sp/>poll<sp/>set</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>zmq::pollitem_t<sp/>items[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>_listener,<sp/>0,<sp/>ZMQ_POLLIN,<sp/>0<sp/>},</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>_clusterConnection.subSocket,<sp/>0,<sp/>ZMQ_POLLIN,<sp/>0<sp/>},</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/>_dispatcher,<sp/>0,<sp/>ZMQ_POLLIN,<sp/>0<sp/>}</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>zmq::poll(&amp;items[0],<sp/>_clusterConnection.closed<sp/>?<sp/>1<sp/>:<sp/>2,<sp/>-1);</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>listenerPolling<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">bool</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(items[0].revents<sp/>&amp;<sp/>ZMQ_POLLIN);</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>subSocketPolling<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">bool</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(_clusterConnection.closed<sp/>?<sp/>false<sp/>:<sp/>(items[1].revents<sp/>&amp;<sp/>ZMQ_POLLIN));</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>dispatcherRespPolling<sp/>=<sp/></highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">bool</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(items[2].revents<sp/>&amp;<sp/>ZMQ_POLLIN);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>{listenerPolling,<sp/>subSocketPolling,<sp/>dispatcherRespPolling};</highlight></codeline>
+<codeline lineno="50"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classfys_1_1network_1_1_dispatcher_connection_manager_1afad4e81f4d20213938ec257e2a36fb86" kindref="member">DispatcherConnectionManager::replyToListenerSocket</ref>(zmq::multipart_t<sp/>&amp;&amp;<sp/>msg)<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!_listener.connected())</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>msg.send(_listener);</highlight></codeline>
+<codeline lineno="56"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classfys_1_1network_1_1_dispatcher_connection_manager_1a0c9a88ab523473d6ab928b0b1edc1c62" kindref="member">DispatcherConnectionManager::sendMessageToDispatcherSocket</ref>(zmq::multipart_t<sp/>&amp;&amp;<sp/>msg)<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!_dispatcher.connected())</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>msg.send(_dispatcher);</highlight></codeline>
+<codeline lineno="62"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="classfys_1_1network_1_1_dispatcher_connection_manager_1a2350732d67f54ae362c14ce417d04042" kindref="member">DispatcherConnectionManager::sendMessageToClusterPubSocket</ref>(zmq::multipart_t<sp/>&amp;&amp;<sp/>msg)<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(_clusterConnection.closed<sp/>||<sp/>!_clusterConnection.pubSocket.connected())</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>msg.send(_clusterConnection.pubSocket);</highlight></codeline>
+<codeline lineno="68"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/home/FyS/Project/FyS/dispatcher/common/src/core/DispatcherConnectionManager.cpp"/>
+  </compounddef>
+</doxygen>

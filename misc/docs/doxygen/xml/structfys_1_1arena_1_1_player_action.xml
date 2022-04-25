@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1arena_1_1_player_action" kind="struct" language="C++" prot="public">
+    <compoundname>fys::arena::PlayerAction</compoundname>
+    <includes refid="_fighting_pit_8hh" local="no">FightingPit.hh</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_player_action_1a537857ac519335f83eb42dddbcd4d14d" prot="public" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint fys::arena::PlayerAction::idMember</definition>
+        <argsstring></argsstring>
+        <name>idMember</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="61" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_player_action_1ac49c6d69cf21b047e1704b0c17cd5af4" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string fys::arena::PlayerAction::actionName</definition>
+        <argsstring></argsstring>
+        <name>actionName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="62" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_player_action_1aebe47a8beab60ec6022296c47c41b896" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; uint &gt;</type>
+        <definition>std::vector&lt;uint&gt; fys::arena::PlayerAction::contenderTarget</definition>
+        <argsstring></argsstring>
+        <name>contenderTarget</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="63" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_player_action_1a0e73c3a004963fc10a99feb7f6646692" prot="public" static="no" mutable="no">
+        <type>std::vector&lt; uint &gt;</type>
+        <definition>std::vector&lt;uint&gt; fys::arena::PlayerAction::allyTarget</definition>
+        <argsstring></argsstring>
+        <name>allyTarget</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="64" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Actions struct containing all the information to forward to the member&apos;s pending action Queue. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="60" column="19" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="60" bodyend="65"/>
+    <listofallmembers>
+      <member refid="structfys_1_1arena_1_1_player_action_1ac49c6d69cf21b047e1704b0c17cd5af4" prot="public" virt="non-virtual"><scope>fys::arena::PlayerAction</scope><name>actionName</name></member>
+      <member refid="structfys_1_1arena_1_1_player_action_1a0e73c3a004963fc10a99feb7f6646692" prot="public" virt="non-virtual"><scope>fys::arena::PlayerAction</scope><name>allyTarget</name></member>
+      <member refid="structfys_1_1arena_1_1_player_action_1aebe47a8beab60ec6022296c47c41b896" prot="public" virt="non-virtual"><scope>fys::arena::PlayerAction</scope><name>contenderTarget</name></member>
+      <member refid="structfys_1_1arena_1_1_player_action_1a537857ac519335f83eb42dddbcd4d14d" prot="public" virt="non-virtual"><scope>fys::arena::PlayerAction</scope><name>idMember</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

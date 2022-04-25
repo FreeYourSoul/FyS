@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1arena_1_1_encounter_context_1_1_reward_encounter_desc" kind="struct" language="C++" prot="public">
+    <compoundname>fys::arena::EncounterContext::RewardEncounterDesc</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_encounter_context_1_1_reward_encounter_desc_1a34d11d3c71ee323867076a242d7b1bce" prot="public" static="no" mutable="no">
+        <type>std::array&lt; RngRange, 3 &gt;</type>
+        <definition>std::array&lt;RngRange, 3&gt; fys::arena::EncounterContext::RewardEncounterDesc::rangeDrop</definition>
+        <argsstring></argsstring>
+        <name>rangeDrop</name>
+        <briefdescription>
+<para>range of items than can be dropped for an encounter out of the 3 different difficulties </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="59" column="12" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_encounter_context_1_1_reward_encounter_desc_1ae9205a44f4f4b1cb70265e05f2bfd0ac" prot="public" static="no" mutable="no">
+        <type>std::map&lt; std::string, ChanceArray &gt;</type>
+        <definition>std::map&lt;std::string, ChanceArray&gt; fys::arena::EncounterContext::RewardEncounterDesc::itemOnChanceRange</definition>
+        <argsstring></argsstring>
+        <name>itemOnChanceRange</name>
+        <briefdescription>
+<para>map of items key over the chance of drop out of the 3 different difficulties </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="61" column="10" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="57" column="26" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" bodystart="57" bodyend="62"/>
+    <listofallmembers>
+      <member refid="structfys_1_1arena_1_1_encounter_context_1_1_reward_encounter_desc_1ae9205a44f4f4b1cb70265e05f2bfd0ac" prot="public" virt="non-virtual"><scope>fys::arena::EncounterContext::RewardEncounterDesc</scope><name>itemOnChanceRange</name></member>
+      <member refid="structfys_1_1arena_1_1_encounter_context_1_1_reward_encounter_desc_1a34d11d3c71ee323867076a242d7b1bce" prot="public" virt="non-virtual"><scope>fys::arena::EncounterContext::RewardEncounterDesc</scope><name>rangeDrop</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

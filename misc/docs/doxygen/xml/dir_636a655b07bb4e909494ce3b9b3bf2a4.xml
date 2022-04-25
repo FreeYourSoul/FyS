@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_636a655b07bb4e909494ce3b9b3bf2a4" kind="dir">
+    <compoundname>/home/FyS/Project/FyS/dispatcher/common/include/context</compoundname>
+    <innerfile refid="_startup_dispatcher_ctx_8hh">StartupDispatcherCtx.hh</innerfile>
+    <innerfile refid="_versioner_8hh">Versioner.hh</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/"/>
+  </compounddef>
+</doxygen>

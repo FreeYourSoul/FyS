@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="_world_server_dispatcher_handler_8cpp" kind="file" language="C++">
+    <compoundname>WorldServerDispatcherHandler.cpp</compoundname>
+    <includes local="no">zmq_addon.hpp</includes>
+    <includes refid="_dispatcher_8hh" local="no">Dispatcher.hh</includes>
+    <includes refid="_world_server_dispatcher_handler_8hh" local="yes">../include/WorldServerDispatcherHandler.hh</includes>
+    <incdepgraph>
+      <node id="2">
+        <label>zmq_addon.hpp</label>
+      </node>
+      <node id="10">
+        <label>boost/lexical_cast.hpp</label>
+      </node>
+      <node id="11">
+        <label>string</label>
+      </node>
+      <node id="4">
+        <label>unordered_set</label>
+      </node>
+      <node id="1">
+        <label>/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/src/WorldServerDispatcherHandler.cpp</label>
+        <link refid="_world_server_dispatcher_handler_8cpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>Dispatcher.hh</label>
+        <link refid="_dispatcher_8hh_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>spdlog/spdlog.h</label>
+      </node>
+      <node id="5">
+        <label>DispatcherConnectionManager.hh</label>
+        <link refid="_dispatcher_connection_manager_8hh_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>boost/property_tree/json_parser.hpp</label>
+      </node>
+      <node id="8">
+        <label>boost/property_tree/ptree.hpp</label>
+      </node>
+      <node id="7">
+        <label>StartupDispatcherCtx.hh</label>
+        <link refid="_startup_dispatcher_ctx_8hh_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>../include/WorldServerDispatcherHandler.hh</label>
+        <link refid="_world_server_dispatcher_handler_8hh_source"/>
+      </node>
+    </incdepgraph>
+    <innernamespace refid="namespacefys">fys</innernamespace>
+    <innernamespace refid="namespacefys_1_1ws">fys::ws</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Created<sp/>by<sp/>FyS<sp/>on<sp/>3/9/19.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;zmq_addon.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;Dispatcher.hh&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;../include/WorldServerDispatcherHandler.hh&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">fys::ws<sp/>{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classfys_1_1ws_1_1_world_server_dispatcher_handler_1aea5c6389c38915aa0e85ec3d2e48f76f" kindref="member">WorldServerDispatcherHandler::processInputMessage</ref>(zmq::multipart_t<sp/>&amp;&amp;msg,</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>network::DispatcherConnectionManager<sp/>&amp;manager)<sp/>noexcept</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classfys_1_1ws_1_1_world_server_dispatcher_handler_1aa3ae7a1a89330ec835a0db46f7a2eaae" kindref="member">WorldServerDispatcherHandler::processClusterMessage</ref>(zmq::multipart_t<sp/>&amp;&amp;msg,</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>network::DispatcherConnectionManager<sp/>&amp;manager)<sp/>noexcept</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>fys::ws</highlight></codeline>
+    </programlisting>
+    <location file="/home/FyS/Project/FyS/dispatcher/worldserver_dispatcher/src/WorldServerDispatcherHandler.cpp"/>
+  </compounddef>
+</doxygen>

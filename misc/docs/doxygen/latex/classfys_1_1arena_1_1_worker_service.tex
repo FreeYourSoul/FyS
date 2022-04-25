@@ -1,0 +1,174 @@
+\hypertarget{classfys_1_1arena_1_1_worker_service}{}\doxysection{fys\+::arena\+::Worker\+Service Class Reference}
+\label{classfys_1_1arena_1_1_worker_service}\index{fys::arena::WorkerService@{fys::arena::WorkerService}}
+
+
+{\ttfamily \#include $<$Worker\+Service.\+hh$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_worker_service_afc77549c54e3e8a680810bad3045e930}\label{classfys_1_1arena_1_1_worker_service_afc77549c54e3e8a680810bad3045e930}} 
+void {\bfseries start\+Fighting\+Pits\+Loop} ()
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_worker_service_a8f2be68bc18768419dcf9aa4bc2be062}\label{classfys_1_1arena_1_1_worker_service_a8f2be68bc18768419dcf9aa4bc2be062}} 
+void \mbox{\hyperlink{classfys_1_1arena_1_1_worker_service_a8f2be68bc18768419dcf9aa4bc2be062}{setup\+Connection\+Manager}} (const \mbox{\hyperlink{classfys_1_1arena_1_1_arena_server_context}{fys\+::arena\+::\+Arena\+Server\+Context}} \&ctx) noexcept
+\begin{DoxyCompactList}\small\item\em Bind the Arena\+Service for the player to connect directly to the Arena. \end{DoxyCompactList}\item 
+unsigned \mbox{\hyperlink{classfys_1_1arena_1_1_worker_service_aaac35104ca164f68392d733907156ed1}{add\+Fighting\+Pit}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit}{Fighting\+Pit}} $>$ fp)
+\begin{DoxyCompactList}\small\item\em Add a fighting pit to the worker service, adding this instance to the on-\/going/accessible fighting pit of the arena server. Create an id for the newly created arena and set it to the fighting pit. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfys_1_1arena_1_1_worker_service_a9b030f873ca8655426996f62b3508fbd}{player\+Join\+Fighting\+Pit}} (unsigned fighting\+Pit\+Id, std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classfys_1_1arena_1_1_party_team}{Party\+Team}} $>$ pt, \mbox{\hyperlink{classfys_1_1cache_1_1_cml}{cache\+::\+Cml}} \&cml)
+\item 
+void \mbox{\hyperlink{classfys_1_1arena_1_1_worker_service_a5208f792ab88c5493e32371784bb52c1}{send\+Msg\+New\+Arriving\+Team}} (unsigned fp\+Id, const std\+::string \&user\+Name) noexcept
+\item 
+{\footnotesize template$<$typename Handler\+Auth , typename Handler\+In\+Game $>$ }\\void \mbox{\hyperlink{classfys_1_1arena_1_1_worker_service_ae2c13525a43315b511afb90ceb658549}{poll\+And\+Process\+Message\+From\+Player}} (Handler\+Auth \&\&handler\+Auth, Handler\+In\+Game \&\&handler\+In\+Game) noexcept
+\item 
+std\+::optional$<$ std\+::reference\+\_\+wrapper$<$ \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit}{Fighting\+Pit}} $>$ $>$ \mbox{\hyperlink{classfys_1_1arena_1_1_worker_service_a7d65ee78a5b80c6bdeabf7a3b1ea0493}{get\+Authenticated\+Player\+Fighting\+Pit}} (const std\+::string \&name, const std\+::string \&token, unsigned fighting\+Pit\+Id)
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_worker_service_a7e4b8861cf42055eee7dba66fcbc20a3}\label{classfys_1_1arena_1_1_worker_service_a7e4b8861cf42055eee7dba66fcbc20a3}} 
+const std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit}{Fighting\+Pit}} $>$ \& {\bfseries get\+Fighting\+Pit\+Instance} (unsigned arena\+Id) const
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_worker_service_a7c0166940a9a3228fc4812bff896b9b9}\label{classfys_1_1arena_1_1_worker_service_a7c0166940a9a3228fc4812bff896b9b9}} 
+std\+::pair$<$ bool, bool $>$ {\bfseries fighting\+Pit\+Exist\+And\+Joinable} (unsigned fighting\+Pit\+Id) const noexcept
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_worker_service_a61c658c9a8dd6e6279314d454e765f9f}\label{classfys_1_1arena_1_1_worker_service_a61c658c9a8dd6e6279314d454e765f9f}} 
+unsigned {\bfseries get\+Number\+Battle\+Running} () const noexcept
+\item 
+void \mbox{\hyperlink{classfys_1_1arena_1_1_worker_service_abe7760cdcb08565d96533251f5b53a43}{upsert\+Player\+Identifier}} (unsigned fighting\+Pit\+Id, std\+::string user\+Name, std\+::string idt\+Player)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Manage the fighting pits \+:
+\begin{DoxyItemize}
+\item Generate a fighting pit
+\item Assign an ID to it
+\item Assign a dedicated thread to it
+\end{DoxyItemize}
+
+Fighting pit are created by the \mbox{\hyperlink{classfys_1_1arena_1_1_worker_service}{Worker\+Service}} using the \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit_announcer}{Fighting\+Pit\+Announcer}} as builder in order to ensure that the fightingpit is ready to host a battle, and then start the fighting pit in a dedicated thread.
+
+Each fighting pit will contains a D\+E\+A\+L\+ER socket that will be used to communicate with the \mbox{\hyperlink{classfys_1_1arena_1_1_worker_service}{Worker\+Service}}. A custom zmq identifier will be provided by the \mbox{\hyperlink{classfys_1_1arena_1_1_worker_service}{Worker\+Service}} in order to be able to target a specific \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit}{Fighting\+Pit}} for specific players (the map \+\_\+id\+On\+Arena\+Id being used to register which player is in which \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit}{Fighting\+Pit}}).
+
+\begin{DoxySeeAlso}{See also}
+\mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit_announcer}{fys\+::arena\+::\+Fighting\+Pit\+Announcer}} 
+
+\mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit}{fys\+::arena\+::\+Fighting\+Pit}} 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfys_1_1arena_1_1_worker_service_aaac35104ca164f68392d733907156ed1}\label{classfys_1_1arena_1_1_worker_service_aaac35104ca164f68392d733907156ed1}} 
+\index{fys::arena::WorkerService@{fys::arena::WorkerService}!addFightingPit@{addFightingPit}}
+\index{addFightingPit@{addFightingPit}!fys::arena::WorkerService@{fys::arena::WorkerService}}
+\doxysubsubsection{\texorpdfstring{addFightingPit()}{addFightingPit()}}
+{\footnotesize\ttfamily unsigned fys\+::arena\+::\+Worker\+Service\+::add\+Fighting\+Pit (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit}{Fighting\+Pit}} $>$}]{fp }\end{DoxyParamCaption})}
+
+
+
+Add a fighting pit to the worker service, adding this instance to the on-\/going/accessible fighting pit of the arena server. Create an id for the newly created arena and set it to the fighting pit. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fp} & \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit}{Fighting\+Pit}} to add in the current \mbox{\hyperlink{classfys_1_1arena_1_1_worker_service}{Worker\+Service}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+newly added fighting pit id, or 0 (\mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit_ad27a20dcca9411de7281580ef8efa782}{Fighting\+Pit\+::\+C\+R\+E\+A\+T\+I\+O\+N\+\_\+\+E\+R\+R\+OR}}) if an error occurred 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfys_1_1arena_1_1_worker_service_a7d65ee78a5b80c6bdeabf7a3b1ea0493}\label{classfys_1_1arena_1_1_worker_service_a7d65ee78a5b80c6bdeabf7a3b1ea0493}} 
+\index{fys::arena::WorkerService@{fys::arena::WorkerService}!getAuthenticatedPlayerFightingPit@{getAuthenticatedPlayerFightingPit}}
+\index{getAuthenticatedPlayerFightingPit@{getAuthenticatedPlayerFightingPit}!fys::arena::WorkerService@{fys::arena::WorkerService}}
+\doxysubsubsection{\texorpdfstring{getAuthenticatedPlayerFightingPit()}{getAuthenticatedPlayerFightingPit()}}
+{\footnotesize\ttfamily std\+::optional$<$ std\+::reference\+\_\+wrapper$<$ \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit}{Fighting\+Pit}} $>$ $>$ fys\+::arena\+::\+Worker\+Service\+::get\+Authenticated\+Player\+Fighting\+Pit (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name,  }\item[{const std\+::string \&}]{token,  }\item[{unsigned}]{fighting\+Pit\+Id }\end{DoxyParamCaption})}
+
+Check if the player defined by an unique name/token is authenticated on the given fighting\+Arena\+Id And return the given fightingpit if it\textquotesingle{}s the case
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & player name \\
+\hline
+{\em token} & authentication token \\
+\hline
+{\em fighting\+Pit\+Id} & arena to check if the player is authenticated on \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to the fighting pit if the player is authenticated on the given fighting\+Pit, return std\+::nullopt otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfys_1_1arena_1_1_worker_service_a9b030f873ca8655426996f62b3508fbd}\label{classfys_1_1arena_1_1_worker_service_a9b030f873ca8655426996f62b3508fbd}} 
+\index{fys::arena::WorkerService@{fys::arena::WorkerService}!playerJoinFightingPit@{playerJoinFightingPit}}
+\index{playerJoinFightingPit@{playerJoinFightingPit}!fys::arena::WorkerService@{fys::arena::WorkerService}}
+\doxysubsubsection{\texorpdfstring{playerJoinFightingPit()}{playerJoinFightingPit()}}
+{\footnotesize\ttfamily void fys\+::arena\+::\+Worker\+Service\+::player\+Join\+Fighting\+Pit (\begin{DoxyParamCaption}\item[{unsigned}]{fighting\+Pit\+Id,  }\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classfys_1_1arena_1_1_party_team}{Party\+Team}} $>$}]{pt,  }\item[{\mbox{\hyperlink{classfys_1_1cache_1_1_cml}{cache\+::\+Cml}} \&}]{cml }\end{DoxyParamCaption})}
+
+Player join a given fighting pit 
+\begin{DoxyParams}{Parameters}
+{\em fighting\+Pit\+Id} & id of the fighting pit to join \\
+\hline
+{\em pt} & party team retrieved to add \\
+\hline
+{\em cml} & cache manager used to register chaiscript scripts \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfys_1_1arena_1_1_worker_service_ae2c13525a43315b511afb90ceb658549}\label{classfys_1_1arena_1_1_worker_service_ae2c13525a43315b511afb90ceb658549}} 
+\index{fys::arena::WorkerService@{fys::arena::WorkerService}!pollAndProcessMessageFromPlayer@{pollAndProcessMessageFromPlayer}}
+\index{pollAndProcessMessageFromPlayer@{pollAndProcessMessageFromPlayer}!fys::arena::WorkerService@{fys::arena::WorkerService}}
+\doxysubsubsection{\texorpdfstring{pollAndProcessMessageFromPlayer()}{pollAndProcessMessageFromPlayer()}}
+{\footnotesize\ttfamily template$<$typename Handler\+Auth , typename Handler\+In\+Game $>$ \\
+void fys\+::arena\+::\+Worker\+Service\+::poll\+And\+Process\+Message\+From\+Player (\begin{DoxyParamCaption}\item[{Handler\+Auth \&\&}]{handler\+Auth,  }\item[{Handler\+In\+Game \&\&}]{handler\+In\+Game }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Read on the router socket (connection with the players) and reply to them thanks to the zmq\+::router protocol 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Lambda} & type following the signature =$>$ void (string, zmq\+::message\+\_\+t) \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em Handler\+Auth} & Handler handler to call when receiving a message to authenticate an awaited player \\
+\hline
+{\em Handler\+In\+Game} & Handler handler to call when receiving a message to do a player action on a fighting\+Pit \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfys_1_1arena_1_1_worker_service_a5208f792ab88c5493e32371784bb52c1}\label{classfys_1_1arena_1_1_worker_service_a5208f792ab88c5493e32371784bb52c1}} 
+\index{fys::arena::WorkerService@{fys::arena::WorkerService}!sendMsgNewArrivingTeam@{sendMsgNewArrivingTeam}}
+\index{sendMsgNewArrivingTeam@{sendMsgNewArrivingTeam}!fys::arena::WorkerService@{fys::arena::WorkerService}}
+\doxysubsubsection{\texorpdfstring{sendMsgNewArrivingTeam()}{sendMsgNewArrivingTeam()}}
+{\footnotesize\ttfamily void fys\+::arena\+::\+Worker\+Service\+::send\+Msg\+New\+Arriving\+Team (\begin{DoxyParamCaption}\item[{unsigned}]{fp\+Id,  }\item[{const std\+::string \&}]{user\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Broadcast a message containing all the information about the incoming players data
+\begin{DoxyItemize}
+\item User\+Name
+\item Team\+Members id, name, stats (life, magic points)
+\item // todo cosmetic information (equipment)
+\end{DoxyItemize}
+
+\begin{DoxyNote}{Note}
+Checks about the validity of the user\+Name and the fighting\+Pit\+Id given as parameter have to be done beforehand
+\end{DoxyNote}
+
+\begin{DoxyParams}{Parameters}
+{\em fp\+Id} & id of the fighting pit, H\+AS TO BE A\+C\+C\+U\+R\+A\+TE \\
+\hline
+{\em user\+Name} & user whom is going to \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfys_1_1arena_1_1_worker_service_abe7760cdcb08565d96533251f5b53a43}\label{classfys_1_1arena_1_1_worker_service_abe7760cdcb08565d96533251f5b53a43}} 
+\index{fys::arena::WorkerService@{fys::arena::WorkerService}!upsertPlayerIdentifier@{upsertPlayerIdentifier}}
+\index{upsertPlayerIdentifier@{upsertPlayerIdentifier}!fys::arena::WorkerService@{fys::arena::WorkerService}}
+\doxysubsubsection{\texorpdfstring{upsertPlayerIdentifier()}{upsertPlayerIdentifier()}}
+{\footnotesize\ttfamily void fys\+::arena\+::\+Worker\+Service\+::upsert\+Player\+Identifier (\begin{DoxyParamCaption}\item[{unsigned}]{fighting\+Pit\+Id,  }\item[{std\+::string}]{user\+Name,  }\item[{std\+::string}]{idt\+Player }\end{DoxyParamCaption})}
+
+Update or add (if player not register yet) the player identifier mapping with fighting\+Pit 
+\begin{DoxyParams}{Parameters}
+{\em fighting\+Pit\+Id} & key of the mapping, multiple players are linked with a fightingpit \\
+\hline
+{\em user\+Name} & unique name of the player \\
+\hline
+{\em idt\+Player} & network identity of the player \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/services/arena/include/network/Worker\+Service.\+hh\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/services/arena/src/network/Worker\+Service.\+cpp\end{DoxyCompactItemize}

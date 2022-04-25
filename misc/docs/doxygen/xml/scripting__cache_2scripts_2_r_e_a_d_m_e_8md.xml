@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="scripting__cache_2scripts_2_r_e_a_d_m_e_8md" kind="file" language="Markdown">
+    <compoundname>README.md</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline><highlight class="normal">#<sp/>Scripts</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>submodule<sp/>containing<sp/>all<sp/>the<sp/>scripts<sp/>that<sp/>are<sp/>going<sp/>to<sp/>be<sp/>stored<sp/>and<sp/>retrieved<sp/>by<sp/>the<sp/>services<sp/>via<sp/>[CML]().</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">##<sp/>Hierarchie</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">*<sp/>arena</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>*<sp/>Contenders<sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>Monsters<sp/>scripting<sp/>(AI,<sp/>attacks<sp/>available,<sp/>stats...)</highlight></codeline>
+<codeline><highlight class="normal"><sp/><sp/>*<sp/>Actions<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>Actions<sp/>possible<sp/>(attacks,<sp/>spells,<sp/>items<sp/>usage...)</highlight></codeline>
+<codeline><highlight class="normal">*<sp/>worldserver<sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>NPC<sp/>movement<sp/>scripts,<sp/>event<sp/>scripts.</highlight></codeline>
+    </programlisting>
+    <location file="/home/FyS/Project/FyS/scripting_cache/scripts/README.md"/>
+  </compounddef>
+</doxygen>

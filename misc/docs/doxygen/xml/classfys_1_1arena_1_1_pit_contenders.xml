@@ -1,0 +1,340 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1arena_1_1_pit_contenders" kind="class" language="C++" prot="public">
+    <compoundname>fys::arena::PitContenders</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_pit_contenders_1a7af242419ccb1ffecf7dbc9888d0972b" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classfys_1_1arena_1_1_fighting_contender" kindref="compound">FightingContender</ref> &gt; &gt;</type>
+        <definition>std::vector&lt;std::shared_ptr&lt;FightingContender&gt; &gt; fys::arena::PitContenders::_contenders</definition>
+        <argsstring></argsstring>
+        <name>_contenders</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/PitContenders.hh" line="95" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/PitContenders.hh" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_pit_contenders_1a576084fa08f3b5ed13f470941af2b1e4" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; bool &gt;</type>
+        <definition>std::vector&lt;bool&gt; fys::arena::PitContenders::_changeSideFlags</definition>
+        <argsstring></argsstring>
+        <name>_changeSideFlags</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Flags determining which contenders are going to move from one side to another (only _contenders having this flag (index equivalent) set to true have their position refreshed </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/PitContenders.hh" line="101" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/PitContenders.hh" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1arena_1_1_pit_contenders_1a47b3baf394b2d512dcc5f6470afd5259" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fys::arena::PitContenders::PitContenders</definition>
+        <argsstring>()=default</argsstring>
+        <name>PitContenders</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/PitContenders.hh" line="46" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_pit_contenders_1a1383fe985d318870379ed3ae6c2a7844" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fys::arena::PitContenders::PitContenders</definition>
+        <argsstring>(const PitContenders &amp;other)=delete</argsstring>
+        <name>PitContenders</name>
+        <param>
+          <type>const <ref refid="classfys_1_1arena_1_1_pit_contenders" kindref="compound">PitContenders</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/PitContenders.hh" line="47" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_pit_contenders_1acdf1e16d380e3b562612074c9dcd5ede" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classfys_1_1arena_1_1_fighting_contender" kindref="compound">FightingContender</ref> &gt; &gt;</type>
+        <definition>std::vector&lt; std::shared_ptr&lt; FightingContender &gt; &gt; fys::arena::PitContenders::getContenderOnSide</definition>
+        <argsstring>(HexagonSide::Orientation side) const</argsstring>
+        <name>getContenderOnSide</name>
+        <param>
+          <type>HexagonSide::Orientation</type>
+          <declname>side</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/PitContenders.hh" line="50" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/contender/PitContenders.cpp" bodystart="50" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_pit_contenders_1a0d1ee3ca940080939011921180bc67a2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classfys_1_1arena_1_1_fighting_contender" kindref="compound">FightingContender</ref> &gt; &gt;</type>
+        <definition>std::vector&lt; std::shared_ptr&lt; FightingContender &gt; &gt; fys::arena::PitContenders::getChangingSideContenders</definition>
+        <argsstring>() const</argsstring>
+        <name>getChangingSideContenders</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/PitContenders.hh" line="53" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/contender/PitContenders.cpp" bodystart="37" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_pit_contenders_1a4422263966ee5d78756b208c73192229" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classfys_1_1arena_1_1_fighting_contender" kindref="compound">FightingContender</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; FightingContender &gt; fys::arena::PitContenders::selectSuitableContender</definition>
+        <argsstring>(ComparatorSelection&lt; FightingContender &gt; comp) const</argsstring>
+        <name>selectSuitableContender</name>
+        <param>
+          <type>ComparatorSelection&lt; <ref refid="classfys_1_1arena_1_1_fighting_contender" kindref="compound">FightingContender</ref> &gt;</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/PitContenders.hh" line="57" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/contender/PitContenders.cpp" bodystart="105" bodyend="112"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_pit_contenders_1af3439b88ce3ccdb13d94d06314e32293" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classfys_1_1arena_1_1_fighting_contender" kindref="compound">FightingContender</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; FightingContender &gt; fys::arena::PitContenders::selectSuitableContenderOnSide</definition>
+        <argsstring>(HexagonSide::Orientation side, ComparatorSelection&lt; FightingContender &gt; comp) const</argsstring>
+        <name>selectSuitableContenderOnSide</name>
+        <param>
+          <type>HexagonSide::Orientation</type>
+          <declname>side</declname>
+        </param>
+        <param>
+          <type>ComparatorSelection&lt; <ref refid="classfys_1_1arena_1_1_fighting_contender" kindref="compound">FightingContender</ref> &gt;</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/PitContenders.hh" line="60" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/contender/PitContenders.cpp" bodystart="70" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_pit_contenders_1aab3e36cacebd04bfc9d454b970d1cbca" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classfys_1_1arena_1_1_fighting_contender" kindref="compound">FightingContender</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; FightingContender &gt; fys::arena::PitContenders::selectRandomContenderOnSideAlive</definition>
+        <argsstring>(HexagonSide::Orientation side) const</argsstring>
+        <name>selectRandomContenderOnSideAlive</name>
+        <param>
+          <type>HexagonSide::Orientation</type>
+          <declname>side</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/PitContenders.hh" line="63" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/contender/PitContenders.cpp" bodystart="82" bodyend="89"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_pit_contenders_1a0a7b25983b809f49172bb56b3975ece7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classfys_1_1arena_1_1_fighting_contender" kindref="compound">FightingContender</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; FightingContender &gt; fys::arena::PitContenders::selectSuitableContenderAlive</definition>
+        <argsstring>(ComparatorSelection&lt; FightingContender &gt; comp) const</argsstring>
+        <name>selectSuitableContenderAlive</name>
+        <param>
+          <type>ComparatorSelection&lt; <ref refid="classfys_1_1arena_1_1_fighting_contender" kindref="compound">FightingContender</ref> &gt;</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/PitContenders.hh" line="66" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/contender/PitContenders.cpp" bodystart="115" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_pit_contenders_1ad0d69852267ca6e6e4d49984942ad6dd" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classfys_1_1arena_1_1_fighting_contender" kindref="compound">FightingContender</ref> &gt;</type>
+        <definition>std::shared_ptr&lt; FightingContender &gt; fys::arena::PitContenders::selectSuitableContenderOnSideAlive</definition>
+        <argsstring>(HexagonSide::Orientation side, ComparatorSelection&lt; FightingContender &gt; comp) const</argsstring>
+        <name>selectSuitableContenderOnSideAlive</name>
+        <param>
+          <type>HexagonSide::Orientation</type>
+          <declname>side</declname>
+        </param>
+        <param>
+          <type>ComparatorSelection&lt; <ref refid="classfys_1_1arena_1_1_fighting_contender" kindref="compound">FightingContender</ref> &gt;</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/PitContenders.hh" line="69" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/contender/PitContenders.cpp" bodystart="92" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_pit_contenders_1a4caae5f21791841f42a518b6ef4ee24a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::shared_ptr&lt; <ref refid="classfys_1_1arena_1_1_fighting_contender" kindref="compound">FightingContender</ref> &gt;</type>
+        <definition>std::shared_ptr&lt;FightingContender&gt; fys::arena::PitContenders::getFightingContender</definition>
+        <argsstring>(std::size_t pos) const</argsstring>
+        <name>getFightingContender</name>
+        <param>
+          <type>std::size_t</type>
+          <declname>pos</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/PitContenders.hh" line="72" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/PitContenders.hh" bodystart="72" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_pit_contenders_1aa406b0c384c4d5057e53ea776a7e2fbc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::size_t</type>
+        <definition>std::size_t fys::arena::PitContenders::getNumberContender</definition>
+        <argsstring>() const</argsstring>
+        <name>getNumberContender</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/PitContenders.hh" line="75" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/PitContenders.hh" bodystart="75" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_pit_contenders_1a4191f15fba232ac41406967d53107229" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classfys_1_1arena_1_1_fighting_contender" kindref="compound">FightingContender</ref> &gt; &gt;</type>
+        <definition>std::vector&lt; std::shared_ptr&lt; FightingContender &gt; &gt; fys::arena::PitContenders::getDeadContenderOnSide</definition>
+        <argsstring>(HexagonSide::Orientation side) const</argsstring>
+        <name>getDeadContenderOnSide</name>
+        <param>
+          <type>HexagonSide::Orientation</type>
+          <declname>side</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/PitContenders.hh" line="78" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/contender/PitContenders.cpp" bodystart="60" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_pit_contenders_1aca3d763e3e9ee2033c321dcaa86136b8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::vector&lt; std::shared_ptr&lt; <ref refid="classfys_1_1arena_1_1_fighting_contender" kindref="compound">FightingContender</ref> &gt; &gt; &amp;</type>
+        <definition>const std::vector&lt;std::shared_ptr&lt;FightingContender&gt; &gt;&amp; fys::arena::PitContenders::getContenders</definition>
+        <argsstring>() const</argsstring>
+        <name>getContenders</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/PitContenders.hh" line="81" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/PitContenders.hh" bodystart="81" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_pit_contenders_1ae4ba9a05745a7663b1bff36ac0190d35" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>unsigned</type>
+        <definition>unsigned fys::arena::PitContenders::contenderOnSide</definition>
+        <argsstring>(HexagonSide::Orientation side) const</argsstring>
+        <name>contenderOnSide</name>
+        <param>
+          <type>HexagonSide::Orientation</type>
+          <declname>side</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/PitContenders.hh" line="84" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/contender/PitContenders.cpp" bodystart="156" bodyend="163"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_pit_contenders_1a54f5b3a4d37f6aa629fe08c70bde20f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::PitContenders::addContender</definition>
+        <argsstring>(const std::shared_ptr&lt; FightingContender &gt; &amp;contender)</argsstring>
+        <name>addContender</name>
+        <param>
+          <type>const std::shared_ptr&lt; <ref refid="classfys_1_1arena_1_1_fighting_contender" kindref="compound">FightingContender</ref> &gt; &amp;</type>
+          <declname>contender</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/PitContenders.hh" line="87" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/contender/PitContenders.cpp" bodystart="140" bodyend="145"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_pit_contenders_1af1cf6aa7715a3e062da1b82cc9e33c53" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::PitContenders::allDead</definition>
+        <argsstring>() const</argsstring>
+        <name>allDead</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/PitContenders.hh" line="90" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/contender/PitContenders.cpp" bodystart="148" bodyend="153"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_pit_contenders_1a99a51eb45c02aa00e4d7516b8648f257" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::PitContenders::executeContenderAction</definition>
+        <argsstring>(const data::PriorityElem &amp;contender)</argsstring>
+        <name>executeContenderAction</name>
+        <param>
+          <type>const <ref refid="structfys_1_1arena_1_1data_1_1_priority_elem" kindref="compound">data::PriorityElem</ref> &amp;</type>
+          <declname>contender</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/PitContenders.hh" line="92" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/contender/PitContenders.cpp" bodystart="127" bodyend="137"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/PitContenders.hh" line="43" column="20" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/contender/PitContenders.hh" bodystart="43" bodyend="103"/>
+    <listofallmembers>
+      <member refid="classfys_1_1arena_1_1_pit_contenders_1a576084fa08f3b5ed13f470941af2b1e4" prot="private" virt="non-virtual"><scope>fys::arena::PitContenders</scope><name>_changeSideFlags</name></member>
+      <member refid="classfys_1_1arena_1_1_pit_contenders_1a7af242419ccb1ffecf7dbc9888d0972b" prot="private" virt="non-virtual"><scope>fys::arena::PitContenders</scope><name>_contenders</name></member>
+      <member refid="classfys_1_1arena_1_1_pit_contenders_1a54f5b3a4d37f6aa629fe08c70bde20f0" prot="public" virt="non-virtual"><scope>fys::arena::PitContenders</scope><name>addContender</name></member>
+      <member refid="classfys_1_1arena_1_1_pit_contenders_1af1cf6aa7715a3e062da1b82cc9e33c53" prot="public" virt="non-virtual"><scope>fys::arena::PitContenders</scope><name>allDead</name></member>
+      <member refid="classfys_1_1arena_1_1_pit_contenders_1ae4ba9a05745a7663b1bff36ac0190d35" prot="public" virt="non-virtual"><scope>fys::arena::PitContenders</scope><name>contenderOnSide</name></member>
+      <member refid="classfys_1_1arena_1_1_pit_contenders_1a99a51eb45c02aa00e4d7516b8648f257" prot="public" virt="non-virtual"><scope>fys::arena::PitContenders</scope><name>executeContenderAction</name></member>
+      <member refid="classfys_1_1arena_1_1_pit_contenders_1a0d1ee3ca940080939011921180bc67a2" prot="public" virt="non-virtual"><scope>fys::arena::PitContenders</scope><name>getChangingSideContenders</name></member>
+      <member refid="classfys_1_1arena_1_1_pit_contenders_1acdf1e16d380e3b562612074c9dcd5ede" prot="public" virt="non-virtual"><scope>fys::arena::PitContenders</scope><name>getContenderOnSide</name></member>
+      <member refid="classfys_1_1arena_1_1_pit_contenders_1aca3d763e3e9ee2033c321dcaa86136b8" prot="public" virt="non-virtual"><scope>fys::arena::PitContenders</scope><name>getContenders</name></member>
+      <member refid="classfys_1_1arena_1_1_pit_contenders_1a4191f15fba232ac41406967d53107229" prot="public" virt="non-virtual"><scope>fys::arena::PitContenders</scope><name>getDeadContenderOnSide</name></member>
+      <member refid="classfys_1_1arena_1_1_pit_contenders_1a4caae5f21791841f42a518b6ef4ee24a" prot="public" virt="non-virtual"><scope>fys::arena::PitContenders</scope><name>getFightingContender</name></member>
+      <member refid="classfys_1_1arena_1_1_pit_contenders_1aa406b0c384c4d5057e53ea776a7e2fbc" prot="public" virt="non-virtual"><scope>fys::arena::PitContenders</scope><name>getNumberContender</name></member>
+      <member refid="classfys_1_1arena_1_1_pit_contenders_1a47b3baf394b2d512dcc5f6470afd5259" prot="public" virt="non-virtual"><scope>fys::arena::PitContenders</scope><name>PitContenders</name></member>
+      <member refid="classfys_1_1arena_1_1_pit_contenders_1a1383fe985d318870379ed3ae6c2a7844" prot="public" virt="non-virtual"><scope>fys::arena::PitContenders</scope><name>PitContenders</name></member>
+      <member refid="classfys_1_1arena_1_1_pit_contenders_1aab3e36cacebd04bfc9d454b970d1cbca" prot="public" virt="non-virtual"><scope>fys::arena::PitContenders</scope><name>selectRandomContenderOnSideAlive</name></member>
+      <member refid="classfys_1_1arena_1_1_pit_contenders_1a4422263966ee5d78756b208c73192229" prot="public" virt="non-virtual"><scope>fys::arena::PitContenders</scope><name>selectSuitableContender</name></member>
+      <member refid="classfys_1_1arena_1_1_pit_contenders_1a0a7b25983b809f49172bb56b3975ece7" prot="public" virt="non-virtual"><scope>fys::arena::PitContenders</scope><name>selectSuitableContenderAlive</name></member>
+      <member refid="classfys_1_1arena_1_1_pit_contenders_1af3439b88ce3ccdb13d94d06314e32293" prot="public" virt="non-virtual"><scope>fys::arena::PitContenders</scope><name>selectSuitableContenderOnSide</name></member>
+      <member refid="classfys_1_1arena_1_1_pit_contenders_1ad0d69852267ca6e6e4d49984942ad6dd" prot="public" virt="non-virtual"><scope>fys::arena::PitContenders</scope><name>selectSuitableContenderOnSideAlive</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

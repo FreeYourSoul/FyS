@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1fb_1_1internal_1_1_register_server_traits_3_01fys_1_1fb_1_1internal_1_1_w_s_server_reg_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>fys::fb::internal::RegisterServerTraits&lt; fys::fb::internal::WSServerReg &gt;</compoundname>
+    <templateparamlist>
+    </templateparamlist>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="structfys_1_1fb_1_1internal_1_1_register_server_traits_3_01fys_1_1fb_1_1internal_1_1_w_s_server_reg_01_4_1aa5a312a01ef6fc126d54482ba2ae2096" prot="public" static="yes" mutable="no">
+        <type>const RegisterServer</type>
+        <definition>const RegisterServer fys::fb::internal::RegisterServerTraits&lt; fys::fb::internal::WSServerReg &gt;::enum_value</definition>
+        <argsstring></argsstring>
+        <name>enum_value</name>
+        <initializer>= RegisterServer_WSServerReg</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="86" column="31" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="85" column="38" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="85" bodyend="87"/>
+    <listofallmembers>
+      <member refid="structfys_1_1fb_1_1internal_1_1_register_server_traits_3_01fys_1_1fb_1_1internal_1_1_w_s_server_reg_01_4_1aa5a312a01ef6fc126d54482ba2ae2096" prot="public" virt="non-virtual"><scope>fys::fb::internal::RegisterServerTraits&lt; fys::fb::internal::WSServerReg &gt;</scope><name>enum_value</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

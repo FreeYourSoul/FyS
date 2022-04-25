@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="md_services_arena__arena__turn_priority_list" kind="page">
+    <compoundname>md_services_arena_Arena_TurnPriorityList</compoundname>
+    <title>Turn per Turn priority</title>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><heading level="1">Requirements</heading>
+</para>
+<para><itemizedlist>
+<listitem><para>A full turn is defined as follow: The slowest pit participant played sign the completion of the current turn</para>
+</listitem><listitem><para>A player&apos;s character (or a contender) can have multiple action in a single turn depending to its speed</para>
+</listitem><listitem><para>The priority list has to be recalculated when :<itemizedlist>
+<listitem><para>A player&apos;s character (or contender) die and is temporarily (for player&apos;s character) or definitely removed from the priority list.</para>
+</listitem><listitem><para>When a player or a contender join the fight (as for character reviving)</para>
+</listitem><listitem><para>The speed of a character has been impacted (by a spell, an item, an attack).</para>
+</listitem></itemizedlist>
+</para>
+</listitem></itemizedlist>
+</para>
+<para><heading level="1">Implementation</heading>
+</para>
+<para>Each pit participant has a speed defined as an unsigned integer. The faster go before the slowest. <linebreak/>
+</para>
+<para><bold>Generation of priorityList</bold> :<orderedlist>
+<listitem><para>Order the list of speed from fastest to slowest.</para>
+</listitem><listitem><para>The first one is the first one to have a turn (add him in the priority list as first)</para>
+</listitem><listitem><para>Subtract his speed with the second one</para>
+</listitem><listitem><para>Re-order the list of speed from fastest to slowest.</para>
+</listitem><listitem><para>The first one in this list is added in priority list</para>
+</listitem><listitem><para>Subtract his speed with the second one</para>
+</listitem><listitem><para>Re-order..</para>
+</listitem><listitem><para>...</para>
+</listitem></orderedlist>
+</para>
+<para><emphasis>Graphical example</emphasis>, each color represent a different character (monster or player&apos;s character):</para>
+<para><image type="html" name="Turn1.png" inline="yes"></image>
+</para>
+<para>The difference of speed between the fastest and the slowest being important, the purple player can play 4 times before the end of the turn. <linebreak/>
+ For the second turn, the base maximum speed is added to the every one plus their own base speed.</para>
+<para><image type="html" name="Turn2.png" inline="yes"></image>
+</para>
+<para>This turn is way shorter than the previous turn (every character play only once), but the next one as the speed stabilized a little bit, but in the third turn, as the purple player end this turn with 19 of speed, he will play multiple times before the end of the turn. <linebreak/>
+ This algorithm give an edge to the fast player without being broken (playing multiple time every single turns). <linebreak/>
+</para>
+<para>Here a resume of the two turns:</para>
+<para><image type="html" name="TurnResume.png" inline="yes"></image>
+ </para>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

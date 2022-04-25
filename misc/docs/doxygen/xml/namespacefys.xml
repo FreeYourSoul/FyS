@@ -1,0 +1,334 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacefys" kind="namespace" language="C++">
+    <compoundname>fys</compoundname>
+    <innerclass refid="classfys_1_1_boundary_map" prot="public">fys::BoundaryMap</innerclass>
+    <innerclass refid="classfys_1_1_dispatcher" prot="public">fys::Dispatcher</innerclass>
+    <innerclass refid="classfys_1_1_dispatcher_handler_base" prot="public">fys::DispatcherHandlerBase</innerclass>
+    <innerclass refid="classfys_1_1_simple_proxy" prot="public">fys::SimpleProxy</innerclass>
+    <innerclass refid="classfys_1_1_startup_dispatcher_ctx" prot="public">fys::StartupDispatcherCtx</innerclass>
+    <innernamespace refid="namespacefys_1_1arena">fys::arena</innernamespace>
+    <innernamespace refid="namespacefys_1_1cache">fys::cache</innernamespace>
+    <innernamespace refid="namespacefys_1_1common">fys::common</innernamespace>
+    <innernamespace refid="namespacefys_1_1fb">fys::fb</innernamespace>
+    <innernamespace refid="namespacefys_1_1init__beacon">fys::init_beacon</innernamespace>
+    <innernamespace refid="namespacefys_1_1map">fys::map</innernamespace>
+    <innernamespace refid="namespacefys_1_1network">fys::network</innernamespace>
+    <innernamespace refid="namespacefys_1_1util">fys::util</innernamespace>
+    <innernamespace refid="namespacefys_1_1ws">fys::ws</innernamespace>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacefys_1af7bce7852e4346a4ad060eaff7d4194a" prot="public" static="no">
+        <type><ref refid="classfys_1_1_boundary_map" kindref="compound">BoundaryMap</ref>&lt; int &gt;</type>
+        <definition>using fys::BoundaryMapInt = typedef BoundaryMap&lt;int&gt;</definition>
+        <argsstring></argsstring>
+        <name>BoundaryMapInt</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/BoundaryMap.hh" line="68" column="1" bodyfile="/home/FyS/Project/FyS/services/common/include/BoundaryMap.hh" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacefys_1ae41544826d4ed594240e33e38a0ee512" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename InputIt</type>
+          </param>
+          <param>
+            <type>typename ComparePredicate</type>
+          </param>
+        </templateparamlist>
+        <type>InputIt</type>
+        <definition>InputIt fys::find_most_suitable</definition>
+        <argsstring>(InputIt first, InputIt last, ComparePredicate &amp;&amp;comp, InputIt start)</argsstring>
+        <name>find_most_suitable</name>
+        <param>
+          <type>InputIt</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>InputIt</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>ComparePredicate &amp;&amp;</type>
+          <declname>comp</declname>
+        </param>
+        <param>
+          <type>InputIt</type>
+          <declname>start</declname>
+        </param>
+        <briefdescription>
+<para>Get the most suitable (suitable being defined by a comparator) of a given container. The most suitable follow the comparator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>For example the most suitable following this comparator [](auto currentSuitable, auto next) { return currentSuitable &lt; next; } will be the biggest element of the container.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>iterator start of the container </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>iterator end of the container </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>predicate</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>predicate that takes the current most suitable and the next value to do a comparison </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>iterator pointing on the maximum value described by the predicate, if container is empty, last is returned </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/algorithm/algorithm.hh" line="59" column="1" bodyfile="/home/FyS/Project/FyS/services/common/include/algorithm/algorithm.hh" bodystart="59" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1acd9b937c090ffc2422a666a08f523360" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename InputIt</type>
+          </param>
+          <param>
+            <type>typename ComparePredicate</type>
+          </param>
+        </templateparamlist>
+        <type>InputIt</type>
+        <definition>InputIt fys::find_most_suitable</definition>
+        <argsstring>(InputIt first, InputIt last, ComparePredicate &amp;&amp;comp)</argsstring>
+        <name>find_most_suitable</name>
+        <param>
+          <type>InputIt</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>InputIt</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>ComparePredicate &amp;&amp;</type>
+          <declname>comp</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/algorithm/algorithm.hh" line="74" column="1" bodyfile="/home/FyS/Project/FyS/services/common/include/algorithm/algorithm.hh" bodystart="74" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1a5530b43620217c94c6551a7c165b750f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename InputIt</type>
+          </param>
+          <param>
+            <type>typename RetrieverLower</type>
+          </param>
+          <param>
+            <type>typename AlgorithmPredicate</type>
+          </param>
+        </templateparamlist>
+        <type>InputIt</type>
+        <definition>InputIt fys::compose_most_suitable</definition>
+        <argsstring>(InputIt first, InputIt last, RetrieverLower &amp;&amp;retriever, AlgorithmPredicate &amp;&amp;algo)</argsstring>
+        <name>compose_most_suitable</name>
+        <param>
+          <type>InputIt</type>
+          <declname>first</declname>
+        </param>
+        <param>
+          <type>InputIt</type>
+          <declname>last</declname>
+        </param>
+        <param>
+          <type>RetrieverLower &amp;&amp;</type>
+          <declname>retriever</declname>
+        </param>
+        <param>
+          <type>AlgorithmPredicate &amp;&amp;</type>
+          <declname>algo</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>first</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>retriever</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>algo</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/algorithm/algorithm.hh" line="90" column="1" bodyfile="/home/FyS/Project/FyS/services/common/include/algorithm/algorithm.hh" bodystart="90" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1a45375c13226f3b5c591fac45345de90d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+          <param>
+            <type>typename R</type>
+          </param>
+          <param>
+            <type>typename Accessor</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool fys::all_in</definition>
+        <argsstring>(const std::vector&lt; T &gt; &amp;toCheck, const std::vector&lt; R &gt; &amp;container, Accessor &amp;&amp;accessor)</argsstring>
+        <name>all_in</name>
+        <param>
+          <type>const std::vector&lt; T &gt; &amp;</type>
+          <declname>toCheck</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; R &gt; &amp;</type>
+          <declname>container</declname>
+        </param>
+        <param>
+          <type>Accessor &amp;&amp;</type>
+          <declname>accessor</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Check if all element of a vector are present in another one</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>type of the first vector (to check type) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>R</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>type of the second vector (type checked) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Accessor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>accessor function used in order to retrieve a type R of the container from a type to check T This function has to take a to check type as parameter (type T) and return a type checked type (R)</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>toCheck</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector to check if the content is contained in another vector </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>container</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>vector to check against </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>accessor</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>take the accessor function </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if all the element from toCheck are in container following the accessor, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/algorithm/algorithm.hh" line="124" column="1" bodyfile="/home/FyS/Project/FyS/services/common/include/algorithm/algorithm.hh" bodystart="124" bodyend="130"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1a19debd42a616dd8ba3d9f6d26e3a8668" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool fys::all_in</definition>
+        <argsstring>(const std::vector&lt; T &gt; &amp;toCheck, const std::vector&lt; T &gt; &amp;container)</argsstring>
+        <name>all_in</name>
+        <param>
+          <type>const std::vector&lt; T &gt; &amp;</type>
+          <declname>toCheck</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; T &gt; &amp;</type>
+          <declname>container</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/algorithm/algorithm.hh" line="134" column="1" bodyfile="/home/FyS/Project/FyS/services/common/include/algorithm/algorithm.hh" bodystart="134" bodyend="139"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/dispatcher/common/include/context/StartupDispatcherCtx.hh" line="36" column="13"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,101 @@
+\hypertarget{classfys_1_1ws_1_1_players_data}{}\doxysection{fys\+::ws\+::Players\+Data Class Reference}
+\label{classfys_1_1ws_1_1_players_data}\index{fys::ws::PlayersData@{fys::ws::PlayersData}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classfys_1_1ws_1_1_players_data_a8f6f7bc04d3f51b978ed6f72df228074}\label{classfys_1_1ws_1_1_players_data_a8f6f7bc04d3f51b978ed6f72df228074}} 
+{\bfseries Players\+Data} (uint max\+Connection=1000) noexcept
+\item 
+\mbox{\Hypertarget{classfys_1_1ws_1_1_players_data_abf4c1d7ce142fc4d8a913a131bd931f9}\label{classfys_1_1ws_1_1_players_data_abf4c1d7ce142fc4d8a913a131bd931f9}} 
+\mbox{\hyperlink{structfys_1_1ws_1_1_player_info}{Player\+Info}} \& {\bfseries access\+Player\+Position} (uint index\+Player)
+\item 
+\mbox{\Hypertarget{classfys_1_1ws_1_1_players_data_a4ff6890d702dfc697517fd55446bde60}\label{classfys_1_1ws_1_1_players_data_a4ff6890d702dfc697517fd55446bde60}} 
+{\footnotesize template$<$typename Action $>$ }\\void {\bfseries execute\+On\+Players} (Action \&\&action\+To\+Execute)
+\item 
+\mbox{\Hypertarget{classfys_1_1ws_1_1_players_data_af52213b1f6e9b99138e1582c1dd01ca6}\label{classfys_1_1ws_1_1_players_data_af52213b1f6e9b99138e1582c1dd01ca6}} 
+void {\bfseries set\+Player\+Move\+Action} (uint index, double direction)
+\item 
+\mbox{\Hypertarget{classfys_1_1ws_1_1_players_data_a172c4e68df2d79a6407a646db4e1ee86}\label{classfys_1_1ws_1_1_players_data_a172c4e68df2d79a6407a646db4e1ee86}} 
+void {\bfseries stop\+Player\+Move} (uint index)
+\item 
+\mbox{\Hypertarget{classfys_1_1ws_1_1_players_data_a2e5d28bfe185181e859f1621093fa937}\label{classfys_1_1ws_1_1_players_data_a2e5d28bfe185181e859f1621093fa937}} 
+void {\bfseries set\+Player\+Arena} (uint index, const std\+::string \&arena\+Id)
+\item 
+uint \mbox{\hyperlink{classfys_1_1ws_1_1_players_data_acb5d4ecb4535a124f14ba2b77d970927}{get\+Index\+And\+Update\+Player\+Connection}} (const std\+::string \&token, std\+::string idt)
+\item 
+std\+::vector$<$ std\+::string\+\_\+view $>$ \mbox{\hyperlink{classfys_1_1ws_1_1_players_data_a2aa08b2fc91fe9e55666e86f3b217fad}{get\+Player\+Idts\+Arround\+Player}} (uint index\+Player, std\+::optional$<$ std\+::reference\+\_\+wrapper$<$ \mbox{\hyperlink{structfys_1_1ws_1_1_player_info}{Player\+Info}} $>$$>$ position, double distance=D\+E\+F\+A\+U\+L\+T\+\_\+\+D\+I\+S\+T\+A\+N\+CE) const noexcept
+\begin{DoxyCompactList}\small\item\em Get the Players Identities Arround the given player except himself. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string\+\_\+view $>$ \mbox{\hyperlink{classfys_1_1ws_1_1_players_data_ae18e2d43f710929ed2694ddfc34beb0e}{get\+Player\+Idts\+Arround\+Pos}} (const \mbox{\hyperlink{structfys_1_1ws_1_1_player_info}{Player\+Info}} \&position, double distance=D\+E\+F\+A\+U\+L\+T\+\_\+\+D\+I\+S\+T\+A\+N\+CE, uint ignore\+Index=L\+I\+M\+I\+T\+\_\+\+N\+O\+T\+I\+F\+I\+C\+A\+T\+I\+O\+N\+S\+\_\+\+M\+O\+VE) const noexcept
+\begin{DoxyCompactList}\small\item\em Get the Players Identities Arround the given position. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfys_1_1ws_1_1_players_data_acb5d4ecb4535a124f14ba2b77d970927}\label{classfys_1_1ws_1_1_players_data_acb5d4ecb4535a124f14ba2b77d970927}} 
+\index{fys::ws::PlayersData@{fys::ws::PlayersData}!getIndexAndUpdatePlayerConnection@{getIndexAndUpdatePlayerConnection}}
+\index{getIndexAndUpdatePlayerConnection@{getIndexAndUpdatePlayerConnection}!fys::ws::PlayersData@{fys::ws::PlayersData}}
+\doxysubsubsection{\texorpdfstring{getIndexAndUpdatePlayerConnection()}{getIndexAndUpdatePlayerConnection()}}
+{\footnotesize\ttfamily uint fys\+::ws\+::\+Players\+Data\+::get\+Index\+And\+Update\+Player\+Connection (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{token,  }\item[{std\+::string}]{idt }\end{DoxyParamCaption})}
+
+Retrieve the index corresponding to the given token
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & \\
+\hline
+{\em idt} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+index corresponding to the given token, std\+::numeric\+\_\+limits$<$uint$>$\+::max() is returned if no corresponding token 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfys_1_1ws_1_1_players_data_a2aa08b2fc91fe9e55666e86f3b217fad}\label{classfys_1_1ws_1_1_players_data_a2aa08b2fc91fe9e55666e86f3b217fad}} 
+\index{fys::ws::PlayersData@{fys::ws::PlayersData}!getPlayerIdtsArroundPlayer@{getPlayerIdtsArroundPlayer}}
+\index{getPlayerIdtsArroundPlayer@{getPlayerIdtsArroundPlayer}!fys::ws::PlayersData@{fys::ws::PlayersData}}
+\doxysubsubsection{\texorpdfstring{getPlayerIdtsArroundPlayer()}{getPlayerIdtsArroundPlayer()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string\+\_\+view $>$ fys\+::ws\+::\+Players\+Data\+::get\+Player\+Idts\+Arround\+Player (\begin{DoxyParamCaption}\item[{uint}]{index\+Player,  }\item[{std\+::optional$<$ std\+::reference\+\_\+wrapper$<$ \mbox{\hyperlink{structfys_1_1ws_1_1_player_info}{Player\+Info}} $>$$>$}]{position,  }\item[{double}]{distance = {\ttfamily DEFAULT\+\_\+DISTANCE} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Get the Players Identities Arround the given player except himself. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index\+Player} & player \\
+\hline
+{\em position} & \\
+\hline
+{\em distance} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$std\+::string\+\_\+view$>$ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfys_1_1ws_1_1_players_data_ae18e2d43f710929ed2694ddfc34beb0e}\label{classfys_1_1ws_1_1_players_data_ae18e2d43f710929ed2694ddfc34beb0e}} 
+\index{fys::ws::PlayersData@{fys::ws::PlayersData}!getPlayerIdtsArroundPos@{getPlayerIdtsArroundPos}}
+\index{getPlayerIdtsArroundPos@{getPlayerIdtsArroundPos}!fys::ws::PlayersData@{fys::ws::PlayersData}}
+\doxysubsubsection{\texorpdfstring{getPlayerIdtsArroundPos()}{getPlayerIdtsArroundPos()}}
+{\footnotesize\ttfamily std\+::vector$<$ std\+::string\+\_\+view $>$ fys\+::ws\+::\+Players\+Data\+::get\+Player\+Idts\+Arround\+Pos (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structfys_1_1ws_1_1_player_info}{Player\+Info}} \&}]{position,  }\item[{double}]{distance = {\ttfamily DEFAULT\+\_\+DISTANCE},  }\item[{uint}]{ignore\+Index = {\ttfamily LIMIT\+\_\+NOTIFICATIONS\+\_\+MOVE} }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Get the Players Identities Arround the given position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & to check arround \\
+\hline
+{\em distance} & radius arround the given point to search \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$std\+::string\+\_\+view$>$ vector of view on the identities of the players arround the given point 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+identities are zmq code to reply to a specific client via a router socket 
+\end{DoxyNote}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/services/worldserver/include/engine/Players\+Data.\+hh\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/services/worldserver/src/engine/Players\+Data.\+cpp\end{DoxyCompactItemize}

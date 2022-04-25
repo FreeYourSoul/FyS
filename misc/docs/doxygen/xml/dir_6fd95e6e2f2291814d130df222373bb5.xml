@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_6fd95e6e2f2291814d130df222373bb5" kind="dir">
+    <compoundname>/home/FyS/Project/FyS/cmake-build-debug/services/worldserver</compoundname>
+    <innerdir refid="dir_a64f2d8fa009228c521a72c04450bbba">/home/FyS/Project/FyS/cmake-build-debug/services/worldserver/CMakeFiles</innerdir>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/cmake-build-debug/services/worldserver/"/>
+  </compounddef>
+</doxygen>

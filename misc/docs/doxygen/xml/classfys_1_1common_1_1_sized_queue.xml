@@ -1,0 +1,179 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1common_1_1_sized_queue" kind="class" language="C++" prot="public">
+    <compoundname>fys::common::SizedQueue</compoundname>
+    <includes refid="_sized_queue_8hh" local="no">SizedQueue.hh</includes>
+    <templateparamlist>
+      <param>
+        <type>typename TypeContainer</type>
+      </param>
+      <param>
+        <type>unsigned int</type>
+        <declname>SIZE_QUEUE</declname>
+        <defname>SIZE_QUEUE</defname>
+        <defval>100</defval>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfys_1_1common_1_1_sized_queue_1acccc8ba5a2f3a2488f031cd5c4b71a3f" prot="private" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint fys::common::SizedQueue&lt; TypeContainer, SIZE_QUEUE &gt;::_tail</definition>
+        <argsstring></argsstring>
+        <name>_tail</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/SizedQueue.hh" line="93" column="6" bodyfile="/home/FyS/Project/FyS/services/common/include/SizedQueue.hh" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1common_1_1_sized_queue_1a86b109bd7c04b28fd7b6a5e5e38812ad" prot="private" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint fys::common::SizedQueue&lt; TypeContainer, SIZE_QUEUE &gt;::_head</definition>
+        <argsstring></argsstring>
+        <name>_head</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/SizedQueue.hh" line="94" column="6" bodyfile="/home/FyS/Project/FyS/services/common/include/SizedQueue.hh" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1common_1_1_sized_queue_1a923262a69818cc0f48a363ba0682fcfd" prot="private" static="no" mutable="no">
+        <type>std::array&lt; TypeContainer, SIZE_QUEUE &gt;</type>
+        <definition>std::array&lt;TypeContainer, SIZE_QUEUE&gt; fys::common::SizedQueue&lt; TypeContainer, SIZE_QUEUE &gt;::_queue</definition>
+        <argsstring></argsstring>
+        <name>_queue</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/SizedQueue.hh" line="96" column="12" bodyfile="/home/FyS/Project/FyS/services/common/include/SizedQueue.hh" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1common_1_1_sized_queue_1a4ec9f87d0f88230412e3c81232d87b50" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::optional&lt; TypeContainer &gt;</type>
+        <definition>std::optional&lt;TypeContainer&gt; fys::common::SizedQueue&lt; TypeContainer, SIZE_QUEUE &gt;::pop</definition>
+        <argsstring>()</argsstring>
+        <name>pop</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Pop the next element of the queue <simplesect kind="return"><para>the next element of the queue, if no such element exist, return an empty optional (nullopt) </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/SizedQueue.hh" line="52" column="1" bodyfile="/home/FyS/Project/FyS/services/common/include/SizedQueue.hh" bodystart="52" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1common_1_1_sized_queue_1a2e47e3b2a7a42eda1f58fbf3a75102b5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::common::SizedQueue&lt; TypeContainer, SIZE_QUEUE &gt;::push</definition>
+        <argsstring>(TypeContainer &amp;&amp;elem)</argsstring>
+        <name>push</name>
+        <param>
+          <type>TypeContainer &amp;&amp;</type>
+          <declname>elem</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Push an element into the queue</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>elem</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>element to insert into the queue </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the element has been pushed correctly, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/SizedQueue.hh" line="69" column="1" bodyfile="/home/FyS/Project/FyS/services/common/include/SizedQueue.hh" bodystart="69" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1common_1_1_sized_queue_1a11bbb38ce47072bdfa62b58a8b58eb94" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint</type>
+        <definition>uint fys::common::SizedQueue&lt; TypeContainer, SIZE_QUEUE &gt;::size</definition>
+        <argsstring>() const</argsstring>
+        <name>size</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get the number of element in the queue to be popped <simplesect kind="return"><para>number of element that can be popped out of the queue </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/SizedQueue.hh" line="83" column="1" bodyfile="/home/FyS/Project/FyS/services/common/include/SizedQueue.hh" bodystart="83" bodyend="83"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classfys_1_1common_1_1_sized_queue_1a47e21b83792213f463bdb1ff6daa7648" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint</type>
+        <definition>uint fys::common::SizedQueue&lt; TypeContainer, SIZE_QUEUE &gt;::getIndex</definition>
+        <argsstring>(const uint index) const</argsstring>
+        <name>getIndex</name>
+        <param>
+          <type>const uint</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/SizedQueue.hh" line="87" column="1" bodyfile="/home/FyS/Project/FyS/services/common/include/SizedQueue.hh" bodystart="87" bodyend="90"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>A Queue (aligned in memory, implemented through an array) with a fixed max. If the queue is fulled, value are not override (do not work like a ringbuffer)</para>
+<para><simplesect kind="note"><para>Not thread safe (for thread safe usage, a LockFreeQueue should be used) </para>
+</simplesect>
+<parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>TypeContainer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>type the queue contains </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>SIZE_QUEUE</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>maximum size of the queue, defaulted to 100 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/common/include/SizedQueue.hh" line="42" column="17" bodyfile="/home/FyS/Project/FyS/services/common/include/SizedQueue.hh" bodystart="42" bodyend="97"/>
+    <listofallmembers>
+      <member refid="classfys_1_1common_1_1_sized_queue_1a86b109bd7c04b28fd7b6a5e5e38812ad" prot="private" virt="non-virtual"><scope>fys::common::SizedQueue</scope><name>_head</name></member>
+      <member refid="classfys_1_1common_1_1_sized_queue_1a923262a69818cc0f48a363ba0682fcfd" prot="private" virt="non-virtual"><scope>fys::common::SizedQueue</scope><name>_queue</name></member>
+      <member refid="classfys_1_1common_1_1_sized_queue_1acccc8ba5a2f3a2488f031cd5c4b71a3f" prot="private" virt="non-virtual"><scope>fys::common::SizedQueue</scope><name>_tail</name></member>
+      <member refid="classfys_1_1common_1_1_sized_queue_1a47e21b83792213f463bdb1ff6daa7648" prot="private" virt="non-virtual"><scope>fys::common::SizedQueue</scope><name>getIndex</name></member>
+      <member refid="classfys_1_1common_1_1_sized_queue_1a4ec9f87d0f88230412e3c81232d87b50" prot="public" virt="non-virtual"><scope>fys::common::SizedQueue</scope><name>pop</name></member>
+      <member refid="classfys_1_1common_1_1_sized_queue_1a2e47e3b2a7a42eda1f58fbf3a75102b5" prot="public" virt="non-virtual"><scope>fys::common::SizedQueue</scope><name>push</name></member>
+      <member refid="classfys_1_1common_1_1_sized_queue_1a11bbb38ce47072bdfa62b58a8b58eb94" prot="public" virt="non-virtual"><scope>fys::common::SizedQueue</scope><name>size</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

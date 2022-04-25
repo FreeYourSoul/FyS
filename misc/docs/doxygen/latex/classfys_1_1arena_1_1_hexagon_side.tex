@@ -1,0 +1,80 @@
+\hypertarget{classfys_1_1arena_1_1_hexagon_side}{}\doxysection{fys\+::arena\+::Hexagon\+Side Class Reference}
+\label{classfys_1_1arena_1_1_hexagon_side}\index{fys::arena::HexagonSide@{fys::arena::HexagonSide}}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_hexagon_side_ab36b432d45c2fd23fea89679319761cd}\label{classfys_1_1arena_1_1_hexagon_side_ab36b432d45c2fd23fea89679319761cd}} 
+enum {\bfseries Hexagon} \{ {\bfseries A}, 
+{\bfseries B}, 
+{\bfseries C}
+ \}
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_hexagon_side_a07edccc39e12cbb5ecffd5a6e40fc133}\label{classfys_1_1arena_1_1_hexagon_side_a07edccc39e12cbb5ecffd5a6e40fc133}} 
+enum {\bfseries Orientation} \+: int \{ \newline
+{\bfseries A\+\_\+N} = 0, 
+{\bfseries A\+\_\+\+NE}, 
+{\bfseries A\+\_\+\+SE}, 
+{\bfseries A\+\_\+S}, 
+\newline
+{\bfseries A\+\_\+\+SW}, 
+{\bfseries A\+\_\+\+NW}, 
+{\bfseries B\+\_\+N}, 
+{\bfseries B\+\_\+\+NE}, 
+\newline
+{\bfseries B\+\_\+\+SE}, 
+{\bfseries B\+\_\+S}, 
+{\bfseries B\+\_\+\+SW}, 
+{\bfseries B\+\_\+\+NW}, 
+\newline
+{\bfseries C\+\_\+N}, 
+{\bfseries C\+\_\+\+NE}, 
+{\bfseries C\+\_\+\+SE}, 
+{\bfseries C\+\_\+S}, 
+\newline
+{\bfseries C\+\_\+\+SW}, 
+{\bfseries C\+\_\+\+NW}, 
+{\bfseries N\+O\+NE}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_hexagon_side_a01276781c53d92827da0ad182f18188c}\label{classfys_1_1arena_1_1_hexagon_side_a01276781c53d92827da0ad182f18188c}} 
+{\bfseries Hexagon\+Side} (Orientation orientation)
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_hexagon_side_a46b074b6158c28544e390cae301855b5}\label{classfys_1_1arena_1_1_hexagon_side_a46b074b6158c28544e390cae301855b5}} 
+{\bfseries Hexagon\+Side} (Hexagon hexagon=Hexagon\+::A, Orientation orientation=Orientation\+::\+N\+O\+NE)
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_hexagon_side_ad37906fa4e3c8fdbfad70ddc937956ca}\label{classfys_1_1arena_1_1_hexagon_side_ad37906fa4e3c8fdbfad70ddc937956ca}} 
+std\+::pair$<$ Hexagon, Orientation $>$ {\bfseries operator$\ast$} () const
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_hexagon_side_ab014ec2b4bd2a39d46ecc33defda624c}\label{classfys_1_1arena_1_1_hexagon_side_ab014ec2b4bd2a39d46ecc33defda624c}} 
+bool {\bfseries move} (Hexagon\+Side\+::\+Orientation destination\+Side, bool force\+Movement=false)
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_hexagon_side_aa4224d220c3eb334088612dd264f3754}\label{classfys_1_1arena_1_1_hexagon_side_aa4224d220c3eb334088612dd264f3754}} 
+bool {\bfseries move\+Right} ()
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_hexagon_side_aca8abd096a2a61ace17c67ec5093b26b}\label{classfys_1_1arena_1_1_hexagon_side_aca8abd096a2a61ace17c67ec5093b26b}} 
+bool {\bfseries move\+Left} ()
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_hexagon_side_aeee2ab35a30e7c137e183940926653e9}\label{classfys_1_1arena_1_1_hexagon_side_aeee2ab35a30e7c137e183940926653e9}} 
+bool {\bfseries move\+Back} ()
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_hexagon_side_a01ff3d343ec90ec7b8339605f4ba8963}\label{classfys_1_1arena_1_1_hexagon_side_a01ff3d343ec90ec7b8339605f4ba8963}} 
+bool {\bfseries is\+Ambush\+Side} () const
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_hexagon_side_ac0748e3a1917cd62a05e214b0ba4278d}\label{classfys_1_1arena_1_1_hexagon_side_ac0748e3a1917cd62a05e214b0ba4278d}} 
+bool {\bfseries can\+Move} (Hexagon\+Side\+::\+Orientation destination\+Side) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_hexagon_side_a0f41942c37679f15c6019899e8d4343d}\label{classfys_1_1arena_1_1_hexagon_side_a0f41942c37679f15c6019899e8d4343d}} 
+static constexpr unsigned {\bfseries S\+I\+D\+E\+\_\+\+N\+U\+M\+B\+ER} = 6 $\ast$ 3
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/services/arena/include/fighting\+Pit/Hexagon\+Side.\+hh\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/services/arena/src/fighting\+Pit/Hexagon\+Side.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,181 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1util_1_1_random_generator" kind="class" language="C++" prot="public">
+    <compoundname>fys::util::RandomGenerator</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfys_1_1util_1_1_random_generator_1accdc197aa53389da087100f5e0741395" prot="private" static="no" mutable="no">
+        <type>std::shared_ptr&lt; std::mt19937 &gt;</type>
+        <definition>std::shared_ptr&lt;std::mt19937&gt; fys::util::RandomGenerator::mt</definition>
+        <argsstring></argsstring>
+        <name>mt</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/RandomGenerator.hh" line="82" column="17" bodyfile="/home/FyS/Project/FyS/services/common/include/RandomGenerator.hh" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1util_1_1_random_generator_1a3fc5e14d8725c6c10fd699050820f816" prot="private" static="no" mutable="no">
+        <type>unsigned</type>
+        <definition>unsigned fys::util::RandomGenerator::_seed</definition>
+        <argsstring></argsstring>
+        <name>_seed</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/RandomGenerator.hh" line="83" column="10" bodyfile="/home/FyS/Project/FyS/services/common/include/RandomGenerator.hh" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classfys_1_1util_1_1_random_generator_1a4469d8ba896e79c804dc74f767e1bd0d" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classfys_1_1util_1_1_random_generator" kindref="compound">fys::util::RandomGenerator</ref> &amp;</type>
+        <definition>static fys::util::RandomGenerator&amp; fys::util::RandomGenerator::getInstance</definition>
+        <argsstring>()</argsstring>
+        <name>getInstance</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/RandomGenerator.hh" line="37" column="1" bodyfile="/home/FyS/Project/FyS/services/common/include/RandomGenerator.hh" bodystart="37" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1util_1_1_random_generator_1a048087d6b6a787c59399a0bf3753ed34" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename Type</type>
+          </param>
+        </templateparamlist>
+        <type>Type</type>
+        <definition>static Type fys::util::RandomGenerator::generateInRange</definition>
+        <argsstring>(Type rA, Type rB)</argsstring>
+        <name>generateInRange</name>
+        <param>
+          <type>Type</type>
+          <declname>rA</declname>
+        </param>
+        <param>
+          <type>Type</type>
+          <declname>rB</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/RandomGenerator.hh" line="45" column="1" bodyfile="/home/FyS/Project/FyS/services/common/include/RandomGenerator.hh" bodystart="45" bodyend="56"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1util_1_1_random_generator_1a267c48b0280e9ba4df6796e27d847560" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fys::util::RandomGenerator::RandomGenerator</definition>
+        <argsstring>(RandomGenerator const &amp;)=delete</argsstring>
+        <name>RandomGenerator</name>
+        <param>
+          <type><ref refid="classfys_1_1util_1_1_random_generator" kindref="compound">RandomGenerator</ref> const &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/RandomGenerator.hh" line="58" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1util_1_1_random_generator_1a093d1765142f4da7fb7f6dc8e4cf197b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classfys_1_1util_1_1_random_generator" kindref="compound">RandomGenerator</ref> &amp;</type>
+        <definition>RandomGenerator&amp; fys::util::RandomGenerator::operator=</definition>
+        <argsstring>(RandomGenerator const &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <param>
+          <type><ref refid="classfys_1_1util_1_1_random_generator" kindref="compound">RandomGenerator</ref> const &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/RandomGenerator.hh" line="59" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1util_1_1_random_generator_1a130a48043e674335a9a7de085e490cc7" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::shared_ptr&lt; std::mt19937 &gt;</type>
+        <definition>std::shared_ptr&lt; std::mt19937 &gt; fys::util::RandomGenerator::get</definition>
+        <argsstring>() const</argsstring>
+        <name>get</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><ref refid="namespace_f_seam" kindref="compound">FSeam</ref> generated class for <ref refid="_random_generator_8hh_source" kindref="compound">RandomGenerator.hh</ref> Please do not modify </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/RandomGenerator.hh" line="61" column="17" bodyfile="/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/RandomGenerator.fseam.cc" bodystart="18" bodyend="27"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1util_1_1_random_generator_1a33759677229b6afc2ecde6aba7a08802" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>unsigned</type>
+        <definition>unsigned fys::util::RandomGenerator::getCurrentSeedUsed</definition>
+        <argsstring>() const</argsstring>
+        <name>getCurrentSeedUsed</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/RandomGenerator.hh" line="63" column="10" bodyfile="/home/FyS/Project/FyS/services/common/include/RandomGenerator.hh" bodystart="63" bodyend="63"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classfys_1_1util_1_1_random_generator_1a84296811665bfab6aba46094c49e60a4" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::util::RandomGenerator::RandomGenerator</definition>
+        <argsstring>()</argsstring>
+        <name>RandomGenerator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/RandomGenerator.hh" line="66" column="1" bodyfile="/home/FyS/Project/FyS/services/common/include/RandomGenerator.hh" bodystart="66" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1util_1_1_random_generator_1ad1de9defce21d5f485757b31f47e5435" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fys::util::RandomGenerator::~RandomGenerator</definition>
+        <argsstring>()=default</argsstring>
+        <name>~RandomGenerator</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/include/RandomGenerator.hh" line="80" column="1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/common/include/RandomGenerator.hh" line="34" column="22" bodyfile="/home/FyS/Project/FyS/services/common/include/RandomGenerator.hh" bodystart="34" bodyend="84"/>
+    <listofallmembers>
+      <member refid="classfys_1_1util_1_1_random_generator_1a3fc5e14d8725c6c10fd699050820f816" prot="private" virt="non-virtual"><scope>fys::util::RandomGenerator</scope><name>_seed</name></member>
+      <member refid="classfys_1_1util_1_1_random_generator_1a048087d6b6a787c59399a0bf3753ed34" prot="public" virt="non-virtual"><scope>fys::util::RandomGenerator</scope><name>generateInRange</name></member>
+      <member refid="classfys_1_1util_1_1_random_generator_1a130a48043e674335a9a7de085e490cc7" prot="public" virt="non-virtual"><scope>fys::util::RandomGenerator</scope><name>get</name></member>
+      <member refid="classfys_1_1util_1_1_random_generator_1a33759677229b6afc2ecde6aba7a08802" prot="public" virt="non-virtual"><scope>fys::util::RandomGenerator</scope><name>getCurrentSeedUsed</name></member>
+      <member refid="classfys_1_1util_1_1_random_generator_1a4469d8ba896e79c804dc74f767e1bd0d" prot="public" virt="non-virtual"><scope>fys::util::RandomGenerator</scope><name>getInstance</name></member>
+      <member refid="classfys_1_1util_1_1_random_generator_1accdc197aa53389da087100f5e0741395" prot="private" virt="non-virtual"><scope>fys::util::RandomGenerator</scope><name>mt</name></member>
+      <member refid="classfys_1_1util_1_1_random_generator_1a093d1765142f4da7fb7f6dc8e4cf197b" prot="public" virt="non-virtual"><scope>fys::util::RandomGenerator</scope><name>operator=</name></member>
+      <member refid="classfys_1_1util_1_1_random_generator_1a267c48b0280e9ba4df6796e27d847560" prot="public" virt="non-virtual"><scope>fys::util::RandomGenerator</scope><name>RandomGenerator</name></member>
+      <member refid="classfys_1_1util_1_1_random_generator_1a84296811665bfab6aba46094c49e60a4" prot="private" virt="non-virtual"><scope>fys::util::RandomGenerator</scope><name>RandomGenerator</name></member>
+      <member refid="classfys_1_1util_1_1_random_generator_1ad1de9defce21d5f485757b31f47e5435" prot="private" virt="non-virtual"><scope>fys::util::RandomGenerator</scope><name>~RandomGenerator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,99 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacefys_1_1map_1_1algo" kind="namespace" language="C++">
+    <compoundname>fys::map::algo</compoundname>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacefys_1_1map_1_1algo_1a4234684a8b70490bbf56355f7fb6f3e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename TmxLayer</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool fys::map::algo::isCollisionLayer</definition>
+        <argsstring>(TmxLayer &amp;&amp;layer)</argsstring>
+        <name>isCollisionLayer</name>
+        <param>
+          <type>TmxLayer &amp;&amp;</type>
+          <declname>layer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Check if the given object layer is used for collision <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>TmxLayer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>tmx::GroupObjects layer </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>layer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>perfect forwarding object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the given group object layer is used for collision, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" line="48" column="1" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" bodystart="48" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1map_1_1algo_1af8e306dd3b22b27b99e99643ac639018" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename TmxLayer</type>
+          </param>
+        </templateparamlist>
+        <type>bool</type>
+        <definition>bool fys::map::algo::isTriggerLayer</definition>
+        <argsstring>(TmxLayer &amp;&amp;layer)</argsstring>
+        <name>isTriggerLayer</name>
+        <param>
+          <type>TmxLayer &amp;&amp;</type>
+          <declname>layer</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Check if the given object layer is used for any trigger <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>TmxLayer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>tmx::GroupObjects layer </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>layer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>perfect forwarding object </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the given group object layer is used for any trigger, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" line="63" column="1" bodyfile="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" bodystart="63" bodyend="68"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/worldserver/include/engine/CollisionMap.hh" line="38" column="24"/>
+  </compounddef>
+</doxygen>

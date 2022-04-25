@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_4888cf0ca1a7c0eba618a56426a2b2c0" kind="dir">
+    <compoundname>/home/FyS/Project/FyS/services/arena/src</compoundname>
+    <innerdir refid="dir_ddbd3191f59764b01fd23d262b600056">/home/FyS/Project/FyS/services/arena/src/fightingPit</innerdir>
+    <innerdir refid="dir_6f0a38b5ab0fa638e1f82f501659103a">/home/FyS/Project/FyS/services/arena/src/network</innerdir>
+    <innerfile refid="_arena_server_context_8cpp">ArenaServerContext.cpp</innerfile>
+    <innerfile refid="_arena_server_service_8cpp">ArenaServerService.cpp</innerfile>
+    <innerfile refid="_chai_register_8cpp">ChaiRegister.cpp</innerfile>
+    <innerfile refid="arena_2src_2_connection_handler_8cpp">ConnectionHandler.cpp</innerfile>
+    <innerfile refid="_fighting_history_manager_8cpp">FightingHistoryManager.cpp</innerfile>
+    <innerfile refid="_flatbuffer_generator_8cpp">FlatbufferGenerator.cpp</innerfile>
+    <innerfile refid="services_2arena_2src_2main_8cpp">main.cpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/src/"/>
+  </compounddef>
+</doxygen>

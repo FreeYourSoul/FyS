@@ -1,0 +1,52 @@
+\hypertarget{classfys_1_1arena_1_1_connection_handler}{}\doxysection{fys\+::arena\+::Connection\+Handler Class Reference}
+\label{classfys_1_1arena_1_1_connection_handler}\index{fys::arena::ConnectionHandler@{fys::arena::ConnectionHandler}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_connection_handler_ab9e57a357e3f48c0ba2be752bca3e1f8}\label{classfys_1_1arena_1_1_connection_handler_ab9e57a357e3f48c0ba2be752bca3e1f8}} 
+{\bfseries Connection\+Handler} (int thread\+Number=1) noexcept
+\item 
+void \mbox{\hyperlink{classfys_1_1arena_1_1_connection_handler_afcd5843eb523467a548501e14ef8719e}{setup\+Connection\+Manager}} (const \mbox{\hyperlink{classfys_1_1arena_1_1_arena_server_context}{fys\+::arena\+::\+Arena\+Server\+Context}} \&ctx) noexcept
+\begin{DoxyCompactList}\small\item\em Connect to the Arena dispatcher in order to receive request from the WS to create new fighting\+Pit. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_connection_handler_ab0feacaff0b2010410f0b52afbee5e94}\label{classfys_1_1arena_1_1_connection_handler_ab0feacaff0b2010410f0b52afbee5e94}} 
+void \mbox{\hyperlink{classfys_1_1arena_1_1_connection_handler_ab0feacaff0b2010410f0b52afbee5e94}{send\+Message\+To\+Dispatcher}} (zmq\+::multipart\+\_\+t \&\&msg) noexcept
+\begin{DoxyCompactList}\small\item\em Reply to the dispatcher using the dealer (direct connection) socket. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Handler $>$ }\\void \mbox{\hyperlink{classfys_1_1arena_1_1_connection_handler_a21874f70ec3cebce589d817b4705451e}{poll\+And\+Process\+Message\+From\+Dispatcher}} (Handler \&\&handler) noexcept
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfys_1_1arena_1_1_connection_handler_a21874f70ec3cebce589d817b4705451e}\label{classfys_1_1arena_1_1_connection_handler_a21874f70ec3cebce589d817b4705451e}} 
+\index{fys::arena::ConnectionHandler@{fys::arena::ConnectionHandler}!pollAndProcessMessageFromDispatcher@{pollAndProcessMessageFromDispatcher}}
+\index{pollAndProcessMessageFromDispatcher@{pollAndProcessMessageFromDispatcher}!fys::arena::ConnectionHandler@{fys::arena::ConnectionHandler}}
+\doxysubsubsection{\texorpdfstring{pollAndProcessMessageFromDispatcher()}{pollAndProcessMessageFromDispatcher()}}
+{\footnotesize\ttfamily template$<$typename Handler $>$ \\
+void fys\+::arena\+::\+Connection\+Handler\+::poll\+And\+Process\+Message\+From\+Dispatcher (\begin{DoxyParamCaption}\item[{Handler \&\&}]{handler }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Read on the dealer socket (connection with the dispatcher/\+WS) and reply to dispatcher via this socket connection (which will forward the message the the proper World\+Server) 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Lambda} & type following the signature =$>$ void (string, zmq\+::message\+\_\+t) \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em handler} & Handler handler to call when receiving a message \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfys_1_1arena_1_1_connection_handler_afcd5843eb523467a548501e14ef8719e}\label{classfys_1_1arena_1_1_connection_handler_afcd5843eb523467a548501e14ef8719e}} 
+\index{fys::arena::ConnectionHandler@{fys::arena::ConnectionHandler}!setupConnectionManager@{setupConnectionManager}}
+\index{setupConnectionManager@{setupConnectionManager}!fys::arena::ConnectionHandler@{fys::arena::ConnectionHandler}}
+\doxysubsubsection{\texorpdfstring{setupConnectionManager()}{setupConnectionManager()}}
+{\footnotesize\ttfamily void fys\+::arena\+::\+Connection\+Handler\+::setup\+Connection\+Manager (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classfys_1_1arena_1_1_arena_server_context}{fys\+::arena\+::\+Arena\+Server\+Context}} \&}]{ctx }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Connect to the Arena dispatcher in order to receive request from the WS to create new fighting\+Pit. 
+
+\mbox{\hyperlink{namespace_f_seam}{F\+Seam}} generated class for Connection\+Handler.\+hh Please do not modify 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/services/arena/include/Connection\+Handler.\+hh\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/cmake-\/build-\/debug/services/arena/test/Connection\+Handler.\+fseam.\+cc\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/services/arena/src/Connection\+Handler.\+cpp\end{DoxyCompactItemize}

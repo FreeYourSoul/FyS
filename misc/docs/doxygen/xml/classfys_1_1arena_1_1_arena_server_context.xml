@@ -1,0 +1,445 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1arena_1_1_arena_server_context" kind="class" language="C++" prot="public">
+    <compoundname>fys::arena::ArenaServerContext</compoundname>
+    <basecompoundref refid="classfys_1_1common_1_1_service_context_base" prot="public" virt="non-virtual">fys::common::ServiceContextBase</basecompoundref>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_arena_server_context_1acc30ba76dfa8e8fe4ead5101e5051f33" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr unsigned</type>
+        <definition>constexpr unsigned fys::arena::ArenaServerContext::MINIMUM_BATTLE_THRESHOLD</definition>
+        <argsstring></argsstring>
+        <name>MINIMUM_BATTLE_THRESHOLD</name>
+        <initializer>= 3</initializer>
+        <briefdescription>
+<para>Minimum of number of battle in parralele that can be processed by the Arena Server. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="83" column="27" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_arena_server_context_1ae92ac74eb8816754c1c0f60104bf47d8" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string fys::arena::ArenaServerContext::_code</definition>
+        <argsstring></argsstring>
+        <name>_code</name>
+        <briefdescription>
+<para>Code of the current <ref refid="classfys_1_1arena_1_1_arena_server_service" kindref="compound">ArenaServerService</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="134" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_arena_server_context_1a4205540130a64451dd322119d6f83457" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string fys::arena::ArenaServerContext::_pathLocalStorageCache</definition>
+        <argsstring></argsstring>
+        <name>_pathLocalStorageCache</name>
+        <briefdescription>
+<para>Path representing the local temporary storage created and maintained by Cml. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="137" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" bodystart="137" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_arena_server_context_1a6b9cecea3ebbb1ff780f3342cc6cae99" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string fys::arena::ArenaServerContext::_path_source_cache</definition>
+        <argsstring></argsstring>
+        <name>_path_source_cache</name>
+        <briefdescription>
+<para>Path of the reference data for CmlCopy. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="139" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" bodystart="139" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_arena_server_context_1a3fb85f250ec78ff8eba1a94e61406ade" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string fys::arena::ArenaServerContext::_dbHost</definition>
+        <argsstring></argsstring>
+        <name>_dbHost</name>
+        <briefdescription>
+<para>Database hostname. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="142" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_arena_server_context_1a30165561de9b66946711f01478cc777e" prot="private" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint fys::arena::ArenaServerContext::_dbPort</definition>
+        <argsstring></argsstring>
+        <name>_dbPort</name>
+        <initializer>= 3306</initializer>
+        <briefdescription>
+<para>Database port number. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="144" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" bodystart="144" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_arena_server_context_1ac702518183ca8bc3e17ac85597ebc120" prot="private" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint fys::arena::ArenaServerContext::_playerConnectionPort</definition>
+        <argsstring></argsstring>
+        <name>_playerConnectionPort</name>
+        <briefdescription>
+<para>Database hostname. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="147" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" bodystart="147" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_arena_server_context_1a6e3a44bb86016b3788c34da5f09bf75c" prot="private" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint fys::arena::ArenaServerContext::_battleThreshold</definition>
+        <argsstring></argsstring>
+        <name>_battleThreshold</name>
+        <initializer>= MINIMUM_BATTLE_THRESHOLD</initializer>
+        <briefdescription>
+<para>Maximum number of concurrent battle handled by the arena service. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="150" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" bodystart="150" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_arena_server_context_1a35c6d8055dedc3ee45db756d20fda717" prot="private" static="no" mutable="no">
+        <type><ref refid="structfys_1_1arena_1_1_encounter_context" kindref="compound">EncounterContext</ref></type>
+        <definition>EncounterContext fys::arena::ArenaServerContext::_encounterContext</definition>
+        <argsstring></argsstring>
+        <name>_encounterContext</name>
+        <briefdescription>
+<para>Context part specific to encounter handled by this arena server. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="153" column="18" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" bodystart="153" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1arena_1_1_arena_server_context_1a255f1ac853dc53954a5be5f2939cd75f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fys::arena::ArenaServerContext::ArenaServerContext</definition>
+        <argsstring>(int ac, const char *const *av)</argsstring>
+        <name>ArenaServerContext</name>
+        <param>
+          <type>int</type>
+          <declname>ac</declname>
+        </param>
+        <param>
+          <type>const char *const *</type>
+          <declname>av</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="86" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/ArenaServerContext.cpp" bodystart="36" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_arena_server_context_1a001873b8746ac8e218a66f449e0a1ab6" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string fys::arena::ArenaServerContext::toString</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>toString</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="89" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/ArenaServerContext.cpp" bodystart="178" bodyend="192"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_arena_server_context_1a55b4e4b6527474258162eb24e9f7256b" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string fys::arena::ArenaServerContext::getDispatcherConnectionString</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getDispatcherConnectionString</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="92" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/ArenaServerContext.cpp" bodystart="195" bodyend="198"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_arena_server_context_1ab6f8e1e95a581783635d21177c7f1f80" prot="public" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string fys::arena::ArenaServerContext::getPlayerBindingString</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getPlayerBindingString</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="95" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/ArenaServerContext.cpp" bodystart="201" bodyend="204"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_arena_server_context_1a13a8d79d908354cbfb1a851788cc0f17" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const std::string &amp;</type>
+        <definition>const std::string&amp; fys::arena::ArenaServerContext::getServerCode</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getServerCode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="98" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" bodystart="98" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_arena_server_context_1a6a8c5e8f91d825b05743603ac807c595" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="structfys_1_1arena_1_1_encounter_context" kindref="compound">EncounterContext</ref> &amp;</type>
+        <definition>const EncounterContext&amp; fys::arena::ArenaServerContext::getEncounterContext</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getEncounterContext</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="101" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" bodystart="101" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_arena_server_context_1a3356639e748200dbc45dd3d056513734" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const std::string &amp;</type>
+        <definition>const std::string&amp; fys::arena::ArenaServerContext::getPathLocalStorageCache</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getPathLocalStorageCache</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="104" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" bodystart="104" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_arena_server_context_1ac50b481b1e28eee1c8c1550d5d6fda80" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const std::string &amp;</type>
+        <definition>const std::string&amp; fys::arena::ArenaServerContext::getPathSourceCache</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getPathSourceCache</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="107" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" bodystart="107" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_arena_server_context_1a5a211cfa98caad4c61bc2f1ad40f2d22" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const std::string &amp;</type>
+        <definition>const std::string&amp; fys::arena::ArenaServerContext::getDbHost</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getDbHost</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="110" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" bodystart="110" bodyend="110"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_arena_server_context_1ab92b73052e7290695c4a385a87c8ac1b" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>uint</type>
+        <definition>uint fys::arena::ArenaServerContext::getDbPort</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getDbPort</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="113" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" bodystart="113" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_arena_server_context_1ac20d9a1e84e31cb90c939a3e905171e6" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>uint</type>
+        <definition>uint fys::arena::ArenaServerContext::getBattleThreshold</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getBattleThreshold</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="116" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" bodystart="116" bodyend="116"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classfys_1_1arena_1_1_arena_server_context_1a88179c3202beac102e89fcae04151660" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::ArenaServerContext::validateEncounterContext</definition>
+        <argsstring>() const</argsstring>
+        <name>validateEncounterContext</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="120" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/ArenaServerContext.cpp" bodystart="151" bodyend="175"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_arena_server_context_1adad65a0623a561d96afdcc3fdd6e70cb" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::ArenaServerContext::validateRewardContext</definition>
+        <argsstring>() const</argsstring>
+        <name>validateRewardContext</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="123" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/ArenaServerContext.cpp" bodystart="133" bodyend="148"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_arena_server_context_1a5d2b7b4da364364710cfc69286753278" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfys_1_1arena_1_1_encounter_context_1_1_reward_encounter_desc" kindref="compound">EncounterContext::RewardEncounterDesc</ref></type>
+        <definition>EncounterContext::RewardEncounterDesc fys::arena::ArenaServerContext::getRewardDescriptionFromJson</definition>
+        <argsstring>(const nlohmann::json &amp;rewardDesc) const</argsstring>
+        <name>getRewardDescriptionFromJson</name>
+        <param>
+          <type>const nlohmann::json &amp;</type>
+          <declname>rewardDesc</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="126" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/ArenaServerContext.cpp" bodystart="113" bodyend="130"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_arena_server_context_1a52bce99789e5c5c2f8177fdda84fdba0" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::ArenaServerContext::parseArenaConfigFile</definition>
+        <argsstring>(const nlohmann::json &amp;configContent)</argsstring>
+        <name>parseArenaConfigFile</name>
+        <param>
+          <type>const nlohmann::json &amp;</type>
+          <declname>configContent</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="128" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/ArenaServerContext.cpp" bodystart="47" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_arena_server_context_1a5f31f5ce3de06be350f205ba65af1e2e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::ArenaServerContext::parseZoneConfigFile</definition>
+        <argsstring>(const nlohmann::json &amp;configContent)</argsstring>
+        <name>parseZoneConfigFile</name>
+        <param>
+          <type>const nlohmann::json &amp;</type>
+          <declname>configContent</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="129" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/ArenaServerContext.cpp" bodystart="70" bodyend="110"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>fys::common::ServiceContextBase</label>
+        <link refid="classfys_1_1common_1_1_service_context_base"/>
+      </node>
+      <node id="1">
+        <label>fys::arena::ArenaServerContext</label>
+        <link refid="classfys_1_1arena_1_1_arena_server_context"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>fys::common::ServiceContextBase</label>
+        <link refid="classfys_1_1common_1_1_service_context_base"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>_dispatcherData</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>fys::arena::ArenaServerContext</label>
+        <link refid="classfys_1_1arena_1_1_arena_server_context"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>fys::common::DispatcherData</label>
+        <link refid="structfys_1_1common_1_1_dispatcher_data"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" line="80" column="64" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerContext.hh" bodystart="80" bodyend="154"/>
+    <listofallmembers>
+      <member refid="classfys_1_1arena_1_1_arena_server_context_1a6e3a44bb86016b3788c34da5f09bf75c" prot="private" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>_battleThreshold</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_context_1ae92ac74eb8816754c1c0f60104bf47d8" prot="private" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>_code</name></member>
+      <member refid="classfys_1_1common_1_1_service_context_base_1a8faa9975800eddf1f6f266c1c6ebc616" prot="protected" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>_configFile</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_context_1a3fb85f250ec78ff8eba1a94e61406ade" prot="private" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>_dbHost</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_context_1a30165561de9b66946711f01478cc777e" prot="private" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>_dbPort</name></member>
+      <member refid="classfys_1_1common_1_1_service_context_base_1a568a3da59fea85f97e27e1bee0356169" prot="protected" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>_dispatcherData</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_context_1a35c6d8055dedc3ee45db756d20fda717" prot="private" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>_encounterContext</name></member>
+      <member refid="classfys_1_1common_1_1_service_context_base_1aed74fe40e171a10a0950bf46e0e305ad" prot="protected" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>_hostname</name></member>
+      <member refid="classfys_1_1common_1_1_service_context_base_1aeb9795a676f4f0ebb1c3db1d95ea98a4" prot="protected" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>_name</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_context_1a4205540130a64451dd322119d6f83457" prot="private" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>_pathLocalStorageCache</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_context_1a6b9cecea3ebbb1ff780f3342cc6cae99" prot="private" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>_path_source_cache</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_context_1ac702518183ca8bc3e17ac85597ebc120" prot="private" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>_playerConnectionPort</name></member>
+      <member refid="classfys_1_1common_1_1_service_context_base_1abc37f80fdcffe74e5a76c418149cd81f" prot="protected" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>_port</name></member>
+      <member refid="classfys_1_1common_1_1_service_context_base_1a3b980d9775a46014bf1f586f557c82b7" prot="protected" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>_version</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_context_1a255f1ac853dc53954a5be5f2939cd75f" prot="public" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>ArenaServerContext</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_context_1ac20d9a1e84e31cb90c939a3e905171e6" prot="public" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>getBattleThreshold</name></member>
+      <member refid="classfys_1_1common_1_1_service_context_base_1a6852c81cd6edd25b86b5ba7b6455687a" prot="public" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>getConnectionString</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_context_1a5a211cfa98caad4c61bc2f1ad40f2d22" prot="public" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>getDbHost</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_context_1ab92b73052e7290695c4a385a87c8ac1b" prot="public" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>getDbPort</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_context_1a55b4e4b6527474258162eb24e9f7256b" prot="public" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>getDispatcherConnectionString</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_context_1a6a8c5e8f91d825b05743603ac807c595" prot="public" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>getEncounterContext</name></member>
+      <member refid="classfys_1_1common_1_1_service_context_base_1a3f87a32136601361983f90c58d6fd501" prot="public" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>getHostname</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_context_1a3356639e748200dbc45dd3d056513734" prot="public" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>getPathLocalStorageCache</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_context_1ac50b481b1e28eee1c8c1550d5d6fda80" prot="public" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>getPathSourceCache</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_context_1ab6f8e1e95a581783635d21177c7f1f80" prot="public" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>getPlayerBindingString</name></member>
+      <member refid="classfys_1_1common_1_1_service_context_base_1a1e9f65ec3d7154b245cab9f17a312276" prot="public" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>getPort</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_context_1a5d2b7b4da364364710cfc69286753278" prot="private" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>getRewardDescriptionFromJson</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_context_1a13a8d79d908354cbfb1a851788cc0f17" prot="public" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>getServerCode</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_context_1acc30ba76dfa8e8fe4ead5101e5051f33" prot="private" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>MINIMUM_BATTLE_THRESHOLD</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_context_1a52bce99789e5c5c2f8177fdda84fdba0" prot="private" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>parseArenaConfigFile</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_context_1a5f31f5ce3de06be350f205ba65af1e2e" prot="private" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>parseZoneConfigFile</name></member>
+      <member refid="classfys_1_1common_1_1_service_context_base_1ad3471d7038a6fcd8a92974124d1c4937" prot="public" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>ServiceContextBase</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_context_1a001873b8746ac8e218a66f449e0a1ab6" prot="public" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>toString</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_context_1a88179c3202beac102e89fcae04151660" prot="private" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>validateEncounterContext</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_context_1adad65a0623a561d96afdcc3fdd6e70cb" prot="private" virt="non-virtual"><scope>fys::arena::ArenaServerContext</scope><name>validateRewardContext</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

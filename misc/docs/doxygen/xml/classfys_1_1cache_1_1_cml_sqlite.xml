@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1cache_1_1_cml_sqlite" kind="class" language="C++" prot="public" final="yes">
+    <compoundname>fys::cache::CmlSqlite</compoundname>
+    <basecompoundref refid="classfys_1_1cache_1_1_cml" prot="public" virt="non-virtual">fys::cache::Cml</basecompoundref>
+      <sectiondef kind="protected-func">
+      <memberdef kind="function" id="classfys_1_1cache_1_1_cml_sqlite_1a304b2498ed2d3bb7151dce8204641c22" prot="protected" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void fys::cache::CmlSqlite::createFileInLocalStorage</definition>
+        <argsstring>(const CmlKey &amp;cmlKey) override</argsstring>
+        <name>createFileInLocalStorage</name>
+        <reimplements refid="classfys_1_1cache_1_1_cml_1abcffc2d7aeeff06798c06265f0956b6f">createFileInLocalStorage</reimplements>
+        <param>
+          <type>const <ref refid="classfys_1_1cache_1_1_cml_key" kindref="compound">CmlKey</ref> &amp;</type>
+          <declname>cmlKey</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/scripting_cache/cml/include/CmlSqlite.hh" line="34" column="14" bodyfile="/home/FyS/Project/FyS/scripting_cache/cml/src/CmlSqlite.cpp" bodystart="29" bodyend="31"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>fys::cache::Cml</label>
+        <link refid="classfys_1_1cache_1_1_cml"/>
+      </node>
+      <node id="1">
+        <label>fys::cache::CmlSqlite</label>
+        <link refid="classfys_1_1cache_1_1_cml_sqlite"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>fys::cache::Cml</label>
+        <link refid="classfys_1_1cache_1_1_cml"/>
+      </node>
+      <node id="1">
+        <label>fys::cache::CmlSqlite</label>
+        <link refid="classfys_1_1cache_1_1_cml_sqlite"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/FyS/Project/FyS/scripting_cache/cml/include/CmlSqlite.hh" line="32" column="31" bodyfile="/home/FyS/Project/FyS/scripting_cache/cml/include/CmlSqlite.hh" bodystart="32" bodyend="36"/>
+    <listofallmembers>
+      <member refid="classfys_1_1cache_1_1_cml_1a492f2c0efa80a500bc910c5eee63e67a" prot="public" virt="non-virtual"><scope>fys::cache::CmlSqlite</scope><name>Cml</name></member>
+      <member refid="classfys_1_1cache_1_1_cml_1afb8685c38f117140d2364a25d5276a9b" prot="public" virt="non-virtual"><scope>fys::cache::CmlSqlite</scope><name>createFile</name></member>
+      <member refid="classfys_1_1cache_1_1_cml_sqlite_1a304b2498ed2d3bb7151dce8204641c22" prot="protected" virt="virtual"><scope>fys::cache::CmlSqlite</scope><name>createFileInLocalStorage</name></member>
+      <member refid="classfys_1_1cache_1_1_cml_1a1b98dfd73b6828338ff93938d321bbd6" prot="public" virt="non-virtual"><scope>fys::cache::CmlSqlite</scope><name>findInCache</name></member>
+      <member refid="classfys_1_1cache_1_1_cml_1a7fedbd32d3aaf5c14ea8e44c86a9eedf" prot="public" virt="virtual"><scope>fys::cache::CmlSqlite</scope><name>~Cml</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

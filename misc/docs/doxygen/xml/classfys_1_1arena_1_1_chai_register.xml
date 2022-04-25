@@ -1,0 +1,420 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1arena_1_1_chai_register" kind="class" language="C++" prot="public">
+    <compoundname>fys::arena::ChaiRegister</compoundname>
+      <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classfys_1_1arena_1_1_chai_register_1a36633e18d1b760e95d203be02dcbb2a7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::unique_ptr&lt; chaiscript::ChaiScript &gt;</type>
+        <definition>std::unique_ptr&lt; chaiscript::ChaiScript &gt; fys::arena::ChaiRegister::createChaiInstance</definition>
+        <argsstring>(PitContenders &amp;pc, AllyPartyTeams &amp;apt)</argsstring>
+        <name>createChaiInstance</name>
+        <param>
+          <type><ref refid="classfys_1_1arena_1_1_pit_contenders" kindref="compound">PitContenders</ref> &amp;</type>
+          <declname>pc</declname>
+        </param>
+        <param>
+          <type><ref refid="classfys_1_1arena_1_1_ally_party_teams" kindref="compound">AllyPartyTeams</ref> &amp;</type>
+          <declname>apt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ChaiRegister.hh" line="58" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/ChaiRegister.cpp" bodystart="394" bodyend="399"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_chai_register_1a57e3cc3b3810524c5d1d599959ab76d4" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::ChaiRegister::registerUtility</definition>
+        <argsstring>(chaiscript::ChaiScript &amp;chai, PitContenders &amp;pc, AllyPartyTeams &amp;apt)</argsstring>
+        <name>registerUtility</name>
+        <param>
+          <type>chaiscript::ChaiScript &amp;</type>
+          <declname>chai</declname>
+        </param>
+        <param>
+          <type><ref refid="classfys_1_1arena_1_1_pit_contenders" kindref="compound">PitContenders</ref> &amp;</type>
+          <declname>pc</declname>
+        </param>
+        <param>
+          <type><ref refid="classfys_1_1arena_1_1_ally_party_teams" kindref="compound">AllyPartyTeams</ref> &amp;</type>
+          <declname>apt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ChaiRegister.hh" line="61" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/ChaiRegister.cpp" bodystart="184" bodyend="219"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_chai_register_1a4e8a0600dd21b51011cc826e31a274ce" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::ChaiRegister::loadAndRegisterActionPartyTeam</definition>
+        <argsstring>(chaiscript::ChaiScript &amp;chai, cache::Cml &amp;cache, PartyTeam &amp;pt)</argsstring>
+        <name>loadAndRegisterActionPartyTeam</name>
+        <param>
+          <type>chaiscript::ChaiScript &amp;</type>
+          <declname>chai</declname>
+        </param>
+        <param>
+          <type><ref refid="classfys_1_1cache_1_1_cml" kindref="compound">cache::Cml</ref> &amp;</type>
+          <declname>cache</declname>
+        </param>
+        <param>
+          <type><ref refid="classfys_1_1arena_1_1_party_team" kindref="compound">PartyTeam</ref> &amp;</type>
+          <declname>pt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Load all the actions/alterations scripts of a party team (a new incoming player) retrieved from Cml and generate the instance of actions into the ChaiScript engine for it to be manipulated in-game.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>chai</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>engine to load and register into </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cache</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cml instance to retrieve from </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>pt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>partyTeam from where the actions has to be found </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para></para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ChaiRegister.hh" line="73" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/ChaiRegister.cpp" bodystart="99" bodyend="125"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_chai_register_1a63a95913ed0293188a18e5ae6a3fa807" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::ChaiRegister::loadContenderScript</definition>
+        <argsstring>(chaiscript::ChaiScript &amp;chai, cache::Cml &amp;cml, const std::string &amp;contenderKey)</argsstring>
+        <name>loadContenderScript</name>
+        <param>
+          <type>chaiscript::ChaiScript &amp;</type>
+          <declname>chai</declname>
+        </param>
+        <param>
+          <type><ref refid="classfys_1_1cache_1_1_cml" kindref="compound">cache::Cml</ref> &amp;</type>
+          <declname>cml</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>contenderKey</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ChaiRegister.hh" line="76" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/ChaiRegister.cpp" bodystart="128" bodyend="131"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_chai_register_1a0ca1578fe775989650ae78acace5c731" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::ChaiRegister::registerBaseActions</definition>
+        <argsstring>(chaiscript::ChaiScript &amp;chai, cache::Cml &amp;cml)</argsstring>
+        <name>registerBaseActions</name>
+        <param>
+          <type>chaiscript::ChaiScript &amp;</type>
+          <declname>chai</declname>
+        </param>
+        <param>
+          <type><ref refid="classfys_1_1cache_1_1_cml" kindref="compound">cache::Cml</ref> &amp;</type>
+          <declname>cml</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ChaiRegister.hh" line="79" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/ChaiRegister.cpp" bodystart="71" bodyend="96"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classfys_1_1arena_1_1_chai_register_1a0e4cc76cc12f1df96e88b0bce8077049" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::ChaiRegister::loadWithIncludes</definition>
+        <argsstring>(chaiscript::ChaiScript &amp;chai, cache::Cml &amp;cache, const std::set&lt; std::string &gt; &amp;keys)</argsstring>
+        <name>loadWithIncludes</name>
+        <param>
+          <type>chaiscript::ChaiScript &amp;</type>
+          <declname>chai</declname>
+        </param>
+        <param>
+          <type><ref refid="classfys_1_1cache_1_1_cml" kindref="compound">cache::Cml</ref> &amp;</type>
+          <declname>cache</declname>
+        </param>
+        <param>
+          <type>const std::set&lt; std::string &gt; &amp;</type>
+          <declname>keys</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Retrieve a script and its includes (if any) of a script and load it into the ChaiScript engine Go recursively through all the includes to include.</para>
+<para><simplesect kind="note"><para>Only load scripts, doesn&apos;t instantiate</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>chai</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>engine to load into </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cache</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cml instance to retrieve from </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>keys</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>script&apos;s keys to find the includes from </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ChaiRegister.hh" line="92" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/src/ChaiRegister.cpp" bodystart="154" bodyend="157"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_chai_register_1a44ad3fc45d4902e814ff1ca38854afc1" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::ChaiRegister::loadWithIncludes</definition>
+        <argsstring>(chaiscript::ChaiScript &amp;chai, cache::Cml &amp;cache, const std::vector&lt; std::string &gt; &amp;keys, std::set&lt; std::string &gt; incursion)</argsstring>
+        <name>loadWithIncludes</name>
+        <param>
+          <type>chaiscript::ChaiScript &amp;</type>
+          <declname>chai</declname>
+        </param>
+        <param>
+          <type><ref refid="classfys_1_1cache_1_1_cml" kindref="compound">cache::Cml</ref> &amp;</type>
+          <declname>cache</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>keys</declname>
+        </param>
+        <param>
+          <type>std::set&lt; std::string &gt;</type>
+          <declname>incursion</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ChaiRegister.hh" line="93" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/src/ChaiRegister.cpp" bodystart="134" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_chai_register_1a5ada213454b70317e297b5d30b1c27c0" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::ChaiRegister::loadScripts</definition>
+        <argsstring>(chaiscript::ChaiScript &amp;chai, cache::Cml &amp;cache, const std::vector&lt; std::string &gt; &amp;keys)</argsstring>
+        <name>loadScripts</name>
+        <param>
+          <type>chaiscript::ChaiScript &amp;</type>
+          <declname>chai</declname>
+        </param>
+        <param>
+          <type><ref refid="classfys_1_1cache_1_1_cml" kindref="compound">cache::Cml</ref> &amp;</type>
+          <declname>cache</declname>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>keys</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get a script from Cml and load it into the ChaiScript engine. Only do a plain load of the scripts in the chai engine and do not instantiate any element in it.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>chai</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>engine to load into </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cache</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Cml instance to retrieve from </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>keys</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>keys to find the scripts </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ChaiRegister.hh" line="105" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/ChaiRegister.cpp" bodystart="160" bodyend="165"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_chai_register_1a4dbb8d25d16b0d407f3fb507c2d34d20" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::ChaiRegister::loadScript</definition>
+        <argsstring>(chaiscript::ChaiScript &amp;chai, cache::Cml &amp;cache, const std::string &amp;keys)</argsstring>
+        <name>loadScript</name>
+        <param>
+          <type>chaiscript::ChaiScript &amp;</type>
+          <declname>chai</declname>
+        </param>
+        <param>
+          <type><ref refid="classfys_1_1cache_1_1_cml" kindref="compound">cache::Cml</ref> &amp;</type>
+          <declname>cache</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>keys</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ChaiRegister.hh" line="108" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/ChaiRegister.cpp" bodystart="167" bodyend="181"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_chai_register_1ab0d7c7e8b61f9dd00122f5a8c8481a49" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::ChaiRegister::registerChai</definition>
+        <argsstring>(chaiscript::ChaiScript &amp;chai, fys::arena::PitContenders &amp;pc, fys::arena::AllyPartyTeams &amp;apt)</argsstring>
+        <name>registerChai</name>
+        <param>
+          <type>chaiscript::ChaiScript &amp;</type>
+          <declname>chai</declname>
+        </param>
+        <param>
+          <type><ref refid="classfys_1_1arena_1_1_pit_contenders" kindref="compound">fys::arena::PitContenders</ref> &amp;</type>
+          <declname>pc</declname>
+        </param>
+        <param>
+          <type><ref refid="classfys_1_1arena_1_1_ally_party_teams" kindref="compound">fys::arena::AllyPartyTeams</ref> &amp;</type>
+          <declname>apt</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ChaiRegister.hh" line="111" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/ChaiRegister.cpp" bodystart="50" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_chai_register_1abd0cf17302ab02c6d25fe22bc69e7c21" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::ChaiRegister::registerCommon</definition>
+        <argsstring>(chaiscript::ModulePtr m)</argsstring>
+        <name>registerCommon</name>
+        <param>
+          <type>chaiscript::ModulePtr</type>
+          <declname>m</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ChaiRegister.hh" line="114" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/ChaiRegister.cpp" bodystart="222" bodyend="325"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_chai_register_1a79fe9de3aacad3a247447e461cfb727f" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::ChaiRegister::registerFightingPitContender</definition>
+        <argsstring>(chaiscript::ChaiScript &amp;chai, chaiscript::ModulePtr m)</argsstring>
+        <name>registerFightingPitContender</name>
+        <param>
+          <type>chaiscript::ChaiScript &amp;</type>
+          <declname>chai</declname>
+        </param>
+        <param>
+          <type>chaiscript::ModulePtr</type>
+          <declname>m</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ChaiRegister.hh" line="117" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/ChaiRegister.cpp" bodystart="328" bodyend="357"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_chai_register_1a238a9c62f0a05217e23566a367397b24" prot="private" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::ChaiRegister::registerTeamAllies</definition>
+        <argsstring>(chaiscript::ChaiScript &amp;chai, chaiscript::ModulePtr m)</argsstring>
+        <name>registerTeamAllies</name>
+        <param>
+          <type>chaiscript::ChaiScript &amp;</type>
+          <declname>chai</declname>
+        </param>
+        <param>
+          <type>chaiscript::ModulePtr</type>
+          <declname>m</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ChaiRegister.hh" line="120" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/ChaiRegister.cpp" bodystart="360" bodyend="391"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/ChaiRegister.hh" line="55" column="19" bodyfile="/home/FyS/Project/FyS/services/arena/include/ChaiRegister.hh" bodystart="55" bodyend="122"/>
+    <listofallmembers>
+      <member refid="classfys_1_1arena_1_1_chai_register_1a36633e18d1b760e95d203be02dcbb2a7" prot="public" virt="non-virtual"><scope>fys::arena::ChaiRegister</scope><name>createChaiInstance</name></member>
+      <member refid="classfys_1_1arena_1_1_chai_register_1a4e8a0600dd21b51011cc826e31a274ce" prot="public" virt="non-virtual"><scope>fys::arena::ChaiRegister</scope><name>loadAndRegisterActionPartyTeam</name></member>
+      <member refid="classfys_1_1arena_1_1_chai_register_1a63a95913ed0293188a18e5ae6a3fa807" prot="public" virt="non-virtual"><scope>fys::arena::ChaiRegister</scope><name>loadContenderScript</name></member>
+      <member refid="classfys_1_1arena_1_1_chai_register_1a4dbb8d25d16b0d407f3fb507c2d34d20" prot="private" virt="non-virtual"><scope>fys::arena::ChaiRegister</scope><name>loadScript</name></member>
+      <member refid="classfys_1_1arena_1_1_chai_register_1a5ada213454b70317e297b5d30b1c27c0" prot="private" virt="non-virtual"><scope>fys::arena::ChaiRegister</scope><name>loadScripts</name></member>
+      <member refid="classfys_1_1arena_1_1_chai_register_1a0e4cc76cc12f1df96e88b0bce8077049" prot="private" virt="non-virtual"><scope>fys::arena::ChaiRegister</scope><name>loadWithIncludes</name></member>
+      <member refid="classfys_1_1arena_1_1_chai_register_1a44ad3fc45d4902e814ff1ca38854afc1" prot="private" virt="non-virtual"><scope>fys::arena::ChaiRegister</scope><name>loadWithIncludes</name></member>
+      <member refid="classfys_1_1arena_1_1_chai_register_1a0ca1578fe775989650ae78acace5c731" prot="public" virt="non-virtual"><scope>fys::arena::ChaiRegister</scope><name>registerBaseActions</name></member>
+      <member refid="classfys_1_1arena_1_1_chai_register_1ab0d7c7e8b61f9dd00122f5a8c8481a49" prot="private" virt="non-virtual"><scope>fys::arena::ChaiRegister</scope><name>registerChai</name></member>
+      <member refid="classfys_1_1arena_1_1_chai_register_1abd0cf17302ab02c6d25fe22bc69e7c21" prot="private" virt="non-virtual"><scope>fys::arena::ChaiRegister</scope><name>registerCommon</name></member>
+      <member refid="classfys_1_1arena_1_1_chai_register_1a79fe9de3aacad3a247447e461cfb727f" prot="private" virt="non-virtual"><scope>fys::arena::ChaiRegister</scope><name>registerFightingPitContender</name></member>
+      <member refid="classfys_1_1arena_1_1_chai_register_1a238a9c62f0a05217e23566a367397b24" prot="private" virt="non-virtual"><scope>fys::arena::ChaiRegister</scope><name>registerTeamAllies</name></member>
+      <member refid="classfys_1_1arena_1_1_chai_register_1a57e3cc3b3810524c5d1d599959ab76d4" prot="public" virt="non-virtual"><scope>fys::arena::ChaiRegister</scope><name>registerUtility</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

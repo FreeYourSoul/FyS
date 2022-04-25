@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1arena_1_1_fighting_pit_1_1_authenticated_player" kind="struct" language="C++" prot="private">
+    <compoundname>fys::arena::FightingPit::AuthenticatedPlayer</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_fighting_pit_1_1_authenticated_player_1ab912b6ad5f341d59ffddf95cfd4319fe" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string fys::arena::FightingPit::AuthenticatedPlayer::name</definition>
+        <argsstring></argsstring>
+        <name>name</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="105" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_fighting_pit_1_1_authenticated_player_1aa26e85f50dfa41ecf6439571bc573d49" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string fys::arena::FightingPit::AuthenticatedPlayer::token</definition>
+        <argsstring></argsstring>
+        <name>token</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="106" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="106" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Simple structure representing an authenticated player (pair name/token) </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" line="104" column="26" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/FightingPit.hh" bodystart="104" bodyend="107"/>
+    <listofallmembers>
+      <member refid="structfys_1_1arena_1_1_fighting_pit_1_1_authenticated_player_1ab912b6ad5f341d59ffddf95cfd4319fe" prot="public" virt="non-virtual"><scope>fys::arena::FightingPit::AuthenticatedPlayer</scope><name>name</name></member>
+      <member refid="structfys_1_1arena_1_1_fighting_pit_1_1_authenticated_player_1aa26e85f50dfa41ecf6439571bc573d49" prot="public" virt="non-virtual"><scope>fys::arena::FightingPit::AuthenticatedPlayer</scope><name>token</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

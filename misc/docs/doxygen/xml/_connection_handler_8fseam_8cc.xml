@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="_connection_handler_8fseam_8cc" kind="file" language="C++">
+    <compoundname>ConnectionHandler.fseam.cc</compoundname>
+    <includes local="no">spdlog/spdlog.h</includes>
+    <includes local="no">zmq_addon.hpp</includes>
+    <includes local="no">functional</includes>
+    <includes refid="_f_seam_mock_data_8hpp" local="no">FSeamMockData.hpp</includes>
+    <includes local="no">FSeam/FSeam.hpp</includes>
+    <includes local="no">ConnectionHandler.hh</includes>
+    <incdepgraph>
+      <node id="3">
+        <label>zmq_addon.hpp</label>
+      </node>
+      <node id="4">
+        <label>functional</label>
+      </node>
+      <node id="5">
+        <label>FSeamMockData.hpp</label>
+        <link refid="_f_seam_mock_data_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>spdlog/spdlog.h</label>
+      </node>
+      <node id="12">
+        <label>random</label>
+      </node>
+      <node id="1">
+        <label>/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/ConnectionHandler.fseam.cc</label>
+        <link refid="_connection_handler_8fseam_8cc"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>optional</label>
+      </node>
+      <node id="9">
+        <label>ConnectionHandler.hh</label>
+      </node>
+      <node id="10">
+        <label>RandomGenerator.hh</label>
+        <link refid="_random_generator_8hh_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>FSeam/FSeam.hpp</label>
+      </node>
+      <node id="13">
+        <label>chrono</label>
+      </node>
+      <node id="6">
+        <label>type_traits</label>
+      </node>
+      <node id="11">
+        <label>memory</label>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="6"><highlight class="comment">//<sp/>includes</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;spdlog/spdlog.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;zmq_addon.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;functional&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;FSeamMockData.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;FSeam/FSeam.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ConnectionHandler.hh&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="comment">//<sp/>ConnectionHandler<sp/>public</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Methods<sp/>Mocked<sp/>Implementation<sp/>for<sp/>class<sp/>ConnectionHandler</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classfys_1_1arena_1_1_connection_handler_1afcd5843eb523467a548501e14ef8719e" kindref="member">fys::arena::ConnectionHandler::setupConnectionManager</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="classfys_1_1arena_1_1_arena_server_context" kindref="compound">fys::arena::ArenaServerContext</ref><sp/>&amp;<sp/>ctx)<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>mockVerifier<sp/>=<sp/>(FSeam::MockVerifier::instance().isMockRegistered(</highlight><highlight class="keyword">this</highlight><highlight class="normal">))<sp/>?</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FSeam::MockVerifier::instance().getMock(</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;ConnectionHandler&quot;</highlight><highlight class="normal">)<sp/>:</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FSeam::MockVerifier::instance().getDefaultMock(</highlight><highlight class="stringliteral">&quot;ConnectionHandler&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_f_seam_1_1_connection_handler_data" kindref="compound">FSeam::ConnectionHandlerData</ref><sp/>data<sp/>{};</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(std::is_copy_constructible&lt;std::decay&lt;const<sp/>fys::arena::ArenaServerContext<sp/>&amp;&gt;&gt;())</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data.<ref refid="struct_f_seam_1_1_connection_handler_data_1a3c0b1a7b2db9afd534fedf1a1fe920a5" kindref="member">setupConnectionManager_ctx_ParamValue</ref><sp/>=<sp/>ctx;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>mockVerifier-&gt;invokeDupedMethod(__func__,<sp/>&amp;data);</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/>mockVerifier-&gt;methodCall(__func__,<sp/>&amp;data);</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classfys_1_1arena_1_1_connection_handler_1ab0feacaff0b2010410f0b52afbee5e94" kindref="member">fys::arena::ConnectionHandler::sendMessageToDispatcher</ref>(zmq::multipart_t<sp/>&amp;&amp;<sp/>msg)<sp/>noexcept<sp/>{</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>mockVerifier<sp/>=<sp/>(FSeam::MockVerifier::instance().isMockRegistered(</highlight><highlight class="keyword">this</highlight><highlight class="normal">))<sp/>?</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FSeam::MockVerifier::instance().getMock(</highlight><highlight class="keyword">this</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;ConnectionHandler&quot;</highlight><highlight class="normal">)<sp/>:</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FSeam::MockVerifier::instance().getDefaultMock(</highlight><highlight class="stringliteral">&quot;ConnectionHandler&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="struct_f_seam_1_1_connection_handler_data" kindref="compound">FSeam::ConnectionHandlerData</ref><sp/>data<sp/>{};</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(std::is_copy_constructible&lt;std::decay&lt;zmq::multipart_t<sp/>&amp;&amp;&gt;&gt;())</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>data.<ref refid="struct_f_seam_1_1_connection_handler_data_1a1a52ff972fea4b14ef4fdcbe299df8ad" kindref="member">sendMessageToDispatcher_msg_ParamValue</ref><sp/>=<sp/>msg;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/>mockVerifier-&gt;invokeDupedMethod(__func__,<sp/>&amp;data);</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>mockVerifier-&gt;methodCall(__func__,<sp/>&amp;data);</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="comment">//<sp/>ConnectionHandler<sp/>protected</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Methods<sp/>Mocked<sp/>Implementation<sp/>for<sp/>class<sp/>ConnectionHandler</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="comment">//<sp/>ConnectionHandler<sp/>private</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Methods<sp/>Mocked<sp/>Implementation<sp/>for<sp/>class<sp/>ConnectionHandler</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/ConnectionHandler.fseam.cc"/>
+  </compounddef>
+</doxygen>

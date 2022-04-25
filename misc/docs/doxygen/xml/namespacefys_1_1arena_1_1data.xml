@@ -1,0 +1,244 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacefys_1_1arena_1_1data" kind="namespace" language="C++">
+    <compoundname>fys::arena::data</compoundname>
+    <innerclass refid="classfys_1_1arena_1_1data_1_1_alteration" prot="public">fys::arena::data::Alteration</innerclass>
+    <innerclass refid="structfys_1_1arena_1_1data_1_1_life" prot="public">fys::arena::data::Life</innerclass>
+    <innerclass refid="structfys_1_1arena_1_1data_1_1_magic_point" prot="public">fys::arena::data::MagicPoint</innerclass>
+    <innerclass refid="structfys_1_1arena_1_1data_1_1_priority_elem" prot="public">fys::arena::data::PriorityElem</innerclass>
+    <innerclass refid="structfys_1_1arena_1_1data_1_1_status" prot="public">fys::arena::data::Status</innerclass>
+      <sectiondef kind="enum">
+      <memberdef kind="enum" id="namespacefys_1_1arena_1_1data_1adb01449004b8d3ec4d620a5f0090fae9" prot="public" static="no" strong="no">
+        <type></type>
+        <name>MoveDirection</name>
+        <enumvalue id="namespacefys_1_1arena_1_1data_1adb01449004b8d3ec4d620a5f0090fae9a018a38b3272648c4b76d8e2c3f210595" prot="public">
+          <name>BACK</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1arena_1_1data_1adb01449004b8d3ec4d620a5f0090fae9a0e1555b68dd69ab741593d4939fac8b2" prot="public">
+          <name>RIGHT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1arena_1_1data_1adb01449004b8d3ec4d620a5f0090fae9a41a7e4c3e9eeca7fc6abf844e9b193b9" prot="public">
+          <name>LEFT</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" line="210" column="19" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" bodystart="210" bodyend="214"/>
+      </memberdef>
+      <memberdef kind="enum" id="namespacefys_1_1arena_1_1data_1ab0c2e18cce60cb8f9d4a1b99d0695e32" prot="public" static="no" strong="no">
+        <type></type>
+        <name>Targeting</name>
+        <enumvalue id="namespacefys_1_1arena_1_1data_1ab0c2e18cce60cb8f9d4a1b99d0695e32a9bc6a43717336bb3d98357493b03b2a0" prot="public">
+          <name>SELF</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1arena_1_1data_1ab0c2e18cce60cb8f9d4a1b99d0695e32ae70fd2a439d83d7f44eee2cc167309a6" prot="public">
+          <name>ENNEMY</name>
+          <initializer>= 1</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1arena_1_1data_1ab0c2e18cce60cb8f9d4a1b99d0695e32ac7851a8cb99e9d019913ac12d336c830" prot="public">
+          <name>ALLY</name>
+          <initializer>= 2</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1arena_1_1data_1ab0c2e18cce60cb8f9d4a1b99d0695e32a63583ed52a3a1e018e69fd14ed456e56" prot="public">
+          <name>ENNEMIES</name>
+          <initializer>= 3</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1arena_1_1data_1ab0c2e18cce60cb8f9d4a1b99d0695e32ae63ca5d4e2bc3e00b91e4e37c0aa9e4e" prot="public">
+          <name>ALLIES</name>
+          <initializer>= 4</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1arena_1_1data_1ab0c2e18cce60cb8f9d4a1b99d0695e32a2ab28ab296e00f5f2d12c3a50ac5fa41" prot="public">
+          <name>ALLY_AND_ENNEMY</name>
+          <initializer>= 5</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1arena_1_1data_1ab0c2e18cce60cb8f9d4a1b99d0695e32aab8aaebbf2e9a18f98673b5e89a29f24" prot="public">
+          <name>ALLY_OR_ENNEMY</name>
+          <initializer>= 6</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="namespacefys_1_1arena_1_1data_1ab0c2e18cce60cb8f9d4a1b99d0695e32a4d6022f1e4fe2807bc460db5b933a429" prot="public">
+          <name>SIDE</name>
+          <initializer>= 7</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" line="216" column="15" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" bodystart="216" bodyend="225"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="namespacefys_1_1arena_1_1data_1af9f991d1649652e0ed1e9107811c8858" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr bool</type>
+        <definition>constexpr bool fys::arena::data::CONTENDER</definition>
+        <argsstring></argsstring>
+        <name>CONTENDER</name>
+        <initializer>= true</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" line="34" column="23" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespacefys_1_1arena_1_1data_1a96fd7d968a4ae07d8b3abd52a3dc0786" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr bool</type>
+        <definition>constexpr bool fys::arena::data::PARTY_MEMBER</definition>
+        <argsstring></argsstring>
+        <name>PARTY_MEMBER</name>
+        <initializer>= false</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" line="35" column="23" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacefys_1_1arena_1_1data_1aec2cf0ed0a3555b413dcfd555e3ba83e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string fys::arena::data::getActionNameFromKey</definition>
+        <argsstring>(const std::string &amp;key)</argsstring>
+        <name>getActionNameFromKey</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" line="38" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" bodystart="38" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1arena_1_1data_1abc8bd08bf2df8ae96102d30b1879b849" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string fys::arena::data::getAlterationNameFromKey</definition>
+        <argsstring>(const std::string &amp;key)</argsstring>
+        <name>getAlterationNameFromKey</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" line="59" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" bodystart="59" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1arena_1_1data_1a42e8af0e76e70180ebdbab36ac15ba09" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>static void fys::arena::data::mergeAlterations</definition>
+        <argsstring>(std::vector&lt; Alteration &gt; &amp;toModify, std::vector&lt; Alteration &gt; toMerge, bool replaceIfExist=false)</argsstring>
+        <name>mergeAlterations</name>
+        <param>
+          <type>std::vector&lt; <ref refid="classfys_1_1arena_1_1data_1_1_alteration" kindref="compound">Alteration</ref> &gt; &amp;</type>
+          <declname>toModify</declname>
+        </param>
+        <param>
+          <type>std::vector&lt; <ref refid="classfys_1_1arena_1_1data_1_1_alteration" kindref="compound">Alteration</ref> &gt;</type>
+          <declname>toMerge</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>replaceIfExist</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Merge the alterations, remove doubles, but keep the alteration that would last the longest. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>toModify</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>reference on the alterations vector to modify </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>toMerge</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>additional alternations </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>replaceIfExist</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>replace the alteration if it is already existing if set at true, do not add the alteration otherwise </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" line="196" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" bodystart="196" bodyend="208"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Types and functions linking C++ world with ChaiScript. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/ChaiRegister.hh" line="46" column="14"/>
+  </compounddef>
+</doxygen>

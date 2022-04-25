@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1fb_1_1_fighting_pit_state_builder" kind="struct" language="C++" prot="public">
+    <compoundname>fys::fb::FightingPitStateBuilder</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1fb_1_1_fighting_pit_state_builder_1ac0d45b406bd9985094d0dc712f73fe65" prot="public" static="no" mutable="no">
+        <type>flatbuffers::FlatBufferBuilder &amp;</type>
+        <definition>flatbuffers::FlatBufferBuilder&amp; fys::fb::FightingPitStateBuilder::fbb_</definition>
+        <argsstring></argsstring>
+        <name>fbb_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" line="235" column="34" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" bodystart="235" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1fb_1_1_fighting_pit_state_builder_1a0618f6c9e74ed65aaeba57c8b74b21c7" prot="public" static="no" mutable="no">
+        <type>flatbuffers::uoffset_t</type>
+        <definition>flatbuffers::uoffset_t fys::fb::FightingPitStateBuilder::start_</definition>
+        <argsstring></argsstring>
+        <name>start_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" line="236" column="26" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" bodystart="236" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfys_1_1fb_1_1_fighting_pit_state_builder_1ac1596a036c299bd9646df3301aec7722" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::FightingPitStateBuilder::add_idFightingPit</definition>
+        <argsstring>(uint32_t idFightingPit)</argsstring>
+        <name>add_idFightingPit</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>idFightingPit</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" line="237" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" bodystart="237" bodyend="239"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_fighting_pit_state_builder_1ae4460d5cf256b506c20353dff583e1fa" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::FightingPitStateBuilder::add_partyTeams</definition>
+        <argsstring>(flatbuffers::Offset&lt; flatbuffers::Vector&lt; flatbuffers::Offset&lt; fys::fb::PartyTeamStatus &gt;&gt;&gt; partyTeams)</argsstring>
+        <name>add_partyTeams</name>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::Vector&lt; flatbuffers::Offset&lt; fys::fb::PartyTeamStatus &gt;&gt;&gt;</type>
+          <declname>partyTeams</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" line="240" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" bodystart="240" bodyend="242"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_fighting_pit_state_builder_1ab1e81b3ae40d09428ac30fd3994e518c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::FightingPitStateBuilder::add_monstersStatus</definition>
+        <argsstring>(flatbuffers::Offset&lt; flatbuffers::Vector&lt; flatbuffers::Offset&lt; fys::fb::MemberStatus &gt;&gt;&gt; monstersStatus)</argsstring>
+        <name>add_monstersStatus</name>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::Vector&lt; flatbuffers::Offset&lt; fys::fb::MemberStatus &gt;&gt;&gt;</type>
+          <declname>monstersStatus</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" line="243" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" bodystart="243" bodyend="245"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_fighting_pit_state_builder_1a918ab16f0a17fd78cc829f6b736ec21d" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::fb::FightingPitStateBuilder::FightingPitStateBuilder</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb)</argsstring>
+        <name>FightingPitStateBuilder</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" line="246" column="12" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" bodystart="246" bodyend="249"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_fighting_pit_state_builder_1ab54545be37542436e2654f0308e8afbd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfys_1_1fb_1_1_fighting_pit_state_builder" kindref="compound">FightingPitStateBuilder</ref> &amp;</type>
+        <definition>FightingPitStateBuilder&amp; fys::fb::FightingPitStateBuilder::operator=</definition>
+        <argsstring>(const FightingPitStateBuilder &amp;)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="structfys_1_1fb_1_1_fighting_pit_state_builder" kindref="compound">FightingPitStateBuilder</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" line="250" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_fighting_pit_state_builder_1a22a37f9b7794a1642a8c61251c6f4964" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; FightingPitState &gt;</type>
+        <definition>flatbuffers::Offset&lt;FightingPitState&gt; fys::fb::FightingPitStateBuilder::Finish</definition>
+        <argsstring>()</argsstring>
+        <name>Finish</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" line="251" column="23" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" bodystart="251" bodyend="255"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" line="234" column="30" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitState_generated.h" bodystart="234" bodyend="256"/>
+    <listofallmembers>
+      <member refid="structfys_1_1fb_1_1_fighting_pit_state_builder_1ac1596a036c299bd9646df3301aec7722" prot="public" virt="non-virtual"><scope>fys::fb::FightingPitStateBuilder</scope><name>add_idFightingPit</name></member>
+      <member refid="structfys_1_1fb_1_1_fighting_pit_state_builder_1ab1e81b3ae40d09428ac30fd3994e518c" prot="public" virt="non-virtual"><scope>fys::fb::FightingPitStateBuilder</scope><name>add_monstersStatus</name></member>
+      <member refid="structfys_1_1fb_1_1_fighting_pit_state_builder_1ae4460d5cf256b506c20353dff583e1fa" prot="public" virt="non-virtual"><scope>fys::fb::FightingPitStateBuilder</scope><name>add_partyTeams</name></member>
+      <member refid="structfys_1_1fb_1_1_fighting_pit_state_builder_1ac0d45b406bd9985094d0dc712f73fe65" prot="public" virt="non-virtual"><scope>fys::fb::FightingPitStateBuilder</scope><name>fbb_</name></member>
+      <member refid="structfys_1_1fb_1_1_fighting_pit_state_builder_1a918ab16f0a17fd78cc829f6b736ec21d" prot="public" virt="non-virtual"><scope>fys::fb::FightingPitStateBuilder</scope><name>FightingPitStateBuilder</name></member>
+      <member refid="structfys_1_1fb_1_1_fighting_pit_state_builder_1a22a37f9b7794a1642a8c61251c6f4964" prot="public" virt="non-virtual"><scope>fys::fb::FightingPitStateBuilder</scope><name>Finish</name></member>
+      <member refid="structfys_1_1fb_1_1_fighting_pit_state_builder_1ab54545be37542436e2654f0308e8afbd" prot="public" virt="non-virtual"><scope>fys::fb::FightingPitStateBuilder</scope><name>operator=</name></member>
+      <member refid="structfys_1_1fb_1_1_fighting_pit_state_builder_1a0618f6c9e74ed65aaeba57c8b74b21c7" prot="public" virt="non-virtual"><scope>fys::fb::FightingPitStateBuilder</scope><name>start_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

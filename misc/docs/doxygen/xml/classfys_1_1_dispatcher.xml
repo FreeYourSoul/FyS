@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1_dispatcher" kind="class" language="C++" prot="public">
+    <compoundname>fys::Dispatcher</compoundname>
+    <includes refid="_dispatcher_8hh" local="no">Dispatcher.hh</includes>
+    <templateparamlist>
+      <param>
+        <type>typename DispatcherHandler</type>
+        <defval><ref refid="classfys_1_1_dispatcher_handler_base" kindref="compound">DispatcherHandlerBase</ref></defval>
+      </param>
+    </templateparamlist>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfys_1_1_dispatcher_1a9f8dd2cd5c571198995bbabb2afbff56" prot="private" static="no" mutable="no">
+        <type><ref refid="classfys_1_1network_1_1_dispatcher_connection_manager" kindref="compound">fys::network::DispatcherConnectionManager</ref></type>
+        <definition>fys::network::DispatcherConnectionManager fys::Dispatcher&lt; DispatcherHandler &gt;::_connectionManager</definition>
+        <argsstring></argsstring>
+        <name>_connectionManager</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/Dispatcher.hh" line="114" column="51" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/core/Dispatcher.hh" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1_dispatcher_1a9974968e626f113e55edd76853ce88d3" prot="private" static="no" mutable="no">
+        <type>DispatcherHandler</type>
+        <definition>DispatcherHandler fys::Dispatcher&lt; DispatcherHandler &gt;::_dispatcher</definition>
+        <argsstring></argsstring>
+        <name>_dispatcher</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/Dispatcher.hh" line="115" column="27" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/core/Dispatcher.hh" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1_dispatcher_1af6ba4eb3e53939a395fe98eb0b1ab884" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::Dispatcher&lt; DispatcherHandler &gt;::Dispatcher</definition>
+        <argsstring>(fys::StartupDispatcherCtx &amp;&amp;ctx)</argsstring>
+        <name>Dispatcher</name>
+        <param>
+          <type><ref refid="classfys_1_1_startup_dispatcher_ctx" kindref="compound">fys::StartupDispatcherCtx</ref> &amp;&amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/Dispatcher.hh" line="78" column="18" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/core/Dispatcher.hh" bodystart="78" bodyend="81"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1_dispatcher_1a26b5be6280733ebc803a9edfa9db4894" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::Dispatcher&lt; DispatcherHandler &gt;::runDispatching</definition>
+        <argsstring>()</argsstring>
+        <name>runDispatching</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/Dispatcher.hh" line="84" column="14" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/core/Dispatcher.hh" bodystart="84" bodyend="111"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Main class of the dispatcher</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>DispatcherHandler</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>class containing two public static method : processInputMessage() : Used to dispatch message from the listener socket (basic one) processClusterMessage() : Used to dispatch message from the subscriber socket (in case of ClusterAware) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/Dispatcher.hh" line="76" column="21" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/core/Dispatcher.hh" bodystart="76" bodyend="116"/>
+    <listofallmembers>
+      <member refid="classfys_1_1_dispatcher_1a9f8dd2cd5c571198995bbabb2afbff56" prot="private" virt="non-virtual"><scope>fys::Dispatcher</scope><name>_connectionManager</name></member>
+      <member refid="classfys_1_1_dispatcher_1a9974968e626f113e55edd76853ce88d3" prot="private" virt="non-virtual"><scope>fys::Dispatcher</scope><name>_dispatcher</name></member>
+      <member refid="classfys_1_1_dispatcher_1af6ba4eb3e53939a395fe98eb0b1ab884" prot="public" virt="non-virtual"><scope>fys::Dispatcher</scope><name>Dispatcher</name></member>
+      <member refid="classfys_1_1_dispatcher_1a26b5be6280733ebc803a9edfa9db4894" prot="public" virt="non-virtual"><scope>fys::Dispatcher</scope><name>runDispatching</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

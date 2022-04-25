@@ -1,0 +1,184 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1fb_1_1_arena_fight_action_builder" kind="struct" language="C++" prot="public">
+    <compoundname>fys::fb::ArenaFightActionBuilder</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1fb_1_1_arena_fight_action_builder_1a3bd993788b0890b86104e5bc5537234f" prot="public" static="no" mutable="no">
+        <type>flatbuffers::FlatBufferBuilder &amp;</type>
+        <definition>flatbuffers::FlatBufferBuilder&amp; fys::fb::ArenaFightActionBuilder::fbb_</definition>
+        <argsstring></argsstring>
+        <name>fbb_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" line="149" column="34" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" bodystart="149" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1fb_1_1_arena_fight_action_builder_1a317ddb6c71881580792b657ef3e14c0e" prot="public" static="no" mutable="no">
+        <type>flatbuffers::uoffset_t</type>
+        <definition>flatbuffers::uoffset_t fys::fb::ArenaFightActionBuilder::start_</definition>
+        <argsstring></argsstring>
+        <name>start_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" line="150" column="26" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" bodystart="150" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfys_1_1fb_1_1_arena_fight_action_builder_1a0feed7a96391f85a5ce782627e4d233c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::ArenaFightActionBuilder::add_memberId</definition>
+        <argsstring>(uint32_t memberId)</argsstring>
+        <name>add_memberId</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>memberId</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" line="151" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" bodystart="151" bodyend="153"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_arena_fight_action_builder_1a47647a96ab42f105e4ca0b16b13f129a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::ArenaFightActionBuilder::add_actionId</definition>
+        <argsstring>(flatbuffers::Offset&lt; flatbuffers::String &gt; actionId)</argsstring>
+        <name>add_actionId</name>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>actionId</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" line="154" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" bodystart="154" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_arena_fight_action_builder_1a5d76c7aff73797915436ed2d872950e4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::ArenaFightActionBuilder::add_targetType</definition>
+        <argsstring>(fys::fb::Targeting targetType)</argsstring>
+        <name>add_targetType</name>
+        <param>
+          <type>fys::fb::Targeting</type>
+          <declname>targetType</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" line="157" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" bodystart="157" bodyend="159"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_arena_fight_action_builder_1a924f3a3e51566832f24fe14c4da301a1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::ArenaFightActionBuilder::add_targetId_contender</definition>
+        <argsstring>(flatbuffers::Offset&lt; flatbuffers::Vector&lt; uint32_t &gt;&gt; targetId_contender)</argsstring>
+        <name>add_targetId_contender</name>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::Vector&lt; uint32_t &gt;&gt;</type>
+          <declname>targetId_contender</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" line="160" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" bodystart="160" bodyend="162"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_arena_fight_action_builder_1af255cdf1afe9dcadb499100d6230a533" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::ArenaFightActionBuilder::add_targetId_ally</definition>
+        <argsstring>(flatbuffers::Offset&lt; flatbuffers::Vector&lt; uint32_t &gt;&gt; targetId_ally)</argsstring>
+        <name>add_targetId_ally</name>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::Vector&lt; uint32_t &gt;&gt;</type>
+          <declname>targetId_ally</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" line="163" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" bodystart="163" bodyend="165"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_arena_fight_action_builder_1abc082a0235466a1f29ad79e31d5e3917" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::fb::ArenaFightActionBuilder::ArenaFightActionBuilder</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb)</argsstring>
+        <name>ArenaFightActionBuilder</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" line="166" column="12" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" bodystart="166" bodyend="169"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_arena_fight_action_builder_1a7679b0877ae327dd1bedf250bc61f836" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfys_1_1fb_1_1_arena_fight_action_builder" kindref="compound">ArenaFightActionBuilder</ref> &amp;</type>
+        <definition>ArenaFightActionBuilder&amp; fys::fb::ArenaFightActionBuilder::operator=</definition>
+        <argsstring>(const ArenaFightActionBuilder &amp;)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="structfys_1_1fb_1_1_arena_fight_action_builder" kindref="compound">ArenaFightActionBuilder</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" line="170" column="27"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_arena_fight_action_builder_1a9b56ed4dbe36b3a7aea713daf281b6ad" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; ArenaFightAction &gt;</type>
+        <definition>flatbuffers::Offset&lt;ArenaFightAction&gt; fys::fb::ArenaFightActionBuilder::Finish</definition>
+        <argsstring>()</argsstring>
+        <name>Finish</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" line="171" column="23" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" bodystart="171" bodyend="176"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" line="148" column="30" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaFightAction_generated.h" bodystart="148" bodyend="177"/>
+    <listofallmembers>
+      <member refid="structfys_1_1fb_1_1_arena_fight_action_builder_1a47647a96ab42f105e4ca0b16b13f129a" prot="public" virt="non-virtual"><scope>fys::fb::ArenaFightActionBuilder</scope><name>add_actionId</name></member>
+      <member refid="structfys_1_1fb_1_1_arena_fight_action_builder_1a0feed7a96391f85a5ce782627e4d233c" prot="public" virt="non-virtual"><scope>fys::fb::ArenaFightActionBuilder</scope><name>add_memberId</name></member>
+      <member refid="structfys_1_1fb_1_1_arena_fight_action_builder_1af255cdf1afe9dcadb499100d6230a533" prot="public" virt="non-virtual"><scope>fys::fb::ArenaFightActionBuilder</scope><name>add_targetId_ally</name></member>
+      <member refid="structfys_1_1fb_1_1_arena_fight_action_builder_1a924f3a3e51566832f24fe14c4da301a1" prot="public" virt="non-virtual"><scope>fys::fb::ArenaFightActionBuilder</scope><name>add_targetId_contender</name></member>
+      <member refid="structfys_1_1fb_1_1_arena_fight_action_builder_1a5d76c7aff73797915436ed2d872950e4" prot="public" virt="non-virtual"><scope>fys::fb::ArenaFightActionBuilder</scope><name>add_targetType</name></member>
+      <member refid="structfys_1_1fb_1_1_arena_fight_action_builder_1abc082a0235466a1f29ad79e31d5e3917" prot="public" virt="non-virtual"><scope>fys::fb::ArenaFightActionBuilder</scope><name>ArenaFightActionBuilder</name></member>
+      <member refid="structfys_1_1fb_1_1_arena_fight_action_builder_1a3bd993788b0890b86104e5bc5537234f" prot="public" virt="non-virtual"><scope>fys::fb::ArenaFightActionBuilder</scope><name>fbb_</name></member>
+      <member refid="structfys_1_1fb_1_1_arena_fight_action_builder_1a9b56ed4dbe36b3a7aea713daf281b6ad" prot="public" virt="non-virtual"><scope>fys::fb::ArenaFightActionBuilder</scope><name>Finish</name></member>
+      <member refid="structfys_1_1fb_1_1_arena_fight_action_builder_1a7679b0877ae327dd1bedf250bc61f836" prot="public" virt="non-virtual"><scope>fys::fb::ArenaFightActionBuilder</scope><name>operator=</name></member>
+      <member refid="structfys_1_1fb_1_1_arena_fight_action_builder_1a317ddb6c71881580792b657ef3e14c0e" prot="public" virt="non-virtual"><scope>fys::fb::ArenaFightActionBuilder</scope><name>start_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,52 @@
+\hypertarget{namespacefys_1_1map_1_1algo}{}\doxysection{fys\+::map\+::algo Namespace Reference}
+\label{namespacefys_1_1map_1_1algo}\index{fys::map::algo@{fys::map::algo}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Tmx\+Layer $>$ }\\bool \mbox{\hyperlink{namespacefys_1_1map_1_1algo_a4234684a8b70490bbf56355f7fb6f3e2}{is\+Collision\+Layer}} (Tmx\+Layer \&\&layer)
+\item 
+{\footnotesize template$<$typename Tmx\+Layer $>$ }\\bool \mbox{\hyperlink{namespacefys_1_1map_1_1algo_af8e306dd3b22b27b99e99643ac639018}{is\+Trigger\+Layer}} (Tmx\+Layer \&\&layer)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacefys_1_1map_1_1algo_a4234684a8b70490bbf56355f7fb6f3e2}\label{namespacefys_1_1map_1_1algo_a4234684a8b70490bbf56355f7fb6f3e2}} 
+\index{fys::map::algo@{fys::map::algo}!isCollisionLayer@{isCollisionLayer}}
+\index{isCollisionLayer@{isCollisionLayer}!fys::map::algo@{fys::map::algo}}
+\doxysubsubsection{\texorpdfstring{isCollisionLayer()}{isCollisionLayer()}}
+{\footnotesize\ttfamily template$<$typename Tmx\+Layer $>$ \\
+bool fys\+::map\+::algo\+::is\+Collision\+Layer (\begin{DoxyParamCaption}\item[{Tmx\+Layer \&\&}]{layer }\end{DoxyParamCaption})}
+
+Check if the given object layer is used for collision 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Tmx\+Layer} & tmx\+::\+Group\+Objects layer \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em layer} & perfect forwarding object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the given group object layer is used for collision, false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacefys_1_1map_1_1algo_af8e306dd3b22b27b99e99643ac639018}\label{namespacefys_1_1map_1_1algo_af8e306dd3b22b27b99e99643ac639018}} 
+\index{fys::map::algo@{fys::map::algo}!isTriggerLayer@{isTriggerLayer}}
+\index{isTriggerLayer@{isTriggerLayer}!fys::map::algo@{fys::map::algo}}
+\doxysubsubsection{\texorpdfstring{isTriggerLayer()}{isTriggerLayer()}}
+{\footnotesize\ttfamily template$<$typename Tmx\+Layer $>$ \\
+bool fys\+::map\+::algo\+::is\+Trigger\+Layer (\begin{DoxyParamCaption}\item[{Tmx\+Layer \&\&}]{layer }\end{DoxyParamCaption})}
+
+Check if the given object layer is used for any trigger 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Tmx\+Layer} & tmx\+::\+Group\+Objects layer \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em layer} & perfect forwarding object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the given group object layer is used for any trigger, false otherwise 
+\end{DoxyReturn}

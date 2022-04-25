@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1fb_1_1internal_1_1_register_authenticated_player_builder" kind="struct" language="C++" prot="public">
+    <compoundname>fys::fb::internal::RegisterAuthenticatedPlayerBuilder</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1fb_1_1internal_1_1_register_authenticated_player_builder_1aeb44576813ffb59eea0c9decf4ee6274" prot="public" static="no" mutable="no">
+        <type>flatbuffers::FlatBufferBuilder &amp;</type>
+        <definition>flatbuffers::FlatBufferBuilder&amp; fys::fb::internal::RegisterAuthenticatedPlayerBuilder::fbb_</definition>
+        <argsstring></argsstring>
+        <name>fbb_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="369" column="34" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="369" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1fb_1_1internal_1_1_register_authenticated_player_builder_1a3dee9ea2b231c50c730401ea397d7fff" prot="public" static="no" mutable="no">
+        <type>flatbuffers::uoffset_t</type>
+        <definition>flatbuffers::uoffset_t fys::fb::internal::RegisterAuthenticatedPlayerBuilder::start_</definition>
+        <argsstring></argsstring>
+        <name>start_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="370" column="26" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="370" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_register_authenticated_player_builder_1aaa8ebe12d4b0e7c18b79faacccf5b57d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::internal::RegisterAuthenticatedPlayerBuilder::add_registerTo_type</definition>
+        <argsstring>(fys::fb::internal::RegisterServer registerTo_type)</argsstring>
+        <name>add_registerTo_type</name>
+        <param>
+          <type>fys::fb::internal::RegisterServer</type>
+          <declname>registerTo_type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="371" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="371" bodyend="373"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_register_authenticated_player_builder_1ab5c2c7c6ac46ffa50de8c615af57b72a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::internal::RegisterAuthenticatedPlayerBuilder::add_registerTo</definition>
+        <argsstring>(flatbuffers::Offset&lt; void &gt; registerTo)</argsstring>
+        <name>add_registerTo</name>
+        <param>
+          <type>flatbuffers::Offset&lt; void &gt;</type>
+          <declname>registerTo</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="374" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="374" bodyend="376"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_register_authenticated_player_builder_1ae1b085817ea48fecd8c79f2229c3c10f" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::fb::internal::RegisterAuthenticatedPlayerBuilder::RegisterAuthenticatedPlayerBuilder</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb)</argsstring>
+        <name>RegisterAuthenticatedPlayerBuilder</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="377" column="12" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="377" bodyend="380"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_register_authenticated_player_builder_1aa8de8f7555c453717a4768bc5da82c08" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfys_1_1fb_1_1internal_1_1_register_authenticated_player_builder" kindref="compound">RegisterAuthenticatedPlayerBuilder</ref> &amp;</type>
+        <definition>RegisterAuthenticatedPlayerBuilder&amp; fys::fb::internal::RegisterAuthenticatedPlayerBuilder::operator=</definition>
+        <argsstring>(const RegisterAuthenticatedPlayerBuilder &amp;)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="structfys_1_1fb_1_1internal_1_1_register_authenticated_player_builder" kindref="compound">RegisterAuthenticatedPlayerBuilder</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="381" column="38"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_register_authenticated_player_builder_1ad72a78e0963d06b9e3a1b4e141e8e99b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; RegisterAuthenticatedPlayer &gt;</type>
+        <definition>flatbuffers::Offset&lt;RegisterAuthenticatedPlayer&gt; fys::fb::internal::RegisterAuthenticatedPlayerBuilder::Finish</definition>
+        <argsstring>()</argsstring>
+        <name>Finish</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="382" column="23" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="382" bodyend="386"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="368" column="41" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="368" bodyend="387"/>
+    <listofallmembers>
+      <member refid="structfys_1_1fb_1_1internal_1_1_register_authenticated_player_builder_1ab5c2c7c6ac46ffa50de8c615af57b72a" prot="public" virt="non-virtual"><scope>fys::fb::internal::RegisterAuthenticatedPlayerBuilder</scope><name>add_registerTo</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_register_authenticated_player_builder_1aaa8ebe12d4b0e7c18b79faacccf5b57d" prot="public" virt="non-virtual"><scope>fys::fb::internal::RegisterAuthenticatedPlayerBuilder</scope><name>add_registerTo_type</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_register_authenticated_player_builder_1aeb44576813ffb59eea0c9decf4ee6274" prot="public" virt="non-virtual"><scope>fys::fb::internal::RegisterAuthenticatedPlayerBuilder</scope><name>fbb_</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_register_authenticated_player_builder_1ad72a78e0963d06b9e3a1b4e141e8e99b" prot="public" virt="non-virtual"><scope>fys::fb::internal::RegisterAuthenticatedPlayerBuilder</scope><name>Finish</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_register_authenticated_player_builder_1aa8de8f7555c453717a4768bc5da82c08" prot="public" virt="non-virtual"><scope>fys::fb::internal::RegisterAuthenticatedPlayerBuilder</scope><name>operator=</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_register_authenticated_player_builder_1ae1b085817ea48fecd8c79f2229c3c10f" prot="public" virt="non-virtual"><scope>fys::fb::internal::RegisterAuthenticatedPlayerBuilder</scope><name>RegisterAuthenticatedPlayerBuilder</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_register_authenticated_player_builder_1a3dee9ea2b231c50c730401ea397d7fff" prot="public" virt="non-virtual"><scope>fys::fb::internal::RegisterAuthenticatedPlayerBuilder</scope><name>start_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

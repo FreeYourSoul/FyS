@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_45ccc09bb65c704475d516ca61cfcc3f" kind="dir">
+    <compoundname>/home/FyS/Project/FyS/services/arena/test/fightingPit</compoundname>
+    <innerfile refid="_common_types_test_case_8cpp">CommonTypesTestCase.cpp</innerfile>
+    <innerfile refid="_fighting_pit_announcer_test_case_8cpp">FightingPitAnnouncerTestCase.cpp</innerfile>
+    <innerfile refid="_fighting_pit_test_case_8cpp">FightingPitTestCase.cpp</innerfile>
+    <innerfile refid="_flatbuffer_generator_test_case_8cpp">FlatbufferGeneratorTestCase.cpp</innerfile>
+    <innerfile refid="_hexagon_side_test_case_8cpp">HexagonSideTestCase.cpp</innerfile>
+    <innerfile refid="_priority_order_list_test_case_8cpp">PriorityOrderListTestCase.cpp</innerfile>
+    <innerfile refid="_test_type_8hh">TestType.hh</innerfile>
+    <innerfile refid="_worker_service_test_case_8cpp">WorkerServiceTestCase.cpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/test/fightingPit/"/>
+  </compounddef>
+</doxygen>

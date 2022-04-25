@@ -1,0 +1,443 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s" kind="struct" language="C++" prot="public">
+    <compoundname>fys::fb::internal::FLATBUFFERS_FINAL_CLASS</compoundname>
+    <basecompoundref prot="private" virt="non-virtual">Table</basecompoundref>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a57450ba93e989936ce4707288480de49" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const flatbuffers::String *</type>
+        <definition>const flatbuffers::String* fys::fb::internal::FLATBUFFERS_FINAL_CLASS::token_client</definition>
+        <argsstring>() const</argsstring>
+        <name>token_client</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="103" column="29" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="103" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1ae4b1140827e56a253a0207ca00c2aaee" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::String *</type>
+        <definition>flatbuffers::String* fys::fb::internal::FLATBUFFERS_FINAL_CLASS::mutable_token_client</definition>
+        <argsstring>()</argsstring>
+        <name>mutable_token_client</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="106" column="23" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="106" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a0ffe35c42555a98f01983328ddfe225d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double fys::fb::internal::FLATBUFFERS_FINAL_CLASS::x</definition>
+        <argsstring>() const</argsstring>
+        <name>x</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="109" column="10" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="109" bodyend="111"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a859df2adba657311044908f76d233cdd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::internal::FLATBUFFERS_FINAL_CLASS::mutate_x</definition>
+        <argsstring>(double _x)</argsstring>
+        <name>mutate_x</name>
+        <param>
+          <type>double</type>
+          <declname>_x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="112" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="112" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a19fc3d2f39b575a3b57736c309d455ae" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double fys::fb::internal::FLATBUFFERS_FINAL_CLASS::y</definition>
+        <argsstring>() const</argsstring>
+        <name>y</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="115" column="10" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="115" bodyend="117"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1ad4485a00dab62f9112cd7737998163d4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::internal::FLATBUFFERS_FINAL_CLASS::mutate_y</definition>
+        <argsstring>(double _y)</argsstring>
+        <name>mutate_y</name>
+        <param>
+          <type>double</type>
+          <declname>_y</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="118" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="118" bodyend="120"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1aa04f520e002c3d0bf28b22742f580b19" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>fys::fb::internal::Action</type>
+        <definition>fys::fb::internal::Action fys::fb::internal::FLATBUFFERS_FINAL_CLASS::action</definition>
+        <argsstring>() const</argsstring>
+        <name>action</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="121" column="29" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="121" bodyend="123"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a5ee00975a31493fb5955cfb312061722" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::internal::FLATBUFFERS_FINAL_CLASS::mutate_action</definition>
+        <argsstring>(fys::fb::internal::Action _action)</argsstring>
+        <name>mutate_action</name>
+        <param>
+          <type>fys::fb::internal::Action</type>
+          <declname>_action</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="124" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="124" bodyend="126"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a4c2a0ff1446b35cee8959e853f5db3af" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::internal::FLATBUFFERS_FINAL_CLASS::Verify</definition>
+        <argsstring>(flatbuffers::Verifier &amp;verifier) const</argsstring>
+        <name>Verify</name>
+        <param>
+          <type>flatbuffers::Verifier &amp;</type>
+          <declname>verifier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="127" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="127" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1aada19901bcd881561fee278540201169" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const flatbuffers::String *</type>
+        <definition>const flatbuffers::String* fys::fb::internal::FLATBUFFERS_FINAL_CLASS::serverCode</definition>
+        <argsstring>() const</argsstring>
+        <name>serverCode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="198" column="29" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="198" bodyend="200"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a7e0ba87cade668ceecb312f01f7803f8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::String *</type>
+        <definition>flatbuffers::String* fys::fb::internal::FLATBUFFERS_FINAL_CLASS::mutable_serverCode</definition>
+        <argsstring>()</argsstring>
+        <name>mutable_serverCode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="201" column="23" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="201" bodyend="203"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a4c2a0ff1446b35cee8959e853f5db3af" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::internal::FLATBUFFERS_FINAL_CLASS::Verify</definition>
+        <argsstring>(flatbuffers::Verifier &amp;verifier) const</argsstring>
+        <name>Verify</name>
+        <param>
+          <type>flatbuffers::Verifier &amp;</type>
+          <declname>verifier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="204" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="204" bodyend="209"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1aada19901bcd881561fee278540201169" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const flatbuffers::String *</type>
+        <definition>const flatbuffers::String* fys::fb::internal::FLATBUFFERS_FINAL_CLASS::serverCode</definition>
+        <argsstring>() const</argsstring>
+        <name>serverCode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="253" column="29" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="253" bodyend="255"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a7e0ba87cade668ceecb312f01f7803f8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::String *</type>
+        <definition>flatbuffers::String* fys::fb::internal::FLATBUFFERS_FINAL_CLASS::mutable_serverCode</definition>
+        <argsstring>()</argsstring>
+        <name>mutable_serverCode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="256" column="23" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="256" bodyend="258"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a29ba055d471e24cced41954f44628595" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double fys::fb::internal::FLATBUFFERS_FINAL_CLASS::xPos</definition>
+        <argsstring>() const</argsstring>
+        <name>xPos</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="259" column="10" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="259" bodyend="261"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a4ca1beb716bf65c868e04d710f74f94e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::internal::FLATBUFFERS_FINAL_CLASS::mutate_xPos</definition>
+        <argsstring>(double _xPos)</argsstring>
+        <name>mutate_xPos</name>
+        <param>
+          <type>double</type>
+          <declname>_xPos</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="262" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="262" bodyend="264"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a2f72f2ea4970b80270aecb9c4eb886f3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double fys::fb::internal::FLATBUFFERS_FINAL_CLASS::yPos</definition>
+        <argsstring>() const</argsstring>
+        <name>yPos</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="265" column="10" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="265" bodyend="267"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a79f26fd1e95dc8124e279ef75e48b2b6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::internal::FLATBUFFERS_FINAL_CLASS::mutate_yPos</definition>
+        <argsstring>(double _yPos)</argsstring>
+        <name>mutate_yPos</name>
+        <param>
+          <type>double</type>
+          <declname>_yPos</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="268" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="268" bodyend="270"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a4c2a0ff1446b35cee8959e853f5db3af" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::internal::FLATBUFFERS_FINAL_CLASS::Verify</definition>
+        <argsstring>(flatbuffers::Verifier &amp;verifier) const</argsstring>
+        <name>Verify</name>
+        <param>
+          <type>flatbuffers::Verifier &amp;</type>
+          <declname>verifier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="271" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="271" bodyend="278"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a852801436614638c0e97d37ce76c1892" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>fys::fb::internal::RegisterServer</type>
+        <definition>fys::fb::internal::RegisterServer fys::fb::internal::FLATBUFFERS_FINAL_CLASS::registerTo_type</definition>
+        <argsstring>() const</argsstring>
+        <name>registerTo_type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="335" column="37" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="335" bodyend="337"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a11a0ca2f7d80754383810ace1426539a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const void *</type>
+        <definition>const void* fys::fb::internal::FLATBUFFERS_FINAL_CLASS::registerTo</definition>
+        <argsstring>() const</argsstring>
+        <name>registerTo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="338" column="14" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="338" bodyend="340"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1ac96277212c18d54c1e6ba8ce3714b67c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename T</type>
+          </param>
+        </templateparamlist>
+        <type>const T *</type>
+        <definition>const T* fys::fb::internal::FLATBUFFERS_FINAL_CLASS::registerTo_as</definition>
+        <argsstring>() const</argsstring>
+        <name>registerTo_as</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="341" column="22"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1ade9e8c6210d37c18545a947519cdcc84" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const fys::fb::internal::WSServerReg *</type>
+        <definition>const fys::fb::internal::WSServerReg* fys::fb::internal::FLATBUFFERS_FINAL_CLASS::registerTo_as_WSServerReg</definition>
+        <argsstring>() const</argsstring>
+        <name>registerTo_as_WSServerReg</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="342" column="40" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="342" bodyend="344"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1af7a8e7aad549e46a606cd895f8bf354a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const fys::fb::internal::ChatServerReg *</type>
+        <definition>const fys::fb::internal::ChatServerReg* fys::fb::internal::FLATBUFFERS_FINAL_CLASS::registerTo_as_ChatServerReg</definition>
+        <argsstring>() const</argsstring>
+        <name>registerTo_as_ChatServerReg</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="345" column="42" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="345" bodyend="347"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1aa40d25c9b46965dcc67eb0542702456d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void *</type>
+        <definition>void* fys::fb::internal::FLATBUFFERS_FINAL_CLASS::mutable_registerTo</definition>
+        <argsstring>()</argsstring>
+        <name>mutable_registerTo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="348" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="348" bodyend="350"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a4c2a0ff1446b35cee8959e853f5db3af" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::fb::internal::FLATBUFFERS_FINAL_CLASS::Verify</definition>
+        <argsstring>(flatbuffers::Verifier &amp;verifier) const</argsstring>
+        <name>Verify</name>
+        <param>
+          <type>flatbuffers::Verifier &amp;</type>
+          <declname>verifier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="351" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="351" bodyend="357"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>fys::fb::internal::FLATBUFFERS_FINAL_CLASS</label>
+        <link refid="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>flatbuffers::Table</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>fys::fb::internal::FLATBUFFERS_FINAL_CLASS</label>
+        <link refid="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>flatbuffers::Table</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" line="96" column="54" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/Notifications_generated.h" bodystart="96" bodyend="136"/>
+    <listofallmembers>
+      <member refid="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1aa04f520e002c3d0bf28b22742f580b19" prot="public" virt="non-virtual"><scope>fys::fb::internal::FLATBUFFERS_FINAL_CLASS</scope><name>action</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1aa40d25c9b46965dcc67eb0542702456d" prot="public" virt="non-virtual"><scope>fys::fb::internal::FLATBUFFERS_FINAL_CLASS</scope><name>mutable_registerTo</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a7e0ba87cade668ceecb312f01f7803f8" prot="public" virt="non-virtual"><scope>fys::fb::internal::FLATBUFFERS_FINAL_CLASS</scope><name>mutable_serverCode</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a7e0ba87cade668ceecb312f01f7803f8" prot="public" virt="non-virtual"><scope>fys::fb::internal::FLATBUFFERS_FINAL_CLASS</scope><name>mutable_serverCode</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1ae4b1140827e56a253a0207ca00c2aaee" prot="public" virt="non-virtual"><scope>fys::fb::internal::FLATBUFFERS_FINAL_CLASS</scope><name>mutable_token_client</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a5ee00975a31493fb5955cfb312061722" prot="public" virt="non-virtual"><scope>fys::fb::internal::FLATBUFFERS_FINAL_CLASS</scope><name>mutate_action</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a859df2adba657311044908f76d233cdd" prot="public" virt="non-virtual"><scope>fys::fb::internal::FLATBUFFERS_FINAL_CLASS</scope><name>mutate_x</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a4ca1beb716bf65c868e04d710f74f94e" prot="public" virt="non-virtual"><scope>fys::fb::internal::FLATBUFFERS_FINAL_CLASS</scope><name>mutate_xPos</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1ad4485a00dab62f9112cd7737998163d4" prot="public" virt="non-virtual"><scope>fys::fb::internal::FLATBUFFERS_FINAL_CLASS</scope><name>mutate_y</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a79f26fd1e95dc8124e279ef75e48b2b6" prot="public" virt="non-virtual"><scope>fys::fb::internal::FLATBUFFERS_FINAL_CLASS</scope><name>mutate_yPos</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a11a0ca2f7d80754383810ace1426539a" prot="public" virt="non-virtual"><scope>fys::fb::internal::FLATBUFFERS_FINAL_CLASS</scope><name>registerTo</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1ac96277212c18d54c1e6ba8ce3714b67c" prot="public" virt="non-virtual"><scope>fys::fb::internal::FLATBUFFERS_FINAL_CLASS</scope><name>registerTo_as</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1af7a8e7aad549e46a606cd895f8bf354a" prot="public" virt="non-virtual"><scope>fys::fb::internal::FLATBUFFERS_FINAL_CLASS</scope><name>registerTo_as_ChatServerReg</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1ade9e8c6210d37c18545a947519cdcc84" prot="public" virt="non-virtual"><scope>fys::fb::internal::FLATBUFFERS_FINAL_CLASS</scope><name>registerTo_as_WSServerReg</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a852801436614638c0e97d37ce76c1892" prot="public" virt="non-virtual"><scope>fys::fb::internal::FLATBUFFERS_FINAL_CLASS</scope><name>registerTo_type</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1aada19901bcd881561fee278540201169" prot="public" virt="non-virtual"><scope>fys::fb::internal::FLATBUFFERS_FINAL_CLASS</scope><name>serverCode</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1aada19901bcd881561fee278540201169" prot="public" virt="non-virtual"><scope>fys::fb::internal::FLATBUFFERS_FINAL_CLASS</scope><name>serverCode</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a57450ba93e989936ce4707288480de49" prot="public" virt="non-virtual"><scope>fys::fb::internal::FLATBUFFERS_FINAL_CLASS</scope><name>token_client</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a4c2a0ff1446b35cee8959e853f5db3af" prot="public" virt="non-virtual"><scope>fys::fb::internal::FLATBUFFERS_FINAL_CLASS</scope><name>Verify</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a4c2a0ff1446b35cee8959e853f5db3af" prot="public" virt="non-virtual"><scope>fys::fb::internal::FLATBUFFERS_FINAL_CLASS</scope><name>Verify</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a4c2a0ff1446b35cee8959e853f5db3af" prot="public" virt="non-virtual"><scope>fys::fb::internal::FLATBUFFERS_FINAL_CLASS</scope><name>Verify</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a4c2a0ff1446b35cee8959e853f5db3af" prot="public" virt="non-virtual"><scope>fys::fb::internal::FLATBUFFERS_FINAL_CLASS</scope><name>Verify</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a0ffe35c42555a98f01983328ddfe225d" prot="public" virt="non-virtual"><scope>fys::fb::internal::FLATBUFFERS_FINAL_CLASS</scope><name>x</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a29ba055d471e24cced41954f44628595" prot="public" virt="non-virtual"><scope>fys::fb::internal::FLATBUFFERS_FINAL_CLASS</scope><name>xPos</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a19fc3d2f39b575a3b57736c309d455ae" prot="public" virt="non-virtual"><scope>fys::fb::internal::FLATBUFFERS_FINAL_CLASS</scope><name>y</name></member>
+      <member refid="structfys_1_1fb_1_1internal_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s_1a2f72f2ea4970b80270aecb9c4eb886f3" prot="public" virt="non-virtual"><scope>fys::fb::internal::FLATBUFFERS_FINAL_CLASS</scope><name>yPos</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

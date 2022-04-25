@@ -1,0 +1,126 @@
+\hypertarget{_fighting_pit_encounter__generated_8h}{}\doxysection{/home/\+Fy\+S/\+Project/\+Fy\+S/services/common/flatbuffer/includes/\+Fighting\+Pit\+Encounter\+\_\+generated.h File Reference}
+\label{_fighting_pit_encounter__generated_8h}\index{/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter\_generated.h@{/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter\_generated.h}}
+{\ttfamily \#include \char`\"{}flatbuffers/flatbuffers.\+h\char`\"{}}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structfys_1_1fb_1_1_f_l_a_t_b_u_f_f_e_r_s___f_i_n_a_l___c_l_a_s_s}{fys\+::fb\+::\+F\+L\+A\+T\+B\+U\+F\+F\+E\+R\+S\+\_\+\+F\+I\+N\+A\+L\+\_\+\+C\+L\+A\+SS}}
+\item 
+struct \mbox{\hyperlink{structfys_1_1fb_1_1_fighting_pit_encounter_builder}{fys\+::fb\+::\+Fighting\+Pit\+Encounter\+Builder}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacefys}{fys}}
+\item 
+ \mbox{\hyperlink{namespacefys_1_1fb}{fys\+::fb}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99}{fys\+::fb\+::\+Level}} \{ \newline
+\mbox{\hyperlink{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99a407c1afc86e0ea814848d1c9be6c0034}{fys\+::fb\+::\+Level\+\_\+\+E\+A\+SY}} = 0, 
+\mbox{\hyperlink{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99a9c6a0091baf7843f70a657dc1271c023}{fys\+::fb\+::\+Level\+\_\+\+M\+E\+D\+I\+UM}} = 1, 
+\mbox{\hyperlink{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99a6214746c672011b105e75e240af9b072}{fys\+::fb\+::\+Level\+\_\+\+H\+A\+RD}} = 2, 
+\mbox{\hyperlink{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99a367d3894fb398f8e4f1e31f891af8ad8}{fys\+::fb\+::\+Level\+\_\+\+M\+IN}} = Level\+\_\+\+E\+A\+SY, 
+\newline
+\mbox{\hyperlink{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99a81502524e3fa52a87b963473343438e4}{fys\+::fb\+::\+Level\+\_\+\+M\+AX}} = Level\+\_\+\+H\+A\+RD
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+const Level(\& \mbox{\hyperlink{namespacefys_1_1fb_aaec34acb72fafec02f6ccdc2bcc29b5a}{fys\+::fb\+::\+Enum\+Values\+Level}} ())\mbox{[}3\mbox{]}
+\item 
+const char $\ast$const  $\ast$ \mbox{\hyperlink{namespacefys_1_1fb_af472613584f1f2c5fe12d1e091e6b1e9}{fys\+::fb\+::\+Enum\+Names\+Level}} ()
+\item 
+const char $\ast$ \mbox{\hyperlink{namespacefys_1_1fb_a85744a8e6d9e00e76a1d5254553d759e}{fys\+::fb\+::\+Enum\+Name\+Level}} (Level e)
+\item 
+flatbuffers\+::\+Offset$<$ Fighting\+Pit\+Encounter $>$ \mbox{\hyperlink{namespacefys_1_1fb_a1dfd620b3d7ece5825b2189328119f16}{fys\+::fb\+::\+Create\+Fighting\+Pit\+Encounter}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&\+\_\+fbb, flatbuffers\+::\+Offset$<$ flatbuffers\+::\+String $>$ user\+\_\+name=0, flatbuffers\+::\+Offset$<$ flatbuffers\+::\+String $>$ token\+\_\+auth=0, uint32\+\_\+t fighting\+\_\+pit\+\_\+id=0, flatbuffers\+::\+Offset$<$ flatbuffers\+::\+String $>$ world\+\_\+server\+\_\+id=0, \mbox{\hyperlink{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99}{fys\+::fb\+::\+Level}} level\+\_\+encounter=\mbox{\hyperlink{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99a407c1afc86e0ea814848d1c9be6c0034}{fys\+::fb\+::\+Level\+\_\+\+E\+A\+SY}}, uint32\+\_\+t id\+\_\+encounter=0, bool is\+\_\+ambush=false, double x\+\_\+player=0.\+0, double y\+\_\+player=0.\+0)
+\item 
+flatbuffers\+::\+Offset$<$ Fighting\+Pit\+Encounter $>$ \mbox{\hyperlink{namespacefys_1_1fb_a69b9f8b2f796f6ee7af20d0747f2d697}{fys\+::fb\+::\+Create\+Fighting\+Pit\+Encounter\+Direct}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&\+\_\+fbb, const char $\ast$user\+\_\+name=nullptr, const char $\ast$token\+\_\+auth=nullptr, uint32\+\_\+t fighting\+\_\+pit\+\_\+id=0, const char $\ast$world\+\_\+server\+\_\+id=nullptr, \mbox{\hyperlink{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99}{fys\+::fb\+::\+Level}} level\+\_\+encounter=\mbox{\hyperlink{namespacefys_1_1fb_afa8d5a591f97452c3c37dd93a4d7ef99a407c1afc86e0ea814848d1c9be6c0034}{fys\+::fb\+::\+Level\+\_\+\+E\+A\+SY}}, uint32\+\_\+t id\+\_\+encounter=0, bool is\+\_\+ambush=false, double x\+\_\+player=0.\+0, double y\+\_\+player=0.\+0)
+\item 
+const fys\+::fb\+::\+Fighting\+Pit\+Encounter $\ast$ \mbox{\hyperlink{namespacefys_1_1fb_a5a60b001710da3f9280fcb59da96e2cd}{fys\+::fb\+::\+Get\+Fighting\+Pit\+Encounter}} (const void $\ast$buf)
+\item 
+const fys\+::fb\+::\+Fighting\+Pit\+Encounter $\ast$ \mbox{\hyperlink{namespacefys_1_1fb_a1153df265e09818956072872c5ed6971}{fys\+::fb\+::\+Get\+Size\+Prefixed\+Fighting\+Pit\+Encounter}} (const void $\ast$buf)
+\item 
+Fighting\+Pit\+Encounter $\ast$ \mbox{\hyperlink{namespacefys_1_1fb_a82a2e82f974eae5350c23b00d99dba51}{fys\+::fb\+::\+Get\+Mutable\+Fighting\+Pit\+Encounter}} (void $\ast$buf)
+\item 
+bool \mbox{\hyperlink{namespacefys_1_1fb_a98024e714e8bc4e3afddfdf00becdf57}{fys\+::fb\+::\+Verify\+Fighting\+Pit\+Encounter\+Buffer}} (flatbuffers\+::\+Verifier \&verifier)
+\item 
+bool \mbox{\hyperlink{namespacefys_1_1fb_a5adcc176bdbd642785461980f84924a9}{fys\+::fb\+::\+Verify\+Size\+Prefixed\+Fighting\+Pit\+Encounter\+Buffer}} (flatbuffers\+::\+Verifier \&verifier)
+\item 
+void \mbox{\hyperlink{namespacefys_1_1fb_a2c8ba7a229fc4ad72cfa02ee0a413731}{fys\+::fb\+::\+Finish\+Fighting\+Pit\+Encounter\+Buffer}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&fbb, flatbuffers\+::\+Offset$<$ fys\+::fb\+::\+Fighting\+Pit\+Encounter $>$ root)
+\item 
+void \mbox{\hyperlink{namespacefys_1_1fb_ab478386d0645330d83b33f26a061230a}{fys\+::fb\+::\+Finish\+Size\+Prefixed\+Fighting\+Pit\+Encounter\+Buffer}} (flatbuffers\+::\+Flat\+Buffer\+Builder \&fbb, flatbuffers\+::\+Offset$<$ fys\+::fb\+::\+Fighting\+Pit\+Encounter $>$ root)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_fighting_pit_encounter__generated_8h_a0c3ecde7fa715fc3efa116b14b3b6659}{V\+T\+\_\+\+U\+S\+E\+R\+\_\+\+N\+A\+ME}} = 4
+\item 
+\mbox{\hyperlink{_fighting_pit_encounter__generated_8h_a24d74d2f5d59cece97a14212a85e5b37}{V\+T\+\_\+\+T\+O\+K\+E\+N\+\_\+\+A\+U\+TH}} = 6
+\item 
+\mbox{\hyperlink{_fighting_pit_encounter__generated_8h_aee007128e57838a2e0cea39d6e9b42ab}{V\+T\+\_\+\+F\+I\+G\+H\+T\+I\+N\+G\+\_\+\+P\+I\+T\+\_\+\+ID}} = 8
+\item 
+\mbox{\hyperlink{_fighting_pit_encounter__generated_8h_a4cb8f89269a03b45b8aa87a97c608f71}{V\+T\+\_\+\+W\+O\+R\+L\+D\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+ID}} = 10
+\item 
+\mbox{\hyperlink{_fighting_pit_encounter__generated_8h_abccc40c62a995bda91eeec4b1f0aa4b5}{V\+T\+\_\+\+L\+E\+V\+E\+L\+\_\+\+E\+N\+C\+O\+U\+N\+T\+ER}} = 12
+\item 
+\mbox{\hyperlink{_fighting_pit_encounter__generated_8h_a9fc0373f2d29fe16be713c1e3939e404}{V\+T\+\_\+\+I\+D\+\_\+\+E\+N\+C\+O\+U\+N\+T\+ER}} = 14
+\item 
+\mbox{\hyperlink{_fighting_pit_encounter__generated_8h_afb318ba5f926992f6cd1770c7b8954b5}{V\+T\+\_\+\+I\+S\+\_\+\+A\+M\+B\+U\+SH}} = 16
+\item 
+\mbox{\hyperlink{_fighting_pit_encounter__generated_8h_ac98e928a949bf93d54da8e0a70d53555}{V\+T\+\_\+\+X\+\_\+\+P\+L\+A\+Y\+ER}} = 18
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{_fighting_pit_encounter__generated_8h_aee007128e57838a2e0cea39d6e9b42ab}\label{_fighting_pit_encounter__generated_8h_aee007128e57838a2e0cea39d6e9b42ab}} 
+\index{FightingPitEncounter\_generated.h@{FightingPitEncounter\_generated.h}!VT\_FIGHTING\_PIT\_ID@{VT\_FIGHTING\_PIT\_ID}}
+\index{VT\_FIGHTING\_PIT\_ID@{VT\_FIGHTING\_PIT\_ID}!FightingPitEncounter\_generated.h@{FightingPitEncounter\_generated.h}}
+\doxysubsubsection{\texorpdfstring{VT\_FIGHTING\_PIT\_ID}{VT\_FIGHTING\_PIT\_ID}}
+{\footnotesize\ttfamily V\+T\+\_\+\+F\+I\+G\+H\+T\+I\+N\+G\+\_\+\+P\+I\+T\+\_\+\+ID = 8}
+
+\mbox{\Hypertarget{_fighting_pit_encounter__generated_8h_a9fc0373f2d29fe16be713c1e3939e404}\label{_fighting_pit_encounter__generated_8h_a9fc0373f2d29fe16be713c1e3939e404}} 
+\index{FightingPitEncounter\_generated.h@{FightingPitEncounter\_generated.h}!VT\_ID\_ENCOUNTER@{VT\_ID\_ENCOUNTER}}
+\index{VT\_ID\_ENCOUNTER@{VT\_ID\_ENCOUNTER}!FightingPitEncounter\_generated.h@{FightingPitEncounter\_generated.h}}
+\doxysubsubsection{\texorpdfstring{VT\_ID\_ENCOUNTER}{VT\_ID\_ENCOUNTER}}
+{\footnotesize\ttfamily V\+T\+\_\+\+I\+D\+\_\+\+E\+N\+C\+O\+U\+N\+T\+ER = 14}
+
+\mbox{\Hypertarget{_fighting_pit_encounter__generated_8h_afb318ba5f926992f6cd1770c7b8954b5}\label{_fighting_pit_encounter__generated_8h_afb318ba5f926992f6cd1770c7b8954b5}} 
+\index{FightingPitEncounter\_generated.h@{FightingPitEncounter\_generated.h}!VT\_IS\_AMBUSH@{VT\_IS\_AMBUSH}}
+\index{VT\_IS\_AMBUSH@{VT\_IS\_AMBUSH}!FightingPitEncounter\_generated.h@{FightingPitEncounter\_generated.h}}
+\doxysubsubsection{\texorpdfstring{VT\_IS\_AMBUSH}{VT\_IS\_AMBUSH}}
+{\footnotesize\ttfamily V\+T\+\_\+\+I\+S\+\_\+\+A\+M\+B\+U\+SH = 16}
+
+\mbox{\Hypertarget{_fighting_pit_encounter__generated_8h_abccc40c62a995bda91eeec4b1f0aa4b5}\label{_fighting_pit_encounter__generated_8h_abccc40c62a995bda91eeec4b1f0aa4b5}} 
+\index{FightingPitEncounter\_generated.h@{FightingPitEncounter\_generated.h}!VT\_LEVEL\_ENCOUNTER@{VT\_LEVEL\_ENCOUNTER}}
+\index{VT\_LEVEL\_ENCOUNTER@{VT\_LEVEL\_ENCOUNTER}!FightingPitEncounter\_generated.h@{FightingPitEncounter\_generated.h}}
+\doxysubsubsection{\texorpdfstring{VT\_LEVEL\_ENCOUNTER}{VT\_LEVEL\_ENCOUNTER}}
+{\footnotesize\ttfamily V\+T\+\_\+\+L\+E\+V\+E\+L\+\_\+\+E\+N\+C\+O\+U\+N\+T\+ER = 12}
+
+\mbox{\Hypertarget{_fighting_pit_encounter__generated_8h_a24d74d2f5d59cece97a14212a85e5b37}\label{_fighting_pit_encounter__generated_8h_a24d74d2f5d59cece97a14212a85e5b37}} 
+\index{FightingPitEncounter\_generated.h@{FightingPitEncounter\_generated.h}!VT\_TOKEN\_AUTH@{VT\_TOKEN\_AUTH}}
+\index{VT\_TOKEN\_AUTH@{VT\_TOKEN\_AUTH}!FightingPitEncounter\_generated.h@{FightingPitEncounter\_generated.h}}
+\doxysubsubsection{\texorpdfstring{VT\_TOKEN\_AUTH}{VT\_TOKEN\_AUTH}}
+{\footnotesize\ttfamily V\+T\+\_\+\+T\+O\+K\+E\+N\+\_\+\+A\+U\+TH = 6}
+
+\mbox{\Hypertarget{_fighting_pit_encounter__generated_8h_a0c3ecde7fa715fc3efa116b14b3b6659}\label{_fighting_pit_encounter__generated_8h_a0c3ecde7fa715fc3efa116b14b3b6659}} 
+\index{FightingPitEncounter\_generated.h@{FightingPitEncounter\_generated.h}!VT\_USER\_NAME@{VT\_USER\_NAME}}
+\index{VT\_USER\_NAME@{VT\_USER\_NAME}!FightingPitEncounter\_generated.h@{FightingPitEncounter\_generated.h}}
+\doxysubsubsection{\texorpdfstring{VT\_USER\_NAME}{VT\_USER\_NAME}}
+{\footnotesize\ttfamily V\+T\+\_\+\+U\+S\+E\+R\+\_\+\+N\+A\+ME = 4}
+
+\mbox{\Hypertarget{_fighting_pit_encounter__generated_8h_a4cb8f89269a03b45b8aa87a97c608f71}\label{_fighting_pit_encounter__generated_8h_a4cb8f89269a03b45b8aa87a97c608f71}} 
+\index{FightingPitEncounter\_generated.h@{FightingPitEncounter\_generated.h}!VT\_WORLD\_SERVER\_ID@{VT\_WORLD\_SERVER\_ID}}
+\index{VT\_WORLD\_SERVER\_ID@{VT\_WORLD\_SERVER\_ID}!FightingPitEncounter\_generated.h@{FightingPitEncounter\_generated.h}}
+\doxysubsubsection{\texorpdfstring{VT\_WORLD\_SERVER\_ID}{VT\_WORLD\_SERVER\_ID}}
+{\footnotesize\ttfamily V\+T\+\_\+\+W\+O\+R\+L\+D\+\_\+\+S\+E\+R\+V\+E\+R\+\_\+\+ID = 10}
+
+\mbox{\Hypertarget{_fighting_pit_encounter__generated_8h_ac98e928a949bf93d54da8e0a70d53555}\label{_fighting_pit_encounter__generated_8h_ac98e928a949bf93d54da8e0a70d53555}} 
+\index{FightingPitEncounter\_generated.h@{FightingPitEncounter\_generated.h}!VT\_X\_PLAYER@{VT\_X\_PLAYER}}
+\index{VT\_X\_PLAYER@{VT\_X\_PLAYER}!FightingPitEncounter\_generated.h@{FightingPitEncounter\_generated.h}}
+\doxysubsubsection{\texorpdfstring{VT\_X\_PLAYER}{VT\_X\_PLAYER}}
+{\footnotesize\ttfamily V\+T\+\_\+\+X\+\_\+\+P\+L\+A\+Y\+ER = 18}
+

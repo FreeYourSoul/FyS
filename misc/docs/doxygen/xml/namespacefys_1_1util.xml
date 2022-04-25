@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacefys_1_1util" kind="namespace" language="C++">
+    <compoundname>fys::util</compoundname>
+    <innerclass refid="classfys_1_1util_1_1_key" prot="public">fys::util::Key</innerclass>
+    <innerclass refid="classfys_1_1util_1_1_random_generator" prot="public">fys::util::RandomGenerator</innerclass>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacefys_1_1util_1aca6c845c3b45cdc1dbae92a253056911" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>SideOrient</type>
+        <definition>static SideOrient fys::util::convertArenaOrientToFb</definition>
+        <argsstring>(HexagonSide::Orientation orient)</argsstring>
+        <name>convertArenaOrientToFb</name>
+        <param>
+          <type>HexagonSide::Orientation</type>
+          <declname>orient</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/util/FbUtility.hh" line="36" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/util/FbUtility.hh" bodystart="36" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacefys_1_1util_1a544e78afb97d7b6be937ce23944c796f" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>HexagonSide::Orientation</type>
+        <definition>static HexagonSide::Orientation fys::util::convertFbOrientToArena</definition>
+        <argsstring>(SideOrient orient)</argsstring>
+        <name>convertFbOrientToArena</name>
+        <param>
+          <type>SideOrient</type>
+          <declname>orient</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/util/FbUtility.hh" line="67" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/util/FbUtility.hh" bodystart="67" bodyend="92"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/util/FbUtility.hh" line="30" column="19"/>
+  </compounddef>
+</doxygen>

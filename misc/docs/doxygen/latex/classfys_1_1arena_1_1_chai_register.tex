@@ -1,0 +1,48 @@
+\hypertarget{classfys_1_1arena_1_1_chai_register}{}\doxysection{fys\+::arena\+::Chai\+Register Class Reference}
+\label{classfys_1_1arena_1_1_chai_register}\index{fys::arena::ChaiRegister@{fys::arena::ChaiRegister}}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_chai_register_a36633e18d1b760e95d203be02dcbb2a7}\label{classfys_1_1arena_1_1_chai_register_a36633e18d1b760e95d203be02dcbb2a7}} 
+static std\+::unique\+\_\+ptr$<$ chaiscript\+::\+Chai\+Script $>$ {\bfseries create\+Chai\+Instance} (\mbox{\hyperlink{classfys_1_1arena_1_1_pit_contenders}{Pit\+Contenders}} \&pc, \mbox{\hyperlink{classfys_1_1arena_1_1_ally_party_teams}{Ally\+Party\+Teams}} \&apt)
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_chai_register_a57e3cc3b3810524c5d1d599959ab76d4}\label{classfys_1_1arena_1_1_chai_register_a57e3cc3b3810524c5d1d599959ab76d4}} 
+static void {\bfseries register\+Utility} (chaiscript\+::\+Chai\+Script \&chai, \mbox{\hyperlink{classfys_1_1arena_1_1_pit_contenders}{Pit\+Contenders}} \&pc, \mbox{\hyperlink{classfys_1_1arena_1_1_ally_party_teams}{Ally\+Party\+Teams}} \&apt)
+\item 
+static bool \mbox{\hyperlink{classfys_1_1arena_1_1_chai_register_a4e8a0600dd21b51011cc826e31a274ce}{load\+And\+Register\+Action\+Party\+Team}} (chaiscript\+::\+Chai\+Script \&chai, \mbox{\hyperlink{classfys_1_1cache_1_1_cml}{cache\+::\+Cml}} \&cache, \mbox{\hyperlink{classfys_1_1arena_1_1_party_team}{Party\+Team}} \&pt)
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_chai_register_a63a95913ed0293188a18e5ae6a3fa807}\label{classfys_1_1arena_1_1_chai_register_a63a95913ed0293188a18e5ae6a3fa807}} 
+static void {\bfseries load\+Contender\+Script} (chaiscript\+::\+Chai\+Script \&chai, \mbox{\hyperlink{classfys_1_1cache_1_1_cml}{cache\+::\+Cml}} \&cml, const std\+::string \&contender\+Key)
+\item 
+\mbox{\Hypertarget{classfys_1_1arena_1_1_chai_register_a0ca1578fe775989650ae78acace5c731}\label{classfys_1_1arena_1_1_chai_register_a0ca1578fe775989650ae78acace5c731}} 
+static void {\bfseries register\+Base\+Actions} (chaiscript\+::\+Chai\+Script \&chai, \mbox{\hyperlink{classfys_1_1cache_1_1_cml}{cache\+::\+Cml}} \&cml)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classfys_1_1arena_1_1_chai_register_a4e8a0600dd21b51011cc826e31a274ce}\label{classfys_1_1arena_1_1_chai_register_a4e8a0600dd21b51011cc826e31a274ce}} 
+\index{fys::arena::ChaiRegister@{fys::arena::ChaiRegister}!loadAndRegisterActionPartyTeam@{loadAndRegisterActionPartyTeam}}
+\index{loadAndRegisterActionPartyTeam@{loadAndRegisterActionPartyTeam}!fys::arena::ChaiRegister@{fys::arena::ChaiRegister}}
+\doxysubsubsection{\texorpdfstring{loadAndRegisterActionPartyTeam()}{loadAndRegisterActionPartyTeam()}}
+{\footnotesize\ttfamily bool fys\+::arena\+::\+Chai\+Register\+::load\+And\+Register\+Action\+Party\+Team (\begin{DoxyParamCaption}\item[{chaiscript\+::\+Chai\+Script \&}]{chai,  }\item[{\mbox{\hyperlink{classfys_1_1cache_1_1_cml}{cache\+::\+Cml}} \&}]{cache,  }\item[{\mbox{\hyperlink{classfys_1_1arena_1_1_party_team}{Party\+Team}} \&}]{pt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Load all the actions/alterations scripts of a party team (a new incoming player) retrieved from Cml and generate the instance of actions into the Chai\+Script engine for it to be manipulated in-\/game.
+
+
+\begin{DoxyParams}{Parameters}
+{\em chai} & engine to load and register into \\
+\hline
+{\em cache} & Cml instance to retrieve from \\
+\hline
+{\em pt} & party\+Team from where the actions has to be found \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/services/arena/include/Chai\+Register.\+hh\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/services/arena/src/Chai\+Register.\+cpp\end{DoxyCompactItemize}

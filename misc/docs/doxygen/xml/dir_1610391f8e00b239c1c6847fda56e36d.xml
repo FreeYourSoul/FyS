@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_1610391f8e00b239c1c6847fda56e36d" kind="dir">
+    <compoundname>/home/FyS/Project/FyS/dispatcher/common/include/core</compoundname>
+    <innerfile refid="_dispatcher_8hh">Dispatcher.hh</innerfile>
+    <innerfile refid="_dispatcher_connection_manager_8hh">DispatcherConnectionManager.hh</innerfile>
+    <innerfile refid="_simple_proxy_8hh">SimpleProxy.hh</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/"/>
+  </compounddef>
+</doxygen>

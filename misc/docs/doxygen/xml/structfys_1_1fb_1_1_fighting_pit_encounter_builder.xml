@@ -1,0 +1,274 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1fb_1_1_fighting_pit_encounter_builder" kind="struct" language="C++" prot="public">
+    <compoundname>fys::fb::FightingPitEncounterBuilder</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1fb_1_1_fighting_pit_encounter_builder_1a29966f4ca16668ef6bea03a4335062dc" prot="public" static="no" mutable="no">
+        <type>flatbuffers::FlatBufferBuilder &amp;</type>
+        <definition>flatbuffers::FlatBufferBuilder&amp; fys::fb::FightingPitEncounterBuilder::fbb_</definition>
+        <argsstring></argsstring>
+        <name>fbb_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" line="143" column="34" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" bodystart="143" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1fb_1_1_fighting_pit_encounter_builder_1a27669969ce586342589485c0c7694b7d" prot="public" static="no" mutable="no">
+        <type>flatbuffers::uoffset_t</type>
+        <definition>flatbuffers::uoffset_t fys::fb::FightingPitEncounterBuilder::start_</definition>
+        <argsstring></argsstring>
+        <name>start_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" line="144" column="26" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" bodystart="144" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfys_1_1fb_1_1_fighting_pit_encounter_builder_1afbb52c21cc0d0c43780a863d4618e3d3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::FightingPitEncounterBuilder::add_user_name</definition>
+        <argsstring>(flatbuffers::Offset&lt; flatbuffers::String &gt; user_name)</argsstring>
+        <name>add_user_name</name>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>user_name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" line="145" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" bodystart="145" bodyend="147"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_fighting_pit_encounter_builder_1ad7a7288ea72bc0a58f41b8f687448c6a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::FightingPitEncounterBuilder::add_token_auth</definition>
+        <argsstring>(flatbuffers::Offset&lt; flatbuffers::String &gt; token_auth)</argsstring>
+        <name>add_token_auth</name>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>token_auth</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" line="148" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" bodystart="148" bodyend="150"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_fighting_pit_encounter_builder_1ad3078296e573e3604fbc23764e1bbffd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::FightingPitEncounterBuilder::add_fighting_pit_id</definition>
+        <argsstring>(uint32_t fighting_pit_id)</argsstring>
+        <name>add_fighting_pit_id</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>fighting_pit_id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" line="151" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" bodystart="151" bodyend="153"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_fighting_pit_encounter_builder_1ac1a3cbb4d7402829f83663102952edf4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::FightingPitEncounterBuilder::add_world_server_id</definition>
+        <argsstring>(flatbuffers::Offset&lt; flatbuffers::String &gt; world_server_id)</argsstring>
+        <name>add_world_server_id</name>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>world_server_id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" line="154" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" bodystart="154" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_fighting_pit_encounter_builder_1a4d24cd503314da9791911e38942cd874" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::FightingPitEncounterBuilder::add_disable_join</definition>
+        <argsstring>(bool disable_join)</argsstring>
+        <name>add_disable_join</name>
+        <param>
+          <type>bool</type>
+          <declname>disable_join</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" line="157" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" bodystart="157" bodyend="159"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_fighting_pit_encounter_builder_1a19efb6fe3345b1b5a71452480b30cfc7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::FightingPitEncounterBuilder::add_level_encounter</definition>
+        <argsstring>(fys::fb::Level level_encounter)</argsstring>
+        <name>add_level_encounter</name>
+        <param>
+          <type>fys::fb::Level</type>
+          <declname>level_encounter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" line="160" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" bodystart="160" bodyend="162"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_fighting_pit_encounter_builder_1aec7c90e52db1bc06bbeace96abe3f5d1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::FightingPitEncounterBuilder::add_id_encounter</definition>
+        <argsstring>(uint32_t id_encounter)</argsstring>
+        <name>add_id_encounter</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>id_encounter</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" line="163" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" bodystart="163" bodyend="165"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_fighting_pit_encounter_builder_1a5531063a6403a537b48a5e69374bbd66" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::FightingPitEncounterBuilder::add_is_ambush</definition>
+        <argsstring>(bool is_ambush)</argsstring>
+        <name>add_is_ambush</name>
+        <param>
+          <type>bool</type>
+          <declname>is_ambush</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" line="166" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" bodystart="166" bodyend="168"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_fighting_pit_encounter_builder_1ab0712316cdebdf6376bbc56aab3d4c8a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::FightingPitEncounterBuilder::add_x_player</definition>
+        <argsstring>(double x_player)</argsstring>
+        <name>add_x_player</name>
+        <param>
+          <type>double</type>
+          <declname>x_player</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" line="169" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" bodystart="169" bodyend="171"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_fighting_pit_encounter_builder_1a48eeb52ebb6e7c0a2cc4db3cadba420a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::FightingPitEncounterBuilder::add_y_player</definition>
+        <argsstring>(double y_player)</argsstring>
+        <name>add_y_player</name>
+        <param>
+          <type>double</type>
+          <declname>y_player</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" line="172" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" bodystart="172" bodyend="174"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_fighting_pit_encounter_builder_1af8dc13eada19739bfd7c5fb7b906c091" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::fb::FightingPitEncounterBuilder::FightingPitEncounterBuilder</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb)</argsstring>
+        <name>FightingPitEncounterBuilder</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" line="175" column="12" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" bodystart="175" bodyend="178"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_fighting_pit_encounter_builder_1a4f88d79432a90833b3670963a4cb81a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfys_1_1fb_1_1_fighting_pit_encounter_builder" kindref="compound">FightingPitEncounterBuilder</ref> &amp;</type>
+        <definition>FightingPitEncounterBuilder&amp; fys::fb::FightingPitEncounterBuilder::operator=</definition>
+        <argsstring>(const FightingPitEncounterBuilder &amp;)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="structfys_1_1fb_1_1_fighting_pit_encounter_builder" kindref="compound">FightingPitEncounterBuilder</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" line="179" column="31"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_fighting_pit_encounter_builder_1a93961485801295e0b931fefd7315484d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; FightingPitEncounter &gt;</type>
+        <definition>flatbuffers::Offset&lt;FightingPitEncounter&gt; fys::fb::FightingPitEncounterBuilder::Finish</definition>
+        <argsstring>()</argsstring>
+        <name>Finish</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" line="180" column="23" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" bodystart="180" bodyend="184"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" line="142" column="34" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/FightingPitEncounter_generated.h" bodystart="142" bodyend="185"/>
+    <listofallmembers>
+      <member refid="structfys_1_1fb_1_1_fighting_pit_encounter_builder_1a4d24cd503314da9791911e38942cd874" prot="public" virt="non-virtual"><scope>fys::fb::FightingPitEncounterBuilder</scope><name>add_disable_join</name></member>
+      <member refid="structfys_1_1fb_1_1_fighting_pit_encounter_builder_1ad3078296e573e3604fbc23764e1bbffd" prot="public" virt="non-virtual"><scope>fys::fb::FightingPitEncounterBuilder</scope><name>add_fighting_pit_id</name></member>
+      <member refid="structfys_1_1fb_1_1_fighting_pit_encounter_builder_1aec7c90e52db1bc06bbeace96abe3f5d1" prot="public" virt="non-virtual"><scope>fys::fb::FightingPitEncounterBuilder</scope><name>add_id_encounter</name></member>
+      <member refid="structfys_1_1fb_1_1_fighting_pit_encounter_builder_1a5531063a6403a537b48a5e69374bbd66" prot="public" virt="non-virtual"><scope>fys::fb::FightingPitEncounterBuilder</scope><name>add_is_ambush</name></member>
+      <member refid="structfys_1_1fb_1_1_fighting_pit_encounter_builder_1a19efb6fe3345b1b5a71452480b30cfc7" prot="public" virt="non-virtual"><scope>fys::fb::FightingPitEncounterBuilder</scope><name>add_level_encounter</name></member>
+      <member refid="structfys_1_1fb_1_1_fighting_pit_encounter_builder_1ad7a7288ea72bc0a58f41b8f687448c6a" prot="public" virt="non-virtual"><scope>fys::fb::FightingPitEncounterBuilder</scope><name>add_token_auth</name></member>
+      <member refid="structfys_1_1fb_1_1_fighting_pit_encounter_builder_1afbb52c21cc0d0c43780a863d4618e3d3" prot="public" virt="non-virtual"><scope>fys::fb::FightingPitEncounterBuilder</scope><name>add_user_name</name></member>
+      <member refid="structfys_1_1fb_1_1_fighting_pit_encounter_builder_1ac1a3cbb4d7402829f83663102952edf4" prot="public" virt="non-virtual"><scope>fys::fb::FightingPitEncounterBuilder</scope><name>add_world_server_id</name></member>
+      <member refid="structfys_1_1fb_1_1_fighting_pit_encounter_builder_1ab0712316cdebdf6376bbc56aab3d4c8a" prot="public" virt="non-virtual"><scope>fys::fb::FightingPitEncounterBuilder</scope><name>add_x_player</name></member>
+      <member refid="structfys_1_1fb_1_1_fighting_pit_encounter_builder_1a48eeb52ebb6e7c0a2cc4db3cadba420a" prot="public" virt="non-virtual"><scope>fys::fb::FightingPitEncounterBuilder</scope><name>add_y_player</name></member>
+      <member refid="structfys_1_1fb_1_1_fighting_pit_encounter_builder_1a29966f4ca16668ef6bea03a4335062dc" prot="public" virt="non-virtual"><scope>fys::fb::FightingPitEncounterBuilder</scope><name>fbb_</name></member>
+      <member refid="structfys_1_1fb_1_1_fighting_pit_encounter_builder_1af8dc13eada19739bfd7c5fb7b906c091" prot="public" virt="non-virtual"><scope>fys::fb::FightingPitEncounterBuilder</scope><name>FightingPitEncounterBuilder</name></member>
+      <member refid="structfys_1_1fb_1_1_fighting_pit_encounter_builder_1a93961485801295e0b931fefd7315484d" prot="public" virt="non-virtual"><scope>fys::fb::FightingPitEncounterBuilder</scope><name>Finish</name></member>
+      <member refid="structfys_1_1fb_1_1_fighting_pit_encounter_builder_1a4f88d79432a90833b3670963a4cb81a2" prot="public" virt="non-virtual"><scope>fys::fb::FightingPitEncounterBuilder</scope><name>operator=</name></member>
+      <member refid="structfys_1_1fb_1_1_fighting_pit_encounter_builder_1a27669969ce586342589485c0c7694b7d" prot="public" virt="non-virtual"><scope>fys::fb::FightingPitEncounterBuilder</scope><name>start_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

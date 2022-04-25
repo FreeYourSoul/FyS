@@ -1,0 +1,283 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Integrate Chaiscript &mdash; FreeYourSoul Online 0.0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Cache Manager Library (CML)" href="../../CML.html" />
+    <link rel="prev" title="Arena" href="Arena_BattleSystem.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> FreeYourSoul Online
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../StoryPlot.html">Story and Lore</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code/arena.html">Code Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../code/Protocol.html">Protocol</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="arena.html">Arena Service</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Arena_TurnPriorityList.html">Turn per Turn priority</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Arena_TurnPriorityList.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Arena_TurnPriorityList.html#implementation">Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Arena_BattleSystem.html">Arena</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Arena_BattleSystem.html#fighting-pit">Fighting Pit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Arena_BattleSystem.html#a-new-battle-system-sctb-side-condition-timed-battle">A new battle system SCTB (Side Condition Timed Battle)</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Chaiscript Integration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction-chaiscript">Introduction : Chaiscript</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#existing-c-chai-mapping">Existing C++/Chai Mapping</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#integrate-ai-scripts">Integrate AI scripts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#template">Template</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#integrate-attacks-scripts">Integrate attacks scripts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Template</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../CML.html">Cache Manager Library</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">FreeYourSoul Online</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="arena.html">Arena Service Documentation!</a> &raquo;</li>
+        
+      <li>Integrate Chaiscript</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/services/arena/Arena_Integrate_Chaiscripts.md.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="integrate-chaiscript">
+<h1>Integrate Chaiscript<a class="headerlink" href="#integrate-chaiscript" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference external" href="#integrate-ai-scripts">Integrate AI</a> (opponent artificial intelligence)</p></li>
+<li><p><a class="reference external" href="#integrate-attacks-scripts">Integrate attacks</a> (used by opponent and team characters)</p></li>
+</ul>
+<div class="section" id="introduction-chaiscript">
+<h2>Introduction : Chaiscript<a class="headerlink" href="#introduction-chaiscript" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="existing-c-chai-mapping">
+<h3>Existing C++/Chai Mapping<a class="headerlink" href="#existing-c-chai-mapping" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="integrate-ai-scripts">
+<h2>Integrate AI scripts<a class="headerlink" href="#integrate-ai-scripts" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="template">
+<h3>Template<a class="headerlink" href="#template" title="Permalink to this headline">¶</a></h3>
+<p>Chaiscript for AI are represented by a class which has to take a contenderId as parameter in constructor and implement the methods:</p>
+<ul class="simple">
+<li><p>runScriptedAction(id) which will determine and apply an action.</p></li>
+<li><p>defineSpawningPosition() which will return the position on the battle field for the opponent</p></li>
+</ul>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TemplateChai</span> <span class="p">{</span>
+    <span class="n">var</span> <span class="n">contenderId</span><span class="p">;</span>
+    
+    <span class="n">TemplateChai</span><span class="p">(</span><span class="n">contenderId</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="n">contenderId</span> <span class="o">=</span> <span class="n">contenderId</span><span class="p">;</span>
+    <span class="p">}</span>    
+
+    <span class="n">def</span> <span class="n">runScriptedAction</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// decide attack</span>
+        <span class="c1">// decide a target (if needed)</span>
+        <span class="c1">// apply and send message</span>
+    <span class="p">}</span>
+
+    <span class="n">def</span> <span class="n">defineSpawningPosition</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// return HexagonSide</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="integrate-attacks-scripts">
+<h2>Integrate attacks scripts<a class="headerlink" href="#integrate-attacks-scripts" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Template<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../CML.html" class="btn btn-neutral float-right" title="Cache Manager Library (CML)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Arena_BattleSystem.html" class="btn btn-neutral float-left" title="Arena" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Quentin Balland
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

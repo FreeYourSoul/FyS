@@ -1,0 +1,90 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1arena_1_1_awaiting_player_arena" kind="struct" language="C++" prot="public">
+    <compoundname>fys::arena::AwaitingPlayerArena</compoundname>
+    <includes refid="_arena_server_service_8hh" local="no">ArenaServerService.hh</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_awaiting_player_arena_1a621a9d3961b9228dd84e549b3a67baaa" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string fys::arena::AwaitingPlayerArena::namePlayer</definition>
+        <argsstring></argsstring>
+        <name>namePlayer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" line="62" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_awaiting_player_arena_1abcf107ee15aa9446c601cecc6a7de7b2" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string fys::arena::AwaitingPlayerArena::token</definition>
+        <argsstring></argsstring>
+        <name>token</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" line="63" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_awaiting_player_arena_1afac334acfc2daf885b245a8b0b8c0b8e" prot="public" static="no" mutable="no">
+        <type>unsigned</type>
+        <definition>unsigned fys::arena::AwaitingPlayerArena::fightingPitId</definition>
+        <argsstring></argsstring>
+        <name>fightingPitId</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" line="66" column="10" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1_awaiting_player_arena_1a421d3737acbf869a32a695acac9f9df4" prot="public" static="no" mutable="no">
+        <type>std::optional&lt; <ref refid="structfys_1_1arena_1_1_awaiting_arena" kindref="compound">AwaitingArena</ref> &gt;</type>
+        <definition>std::optional&lt;AwaitingArena&gt; fys::arena::AwaitingPlayerArena::gen</definition>
+        <argsstring></argsstring>
+        <name>gen</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" line="69" column="15" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfys_1_1arena_1_1_awaiting_player_arena_1a5f310e67f258a1651127ab64e6442d97" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::AwaitingPlayerArena::hasToBeGenerated</definition>
+        <argsstring>() const</argsstring>
+        <name>hasToBeGenerated</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" line="72" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" bodystart="72" bodyend="75"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>A Player is awaited whom could generate a new <ref refid="classfys_1_1arena_1_1_fighting_pit" kindref="compound">FightingPit</ref> if _fightingPitId is not set <ref refid="structfys_1_1arena_1_1_awaiting_player_arena" kindref="compound">AwaitingPlayerArena</ref> represent a player that is the trigger of a new fighting pit or a join action of an existing one, it contains the information related to the arena that has to be generated (none required when joining). </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" line="61" column="26" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" bodystart="61" bodyend="77"/>
+    <listofallmembers>
+      <member refid="structfys_1_1arena_1_1_awaiting_player_arena_1afac334acfc2daf885b245a8b0b8c0b8e" prot="public" virt="non-virtual"><scope>fys::arena::AwaitingPlayerArena</scope><name>fightingPitId</name></member>
+      <member refid="structfys_1_1arena_1_1_awaiting_player_arena_1a421d3737acbf869a32a695acac9f9df4" prot="public" virt="non-virtual"><scope>fys::arena::AwaitingPlayerArena</scope><name>gen</name></member>
+      <member refid="structfys_1_1arena_1_1_awaiting_player_arena_1a5f310e67f258a1651127ab64e6442d97" prot="public" virt="non-virtual"><scope>fys::arena::AwaitingPlayerArena</scope><name>hasToBeGenerated</name></member>
+      <member refid="structfys_1_1arena_1_1_awaiting_player_arena_1a621a9d3961b9228dd84e549b3a67baaa" prot="public" virt="non-virtual"><scope>fys::arena::AwaitingPlayerArena</scope><name>namePlayer</name></member>
+      <member refid="structfys_1_1arena_1_1_awaiting_player_arena_1abcf107ee15aa9446c601cecc6a7de7b2" prot="public" virt="non-virtual"><scope>fys::arena::AwaitingPlayerArena</scope><name>token</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1cache_1_1_cml_key" kind="class" language="C++" prot="public">
+    <compoundname>fys::cache::CmlKey</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfys_1_1cache_1_1_cml_key_1aa2b6f88c1062dfeeb656eed5c2493158" prot="private" static="no" mutable="no">
+        <type>std::filesystem::path</type>
+        <definition>std::filesystem::path fys::cache::CmlKey::_path</definition>
+        <argsstring></argsstring>
+        <name>_path</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/scripting_cache/cml/include/CmlKey.hh" line="67" column="31" bodyfile="/home/FyS/Project/FyS/scripting_cache/cml/include/CmlKey.hh" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1cache_1_1_cml_key_1a13bc00befdb0c9dccc1c08007a7f3635" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string fys::cache::CmlKey::_key</definition>
+        <argsstring></argsstring>
+        <name>_key</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/scripting_cache/cml/include/CmlKey.hh" line="68" column="21" bodyfile="/home/FyS/Project/FyS/scripting_cache/cml/include/CmlKey.hh" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1cache_1_1_cml_key_1a07698261f96a45613b3d4210a0fa50a1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::cache::CmlKey::CmlKey</definition>
+        <argsstring>(std::filesystem::path basePath, std::string key)</argsstring>
+        <name>CmlKey</name>
+        <param>
+          <type>std::filesystem::path</type>
+          <declname>basePath</declname>
+        </param>
+        <param>
+          <type>std::string</type>
+          <declname>key</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/scripting_cache/cml/include/CmlKey.hh" line="34" column="9" bodyfile="/home/FyS/Project/FyS/scripting_cache/cml/include/CmlKey.hh" bodystart="34" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1cache_1_1_cml_key_1a87c75d96e2e9e3a83383f29eca31b4c8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::filesystem::path &amp;</type>
+        <definition>const std::filesystem::path&amp; fys::cache::CmlKey::getPath</definition>
+        <argsstring>() const</argsstring>
+        <name>getPath</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/scripting_cache/cml/include/CmlKey.hh" line="40" column="38" bodyfile="/home/FyS/Project/FyS/scripting_cache/cml/include/CmlKey.hh" bodystart="40" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1cache_1_1_cml_key_1abdff7da89c4dea13694afbe484be3d74" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>const std::string &amp;</type>
+        <definition>const std::string&amp; fys::cache::CmlKey::getKey</definition>
+        <argsstring>() const</argsstring>
+        <name>getKey</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/scripting_cache/cml/include/CmlKey.hh" line="41" column="28" bodyfile="/home/FyS/Project/FyS/scripting_cache/cml/include/CmlKey.hh" bodystart="41" bodyend="41"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classfys_1_1cache_1_1_cml_key_1a855fba61fbaf5419a6bdac3e41f20dff" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>static std::vector&lt;std::string&gt; fys::cache::CmlKey::tokenizeKey</definition>
+        <argsstring>(const CmlKey &amp;key, const std::string &amp;separators)</argsstring>
+        <name>tokenizeKey</name>
+        <param>
+          <type>const <ref refid="classfys_1_1cache_1_1_cml_key" kindref="compound">CmlKey</ref> &amp;</type>
+          <declname>key</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>separators</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/scripting_cache/cml/include/CmlKey.hh" line="44" column="28" bodyfile="/home/FyS/Project/FyS/scripting_cache/cml/include/CmlKey.hh" bodystart="44" bodyend="64"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/scripting_cache/cml/include/CmlKey.hh" line="32" column="17" bodyfile="/home/FyS/Project/FyS/scripting_cache/cml/include/CmlKey.hh" bodystart="32" bodyend="70"/>
+    <listofallmembers>
+      <member refid="classfys_1_1cache_1_1_cml_key_1a13bc00befdb0c9dccc1c08007a7f3635" prot="private" virt="non-virtual"><scope>fys::cache::CmlKey</scope><name>_key</name></member>
+      <member refid="classfys_1_1cache_1_1_cml_key_1aa2b6f88c1062dfeeb656eed5c2493158" prot="private" virt="non-virtual"><scope>fys::cache::CmlKey</scope><name>_path</name></member>
+      <member refid="classfys_1_1cache_1_1_cml_key_1a07698261f96a45613b3d4210a0fa50a1" prot="public" virt="non-virtual"><scope>fys::cache::CmlKey</scope><name>CmlKey</name></member>
+      <member refid="classfys_1_1cache_1_1_cml_key_1abdff7da89c4dea13694afbe484be3d74" prot="public" virt="non-virtual"><scope>fys::cache::CmlKey</scope><name>getKey</name></member>
+      <member refid="classfys_1_1cache_1_1_cml_key_1a87c75d96e2e9e3a83383f29eca31b4c8" prot="public" virt="non-virtual"><scope>fys::cache::CmlKey</scope><name>getPath</name></member>
+      <member refid="classfys_1_1cache_1_1_cml_key_1a855fba61fbaf5419a6bdac3e41f20dff" prot="private" virt="non-virtual"><scope>fys::cache::CmlKey</scope><name>tokenizeKey</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

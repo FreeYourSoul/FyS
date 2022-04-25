@@ -1,0 +1,365 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1arena_1_1_priority_order_list" kind="class" language="C++" prot="public">
+    <compoundname>fys::arena::PriorityOrderList</compoundname>
+    <derivedcompoundref refid="class_priority_order_list_pass_through" prot="public" virt="non-virtual">PriorityOrderListPassThrough</derivedcompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_priority_order_list_1aad4a2023b2c0033d305a7b13969f10db" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structfys_1_1arena_1_1data_1_1_priority_elem" kindref="compound">data::PriorityElem</ref> &gt;</type>
+        <definition>std::vector&lt;data::PriorityElem&gt; fys::arena::PriorityOrderList::_baseSpeed</definition>
+        <argsstring></argsstring>
+        <name>_baseSpeed</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" line="93" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_priority_order_list_1a1fbaf160d8b4817c956366e2c66f2e11" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structfys_1_1arena_1_1data_1_1_priority_elem" kindref="compound">data::PriorityElem</ref> &gt;</type>
+        <definition>std::vector&lt;data::PriorityElem&gt; fys::arena::PriorityOrderList::_priorityList</definition>
+        <argsstring></argsstring>
+        <name>_priorityList</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" line="94" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_priority_order_list_1ae74e5d1a2bf96ca9f08aadf545d7b0d8" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; <ref refid="structfys_1_1arena_1_1data_1_1_priority_elem" kindref="compound">data::PriorityElem</ref> &gt;</type>
+        <definition>std::vector&lt;data::PriorityElem&gt; fys::arena::PriorityOrderList::_analyzedList</definition>
+        <argsstring></argsstring>
+        <name>_analyzedList</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" line="96" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_priority_order_list_1a0ce382556e12327bc9adcf2cbc34da7a" prot="private" static="no" mutable="no">
+        <type><ref refid="structfys_1_1arena_1_1data_1_1_priority_elem" kindref="compound">data::PriorityElem</ref></type>
+        <definition>data::PriorityElem fys::arena::PriorityOrderList::_currentPrio</definition>
+        <argsstring></argsstring>
+        <name>_currentPrio</name>
+        <initializer>{}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" line="98" column="20" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_priority_order_list_1a85b8c7f4001a4c5815ab1d98652ee4f2" prot="private" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint fys::arena::PriorityOrderList::_currentTurn</definition>
+        <argsstring></argsstring>
+        <name>_currentTurn</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" line="100" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1arena_1_1_priority_order_list_1adc1e8229ffbc1124cd33e3b1840791d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fys::arena::PriorityOrderList::PriorityOrderList</definition>
+        <argsstring>()=default</argsstring>
+        <name>PriorityOrderList</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" line="37" column="1"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_priority_order_list_1a517557fc8c0e2e4c06dc889546884244" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fys::arena::PriorityOrderList::PriorityOrderList</definition>
+        <argsstring>(std::vector&lt; data::PriorityElem &gt; baseSpeed)</argsstring>
+        <name>PriorityOrderList</name>
+        <param>
+          <type>std::vector&lt; <ref refid="structfys_1_1arena_1_1data_1_1_priority_elem" kindref="compound">data::PriorityElem</ref> &gt;</type>
+          <declname>baseSpeed</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" line="38" column="10" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/PriorityOrderList.cpp" bodystart="30" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_priority_order_list_1a108bb8e1c5fd8e9f745b09135c26a834" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::PriorityOrderList::addParticipantInList</definition>
+        <argsstring>(uint id, int speed, bool isContender)</argsstring>
+        <name>addParticipantInList</name>
+        <param>
+          <type>uint</type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>speed</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>isContender</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" line="40" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/PriorityOrderList.cpp" bodystart="42" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_priority_order_list_1a51adec2200b483e253be8ab37b926546" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::PriorityOrderList::removeParticipantFromList</definition>
+        <argsstring>(uint idParticipant, bool isContender)</argsstring>
+        <name>removeParticipantFromList</name>
+        <param>
+          <type>uint</type>
+          <declname>idParticipant</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>isContender</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" line="41" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/PriorityOrderList.cpp" bodystart="60" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_priority_order_list_1af13af7be2f3b7a87c8e9ddb65e16c10d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::PriorityOrderList::empty</definition>
+        <argsstring>() const</argsstring>
+        <name>empty</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" line="44" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" bodystart="44" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_priority_order_list_1a9090c56e953a37b539dea776fa916525" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>const <ref refid="structfys_1_1arena_1_1data_1_1_priority_elem" kindref="compound">data::PriorityElem</ref> &amp;</type>
+        <definition>const data::PriorityElem&amp; fys::arena::PriorityOrderList::getCurrent</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getCurrent</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" line="47" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" bodystart="47" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_priority_order_list_1ab5311726c30e5b7923da3360c890ddfd" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>unsigned</type>
+        <definition>unsigned fys::arena::PriorityOrderList::getTurnNumber</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>getTurnNumber</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" line="50" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_priority_order_list_1a39e71bcfac4ce882cca7504536ba2122" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfys_1_1arena_1_1data_1_1_priority_elem" kindref="compound">data::PriorityElem</ref></type>
+        <definition>data::PriorityElem fys::arena::PriorityOrderList::getNext</definition>
+        <argsstring>()</argsstring>
+        <name>getNext</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" line="53" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/PriorityOrderList.cpp" bodystart="71" bodyend="87"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classfys_1_1arena_1_1_priority_order_list_1a9a9216ae516ac4e23c4916d430709e43" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::PriorityOrderList::sortBaseAndCalculatePriority</definition>
+        <argsstring>()</argsstring>
+        <name>sortBaseAndCalculatePriority</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" line="57" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/PriorityOrderList.cpp" bodystart="120" bodyend="132"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_priority_order_list_1af47c5ebf9bd884d1ff8a81a90d001435" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::PriorityOrderList::calculatePriority</definition>
+        <argsstring>(uint turn)</argsstring>
+        <name>calculatePriority</name>
+        <param>
+          <type>uint</type>
+          <declname>turn</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" line="60" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/PriorityOrderList.cpp" bodystart="173" bodyend="190"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_priority_order_list_1a13f44714b1d7f279a5009e88fca5fd18" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::PriorityOrderList::endTurnRoutine</definition>
+        <argsstring>()</argsstring>
+        <name>endTurnRoutine</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" line="63" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/PriorityOrderList.cpp" bodystart="152" bodyend="170"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_priority_order_list_1a7641d325482cf3943fa014c635d7eeab" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int fys::arena::PriorityOrderList::getComputedSpeed</definition>
+        <argsstring>(const data::PriorityElem &amp;elemToCompute) const</argsstring>
+        <name>getComputedSpeed</name>
+        <param>
+          <type>const <ref refid="structfys_1_1arena_1_1data_1_1_priority_elem" kindref="compound">data::PriorityElem</ref> &amp;</type>
+          <declname>elemToCompute</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" line="66" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/PriorityOrderList.cpp" bodystart="135" bodyend="149"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_priority_order_list_1a7fda36b624a3ff61d44ea1ef791582cf" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::PriorityOrderList::customSort</definition>
+        <argsstring>()</argsstring>
+        <name>customSort</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Sort in a specific manner </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" line="72" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/PriorityOrderList.cpp" bodystart="90" bodyend="117"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_priority_order_list_1ac54a07cc6dfd931271fac0a9f4ad19d3" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::PriorityOrderList::isPlayerSlowest</definition>
+        <argsstring>(uint id) const</argsstring>
+        <name>isPlayerSlowest</name>
+        <param>
+          <type>uint</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" line="75" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" bodystart="75" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_priority_order_list_1a8e9de19584395a3ddcbf70cc9f5e2afd" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int fys::arena::PriorityOrderList::getFastestBaseSpeed</definition>
+        <argsstring>() const</argsstring>
+        <name>getFastestBaseSpeed</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" line="81" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" bodystart="81" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_priority_order_list_1ab3e80747ccc7ff4f8d38f172242fefa5" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int fys::arena::PriorityOrderList::getSlowestSpeed</definition>
+        <argsstring>() const</argsstring>
+        <name>getSlowestSpeed</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" line="87" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" bodystart="87" bodyend="90"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>PriorityOrderListPassThrough</label>
+        <link refid="class_priority_order_list_pass_through"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>fys::arena::PriorityOrderList</label>
+        <link refid="classfys_1_1arena_1_1_priority_order_list"/>
+      </node>
+    </inheritancegraph>
+    <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" line="34" column="24" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/PriorityOrderList.hh" bodystart="34" bodyend="102"/>
+    <listofallmembers>
+      <member refid="classfys_1_1arena_1_1_priority_order_list_1ae74e5d1a2bf96ca9f08aadf545d7b0d8" prot="private" virt="non-virtual"><scope>fys::arena::PriorityOrderList</scope><name>_analyzedList</name></member>
+      <member refid="classfys_1_1arena_1_1_priority_order_list_1aad4a2023b2c0033d305a7b13969f10db" prot="private" virt="non-virtual"><scope>fys::arena::PriorityOrderList</scope><name>_baseSpeed</name></member>
+      <member refid="classfys_1_1arena_1_1_priority_order_list_1a0ce382556e12327bc9adcf2cbc34da7a" prot="private" virt="non-virtual"><scope>fys::arena::PriorityOrderList</scope><name>_currentPrio</name></member>
+      <member refid="classfys_1_1arena_1_1_priority_order_list_1a85b8c7f4001a4c5815ab1d98652ee4f2" prot="private" virt="non-virtual"><scope>fys::arena::PriorityOrderList</scope><name>_currentTurn</name></member>
+      <member refid="classfys_1_1arena_1_1_priority_order_list_1a1fbaf160d8b4817c956366e2c66f2e11" prot="private" virt="non-virtual"><scope>fys::arena::PriorityOrderList</scope><name>_priorityList</name></member>
+      <member refid="classfys_1_1arena_1_1_priority_order_list_1a108bb8e1c5fd8e9f745b09135c26a834" prot="public" virt="non-virtual"><scope>fys::arena::PriorityOrderList</scope><name>addParticipantInList</name></member>
+      <member refid="classfys_1_1arena_1_1_priority_order_list_1af47c5ebf9bd884d1ff8a81a90d001435" prot="private" virt="non-virtual"><scope>fys::arena::PriorityOrderList</scope><name>calculatePriority</name></member>
+      <member refid="classfys_1_1arena_1_1_priority_order_list_1a7fda36b624a3ff61d44ea1ef791582cf" prot="private" virt="non-virtual"><scope>fys::arena::PriorityOrderList</scope><name>customSort</name></member>
+      <member refid="classfys_1_1arena_1_1_priority_order_list_1af13af7be2f3b7a87c8e9ddb65e16c10d" prot="public" virt="non-virtual"><scope>fys::arena::PriorityOrderList</scope><name>empty</name></member>
+      <member refid="classfys_1_1arena_1_1_priority_order_list_1a13f44714b1d7f279a5009e88fca5fd18" prot="private" virt="non-virtual"><scope>fys::arena::PriorityOrderList</scope><name>endTurnRoutine</name></member>
+      <member refid="classfys_1_1arena_1_1_priority_order_list_1a7641d325482cf3943fa014c635d7eeab" prot="private" virt="non-virtual"><scope>fys::arena::PriorityOrderList</scope><name>getComputedSpeed</name></member>
+      <member refid="classfys_1_1arena_1_1_priority_order_list_1a9090c56e953a37b539dea776fa916525" prot="public" virt="non-virtual"><scope>fys::arena::PriorityOrderList</scope><name>getCurrent</name></member>
+      <member refid="classfys_1_1arena_1_1_priority_order_list_1a8e9de19584395a3ddcbf70cc9f5e2afd" prot="private" virt="non-virtual"><scope>fys::arena::PriorityOrderList</scope><name>getFastestBaseSpeed</name></member>
+      <member refid="classfys_1_1arena_1_1_priority_order_list_1a39e71bcfac4ce882cca7504536ba2122" prot="public" virt="non-virtual"><scope>fys::arena::PriorityOrderList</scope><name>getNext</name></member>
+      <member refid="classfys_1_1arena_1_1_priority_order_list_1ab3e80747ccc7ff4f8d38f172242fefa5" prot="private" virt="non-virtual"><scope>fys::arena::PriorityOrderList</scope><name>getSlowestSpeed</name></member>
+      <member refid="classfys_1_1arena_1_1_priority_order_list_1ab5311726c30e5b7923da3360c890ddfd" prot="public" virt="non-virtual"><scope>fys::arena::PriorityOrderList</scope><name>getTurnNumber</name></member>
+      <member refid="classfys_1_1arena_1_1_priority_order_list_1ac54a07cc6dfd931271fac0a9f4ad19d3" prot="private" virt="non-virtual"><scope>fys::arena::PriorityOrderList</scope><name>isPlayerSlowest</name></member>
+      <member refid="classfys_1_1arena_1_1_priority_order_list_1adc1e8229ffbc1124cd33e3b1840791d6" prot="public" virt="non-virtual"><scope>fys::arena::PriorityOrderList</scope><name>PriorityOrderList</name></member>
+      <member refid="classfys_1_1arena_1_1_priority_order_list_1a517557fc8c0e2e4c06dc889546884244" prot="public" virt="non-virtual"><scope>fys::arena::PriorityOrderList</scope><name>PriorityOrderList</name></member>
+      <member refid="classfys_1_1arena_1_1_priority_order_list_1a51adec2200b483e253be8ab37b926546" prot="public" virt="non-virtual"><scope>fys::arena::PriorityOrderList</scope><name>removeParticipantFromList</name></member>
+      <member refid="classfys_1_1arena_1_1_priority_order_list_1a9a9216ae516ac4e23c4916d430709e43" prot="private" virt="non-virtual"><scope>fys::arena::PriorityOrderList</scope><name>sortBaseAndCalculatePriority</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

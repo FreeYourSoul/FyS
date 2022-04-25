@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_c8534e851ac17f325a03947633d70eda" kind="dir">
+    <compoundname>/home/FyS/Project/FyS/services/arena/include/network</compoundname>
+    <innerfile refid="_d_b_connector_8hh">DBConnector.hh</innerfile>
+    <innerfile refid="_worker_connection_8hh">WorkerConnection.hh</innerfile>
+    <innerfile refid="_worker_service_8hh">WorkerService.hh</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/network/"/>
+  </compounddef>
+</doxygen>

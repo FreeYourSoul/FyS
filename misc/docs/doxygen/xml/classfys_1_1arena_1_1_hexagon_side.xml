@@ -1,0 +1,460 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1arena_1_1_hexagon_side" kind="class" language="C++" prot="public">
+    <compoundname>fys::arena::HexagonSide</compoundname>
+      <sectiondef kind="public-type">
+      <memberdef kind="enum" id="classfys_1_1arena_1_1_hexagon_side_1ab36b432d45c2fd23fea89679319761cd" prot="public" static="no" strong="yes">
+        <type></type>
+        <name>Hexagon</name>
+        <enumvalue id="classfys_1_1arena_1_1_hexagon_side_1ab36b432d45c2fd23fea89679319761cda7fc56270e7a70fa81a5935b72eacbe29" prot="public">
+          <name>A</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classfys_1_1arena_1_1_hexagon_side_1ab36b432d45c2fd23fea89679319761cda9d5ed678fe57bcca610140957afab571" prot="public">
+          <name>B</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classfys_1_1arena_1_1_hexagon_side_1ab36b432d45c2fd23fea89679319761cda0d61f8370cad1d412f80b84d143e1257" prot="public">
+          <name>C</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/HexagonSide.hh" line="35" column="19" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/HexagonSide.hh" bodystart="35" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="enum" id="classfys_1_1arena_1_1_hexagon_side_1a07edccc39e12cbb5ecffd5a6e40fc133" prot="public" static="no" strong="yes">
+        <type>int</type>
+        <name>Orientation</name>
+        <enumvalue id="classfys_1_1arena_1_1_hexagon_side_1a07edccc39e12cbb5ecffd5a6e40fc133af4257c91fcb8820d70748c2eba89e24c" prot="public">
+          <name>A_N</name>
+          <initializer>= 0</initializer>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classfys_1_1arena_1_1_hexagon_side_1a07edccc39e12cbb5ecffd5a6e40fc133a6d0644934995e872ee773f6c9fba5a47" prot="public">
+          <name>A_NE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classfys_1_1arena_1_1_hexagon_side_1a07edccc39e12cbb5ecffd5a6e40fc133a4e38d10d3ab02551d3d6e1cbd1e59382" prot="public">
+          <name>A_SE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classfys_1_1arena_1_1_hexagon_side_1a07edccc39e12cbb5ecffd5a6e40fc133afc1f169d5c31dc01ab77b36e716d2021" prot="public">
+          <name>A_S</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classfys_1_1arena_1_1_hexagon_side_1a07edccc39e12cbb5ecffd5a6e40fc133a6fafc43c3fbfbf1d6ce411d4edc05d99" prot="public">
+          <name>A_SW</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classfys_1_1arena_1_1_hexagon_side_1a07edccc39e12cbb5ecffd5a6e40fc133aa6c0a0942de9c60c116561f33ebe8bd1" prot="public">
+          <name>A_NW</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classfys_1_1arena_1_1_hexagon_side_1a07edccc39e12cbb5ecffd5a6e40fc133a7b867a3304f1ed1230ce4569eed848fc" prot="public">
+          <name>B_N</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classfys_1_1arena_1_1_hexagon_side_1a07edccc39e12cbb5ecffd5a6e40fc133a9e7fdfc41265fd2e91ea00e86ea46f01" prot="public">
+          <name>B_NE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classfys_1_1arena_1_1_hexagon_side_1a07edccc39e12cbb5ecffd5a6e40fc133aab2b686ce66dc351fe7d1a2d05065258" prot="public">
+          <name>B_SE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classfys_1_1arena_1_1_hexagon_side_1a07edccc39e12cbb5ecffd5a6e40fc133a31448dea3aaed26fa49e28808702f210" prot="public">
+          <name>B_S</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classfys_1_1arena_1_1_hexagon_side_1a07edccc39e12cbb5ecffd5a6e40fc133ad0a13e13d88d52947f61eae6bb96e682" prot="public">
+          <name>B_SW</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classfys_1_1arena_1_1_hexagon_side_1a07edccc39e12cbb5ecffd5a6e40fc133ac3f9e25dc06a2ede9a50b0a6b744a5e5" prot="public">
+          <name>B_NW</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classfys_1_1arena_1_1_hexagon_side_1a07edccc39e12cbb5ecffd5a6e40fc133a01207a4ae4426161f9a15ba082019284" prot="public">
+          <name>C_N</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classfys_1_1arena_1_1_hexagon_side_1a07edccc39e12cbb5ecffd5a6e40fc133ab436f9cd3d88fc2b260b444c278bd149" prot="public">
+          <name>C_NE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classfys_1_1arena_1_1_hexagon_side_1a07edccc39e12cbb5ecffd5a6e40fc133ab667a6cb09898a0e436b5420a0939a9a" prot="public">
+          <name>C_SE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classfys_1_1arena_1_1_hexagon_side_1a07edccc39e12cbb5ecffd5a6e40fc133a98bf7dd67e227162ce354f74746d867b" prot="public">
+          <name>C_S</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classfys_1_1arena_1_1_hexagon_side_1a07edccc39e12cbb5ecffd5a6e40fc133a44c002f308711caaafc2d7b6f50cc605" prot="public">
+          <name>C_SW</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classfys_1_1arena_1_1_hexagon_side_1a07edccc39e12cbb5ecffd5a6e40fc133abe5bdc7ede59c966f1baf24efa2af017" prot="public">
+          <name>C_NW</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <enumvalue id="classfys_1_1arena_1_1_hexagon_side_1a07edccc39e12cbb5ecffd5a6e40fc133ab50339a10e1de285ac99d4c3990b8693" prot="public">
+          <name>NONE</name>
+          <briefdescription>
+          </briefdescription>
+          <detaileddescription>
+          </detaileddescription>
+        </enumvalue>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/HexagonSide.hh" line="43" column="23" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/HexagonSide.hh" bodystart="43" bodyend="63"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_hexagon_side_1a0f41942c37679f15c6019899e8d4343d" prot="public" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr unsigned</type>
+        <definition>constexpr unsigned fys::arena::HexagonSide::SIDE_NUMBER</definition>
+        <argsstring></argsstring>
+        <name>SIDE_NUMBER</name>
+        <initializer>= 6 * 3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/HexagonSide.hh" line="41" column="27" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/HexagonSide.hh" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_hexagon_side_1a47b7cea7f4c2bd50b7ef56e577be92aa" prot="private" static="no" mutable="no">
+        <type>Hexagon</type>
+        <definition>Hexagon fys::arena::HexagonSide::_hexagon</definition>
+        <argsstring></argsstring>
+        <name>_hexagon</name>
+        <initializer>= Hexagon::A</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/HexagonSide.hh" line="101" column="9" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/HexagonSide.hh" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_hexagon_side_1a4ccbbb60fb55d13d05bb837bf8f4d264" prot="private" static="no" mutable="no">
+        <type>Orientation</type>
+        <definition>Orientation fys::arena::HexagonSide::_side</definition>
+        <argsstring></argsstring>
+        <name>_side</name>
+        <initializer>= Orientation::NONE</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/HexagonSide.hh" line="102" column="13" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/HexagonSide.hh" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1arena_1_1_hexagon_side_1a01276781c53d92827da0ad182f18188c" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::arena::HexagonSide::HexagonSide</definition>
+        <argsstring>(Orientation orientation)</argsstring>
+        <name>HexagonSide</name>
+        <param>
+          <type>Orientation</type>
+          <declname>orientation</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/HexagonSide.hh" line="65" column="10" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/HexagonSide.hh" bodystart="65" bodyend="68"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_hexagon_side_1a46b074b6158c28544e390cae301855b5" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::arena::HexagonSide::HexagonSide</definition>
+        <argsstring>(Hexagon hexagon=Hexagon::A, Orientation orientation=Orientation::NONE)</argsstring>
+        <name>HexagonSide</name>
+        <param>
+          <type>Hexagon</type>
+          <declname>hexagon</declname>
+          <defval>Hexagon::A</defval>
+        </param>
+        <param>
+          <type>Orientation</type>
+          <declname>orientation</declname>
+          <defval>Orientation::NONE</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/HexagonSide.hh" line="70" column="10" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/HexagonSide.hh" bodystart="70" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_hexagon_side_1ad37906fa4e3c8fdbfad70ddc937956ca" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::pair&lt; Hexagon, Orientation &gt;</type>
+        <definition>std::pair&lt;Hexagon, Orientation&gt; fys::arena::HexagonSide::operator*</definition>
+        <argsstring>() const</argsstring>
+        <name>operator*</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/HexagonSide.hh" line="75" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/HexagonSide.hh" bodystart="75" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_hexagon_side_1ab014ec2b4bd2a39d46ecc33defda624c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::HexagonSide::move</definition>
+        <argsstring>(HexagonSide::Orientation destinationSide, bool forceMovement=false)</argsstring>
+        <name>move</name>
+        <param>
+          <type>HexagonSide::Orientation</type>
+          <declname>destinationSide</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>forceMovement</declname>
+          <defval>false</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/HexagonSide.hh" line="77" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/HexagonSide.cpp" bodystart="286" bodyend="293"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_hexagon_side_1aa4224d220c3eb334088612dd264f3754" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::HexagonSide::moveRight</definition>
+        <argsstring>()</argsstring>
+        <name>moveRight</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/HexagonSide.hh" line="78" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/HexagonSide.cpp" bodystart="302" bodyend="305"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_hexagon_side_1aca8abd096a2a61ace17c67ec5093b26b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::HexagonSide::moveLeft</definition>
+        <argsstring>()</argsstring>
+        <name>moveLeft</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/HexagonSide.hh" line="79" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/HexagonSide.cpp" bodystart="296" bodyend="299"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_hexagon_side_1aeee2ab35a30e7c137e183940926653e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::HexagonSide::moveBack</definition>
+        <argsstring>()</argsstring>
+        <name>moveBack</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/HexagonSide.hh" line="80" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/HexagonSide.cpp" bodystart="308" bodyend="311"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_hexagon_side_1a01ff3d343ec90ec7b8339605f4ba8963" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::HexagonSide::isAmbushSide</definition>
+        <argsstring>() const</argsstring>
+        <name>isAmbushSide</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/HexagonSide.hh" line="83" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/HexagonSide.cpp" bodystart="378" bodyend="383"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_hexagon_side_1ac0748e3a1917cd62a05e214b0ba4278d" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::HexagonSide::canMove</definition>
+        <argsstring>(HexagonSide::Orientation destinationSide) const</argsstring>
+        <name>canMove</name>
+        <param>
+          <type>HexagonSide::Orientation</type>
+          <declname>destinationSide</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/HexagonSide.hh" line="86" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/HexagonSide.cpp" bodystart="386" bodyend="395"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classfys_1_1arena_1_1_hexagon_side_1ab37b8d57791e873c2cbc79343a5864a7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::HexagonSide::changeSide</definition>
+        <argsstring>(HexagonSide::Orientation)</argsstring>
+        <name>changeSide</name>
+        <param>
+          <type>HexagonSide::Orientation</type>
+          <defname>destination</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/HexagonSide.hh" line="89" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/HexagonSide.cpp" bodystart="316" bodyend="328"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_hexagon_side_1abdbdecaff4069d7337cb810de823a1a4" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>Orientation</type>
+        <definition>HexagonSide::Orientation fys::arena::HexagonSide::findLeft</definition>
+        <argsstring>() const</argsstring>
+        <name>findLeft</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/HexagonSide.hh" line="92" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/HexagonSide.cpp" bodystart="331" bodyend="340"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_hexagon_side_1a7d54ab2a7aefb76114c45ac102f8186c" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>Orientation</type>
+        <definition>HexagonSide::Orientation fys::arena::HexagonSide::findRight</definition>
+        <argsstring>() const</argsstring>
+        <name>findRight</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/HexagonSide.hh" line="95" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/HexagonSide.cpp" bodystart="343" bodyend="352"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_hexagon_side_1a373fb9d7e5a6894ab80ffc212b3a7560" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>Orientation</type>
+        <definition>HexagonSide::Orientation fys::arena::HexagonSide::findBack</definition>
+        <argsstring>() const</argsstring>
+        <name>findBack</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/HexagonSide.hh" line="98" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/HexagonSide.cpp" bodystart="355" bodyend="375"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/HexagonSide.hh" line="33" column="18" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/HexagonSide.hh" bodystart="33" bodyend="103"/>
+    <listofallmembers>
+      <member refid="classfys_1_1arena_1_1_hexagon_side_1a47b7cea7f4c2bd50b7ef56e577be92aa" prot="private" virt="non-virtual"><scope>fys::arena::HexagonSide</scope><name>_hexagon</name></member>
+      <member refid="classfys_1_1arena_1_1_hexagon_side_1a4ccbbb60fb55d13d05bb837bf8f4d264" prot="private" virt="non-virtual"><scope>fys::arena::HexagonSide</scope><name>_side</name></member>
+      <member refid="classfys_1_1arena_1_1_hexagon_side_1ac0748e3a1917cd62a05e214b0ba4278d" prot="public" virt="non-virtual"><scope>fys::arena::HexagonSide</scope><name>canMove</name></member>
+      <member refid="classfys_1_1arena_1_1_hexagon_side_1ab37b8d57791e873c2cbc79343a5864a7" prot="private" virt="non-virtual"><scope>fys::arena::HexagonSide</scope><name>changeSide</name></member>
+      <member refid="classfys_1_1arena_1_1_hexagon_side_1a373fb9d7e5a6894ab80ffc212b3a7560" prot="private" virt="non-virtual"><scope>fys::arena::HexagonSide</scope><name>findBack</name></member>
+      <member refid="classfys_1_1arena_1_1_hexagon_side_1abdbdecaff4069d7337cb810de823a1a4" prot="private" virt="non-virtual"><scope>fys::arena::HexagonSide</scope><name>findLeft</name></member>
+      <member refid="classfys_1_1arena_1_1_hexagon_side_1a7d54ab2a7aefb76114c45ac102f8186c" prot="private" virt="non-virtual"><scope>fys::arena::HexagonSide</scope><name>findRight</name></member>
+      <member refid="classfys_1_1arena_1_1_hexagon_side_1ab36b432d45c2fd23fea89679319761cd" prot="public" virt="non-virtual"><scope>fys::arena::HexagonSide</scope><name>Hexagon</name></member>
+      <member refid="classfys_1_1arena_1_1_hexagon_side_1a01276781c53d92827da0ad182f18188c" prot="public" virt="non-virtual"><scope>fys::arena::HexagonSide</scope><name>HexagonSide</name></member>
+      <member refid="classfys_1_1arena_1_1_hexagon_side_1a46b074b6158c28544e390cae301855b5" prot="public" virt="non-virtual"><scope>fys::arena::HexagonSide</scope><name>HexagonSide</name></member>
+      <member refid="classfys_1_1arena_1_1_hexagon_side_1a01ff3d343ec90ec7b8339605f4ba8963" prot="public" virt="non-virtual"><scope>fys::arena::HexagonSide</scope><name>isAmbushSide</name></member>
+      <member refid="classfys_1_1arena_1_1_hexagon_side_1ab014ec2b4bd2a39d46ecc33defda624c" prot="public" virt="non-virtual"><scope>fys::arena::HexagonSide</scope><name>move</name></member>
+      <member refid="classfys_1_1arena_1_1_hexagon_side_1aeee2ab35a30e7c137e183940926653e9" prot="public" virt="non-virtual"><scope>fys::arena::HexagonSide</scope><name>moveBack</name></member>
+      <member refid="classfys_1_1arena_1_1_hexagon_side_1aca8abd096a2a61ace17c67ec5093b26b" prot="public" virt="non-virtual"><scope>fys::arena::HexagonSide</scope><name>moveLeft</name></member>
+      <member refid="classfys_1_1arena_1_1_hexagon_side_1aa4224d220c3eb334088612dd264f3754" prot="public" virt="non-virtual"><scope>fys::arena::HexagonSide</scope><name>moveRight</name></member>
+      <member refid="classfys_1_1arena_1_1_hexagon_side_1ad37906fa4e3c8fdbfad70ddc937956ca" prot="public" virt="non-virtual"><scope>fys::arena::HexagonSide</scope><name>operator*</name></member>
+      <member refid="classfys_1_1arena_1_1_hexagon_side_1a07edccc39e12cbb5ecffd5a6e40fc133" prot="public" virt="non-virtual"><scope>fys::arena::HexagonSide</scope><name>Orientation</name></member>
+      <member refid="classfys_1_1arena_1_1_hexagon_side_1a0f41942c37679f15c6019899e8d4343d" prot="public" virt="non-virtual"><scope>fys::arena::HexagonSide</scope><name>SIDE_NUMBER</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

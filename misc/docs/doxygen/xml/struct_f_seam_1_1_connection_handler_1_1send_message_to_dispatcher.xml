@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="struct_f_seam_1_1_connection_handler_1_1send_message_to_dispatcher" kind="struct" language="C++" prot="public">
+    <compoundname>FSeam::ConnectionHandler::sendMessageToDispatcher</compoundname>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="struct_f_seam_1_1_connection_handler_1_1send_message_to_dispatcher_1a2f0e56729284f400a0ba33f50f3292c0" prot="public" static="yes" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string FSeam::ConnectionHandler::sendMessageToDispatcher::NAME</definition>
+        <argsstring></argsstring>
+        <name>NAME</name>
+        <initializer>= &quot;sendMessageToDispatcher&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/FSeamMockData.hpp" line="37" column="66" bodyfile="/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/FSeamMockData.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/FSeamMockData.hpp" line="37" column="34" bodyfile="/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/FSeamMockData.hpp" bodystart="37" bodyend="37"/>
+    <listofallmembers>
+      <member refid="struct_f_seam_1_1_connection_handler_1_1send_message_to_dispatcher_1a2f0e56729284f400a0ba33f50f3292c0" prot="public" virt="non-virtual"><scope>FSeam::ConnectionHandler::sendMessageToDispatcher</scope><name>NAME</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

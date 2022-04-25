@@ -1,0 +1,33 @@
+\hypertarget{classfys_1_1_dispatcher_handler_base}{}\doxysection{fys\+::Dispatcher\+Handler\+Base Class Reference}
+\label{classfys_1_1_dispatcher_handler_base}\index{fys::DispatcherHandlerBase@{fys::DispatcherHandlerBase}}
+
+
+{\ttfamily \#include $<$Dispatcher.\+hh$>$}
+
+Inheritance diagram for fys\+::Dispatcher\+Handler\+Base\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classfys_1_1_dispatcher_handler_base}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classfys_1_1_dispatcher_handler_base_a3cfca05ef8fe5518e923b5bcb86b9f8b}\label{classfys_1_1_dispatcher_handler_base_a3cfca05ef8fe5518e923b5bcb86b9f8b}} 
+void \mbox{\hyperlink{classfys_1_1_dispatcher_handler_base_a3cfca05ef8fe5518e923b5bcb86b9f8b}{process\+Input\+Message}} (zmq\+::multipart\+\_\+t \&\&msg, \mbox{\hyperlink{classfys_1_1network_1_1_dispatcher_connection_manager}{network\+::\+Dispatcher\+Connection\+Manager}} \&manager) noexcept
+\begin{DoxyCompactList}\small\item\em This method is processing the input\+Message and dispatch it appropriately among the peers connected to the dispatcher socket. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classfys_1_1_dispatcher_handler_base_ab8bff2bf6a8e11aadd08d3c1c5fd0b43}\label{classfys_1_1_dispatcher_handler_base_ab8bff2bf6a8e11aadd08d3c1c5fd0b43}} 
+void \mbox{\hyperlink{classfys_1_1_dispatcher_handler_base_ab8bff2bf6a8e11aadd08d3c1c5fd0b43}{process\+Cluster\+Message}} (zmq\+::multipart\+\_\+t \&\&msg, \mbox{\hyperlink{classfys_1_1network_1_1_dispatcher_connection_manager}{network\+::\+Dispatcher\+Connection\+Manager}} \&manager) noexcept
+\begin{DoxyCompactList}\small\item\em This method is dispatching the cluster message and forward it appropriately among the peers connected to the dispatcher socket. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classfys_1_1_dispatcher_handler_base_aacb192c18798171bd41d5002f93f4264}\label{classfys_1_1_dispatcher_handler_base_aacb192c18798171bd41d5002f93f4264}} 
+void {\bfseries forward\+Message\+To\+Frontend} (zmq\+::multipart\+\_\+t \&\&msg, \mbox{\hyperlink{classfys_1_1network_1_1_dispatcher_connection_manager}{network\+::\+Dispatcher\+Connection\+Manager}} \&manager) noexcept
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+basic implementation of the dispatcher 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/dispatcher/common/include/core/Dispatcher.\+hh\item 
+/home/\+Fy\+S/\+Project/\+Fy\+S/dispatcher/common/src/core/Dispatcher.\+cpp\end{DoxyCompactItemize}

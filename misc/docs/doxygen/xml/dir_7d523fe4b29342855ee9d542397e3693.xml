@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="dir_7d523fe4b29342855ee9d542397e3693" kind="dir">
+    <compoundname>/home/FyS/Project/FyS/services/worldserver/src</compoundname>
+    <innerdir refid="dir_0fedde0648077bb4f4d7035b8d41f8b5">/home/FyS/Project/FyS/services/worldserver/src/engine</innerdir>
+    <innerfile refid="worldserver_2src_2_connection_handler_8cpp">ConnectionHandler.cpp</innerfile>
+    <innerfile refid="services_2worldserver_2src_2main_8cpp">main.cpp</innerfile>
+    <innerfile refid="services_2worldserver_2src_2_world_server_context_8cpp">WorldServerContext.cpp</innerfile>
+    <innerfile refid="_world_server_service_8cpp">WorldServerService.cpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/worldserver/src/"/>
+  </compounddef>
+</doxygen>

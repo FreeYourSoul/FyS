@@ -1,0 +1,241 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1arena_1_1_side_battle" kind="class" language="C++" prot="public">
+    <compoundname>fys::arena::SideBattle</compoundname>
+    <includes refid="_side_battle_8hh" local="no">SideBattle.hh</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_side_battle_1abffab41e9b5a3ecc6c0f3af765666b82" prot="private" static="no" mutable="no">
+        <type>std::reference_wrapper&lt; <ref refid="classfys_1_1arena_1_1_pit_contenders" kindref="compound">PitContenders</ref> &gt;</type>
+        <definition>std::reference_wrapper&lt;PitContenders&gt; fys::arena::SideBattle::_contenders</definition>
+        <argsstring></argsstring>
+        <name>_contenders</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/SideBattle.hh" line="82" column="24" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/SideBattle.hh" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_side_battle_1a69f1821dd0730d75fcbedcf1bfba568d" prot="private" static="no" mutable="no">
+        <type>std::reference_wrapper&lt; <ref refid="classfys_1_1arena_1_1_ally_party_teams" kindref="compound">AllyPartyTeams</ref> &gt;</type>
+        <definition>std::reference_wrapper&lt;AllyPartyTeams&gt; fys::arena::SideBattle::_partyTeams</definition>
+        <argsstring></argsstring>
+        <name>_partyTeams</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/SideBattle.hh" line="83" column="24" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/SideBattle.hh" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_side_battle_1a2c8c1e8e00a27ed84602ffa64f133695" prot="private" static="no" mutable="no">
+        <type><ref refid="classfys_1_1arena_1_1_priority_order_list" kindref="compound">PriorityOrderList</ref></type>
+        <definition>PriorityOrderList fys::arena::SideBattle::_priorityOrderList</definition>
+        <argsstring></argsstring>
+        <name>_priorityOrderList</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/SideBattle.hh" line="85" column="19" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/SideBattle.hh" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_side_battle_1aa91bc87dd8d322e819a227376dc972a9" prot="private" static="no" mutable="no">
+        <type>HexagonSide::Orientation</type>
+        <definition>HexagonSide::Orientation fys::arena::SideBattle::_side</definition>
+        <argsstring></argsstring>
+        <name>_side</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/SideBattle.hh" line="86" column="26" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/SideBattle.hh" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_side_battle_1a18f2ce8bb09c6463bab4e9c1a37984da" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool fys::arena::SideBattle::_started</definition>
+        <argsstring></argsstring>
+        <name>_started</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/SideBattle.hh" line="88" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/SideBattle.hh" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_side_battle_1a1358c5caf3d915c1cae304130e5657be" prot="private" static="no" mutable="no">
+        <type>std::chrono::system_clock::time_point</type>
+        <definition>std::chrono::system_clock::time_point fys::arena::SideBattle::_endCurrentTurn</definition>
+        <argsstring></argsstring>
+        <name>_endCurrentTurn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/SideBattle.hh" line="89" column="39" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/SideBattle.hh" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1arena_1_1_side_battle_1ab963e128698d2f129f0d31f23c6fd2a1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::arena::SideBattle::SideBattle</definition>
+        <argsstring>(PitContenders &amp;pitContenders, AllyPartyTeams &amp;allyPartyTeams, HexagonSide::Orientation side)</argsstring>
+        <name>SideBattle</name>
+        <param>
+          <type><ref refid="classfys_1_1arena_1_1_pit_contenders" kindref="compound">PitContenders</ref> &amp;</type>
+          <declname>pitContenders</declname>
+        </param>
+        <param>
+          <type><ref refid="classfys_1_1arena_1_1_ally_party_teams" kindref="compound">AllyPartyTeams</ref> &amp;</type>
+          <declname>allyPartyTeams</declname>
+        </param>
+        <param>
+          <type>HexagonSide::Orientation</type>
+          <declname>side</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/SideBattle.hh" line="46" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/SideBattle.hh" bodystart="46" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_side_battle_1a8c52b3c38cfc67a561657c0207e9efef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfys_1_1arena_1_1data_1_1_priority_elem" kindref="compound">data::PriorityElem</ref></type>
+        <definition>data::PriorityElem fys::arena::SideBattle::getCurrentParticipantTurn</definition>
+        <argsstring>(const std::chrono::system_clock::time_point &amp;now, const std::chrono::milliseconds &amp;timerInterlude)</argsstring>
+        <name>getCurrentParticipantTurn</name>
+        <param>
+          <type>const std::chrono::system_clock::time_point &amp;</type>
+          <declname>now</declname>
+        </param>
+        <param>
+          <type>const std::chrono::milliseconds &amp;</type>
+          <declname>timerInterlude</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get the next participant in the fighting pit turn (can be either an NPC, or a contender) depending on their speed. This Calculation is made in the <ref refid="classfys_1_1arena_1_1_priority_order_list" kindref="compound">fys::arena::PriorityOrderList</ref>.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>now</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>timing now in milliseconds (timestamp) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>timerInterlude</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>timing of a turn for a player (depend on the level set by the creator of the arena) </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>PriorityElem representing the next player to play its turn </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/SideBattle.hh" line="62" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/SideBattle.cpp" bodystart="35" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_side_battle_1a0b3529526b593101db492e37c776c316" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::SideBattle::eraseFinishedAlterationAndDeadCharactersFromTurnList</definition>
+        <argsstring>()</argsstring>
+        <name>eraseFinishedAlterationAndDeadCharactersFromTurnList</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Erase characters (contender or ally) from the <ref refid="classfys_1_1arena_1_1_priority_order_list" kindref="compound">PriorityOrderList</ref> that are dead. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/SideBattle.hh" line="68" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/fightingPit/SideBattle.cpp" bodystart="50" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_side_battle_1a75f1355e1b134fe60a7c737e8df1a51e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::SideBattle::addParticipantInList</definition>
+        <argsstring>(uint id, int speed, bool isContender)</argsstring>
+        <name>addParticipantInList</name>
+        <param>
+          <type>uint</type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>speed</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>isContender</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/SideBattle.hh" line="70" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/SideBattle.hh" bodystart="70" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_side_battle_1a54c8c60c43ed1047267e783616dc36c9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>HexagonSide::Orientation</type>
+        <definition>HexagonSide::Orientation fys::arena::SideBattle::getSide</definition>
+        <argsstring>() const</argsstring>
+        <name>getSide</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/SideBattle.hh" line="76" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/SideBattle.hh" bodystart="76" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_side_battle_1ad8c1f7770304ca1175795037614bb99e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::SideBattle::empty</definition>
+        <argsstring>() const</argsstring>
+        <name>empty</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/SideBattle.hh" line="79" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/SideBattle.hh" bodystart="79" bodyend="79"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Represent a battle on a specific side of one of the 3 hexagons. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/SideBattle.hh" line="43" column="17" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/SideBattle.hh" bodystart="43" bodyend="91"/>
+    <listofallmembers>
+      <member refid="classfys_1_1arena_1_1_side_battle_1abffab41e9b5a3ecc6c0f3af765666b82" prot="private" virt="non-virtual"><scope>fys::arena::SideBattle</scope><name>_contenders</name></member>
+      <member refid="classfys_1_1arena_1_1_side_battle_1a1358c5caf3d915c1cae304130e5657be" prot="private" virt="non-virtual"><scope>fys::arena::SideBattle</scope><name>_endCurrentTurn</name></member>
+      <member refid="classfys_1_1arena_1_1_side_battle_1a69f1821dd0730d75fcbedcf1bfba568d" prot="private" virt="non-virtual"><scope>fys::arena::SideBattle</scope><name>_partyTeams</name></member>
+      <member refid="classfys_1_1arena_1_1_side_battle_1a2c8c1e8e00a27ed84602ffa64f133695" prot="private" virt="non-virtual"><scope>fys::arena::SideBattle</scope><name>_priorityOrderList</name></member>
+      <member refid="classfys_1_1arena_1_1_side_battle_1aa91bc87dd8d322e819a227376dc972a9" prot="private" virt="non-virtual"><scope>fys::arena::SideBattle</scope><name>_side</name></member>
+      <member refid="classfys_1_1arena_1_1_side_battle_1a18f2ce8bb09c6463bab4e9c1a37984da" prot="private" virt="non-virtual"><scope>fys::arena::SideBattle</scope><name>_started</name></member>
+      <member refid="classfys_1_1arena_1_1_side_battle_1a75f1355e1b134fe60a7c737e8df1a51e" prot="public" virt="non-virtual"><scope>fys::arena::SideBattle</scope><name>addParticipantInList</name></member>
+      <member refid="classfys_1_1arena_1_1_side_battle_1ad8c1f7770304ca1175795037614bb99e" prot="public" virt="non-virtual"><scope>fys::arena::SideBattle</scope><name>empty</name></member>
+      <member refid="classfys_1_1arena_1_1_side_battle_1a0b3529526b593101db492e37c776c316" prot="public" virt="non-virtual"><scope>fys::arena::SideBattle</scope><name>eraseFinishedAlterationAndDeadCharactersFromTurnList</name></member>
+      <member refid="classfys_1_1arena_1_1_side_battle_1a8c52b3c38cfc67a561657c0207e9efef" prot="public" virt="non-virtual"><scope>fys::arena::SideBattle</scope><name>getCurrentParticipantTurn</name></member>
+      <member refid="classfys_1_1arena_1_1_side_battle_1a54c8c60c43ed1047267e783616dc36c9" prot="public" virt="non-virtual"><scope>fys::arena::SideBattle</scope><name>getSide</name></member>
+      <member refid="classfys_1_1arena_1_1_side_battle_1ab963e128698d2f129f0d31f23c6fd2a1" prot="public" virt="non-virtual"><scope>fys::arena::SideBattle</scope><name>SideBattle</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

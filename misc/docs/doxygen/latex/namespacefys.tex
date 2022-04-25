@@ -1,0 +1,119 @@
+\hypertarget{namespacefys}{}\doxysection{fys Namespace Reference}
+\label{namespacefys}\index{fys@{fys}}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacefys_1_1arena}{arena}}
+\item 
+ \mbox{\hyperlink{namespacefys_1_1cache}{cache}}
+\item 
+ \mbox{\hyperlink{namespacefys_1_1common}{common}}
+\item 
+ \mbox{\hyperlink{namespacefys_1_1fb}{fb}}
+\item 
+ \mbox{\hyperlink{namespacefys_1_1init__beacon}{init\+\_\+beacon}}
+\item 
+ \mbox{\hyperlink{namespacefys_1_1map}{map}}
+\item 
+ \mbox{\hyperlink{namespacefys_1_1network}{network}}
+\item 
+ \mbox{\hyperlink{namespacefys_1_1util}{util}}
+\item 
+ \mbox{\hyperlink{namespacefys_1_1ws}{ws}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classfys_1_1_boundary_map}{Boundary\+Map}}
+\item 
+class \mbox{\hyperlink{classfys_1_1_dispatcher}{Dispatcher}}
+\item 
+class \mbox{\hyperlink{classfys_1_1_dispatcher_handler_base}{Dispatcher\+Handler\+Base}}
+\item 
+struct \mbox{\hyperlink{structfys_1_1is__iterator}{is\+\_\+iterator}}
+\item 
+struct \mbox{\hyperlink{structfys_1_1is__iterator_3_01_t_00_01std_1_1enable__if__t_3_9std_1_1is__same_3_01typename_01std7eccb0d1d933dcd8d907a28a6e5a01ad}{is\+\_\+iterator$<$ T, std\+::enable\+\_\+if\+\_\+t$<$!std\+::is\+\_\+same$<$ typename std\+::iterator\+\_\+traits$<$ T $>$\+::value\+\_\+type, void $>$\+::value $>$ $>$}}
+\item 
+class \mbox{\hyperlink{classfys_1_1_simple_proxy}{Simple\+Proxy}}
+\item 
+class \mbox{\hyperlink{classfys_1_1_startup_dispatcher_ctx}{Startup\+Dispatcher\+Ctx}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespacefys_af7bce7852e4346a4ad060eaff7d4194a}{Boundary\+Map\+Int}} = \mbox{\hyperlink{classfys_1_1_boundary_map}{Boundary\+Map}}$<$ int $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Input\+It , typename Compare\+Predicate $>$ }\\Input\+It \mbox{\hyperlink{namespacefys_ae41544826d4ed594240e33e38a0ee512}{find\+\_\+most\+\_\+suitable}} (Input\+It first, Input\+It last, Compare\+Predicate \&\&comp, Input\+It start)
+\begin{DoxyCompactList}\small\item\em Get the most suitable (suitable being defined by a comparator) of a given container. The most suitable follow the comparator. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Input\+It , typename Compare\+Predicate $>$ }\\Input\+It \mbox{\hyperlink{namespacefys_acd9b937c090ffc2422a666a08f523360}{find\+\_\+most\+\_\+suitable}} (Input\+It first, Input\+It last, Compare\+Predicate \&\&comp)
+\item 
+{\footnotesize template$<$typename Input\+It , typename Retriever\+Lower , typename Algorithm\+Predicate $>$ }\\Input\+It \mbox{\hyperlink{namespacefys_a5530b43620217c94c6551a7c165b750f}{compose\+\_\+most\+\_\+suitable}} (Input\+It first, Input\+It last, Retriever\+Lower \&\&retriever, Algorithm\+Predicate \&\&algo)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{namespacefys_af7bce7852e4346a4ad060eaff7d4194a}\label{namespacefys_af7bce7852e4346a4ad060eaff7d4194a}} 
+\index{fys@{fys}!BoundaryMapInt@{BoundaryMapInt}}
+\index{BoundaryMapInt@{BoundaryMapInt}!fys@{fys}}
+\doxysubsubsection{\texorpdfstring{BoundaryMapInt}{BoundaryMapInt}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacefys_af7bce7852e4346a4ad060eaff7d4194a}{fys\+::\+Boundary\+Map\+Int}} = typedef \mbox{\hyperlink{classfys_1_1_boundary_map}{Boundary\+Map}}$<$int$>$}
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacefys_a5530b43620217c94c6551a7c165b750f}\label{namespacefys_a5530b43620217c94c6551a7c165b750f}} 
+\index{fys@{fys}!compose\_most\_suitable@{compose\_most\_suitable}}
+\index{compose\_most\_suitable@{compose\_most\_suitable}!fys@{fys}}
+\doxysubsubsection{\texorpdfstring{compose\_most\_suitable()}{compose\_most\_suitable()}}
+{\footnotesize\ttfamily template$<$typename Input\+It , typename Retriever\+Lower , typename Algorithm\+Predicate $>$ \\
+Input\+It fys\+::compose\+\_\+most\+\_\+suitable (\begin{DoxyParamCaption}\item[{Input\+It}]{first,  }\item[{Input\+It}]{last,  }\item[{Retriever\+Lower \&\&}]{retriever,  }\item[{Algorithm\+Predicate \&\&}]{algo }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em first} & \\
+\hline
+{\em last} & \\
+\hline
+{\em retriever} & \\
+\hline
+{\em algo} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacefys_acd9b937c090ffc2422a666a08f523360}\label{namespacefys_acd9b937c090ffc2422a666a08f523360}} 
+\index{fys@{fys}!find\_most\_suitable@{find\_most\_suitable}}
+\index{find\_most\_suitable@{find\_most\_suitable}!fys@{fys}}
+\doxysubsubsection{\texorpdfstring{find\_most\_suitable()}{find\_most\_suitable()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Input\+It , typename Compare\+Predicate $>$ \\
+Input\+It fys\+::find\+\_\+most\+\_\+suitable (\begin{DoxyParamCaption}\item[{Input\+It}]{first,  }\item[{Input\+It}]{last,  }\item[{Compare\+Predicate \&\&}]{comp }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespacefys_ae41544826d4ed594240e33e38a0ee512}\label{namespacefys_ae41544826d4ed594240e33e38a0ee512}} 
+\index{fys@{fys}!find\_most\_suitable@{find\_most\_suitable}}
+\index{find\_most\_suitable@{find\_most\_suitable}!fys@{fys}}
+\doxysubsubsection{\texorpdfstring{find\_most\_suitable()}{find\_most\_suitable()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Input\+It , typename Compare\+Predicate $>$ \\
+Input\+It fys\+::find\+\_\+most\+\_\+suitable (\begin{DoxyParamCaption}\item[{Input\+It}]{first,  }\item[{Input\+It}]{last,  }\item[{Compare\+Predicate \&\&}]{comp,  }\item[{Input\+It}]{start }\end{DoxyParamCaption})}
+
+
+
+Get the most suitable (suitable being defined by a comparator) of a given container. The most suitable follow the comparator. 
+
+For example the most suitable following this comparator \mbox{[}\mbox{]}(auto current\+Suitable, auto next) \{ return current\+Suitable $<$ next; \} will be the biggest element of the container.
+
+
+\begin{DoxyParams}{Parameters}
+{\em first} & iterator start of the container \\
+\hline
+{\em last} & iterator end of the container \\
+\hline
+{\em predicate} & predicate that takes the current most suitable and the next value to do a comparison \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+iterator pointing on the maximum value described by the predicate, if container is empty, last is returned 
+\end{DoxyReturn}

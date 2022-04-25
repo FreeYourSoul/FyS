@@ -1,0 +1,104 @@
+\hypertarget{_2home_2_fy_s_2_project_2_fy_s_2services_2arena_2include_2_flatbuffer_generator_8hh-example}{}\doxysection{/home/\+Fy\+S/\+Project/\+Fy\+S/services/arena/include/\+Flatbuffer\+Generator.\+hh}
+Class used to generate the Flat\+Buffer messages using the Fighting\+Pit data \begin{DoxyNote}{Note}
+It is important to note that the flatbuffer retrieved from a public member is invalidated if another call is made
+\end{DoxyNote}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{FlatbufferGenerator fg;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{auto} fightingPitStateFlatBuffer = generateFightingPitState(fightingPit);}
+\DoxyCodeLine{\textcolor{keyword}{auto} partyTeamStatusFlatBuffer = generatePartyTeamStatus(partyTeam); \textcolor{comment}{// invalidate fightingPitStateFlatBuffer}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{// fightingPitStateFlatBuffer is invalidating fightingPitStateFlatBuffer}}
+\DoxyCodeLine{\textcolor{comment}{// any usage of fightingPitStateFlatBuffer is undefined behavior}}
+\end{DoxyCode}
+
+
+
+\begin{DoxyCodeInclude}{0}
+\DoxyCodeLine{\textcolor{comment}{// MIT License}}
+\DoxyCodeLine{\textcolor{comment}{//}}
+\DoxyCodeLine{\textcolor{comment}{// Copyright (c) 2019 Quentin Balland}}
+\DoxyCodeLine{\textcolor{comment}{// Repository : https://github.com/FreeYourSoul/FyS}}
+\DoxyCodeLine{\textcolor{comment}{//}}
+\DoxyCodeLine{\textcolor{comment}{// Permission is hereby granted, free of charge, to any person obtaining a copy}}
+\DoxyCodeLine{\textcolor{comment}{//         of this software and associated documentation files (the "Software"), to deal}}
+\DoxyCodeLine{\textcolor{comment}{// in the Software without restriction, including without limitation the rights}}
+\DoxyCodeLine{\textcolor{comment}{//         to use, copy, modify, merge, publish, distribute, sublicense, and/or sell}}
+\DoxyCodeLine{\textcolor{comment}{//         copies of the Software, and to permit persons to whom the Software is}}
+\DoxyCodeLine{\textcolor{comment}{// furnished to do so, subject to the following conditions:}}
+\DoxyCodeLine{\textcolor{comment}{//}}
+\DoxyCodeLine{\textcolor{comment}{// The above copyright notice and this permission notice shall be included in all}}
+\DoxyCodeLine{\textcolor{comment}{//         copies or substantial portions of the Software.}}
+\DoxyCodeLine{\textcolor{comment}{//}}
+\DoxyCodeLine{\textcolor{comment}{// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR}}
+\DoxyCodeLine{\textcolor{comment}{// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,}}
+\DoxyCodeLine{\textcolor{comment}{// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE}}
+\DoxyCodeLine{\textcolor{comment}{//         AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER}}
+\DoxyCodeLine{\textcolor{comment}{// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,}}
+\DoxyCodeLine{\textcolor{comment}{// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE}}
+\DoxyCodeLine{\textcolor{comment}{// SOFTWARE.}}
+\DoxyCodeLine{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#ifndef FYS\_ONLINE\_FLATBUFFERGENERATOR\_HH}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define FYS\_ONLINE\_FLATBUFFERGENERATOR\_HH}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <utility>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <flatbuffers/flatbuffers.h>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace }fys::fb \{}
+\DoxyCodeLine{\textcolor{keyword}{class }FightingPitState;}
+\DoxyCodeLine{\textcolor{keyword}{class }PartyTeamStatus;}
+\DoxyCodeLine{\textcolor{keyword}{class }MemberStatus;}
+\DoxyCodeLine{\textcolor{keyword}{class }Cosmetics;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{keyword}{namespace }fys::arena \{}
+\DoxyCodeLine{\textcolor{keyword}{class }AllyPartyTeams;}
+\DoxyCodeLine{\textcolor{keyword}{class }PartyTeam;}
+\DoxyCodeLine{\textcolor{keyword}{class }TeamMember;}
+\DoxyCodeLine{\textcolor{keyword}{class }FightingContender;}
+\DoxyCodeLine{\textcolor{keyword}{class }FightingPit;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace }fys::arena \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{class }FlatbufferGenerator \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{    [[nodiscard]] std::pair<void*, uint>}
+\DoxyCodeLine{    generateFightingPitState(\textcolor{keyword}{const} \mbox{\hyperlink{classfys_1_1arena_1_1_fighting_pit}{fys::arena::FightingPit}}\& fp);}
+\DoxyCodeLine{}
+\DoxyCodeLine{    [[nodiscard]] std::pair<void*, uint>}
+\DoxyCodeLine{    generatePartyTeamStatus(\textcolor{keyword}{const} \mbox{\hyperlink{classfys_1_1arena_1_1_party_team}{fys::arena::PartyTeam}}\& partyTeam);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//  [[nodiscard]] std::pair<void*, uint>}}
+\DoxyCodeLine{\textcolor{comment}{//  generateCosmetics(const fys::arena::PartyTeam\& partyTeam);}}
+\DoxyCodeLine{\textcolor{comment}{//}}
+\DoxyCodeLine{\textcolor{comment}{//  [[nodiscard]] std::pair<void*, uint>}}
+\DoxyCodeLine{\textcolor{comment}{//  generateCosmetics(const std::vector<PitContenders>\& contenders);}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{    [[nodiscard]] \textcolor{keyword}{inline} std::vector<flatbuffers::Offset<fb::PartyTeamStatus>>}
+\DoxyCodeLine{    generatePartyTeamVecStatusOffset(\textcolor{keyword}{const} AllyPartyTeams\& apt);}
+\DoxyCodeLine{}
+\DoxyCodeLine{    [[nodiscard]] \textcolor{keyword}{inline} std::vector<flatbuffers::Offset<fb::MemberStatus>>}
+\DoxyCodeLine{    generateTeamMemberVecStatusOffset(\textcolor{keyword}{const} PartyTeam\& partyTeam);}
+\DoxyCodeLine{}
+\DoxyCodeLine{    [[nodiscard]] \textcolor{keyword}{inline} std::vector<flatbuffers::Offset<fys::fb::MemberStatus>>}
+\DoxyCodeLine{    generateContenderVecStatusOffset(\textcolor{keyword}{const} PitContenders\& pitContender);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//  [[nodiscard]] inline flatbuffers::Offset<fys::fb::Cosmetics>}}
+\DoxyCodeLine{\textcolor{comment}{//  generateCosmeticsOffset(const fys::arena::PartyTeam\&);}}
+\DoxyCodeLine{\textcolor{comment}{//}}
+\DoxyCodeLine{\textcolor{comment}{//  [[nodiscard]] inline flatbuffers::Offset<fys::fb::Cosmetics>}}
+\DoxyCodeLine{\textcolor{comment}{//  generateCosmeticsOffset(const std::vector<fys::arena::FightingContender>\& contenders);}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{    flatbuffers::FlatBufferBuilder \_fbb;}
+\DoxyCodeLine{}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#endif //FYS\_ONLINE\_FLATBUFFERGENERATOR\_HH}}
+\end{DoxyCodeInclude}
+ 

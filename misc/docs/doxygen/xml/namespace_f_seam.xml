@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespace_f_seam" kind="namespace" language="C++">
+    <compoundname>FSeam</compoundname>
+    <innerclass refid="struct_f_seam_1_1_connection_handler_data" prot="public">FSeam::ConnectionHandlerData</innerclass>
+    <innerclass refid="struct_f_seam_1_1_random_generator_data" prot="public">FSeam::RandomGeneratorData</innerclass>
+    <innerclass refid="struct_f_seam_1_1_type_parse_traits_3_01fys_1_1arena_1_1_connection_handler_01_4" prot="public">FSeam::TypeParseTraits&lt; fys::arena::ConnectionHandler &gt;</innerclass>
+    <innerclass refid="struct_f_seam_1_1_type_parse_traits_3_01fys_1_1util_1_1_random_generator_01_4" prot="public">FSeam::TypeParseTraits&lt; fys::util::RandomGenerator &gt;</innerclass>
+    <innernamespace refid="namespace_f_seam_1_1_connection_handler">FSeam::ConnectionHandler</innernamespace>
+    <innernamespace refid="namespace_f_seam_1_1_random_generator">FSeam::RandomGenerator</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="namespace_f_seam" kindref="compound">FSeam</ref> generated class for DataMock.hpp Please do not modify </para>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/FSeamMockData.hpp" line="17" column="15"/>
+  </compounddef>
+</doxygen>

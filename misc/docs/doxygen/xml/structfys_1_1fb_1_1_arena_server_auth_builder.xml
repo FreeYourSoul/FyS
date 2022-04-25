@@ -1,0 +1,202 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1fb_1_1_arena_server_auth_builder" kind="struct" language="C++" prot="public">
+    <compoundname>fys::fb::ArenaServerAuthBuilder</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1fb_1_1_arena_server_auth_builder_1a0de20617bdf846ff42ffca570a6fdf29" prot="public" static="no" mutable="no">
+        <type>flatbuffers::FlatBufferBuilder &amp;</type>
+        <definition>flatbuffers::FlatBufferBuilder&amp; fys::fb::ArenaServerAuthBuilder::fbb_</definition>
+        <argsstring></argsstring>
+        <name>fbb_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" line="80" column="34" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1fb_1_1_arena_server_auth_builder_1aa84b2454e20e98577095ab6cd61f4f41" prot="public" static="no" mutable="no">
+        <type>flatbuffers::uoffset_t</type>
+        <definition>flatbuffers::uoffset_t fys::fb::ArenaServerAuthBuilder::start_</definition>
+        <argsstring></argsstring>
+        <name>start_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" line="81" column="26" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfys_1_1fb_1_1_arena_server_auth_builder_1abcb4879016b84206078098f24349e449" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::ArenaServerAuthBuilder::add_user_name</definition>
+        <argsstring>(flatbuffers::Offset&lt; flatbuffers::String &gt; user_name)</argsstring>
+        <name>add_user_name</name>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>user_name</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" line="82" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" bodystart="82" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_arena_server_auth_builder_1a779fa8b4f2bb62d4c9068be04136d50e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::ArenaServerAuthBuilder::add_token_auth</definition>
+        <argsstring>(flatbuffers::Offset&lt; flatbuffers::String &gt; token_auth)</argsstring>
+        <name>add_token_auth</name>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>token_auth</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" line="85" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" bodystart="85" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_arena_server_auth_builder_1a7e873b52c44444c4950b1000e7c3df0a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::ArenaServerAuthBuilder::add_ip</definition>
+        <argsstring>(flatbuffers::Offset&lt; flatbuffers::String &gt; ip)</argsstring>
+        <name>add_ip</name>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>ip</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" line="88" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" bodystart="88" bodyend="90"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_arena_server_auth_builder_1aa5c0375256453719f1ec2b5dfa3b0bf1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::ArenaServerAuthBuilder::add_connection_str</definition>
+        <argsstring>(flatbuffers::Offset&lt; flatbuffers::String &gt; connection_str)</argsstring>
+        <name>add_connection_str</name>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>connection_str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" line="91" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" bodystart="91" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_arena_server_auth_builder_1af111bba90852ed20fad5c2840742219c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::ArenaServerAuthBuilder::add_id_fightingpit</definition>
+        <argsstring>(uint32_t id_fightingpit)</argsstring>
+        <name>add_id_fightingpit</name>
+        <param>
+          <type>uint32_t</type>
+          <declname>id_fightingpit</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" line="94" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" bodystart="94" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_arena_server_auth_builder_1afacea387378c2b4490931a1a85728c62" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::ArenaServerAuthBuilder::add_arena_server_code</definition>
+        <argsstring>(flatbuffers::Offset&lt; flatbuffers::String &gt; arena_server_code)</argsstring>
+        <name>add_arena_server_code</name>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::String &gt;</type>
+          <declname>arena_server_code</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" line="97" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" bodystart="97" bodyend="99"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_arena_server_auth_builder_1a25d8b62dff258d30289375624bf6bb99" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::fb::ArenaServerAuthBuilder::ArenaServerAuthBuilder</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb)</argsstring>
+        <name>ArenaServerAuthBuilder</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" line="100" column="12" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" bodystart="100" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_arena_server_auth_builder_1a4345c7fae5cf87da94aea3dcf0303f6d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfys_1_1fb_1_1_arena_server_auth_builder" kindref="compound">ArenaServerAuthBuilder</ref> &amp;</type>
+        <definition>ArenaServerAuthBuilder&amp; fys::fb::ArenaServerAuthBuilder::operator=</definition>
+        <argsstring>(const ArenaServerAuthBuilder &amp;)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="structfys_1_1fb_1_1_arena_server_auth_builder" kindref="compound">ArenaServerAuthBuilder</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" line="104" column="26"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_arena_server_auth_builder_1a37a6d60780bbb7556ef917c2dcd02eae" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; ArenaServerAuth &gt;</type>
+        <definition>flatbuffers::Offset&lt;ArenaServerAuth&gt; fys::fb::ArenaServerAuthBuilder::Finish</definition>
+        <argsstring>()</argsstring>
+        <name>Finish</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" line="105" column="23" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" bodystart="105" bodyend="114"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" line="79" column="29" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/ArenaServerAuth_generated.h" bodystart="79" bodyend="115"/>
+    <listofallmembers>
+      <member refid="structfys_1_1fb_1_1_arena_server_auth_builder_1afacea387378c2b4490931a1a85728c62" prot="public" virt="non-virtual"><scope>fys::fb::ArenaServerAuthBuilder</scope><name>add_arena_server_code</name></member>
+      <member refid="structfys_1_1fb_1_1_arena_server_auth_builder_1aa5c0375256453719f1ec2b5dfa3b0bf1" prot="public" virt="non-virtual"><scope>fys::fb::ArenaServerAuthBuilder</scope><name>add_connection_str</name></member>
+      <member refid="structfys_1_1fb_1_1_arena_server_auth_builder_1af111bba90852ed20fad5c2840742219c" prot="public" virt="non-virtual"><scope>fys::fb::ArenaServerAuthBuilder</scope><name>add_id_fightingpit</name></member>
+      <member refid="structfys_1_1fb_1_1_arena_server_auth_builder_1a7e873b52c44444c4950b1000e7c3df0a" prot="public" virt="non-virtual"><scope>fys::fb::ArenaServerAuthBuilder</scope><name>add_ip</name></member>
+      <member refid="structfys_1_1fb_1_1_arena_server_auth_builder_1a779fa8b4f2bb62d4c9068be04136d50e" prot="public" virt="non-virtual"><scope>fys::fb::ArenaServerAuthBuilder</scope><name>add_token_auth</name></member>
+      <member refid="structfys_1_1fb_1_1_arena_server_auth_builder_1abcb4879016b84206078098f24349e449" prot="public" virt="non-virtual"><scope>fys::fb::ArenaServerAuthBuilder</scope><name>add_user_name</name></member>
+      <member refid="structfys_1_1fb_1_1_arena_server_auth_builder_1a25d8b62dff258d30289375624bf6bb99" prot="public" virt="non-virtual"><scope>fys::fb::ArenaServerAuthBuilder</scope><name>ArenaServerAuthBuilder</name></member>
+      <member refid="structfys_1_1fb_1_1_arena_server_auth_builder_1a0de20617bdf846ff42ffca570a6fdf29" prot="public" virt="non-virtual"><scope>fys::fb::ArenaServerAuthBuilder</scope><name>fbb_</name></member>
+      <member refid="structfys_1_1fb_1_1_arena_server_auth_builder_1a37a6d60780bbb7556ef917c2dcd02eae" prot="public" virt="non-virtual"><scope>fys::fb::ArenaServerAuthBuilder</scope><name>Finish</name></member>
+      <member refid="structfys_1_1fb_1_1_arena_server_auth_builder_1a4345c7fae5cf87da94aea3dcf0303f6d" prot="public" virt="non-virtual"><scope>fys::fb::ArenaServerAuthBuilder</scope><name>operator=</name></member>
+      <member refid="structfys_1_1fb_1_1_arena_server_auth_builder_1aa84b2454e20e98577095ab6cd61f4f41" prot="public" virt="non-virtual"><scope>fys::fb::ArenaServerAuthBuilder</scope><name>start_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

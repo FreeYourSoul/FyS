@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1arena_1_1data_1_1_magic_point" kind="struct" language="C++" prot="public">
+    <compoundname>fys::arena::data::MagicPoint</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1arena_1_1data_1_1_magic_point_1a856984f3da4298c5322b553946cd1f41" prot="public" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint fys::arena::data::MagicPoint::current</definition>
+        <argsstring></argsstring>
+        <name>current</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" line="104" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1arena_1_1data_1_1_magic_point_1a12e2a5ce065ac2a7f1aa467d2c983ed5" prot="public" static="no" mutable="no">
+        <type>uint</type>
+        <definition>uint fys::arena::data::MagicPoint::total</definition>
+        <argsstring></argsstring>
+        <name>total</name>
+        <initializer>= 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" line="105" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" line="103" column="17" bodyfile="/home/FyS/Project/FyS/services/arena/include/fightingPit/data/CommonTypes.hh" bodystart="103" bodyend="106"/>
+    <listofallmembers>
+      <member refid="structfys_1_1arena_1_1data_1_1_magic_point_1a856984f3da4298c5322b553946cd1f41" prot="public" virt="non-virtual"><scope>fys::arena::data::MagicPoint</scope><name>current</name></member>
+      <member refid="structfys_1_1arena_1_1data_1_1_magic_point_1a12e2a5ce065ac2a7f1aa467d2c983ed5" prot="public" virt="non-virtual"><scope>fys::arena::data::MagicPoint</scope><name>total</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

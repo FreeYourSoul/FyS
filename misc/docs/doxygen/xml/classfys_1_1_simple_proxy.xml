@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1_simple_proxy" kind="class" language="C++" prot="public">
+    <compoundname>fys::SimpleProxy</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfys_1_1_simple_proxy_1a4c83c2d0a73f757de9dae83ee63c5be4" prot="private" static="no" mutable="no">
+        <type>zmq::context_t</type>
+        <definition>zmq::context_t fys::SimpleProxy::_ctx</definition>
+        <argsstring></argsstring>
+        <name>_ctx</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/SimpleProxy.hh" line="42" column="24" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/core/SimpleProxy.hh" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1_simple_proxy_1a8498b67b6bf4d116522a43cedab1bb1a" prot="private" static="no" mutable="no">
+        <type>zmq::socket_t</type>
+        <definition>zmq::socket_t fys::SimpleProxy::_frontend</definition>
+        <argsstring></argsstring>
+        <name>_frontend</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/SimpleProxy.hh" line="43" column="23" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/core/SimpleProxy.hh" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1_simple_proxy_1af3f15db43b1c915c44aa41ce33e164b6" prot="private" static="no" mutable="no">
+        <type>zmq::socket_t</type>
+        <definition>zmq::socket_t fys::SimpleProxy::_backend</definition>
+        <argsstring></argsstring>
+        <name>_backend</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/SimpleProxy.hh" line="44" column="23" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/core/SimpleProxy.hh" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1_simple_proxy_1a2119cdfac1b0d3a4e145767e0f877e3d" prot="public" static="no" const="no" explicit="yes" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::SimpleProxy::SimpleProxy</definition>
+        <argsstring>(const StartupDispatcherCtx &amp;ctx) noexcept</argsstring>
+        <name>SimpleProxy</name>
+        <param>
+          <type>const <ref refid="classfys_1_1_startup_dispatcher_ctx" kindref="compound">StartupDispatcherCtx</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/SimpleProxy.hh" line="37" column="18" bodyfile="/home/FyS/Project/FyS/dispatcher/common/src/core/SimpleProxy.cpp" bodystart="29" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1_simple_proxy_1a5707af06a4eb7b36b77578914306fe53" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::SimpleProxy::startProxy</definition>
+        <argsstring>()</argsstring>
+        <name>startProxy</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/SimpleProxy.hh" line="39" column="14" bodyfile="/home/FyS/Project/FyS/dispatcher/common/src/core/SimpleProxy.cpp" bodystart="38" bodyend="40"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/dispatcher/common/include/core/SimpleProxy.hh" line="34" column="22" bodyfile="/home/FyS/Project/FyS/dispatcher/common/include/core/SimpleProxy.hh" bodystart="34" bodyend="46"/>
+    <listofallmembers>
+      <member refid="classfys_1_1_simple_proxy_1af3f15db43b1c915c44aa41ce33e164b6" prot="private" virt="non-virtual"><scope>fys::SimpleProxy</scope><name>_backend</name></member>
+      <member refid="classfys_1_1_simple_proxy_1a4c83c2d0a73f757de9dae83ee63c5be4" prot="private" virt="non-virtual"><scope>fys::SimpleProxy</scope><name>_ctx</name></member>
+      <member refid="classfys_1_1_simple_proxy_1a8498b67b6bf4d116522a43cedab1bb1a" prot="private" virt="non-virtual"><scope>fys::SimpleProxy</scope><name>_frontend</name></member>
+      <member refid="classfys_1_1_simple_proxy_1a2119cdfac1b0d3a4e145767e0f877e3d" prot="public" virt="non-virtual"><scope>fys::SimpleProxy</scope><name>SimpleProxy</name></member>
+      <member refid="classfys_1_1_simple_proxy_1a5707af06a4eb7b36b77578914306fe53" prot="public" virt="non-virtual"><scope>fys::SimpleProxy</scope><name>startProxy</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

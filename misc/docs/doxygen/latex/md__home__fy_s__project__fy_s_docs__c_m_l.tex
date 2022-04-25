@@ -1,0 +1,34 @@
+This is a library that is used in order to retrieve data from the database, and cache it in order to not have expensive db call. ~\newline
+
+
+For example; ~\newline
+ in the case of the Arena Service (\href{services/Arena_BattleSystem.md\#arena}{\texttt{ Battle service}}). At the start of a battle, the contenders (monsters) that the player are facing are selected and thus known. The Service will have to fetch how the contenders behaviour are (stats, attacks, artificial intelligence and so on..), this logic is stored as chai scripts in the DB. When the battle end, if necessary, the memory is flushed for the next battle (new contenders / actions to fetch). ~\newline
+ But in case the same contender is selected for the next fight, it would be a waster to retrieve the behaviours twice in the database. ~\newline
+
+
+\doxysection*{To resolve this issue \+: C\+ML is composed of 3 distincts steps\+:}
+
+
+\begin{DoxyItemize}
+\item Retrieve from the database
+\item Create a at a specified file system location a folder hierarchy in order to find the contender again if needed.
+\item If the scripts is considered as \char`\"{}hot\char`\"{} (often used), it is kept in memory and not flushed at the end of the battle.
+\end{DoxyItemize}
+
+Thanks to those 3 steps, in the second attempt to retrieve the contender data.
+\begin{DoxyEnumerate}
+\item First it will be checked if it is a hot scripts (basically contenders are not hot scripts, but actions like attacks are).
+\item If it is not a hot script, the local file system is checking for the existance of the file that should correspond the script. ~\newline
+
+\item If it is found, it will be loaded, otherwise the database is requested.
+\end{DoxyEnumerate}
+
+
+
+\doxysection*{Up to date}
+
+In order to not have not up to date scripts stored in the file system. Two mecanisms are possible\+:
+\begin{DoxyItemize}
+\item Cleanup of the script at back-\/end startup (to enforce new database fetch)
+\item Redownload from database of the scripts stored on the file system at the back-\/end startup (to ensure up to date data). 
+\end{DoxyItemize}

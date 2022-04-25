@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacechaiscript" kind="namespace" language="C++">
+    <compoundname>chaiscript</compoundname>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespacechaiscript_1a7cda10544cf97cb00d064cf303deb789" prot="public" static="no">
+        <type>std::shared_ptr&lt; chaiscript::Module &gt;</type>
+        <definition>using chaiscript::ModulePtr = typedef std::shared_ptr&lt;chaiscript::Module&gt;</definition>
+        <argsstring></argsstring>
+        <name>ModulePtr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ChaiRegister.hh" line="34" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/ChaiRegister.hh" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/ChaiRegister.hh" line="31" column="20"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="_port_setting_displayer_8py" kind="file" language="Python">
+    <compoundname>PortSettingDisplayer.py</compoundname>
+    <innernamespace refid="namespace_port_setting_displayer">PortSettingDisplayer</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="keyword">import</highlight><highlight class="normal"><sp/>configparser</highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="keyword">import</highlight><highlight class="normal"><sp/>os</highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>root,<sp/>directories,<sp/>fileNames<sp/></highlight><highlight class="keywordflow">in</highlight><highlight class="normal"><sp/>os.walk(</highlight><highlight class="stringliteral">&apos;./&apos;</highlight><highlight class="normal">):</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>filename<sp/></highlight><highlight class="keywordflow">in</highlight><highlight class="normal"><sp/>fileNames:</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;.ini&quot;</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">in</highlight><highlight class="normal"><sp/>filename:</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>config<sp/>=<sp/>configparser.ConfigParser()</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>path<sp/>=<sp/>os.path.join(root,<sp/>filename)</highlight></codeline>
+<codeline lineno="9"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>config.read(path)</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>print(</highlight><highlight class="stringliteral">&quot;Configuration<sp/>file<sp/>{}&quot;</highlight><highlight class="normal">.format(path))</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>print(</highlight><highlight class="stringliteral">&quot;Port<sp/>Proxy<sp/>FrontEnd:<sp/>{}<sp/>Port<sp/>Proxy<sp/>backend:<sp/>{}&quot;</highlight><highlight class="normal">.format(config[</highlight><highlight class="stringliteral">&quot;proxy_frontend&quot;</highlight><highlight class="normal">][</highlight><highlight class="stringliteral">&quot;port&quot;</highlight><highlight class="normal">],<sp/>config[</highlight><highlight class="stringliteral">&quot;proxy_backend&quot;</highlight><highlight class="normal">][</highlight><highlight class="stringliteral">&quot;port&quot;</highlight><highlight class="normal">]))</highlight></codeline>
+    </programlisting>
+    <location file="/home/FyS/Project/FyS/dispatcher/PortSettingDisplayer.py"/>
+  </compounddef>
+</doxygen>

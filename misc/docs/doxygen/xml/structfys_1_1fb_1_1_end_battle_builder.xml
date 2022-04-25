@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="structfys_1_1fb_1_1_end_battle_builder" kind="struct" language="C++" prot="public">
+    <compoundname>fys::fb::EndBattleBuilder</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structfys_1_1fb_1_1_end_battle_builder_1aff207b33a4dc631e3c03809dea59c51b" prot="public" static="no" mutable="no">
+        <type>flatbuffers::FlatBufferBuilder &amp;</type>
+        <definition>flatbuffers::FlatBufferBuilder&amp; fys::fb::EndBattleBuilder::fbb_</definition>
+        <argsstring></argsstring>
+        <name>fbb_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" line="142" column="34" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" bodystart="142" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structfys_1_1fb_1_1_end_battle_builder_1a0f3cd352b9acc3038fb11c018dfb05b4" prot="public" static="no" mutable="no">
+        <type>flatbuffers::uoffset_t</type>
+        <definition>flatbuffers::uoffset_t fys::fb::EndBattleBuilder::start_</definition>
+        <argsstring></argsstring>
+        <name>start_</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" line="143" column="26" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" bodystart="143" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="structfys_1_1fb_1_1_end_battle_builder_1ab625d1766bfcf309e2ca57d75a081dae" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::EndBattleBuilder::add_status</definition>
+        <argsstring>(fys::fb::StatusBattle status)</argsstring>
+        <name>add_status</name>
+        <param>
+          <type>fys::fb::StatusBattle</type>
+          <declname>status</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" line="144" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" bodystart="144" bodyend="146"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_end_battle_builder_1a26ad9102ba79b7c5ef39c8ba64229cbf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::fb::EndBattleBuilder::add_rewards</definition>
+        <argsstring>(flatbuffers::Offset&lt; flatbuffers::Vector&lt; flatbuffers::Offset&lt; fys::fb::Reward &gt;&gt;&gt; rewards)</argsstring>
+        <name>add_rewards</name>
+        <param>
+          <type>flatbuffers::Offset&lt; flatbuffers::Vector&lt; flatbuffers::Offset&lt; fys::fb::Reward &gt;&gt;&gt;</type>
+          <declname>rewards</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" line="147" column="8" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" bodystart="147" bodyend="149"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_end_battle_builder_1adc5e57a0967f5ee4d32b0d7c22e572ea" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>fys::fb::EndBattleBuilder::EndBattleBuilder</definition>
+        <argsstring>(flatbuffers::FlatBufferBuilder &amp;_fbb)</argsstring>
+        <name>EndBattleBuilder</name>
+        <param>
+          <type>flatbuffers::FlatBufferBuilder &amp;</type>
+          <declname>_fbb</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" line="150" column="12" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" bodystart="150" bodyend="153"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_end_battle_builder_1a98a986180e665f413acedc251f712fba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfys_1_1fb_1_1_end_battle_builder" kindref="compound">EndBattleBuilder</ref> &amp;</type>
+        <definition>EndBattleBuilder&amp; fys::fb::EndBattleBuilder::operator=</definition>
+        <argsstring>(const EndBattleBuilder &amp;)</argsstring>
+        <name>operator=</name>
+        <param>
+          <type>const <ref refid="structfys_1_1fb_1_1_end_battle_builder" kindref="compound">EndBattleBuilder</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" line="154" column="20"/>
+      </memberdef>
+      <memberdef kind="function" id="structfys_1_1fb_1_1_end_battle_builder_1a188172184dc7b8ea6bb4013a21675699" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>flatbuffers::Offset&lt; EndBattle &gt;</type>
+        <definition>flatbuffers::Offset&lt;EndBattle&gt; fys::fb::EndBattleBuilder::Finish</definition>
+        <argsstring>()</argsstring>
+        <name>Finish</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" line="155" column="23" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" bodystart="155" bodyend="159"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" line="141" column="23" bodyfile="/home/FyS/Project/FyS/services/common/flatbuffer/includes/EndBattle_generated.h" bodystart="141" bodyend="160"/>
+    <listofallmembers>
+      <member refid="structfys_1_1fb_1_1_end_battle_builder_1a26ad9102ba79b7c5ef39c8ba64229cbf" prot="public" virt="non-virtual"><scope>fys::fb::EndBattleBuilder</scope><name>add_rewards</name></member>
+      <member refid="structfys_1_1fb_1_1_end_battle_builder_1ab625d1766bfcf309e2ca57d75a081dae" prot="public" virt="non-virtual"><scope>fys::fb::EndBattleBuilder</scope><name>add_status</name></member>
+      <member refid="structfys_1_1fb_1_1_end_battle_builder_1adc5e57a0967f5ee4d32b0d7c22e572ea" prot="public" virt="non-virtual"><scope>fys::fb::EndBattleBuilder</scope><name>EndBattleBuilder</name></member>
+      <member refid="structfys_1_1fb_1_1_end_battle_builder_1aff207b33a4dc631e3c03809dea59c51b" prot="public" virt="non-virtual"><scope>fys::fb::EndBattleBuilder</scope><name>fbb_</name></member>
+      <member refid="structfys_1_1fb_1_1_end_battle_builder_1a188172184dc7b8ea6bb4013a21675699" prot="public" virt="non-virtual"><scope>fys::fb::EndBattleBuilder</scope><name>Finish</name></member>
+      <member refid="structfys_1_1fb_1_1_end_battle_builder_1a98a986180e665f413acedc251f712fba" prot="public" virt="non-virtual"><scope>fys::fb::EndBattleBuilder</scope><name>operator=</name></member>
+      <member refid="structfys_1_1fb_1_1_end_battle_builder_1a0f3cd352b9acc3038fb11c018dfb05b4" prot="public" virt="non-virtual"><scope>fys::fb::EndBattleBuilder</scope><name>start_</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

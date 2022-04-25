@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="struct_f_seam_1_1_connection_handler_1_1setup_connection_manager" kind="struct" language="C++" prot="public">
+    <compoundname>FSeam::ConnectionHandler::setupConnectionManager</compoundname>
+      <sectiondef kind="public-static-attrib">
+      <memberdef kind="variable" id="struct_f_seam_1_1_connection_handler_1_1setup_connection_manager_1a814f6733fc78c2457619890afe8566f1" prot="public" static="yes" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string FSeam::ConnectionHandler::setupConnectionManager::NAME</definition>
+        <argsstring></argsstring>
+        <name>NAME</name>
+        <initializer>= &quot;setupConnectionManager&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/FSeamMockData.hpp" line="36" column="65" bodyfile="/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/FSeamMockData.hpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/FSeamMockData.hpp" line="36" column="33" bodyfile="/home/FyS/Project/FyS/cmake-build-debug/services/arena/test/FSeamMockData.hpp" bodystart="36" bodyend="36"/>
+    <listofallmembers>
+      <member refid="struct_f_seam_1_1_connection_handler_1_1setup_connection_manager_1a814f6733fc78c2457619890afe8566f1" prot="public" virt="non-virtual"><scope>FSeam::ConnectionHandler::setupConnectionManager</scope><name>NAME</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

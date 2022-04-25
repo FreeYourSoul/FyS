@@ -1,0 +1,322 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classfys_1_1arena_1_1_arena_server_service" kind="class" language="C++" prot="public">
+    <compoundname>fys::arena::ArenaServerService</compoundname>
+    <includes refid="_arena_server_service_8hh" local="no">ArenaServerService.hh</includes>
+      <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classfys_1_1arena_1_1_arena_server_service_1a964c53f1ea5deda06fdfc8030889e56d" prot="private" static="no">
+        <type>const std::unordered_map&lt; std::string, <ref refid="structfys_1_1arena_1_1_awaiting_player_arena" kindref="compound">AwaitingPlayerArena</ref> &gt;::const_iterator</type>
+        <definition>using fys::arena::ArenaServerService::AwaitingPlayerArenaIt =  const std::unordered_map&lt;std::string, AwaitingPlayerArena&gt;::const_iterator</definition>
+        <argsstring></argsstring>
+        <name>AwaitingPlayerArenaIt</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" line="117" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" bodystart="117" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_arena_server_service_1aa6431898b47033e59ce327692042b88f" prot="private" static="yes" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string fys::arena::ArenaServerService::READY_ACTION</definition>
+        <argsstring></argsstring>
+        <name>READY_ACTION</name>
+        <initializer>= &quot;READY&quot;</initializer>
+        <briefdescription>
+<para>action name to set readiness </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" line="120" column="33" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" bodystart="120" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_arena_server_service_1aa0971bbb7211d7c3acd5cbf3efa169a8" prot="private" static="yes" mutable="no">
+        <type>const uint</type>
+        <definition>const uint fys::arena::ArenaServerService::READY_ACTION_ID</definition>
+        <argsstring></argsstring>
+        <name>READY_ACTION_ID</name>
+        <initializer>= 1337</initializer>
+        <briefdescription>
+<para>magic id to set readiness </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" line="122" column="26" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_arena_server_service_1a5c946fdf988c0c7d2b898bd985f5d47b" prot="private" static="no" mutable="no">
+        <type>std::reference_wrapper&lt; const <ref refid="classfys_1_1arena_1_1_arena_server_context" kindref="compound">ArenaServerContext</ref> &gt;</type>
+        <definition>std::reference_wrapper&lt;const ArenaServerContext&gt; fys::arena::ArenaServerService::_ctx</definition>
+        <argsstring></argsstring>
+        <name>_ctx</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" line="155" column="24" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" bodystart="155" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_arena_server_service_1ad2f8141ba2584b674386c8c3df88ce0d" prot="private" static="no" mutable="no">
+        <type><ref refid="classfys_1_1cache_1_1_cml_copy" kindref="compound">cache::CmlCopy</ref></type>
+        <definition>cache::CmlCopy fys::arena::ArenaServerService::_cache</definition>
+        <argsstring></argsstring>
+        <name>_cache</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" line="156" column="16" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" bodystart="156" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_arena_server_service_1a5c58b3af53c6d2aef081f5b1fe142825" prot="private" static="no" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classfys_1_1network_1_1_d_b_connector" kindref="compound">network::DBConnector</ref> &gt;</type>
+        <definition>std::unique_ptr&lt;network::DBConnector&gt; fys::arena::ArenaServerService::_dbConnector</definition>
+        <argsstring></argsstring>
+        <name>_dbConnector</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" line="159" column="17" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" bodystart="159" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_arena_server_service_1afb3b03ebe48946781f8b373830f5a401" prot="private" static="no" mutable="no">
+        <type><ref refid="classfys_1_1arena_1_1_connection_handler" kindref="compound">ConnectionHandler</ref></type>
+        <definition>ConnectionHandler fys::arena::ArenaServerService::_connectionHandler</definition>
+        <argsstring></argsstring>
+        <name>_connectionHandler</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" line="160" column="19" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" bodystart="160" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_arena_server_service_1afbb19065fe5875e1efeec92c324f5bb8" prot="private" static="no" mutable="no">
+        <type><ref refid="classfys_1_1arena_1_1_worker_service" kindref="compound">WorkerService</ref></type>
+        <definition>WorkerService fys::arena::ArenaServerService::_workerService</definition>
+        <argsstring></argsstring>
+        <name>_workerService</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" line="163" column="15" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" bodystart="163" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classfys_1_1arena_1_1_arena_server_service_1a33df4ee0a2d2ad0758470b02cc0d3eef" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, <ref refid="structfys_1_1arena_1_1_awaiting_player_arena" kindref="compound">AwaitingPlayerArena</ref> &gt;</type>
+        <definition>std::unordered_map&lt;std::string, AwaitingPlayerArena&gt; fys::arena::ArenaServerService::_awaitingArena</definition>
+        <argsstring></argsstring>
+        <name>_awaitingArena</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" line="166" column="20" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" bodystart="166" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classfys_1_1arena_1_1_arena_server_service_1afab9e43f2294fd99b3019bb42d94f83c" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>fys::arena::ArenaServerService::ArenaServerService</definition>
+        <argsstring>(const ArenaServerContext &amp;ctx)</argsstring>
+        <name>ArenaServerService</name>
+        <param>
+          <type>const <ref refid="classfys_1_1arena_1_1_arena_server_context" kindref="compound">ArenaServerContext</ref> &amp;</type>
+          <declname>ctx</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" line="125" column="10" bodyfile="/home/FyS/Project/FyS/services/arena/src/ArenaServerService.cpp" bodystart="90" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_arena_server_service_1ae335fe525fd28119a792fa4b49093d85" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::ArenaServerService::runServerLoop</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>runServerLoop</name>
+        <briefdescription>
+<para>Run infinite loop that poll on the connections of the dispatcher, then of the players. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>This method contains the code of the deserialization of flatbuffer message (ioc with lambda) and then check if the incoming message is coming from an authorized user. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" line="132" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/ArenaServerService.cpp" bodystart="101" bodyend="220"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classfys_1_1arena_1_1_arena_server_service_1a35c275338e886d9012b0bca6b9af09f9" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool fys::arena::ArenaServerService::isSaturated</definition>
+        <argsstring>() const noexcept</argsstring>
+        <name>isSaturated</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Verify if the server is saturated (too many battle at the same time running on this ArenaService) <simplesect kind="return"><para>true if the server is saturated, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" line="140" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/ArenaServerService.cpp" bodystart="240" bodyend="244"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_arena_server_service_1a13278673d94817dd6c0d7c2ea06d6dc5" prot="private" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structfys_1_1arena_1_1_player_action" kindref="compound">PlayerAction</ref></type>
+        <definition>PlayerAction fys::arena::ArenaServerService::createPlayerAction</definition>
+        <argsstring>(std::string &amp;&amp;action, const fb::ArenaFightAction *frame) const</argsstring>
+        <name>createPlayerAction</name>
+        <param>
+          <type>std::string &amp;&amp;</type>
+          <declname>action</declname>
+        </param>
+        <param>
+          <type>const fb::ArenaFightAction *</type>
+          <declname>frame</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" line="143" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/ArenaServerService.cpp" bodystart="223" bodyend="237"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_arena_server_service_1a75f8ca840876da76a1d2730e27762660" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>unsigned</type>
+        <definition>unsigned fys::arena::ArenaServerService::createNewFightingPit</definition>
+        <argsstring>(const AwaitingPlayerArena &amp;awaited) noexcept</argsstring>
+        <name>createNewFightingPit</name>
+        <param>
+          <type>const <ref refid="structfys_1_1arena_1_1_awaiting_player_arena" kindref="compound">AwaitingPlayerArena</ref> &amp;</type>
+          <declname>awaited</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" line="146" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/ArenaServerService.cpp" bodystart="275" bodyend="297"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_arena_server_service_1a94cc08c348dcc7c4b4456288ede5f182" prot="private" static="no" const="yes" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>std::pair&lt; bool, AwaitingPlayerArenaIt &gt;</type>
+        <definition>std::pair&lt; bool, const std::unordered_map&lt; std::string, AwaitingPlayerArena &gt;::const_iterator &gt; fys::arena::ArenaServerService::isPlayerAwaited</definition>
+        <argsstring>(const std::string &amp;name, const std::string &amp;token, unsigned idFightingPit) const noexcept</argsstring>
+        <name>isPlayerAwaited</name>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>name</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>token</declname>
+        </param>
+        <param>
+          <type>unsigned</type>
+          <declname>idFightingPit</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" line="149" column="1" bodyfile="/home/FyS/Project/FyS/services/arena/src/ArenaServerService.cpp" bodystart="247" bodyend="253"/>
+      </memberdef>
+      <memberdef kind="function" id="classfys_1_1arena_1_1_arena_server_service_1ad21c6096306acd6c903533cd776e13e8" prot="private" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void fys::arena::ArenaServerService::forwardReplyToDispatcher</definition>
+        <argsstring>(zmq::message_t &amp;&amp;idtWs, const fys::arena::AwaitingPlayerArena &amp;awaitArena) noexcept</argsstring>
+        <name>forwardReplyToDispatcher</name>
+        <param>
+          <type>zmq::message_t &amp;&amp;</type>
+          <declname>idtWs</declname>
+        </param>
+        <param>
+          <type>const <ref refid="structfys_1_1arena_1_1_awaiting_player_arena" kindref="compound">fys::arena::AwaitingPlayerArena</ref> &amp;</type>
+          <declname>awaitArena</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" line="151" column="6" bodyfile="/home/FyS/Project/FyS/services/arena/src/ArenaServerService.cpp" bodystart="256" bodyend="272"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+<para>Class managing an Arena Server. <linebreak/>
+ An arena server is a server handling multiple arena fighting pit instance at once. In order to properly works, it need to work with an ArenaDispatcher, which is a proxy for the WorldServer to communicate with Arena. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>fys::arena::ArenaServerService::createNewFightingPit In case of a new encounter for a player, the following workflow apply:<itemizedlist>
+<listitem><para>Player is moving / doing an action on the WorldMap (managed by a WorldServer) that is triggering a new encounter. [publisher socket send notification] <linebreak/>
+<linebreak/>
+</para>
+</listitem><listitem><para>WorldServer send a message to a ArenaDispatcher containing configuration data to generate a fighting pit and authentication information, those are the following:<linebreak/>
+<itemizedlist>
+<listitem><para>a generated token (used as authentication key)<linebreak/>
+</para>
+</listitem><listitem><para>the difficulty of the fight (configuration of the player)<linebreak/>
+</para>
+</listitem><listitem><para>the id of encounter; if equal to 0, it is a random encounter. scripted id otherwise.<linebreak/>
+</para>
+</listitem></itemizedlist>
+</para>
+</listitem><listitem><para>The <ref refid="classfys_1_1_dispatcher" kindref="compound">Dispatcher</ref> forward the message to an ArenaServer that is going to register the incoming player that will initiate the creation of the fighting pit. <linebreak/>
+<linebreak/>
+</para>
+</listitem><listitem><para>The Arena server reply to the dispatcher (that will reply to the WorldServer), the message will return to the player, message containing the ip (connection string) of the ArenaServer that will create the fighting pit. <linebreak/>
+<linebreak/>
+</para>
+</listitem><listitem><para>The Player can then directly connect to the ArenaServer using the token to validate the authentication, The Arena service validate the connection, and use the data (difficulty ect..) in order to generate the fighting pit (with an id unique). When the fight is setup, the initial handshake with the client contains the id of the fighting pit in order to enable other player to join. <linebreak/>
+</para>
+</listitem></itemizedlist>
+</para>
+<para>@joinFightingPit Another player than the creator can join an existing arena by specifying its fighting pit id to the WorldServer, which will check if the position of the joining player is close enough of the creator of the fighting pit. The ArenaServer is then just going to check the existence of the id and will add the player into the fight. </para>
+    </detaileddescription>
+    <location file="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" line="116" column="25" bodyfile="/home/FyS/Project/FyS/services/arena/include/ArenaServerService.hh" bodystart="116" bodyend="167"/>
+    <listofallmembers>
+      <member refid="classfys_1_1arena_1_1_arena_server_service_1a33df4ee0a2d2ad0758470b02cc0d3eef" prot="private" virt="non-virtual"><scope>fys::arena::ArenaServerService</scope><name>_awaitingArena</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_service_1ad2f8141ba2584b674386c8c3df88ce0d" prot="private" virt="non-virtual"><scope>fys::arena::ArenaServerService</scope><name>_cache</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_service_1afb3b03ebe48946781f8b373830f5a401" prot="private" virt="non-virtual"><scope>fys::arena::ArenaServerService</scope><name>_connectionHandler</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_service_1a5c946fdf988c0c7d2b898bd985f5d47b" prot="private" virt="non-virtual"><scope>fys::arena::ArenaServerService</scope><name>_ctx</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_service_1a5c58b3af53c6d2aef081f5b1fe142825" prot="private" virt="non-virtual"><scope>fys::arena::ArenaServerService</scope><name>_dbConnector</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_service_1afbb19065fe5875e1efeec92c324f5bb8" prot="private" virt="non-virtual"><scope>fys::arena::ArenaServerService</scope><name>_workerService</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_service_1afab9e43f2294fd99b3019bb42d94f83c" prot="public" virt="non-virtual"><scope>fys::arena::ArenaServerService</scope><name>ArenaServerService</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_service_1a964c53f1ea5deda06fdfc8030889e56d" prot="private" virt="non-virtual"><scope>fys::arena::ArenaServerService</scope><name>AwaitingPlayerArenaIt</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_service_1a75f8ca840876da76a1d2730e27762660" prot="private" virt="non-virtual"><scope>fys::arena::ArenaServerService</scope><name>createNewFightingPit</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_service_1a13278673d94817dd6c0d7c2ea06d6dc5" prot="private" virt="non-virtual"><scope>fys::arena::ArenaServerService</scope><name>createPlayerAction</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_service_1ad21c6096306acd6c903533cd776e13e8" prot="private" virt="non-virtual"><scope>fys::arena::ArenaServerService</scope><name>forwardReplyToDispatcher</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_service_1a94cc08c348dcc7c4b4456288ede5f182" prot="private" virt="non-virtual"><scope>fys::arena::ArenaServerService</scope><name>isPlayerAwaited</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_service_1a35c275338e886d9012b0bca6b9af09f9" prot="private" virt="non-virtual"><scope>fys::arena::ArenaServerService</scope><name>isSaturated</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_service_1aa6431898b47033e59ce327692042b88f" prot="private" virt="non-virtual"><scope>fys::arena::ArenaServerService</scope><name>READY_ACTION</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_service_1aa0971bbb7211d7c3acd5cbf3efa169a8" prot="private" virt="non-virtual"><scope>fys::arena::ArenaServerService</scope><name>READY_ACTION_ID</name></member>
+      <member refid="classfys_1_1arena_1_1_arena_server_service_1ae335fe525fd28119a792fa4b49093d85" prot="public" virt="non-virtual"><scope>fys::arena::ArenaServerService</scope><name>runServerLoop</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
