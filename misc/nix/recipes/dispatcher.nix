@@ -1,4 +1,4 @@
-{ stdenv, callPackage, cmake, flatcc, boost, flatbuffers, zeromq, cppzmq, catch2
+{ stdenv, callPackage, cmake, pkgconfig, flatcc, boost, flatbuffers, zeromq, cppzmq, catch2
 , fmt, spdlog, nlohmann_json, fil }:
 
 stdenv.mkDerivation rec {
@@ -22,7 +22,7 @@ stdenv.mkDerivation rec {
     nlohmann_json
     fil
   ];
-  nativeBuildInputs = [ cmake flatcc ];
+  nativeBuildInputs = [ cmake pkgconfig flatcc ];
 
   cmakeFlags = [
     "-DBUILD_SERVICE_WORLD=OFF"

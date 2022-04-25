@@ -1,10 +1,11 @@
-{ stdenv, callPackage, cmake, zmqpp, catch2, spdlog }:
+{ stdenv, callPackage, cmake, pkgconfig, zmqpp, catch2, spdlog }:
 
 stdenv.mkDerivation rec {
   inherit (callPackage ./common.nix { }) version src;
 
   pname = "fys-quest-service";
 
-  buildInputs = [ cmake zmq ];
+  buildInputs = [ zmq ];
+  nativeBuildInputs = [ make pkgconfig ];
 
 }

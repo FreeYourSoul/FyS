@@ -15,21 +15,19 @@ in with pkgs; rec {
     });
 
   # External Dependencies (not default nixpkg)
-  nlohmann_json = (callPackage ./nix/dependency/nlohmann_json.nix) { };
-  chaiscript = (callPackage ./nix/dependency/chaiscript.nix) { };
-  tmxlite = (callPackage ./nix/dependency/tmxlite.nix) { };
-  cppzmq = (callPackage ./nix/dependency/cppzmq.nix) { };
-  sol3 = (callPackage ./nix/dependency/sol3.nix) { };
-  spdlog = (callPackage ./nix/dependency/spdlog.nix) { };
+  chaiscript = (callPackage ./misc/nix/dependency/chaiscript.nix) { };
+  tmxlite = (callPackage ./misc/nix/dependency/tmxlite.nix) { };
+  cppzmq = (callPackage ./misc/nix/dependency/cppzmq.nix) { };
+  sol3 = (callPackage ./misc/nix/dependency/sol3.nix) { };
 
   # FyS Dependencies
-  dispatcher = (callPackage ./nix/recipes/dispatcher.nix) {
-    inherit stdenv nlohmann_json fil spdlog;
+  dispatcher = (callPackage ./misc/nix/recipes/dispatcher.nix) {
+    inherit stdenv nlohmann_json fil;
   };
-  world_service = (callPackage ./nix/recipes/world_service.nix) {
-    inherit stdenv fil nlohmann_json tmxlite fseam sol3 cppzmq spdlog;
+  world_service = (callPackage ./misc/nix/recipes/world_service.nix) {
+    inherit stdenv fil nlohmann_json tmxlite fseam sol3 cppzmq;
   };
-  arena_service = (callPackage ./nix/recipes/arena_service.nix) {
-    inherit stdenv fil nlohmann_json fseam chaiscript cppzmq spdlog;
+  arena_service = (callPackage ./misc/nix/recipes/arena_service.nix) {
+    inherit stdenv fil nlohmann_json fseam chaiscript cppzmq;
   };
 }

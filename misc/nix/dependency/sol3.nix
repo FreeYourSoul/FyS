@@ -1,12 +1,12 @@
 { stdenv, callPackage, cmake, lua }:
 
 stdenv.mkDerivation rec {
-  version = "3.2.3";
   pname = "sol3";
-
+  version = "3.2.3";
+  
   src = builtins.fetchGit {
-    url = "https://github.com/ThePhD/sol2.git";
-    rev = "c068aefbeddb3dd1f1fd38d42843ecb49a3b4cdb";
+    url = "https://github.com/FreeYourSoul/sol2.git";
+    rev = "d0eba0a7544b0b62e37f08972c0f431f3c0e96b4";
   };
 
   buildInputs = [ ];

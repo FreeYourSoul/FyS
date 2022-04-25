@@ -1,4 +1,4 @@
-{ stdenv, callPackage, lua, cmake, zeromq, cppzmq, catch2, fmt, spdlog
+{ stdenv, callPackage, lua, cmake, pkgconfig, zeromq, cppzmq, catch2, fmt, spdlog
 , nlohmann_json }:
 
 stdenv.mkDerivation rec {
@@ -6,6 +6,8 @@ stdenv.mkDerivation rec {
 
   pname = "fys-inventory-service";
 
-  buildInputs = [ cmake zeromq lua cppzmq spdlog catch2 fmt nlohmann_json ];
+  buildInputs = [ zeromq lua cppzmq spdlog catch2 fmt nlohmann_json ];
+
+  nativeBuildInputs = [ cmake pkgconfig ];
 
 }
