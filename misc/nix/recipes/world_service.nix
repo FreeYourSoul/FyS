@@ -1,6 +1,6 @@
-{ stdenv, callPackage, cmake, pkgconfig, flatcc, boost, flatbuffers, zeromq, cppzmq, catch2
-, fmt, spdlog, nlohmann_json, fil, lua, tmxlite, sol3, python37
-, python37Packages, fseam }:
+{ stdenv, callPackage, cmake, python3, flatcc, boost, flatbuffers, zeromq, cppzmq, catch2
+, fmt, spdlog, nlohmann_json, fil, lua, tmxlite, sol3
+, python3Packages, fseam }:
 
 stdenv.mkDerivation rec {
   inherit (callPackage ./common.nix {
@@ -27,7 +27,7 @@ stdenv.mkDerivation rec {
     sol3
   ];
 
-  nativeBuildInputs = [ cmake pkgconfig flatcc python37 python37Packages.ply ];
+  nativeBuildInputs = [ cmake python3 flatcc python3Packages.ply ];
 
   cmakeFlags = [
     "-DBUILD_SERVICE_WORLD=ON"

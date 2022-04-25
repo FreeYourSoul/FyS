@@ -1,5 +1,5 @@
-{ stdenv, callPackage, cmake, pkgconfig, flatcc, boost, flatbuffers, zeromq, cppzmq, catch2
-, fmt, spdlog, nlohmann_json, fil, chaiscript, python37, python37Packages, fseam
+{ stdenv, callPackage, cmake, flatcc, boost, flatbuffers, zeromq, cppzmq, catch2
+, fmt, spdlog, nlohmann_json, fil, chaiscript, python3, python3Packages, fseam
 , zlib }:
 
 stdenv.mkDerivation rec {
@@ -25,7 +25,7 @@ stdenv.mkDerivation rec {
     zlib
   ];
 
-  nativeBuildInputs = [ cmake pkgconfig catch2 flatcc python37 python37Packages.ply ];
+  nativeBuildInputs = [ cmake catch2 flatcc python3 python3Packages.ply ];
 
   cmakeFlags = [
     "-DBUILD_SERVICE_WORLD=OFF"

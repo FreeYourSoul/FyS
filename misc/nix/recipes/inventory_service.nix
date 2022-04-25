@@ -1,4 +1,4 @@
-{ stdenv, callPackage, lua, cmake, pkgconfig, zeromq, cppzmq, catch2, fmt, spdlog
+{ stdenv, callPackage, lua, cmake, zeromq, cppzmq, catch2, fmt, spdlog, python3
 , nlohmann_json }:
 
 stdenv.mkDerivation rec {
@@ -8,6 +8,6 @@ stdenv.mkDerivation rec {
 
   buildInputs = [ zeromq lua cppzmq spdlog catch2 fmt nlohmann_json ];
 
-  nativeBuildInputs = [ cmake pkgconfig ];
+  nativeBuildInputs = [ cmake  python3 ];
 
 }
