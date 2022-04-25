@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/FreeYourSoul/FyS.svg?branch=master)](https://travis-ci.com/FreeYourSoul/FyS)
+[![Build Status](https://github.com/FreeYourSoul/FyS/workflows/Build/badge.svg)](https://github.com/FreeYourSoul/FyS/actions?query=workflow%3A"Build")
 [![Documentation Status](https://readthedocs.org/projects/fys/badge/?version=latest)](https://fys.readthedocs.io/en/latest/?badge=latest)
 [![Doxygen](https://codedocs.xyz/FreeYourSoul/FyS.svg)](https://codedocs.xyz/FreeYourSoul/FyS/)
 [![HitCount](http://hits.dwyl.io/FreeYourSoul/FyS.svg)](http://hits.dwyl.io/FreeYourSoul/FyS)
