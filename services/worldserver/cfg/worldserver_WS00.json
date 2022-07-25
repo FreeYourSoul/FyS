@@ -4,7 +4,7 @@
         "connection_port":              8001,
         "connection_warning_threshold": 1000,
         "script_storage_cache":         "/tmp/ARN_cache/",
-        "collision_map":                "services/worldserver/cfg/maps/WS00.fcolmap",
+        "collision_map":                "services/worldserver/cfg/maps/WS00.colmap",
         "spawning_config":              "services/worldserver/cfg/spawning_config_WS00.json",
         "path_lua_init_engine":         "scripting_cache/scripts/ws/initialization.lua",
         "path_lua_base":                "scripting_cache/scripts/",

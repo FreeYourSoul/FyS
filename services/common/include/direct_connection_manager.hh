@@ -29,6 +29,10 @@
 
 namespace fys::common {
 
+/**
+ * @brief A connection manager that will handle direct connection from the final user (player).
+ *
+ */
 class direct_connection_manager {
 
 public:
@@ -37,6 +41,14 @@ public:
     _router_player_connection.bind(bindingString);
   }
 
+  /**
+   * An envelope of message received is split into three distinct parts :
+   *  - identity frame : consumed by this connection manager in order to be used by ZMQ to properly redirect any reply
+   *  - authentication frame : consumed by this connection manager in order to verify if the client is properly authenticated
+   *  - payload : message forwarded to the generic handler provided.
+   *
+   * @param handler_player handler that will receive the payload of the messaged polled
+   */
   template<typename HandlerPlayer>
   void pollAndProcessPlayerMessage(HandlerPlayer&& handler_player) {
     //  Initialize poll set

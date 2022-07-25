@@ -77,7 +77,7 @@ world_populator::populate_script_engine(const world_server_context& ctx) {
 
 world_populator&
 world_populator::populate_map(const world_server_context& ctx) {
-  // todo : define map and implement it
+  _map = std::make_shared<collision_map>(ctx);
   return *this;
 }
 

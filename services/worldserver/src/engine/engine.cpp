@@ -98,10 +98,6 @@ void engine::execute_pending_moves(const std::chrono::system_clock::time_point& 
   notify_reported_npc_movements(_script_engine->execute_scripted_actions());
 }
 
-void engine::spawnNPC(const std::chrono::system_clock::time_point& currentTime) {
-  _script_engine->spawn_new_encounters(currentTime);
-}
-
 void engine::move_character_action(const std::string& character_name, std::uint32_t index_character, character_info& info) {
   pos future_position = calculate_potential_future_position(info);
 

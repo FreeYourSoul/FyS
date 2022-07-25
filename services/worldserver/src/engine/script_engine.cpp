@@ -30,7 +30,10 @@
 #define SOL_ALL_SAFETIES_ON 1
 #include <sol/sol.hpp>
 
+#include <fmt/format.h>
+
 #include <CmlKey.hh>
+#include <logger.hh>
 #include <world_server_context.hh>
 
 #include <engine/script_engine.hh>
@@ -102,79 +105,6 @@ struct script_engine::internal {
 
   internal() = default;
 
-  [[nodiscard]] npc_actions_report execute_encounter_scripted_actions() {
-    npc_actions_report report;
-
-    report.npc_actions.reserve(spawning_points.size());
-    report.central_positions.reserve(spawning_points.size());
-    report.notification_distances.reserve(spawning_points.size());
-
-    for (std::uint32_t sp_index = 0; sp_index < spawning_points.size(); ++sp_index) {
-      const std::string_view spawning_point_id = spawning_points.at(sp_index).id_spawning_point;
-      std::vector<npc_action> actions_executed;
-
-      actions_executed.reserve(spawned_per_spawning_point.at(sp_index).size());
-      for (std::uint32_t spawn_id = 0; spawn_id < spawned_per_spawning_point.at(sp_index).size(); ++spawn_id) {
-        auto& npc = spawned_per_spawning_point.at(sp_index).at(spawn_id);
-
-        try {
-          unsigned action_id;
-          double x, y, velocity, angle;
-
-          sol::tie(action_id, x, y, velocity, angle) =
-              lua["execAction"](lua[npc.sp_namespace], npc.npc_lua_id, std::ref(npc.info));
-
-          if (action_id != npc_action::IDLE) {
-            npc.info.position.x = x;
-            npc.info.position.y = y;
-            npc.info.velocity = velocity;
-            npc.info.angle = angle;
-            actions_executed.emplace_back(npc_action{npc.npc_lua_id, spawning_point_id, action_id, npc.info});
-          }
-        } catch (const std::exception& e) {
-          SPDLOG_ERROR("[lua] : An error occurred while executing script action SpawningPoint {} npc {} : \n[ERROR] : {}",
-                       npc.sp_namespace, npc.npc_lua_id, e.what());
-        }
-      }
-
-      report.npc_actions.emplace_back(std::move(actions_executed));
-      report.central_positions.emplace_back(spawning_points.at(sp_index).center_spawning_point);
-      report.notification_distances.emplace_back(spawning_points.at(sp_index).distance_notification);
-    }
-    //			merge_spawning_point_in_report(report);
-    return report;
-  }
-
-  [[nodiscard]] npc_actions_report execute_neutral_scripted_actions() {
-    npc_actions_report report;
-    return report;
-  }
-
-  void spawn_encounter(unsigned index_spawn) {
-    // Do not spawn encounter if the max monster has already been spawned!
-    if (spawning_points.at(index_spawn).max_spawned <= spawned_per_spawning_point.at(index_spawn).size()) {
-      return;
-    }
-    const std::string spNamespace = fmt::format("spawningPoint_{}", spawning_points.at(index_spawn).id_spawning_point);
-
-    try {
-      auto result = lua["spawn"](lua[spNamespace]);
-
-      if (!result.valid()) {
-        SPDLOG_ERROR("[lua] : function '{}' has not been created properly at init.", spNamespace);
-        return;
-      }
-      character_info_ret_type res = lua["getCharacterInfo"](lua[spNamespace], static_cast<uint>(result));
-      spawned_per_spawning_point[index_spawn].push_back(
-          npc_lua_instance{
-              character_info{pos{std::get<0>(res), std::get<1>(res)}, std::get<2>(res), std::get<3>(res)},
-              spNamespace,
-              static_cast<uint>(result)});
-    } catch (const std::exception& e) {
-      SPDLOG_ERROR("[lua] : An error occurred while spawning with spawning point '{}' : {}", spNamespace, e.what());
-    }
-  }
-
   sol::state lua;
 
   //! vector of encounter spawning points
@@ -191,31 +121,8 @@ script_engine::script_engine()
 
 script_engine::~script_engine() = default;
 
-void script_engine::spawn_new_encounters(const std::chrono::system_clock::time_point& current_time) {
-  for (unsigned i = 0; i < _intern->spawning_points.size(); ++i) {
-    if (current_time >= _intern->spawning_points.at(i).next_spawn) {
-      _intern->spawn_encounter(i);
-      _intern->spawning_points.at(i).next_spawn += _intern->spawning_points.at(i).spawning_interval;
-    }
-  }
-}
-
 npc_actions_report script_engine::execute_scripted_actions() {
-  npc_actions_report report = _intern->execute_encounter_scripted_actions();
-  npc_actions_report report_neutral = _intern->execute_neutral_scripted_actions();
-
-  // merge both reports
-
-  report.notification_distances.reserve(report.notification_distances.size() + report_neutral.notification_distances.size());
-  std::ranges::move(report_neutral.notification_distances, std::back_inserter(report.notification_distances));
-
-  report.central_positions.reserve(report.central_positions.size() + report_neutral.central_positions.size());
-  std::ranges::move(report_neutral.central_positions, std::back_inserter(report.central_positions));
-
-  report.npc_actions.reserve(report.npc_actions.size() + report_neutral.npc_actions.size());
-  std::ranges::move(report_neutral.npc_actions, std::back_inserter(report.npc_actions));
-
-  return report;
+  return {};
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
