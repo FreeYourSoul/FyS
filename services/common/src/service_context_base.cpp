@@ -21,11 +21,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <spdlog/spdlog.h>
-
+#include <fmt/format.h>
 #include <boost/property_tree/ini_parser.hpp>
 
 #include <fil/cli/command_line_interface.hh>
+#include <logger.hh>
 
 #include "service_context_base.hh"
 
@@ -52,7 +52,7 @@ service_context_base::service_context_base(int ac, const char* const* av) try {
 
   this->initialize_from_ini(config_path);
 } catch (std::exception& e) {
-  SPDLOG_ERROR("Context of the service not initialized caused by : {}", e.what());
+  log_error(fmt::format("Context of the service not initialized caused by : {}", e.what()));
 }
 
 void service_context_base::initialize_from_ini(const std::string& cfg_file_path) {

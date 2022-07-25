@@ -24,8 +24,9 @@
 #ifndef FYS_ARENA_CONNECTIONHANDLER_HH
 #define FYS_ARENA_CONNECTIONHANDLER_HH
 
-#include <spdlog/spdlog.h>
 #include <zmq_addon.hpp>
+
+#include <logger.hh>
 
 namespace fys::common {
 
@@ -65,7 +66,7 @@ public:
     if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
       zmq::multipart_t msg;
       if (!msg.recv(_dealer_connection_to_dispatcher, ZMQ_NOBLOCK) || msg.size() != _number_message) {
-        SPDLOG_ERROR("Error while reading on the listener socket");
+        log_error("Error while reading on the listener socket");
       } else {
         // first frame is idt of the router of the dispatcher
         auto identity_for_dispatcher = msg.pop();

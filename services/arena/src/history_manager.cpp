@@ -24,10 +24,11 @@
 #include <fstream>
 
 #include <nlohmann/json.hpp>
-#include <spdlog/spdlog.h>
+#include <fmt/format.h>
 
 #include <fightingPit/fighting_pit.hh>
 
+#include <logger.hh>
 #include "history_manager.hh"
 
 namespace {
@@ -80,8 +81,8 @@ void history_manager::add_historic(unsigned fp_id, history_action&& ha) {
     auto it = get_instance()._history.find(fp_id);
     if (it != get_instance()._history.end()) {
 
-      SPDLOG_INFO("[fp:{}] : Member {}.{} execute action '{}' targeting {}", fp_id,
-                  ha.id_character, ha.name, ha.action_key, target_str(ha.targets));
+      log_info(fmt::format("[fp:{}] : Member {}.{} execute action '{}' targeting {}", fp_id,
+                           ha.id_character, ha.name, ha.action_key, target_str(ha.targets)));
 
       it->second.player_actions.emplace_back(std::move(ha));
     }

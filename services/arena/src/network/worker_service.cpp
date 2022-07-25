@@ -21,12 +21,11 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <spdlog/spdlog.h>
-
 #include <chrono>
 #include <thread>
 
 #include <chaiscript/chaiscript.hpp>
+#include <fmt/format.h>
 
 #include <FightingPitState_generated.h>
 
@@ -36,6 +35,7 @@
 #include <arena_server_context.hh>
 #include <flatbuffer_generator.hh>
 #include <history_manager.hh>
+#include <logger.hh>
 #include <network/worker_service.hh>
 
 namespace fys::arena {
@@ -48,7 +48,7 @@ void worker_service::setup_connection_manager(const fys::arena::arena_server_con
 }
 
 void worker_service::start_fighting_pits_loop() {
-  SPDLOG_INFO("WorkerService FightingPit game loops started");
+  log_info("WorkerService FightingPit game loops started");
 
   using namespace std::chrono_literals;
   while (true) {
@@ -71,11 +71,11 @@ void worker_service::start_fighting_pits_loop() {
 unsigned
 worker_service::add_fighting_pit(std::unique_ptr<fighting_pit> fp) {
   if (!fp) {
-    SPDLOG_ERROR("Cannot add fighting pit in WorkerService");
+    log_error("Cannot add fighting pit in WorkerService");
     return fighting_pit::CREATION_ERROR;
   }
   if (_arena_instances.size() >= SERVER_FULL_CAPACITY) {
-    SPDLOG_ERROR("Cannot add fighting pit in WorkerService (worker full)");
+    log_error("Cannot add fighting pit in WorkerService (worker full)");
     return fighting_pit::CREATION_ERROR;
   }
 
@@ -110,12 +110,12 @@ void worker_service::player_join_fighting_pit(unsigned fighting_pit_id, std::uni
     if (it->second->is_joinable()) {
       it->second->add_party_team_and_register_actions(std::move(pt), cml);
     } else {
-      SPDLOG_INFO("User {} can't join fighting pit of id {} as the battle already started.",
-                  pt->user_name(), fighting_pit_id);
+      log_info(fmt::format("User {} can't join fighting pit of id {} as the battle already started.",
+                           pt->user_name(), fighting_pit_id));
     }
   } else {
-    SPDLOG_ERROR("PartyTeam of user {} can't join fighting pit of id {}",
-                 pt->user_name(), fighting_pit_id);
+    log_error(fmt::format("PartyTeam of user {} can't join fighting pit of id {}",
+                          pt->user_name(), fighting_pit_id));
   }
 }
 
@@ -125,7 +125,7 @@ worker_service::get_authenticated_player_fighting_pit(const std::string& name, c
       (it != _arena_instances.end() && it->second->is_player_participant(name, token))) {
     return *it->second;
   }
-  SPDLOG_WARN("Request received from {}:{} for arena id {}, but arena isn't defined", name, token, fp_id);
+  log_warn(fmt::format("Request received from {}:{} for arena id {}, but arena isn't defined", name, token, fp_id));
   return std::nullopt;
 }
 
@@ -167,22 +167,22 @@ void worker_service::direct_send_msg_to_player(zmq::message_t&& identity, zmq::m
   toSend.add(std::move(identity));
   toSend.add(std::move(msg));
   if (!toSend.send(_worker_router)) {
-    SPDLOG_ERROR("Failure to send directly the message: {}", toSend.str());
+    log_error(fmt::format("Failure to send directly the message: {}", toSend.str()));
   }
 }
 
 bool worker_service::send_msg_to_player(unsigned fp_id, const std::string& user_name, zmq::message_t&& msg) {
   const std::string& identifier = retrieve_player_identifier(fp_id, user_name);
   if (identifier == user_name) {
-    SPDLOG_ERROR("Cannot send a message in fightingPit {} to player {}. {}", fp_id, user_name, msg.str());
+    log_error(fmt::format("Cannot send a message in fightingPit {} to player {}. {}", fp_id, user_name, msg.str()));
     return false;
   }
   zmq::multipart_t toSend;
   toSend.addstr(identifier);
   toSend.add(std::move(msg));
-  SPDLOG_DEBUG("Send message to player {} with identifier {}", user_name, identifier);
+  log_debug(fmt::format("Send message to player {} with identifier {}", user_name, identifier));
   if (!toSend.send(_worker_router)) {
-    SPDLOG_ERROR("Failure to send message to player {} in fightingPit {}.", user_name, fp_id);
+    log_error(fmt::format("Failure to send message to player {} in fightingPit {}.", user_name, fp_id));
     return false;
   }
   return true;
@@ -201,9 +201,9 @@ bool worker_service::broadcast_msg(unsigned fp_id, zmq::message_t&& msg, const s
     if (user_name == except)
       continue;
     toSend.at(0).rebuild(identifier.data(), identifier.size());
-    SPDLOG_DEBUG("Send message to player {} with identifier {}", user_name, identifier);
+    log_debug(fmt::format("Send message to player {} with identifier {}", user_name, identifier));
     if (!toSend.send(_worker_router)) {
-      SPDLOG_ERROR("fightingPit of id {} : Message has not been correctly sent to {}, {}", fp_id, user_name, identifier);
+      log_error(fmt::format("fightingPit of id {} : Message has not been correctly sent to {}, {}", fp_id, user_name, identifier));
       return false;
     }
   }
@@ -214,7 +214,7 @@ const std::string&
 worker_service::retrieve_player_identifier(unsigned fp_id, const std::string& user_name) {
   auto identifiers_it = _arena_id_on_identifier.find(fp_id);
   if (identifiers_it == _arena_id_on_identifier.end()) {
-    SPDLOG_WARN("Trying to retrieve player identifier on non-existing fighting pit of id {}", fp_id);
+    log_warn(fmt::format("Trying to retrieve player identifier on non-existing fighting pit of id {}", fp_id));
     return user_name;
   }
 
@@ -222,7 +222,7 @@ worker_service::retrieve_player_identifier(unsigned fp_id, const std::string& us
     return ident.user_name == user_name;
   });
   if (it == identifiers_it->second.end()) {
-    SPDLOG_WARN("Trying to retrieve non-existing player identifier {} in fighting pit of id {}", user_name, fp_id);
+    log_warn(fmt::format("Trying to retrieve non-existing player identifier {} in fighting pit of id {}", user_name, fp_id));
     return user_name;
   }
   return it->identifier;

@@ -25,9 +25,11 @@
 #define FYS_WORKERSERVICE_HH
 
 #include <fightingPit/fighting_pit.hh>
-#include <spdlog/spdlog.h>
+
 #include <utility>
 #include <zmq_addon.hpp>
+
+#include <logger.hh>
 
 // forward declarations
 namespace fys::cache {
@@ -127,9 +129,9 @@ public:
     if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
       zmq::multipart_t msg;
       if (!msg.recv(_worker_router, ZMQ_NOBLOCK)) {
-        SPDLOG_ERROR("Error while reading on the arena worker listener socket");
+        log_error("Error while reading on the arena worker listener socket");
       } else if (auto s = msg.size(); s != 3) {
-        SPDLOG_WARN("An incoming message with {} instead of 3 has been read", s);
+        log_warn(fmt::format("An incoming message with {} instead of 3 has been read", s));
       } else {
         auto identity = msg.pop();
         auto intermediate = msg.pop();

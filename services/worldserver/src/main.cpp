@@ -21,20 +21,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include <fmt/format.h>
+
 #include <engine/world_populator.hh>
-#include <key.hh>
-#include <spdlog/sinks/stdout_color_sinks.h>
-#include <spdlog/spdlog.h>
+
 #include <world_server_context.hh>
 #include <world_server_service.hh>
 
+#include <key.hh>
+#include <logger.hh>
+
 int main(int ac, char** av) {
   try {
-    spdlog::set_pattern("[%D %H:%M:%S][world_server][ %25s:%-4# ][%L]: %v");
     fys::ws::world_server_context ctx(ac, av);
     int major, minor, patch;
     zmq_version(&major, &minor, &patch);
-    SPDLOG_INFO("Version ZMQ : {}.{}.{}\n{}", major, minor, patch, ctx.to_string());
+    fys::configure_logger("world_server", "debug", "");
+    fys::log_info(fmt::format("Version ZMQ : {}.{}.{}\n{}", major, minor, patch, ctx.to_string()));
 
     fys::ws::world_server_service service(ctx,
                                           std::move(*fys::ws::world_populator()
@@ -45,7 +48,7 @@ int main(int ac, char** av) {
                                                          .build_world_server_engine()));
     service.run_server_loop();
   } catch (const std::exception& e) {
-    SPDLOG_ERROR("Main caught an exception: {}", e.what());
+    fys::log_error(fmt::format("Main caught an exception: {}", e.what()));
   }
   return 0;
 }

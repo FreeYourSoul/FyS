@@ -23,17 +23,20 @@
 
 #include <fstream>
 
+#include <fmt/format.h>
+
 #include <CmlKey.hh>
 #include <engine/engine.hh>
 #include <engine/script_engine.hh>
 #include <engine/world_populator.hh>
 #include <world_server_context.hh>
+#include <logger.hh>
 
 namespace {
 void assert_engine_error(bool isError, const std::string& errorMsg) {
   if (isError) {
     std::string err = std::string("Miss constructed WorldServerEngine : ").append(errorMsg);
-    SPDLOG_ERROR(err);
+    fys::log_error(err);
     throw std::runtime_error(err);
   }
 }
@@ -46,13 +49,13 @@ world_populator::~world_populator() = default;
 
 std::shared_ptr<engine>
 world_populator::build_world_server_engine() {
-  SPDLOG_INFO("[INIT] Start building ServerEngine...");
+  log_info("[INIT] Start building ServerEngine...");
 
   ::assert_engine_error(_connection_string.empty(), "Connection string is empty");
   ::assert_engine_error(static_cast<bool>(_script_engine) == false, "Script engine not initialized");
   ::assert_engine_error(static_cast<bool>(_map) == false, "Map is not initialized");
 
-  SPDLOG_INFO("[INIT] ServerEngine setup is correct...");
+  log_info("[INIT] ServerEngine setup is correct...");
 
   auto ret = std::make_shared<engine>(_connection_string,
                                       std::move(*_map.get()),

@@ -22,7 +22,6 @@
 // SOFTWARE.
 
 #include <algorithm>
-#include <spdlog/spdlog.h>
 
 #include <chai_register.hh>
 #include <util/ChaiUtility.hh>
@@ -48,7 +47,7 @@ retrieve_time_interlude_from_level_degree(fys::arena::fighting_pit::level level)
   case fys::arena::fighting_pit::level::MEDIUM: return fys::arena::interval::MEDIUM;
   case fys::arena::fighting_pit::level::HARD: return fys::arena::interval::HARD;
   default:
-    SPDLOG_ERROR("Incorrect level");
+    log_error("Incorrect level");
     return std::chrono::milliseconds{0};
   }
 }
@@ -107,24 +106,25 @@ fighting_pit::update_progress_status() {
 void fighting_pit::forward_to_team_member(const std::string& user, player_action action) {
   auto member = _party_teams.get_specific_team_member_by_id(user, action.id_member);
   if (!member) {
-    SPDLOG_ERROR("[fp:{}] : Player '{}' try to forward a message to not existing member member of id {}",
-                 _arena_id, user, action.id_member);
+    log_error(fmt::format("[fp:{}] : Player '{}' try to forward a message to not existing member member of id {}",
+                          _arena_id, user, action.id_member));
     return;
   }
   try {
     if (!chai::util::member_has_action_registered(*_chai_ptr, user, member->name(), action.action_name)) {
-      SPDLOG_WARN("[fp:{}] : Member {}.{}.{} tried to execute Action '{}' which isn't registered for member '{}'",
-                  _arena_id, user, member->id(), member->name(), action.action_name, member->name());
+      log_warn(fmt::format("[fp:{}] : Member {}.{}.{} tried to execute Action '{}' which isn't registered for member '{}'",
+                           _arena_id, user, member->id(), member->name(), action.action_name, member->name()));
       return;
     }
     auto [targetIsCorrect, target] = this->check_and_retrieve_target(user, member, action);
     if (targetIsCorrect) {
-      SPDLOG_INFO("[fp:{}] : Member {}.{}.{} register a new action {}", _arena_id, user, member->id(), member->name(), action.action_name);
+      log_info(fmt::format("[fp:{}] : Member {}.{}.{} register a new action {}",
+                           _arena_id, user, member->id(), member->name(), action.action_name));
       member->add_pending_action(std::move(action.action_name), std::move(target));
     }
   } catch (const std::exception& e) {
-    SPDLOG_ERROR("[fp:{}] : An error occurred when checking if an action was doable from user '{}':\n{}",
-                 _arena_id, user, e.what());
+    log_error(fmt::format("[fp:{}] : An error occurred when checking if an action was doable from user '{}':\n{}",
+                          _arena_id, user, e.what()));
   }
 }
 
@@ -194,7 +194,7 @@ void fighting_pit::initialize_priority_in_side_battles() {
   };
 }
 void fighting_pit::set_player_readiness(const std::string& user_name) {
-  SPDLOG_INFO("[fp:{}] : Player '{}' is setting readiness", _arena_id, user_name);
+  log_info(fmt::format("[fp:{}] : Player '{}' is setting readiness", _arena_id, user_name));
   if (_party_teams.set_party_readiness(user_name)) {
     _progress = progress::ON_GOING;
   }
@@ -208,29 +208,29 @@ fighting_pit::check_and_retrieve_target(const std::string& user, const team_memb
   // Check if the target is appropriate
   if (t == data::targeting::SELF) {
     if (!action.ally_target.empty() || !action.contender_target.empty()) {
-      SPDLOG_WARN("[fp:{}] : Action {} target type is SELF, but Player {} tried to execute it with targets set",
-                  action.action_name, user);
+      log_warn(fmt::format("[fp:{}] : Action {} target type is SELF, but Player {} tried to execute it with targets set",
+                           action.action_name, user));
       return std::pair(false, target);
     }
     target = std::nullopt;
   } else if (t == data::targeting::ENNEMY) {
     if (!action.ally_target.empty() || action.contender_target.empty()) {
-      SPDLOG_WARN("[fp:{}] Action {} target type is ENNEMY, but Player {} tried to execute it with ally targets set",
-                  _arena_id, action.action_name, user);
+      log_warn(fmt::format("[fp:{}] Action {} target type is ENEMY, but Player {} tried to execute it with ally targets set",
+                           _arena_id, action.action_name, user) f);
       return std::pair(false, target);
     }
     target = contender_target_id{action.contender_target.at(0)};
   } else if (t == data::targeting::ENNEMIES) {
     if (!action.ally_target.empty() || action.contender_target.empty()) {
-      SPDLOG_WARN("[fp:{}] : Action {} target type is ENNEMIES, but Player {} tried to execute it with ally targets set",
-                  _arena_id, action.action_name, user);
+      log_warn(fmt::format("[fp:{}] : Action {} target type is ENEMIES, but Player {} tried to execute it with ally targets set",
+                           _arena_id, action.action_name, user));
       return std::pair(false, target);
     }
     target = contenders_targets_ids{std::move(action.contender_target)};
   } else if (t == data::targeting::ALLY) {
     if (action.ally_target.empty() || !action.contender_target.empty()) {
-      SPDLOG_WARN("[fp:{}] : Action {} target type is ALLY, but Player {} tried to execute it with contender targets set",
-                  _arena_id, action.action_name, user);
+      log_warn(fmt::format("[fp:{}] : Action {} target type is ALLY, but Player {} tried to execute it with contender targets set",
+                           _arena_id, action.action_name, user));
       return std::pair(false, target);
     }
     target = ally_target_id{action.ally_target.at(0)};

@@ -48,7 +48,9 @@ set(COMMON_SRCS
         ${CMAKE_CURRENT_SOURCE_DIR}/include/direct_connection_manager.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/include/sized_queue.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/include/service_context_base.hh
-        ${CMAKE_CURRENT_SOURCE_DIR}/include/key.hh)
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/key.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/logger.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/logger.hh)
 
 set(COMMON_INCLUDES_DIR
         ${CMAKE_CURRENT_SOURCE_DIR}/include

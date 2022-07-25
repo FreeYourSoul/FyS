@@ -24,11 +24,12 @@
 #include <algorithm>
 #include <fstream>
 #include <iostream>
-#include <spdlog/spdlog.h>
 
+#include <fmt/format.h>
 #include <nlohmann/json.hpp>
 
 #include <collision_map_converter.hh>
+#include <logger.hh>
 #include <world_server_context.hh>
 
 #include "engine/collision_map.hh"
@@ -93,8 +94,8 @@ struct collision_map::internal {
   [[nodiscard]] unsigned
   get_x(unsigned long x) {
     if (x > _boundary_x.out) {
-      SPDLOG_ERROR("Trying to retrieve X {} (from_world_map {}) while boundary is [{}:{}]",
-                   x, _boundary_x.in, _boundary_x.out);
+      log_error(fmt::format("Trying to retrieve X {} (from_world_map {}) while boundary is [{}:{}]",
+                            x, _boundary_x.in, _boundary_x.out));
       return 0;
     }
     return x;
@@ -103,8 +104,8 @@ struct collision_map::internal {
   [[nodiscard]] unsigned
   get_y(unsigned long y) {
     if (y > _boundary_y.out) {
-      SPDLOG_ERROR("Trying to retrieve Y {} while boundary is [{}:{}]",
-                   y, _boundary_y.in, _boundary_y.out);
+      log_error(fmt::format("Trying to retrieve Y {} while boundary is [{}:{}]",
+                            y, _boundary_y.in, _boundary_y.out));
       return 0;
     }
     return y * (_boundary_x.out - _boundary_x.in);

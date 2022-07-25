@@ -25,8 +25,11 @@
 #include <fstream>
 #include <iostream>
 #include <numeric>
-#include <spdlog/spdlog.h>
 #include <utility>
+
+#include <fmt/format.h>
+
+#include <logger.hh>
 
 #include "arena_server_context.hh"
 
@@ -37,7 +40,7 @@ namespace fys::arena {
 arena_server_context::arena_server_context(int ac, const char* const* av)
     : common::service_context_base(ac, av) {
   std::ifstream i(_config_file);
-  SPDLOG_INFO("start parsing file {}", _config_file);
+  log_info(fmt::format("start parsing file {}", _config_file));
   json json_config = json::parse(i);
   parse_arena_config_file(json_config);
 }
@@ -60,7 +63,7 @@ void arena_server_context::parse_arena_config_file(const json& config_content) {
 
   auto zone_conf = arena["zone_configuration"];
   for (auto& zone : zone_conf) {
-    SPDLOG_INFO("start parsing file {}", zone.get<std::string>());
+    log_info(fmt::format("start parsing file {}", zone.get<std::string>()));
     std::ifstream i(zone.get<std::string>());
     parse_zone_config_file(json::parse(i));
   }
@@ -128,9 +131,9 @@ bool arena_server_context::validate_reward_context() const {
       total = std::accumulate(v.item_on_chance_range.cbegin(), v.item_on_chance_range.cend(), 0,
                               [i](const std::uint32_t val, const auto& rhs) -> std::uint32_t { return val + rhs.second[i]; });
       if (total != 100) {
-        SPDLOG_ERROR("Reward Context invalid because of % chance for contender {} : "
-                     "difficulty {} is {} while it should be equal 100",
-                     k, i, total);
+        log_error(fmt::format("Reward Context invalid because of % chance for contender {} : "
+                              "difficulty {} is {} while it should be equal 100",
+                              k, i, total));
         return false;
       }
     }
@@ -142,9 +145,9 @@ bool arena_server_context::validate_encounter_context() const {
   for (const auto& [k, v] : _encounter_ctx.range_encounter_per_zone) {
     for (int i = 0; i < 3; ++i) {
       if (v.at(i).first <= 0) {
-        SPDLOG_ERROR("Encounter Context invalid because of range for {} : "
-                     "difficulty {} minimum is 0 or less while it should be at least 1",
-                     k, i);
+        log_error(fmt::format("Encounter Context invalid because of range for {} : "
+                              "difficulty {} minimum is 0 or less while it should be at least 1",
+                              k, i));
         return false;
       }
     }
@@ -155,9 +158,9 @@ bool arena_server_context::validate_encounter_context() const {
       total = std::accumulate(v.cbegin(), v.cend(), 0,
                               [i](const std::uint32_t val, const auto& rhs) -> std::uint32_t { return val + rhs.chance[i]; });
       if (total != 100) {
-        SPDLOG_ERROR("Encounter Context invalid because of % chance for zone {} : "
-                     "difficulty {} is {} while it should be equal 100",
-                     k, i, total);
+        log_error(fmt::format("Encounter Context invalid because of % chance for zone {} : "
+                              "difficulty {} is {} while it should be equal 100",
+                              k, i, total));
         return false;
       }
     }
