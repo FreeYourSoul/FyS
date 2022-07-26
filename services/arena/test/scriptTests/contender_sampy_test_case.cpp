@@ -22,7 +22,7 @@
 // SOFTWARE.
 
 #include <arena_server_context.hh>
-#include <catch2/catch_test_macros.hpp>
+#include <catch2/catch.hpp>
 #include <chai_register.hh>
 #include <chaiscript/chaiscript.hpp>
 #include <fightingPit/contender/contender_scripting.hh>

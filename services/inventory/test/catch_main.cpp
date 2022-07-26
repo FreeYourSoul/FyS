@@ -21,16 +21,5 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#define CATCH_CONFIG_MAIN
 #include <catch2/catch.hpp>
-
-#include <engine/engine.hh>
-
-using namespace fys::ws;
-
-TEST_CASE("WorldServerEngineTestCase", "[service][world]") {
-
-  SECTION("authenticatePlayer test") {
-
-  }// End section :
-
-}// End TestCase : WorldServerEngineTestCase

@@ -27,7 +27,7 @@
 #include <EndBattle_generated.h>
 #include <FightingPitEncounter_generated.h>
 #include <FightingPitState_generated.h>
-#include <catch2/catch_test_macros.hpp>
+#include <catch2/catch.hpp>
 #include <flatbuffers/flatbuffers.h>
 
 TEST_CASE("ArenaComFlatBufferTestCase FightingPitEncounter", "[service][arena][common][fb]") {

@@ -21,7 +21,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <catch2/catch_test_macros.hpp>
+#include <catch2/catch.hpp>
 #include <fightingPit/data/common_types.hh>
 
 TEST_CASE("CommonTypesTestCase getActionNameFromKey test", "[service][arena]") {

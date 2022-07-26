@@ -25,7 +25,7 @@
 #pragma ide diagnostic ignored "cert-msc32-c"
 
 #include <arena_server_context.hh>
-#include <catch2/catch_test_macros.hpp>
+#include <catch2/catch.hpp>
 #include <fightingPit/fighting_pit_announcer.hh>
 
 #include "test_type.hh"

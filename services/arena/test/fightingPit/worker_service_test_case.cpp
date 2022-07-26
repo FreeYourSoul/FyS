@@ -25,7 +25,7 @@
 #include <fightingPit/fighting_pit_announcer.hh>
 #include <network/worker_service.hh>
 
-#include <catch2/catch_test_macros.hpp>
+#include <catch2/catch.hpp>
 
 #include <FSeamMockData.hpp>
 

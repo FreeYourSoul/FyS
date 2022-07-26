@@ -10,6 +10,8 @@ project(world_server_test CXX)
 get_target_property(WS_SRCS worldserver_service SOURCES)
 
 add_executable(world_server_test
+        ${CMAKE_CURRENT_SOURCE_DIR}/catch_main.cpp
+
         # Test files
         ${CMAKE_CURRENT_SOURCE_DIR}/flatbuffer_generator_testcase.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/collision_map_testcase.cpp
@@ -36,7 +38,7 @@ add_executable(world_server_test
         )
 
 target_link_libraries(world_server_test PUBLIC
-        Catch2::Catch2WithMain
+        Catch2::Catch2
         lua
         fys::common_service
         fys::collision_map
@@ -54,11 +56,12 @@ catch_discover_tests(world_server_test)
 
 
 add_executable(world_server_lua_test
+        ${CMAKE_CURRENT_SOURCE_DIR}/catch_main.cpp
+
         #Test files
         ${CMAKE_CURRENT_SOURCE_DIR}/script/spawning_point_0_testcase.cpp
 
         #Source files
-
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/engine/player_data.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/engine/player_data.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/engine/engine.cpp
@@ -80,7 +83,7 @@ add_executable(world_server_lua_test
         )
 
 target_link_libraries(world_server_lua_test
-        Catch2::Catch2WithMain
+        Catch2::Catch2
         fys::common_service
         fys::collision_map
         fys::cml

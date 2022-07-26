@@ -22,7 +22,7 @@
 // SOFTWARE.
 
 #include <WSAction_generated.h>
-#include <catch2/catch_test_macros.hpp>
+#include <catch2/catch.hpp>
 #include <flatbuffers/flatbuffers.h>
 #include <zmq_addon.hpp>
 

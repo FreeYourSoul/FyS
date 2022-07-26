@@ -47,6 +47,7 @@ addFSeamTests(
         ${CMAKE_CURRENT_SOURCE_DIR}/../include
 
         TST_SRC #test files
+        ${CMAKE_CURRENT_SOURCE_DIR}/catch_main.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/fightingPit/test_type.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/fightingPit/worker_service_test_case.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/fightingPit/flatbuffer_generator_test_case.cpp
@@ -66,6 +67,7 @@ addFSeamTests(
 
         FILES_AS_SOURCE #source tested
         ${COMMON_SRCS}
+        ${CMAKE_CURRENT_SOURCE_DIR}/catch_main.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/util/chai_utility.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/contender/contender_scripting.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/../src/fightingPit/contender/fighting_contender.cpp
@@ -119,7 +121,7 @@ target_include_directories(sampy_test PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/../include)
 
 target_compile_definitions(arena_test PUBLIC CHAISCRIPT_NO_THREADS SPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)
-target_link_libraries(arena_test cppzmq Catch2::Catch2WithMain fmt::fmt dl fys::cml nlohmann_json::nlohmann_json)
+target_link_libraries(arena_test cppzmq Catch2::Catch2 fmt::fmt dl fys::cml nlohmann_json::nlohmann_json)
 target_compile_features(arena_test PRIVATE cxx_std_20)
 target_compile_options(arena_test PRIVATE -fno-diagnostics-show-caret )
 target_include_directories(arena_test PRIVATE

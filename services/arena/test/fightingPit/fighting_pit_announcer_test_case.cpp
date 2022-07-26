@@ -25,7 +25,7 @@
 #pragma ide diagnostic ignored "cert-msc32-c"
 
 #include <thread>
-#include <catch2/catch_test_macros.hpp>
+#include <catch2/catch.hpp>
 #include <fightingPit/contender/contender_scripting.hh>
 #include <fightingPit/contender/fighting_contender.hh>
 #include <fightingPit/data/common_types.hh>

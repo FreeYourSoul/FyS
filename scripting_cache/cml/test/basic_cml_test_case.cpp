@@ -22,7 +22,7 @@
 // SOFTWARE.
 
 #include <CmlKey.hh>
-#include <catch2/catch_test_macros.hpp>
+#include <catch2/catch.hpp>
 #define private protected
 #include <Cml.hh>
 
