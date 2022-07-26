@@ -22,14 +22,14 @@ void dispatcher_connection_manager::setupConnectionManager(const fys::startup_di
     _clusterConnection.subSocket.close();
     _clusterConnection.closed = true;
   }
-  _dispatcher.setsockopt(ZMQ_MAXMSGSIZE, ctx.getMaxMsgSize());
+  _dispatcher.set(zmq::sockopt::maxmsgsize, static_cast<std::int64_t>(ctx.getMaxMsgSize()));
   _dispatcher.bind("tcp://*:" + std::to_string(ctx.getDispatchingPort()));
   _listener.bind("tcp://*:" + std::to_string(ctx.getBindingPort()));
 }
 
 void dispatcher_connection_manager::subscribeToTopics(const std::vector<std::string>& topics) noexcept {
   for (const auto& topic : topics) {
-    _clusterConnection.subSocket.setsockopt(ZMQ_SUBSCRIBE, topic.c_str(), topic.size());
+    _clusterConnection.subSocket.set(zmq::sockopt::subscribe, topic);
   }
 }
 
@@ -39,7 +39,7 @@ std::tuple<bool, bool, bool> dispatcher_connection_manager::poll() noexcept {
       {_listener, 0, ZMQ_POLLIN, 0},
       {_clusterConnection.subSocket, 0, ZMQ_POLLIN, 0},
       {_dispatcher, 0, ZMQ_POLLIN, 0}};
-  zmq::poll(&items[0], _clusterConnection.closed ? 1 : 2, -1);
+  zmq::poll(&items[0], _clusterConnection.closed ? 1 : 2);
   bool listenerPolling = static_cast<bool>(items[0].revents & ZMQ_POLLIN);
   bool subSocketPolling = static_cast<bool>(_clusterConnection.closed ? false : (items[1].revents & ZMQ_POLLIN));
   bool dispatcherRespPolling = static_cast<bool>(items[2].revents & ZMQ_POLLIN);
@@ -47,19 +47,19 @@ std::tuple<bool, bool, bool> dispatcher_connection_manager::poll() noexcept {
 }
 
 bool dispatcher_connection_manager::replyToListenerSocket(zmq::multipart_t&& msg) noexcept {
-  if (!_listener.connected())
+  if (!_listener.handle())
     return false;
   return msg.send(_listener);
 }
 
 bool dispatcher_connection_manager::sendMessageToDispatcherSocket(zmq::multipart_t&& msg) noexcept {
-  if (!_dispatcher.connected())
+  if (!_dispatcher.handle())
     return false;
   return msg.send(_dispatcher);
 }
 
 bool dispatcher_connection_manager::sendMessageToClusterPubSocket(zmq::multipart_t&& msg) noexcept {
-  if (_clusterConnection.closed || !_clusterConnection.pubSocket.connected())
+  if (_clusterConnection.closed || !_clusterConnection.pubSocket.handle())
     return false;
   return msg.send(_clusterConnection.pubSocket);
 }

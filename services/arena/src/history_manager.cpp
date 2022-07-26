@@ -1,6 +1,6 @@
 // MIT License
 //
-// Copyright (c) 2021 Quentin Balland
+// Copyright (c) 2021-2022 Quentin Balland
 // Repository : https://github.com/FreeYourSoul/FyS
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -129,7 +129,7 @@ void history_manager::save(std::uint32_t fp_id) {
   auto& history_elem = history_it->second;
 
   if (history_elem.has_to_be_saved && history_elem.seed > 0) {
-    SPDLOG_INFO("[fp:] HistoryAction : Save history file for fight id {}", history_elem.id);
+    log_info(fmt::format("[fp:] HistoryAction : Save history file for fight id {}", history_elem.id));
     auto date = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
     nlohmann::json actions;
 

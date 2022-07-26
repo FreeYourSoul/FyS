@@ -3,6 +3,8 @@ project(arena_service
         DESCRIPTION "Arena Service Server"
         LANGUAGES CXX)
 
+add_definitions(-DCHAISCRIPT_NO_THREADS_WARNING)
+
 add_executable(arena_service
         ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/src/chai_register.cpp
@@ -32,8 +34,8 @@ add_executable(arena_service
         ${CMAKE_CURRENT_SOURCE_DIR}/include/fightingPit/rewards.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/src/arena_server_context.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/arena_server_context.hh
-        ${CMAKE_CURRENT_SOURCE_DIR}/include/util/FbUtility.hh
-        ${CMAKE_CURRENT_SOURCE_DIR}/include/util/ChaiUtility.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/util/fb_utility.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/util/chai_utility.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/src/flatbuffer_generator.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/flatbuffer_generator.hh
         ${CMAKE_CURRENT_SOURCE_DIR}/src/history_manager.cpp
@@ -68,6 +70,6 @@ endif ()
 
 target_compile_options(arena_service PRIVATE -O2 -fno-diagnostics-show-caret -fstack-protector-all -g -lfmt)
 target_compile_options(arena_service PRIVATE -Wall -Wpedantic -Wextra -Wno-deprecated-declarations)
-target_compile_definitions(arena_service PUBLIC CHAISCRIPT_NO_THREADS -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)
+target_compile_definitions(arena_service PUBLIC -DCHAISCRIPT_NO_THREADS_WARNING -DCHAISCRIPT_NO_THREADS -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)
 
 install(TARGETS arena_service DESTINATION ${CMAKE_INSTALL_BINDIR})

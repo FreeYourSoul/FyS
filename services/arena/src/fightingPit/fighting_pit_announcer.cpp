@@ -1,6 +1,6 @@
 // MIT License
 //
-// Copyright (c) 2021 Quentin Balland
+// Copyright (c) 2021-2022 Quentin Balland
 // Repository : https://github.com/FreeYourSoul/FyS
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,7 +21,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include <memory>
+#include <string>
+#include <vector>
+
 #include <chaiscript/chaiscript.hpp>
+#include <fmt/format.h>
 #include <nlohmann/json.hpp>
 
 #include <fil/datastructure/boundary_map.hh>
@@ -35,6 +40,7 @@
 #include <Cml.hh>
 #include <arena_server_context.hh>
 #include <connection_handler.hh>
+#include <logger.hh>
 #include <random_generator.hh>
 
 #include <fightingPit/fighting_pit_announcer.hh>
@@ -81,12 +87,12 @@ fighting_pit_announcer::~fighting_pit_announcer() = default;
 std::unique_ptr<fighting_pit>
 fighting_pit_announcer::build_fighting_pit(const encounter_context& ctx, const std::string& ws_id) {
   if (_creator_user_name.empty() || _creator_user_token.empty() || _creator_party_team == nullptr) {
-    SPDLOG_WARN("FightingPit built invalid (no creator/token of the pit registered and/or party team not set"
-                ", a call to generateAllyPartyTeam function is required)");
+    log_warn("fighting_pit built invalid (no creator/token of the pit registered and/or party team not set"
+             ", a call to generateAllyPartyTeam function is required)");
     return nullptr;
   }
   if (!ctx.zoneRegistered(ws_id)) {
-    SPDLOG_WARN("FightingPit built invalid the zone of world server {} isn't registered", ws_id);
+    log_warn(fmt::format("fighting_pit built invalid the zone of world server {} isn't registered", ws_id));
     return nullptr;
   }
   std::unique_ptr<fighting_pit> fp = std::make_unique<fighting_pit>(_creator_user_name, _difficulty);
@@ -126,7 +132,7 @@ bool fighting_pit_announcer::generate_contenders(fighting_pit& fp, const encount
     contender_script->register_contender_script();
     auto contender = std::make_shared<fighting_contender>(std::move(contender_script));
     if (!fp.add_contender(contender)) {
-      SPDLOG_WARN("FightingPit built invalid, generation of contender {} failed", contender->name());
+      log_warn(fmt::format("fighting_pit built invalid, generation of contender {} failed", contender->name()));
       return false;
     }
     // todo make positioning of contender depending on ambush / or normal one
@@ -174,7 +180,7 @@ fighting_pit_announcer::get_side_battle_for_side(const std::unique_ptr<fighting_
   auto it = std::ranges::find_if(fp->_side_battles, [side](const auto& sb) { return sb.side() == side; });
 
   if (it == fp->_side_battles.end()) {
-    SPDLOG_ERROR("Side not found");
+    log_error("side not found");
     return fp->_side_battles.front();
   }
   return *it;

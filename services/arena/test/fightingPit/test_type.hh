@@ -1,6 +1,6 @@
 // MIT License
 //
-// Copyright (c) 2021 Quentin Balland
+// Copyright (c) 2021-2022 Quentin Balland
 // Repository : https://github.com/FreeYourSoul/FyS
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,6 +24,8 @@
 #ifndef FYS_ONLINE_TESTTYPE_HH
 #define FYS_ONLINE_TESTTYPE_HH
 
+#include <filesystem>
+#include <memory>
 #include <fstream>
 
 #include <random_generator.hh>
@@ -360,12 +362,12 @@ public:
   }
 };
 
-class DeleteFolderWhenDone {
+class delete_folder_when_done {
 public:
-  explicit DeleteFolderWhenDone(const std::string& v)
+  explicit delete_folder_when_done(const std::string& v)
       : _path(v) {}
 
-  ~DeleteFolderWhenDone() {
+  ~delete_folder_when_done() {
     std::error_code ec;
     SPDLOG_INFO("Delete folder {} : deleted {}", _path.string(), std::filesystem::remove_all(_path, ec));
   }

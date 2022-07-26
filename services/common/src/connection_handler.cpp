@@ -1,6 +1,6 @@
 // MIT License
 //
-// Copyright (c) 2021 Quentin Balland
+// Copyright (c) 2021-2022 Quentin Balland
 // Repository : https://github.com/FreeYourSoul/FyS
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -30,7 +30,7 @@ void connection_handler::setup_connection_manager(const std::string& dispatcher_
 }
 
 void connection_handler::send_msg_to_dispatcher(zmq::multipart_t&& msg) noexcept {
-  if (_dealer_connection_to_dispatcher.connected()) {
+  if (_dealer_connection_to_dispatcher.handle() != nullptr) {
     msg.send(_dealer_connection_to_dispatcher);
   }
 }

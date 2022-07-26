@@ -1,6 +1,6 @@
 // MIT License
 //
-// Copyright (c) 2021 Quentin Balland
+// Copyright (c) 2021-2022 Quentin Balland
 // Repository : https://github.com/FreeYourSoul/FyS
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -23,6 +23,8 @@
 
 #ifndef FYS_ARENA_CONNECTIONHANDLER_HH
 #define FYS_ARENA_CONNECTIONHANDLER_HH
+
+#include <chrono>
 
 #include <zmq_addon.hpp>
 
@@ -62,7 +64,7 @@ public:
     //  Initialize poll set
     zmq::pollitem_t items[] = {
         {_dealer_connection_to_dispatcher, 0, ZMQ_POLLIN, 0}};
-    zmq::poll(&items[0], 1, 100);
+    zmq::poll(&items[0], 1, std::chrono::milliseconds{100});
     if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
       zmq::multipart_t msg;
       if (!msg.recv(_dealer_connection_to_dispatcher, ZMQ_NOBLOCK) || msg.size() != _number_message) {

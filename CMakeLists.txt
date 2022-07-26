@@ -52,7 +52,7 @@ if (BUILD_SERVICE_CLI_TMX_MAP_CONVERTER)
 endif()
 if (BUILD_TESTING)
     find_package(FSeam REQUIRED)
-    find_package(Catch2 REQUIRED)
+    find_package(Catch2 3 REQUIRED)
     enable_testing()
 endif()
 

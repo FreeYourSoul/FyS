@@ -1,6 +1,6 @@
 // MIT License
 //
-// Copyright (c) 2021 Quentin Balland
+// Copyright (c) 2021-2022 Quentin Balland
 // Repository : https://github.com/FreeYourSoul/FyS
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,7 +21,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <catch2/catch.hpp>
+#include <catch2/catch_test_macros.hpp>
 
 #include <fightingPit/contender/contender_scripting.hh>
 #include <fightingPit/contender/fighting_contender.hh>
@@ -33,9 +33,9 @@
 
 #include <FightingPitState_generated.h>
 
-#include "TestType.hh"
+#include "test_type.hh"
 #include <arena_server_context.hh>
-#include <util/FbUtility.hh>
+#include <util/fb_utility.hh>
 
 #include <ReplyFrame_generated.h>
 #include <flatbuffer_generator.hh>

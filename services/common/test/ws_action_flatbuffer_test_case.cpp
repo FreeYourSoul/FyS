@@ -1,6 +1,6 @@
 // MIT License
 //
-// Copyright (c) 2021 Quentin Balland
+// Copyright (c) 2021-2022 Quentin Balland
 // Repository : https://github.com/FreeYourSoul/FyS
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,7 +22,7 @@
 // SOFTWARE.
 
 #include <WSAction_generated.h>
-#include <catch2/catch.hpp>
+#include <catch2/catch_test_macros.hpp>
 #include <flatbuffers/flatbuffers.h>
 #include <zmq_addon.hpp>
 

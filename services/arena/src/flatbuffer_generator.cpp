@@ -1,6 +1,6 @@
 // MIT License
 //
-// Copyright (c) 2021 Quentin Balland
+// Copyright (c) 2021-2022 Quentin Balland
 // Repository : https://github.com/FreeYourSoul/FyS
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -34,7 +34,7 @@
 #include <fightingPit/team/party_team.hh>
 #include <fightingPit/team/team_member.hh>
 
-#include <util/FbUtility.hh>
+#include <util/fb_utility.hh>
 
 #include "../../inventory/include/flatbuffer_generator.hh"
 #include "../../worldserver/include/flatbuffer_generator.hh"

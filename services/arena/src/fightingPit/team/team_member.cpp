@@ -1,6 +1,6 @@
 // MIT License
 //
-// Copyright (c) 2021 Quentin Balland
+// Copyright (c) 2021-2022 Quentin Balland
 // Repository : https://github.com/FreeYourSoul/FyS
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,7 +25,7 @@
 #include <spdlog/spdlog.h>
 
 #include <chaiscript/chaiscript.hpp>
-#include <util/ChaiUtility.hh>
+#include <util/chai_utility.hh>
 
 #include <fightingPit/contender/fighting_contender.hh>
 #include <fightingPit/contender/pit_contenders.hh>

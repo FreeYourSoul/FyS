@@ -1,5 +1,8 @@
 add_subdirectory(common)
 
+# FSeam is not suitable to work with Catch2 version 3
+set(FSEAM_USE_CATCH2 OFF)
+
 if (BUILD_SERVICE_ARENA)
     add_subdirectory(arena)
     if (BUILD_TESTING)

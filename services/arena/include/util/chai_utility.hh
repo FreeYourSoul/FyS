@@ -1,6 +1,6 @@
 // MIT License
 //
-// Copyright (c) 2021 Quentin Balland
+// Copyright (c) 2021-2022 Quentin Balland
 // Repository : https://github.com/FreeYourSoul/FyS
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,5 +21,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#define CATCH_CONFIG_MAIN
-#include <catch2/catch.hpp>
+#ifndef FYS_ONLINE_CHAIUTILITY_HH
+#define FYS_ONLINE_CHAIUTILITY_HH
+
+#include <chaiscript/chaiscript.hpp>
+#include <fmt/format.h>
+#include <string>
+
+namespace chaiscript {
+class ChaiScript;
+}
+
+namespace fys::arena::chai::util {
+
+[[maybe_unused]] [[nodiscard]] static std::string
+get_ally_action_retriever(const std::string& user, const std::string& member, const std::string& action) {
+  return fmt::format(R"(ally_actions["{}_{}"]["{}"])", user, member, action);
+}
+
+[[maybe_unused]] [[nodiscard]] static bool
+member_has_action_registered(chaiscript::ChaiScript& chai,
+                             const std::string& userName, const std::string& memberName, const std::string& actionName) {
+  return chai.eval<bool>(
+      fmt::format(R"(ally_actions.count("{}_{}") > 0 && ally_actions["{}_{}"].count("{}") > 0;)",
+                  userName, memberName, userName, memberName, actionName));
+}
+
+}// namespace fys::arena::chai::util
+
+#endif//FYS_ONLINE_CHAIUTILITY_HH

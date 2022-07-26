@@ -6,6 +6,7 @@ result
 .idea
 **/.idea
 **/cmake-build-debug
+**/cmake-build-debug-event-trace
 **/cmake-build-release
 */cmake-build-debug
 */cmake-build-release

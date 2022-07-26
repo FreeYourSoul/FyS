@@ -1,6 +1,6 @@
 // MIT License
 //
-// Copyright (c) 2021 Quentin Balland
+// Copyright (c) 2021-2022 Quentin Balland
 // Repository : https://github.com/FreeYourSoul/FyS
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,12 +24,14 @@
 #include <algorithm>
 
 #include <chai_register.hh>
-#include <util/ChaiUtility.hh>
-
 #include <fil/algorithm/contains.hh>
+#include <fmt/format.h>
+
+#include <network/worker_service.hh>
+#include <util/chai_utility.hh>
 
 #include <history_manager.hh>
-#include <network/worker_service.hh>
+#include <logger.hh>
 
 #include <fightingPit/contender/fighting_contender.hh>
 #include <fightingPit/fighting_pit.hh>
@@ -47,7 +49,7 @@ retrieve_time_interlude_from_level_degree(fys::arena::fighting_pit::level level)
   case fys::arena::fighting_pit::level::MEDIUM: return fys::arena::interval::MEDIUM;
   case fys::arena::fighting_pit::level::HARD: return fys::arena::interval::HARD;
   default:
-    log_error("Incorrect level");
+    fys::log_error("incorrect level");
     return std::chrono::milliseconds{0};
   }
 }
@@ -216,28 +218,31 @@ fighting_pit::check_and_retrieve_target(const std::string& user, const team_memb
   } else if (t == data::targeting::ENNEMY) {
     if (!action.ally_target.empty() || action.contender_target.empty()) {
       log_warn(fmt::format("[fp:{}] Action {} target type is ENEMY, but Player {} tried to execute it with ally targets set",
-                           _arena_id, action.action_name, user) f);
+                           _arena_id, action.action_name, user));
       return std::pair(false, target);
     }
     target = contender_target_id{action.contender_target.at(0)};
   } else if (t == data::targeting::ENNEMIES) {
     if (!action.ally_target.empty() || action.contender_target.empty()) {
-      log_warn(fmt::format("[fp:{}] : Action {} target type is ENEMIES, but Player {} tried to execute it with ally targets set",
+      log_warn(fmt::format("[fp:{}] : Action {} target type is ENEMIES, but Player {} "
+                           "tried to execute it with ally targets set",
                            _arena_id, action.action_name, user));
       return std::pair(false, target);
     }
     target = contenders_targets_ids{std::move(action.contender_target)};
   } else if (t == data::targeting::ALLY) {
     if (action.ally_target.empty() || !action.contender_target.empty()) {
-      log_warn(fmt::format("[fp:{}] : Action {} target type is ALLY, but Player {} tried to execute it with contender targets set",
+      log_warn(fmt::format("[fp:{}] : Action {} target type is ALLY, but Player {} "
+                           "tried to execute it with contender targets set",
                            _arena_id, action.action_name, user));
       return std::pair(false, target);
     }
     target = ally_target_id{action.ally_target.at(0)};
   } else if (t == data::targeting::ALLIES) {
     if (action.ally_target.empty() || !action.contender_target.empty()) {
-      SPDLOG_WARN("[fp:{}] : Action {} target type is ALLIES, but Player {} tried to execute it with contender targets set",
-                  _arena_id, action.action_name, user);
+      log_warn(fmt::format("[fp:{}] : Action {} target type is ALLIES, but Player {}"
+                           " tried to execute it with contender targets set",
+                           _arena_id, action.action_name, user));
       return std::pair(false, target);
     }
     target = allies_targets_ids{std::move(action.ally_target)};
@@ -245,17 +250,17 @@ fighting_pit::check_and_retrieve_target(const std::string& user, const team_memb
   //	else if (targetType == data::Targeting::ALLY_AND_ENNEMY) {}
   //	else if (targetType == data::Targeting::ALLY_OR_ENNEMY) {}
   else {
-    SPDLOG_WARN("NOT IMPLEMENTED YET");
+    log_warn("NOT IMPLEMENTED YET");
     return std::pair(false, target);
   }
   if (!fil::all_contains(action.ally_target, _party_teams.get_party_team_of_player(user).team_members(),
                          [](const team_member_sptr& tm) { return tm->id(); })) {
-    SPDLOG_WARN("[fp:{}] : Player {} tried to target a non-existing Ally", _arena_id, user);
+    log_warn(fmt::format("[fp:{}] : Player {} tried to target a non-existing Ally", _arena_id, user));
     return std::pair(false, target);
   }
   if (!fil::all_contains(action.contender_target, _contenders.get_contenders(),
                          [](const fighting_contender_sptr& c) { return c->id(); })) {
-    SPDLOG_WARN("[fp:{}] : Player {} tried to target a non-existing Contender, Targets are : ", _arena_id, user);
+    log_warn(fmt::format("[fp:{}] : Player {} tried to target a non-existing Contender, Targets are : ", _arena_id, user));
     return std::pair(false, target);
   }
   return std::pair(true, target);

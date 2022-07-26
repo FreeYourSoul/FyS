@@ -7,7 +7,7 @@ endif ()
 
 project(cml_test CXX)
 
-find_package(Catch2 REQUIRED)
+find_package(Catch2 3 REQUIRED)
 include(Catch)
 
 enable_testing()
@@ -15,11 +15,10 @@ enable_testing()
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../include)
 
 add_executable(cml_test
-        ${CMAKE_CURRENT_SOURCE_DIR}/catchMain.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/BasicCmlTestCase.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/CmlCopyTestCase.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/basic_cml_test_case.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/cml_copy_test_case.cpp
         )
 set(CMAKE_BUILD_TYPE Debug)
-target_link_libraries(cml_test PUBLIC fys::cml Catch2::Catch2 stdc++fs)
+target_link_libraries(cml_test PUBLIC fys::cml Catch2::Catch2WithMain stdc++fs)
 target_compile_features(cml_test PRIVATE cxx_std_20)
 catch_discover_tests(cml_test)

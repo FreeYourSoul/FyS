@@ -1,6 +1,6 @@
 // MIT License
 //
-// Copyright (c) 2021 Quentin Balland
+// Copyright (c) 2021-2022 Quentin Balland
 // Repository : https://github.com/FreeYourSoul/FyS
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -24,15 +24,18 @@
 #pragma clang diagnostic push
 #pragma ide diagnostic ignored "cert-msc32-c"
 
-#include "TestType.hh"
-#include <FSeamMockData.hpp>
-#include <arena_server_context.hh>
-#include <catch2/catch.hpp>
+#include <thread>
+#include <catch2/catch_test_macros.hpp>
 #include <fightingPit/contender/contender_scripting.hh>
 #include <fightingPit/contender/fighting_contender.hh>
 #include <fightingPit/data/common_types.hh>
 #include <fightingPit/fighting_pit_announcer.hh>
+
 #include <random_generator.hh>
+#include <arena_server_context.hh>
+
+#include "test_type.hh"
+#include <FSeamMockData.hpp>
 
 using namespace fys::arena;
 
