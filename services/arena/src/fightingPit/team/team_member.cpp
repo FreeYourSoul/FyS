@@ -21,8 +21,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <fmt/ostream.h>
-#include <spdlog/spdlog.h>
+#include <fmt/format.h>
 
 #include <chaiscript/chaiscript.hpp>
 #include <util/chai_utility.hh>
@@ -34,6 +33,7 @@
 #include <fightingPit/team/team_member.hh>
 
 #include <history_manager.hh>
+#include <logger.hh>
 
 // overloaded trick
 template<class... Ts>
@@ -67,8 +67,8 @@ bool team_member::execute_action(
     return false;
   }
   if (pa->id_action >= _actions_doable.size()) {
-    SPDLOG_ERROR("TeamMember {}::{} id {} tried to execute a non existing action of id {}",
-                 _user_name, _name, _id, pa->id_action);
+    log_error(fmt::format("TeamMember {}::{} id {} tried to execute a non existing action of id {}",
+                          _user_name, _name, _id, pa->id_action));
     return false;
   }
   const std::string key = _actions_doable.at(pa->id_action).first;
@@ -79,7 +79,7 @@ bool team_member::execute_action(
   try {
     target_type = chai_ptr->eval<data::targeting>(action + ".requireTarget();");
   } catch (const std::exception& e) {
-    SPDLOG_ERROR("action retrieved by {} doesn't have requireTarget method {}", action, e.what());
+    log_error(fmt::format("action retrieved by {} doesn't have requireTarget method {}", action, e.what()));
     return false;
   }
 
@@ -94,7 +94,8 @@ bool team_member::execute_action(
                          const auto funcAction = chai_ptr->eval<std::function<int(team_member&)>>(fun_act_str);
                          funcAction(*apt.select_member_by_id(target.v));
                        } else {
-                         spdlog::error("Action of type {}, couldn't target an AllyTarget of id {}", target_type, target.v);
+                         log_error(fmt::format("Action of type {}, couldn't target an AllyTarget of id {}",
+                                               target_type, target.v));
                        }
                      },
 
@@ -103,12 +104,13 @@ bool team_member::execute_action(
                          const auto funcAction = chai_ptr->eval<std::function<int(fighting_contender&)>>(fun_act_str);
                          funcAction(*pc.fighting_contender_at(target.v));
                        } else {
-                         spdlog::error("Action of type {}, couldn't target a ContenderTarget of id {}", target_type, target.v);
+                         log_error(fmt::format("Action of type {}, couldn't target a ContenderTarget of id {}",
+                                               target_type, target.v));
                        }
                      },
 
                      []([[maybe_unused]] auto o) {
-                       spdlog::error("NOT IMPLEMENTED YET");
+                       log_error("NOT IMPLEMENTED YET");
                      }},
                  *pa->target);
     } else {
@@ -116,9 +118,9 @@ bool team_member::execute_action(
       funcAction(*this);
     }
   } catch (const chaiscript::exception::eval_error& ee) {
-    SPDLOG_ERROR("Error caught on script execution while executing {} with target required {}. Team owned by "
-                 "{} TeamMember {} --> {}",
-                 pa->id_action, static_cast<bool>(pa->target), _user_name, _name, ee.what());
+    log_error(fmt::format("Error caught on script execution while executing {} with target required {}. Team owned by "
+                          "{} TeamMember {} --> {}",
+                          pa->id_action, static_cast<bool>(pa->target), _user_name, _name, ee.what()));
     return false;
   }
   return true;
@@ -126,12 +128,12 @@ bool team_member::execute_action(
 
 void team_member::add_pending_action(const std::string& action_name, std::optional<target_type> target) {
   if (_status.life_pt.is_dead()) {
-    SPDLOG_WARN("Player {}::{} tried to add an action while dead", _user_name, _name);
+    log_warn(fmt::format("Player {}::{} tried to add an action while dead", _user_name, _name));
     return;
   }
   auto it = std::ranges::find_if(_actions_doable, action_key_matcher(action_name));
   if (it == _actions_doable.end()) {
-    SPDLOG_WARN("Player {}::{} tried unrecognized action called {}", _user_name, _name, action_name);
+    log_warn(fmt::format("Player {}::{} tried unrecognized action called {}", _user_name, _name, action_name));
     return;
   }
   _pending_actions.push(pending_action{static_cast<uint>(std::distance(_actions_doable.begin(), it)), std::move(target)});

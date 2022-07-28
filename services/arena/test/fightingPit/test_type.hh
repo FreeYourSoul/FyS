@@ -28,11 +28,14 @@
 #include <memory>
 #include <fstream>
 
+#include <fmt/format.h>
+
 #include <random_generator.hh>
 
 #include <Cml.hh>
 #include <CmlCopy.hh>
 #include <CmlKey.hh>
+#include <logger.hh>
 #include <FSeamMockData.hpp>
 #include <fightingPit/team/party_team.hh>
 #include <fightingPit/team/team_member.hh>
@@ -369,7 +372,7 @@ public:
 
   ~delete_folder_when_done() {
     std::error_code ec;
-    SPDLOG_INFO("Delete folder {} : deleted {}", _path.string(), std::filesystem::remove_all(_path, ec));
+    fys::log_info(fmt::format("Delete folder {} : deleted {}", _path.string(), std::filesystem::remove_all(_path, ec)));
   }
 
 private:

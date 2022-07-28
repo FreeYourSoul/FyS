@@ -24,9 +24,11 @@
 #ifndef FYS_ONLINE_CHAIUTILITY_HH
 #define FYS_ONLINE_CHAIUTILITY_HH
 
+#include <string>
+
 #include <chaiscript/chaiscript.hpp>
 #include <fmt/format.h>
-#include <string>
+
 
 namespace chaiscript {
 class ChaiScript;

@@ -21,8 +21,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <fmt/ostream.h>
-#include <spdlog/spdlog.h>
+#include <fmt/format.h>
 
 #include <utility>
 
@@ -35,6 +34,8 @@
 
 #include <fightingPit/fighting_pit_layout.hh>
 #include <fightingPit/side_battle.hh>
+
+#include <logger.hh>
 
 namespace fys::arena {
 
@@ -106,7 +107,7 @@ fighting_pit_layout::changing_side_contenders() {
 
 void fighting_pit_layout::set_contender_initiate_position(fighting_contender& contender, hexagon_side::orientation side) {
   if ((*contender._side).second != hexagon_side::orientation::NONE) {
-    SPDLOG_ERROR("Can't set initial position for contender {} as position is not NONE", contender.name());
+    log_error(fmt::format("Can't set initial position for contender {} as position is not NONE", contender.name()));
     return;
   }
   contender._side.move(side, true);
@@ -114,7 +115,7 @@ void fighting_pit_layout::set_contender_initiate_position(fighting_contender& co
 
 void fighting_pit_layout::set_ally_move_initiate_position(team_member& tm, hexagon_side::orientation side) {
   if ((*tm._side).second != hexagon_side::orientation::NONE) {
-    SPDLOG_ERROR("Can't set initial position for ally {}.{} as position is not NONE", tm.user_name(), tm.name());
+    log_error(fmt::format("Can't set initial position for ally {}.{} as position is not NONE", tm.user_name(), tm.name()));
     return;
   }
   tm._side.move(side, true);

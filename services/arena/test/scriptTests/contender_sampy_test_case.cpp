@@ -23,8 +23,10 @@
 
 #include <arena_server_context.hh>
 #include <catch2/catch.hpp>
-#include <chai_register.hh>
+
+#include <fmt/format.h>
 #include <chaiscript/chaiscript.hpp>
+
 #include <fightingPit/contender/contender_scripting.hh>
 #include <fightingPit/contender/fighting_contender.hh>
 #include <fightingPit/contender/pit_contenders.hh>
@@ -35,8 +37,9 @@
 
 #include <FSeamMockData.hpp>
 
-#include <CmlCopy.hh>
 #include <chai_register.hh>
+#include <logger.hh>
+#include <CmlCopy.hh>
 
 namespace {
 
@@ -69,6 +72,8 @@ copy_path_storage() {
  *        It is used in order to test the implementation of ChaiScript int FyS Online.
  */
 TEST_CASE("Test Sampy", "[service][arena][script_test]") {
+
+  fys::configure_logger("test_arena_sampy", "debug", "");
 
   fys::cache::CmlCopy ccpy(local_path_storage(), copy_path_storage());
   std::filesystem::path baseCache = local_path_storage();
@@ -117,7 +122,7 @@ TEST_CASE("Test Sampy", "[service][arena][script_test]") {
 var actions = contender_Sampy0.actions;
 retrieveDoableActions(actions.act);)");
     } catch (const std::exception& ee) {
-      SPDLOG_ERROR("Error when eval {}", ee.what());
+      fys::log_error(fmt::format("Error when eval {}", ee.what()));
       FAIL("Shouldn't arrive there");
     }
 
