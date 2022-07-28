@@ -25,6 +25,7 @@
 #include <memory>
 
 #include <chaiscript/chaiscript.hpp>
+#include <fmt/format.h>
 
 #include <fightingPit/contender/contender_scripting.hh>
 #include <fightingPit/contender/fighting_contender.hh>
@@ -35,6 +36,7 @@
 
 #include <CmlCopy.hh>
 #include <chai_register.hh>
+#include <logger.hh>
 #include <fightingPit/fighting_pit_announcer.hh>
 
 namespace {
@@ -63,6 +65,7 @@ copy_path_storage() {
 }// namespace
 
 TEST_CASE("test damage chaiscript", "[service][arena][script_test]") {
+  fys::configure_logger("test_arena_damage_chai", "debug", "");
 
   fys::cache::CmlCopy ccpy(local_path_storage(), copy_path_storage());
   std::filesystem::path baseCache = local_path_storage();
@@ -114,7 +117,7 @@ var s = slash(1);
 s.execute(contender);
 )");
       } catch (const chaiscript::exception::eval_error& ex) {
-        SPDLOG_ERROR("{}", ex.pretty_print());
+        fys::log_error(fmt::format("{}", ex.pretty_print()));
         FAIL("Chaiscript : Shouldn't fail here");
       }
       REQUIRE(120 == pc.fighting_contender_at(0)->access_status().life_pt.current);// -33 life
@@ -138,7 +141,7 @@ var s = slash(1);
 s.execute(contender);
 )");
       } catch (std::exception& ex) {
-        SPDLOG_ERROR("{}", ex.what());
+        fys::log_error(fmt::format("{}", ex.what()));
         FAIL("Chaiscript : Shouldn't fail here");
       }
       REQUIRE(0 == pc.fighting_contender_at(0)->access_status().life_pt.current);// -33 life > 0
@@ -178,7 +181,7 @@ d.push_back_ref(contender2Status);
 s.execute(d);
 )");
       } catch (std::exception& ex) {
-        SPDLOG_ERROR("{}", ex.what());
+        fys::log_error(fmt::format("{}", ex.what()));
         FAIL("Chaiscript : Shouldn't fail here");
       }
       REQUIRE(123 == pc.fighting_contender_at(0)->access_status().life_pt.current);// -33 life
@@ -204,7 +207,7 @@ d.push_back_ref(contender2Status);
 s.execute(d);
 )");
       } catch (std::exception& ex) {
-        SPDLOG_ERROR("{}", ex.what());
+        fys::log_error(fmt::format("{}", ex.what()));
         FAIL("Chaiscript : Shouldn't fail here");
       }
 
