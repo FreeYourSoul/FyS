@@ -15,6 +15,7 @@ enable_testing()
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../include)
 
 add_executable(cml_test
+        ${CMAKE_CURRENT_SOURCE_DIR}/catch_main.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/basic_cml_test_case.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/cml_copy_test_case.cpp
         )
