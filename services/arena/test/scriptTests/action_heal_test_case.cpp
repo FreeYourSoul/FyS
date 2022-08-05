@@ -25,6 +25,7 @@
 #include <memory>
 
 #include <chaiscript/chaiscript.hpp>
+#include <fmt/format.h>
 
 #include <fightingPit/contender/contender_scripting.hh>
 #include <fightingPit/contender/fighting_contender.hh>
@@ -34,6 +35,7 @@
 #include <fightingPit/team/team_member.hh>
 
 #include <CmlCopy.hh>
+#include <logger.hh>
 #include <chai_register.hh>
 
 namespace {
@@ -62,6 +64,8 @@ copy_path_storage() {
 }// namespace
 
 TEST_CASE("test heal chaiscript", "[service][arena][script_test]") {
+
+  fys::configure_logger("test_arena_chai_heal", "debug", "");
 
   fys::cache::CmlCopy ccpy(local_path_storage(), copy_path_storage());
   std::filesystem::path baseCache = local_path_storage();
@@ -113,7 +117,7 @@ var s = light_heal(1);
 s.execute(contender);
 )");
       } catch (std::exception& ex) {
-        SPDLOG_ERROR("{}", ex.what());
+        fys::log_error(fmt::format("{}", ex.what()));
         FAIL("Chaiscript : Shouldn't fail here");
       }
       REQUIRE(133 == pc.fighting_contender_at(0)->access_status().life_pt.current);// +33 life
@@ -132,7 +136,7 @@ var s = light_heal(1);
 s.execute(contender);
 )");
       } catch (std::exception& ex) {
-        SPDLOG_ERROR("{}", ex.what());
+        fys::log_error(fmt::format("{}", ex.what()));
         FAIL("Chaiscript : Shouldn't fail here");
       }
       REQUIRE(153 == pc.fighting_contender_at(0)->access_status().life_pt.current);// +33 life > go to max
