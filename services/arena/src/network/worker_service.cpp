@@ -104,7 +104,7 @@ void worker_service::cleanup_finished_battles() {
   }
 }
 
-void worker_service::player_join_fighting_pit(unsigned fighting_pit_id, std::unique_ptr<party_team> pt, cache::Cml& cml) {
+void worker_service::player_join_fighting_pit(unsigned fighting_pit_id, std::unique_ptr<party_team> pt, cache::cml& cml) {
   auto it = _arena_instances.find(fighting_pit_id);
   if (it != _arena_instances.end()) {
     if (it->second->is_joinable()) {

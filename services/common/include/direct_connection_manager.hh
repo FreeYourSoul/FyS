@@ -24,8 +24,9 @@
 #ifndef FYS_ONLINE_DIRECT_CONNECTION_MANAGER_HH
 #define FYS_ONLINE_DIRECT_CONNECTION_MANAGER_HH
 
-#include <spdlog/spdlog.h>
 #include <zmq_addon.hpp>
+
+#include <logger.hh>
 
 namespace fys::common {
 
@@ -58,9 +59,9 @@ public:
     if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
       zmq::multipart_t msg;
       if (!msg.recv(_router_player_connection, ZMQ_NOBLOCK) || (msg.size() != 3)) {
-        SPDLOG_ERROR("Error while reading on the listener socket.");
-        SPDLOG_ERROR("Received message may be ill formatted, contains '{}' part, message is : {}",
-                     msg.size(), msg.str());
+        log_error("Error while reading on the listener socket.");
+        log_error(fmt::format("Received message may be ill formatted, contains '{}' part, message is : {}",
+                              msg.size(), msg.str()));
       } else {
         // first frame is the identity
         auto identity = msg.pop();

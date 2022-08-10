@@ -140,7 +140,7 @@ bool fighting_pit::is_player_participant(const std::string& name, const std::str
   });
 }
 
-void fighting_pit::add_party_team_and_register_actions(std::unique_ptr<party_team> pt, cache::Cml& cache) {
+void fighting_pit::add_party_team_and_register_actions(std::unique_ptr<party_team> pt, cache::cml& cache) {
   chai_register::load_register_action_party_team(*_chai_ptr, cache, *pt);
   _layout_map.add_active_party_team(*pt);
   _party_teams.add_party_team(std::move(pt));

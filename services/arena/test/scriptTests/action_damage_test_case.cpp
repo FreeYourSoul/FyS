@@ -34,10 +34,10 @@
 #include <fightingPit/team/party_team.hh>
 #include <fightingPit/team/team_member.hh>
 
-#include <CmlCopy.hh>
 #include <chai_register.hh>
-#include <logger.hh>
+#include <cml_copy.hh>
 #include <fightingPit/fighting_pit_announcer.hh>
+#include <logger.hh>
 
 namespace {
 std::string
@@ -67,7 +67,7 @@ copy_path_storage() {
 TEST_CASE("test damage chaiscript", "[service][arena][script_test]") {
   fys::configure_logger("test_arena_damage_chai", "debug", "");
 
-  fys::cache::CmlCopy ccpy(local_path_storage(), copy_path_storage());
+  fys::cache::cml_copy ccpy(local_path_storage(), copy_path_storage());
   std::filesystem::path baseCache = local_path_storage();
 
   fys::arena::pit_contenders pc;

@@ -39,7 +39,7 @@ namespace zmq {
 struct message_t;
 }
 namespace fys::cache {
-class Cml;
+class cml;
 }
 namespace fys::arena::data {
 struct status;
@@ -72,13 +72,13 @@ public:
    * @return
    */
   static bool
-  load_register_action_party_team(chaiscript::ChaiScript& chai, cache::Cml& cache, party_team& pt);
+  load_register_action_party_team(chaiscript::ChaiScript& chai, cache::cml& cache, party_team& pt);
 
   static void
-  load_contender_script(chaiscript::ChaiScript& chai, cache::Cml& cml, const std::string& contender_key);
+  load_contender_script(chaiscript::ChaiScript& chai, cache::cml& cml, const std::string& contender_key);
 
   static void
-  register_base_actions(chaiscript::ChaiScript& chai, cache::Cml& cml);
+  register_base_actions(chaiscript::ChaiScript& chai, cache::cml& cml);
 
   static void
   register_network_commands(chaiscript::ChaiScript& action_key, std::function<void(zmq::message_t&&)> ally_targets);
@@ -94,8 +94,8 @@ private:
    * @param cache Cml instance to retrieve from
    * @param keys script's keys to find the includes from
    */
-  static void load_with_includes(chaiscript::ChaiScript& chai, cache::Cml& cache, const std::set<std::string>& keys);
-  static void load_with_includes(chaiscript::ChaiScript& chai, cache::Cml& cache,
+  static void load_with_includes(chaiscript::ChaiScript& chai, cache::cml& cache, const std::set<std::string>& keys);
+  static void load_with_includes(chaiscript::ChaiScript& chai, cache::cml& cache,
                                  const std::vector<std::string>& keys, std::set<std::string> incursion);
 
   /**
@@ -107,10 +107,10 @@ private:
    * @param keys keys to find the scripts
    */
   static inline void
-  load_scripts(chaiscript::ChaiScript& chai, cache::Cml& cache, const std::vector<std::string>& keys);
+  load_scripts(chaiscript::ChaiScript& chai, cache::cml& cache, const std::vector<std::string>& keys);
 
   static inline bool
-  load_scripts(chaiscript::ChaiScript& chai, cache::Cml& cache, const std::string& keys);
+  load_scripts(chaiscript::ChaiScript& chai, cache::cml& cache, const std::string& keys);
 
   static void
   register_chai(chaiscript::ChaiScript& chai, pit_contenders& pc, ally_party_teams& apt, fighting_pit_layout& layout);

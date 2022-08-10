@@ -25,12 +25,12 @@
 
 #include <fmt/format.h>
 
-#include <CmlKey.hh>
+#include <cml_key.hh>
 #include <engine/engine.hh>
 #include <engine/script_engine.hh>
 #include <engine/world_populator.hh>
-#include <world_server_context.hh>
 #include <logger.hh>
+#include <world_server_context.hh>
 
 namespace {
 void assert_engine_error(bool isError, const std::string& errorMsg) {
@@ -62,7 +62,7 @@ world_populator::build_world_server_engine() {
                                       std::move(_script_engine),
                                       _interval_movement);
 
-  SPDLOG_INFO("[INIT] ServerEngine building is complete");
+  log_info("[INIT] ServerEngine building is complete");
 
   return ret;
 }

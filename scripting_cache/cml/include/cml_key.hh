@@ -21,46 +21,53 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef FYS_SERVICE_CML_HH
-#define FYS_SERVICE_CML_HH
+#ifndef FYS_SERVICE_CMLKEY_HH
+#define FYS_SERVICE_CMLKEY_HH
 
+#include <vector>
+#include <algorithm>
 #include <filesystem>
-#include <memory>
-#include <unordered_map>
 
 namespace fys::cache {
-
-class CmlKey;
-
-struct InMemoryCached {
-  std::filesystem::file_time_type lastWriteTime;
-  std::string content;
-};
-
-class Cml {
-
+class cml_key {
 public:
-  virtual ~Cml() = default;
-  explicit Cml(std::filesystem::path pathLocalStorage);
+  cml_key(std::filesystem::path basePath, std::string key)
+      : _path(std::move(basePath)), _key(key) {
+    std::replace(key.begin(), key.end(), ':', '/');
+    _path /= std::filesystem::path(key);
+    auto ok = _path.string();
+  }
 
-  const std::string& findInCache(const std::string& key);
-
-  virtual void createUpToDateFileInLocalStorage(const CmlKey& cmlKey, std::filesystem::file_time_type cacheTime) = 0;
-
-  void createFile(const std::filesystem::path& pathToFile, const std::string& content) const;
-
-private:
-  [[nodiscard]] inline std::pair<bool, std::filesystem::file_time_type>
-  localStorageInfo(const CmlKey& k) const;
-
-  [[nodiscard]] bool
-  isInLocalStorageAndUpToDate(const CmlKey& cmlKey, std::filesystem::file_time_type cacheLastUpdate) const;
+  [[nodiscard]] const std::filesystem::path& get_path() const { return _path; }
+  [[nodiscard]] const std::string& getKey() const { return _key; }
 
 private:
-  std::filesystem::path _localPathStorage;
-  std::unordered_map<std::string, InMemoryCached> _inMemCache;
+  static std::vector<std::string> tokenizeKey(const cml_key& key, const std::string& separators) {
+    std::vector<std::string> token;
+    std::size_t pos = 0;
+    while (pos != key._key.size()) {
+      std::size_t from = key._key.find_first_not_of(separators, pos);
+      if (from == std::string::npos)
+        break;
+
+      std::size_t to = key._key.find_first_of(separators, from + 1);
+      if (to == std::string::npos)
+        to = key._key.size();
+
+      std::string temp;
+      for (std::size_t i = from; i != to; i++)
+        temp.push_back(key._key[i]);
+
+      token.emplace_back(std::move(temp));
+      pos = to;
+    }
+    return token;
+  }
+
+private:
+  std::filesystem::path _path;
+  std::string _key;
 };
-
 }// namespace fys::cache
 
-#endif//FYS_SERVICE_CML_HH
+#endif//FYS_SERVICE_CMLKEY_HH

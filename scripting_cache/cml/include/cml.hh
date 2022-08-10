@@ -21,32 +21,46 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef FYS_SERVICE_CMLSQL_HH
-#define FYS_SERVICE_CMLSQL_HH
+#ifndef FYS_SERVICE_CML_HH
+#define FYS_SERVICE_CML_HH
 
-#include <fmt/format.h>
-
-#include <Cml.hh>
+#include <filesystem>
+#include <memory>
+#include <unordered_map>
 
 namespace fys::cache {
-class
-    CmlCopy : public Cml {
+
+class cml_key;
+
+struct InMemoryCached {
+  std::filesystem::file_time_type lastWriteTime;
+  std::string content;
+};
+
+class cml {
+
 public:
-  ~CmlCopy() override {}
-  CmlCopy(const std::string& pathLocalStorage,
-          const std::string& pathCopy)
-      : Cml(pathLocalStorage), _copyPathStorage(pathCopy) {
-    if (!std::filesystem::exists(_copyPathStorage)) {
-      fmt::print("Path copy does not exist {}", pathCopy);
-    }
-  }
+  virtual ~cml() = default;
+  explicit cml(std::filesystem::path pathLocalStorage);
+
+  const std::string& findInCache(const std::string& key);
+
+  virtual void createUpToDateFileInLocalStorage(const cml_key& cmlKey, std::filesystem::file_time_type cacheTime) = 0;
+
+  void createFile(const std::filesystem::path& pathToFile, const std::string& content) const;
 
 private:
-  void createUpToDateFileInLocalStorage(const CmlKey& cmlKey, std::filesystem::file_time_type cacheTime) override;
+  [[nodiscard]] inline std::pair<bool, std::filesystem::file_time_type>
+  localStorageInfo(const cml_key& k) const;
 
-protected:
-  std::filesystem::path _copyPathStorage;
+  [[nodiscard]] bool
+  isInLocalStorageAndUpToDate(const cml_key& cmlKey, std::filesystem::file_time_type cacheLastUpdate) const;
+
+private:
+  std::filesystem::path _localPathStorage;
+  std::unordered_map<std::string, InMemoryCached> _inMemCache;
 };
+
 }// namespace fys::cache
 
-#endif//FYS_SERVICE_CMLSQL_HH
+#endif//FYS_SERVICE_CML_HH

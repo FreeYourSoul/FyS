@@ -21,13 +21,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include "CmlCopy.hh"
-#include <CmlKey.hh>
+#include "cml_copy.hh"
+#include <cml_key.hh>
 
 namespace fys::cache {
 
-void CmlCopy::createUpToDateFileInLocalStorage(const CmlKey& cmlKey, std::filesystem::file_time_type cacheTime) {
-  CmlKey k(_copyPathStorage, cmlKey.getKey());
+void cml_copy::createUpToDateFileInLocalStorage(const cml_key& cmlKey, std::filesystem::file_time_type cacheTime) {
+  cml_key k(_copyPathStorage, cmlKey.getKey());
   std::error_code e;
 
   // If the file doesn't exist yet, or if it is not up to date then remake it

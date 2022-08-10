@@ -32,8 +32,8 @@
 #include <fightingPit/team/party_team.hh>
 #include <fightingPit/team/team_member.hh>
 
+#include <cml_copy.hh>
 #include <logger.hh>
-#include <CmlCopy.hh>
 
 #include <chai_register.hh>
 
@@ -57,7 +57,7 @@ TEST_CASE("Test register/load player", "[service][arena][script_test]") {
 
   fys::configure_logger("test_arena_load_player", "debug", "");
 
-  fys::cache::CmlCopy ccpy(local_path_storage(), copy_path_storage());
+  fys::cache::cml_copy ccpy(local_path_storage(), copy_path_storage());
   std::filesystem::path baseCache = local_path_storage();
 
   fys::arena::pit_contenders pc;

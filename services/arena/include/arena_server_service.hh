@@ -24,7 +24,7 @@
 #ifndef FYS_ARENASERVERSERVICE_HH
 #define FYS_ARENASERVERSERVICE_HH
 
-#include <CmlCopy.hh>
+#include <cml_copy.hh>
 #include <connection_handler.hh>
 #include <network/db_connector.hh>
 #include <network/worker_service.hh>
@@ -155,7 +155,7 @@ private:
 
 private:
   std::reference_wrapper<const arena_server_context> _ctx;
-  cache::CmlCopy _cache;
+  cache::cml_copy _cache;
 
   // Manage connections
   std::unique_ptr<network::db_connector> _db_connector;

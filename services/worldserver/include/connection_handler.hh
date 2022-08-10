@@ -24,9 +24,12 @@
 #ifndef FYS_CONNECTIONHANDLER_HH
 #define FYS_CONNECTIONHANDLER_HH
 
-#include "world_server_context.hh"
-#include <spdlog/spdlog.h>
+#include <fmt/format.h>
+
 #include <zmq_addon.hpp>
+
+#include <logger.hh>
+#include <world_server_context.hh>
 
 namespace fys::ws {
 
@@ -50,9 +53,9 @@ public:
     if (static_cast<bool>(items[0].revents & ZMQ_POLLIN)) {
       zmq::multipart_t msg;
       if (!msg.recv(_sub_socket_on_dispatcher, ZMQ_NOBLOCK) || (msg.size() != 3 && msg.size() != 4)) {
-        SPDLOG_ERROR("Error while reading on the listener socket.");
-        SPDLOG_ERROR("Received message may be ill formatted, contains '{}' part, message is : {}",
-                     msg.size(), msg.str());
+        log_error("Error while reading on the listener socket.");
+        log_error(fmt::format("Received message may be ill formatted, contains '{}' part, message is : {}",
+                              msg.size(), msg.str()));
       } else {
         // first  frame is subscription channel
         const std::string subKey = msg.popstr();

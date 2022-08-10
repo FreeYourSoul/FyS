@@ -22,17 +22,17 @@
 // SOFTWARE.
 
 #include <fmt/format.h>
-#include <spdlog/spdlog.h>
 
 #include <algorithm>
 #include <fstream>
+#include <memory>
 
 #define SOL_ALL_SAFETIES_ON 1
 #include <sol/sol.hpp>
 
 #include <fmt/format.h>
 
-#include <CmlKey.hh>
+#include <cml_key.hh>
 #include <logger.hh>
 #include <world_server_context.hh>
 
@@ -167,8 +167,8 @@ void world_populator::generate_spawning_points(const std::string& spawning_point
       _script_engine->_intern->spawning_points[index].distance_notification = static_cast<uint>(visibilityDistance);
 
     } catch (const std::exception& e) {
-      SPDLOG_ERROR("[INIT] An error occurred while instantiating SpawningPoints '{}' : {}",
-                   _script_engine->_intern->spawning_points[index].display_key, e.what());
+      log_error(fmt::format("[INIT] An error occurred while instantiating SpawningPoints '{}' : {}",
+                            _script_engine->_intern->spawning_points[index].display_key, e.what()));
     }
     ++index;
   }
@@ -180,7 +180,7 @@ void world_populator::register_common_lua_engine(const std::string& to_lua_init_
   try {
     _script_engine->_intern->lua.safe_script_file(to_lua_init_file);
   } catch (const std::exception& e) {
-    SPDLOG_ERROR("Error while initiating LUA engine : {} ", e.what());
+    log_error(fmt::format("Error while initiating LUA engine : {} ", e.what()));
     throw;
   }
 

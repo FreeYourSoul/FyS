@@ -156,7 +156,7 @@ public:
    * @param pt party team to add
    * @param cache retrieving object to find the actions
    */
-  void add_party_team_and_register_actions(std::unique_ptr<party_team> pt, cache::Cml& cache);
+  void add_party_team_and_register_actions(std::unique_ptr<party_team> pt, cache::cml& cache);
 
   /**
    * Check if given player (defined by name/token) is authenticated

@@ -21,30 +21,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef FYS_ONLINE_CMLSCRIPTDOWNLOADER_HH
-#define FYS_ONLINE_CMLSCRIPTDOWNLOADER_HH
+#ifndef FYS_SERVICE_CMLSQL_HH
+#define FYS_SERVICE_CMLSQL_HH
 
-#include <Cml.hh>
-#include <functional>
+#include <fmt/format.h>
+
+#include <cml.hh>
 
 namespace fys::cache {
-
-class CmlScriptDownloader final : cache::Cml {
-
+class
+    cml_copy : public cml {
 public:
-  virtual ~CmlScriptDownloader() = default;
-
-  template<typename DownloaderFunc>
-  CmlScriptDownloader(std::filesystem::path pathLocalStorage, DownloaderFunc&& downloader)
-      : cache::Cml(std::move(pathLocalStorage)), _downloader(std::forward<DownloaderFunc>(downloader)) {}
+  ~cml_copy() override {}
+  cml_copy(const std::string& pathLocalStorage,
+          const std::string& pathCopy)
+      : cml(pathLocalStorage), _copyPathStorage(pathCopy) {
+    if (!std::filesystem::exists(_copyPathStorage)) {
+      fmt::print("Path copy does not exist {}", pathCopy);
+    }
+  }
 
 private:
-  void createUpToDateFileInLocalStorage(const CmlKey& cml_key, std::filesystem::file_time_type cache_time) override;
+  void createUpToDateFileInLocalStorage(const cml_key& cmlKey, std::filesystem::file_time_type cacheTime) override;
 
-private:
-  std::function<void(const std::string&, const std::string&)> _downloader;
+protected:
+  std::filesystem::path _copyPathStorage;
 };
-
 }// namespace fys::cache
 
-#endif//FYS_ONLINE_CMLSCRIPTDOWNLOADER_HH
+#endif//FYS_SERVICE_CMLSQL_HH

@@ -11,13 +11,13 @@ find_package(nlohmann_json REQUIRED)
 find_package(fmt)
 
 add_library(cml
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/Cml.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/include/Cml.hh
-        ${CMAKE_CURRENT_SOURCE_DIR}/include/CmlKey.hh
-        ${CMAKE_CURRENT_SOURCE_DIR}/include/CmlScriptDownloader.hh
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/CmlScriptDownloader.cpp
-        ${CMAKE_CURRENT_SOURCE_DIR}/include/CmlCopy.hh
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/CmlCopy.cpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/cml.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/cml.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/cml_key.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/cml_script_downloader.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/cml_script_downloader.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/cml_copy.hh
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/cml_copy.cpp)
 add_library(fys::cml ALIAS cml)
 target_include_directories(cml PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 target_link_libraries(cml spdlog::spdlog fmt::fmt dl stdc++fs)

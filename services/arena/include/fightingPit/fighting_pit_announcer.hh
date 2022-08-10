@@ -35,7 +35,7 @@
 
 // forward declarations
 namespace fys::cache {
-class Cml;
+class cml;
 }
 
 namespace fys::arena {
@@ -58,7 +58,7 @@ public:
   };
 
 public:
-  explicit fighting_pit_announcer(cache::Cml& cml);
+  explicit fighting_pit_announcer(cache::cml& cml);
   ~fighting_pit_announcer();
 
   /**
@@ -152,7 +152,7 @@ private:
                                             const std::vector<std::shared_ptr<fighting_contender>>& contenders);
 
 private:
-  cache::Cml& _cache;
+  cache::cml& _cache;
 
   /**
    *   range           desc

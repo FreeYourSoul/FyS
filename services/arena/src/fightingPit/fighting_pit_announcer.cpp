@@ -37,8 +37,8 @@
 #include <fightingPit/team/party_team.hh>
 #include <fightingPit/team/team_member.hh>
 
-#include <Cml.hh>
 #include <arena_server_context.hh>
+#include <cml.hh>
 #include <connection_handler.hh>
 #include <logger.hh>
 #include <random_generator.hh>
@@ -79,7 +79,7 @@ namespace fys::arena {
 
 using json = nlohmann::json;
 
-fighting_pit_announcer::fighting_pit_announcer(cache::Cml& cml)
+fighting_pit_announcer::fighting_pit_announcer(cache::cml& cml)
     : _cache(cml) {}
 
 fighting_pit_announcer::~fighting_pit_announcer() = default;

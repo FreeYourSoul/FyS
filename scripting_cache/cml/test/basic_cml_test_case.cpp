@@ -21,21 +21,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <CmlKey.hh>
 #include <catch2/catch.hpp>
+#include <cml_key.hh>
 #define private protected
-#include <Cml.hh>
+#include <cml.hh>
 
-class CmlBaseTest final : public fys::cache::Cml {
+class CmlBaseTest final : public fys::cache::cml {
 public:
   explicit CmlBaseTest(std::string v)
-      : fys::cache::Cml(std::filesystem::path(std::move(v))) {}
-  using fys::cache::Cml::_inMemCache;
-  using fys::cache::Cml::isInLocalStorageAndUpToDate;
+      : fys::cache::cml(std::filesystem::path(std::move(v))) {}
+  using fys::cache::cml::_inMemCache;
+  using fys::cache::cml::isInLocalStorageAndUpToDate;
 
   bool _localStorageCalled = false;
 
-  void createUpToDateFileInLocalStorage(const fys::cache::CmlKey& cmlKey, std::filesystem::file_time_type cacheTime) override {
+  void createUpToDateFileInLocalStorage(const fys::cache::cml_key& cmlKey, std::filesystem::file_time_type cacheTime) override {
     _localStorageCalled = true;
   }
 };
@@ -117,9 +117,9 @@ John Keats)d";
 
 TEST_CASE("isInLocalStorageAndUpToDate for Basic CML", "[cml_test]") {
   CmlBaseTest cbt(local_path_storage());
-  const fys::cache::CmlKey key1 = fys::cache::CmlKey{local_path_storage(), "test1"};
-  const fys::cache::CmlKey key2 = fys::cache::CmlKey{local_path_storage(), "inner_folder:test2"};
-  const fys::cache::CmlKey key3 = fys::cache::CmlKey{local_path_storage(), "inner_folder:inner_folder_1:test3"};
+  const fys::cache::cml_key key1 = fys::cache::cml_key{local_path_storage(), "test1"};
+  const fys::cache::cml_key key2 = fys::cache::cml_key{local_path_storage(), "inner_folder:test2"};
+  const fys::cache::cml_key key3 = fys::cache::cml_key{local_path_storage(), "inner_folder:inner_folder_1:test3"};
 
   // Get from filesystem and store in memcache
   cbt.findInCache("test1");

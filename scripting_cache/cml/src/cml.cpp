@@ -21,8 +21,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <Cml.hh>
-#include <CmlKey.hh>
+#include <cml.hh>
+#include <cml_key.hh>
 #include <fstream>
 #include <optional>
 #include <spdlog/spdlog.h>
@@ -55,7 +55,7 @@ void writeFile(const std::filesystem::path& file, const std::string& content) {
 
 }// namespace
 
-Cml::Cml(std::filesystem::path pathLocalStorage)
+cml::cml(std::filesystem::path pathLocalStorage)
     : _localPathStorage(std::move(pathLocalStorage)) {
   try {
     std::filesystem::create_directories(_localPathStorage);
@@ -66,12 +66,12 @@ Cml::Cml(std::filesystem::path pathLocalStorage)
  * @return true if the key represent a cached data in the local storage (filesystem)
  */
 std::pair<bool, std::filesystem::file_time_type>
-Cml::localStorageInfo(const CmlKey& k) const {
+cml::localStorageInfo(const cml_key& k) const {
   std::error_code ec;
   return std::pair(std::filesystem::is_regular_file(k.get_path()), std::filesystem::last_write_time(k.get_path(), ec));
 }
 
-bool Cml::isInLocalStorageAndUpToDate(const CmlKey& cmlKey, std::filesystem::file_time_type cacheLastUpdate) const {
+bool cml::isInLocalStorageAndUpToDate(const cml_key& cmlKey, std::filesystem::file_time_type cacheLastUpdate) const {
   auto [exist, lastWriteTime] = localStorageInfo(cmlKey);
   if (exist) {
     return lastWriteTime <= cacheLastUpdate;
@@ -80,9 +80,9 @@ bool Cml::isInLocalStorageAndUpToDate(const CmlKey& cmlKey, std::filesystem::fil
 }
 
 const std::string&
-Cml::findInCache(const std::string& key) {
+cml::findInCache(const std::string& key) {
   static const std::string empty{};
-  CmlKey cmlKey(_localPathStorage, key);
+  cml_key cmlKey(_localPathStorage, key);
 
   // Check in-memory (and check if file has been updated)
   if (auto it = _inMemCache.find(key); it != _inMemCache.end()) {
@@ -106,7 +106,7 @@ Cml::findInCache(const std::string& key) {
   return empty;
 }
 
-void Cml::createFile(const std::filesystem::path& pathToFile, const std::string& content) const {
+void cml::createFile(const std::filesystem::path& pathToFile, const std::string& content) const {
   if (!std::filesystem::create_directories(pathToFile.parent_path())) {
     SPDLOG_ERROR("Couldn't create directories for path : {}", _localPathStorage.string());
     return;

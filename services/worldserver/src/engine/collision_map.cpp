@@ -23,6 +23,7 @@
 
 #include <algorithm>
 #include <fstream>
+#include <ranges>
 #include <iostream>
 
 #include <fmt/format.h>

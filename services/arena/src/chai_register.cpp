@@ -37,8 +37,8 @@
 #include <fightingPit/team/party_team.hh>
 #include <fightingPit/team/team_member.hh>
 
-#include <Cml.hh>
 #include <chai_register.hh>
+#include <cml.hh>
 #include <connection_handler.hh>
 #include <flatbuffer_generator.hh>
 
@@ -66,7 +66,7 @@ void chai_register::register_chai(chaiscript::ChaiScript& chai, pit_contenders& 
   }
 }
 
-void chai_register::register_base_actions(chaiscript::ChaiScript& chai, cache::Cml& cml) {
+void chai_register::register_base_actions(chaiscript::ChaiScript& chai, cache::cml& cml) {
   static const std::vector<std::string> baseActions = {
       "arena:actions:action.chai",
       "arena:actions:damage:damage.chai",
@@ -89,7 +89,7 @@ void chai_register::register_base_actions(chaiscript::ChaiScript& chai, cache::C
   }
 }
 
-bool chai_register::load_register_action_party_team(chaiscript::ChaiScript& chai, cache::Cml& cache, party_team& pt) {
+bool chai_register::load_register_action_party_team(chaiscript::ChaiScript& chai, cache::cml& cache, party_team& pt) {
   try {
     // Load actions and register Members
     for (auto& tm : pt.team_members()) {
@@ -115,11 +115,11 @@ bool chai_register::load_register_action_party_team(chaiscript::ChaiScript& chai
   return true;
 }
 
-void chai_register::load_contender_script(chaiscript::ChaiScript& chai, cache::Cml& cml, const std::string& contender_key) {
+void chai_register::load_contender_script(chaiscript::ChaiScript& chai, cache::cml& cml, const std::string& contender_key) {
   load_with_includes(chai, cml, std::set<std::string>{contender_key});
 }
 
-void chai_register::load_with_includes(chaiscript::ChaiScript& chai, cache::Cml& cache,
+void chai_register::load_with_includes(chaiscript::ChaiScript& chai, cache::cml& cache,
                                        const std::vector<std::string>& keys, std::set<std::string> incursion) {
   for (const auto& key : keys) {
     load_scripts(chai, cache, key);
@@ -136,17 +136,17 @@ void chai_register::load_with_includes(chaiscript::ChaiScript& chai, cache::Cml&
   }
 }
 
-void chai_register::load_with_includes(chaiscript::ChaiScript& chai, cache::Cml& cache, const std::set<std::string>& keys) {
+void chai_register::load_with_includes(chaiscript::ChaiScript& chai, cache::cml& cache, const std::set<std::string>& keys) {
   load_with_includes(chai, cache, std::vector(keys.begin(), keys.end()), std::set<std::string>{});
 }
 
-void chai_register::load_scripts(chaiscript::ChaiScript& chai, cache::Cml& cache, const std::vector<std::string>& keys) {
+void chai_register::load_scripts(chaiscript::ChaiScript& chai, cache::cml& cache, const std::vector<std::string>& keys) {
   for (const auto& key : keys) {
     load_scripts(chai, cache, key);
   }
 }
 
-bool chai_register::load_scripts(chaiscript::ChaiScript& chai, cache::Cml& cache, const std::string& keys) {
+bool chai_register::load_scripts(chaiscript::ChaiScript& chai, cache::cml& cache, const std::string& keys) {
   const std::string& action = cache.findInCache(keys);
   if (action.empty()) {
     SPDLOG_ERROR("Action with key {} not found (key may be wrong)", keys);

@@ -21,53 +21,30 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef FYS_SERVICE_CMLKEY_HH
-#define FYS_SERVICE_CMLKEY_HH
+#ifndef FYS_ONLINE_CMLSCRIPTDOWNLOADER_HH
+#define FYS_ONLINE_CMLSCRIPTDOWNLOADER_HH
 
-#include <vector>
-#include <algorithm>
-#include <filesystem>
+#include <cml.hh>
+#include <functional>
 
 namespace fys::cache {
-class CmlKey {
+
+class cml_script_downloader final : cache::cml {
+
 public:
-  CmlKey(std::filesystem::path basePath, std::string key)
-      : _path(std::move(basePath)), _key(key) {
-    std::replace(key.begin(), key.end(), ':', '/');
-    _path /= std::filesystem::path(key);
-    auto ok = _path.string();
-  }
+  virtual ~cml_script_downloader() = default;
 
-  [[nodiscard]] const std::filesystem::path& get_path() const { return _path; }
-  [[nodiscard]] const std::string& getKey() const { return _key; }
+  template<typename DownloaderFunc>
+  cml_script_downloader(std::filesystem::path pathLocalStorage, DownloaderFunc&& downloader)
+      : cache::cml(std::move(pathLocalStorage)), _downloader(std::forward<DownloaderFunc>(downloader)) {}
 
 private:
-  static std::vector<std::string> tokenizeKey(const CmlKey& key, const std::string& separators) {
-    std::vector<std::string> token;
-    std::size_t pos = 0;
-    while (pos != key._key.size()) {
-      std::size_t from = key._key.find_first_not_of(separators, pos);
-      if (from == std::string::npos)
-        break;
-
-      std::size_t to = key._key.find_first_of(separators, from + 1);
-      if (to == std::string::npos)
-        to = key._key.size();
-
-      std::string temp;
-      for (std::size_t i = from; i != to; i++)
-        temp.push_back(key._key[i]);
-
-      token.emplace_back(std::move(temp));
-      pos = to;
-    }
-    return token;
-  }
+  void createUpToDateFileInLocalStorage(const cml_key& cml_key, std::filesystem::file_time_type cache_time) override;
 
 private:
-  std::filesystem::path _path;
-  std::string _key;
+  std::function<void(const std::string&, const std::string&)> _downloader;
 };
+
 }// namespace fys::cache
 
-#endif//FYS_SERVICE_CMLKEY_HH
+#endif//FYS_ONLINE_CMLSCRIPTDOWNLOADER_HH

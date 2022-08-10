@@ -36,7 +36,7 @@
 
 // forward declarations
 namespace fys::cache {
-class Cml;
+class cml;
 }
 namespace fys::arena {
 class party_team;
@@ -99,7 +99,7 @@ public:
    * @param pt party team retrieved to add
    * @param cml cache manager used to register chaiscript scripts
    */
-  void player_join_fighting_pit(unsigned fighting_pit_id, std::unique_ptr<party_team> pt, cache::Cml& cml);
+  void player_join_fighting_pit(unsigned fighting_pit_id, std::unique_ptr<party_team> pt, cache::cml& cml);
 
   /**
    * Broadcast a message containing all the information about the incoming players data<br>

@@ -33,7 +33,7 @@ namespace chaiscript {
 class ChaiScript;
 }
 namespace fys::cache {
-class Cml;
+class cml;
 }
 namespace fys::arena {
 class pit_contenders;

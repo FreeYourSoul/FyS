@@ -32,13 +32,13 @@
 
 #include <random_generator.hh>
 
-#include <Cml.hh>
-#include <CmlCopy.hh>
-#include <CmlKey.hh>
-#include <logger.hh>
 #include <FSeamMockData.hpp>
+#include <cml.hh>
+#include <cml_copy.hh>
+#include <cml_key.hh>
 #include <fightingPit/team/party_team.hh>
 #include <fightingPit/team/team_member.hh>
+#include <logger.hh>
 
 // moving action
 static const std::string actionTestMoveScript = R"(
@@ -356,12 +356,12 @@ class TestMonsterSleep {
 };
 )";
 
-class CmlBase final : public fys::cache::Cml {
+class CmlBase final : public fys::cache::cml {
 public:
   explicit CmlBase(std::string v)
-      : fys::cache::Cml(std::filesystem::path(std::move(v))) {}
+      : fys::cache::cml(std::filesystem::path(std::move(v))) {}
 
-  void createUpToDateFileInLocalStorage(const fys::cache::CmlKey&, std::filesystem::file_time_type) override {
+  void createUpToDateFileInLocalStorage(const fys::cache::cml_key&, std::filesystem::file_time_type) override {
   }
 };
 
@@ -379,13 +379,13 @@ private:
   std::filesystem::path _path;
 };
 
-class CmlBaseCopy final : public fys::cache::CmlCopy {
+class CmlBaseCopy final : public fys::cache::cml_copy {
 public:
   explicit CmlBaseCopy(const std::string& v, const std::string& w)
-      : fys::cache::CmlCopy(v, w) {}
+      : fys::cache::cml_copy(v, w) {}
 
 protected:
-  void createUpToDateFileInLocalStorage(const fys::cache::CmlKey& cmlKey, std::filesystem::file_time_type) override {
+  void createUpToDateFileInLocalStorage(const fys::cache::cml_key& cmlKey, std::filesystem::file_time_type) override {
     std::error_code e;
     std::filesystem::create_directories(cmlKey.get_path().parent_path(), e);
 
@@ -402,7 +402,7 @@ protected:
       std::ofstream ofs(cmlKey.get_path());
       ofs << MonsterTestMoveAttack;
     } else {
-      fys::cache::CmlKey k(_copyPathStorage, cmlKey.getKey());
+      fys::cache::cml_key k(_copyPathStorage, cmlKey.getKey());
       std::filesystem::copy(k.get_path(), cmlKey.get_path(), e);
     }
   }

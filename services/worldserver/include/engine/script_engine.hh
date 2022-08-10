@@ -24,8 +24,8 @@
 #ifndef FYS_ONLINE_SCRIPT_ENGINE_HH
 #define FYS_ONLINE_SCRIPT_ENGINE_HH
 
-#include <CmlScriptDownloader.hh>
 #include <chrono>
+#include <cml_script_downloader.hh>
 #include <engine/player_data.hh>
 #include <engine/world_populator.hh>
 #include <memory>

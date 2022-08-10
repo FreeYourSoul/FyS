@@ -38,8 +38,8 @@
 #include <FSeamMockData.hpp>
 
 #include <chai_register.hh>
+#include <cml_copy.hh>
 #include <logger.hh>
-#include <CmlCopy.hh>
 
 namespace {
 
@@ -75,7 +75,7 @@ TEST_CASE("Test Sampy", "[service][arena][script_test]") {
 
   fys::configure_logger("test_arena_sampy", "debug", "");
 
-  fys::cache::CmlCopy ccpy(local_path_storage(), copy_path_storage());
+  fys::cache::cml_copy ccpy(local_path_storage(), copy_path_storage());
   std::filesystem::path baseCache = local_path_storage();
 
   fys::arena::pit_contenders pc;
