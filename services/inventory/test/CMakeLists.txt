@@ -42,4 +42,4 @@ add_executable(inventory_test
 
 target_compile_definitions(inventory_test PUBLIC -DSPDLOG_ACTIVE_LEVEL=SPDLOG_LEVEL_DEBUG)
 target_link_libraries(inventory_test Catch2::Catch2 cppzmq fmt::fmt dl fys::cml)
-target_compile_features(inventory_test PRIVATE cxx_std_20)
+target_compile_features(inventory_test PRIVATE cxx_std_23)

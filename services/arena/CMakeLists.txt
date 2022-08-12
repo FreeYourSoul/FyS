@@ -57,7 +57,7 @@ target_link_libraries(arena_service PUBLIC
         dl
         fys::common_service
         fys::cml)
-target_compile_features(arena_service PRIVATE cxx_std_20)
+target_compile_features(arena_service PRIVATE cxx_std_23)
 
 target_include_directories(arena_service PRIVATE
         ${CMAKE_CURRENT_SOURCE_DIR}/include)

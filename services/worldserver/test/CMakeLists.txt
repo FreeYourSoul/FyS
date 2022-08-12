@@ -51,7 +51,7 @@ target_include_directories(world_server_test PRIVATE
         ${TMXLITE_HEADERS}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include
         ${CMAKE_CURRENT_SOURCE_DIR}/../collision_map)
-target_compile_features(world_server_test PRIVATE cxx_std_20)
+target_compile_features(world_server_test PRIVATE cxx_std_23)
 catch_discover_tests(world_server_test)
 
 
@@ -93,5 +93,5 @@ target_include_directories(world_server_lua_test PRIVATE
         ${COMMON_INCLUDES_DIR}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include
         ${CMAKE_CURRENT_SOURCE_DIR}/../collision_map)
-target_compile_features(world_server_lua_test PRIVATE cxx_std_20)
+target_compile_features(world_server_lua_test PRIVATE cxx_std_23)
 catch_discover_tests(world_server_lua_test)

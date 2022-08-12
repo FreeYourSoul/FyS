@@ -8,6 +8,7 @@ endif ()
 project(FyS_Online CXX)
 
 option(BUILD_CML "Build Cache utility library" ON)
+option(BUILD_AGENT "Build the agent library & controller" ON)
 option(BUILD_SERVICE_ARENA "Build the arena service server binary" ON)
 option(BUILD_SERVICE_QUEST "Build the quest service server binary" ON)
 option(BUILD_SERVICE_WORLD "Build the world service server binary" ON)
@@ -67,6 +68,10 @@ endif (CCACHE_FOUND)
 if (BUILD_CML)
     add_subdirectory(scripting_cache)
     add_subdirectory(scripting_cache/cml)
+endif()
+
+if (BUILD_AGENT)
+    add_subdirectory(agents)
 endif()
 
 add_subdirectory(dispatcher)

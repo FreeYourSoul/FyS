@@ -28,6 +28,11 @@ namespace fys::agent {
 
 class agent {
 
+public:
+  void perceive(this agent &self) {
+
+  }
+
 };
 
 }

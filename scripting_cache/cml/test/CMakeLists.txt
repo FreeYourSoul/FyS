@@ -21,5 +21,5 @@ add_executable(cml_test
         )
 set(CMAKE_BUILD_TYPE Debug)
 target_link_libraries(cml_test PUBLIC fys::cml Catch2::Catch2 stdc++fs)
-target_compile_features(cml_test PRIVATE cxx_std_20)
+target_compile_features(cml_test PRIVATE cxx_std_23)
 catch_discover_tests(cml_test)
